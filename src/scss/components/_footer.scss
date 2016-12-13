@@ -1,0 +1,22 @@
+
+footer {
+    font-size: 80%;
+
+    // Slightly darker grey background to match OSU navbar
+    background: #333333;
+    padding: 2rem;
+    color: #FFF;
+
+    .wordmark {
+        border: none;
+    }
+
+    ul {
+        margin: 0;
+        padding: 0;
+
+        li {
+            list-style: none;
+        }
+    }
+}

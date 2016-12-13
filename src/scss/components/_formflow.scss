@@ -1,0 +1,97 @@
+
+.formflow {
+    // width: 20rem;
+    max-width: 20rem;
+
+    .formflow-title {
+        text-transform: uppercase;
+        color: #666;
+        font-size: 80%;
+        font-weight: 500;
+        letter-spacing: 0.03em;
+        margin-bottom: 1rem;
+    }
+
+    .formflow-group {
+        @extend .list-group;
+
+        border-radius: 3px;
+        padding-left: 0;
+
+        // Icon flow vertical line
+        .formflow-page:after {
+            content: "";
+            z-index: 1;
+            position: absolute;
+            border-left: 2px solid #c2c2c2;
+            right: 2.2em;
+            top: 44px;
+            bottom: -10px;
+        }
+
+        small {
+            display: block;
+            color: #666;
+        }
+
+        a {
+            @extend .list-group-item;
+
+            border: none;
+            background-color: transparent;
+            line-height: 2rem;
+
+            // Bit left-side overflow for the background highlighting hover. 
+            margin-left: -1rem;
+            padding-left: 1rem;
+
+            &:hover {
+                background: #F6F6F6;
+            }
+
+            // Re-apply our custom anchor display style to the inner page label
+            .formflow-page {
+                border-bottom: 1px solid rgba(50,131,200,0.25);
+            }
+
+            &.active, &.active:hover {
+                background-color: transparent !important;
+                color: #212121 !important;
+                font-weight: 500;
+                cursor: default;
+
+                .formflow-page {
+                    border: none;
+                }
+            }
+
+            .fa-stack {
+                margin-left: 1em;
+            }
+
+            .fa {
+                color: #666;
+            }
+
+            &.complete .fa {
+                color: #6a8f01;
+            }
+
+            &.error .fa {
+                color: #bb0000;
+            }
+
+            // Hide last line
+            &:last-child .formflow-page:after {
+                display: none;
+            }
+        }
+    }
+
+    /* Content after the sidebar needs left hand padding */
+    // & ~ .container-fluid,
+    // & ~ .container {
+    //     margin: 0 2em;
+    // }
+
+}

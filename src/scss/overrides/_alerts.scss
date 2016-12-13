@@ -1,0 +1,81 @@
+/**
+ * Styles that are direct overrides from those provided by Bootstrap 4
+ *
+ * We encapsulate these within an overrides scss in order to keep track
+ * of what we're actually modifying from the base library, for whenever
+ * we update the base library
+ *
+ * This file is for form component overrides
+ *
+ */
+
+
+// .list-group {
+//     a {
+//         text-decoration: none;
+//     }
+// }
+
+// // TODO: Move to config
+// .alert-danger {
+//     background-color: #efefef;
+//     border-color: #bb0000;
+//     color: #bb0000;
+// }
+
+// .alert {
+//     margin-bottom: 2rem;
+// }
+
+@mixin alert-style($border, $fg, $bg: transparent) {
+    border: 1px solid $border;
+    border-left: 4px solid $border;
+    background-color: $bg;
+    padding: 1em;
+    border-radius: 3px;
+    color: $fg;
+    margin-bottom: 2rem;
+    min-height: 4rem;
+
+    p {
+        margin: 0;
+        padding-left: 3em;
+        padding-top: 0.25em;
+    }
+
+    .fa-stack {
+        color: $fg;
+        float: left;
+    }
+}
+
+.alert.alert-info {
+    @include alert-style(#c2c2c2, #525252); // TODO: Replace with gray branding
+}
+
+.alert.alert-danger {
+    @include alert-style($brand-danger, $brand-danger);
+}
+
+.alert.alert-warning {
+    @include alert-style($brand-warning, $brand-warning);
+}
+
+.alert.alert-danger.ocio {
+    @include alert-style(#EAA286, $brand-danger, #FFEFE5);
+}
+
+.alert.alert-success {
+    @include alert-style($brand-success, $brand-success);
+}
+
+.alert.alert-info.ocio {
+    @include alert-style(#1D63A1, $body-color, #eef4fc);
+}
+
+// i.fa.fa-asterisk.required-sample {
+//     color: #bb0000;
+//     font-size: 0.5rem;
+//     line-height: 1rem;
+//     vertical-align: top;
+// }

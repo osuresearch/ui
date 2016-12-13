@@ -1,0 +1,45 @@
+
+/* Testing new form patterns */
+
+.form {
+
+    /* Legacy UI - Errors only show up in the form header */
+    .form-error {
+        display: none;
+    }
+
+    // AB test for rendering error text inline, instead of just recoloring
+    // (Accessibility improvement)
+    &--inline-errors {
+        .form-error {
+            display: block;
+            color: #bb0000;
+        }
+
+        .has-danger .form-control-label {
+            color: #212121;
+        }
+
+        .form-error i {
+            padding-right: 0.5em;
+        }
+
+        .has-danger .form-control {
+            border-color: #666;
+        }
+    }
+
+    // Using recommended 70-75 chararacter line width for readability
+    // This looks terrible, layout-wise, but adding it for the sake of testing
+    &--optimal-width {
+        max-width: 60rem;
+    }
+
+    // Shibboleth login styled alert colors
+    &--shibb-alerts {
+        .alert-danger {
+            background-color: #FFEFE5;
+            border-color: #EAA286;
+        }
+    }
+}

@@ -1,0 +1,22 @@
+
+/* Realigning the OSU navbar to match ORIS apps */
+
+#osu_navbar {
+    a {    
+        border: none;
+    }
+
+    .container {
+        margin: 0 2rem;
+        padding: 0;
+        max-width: 100%;
+    }
+
+    .univ_name a {
+        margin-left: 0;
+    }
+
+    div.links ul li:last-child {
+        margin-right:0;
+    }
+}

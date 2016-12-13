@@ -1,0 +1,5 @@
+.DS_Store
+.notes
+vendor
+node_modules
+composer.lock

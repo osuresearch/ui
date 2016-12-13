@@ -1,0 +1,68 @@
+/*
+TODO: Migrate into a better override
+*/
+
+// Direct from Chrome Web tools
+.navbar a {
+    border: none;
+}
+
+.navbar {
+    padding: 0 2rem;
+    border-radius: 0;
+}
+
+.navbar-brand {
+    padding: 0.5rem 0;
+    margin-right: 1.5rem;
+}
+
+.navbar-nav .nav-link {
+    color: rgba(0,0,0,0.6);
+    padding: 0.75rem 0.25rem;
+}
+
+.navbar .nav-item.active {
+    -webkit-box-shadow: inset 0px -2px 0px 0px #3283c8;
+    -moz-box-shadow: inset 0px -2px 0px 0px #3283c8;
+    box-shadow: inset 0px -2px 0px 0px #3283c8;
+}
+
+.navbar.navbar-light .nav-item.active,
+.navbar.navbar-dark .nav-item.active {
+    -webkit-box-shadow: inset 0px -2px 0px 0px #bb0000;
+    -moz-box-shadow: inset 0px -2px 0px 0px #bb0000;
+    box-shadow: inset 0px -2px 0px 0px #bb0000;
+}
+
+.navbar-light .navbar-nav .active > .nav-link {
+    color: #0a0a0a;
+    font-weight: 400;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: #666;
+}
+
+// Organization name (Office of Research) in the app header
+.navbar-org {
+    display: block;
+    font-size: 80%;
+    line-height: 80%;
+    color: #bb0000;
+}
+
+// Thick variation of the navbar, for the app header
+.navbar.navbar-thick {
+    min-height: 62px;
+    max-height: 62px;
+
+    .navbar-nav .nav-link {
+        padding: 1.2rem 0.25rem;
+    }
+
+    .navbar-brand {
+        padding: 0;
+        padding-top: 0.8rem;
+    }
+}
