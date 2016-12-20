@@ -44,7 +44,6 @@ If you are using [dataTables](https://datatables.net/), the following additional
 ```
 <script src="/assets/js/vendor/datatables-1.10.10.min.js"></script>
 ```
-If you aren't using any date inputs in your application, you can exclude `bootstrap-datepicker`. Likewise, if you aren't using dataTables, you can exclude `datatables` to improve load times.
 
 ## Installation
 This library is installable via Composer through `composer.json`, as long as you add UCR as a GitLab repository source:
