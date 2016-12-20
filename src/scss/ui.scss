@@ -21,7 +21,7 @@
 // For local testing of renders, we don't particularly *want* to point to a server.
 // But at the same time, we can't do relative as applications may live in either /secure
 // or at root of the application server.
-$vendor-fonts: '/assets/fonts' !default;
+$vendor-fonts: '/assets/fonts/vendor' !default;
 $vendor-images: '/assets/img/vendor' !default;
 
 // Vendor libraries
