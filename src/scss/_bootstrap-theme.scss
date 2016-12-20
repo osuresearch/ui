@@ -24,14 +24,14 @@
 $gray-dark:                 #212121;
 $gray:                      #55595c;
 $gray-light:                #666666; // Custom grey (used for .text-muted)
-$gray-lighter:              #eceeef;
-$gray-lightest:             #f7f7f9;
+$gray-lighter:              #c2c2c2; // #eceeef;
+$gray-lightest:             #eceeef; // #f7f7f9;
 
 $brand-primary:             #26686d; // OSU Blue
-$brand-success:             #5cb85c;
-$brand-info:                #5bc0de;
-$brand-warning:             #b0882d;
-$brand-danger:              #bb0000; // OSU Scarlet
+$brand-success:             #38ae67; // UCR Green
+$brand-info:                #3283c8; // Link Blue
+$brand-warning:             #fc8a51; // UCR Warning
+$brand-danger:              #e52c5a; // UCR Pink
 $brand-inverse:             $gray-dark;
 
 
@@ -126,7 +126,12 @@ $form-icon-danger: none;
 
 // Forms
 $input-color:                   $body-color; // Darker input text color
-$input-border-color:            #666; // Darker border
+$input-border-color:            $gray-light; // Darker border
+
+$input-bg-disabled:              $gray-lightest;
+
+$input-group-addon-bg:           $gray-lightest;
+$input-group-addon-border-color: $input-border-color;
 
 // $input-border-focus:            #7da4a7; // OSU PMS 5473 60% tint
 // $custom-select-focus-border-color: #7da4a7; // OSU PMS 5473 60% tint
@@ -136,4 +141,27 @@ $custom-control-checked-indicator-bg: $brand-primary;
 $custom-control-gutter:   1.5rem !default;
 $custom-control-spacer-x: 2rem !default;
 $custom-control-spacer-y: 1rem !default;
+
+
+
+// Form states and alerts
+//
+// Define colors for form feedback states and, by default, alerts.
+
+
+$state-success-text:             $body-color;
+$state-success-bg:               lighten($brand-success, 99% - lightness($brand-success));
+$state-success-border:           $brand-success;
+
+$state-info-text:                $gray-light;
+$state-info-bg:                  transparent;
+$state-info-border:              #9a9a9a;
+
+$state-warning-text:             $body-color;
+$state-warning-bg:               lighten($brand-warning, 99% - lightness($brand-warning));
+$state-warning-border:           $brand-warning;
+
+$state-danger-text:              $body-color;
+$state-danger-bg:                lighten($brand-danger, 99% - lightness($brand-danger));
+$state-danger-border:            $brand-danger;
 

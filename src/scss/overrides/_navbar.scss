@@ -2,6 +2,11 @@
 TODO: Migrate into a better override
 */
 
+
+.bg-faded {
+  background-color: #f7f7f9; // Was $gray-lightest, but we want lighter
+}
+
 // Direct from Chrome Web tools
 .navbar a {
     border: none;

@@ -23,7 +23,7 @@
             content: "";
             z-index: 1;
             position: absolute;
-            border-left: 2px solid #c2c2c2;
+            border-left: 2px solid $gray-lighter;
             right: 2.2em;
             top: 44px;
             bottom: -10px;
@@ -31,7 +31,7 @@
 
         small {
             display: block;
-            color: #666;
+            color: $gray-light;
         }
 
         a {
@@ -46,17 +46,17 @@
             padding-left: 1rem;
 
             &:hover {
-                background: #F6F6F6;
+                background: #f7f7f9;
             }
 
             // Re-apply our custom anchor display style to the inner page label
-            .formflow-page {
-                border-bottom: 1px solid rgba(50,131,200,0.25);
-            }
+            // .formflow-page {
+            //     border-bottom: 1px solid rgba(50,131,200,0.25);
+            // }
 
             &.active, &.active:hover {
                 background-color: transparent !important;
-                color: #212121 !important;
+                color: $body-color !important;
                 font-weight: 500;
                 cursor: default;
 
@@ -70,15 +70,19 @@
             }
 
             .fa {
-                color: #666;
+                color: $gray-light;
             }
 
-            &.complete .fa {
-                color: #6a8f01;
+            &.success .fa {
+                color: $brand-success;
             }
 
-            &.error .fa {
-                color: #bb0000;
+            &.warning .fa {
+                color: $brand-warning;
+            }
+
+            &.danger .fa {
+                color: $brand-danger;
             }
 
             // Hide last line

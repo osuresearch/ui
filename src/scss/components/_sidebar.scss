@@ -1,0 +1,66 @@
+
+.nav.nav-sidebar {
+    @extend .nav-stacked; // Variation on the stacked navbar style
+
+    // Add a lightweight divider line between navigation and content
+    border-right: 2px solid #F6F6F6;
+    max-width: 20em;
+
+    // Adjust headers to be small grey uppercase labels
+    li.nav-header {
+        text-transform: uppercase;
+        color: #666;
+    /*     padding: 1rem; */
+        padding: 0.75rem 1.25rem; 
+        font-size: 80%;
+        font-weight: 500;
+
+        // Visibly divide additional sections further
+        &:not(:first-child) {
+            padding-top: 2em;
+        }
+    }
+
+    li.nav-item {
+    /*     border: 1px solid red; */
+        position: relative;
+
+        // Give some hover borders around links 
+        a.nav-link {
+        /*     padding: 0.5em 1em; */
+            padding: 0.75rem 2rem 0.75rem 1.25rem;
+            width: 100%;
+            border: none;
+
+            &:hover {
+                background-color: #F6F6F6;
+            }
+        }
+
+        // Active link will always be highlighted
+        &.active a.nav-link {
+            background-color: #3283c8;
+            color: #FFF;
+        }
+
+        // Add an arrow icon after every link, displayed
+        // for the active one or when we hover over something
+        &::after {
+            position: absolute;
+            font: normal normal normal 14px/1 FontAwesome;
+            right: 1em;
+            content: "\f105";
+            top: 1.25em;
+        /*     color: #3283c8; */
+            color: transparent;
+        }
+
+        &.active::after {
+            color: #FFF;
+        }
+
+        &:not(.active):hover::after {
+            color: #3283c8;
+        }
+    }
+}
