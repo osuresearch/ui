@@ -471,5 +471,3 @@ $(function() {
         $(this).siblings('input').focus();
     });
 });
-
-//# sourceMappingURL=ui.js.map
