@@ -5,26 +5,26 @@
 //
 // Ported to SCSS by Chase McManning
 
-// Variables
-$gray:                          lighten(#000, 33.5%) !default; // #555
-$gray-light:                    lighten(#000, 46.7%) !default; // #777
-$gray-lighter:                  lighten(#000, 93.5%) !default; // #eee
+// // Variables
+// $gray:                          lighten(#000, 33.5%) !default; // #555
+// $gray-light:                    lighten(#000, 46.7%) !default; // #777
+// $gray-lighter:                  lighten(#000, 93.5%) !default; // #eee
 
-$brand-primary:                 darken(#428bca, 6.5%) !default; // #337ab7
+// $brand-primary:                 darken(#428bca, 6.5%) !default; // #337ab7
 
-$btn-primary-color:             #fff !default;
-$btn-primary-bg:                $brand-primary !default;
-$btn-primary-border:            darken($btn-primary-bg, 5%) !default;
+// $btn-primary-color:             #fff !default;
+// $btn-primary-bg:                $brand-primary !default;
+// $btn-primary-border:            darken($btn-primary-bg, 5%) !default;
 
-$btn-link-disabled-color:       $gray-light !default;
+// $btn-link-disabled-color:       $gray-light !default;
 
-$state-info-bg:                 #d9edf7 !default;
+// $state-info-bg:                 #d9edf7 !default;
 
-$line-height-base:              1.428571429 !default; // 20/14
-$border-radius-base:            4px !default;
+// $line-height-base:              1.428571429 !default; // 20/14
+// $border-radius-base:            4px !default;
 
-$dropdown-bg:                   #fff !default;
-$dropdown-border:               rgba(0,0,0,.15) !default;
+// $dropdown-bg:                   #fff !default;
+// $dropdown-border:               rgba(0,0,0,.15) !default;
 
 
 // Mixins

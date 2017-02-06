@@ -1,4 +1,12 @@
-// McManning note - This is missing the dt-button and DTCR (?) classes from the compiled css
+/**
+ * Stylesheet for DataTables 1.10.10
+ *
+ * This was custom built to support Bootstrap v4 as well as ORIS branding adjustments
+ *
+ * @author Chase McManning
+ */
+
+// Note: This is missing the dt-button and DTCR (col reorder?) classes from the compiled css
 // Header from the compiled CSS:
 /*
  * This combined file was created by the DataTables downloader builder:
@@ -12,12 +20,14 @@
  *   JSZip 2.5.0, DataTables 1.10.10, Buttons 1.1.0, Column visibility 1.1.0, HTML5 export 1.1.0, Print view 1.1.0, ColReorder 1.3.0
  */
 
-
 //
  // Colour customisation
  //
  // `!default` allows overriding variables that are defined before @import
  //
+
+// Color to use when shading
+$table-shade: black !default;
 
 // Border between the header (and footer) and the table body
 $table-header-border: 1px solid #d0d0d0 !default;
@@ -25,30 +35,36 @@ $table-header-border: 1px solid #d0d0d0 !default;
 // Border of rows / cells
 $table-body-border: 1px solid #dddddd !default;
 
-// Row background colour (hover, striping etc are all based on this colour and
+// Row background color (hover, striping etc are all based on this color and
 // calculated automatically)
 $table-row-background: #ffffff !default;
 
-// Row colour, when selected (tr.selected)
+// Row color, when selected (tr.selected)
 $table-row-selected: #b0bed9 !default;
 
-// Text colour of the interaction control elements (info, filter, paging etc)
+// Text color of the interaction control elements (info, filter, etc)
 $table-control-color: #333333 !default;
 
-// Highlight colour of the paging button for the current page
-$table-paging-button-active: #bb0000 !default;
+//
+// Pagination control
+//
+$table-paging-fg-color: $link-color !default;
+$table-paging-border: none !default; // 1px solid $gray-lightest !default;
 
-// Hover colour of paging buttons on mouse over
-$table-paging-button-hover: transparent !default;
+// Current page highlight (does not change on mouse hover)
+$table-paging-current-fg-color: $gray-light !default;
+$table-paging-current-bg-color: transparent !default;
 
-// Colour to use when shading
-$table-shade: black !default;
+$table-paging-disabled-fg-color: $gray-light !default;
+$table-paging-disabled-bg-color: transparent !default;
 
-// jQuery UI stylesheet imports this one - there are just two places where we
-// don't want DataTabels default styles assigned for jQuery UI, so rather than
-// duplicating the whole file, this is the best option
-$jqueryui: false !default;
+// Mouse hover over a selectable page
+$table-paging-hover-fg-color: $link-hover-color !default;
+$table-paging-hover-bg-color: $gray-lightest !default;
 
+// Mousedown on a selectable page
+$table-paging-active-fg-color: $table-paging-hover-fg-color !default;
+$table-paging-active-bg-color: $table-paging-hover-bg-color !default;
 
 //
 // Functions / mixins
@@ -94,10 +110,7 @@ table.dataTable {
     thead th,
     thead td {
         padding: 10px 18px;
-
-        @if not $jqueryui { // jQuery UI defines its own border
-            border-bottom: $table-header-border;
-        }
+        border-bottom: $table-header-border;
 
         &:active {
             outline: none;
@@ -107,48 +120,44 @@ table.dataTable {
     tfoot th,
     tfoot td {
         padding: 10px 18px 6px 18px;
-
-        @if not $jqueryui { // jQuery UI defines its own border
-            border-top: $table-header-border;
-        }
+        border-top: $table-header-border;
     }
 
     // Sorting
-    @if not $jqueryui { // jQuery UI defines its own sort icons
-        thead {
-            .sorting,
-            .sorting_asc,
-            .sorting_desc {
-                cursor: pointer;
-                *cursor: hand;
-            }
+    thead {
+        .sorting,
+        .sorting_asc,
+        .sorting_desc {
+            cursor: pointer;
+            *cursor: hand;
+        }
 
-            .sorting,
-            .sorting_asc,
-            .sorting_desc,
-            .sorting_asc_disabled,
-            .sorting_desc_disabled {
-                background-repeat: no-repeat;
-                background-position: center right;
-            }
+        .sorting,
+        .sorting_asc,
+        .sorting_desc,
+        .sorting_asc_disabled,
+        .sorting_desc_disabled {
+            background-repeat: no-repeat;
+            background-position: center right;
+        }
 
-            .sorting {
-                background-image: url($vendor-images + '/datatables/sort_both.png');
-            }
-            .sorting_asc {
-                background-image: url($vendor-images + '/datatables/sort_asc.png');
-            }
-            .sorting_desc {
-                background-image: url($vendor-images + '/datatables/sort_desc.png');
-            }
-            .sorting_asc_disabled {
-                background-image: url($vendor-images + '/datatables/sort_asc_disabled.png');
-            }
-            .sorting_desc_disabled {
-                background-image: url($vendor-images + '/datatables/sort_desc_disabled.png');
-            }
+        .sorting {
+            background-image: url($vendor-images + '/datatables/sort_both.png');
+        }
+        .sorting_asc {
+            background-image: url($vendor-images + '/datatables/sort_asc.png');
+        }
+        .sorting_desc {
+            background-image: url($vendor-images + '/datatables/sort_desc.png');
+        }
+        .sorting_asc_disabled {
+            background-image: url($vendor-images + '/datatables/sort_asc_disabled.png');
+        }
+        .sorting_desc_disabled {
+            background-image: url($vendor-images + '/datatables/sort_desc_disabled.png');
         }
     }
+
 
 
     /*
@@ -451,65 +460,44 @@ table.dataTable td {
         .paginate_button {
             box-sizing: border-box;
             display: inline-block;
-            min-width: 1.5em;
+            min-width: 2em;
             padding: 0 10px;
-            margin-left: 2px;
+            margin-left: -1px;
             text-align: center;
             text-decoration: none !important;
             cursor: pointer;
             *cursor: hand;
 
-            color: $table-control-color !important;
-            border: 1px solid transparent;
+            color: $table-paging-fg-color;
+            border: $table-paging-border;
             border-radius: 2px;
 
             font-size: 1.2rem;
             line-height: 30px;
 
-            i.material-icons {
-                font-size: 2.2rem;
-                line-height: 30px;
-            }
-
             &.current,
             &.current:hover {
-                color: white !important; // $table-control-color !important;
-                // border: 1px solid darken( $table-paging-button-active, 27% );
-                // @include gradient(
-                //     lighten($table-paging-button-active, 28%),
-                //     $table-paging-button-active
-                // );
-                background: $table-paging-button-active;
+                color: $table-paging-current-fg-color;
+                background: $table-paging-current-bg-color;
             }
 
             &.disabled,
             &.disabled:hover,
             &.disabled:active {
                 cursor: default;
-                color: #666 !important;
-                // border: 1px solid transparent;
-                background: transparent;
-                box-shadow: none;
+                color: $table-paging-disabled-fg-color;
+                background: $table-paging-disabled-bg-color;
             }
 
             &:hover {
-                // color: white !important;
-                // border: 1px solid $table-paging-button-hover;
-                // @include gradient(
-                //     lighten($table-paging-button-hover, 28%),
-                //     $table-paging-button-hover
-                // );
-                background: $table-paging-button-hover;
+                color: $table-paging-hover-fg-color;
+                background: $table-paging-hover-bg-color;
             }
 
             &:active {
                 outline: none;
-                background: #ddd;
-                // @include gradient(
-                //     lighten($table-paging-button-hover, 10%),
-                //     darken($table-paging-button-hover, 2%)
-                // );
-                // box-shadow: inset 0 0 3px #111;
+                color: $table-paging-active-fg-color;
+                background: $table-paging-active-bg-color;
             }
         }
 

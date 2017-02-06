@@ -1,7 +1,7 @@
 // Ported to SCSS by Chase McManning
 
 .datepicker {
-    border-radius: $border-radius-base;
+    border-radius: 4px;
     &-inline {
         width: 220px;
     }
@@ -22,7 +22,7 @@
             display: inline-block;
             border-left:   7px solid transparent;
             border-right:  7px solid transparent;
-            border-bottom: 7px solid $dropdown-border;
+            border-bottom: 7px solid $dropdown-border-color; // rgba(0,0,0,.15)
             border-top:    0;
             border-bottom-color: rgba(0,0,0,.2);
             position: absolute;
@@ -32,7 +32,7 @@
             display: inline-block;
             border-left:   6px solid transparent;
             border-right:  6px solid transparent;
-            border-bottom: 6px solid $dropdown-bg;
+            border-bottom: 6px solid $dropdown-bg; // fff
             border-top:    0;
             position: absolute;
         }
@@ -45,7 +45,7 @@
         &.datepicker-orient-top:before {
             bottom: -7px;
             border-bottom: 0;
-            border-top:    7px solid $dropdown-border;
+            border-top:    7px solid $dropdown-border-color;
         }
         &.datepicker-orient-top:after {
             bottom: -6px;
@@ -81,17 +81,17 @@
     table tr td {
         &.old,
         &.new {
-            color: $btn-link-disabled-color;
+            color: $gray-lighter; // $btn-link-disabled-color;
         }
         &.day:hover,
         &.focused {
-            background: $gray-lighter;
+            background: $gray-lightest;
             cursor: pointer;
         }
         &.disabled,
         &.disabled:hover {
             background: none;
-            color: $btn-link-disabled-color;
+            color: $gray-lighter; // $btn-link-disabled-color;
             cursor: default;
         }
         &.highlighted {
@@ -106,7 +106,7 @@
             &.disabled,
             &.disabled:active {
                 background: $highlighted-bg;
-                color: $btn-link-disabled-color;
+                color: $gray-lighter; // $btn-link-disabled-color;
             }
         }
         &.today {
@@ -120,7 +120,7 @@
             &.disabled,
             &.disabled:active {
                 background: $today-bg;
-                color: $btn-link-disabled-color;
+                color: $gray-lighter; // $btn-link-disabled-color;
             }
         }
         &.range {
@@ -135,7 +135,7 @@
             &.disabled,
             &.disabled:active {
                 background: $range-bg;
-                color: $btn-link-disabled-color;
+                color: $gray-lighter; // $btn-link-disabled-color;
             }
         }
         &.range.highlighted {
@@ -149,7 +149,7 @@
             &.disabled,
             &.disabled:active {
                 background: $range-highlighted-bg;
-                color: $btn-link-disabled-color;
+                color: $gray-lighter; // $btn-link-disabled-color;
             }
         }
         &.range.today {
@@ -159,7 +159,7 @@
             &.disabled,
             &.disabled:active {
                 background: $range-today-bg;
-                color: $btn-link-disabled-color;
+                color: $gray-lighter; // $btn-link-disabled-color;
             }
         }
         &.selected,
@@ -172,6 +172,8 @@
             @include button-variant($btn-primary-color, $btn-primary-bg, $btn-primary-border);
             text-shadow: 0 -1px 0 rgba(0,0,0,.25);
         }
+
+        // These are the actual year/month/day buttons
         span {
             display: block;
             width: 23%;
@@ -181,14 +183,17 @@
             margin: 1%;
             cursor: pointer;
             border-radius: 4px;
-            &:hover,
+            &:hover {
+                background: $gray-lightest;
+            }
             &.focused {
-                background: $gray-lighter;
+                background: $brand-primary;
+                color: #fff;
             }
             &.disabled,
             &.disabled:hover {
                 background: none;
-                color: $btn-link-disabled-color;
+                color: $gray-lighter; // $btn-link-disabled-color;
                 cursor: default;
             }
             &.active,
@@ -200,7 +205,7 @@
             }
             &.old,
             &.new {
-                color: $btn-link-disabled-color;
+                color: $gray-lighter; // $btn-link-disabled-color;
             }
         }
     }
@@ -215,7 +220,7 @@
     tfoot tr th {
         cursor: pointer;
         &:hover {
-            background: $gray-lighter;
+            background: $gray-lightest;
         }
     }
 

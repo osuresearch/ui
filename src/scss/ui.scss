@@ -38,7 +38,6 @@ $vendor-images: '/assets/img/vendor' !default;
 // Overrides of core Bootstrap 4 stylings that we can't edit
 @import "overrides/form";
 @import "overrides/alerts";
-@import "overrides/datepicker";
 @import "overrides/navbar";
 @import "overrides/osu-navbar";
 
