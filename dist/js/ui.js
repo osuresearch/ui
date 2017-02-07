@@ -468,5 +468,3 @@ $(function globalBinds() {
             $.fn[NAME].call($this, {});
         });
 }(jQuery));
-
-//# sourceMappingURL=ui.js.map
