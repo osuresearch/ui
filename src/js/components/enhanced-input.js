@@ -11,9 +11,12 @@
  *  data-provide="enhanced-input" to enable on an input
  *
  */
-;(function ($) {
-    var PLUGIN_NAME = 'enhanced-input';
+(function enhancedInputPlugin($) {
+    var NAME = 'EnhancedInput';
     var VERSION = '1.0.0';
+
+    var DATA_API_EVENT = 'click.' + NAME + '.data-api';
+    var PROVIDER = '[data-provide="enhanced-input"]';
 
     // Events on the input/textarea that will update the counter
     var INPUT_EVENTS = 'keyup keydown focus input paste';
@@ -22,9 +25,7 @@
         // Not applicable
     };
 
-    var EnhancedInput = function(element, options) {
-        $.data(element, PLUGIN_NAME, this);
-
+    var Plugin = function Plugin(element, options) {
         this.o = options;
         this.element = $(element);
 
@@ -35,65 +36,64 @@
             );
         }
 
-        this._setupDOM();
-        this._attachEvents();
+        this.setupDOM();
+        this.attachEvents();
 
         // Setup initial count
-        this._change();
+        this.update();
     };
 
-    EnhancedInput.prototype = {
-        constructor: EnhancedInput,
+    Plugin.prototype = {
+        constructor: Plugin,
 
-        _attachEvents: function() {
-            this.element.on(INPUT_EVENTS, $.proxy(this._change, this));
+        attachEvents: function attachEvents() {
+            this.element.on(INPUT_EVENTS, $.proxy(this.update, this));
         },
 
-        _setupDOM: function() {
-
+        setupDOM: function setupDOM() {
             // Add the counter to the DOM
             this.counter = $('<div class="enhanced-input-counter"/>');
             this.element.after(this.counter);
         },
 
-        _change: function() {
-
+        update: function update() {
             // Update textarea counter to reflect number of changes.
             // Note that Chrome counts \r\n as 1 character in JS, but
             // two when dealing with textarea[maxlength]. So we need
             // to do some math changes to get this to count properly.
             var length = this.element.val().replace(
-                /\r(?!\n)|\n(?!\r)/g, 
-                "\r\n"
+                /\r(?!\n)|\n(?!\r)/g,
+                '\r\n'
             ).length;
 
             this.counter.html(
-                length + '/' + 
+                length + '/' +
                 this.element.attr('maxlength')
             );
         }
     };
 
-    ////////////////////////////
+    // //////////////////////////
     // jQuery Plugin Interface
-    ////////////////////////////
-
-    var plugin = function(option) {
+    // //////////////////////////
+    $.fn[NAME] = function wrapper(option) {
         var args = Array.apply(null, arguments);
+        var ret;
+
         args.shift();
 
-        var ret;
-        this.each(function () {
-            var $this = $(this),
-                data = $this.data(PLUGIN_NAME),
-                options = typeof option === 'object' && option;
+        this.each(function iterator() {
+            var $this = $(this);
+            var data = $this.data(NAME);
+            var options = typeof option === 'object' && option;
+            var opts;
 
             if (!data) {
                 // Options priority: js args, data-api, defaults
-                var opts = $.extend({}, DEFAULTS, $this.data(), options);
+                opts = $.extend({}, DEFAULTS, $this.data(), options);
 
-                data = new EnhancedInput(this, opts);
-                $this.data('', data);
+                data = new Plugin(this, opts);
+                $this.data(NAME, data);
                 ret = data;
             }
 
@@ -102,30 +102,28 @@
             }
         });
 
-        if (ret === undefined || ret instanceof EnhancedInput) {
+        if (ret === undefined || ret instanceof Plugin) {
             return this;
         }
 
         return ret;
     };
 
-    $.fn[PLUGIN_NAME] = plugin;
-    $.fn[PLUGIN_NAME].defaults = DEFAULTS;
-    $.fn[PLUGIN_NAME].Constructor = EnhancedInput;
-    $.fn[PLUGIN_NAME].version = VERSION;
+    $.fn[NAME].defaults = DEFAULTS;
+    $.fn[NAME].Constructor = Plugin;
+    $.fn[NAME].version = VERSION;
 
     // Fire off construction of any lookups using data-api immediately
     $(document).on(
-        'click.'+PLUGIN_NAME+'.data-api',
-        '[data-provide="'+PLUGIN_NAME+'"]',
-        function (e) {
+        DATA_API_EVENT,
+        PROVIDER,
+        function handler(e) {
             var $this = $(this);
-            if ($this.data(PLUGIN_NAME)) {
+            if ($this.data(NAME)) {
                 return;
             }
 
             e.preventDefault();
-            plugin.call($this, {});
+            $.fn[NAME].call($this, {});
         });
-
-}( jQuery ));
+}(jQuery));

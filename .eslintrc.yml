@@ -1,0 +1,24 @@
+# Eslint using the popular AirBNB styleguide for ES5
+# https://github.com/airbnb/javascript/tree/es5-deprecated/es5
+#
+# ORIS-specific changes:
+# - 4 space indenting to match PHP PSR standards
+# - Slightly less environment-specific restrictions
+env:
+  browser: true
+  jquery: true
+extends: 'airbnb/legacy'
+rules:
+  indent: # Enforce 4 space indenting
+    - error
+    - 4
+  # ++/--. Allow it in for() loops. Less susceptible to whitespace bugs
+  no-plusplus:
+    - error
+    - allowForLoopAfterthoughts: true
+  # Disable scan for properties of params (e.g. foo(a) { a.p = 5 })
+  no-param-reassign:
+    - error
+    - props: false
+  # Disable CR/CRLF enforcement. We all have smart enough editors for it
+  linebreak-style: off

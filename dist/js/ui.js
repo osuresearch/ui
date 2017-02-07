@@ -1,4 +1,3 @@
-
 /**
  * Global behaviors applied to ORIS UI components
  *
@@ -7,7 +6,26 @@
  * application that uses your components.
  */
 
-// No code! Woo!
+// Apply global configuration changes to bootstrap-datepicker
+$.fn.datepicker.defaults.format = 'mm/dd/yyyy';
+$.fn.datepicker.defaults.maxViewMode = 2; // years
+$.fn.datepicker.defaults.orientation = 'bottom auto';
+$.fn.datepicker.defaults.autoclose = true;
+
+// Binds to create as soon as jQuery is setup
+$(function globalBinds() {
+    // Ensure addon icons trigger the datepicker as well, as people
+    // may be inclined to click the icon instead of the input.
+    // Note this is done as a document bind so that datepickers
+    // late loaded into the DOM are also bound.
+    $(document).on(
+        'click',
+        'input[data-provide="datepicker"] + .input-group-addon',
+        function clickHandler() {
+            $(this).siblings('input').focus();
+        }
+    );
+});
 
 /**
  * Enhanced Inputs
@@ -22,9 +40,12 @@
  *  data-provide="enhanced-input" to enable on an input
  *
  */
-;(function ($) {
-    var PLUGIN_NAME = 'enhanced-input';
+(function enhancedInputPlugin($) {
+    var NAME = 'EnhancedInput';
     var VERSION = '1.0.0';
+
+    var DATA_API_EVENT = 'click.' + NAME + '.data-api';
+    var PROVIDER = '[data-provide="enhanced-input"]';
 
     // Events on the input/textarea that will update the counter
     var INPUT_EVENTS = 'keyup keydown focus input paste';
@@ -33,9 +54,7 @@
         // Not applicable
     };
 
-    var EnhancedInput = function(element, options) {
-        $.data(element, PLUGIN_NAME, this);
-
+    var Plugin = function Plugin(element, options) {
         this.o = options;
         this.element = $(element);
 
@@ -46,65 +65,64 @@
             );
         }
 
-        this._setupDOM();
-        this._attachEvents();
+        this.setupDOM();
+        this.attachEvents();
 
         // Setup initial count
-        this._change();
+        this.update();
     };
 
-    EnhancedInput.prototype = {
-        constructor: EnhancedInput,
+    Plugin.prototype = {
+        constructor: Plugin,
 
-        _attachEvents: function() {
-            this.element.on(INPUT_EVENTS, $.proxy(this._change, this));
+        attachEvents: function attachEvents() {
+            this.element.on(INPUT_EVENTS, $.proxy(this.update, this));
         },
 
-        _setupDOM: function() {
-
+        setupDOM: function setupDOM() {
             // Add the counter to the DOM
             this.counter = $('<div class="enhanced-input-counter"/>');
             this.element.after(this.counter);
         },
 
-        _change: function() {
-
+        update: function update() {
             // Update textarea counter to reflect number of changes.
             // Note that Chrome counts \r\n as 1 character in JS, but
             // two when dealing with textarea[maxlength]. So we need
             // to do some math changes to get this to count properly.
             var length = this.element.val().replace(
-                /\r(?!\n)|\n(?!\r)/g, 
-                "\r\n"
+                /\r(?!\n)|\n(?!\r)/g,
+                '\r\n'
             ).length;
 
             this.counter.html(
-                length + '/' + 
+                length + '/' +
                 this.element.attr('maxlength')
             );
         }
     };
 
-    ////////////////////////////
+    // //////////////////////////
     // jQuery Plugin Interface
-    ////////////////////////////
-
-    var plugin = function(option) {
+    // //////////////////////////
+    $.fn[NAME] = function wrapper(option) {
         var args = Array.apply(null, arguments);
+        var ret;
+
         args.shift();
 
-        var ret;
-        this.each(function () {
-            var $this = $(this),
-                data = $this.data(PLUGIN_NAME),
-                options = typeof option === 'object' && option;
+        this.each(function iterator() {
+            var $this = $(this);
+            var data = $this.data(NAME);
+            var options = typeof option === 'object' && option;
+            var opts;
 
             if (!data) {
                 // Options priority: js args, data-api, defaults
-                var opts = $.extend({}, DEFAULTS, $this.data(), options);
+                opts = $.extend({}, DEFAULTS, $this.data(), options);
 
-                data = new EnhancedInput(this, opts);
-                $this.data('', data);
+                data = new Plugin(this, opts);
+                $this.data(NAME, data);
                 ret = data;
             }
 
@@ -113,33 +131,31 @@
             }
         });
 
-        if (ret === undefined || ret instanceof EnhancedInput) {
+        if (ret === undefined || ret instanceof Plugin) {
             return this;
         }
 
         return ret;
     };
 
-    $.fn[PLUGIN_NAME] = plugin;
-    $.fn[PLUGIN_NAME].defaults = DEFAULTS;
-    $.fn[PLUGIN_NAME].Constructor = EnhancedInput;
-    $.fn[PLUGIN_NAME].version = VERSION;
+    $.fn[NAME].defaults = DEFAULTS;
+    $.fn[NAME].Constructor = Plugin;
+    $.fn[NAME].version = VERSION;
 
     // Fire off construction of any lookups using data-api immediately
     $(document).on(
-        'click.'+PLUGIN_NAME+'.data-api',
-        '[data-provide="'+PLUGIN_NAME+'"]',
-        function (e) {
+        DATA_API_EVENT,
+        PROVIDER,
+        function handler(e) {
             var $this = $(this);
-            if ($this.data(PLUGIN_NAME)) {
+            if ($this.data(NAME)) {
                 return;
             }
 
             e.preventDefault();
-            plugin.call($this, {});
+            $.fn[NAME].call($this, {});
         });
-
-}( jQuery ));
+}(jQuery));
 
 /**
  * Simple ass AJAX lookup
@@ -175,7 +191,7 @@
  *                   "type": "person",
  *                   "id": "200275154",
  *                   "attributes": {
- *                       "title": "McManning, Chase"
+ *                       "name": "McManning, Chase"
  *                   }
  *               }
  *           ]
@@ -184,25 +200,23 @@
  * It can also supply an access token to the ORIS API through the
  * `token` parameter. Just make sure your token has the correct
  * permissions before attempting to perform lookup against an endpoint.
+ *
+ * Additional Notes:
+ * - Response can be application/json for non-API endpoints
+ * - Some API endpoints may support filter[] parameters.
+ *   Check the API documentation for more information.
  */
-;(function ($) {
-
-    // var NAME = 'lookup';
-    // var DATA_KEY = 'lookup';
-    // var EVENT_KEY = '.lookup';
-    // var DATA_API_KEY = '.data-api';
-    // var JQUERY_NO_CONFLICT = $.fn[NAME];
-
-    // var EVENTS = {
-    //     CLICK_DATA_API: 'click'+EVENT_KEY+DATA_API_KEY
-    // };
-
+(function lookupPlugin($) {
+    var NAME = 'Lookup';
     var VERSION = '1.0.0';
+
+    var DATA_API_EVENT = 'click.' + NAME + '.data-api';
+    var PROVIDER = '[data-provide="lookup"]';
 
     var DEFAULTS = {
         url: null,                      // Endpoint URL to request AJAX data from
 
-        display: 'attributes.title',    // AJAX object attribute to display in the input upon select
+        display: 'attributes.name',     // AJAX object attribute to display in the input upon select
 
         store: 'id',                    // AJAX object attribute to submit alongside the form.
                                         // If null, whatever is in the lookup input will be
@@ -215,45 +229,32 @@
         token: null                     // ORIS-API bearer token, if known.
     };
 
-    /**
-     * Utility function to resolve dot notation paths to JSON records.
-     *
-     * Source: http://stackoverflow.com/a/6394168
-     */
-    function _resolvePath(path, obj) {
-        return path.split('.').reduce(function(o, i) { return o[i]; }, obj);
-    }
-
-    var Lookup = function(element, options) {
-        $.data(element, 'lookup', this);
-
+    var Plugin = function Plugin(element, options) {
         this.o = options;
         this.element = $(element);
 
-        // Configuration and whatnot
-        console.log(options.url);
-
-        this._setupDOM();
-        this._attachEvents();
+        this.setupDOM();
+        this.attachEvents();
     };
 
-    Lookup.prototype = {
-        constructor: Lookup,
+    Plugin.prototype = {
+        constructor: Plugin,
 
-        _attachEvents: function() {
-            this.element.on('keyup', $.proxy(this._change, this));
-            this.results.on('click', 'a', $.proxy(this._select, this));
+        attachEvents: function attachEvents() {
+            this.element.on('keyup', $.proxy(this.change, this));
+            this.results.on('click', 'a', $.proxy(this.select, this));
             this.addon.on('click', $.proxy(this.clear, this));
         },
 
-        _setupDOM: function() {
-
+        setupDOM: function setupDOM() {
             var $parent = this.element.parent();
 
             // Setup a hidden input for storing selection data
             if (this.o.store) {
-                var name = this.element.attr('name');
-                this.store = $('<input type="hidden" name="'+name+'">');
+                this.store = $(
+                    '<input type="hidden" name="' +
+                    this.element.attr('name') + '">'
+                );
 
                 this.element.attr('name', '');
                 $parent.after(this.store);
@@ -265,14 +266,15 @@
             $parent.after(this.results);
         },
 
-        _change: function() {
+        change: function change() {
+            var term;
 
             // Ignore change events if we're readonly
             if (this.element.is('[readonly]')) {
                 return;
             }
 
-            var term = this.element.val();
+            term = this.element.val();
             if (term.length >= this.o.threshold) {
                 this.search(term);
             } else {
@@ -280,10 +282,10 @@
             }
         },
 
-        _select: function(e) {
+        select: function select(e) {
             var json = $(e.target).data('json');
 
-            this.element.val(_resolvePath(this.o.display, json));
+            this.element.val(this.resolvePath(this.o.display, json));
             this.results.html('');
 
             this.element.focus();
@@ -298,14 +300,14 @@
 
             // Store key in hidden input, if we choose to do so
             if (this.o.store) {
-                this.store.val(_resolvePath(this.o.store, json));
+                this.store.val(this.resolvePath(this.o.store, json));
             }
 
             e.preventDefault();
             return false;
         },
 
-        clear: function(e) {
+        clear: function clear(e) {
             this.results.html('');
             this.element.val('');
             this.element.focus();
@@ -328,44 +330,43 @@
             return false;
         },
 
-        search: function(term) {
+        search: function search(term) {
+            var that = this;
 
             this.addon.html(
                 '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i>'
             );
 
             // TODO: Replace mock with actual ajax
-            var self = this;
-            setTimeout(function() {
-
-                self.addon.html(
+            setTimeout(function demoTimeout() {
+                that.addon.html(
                     '<i class="fa fa-search" aria-hidden="true"></i>'
                 );
 
-                self._displayResults({
+                that.displayResults({
                     meta: {
                         total: 56
                     },
                     data: [
                         {
-                            type: "person",
-                            id: "junk",
+                            type: 'person',
+                            id: 'junk',
                             attributes: {
-                                title: term
+                                name: term
                             }
                         },
                         {
-                            type: "person",
-                            id: "200275154",
+                            type: 'person',
+                            id: '200275154',
                             attributes: {
-                                title: "McManning, Chase"
+                                name: 'McManning, Chase'
                             }
                         },
                         {
-                            type: "person",
-                            id: "123456789",
+                            type: 'person',
+                            id: '123456789',
                             attributes: {
-                                title: "Ray, John"
+                                name: 'Ray, John'
                             }
                         }
                     ]
@@ -373,13 +374,15 @@
             }, 1000);
         },
 
-        _displayResults: function(json) {
+        displayResults: function displayResults(json) {
+            var i;
+
             this.results.html('');
 
-            for (var i = 0; i < json.data.length; i++) {
+            for (i = 0; i < json.data.length; i++) {
                 this.results.append(
                     $('<a href="#" class="list-group-item list-group-action">' +
-                        _resolvePath(this.o.display, json.data[i]) +
+                        this.resolvePath(this.o.display, json.data[i]) +
                         '</a>'
                     ).data('json', json.data[i])
                 );
@@ -392,29 +395,46 @@
                     '</strong> additional results. Please narrow your search</div>'
                 );
             }
+        },
+
+        /**
+         * Utility function to resolve dot notation paths to JSON records.
+         *
+         * Source: http://stackoverflow.com/a/6394168
+         *
+         * @param {string} path period separated JSON path
+         * @param {object} obj JSON object to parse
+         *
+         * @returns {object} data within the JSON path
+         */
+        resolvePath: function resolvePath(path, obj) {
+            return path.split('.').reduce(function reduce(o, i) {
+                return o[i];
+            }, obj);
         }
     };
 
-    ////////////////////////////
+    // //////////////////////////
     // jQuery Plugin Interface
-    ////////////////////////////
-
-    var plugin = function(option) {
+    // //////////////////////////
+    $.fn[NAME] = function wrapper(option) {
         var args = Array.apply(null, arguments);
+        var ret;
+
         args.shift();
 
-        var ret;
-        this.each(function () {
-            var $this = $(this),
-                data = $this.data('lookup'),
-                options = typeof option === 'object' && option;
+        this.each(function iterator() {
+            var $this = $(this);
+            var data = $this.data(NAME);
+            var options = typeof option === 'object' && option;
+            var opts;
 
             if (!data) {
                 // Options priority: js args, data-api, defaults
-                var opts = $.extend({}, DEFAULTS, $this.data(), options);
+                opts = $.extend({}, DEFAULTS, $this.data(), options);
 
-                data = new Lookup(this, opts);
-                $this.data('', data);
+                data = new Plugin(this, opts);
+                $this.data(NAME, data);
                 ret = data;
             }
 
@@ -423,51 +443,30 @@
             }
         });
 
-        if (ret === undefined || ret instanceof Lookup) {
+        if (ret === undefined || ret instanceof Plugin) {
             return this;
         }
 
         return ret;
     };
 
-    $.fn.lookup = plugin;
-    $.fn.lookup.defaults = DEFAULTS;
-    $.fn.lookup.Constructor = Lookup;
-    $.fn.lookup.version = VERSION;
+    $.fn[NAME].defaults = DEFAULTS;
+    $.fn[NAME].Constructor = Plugin;
+    $.fn[NAME].version = VERSION;
 
     // Fire off construction of any lookups using data-api immediately
     $(document).on(
-        'click.lookup.data-api',
-        '[data-provide="lookup"]',
-        function (e) {
+        DATA_API_EVENT,
+        PROVIDER,
+        function handler(e) {
             var $this = $(this);
-            if ($this.data('lookup')) {
+            if ($this.data(NAME)) {
                 return;
             }
 
             e.preventDefault();
-            plugin.call($this, {});
+            $.fn[NAME].call($this, {});
         });
+}(jQuery));
 
-}( jQuery ));
-
-/**
- * Apply global configuration changes to bootstrap-datepicker
- */
-$.fn.datepicker.defaults.format = 'mm/dd/yyyy';
-$.fn.datepicker.defaults.maxViewMode = 2; // years
-$.fn.datepicker.defaults.orientation = 'bottom auto';
-$.fn.datepicker.defaults.autoclose = true;
-
-// Ensure any addon UI components (usually an icon at the right) trigger
-// the actual date input. Note that if you setup bootstrap-datepicker
-// on your own without utilizing it's data-api, you'll need to bind
-// this event yourself.
-$(function() {
-
-    // Note that we use document binding so late created components
-    // through AJAX/PJAX will still be bound as well.
-    $(document).on('click', 'input[data-provide="datepicker"] + .input-group-addon', function() {
-        $(this).siblings('input').focus();
-    });
-});
+//# sourceMappingURL=ui.js.map

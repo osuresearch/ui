@@ -11,11 +11,20 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify'), // Minifier for Javascript files
     jshint = require('gulp-jshint'), // Linting for Javascript files
     phplint = require('gulp-phplint'), // Linting for PHP files
-    phpcs = require('gulp-phpcs'); // Style/security testing for PHP files
+    phpcs = require('gulp-phpcs'), // Style/security testing for PHP files
+    eslint = require('gulp-eslint'); // Linting for Javascript files
+
+var JS_LINT_PATHS = [
+    'src/js/**/*.js'
+];
 
 var SCSS_LINT_PATHS = [
     'src/scss/**/*.scss', // Include our own custom SCSS
     '!src/scss/vendor/**/*' // Ignore vendor SCSS
+];
+
+var PHP_LINT_PATHS = [
+    'src/php/**/*.php'
 ];
 
 // Autoprefixer compatibility settings.
@@ -81,17 +90,10 @@ gulp.task('sass:build', function() {
  * Gulp task to lint non-vendor javascript files
  */
 gulp.task('js:lint', function() {
-    return gulp.src('js/**/*.js')
-        .pipe(jshint({
-            curly: true,
-            eqeqeq: true,
-            forin: true,
-            unused: true
-        }))
-        .pipe(jshint.reporter('jshint-stylish', {
-            beep: true
-        }));
-        //.pipe(jshint.reporter('fail')); Force linting to fail the build
+    return gulp.src(JS_LINT_PATHS)
+        .pipe(eslint())
+        .pipe(eslint.format())
+        .pipe(eslint.failOnError());
 });
 
 /**
@@ -114,6 +116,8 @@ gulp.task('js:quickbuild', ['js:lint'], function() {
  * Gulp task to minify ui.js into ui.min.js after js:quickbuild
  */
 gulp.task('js:build', ['js:lint'], function() {
+    // defined separate from JS_LINT_PATHS so that
+    // we can compile vendor JS that we don't lint
     return gulp.src('src/js/**/*.js')
         .pipe(sourcemaps.init())
         .pipe(plumber())
@@ -138,7 +142,7 @@ gulp.task('php:lint', function() {
     var isWin = /^win/.test(process.platform);
 
     return gulp.src([
-            'src/php/**/*.php', // library scripts
+            PHP_LINT_PATHS, // library scripts
         ])
         .pipe(phplint('', { // Check for basic PHP syntax errors
             skipPassedFiles: true // Don't report syntax error free files
@@ -160,9 +164,9 @@ gulp.task('php:lint', function() {
  * Executed via `gulp watch`
  */
 gulp.task('watch', function() {
-    gulp.watch('src/scss/**/*.scss', ['sass:build']);
-    gulp.watch('src/js/**/*.js', ['js:quickbuild']);
-    gulp.watch(['src/php/**/*.php'], ['php:lint']);
+    gulp.watch(SCSS_LINT_PATHS, ['sass:build']);
+    gulp.watch(JS_LINT_PATHS, ['js:quickbuild']);
+    gulp.watch(PHP_LINT_PATHS, ['php:lint']);
 });
 
 /**
