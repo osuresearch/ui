@@ -14,13 +14,10 @@ $.fn.datepicker.defaults.autoclose = true;
 
 // Binds to create as soon as jQuery is setup
 $(function globalBinds() {
-    // Ensure addon icons trigger the datepicker as well, as people
-    // may be inclined to click the icon instead of the input.
-    // Note this is done as a document bind so that datepickers
-    // late loaded into the DOM are also bound.
+    // Ensure addon icons trigger the sibling inputs.
     $(document).on(
         'click',
-        'input[data-provide="datepicker"] + .input-group-addon',
+        'span.input-group-addon',
         function clickHandler() {
             $(this).siblings('input').focus();
         }
