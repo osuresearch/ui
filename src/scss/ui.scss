@@ -25,7 +25,8 @@ $vendor-fonts: '/assets/fonts/vendor' !default;
 $vendor-images: '/assets/img/vendor' !default;
 
 // Vendor libraries
-@import "vendor/bootstrap-4.0.0a4/bootstrap";
+// @import "vendor/bootstrap-4.0.0a4/bootstrap";
+@import "vendor/bootstrap-4.0.0a6/bootstrap";
 @import "vendor/osu_navbar-resp-white";
 @import "vendor/font-awesome";
 @import "vendor/datatables";
@@ -33,19 +34,23 @@ $vendor-images: '/assets/img/vendor' !default;
 
 // Custom mixins
 @import "globals";
-@import "mixins";
+// @import "mixins";
 
 // Overrides of core Bootstrap 4 stylings that we can't edit
-@import "overrides/form";
+// @import "overrides/form";
 @import "overrides/alerts";
 @import "overrides/navbar";
+@import "overrides/buttons";
+@import "overrides/input-group";
+
+// Overrides of other vendor libraries
 @import "overrides/osu-navbar";
 
 // Components
-@import "components/form";
-@import "components/lookup";
-@import "components/enhanced-input";
+// @import "components/form";
+// @import "components/lookup";
+// @import "components/enhanced-input";
 @import "components/footer";
-@import "components/formflow";
-@import "components/sidebar";
+// @import "components/formflow";
+// @import "components/sidebar";
 
