@@ -1,0 +1,37 @@
+// Overrides of Bootstrap's _input-group.scss
+// This changes the display mode of .input-group-addons to float
+// inside of form components, instead of as side buttons.
+
+// By default, our input-group-addon items are floated
+// inside of the form-control they're connected to, rather than
+// appearing as a separate button.
+.input-group-addon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 4; // one above .form-control:hover
+    background: transparent;
+    border: none;
+    left: 0;
+    padding-top: 0.7rem;
+}
+
+.input-group {
+
+    // Prefix addons need to add padding to the left of the form control
+    .input-group-addon + .form-control {
+        padding-left: 2.25rem;
+        border-radius: $input-border-radius;
+    }
+
+    // ... And suffix addons need to add padding to the right
+    .form-control + .input-group-addon {
+        left: auto;
+        right: 0;
+    }
+
+    .form-control:not(:last-child) {
+        @include border-right-radius($input-border-radius);
+        padding-right: 2.25rem;
+    }
+}

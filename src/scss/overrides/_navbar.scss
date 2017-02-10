@@ -55,19 +55,27 @@ TODO: Migrate into a better override
     font-size: 80%;
     line-height: 80%;
     color: #bb0000;
+    padding-bottom: 0.1em;
 }
 
 // Thick variation of the navbar, for the app header
 .navbar.navbar-thick {
     min-height: 62px;
-    max-height: 62px;
 
     .navbar-nav .nav-link {
-        padding: 1.2rem 0.25rem;
+        padding-top: 1.2rem;
+        padding-bottom: 1.2rem;
     }
 
     .navbar-brand {
         padding: 0;
-        padding-top: 0.8rem;
+        padding-top: 0.5rem;
+        padding-top: 0.75rem;
+        height: 62px;
+    }
+
+    // Push the toggle button down a bit to center in the thicker bar
+    .navbar-toggler {
+        top: 0.75rem;
     }
 }
