@@ -109,7 +109,6 @@
 
         change: function change() {
             var term;
-
             // Ignore change events if we're readonly
             if (this.element.is('[readonly]')) {
                 return;
@@ -125,7 +124,6 @@
 
         select: function select(e) {
             var json = $(e.target).data('json');
-
             this.element.val(this.resolvePath(this.o.display, json));
             this.results.html('');
 
@@ -143,6 +141,8 @@
             if (this.o.store) {
                 this.store.val(this.resolvePath(this.o.store, json));
             }
+
+            this.element.trigger('oris.lookup-selected', [json]);
 
             e.preventDefault();
             return false;
@@ -178,47 +178,38 @@
                 '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i>'
             );
 
-            // TODO: Replace mock with actual ajax
-            setTimeout(function demoTimeout() {
-                that.addon.html(
-                    '<i class="fa fa-search" aria-hidden="true"></i>'
-                );
+            // Cancel requests if new one comes in
+            if(typeof this.request !== 'undefined') {
+                this.abort = true;
+                this.request.abort();
+            } else {
+                this.abort = false;
+            }
 
-                that.displayResults({
-                    meta: {
-                        total: 56
-                    },
-                    data: [
-                        {
-                            type: 'person',
-                            id: 'junk',
-                            attributes: {
-                                name: term
-                            }
-                        },
-                        {
-                            type: 'person',
-                            id: '200275154',
-                            attributes: {
-                                name: 'McManning, Chase'
-                            }
-                        },
-                        {
-                            type: 'person',
-                            id: '123456789',
-                            attributes: {
-                                name: 'Ray, John'
-                            }
-                        }
-                    ]
-                });
-            }, 1000);
+            this.request = $.ajax({
+                url: this.o.url,
+                type: 'GET',
+                data: 'q=' + term,
+                dataType: 'json'
+            }).done(function (data) {
+                data = JSON.parse(data);
+                that.displayResults(data);
+            }).fail(function (data) {
+                if (that.abort) {
+                    return;
+                } else {
+                    that.error();
+                }
+            });
         },
 
         displayResults: function displayResults(json) {
             var i;
-
             this.results.html('');
+
+            this.addon.html(
+                '<i class="fa fa-search" aria-hidden="true"></i>'
+            );
 
             for (i = 0; i < json.data.length; i++) {
                 this.results.append(
@@ -228,14 +219,28 @@
                     ).data('json', json.data[i])
                 );
             }
-
             if (json.meta && json.meta.total) {
                 this.results.append(
                     '<div class="lookup-total">There are <strong>' +
                     (json.meta.total - json.data.length) +
                     '</strong> additional results. Please narrow your search</div>'
                 );
+            } else if (json.meta && json.meta.total === 0) {
+                this.results.append(
+                    '<div class="lookup-total">There are <strong>' +
+                    (json.meta.total - json.data.length) +
+                    '</strong> results.</div>'
+                );
             }
+        },
+
+        error: function () {
+            this.results.append(
+                '<p><i class="fa fa-exclamation-circle" aria-hidden="true"></i>Something went wrong</p>' +
+                '<p>Try <a href="#" onclick="location.reload()">reloading the page</a><br>' +
+                'If the problem persists, contact <a href="mailto:orhelp@osu.edu">orhelp@osu.edu<a/>' +
+                '</p>'
+            );
         },
 
         /**
