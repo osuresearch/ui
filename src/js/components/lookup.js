@@ -192,7 +192,6 @@
                 data: 'q=' + term,
                 dataType: 'json'
             }).done(function (data) {
-                data = JSON.parse(data);
                 that.displayResults(data);
             }).fail(function (data) {
                 if (that.abort) {
@@ -219,7 +218,7 @@
                     ).data('json', json.data[i])
                 );
             }
-            if (json.meta && json.meta.total) {
+            if (json.meta && (json.meta.total - json.data.length) > 0) {
                 this.results.append(
                     '<div class="lookup-total">There are <strong>' +
                     (json.meta.total - json.data.length) +
@@ -227,9 +226,7 @@
                 );
             } else if (json.meta && json.meta.total === 0) {
                 this.results.append(
-                    '<div class="lookup-total">There are <strong>' +
-                    (json.meta.total - json.data.length) +
-                    '</strong> results.</div>'
+                    '<div class="lookup-total">There are no matching results.</div>'
                 );
             }
         },
