@@ -22,3 +22,6 @@ rules:
     - props: false
   # Disable CR/CRLF enforcement. We all have smart enough editors for it
   linebreak-style: off
+  # Disable function name enforcement. We like our anonymous functions for
+  # jQuery wrapping, and it doesn't really impact debugging as people may think
+  func-names: off
