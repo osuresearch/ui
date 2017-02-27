@@ -1,13 +1,20 @@
 
-.lookup-total {
-    border: 1px solid #ddd;
-    color: #666;
-    font-size: 80%;
-    padding: 0.5rem 1rem;
-    background-color: #efefef;
-}
-
 .lookup-results {
-    padding-bottom: 1rem;
-    margin-top: -1rem;
+    margin-top: -1em;
+    margin-bottom: 1em;
+    margin-left: 1.25em;
+    margin-right: 1.25em;
+    border: 1px solid #e6e6e6;
+    border-top: none;
+
+    .list-group-item {
+        padding: 0.25em 1em;
+        border: none;
+    }
+
+    .lookup-total {
+        font-size: 80%;
+        padding: 0.25rem 1rem;
+        color: $gray-light;
+    }
 }
