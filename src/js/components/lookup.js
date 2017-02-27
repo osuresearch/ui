@@ -101,14 +101,22 @@
                 $parent.after(this.store);
             }
 
-            this.addon = this.element.next('.input-group-addon');
+            this.addon = this.element.siblings('.input-group-addon');
+
+            if (this.addon.length < 1) {
+                $.error(
+                    'Could not locate sibling .input-group-addon to search input'
+                );
+            }
 
             this.results = $('<div class="list-group lookup-results"/>');
             $parent.after(this.results);
+            this.results.hide();
         },
 
         change: function change() {
             var term;
+
             // Ignore change events if we're readonly
             if (this.element.is('[readonly]')) {
                 return;
@@ -124,8 +132,9 @@
 
         select: function select(e) {
             var json = $(e.target).data('json');
+
             this.element.val(this.resolvePath(this.o.display, json));
-            this.results.html('');
+            this.results.html('').hide();
 
             this.element.focus();
 
@@ -149,7 +158,7 @@
         },
 
         clear: function clear(e) {
-            this.results.html('');
+            this.results.html('').hide();
             this.element.val('');
             this.element.focus();
 
@@ -204,6 +213,7 @@
 
         displayResults: function displayResults(json) {
             var i;
+
             this.results.html('');
 
             this.addon.html(
@@ -218,6 +228,7 @@
                     ).data('json', json.data[i])
                 );
             }
+
             if (json.meta && (json.meta.total - json.data.length) > 0) {
                 this.results.append(
                     '<div class="lookup-total">There are <strong>' +
@@ -229,10 +240,12 @@
                     '<div class="lookup-total">There are no matching results.</div>'
                 );
             }
+
+            this.results.show();
         },
 
         error: function () {
-            this.results.append(
+            this.results.html(
                 '<p><i class="fa fa-exclamation-circle" aria-hidden="true"></i>Something went wrong</p>' +
                 '<p>Try <a href="#" onclick="location.reload()">reloading the page</a><br>' +
                 'If the problem persists, contact <a href="mailto:orhelp@osu.edu">orhelp@osu.edu<a/>' +
