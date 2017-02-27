@@ -188,7 +188,7 @@
             );
 
             // Cancel requests if new one comes in
-            if(typeof this.request !== 'undefined') {
+            if (typeof this.request !== 'undefined') {
                 this.abort = true;
                 this.request.abort();
             } else {
@@ -202,10 +202,8 @@
                 dataType: 'json'
             }).done(function (data) {
                 that.displayResults(data);
-            }).fail(function (data) {
-                if (that.abort) {
-                    return;
-                } else {
+            }).fail(function () {
+                if (!that.abort) {
                     that.error();
                 }
             });
