@@ -244,12 +244,14 @@
             this.results.show();
         },
 
-        error: function () {
+        error: function error() {
             this.results.html(
-                '<p><i class="fa fa-exclamation-circle" aria-hidden="true"></i>Something went wrong</p>' +
-                '<p>Try <a href="#" onclick="location.reload()">reloading the page</a><br>' +
-                'If the problem persists, contact <a href="mailto:orhelp@osu.edu">orhelp@osu.edu<a/>' +
-                '</p>'
+                '<div class="list-group-item">' +
+                    '<span class="text-danger">' +
+                        'Something went wrong. If the problem persists, ' +
+                        'contact <a href="mailto:orhelp@osu.edu">orhelp@osu.edu</a>' +
+                    '</span>' +
+                '</div>'
             );
         },
 
