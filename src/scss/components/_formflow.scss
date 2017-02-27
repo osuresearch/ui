@@ -24,24 +24,41 @@
             z-index: 1;
             position: absolute;
             border-left: 2px solid $gray-lighter;
-            right: 2.2em;
+            right: 2em;
             top: 44px;
             bottom: -10px;
         }
 
+        // Subtitle for flow items.
+        // Sometimes indicates a sub-count or additional info
         small {
             display: block;
             color: $gray-light;
+
+            // Padding between actual link and the subtitle
+            padding-top: 0.5rem;
+
+            // Padding to avoid overlapping the right hand icons
+            padding-right: 2rem;
         }
 
-        a {
+        // Link to a page of the form
+        .formflow-page {
+            // Padding to avoid overlapping the right hand icons
+            padding-right: 2rem;
+        }
+
+        .formflow-item {
             @extend .list-group-item;
+
+            // Rewrite flex to be vertical blocks, right aligned
+            flex-flow: column;
+            align-items: flex-start;
 
             border: none;
             background-color: transparent;
-            line-height: 2rem;
 
-            // Bit left-side overflow for the background highlighting hover. 
+            // Bit left-side overflow for the background highlighting hover.
             margin-left: -1rem;
             padding-left: 1rem;
 
@@ -66,7 +83,8 @@
             }
 
             .fa-stack {
-                margin-left: 1em;
+                position: absolute;
+                right: 1em;
             }
 
             .fa {
@@ -85,7 +103,7 @@
                 color: $brand-danger;
             }
 
-            // Hide last line
+            // Hide last connector line
             &:last-child .formflow-page:after {
                 display: none;
             }

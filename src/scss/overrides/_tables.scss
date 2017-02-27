@@ -1,0 +1,23 @@
+
+.table {
+    tr {
+        border: none;
+    }
+
+    // Not thead th as we could potentially put th in the body/footer
+    th {
+        font-weight: 400;
+        font-size: 0.85em;
+        color: $gray-light;
+    }
+
+    thead th {
+        border: none;
+    }
+}
+
+// Ensure that the last stripe also has a border.
+// Looks weird when a table is lacking a border for the last record
+.table-striped tbody tr:nth-of-type(odd) {
+    border-bottom: $table-border-width solid $table-border-color;
+}

@@ -36,21 +36,24 @@ $vendor-images: '/assets/img/vendor' !default;
 @import "globals";
 // @import "mixins";
 
-// Overrides of core Bootstrap 4 stylings that we can't edit
-// @import "overrides/form";
+// Overrides of core Bootstrap 4 stylings that are not
+// configurable via boostrap-theme.scss
+@import "overrides/form";
 @import "overrides/alerts";
 @import "overrides/navbar";
 @import "overrides/buttons";
 @import "overrides/input-group";
+@import "overrides/tables";
+@import "overrides/pagination";
 
 // Overrides of other vendor libraries
 @import "overrides/osu-navbar";
 
 // Components
 // @import "components/form";
-// @import "components/lookup";
+@import "components/lookup";
 // @import "components/enhanced-input";
 @import "components/footer";
-// @import "components/formflow";
+@import "components/formflow";
 // @import "components/sidebar";
 

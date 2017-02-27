@@ -9,15 +9,16 @@
  *
  */
 
-// Bootstrap 4.0.0a4 does not support borders for custom controls,
-// so we force it here.
+// Bootstrap 4.0.0a6 does not support borders for custom controls
 .custom-checkbox .custom-control-indicator {
-    border: 1px solid #666;
+    border: 1px solid $input-border-color;
     background-color: #fff;
+
+    @include box-shadow($input-box-shadow);
 }
 
 .custom-radio .custom-control-indicator {
-    border: 1px solid #666;
+    border: 1px solid $input-border-color;
     background-color: #fff;
 }
 

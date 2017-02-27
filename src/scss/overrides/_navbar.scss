@@ -3,18 +3,34 @@ TODO: Migrate into a better override
 */
 
 
-.bg-faded {
-  background-color: #f7f7f9; // Was $gray-lightest, but we want lighter
-}
-
-// Direct from Chrome Web tools
-.navbar a {
-    border: none;
-}
-
 .navbar {
     padding: 0 2rem;
     border-radius: 0;
+
+    a {
+        border: none;
+    }
+
+    // By default, we underline nav items in link blue
+    .nav-item.active {
+        box-shadow: inset 0px -2px 0px 0px $link-color;
+    }
+
+    // for light/dark themed navbars, we use the OSU Brand Scarlet
+    &.navbar-light, &.navbar-dark {
+        .nav-item.active {
+            box-shadow: inset 0px -2px 0px 0px #bb0000;
+        }
+    }
+
+    &.bg-faded {
+        background-color: #f7f7f9; // Was $gray-lightest, but we want lighter
+
+        // Add a hover button effect on navbar links
+        li.nav-item:hover {
+            background-color: $gray-lightest;
+        }
+    }
 }
 
 .navbar-brand {
@@ -25,19 +41,6 @@ TODO: Migrate into a better override
 .navbar-nav .nav-link {
     color: rgba(0,0,0,0.6);
     padding: 0.75rem 0.25rem;
-}
-
-.navbar .nav-item.active {
-    -webkit-box-shadow: inset 0px -2px 0px 0px #3283c8;
-    -moz-box-shadow: inset 0px -2px 0px 0px #3283c8;
-    box-shadow: inset 0px -2px 0px 0px #3283c8;
-}
-
-.navbar.navbar-light .nav-item.active,
-.navbar.navbar-dark .nav-item.active {
-    -webkit-box-shadow: inset 0px -2px 0px 0px #bb0000;
-    -moz-box-shadow: inset 0px -2px 0px 0px #bb0000;
-    box-shadow: inset 0px -2px 0px 0px #bb0000;
 }
 
 .navbar-light .navbar-nav .active > .nav-link {
