@@ -14,7 +14,6 @@ $.fn.datepicker.defaults.autoclose = true;
 
 // Binds to create as soon as jQuery is setup
 $(function globalBinds() {
-
     // Ensure addon icons trigger the sibling inputs.
     $(document).on(
         'click',
@@ -258,10 +257,17 @@ $(function globalBinds() {
                 $parent.after(this.store);
             }
 
-            this.addon = this.element.next('.input-group-addon');
+            this.addon = this.element.siblings('.input-group-addon');
+
+            if (this.addon.length < 1) {
+                $.error(
+                    'Could not locate sibling .input-group-addon to search input'
+                );
+            }
 
             this.results = $('<div class="list-group lookup-results"/>');
             $parent.after(this.results);
+            this.results.hide();
         },
 
         change: function change() {
@@ -284,7 +290,7 @@ $(function globalBinds() {
             var json = $(e.target).data('json');
 
             this.element.val(this.resolvePath(this.o.display, json));
-            this.results.html('');
+            this.results.html('').hide();
 
             this.element.focus();
 
@@ -301,12 +307,14 @@ $(function globalBinds() {
                 this.store.val(this.resolvePath(this.o.store, json));
             }
 
+            this.element.trigger('oris.lookup-selected', [json]);
+
             e.preventDefault();
             return false;
         },
 
         clear: function clear(e) {
-            this.results.html('');
+            this.results.html('').hide();
             this.element.val('');
             this.element.focus();
 
@@ -335,47 +343,36 @@ $(function globalBinds() {
                 '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i>'
             );
 
-            // TODO: Replace mock with actual ajax
-            setTimeout(function demoTimeout() {
-                that.addon.html(
-                    '<i class="fa fa-search" aria-hidden="true"></i>'
-                );
+            // Cancel requests if new one comes in
+            if (typeof this.request !== 'undefined') {
+                this.abort = true;
+                this.request.abort();
+            } else {
+                this.abort = false;
+            }
 
-                that.displayResults({
-                    meta: {
-                        total: 56
-                    },
-                    data: [
-                        {
-                            type: 'person',
-                            id: 'junk',
-                            attributes: {
-                                name: term
-                            }
-                        },
-                        {
-                            type: 'person',
-                            id: '200275154',
-                            attributes: {
-                                name: 'McManning, Chase'
-                            }
-                        },
-                        {
-                            type: 'person',
-                            id: '123456789',
-                            attributes: {
-                                name: 'Ray, John'
-                            }
-                        }
-                    ]
-                });
-            }, 1000);
+            this.request = $.ajax({
+                url: this.o.url,
+                type: 'GET',
+                data: 'q=' + term,
+                dataType: 'json'
+            }).done(function (data) {
+                that.displayResults(data);
+            }).fail(function () {
+                if (!that.abort) {
+                    that.error();
+                }
+            });
         },
 
         displayResults: function displayResults(json) {
             var i;
 
             this.results.html('');
+
+            this.addon.html(
+                '<i class="fa fa-search" aria-hidden="true"></i>'
+            );
 
             for (i = 0; i < json.data.length; i++) {
                 this.results.append(
@@ -386,13 +383,30 @@ $(function globalBinds() {
                 );
             }
 
-            if (json.meta && json.meta.total) {
+            if (json.meta && (json.meta.total - json.data.length) > 0) {
                 this.results.append(
                     '<div class="lookup-total">There are <strong>' +
                     (json.meta.total - json.data.length) +
                     '</strong> additional results. Please narrow your search</div>'
                 );
+            } else if (json.meta && json.meta.total === 0) {
+                this.results.append(
+                    '<div class="lookup-total">There are no matching results.</div>'
+                );
             }
+
+            this.results.show();
+        },
+
+        error: function error() {
+            this.results.html(
+                '<div class="list-group-item">' +
+                    '<span class="text-danger">' +
+                        'Something went wrong. If the problem persists, ' +
+                        'contact <a href="mailto:orhelp@osu.edu">orhelp@osu.edu</a>' +
+                    '</span>' +
+                '</div>'
+            );
         },
 
         /**
