@@ -173,6 +173,8 @@
                 this.store.val('');
             }
 
+            this.element.trigger('clear.' + NAME);
+
             if (e) {
                 e.preventDefault();
             }
