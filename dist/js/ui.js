@@ -307,7 +307,7 @@ $(function globalBinds() {
                 this.store.val(this.resolvePath(this.o.store, json));
             }
 
-            this.element.trigger('oris.lookup-selected', [json]);
+            this.element.trigger('select.' + NAME, [json]);
 
             e.preventDefault();
             return false;
@@ -329,6 +329,8 @@ $(function globalBinds() {
                 this.store.val('');
             }
 
+            this.element.trigger('clear.' + NAME);
+
             if (e) {
                 e.preventDefault();
             }
@@ -338,6 +340,7 @@ $(function globalBinds() {
 
         search: function search(term) {
             var that = this;
+            var headers = {};
 
             this.addon.html(
                 '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i>'
@@ -351,11 +354,17 @@ $(function globalBinds() {
                 this.abort = false;
             }
 
+            // If we have an OAuth bearer token, add it as an auth header
+            if (this.o.token) {
+                headers.Authorization = 'Bearer ' + this.o.token;
+            }
+
             this.request = $.ajax({
                 url: this.o.url,
                 type: 'GET',
                 data: 'q=' + term,
-                dataType: 'json'
+                dataType: 'json',
+                headers: headers
             }).done(function (data) {
                 that.displayResults(data);
             }).fail(function () {
