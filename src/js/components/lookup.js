@@ -151,7 +151,7 @@
                 this.store.val(this.resolvePath(this.o.store, json));
             }
 
-            this.element.trigger('oris.lookup-selected', [json]);
+            this.element.trigger('select.' + NAME, [json]);
 
             e.preventDefault();
             return false;
