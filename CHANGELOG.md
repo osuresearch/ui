@@ -1,6 +1,8 @@
 # Change Log
 
 ## 1.1.0 (In Progress)
+Upgrade for Bootstrap 4 alpha.6 
+
 __Backwards Breaking Changes:__
 * All layout components (`.nav`, `.row`, etc) are now 100% based on [Flexbox](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)
 * `.nav-stacked` changed to `flex-column` 
