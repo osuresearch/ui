@@ -30,9 +30,8 @@
 .custom-controls-stacked {
     padding-bottom: 1em;
 
-    // Remove extra padding that Bootstrap creates after the last child
-    .custom-control:last-child::after {
-        display: none;
+    .custom-control:last-child {
+        margin-bottom: 0;
     }
 }
 
@@ -41,6 +40,10 @@
 // spacing components in the same .form-group
 .custom-controls {
     padding-bottom: 1em;
+
+    .custom-control {
+        margin-bottom: 0;
+    }
 }
 
 // Placement correction for file upload box in a .form-group
