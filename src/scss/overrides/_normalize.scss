@@ -1,0 +1,5 @@
+
+// Bootstrap never overrides Normalize's sans-serif font for certain components
+button, input, optgroup, select, textarea {
+    font-family: "ProximaNova", sans-serif;
+}
