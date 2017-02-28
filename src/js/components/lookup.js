@@ -184,6 +184,7 @@
 
         search: function search(term) {
             var that = this;
+            var headers = {};
 
             this.addon.html(
                 '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i>'
@@ -197,11 +198,17 @@
                 this.abort = false;
             }
 
+            // If we have an OAuth bearer token, add it as an auth header
+            if (this.o.token) {
+                headers.Authorization = 'Bearer ' + this.o.token;
+            }
+
             this.request = $.ajax({
                 url: this.o.url,
                 type: 'GET',
                 data: 'q=' + term,
-                dataType: 'json'
+                dataType: 'json',
+                headers: headers
             }).done(function (data) {
                 that.displayResults(data);
             }).fail(function () {
