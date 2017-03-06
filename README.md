@@ -6,8 +6,12 @@ Frontend UI components built on [Bootstrap 4](http://v4-alpha.getbootstrap.com/)
 * View templates for use with [Symfony Forms](http://symfony.com/doc/current/forms.html)
 * Commonly used "enhanced" form components, including lookups, date pickers, and multi-file uploaders
 
+Current unresolved issues can be found and reported on [YouTrack](https://ordevsvc01.rf.ohio-state.edu/youtrack/issues?q=project%3A+%7BPHP+Framework%7D+component%3A+ORIS%5CUI+%23Unresolved+)
+
 ## Requirements
-You need PHP5.6+ and Composer to install this package.
+* PHP 5.6+
+* Composer
+* NodeJS/NPM If you're not using the compiled ui.css and ui.js
 
 ### CSS Support
 The gulp build process uses the following compatibility table for autoprefixing CSS:
@@ -103,4 +107,5 @@ TBD
 
 ## Contributing
 
-TBD
+Check out open issues on [YouTrack](https://ordevsvc01.rf.ohio-state.edu/youtrack/issues?q=project%3A+%7BPHP+Framework%7D+component%3A+ORIS%5CUI+%23Unresolved+) and create merge requests for implementations.
+
