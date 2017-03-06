@@ -1,4 +1,5 @@
 # Change Log
+Current unresolved issues can be found and reported on [YouTrack](https://ordevsvc01.rf.ohio-state.edu/youtrack/issues?q=project%3A+%7BPHP+Framework%7D+component%3A+ORIS%5CUI+%23Unresolved+)
 
 ## 1.1.0 (In Progress)
 Upgrade for Bootstrap 4 alpha.6 
