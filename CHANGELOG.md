@@ -2,11 +2,11 @@
 Current unresolved issues can be found and reported on [YouTrack](https://ordevsvc01.rf.ohio-state.edu/youtrack/issues?q=project%3A+%7BPHP+Framework%7D+component%3A+ORIS%5CUI+%23Unresolved+)
 
 ## 1.1.0 (In Progress)
-Upgrade for Bootstrap 4 alpha.6 
+Upgrade for Bootstrap 4 alpha.6
 
 __Backwards Breaking Changes:__
 * All layout components (`.nav`, `.row`, etc) are now 100% based on [Flexbox](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)
-* `.nav-stacked` changed to `flex-column` 
+* `.nav-stacked` changed to `flex-column`
 * `.container` changed to `.wrapper` for the OSU Navbar component
 * `col-xs` breakpoints have been removed. Use `col-` for default non-responsive layout behavior. Example: `col-xs-12` is now just `col-12`
 
@@ -20,6 +20,7 @@ __Implemented Enhancements:__
 * Lookup component has been implemented with real AJAX requests
 * Prefix `.input-group-addon` icons are now embedded within adjacent inputs (previously was presented as a button)
 * Simplified `.table` display
+* Changed sm breakpoint to 500px to force col-sm-* support for Chrome 57+ printing
 
 ## 1.0.0 (2017-02-07)
 Initial stable release based on Bootstrap 4 alpha.4

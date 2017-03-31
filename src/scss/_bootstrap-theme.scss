@@ -184,3 +184,16 @@ $table-head-bg:                 transparent;
 $table-head-color:              $gray;
 
 $table-border-color:            $gray-lightest;
+
+// Grid breakpoints
+
+// Custom breakpoint for sm to force Chrome browsers to print with layouts
+// at col-sm-*
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 500px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px
+);
