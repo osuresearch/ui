@@ -412,7 +412,7 @@ $(function globalBinds() {
                 '<div class="list-group-item">' +
                     '<span class="text-danger">' +
                         'Something went wrong. If the problem persists, ' +
-                        'contact <a href="mailto:orhelp@osu.edu">orhelp@osu.edu</a>' +
+                        'contact <a href="mailto:orhelpdesk@osu.edu">orhelpdesk@osu.edu</a>' +
                     '</span>' +
                 '</div>'
             );
