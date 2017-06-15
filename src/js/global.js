@@ -7,10 +7,12 @@
  */
 
 // Apply global configuration changes to bootstrap-datepicker
-$.fn.datepicker.defaults.format = 'mm/dd/yyyy';
-$.fn.datepicker.defaults.maxViewMode = 2; // years
-$.fn.datepicker.defaults.orientation = 'bottom auto';
-$.fn.datepicker.defaults.autoclose = true;
+if ($.fn.datepicker) {
+    $.fn.datepicker.defaults.format = 'mm/dd/yyyy';
+    $.fn.datepicker.defaults.maxViewMode = 2; // years
+    $.fn.datepicker.defaults.orientation = 'bottom auto';
+    $.fn.datepicker.defaults.autoclose = true;
+}
 
 // Binds to create as soon as jQuery is setup
 $(function globalBinds() {
