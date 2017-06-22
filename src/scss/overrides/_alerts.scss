@@ -21,8 +21,8 @@
     }
 
     // If there's any paragraphs after an icon stack,
-    // ensure they're all re-padded to fit the icon 
-    // on the left float    
+    // ensure they're all re-padded to fit the icon
+    // on the left float
     .fa-stack ~ p {
         padding-left: 3em;
     }
@@ -33,10 +33,21 @@
         font-weight: 500;
     }
 
-    // Opacity is hardcoded to 0.2 in BS 4.0.0a4
-    // .close {
-    //     opacity: 0.4;
-    // }
+    // CSS improvements to the 'hide' buttons for all alerts
+    .alert-hide {
+        opacity: 0.4;
+        line-height: 1;
+
+        padding: 0;
+        cursor: pointer;
+        color: $border;
+        background: transparent;
+        border: 0;
+        -webkit-appearance: none;
+
+        float: right;
+        font-size: 1.5rem;
+    }
 }
 
 .alert-info {

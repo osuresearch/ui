@@ -1,0 +1,33 @@
+
+/*  Banner-style alerts
+
+    This takes the Bootstrap alert and resizes it to fit across the screen under the navigation bar,
+    as well as add some sticky behavior for browsers that support it.
+*/
+
+.alert.alert-banner {
+    display: none;
+
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+    margin: 0;
+    padding: 0 2em;
+    line-height: 2;
+    border-left: none;
+    border-right: none;
+    min-height: initial;
+
+    .fa-stack {
+        padding-top: 0.5rem;
+    }
+
+    // Better alignment for the hide X button
+    .alert-hide {
+        line-height: 2;
+    }
+
+    &.is-visible {
+        display: block;
+    }
+}
