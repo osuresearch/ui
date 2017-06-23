@@ -62,12 +62,12 @@ footer {
     }
 }
 
-// Padding around main content
-// Important is there because main could be defined by a .col-*
-// and we want to override any of that column padding to enforce
-// the 2rem standard
+// Ensure that containers directly under <main> have a 2em content border
 main {
-    padding: 2rem !important;
+    > .container,
+    > .container-fluid {
+        padding: 2em;
+    }
 }
 
 // Z-levels (from MaterializeCSS)
