@@ -6,6 +6,7 @@ TODO: Migrate into a better override
 .navbar {
     padding: 0 2rem;
     border-radius: 0;
+    z-index: 999;
 
     a {
         border: none;
