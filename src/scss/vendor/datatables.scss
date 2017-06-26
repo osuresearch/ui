@@ -137,8 +137,10 @@ table.dataTable {
         .sorting_desc,
         .sorting_asc_disabled,
         .sorting_desc_disabled {
+            padding-left: 32px;
             background-repeat: no-repeat;
             background-position: center right;
+            background-position-x: 12px;
         }
 
         .sorting {
@@ -146,15 +148,19 @@ table.dataTable {
         }
         .sorting_asc {
             background-image: url($vendor-images + '/datatables/sort_asc.png');
+            background-position-y: 16px;
         }
         .sorting_desc {
             background-image: url($vendor-images + '/datatables/sort_desc.png');
+            background-position-y: 8px;
         }
         .sorting_asc_disabled {
             background-image: url($vendor-images + '/datatables/sort_asc_disabled.png');
+            background-position-y: 16px;
         }
         .sorting_desc_disabled {
             background-image: url($vendor-images + '/datatables/sort_desc_disabled.png');
+            background-position-y: 8px;
         }
     }
 
