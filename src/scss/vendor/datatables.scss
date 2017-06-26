@@ -98,9 +98,19 @@ table.dataTable {
     border-spacing: 0;
 
     /*
-     * Header and footer styles
+     * Header style
      */
-    thead,
+    thead {
+        th {
+            font-weight: 400;
+            font-size: 80%;
+            color: #666;
+        }
+    }
+
+    /*
+     * Footer style
+     */
     tfoot {
         th {
             font-weight: bold;
