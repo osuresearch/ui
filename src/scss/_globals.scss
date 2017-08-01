@@ -62,6 +62,11 @@ footer {
     }
 }
 
+// Because Bootstrap's reset makes it 1.5 for some reason...
+legend {
+    font-size: 1rem;
+}
+
 // Ensure that containers directly under <main> have a 2em content border
 main {
     > .container,
