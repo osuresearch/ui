@@ -12,14 +12,14 @@
 // Bootstrap 4.0.0a6 does not support borders for custom controls
 .custom-checkbox .custom-control-indicator {
     border: 1px solid $input-border-color;
-    background-color: #fff;
+    background-color: $white;
 
     @include box-shadow($input-box-shadow);
 }
 
 .custom-radio .custom-control-indicator {
     border: 1px solid $input-border-color;
-    background-color: #fff;
+    background-color: $white;
 }
 
 // If it's checked, remove the border
@@ -55,15 +55,20 @@
 // TODO: Is this a setting somewhere in BS4?
 .custom-file-control,
 .custom-file-control::before {
-    border: 1px solid #666;
+    border: 1px solid $gray;
 }
 
 // Customize form group to have a bottom border and 2em spacing
 // between itself and other form groups
 .form-group {
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid $gray-lighter;
     padding-bottom: 2em;
     margin: 2em 0;
+
+    // Replication of Bootstrap's .has-danger
+    &.is-error {
+        @include form-control-validation($brand-danger);
+    }
 
     // Enforce 1em padding between components in a form group
     textarea,
@@ -78,10 +83,14 @@
     .form-error {
         color: $brand-danger;
         padding-bottom: 1em;
+
+        .fa {
+            padding-right: 0.5em;
+        }
     }
 
     // Do NOT colorize form labels for error states
-    &.has-danger label {
+    &.is-error label {
         color: $body-color;
     }
 
@@ -96,5 +105,3 @@
         content: "\f069";
     }
 }
-
-
