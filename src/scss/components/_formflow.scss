@@ -23,7 +23,7 @@
             content: "";
             z-index: 1;
             position: absolute;
-            border-left: 2px solid $gray-lighter;
+            border-left: 2px solid $gray-light;
             right: 2em;
             top: 44px;
             bottom: -10px;
@@ -33,7 +33,7 @@
         // Sometimes indicates a sub-count or additional info
         small {
             display: block;
-            color: $gray-light;
+            color: $gray;
 
             // Padding between actual link and the subtitle
             padding-top: 0.5rem;
@@ -88,7 +88,7 @@
             }
 
             .fa {
-                color: $gray-light;
+                color: $gray;
             }
 
             &.success .fa {
