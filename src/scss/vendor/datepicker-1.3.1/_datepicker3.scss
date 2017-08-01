@@ -81,17 +81,17 @@
     table tr td {
         &.old,
         &.new {
-            color: $gray-lighter; // $btn-link-disabled-color;
+            color: $gray-light; // $btn-link-disabled-color;
         }
         &.day:hover,
         &.focused {
-            background: $gray-lightest;
+            background: $gray-lighter;
             cursor: pointer;
         }
         &.disabled,
         &.disabled:hover {
             background: none;
-            color: $gray-lighter; // $btn-link-disabled-color;
+            color: $gray-light; // $btn-link-disabled-color;
             cursor: default;
         }
         &.highlighted {
@@ -106,7 +106,7 @@
             &.disabled,
             &.disabled:active {
                 background: $highlighted-bg;
-                color: $gray-lighter; // $btn-link-disabled-color;
+                color: $gray-light; // $btn-link-disabled-color;
             }
         }
         &.today {
@@ -120,11 +120,11 @@
             &.disabled,
             &.disabled:active {
                 background: $today-bg;
-                color: $gray-lighter; // $btn-link-disabled-color;
+                color: $gray-light; // $btn-link-disabled-color;
             }
         }
         &.range {
-            $range-bg: $gray-lighter;
+            $range-bg: $gray-light;
             @include button-variant(#000, $range-bg, darken($range-bg, 20%));
             border-radius: 0;
 
@@ -135,11 +135,11 @@
             &.disabled,
             &.disabled:active {
                 background: $range-bg;
-                color: $gray-lighter; // $btn-link-disabled-color;
+                color: $gray-light; // $btn-link-disabled-color;
             }
         }
         &.range.highlighted {
-            $range-highlighted-bg: mix($state-info-bg, $gray-lighter, 50%);
+            $range-highlighted-bg: mix($state-info-bg, $gray-light, 50%);
             @include button-variant(#000, $range-highlighted-bg, darken($range-highlighted-bg, 20%));
 
             &.focused {
@@ -149,17 +149,17 @@
             &.disabled,
             &.disabled:active {
                 background: $range-highlighted-bg;
-                color: $gray-lighter; // $btn-link-disabled-color;
+                color: $gray-light; // $btn-link-disabled-color;
             }
         }
         &.range.today {
-            $range-today-bg: mix(orange, $gray-lighter, 50%);
+            $range-today-bg: mix(orange, $gray-light, 50%);
             @include button-variant(#000, $range-today-bg, darken($range-today-bg, 20%));
 
             &.disabled,
             &.disabled:active {
                 background: $range-today-bg;
-                color: $gray-lighter; // $btn-link-disabled-color;
+                color: $gray-light; // $btn-link-disabled-color;
             }
         }
         &.selected,
@@ -184,7 +184,7 @@
             cursor: pointer;
             border-radius: 4px;
             &:hover {
-                background: $gray-lightest;
+                background: $gray-lighter;
             }
             &.focused {
                 background: $brand-primary;
@@ -193,7 +193,7 @@
             &.disabled,
             &.disabled:hover {
                 background: none;
-                color: $gray-lighter; // $btn-link-disabled-color;
+                color: $gray-light; // $btn-link-disabled-color;
                 cursor: default;
             }
             &.active,
@@ -205,7 +205,7 @@
             }
             &.old,
             &.new {
-                color: $gray-lighter; // $btn-link-disabled-color;
+                color: $gray-light; // $btn-link-disabled-color;
             }
         }
     }
@@ -220,7 +220,7 @@
     tfoot tr th {
         cursor: pointer;
         &:hover {
-            background: $gray-lightest;
+            background: $gray-lighter;
         }
     }
 

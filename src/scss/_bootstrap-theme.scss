@@ -176,6 +176,11 @@ $state-danger-text:              $body-color;
 $state-danger-bg:                lighten($brand-danger, 99% - lightness($brand-danger));
 $state-danger-border:            $brand-danger;
 
+// Dropdowns
+
+$dropdown-link-disabled-color:   $gray;
+$dropdown-header-color:          $gray;
+
 // Tables
 //
 // Customizes the `.table` component with basic values, each used across all table variations.
