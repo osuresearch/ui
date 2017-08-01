@@ -22,10 +22,10 @@
 // Grayscale and brand colors for use across Bootstrap.
 
 $gray-dark:                 #212121;
-$gray:                      #55595c;
-$gray-light:                #666666; // Custom grey (used for .text-muted)
-$gray-lighter:              #c2c2c2; // #eceeef;
-$gray-lightest:             #eceeef; // #f7f7f9;
+$gray:                      #666666;
+$gray-light:                #c2c2c2;
+$gray-lighter:              #ececef;
+$gray-lightest:             #f7f7f9;
 
 $brand-primary:             #26686d; // OSU Blue
 $brand-success:             #38ae67; // UCR Green
@@ -33,7 +33,6 @@ $brand-info:                #3283c8; // Link Blue
 $brand-warning:             #fc8a51; // UCR Warning
 $brand-danger:              #e52c5a; // UCR Pink
 $brand-inverse:             $gray-dark;
-
 
 // Options
 //
@@ -62,6 +61,8 @@ $link-hover-decoration:      none; // Removed, we'll be overriding with a border
 // Font, line-height, and color for body text, headings, and more.
 
 $font-family-sans-serif:     "ProximaNova", sans-serif;
+
+$text-muted: $gray;
 
 // Pixel value used to responsively scale all typography. Applied to the `<html>` element.
 $font-size-root:             16px;
@@ -132,9 +133,9 @@ $form-icon-danger: none;
 
 // Forms
 
-$input-border-color:                $gray-lighter; // Darker border
+$input-border-color:                $gray-light;
 
-$input-bg-disabled:                 $gray-lightest;
+$input-bg-disabled:                 $gray-lighter;
 
 // $input-group-addon-bg:           $gray-lightest;
 // $input-group-addon-border-color: $input-border-color;
@@ -152,6 +153,9 @@ $custom-control-spacer-y:           1rem;
 $custom-file-button-bg:             #f7f7f9;
 $custom-file-border-color:          $input-border-color;
 
+$custom-control-disabled-indicator-bg:       $gray-light;
+$custom-control-disabled-description-color:  $gray;
+
 // Form states and alerts
 //
 // Define colors for form feedback states and, by default, alerts.
@@ -160,7 +164,7 @@ $state-success-text:             $body-color;
 $state-success-bg:               lighten($brand-success, 99% - lightness($brand-success));
 $state-success-border:           $brand-success;
 
-$state-info-text:                $gray-light;
+$state-info-text:                $gray;
 $state-info-bg:                  transparent;
 $state-info-border:              #9a9a9a;
 
@@ -177,17 +181,13 @@ $state-danger-border:            $brand-danger;
 // Customizes the `.table` component with basic values, each used across all table variations.
 
 // Zebra striping background color
-$table-bg-accent:               #f7f7f9;
-$table-bg-hover:                $gray-lightest;
+$table-bg-accent:               $gray-lightest;
+$table-bg-hover:                $gray-lighter;
 
 $table-head-bg:                 transparent;
 $table-head-color:              $gray;
 
-$table-border-color:            $gray-lightest;
-
-// Badges
-
-$badge-font-weight:             400;
+$table-border-color:            $gray-lighter;
 
 // Grid breakpoints
 
