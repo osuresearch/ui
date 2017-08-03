@@ -65,11 +65,6 @@
     padding-bottom: 2em;
     margin: 2em 0;
 
-    // Replication of Bootstrap's .has-danger
-    &.is-error {
-        @include form-control-validation($brand-danger);
-    }
-
     // Enforce 1em padding between components in a form group
     textarea,
     input,
@@ -89,9 +84,19 @@
         }
     }
 
-    // Do NOT colorize form labels for error states
-    &.is-error label {
-        color: $body-color;
+    // Replication of Bootstrap's .has-danger
+    &.is-error {
+        @include form-control-validation($brand-danger);
+
+        // Do *not* colorize addons
+        .input-group-addon {
+            background: none;
+        }
+
+        // Do *not* colorize form labels
+        label {
+            color: $body-color;
+        }
     }
 
     // Required star for form groups.
