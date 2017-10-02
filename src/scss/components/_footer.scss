@@ -1,11 +1,18 @@
 
+// Temporary footer height until it gets moved to be flex based
+$fixed-footer-height: 156px;
+
 footer {
     font-size: 80%;
-
-    // Slightly darker grey background to match OSU navbar
-    background: #333333;
+    background: $gray-dark;
     padding: 2rem;
-    color: #FFF;
+    color: $white;
+
+    // Force to the bottom of the page, fixed height
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: $fixed-footer-height;
 
     .wordmark {
         border: none;
@@ -19,4 +26,9 @@ footer {
             list-style: none;
         }
     }
+}
+
+// Adjust body margin as well since the footer is currently absolute positioned
+body {
+    margin-bottom: $fixed-footer-height;
 }

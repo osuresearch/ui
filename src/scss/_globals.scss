@@ -37,42 +37,9 @@ html {
   min-height: 100%;
 }
 
-// Corrections for sticky footer
-body {
-    // Margin bottom by footer height
-    margin-bottom: 180px;
-}
-
-footer {
-    font-size: 90%;
-
-    // Slightly darker grey background to match OSU navbar
-    background: #333333; // osu-grey darken-1
-    padding: 2em;
-    color: #FFF;
-
-    // Force to the bottom of the page, fixed height
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 180px;
-
-    .row {
-        margin: 0;
-    }
-}
-
 // Because Bootstrap's reset makes it 1.5 for some reason...
 legend {
     font-size: 1rem;
-}
-
-// Ensure that containers directly under <main> have a 2em content border
-main {
-    > .container,
-    > .container-fluid {
-        padding: 2em;
-    }
 }
 
 // Z-levels (from MaterializeCSS)
