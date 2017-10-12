@@ -1,0 +1,106 @@
+
+/* OSU brand navbar - full SCSS rewrite */
+.osu-navbar {
+    height: 42px; // Fixed height
+    margin: 0;
+    padding: 0 2rem;
+    background: #333 url($vendor-images + '/osu-navbar/white/bg-navbar_red.png') center bottom repeat-x;
+    font-size: 13px;
+    line-height: 1.5;
+    font-weight: 400;
+
+    // Flexbox shenanigans
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .osu-navbar-info {
+        margin-top: -2px; // account for the red underline
+
+        a {
+            height: 16px;
+            width: 80px;
+            display: block;
+            text-indent: -9999px;
+            background: url($vendor-images + '/osu-navbar/white/osu_name.png') 0 0 no-repeat;
+        }
+    }
+
+    .osu-navbar-links {
+        margin-top: -2px; // account for the red underline
+
+        // Horizontal list of links
+        li {
+            list-style: none;
+            float: left;
+            margin-right: 1em;
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+
+        // Custom link style (not blue)
+        a {
+            color: $white;
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    // Replace text links with icons for smaller resolutions
+    @include media-breakpoint-down(sm) {
+        padding: 0 1rem; // Reduce edge padding for mobile
+
+        .osu-navbar-links {
+            li {
+                margin-right: 0.5em;
+            }
+
+            a {
+                // Turn into fixed blocks (for icon backgrounds)
+                // and hide (by offsetting) the text labels
+                display: block;
+                height: 23px;
+                width: 23px;
+                overflow: hidden;
+                text-indent: -999px;
+
+                // Don't underline icon links
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+        }
+
+        .osu-navbar-help {
+            background: url($vendor-images + '/osu-navbar/white/resp-help.png') 0 0 no-repeat;
+        }
+
+        .osu-navbar-buckeyelink {
+            background: url($vendor-images + '/osu-navbar/white/resp-buckeyelink.png') 0 0 no-repeat;
+        }
+
+        .osu-navbar-map {
+            background: url($vendor-images + '/osu-navbar/white/resp-map.png') 0 0 no-repeat;
+        }
+
+        .osu-navbar-findpeople {
+            background: url($vendor-images + '/osu-navbar/white/resp-findpeople.png') 0 0 no-repeat;
+        }
+
+        .osu-navbar-webmail {
+            background: url($vendor-images + '/osu-navbar/white/resp-webmail.png') 0 0 no-repeat;
+        }
+
+        .osu-navbar-search {
+            background: url($vendor-images + '/osu-navbar/white/resp-search.png') 0 0 no-repeat;
+        }
+    }
+
+    // TODO: Retina icon support
+    // I'm not familiar with the math for that.
+}
