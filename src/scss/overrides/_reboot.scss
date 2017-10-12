@@ -1,0 +1,53 @@
+
+// Prettier links, because text-decoration: underline is crap
+// a {
+//     border-bottom: 1px solid rgba(50, 131, 200, 0.25);
+// }
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+// Flexbox-based body
+body {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0;
+
+    // Required in combination with main{flex-basis} to ensure that
+    // the footer stays at the page bottom at all times
+    min-height: 100vh;
+
+    main {
+        // Fill available flex height with <main>,
+        // effectively pushing <footer> to the page bottom at all times
+        flex: 1;
+        flex-basis: 100%;
+
+        // Hack: media selector that only activates on IE 10 & 11.
+        // IE 11 fails to support a flex-basis height and causes the footer
+        // to be positioned out of order. This removes flex from main and
+        // applies a fixed min-height calculation instead.
+        @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+            flex: none;
+
+            // Calculation is based on 100px header + 156px footer
+            min-height: calc(100vh - 256px);
+        }
+    }
+
+    footer {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+// Disable IE's built in 'x' button on the right of inputs
+// (conflicts with Javascript event handling)
+::-ms-clear,
+::-ms-reveal {
+    width: 0;
+    height: 0;
+}
