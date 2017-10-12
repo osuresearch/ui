@@ -8,55 +8,52 @@
  *
  * We do recommend the SASS compilation route.
  */
-@charset "UTF-8";
+@charset 'UTF-8';
 
-// Bootstrap 4.0.0a2 theme settings
-@import "bootstrap-theme";
+// Branding fonts/colors
+@import 'colors';
+@import 'fonts';
 
-// Vendor configurations for paths to assets.
-// Vendor static assets (fonts, images) are stored separate
-// from the application that may include vendor CSS.
+// Theme settings
+@import 'settings';
 
-// TODO: Determine how to appropriately path these.
-// For local testing of renders, we don't particularly *want* to point to a server.
-// But at the same time, we can't do relative as applications may live in either /secure
-// or at root of the application server.
-$vendor-fonts: '/assets/fonts/vendor' !default;
-$vendor-images: '/assets/img/vendor' !default;
+@import 'temp';
 
 // Vendor libraries
-// @import "vendor/bootstrap-4.0.0a4/bootstrap";
-@import "vendor/bootstrap-4.0.0a6/bootstrap";
-@import "vendor/osu_navbar-resp-white";
-@import "vendor/font-awesome";
-@import "vendor/datatables";
-@import "vendor/datepicker-1.3.1/build3";
-@import "vendor/fixedsticky";
+@import 'vendor/bootstrap-4.0.0-beta/bootstrap';
+// @import 'vendor/osu_navbar-resp-white';
+@import 'vendor/font-awesome';
+@import 'vendor/datatables';
+// @import 'vendor/datepicker-1.3.1/build3';
+// @import 'vendor/fixedsticky';
 
-// Custom mixins
-@import "globals";
-// @import "mixins";
+// Custom global stylesheet overrides
+// @import 'globals';
+
+// // @import 'mixins';
 
 // Overrides of core Bootstrap 4 stylings that are not
 // configurable via boostrap-theme.scss
-@import "overrides/normalize";
-@import "overrides/forms";
-@import "overrides/alerts";
-@import "overrides/navbar";
-@import "overrides/buttons";
-@import "overrides/input-group";
-@import "overrides/tables";
-@import "overrides/pagination";
+@import 'overrides/forms2';
+@import 'overrides/navbar2';
+@import 'overrides/reboot';
 
-// Overrides of other vendor libraries
-@import "overrides/osu-navbar";
+// @import 'overrides/alerts';
+// @import 'overrides/navbar';
+// @import 'overrides/buttons';
+@import 'overrides/input-group';
+// @import 'overrides/tables';
+// @import 'overrides/pagination';
 
-// Components
-// @import "components/form";
-@import "components/lookup";
-// @import "components/enhanced-input";
-@import "components/footer";
-@import "components/formflow";
-// @import "components/sidebar";
-@import "components/alert-banner";
+// // Overrides of other vendor libraries
+// @import 'overrides/osu-navbar';
+
+// // Components
+// // @import 'components/form';
+// @import 'components/lookup';
+// // @import 'components/enhanced-input';
+@import 'components/footer';
+@import 'components/osu-navbar';
+// @import 'components/formflow';
+// @import 'components/alert-banner';
 
