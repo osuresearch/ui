@@ -1,21 +1,19 @@
 
-// Temporary footer height until it gets moved to be flex based
-$fixed-footer-height: 156px;
-
 footer {
     font-size: 80%;
-    background: $gray-dark;
+    font-weight: 100;
+    background: shade($gray, 60%);
     padding: 2rem;
     color: $white;
 
-    // Force to the bottom of the page, fixed height
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: $fixed-footer-height;
-
     .wordmark {
         border: none;
+    }
+
+    // Make links slightly thicker to fix contrast issues
+    // against the dark background
+    a {
+        font-weight: 300;
     }
 
     ul {
@@ -26,9 +24,9 @@ footer {
             list-style: none;
         }
     }
-}
 
-// Adjust body margin as well since the footer is currently absolute positioned
-body {
-    margin-bottom: $fixed-footer-height;
+    // Reduce footprint for mobile
+    @include media-breakpoint-down(sm) {
+        padding: 1rem;
+    }
 }
