@@ -10,46 +10,37 @@
  */
 @charset 'UTF-8';
 
-// Branding fonts/colors
+// Early include independent functions from Bootstrap so
+// they can be usable for some of our internals
+@import 'vendor/bootstrap-4.0.0-beta/functions';
+
+// Branding colors and fonts
 @import 'colors';
 @import 'fonts';
 
-// Theme settings
+// Vendor theme settings
 @import 'settings';
-
-@import 'temp';
 
 // Vendor libraries
 @import 'vendor/bootstrap-4.0.0-beta/bootstrap';
-// @import 'vendor/osu_navbar-resp-white';
 @import 'vendor/font-awesome';
 @import 'vendor/datatables';
-// @import 'vendor/datepicker-1.3.1/build3';
-// @import 'vendor/fixedsticky';
+@import 'vendor/datepicker-1.3.1/build3';
 
-// Custom global stylesheet overrides
-// @import 'globals';
-
-// // @import 'mixins';
-
-// Overrides of core Bootstrap 4 stylings that are not
-// configurable via boostrap-theme.scss
-@import 'overrides/forms2';
-@import 'overrides/navbar2';
+// Overrides of non-configurable Bootstrap 4 components
+// Note that this should be in the same order as bootstrap.scss
 @import 'overrides/reboot';
-
-// @import 'overrides/alerts';
-// @import 'overrides/navbar';
-// @import 'overrides/buttons';
+@import 'overrides/tables';
+@import 'overrides/forms';
+@import 'overrides/buttons';
 @import 'overrides/input-group';
-// @import 'overrides/tables';
-// @import 'overrides/pagination';
+@import 'overrides/custom-forms';
+@import 'overrides/navbar';
+@import 'overrides/pagination';
+@import 'overrides/alert';
 
-// // Overrides of other vendor libraries
-// @import 'overrides/osu-navbar';
 
 // // Components
-// // @import 'components/form';
 // @import 'components/lookup';
 // // @import 'components/enhanced-input';
 @import 'components/footer';

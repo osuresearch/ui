@@ -22,6 +22,13 @@
         padding: 0;
     }
 
+    // Fix cursor for disabled form controls
+    .form-control {
+        &:disabled {
+            cursor: not-allowed;
+        }
+    }
+
     // Small (help text) padding improvements
     .form-text {
         font-size: 80%;
@@ -72,86 +79,5 @@
         padding-left: 0.5em;
         vertical-align: top;
         content: "\f069";
-    }
-}
-
-// Bootstrap 4.0 does not support borders for custom controls
-.custom-checkbox .custom-control-indicator {
-    border: 1px solid $input-border-color;
-    background-color: $white;
-
-    @include box-shadow($input-box-shadow);
-}
-
-.custom-radio .custom-control-indicator {
-    border: 1px solid $input-border-color;
-    background-color: $white;
-}
-
-// If it's checked, remove the border
-.custom-control-input:checked ~ .custom-control-indicator {
-    border: none;
-}
-
-.custom-control-input:disabled ~ .custom-control-indicator,
-.custom-control-input:disabled ~ .custom-control-description {
-    cursor: not-allowed;
-}
-
-.form-control {
-    &:disabled {
-        cursor: not-allowed;
-    }
-}
-
-// Fix padding for stacked controls
-.custom-controls-stacked {
-    padding-bottom: 1rem;
-}
-
-// Bug in BS4 Beta (?) plaintext form controls aren't rendered
-// as blocks like default .form-controls
-.form-control-plaintext {
-    display: block;
-    width: 100%;
-}
-
-// Correct positioning & font size of feedback message
-.invalid-feedback {
-    margin-top: 0;
-    margin-bottom: 1rem;
-    font-size: 0.8rem;
-}
-
-.custom-controls,
-.custom-controls-stacked {
-    // Bootstrap does not support adding an .is-invalid
-    // state to the control set wrapper
-    &.is-invalid {
-        ~ .invalid-feedback {
-            display: block;
-        }
-
-        .custom-control-indicator {
-            border-color: theme-color('danger');
-        }
-
-        .custom-control-description {
-            color: theme-color('danger');
-        }
-    }
-}
-
-.input-group {
-    // Bootstrap does not (yet) support .is-invalid on a group.
-    // See bug: https://github.com/twbs/bootstrap/issues/23454
-    &.is-invalid {
-        ~ .invalid-feedback {
-            display: block;
-        }
-
-        input {
-            @extend .is-invalid;
-        }
     }
 }

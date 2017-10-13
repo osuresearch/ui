@@ -31,4 +31,16 @@
     .form-control:not(:last-child) {
         padding-right: 2.25rem;
     }
+
+    // Bootstrap does not (yet) support .is-invalid on a group.
+    // See bug: https://github.com/twbs/bootstrap/issues/23454
+    &.is-invalid {
+        ~ .invalid-feedback {
+            display: block;
+        }
+
+        input {
+            @extend .is-invalid;
+        }
+    }
 }

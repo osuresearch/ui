@@ -50,18 +50,8 @@
     }
 }
 
-.alert-info {
-    @include alert-extras($alert-info-border);
-}
-
-.alert-danger {
-    @include alert-extras($alert-danger-border);
-}
-
-.alert-warning {
-    @include alert-extras($alert-warning-border);
-}
-
-.alert-success {
-    @include alert-extras($alert-success-border);
+@each $color, $value in $theme-colors {
+    .alert-#{$color} {
+        @include alert-extras(theme-color($color));
+    }
 }
