@@ -2,15 +2,16 @@
  * Styling alerts further and better supporting alert icons
  */
 
-@mixin alert-extras($border) {
-    border-left: 4px solid $border;
+@mixin alert-extras($theme-color) {
+    border-left: 4px solid $theme-color;
+    background: tint($theme-color, 5%);
 
     padding: 1em;
     margin-bottom: 2rem;
     min-height: 4rem;
 
     .fa-stack {
-        color: $border;
+        color: $theme-color;
         float: left;
         padding-top: 0.25em;
     }
@@ -29,24 +30,28 @@
 
     .alert-heading {
         padding: 0 0.5rem;
-        color: $border;
+        color: $theme-color;
         font-weight: 500;
     }
 
-    // CSS improvements to the 'hide' buttons for all alerts
-    .alert-hide {
-        opacity: 0.4;
+    // CSS improvements to the close buttons for all alerts
+    .alert-hide,
+    .close {
+        opacity: 0.8;
         line-height: 1;
+        font-size: 1.5rem;
+        font-weight: bold;
+        text-shadow: 0 1px 0 #fff;
 
         padding: 0;
         cursor: pointer;
-        color: $border;
+        color: $theme-color;
         background: transparent;
         border: 0;
         -webkit-appearance: none;
 
         float: right;
-        font-size: 1.5rem;
+    }
     }
 }
 
