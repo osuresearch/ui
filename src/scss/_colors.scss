@@ -81,12 +81,8 @@ $brand: (
 // as a background with complementary foreground
 @each $color, $value in $brand {
     .brand-#{$color} {
+        @include color-yiq($value);
         background-color: $value;
-        @if (lightness($value) > 50) {
-            color: $black;
-        } @else {
-            color: $white;
-        }
     }
 
     // All tints and shades.
@@ -95,21 +91,13 @@ $brand: (
         $percentage: $step * 10;
 
         .brand-#{$color}-tint-#{$percentage} {
+            @include color-yiq(tint($value, $percentage));
             background-color: tint($value, $percentage);
-            @if (lightness(tint($value, $percentage)) > 50) {
-                color: $black;
-            } @else {
-                color: $white;
-            }
         }
 
         .brand-#{$color}-shade-#{$percentage} {
+            @include color-yiq(shade($value, $percentage));
             background-color: shade($value, $percentage);
-            @if (lightness(shade($value, $percentage)) > 50) {
-                color: $black;
-            } @else {
-                color: $white;
-            }
         }
     }
 }
