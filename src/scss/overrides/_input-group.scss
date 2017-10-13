@@ -17,11 +17,9 @@
 }
 
 .input-group {
-
     // Prefix addons need to add padding to the left of the form control
     .input-group-addon + .form-control {
         padding-left: 2.25rem;
-        border-radius: $input-border-radius;
     }
 
     // ... And suffix addons need to add padding to the right
@@ -31,7 +29,6 @@
     }
 
     .form-control:not(:last-child) {
-        @include border-right-radius($input-border-radius);
         padding-right: 2.25rem;
     }
 }
