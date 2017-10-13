@@ -1,85 +1,55 @@
-/*
-TODO: Migrate into a better override
-*/
-
 
 .navbar {
-    padding: 0 2rem;
-    border-radius: 0;
-    z-index: 999;
+    // Use .navbar-expand (horizontal flex) behavior by default
+    @extend .navbar-expand;
 
-    a {
-        border: none;
+    padding: 0.5em 2em;
+
+    // Alignment correction to ensure the top of the dropdown menu
+    // is aligned against the bottom of the navbar
+    .navbar-nav .dropdown-menu {
+        margin-top: 9px;
     }
 
-    // By default, we underline nav items in link blue
-    .nav-item.active {
-        box-shadow: inset 0px -2px 0px 0px $link-color;
-    }
+    // Application's main navbar. Styled slightly different
+    // than inline navbars - with a bit more responsive behavior
+    &.navbar-main {
+        @extend .navbar-light;
+        background-color: tint($gray, 5%);
 
-    // for light/dark themed navbars, we use the OSU Brand Scarlet
-    &.navbar-light, &.navbar-dark {
-        .nav-item.active {
-            box-shadow: inset 0px -2px 0px 0px #bb0000;
+        // Alternative link display - to treat them more like buttons
+        .nav-item {
+            // margin-bottom: -0.75em;
+            // padding-bottom: 0.5em;
+
+            &:hover {
+                background: tint($gray, 10%);
+            }
+
+            &.active {
+                // border-bottom: 2px solid #bb0000;
+                background: tint($gray, 12%);
+            }
         }
-    }
 
-    &.bg-faded {
-        background-color: #f7f7f9; // Was $gray-lightest, but we want lighter
+        // Adjustments to branding alignment
+        .navbar-brand {
+            padding: 0;
+            padding-top: 0.1em;
 
-        // Add a hover button effect on navbar links
-        li.nav-item:hover {
-            background-color: $gray-lightest;
+            // Organization name (Office of Research) in the app header
+            .navbar-org {
+                display: block;
+                font-size: 80%;
+                line-height: 80%;
+                color: $scarlet;
+                padding: 0.1em 0;
+            }
         }
-    }
-}
 
-.navbar-brand {
-    padding: 0.5rem 0;
-    margin-right: 1.5rem;
-}
-
-.navbar-nav .nav-link {
-    color: rgba(0,0,0,0.6);
-    padding: 0.75rem 0.25rem;
-}
-
-.navbar-light .navbar-nav .active > .nav-link {
-    color: #0a0a0a;
-    font-weight: 400;
-}
-
-.navbar-light .navbar-nav .nav-link {
-    color: #666;
-}
-
-// Organization name (Office of Research) in the app header
-.navbar-org {
-    display: block;
-    font-size: 80%;
-    line-height: 80%;
-    color: #bb0000;
-    padding-bottom: 0.1em;
-}
-
-// Thick variation of the navbar, for the app header
-.navbar.navbar-thick {
-    min-height: 62px;
-
-    .navbar-nav .nav-link {
-        padding-top: 1.2rem;
-        padding-bottom: 1.2rem;
-    }
-
-    .navbar-brand {
-        padding: 0;
-        padding-top: 0.5rem;
-        padding-top: 0.75rem;
-        height: 62px;
-    }
-
-    // Push the toggle button down a bit to center in the thicker bar
-    .navbar-toggler {
-        top: 0.75rem;
+        // Reduce edge padding for mobile
+        @include media-breakpoint-down(sm) {
+            padding: 0.5em 1em;
+        }
     }
 }
