@@ -56,3 +56,19 @@ $input-disabled-bg: $gray-100;
 
 // Slighly higher contrast for hovering options in a dropdown
 $dropdown-link-hover-bg: $gray-100;
+
+
+/*
+    Settings for customized Bootstrap-Datepicker SCSS
+*/
+$datepicker-button-focus-bg: $gray-200;
+$datepicker-button-focus-fg: $gray-900;
+$datepicker-button-hover-bg: $gray-200;
+$datepicker-button-disabled-fg: $gray-300;
+
+$datepicker-button-active-fg: $white;
+$datepicker-button-active-bg: $casal;
+
+$datepicker-dropdown-bg: $white;
+$datepicker-dropdown-border-color: rgba($black, .15);
+
