@@ -48,23 +48,23 @@ $table-control-color: #333333 !default;
 //
 // Pagination control
 //
-$table-paging-fg-color: $link-color !default;
-$table-paging-border: none !default; // 1px solid $gray-lightest !default;
+$table-paging-fg-color: blue !default;
+$table-paging-border: none !default;
 
 // Current page highlight (does not change on mouse hover)
-$table-paging-current-fg-color: $gray-light !default;
+$table-paging-current-fg-color: #666 !default;
 $table-paging-current-bg-color: transparent !default;
 
-$table-paging-disabled-fg-color: $gray-light !default;
+$table-paging-disabled-fg-color: #666 !default;
 $table-paging-disabled-bg-color: transparent !default;
 
 // Mouse hover over a selectable page
-$table-paging-hover-fg-color: $link-hover-color !default;
-$table-paging-hover-bg-color: $gray-lightest !default;
+$table-paging-hover-fg-color: blue !default;
+$table-paging-hover-bg-color: #dddddd !default;
 
 // Mousedown on a selectable page
-$table-paging-active-fg-color: $table-paging-hover-fg-color !default;
-$table-paging-active-bg-color: $table-paging-hover-bg-color !default;
+$table-paging-active-fg-color: pink !default;
+$table-paging-active-bg-color: orange !default;
 
 //
 // Functions / mixins
