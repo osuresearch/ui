@@ -1,15 +1,81 @@
-/**
- * Styles that are direct overrides from those provided by Bootstrap 4
- *
- * We encapsulate these within an overrides scss in order to keep track
- * of what we're actually modifying from the base library, for whenever
- * we update the base library
- *
- * This file is for form component overrides
- *
- */
+.form-group {
+    // Customize form group to have a bottom border and 2em spacing
+    // between itself and other form groups
+    border-bottom: 1px solid $gray-200;
+    padding-bottom: 1rem;
+    margin: 2rem 0;
 
-// Bootstrap 4.0.0a6 does not support borders for custom controls
+    // Enforce 1em padding between components in a form group
+    textarea,
+    input,
+    select,
+    label,
+    legend,
+    .input-group {
+        margin-bottom: 1em;
+    }
+
+    // Have vertical (default) form legends behave
+    // the same way as horizontal/inline form legends
+    legend {
+        @extend .col-form-legend;
+        padding: 0;
+    }
+
+    // Small (help text) padding improvements
+    .form-text {
+        font-size: 80%;
+        color: $text-muted;
+        margin-top: 0;
+        margin-bottom: 1rem;
+    }
+
+    // Inline error messages
+    .form-error {
+        color: theme-color('danger');
+        display: none;
+        padding-bottom: 1em;
+
+        .fa {
+            padding-right: 0.5em;
+        }
+    }
+
+    &.is-error {
+        .form-error {
+            display: block;
+        }
+    }
+
+    // Replication of Bootstrap's .has-danger
+    // &.is-error {
+    //     @include form-control-validation($brand-danger);
+
+    //     // Do *not* colorize addons
+    //     .input-group-addon {
+    //         background: none;
+    //     }
+
+    //     // Do *not* colorize form labels
+    //     label {
+    //         color: $body-color;
+    //     }
+    // }
+
+    // Required star for form groups.
+    // Attaches to the first label or legend found
+    &.is-required > label:first-child:after,
+    &.is-required > legend:first-child:after {
+        color: #bb0000;
+        font-family: FontAwesome;
+        font-size: 0.5em;
+        padding-left: 0.5em;
+        vertical-align: top;
+        content: "\f069";
+    }
+}
+
+// Bootstrap 4.0 does not support borders for custom controls
 .custom-checkbox .custom-control-indicator {
     border: 1px solid $input-border-color;
     background-color: $white;
@@ -27,87 +93,65 @@
     border: none;
 }
 
+.custom-control-input:disabled ~ .custom-control-indicator,
+.custom-control-input:disabled ~ .custom-control-description {
+    cursor: not-allowed;
+}
+
+.form-control {
+    &:disabled {
+        cursor: not-allowed;
+    }
+}
+
+// Fix padding for stacked controls
 .custom-controls-stacked {
-    padding-bottom: 1em;
-
-    .custom-control:last-child {
-        margin-bottom: 0;
-    }
+    padding-bottom: 1rem;
 }
 
-// Bootstrap provides .custom-controls-stacked but nothing
-// for horizontal controls that we want to pad below for
-// spacing components in the same .form-group
-.custom-controls {
-    padding-bottom: 1em;
-
-    .custom-control {
-        margin-bottom: 0;
-    }
-}
-
-// Placement correction for file upload box in a .form-group
-.form-group .custom-file {
+// Bug in BS4 Beta (?) plaintext form controls aren't rendered
+// as blocks like default .form-controls
+.form-control-plaintext {
     display: block;
+    width: 100%;
 }
 
-// Color correction for file upload box.
-// TODO: Is this a setting somewhere in BS4?
-.custom-file-control,
-.custom-file-control::before {
-    border: 1px solid $gray;
+// Correct positioning & font size of feedback message
+.invalid-feedback {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 0.8rem;
 }
 
-// Customize form group to have a bottom border and 2em spacing
-// between itself and other form groups
-.form-group {
-    border-bottom: 1px solid $gray-lighter;
-    padding-bottom: 2em;
-    margin: 2em 0;
-
-    // Enforce 1em padding between components in a form group
-    textarea,
-    input,
-    select,
-    label,
-    .input-group {
-        margin-bottom: 1em;
-    }
-
-    // Inline error messages
-    .form-error {
-        color: $brand-danger;
-        padding-bottom: 1em;
-
-        .fa {
-            padding-right: 0.5em;
-        }
-    }
-
-    // Replication of Bootstrap's .has-danger
-    &.is-error {
-        @include form-control-validation($brand-danger);
-
-        // Do *not* colorize addons
-        .input-group-addon {
-            background: none;
+.custom-controls,
+.custom-controls-stacked {
+    // Bootstrap does not support adding an .is-invalid
+    // state to the control set wrapper
+    &.is-invalid {
+        ~ .invalid-feedback {
+            display: block;
         }
 
-        // Do *not* colorize form labels
-        label {
-            color: $body-color;
+        .custom-control-indicator {
+            border-color: theme-color('danger');
+        }
+
+        .custom-control-description {
+            color: theme-color('danger');
         }
     }
+}
 
-    // Required star for form groups.
-    // Attaches to the first label or legend found
-    &.is-required > label:first-child:after,
-    &.is-required > legend:first-child:after {
-        color: #bb0000;
-        font-family: FontAwesome;
-        font-size: 0.5em;
-        padding-left: 0.5em;
-        vertical-align: top;
-        content: "\f069";
+.input-group {
+    // Bootstrap does not (yet) support .is-invalid on a group.
+    // See bug: https://github.com/twbs/bootstrap/issues/23454
+    &.is-invalid {
+        ~ .invalid-feedback {
+            display: block;
+        }
+
+        input {
+            @extend .is-invalid;
+        }
     }
 }
