@@ -1,9 +1,15 @@
 
 // Because Bootstrap doesn't the right pointers for buttons
 .btn {
+    @extend .btn-secondary;
+
     cursor: pointer;
 
     &:disabled {
         cursor: not-allowed;
+    }
+
+    &.btn-outline {
+        @extend .btn-outline-secondary;
     }
 }
