@@ -52,6 +52,9 @@
 
         float: right;
     }
+
+    &.is-hidden {
+        display: none;
     }
 }
 
