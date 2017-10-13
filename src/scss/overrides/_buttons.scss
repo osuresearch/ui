@@ -1,5 +1,9 @@
 
+// Because Bootstrap doesn't the right pointers for buttons
 .btn {
     cursor: pointer;
-}
 
+    &[disabled] {
+        cursor: not-allowed;
+    }
+}
