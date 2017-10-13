@@ -13,12 +13,12 @@
     text-align: center;
 
     &:hover, &:active, &:focus {
-        background: #eceeef;
+        background: $gray-100;
     }
 }
 
 .page-item.active .page-link {
-    color: #666;
+    color: $gray;
     background: none;
     cursor: default;
 }
