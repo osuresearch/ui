@@ -17,7 +17,7 @@ $gray-900: shade($gray, 60%);
 $theme-colors: (
   primary: $casal, // PMS 5473
   secondary: tint($gray, 70%),
-  info: #3283c8, // Link blue
+  info: shade($polo-blue, 20%), //#3283c8, // Link blue
 
   success: #1aaa55, // Current UCR success green
   // success: #38ae67, // Old UCR sucess green
