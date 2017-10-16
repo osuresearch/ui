@@ -1,8 +1,6 @@
 
 // Because Bootstrap doesn't the right pointers for buttons
 .btn {
-    @extend .btn-secondary;
-
     cursor: pointer;
 
     &:disabled {
@@ -11,5 +9,9 @@
 
     &.btn-outline {
         @extend .btn-outline-secondary;
+
+        // Force all "outline" buttons to use a white background,
+        // as it's too easy to make a low contrast button.
+        background: $white;
     }
 }
