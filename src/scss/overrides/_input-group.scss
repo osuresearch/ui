@@ -8,11 +8,9 @@
 .input-group-addon {
     position: absolute;
     top: 0;
-    left: 0;
     z-index: 4; // one above .form-control:hover
     background: transparent;
     border: none;
-    left: 0;
     padding-top: 0.7rem;
 }
 
