@@ -1,23 +1,5 @@
 
-// // Bootstrap-datepicker overrides
-// .datepicker {
-
-//     // It makes the mistake of trying to do 'display: block' on a th.
-//     // Chrome no likey
-//     th.today {
-//         display: table-cell !important;
-//     }
-
-//     // Better padding for FontAwesome buttons
-//     th.next,
-//     th.prev {
-//         padding: 0 0.5em;
-//     }
-
-//     // Color branding
-//     .year.focused,
-//     .month.focused {
-//         color: #fff;
-//         background-color: #26686d;
-//     }
-// }
+input[data-provide="datepicker"] {
+    // Ensure the input fits a date entry
+    max-width: 9em;
+}
