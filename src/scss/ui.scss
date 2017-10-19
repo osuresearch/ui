@@ -26,6 +26,7 @@
 @import 'vendor/font-awesome';
 @import 'vendor/datatables';
 @import 'vendor/datepicker-1.3.1/build3';
+@import 'vendor/uploadifive-1.1.0';
 
 // Overrides of non-configurable Bootstrap 4 components
 // Note that this should be in the same order as bootstrap.scss
@@ -38,19 +39,20 @@
 @import 'overrides/navbar';
 @import 'overrides/pagination';
 @import 'overrides/alert';
+@import 'overrides/datatables';
 @import 'overrides/datepicker';
 
 
-// // Components
-// @import 'components/lookup';
-// // @import 'components/enhanced-input';
-@import 'components/footer';
-@import 'components/osu-navbar';
+// Components
+@import 'components/alert-banner';
 @import 'components/horizontal-scroll';
-@import 'components/sticky-header';
+@import 'components/footer';
+@import 'components/lookup';
+@import 'components/osu-navbar';
 @import 'components/richtext';
+@import 'components/sticky-header';
 @import 'components/tabbar';
+@import 'components/uploader';
 
-// @import 'components/formflow';
-// @import 'components/alert-banner';
-
+@import 'components/formflow';
+// @import 'components/enhanced-input';
