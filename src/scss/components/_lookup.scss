@@ -1,20 +1,10 @@
 
-.lookup-results {
-    margin-top: -1em;
-    margin-bottom: 1em;
-    margin-left: 1.25em;
-    margin-right: 1.25em;
-    border: 1px solid #e6e6e6;
-    border-top: none;
+// Hide the clear button until the lookup decides to show it
+.lookup-clear {
+    display: none;
+}
 
-    .list-group-item {
-        padding: 0.25em 1em;
-        border: none;
-    }
-
-    .lookup-total {
-        font-size: 80%;
-        padding: 0.25rem 1rem;
-        color: $gray-light;
-    }
+// Allow error message to wrap (could be long)
+.lookup-error {
+    white-space: normal;
 }
