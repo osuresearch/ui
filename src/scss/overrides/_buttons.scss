@@ -1,6 +1,9 @@
 
-// Because Bootstrap doesn't the right pointers for buttons
 .btn {
+    // If the developer leaves out a theme, use the primary button
+    @extend .btn-primary;
+
+    // Because Bootstrap doesn't use the right pointers for buttons
     cursor: pointer;
 
     &:disabled {
