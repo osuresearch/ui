@@ -17,4 +17,10 @@
         // as it's too easy to make a low contrast button.
         background: $white;
     }
+
+    // Fix link buttons not being styled properly when used as a dropdown
+    &.dropdown-toggle.btn-link {
+        background-color: transparent;
+        border: none;
+    }
 }
