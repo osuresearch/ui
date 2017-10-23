@@ -19,8 +19,8 @@ function checkCompatibility() {
         throw new Error('oris/ui requires at least jQuery 3.2 but less than 4.0');
     }
 
-    if (bsver !== '4.0.0-beta') {
-        throw new Error('oris/ui requires Bootstrap 4.0.0-beta');
+    if (bsver !== '4.0.0-beta.2') {
+        throw new Error('oris/ui requires Bootstrap 4.0.0-beta.2');
     }
 }
 
