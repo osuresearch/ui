@@ -15,12 +15,12 @@
  * Usage:
  *
  *  $('input.form-lookup').Lookup({
- *      url: 'https://path.to/ajax/source'
+ *      endpoint: 'https://path.to/ajax/source'
  *  });
  *
  * Also accepts Bootstrap-style data attributes:
  *  data-provide="lookup" to enable on an input
- *  data-url="https://..." to bind a url
+ *  data-endpoint="https://..." to bind a url
  *  ... etc
  *
  * Note that this expects the backend to conform to JSON-API spec by default.
@@ -71,13 +71,13 @@
     var PROVIDER = '[data-provide="lookup"]';
 
     var DEFAULTS = {
-        url: null,                          // Endpoint URL to request JSON data from.
+        endpoint: null,                     // Endpoint URL to request JSON data from.
                                             // If this is a string, an AJAX GET request will be
                                             // issued to it. If it is a function, that function
                                             // will be executed with (term, query) as parameters
                                             // and it is expected to return JSON data.
 
-        token: null,                        // ORIS-API bearer token, if known.
+        token: null,                        // OAuth2 bearer token, if known.
 
         query: {},                          // Additional query parameters passed to the endpoint
                                             // as key-value pairs.
@@ -372,7 +372,7 @@
                 this.displayResults(this.o.url(term, query));
             } else {
                 this.request = $.ajax({
-                    url: this.o.url,
+                    url: this.o.endpoint,
                     type: 'GET',
                     data: query,
                     dataType: 'json',
