@@ -511,7 +511,7 @@
     $.fn[NAME].Constructor = Plugin;
     $.fn[NAME].version = VERSION;
 
-    // Fire off construction of any lookups using data-api immediately
+    // Fire off construction of any components using data-api immediately
     $(document).on(
         DATA_API_EVENT,
         PROVIDER,
