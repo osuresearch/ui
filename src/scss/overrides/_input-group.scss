@@ -15,6 +15,20 @@
 }
 
 .input-group {
+    // Enable wrapping so that .invalid-feedback can
+    // be rendered on a new line, if visible
+    flex-wrap: wrap;
+
+    // Fix for BS4-beta not correctly rendering invalid-feedback
+    // within an input-group. This will force it on the next line
+    // of the flexbox with full width. Margin is also modified as
+    // we don't want to combine the margin-bottom of both the
+    // input-group and the invalid-feedback elements.
+    .invalid-feedback {
+        margin: 1rem 0 0 0;
+        flex: 1 1 100%;
+    }
+
     // Prefix addons need to add padding to the left of the form control
     .input-group-addon + .form-control {
         padding-left: 2.25rem;
