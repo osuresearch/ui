@@ -5,10 +5,10 @@
  */
 
 // brand.osu.edu primary palette
-$black:     #000000; // Black!
-$white:     #ffffff; // White!
-$scarlet:   #bb0000; // PMS 200 - red
-$gray:      #666666; // PMS 424 - gray
+$black:     #000; // Black!
+$white:     #fff; // White!
+$scarlet:   #b00; // PMS 200 - red
+$gray:      #666; // PMS 424 - gray
 
 // brand.osu.edu secondary palette
 // Color name estimations via http://chir.ag/projects/name-that-color/
@@ -43,20 +43,20 @@ $pms-2425:  $disco;
 
 // Mapping table of colors, useful for iterators
 $brand: (
-    scarlet:    $scarlet,
-    gray:       $gray,
-    jacarta:    $jacarta,
-    polo-blue:  $polo-blue,
-    wattle:     $wattle,
-    casal:      $casal,
-    anzac:      $anzac,
-    taupe:      $taupe,
-    sycamore:   $sycamore,
-    flame-pea:  $flame-pea,
-    peach:      $peach,
-    tradewind:  $tradewind,
-    tana:       $tana,
-    disco:      $disco
+    'scarlet':    $scarlet,
+    'gray':       $gray,
+    'jacarta':    $jacarta,
+    'polo-blue':  $polo-blue,
+    'wattle':     $wattle,
+    'casal':      $casal,
+    'anzac':      $anzac,
+    'taupe':      $taupe,
+    'sycamore':   $sycamore,
+    'flame-pea':  $flame-pea,
+    'peach':      $peach,
+    'tradewind':  $tradewind,
+    'tana':       $tana,
+    'disco':      $disco
 );
 
 /// Slightly lighten a color

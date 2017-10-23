@@ -14,7 +14,7 @@
 
 // If it's checked, remove the border
 .custom-control-input:checked ~ .custom-control-indicator {
-    border: none;
+    border: 0;
 }
 
 .custom-control-input:disabled ~ .custom-control-indicator,

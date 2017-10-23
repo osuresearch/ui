@@ -15,24 +15,24 @@ $gray-800: shade($gray, 40%);
 $gray-900: shade($gray, 60%);
 
 $theme-colors: (
-  primary: $casal, // PMS 5473
-  secondary: tint($gray, 70%),
-  info: shade($polo-blue, 20%), //#3283c8, // Link blue
+    primary: $casal, // PMS 5473
+    secondary: tint($gray, 70%),
+    info: shade($polo-blue, 20%), //#3283c8, // Link blue
 
-  success: #1aaa55, // Current UCR success green
-  // success: #38ae67, // Old UCR sucess green
+    success: #1aaa55, // Current UCR success green
+    // success: #38ae67, // Old UCR sucess green
 
-  // Slightly darker than current UCR warning yellow
-  // If it's any lighter than this, button font will
-  // automatically become black for fixing contrast.
-  warning: shade(#fc9403, 8%),
+    // Slightly darker than current UCR warning yellow
+    // If it's any lighter than this, button font will
+    // automatically become black for fixing contrast.
+    warning: shade(#fc9403, 8%),
 
-  //warning: #fc8a51, // Old UCR warning yellow
-  danger: #db3b21, // Current UCR alert red
-  // danger: #e52c5a, // Old UCR alert red
+    //warning: #fc8a51, // Old UCR warning yellow
+    danger: #db3b21, // Current UCR alert red
+    // danger: #e52c5a, // Old UCR alert red
 
-  light: $gray-100,
-  dark: $gray-800
+    light: $gray-100,
+    dark: $gray-800
 ) !default;
 
 $enable-rounded: false;
@@ -55,7 +55,7 @@ $link-hover-decoration: none;
 //   xl: 1200px
 // );
 
-$font-family-sans-serif: "ProximaNova", sans-serif;
+$font-family-sans-serif: ProximaNova, sans-serif;
 
 // Smaller 'small' text to 80% base
 $font-size-sm: 0.8rem;
