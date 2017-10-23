@@ -22,10 +22,14 @@
     // Bootstrap's dismiss button
     .close {
         top: 0.5rem;
-        right: 0;
+        right: 2rem;
     }
 
     @include media-breakpoint-down(sm) {
         padding: 0.25rem 1rem;
+
+        .close {
+            right: 1rem;
+        }
     }
 }

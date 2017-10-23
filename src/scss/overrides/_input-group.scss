@@ -10,7 +10,7 @@
     top: 0;
     z-index: 4; // one above .form-control:hover
     background: transparent;
-    border: none;
+    border: 0;
     padding-top: 0.7rem;
 }
 
@@ -25,7 +25,7 @@
     // we don't want to combine the margin-bottom of both the
     // input-group and the invalid-feedback elements.
     .invalid-feedback {
-        margin: 1rem 0 0 0;
+        margin: 1rem 0 0;
         flex: 1 1 100%;
     }
 

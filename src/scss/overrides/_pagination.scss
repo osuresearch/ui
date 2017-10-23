@@ -4,7 +4,7 @@
 // Style is set to match what has been defined for DataTables pagination.
 
 .page-link {
-    border: none;
+    border: 0;
     font-size: 1.2rem;
     line-height: 2;
     padding: 0 10px;
@@ -12,7 +12,9 @@
     min-width: 2em;
     text-align: center;
 
-    &:hover, &:active, &:focus {
+    &:hover,
+    &:active,
+    &:focus {
         background: $gray-100;
     }
 }

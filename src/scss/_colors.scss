@@ -81,7 +81,7 @@ $brand: (
 // as a background with complementary foreground
 @each $color, $value in $brand {
     .brand-#{$color} {
-        @include color-yiq($value);
+        color: color-yiq($value);
         background-color: $value;
     }
 
@@ -91,12 +91,12 @@ $brand: (
         $percentage: $step * 10;
 
         .brand-#{$color}-tint-#{$percentage} {
-            @include color-yiq(tint($value, $percentage));
+            color: color-yiq(tint($value, $percentage));
             background-color: tint($value, $percentage);
         }
 
         .brand-#{$color}-shade-#{$percentage} {
-            @include color-yiq(shade($value, $percentage));
+            color: color-yiq(shade($value, $percentage));
             background-color: shade($value, $percentage);
         }
     }

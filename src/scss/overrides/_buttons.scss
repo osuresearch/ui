@@ -3,6 +3,12 @@
     // If the developer leaves out a theme, use the primary button
     @extend .btn-primary;
 
+    // Reiterate that link buttons don't have a border
+    // (overriding the extended default above)
+    &.btn-link {
+        border: 0;
+    }
+
     // Because Bootstrap doesn't use the right pointers for buttons
     cursor: pointer;
 
@@ -21,6 +27,6 @@
     // Fix link buttons not being styled properly when used as a dropdown
     &.dropdown-toggle.btn-link {
         background-color: transparent;
-        border: none;
+        border: 0;
     }
 }

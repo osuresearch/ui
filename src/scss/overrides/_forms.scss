@@ -65,13 +65,13 @@
 
     // Required star for form groups.
     // Attaches to the first label or legend found
-    &.is-required > label:first-child:after,
-    &.is-required > legend:first-child:after {
-        color: #bb0000;
+    &.is-required > label:first-child::after,
+    &.is-required > legend:first-child::after {
+        color: $scarlet;
         font-family: FontAwesome;
         font-size: 0.5em;
         padding-left: 0.5em;
         vertical-align: top;
-        content: "\f069";
+        content: '\f069';
     }
 }

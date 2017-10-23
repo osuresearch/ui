@@ -1,7 +1,7 @@
 
 .table {
     tr {
-        border: none;
+        border: 0;
     }
 
     // Not thead th as we could potentially put th in the body/footer
@@ -12,7 +12,7 @@
     }
 
     thead th {
-        border: none;
+        border: 0;
     }
 }
 

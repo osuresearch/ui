@@ -12,7 +12,7 @@
 
 // Early include independent functions from Bootstrap so
 // they can be usable for some of our internals
-@import 'vendor/bootstrap-4.0.0-beta/functions';
+@import 'vendor/bootstrap-4.0.0-beta.2/functions';
 
 // Branding colors and fonts
 @import 'colors';
@@ -22,7 +22,7 @@
 @import 'settings';
 
 // Vendor libraries
-@import 'vendor/bootstrap-4.0.0-beta/bootstrap';
+@import 'vendor/bootstrap-4.0.0-beta.2/bootstrap';
 @import 'vendor/font-awesome';
 @import 'vendor/datatables';
 @import 'vendor/datepicker-1.3.1/build3';

@@ -41,14 +41,13 @@
         line-height: 1;
         font-size: 1.5rem;
         font-weight: bold;
-        text-shadow: 0 1px 0 #fff;
+        text-shadow: 0 1px 0 $white;
 
         padding: 0;
         cursor: pointer;
         color: $theme-color;
         background: transparent;
         border: 0;
-        -webkit-appearance: none;
 
         float: right;
     }
