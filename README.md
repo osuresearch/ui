@@ -47,7 +47,7 @@ This library is installable via Composer through `composer.json`, as long as you
         ]
     },
     "require": {
-        "oris/ui": "@dev"
+        "oris/ui": "^2.0"
     },
     ... etc ...
 }
