@@ -1,7 +1,41 @@
 # Change Log
 Current unresolved issues can be found and reported on [YouTrack](https://ordevsvc01.rf.ohio-state.edu/youtrack/issues?q=project%3A+%7BPHP+Framework%7D+component%3A+ORIS%5CUI+%23Unresolved+)
 
-## 1.1.0 (In Progress)
+
+## 2.0.0 (2017-10-25)
+Upgrade for Bootstrap 4 Beta.2
+
+There are a handful of breaking changes between BS4 Alpha to BS4 Beta. Be sure to thoroughly read the two ship lists:
+* [Bootstrap 4 Beta 1 Ship List](https://github.com/twbs/bootstrap/issues/21568)
+* [Bootstrap 4 Beta 2 Ship List](https://github.com/twbs/bootstrap/issues/23278)
+
+The following changelog only applies to ORIS components or adjustments made on top of Bootstrap 4.
+
+__Backwards Breaking Changes:__
+* Replaced `$.Lookup` with a new 2.0. See the Styleguide for new usage documentation.
+* Now requires jQuery 3+
+* Removed `tether.js` vendor library
+* `.is-error`/`.error` form validation classes removed. Now uses BS4's validation structure (see official docs)
+* Replaced `.navbar-thick` with `.navbar-main` to better consolidate a number of required classes into one
+* `.navbar-expand` has been merged directly into `.navbar` so all navbars are horizontal flex by default
+* Removed `.z-depth-*` classes
+* Removed `@mixin vertical-align`
+* Complete rewrite of the OSU Brand Header. See Styleguide for new DOM structure.
+
+__Fixed Bugs:__
+* Fixed icons not displaying for mobile in the OSU Brand Header
+* Fixed default render theme for components when a developer forgets to add a theme class
+
+__Implemented Enhancements:__
+* Added new Tab Bar component
+* Added new Uploader component
+* Added new Richtext component
+* Added extended color palette for SASS
+* No longer using an absolutely positioned/absolute height footer
+* Added `.is-horizontal-scroll` for the body element to make a horizontally scrollable body with fixed headers
+
+
+## 1.1.0 (2017-10-25)
 Upgrade for Bootstrap 4 alpha.6
 
 __Backwards Breaking Changes:__
@@ -21,6 +55,7 @@ __Implemented Enhancements:__
 * Prefix `.input-group-addon` icons are now embedded within adjacent inputs (previously was presented as a button)
 * Simplified `.table` display
 * Changed sm breakpoint to 500px to force col-sm-* support for Chrome 57+ printing
+
 
 ## 1.0.0 (2017-02-07)
 Initial stable release based on Bootstrap 4 alpha.4
