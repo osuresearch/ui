@@ -1,0 +1,181 @@
+/**
+ * Chase's complete rewrite of Uploadifive's CSS because brand consistency.
+ *
+ * @author Chase McManning (mcmanning.1@osu.edu)
+ */
+
+.uploadifive-button {
+    @extend .btn;
+    @extend .btn-outline-primary;
+
+    display: inline;
+    cursor: pointer;
+}
+
+// .uploadifive-button {
+//     background-color: #505050;
+//     background-image: linear-gradient(bottom, #505050 0%, #707070 100%);
+//     background-image: -o-linear-gradient(bottom, #505050 0%, #707070 100%);
+//     background-image: -moz-linear-gradient(bottom, #505050 0%, #707070 100%);
+//     background-image: -webkit-linear-gradient(bottom, #505050 0%, #707070 100%);
+//     background-image: -ms-linear-gradient(bottom, #505050 0%, #707070 100%);
+//     background-image: -webkit-gradient(
+//         linear,
+//         left bottom,
+//         left top,
+//         color-stop(0, #505050),
+//         color-stop(1, #707070)
+//     );
+//     background-position: center top;
+//     background-repeat: no-repeat;
+//     -webkit-border-radius: 30px;
+//     -moz-border-radius: 30px;
+//     border-radius: 30px;
+//     border: 2px solid #808080;
+//     color: #FFF;
+//     font: bold 12px Arial, Helvetica, sans-serif;
+//     text-align: center;
+//     text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
+//     text-transform: uppercase;
+//     width: 100%;
+// }
+
+// .uploadifive-button:hover {
+//     background-color: #606060;
+//     background-image: linear-gradient(top, #606060 0%, #808080 100%);
+//     background-image: -o-linear-gradient(top, #606060 0%, #808080 100%);
+//     background-image: -moz-linear-gradient(top, #606060 0%, #808080 100%);
+//     background-image: -webkit-linear-gradient(top, #606060 0%, #808080 100%);
+//     background-image: -ms-linear-gradient(top, #606060 0%, #808080 100%);
+//     background-image: -webkit-gradient(
+//         linear,
+//         left bottom,
+//         left top,
+//         color-stop(0, #606060),
+//         color-stop(1, #808080)
+//     );
+//     background-position: center bottom;
+// }
+
+.uploadifive-container {
+    width: 100%;
+    page-break-inside: avoid;
+}
+
+.uploadifive-queue {
+    border: 1px solid #CCC;
+    height: 177px;
+    overflow: auto;
+    margin: 0 0 10px 0;
+    width: 100%;
+}
+
+.uploadifive-queue-item {
+    background-color: #F5F5F5;
+    border-bottom: 1px dotted #D5D5D5;
+    border-radius: 5px;
+    margin-top: 3px;
+    padding: 15px;
+
+    &.error {
+        color: theme-color('danger');
+    }
+
+    .close {
+        font-size: 0.8rem;
+        color: #e52c5a;
+        font-weight: normal;
+        opacity: 1;
+        text-shadow: none;
+    }
+
+    .progress {
+        border: 1px solid #D0D0D0;
+        height: 3px;
+        margin-top: 5px;
+        width: 100%;
+    }
+
+    .progress-bar {
+        background-color: #0072BC;
+        height: 3px;
+        width: 0;
+    }
+}
+
+.uploadifive-button {
+    width: 100%;
+    margin: 0;
+}
+
+.uploadifive-container > div.uploaded-files {
+    border: 1px solid #CCC;
+    max-height: 193px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin: 0 0 5px 0;
+    width: 100%;
+    page-break-inside: avoid;
+}
+
+.uploadifive-container > div.uploaded-files > .ui-listview {
+    margin: 0;
+}
+
+.uploadifive-container > div.uploaded-files > .ui-listview .ui-corner-top {
+    border-top-width: 0;
+}
+
+.uploadifive-container > div.uploaded-files > .ui-listview .ui-li {
+    border-right-width: 0;
+    border-left-width: 0;
+}
+
+.uploadifive-container > div.uploaded-files > .ui-listview .ui-li-last {
+    border-bottom-width: 0;
+}
+
+.uploadifive-container > div.uploaded-files p.ui-li-desc {
+    padding: 0 15px 0.6em;
+    margin-bottom: 0;
+}
+
+.uploadifive-container > p.help-text {
+    margin-left: 0 !important;
+    width: 100% !important;
+}
+
+.uploadifive-container.text-output {
+    line-height: 1.3em;
+    font-size: 12px;
+}
+
+.uploadifive-container.text-output > div.uploaded-files {
+    max-height: none;
+}
+
+/* Hacky solution to prevent container overflow triggered by the split button */
+.uploadifive-container > div.uploaded-files .delete-file {
+    height: 98%;
+}
+
+/* Hide X button on completed uploads */
+// .uploadifive-queue-item.complete .close {
+//     display: none;
+// }
+
+// @media screen and (min-width: 600px) and (max-width: 799px) {
+
+//     .uploadifive-container {
+//         margin-left: 25%;
+//         width: 75%;
+//     }
+// }
+
+// @media screen and (min-width: 800px) {
+
+//     .uploadifive-container {
+//         margin-left: 25%;
+//         width: 50%;
+//     }
+// }

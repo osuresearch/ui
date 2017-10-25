@@ -1,0 +1,103 @@
+/**
+ * Extended OSU branding color palette
+ *
+ * @author Chase McManning (mcmanning.1@osu.edu)
+ */
+
+// brand.osu.edu primary palette
+$black:     #000; // Black!
+$white:     #fff; // White!
+$scarlet:   #b00; // PMS 200 - red
+$gray:      #666; // PMS 424 - gray
+
+// brand.osu.edu secondary palette
+// Color name estimations via http://chir.ag/projects/name-that-color/
+$jacarta:   #442369; // PMS 2597 - deep purple
+$polo-blue: #92b0d7; // PMS 644 - light blue
+$wattle:    #d4df48; // PMS 380 - yellow/green
+$casal:     #26686d; // PMS 5473 - dark teal
+$anzac:     #dcaa38; // PMS 110 - deep gold
+$taupe:     #453831; // PMS 7532 - brown
+$sycamore:  #909738; // PMS 391 - sewage green
+$flame-pea: #d65828; // PMS 159 - orange
+$peach:     #ffeaae; // PMS 1205 - light tan
+$tradewind: #6ebbab; // PMS 563 - light teal
+$tana:      #dddec6; // PMS 7534 - grey/tan
+$disco:     #851e5e; // PMS 2425 - purple
+
+// Alternative naming conventions
+$pms-200:   $scarlet;
+$pms-424:   $gray;
+$pms-2597:  $jacarta;
+$pms-644:   $polo-blue;
+$pms-380:   $wattle;
+$pms-5473:  $casal;
+$pms-110:   $anzac;
+$pms-7532:  $taupe;
+$pms-391:   $sycamore;
+$pms-159:   $flame-pea;
+$pms-1205:  $peach;
+$pms-563:   $tradewind;
+$pms-7534:  $tana;
+$pms-2425:  $disco;
+
+// Mapping table of colors, useful for iterators
+$brand: (
+    'scarlet':    $scarlet,
+    'gray':       $gray,
+    'jacarta':    $jacarta,
+    'polo-blue':  $polo-blue,
+    'wattle':     $wattle,
+    'casal':      $casal,
+    'anzac':      $anzac,
+    'taupe':      $taupe,
+    'sycamore':   $sycamore,
+    'flame-pea':  $flame-pea,
+    'peach':      $peach,
+    'tradewind':  $tradewind,
+    'tana':       $tana,
+    'disco':      $disco
+);
+
+/// Slightly lighten a color
+/// @access public
+/// @param {Color} $color - color to tint
+/// @param {Number} $percentage - percentage of `$color` in returned color
+/// @return {Color}
+@function tint($color, $percentage) {
+    @return mix($color, $white, $percentage);
+}
+
+/// Slightly darken a color
+/// @access public
+/// @param {Color} $color - color to shade
+/// @param {Number} $percentage - percentage of `$color` in returned color
+/// @return {Color}
+@function shade($color, $percentage) {
+    @return mix($black, $color, $percentage);
+}
+
+// Generate a .brand-[name] class for every color
+// as a background with complementary foreground
+@each $color, $value in $brand {
+    .brand-#{$color} {
+        color: color-yiq($value);
+        background-color: $value;
+    }
+
+    // All tints and shades.
+    // e.g. .brand-disco-tint-40 and .brand-peach-shade-10
+    @for $step from 1 through 9 {
+        $percentage: $step * 10;
+
+        .brand-#{$color}-tint-#{$percentage} {
+            color: color-yiq(tint($value, $percentage));
+            background-color: tint($value, $percentage);
+        }
+
+        .brand-#{$color}-shade-#{$percentage} {
+            color: color-yiq(shade($value, $percentage));
+            background-color: shade($value, $percentage);
+        }
+    }
+}

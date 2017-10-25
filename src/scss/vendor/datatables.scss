@@ -48,32 +48,32 @@ $table-control-color: #333333 !default;
 //
 // Pagination control
 //
-$table-paging-fg-color: $link-color !default;
-$table-paging-border: none !default; // 1px solid $gray-lightest !default;
+$table-paging-fg-color: blue !default;
+$table-paging-border: none !default;
 
 // Current page highlight (does not change on mouse hover)
-$table-paging-current-fg-color: $gray-light !default;
+$table-paging-current-fg-color: #666 !default;
 $table-paging-current-bg-color: transparent !default;
 
-$table-paging-disabled-fg-color: $gray-light !default;
+$table-paging-disabled-fg-color: #666 !default;
 $table-paging-disabled-bg-color: transparent !default;
 
 // Mouse hover over a selectable page
-$table-paging-hover-fg-color: $link-hover-color !default;
-$table-paging-hover-bg-color: $gray-lightest !default;
+$table-paging-hover-fg-color: blue !default;
+$table-paging-hover-bg-color: #dddddd !default;
 
 // Mousedown on a selectable page
-$table-paging-active-fg-color: $table-paging-hover-fg-color !default;
-$table-paging-active-bg-color: $table-paging-hover-bg-color !default;
+$table-paging-active-fg-color: pink !default;
+$table-paging-active-bg-color: orange !default;
 
 //
 // Functions / mixins
 //
-@function tint( $color, $percent ) {
+@function dt_tint( $color, $percent ) {
     @return mix(white, $color, $percent);
 }
 
-@function shade( $color, $percent ) {
+@function dt_shade( $color, $percent ) {
     @return mix($table-shade, $color, $percent);
 }
 
@@ -98,9 +98,19 @@ table.dataTable {
     border-spacing: 0;
 
     /*
-     * Header and footer styles
+     * Header style
      */
-    thead,
+    thead {
+        th {
+            font-weight: 400;
+            font-size: 80%;
+            color: #666;
+        }
+    }
+
+    /*
+     * Footer style
+     */
     tfoot {
         th {
             font-weight: bold;
@@ -137,8 +147,10 @@ table.dataTable {
         .sorting_desc,
         .sorting_asc_disabled,
         .sorting_desc_disabled {
+            padding-left: 32px;
             background-repeat: no-repeat;
             background-position: center right;
+            background-position-x: 12px;
         }
 
         .sorting {
@@ -146,15 +158,19 @@ table.dataTable {
         }
         .sorting_asc {
             background-image: url($vendor-images + '/datatables/sort_asc.png');
+            background-position-y: 16px;
         }
         .sorting_desc {
             background-image: url($vendor-images + '/datatables/sort_desc.png');
+            background-position-y: 8px;
         }
         .sorting_asc_disabled {
             background-image: url($vendor-images + '/datatables/sort_asc_disabled.png');
+            background-position-y: 16px;
         }
         .sorting_desc_disabled {
             background-image: url($vendor-images + '/datatables/sort_desc_disabled.png');
+            background-position-y: 8px;
         }
     }
 
@@ -216,10 +232,10 @@ table.dataTable {
     &.stripe tbody,
     &.display tbody {
         tr.odd {
-            background-color: shade($table-row-background, 2.35%); // shade by f9
+            background-color: dt_shade($table-row-background, 2.35%); // shade by f9
 
             &.selected {
-                background-color: shade($table-row-selected, 2.35%);
+                background-color: dt_shade($table-row-selected, 2.35%);
             }
         }
     }
@@ -228,10 +244,10 @@ table.dataTable {
     // Hover classes - add "hover" class to the table to activate
     &.hover tbody {
         tr:hover {
-            background-color: shade($table-row-background, 3.6%); // shade by f5
+            background-color: dt_shade($table-row-background, 3.6%); // shade by f5
 
             &.selected {
-                background-color: shade($table-row-selected, 3.6%);
+                background-color: dt_shade($table-row-selected, 3.6%);
             }
         }
     }
@@ -244,13 +260,13 @@ table.dataTable {
             tr>.sorting_1,
             tr>.sorting_2,
             tr>.sorting_3 {
-                background-color: shade($table-row-background, 2%); // shade by fa
+                background-color: dt_shade($table-row-background, 2%); // shade by fa
             }
 
             tr.selected>.sorting_1,
             tr.selected>.sorting_2,
             tr.selected>.sorting_3 {
-                background-color: shade($table-row-selected, 2%);
+                background-color: dt_shade($table-row-selected, 2%);
             }
         }
     }
@@ -258,26 +274,26 @@ table.dataTable {
     &.display tbody,
     &.order-column.stripe tbody {
         tr.odd {
-            >.sorting_1 { background-color: shade($table-row-background, 5.4%); } // shade by f1
-            >.sorting_2 { background-color: shade($table-row-background, 4.7%); } // shade by f3
-            >.sorting_3 { background-color: shade($table-row-background, 3.9%); } // shade by f5
+            >.sorting_1 { background-color: dt_shade($table-row-background, 5.4%); } // shade by f1
+            >.sorting_2 { background-color: dt_shade($table-row-background, 4.7%); } // shade by f3
+            >.sorting_3 { background-color: dt_shade($table-row-background, 3.9%); } // shade by f5
 
             &.selected {
-                >.sorting_1 { background-color: shade($table-row-selected, 5.4%); }
-                >.sorting_2 { background-color: shade($table-row-selected, 4.7%); }
-                >.sorting_3 { background-color: shade($table-row-selected, 3.9%); }
+                >.sorting_1 { background-color: dt_shade($table-row-selected, 5.4%); }
+                >.sorting_2 { background-color: dt_shade($table-row-selected, 4.7%); }
+                >.sorting_3 { background-color: dt_shade($table-row-selected, 3.9%); }
             }
         }
 
         tr.even {
-            >.sorting_1 { background-color: shade($table-row-background, 2%); } // shade by fa
-            >.sorting_2 { background-color: shade($table-row-background, 1.2%); } // shade by fc
-            >.sorting_3 { background-color: shade($table-row-background, 0.4%); } // shade by fe
+            >.sorting_1 { background-color: dt_shade($table-row-background, 2%); } // shade by fa
+            >.sorting_2 { background-color: dt_shade($table-row-background, 1.2%); } // shade by fc
+            >.sorting_3 { background-color: dt_shade($table-row-background, 0.4%); } // shade by fe
 
             &.selected {
-                >.sorting_1 { background-color: shade($table-row-selected, 2%); }
-                >.sorting_2 { background-color: shade($table-row-selected, 1.2%); }
-                >.sorting_3 { background-color: shade($table-row-selected, 0.4%); }
+                >.sorting_1 { background-color: dt_shade($table-row-selected, 2%); }
+                >.sorting_2 { background-color: dt_shade($table-row-selected, 1.2%); }
+                >.sorting_3 { background-color: dt_shade($table-row-selected, 0.4%); }
             }
         }
     }
@@ -285,14 +301,14 @@ table.dataTable {
     &.hover tbody,
     &.order-column.hover tbody {
         tr:hover {
-            >.sorting_1 { background-color: shade($table-row-background, 8.2%); } // shade by ea
-            >.sorting_2 { background-color: shade($table-row-background, 7.5%); } // shade by ec
-            >.sorting_3 { background-color: shade($table-row-background, 6.3%); } // shade by ef
+            >.sorting_1 { background-color: dt_shade($table-row-background, 8.2%); } // shade by ea
+            >.sorting_2 { background-color: dt_shade($table-row-background, 7.5%); } // shade by ec
+            >.sorting_3 { background-color: dt_shade($table-row-background, 6.3%); } // shade by ef
 
             &.selected {
-                >.sorting_1 { background-color: shade($table-row-selected, 8.2%); }
-                >.sorting_2 { background-color: shade($table-row-selected, 7.5%); }
-                >.sorting_3 { background-color: shade($table-row-selected, 6.3%); }
+                >.sorting_1 { background-color: dt_shade($table-row-selected, 8.2%); }
+                >.sorting_2 { background-color: dt_shade($table-row-selected, 7.5%); }
+                >.sorting_3 { background-color: dt_shade($table-row-selected, 6.3%); }
             }
         }
     }

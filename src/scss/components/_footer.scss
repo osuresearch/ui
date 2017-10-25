@@ -1,14 +1,20 @@
 
 footer {
     font-size: 80%;
-
-    // Slightly darker grey background to match OSU navbar
-    background: #333333;
+    font-weight: 100;
+    width: 100%;
+    background: shade($gray, 60%);
     padding: 2rem;
-    color: #FFF;
+    color: $white;
 
     .wordmark {
         border: none;
+    }
+
+    // Make links slightly thicker to fix contrast issues
+    // against the dark background
+    a {
+        font-weight: 300;
     }
 
     ul {
@@ -18,5 +24,10 @@ footer {
         li {
             list-style: none;
         }
+    }
+
+    // Reduce footprint for mobile
+    @include media-breakpoint-down(sm) {
+        padding: 1rem;
     }
 }

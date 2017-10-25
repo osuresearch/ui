@@ -15,7 +15,8 @@ var gulp = require('gulp'),
     eslint = require('gulp-eslint'); // Linting for Javascript files
 
 var JS_LINT_PATHS = [
-    'src/js/**/*.js'
+    'src/js/**/*.js',
+    '!src/js/vendor/**/*.js' // Ignore vendor JS
 ];
 
 var SCSS_LINT_PATHS = [

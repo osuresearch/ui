@@ -1,0 +1,35 @@
+
+// Vendor configurations for paths to assets.
+// Vendor static assets (fonts, images) are stored separate
+// from the application that may include vendor CSS.
+$vendor-fonts: '/assets/fonts/vendor' !default;
+$vendor-images: '/assets/img/vendor' !default;
+
+/**
+ * Support for Proxima Nova (OSU branding)
+ */
+@font-face {
+    font-family: 'ProximaNova';
+    src: url($vendor-fonts + '/proxima/ProximaNova-Thin.woff') format('woff'), url($vendor-fonts + '/proxima/ProximaNova-Thin.ttf') format('truetype');
+    font-weight: 200;
+}
+@font-face {
+    font-family: 'ProximaNova';
+    src: url($vendor-fonts + '/proxima/ProximaNova-Light.woff') format('woff'), url($vendor-fonts + '/proxima/ProximaNova-Light.ttf') format('truetype');
+    font-weight: 300;
+}
+@font-face {
+    font-family: 'ProximaNova';
+    src: url($vendor-fonts + '/proxima/ProximaNova-Reg.woff') format('woff'), url($vendor-fonts + '/proxima/ProximaNova-Reg.ttf') format('truetype');
+    font-weight: 400;
+}
+@font-face {
+    font-family: 'ProximaNova';
+    src: url($vendor-fonts + '/proxima/ProximaNova-Sbold.woff') format('woff'), url($vendor-fonts + '/proxima/ProximaNova-Sbold.ttf') format('truetype');
+    font-weight: 500;
+}
+@font-face {
+    font-family: 'ProximaNova';
+    src: url($vendor-fonts + '/proxima/ProximaNova-Bold.woff') format('woff'), url($vendor-fonts + '/proxima/ProximaNova-Bold.ttf') format('truetype');
+    font-weight: 700;
+}

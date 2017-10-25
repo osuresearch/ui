@@ -1,0 +1,181 @@
+
+// TODO: Clean this all up. It's just a dump from Chrome's dev tools
+// that probably overrides itself multiple times over
+
+.uploader {
+
+}
+
+.uploadifive-queue-item .fileinfo {
+    display: block;
+    font-size: 80%;
+    color: #666;
+}
+
+.uploadifive-queue-item.error .fileinfo {
+    color: theme-colors('danger');
+}
+
+.uploadifive-queue-item {
+    border-radius: 0;
+    border-bottom: 1px solid #cccccc;
+    margin: 0;
+    padding: 0.5rem 1rem;
+    padding-right: 0.5rem;
+
+    background: #f7f7f9;
+}
+
+.uploadifive-queue-item:last-child {
+    border-bottom: none;
+}
+
+.uploadifive-queue-item a.close:hover {
+    color: #fff;
+}
+
+.uploadifive-queue {
+    height: 100%;
+}
+
+
+.uploader-dropzone {
+    display: none;
+    border: 3px dashed #666;
+
+    align-items: center;
+    justify-content: center;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,0.5);
+
+    pointer-events: none;
+}
+
+.uploader-dropzone p {
+    max-width: 50%;
+}
+
+.uploadifive-queue {
+    position: relative;
+}
+
+.uploader-feedback {
+    display: none;
+    text-align: center;
+    padding: 3rem;
+}
+
+.uploadifive-queue.is-empty .uploader-feedback {
+    display: block;
+}
+
+.uploadifive-queue.is-dragging .uploader-dropzone {
+    display: flex;
+}
+
+
+.uploader-dropzone .fa {
+    font-size: 2rem;
+    display: block;
+}
+
+.uploader-dropzone {
+    text-align: center;
+}
+
+
+
+.uploader-dropzone .fa {
+    display: inline;
+    vertical-align: middle;
+    padding-right: 0.5rem;
+    font-size: 1.5rem;
+}
+
+.uploader-dropzone {
+    color: #38ae67;
+    background: rgba(255, 255, 255, 0.9);
+    border-color: #38ae67;
+}
+
+.uploader-feedback {
+    color: #666;
+}
+
+.uploader-feedback .fa {
+    display: block;
+    font-size: 2.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.uploadifive-queue.is-dragging.is-empty .uploader-feedback {
+    /* Maintain content size, but hide content */
+    opacity: 0;
+}
+
+.uploadifive-button {
+    display: block;
+    margin-bottom: 2.5rem;
+}
+
+.uploadifive-button input[type="file"] {
+    cursor: pointer;
+}
+
+.uploadifive-queue:before {
+    content: 'UPLOADED FILES';
+    font-size: 80%;
+    position: absolute;
+    top: -1.5rem;
+    color: #666;
+}
+
+.uploadifive-queue {
+    overflow: initial;
+}
+
+.uploadifive-queue-item .close {
+    margin-left: 1rem;
+}
+
+.uploadifive-queue .uploader-print-feedback {
+    display: none;
+}
+
+@media print {
+    .uploadifive-button {
+        display: none;
+    }
+
+    .uploadifive-queue {
+        margin-top: 1rem;
+    }
+
+    .uploadifive-queue-item {
+        background: #FFF;
+    }
+
+    .uploadifive-queue a {
+        color: #000;
+    }
+
+    .uploadifive-queue a.btn {
+        display: none;
+    }
+
+    .uploadifive-queue.is-empty .uploader-feedback {
+        display: none;
+    }
+
+    .uploadifive-queue.is-empty .uploader-print-feedback {
+        display: block;
+        padding: 1rem;
+        text-align: center;
+    }
+}
+

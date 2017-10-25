@@ -57,14 +57,7 @@
         },
 
         update: function update() {
-            // Update textarea counter to reflect number of changes.
-            // Note that Chrome counts \r\n as 1 character in JS, but
-            // two when dealing with textarea[maxlength]. So we need
-            // to do some math changes to get this to count properly.
-            var length = this.element.val().replace(
-                /\r(?!\n)|\n(?!\r)/g,
-                '\r\n'
-            ).length;
+            var length = this.element.val().length;
 
             this.counter.html(
                 length + '/' +

@@ -1,18 +1,18 @@
 
 .table {
     tr {
-        border: none;
+        border: 0;
     }
 
     // Not thead th as we could potentially put th in the body/footer
     th {
         font-weight: 400;
         font-size: 0.85em;
-        color: $gray-light;
+        color: $gray;
     }
 
     thead th {
-        border: none;
+        border: 0;
     }
 }
 

@@ -8,20 +8,30 @@
 .input-group-addon {
     position: absolute;
     top: 0;
-    left: 0;
     z-index: 4; // one above .form-control:hover
     background: transparent;
-    border: none;
-    left: 0;
+    border: 0;
     padding-top: 0.7rem;
 }
 
 .input-group {
+    // Enable wrapping so that .invalid-feedback can
+    // be rendered on a new line, if visible
+    flex-wrap: wrap;
+
+    // Fix for BS4-beta not correctly rendering invalid-feedback
+    // within an input-group. This will force it on the next line
+    // of the flexbox with full width. Margin is also modified as
+    // we don't want to combine the margin-bottom of both the
+    // input-group and the invalid-feedback elements.
+    .invalid-feedback {
+        margin: 1rem 0 0;
+        flex: 1 1 100%;
+    }
 
     // Prefix addons need to add padding to the left of the form control
     .input-group-addon + .form-control {
         padding-left: 2.25rem;
-        border-radius: $input-border-radius;
     }
 
     // ... And suffix addons need to add padding to the right
@@ -31,7 +41,18 @@
     }
 
     .form-control:not(:last-child) {
-        @include border-right-radius($input-border-radius);
         padding-right: 2.25rem;
+    }
+
+    // Bootstrap does not (yet) support .is-invalid on a group.
+    // See bug: https://github.com/twbs/bootstrap/issues/23454
+    &.is-invalid {
+        ~ .invalid-feedback {
+            display: block;
+        }
+
+        input {
+            @extend .is-invalid;
+        }
     }
 }

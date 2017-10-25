@@ -1,23 +1,36 @@
 /**
- * Simple ass AJAX lookup
+ * AJAX Lookup component
  *
- * Compatible with Bootstrap 4.0.0a4
+ * Compatible with Bootstrap 4.0.0-beta
+ *
+ * Features:
+ *  - Bootstrap-style Javascript-free configuration via data- attributes
+ *  - support for JSON-API responses by default
+ *  - customizable renderer for search results
+ *  - setting of a hidden input to a value different than displayed in results
+ *      (use case of displaying usernames while POSTing the user's ID instead)
+ *  - throttling rules to reduce HTTP requests while still appearing responsive
+ *  - accessibilty support for keyboard navigation
  *
  * Usage:
  *
- *  $('.form-lookup').Lookup({
- *      url: 'source url'
+ *  $('input.form-lookup').Lookup({
+ *      endpoint: 'https://path.to/ajax/source'
  *  });
  *
  * Also accepts Bootstrap-style data attributes:
  *  data-provide="lookup" to enable on an input
- *  data-url="https://..." to bind a url
+ *  data-endpoint="https://..." to bind a url
  *  ... etc
  *
- * Note that this expects the backend to conform to JSON-API spec.
+ * Note that this expects the backend to conform to JSON-API spec by default.
+ * For advanced configuration of loading a different endpoint, see documented
+ * settings below.
  *
- * Upstream query will be:
- *      GET {url}?q={term}
+ * The default expected endpoint format is as follows:
+ *
+ * Upstream query will be formatted as:
+ *      GET {url}?q={term}&{query}
  *      Accept: application/vnd.api+json
  *
  * Downstream responses expect to be formatted as:
@@ -46,33 +59,81 @@
  * - Response can be application/json for non-API endpoints
  * - Some API endpoints may support filter[] parameters.
  *   Check the API documentation for more information.
+ * - 'meta.total' is optional in the response. If provided, an additional
+ *   footer will be rendered in results to inform the user that there are
+ *   additional results.
  */
-(function lookupPlugin($) {
+(function ($) {
     var NAME = 'Lookup';
-    var VERSION = '1.0.0';
+    var VERSION = '2.0.0';
 
     var DATA_API_EVENT = 'click.' + NAME + '.data-api';
     var PROVIDER = '[data-provide="lookup"]';
 
     var DEFAULTS = {
-        url: null,                      // Endpoint URL to request AJAX data from
+        endpoint: null,                     // Endpoint URL to request JSON data from.
+                                            // If this is a string, an AJAX GET request will be
+                                            // issued to it. If it is a function, that function
+                                            // will be executed with (term, query) as parameters
+                                            // and it is expected to return JSON data.
 
-        display: 'attributes.name',     // AJAX object attribute to display in the input upon select
+        token: null,                        // OAuth2 bearer token, if known.
 
-        store: 'id',                    // AJAX object attribute to submit alongside the form.
-                                        // If null, whatever is in the lookup input will be
-                                        // submitted with the form.
+        query: {},                          // Additional query parameters passed to the endpoint
+                                            // as key-value pairs.
 
-        threshold: 3,                   // Minimum characters required before a search is started
+        readonly: true,                     // Whether to go readonly once something is selected
 
-        readonly: true,                 // Whether to go readonly once something is selected
+        display: 'attributes.name',         // JSON object attribute to display in the input upon
+                                            // select. If display is a function, that function will
+                                            // be called with the selected JSON object and must
+                                            // return a string to insert into the input.
 
-        token: null                     // ORIS-API bearer token, if known.
+        optionDisplay: 'attributes.name',   // JSON object attribute to display in the results
+                                            // dropdown for each result available to the user. If
+                                            // this is a function, that function will be called
+                                            // with the selected JSON object and must return HTML
+                                            // to insert into the dropdown list item.
+
+        store: 'id',                        // JSON object attribute to submit alongside the form.
+                                            // If this is a function, that function will be called
+                                            // with the selected JSON object and must return a
+                                            // string to be submitted alongside the form.
+                                            // If null, whatever is in the lookup input will be
+                                            // submitted with the form. Note that if this is set,
+                                            // the text in the lookup will *not* be submitted with
+                                            // the form.
+
+        language: {
+            error: 'Something went wrong. Try reloading the page. If the problem persists, ' +
+                   'contact <a href="mailto:orhelpdesk@osu.edu">orhelpdesk@osu.edu</a>'
+        },
+
+        // HTTP throttling configurations. These are adjusted to
+        // improve the "feel" of responsiveness while minimizing
+        // the amount of HTTP requests to the endpoint
+        throttle: {
+            threshold: 3,                   // Minimum characters required before searching
+
+            termDelta: 5,                   // Delta of search term change required before we
+                                            // fire off another HTTP request. This helps throttle
+                                            // our requests for fast typers while keeping the
+                                            // results as responsive as possible
+
+            delay: 500                      // Delay between the last input event and the next
+                                            // firing of the HTTP search request. This is applied
+                                            // when a user inputs text that isn't long enough
+                                            // to pass termDelta, but the stopped typing implies
+                                            // that they are waiting for a result response
+        }
     };
 
-    var Plugin = function Plugin(element, options) {
+    var Plugin = function (element, options) {
         this.o = options;
         this.element = $(element);
+        this.term = '';
+        this.request = null;
+        this.storedTermDelta = 0;
 
         this.setupDOM();
         this.attachEvents();
@@ -81,14 +142,22 @@
     Plugin.prototype = {
         constructor: Plugin,
 
-        attachEvents: function attachEvents() {
-            this.element.on('keyup', $.proxy(this.change, this));
-            this.results.on('click', 'a', $.proxy(this.select, this));
-            this.addon.on('click', $.proxy(this.clear, this));
+        /**
+         * Attach event handlers to buttons and result links
+         */
+        attachEvents: function () {
+            this.element.on('keyup', this.change.bind(this));
+            this.results.on('click', 'a', this.select.bind(this));
+            this.clearButton.on('click', this.clear.bind(this));
         },
 
-        setupDOM: function setupDOM() {
+        /**
+         * Store the current DOM and create new DOM elements for the
+         * search results and hidden input (if `store` is set)
+         */
+        setupDOM: function () {
             var $parent = this.element.parent();
+            var nonce = Date.now();
 
             // Setup a hidden input for storing selection data
             if (this.o.store) {
@@ -102,6 +171,7 @@
             }
 
             this.addon = this.element.siblings('.input-group-addon');
+            this.clearButton = $parent.find('button.lookup-clear');
 
             if (this.addon.length < 1) {
                 $.error(
@@ -109,31 +179,106 @@
                 );
             }
 
-            this.results = $('<div class="list-group lookup-results"/>');
-            $parent.after(this.results);
-            this.results.hide();
+            this.results = $(
+                '<div id="results-' + nonce + '" class="dropdown-menu" ' +
+                'role="listbox"/>'
+            ).hide();
+
+            $parent.append(this.results);
+
+            this.element.addClass('lookup');
+
+            // Accessibility adjustments
+            this.element.attr('aria-owns', 'results-' + nonce);
         },
 
-        change: function change() {
-            var term;
+        /**
+         * Execute an AJAX request when the input changes
+         *
+         * Changes occur from paste events, clears, and general typing.
+         * This will also handle throttling to ensure that fast typers
+         * are not sending unnecessary HTTP requests, and that slow typers
+         * are still getting results in a timely manner.
+         */
+        change: function () {
+            var term = this.element.val();
+
+            if (this.changeTimeoutHandle) {
+                window.clearTimeout(this.changeTimeoutHandle);
+            }
+
+            this.changeTimeoutHandle = window.setTimeout(
+                this.changeTimeout.bind(this),
+                this.o.throttle.delay
+            );
 
             // Ignore change events if we're readonly
-            if (this.element.is('[readonly]')) {
+            // or haven't actually changed the input
+            if (term === this.term || this.element.is('[readonly]')) {
                 return;
             }
 
-            term = this.element.val();
-            if (term.length >= this.o.threshold) {
-                this.search(term);
-            } else {
-                this.results.html('');
+            // If there's too little in the search box,
+            // we hide the results and wait.
+            if (term.length < this.o.throttle.threshold) {
+                this.results.html('').hide();
+                this.term = term;
+                return;
             }
+
+            // If delta term + stored delta term (last change) is
+            // smaller than the delta threshold, we wait.
+            this.storedTermDelta += Math.abs(this.term.length - term.length);
+            if (this.storedTermDelta < this.o.throttle.termDelta) {
+                return;
+            }
+
+            // Even if term delta passes, throttle requests to a time delay
+            // if (this.lastChange + this.o.throttle.delay > Date.now()) {
+            //     return;
+            // }
+
+            // this.lastChange = Date.now();
+
+            this.search(term);
         },
 
-        select: function select(e) {
-            var json = $(e.target).data('json');
+        /**
+         * Callback for when the user stops typing.
+         *
+         * Executes a search if the input is different than our last search.
+         */
+        changeTimeout: function () {
+            var term = this.element.val();
 
-            this.element.val(this.resolvePath(this.o.display, json));
+            if (term === this.term || this.element.is('[readonly]')) {
+                return;
+            }
+
+            // If there's too little in the search box,
+            // we hide the results and wait.
+            if (term.length < this.o.throttle.threshold) {
+                this.results.html('').hide();
+                this.term = term;
+                return;
+            }
+
+            this.changeTimeoutHandle = false;
+            this.search(term);
+        },
+
+        /**
+         * Event handler to select a result from the results dropdown
+         *
+         * @param {Event} e click event on a result
+         *
+         * @return {boolean} false
+         */
+        select: function (e) {
+            var $item = $(e.target).closest('.dropdown-item');
+            var json = $item.data('json');
+
+            this.element.val(this.resolve(this.o.display, json));
             this.results.html('').hide();
 
             this.element.focus();
@@ -142,25 +287,34 @@
             if (this.o.readonly) {
                 this.element.attr('readonly', 'readonly');
                 this.addon.html(
-                    '<i class="fa fa-close" aria-hidden="true"></i>'
+                    '<i class="fa fa-check" aria-hidden="true"></i>'
                 );
+                this.clearButton.show();
             }
 
             // Store key in hidden input, if we choose to do so
             if (this.o.store) {
-                this.store.val(this.resolvePath(this.o.store, json));
+                this.store.val(this.resolve(this.o.store, json));
             }
 
-            this.element.trigger('select.' + NAME, [json]);
+            this.element.trigger('pick.lookup', [json]);
 
-            e.preventDefault();
             return false;
         },
 
-        clear: function clear(e) {
+        /**
+         * Clear the current search results and input
+         *
+         * If the input is in a readonly state, it'll become editable again.
+         *
+         * @return {boolean} false
+         */
+        clear: function () {
             this.results.html('').hide();
+            this.clearButton.hide();
             this.element.val('');
             this.element.focus();
+            this.term = '';
 
             if (this.o.readonly) {
                 this.element.removeAttr('readonly');
@@ -173,25 +327,32 @@
                 this.store.val('');
             }
 
-            this.element.trigger('clear.' + NAME);
-
-            if (e) {
-                e.preventDefault();
-            }
+            this.element.trigger('clear.lookup');
 
             return false;
         },
 
-        search: function search(term) {
+        /**
+         * Execute AJAX search
+         *
+         * @param {string} term search term to send
+         */
+        search: function (term) {
             var that = this;
             var headers = {};
+            var query = {};
+
+            this.term = term;
+
+            // Reset term delta throttling
+            this.storedTermDelta = 0;
 
             this.addon.html(
                 '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i>'
             );
 
             // Cancel requests if new one comes in
-            if (typeof this.request !== 'undefined') {
+            if (this.request) {
                 this.abort = true;
                 this.request.abort();
             } else {
@@ -203,24 +364,38 @@
                 headers.Authorization = 'Bearer ' + this.o.token;
             }
 
-            this.request = $.ajax({
-                url: this.o.url,
-                type: 'GET',
-                data: 'q=' + term,
-                dataType: 'json',
-                headers: headers
-            }).done(function (data) {
-                that.displayResults(data);
-            }).fail(function () {
-                if (!that.abort) {
-                    that.error();
-                }
+            $.extend(query, this.o.query, {
+                q: term
             });
+
+            if (typeof this.o.url === 'function') {
+                this.displayResults(this.o.url(term, query));
+            } else {
+                this.request = $.ajax({
+                    url: this.o.endpoint,
+                    type: 'GET',
+                    data: query,
+                    dataType: 'json',
+                    headers: headers
+                }).done(function (data) {
+                    that.request = null;
+                    that.displayResults(data);
+                }).fail(function () {
+                    if (!that.abort) {
+                        that.request = null;
+                        that.error();
+                    }
+                });
+            }
         },
 
-        displayResults: function displayResults(json) {
+        /**
+         * Parse the JSON results and display as a dropdown list
+         */
+        displayResults: function (json) {
             var i;
 
+            this.json = json;
             this.results.html('');
 
             this.addon.html(
@@ -229,8 +404,8 @@
 
             for (i = 0; i < json.data.length; i++) {
                 this.results.append(
-                    $('<a href="#" class="list-group-item list-group-action">' +
-                        this.resolvePath(this.o.display, json.data[i]) +
+                    $('<a class="dropdown-item" href="#">' +
+                        this.resolve(this.o.optionDisplay, json.data[i]) +
                         '</a>'
                     ).data('json', json.data[i])
                 );
@@ -238,42 +413,51 @@
 
             if (json.meta && (json.meta.total - json.data.length) > 0) {
                 this.results.append(
-                    '<div class="lookup-total">There are <strong>' +
+                    '<div class="dropdown-header">There are <strong>' +
                     (json.meta.total - json.data.length) +
                     '</strong> additional results. Please narrow your search</div>'
                 );
-            } else if (json.meta && json.meta.total === 0) {
+            } else if (json.data.length === 0) {
                 this.results.append(
-                    '<div class="lookup-total">There are no matching results.</div>'
+                    '<div class="dropdown-header">There are no matching results.</div>'
                 );
             }
 
             this.results.show();
         },
 
-        error: function error() {
+        /**
+         * Activate an error state on AJAX failures (e.g. network issues)
+         */
+        error: function () {
             this.results.html(
-                '<div class="list-group-item">' +
-                    '<span class="text-danger">' +
-                        'Something went wrong. If the problem persists, ' +
-                        'contact <a href="mailto:orhelpdesk@osu.edu">orhelpdesk@osu.edu</a>' +
+                '<div class="dropdown-header">' +
+                    '<span class="lookup-error text-danger">' +
+                        this.o.language.error +
                     '</span>' +
                 '</div>'
+            ).show();
+
+            // Turn spinner to an error icon
+            this.addon.html(
+                '<i class="fa fa-exclamation-circle text-danger" aria-hidden="true"></i>'
             );
         },
 
         /**
-         * Utility function to resolve dot notation paths to JSON records.
+         * Utility function to either resolve a dot notation JSON path or a callback
          *
-         * Source: http://stackoverflow.com/a/6394168
+         * @param {string|function} path    period separated JSON path or resolver function
+         * @param {object}          obj     JSON object to parse
          *
-         * @param {string} path period separated JSON path
-         * @param {object} obj JSON object to parse
-         *
-         * @returns {object} data within the JSON path
+         * @returns {object} data within the JSON path or resolver function
          */
-        resolvePath: function resolvePath(path, obj) {
-            return path.split('.').reduce(function reduce(o, i) {
+        resolve: function (path, obj) {
+            if (typeof path === 'function') {
+                return path(obj, this.json);
+            }
+
+            return path.split('.').reduce(function (o, i) {
                 return o[i];
             }, obj);
         }
@@ -282,13 +466,13 @@
     // //////////////////////////
     // jQuery Plugin Interface
     // //////////////////////////
-    $.fn[NAME] = function wrapper(option) {
+    $.fn[NAME] = function (option) {
         var args = Array.apply(null, arguments);
         var ret;
 
         args.shift();
 
-        this.each(function iterator() {
+        this.each(function () {
             var $this = $(this);
             var data = $this.data(NAME);
             var options = typeof option === 'object' && option;
