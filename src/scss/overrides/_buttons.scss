@@ -29,4 +29,10 @@
         background-color: transparent;
         border: 0;
     }
+
+    // Darken the text slightly in the secondary outline button,
+    // otherwise it looks too similar to a disabled button
+    &.btn-outline-secondary:not(:hover) {
+        color: shade($gray, 40%);
+    }
 }
