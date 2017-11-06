@@ -1,6 +1,16 @@
 
 // Polyfill for IE11 support
-import 'node_modules/babel-polyfill/dist/polyfill'
+import 'node_modules/babel-polyfill/dist/polyfill';
+
+// Polyfill for `position: sticky` support
+import './vendor/fixedsticky-0.1.7';
+
+import Lookup from './components/lookup';
+import Uploader from './components/uploader';
+
+// TODO: Clean these two up
+import './components/alert';
+import './components/alert-banner';
 
 (($) => {
     const bsver = $.fn['button'].Constructor.VERSION;
@@ -31,3 +41,8 @@ import 'node_modules/babel-polyfill/dist/polyfill'
         $.fn.datepicker.defaults.autoclose = true;
     }
 })($);
+
+export {
+    Lookup,
+    Uploader
+};
