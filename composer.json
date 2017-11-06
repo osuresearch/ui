@@ -8,12 +8,25 @@
             "email": "mcmanning.1@osu.edu"
         }
     ],
+    "config": {
+        "gitlab-domains": [
+            "code.osu.edu"
+        ],
+        "preferred-install": {
+            "*": "dist"
+        }
+    },
+    "repositories": [
+        {
+            "type": "gitlab",
+            "url":  "git@code.osu.edu:ORIS/coding-standards.git"
+        }
+    ],
     "require": {
         "php": ">=5.6.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "~4.0",
-        "squizlabs/php_codesniffer": "^2.5"
+        "oris/coding-standards": "^1.0"
     },
     "autoload": {
         "psr-4": {
