@@ -12,6 +12,12 @@
     background: transparent;
     border: 0;
     padding-top: 0.7rem;
+
+    // Slight realignment fix for the FontAwesome search icon.
+    // It looks too low by a couple pixels while embedded in inputs
+    i.fa.fa-search {
+        margin-top: -2px;
+    }
 }
 
 .input-group {
