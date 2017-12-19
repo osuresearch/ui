@@ -16,6 +16,7 @@
     &.navbar-main {
         @extend .navbar-light;
         background-color: tint($gray, 5%);
+        box-shadow: 0 2px 5px 0 rgba($black, 0.08), 0 2px 10px 0 rgba($black, 0.06);
 
         // Alternative link display - to treat them more like buttons
         .nav-item {
