@@ -56,12 +56,16 @@
         }
     }
 
+    // Flex the profile component to the right
+    .profile {
+        margin-left: auto;
+    }
+
     // Flex inline forms to the right
     .form-inline {
         margin-left: auto;
 
-        // Give a fixed margin if there's a .profile component after a .form-inline.
-        // Otherwise the inline form will center itself
+        // Give a fixed margin if there's a .profile component after a .form-inline
         + .profile {
             margin-left: 0.75rem;
         }
