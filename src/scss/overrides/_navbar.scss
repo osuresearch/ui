@@ -4,6 +4,7 @@
     @extend .navbar-expand;
 
     padding: 0.5em 2em;
+    white-space: nowrap;
 
     // Alignment correction to ensure the top of the dropdown menu
     // is aligned against the bottom of the navbar
@@ -15,6 +16,7 @@
     // than inline navbars - with a bit more responsive behavior
     &.navbar-main {
         @extend .navbar-light;
+
         background-color: tint($gray, 5%);
         box-shadow: 0 2px 5px 0 rgba($black, 0.08), 0 2px 10px 0 rgba($black, 0.06);
 
@@ -51,6 +53,58 @@
         // Reduce edge padding for mobile
         @include media-breakpoint-down(sm) {
             padding: 0.5em 1em;
+        }
+    }
+
+    // Flex the profile component to the right
+    .profile {
+        margin-left: auto;
+    }
+
+    // Flex inline forms to the right
+    .form-inline {
+        margin-left: auto;
+
+        // Give a fixed margin if there's a .profile component after a .form-inline
+        + .profile {
+            margin-left: 0.75rem;
+        }
+
+        // Stylize navbar inputs to contrast with the nav background
+        input {
+            background: #eceeef;
+            border: none;
+            color: $gray;
+            width: 15rem;
+
+            &:focus {
+                background: $white;
+                box-shadow: none;
+            }
+        }
+    }
+
+    // Responsive Reflow
+
+    // Will hide the navigation items (since they're displayed via Tab Bar)
+    // shifts the inline form to fill the page width, and changes how the sticky
+    // behavior works so only the inline form is visible while sticky is in effect
+    @include media-breakpoint-down(sm) {
+        justify-content: space-between;
+        flex-wrap: wrap;
+
+        .navbar-nav {
+            display: none;
+        }
+
+        .form-inline {
+            width: 100%;
+            margin-top: 0.5rem;
+            order: 3;
+        }
+
+        .input-group {
+            width: 100%;
         }
     }
 }
