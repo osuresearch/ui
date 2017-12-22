@@ -12,4 +12,9 @@
         text-decoration: underline;
         white-space: nowrap;
     }
+
+    // Tighten edges on mobile
+    @include media-breakpoint-down(sm) {
+        padding: 0.5rem 1rem;
+    }
 }
