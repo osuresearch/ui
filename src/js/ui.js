@@ -8,9 +8,9 @@ import './vendor/fixedsticky-0.1.7';
 import Lookup from './components/lookup';
 import Uploader from './components/uploader';
 
-// TODO: Clean these two up
 import './components/alert';
 import './components/alert-banner';
+import './components/sticky-header';
 
 (($) => {
     const bsver = $.fn['button'].Constructor.VERSION;
