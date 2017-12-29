@@ -2,6 +2,28 @@
 Current unresolved issues can be found and reported on [YouTrack](https://ordevsvc01.rf.ohio-state.edu/youtrack/issues?q=project%3A+%7BPHP+Framework%7D+component%3A+ORIS%5CUI+%23Unresolved+)
 
 
+## 3.0.0 (2018-??-??)
+Upgrade to ES6 for Javascript components
+
+This upgrade requires changes to the `gulpfile.js` in ES5 applications (any application doing an upgrade from oris/ui 2.0 to 3.0). See the [migration guide on the OR Wiki](https://orwiki.osu.edu/xwiki/wiki/oris/view/Development/Guides/Migrations/UI%202.0%20to%203.0/)
+
+__Backwards Breaking Changes:__
+* Rewrite of Javascript components to ES6
+* `navbar-nav` will now be hidden on displays `<= sm` with the expectation that a `tabbar` will be visible for navigation.
+
+__Fixed Bugs:__
+* Fixed responsive navbar rules for when a `form-inline` is adjacent to a `profile`
+* Fixed alignment of icons for inputs included in a navbar's `form-inline`
+* Fixed outline buttons looking too similar to disabled buttons
+* Fixed `header.is-sticky` not supporting variable height headers (e.g. when extra message banners are visible)
+
+__Implemented Enhancements:__
+* Added `src/dist/ui.es5.js` full backwards compatible build for ES5 applications
+* Added new `system-alert` component for displaying important server-wide notice banners on applications
+* Added new `profile` component
+* Added `Util` function group, and a general purpose `Util.debounce` function for frequent event handlers
+
+
 ## 2.0.0 (2017-10-25)
 Upgrade for Bootstrap 4 Beta.2
 
@@ -27,9 +49,9 @@ __Fixed Bugs:__
 * Fixed default render theme for components when a developer forgets to add a theme class
 
 __Implemented Enhancements:__
-* Added new Tab Bar component
-* Added new Uploader component
-* Added new Richtext component
+* Added new `tabbar` component
+* Added new `uploader` component
+* Added new `richtext` component
 * Added extended color palette for SASS
 * No longer using an absolutely positioned/absolute height footer
 * Added `.is-horizontal-scroll` for the body element to make a horizontally scrollable body with fixed headers
