@@ -27,14 +27,14 @@ const BROWSER_COMPATIBILITY = [
  * Patterns to lint for SASS/SCSS/CSS files
  */
 const SASS_LINT_PATHS = [
-    'src/scss/**/*.scss', // Include our own custom SCSS
-    '!src/scss/vendor/**/*' // Ignore vendor SCSS
+    'src/sass/**/*.scss', // Include our own custom SCSS
+    '!src/sass/vendor/**/*' // Ignore vendor SCSS
 ];
 
 /**
  * Root file for compiling distributable bundle.css
  */
-const SASS_BUILD_PATH = 'src/scss/ui.scss';
+const SASS_BUILD_PATH = 'src/sass/ui.scss';
 
 /**
  * Output filename for CSS bundling. Map file will also
