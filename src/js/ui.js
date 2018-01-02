@@ -13,7 +13,7 @@ import './components/alert-banner';
 import './components/sticky-header';
 
 (($) => {
-    const bsver = $.fn['button'].Constructor.VERSION;
+    const bsver = $.fn.button.Constructor.VERSION;
     const jqver = $.fn.jquery.split(' ')[0].split('.');
 
     if ((jqver[0] < 3 && jqver[1] < 2) || (jqver[0] >= 4)) {

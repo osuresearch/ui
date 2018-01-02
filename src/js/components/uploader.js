@@ -105,7 +105,7 @@ class Uploader extends Component {
             onCancel: this.uploadifiveCancel.bind(this),
 
             // UX configurations
-            itemTemplate: this.getFileItemTemplate(),
+            itemTemplate: this.fileItemTemplate(),
             width: 'auto', // Because for some reason uploadifive wants to set inline CSS for its button.
             height: 'auto'
         });
@@ -154,7 +154,7 @@ class Uploader extends Component {
         // Detect file drag events on our queue
         // Via: https://stackoverflow.com/a/8494918
         this.$queue.on('dragover dragstart dragenter', (e) => {
-            var dt = e.originalEvent.dataTransfer;
+            const dt = e.originalEvent.dataTransfer;
 
             if (dt.types && (dt.types.indexOf ?
                 dt.types.indexOf('Files') !== -1 : dt.types.contains('Files'))) {
@@ -179,7 +179,7 @@ class Uploader extends Component {
         this.$queue.removeClass('is-empty');
 
         files.forEach((file) => {
-            let $template = $(this.getFileItemTemplate());
+            const $template = $(this.fileItemTemplate());
             let canDelete = this.o.delete;
             let canDownload = this.o.download;
             let filename;
@@ -277,7 +277,7 @@ class Uploader extends Component {
             method: 'DELETE',
             url: this.o.endpoint,
             data: {
-                filename: filename,
+                filename,
                 metadata: this.o.metadata
             }
         });
@@ -290,7 +290,7 @@ class Uploader extends Component {
      *
      * @return HTML
      */
-    getFileItemTemplate() {
+    static get fileItemTemplate() {
         // Note that 'close', 'filename', 'fileinfo', 'progress' are all required
         // class names, as they're used by the uploadifive plugin to hook events
         return `
@@ -352,9 +352,8 @@ class Uploader extends Component {
      * Event handler for when Uploadifive finishes uploading a single file
      *
      * @param {object} file metadata
-     * @param {object} data ????
      */
-    uploadifiveUploadComplete(file, data) {
+    uploadifiveUploadComplete(file) {
         // If uploaded files are downloadable, make the filename a download link
         if (this.o.download) {
             file.queueItem
@@ -372,10 +371,8 @@ class Uploader extends Component {
 
     /**
      * Event handler for when Uploadifive's queue of files is complete
-     *
-     * @param {object} uploads ????
      */
-    uploadifiveQueueComplete(uploads) {
+    uploadifiveQueueComplete() {
         // TODO: Bug where this gets triggered even if we drag a non-file into the uploader.
         // E.g. we drag highlighted text into it, and this gets fired off for an empty queue.
         // Also gets fired off if a file is added, but has an error.
@@ -383,7 +380,7 @@ class Uploader extends Component {
         this.el.trigger('queue-complete.uploader');
     }
 
-    uploadifiveAddItem(item) {
+    uploadifiveAddItem() {
         this.$queue.removeClass('is-empty');
     }
 
@@ -413,6 +410,7 @@ class Uploader extends Component {
     /**
      * Event handler for errors in Uploadifive
      */
+    // eslint-disable-next-line class-methods-use-this, no-unused-vars
     uploadifiveError(errorType, file) {
         // console.log('uploadifive:error', errorType, file);
         /* Error codes:

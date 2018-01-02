@@ -2,8 +2,8 @@
 /**
  * Code specific to the banner-style alert dialogs
  */
-$(function alertBanner() {
-    var $banners = $('.alert-banner');
+$(() => {
+    const $banners = $('.alert-banner');
 
     // Turn on `display: sticky` polyfill for all banners
     $banners.fixedsticky();

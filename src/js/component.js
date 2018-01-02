@@ -61,11 +61,13 @@ class Component {
         const instance = this;
         const className = instance.name;
 
-        const wrapper = function () {
-            let args = Array.apply(null, arguments);
+        const wrapper = function (...args) {
             let ret = null;
 
-            args.shift();
+            args.shift(); // Scope
+
+            // Method name (or options object)
+            const method = args.shift();
 
             this.each(function () {
                 const $this = $(this);
@@ -75,23 +77,24 @@ class Component {
                     {},
                     instance.DEFAULTS,
                     $this.data(),
-                    typeof options === 'object' && options
+                    typeof method === 'object' && method
                 );
 
                 if (!data) {
+                    // eslint-disable-next-line new-cap
                     data = new instance($this, opts);
                     $this.data(className, data);
                     ret = data;
                 }
 
                 // Check for a method call instead of a construction
-                if (typeof options === 'string') {
-                    if (typeof data[options] === 'undefined') {
-                        throw new Error(`No method named "${options}"`);
+                if (typeof method === 'string') {
+                    if (typeof data[method] === 'undefined') {
+                        throw new Error(`No method named "${method}"`);
                     }
 
-                    // Call the declared function with the arguments provided
-                    ret = data[options].apply(data, args);
+                    // Call the declared method with rest of the arguments
+                    ret = data[method](...args);
                 }
             });
 
@@ -100,14 +103,14 @@ class Component {
             }
 
             return ret;
-        }
+        };
 
         $.fn[className] = wrapper;
         $.fn[className].Constructor = instance;
         $.fn[className].version = instance.VERSION;
         $.fn[className].noConflict = function () {
             return wrapper;
-        }
+        };
 
         // If the component is setup to autoload on document ready,
         // run it immediately without additional configurations.
@@ -115,7 +118,7 @@ class Component {
         if (instance.AUTOLOAD) {
             $(window).on(
                 'load',
-                function () {
+                () => {
                     $(instance.PROVIDER).each(function () {
                         wrapper.call($(this), {});
                     });
@@ -133,7 +136,6 @@ class Component {
                 }
             );
         }
-
     }
 }
 

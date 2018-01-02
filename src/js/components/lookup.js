@@ -124,7 +124,7 @@ class Lookup extends Component {
                                                 // to pass termDelta, but the stopped typing implies
                                                 // that they are waiting for a result response
             }
-        }
+        };
     }
 
     static get VERSION() {
@@ -205,7 +205,7 @@ class Lookup extends Component {
         }
 
         this.changeTimeoutHandle = window.setTimeout(
-            () => { this.changeTimeout() },
+            () => { this.changeTimeout(); },
             this.o.throttle.delay
         );
 
@@ -335,8 +335,8 @@ class Lookup extends Component {
      * @param {string} term search term to send
      */
     search(term) {
-        let headers = {};
-        let query = {};
+        const headers = {};
+        const query = {};
 
         this.term = term;
 
@@ -372,7 +372,7 @@ class Lookup extends Component {
                 type: 'GET',
                 data: query,
                 dataType: 'json',
-                headers: headers
+                headers
             }).done((data) => {
                 this.request = null;
                 this.displayResults(data);
@@ -397,7 +397,7 @@ class Lookup extends Component {
         );
 
         for (let i = 0; i < json.data.length; i++) {
-            let display = this.resolve(this.o.optionDisplay, json.data[i]);
+            const display = this.resolve(this.o.optionDisplay, json.data[i]);
 
             this.results.append(
                 $(`<a class="dropdown-item" href="#">${display}</a>`).data(
@@ -408,7 +408,7 @@ class Lookup extends Component {
         }
 
         if (json.meta && (json.meta.total - json.data.length) > 0) {
-            let count = json.meta.total - json.data.length;
+            const count = json.meta.total - json.data.length;
 
             this.results.append(
                 `<div class="dropdown-header">
