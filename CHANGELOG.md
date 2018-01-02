@@ -19,7 +19,7 @@ __Fixed Bugs:__
 
 __Implemented Enhancements:__
 * Added `src/dist/ui.es5.js` full backwards compatible build for ES5 applications
-* Added new `system-alert` component for displaying important server-wide notice banners on applications
+* Added new `application-alert` component for displaying important server-wide notice banners on applications
 * Added new `profile` component
 * Added `Util` function group, and a general purpose `Util.debounce` function for frequent event handlers
 
