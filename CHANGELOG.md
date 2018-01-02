@@ -2,13 +2,14 @@
 Current unresolved issues can be found and reported on [YouTrack](https://ordevsvc01.rf.ohio-state.edu/youtrack/issues?q=project%3A+%7BPHP+Framework%7D+component%3A+ORIS%5CUI+%23Unresolved+)
 
 
-## 3.0.0 (2018-??-??)
+## 3.0.0 (2018-01-02)
 Upgrade to ES6 for Javascript components
 
 This upgrade requires changes to the `gulpfile.js` in ES5 applications (any application doing an upgrade from oris/ui 2.0 to 3.0). See the [migration guide on the OR Wiki](https://orwiki.osu.edu/xwiki/wiki/oris/view/Development/Guides/Migrations/UI%202.0%20to%203.0/)
 
 __Backwards Breaking Changes:__
 * Rewrite of Javascript components to ES6
+* Rename `scss` directory to `sass` to be consistent with the applications
 * `navbar-nav` will now be hidden on displays `<= sm` with the expectation that a `tabbar` will be visible for navigation.
 
 __Fixed Bugs:__
