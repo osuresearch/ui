@@ -2,7 +2,7 @@
 
 Frontend UI components built on [Bootstrap 4 Beta](https://getbootstrap.com/docs/4.0/getting-started/introduction/) for use in PHP applications. Includes:
 * SASS build with utilities for advanced usage
-* Compiled `ui.css` and `ui.js` scripts
+* Compiled `dist/css/ui.css` and `dist/js/ui.es5.js` scripts
 * Common frontend components, including lookups, date pickers, and multi-file uploaders
 
 Current unresolved issues can be found and reported on [YouTrack](https://ordevsvc01.rf.ohio-state.edu/youtrack/issues?q=project%3A+%7BPHP+Framework%7D+component%3A+ORIS%5CUI+%23Unresolved+)
@@ -12,7 +12,7 @@ The [Styleguide app on the dev server](https://orwebdev02.rf.ohio-state.edu/styl
 ## Requirements
 * PHP 5.6+
 * Composer
-* NodeJS/NPM If you're not using the compiled ui.css and ui.js
+* NodeJS/NPM If you're not using the compiled ui.css and ui.es5.js
 
 ### CSS Support
 The gulp build process uses the following compatibility table for autoprefixing CSS:
@@ -47,18 +47,16 @@ This library is installable via Composer through `composer.json`, as long as you
         ]
     },
     "require": {
-        "oris/ui": "^2.0"
+        "oris/ui": "^3.0"
     },
     ... etc ...
 }
 ```
 
-Chase will eventually update the ORIS Satis service to make this slightly easier to configure. :)
-
 ### Including SASS/CSS
-If your project's stylesheets are built using SASS (i.e. you have a `/sass/app.scss` in your project), add the following import:
+If your project's stylesheets are built using SASS (i.e. you have a `/sass/index.scss` in your project), add the following import:
 ```
-@import "../vendor/oris/ui/src/scss/ui.scss";
+@import "../vendor/oris/ui/src/sass/ui.scss";
 ```
 
 If not, copy `vendor/ui/dist/css/ui.css` to your project's `css` folder, or reference it directly.
@@ -66,19 +64,9 @@ If not, copy `vendor/ui/dist/css/ui.css` to your project's `css` folder, or refe
 **Important** - Do make sure you are cache busting the included CSS file. Otherwise future updates will potentially break display for clients.
 
 ### Including Javascript
-Similar to SASS, you can directly include the source Javascript into your build process, just ensure that it compiles all files in `vendor/oris/ui/src/js/**/*.js`.
+An ES5-compatible build is made every release and found in `vendor/ui/dist/js/ui.es5.js`. You may either concatenate that into your application's Javascript or include it separately.
 
-**Important to note** - The source files may, at some point, migrate to ES6/ES2015. The build process to create `ui.js` and `ui.min.js` will **always** transpile the source to ES5, but if you are to include sources directly you will need to do it manually.
-
-Alternatively (the easy route), you can copy to your `js/vendor` directory (or reference directly) the compiled `vendor/oris/ui/dist/js/ui.js` or the `vendor/oris/ui/dist/js/ui.min.js` optimized for production.
-
-If you have a gulp process that compiles `app.js`, you can add `ui.js` to it's build path, e.g.:
-```
-gulp.src(['src/js/**/*.js', 'vendor/oris/ui/dist/js/ui.js'])
-    .pipe(sourcemaps.init())
-    .pipe(... whatever else ...)
-    ... etc
-```
+If your application is in ES6, you can import `src/js/ui.js` into your bundle. An basic example of how this works is available in the `oris/template` project.
 
 Just like with the CSS, ensure you are cache busting your Javascript files to ensure clients always have the correct version.
 
