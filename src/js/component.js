@@ -64,8 +64,6 @@ class Component {
         const wrapper = function (...args) {
             let ret = null;
 
-            args.shift(); // Scope
-
             // Method name (or options object)
             const method = args.shift();
 
