@@ -88,11 +88,16 @@ class Component {
                 // Check for a method call instead of a construction
                 if (typeof method === 'string') {
                     if (typeof data[method] === 'undefined') {
-                        throw new Error(`No method named "${method}"`);
+                        throw new Error(`No method or property named "${method}"`);
                     }
 
                     // Call the declared method with rest of the arguments
-                    ret = data[method](...args);
+                    if (typeof data[method] === 'function') {
+                        ret = data[method](...args);
+                    }
+
+                    // Otherwise, it's a property getter. Set directly
+                    ret = data[method];
                 }
             });
 
