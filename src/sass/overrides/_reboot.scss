@@ -51,3 +51,8 @@ body {
     width: 0;
     height: 0;
 }
+
+// Missing from original reboot
+button, html [type="button"], [type="reset"], [type="submit"] {
+    cursor: pointer;
+}
