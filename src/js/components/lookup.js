@@ -316,6 +316,24 @@ class Lookup extends Component {
     }
 
     /**
+     * Return the current input value if an option has been selected
+     *
+     * @return {string}
+     */
+    get displayValue() {
+        return this.el.val();
+    }
+
+    /**
+     * Return the current stored hidden value if an option has been selected
+     *
+     * @return {string}
+     */
+    get storeValue() {
+        return this.store.val();
+    }
+
+    /**
      * Clear the current search results and input
      *
      * If the input is in a readonly state, it'll become editable again.
