@@ -1,6 +1,19 @@
 # Change Log
 Current unresolved issues can be found and reported on [YouTrack](https://ordevsvc01.rf.ohio-state.edu/youtrack/issues?q=project%3A+%7BPHP+Framework%7D+component%3A+ORIS%5CUI+%23Unresolved+)
 
+## 3.1.0 (2018-01-11)
+Bug Fixes, feature additions
+
+__Fixed Bugs__:
+* Fixed cursor to be a pointer for default button styles
+* Fixed z-indexes for custom components going higher than Bootstrap components (e.g. navbar being rendered over modals)
+* Component: Fixed the first argument being incorrectly dropped from class method calls through the jQuery interface
+* Component: Fixed property getters not working correctly when called through the jQuery interface
+
+__Implemented Enhancements__:
+* Lookup: Added `set(display, store)` method
+* Lookup: Added getters `displayValue` and `storeValue`
+
 
 ## 3.0.0 (2018-01-02)
 Upgrade to ES6 for Javascript components
