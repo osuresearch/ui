@@ -275,7 +275,27 @@ class Lookup extends Component {
         const $item = $(e.target).closest('.dropdown-item');
         const json = $item.data('json');
 
-        this.el.val(this.resolve(this.o.display, json));
+        this.set(
+            this.resolve(this.o.display, json),
+            this.resolve(this.o.store, json)
+        );
+
+        this.el.trigger('pick.lookup', [json]);
+
+        return false;
+    }
+
+    /**
+     * Set a value for the search result.
+     *
+     * Useful for pre-populating lookups on page load
+     * or via other components
+     *
+     * @param {string} displayText to show in the input
+     * @param {string} hiddenKey value to set to the hidden input
+     */
+    set(displayText, hiddenKey) {
+        this.el.val(displayText);
         this.results.html('').hide();
 
         this.el.focus();
@@ -291,12 +311,26 @@ class Lookup extends Component {
 
         // Store key in hidden input, if we choose to do so
         if (this.o.store) {
-            this.store.val(this.resolve(this.o.store, json));
+            this.store.val(hiddenKey);
         }
+    }
 
-        this.el.trigger('pick.lookup', [json]);
+    /**
+     * Return the current input value if an option has been selected
+     *
+     * @return {string}
+     */
+    get displayValue() {
+        return this.el.val();
+    }
 
-        return false;
+    /**
+     * Return the current stored hidden value if an option has been selected
+     *
+     * @return {string}
+     */
+    get storeValue() {
+        return this.store.val();
     }
 
     /**
