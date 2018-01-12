@@ -18,7 +18,7 @@
 <button class="dropdown-item"
     data-provide="emulate"
     data-endpoint="{{ emulate_endpoint }}"
-    data-lookup-endpoint="{{ emulate_lookup_endpoint ? 'https://orapps.osu.edu/api/v1/person' }}"
+    data-lookup-endpoint="{{ emulate_lookup_endpoint ?? 'https://orapps.osu.edu/api/v1/person' }}"
     data-user="{{ session.isEmulating() ? session.user.name }}">
     Emulate User
 </button>
