@@ -1,3 +1,19 @@
+{#
+    To include this prebuilt component in your application, the following
+    Twig variables are required to be set either globally or passed into this
+    script during inclusion:
+
+    session                 Instance of ORIS/Env/User/Session
+
+    emulate_endpoint        Path to the POST route for emulation in your app.
+                            POST route must accept a single field 'user' that
+                            contains either an OSU ID, username, or a blank
+                            string which resets emulation.
+
+    emulate_lookup_endpoint (optional) path to an endpoint that returns person search
+                            results. If not provided, it will default to
+                            `https://orapps.osu.edu/api/v1/person`
+#}
 
 <button class="dropdown-item"
     data-provide="emulate"
