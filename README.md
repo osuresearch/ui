@@ -3,7 +3,7 @@
 Frontend UI components built on [Bootstrap 4 Beta](https://getbootstrap.com/docs/4.0/getting-started/introduction/) for use in PHP applications. Includes:
 * SASS build with utilities for advanced usage
 * Compiled `dist/css/ui.css` and `dist/js/ui.es5.js` scripts
-* Common frontend components, including lookups, date pickers, and multi-file uploaders
+* Common frontend components, including lookups, date pickers, emulation, and multi-file uploaders
 
 Current unresolved issues can be found and reported on [YouTrack](https://ordevsvc01.rf.ohio-state.edu/youtrack/issues?q=project%3A+%7BPHP+Framework%7D+component%3A+ORIS%5CUI+%23Unresolved+)
 
