@@ -1,0 +1,40 @@
+{#
+    To include this prebuilt component in your application, the following
+    Twig variables are required to be set either globally or passed into this
+    script during inclusion:
+
+    session                 Instance of ORIS/Env/User/Session
+
+    can_emulate             Whether the logged in user can use the emulation feature
+
+    emulate_endpoint        Path to the POST route for emulation in your app.
+                            POST route must accept a single field 'user' that
+                            contains either an OSU ID, username, or a blank
+                            string which resets emulation.
+
+    emulate_lookup_endpoint (optional) path to an endpoint that returns person search
+                            results. If not provided, it will default to
+                            `https://orapps.osu.edu/api/v1/person`
+#}
+
+<div class="profile dropdown">
+    <a href="#" class="dropdown-toggle"
+        id="profile-dropdown" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        {{ session.user.username }}
+    </a>
+    <div class="dropdown-menu dropdown-menu-right"
+        aria-labelledby="profile-dropdown">
+
+        <a class="dropdown-item" href="/register" target="_blank">My Profile</a>
+
+        <div class="dropdown-divider"></div>
+
+    {% if can_emulate %}
+        {% include 'emulate.html' %}
+    {% endif %}
+
+        <a class="dropdown-item profile-logout"
+            href="/Shibboleth.sso/Logout?return=https://webauth.service.ohio-state.edu/idp/profile/Logout">Logout</a>
+    </div>
+</div>

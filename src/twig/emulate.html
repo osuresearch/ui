@@ -1,0 +1,70 @@
+{#
+    To include this prebuilt component in your application, the following
+    Twig variables are required to be set either globally or passed into this
+    script during inclusion:
+
+    session                 Instance of ORIS/Env/User/Session
+
+    emulate_endpoint        Path to the POST route for emulation in your app.
+                            POST route must accept a single field 'user' that
+                            contains either an OSU ID, username, or a blank
+                            string which resets emulation.
+
+    emulate_lookup_endpoint (optional) path to an endpoint that returns person search
+                            results. If not provided, it will default to
+                            `https://orapps.osu.edu/api/v1/person`
+#}
+
+<button class="dropdown-item"
+    data-provide="emulate"
+    data-endpoint="{{ emulate_endpoint }}"
+    data-lookup-endpoint="{{ emulate_lookup_endpoint ?? 'https://orapps.osu.edu/api/v1/person' }}"
+    data-user="{{ session.isEmulating() ? session.user.name }}">
+    Emulate User
+</button>
+
+<script type="text/x-template" class="emulate-modal-template">
+    <div class="modal fade" id="emulate-modal" tabindex="-1" role="dialog"
+        aria-labelledby="emulate-label" aria-hidden="true">
+
+        <div class="modal-dialog">
+            <form class="modal-content" method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="emulate-label">
+                        Emulate User
+                    </h5>
+                    <button type="button" class="close"
+                        data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <fieldset class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                            </span>
+
+                            <input type="text" class="form-control emulate-lookup"
+                                placeholder="Search for a user"
+                                id="emulate-lookup" name="user" autocomplete="off"
+                                aria-autocomplete="list" aria-haspopup="true">
+
+                            <span class="input-group-btn">
+                                <button class="btn btn-secondary lookup-clear"
+                                    type="button" aria-label="change selection">
+                                    Change
+                                </button>
+                                <button class="btn btn-danger emulate-clear">
+                                    Reset
+                                </button>
+                            </span>
+                        </div>
+
+                        <div class="emulate-history"></div>
+                    </fieldset>
+                </div>
+            </form>
+        </div>
+    </div>
+</script>

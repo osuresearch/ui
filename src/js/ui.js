@@ -7,6 +7,7 @@ import './vendor/fixedsticky-0.1.7';
 
 import Lookup from './components/lookup';
 import Uploader from './components/uploader';
+import Emulate from './components/emulate';
 
 import './components/alert';
 import './components/alert-banner';
@@ -44,5 +45,6 @@ import './components/sticky-header';
 
 export {
     Lookup,
-    Uploader
+    Uploader,
+    Emulate
 };
