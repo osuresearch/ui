@@ -1,0 +1,112 @@
+{#
+    To include this prebuilt component in your application, the following
+    Twig variables are required to be set either globally or passed into this
+    script during inclusion:
+
+    session                 Instance of ORIS/Env/User/Session
+
+    app_title               Human-readable name of your application
+
+    help_endpoint           (optional) Path to the POST route for support requests.
+                            If not provided, it will default to
+                            `https://orapps.osu.edu/api/v1/support/help`
+
+    feedback_endpoint       (optional) Path to the POST route for support requests.
+                            If not provided, it will default to
+                            `https://orapps.osu.edu/api/v1/support/feedback`.
+
+    support_metadata        (optional) Extra metadata to be sent alongside the request
+
+    * If you are to use a custom endpoint, it SHOULD accept the following POST fields:
+        application: string - this app's human-readable name
+        name: string - submitter's real name
+        email: string - submitter's email
+        metadata: string - (optional) arbitrary data specific to your application
+        url: string - the submitter's current location.href
+        message: string - the submitter's written message
+#}
+
+<button class="btn btn-outline-secondary hidden-print support"
+    data-provide="support"
+    data-app="{{ app_title }}" data-name="{{ session.user.name }}" data-email="{{ session.user.email }}"
+    data-help-endpoint="{{ help_endpoint ?? 'https://orapps.osu.edu/api/v1/support/help' }}"
+    data-feedback-endpoint="{{ feedback_endpoint ?? 'https://orapps.osu.edu/api/v1/support/feedback' }}">
+    <i class="fa fa-comment-o" aria-hidden="true"></i>
+    Help / Feedback
+</button>
+
+<script type="text/x-template" class="support-modal-template">
+    <div class="modal fade support-modal" id="support-modal" tabindex="-1" role="dialog"
+        aria-labelledby="support-label" aria-hidden="true">
+
+        <div class="modal-dialog">
+            <form class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="support-label">How can we help?</h5>
+                    <button type="button" class="close"
+                        data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="support-type">
+                        <fieldset class="form-group">
+                            <div class="custom-controls-stacked">
+                                <label class="custom-control custom-radio">
+                                    <input name="choice" type="radio"
+                                        class="custom-control-input" value="help" required>
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">
+                                        I need help finding something / something is incorrect
+                                    </span>
+                                </label>
+                                <label class="custom-control custom-radio">
+                                    <input name="choice" type="radio"
+                                        class="custom-control-input" value="feedback" required>
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">
+                                        I have a suggestion for something we can improve
+                                    </span>
+                                </label>
+                            </div>
+                        </fieldset>
+                    </div>
+
+                    <div class="support-help">
+                        <div class="js-extra-content"></div>
+
+                        <p>
+                            For technical issues regarding {{ app_title }}, contact the
+                            OR Help Desk at <a href="tel:16146888288">(614) 688-8288</a>
+                            or use the form below.
+                        </p>
+
+                        <fieldset class="form-group">
+                            <label for="support-help-entry">Please describe your issue</label>
+                            <textarea id="support-help-entry" class="form-control" rows="4"></textarea>
+                        </fieldset>
+                    </div>
+
+                    <div class="support-feedback">
+                        <div class="js-extra-content"></div>
+
+                        <p>
+                            This form is to provide feedback to help us improve {{ app_title }}.
+                            You may also provide feedback by emailing the help desk directly at
+                            <a href="mailto:orhelpdesk@osu.edu?subject={{ app_title }} Feedback">orhelpdesk@osu.edu</a>
+                        </p>
+
+                        <fieldset class="form-group">
+                            <label for="support-feedback-entry">How can we improve {{ app_title }}?</label>
+                            <textarea id="support-feedback-entry" class="form-control" rows="4"></textarea>
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary support-submit">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</script>
