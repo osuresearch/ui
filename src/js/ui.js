@@ -22,6 +22,7 @@ import './components/sticky-header';
         throw new Error('oris/ui requires at least jQuery 3.2 but less than 4.0');
     }
 
+    // Make sure the developer included a compatible build of Bootstrap
     if (bsver !== '4.0.0-beta.2') {
         throw new Error('oris/ui requires Bootstrap 4.0.0-beta.2');
     }

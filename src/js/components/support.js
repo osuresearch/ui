@@ -10,7 +10,7 @@ import Component from '../component';
  */
 class Support extends Component {
     static get VERSION() {
-        return '1.0.0';
+        return '3.2.0';
     }
 
     static get DEFAULTS() {
@@ -37,10 +37,6 @@ class Support extends Component {
                         'Please contact us directly at orhelpdesk@osu.edu or (614) 688-8288'
             }
         };
-    }
-
-    static get AUTOLOAD() {
-        return true;
     }
 
     constructor(element, options) {

@@ -3,7 +3,7 @@ import Component from '../component';
 
 class Emulate extends Component {
     static get VERSION() {
-        return '1.0.0';
+        return '3.2.0';
     }
 
     static get DEFAULTS() {
@@ -16,10 +16,6 @@ class Emulate extends Component {
 
             historyLimit: 4,        // Number of people to keep in local history
         };
-    }
-
-    static get AUTOLOAD() {
-        return true;
     }
 
     constructor(element, options) {

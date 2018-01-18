@@ -8,7 +8,20 @@ Versions follow [Semantic Versioning](https://semver.org/) guidelines - given a 
 3. PATCH version when you make backwards-compatible bug fixes.
 
 
-## 3.1.0 (2018-XX-XX)
+## 3.2.0 (2018-01-18)
+
+__Internal Changes__:
+* Changed `Component.AUTOLOAD` to default to true to fit the majority of use cases
+* Changed `Component.VERSION` to no longer be required by inherited classes
+* Removed unused Bootstrap 3 + Symfony Forms templates
+
+__Implemented Enhancements__:
+* Added new Support component and DOM template (src/twig/support.html)
+* Added new Emulate component and DOM template (src/twig/emulate.html)
+* Added template for Profile component (src/twig/profile.html)
+
+
+## 3.1.0 (2018-01-11)
 Bug Fixes, feature additions
 
 __Fixed Bugs__:

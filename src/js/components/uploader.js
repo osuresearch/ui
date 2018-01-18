@@ -58,7 +58,7 @@ class Uploader extends Component {
     }
 
     static get VERSION() {
-        return '2.1.0';
+        return '3.2.0';
     }
 
     constructor(element, options) {

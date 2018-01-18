@@ -1,4 +1,16 @@
 
+/**
+ * Base class for frontend self-contained components to inherit off of.
+ *
+ * Provides a uniform interface for the following:
+ *  - Options handling with a defined default options list, and the ability to
+ *      override through construction or data-attributes
+ *  - Versioning to ensure compatibility between reusable nested components
+ *  - lazy loading support - activating a component only on an event (such as a click)
+ *      to allow quicker initial page load times
+ *  - interface into jQuery to support jQuery-style conventions of calling the component
+ *      constructor and methods on any number of DOM elements
+ */
 class Component {
     constructor(element, options) {
         this.el = element;
@@ -8,34 +20,89 @@ class Component {
         this.el.addClass(this.constructor.CLASSNAME);
     }
 
+    /**
+     * Revision number of this component
+     *
+     * Typically only matters for components that may be shared between applications
+     * or other components to ensure compatibility is still met. Should follow semver
+     * conventions.
+     *
+     * @return {string}
+     */
     static get VERSION() {
         return 'Unknown';
     }
 
+    /**
+     * Dictionary of setting defaults for this component, available internally
+     * as the `o` class attribute.
+     *
+     * Each key in the dictionary may be overriden via a data-attribute on the
+     * component's DOM, or via an object passed in through the jQuery plugin pattern
+     * e.g. $(selector).CoolTool({ someKey: 'My Override' }).
+     *
+     * The priority order of option overrides are:
+     *  1. jQuery constructor parameter
+     *  2. data-attributes
+     *  3. defaults
+     *
+     * Note that the data-attribute version of keys is only one level deep, and
+     * performs kebabcase translation via the browser.
+     *
+     * For example:
+     *  fooOption: { barSubOption: 'hello' }
+     * must be provided as:
+     *  data-foo-option="{ barSubOption: 'hello' }"
+     *
+     * @return {object}
+     */
     static get DEFAULTS() {
         return {};
     }
 
+    /**
+     * Return a kebabcase version of this class' name. Used for setting/selecting
+     * the DOM class name for this component that follows the SMACSS conventions
+     *
+     * @return {string}
+     */
     static get CLASSNAME() {
         return this.name.replace(/([A-Z])/g, '-$1').toLowerCase().substr(1);
     }
 
+    /**
+     * Returns a selector for DOM elements that should be autoloaded as
+     * an instance of this component.
+     *
+     * By default, this is an attribute data-provide containing the
+     * kebabcase version of this component's class name.
+     *
+     * @return {string}
+     */
     static get PROVIDER() {
         return `[data-provide="${this.CLASSNAME}"]`;
     }
 
+    /**
+     * Returns an event handler name for what interactions initializes this
+     * component, if not set to autoload on page load.
+     *
+     * By default, this is the click event on the component's main DOM element
+     * (the one selectable via this.PROVIDER)
+     *
+     * @return {string}
+     */
     static get DATA_API() {
         return `click.${this.name}.data-api`;
     }
 
     /**
-     * Override and return true to have all instances of the component
-     * activate on window.load. This requires that all instances have
-     * the PROVIDER data-api attribute set.
+     * By default, all instances of the component (those DOM elements
+     * with the PROVIDER data-api attribute set) will initialize on window.load
      *
-     * If false, the component will only activate on the DATA_API event
-     * on the DOM element with the PROVIDER data-api attribute. By default,
-     * this means that the component code will only instantiate for the
+     * If overriden to return false, the component will only activate on the
+     * DATA_API event on the DOM element with the PROVIDER data-api attribute.
+     * By default, this means that the component code will only instantiate for the
      * DOM element once it's clicked.
      *
      * @return {boolean}
@@ -49,7 +116,7 @@ class Component {
      * the standard jQuery component-style API.
      *
      * A component class named 'CoolTool' would be given an associated
-     * constructor pattern: $('<div>').CoolTool({ ... })
+     * constructor pattern: $(selector).CoolTool({ ... })
      *
      * Furthermore, components with the PROVIDER data-api setup will activate
      * within the DOM. How this activation is done is described in the documentation
