@@ -9,9 +9,7 @@ class Component {
     }
 
     static get VERSION() {
-        throw new Error(
-            'Components inherited from `Component` must override `static get VERSION`'
-        );
+        return 'Unknown';
     }
 
     static get DEFAULTS() {
@@ -43,7 +41,7 @@ class Component {
      * @return {boolean}
      */
     static get AUTOLOAD() {
-        return false;
+        return true;
     }
 
     /**
