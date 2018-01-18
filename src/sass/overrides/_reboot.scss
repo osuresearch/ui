@@ -4,6 +4,9 @@
 //     border-bottom: 1px solid rgba(50, 131, 200, 0.25);
 // }
 
+// Allow vendor prefixes - as some resets are very vendor-dependent
+// sass-lint:disable no-vendor-prefixes
+
 html {
     position: relative;
     min-height: 100%;
@@ -53,6 +56,9 @@ body {
 }
 
 // Missing from original reboot
-button, html [type="button"], [type="reset"], [type="submit"] {
+button,
+html [type='button'],
+[type='reset'],
+[type='submit'] {
     cursor: pointer;
 }

@@ -18,8 +18,8 @@
         padding-left: 0;
 
         // Icon flow vertical line
-        .formflow-page:after {
-            content: "";
+        .formflow-page::after {
+            content: '';
             z-index: 1;
             position: absolute;
             border-left: 2px solid $gray-400;
@@ -55,7 +55,7 @@
             flex-flow: column;
             align-items: flex-start;
 
-            border: none;
+            border: 0;
             background-color: transparent;
 
             // Bit left-side overflow for the background highlighting hover.
@@ -72,9 +72,9 @@
             // }
 
             &.is-active,
-            &.is-active:hover,
+            &.is-active::hover,
             &.is-active a,
-            &.is-active:hover a {
+            &.is-active::hover a {
                 background-color: transparent !important;
                 color: $body-color !important;
                 font-weight: 500;
@@ -103,7 +103,7 @@
             }
 
             // Hide last connector line
-            &:last-child .formflow-page:after {
+            &::last-child .formflow-page::after {
                 display: none;
             }
         }

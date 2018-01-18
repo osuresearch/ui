@@ -7,5 +7,5 @@ header.is-sticky {
     position: sticky;
     top: -38px; // Hide the OSU navbar when sticky-scrolling
     z-index: $zindex-sticky;
-    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.16), 0 2px 4px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 0 0 2px 0 transparentize($black, 0.16), 0 2px 4px 0 transparentize($black, 0.12);
 }

@@ -5,7 +5,7 @@ button.support {
     bottom: 0.5em;
     right: 0.5em;
     font-size: 0.8em;
-    background-color: #fff;
+    background-color: $white;
 }
 
 // The associated support modal itself
@@ -15,7 +15,7 @@ button.support {
     }
 
     .form-group {
-        border: none;
+        border: 0;
         margin: 0;
         padding: 0 1rem;
 
@@ -27,7 +27,7 @@ button.support {
     .support-help,
     .support-feedback {
         display: none;
-        border-top: 1px solid #c2c2c2;
+        border-top: 1px solid tint($gray, 40%);
         padding-top: 1em;
         margin-top: 1em;
     }
@@ -39,7 +39,7 @@ button.support {
     p {
         font-size: 80%;
         margin: 1rem;
-        color: #666;
+        color: $gray;
     }
 
     &.is-help {

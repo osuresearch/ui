@@ -10,7 +10,7 @@
 
     z-index: $zindex-fixed;
 
-    box-shadow: 0 0 2px 0 rgba($black, 0.08), 0 -2px 4px 0 rgba($black, 0.06);
+    box-shadow: 0 0 2px 0 transparentize($black, 0.08), 0 -2px 4px 0 transparentize($black, 0.06);
 
     .nav-link {
         text-align: center;
