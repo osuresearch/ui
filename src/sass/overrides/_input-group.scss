@@ -2,21 +2,24 @@
 // This changes the display mode of .input-group-addons to float
 // inside of form components, instead of as side buttons.
 
-// By default, our input-group-addon items are floated
+// By default, our input-group-prefix items are floated
 // inside of the form-control they're connected to, rather than
 // appearing as a separate button.
-.input-group-addon {
+.input-group-prefix {
     position: absolute;
     top: 0;
+
     z-index: 4; // one above .form-control:hover
     background: transparent;
     border: 0;
-    padding-top: 0.7rem;
 
-    // Slight realignment fix for the FontAwesome search icon.
-    // It looks too low by a couple pixels while embedded in inputs
-    i.fa.fa-search {
-        margin-top: -2px;
+    .fa {
+        // Note these have to be margins, not absolute left
+        // because if an input is in a .input-group.col-* the column
+        // will end up adding additional padding - so the alignment
+        // screws up if we use absolute positioning
+        margin-left: 0.7rem;
+        margin-top: 0.7rem;
     }
 }
 
@@ -36,12 +39,12 @@
     }
 
     // Prefix addons need to add padding to the left of the form control
-    .input-group-addon + .form-control {
+    .input-group-prefix + .form-control {
         padding-left: 2.25rem;
     }
 
-    // ... And suffix addons need to add padding to the right
-    .form-control + .input-group-addon {
+    // ... And suffix need to add padding to the right
+    .input-group-suffix {
         left: auto;
         right: 0;
     }

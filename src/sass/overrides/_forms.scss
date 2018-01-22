@@ -12,15 +12,14 @@
     // Have vertical (default) form legends behave
     // the same way as horizontal/inline form legends
     legend {
-        @extend .col-form-legend;
+        @extend .col-form-label;
         padding: 0;
     }
 
     // Fix cursor for disabled form controls
-    .form-control {
-        &:disabled {
-            cursor: not-allowed;
-        }
+    .form-control:disabled,
+    .custom-control-input:disabled ~ .custom-control-label::after {
+        cursor: not-allowed;
     }
 
     // Small (help text) padding improvements
@@ -30,38 +29,6 @@
         margin-top: 0;
         margin-bottom: 1rem;
     }
-
-    // Inline error messages
-    .form-error {
-        color: theme-color('danger');
-        display: none;
-        padding-bottom: 1em;
-
-        .fa {
-            padding-right: 0.5em;
-        }
-    }
-
-    &.is-error {
-        .form-error {
-            display: block;
-        }
-    }
-
-    // Replication of Bootstrap's .has-danger
-    // &.is-error {
-    //     @include form-control-validation($brand-danger);
-
-    //     // Do *not* colorize addons
-    //     .input-group-addon {
-    //         background: none;
-    //     }
-
-    //     // Do *not* colorize form labels
-    //     label {
-    //         color: $body-color;
-    //     }
-    // }
 
     // Required star for form groups.
     // Attaches to the first label or legend found

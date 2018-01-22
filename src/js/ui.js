@@ -23,8 +23,8 @@ import './components/sticky-header';
     }
 
     // Make sure the developer included a compatible build of Bootstrap
-    if (bsver !== '4.0.0-beta.2') {
-        throw new Error('oris/ui requires Bootstrap 4.0.0-beta.2');
+    if (bsver !== '4.0.0') {
+        throw new Error('oris/ui requires Bootstrap 4.0.0 release');
     }
 
     // Ensure addon icons trigger the sibling inputs.
