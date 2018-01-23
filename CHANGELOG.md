@@ -8,54 +8,39 @@ Versions follow [Semantic Versioning](https://semver.org/) guidelines - given a 
 3. PATCH version when you make backwards-compatible bug fixes.
 
 
-## 3.2.0 (2018-01-18)
+## 3.0.0 (2018-01-23)
+Upgrade to Bootstrap 4.0.0 Release and to ES6 for Javascript components
 
-__Internal Changes__:
-* Changed `Component.AUTOLOAD` to default to true to fit the majority of use cases
-* Changed `Component.VERSION` to no longer be required by inherited classes
-* Removed unused Bootstrap 3 + Symfony Forms templates
+This upgrade requires changes to the `gulpfile.js` in ES5 applications (any application doing an upgrade from oris/ui 2.0 to 3.0),
+changes to the version of Bootstrap included from Assets, and contains a number of backwards breaking changes 
+between Bootstrap 4 Beta 2 and Release. 
 
-__Implemented Enhancements__:
-* Added new Support component and DOM template (src/twig/support.html)
-* Added new Emulate component and DOM template (src/twig/emulate.html)
-* Added template for Profile component (src/twig/profile.html)
-
-
-## 3.1.0 (2018-01-11)
-Bug Fixes, feature additions
-
-__Fixed Bugs__:
-* Fixed cursor to be a pointer for default button styles
-* Fixed z-indexes for custom components going higher than Bootstrap components (e.g. navbar being rendered over modals)
-* Component: Fixed the first argument being incorrectly dropped from class method calls through the jQuery interface
-* Component: Fixed property getters not working correctly when called through the jQuery interface
-
-__Implemented Enhancements__:
-* Lookup: Added `set(display, store)` method
-* Lookup: Added getters `displayValue` and `storeValue`
-
-
-## 3.0.0 (2018-01-02)
-Upgrade to ES6 for Javascript components
-
-This upgrade requires changes to the `gulpfile.js` in ES5 applications (any application doing an upgrade from oris/ui 2.0 to 3.0). See the [migration guide on the OR Wiki](https://orwiki.osu.edu/xwiki/wiki/oris/view/Development/Guides/Migrations/UI%202.0%20to%203.0/)
+See the [migration guide on the OR Wiki](https://orwiki.osu.edu/xwiki/wiki/oris/view/Development/Guides/Migrations/UI%202.0%20to%203.0/)
 
 __Backwards Breaking Changes:__
+* Upgrade to Bootstrap 4.0.0 Release
 * Rewrite of Javascript components to ES6
 * Rename `scss` directory to `sass` to be consistent with the applications
 * `navbar-nav` will now be hidden on displays `<= sm` with the expectation that a `tabbar` will be visible for navigation.
+* Removed unused Bootstrap 3 + Symfony Forms templates
 
 __Fixed Bugs:__
 * Fixed responsive navbar rules for when a `form-inline` is adjacent to a `profile`
 * Fixed alignment of icons for inputs included in a navbar's `form-inline`
 * Fixed outline buttons looking too similar to disabled buttons
 * Fixed `header.is-sticky` not supporting variable height headers (e.g. when extra message banners are visible)
+* Fixed cursor to be a pointer for default button styles
+* Fixed z-indexes for custom components going higher than Bootstrap components (e.g. navbar being rendered over modals)
 
 __Implemented Enhancements:__
 * Added `src/dist/ui.es5.js` full backwards compatible build for ES5 applications
-* Added new `application-alert` component for displaying important server-wide notice banners on applications
-* Added new `profile` component
+* Added new `ApplicationAlert` component for displaying important server-wide notice banners on applications
+* Added new `Profile` component and DOM template (src/twig/profile.html)
+* Added new `Support` component and DOM template (src/twig/support.html)
+* Added new `Emulate` component and DOM template (src/twig/emulate.html)
 * Added `Util` function group, and a general purpose `Util.debounce` function for frequent event handlers
+* Lookup: Added `set(display, store)` method
+* Lookup: Added getters `displayValue` and `storeValue`
 
 
 ## 2.0.0 (2017-10-25)
