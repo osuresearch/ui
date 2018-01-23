@@ -163,12 +163,12 @@ class Lookup extends Component {
             $parent.after(this.store);
         }
 
-        this.addon = this.el.siblings('.input-group-addon');
+        this.prefix = this.el.siblings('.input-group-prefix');
         this.clearButton = $parent.find('button.lookup-clear');
 
-        if (this.addon.length < 1) {
+        if (this.prefix.length < 1) {
             $.error(
-                'Could not locate sibling .input-group-addon to search input'
+                'Could not locate sibling .input-group-prefix to search input'
             );
         }
 
@@ -307,7 +307,7 @@ class Lookup extends Component {
         // Readonly mode enabled? Disable the input
         if (this.o.readonly) {
             this.el.attr('readonly', 'readonly');
-            this.addon.html(
+            this.prefix.html(
                 '<i class="fa fa-check" aria-hidden="true"></i>'
             );
             this.clearButton.show();
@@ -353,7 +353,7 @@ class Lookup extends Component {
 
         if (this.o.readonly) {
             this.el.removeAttr('readonly');
-            this.addon.html(
+            this.prefix.html(
                 '<i class="fa fa-search" aria-hidden="true"></i>'
             );
         }
@@ -381,7 +381,7 @@ class Lookup extends Component {
         // Reset term delta throttling
         this.storedTermDelta = 0;
 
-        this.addon.html(
+        this.prefix.html(
             '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i>'
         );
 
@@ -430,7 +430,7 @@ class Lookup extends Component {
         this.json = json;
         this.results.html('');
 
-        this.addon.html(
+        this.prefix.html(
             '<i class="fa fa-search" aria-hidden="true"></i>'
         );
 
@@ -476,7 +476,7 @@ class Lookup extends Component {
         ).show();
 
         // Turn spinner to an error icon
-        this.addon.html(
+        this.prefix.html(
             '<i class="fa fa-exclamation-circle text-danger" aria-hidden="true"></i>'
         );
     }
@@ -490,6 +490,10 @@ class Lookup extends Component {
      * @returns {object} data within the JSON path or resolver function
      */
     resolve(path, obj) {
+        if (path === null || obj === null) {
+            return null;
+        }
+
         if (typeof path === 'function') {
             return path(obj, this.json);
         }

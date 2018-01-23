@@ -105,7 +105,7 @@ class Uploader extends Component {
             onCancel: this.uploadifiveCancel.bind(this),
 
             // UX configurations
-            itemTemplate: this.fileItemTemplate(),
+            itemTemplate: this.fileItemTemplate,
             width: 'auto', // Because for some reason uploadifive wants to set inline CSS for its button.
             height: 'auto'
         });
@@ -179,7 +179,7 @@ class Uploader extends Component {
         this.$queue.removeClass('is-empty');
 
         files.forEach((file) => {
-            const $template = $(this.fileItemTemplate());
+            const $template = $(this.fileItemTemplate);
             let canDelete = this.o.delete;
             let canDownload = this.o.download;
             let filename;
