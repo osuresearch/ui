@@ -310,7 +310,6 @@ class Lookup extends Component {
             this.prefix.html(
                 '<i class="fa fa-check" aria-hidden="true"></i>'
             );
-            this.clearButton.show();
         }
 
         // Store key in hidden input, if we choose to do so
@@ -346,7 +345,6 @@ class Lookup extends Component {
      */
     clear() {
         this.results.html('').hide();
-        this.clearButton.hide();
         this.el.val('');
         this.el.focus();
         this.term = '';
