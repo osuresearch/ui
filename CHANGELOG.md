@@ -8,6 +8,12 @@ Versions follow [Semantic Versioning](https://semver.org/) guidelines - given a 
 3. PATCH version when you make backwards-compatible bug fixes.
 
 
+# 3.0.1 (2018-02-01)
+
+__Bug Fixes:__
+* Fixed class names for Emulate component DOM template (changed for BS4 Release)
+
+
 ## 3.0.0 (2018-01-23)
 Upgrade to Bootstrap 4.0.0 Release and to ES6 for Javascript components
 
