@@ -9,17 +9,20 @@ Versions follow [Semantic Versioning](https://semver.org/) guidelines - given a 
 
 
 # 3.0.1 (2018-02-01)
+There's Always Something Edition
 
 __Bug Fixes:__
 * Fixed class names for Emulate component DOM template (changed for BS4 Release)
+* Fixed checkboxes for Feedback component DOM template (changed for BS4 Release)
+* Fixed Lookup setting a `display: block` on the clear button - causing adjacent buttons to be misaligned
 
 
 ## 3.0.0 (2018-01-23)
 Upgrade to Bootstrap 4.0.0 Release and to ES6 for Javascript components
 
 This upgrade requires changes to the `gulpfile.js` in ES5 applications (any application doing an upgrade from oris/ui 2.0 to 3.0),
-changes to the version of Bootstrap included from Assets, and contains a number of backwards breaking changes 
-between Bootstrap 4 Beta 2 and Release. 
+changes to the version of Bootstrap included from Assets, and contains a number of backwards breaking changes
+between Bootstrap 4 Beta 2 and Release.
 
 See the [migration guide on the OR Wiki](https://orwiki.osu.edu/xwiki/wiki/oris/view/Development/Guides/Migrations/UI%202.0%20to%203.0/)
 
