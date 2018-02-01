@@ -51,23 +51,21 @@
                 <div class="modal-body">
                     <div class="support-type">
                         <fieldset class="form-group">
-                            <div class="custom-controls-stacked">
-                                <label class="custom-control custom-radio">
-                                    <input name="choice" type="radio"
-                                        class="custom-control-input" value="help" required>
-                                    <span class="custom-control-indicator"></span>
-                                    <span class="custom-control-description">
+                            <div class="form-check">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" name="choice" class="custom-control-input"
+                                        id="support-help" value="help" required>
+                                    <label class="custom-control-label" for="support-help">
                                         I need help finding something / something is incorrect
                                     </span>
-                                </label>
-                                <label class="custom-control custom-radio">
-                                    <input name="choice" type="radio"
-                                        class="custom-control-input" value="feedback" required>
-                                    <span class="custom-control-indicator"></span>
-                                    <span class="custom-control-description">
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" name="choice" class="custom-control-input"
+                                        id="support-feedback" value="feedback" required>
+                                    <label class="custom-control-label" for="support-feedback">
                                         I have a suggestion for something we can improve
                                     </span>
-                                </label>
+                                </div>
                             </div>
                         </fieldset>
                     </div>
