@@ -187,9 +187,9 @@ class Lookup extends Component {
      * Attach event handlers to buttons and result links
      */
     attachEventListeners() {
-        this.el.on('keyup', e => this.change(e));
-        this.results.on('click', 'a', e => this.select(e));
-        this.clearButton.on('click', e => this.clear(e));
+        this.el.on('keyup', this.change.bind(this));
+        this.results.on('click', 'a', this.onSelect.bind(this));
+        this.clearButton.on('click', this.onClear.bind(this));
     }
 
     /**
@@ -274,7 +274,7 @@ class Lookup extends Component {
      *
      * @return {boolean} false
      */
-    select(e) {
+    onSelect(e) {
         const $item = $(e.target).closest('.dropdown-item');
         const json = $item.data('json');
 
@@ -283,8 +283,24 @@ class Lookup extends Component {
             this.resolve(this.o.key, json)
         );
 
+        this.el.focus();
         this.el.trigger('pick.lookup', [json]);
 
+        return false;
+    }
+
+    /**
+     * Event handler for when the 'Clear' button is pressed
+     *
+     * @param {Event} e click event on the clear button
+     *
+     * @return {boolean} false
+     */
+    onClear(e) {
+        this.clear();
+        this.el.focus();
+
+        e.preventDefault();
         return false;
     }
 
@@ -300,8 +316,6 @@ class Lookup extends Component {
     set(displayText, hiddenKey) {
         this.el.val(displayText);
         this.results.html('').hide();
-
-        this.el.focus();
 
         // Readonly mode enabled? Disable the input
         if (this.o.readonly) {
@@ -345,7 +359,6 @@ class Lookup extends Component {
     clear() {
         this.results.html('').hide();
         this.el.val('');
-        this.el.focus();
         this.term = '';
 
         if (this.o.readonly) {
