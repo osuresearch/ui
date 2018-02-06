@@ -80,7 +80,7 @@ class Support extends Component {
      * Display the support form to the end user
      */
     open() {
-        let checked = this.modal.find('input[name="choice"]:checked');
+        const checked = this.modal.find('input[name="choice"]:checked');
         if (checked.length) {
             checked[0].checked = false;
         }
