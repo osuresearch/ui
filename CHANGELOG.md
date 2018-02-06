@@ -8,6 +8,20 @@ Versions follow [Semantic Versioning](https://semver.org/) guidelines - given a 
 3. PATCH version when you make backwards-compatible bug fixes.
 
 
+# 3.1.0 (2018-02-06)
+
+__Backwards Breaking Changes:__
+* Lookup: Changed `store` option to `key` to better reflect its purpose
+* Lookup: Will no longer move the `name` attribute from the Lookup input to the hidden "key" input. This changes how data is POSTed alongside forms, as you will no longer get the hidden key value but instead the original display text of the input for the named field. Key value will now be stored and submitted via an input named the same as the original lookup input, but with the suffix `-key`.
+
+__Bug Fixes:__
+* Fixed Lookup incorrectly forcing focus to the input when `set()` or `clear()` methods are called via Javascript
+* Fixed margins for checks/radios inside a `.form-check-inline` group
+
+__Implemented Enhancements:__
+* Lookup: Now supports using a pre-populated "key" input on initial DOM load. The input MUST be a sibling to the lookup input and named the same plus the suffix `-key`. E.g. for `<input data-provide="lookup" name="foo" ...>` there would be an `<input name="foo-key" ...>` sibling. If one could not be found, a hidden input will be created automatically that meets the requirements.
+
+
 # 3.0.1 (2018-02-01)
 There's Always Something Edition
 
