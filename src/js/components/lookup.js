@@ -1,7 +1,7 @@
 /**
  * AJAX Lookup component
  *
- * Compatible with Bootstrap 4.0.0-beta
+ * Compatible with Bootstrap 4.0.0
  *
  * Features:
  *  - Bootstrap-style Javascript-free configuration via data- attributes
@@ -93,14 +93,13 @@ class Lookup extends Component {
                                                 // with the selected JSON object and must return HTML
                                                 // to insert into the dropdown list item.
 
-            store: 'id',                        // JSON object attribute to submit alongside the form.
+            key: 'id',                          // JSON object attribute to submit alongside the form
+                                                // in a sibling input field named the same as the lookup's
+                                                // input field, but with a `-key` suffix. If such a field
+                                                // does not exist, one will be created automatically.
                                                 // If this is a function, that function will be called
                                                 // with the selected JSON object and must return a
                                                 // string to be submitted alongside the form.
-                                                // If null, whatever is in the lookup input will be
-                                                // submitted with the form. Note that if this is set,
-                                                // the text in the lookup will *not* be submitted with
-                                                // the form.
 
             language: {
                 error: 'Something went wrong. Try reloading the page. If the problem persists, ' +
@@ -128,7 +127,7 @@ class Lookup extends Component {
     }
 
     static get VERSION() {
-        return '3.2.0';
+        return '3.1.0';
     }
 
     static get AUTOLOAD() {
@@ -148,7 +147,7 @@ class Lookup extends Component {
 
     /**
      * Store the current DOM and create new DOM elements for the
-     * search results and hidden input (if `store` is set)
+     * search results and hidden input (if `key` is set)
      */
     setupDOM() {
         const $parent = this.el.parent();
@@ -281,7 +280,7 @@ class Lookup extends Component {
 
         this.set(
             this.resolve(this.o.display, json),
-            this.resolve(this.o.store, json)
+            this.resolve(this.o.key, json)
         );
 
         this.el.trigger('pick.lookup', [json]);
@@ -313,8 +312,8 @@ class Lookup extends Component {
         }
 
         // Store key in hidden input, if we choose to do so
-        if (this.o.store) {
-            this.store.val(hiddenKey);
+        if (this.o.key) {
+            this.keyInput.val(hiddenKey);
         }
     }
 
@@ -356,8 +355,8 @@ class Lookup extends Component {
             );
         }
 
-        if (this.o.store) {
-            this.store.val('');
+        if (this.o.key) {
+            this.keyInput.val('');
         }
 
         this.el.trigger('clear.lookup');
