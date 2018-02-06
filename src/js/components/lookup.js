@@ -154,12 +154,21 @@ class Lookup extends Component {
         const nonce = Date.now();
         const name = this.el.attr('name');
 
-        // Setup a hidden input for storing selection data
-        if (this.o.store) {
-            this.store = $(`<input type="hidden" name="${name}">`);
+        // If key is set, ensure we have an input to store/retrieve that key named
+        // whatever the input's name is plus '-key' as a sibling to the input.
+        // If we can't find one, one will be created automatically as a hidden input.
+        if (this.o.key) {
+            this.keyInput = $parent.find(`input[name="${name}-key"]`);
 
-            this.el.attr('name', '');
-            $parent.after(this.store);
+            if (this.keyInput.length < 1) {
+                this.keyInput = $('<input type="hidden">');
+
+                if (name.length) {
+                    this.keyInput.attr('name', name + '-key');
+                }
+
+                $parent.append(this.keyInput);
+            }
         }
 
         this.prefix = this.el.siblings('.input-group-prefix');
@@ -172,15 +181,13 @@ class Lookup extends Component {
         }
 
         this.results = $(
-            `<div id="results-${nonce}" class="dropdown-menu" role="listbox"/>`
+            `<div id="lookup-results-${nonce}" class="dropdown-menu" role="listbox"/>`
         ).hide();
 
         $parent.append(this.results);
 
-        this.el.addClass('lookup');
-
         // Accessibility adjustments
-        this.el.attr('aria-owns', `results-${nonce}`);
+        this.el.attr('aria-owns', `lookup-results-${nonce}`);
     }
 
     /**
