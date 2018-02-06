@@ -37,3 +37,10 @@
         }
     }
 }
+
+.form-check-inline {
+    // Fix margins between inline checks/radios
+    .custom-control:not(:first-child) {
+        margin-left: 1.5rem;
+    }
+}
