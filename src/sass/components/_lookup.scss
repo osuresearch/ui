@@ -10,6 +10,6 @@
 }
 
 // Show the clear button only when the lookup is readonly
-.lookup[readonly] + .input-group-suffix > .lookup-clear {
+.lookup[readonly] ~ .input-group-suffix > .lookup-clear {
     display: inline;
 }
