@@ -130,15 +130,12 @@ class Lookup extends Component {
         return '3.1.0';
     }
 
-    static get AUTOLOAD() {
-        return false;
-    }
-
     constructor(element, options) {
         super(element, options);
 
         this.term = '';
         this.request = null;
+        this.keyInput = null;
         this.storedTermDelta = 0;
 
         this.setupDOM();
@@ -158,12 +155,14 @@ class Lookup extends Component {
         // whatever the input's name is plus '-key' as a sibling to the input.
         // If we can't find one, one will be created automatically as a hidden input.
         if (this.o.key) {
-            this.keyInput = $parent.find(`input[name="${name}-key"]`);
+            if (name !== undefined) {
+                this.keyInput = $parent.find(`input[name="${name}-key"]`);
+            }
 
-            if (this.keyInput.length < 1) {
+            if (!this.keyInput) {
                 this.keyInput = $('<input type="hidden">');
 
-                if (name.length) {
+                if (name !== undefined) {
                     this.keyInput.attr('name', name + '-key');
                 }
 
@@ -191,7 +190,7 @@ class Lookup extends Component {
 
         // If the lookup was prepopulated with content, set to readonly
         // if we are configured to do so
-        if (this.o.readonly) {
+        if (this.o.readonly && this.el.val().trim().length > 0) {
             this.el.attr('readonly', 'readonly');
             this.prefix.html(
                 '<i class="fa fa-check" aria-hidden="true"></i>'
