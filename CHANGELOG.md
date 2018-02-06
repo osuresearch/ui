@@ -16,6 +16,7 @@ __Backwards Breaking Changes:__
 
 __Bug Fixes:__
 * Fixed Lookup incorrectly forcing focus to the input when `set()` or `clear()` methods are called via Javascript
+* Fixed Lookup not automatically setting itself to <code>readonly</code> if prepopulated with a value
 * Fixed margins for checks/radios inside a `.form-check-inline` group
 
 __Implemented Enhancements:__

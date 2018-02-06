@@ -188,6 +188,15 @@ class Lookup extends Component {
 
         // Accessibility adjustments
         this.el.attr('aria-owns', `lookup-results-${nonce}`);
+
+        // If the lookup was prepopulated with content, set to readonly
+        // if we are configured to do so
+        if (this.o.readonly) {
+            this.el.attr('readonly', 'readonly');
+            this.prefix.html(
+                '<i class="fa fa-check" aria-hidden="true"></i>'
+            );
+        }
     }
 
     /**
