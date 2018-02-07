@@ -8,7 +8,7 @@ Versions follow [Semantic Versioning](https://semver.org/) guidelines - given a 
 3. PATCH version when you make backwards-compatible bug fixes.
 
 
-# 3.1.0 (2018-02-06)
+# 3.1.0 (2018-02-07)
 
 __Backwards Breaking Changes:__
 * Lookup: Changed `store` option to `key` to better reflect its purpose
@@ -21,6 +21,8 @@ __Bug Fixes:__
 
 __Implemented Enhancements:__
 * Lookup: Now supports using a pre-populated "key" input on initial DOM load. The input MUST be a sibling to the lookup input and named the same plus the suffix `-key`. E.g. for `<input data-provide="lookup" name="foo" ...>` there would be an `<input name="foo-key" ...>` sibling. If one could not be found, a hidden input will be created automatically that meets the requirements.
+* Added kebabcase synonym for all frontend components registered in the jQuery prototype. E.g. `$.fn.CoolTool` is also now registered as `$.fn['cool-tool']`
+* Added rule to throw an error if a component name overrides an existing entry in jQuery's prototype
 
 
 # 3.0.1 (2018-02-01)
