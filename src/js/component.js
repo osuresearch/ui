@@ -180,6 +180,8 @@ class Component {
             return wrapper;
         };
 
+        $.fn[instance.CLASSNAME] = $.fn[className];
+
         // If the component is setup to autoload on document ready,
         // run it immediately without additional configurations.
         // Note that this still requires data-provide provider
