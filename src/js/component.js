@@ -173,6 +173,14 @@ class Component {
             return ret;
         };
 
+        // Ensure component registration does not override an existing
+        // item inside the jQuery function scope
+        if ($.fn.hasOwnProperty(className) || $.fn.hasOwnProperty(instance.CLASSNAME)) {
+            $.error(
+                `Component "${className}" conflicts with existing entry in jQuery prototype ($.fn)`
+            );
+        }
+
         $.fn[className] = wrapper;
         $.fn[className].Constructor = instance;
         $.fn[className].version = instance.VERSION;
