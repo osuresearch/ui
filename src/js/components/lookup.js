@@ -357,8 +357,8 @@ class Lookup extends Component {
      *
      * @return {string}
      */
-    get storeValue() {
-        return this.store.val();
+    get keyValue() {
+        return this.keyInput.val();
     }
 
     /**
