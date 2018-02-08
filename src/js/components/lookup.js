@@ -151,29 +151,26 @@ class Lookup extends Component {
         const nonce = Date.now();
         const name = this.el.attr('name');
 
-        // If key is set, ensure we have an input to store/retrieve that key named
-        // whatever the input's name is plus '-key' as a sibling to the input.
-        // If we can't find one, one will be created automatically as a hidden input.
-        if (this.o.key) {
-            if (name !== undefined) {
-                this.keyInput = $parent.find(`input[name="${name}-key"]`);
-            }
+        // If key option is set and we have a named input, get an input for the key
+        if (this.o.key && name !== undefined) {
+            // If the input's name is array-based, we only want to use the primary name
+            // and maintain array entry matches for the hidden input
+            const prefix = name.match(/^[^\[]+/g)[0];
+            const postfix = name.substr(prefix.length);
 
-            if (!this.keyInput) {
-                this.keyInput = $('<input type="hidden">');
+            this.keyInput = $parent.find(`input[name^="${prefix}-key${postfix}"]`);
 
-                if (name !== undefined) {
-                    this.keyInput.attr('name', name + '-key');
-                }
-
+            // Key input doesn't exist? Add a new one
+            if (!this.keyInput.length) {
+                this.keyInput = $(`<input type="hidden" name="${prefix}-key${postfix}">`);
                 $parent.append(this.keyInput);
             }
         }
 
         this.prefix = this.el.siblings('.input-group-prefix');
-        this.clearButton = $parent.find('button.lookup-clear');
+        this.clearButton = $parent.find('.lookup-clear');
 
-        if (this.prefix.length < 1) {
+        if (!this.prefix) {
             $.error(
                 'Could not locate sibling .input-group-prefix to search input'
             );
@@ -341,7 +338,7 @@ class Lookup extends Component {
         }
 
         // Store key in hidden input, if we choose to do so
-        if (this.o.key) {
+        if (this.keyInput) {
             this.keyInput.val(hiddenKey);
         }
     }
@@ -360,8 +357,8 @@ class Lookup extends Component {
      *
      * @return {string}
      */
-    get storeValue() {
-        return this.store.val();
+    get keyValue() {
+        return this.keyInput.val();
     }
 
     /**
@@ -383,7 +380,7 @@ class Lookup extends Component {
             );
         }
 
-        if (this.o.key) {
+        if (this.keyInput) {
             this.keyInput.val('');
         }
 
