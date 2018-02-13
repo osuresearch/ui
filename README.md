@@ -1,6 +1,6 @@
 # ORIS UI Package
 
-Frontend UI components built on [Bootstrap 4 Beta](https://getbootstrap.com/docs/4.0/getting-started/introduction/) for use in PHP applications. Includes:
+Frontend UI components built on [Bootstrap 4](https://getbootstrap.com) for use in PHP applications. Includes:
 * SASS build with utilities for advanced usage
 * Compiled `dist/css/ui.css` and `dist/js/ui.es5.js` scripts
 * Common frontend components, including lookups, date pickers, emulation, and multi-file uploaders
