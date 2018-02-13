@@ -7,6 +7,12 @@ Versions follow [Semantic Versioning](https://semver.org/) guidelines - given a 
 2. MINOR version when you add functionality in a backwards-compatible manner, and
 3. PATCH version when you make backwards-compatible bug fixes.
 
+# 3.1.1 (2018-02-13)
+
+__Bug Fixes__:
+* Lookup: Fixed support for array notation in lookup input names. `name="foo[arr]"` will require a sibling input with `name="foo-key[arr]"`
+* Lookup: Fixed incorrect variable reference for `keyValue` method
+
 
 # 3.1.0 (2018-02-07)
 
