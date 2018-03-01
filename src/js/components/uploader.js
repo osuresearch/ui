@@ -320,9 +320,13 @@ class Uploader extends Component {
             if (this.isEmpty()) {
                 this.blankslate();
             }
+        })
+        .fail(() => {
+            // If the developer gave the user the ability to delete a file,
+            // then a deletion on the backend should never fail.
+            // We call this an irrecoverable error.
+            this.error('Server returned an error response');
         });
-
-        // TODO: Error response handling
     }
 
     /**
@@ -380,9 +384,7 @@ class Uploader extends Component {
     }
 
     /**
-     * Trigger an upload of all queued files at once.
-     *
-     * TODO: Document how we listen for a completion
+     * Trigger an upload of all queued files at once
      */
     uploadQueuedFiles() {
         this.el.uploadifive('upload');
@@ -425,10 +427,12 @@ class Uploader extends Component {
         // TODO: Bug where this gets triggered even if we drag a non-file into the uploader.
         // E.g. we drag highlighted text into it, and this gets fired off for an empty queue.
         // Also gets fired off if a file is added, but has an error.
-
         this.el.trigger('queue-complete.uploader');
     }
 
+    /**
+     * Event handler for when an item is added to Uploadifive
+     */
     uploadifiveAddItem() {
         this.$queue.removeClass('is-empty');
     }
@@ -491,10 +495,14 @@ class Uploader extends Component {
      * Activate an error state on irrecoverable errors
      */
     error(message) {
-        this.el.addClass('is-error');
+        this.$queue.addClass('is-error');
         this.$feedback.html(
             this.o.language.error.replace(/\$message/g, message)
         );
+
+        // Irrecoverably destroy the upload capabilities
+        this.el.siblings('input[type="file"]').remove();
+        this.el.parent().addClass('is-error');
     }
 }
 
