@@ -46,11 +46,14 @@ class Uploader extends Component {
             metadata: '',           // Additional metadata to send alongside file uploads, downloads,
                                     // and deletions. MUST be a string.
 
-            files: [],              // Pre-existing files in the uploader. This is an array of objects,
-                                    // where each object a required `filename` key, and optional keys:
+            files: [],              // Pre-existing files in the uploader. This is an array of objects with the keys:
+                                    //  `name` - string (required) - Filename to display
                                     //  `info` - string (default: '') - human-readable info to display under the filename
-                                    //  `deletable` - boolean (default: o.delete) - whether this file can be removed
-                                    //  `metadata` - string or JSON (default: '') - additional metadata to send to DELETE
+                                    //  `delete` - boolean (default: o.delete) - whether this file can be deleted from
+                                    //      the server. This overrides the Uploader's o.delete option.
+                                    //  `download` - boolean (default: o.download) - whether this file can be downloaded
+                                    //      from the server. This overrides the Uploader's o.download option.
+                                    //  `metadata` - string (default: '') - additional metadata to send to DELETE
                                     //      or GET requests. Should be the same structure as the endpoint's response
                                     //      when uploading new files
                                     // If you don't need all the extra features, you may instead just pass in an
@@ -195,36 +198,49 @@ class Uploader extends Component {
     }
 
     /**
-     * Add existing files to the input as 'complete'
+     * Add existing files to the input queue in an already complete state
      *
      * @param {array} files strings of filenames or file objects
      */
     addExistingFiles(files) {
         this.$queue.removeClass('is-empty');
 
-        files.forEach((file) => {
+        files.forEach(file => {
             const $template = $(Uploader.fileItemTemplate);
-            let canDelete = this.o.delete;
-            let canDownload = this.o.download;
-            let filename;
+            let fileObject = file;
 
-            // If it's a simple string, it's just a filename
+            // If it's a simple string, convert to an Uploadifive file object
             if (typeof file === 'string') {
-                filename = file;
-                $template.find('.filename').html(file);
-            } else {
-                filename = file.filename;
-                $template.find('.filename').html(file.filename);
-                $template.find('.fileinfo').html(file.info);
-
-                if (typeof file.delete !== 'undefined') {
-                    canDelete = file.delete;
-                }
-
-                if (typeof file.download !== 'undefined') {
-                    canDownload = file.download;
-                }
+                fileObject = {
+                    name: file,
+                    metadata: '',
+                    info: ''
+                };
             }
+
+            // Add some extra properties that are required by Uploadifive
+            fileObject.complete = true;
+            fileObject.uploading = false;
+            fileObject.queueItem = $template;
+
+            // Other things Uploadifive adds that we probably won't:
+            // size, type (image/png), lastModified (UTC), lastModifiedDate
+
+            // Add some extra properties that are useful internally
+            fileObject.canDelete = this.o.delete;
+            if (typeof file.delete !== 'undefined') {
+                fileObject.canDelete = file.delete;
+            }
+
+            fileObject.canDownload = this.o.download;
+            if (typeof file.download !== 'undefined') {
+                fileObject.canDownload = file.download;
+            }
+
+            $template.data('file', fileObject);
+
+            $template.find('.filename').html(fileObject.name);
+            $template.find('.fileinfo').html(fileObject.info || '');
 
             // Note it has to be 'complete' as well otherwise Uploadifive
             // will complain about the existing file record when uploading
@@ -233,7 +249,7 @@ class Uploader extends Component {
             $template.find('.progress').remove();
 
             // Add control to delete the file, if possible
-            if (canDelete) {
+            if (fileObject.canDelete) {
                 $template.find('.close').on(
                     'click',
                     this.deleteExistingFile.bind(this)
@@ -243,16 +259,16 @@ class Uploader extends Component {
             }
 
             // If they can download the file, inject a download link
-            if (canDownload) {
+            if (fileObject.canDownload) {
                 $template
                     .find('.filename')
                     .attr(
                         'href',
                         this.o.endpoint +
-                        '?filename=' + encodeURIComponent(filename) +
-                        '&metadata=' + encodeURIComponent(this.o.metadata)
-                    )
-                    .attr('target', '_blank');
+                        '?filename=' + encodeURIComponent(fileObject.name) +
+                        '&metadata=' + encodeURIComponent(this.o.metadata || '') +
+                        '&file-metadata=' + encodeURIComponent(fileObject.metadata || '')
+                    );
             }
 
             this.$queue.append($template);
@@ -290,15 +306,19 @@ class Uploader extends Component {
      * This applies to both pre-existing files in the uploader and files
      * that are AJAX uploaded through the uploader while running.
      *
-     * @param {string} filename to be deleted
+     * @param {object} file Uploadifive file metadata
      */
-    deleteCompletedFile(filename) {
+    deleteCompletedFile(file) {
         $.ajax({
             method: 'DELETE',
-            url: this.o.endpoint,
-            data: {
-                filename,
-                metadata: this.o.metadata
+            url: this.o.endpoint +
+                '?filename=' + encodeURIComponent(file.name) +
+                '&metadata=' + encodeURIComponent(this.o.metadata || '') +
+                '&file-metadata=' + encodeURIComponent(file.metadata || '')
+        })
+        .done(() => {
+            if (this.isEmpty()) {
+                this.blankslate();
             }
         });
 
@@ -371,9 +391,17 @@ class Uploader extends Component {
     /**
      * Event handler for when Uploadifive finishes uploading a single file
      *
-     * @param {object} file metadata
+     * This will take whatever response body came from the POST request and
+     * apply it as metadata to the file (could be an ID, JSON blob, whatever).
+     * This metadata will then be sent back up on every download
+     * request/delete request/etc.
+     *
+     * @param {object} file             Uploadifive file metadata
+     * @param {string} xhrResponseText  Response content from the POST
      */
-    uploadifiveUploadComplete(file) {
+    uploadifiveUploadComplete(file, xhrResponseText) {
+        file.metadata = xhrResponseText;
+
         // If uploaded files are downloadable, make the filename a download link
         if (this.o.download) {
             file.queueItem
@@ -381,9 +409,10 @@ class Uploader extends Component {
                     'href',
                     this.o.endpoint +
                     '?filename=' + encodeURIComponent(file.name) +
-                    '&metadata=' + encodeURIComponent(this.o.metadata)
+                    '&metadata=' + encodeURIComponent(this.o.metadata || '') +
+                    '&file-metadata=' + encodeURIComponent(file.metadata || '')
                 )
-                .attr('target', '_blank');
+                .attr('target', '_BLANK');
         }
 
         this.el.trigger('file-complete.uploader');
