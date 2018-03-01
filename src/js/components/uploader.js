@@ -106,8 +106,9 @@ class Uploader extends Component {
         // configurations to Uploadifive and pre-populating with files that are
         // already listed as being uploaded.
         this.el.uploadifive({
-            // Async behavior
+            // AJAX behavior
             auto: this.o.async,
+            fileObjName: this.o.dataField,
             uploadScript: this.o.endpoint,
             formData: {
                 metadata: this.o.metadata
