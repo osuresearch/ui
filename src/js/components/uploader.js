@@ -269,21 +269,17 @@ class Uploader extends Component {
      */
     deleteExistingFile(e) {
         const $item = $(e.currentTarget).closest('.uploadifive-queue-item');
+        const that = this;
+
+        this.deleteCompletedFile($item.data('file'));
+
+        // Remove the item from being tracked as part of isEmpty()
         $item.removeClass('is-existing');
 
-        this.deleteCompletedFile(
-            $item.find('.filename').text().trim()
-        );
-
-        // do the same thing that uploadifive does and fade the item
+        // do the same thing that uploadifive does and fade the item out of the DOM
         $item.fadeOut(500, function () {
             $(this).remove();
         });
-
-        // If the item was the last, go to a blankslate state
-        if (this.isEmpty()) {
-            this.blankslate();
-        }
 
         return false;
     }
@@ -413,20 +409,21 @@ class Uploader extends Component {
      * by an internal call to `clearQueue`
      */
     uploadifiveClearQueue() {
-        if (this.isEmpty()) {
-            this.blankslate();
-        }
+        this.blankslate();
     }
 
     /**
      * Event handler for when a file is cancelled in Uploadifive
+     *
+     * @param {object} file Uploadifive file metadata
      */
     uploadifiveCancel(file) {
         if (file.complete) {
-            this.deleteCompletedFile(file.name);
+            this.deleteCompletedFile(file);
         }
 
-        if (this.isEmpty()) {
+        // If this is the last item, swap to a blankslate
+        if (this.$queue.find('.uploadifive-queue-item').length < 2) {
             this.blankslate();
         }
     }
