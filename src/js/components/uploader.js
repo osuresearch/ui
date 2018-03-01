@@ -10,19 +10,35 @@ class Uploader extends Component {
     static get DEFAULTS() {
         return {
             endpoint: null,         // Target endpoint for file interactions.
-                                    // A POST request will be made for file uploads, with the keys
-                                    // `filedata` for the raw file upload and `metadata` for the
-                                    // metadata attached to this instance.
-                                    // DELETE and GET requests may also be made against this endpoint,
-                                    // based on the `delete` and `download` settings.
 
-            delete: false,          // Allow files to be deleted after upload. If true, a DELETE
-                                    // will be sent to `endpoint` in the form of:
-                                    // DELETE {endpoint}?filename={filename}&metadata={metadata}
+                                    // A POST request will be made for file uploads, with the fields:
+                                    //  `filedata` - string - raw file data (key set by `dataField`)
+                                    //  `metadata` - string - additional uploader metadata (value set by `metadata`)
+                                    // HTTP 200 response is expected for a successful upload.
+                                    // The response body will be stringified and attached to the uploaded
+                                    // file as metadata and available via the `file-complete` event
 
-            download: true,         // Allow files to be downloaded after upload. If true, a GET
-                                    // will be sent to `endpoint` in the form of:
-                                    // GET {endpoint}?filename={filename}&metadata={metadata}
+                                    // If `download` is true, a GET request will be made with the fields:
+                                    //  `filename` - string - name of the originally uploaded file
+                                    //  `metadata` - string - additional uploader metadata (value set by `metadata`)
+                                    //  `file-metadata` - string - metadata attached to the specific file
+                                    //      (either from the POST response body after an upload or specified
+                                    //      in the `files` array for existing files)
+                                    // HTTP 200 response is expected along with an appropriate `Content-Disposition`
+                                    // header to ensure that a file download is triggered by the browser, and not
+                                    // a page change.
+
+                                    // If `delete` is true, a DELETE request will be made with the fields:
+                                    //  `filename` - string - name of the originally uploaded file
+                                    //  `metadata` - string - additional uploader metadata (value set by `metadata`)
+                                    //  `file-metadata` - string - metadata attached to the specific file
+                                    //      (either from the POST response body after an upload or specified
+                                    //      in the `files` array for existing files)
+                                    // HTTP 204 response is expected.
+
+            delete: false,          // Allow files to be deleted after upload. See `endpoint` for behavior.
+
+            download: true,         // Allow files to be downloaded after upload. See `endpoint` for behavior.
 
             async: true,            // If true, files will be POSTed immediately once added
                                     // If false, files will be uploaded alongside the submitted form
@@ -32,10 +48,17 @@ class Uploader extends Component {
 
             files: [],              // Pre-existing files in the uploader. This is an array of objects,
                                     // where each object a required `filename` key, and optional keys:
-                                    // `info` (string, default is an empty string),
-                                    // and `deletable` (boolean, default is value of `delete`)
-                                    // You may also optionally pass this in as an array of strings,
-                                    // where each string is then an existing filename
+                                    //  `info` - string (default: '') - human-readable info to display under the filename
+                                    //  `deletable` - boolean (default: o.delete) - whether this file can be removed
+                                    //  `metadata` - string or JSON (default: '') - additional metadata to send to DELETE
+                                    //      or GET requests. Should be the same structure as the endpoint's response
+                                    //      when uploading new files
+                                    // If you don't need all the extra features, you may instead just pass in an
+                                    // array of strings, where each string is an existing filename.
+                                    // E.g. `files: ['foo 1.pdf', 'foo 2.pdf', ...]`
+
+            dataField: 'filedata',  // The POST field name that contains the uploaded file data
+                                    // Defaults to `filedata`
 
             // Upload restrictions
             restrictions: {
