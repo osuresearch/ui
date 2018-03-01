@@ -29,10 +29,6 @@
     color: $white;
 }
 
-.uploadifive-queue {
-    height: 100%;
-}
-
 
 .uploader-dropzone {
     display: none;
@@ -57,6 +53,15 @@
 
 .uploadifive-queue {
     position: relative;
+    height: 100%;
+
+    &.is-empty .uploader-feedback {
+        display: block;
+    }
+
+    &.is-dragging .uploader-dropzone {
+        display: flex;
+    }
 }
 
 .uploader-feedback {
@@ -65,37 +70,18 @@
     padding: 3rem;
 }
 
-.uploadifive-queue.is-empty .uploader-feedback {
-    display: block;
-}
-
-.uploadifive-queue.is-dragging .uploader-dropzone {
-    display: flex;
-}
-
-
-.uploader-dropzone .fa {
-    font-size: 2rem;
-    display: block;
-}
-
-.uploader-dropzone {
-    text-align: center;
-}
-
-
-
-.uploader-dropzone .fa {
-    display: inline;
-    vertical-align: middle;
-    padding-right: 0.5rem;
-    font-size: 1.5rem;
-}
-
 .uploader-dropzone {
     color: #38ae67;
+    text-align: center;
     background: transparentize($white, 0.1);
     border-color: #38ae67;
+
+    .fa {
+        display: inline;
+        vertical-align: middle;
+        padding-right: 0.5rem;
+        font-size: 1.5rem;
+    }
 }
 
 .uploader-feedback {
@@ -115,31 +101,48 @@
 
 .uploadifive-button {
     display: block;
-    margin-bottom: 2.5rem;
-}
 
-.uploadifive-button input[type="file"] {
-    cursor: pointer;
-}
+    input[type="file"] {
+        cursor: pointer;
+    }
 
-.uploadifive-queue:before {
-    content: 'UPLOADED FILES';
-    font-size: 80%;
-    position: absolute;
-    top: -1.5rem;
-    color: $gray;
+    &.is-error {
+        display: none;
+    }
 }
 
 .uploadifive-queue {
     overflow: initial;
+    margin-top: 2.5rem;
+
+    &:before {
+        content: 'UPLOADED FILES';
+        font-size: 80%;
+        position: absolute;
+        top: -1.5rem;
+        color: $gray;
+    }
+
+    &.is-error {
+        border-color: $scarlet;
+
+        .uploadifive-queue-item {
+            display: none;
+        }
+
+        .uploader-feedback {
+            display: block;
+            color: $scarlet;
+        }
+    }
+}
+
+.uploader-print-feedback {
+    display: none;
 }
 
 .uploadifive-queue-item .close {
     margin-left: 1rem;
-}
-
-.uploadifive-queue .uploader-print-feedback {
-    display: none;
 }
 
 @media print {
