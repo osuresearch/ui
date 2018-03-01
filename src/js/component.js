@@ -159,10 +159,10 @@ class Component {
                     // Call the declared method with rest of the arguments
                     if (typeof data[method] === 'function') {
                         ret = data[method](...args);
+                    } else {
+                        // Otherwise, it's a property getter. Set directly
+                        ret = data[method];
                     }
-
-                    // Otherwise, it's a property getter. Set directly
-                    ret = data[method];
                 }
             });
 
