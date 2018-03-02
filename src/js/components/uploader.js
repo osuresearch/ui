@@ -220,8 +220,7 @@ class Uploader extends Component {
             if (typeof file === 'string') {
                 fileObject = {
                     name: file,
-                    metadata: '',
-                    info: ''
+                    metadata: ''
                 };
             }
 
