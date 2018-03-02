@@ -41,7 +41,7 @@ class Uploader extends Component {
             download: true,         // Allow files to be downloaded after upload. See `endpoint` for behavior.
 
             async: true,            // If true, files will be POSTed immediately once added
-                                    // If false, files will be uploaded alongside the submitted form
+                                    // If false, files will be uploaded only when `uploadQueuedFiles` is called
 
             metadata: '',           // Additional metadata to send alongside file uploads, downloads,
                                     // and deletions. MUST be a string.
@@ -53,9 +53,8 @@ class Uploader extends Component {
                                     //      the server. This overrides the Uploader's o.delete option.
                                     //  `download` - boolean (default: o.download) - whether this file can be downloaded
                                     //      from the server. This overrides the Uploader's o.download option.
-                                    //  `metadata` - string (default: '') - additional metadata to send to DELETE
-                                    //      or GET requests. Should be the same structure as the endpoint's response
-                                    //      when uploading new files
+                                    //  `metadata` - string (default: '') - Additional metadata about this file that
+                                    //      will be sent to the endpoint for delete/download actions
                                     // If you don't need all the extra features, you may instead just pass in an
                                     // array of strings, where each string is an existing filename.
                                     // E.g. `files: ['foo 1.pdf', 'foo 2.pdf', ...]`
@@ -248,7 +247,7 @@ class Uploader extends Component {
             $template.data('file', fileObject);
 
             $template.find('.filename').html(fileObject.name);
-            $template.find('.fileinfo').html(fileObject.info || '');
+            $template.find('.fileinfo').html(fileObject.info || 'Complete');
 
             // Note it has to be 'complete' as well otherwise Uploadifive
             // will complain about the existing file record when uploading
