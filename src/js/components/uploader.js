@@ -423,7 +423,15 @@ class Uploader extends Component {
                 .attr('target', '_BLANK');
         }
 
-        this.el.trigger('file-complete.uploader');
+        // If deleting uploaded files is not enabled, disable delete action
+        if (!this.o.delete) {
+            file.queueItem.find('.close').remove();
+        }
+
+        // Notify listeners next tick instead of this call stack
+        window.setTimeout(() => {
+            this.el.trigger('file-complete.uploader');
+        }, 1);
     }
 
     /**
@@ -433,7 +441,13 @@ class Uploader extends Component {
         // TODO: Bug where this gets triggered even if we drag a non-file into the uploader.
         // E.g. we drag highlighted text into it, and this gets fired off for an empty queue.
         // Also gets fired off if a file is added, but has an error.
-        this.el.trigger('queue-complete.uploader');
+
+        // We avoid triggering this immediately to allow all DOM changes
+        // to take effect prior to notifying listeners. Uploadifive cascades
+        // file complete + queue complete events immediately.
+        window.setTimeout(() => {
+            this.el.trigger('queue-complete.uploader');
+        }, 1);
     }
 
     /**
