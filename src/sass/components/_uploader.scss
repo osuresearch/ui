@@ -32,6 +32,10 @@
 
     .close {
         margin-left: 1rem;
+
+        &:hover {
+            color: $white;
+        }
     }
 
     .fileinfo {
@@ -121,7 +125,7 @@
         }
     }
 
-    &.is-dragging
+    &.is-dragging {
         .uploader-dropzone {
             display: flex;
         }
