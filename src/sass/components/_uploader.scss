@@ -1,104 +1,9 @@
 
-// TODO: Clean this all up. It's just a dump from Chrome's dev tools
-// that probably overrides itself multiple times over
-.uploadifive-queue-item .fileinfo {
-    display: block;
-    font-size: 80%;
-    color: $gray;
-}
+// Note that a lot of inner classes don't follow SMACSS conventions
+// (like .close, .fileinfo, .error) because they're internally required
+// by the vendor Uploadifive script, and cannot be changed.
 
-.uploadifive-queue-item.error .fileinfo {
-    color: theme-colors('danger');
-}
-
-.uploadifive-queue-item {
-    border-radius: 0;
-    border-bottom: 1px solid tint($gray, 40%);
-    margin: 0;
-    padding: 0.5rem 1rem;
-    padding-right: 0.5rem;
-
-    background: tint($gray, 5%);
-}
-
-.uploadifive-queue-item:last-child {
-    border-bottom: 0;
-}
-
-.uploadifive-queue-item a.close:hover {
-    color: $white;
-}
-
-
-.uploader-dropzone {
-    display: none;
-    border: 3px dashed $gray;
-
-    align-items: center;
-    justify-content: center;
-
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: transparentize($white, 0.5);
-
-    pointer-events: none;
-}
-
-.uploader-dropzone p {
-    max-width: 50%;
-}
-
-.uploadifive-queue {
-    position: relative;
-    height: 100%;
-
-    &.is-empty .uploader-feedback {
-        display: block;
-    }
-
-    &.is-dragging .uploader-dropzone {
-        display: flex;
-    }
-}
-
-.uploader-feedback {
-    display: none;
-    text-align: center;
-    padding: 3rem;
-}
-
-.uploader-dropzone {
-    color: #38ae67;
-    text-align: center;
-    background: transparentize($white, 0.1);
-    border-color: #38ae67;
-
-    .fa {
-        display: inline;
-        vertical-align: middle;
-        padding-right: 0.5rem;
-        font-size: 1.5rem;
-    }
-}
-
-.uploader-feedback {
-    color: #666;
-}
-
-.uploader-feedback .fa {
-    display: block;
-    font-size: 2.5rem;
-    padding-bottom: 0.5rem;
-}
-
-.uploadifive-queue.is-dragging.is-empty .uploader-feedback {
-    /* Maintain content size, but hide content */
-    opacity: 0;
-}
-
+// The big "Select Files" button above the queue
 .uploadifive-button {
     display: block;
 
@@ -111,9 +16,94 @@
     }
 }
 
+// Individual queued (or previously uploaded) file
+.uploadifive-queue-item {
+    border-radius: 0;
+    border-bottom: 1px solid tint($gray, 40%);
+    margin: 0;
+    padding: 0.5rem 1rem;
+    padding-right: 0.5rem;
+
+    background: tint($gray, 5%);
+
+    &:last-child {
+        border-bottom: 0;
+    }
+
+    .close {
+        margin-left: 1rem;
+    }
+
+    .fileinfo {
+        display: block;
+        font-size: 80%;
+        color: $gray;
+    }
+
+    &.error .fileinfo {
+        color: theme-colors('danger');
+    }
+}
+
+// Dropzone overlay when a user is drag and dropping a file onto the browser
+.uploader-dropzone {
+    display: none;
+    border: 3px dashed #38ae67;
+
+    align-items: center;
+    justify-content: center;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    pointer-events: none;
+
+    color: #38ae67;
+    text-align: center;
+    background: transparentize($white, 0.1);
+
+    .fa {
+        display: inline;
+        vertical-align: middle;
+        padding-right: 0.5rem;
+        font-size: 1.5rem;
+    }
+
+    p {
+        max-width: 50%;
+    }
+}
+
+// Feedback message overlay for errors/blankslate
+.uploader-feedback {
+    display: none;
+    text-align: center;
+    padding: 3rem;
+    color: $gray;
+
+    .fa {
+        display: block;
+        font-size: 2.5rem;
+        padding-bottom: 0.5rem;
+    }
+}
+
+// Printable variation of the feedback message
+.uploader-print-feedback {
+    display: none;
+}
+
+// The queue itself that contains the dropzone/feedback/items
+// and decides when to render each based on it's own .is-* states
 .uploadifive-queue {
     overflow: initial;
     margin-top: 2.5rem;
+    border: $input-border-width solid tint($gray, 40%);
+    position: relative;
+    height: 100%;
 
     &:before {
         content: 'UPLOADED FILES';
@@ -121,6 +111,20 @@
         position: absolute;
         top: -1.5rem;
         color: $gray;
+    }
+
+    &.is-empty {
+        border-color: $input-border-color;
+
+        .uploader-feedback {
+            display: block;
+        }
+    }
+
+    &.is-dragging
+        .uploader-dropzone {
+            display: flex;
+        }
     }
 
     &.is-error {
@@ -135,16 +139,14 @@
             color: $scarlet;
         }
     }
+
+    &.is-dragging.is-empty .uploader-feedback {
+        // Maintain content size, but hide content
+        opacity: 0;
+    }
 }
 
-.uploader-print-feedback {
-    display: none;
-}
-
-.uploadifive-queue-item .close {
-    margin-left: 1rem;
-}
-
+// Print rules for what to hide/show/adjust
 @media print {
     .uploadifive-button {
         display: none;
@@ -162,7 +164,7 @@
         color: $black;
     }
 
-    .uploadifive-queue a.btn {
+    .uploadifive-queue .btn {
         display: none;
     }
 
