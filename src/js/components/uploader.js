@@ -76,9 +76,12 @@ class Uploader extends Component {
 
                 empty: '<i class="fa fa-download"></i> Drag a file here or click <strong>Select Files</strong>',
 
+                // Print view version of the blankslate
                 printEmpty: 'No files have been uploaded',
 
-                dropzone: '<i class="fa fa-download"></i> Drop file here'
+                dropzone: '<i class="fa fa-download"></i> Drop file here',
+
+                delete: 'Are you sure you want to delete this file?'
             }
         };
     }
@@ -130,6 +133,11 @@ class Uploader extends Component {
             onQueueComplete: this.uploadifiveQueueComplete.bind(this),
             onClearQueue: this.uploadifiveClearQueue.bind(this),
             onCancel: this.uploadifiveCancel.bind(this),
+
+            // Overrides of default Uploadifive behavior
+            overrideEvents: [
+                'onCancel'
+            ],
 
             // UX configurations
             itemTemplate: Uploader.fileItemTemplate,
@@ -282,26 +290,31 @@ class Uploader extends Component {
      * so we have to mimic some of its behavior to make them look similar
      *
      * @param {Event} e
+     *
+     * @return {boolean} false to prevent event bubbling
      */
     deleteExistingFile(e) {
         const $item = $(e.currentTarget).closest('.uploadifive-queue-item');
         const that = this;
 
-        this.deleteCompletedFile($item.data('file'));
+        if (confirm(this.o.language.delete)) {
+            this.deleteCompletedFile($item.data('file'));
 
-        // Remove the item from being tracked as part of isEmpty()
-        $item.removeClass('is-existing');
+            // Remove the item from being tracked as part of isEmpty()
+            $item.removeClass('is-existing');
 
-        // do the same thing that uploadifive does and fade the item out of the DOM
-        $item.fadeOut(500, function () {
-            $(this).remove();
-        });
+            // do the same thing that uploadifive does and fade the item out of the DOM
+            $item.fadeOut(500, function () {
+                $(this).remove();
+            });
+        }
 
+        e.preventDefault();
         return false;
     }
 
     /**
-     * Delete a file that has already been uploaded.
+     * Delete a file that has already been uploaded
      *
      * This applies to both pre-existing files in the uploader and files
      * that are AJAX uploaded through the uploader while running.
@@ -353,14 +366,7 @@ class Uploader extends Component {
      * @return {boolean}
      */
     isEmpty() {
-        const ufive = this.el.data('uploadifive');
-
-        // We have to mix internally tracked files (new uploads) plus existing
-        // added to the DOM - otherwise we can't get an accurate count.
-        // (just searching for .uploadifive-queue-item is inaccurate due to
-        // delays in how Uploadifive removes things from the DOM)
-        return ufive.uploads.count + ufive.queue.count +
-                this.$queue.find('.uploadifive-queue-item.is-existing').length < 1;
+        return this.$queue.find('.uploadifive-queue-item:not(".is-removing")').length < 1;
     }
 
     /**
@@ -446,18 +452,53 @@ class Uploader extends Component {
     }
 
     /**
-     * Event handler for when a file is cancelled in Uploadifive
+     * Override of Uploadifive's default cancel handler
+     *
+     * This replaces Uploadifive's removeQueueItem with our own implementation
+     * in order to detect already uploaded files and give the user a confirmation
+     * for intent to delete prior to sending a DELETE to the server.
      *
      * @param {object} file Uploadifive file metadata
      */
     uploadifiveCancel(file) {
-        if (file.complete) {
-            this.deleteCompletedFile(file);
-        }
+        const ufive = this.el.data('uploadifive');
+        const fadeTime = 500;
+        const that = this;
+        let message;
 
-        // If this is the last item, swap to a blankslate
-        if (this.$queue.find('.uploadifive-queue-item').length < 2) {
-            this.blankslate();
+        if (file.queueItem) {
+            // If it's a completed file, we'll be sending an AJAX DELETE
+            // after the user has confirmed intent
+            if (file.complete) {
+                if (!confirm(this.o.language.delete)) {
+                    return;
+                }
+
+                this.deleteCompletedFile(file);
+                message = 'Deleted';
+            } else {
+                // It's an error or was mid-upload, just remove the queue entry
+                message = 'Cancelled';
+            }
+
+            file.queueItem.find('.fileinfo').html(message);
+            file.queueItem.find('.progress-bar').width(0);
+
+            // Flag an is-removing state so this file doesn't get counted
+            // despite it still being in the DOM for an extra 500ish ms
+            file.queueItem.addClass('is-removing');
+
+            file.queueItem.delay(0).fadeOut(fadeTime, function () {
+                $(this).remove();
+
+               // If there's nothing left in the queue, go back to a blankslate
+                if (that.$queue.find('.uploadifive-queue-item').length < 1) {
+                    that.blankslate();
+                }
+            });
+
+            delete file.queueItem;
+            ufive.queue.count--;
         }
     }
 
