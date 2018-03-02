@@ -38,7 +38,7 @@ class Uploader extends Component {
 
             delete: false,          // Allow files to be deleted after upload. See `endpoint` for behavior.
 
-            download: true,         // Allow files to be downloaded after upload. See `endpoint` for behavior.
+            download: false,        // Allow files to be downloaded after upload. See `endpoint` for behavior.
 
             async: true,            // If true, files will be POSTed immediately once added
                                     // If false, files will be uploaded only when `uploadQueuedFiles` is called
