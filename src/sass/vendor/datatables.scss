@@ -313,9 +313,9 @@ table.dataTable {
         }
     }
 
-    &.no-footer {
-        border-bottom: $table-header-border;
-    }
+    // &.no-footer {
+    //     border-bottom: $table-header-border;
+    // }
 
     &.nowrap {
         th, td {
