@@ -40,6 +40,7 @@ $enable-shadows: false;
 
 // Slightly darker link color - TODO: Not hardcoded?
 $link-color: #3283c8;
+$link-hover-color: darken($link-color, 15%);
 
 // Remove underline from link hover. We'll be using a border
 // for a better looking underline
@@ -88,3 +89,13 @@ $datepicker-button-active-bg: $casal;
 $datepicker-dropdown-bg: $white;
 $datepicker-dropdown-border-color: rgba($black, .15);
 
+/*
+    Settings for DataTables
+*/
+$table-paging-fg-color: #3283c8;
+$table-paging-current-fg-color: $gray;
+$table-paging-disabled-fg-color: $gray;
+$table-paging-hover-fg-color: $link-hover-color;
+$table-paging-hover-bg-color: $gray-200;
+$table-paging-active-fg-color: $link-hover-color;
+$table-paging-active-bg-color: $gray-200;
