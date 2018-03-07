@@ -52,4 +52,15 @@
         margin-bottom: 1rem;
     }
 }
+
+// Edge case: According to HTML5 spec, fieldsets establish a new block
+// formatting context which prevents margin collapsing. So we end up
+// giving these a smaller bottom margin to be combined with inner content
+// margins. Do note that combining a fieldset with a row may have undesired
+// layout bugs.
+// Why a fieldset.form-group? Because we use it for checkbox groups to apply
+// a <legend> to the group as a whole for screen readers. We can't use <legend>
+// without the parent <fieldset>
+fieldset.form-group {
+    margin-bottom: 1rem;
 }
