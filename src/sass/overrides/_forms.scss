@@ -1,4 +1,6 @@
 .form-group {
+    margin-bottom: 2rem;
+
     // Enforce 1em padding between components in a form group
     textarea,
     input,
@@ -41,4 +43,13 @@
         vertical-align: top;
         content: '\f069';
     }
+
+    // Margins won't collapse if the form-group is also a .col-*
+    // (since the .col has padding) - so we reduce the margin to 1rem
+    // and have it non-collapsed with the last component in the group
+    // that - presumably - has a 1rem margin.
+    &.col, &[class*="col-"] {
+        margin-bottom: 1rem;
+    }
+}
 }
