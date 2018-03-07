@@ -75,6 +75,12 @@ $badge-font-weight: normal;
 // Realign form checkboxes to match other input groups
 $form-check-input-gutter: 0;
 
+// Change padding to match DataTables
+$table-cell-padding: 8px 10px;
+
+$table-border-width: 0;
+$table-accent-bg: #f9f9f9;
+
 /*
     Settings for customized Bootstrap-Datepicker SCSS
 */
