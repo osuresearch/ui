@@ -47,6 +47,8 @@ import './components/sticky-header';
     // Apply global configuration changes to datatables, if included
     if ($.fn.dataTable) {
         $.extend(true, $.fn.dataTable.defaults, {
+            dom: 't',
+            paging: false,
             language: {
                 // Override pagination buttons with the same style we use
                 // for Bootstrap's pagination controls
