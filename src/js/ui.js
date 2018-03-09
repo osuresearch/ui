@@ -43,6 +43,28 @@ import './components/sticky-header';
         $.fn.datepicker.defaults.orientation = 'bottom auto';
         $.fn.datepicker.defaults.autoclose = true;
     }
+
+    // Apply global configuration changes to datatables, if included
+    if ($.fn.dataTable) {
+        $.extend(true, $.fn.dataTable.defaults, {
+            dom: 't',
+            paging: false,
+            language: {
+                // Override pagination buttons with the same style we use
+                // for Bootstrap's pagination controls
+                paginate: {
+                    previous: `
+                        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                        <span class="sr-only">Previous</span>
+                    `,
+                    next: `
+                        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                        <span class="sr-only">Next</span>
+                    `
+                }
+            }
+        });
+    }
 })($);
 
 export {
