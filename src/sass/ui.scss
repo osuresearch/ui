@@ -26,32 +26,32 @@
 
 // Overrides of non-configurable Bootstrap 4 components
 // Note that this should be in the same order as bootstrap.scss
-@import 'overrides/reboot';
-@import 'overrides/tables';
-@import 'overrides/forms';
-@import 'overrides/buttons';
-@import 'overrides/input-group';
-@import 'overrides/custom-forms';
-@import 'overrides/navbar';
-@import 'overrides/pagination';
 @import 'overrides/alert';
+@import 'overrides/badge';
+@import 'overrides/buttons';
+@import 'overrides/code';
+@import 'overrides/custom-forms';
 @import 'overrides/datatables';
 @import 'overrides/datepicker';
-@import 'overrides/code';
+@import 'overrides/forms';
+@import 'overrides/input-group';
+@import 'overrides/navbar';
+@import 'overrides/pagination';
+@import 'overrides/reboot';
+@import 'overrides/tables';
 
 // Components
 @import 'components/alert-banner';
-@import 'components/horizontal-scroll';
+@import 'components/application-alert';
+// @import 'components/enhanced-input';
 @import 'components/footer';
+@import 'components/formflow';
+@import 'components/horizontal-scroll';
 @import 'components/lookup';
 @import 'components/osu-navbar';
+@import 'components/profile';
 @import 'components/richtext';
 @import 'components/sticky-header';
+@import 'components/support';
 @import 'components/tabbar';
 @import 'components/uploader';
-@import 'components/profile';
-@import 'components/application-alert';
-@import 'components/support';
-
-@import 'components/formflow';
-// @import 'components/enhanced-input';
