@@ -7,6 +7,21 @@ Versions follow [Semantic Versioning](https://semver.org/) guidelines - given a 
 2. MINOR version when you add functionality in a backwards-compatible manner, and
 3. PATCH version when you make backwards-compatible bug fixes.
 
+# 3.1.2 (Unreleased)
+
+__Bug Fixes:__
+* Removed specificity for `form-group.is-required` label star suffixes - fails for cases where labels are inside a BS4 rowset
+* Fixed `.form-group` margins for the case when the `.form-group` is combined with a `.col-*` class (margins failed to collapse due to additional padding)
+* Fixed edge case of incorrect margins for a `.form-group` that is defined as a `fieldset` (fieldsets do *not* allow margin collapse)
+* Update gulp-sass dependency to `^3` due to 404 errors being thrown for the old `^2` branch's dependencies
+
+__UI Changes:__
+* Rounded badges to make them look less like buttons
+* Changed DataTables pagination controls to look/behave like Bootstrap 4
+* Removed some redundant (noisy) borders from tables/DataTables
+* Defaulting DataTables to a non-paging simple table-only view. Additional features are to be turned on at developer’s discretion
+
+
 # 3.1.1 (2018-02-13)
 
 __Bug Fixes__:
