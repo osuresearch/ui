@@ -92,7 +92,7 @@ class Emulate extends Component {
         // Add the picked person to local history
         if (this.lookup.Lookup('displayValue').length > 0) {
             this.addToHistory(
-                this.lookup.Lookup('storeValue'),
+                this.lookup.Lookup('keyValue'),
                 this.lookup.Lookup('displayValue')
             );
         }
