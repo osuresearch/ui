@@ -7,6 +7,11 @@ Versions follow [Semantic Versioning](https://semver.org/) guidelines - given a 
 2. MINOR version when you add functionality in a backwards-compatible manner, and
 3. PATCH version when you make backwards-compatible bug fixes.
 
+# 3.2.1 (2018-03-13)
+
+__Bug Fixes:__
+* Emulate: Fixed incorrect property call to Lookup
+
 
 # 3.2.0 (2018-03-13)
 
