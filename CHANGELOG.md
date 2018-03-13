@@ -7,19 +7,36 @@ Versions follow [Semantic Versioning](https://semver.org/) guidelines - given a 
 2. MINOR version when you add functionality in a backwards-compatible manner, and
 3. PATCH version when you make backwards-compatible bug fixes.
 
-# 3.1.2 (Unreleased)
+
+# 3.2.0 (2018-03-13)
+
+__New Features__
+* Uploader: Added user confirmation prior to sending a request to delete a file
+* Uploader: Added `dataField` option (default: `filedata`) to support changing the target for `$_FILES`
+* Uploader: Added the ability to specify per-file metadata (submitted to delete/download endpoints as `file-metadata`)
 
 __Bug Fixes:__
 * Removed specificity for `form-group.is-required` label star suffixes - fails for cases where labels are inside a BS4 rowset
 * Fixed `.form-group` margins for the case when the `.form-group` is combined with a `.col-*` class (margins failed to collapse due to additional padding)
 * Fixed edge case of incorrect margins for a `.form-group` that is defined as a `fieldset` (fieldsets do *not* allow margin collapse)
 * Update gulp-sass dependency to `^3` due to 404 errors being thrown for the old `^2` branch's dependencies
+* Component: Fixed a missing ifelse causing all function calls to be treated as property getters
+* Uploader: Fixed static method call for item template DOM
+* Uploader: Improved error handling and error states
+* Uploader: Moved request body payload to query parameters for DELETE requests to support certain webservers ignoring the body of a DELETE request
+* Uploader: Fixed event listeners handling events in the same call stack as the Uploader plugin
+* Uploader: Fixed various edge cases causing `isEmpty` to incorrectly return false
 
 __UI Changes:__
 * Rounded badges to make them look less like buttons
 * Changed DataTables pagination controls to look/behave like Bootstrap 4
 * Removed some redundant (noisy) borders from tables/DataTables
 * Defaulting DataTables to a non-paging simple table-only view. Additional features are to be turned on at developer’s discretion
+* Uploader: Changed default file info to `Complete` for previously uploaded files without a custom `info` field
+
+__Internal Changes:__
+* Uploader: Defaulting `download` option to false
+* Uploader: Cleaned up SASS
 
 
 # 3.1.1 (2018-02-13)
