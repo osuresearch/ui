@@ -7,6 +7,11 @@ Versions follow [Semantic Versioning](https://semver.org/) guidelines - given a 
 2. MINOR version when you add functionality in a backwards-compatible manner, and
 3. PATCH version when you make backwards-compatible bug fixes.
 
+# Unreleased
+
+__UI Changes:__
+* DataTables: Swapped what row is "darkened" for a `.stripe` table to improve the look of paginated tables with an even number of records per page
+
 # 3.2.1 (2018-03-13)
 
 __Bug Fixes:__
