@@ -231,7 +231,7 @@ table.dataTable {
     // Stripe classes - add "stripe" class to the table to activate
     &.stripe tbody,
     &.display tbody {
-        tr.odd {
+        tr.even {
             background-color: dt_shade($table-row-background, 2.35%); // shade by f9
 
             &.selected {
@@ -273,7 +273,7 @@ table.dataTable {
 
     &.display tbody,
     &.order-column.stripe tbody {
-        tr.odd {
+        tr.even {
             >.sorting_1 { background-color: dt_shade($table-row-background, 5.4%); } // shade by f1
             >.sorting_2 { background-color: dt_shade($table-row-background, 4.7%); } // shade by f3
             >.sorting_3 { background-color: dt_shade($table-row-background, 3.9%); } // shade by f5
