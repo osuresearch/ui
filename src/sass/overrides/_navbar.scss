@@ -85,6 +85,24 @@
         }
     }
 
+    // Styling for react-router-dom's <NavLink> components
+    // as direct children to <Navbar>.
+    // @todo I realize this :not logic is awful, and should be improved.
+    > a:not(.navbar-brand) {
+        color: rgba(0,0,0,0.5);
+        padding: .5rem;
+
+        &:hover {
+            background: #f0f0f0;
+            color: #292929;
+        }
+
+        &.active {
+            color: #292929;
+            background: #ededed;
+        }
+    }
+
     // Responsive Reflow
 
     // Will hide the navigation items (since they're displayed via Tab Bar)
