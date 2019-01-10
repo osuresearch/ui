@@ -119,8 +119,6 @@ class ShibbolethMonitor extends React.Component {
      * up the login modal and reset our ping interval to the faster active version
      */
     onPingError() {
-        console.error(arguments);
-
         const { pendingLogin, loginWindowRef } = this.state;
 
         // Still waiting? Keep modal open.
@@ -151,8 +149,6 @@ class ShibbolethMonitor extends React.Component {
      * the ping interval to the slower background version.
      */
     onPingSuccess() {
-        console.debug(arguments);
-
         // Background success, don't need to do anything else
         if (!this.state.pendingLogin) {
             return;
@@ -269,7 +265,7 @@ ShibbolethMonitor.propTypes = {
 };
 
 ShibbolethMonitor.defaultProps = {
-    backgroundPing: 5, // 300, // 5min
+    backgroundPing: 300, // 5min
     loginPing: 5 // 5sec
 };
 
