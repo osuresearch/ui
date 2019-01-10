@@ -166,6 +166,7 @@ class Emulate extends React.Component {
                         <div className="modal-body">
                             <fieldset className="form-group">
                                 <Lookup
+                                    name="emulate-user-lookup"
                                     endpoint={this.props.lookupEndpoint}
                                     hasClearButton={false}
                                     onChange={this.onEmulate}
