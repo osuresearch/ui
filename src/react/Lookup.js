@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// Non-React component inclusion, since this 
+// Non-React component inclusion, since this
 // is just a wrapper around $.Lookup for now
 import '../js/components/lookup';
 
@@ -22,19 +22,19 @@ import '../js/components/lookup';
  *          onClear={this.onClear} />
  *  </fieldset>
  * ```
- * 
+ *
  * There are two methods for using the value key in React:
- * 
+ *
  * 1. Have a bind to the onChange event extract the key from the JSON payload (second argument)
  * 2. Make a reference to the Lookup and access the `valueKey` property. Eg:
- * 
+ *
  * ```jsx
  *  render() {
  *      return (
  *          <Lookup ref={this.lookup} ... />
  *      );
  *  }
- * 
+ *
  *  doSomethingWithKey() {
  *      const key = this.lookup.valueKey;
  *      ...
@@ -75,6 +75,20 @@ class Lookup extends React.Component {
 
         if (this.props.onClear) {
             this.$el.on('clear.lookup', this.props.onClear);
+        }
+    }
+
+    /**
+     * Update jQuery instance properties on prop mutation
+     *
+     * @param {object} prevProps
+     */
+    componentDidUpdate(prevProps) {
+        // If value or valueKey change, notify the jQuery component
+        if (this.props.value !== prevProps.value ||
+            this.props.valueKey !== prevProps.valueKey
+        ) {
+            this.$el.Lookup('set', this.props.value, this.props.valueKey);
         }
     }
 
