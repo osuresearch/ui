@@ -7,11 +7,11 @@ import PropTypes from 'prop-types';
  * Standard brand application header.
  *
  * Add nav links, searches, and Profile as children.
- * Requires react-router to be running. 
+ * Requires react-router to be running.
  */
 const Navbar = (props) => (
     <nav className="navbar navbar-main">
-        <Link exact to="/" className="navbar-brand">
+        <Link exact="true" to="/" className="navbar-brand">
             <div className="navbar-org">Office of Research</div>
             {props.title}
         </Link>
