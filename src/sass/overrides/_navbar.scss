@@ -22,8 +22,7 @@
 
         // Alternative link display - to treat them more like buttons
         .nav-item {
-            // margin-bottom: -0.75em;
-            // padding-bottom: 0.5em;
+            margin: 0 0.25rem;
 
             &:hover {
                 background: tint($gray, 10%);
@@ -91,6 +90,7 @@
     > a:not(.navbar-brand) {
         color: rgba(0,0,0,0.5);
         padding: .5rem;
+        margin: 0 0.25rem;
 
         &:hover {
             background: #f0f0f0;
