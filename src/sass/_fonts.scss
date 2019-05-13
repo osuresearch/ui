@@ -6,7 +6,7 @@ $vendor-fonts: '/assets/fonts/vendor' !default;
 $vendor-images: '/assets/img/vendor' !default;
 
 /**
- * Support for Proxima Nova (OSU branding)
+ * Support for Proxima Nova & Capita (OSU branding)
  */
 @font-face {
     font-family: 'ProximaNova';
@@ -32,4 +32,14 @@ $vendor-images: '/assets/img/vendor' !default;
     font-family: 'ProximaNova';
     src: url($vendor-fonts + '/proxima/ProximaNova-Bold.woff') format('woff'), url($vendor-fonts + '/proxima/ProximaNova-Bold.ttf') format('truetype');
     font-weight: 700;
+}
+@font-face {
+    font-family: 'Capita';
+    src: url($vendor-fonts + '/capita/CapitaReg.woff') format('woff'), url($vendor-fonts + '/capita/CapitaReg.ttf') format('truetype');
+    font-weight: 700;
+}
+@font-face {
+    font-family: 'Capita';
+    src: url($vendor-fonts + '/capita/CapitaXLig.woff') format('woff'), url($vendor-fonts + '/capita/CapitaXLig.ttf') format('truetype');
+    font-weight: 100;
 }
