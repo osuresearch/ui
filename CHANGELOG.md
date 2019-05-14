@@ -7,10 +7,24 @@ Versions follow [Semantic Versioning](https://semver.org/) guidelines - given a 
 2. MINOR version when you add functionality in a backwards-compatible manner, and
 3. PATCH version when you make backwards-compatible bug fixes.
 
-# Unreleased
+# 3.3.0 (2019-05-14)
+
+__New Features__
+* Add new React components for common ORIS application features (Emulate, AppLoader, AppError, Lookup, Modal, Profile, Navbar, SystemAlert, ShibbolethMonitor)
+* Add `i.required-asterisk` component style to render out the red asterisk used on required fields in any context that a designer wants (e.g. for individual checkbox labels or a form heading)
+
+__Bug Fixes:__
+* Lookup: Fix component not updating `$.Lookup` when `value, valueKey` props mutate
+* DataTables: Fix _empty container class always inheriting underlying `.even, .odd` styles
+* Fix extra margins added for adjacent inputs in a group
 
 __UI Changes:__
 * DataTables: Swapped what row is "darkened" for a `.stripe` table to improve the look of paginated tables with an even number of records per page
+* Added Capita as an available font - with Times New Roman fallback
+* Change `h1, h2` headings to scarlet Capita
+* Add a slight additional margin between navbar links to reduce crowding
+* Slightly adjust the grey of `.navbar` tabs to better support embedding into modals
+
 
 # 3.2.1 (2018-03-13)
 
@@ -20,7 +34,7 @@ __Bug Fixes:__
 
 # 3.2.0 (2018-03-13)
 
-__New Features__
+__New Features:__
 * Uploader: Added user confirmation prior to sending a request to delete a file
 * Uploader: Added `dataField` option (default: `filedata`) to support changing the target for `$_FILES`
 * Uploader: Added the ability to specify per-file metadata (submitted to delete/download endpoints as `file-metadata`)
