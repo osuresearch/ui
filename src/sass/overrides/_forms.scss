@@ -64,3 +64,10 @@
 fieldset.form-group {
     margin-bottom: 1rem;
 }
+
+// Fix margins when an input-group is used as an append
+// section of a parent input-group
+// (cases where we want two adjacent inputs)
+.input-group-append .input-group {
+    margin: 0;
+}

@@ -84,6 +84,11 @@ $table-cell-padding: 8px 10px;
 $table-border-width: 0;
 $table-accent-bg: #f9f9f9;
 
+// To match $modal-header-border-color for better
+// inserting nav tabs within a modal
+$nav-tabs-link-active-border-color: $gray-200;
+$nav-tabs-border-color: $gray-200;
+
 /*
     Settings for customized Bootstrap-Datepicker SCSS
 */

@@ -35,3 +35,8 @@ table.dataTable {
         vertical-align: top;
     }
 }
+
+// Fix _empty container inheriting the .odd/.even styles.
+table.dataTable td.dataTables_empty {
+    background: $white;
+}

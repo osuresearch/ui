@@ -39,6 +39,7 @@
 @import 'overrides/pagination';
 @import 'overrides/reboot';
 @import 'overrides/tables';
+@import 'overrides/type';
 
 // Components
 @import 'components/alert-banner';
@@ -50,6 +51,7 @@
 @import 'components/lookup';
 @import 'components/osu-navbar';
 @import 'components/profile';
+@import 'components/required-asterisk';
 @import 'components/richtext';
 @import 'components/sticky-header';
 @import 'components/support';
