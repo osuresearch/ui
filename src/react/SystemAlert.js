@@ -24,14 +24,18 @@ class SystemAlert extends React.Component {
      * Load the alert contents from the endpoint on mount
      */
     componentDidMount() {
-        fetch(this.props.endpoint)
-            .then((res) => res.json())
-            .then((res) => this.setState({
-                message: res.data
-            }))
-            .catch(() => this.setState({
-                message: 'Could not communicate with the alerting API'
-            }));
+        fetch(this.props.endpoint, {
+            cache: 'no-cache',
+            redirect: 'follow',
+            credentials: 'same-origin'
+        })
+        .then((res) => res.json())
+        .then((res) => this.setState({
+            message: res.data
+        }))
+        .catch(() => this.setState({
+            message: 'Could not communicate with the alerting API'
+        }));
     }
 
     render() {
