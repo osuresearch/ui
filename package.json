@@ -1,4 +1,8 @@
 {
+  "name": "oris-ui",
+  "description": "Common frontend UI components for ORIS applications",
+  "private": true,
+  "author": "Chase McManning <mcmanning.1@osu.edu>",
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-plugin-external-helpers": "^6.22.0",
