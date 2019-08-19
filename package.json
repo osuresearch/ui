@@ -1,5 +1,6 @@
 {
   "name": "oris-ui",
+  "version": "3.3.0",
   "description": "Common frontend UI components for ORIS applications",
   "private": true,
   "author": "Chase McManning <mcmanning.1@osu.edu>",
