@@ -1,0 +1,8 @@
+
+// In order to render out demo-able components in the styleguide, we need
+// to import ORIS/UI prior to flow. When applications include flow, they
+// will import oris/ui separately on their own, so we exclude this from flow.scss
+$vendor-images: 'https://orwebdev02.rf.ohio-state.edu/assets/img/vendor';
+$vendor-fonts: 'https://orwebdev02.rf.ohio-state.edu/assets/fonts/vendor';
+
+@import './sass/ui';

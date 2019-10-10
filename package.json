@@ -1,30 +1,40 @@
 {
   "name": "@oris/ui",
-  "version": "3.3.0",
-  "description": "Common frontend UI components for ORIS applications",
-  "private": true,
+  "version": "4.0.0",
+  "description": "React UI components for ORIS applications",
   "author": "Chase McManning <mcmanning.1@osu.edu>",
+  "private": true,
+  "dependencies": {
+    "node-sass": "^4.12.0",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-scripts": "3.1.1"
+  },
+  "scripts": {
+    "start": "npx styleguidist server",
+    "build": "react-scripts build",
+    "test": "react-scripts test"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
   "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-plugin-external-helpers": "^6.22.0",
-    "babel-plugin-module-resolver": "^2.7.1",
-    "babel-polyfill": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
-    "eslint": "~4.9.0",
-    "eslint-config-airbnb-base": "~11.0.0",
-    "eslint-plugin-import": "^2.8.0",
-    "gulp": "^3.9.1",
-    "gulp-autoprefixer": "^3.1.0",
-    "gulp-better-rollup": "^2.0.0",
-    "gulp-concat": "^2.6.0",
-    "gulp-eslint": "^3.0.1",
-    "gulp-plumber": "^1.1.0",
-    "gulp-rename": "^1.2.2",
-    "gulp-sass": "^3",
-    "gulp-sass-lint": "^1.3.2",
-    "gulp-sourcemaps": "^1.6.0",
-    "gulp-uglify": "^2.0.0",
-    "rollup": "^0.50.0",
-    "rollup-plugin-babel": "^3.0.2"
+    "acorn": "^6.3.0",
+    "diff": "^4.0.1",
+    "react-dropzone": "^10.1.8",
+    "react-router-dom": "^5.0.1",
+    "react-styleguidist": "^9.1.16"
   }
 }
