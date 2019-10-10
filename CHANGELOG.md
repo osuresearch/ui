@@ -7,6 +7,12 @@ Versions follow [Semantic Versioning](https://semver.org/) guidelines - given a 
 2. MINOR version when you add functionality in a backwards-compatible manner, and
 3. PATCH version when you make backwards-compatible bug fixes.
 
+# 3.3.1 (2019-10-10)
+
+__Bug Fixes:__
+* Multiple React components: Fixed `fetch` compatibility issues with Edge < 18
+
+
 # 3.3.0 (2019-05-14)
 
 __New Features__
