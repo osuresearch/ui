@@ -484,7 +484,7 @@ class Search extends React.Component {
         // }
 
         return (
-            <div className="input-group search">
+            <div className="input-group input-search">
                 <span className="input-group-prefix">
                     <i className={this.getPrefixIconClasses()} aria-hidden="true"></i>
                 </span>

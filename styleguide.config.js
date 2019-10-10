@@ -1,5 +1,6 @@
 
 const path = require('path');
+const glob = require('glob');
 const { styles, theme } = require('./styleguide.styles');
 
 // Where to find the root SASS file for loading styles across the page
@@ -10,6 +11,23 @@ const BUILD_PATH = path.join(__dirname, './build');
 
 // Where standard static vendor assets are loaded from.
 const ASSETS_HOST = 'https://orwebdev02.rf.ohio-state.edu';
+
+/**
+ * Custom aggregator for the `HTML Components` section
+ */
+function listHtmlComponents() {
+    const files = glob.sync('src/html/**/!(readme).md');
+
+    var sections = [];
+    files.forEach((filename) => {
+        sections.push({
+            name: path.basename(filename, '.md'),
+            content: filename
+        });
+    });
+
+    return sections;
+}
 
 /**
  * Reconfigure Webpack for Styleguidist
@@ -36,7 +54,10 @@ module.exports = {
                 { src: ASSETS_HOST + '/assets/js/vendor/bootstrap-4.0.0.min.js' },
 
                 // Vendor libraries required for certain custom components
+                { src: ASSETS_HOST + '/assets/js/vendor/bootstrap-datepicker-1.6.1.min.js' },
                 { src: ASSETS_HOST + '/assets/js/vendor/moment-2.14.1.min.js' },
+                { src: ASSETS_HOST + '/assets/js/vendor/ckeditor-4.6.2/ckeditor.js' },
+                { src: ASSETS_HOST + '/assets/js/vendor/datatables-1.10.10.min.js' },
             ]
         }
     },
@@ -79,6 +100,11 @@ module.exports = {
             content: 'src/component/readme.md',
             components: 'src/component/**/*.js',
             ignore: 'src/component/_legacy/*.js'
+        },
+        {
+            name: 'HTML Components',
+            content: 'src/html/readme.md',
+            sections: listHtmlComponents()
         },
         {
             name: 'Experimental',

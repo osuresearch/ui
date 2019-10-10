@@ -1,0 +1,35 @@
+
+
+### Font Stack
+
+Our font stack is `"ProximaNova", sans-serif` at a baseline of `16px`
+
+Supported weights are `200, 300, 400, 500, 700`
+
+### Headings
+
+```js
+<h1>h1. Heading</h1>
+<h2>h2. Heading</h2>
+<h3>h3. Heading</h3>
+<h4>h4. Heading</h4>
+<h5>h5. Heading</h5>
+```
+
+### Inline Text Styles
+
+```js
+<p>You can use the mark tag to <mark>highlight</mark> text.</p>
+<p><del>This line of text is meant to be treated as deleted text.</del></p>
+<p><s>This line of text is meant to be treated as no longer accurate.</s></p>
+<p><ins>This line of text is meant to be treated as an addition to the document.</ins></p>
+<p><u>This line of text will render as underlined</u></p>
+<p><small>This line of text is meant to be treated as fine print.</small></p>
+<p><strong>This line rendered as bold text.</strong></p>
+<p><em>This line rendered as italicized text.</em></p>
+```
+
+### Best Practices
+
+* Always define your font sizes using `em` or `rem` for [consistent experiences](https://www.w3.org/QA/Tips/font-size)
+* Avoid more than 3 or 4 font sizes per page

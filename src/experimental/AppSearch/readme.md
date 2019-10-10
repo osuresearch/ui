@@ -1,7 +1,7 @@
 
 ### Examples
 
-```jsx
+```js
 // For categorizer, try the following to test different bucketing:
 // `type` - tighter list (everyone is clumped into one category)
 // `attributes.lastName` - smaller number of categories, more results
