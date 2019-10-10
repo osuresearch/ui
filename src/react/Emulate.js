@@ -73,7 +73,10 @@ class Emulate extends React.Component {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ id })
+            body: JSON.stringify({ id }),
+            cache: 'no-cache',
+            redirect: 'follow',
+            credentials: 'same-origin'
         })
         .then(() => location.reload());
     }

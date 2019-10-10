@@ -99,7 +99,8 @@ class ShibbolethMonitor extends React.Component {
         fetch(this.props.endpoint, {
             method: 'HEAD',
             cache: 'no-cache',
-            redirect: 'follow'
+            redirect: 'follow',
+            credentials: 'same-origin'
         })
         .then((res) => {
             if (res.ok) {
