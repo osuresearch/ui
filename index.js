@@ -8,6 +8,7 @@ import Footer from './src/component/Footer';
 import Icon from './src/component/Icon';
 import Navbar from './src/component/Navbar';
 import OhioStateNavbar from './src/component/OhioStateNavbar';
+import Profile from './src/component/Profile';
 import Search from './src/component/Search';
 import SearchResult from './src/component/SearchResult';
 
@@ -71,6 +72,7 @@ export {
     Icon,
     Navbar,
     OhioStateNavbar,
+    Profile,
     Search,
     SearchResult,
 

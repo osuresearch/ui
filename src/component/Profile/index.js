@@ -5,22 +5,11 @@ import PropTypes from 'prop-types';
 /**
  * Provides a dropdown for the logged in user to update their profile or logout.
  *
- * Usage:
- * ```jsx
- *  <Profile username="buckeye.1" />
- * ```
- *
- * You can add custom links to the dropdown by adding children to the component.
- * For example, if your app had a "My Alerts" link, you can add:
- *
- * ```jsx
- *  <Profile username="buckeye.1">
- *      <a className="dropdown-item" href="/path/to/alerts">My Alerts</a>
- *  </Profile>
- * ```
+ * Typically rendered within the `Navbar` of an application.
  */
 const Profile = (props) => (
     <div className="profile dropdown">
+        {/* TODO: This needs to be a button, not an href="#" element to appease the React gods. */}
         <a href="#" className="dropdown-toggle"
             id="profile-dropdown" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">

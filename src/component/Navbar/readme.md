@@ -15,13 +15,13 @@ import { NavLink } from 'react-router-dom';
 </MemoryRouter>
 ```
 
-An example of combining `AppSearch` within your primary navigation:
+An example of combining `AppSearch` and `Profile` within your primary navigation:
 
 
 ```js
 import { MemoryRouter } from 'react-router';
 import { NavLink } from 'react-router-dom';
-import { AppSearch } from '@oris/ui';
+import { AppSearch, Profile } from '@oris/ui';
 
 <MemoryRouter>
     <Navbar title="My Cool App">
@@ -32,6 +32,8 @@ import { AppSearch } from '@oris/ui';
             endpoint="https://orapps.osu.edu/api/v1/person"
             categorizer="attributes.college.name"
         />
+
+        <Profile username="buckeye.1" />
     </Navbar>
 </MemoryRouter>
 ```

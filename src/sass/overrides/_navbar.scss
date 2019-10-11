@@ -60,6 +60,16 @@
         margin-left: auto;
     }
 
+    // Specialized rules to flex AppSearch to the right and change
+    // margin rules on profile if it comes after AppSearch in the DOM
+    .app-search {
+        margin-left: auto;
+    }
+
+    .app-search + .profile {
+        margin-left: 2em;
+    }
+
     // Flex inline forms to the right
     .form-inline {
         margin-left: auto;
