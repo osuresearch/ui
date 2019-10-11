@@ -94,6 +94,12 @@ class Palette extends React.Component {
     }
 }
 
+Palette.propTypes = {
+    color: PropTypes.string.isRequired,
+    tints: PropTypes.arrayOf(PropTypes.number).isRequired,
+    shades: PropTypes.arrayOf(PropTypes.number).isRequired
+}
+
 Palette.defaultProps = {
     color: 'gray',
     tints: [10, 20, 30, 40, 50, 60, 70, 80, 90],

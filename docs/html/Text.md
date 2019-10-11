@@ -3,7 +3,7 @@
 
 ```js
 <div className="form-group">
-    <label for="input-sample">
+    <label htmlFor="input-sample">
         Input
     </label>
     <input type="text" className="form-control" id="input-sample" />
@@ -16,7 +16,7 @@
 
 ```js
 <div className="form-group is-required">
-    <label for="input-invalid-sample">
+    <label htmlFor="input-invalid-sample">
         Input with a serverside-generated error message. Bootstrap 4 is now
         opinionated about how to handle clientside errors.
         See the <a href="https://getbootstrap.com/docs/4.0/components/forms/#validation" target="_blank">official validation documentation</a>.
@@ -37,13 +37,13 @@
 
 ```js
 <div className="form-group">
-    <label for="input-valid-sample">
+    <label htmlFor="input-valid-sample">
         An input updated with a "this is valid!" message. Useful
         if you want some basic validation feedback while the user
         is filling out the form.
     </label>
     <input type="text" className="form-control is-valid"
-        id="input-valid-sample" value="some value" />
+        id="input-valid-sample" defaultValue="some value" />
 
     <small className="form-text">
         This is some additional help text
@@ -53,7 +53,7 @@
 
 ```js
 <div className="form-group">
-    <label for="number-sample">
+    <label htmlFor="number-sample">
        Numeric Input
     </label>
     <div className="row">
@@ -67,7 +67,7 @@
 
 ```js
 <div className="form-group is-required">
-    <label className="form-control-label" for="textarea-sample">
+    <label className="form-control-label" htmlFor="textarea-sample">
         Basic textarea
     </label>
     <textarea className="form-control"
@@ -83,7 +83,7 @@
 
 ```js
 <fieldset className="form-group">
-    <label for="textarea-with-na">
+    <label htmlFor="textarea-with-na">
         Textarea with Not Applicable option - a common pattern used in our apps
     </label>
     <textarea className="form-control" id="textarea-with-na" rows="3"></textarea>
@@ -91,7 +91,7 @@
     <div className="form-check">
         <div className="custom-control custom-checkbox">
             <input type="checkbox" name="na" className="custom-control-input" id="na-check" />
-            <label className="custom-control-label" for="na-check">Not Applicable</label>
+            <label className="custom-control-label" htmlFor="na-check">Not Applicable</label>
         </div>
     </div>
     <small className="form-text">
@@ -107,50 +107,50 @@
 <form>
     <div className="row">
         <div className="form-group col-6 is-required">
-            <label for="inputEmail4">Email</label>
+            <label htmlFor="inputEmail4">Email</label>
             <input type="email" className="form-control" id="inputEmail4"
                 placeholder="buckeye.1@osu.edu"
-                autocomplete="osu-email"
+                autoComplete="osu-email"
                 required={true} />
             <small className="form-text">
                 Must be a valid OSU email address
             </small>
         </div>
         <div className="form-group col-6 is-required">
-            <label for="inputPassword4">Password</label>
+            <label htmlFor="inputPassword4">Password</label>
             <input type="password" className="form-control"
                 id="inputPassword4" placeholder="Password"
-                required={true} autocomplete="current-password" />
+                required={true} autoComplete="current-password" />
             <small className="form-text">
                 Must not be a commonly used password or password previously exposed through a third party data breach
             </small>
         </div>
     </div>
     <div className="form-group">
-        <label for="inputAddress">Address</label>
+        <label htmlFor="inputAddress">Address</label>
         <input type="text" className="form-control" id="inputAddress"
             placeholder="1234 Main St" />
     </div>
     <div className="form-group">
-        <label for="inputAddress2">Address 2</label>
+        <label htmlFor="inputAddress2">Address 2</label>
         <input type="text" className="form-control" id="inputAddress2"
             placeholder="Apartment, studio, or floor" />
     </div>
     <div className="row">
         <div className="form-group col-6">
-            <label for="inputCity">City</label>
+            <label htmlFor="inputCity">City</label>
             <input type="text" className="form-control" id="inputCity" />
         </div>
         <div className="form-group col-4">
-            <label for="inputState">State</label>
+            <label htmlFor="inputState">State</label>
             <select id="inputState" className="form-control custom-select">
-                <option disabled selected>Choose</option>
+                <option disabled>Choose</option>
                 <option value="MI">Michigan</option>
                 <option value="OH">Ohio</option>
             </select>
         </div>
         <div className="form-group col-2">
-            <label for="inputZip">Zip</label>
+            <label htmlFor="inputZip">Zip</label>
             <input type="text" className="form-control" id="inputZip" />
         </div>
     </div>
@@ -159,7 +159,7 @@
             <div className="custom-control custom-checkbox">
                 <input type="checkbox" name="agree"
                     className="custom-control-input" id="agree" />
-                <label className="custom-control-label" for="agree">
+                <label className="custom-control-label" htmlFor="agree">
                     I agree to the terms and services
                 </label>
             </div>

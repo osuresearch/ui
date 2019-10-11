@@ -2,52 +2,52 @@
 ### Examples
 
 ```js
-<div class="form-group">
-    <label for="select-example">Selection example</label>
-    <select class="form-control custom-select"
+<div className="form-group">
+    <label htmlFor="select-example">Selection example</label>
+    <select className="form-control custom-select"
         id="select-example" name="select-example">
-        <option disabled selected>Pick a color profile</option>
+        <option disabled>Pick a color profile</option>
         <option value="RGB">RGB</option>
         <option value="CMYK">CMYK</option>
         <option value="HSL">HSL</option>
     </select>
-    <small class="text-muted">
+    <small className="text-muted">
     Some additional help text here
     </small>
 </div>
 ```
 
 ```js
-<div class="form-group is-required">
-    <label for="error-example">Erroneous selection</label>
-    <select class="form-control custom-select is-invalid"
+<div className="form-group is-required">
+    <label htmlFor="error-example">Erroneous selection</label>
+    <select className="form-control custom-select is-invalid"
         id="error-example" name="error-example">
-        <option disabled selected>Pick a color profile</option>
+        <option disabled>Pick a color profile</option>
         <option value="RGB">RGB</option>
         <option value="CMYK">CMYK</option>
         <option value="HSL">HSL</option>
     </select>
-    <div class="invalid-feedback">You must select a color profile</div>
-    <small class="text-muted">
+    <div className="invalid-feedback">You must select a color profile</div>
+    <small className="text-muted">
     Some additional help text here
     </small>
 </div>
 ```
 
 ```js
-<div class="btn-group">
-    <div class="dropdown">
-        <button id="example-dropdown" class="btn btn-outline-secondary dropdown-toggle"
+<div className="btn-group">
+    <div className="dropdown">
+        <button id="example-dropdown" className="btn btn-outline-secondary dropdown-toggle"
             type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Dropdown button
         </button>
-        <div class="dropdown-menu" aria-labelledby="example-dropdown">
-            <h6 class="dropdown-header">Dropdown header</h6>
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item disabled" href="#">Disabled action</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Separated link</a>
+        <div className="dropdown-menu" aria-labelledby="example-dropdown">
+            <h6 className="dropdown-header">Dropdown header</h6>
+            <a className="dropdown-item" href="#">Action</a>
+            <a className="dropdown-item" href="#">Another action</a>
+            <a className="dropdown-item disabled" href="#">Disabled action</a>
+            <div className="dropdown-divider"></div>
+            <a className="dropdown-item" href="#">Separated link</a>
         </div>
     </div>
 </div>

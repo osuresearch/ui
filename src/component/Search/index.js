@@ -530,7 +530,7 @@ Search.propTypes = {
     defaultValue: PropTypes.shape({
                     key: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
                     value: PropTypes.any.isRequired
-                }).isRequired,
+                }),
 
     /**
      * Callable for when an item is selected from the search results, or the search is cleared.

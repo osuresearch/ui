@@ -18,8 +18,8 @@ const Icon = (props) => {
         classNames += ' fa-stack-1x';
 
         return (
-            <span class="fa-stack" aria-hidden={!hasLabel}>
-                <i class="fa fa-circle-thin fa-stack-2x"></i>
+            <span className="fa-stack" aria-hidden={!hasLabel}>
+                <i className="fa fa-circle-thin fa-stack-2x"></i>
                 <i className={classNames}>
                     {hasLabel &&
                     <span className="sr-only">

@@ -1,4 +1,8 @@
 
+This palette is based on university-wide branding guidelines at https://brand.osu.edu/color
+
+Click at color tints / shades to see example SASS code that you can paste directly into your stylesheets.
+
 ## Primary Colors
 
 ```js
@@ -11,8 +15,6 @@ import Palette from "../src/internal/Palette";
 ```
 
 ## Secondary Colors
-
-This palette is based on university-wide branding guidelines at https://brand.osu.edu/color
 
 ```js
 import Palette from "../src/internal/Palette";
@@ -32,3 +34,4 @@ import Palette from "../src/internal/Palette";
 <Palette color="disco" />
 </div>
 ```
+

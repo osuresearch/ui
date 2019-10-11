@@ -11,7 +11,7 @@ To use the richtext component in your application, you need the following additi
 
 ```js
 <div className="form-group is-required">
-    <label for="richtext-editor">
+    <label htmlFor="richtext-editor">
         Rich text editor driven by CKEditor. Replaces a default
         <code>textarea</code> DOM element with the CKEditor plugin.
     </label>

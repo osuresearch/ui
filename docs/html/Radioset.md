@@ -10,17 +10,17 @@
         <div className="custom-control custom-radio">
             <input type="radio" name="color"
                 className="custom-control-input" id="rgb" />
-            <label className="custom-control-label" for="rgb">RGB</label>
+            <label className="custom-control-label" htmlFor="rgb">RGB</label>
         </div>
         <div className="custom-control custom-radio">
             <input type="radio" name="color"
                 className="custom-control-input" id="cmyk" />
-            <label className="custom-control-label" for="cmyk">CMYK</label>
+            <label className="custom-control-label" htmlFor="cmyk">CMYK</label>
         </div>
         <div className="custom-control custom-radio">
             <input type="radio" name="color"
                 className="custom-control-input" id="hsl" disabled />
-            <label className="custom-control-label" for="hsl">HSL</label>
+            <label className="custom-control-label" htmlFor="hsl">HSL</label>
         </div>
     </div>
     <small className="form-text">
@@ -39,12 +39,12 @@
         <div className="custom-control custom-radio">
             <input type="radio" name="color"
                 className="custom-control-input" id="yes2" />
-            <label className="custom-control-label" for="yes2">Yes</label>
+            <label className="custom-control-label" htmlFor="yes2">Yes</label>
         </div>
         <div className="custom-control custom-radio">
             <input type="radio" name="color"
                 className="custom-control-input" id="no2" />
-            <label className="custom-control-label" for="no2">No</label>
+            <label className="custom-control-label" htmlFor="no2">No</label>
         </div>
     </div>
     <div className="invalid-feedback">
@@ -66,12 +66,12 @@
         <div className="custom-control custom-radio">
             <input type="radio" name="color"
                 className="custom-control-input" id="yes3" />
-            <label className="custom-control-label" for="yes3">Yes</label>
+            <label className="custom-control-label" htmlFor="yes3">Yes</label>
         </div>
         <div className="custom-control custom-radio">
             <input type="radio" name="color"
                 className="custom-control-input" id="no3" />
-            <label className="custom-control-label" for="no3">No</label>
+            <label className="custom-control-label" htmlFor="no3">No</label>
         </div>
     </div>
     <small className="form-text">

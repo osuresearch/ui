@@ -14,21 +14,21 @@ It is also recommended to utilize [Moment.js](https://momentjs.com/docs/) for ha
 ### Examples
 
 ```js
-<div class="form-group">
-    <label for="date-sample">
+<div className="form-group">
+    <label htmlFor="date-sample">
         Date selection using
         <a href="https://bootstrap-datepicker.readthedocs.io">
             bootstrap-datepicker
         </a> for a cross browser polyfill
     </label>
-    <div class="input-group">
-        <span class="input-group-prefix">
-            <i class="fa fa-calendar" aria-hidden="true"></i>
+    <div className="input-group">
+        <span className="input-group-prefix">
+            <i className="fa fa-calendar" aria-hidden="true"></i>
         </span>
-        <input type="text" class="form-control"
+        <input type="text" className="form-control"
             id="date-sample" data-provide="datepicker" />
     </div>
-    <small class="text-muted">
+    <small className="text-muted">
         Can be lazy loaded with <code>data-provide="datepicker"</code> on the input
     </small>
 </div>
