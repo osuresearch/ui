@@ -13,6 +13,12 @@ For a full list of available icon names, see [Font Awesome 4.7.0 Icons](https://
 <Icon name="spinner" spin={true} />
 ```
 
+#### Circling the icon
+
+```jsx
+<Icon name="user" circled={true} />
+```
+
 ### Accessibility
 
 By default, an icon is hidden to screen readers. To add screen reader text, simply add a string as a child element.

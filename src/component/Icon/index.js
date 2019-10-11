@@ -14,6 +14,24 @@ const Icon = (props) => {
 
     const hasLabel = React.Children.count(props.children) > 0;
 
+    if (props.circled) {
+        classNames += ' fa-stack-1x';
+
+        return (
+            <span class="fa-stack" aria-hidden={!hasLabel}>
+                <i class="fa fa-circle-thin fa-stack-2x"></i>
+                <i className={classNames}>
+                    {hasLabel &&
+                    <span className="sr-only">
+                        {props.children}
+                    </span>
+                    }
+                </i>
+            </span>
+        );
+    }
+
+    // Single icon
     return (
         <i className={classNames} aria-hidden={!hasLabel}>
             {hasLabel &&
@@ -37,6 +55,11 @@ Icon.propTypes = {
     spin: PropTypes.bool.isRequired,
 
     /**
+     * Will encapsulate the specified icon within a circle
+     */
+    circled: PropTypes.bool.isRequired,
+
+    /**
      * Screen reader labeling for the icon. If not provided,
      * the icon will be flagged as `aria-hidden`
      */
@@ -45,6 +68,7 @@ Icon.propTypes = {
 
 Icon.defaultProps = {
     spin: false,
+    circled: false
 };
 
 export default Icon;

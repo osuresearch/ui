@@ -16,7 +16,7 @@ const ASSETS_HOST = 'https://orwebdev02.rf.ohio-state.edu';
  * Custom aggregator for the `HTML Components` section
  */
 function listHtmlComponents() {
-    const files = glob.sync('src/html/**/!(readme).md');
+    const files = glob.sync('docs/html/**/!(readme).md');
 
     var sections = [];
     files.forEach((filename) => {
@@ -93,7 +93,11 @@ module.exports = {
     sections: [
         {
             name: '',
-            content: 'src/readme.md'
+            content: 'docs/readme.md'
+        },
+        {
+            name: 'Colors',
+            content: 'docs/colors.md'
         },
         {
             name: 'Components',
@@ -103,7 +107,7 @@ module.exports = {
         },
         {
             name: 'HTML Components',
-            content: 'src/html/readme.md',
+            content: 'docs/html/readme.md',
             sections: listHtmlComponents()
         },
         {
