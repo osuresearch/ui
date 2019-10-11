@@ -2,6 +2,7 @@
 const path = require('path');
 const glob = require('glob');
 const { styles, theme } = require('./styleguide.styles');
+const packageManifest = require('./package.json');
 
 // Where to find the root SASS file for loading styles across the page
 const SASS_INDEX = path.join(__dirname, './src/styleguide.scss');
@@ -38,7 +39,7 @@ function listHtmlComponents() {
  * - https://www.npmjs.com/package/@vxna/mini-html-webpack-template
  */
 module.exports = {
-    title: 'UI Components',
+    title: 'UI Components ' + packageManifest.version,
     usageMode: 'expand',
     styleguideDir: BUILD_PATH,
     skipComponentsWithoutExample: true,
