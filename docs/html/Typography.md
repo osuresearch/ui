@@ -2,7 +2,9 @@
 
 ### Font Stack
 
-Our font stack is `"ProximaNova", sans-serif` at a baseline of `16px`
+Our base font stack is `'ProximaNova', sans-serif` at a baseline of `16px`.
+
+For headers, our stack is `'Capita', 'Times New Roman', serif`.
 
 Supported weights are `200, 300, 400, 500, 700`
 
