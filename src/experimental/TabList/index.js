@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Icon from '../../component/Icon';
+import Icon from '../../components/Icon';
 
 class TabList extends React.Component {
     constructor(props) {

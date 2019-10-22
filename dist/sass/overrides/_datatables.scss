@@ -1,0 +1,42 @@
+
+table.dataTable {
+    tbody td, tbody th {
+        vertical-align: bottom;
+
+        &.money {
+            text-align: right;
+        }
+    }
+
+    thead th, thead td {
+        // Style correction for headers to match BS4 table headers
+        font-weight: 400;
+        font-size: 0.85em;
+        padding-right: 2em;
+        color: #666;
+
+        border-bottom: 1px solid #CCC;
+        border-radius: 0;
+        padding: 8px 10px;
+
+        // Ensure header labels don't wrap
+        white-space: nowrap;
+    }
+}
+
+// Ensure that the search input matches our form control styles
+.dataTables_filter input[type='search'] {
+    @extend .form-control;
+}
+
+// Scrollable datatables also introduces a more specific wrapper
+.dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody {
+    th, td {
+        vertical-align: top;
+    }
+}
+
+// Fix _empty container inheriting the .odd/.even styles.
+table.dataTable td.dataTables_empty {
+    background: $white;
+}

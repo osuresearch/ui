@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Search from '../../component/Search';
+import Search from '../../components/Search';
 
 /**
  * Application-wide searching. For use with the navbar.

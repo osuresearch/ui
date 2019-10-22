@@ -1,0 +1,33 @@
+
+footer {
+    font-size: 80%;
+    font-weight: 100;
+    width: 100%;
+    background: shade($gray, 60%);
+    padding: 2rem;
+    color: $white;
+
+    .wordmark {
+        border: none;
+    }
+
+    // Make links slightly thicker to fix contrast issues
+    // against the dark background
+    a {
+        font-weight: 300;
+    }
+
+    ul {
+        margin: 0;
+        padding: 0;
+
+        li {
+            list-style: none;
+        }
+    }
+
+    // Reduce footprint for mobile
+    @include media-breakpoint-down(sm) {
+        padding: 1rem;
+    }
+}

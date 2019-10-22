@@ -7,6 +7,17 @@ Versions follow [Semantic Versioning](https://semver.org/) guidelines - given a 
 2. MINOR version when you add functionality in a backwards-compatible manner, and
 3. PATCH version when you make backwards-compatible bug fixes.
 
+
+# 4.0.0 (Unreleased)
+
+__Backwards Breaking Changes:__
+
+* All non-React components have been removed or replaced with React-equivalents
+* Composer support has been removed. Now only installable through NPM
+* Component imports must now come from the `@oris/ui` package
+
+
+
 # 3.3.0 (2019-05-14)
 
 __New Features__

@@ -23,7 +23,7 @@ var _react = _interopRequireDefault(require("react"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
-var _Search = _interopRequireDefault(require("../../component/Search"));
+var _Search = _interopRequireDefault(require("../../components/Search"));
 
 /**
  * Application-wide searching. For use with the navbar.

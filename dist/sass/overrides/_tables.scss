@@ -1,0 +1,13 @@
+
+.table {
+    // Not thead th as we could potentially put th in the body/footer
+    th {
+        font-weight: 400;
+        font-size: 0.85em;
+        color: $gray;
+    }
+
+    thead {
+        border-bottom: 1px solid #c2c2c2;
+    }
+}

@@ -6,7 +6,8 @@
   "private": true,
   "main": "dist/components/index.js",
   "files": [
-    "dist"
+    "dist",
+    "src"
   ],
   "dependencies": {
     "node-sass": "^4.12.0",
@@ -18,7 +19,9 @@
   },
   "scripts": {
     "start": "npx styleguidist server",
-    "build": "npx babel ./src --out-dir ./dist",
+    "build:components": "npx babel ./src --out-dir ./dist",
+    "build:copy-sass": "node ./scripts/copy-sass.js",
+    "build": "npm-run-all --serial build:components build:copy-sass",
     "test": "react-scripts test"
   },
   "//scripts": {
@@ -51,7 +54,15 @@
     "@babel/preset-typescript": "^7.6.0",
     "@babel/register": "^7.6.0",
     "acorn": "^6.3.0",
+    "npm-run-all": "^4.1.5",
     "react-dropzone": "^10.1.8",
     "react-styleguidist": "^9.1.16"
+  },
+  "//devDependencies": {
+    "@babel/*": "Build dist/* files for usage through npm imports",
+    "acorn": "Forced upgraded version to help resolved a bug in Styleguidist",
+    "npm-run-all": "Parallel/Serial process runner for npm run commands",
+    "react-dropzone": "Dependency of Files component",
+    "react-styleguidist": "Styleguide build and local development support"
   }
 }

@@ -1,0 +1,7 @@
+
+input {
+    &[data-provide='datepicker'] {
+        // Ensure the input fits a date entry
+        max-width: 9em;
+    }
+}

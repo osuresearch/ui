@@ -1,0 +1,7 @@
+
+.badge {
+    // Bootstrap uses border-radius function internally,
+    // but this doesn't work because we turned off rounded
+    // borders for components. So this is overridden here
+    border-radius: $badge-border-radius;
+}
