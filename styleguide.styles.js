@@ -55,7 +55,7 @@ const theme = {
         h5: 16,
         h6: 16
     },
-    maxWidth: 780,
+    maxWidth: 900,
     sidebarWidth: 240
 }
 

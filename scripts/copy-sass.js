@@ -6,8 +6,8 @@ const fs = require('fs');
 const glob = require('glob');
 
 const packagePath = process.cwd();
-const distPath = path.join(packagePath, './dist/sass');
-const srcPath = path.join(packagePath, './src/sass');
+const distPath = path.join(packagePath, './dist');
+const srcPath = path.join(packagePath, './src');
 
 function copySass({ from, to }) {
     const files = glob.sync('**/*.scss', { cwd: from });

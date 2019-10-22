@@ -14,7 +14,7 @@ import { TabItem, Badge } from '@oris/ui';
 Example of handling large tab lists
 
 ```jsx
-import TabItem from '../TabItem';
+import { TabItem } from '@oris/ui';
 
 // This example will activate any clicked item, so you can
 // see what the active state looks like while overflowing
@@ -37,7 +37,7 @@ const isActive = (i) => state.selected == i;
 Example of a vertical layout. For a vertical layout, tabs are never collapsed into a "More" dropdown.
 
 ```jsx
-import TabItem from '../TabItem';
+import { TabItem } from '@oris/ui';
 
 <TabList vertical={true}>
     <TabItem onClick={() => alert('One')}>One</TabItem>

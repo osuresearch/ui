@@ -1,0 +1,8 @@
+
+.input-search {
+    // Override Bootstrap's default 'display:none' on dropdowns.
+    // We don't include it in the DOM until it's needed anyway.
+    .dropdown-menu {
+        display: block;
+    }
+}

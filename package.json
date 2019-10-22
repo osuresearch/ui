@@ -19,6 +19,7 @@
   },
   "scripts": {
     "start": "npx styleguidist server",
+    "styleguide": "npx styleguidist build",
     "build:components": "npx babel ./src --out-dir ./dist",
     "build:copy-sass": "node ./scripts/copy-sass.js",
     "build": "npm-run-all --serial build:components build:copy-sass",
@@ -26,6 +27,7 @@
   },
   "//scripts": {
     "start": "Run styleguidist server for local development of ORIS/UI",
+    "styleguide": "Build a deployable styleguide for upload to webservers",
     "build": "Compile ES6 code to deployable source distributions via Babel",
     "test": "Something that doesn't work yet"
   },

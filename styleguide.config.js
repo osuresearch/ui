@@ -5,7 +5,7 @@ const { styles, theme } = require('./styleguide.styles');
 const packageManifest = require('./package.json');
 
 // Where to find the root SASS file for loading styles across the page
-const SASS_INDEX = path.join(__dirname, './src/styleguide.scss');
+const SASS_INDEX = path.join(__dirname, './src/sass/styleguide.scss');
 
 // Output path of deployable assets after `npm run deploy`
 const BUILD_PATH = path.join(__dirname, './build');
