@@ -4,7 +4,7 @@
   "description": "React UI components for ORIS applications",
   "author": "Chase McManning <mcmanning.1@osu.edu>",
   "private": true,
-  "main": "dist/index.js",
+  "main": "dist/components/index.js",
   "files": [
     "dist"
   ],
@@ -18,8 +18,13 @@
   },
   "scripts": {
     "start": "npx styleguidist server",
-    "build": "react-scripts build",
+    "build": "npx babel ./src --out-dir ./dist",
     "test": "react-scripts test"
+  },
+  "//scripts": {
+    "start": "Run styleguidist server for local development of ORIS/UI",
+    "build": "Compile ES6 code to deployable source distributions via Babel",
+    "test": "Something that doesn't work yet"
   },
   "eslintConfig": {
     "extends": "react-app"

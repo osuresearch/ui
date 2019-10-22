@@ -102,9 +102,9 @@ module.exports = {
         },
         {
             name: 'Components',
-            content: 'src/component/readme.md',
-            components: 'src/component/**/*.js',
-            ignore: 'src/component/_legacy/*.js'
+            content: 'src/components/readme.md',
+            components: 'src/components/**/*.js',
+            ignore: 'src/components/_legacy/*.js'
         },
         {
             name: 'HTML Components',
