@@ -24,8 +24,4 @@ function copySass({ from, to }) {
     return cmds;
 }
 
-function run() {
-    copySass({ from: srcPath, to: distPath });
-}
-
-run();
+copySass({ from: srcPath, to: distPath });
