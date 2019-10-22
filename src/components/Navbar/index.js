@@ -29,7 +29,10 @@ Navbar.propTypes = {
     /**
      * Components to render within the navbar (buttons, searches, Profile)
      */
-    children: PropTypes.node.isRequired
+    /*children: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.node),
+        PropTypes.object
+    ]),*/
 };
 
 export default Navbar;

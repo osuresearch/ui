@@ -16,7 +16,10 @@ Badge.propTypes = {
     /**
      * The content of the badge label
      */
-    children: PropTypes.any,
+    children: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.node),
+        PropTypes.object
+    ]),
 
     /**
      * The Bootstrap theme to apply to the badge

@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
  */
 class Banner extends React.Component {
     render() {
-        const { children, theme, title } = this.props;
+        const { theme, title } = this.props;
 
         let classNames = 'banner banner-' + theme;
         return <div className={classNames}>{title}</div>

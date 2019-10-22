@@ -528,9 +528,9 @@ Search.propTypes = {
      * Preloaded value to start with when initializing the component
      */
     defaultValue: PropTypes.shape({
-                    key: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-                    value: PropTypes.any.isRequired
-                }),
+        key: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+        value: PropTypes.any.isRequired
+    }),
 
     /**
      * Callable for when an item is selected from the search results, or the search is cleared.
@@ -560,7 +560,7 @@ Search.propTypes = {
      *
      * Defaults to the `SearchResult` component if not supplied.
      */
-    resultComponent: PropTypes.func,
+    resultComponent: PropTypes.node,
 
     /**
      * Callback to render custom content in place of the dropdown.

@@ -10,3 +10,9 @@ export { default as OhioStateNavbar } from './OhioStateNavbar';
 export { default as Profile } from './Profile';
 export { default as Search } from './Search';
 export { default as SearchResult } from './SearchResult';
+
+// Unreleased experimental components.
+export { default as AppSearch } from '../experimental/AppSearch';
+export { default as Banner } from '../experimental/Banner';
+export { default as TabList } from '../experimental/TabList';
+export { default as TabItem } from '../experimental/TabItem';

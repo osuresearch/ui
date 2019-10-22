@@ -5,7 +5,7 @@
 $vendor-images: 'https://orwebdev02.rf.ohio-state.edu/assets/img/vendor';
 $vendor-fonts: 'https://orwebdev02.rf.ohio-state.edu/assets/fonts/vendor';
 
-@import './sass/ui';
+@import './ui';
 
 // Styleguide-specific component styles
-@import './internal/Palette';
+@import '../internal/Palette';

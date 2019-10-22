@@ -52,7 +52,10 @@ Profile.propTypes = {
      * Must be anchors or buttons with class "dropdown-item".
      * See: https://getbootstrap.com/docs/4.0/components/dropdowns/
      */
-    children: PropTypes.node
+    children: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.node),
+        PropTypes.object
+    ])
 };
 
 Profile.defaultProps = {

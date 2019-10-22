@@ -22,7 +22,8 @@
     "styleguide": "npx styleguidist build",
     "build:components": "npx babel ./src --out-dir ./dist",
     "build:copy-sass": "node ./scripts/copy-sass.js",
-    "build": "npm-run-all --serial build:components build:copy-sass",
+    "build:copy-ts": "node ./scripts/copy-ts.js",
+    "build": "npm-run-all --serial build:components build:copy-sass build:copy-ts",
     "test": "react-scripts test"
   },
   "//scripts": {

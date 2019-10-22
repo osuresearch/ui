@@ -89,7 +89,7 @@ module.exports = {
     ],
     moduleAliases: {
         // Aliasing so we don't have awful import '../../../..' in examples.
-        '@oris/ui': path.join(__dirname, '.')
+        '@oris/ui': path.join(__dirname, './src/components')
     },
     sections: [
         {
