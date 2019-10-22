@@ -4,10 +4,15 @@
   "description": "React UI components for ORIS applications",
   "author": "Chase McManning <mcmanning.1@osu.edu>",
   "private": true,
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "node-sass": "^4.12.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
+    "react-rainbow-components": "^1.7.0",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.1.1"
   },
@@ -32,6 +37,14 @@
     ]
   },
   "devDependencies": {
+    "@babel/cli": "^7.6.0",
+    "@babel/core": "^7.6.0",
+    "@babel/plugin-transform-runtime": "^7.6.2",
+    "@babel/plugin-transform-typescript": "^7.6.0",
+    "@babel/preset-env": "^7.6.0",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/preset-typescript": "^7.6.0",
+    "@babel/register": "^7.6.0",
     "acorn": "^6.3.0",
     "react-dropzone": "^10.1.8",
     "react-styleguidist": "^9.1.16"
