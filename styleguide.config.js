@@ -8,7 +8,7 @@ const packageManifest = require('./package.json');
 const SASS_INDEX = path.join(__dirname, './src/sass/styleguide.scss');
 
 // Output path of deployable assets after `npm run deploy`
-const BUILD_PATH = path.join(__dirname, './build');
+const BUILD_PATH = path.join(__dirname, './styleguide');
 
 // Where standard static vendor assets are loaded from.
 const ASSETS_HOST = 'https://orwebdev02.rf.ohio-state.edu';

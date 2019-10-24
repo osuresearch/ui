@@ -19,11 +19,11 @@
   },
   "scripts": {
     "start": "npx styleguidist server",
-    "styleguide": "npx styleguidist build",
+    "build:styleguide": "npx styleguidist build",
     "build:components": "npx babel ./src --out-dir ./dist",
     "build:copy-sass": "node ./scripts/copy-sass.js",
     "build:copy-ts": "node ./scripts/copy-ts.js",
-    "build": "npm-run-all --serial build:components build:copy-sass build:copy-ts",
+    "build": "npm-run-all --parallel build:components build:styleguide --serial build:copy-sass build:copy-ts",
     "test": "react-scripts test"
   },
   "//scripts": {
@@ -59,7 +59,7 @@
     "acorn": "^6.3.0",
     "npm-run-all": "^4.1.5",
     "react-dropzone": "^10.1.8",
-    "react-styleguidist": "^9.1.16"
+    "react-styleguidist": "^9.2"
   },
   "//devDependencies": {
     "@babel/*": "Build dist/* files for usage through npm imports",

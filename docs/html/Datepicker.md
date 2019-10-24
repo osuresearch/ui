@@ -33,3 +33,6 @@ It is also recommended to utilize [Moment.js](https://momentjs.com/docs/) for ha
     </small>
 </div>
 ```
+
+**Warning**: This may not work with React at the moment as the Datepicker is a jQuery plugin.
+

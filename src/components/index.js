@@ -1,4 +1,6 @@
 
+import '../internal/jQueryPluginChanges';
+
 export { default as AppAlert } from './AppAlert';
 export { default as Badge } from './Badge';
 export { default as Button } from './Button';
