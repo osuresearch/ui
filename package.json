@@ -6,8 +6,7 @@
   "private": true,
   "main": "dist/components/index.js",
   "files": [
-    "dist",
-    "src"
+    "dist"
   ],
   "dependencies": {
     "node-sass": "^4.12.0",
