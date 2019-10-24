@@ -35,12 +35,16 @@ Navbar.propTypes = {
   /**
    * Application title displayed to the end user
    */
-  title: _propTypes.default.string.isRequired,
-
+  title: _propTypes.default.string.isRequired
   /**
    * Components to render within the navbar (buttons, searches, Profile)
    */
-  children: _propTypes.default.node.isRequired
+
+  /*children: PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.node),
+      PropTypes.object
+  ]),*/
+
 };
 var _default = Navbar;
 exports.default = _default;

@@ -52,7 +52,7 @@ Badge.propTypes = {
   /**
    * The content of the badge label
    */
-  children: _propTypes.default.any,
+  children: _propTypes.default.oneOfType([_propTypes.default.arrayOf(_propTypes.default.node), _propTypes.default.object]),
 
   /**
    * The Bootstrap theme to apply to the badge

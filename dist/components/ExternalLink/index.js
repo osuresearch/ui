@@ -36,7 +36,7 @@ ExternalLink.propTypes = {
   /**
    * If no children are supplied, the link `href` will be rendered in their place.
    */
-  children: _propTypes.default.any,
+  children: _propTypes.default.oneOfType([_propTypes.default.arrayOf(_propTypes.default.node), _propTypes.default.object]),
 
   /**
    * Should the link redirect the current window instead of opening in a new one

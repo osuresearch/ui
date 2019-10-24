@@ -71,6 +71,32 @@ Object.defineProperty(exports, "SearchResult", {
     return _SearchResult.default;
   }
 });
+Object.defineProperty(exports, "AppSearch", {
+  enumerable: true,
+  get: function get() {
+    return _AppSearch.default;
+  }
+});
+Object.defineProperty(exports, "Banner", {
+  enumerable: true,
+  get: function get() {
+    return _Banner.default;
+  }
+});
+Object.defineProperty(exports, "TabList", {
+  enumerable: true,
+  get: function get() {
+    return _TabList.default;
+  }
+});
+Object.defineProperty(exports, "TabItem", {
+  enumerable: true,
+  get: function get() {
+    return _TabItem.default;
+  }
+});
+
+require("../internal/jQueryPluginChanges");
 
 var _AppAlert = _interopRequireDefault(require("./AppAlert"));
 
@@ -93,3 +119,11 @@ var _Profile = _interopRequireDefault(require("./Profile"));
 var _Search = _interopRequireDefault(require("./Search"));
 
 var _SearchResult = _interopRequireDefault(require("./SearchResult"));
+
+var _AppSearch = _interopRequireDefault(require("../experimental/AppSearch"));
+
+var _Banner = _interopRequireDefault(require("../experimental/Banner"));
+
+var _TabList = _interopRequireDefault(require("../experimental/TabList"));
+
+var _TabItem = _interopRequireDefault(require("../experimental/TabItem"));

@@ -41,7 +41,6 @@ function (_React$Component) {
     key: "render",
     value: function render() {
       var _this$props = this.props,
-          children = _this$props.children,
           theme = _this$props.theme,
           title = _this$props.title;
       var classNames = 'banner banner-' + theme;

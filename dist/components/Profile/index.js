@@ -64,7 +64,7 @@ Profile.propTypes = {
    * Must be anchors or buttons with class "dropdown-item".
    * See: https://getbootstrap.com/docs/4.0/components/dropdowns/
    */
-  children: _propTypes.default.node
+  children: _propTypes.default.oneOfType([_propTypes.default.arrayOf(_propTypes.default.node), _propTypes.default.object])
 };
 Profile.defaultProps = {
   shibbolethLogoutUrl: '/Shibboleth.sso/Logout?return=https://webauth.service.ohio-state.edu/idp/profile/Logout',

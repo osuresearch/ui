@@ -67,7 +67,7 @@ Icon.propTypes = {
    * Screen reader labeling for the icon. If not provided,
    * the icon will be flagged as `aria-hidden`
    */
-  children: _propTypes.default.string
+  children: _propTypes.default.oneOfType([_propTypes.default.arrayOf(_propTypes.default.node), _propTypes.default.object])
 };
 Icon.defaultProps = {
   spin: false,
