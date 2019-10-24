@@ -40,7 +40,7 @@ Outline buttons for secondary (less important / focused) actions, such as cancel
 Examples of buttons with icons.
 
 ```jsx
-import Icon from '../Icon';
+import { Icon } from '@oris/ui';
 
 <div>
     <Button theme="outline-secondary">
@@ -56,7 +56,7 @@ import Icon from '../Icon';
 Do not combine icons and words together in buttons, unless it is to represent some sort of active state such as saving in progress:
 
 ```jsx
-import Icon from '../Icon';
+import { Icon } from '@oris/ui';
 
 <Button>
     <Icon name="spinner" spin={true} /> Saving...

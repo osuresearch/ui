@@ -16,11 +16,17 @@ __Backwards Breaking Changes:__
 * Composer support has been removed. Now only installable through NPM
 * Component imports must now come from the `@oris/ui` package
 
+__New Features:__
+
+**Changes still a WIP, but expected to be part of the 4.0.0 release**
+
+* Upgraded Bootstrap to latest 4.X.X
+* Added TypeScript definitions for components and props [insert cool screenshot here]
 
 
 # 3.3.0 (2019-05-14)
 
-__New Features__
+__New Features:__
 * Add new React components for common ORIS application features (Emulate, AppLoader, AppError, Lookup, Modal, Profile, Navbar, SystemAlert, ShibbolethMonitor)
 * Add `i.required-asterisk` component style to render out the red asterisk used on required fields in any context that a designer wants (e.g. for individual checkbox labels or a form heading)
 
