@@ -11,7 +11,7 @@ const SASS_INDEX = path.join(__dirname, './src/sass/styleguide.scss');
 const BUILD_PATH = path.join(__dirname, './styleguide');
 
 // Where standard static vendor assets are loaded from.
-const ASSETS_HOST = 'https://orwebdev02.rf.ohio-state.edu';
+const ASSETS_HOST = 'https://orapps.osu.edu';
 
 /**
  * Custom aggregator for the `HTML Components` section
