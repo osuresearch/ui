@@ -31,6 +31,27 @@ Supported weights are `200, 300, 400, 500, 700`
 <p><em>This line rendered as italicized text.</em></p>
 ```
 
+### Links
+
+```js
+<a href="/path/to/url">Some link</a>
+```
+
+For accessibility, use a `.btn-link` button for links with no target (e.g. `href="#"`):
+
+```js
+<button className="btn-link">Some link</button>
+```
+
+For external links, use the `<ExternalLink />` component to ensure accessibility and security standards are met:
+
+```js
+import { ExternalLink } from '@oris/ui';
+
+<ExternalLink href="https://research.osu.edu">Office of Research</ExternalLink>
+```
+
+
 ### Best Practices
 
 * Always define your font sizes using `em` or `rem` for [consistent experiences](https://www.w3.org/QA/Tips/font-size)

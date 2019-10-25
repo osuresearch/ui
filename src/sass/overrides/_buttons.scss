@@ -38,7 +38,7 @@
 }
 
 // Case where a button is .btn-link without .btn
-.btn-link {
+.btn-link:not(.btn) {
     border: none;
     margin: 0;
     padding: 0;
