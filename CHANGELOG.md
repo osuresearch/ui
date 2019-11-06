@@ -18,6 +18,13 @@ __Backwards Breaking Changes:__
 
 __New Features:__
 
+* New `ExternalLink` component to automatically handle accessibility and security standards for links out of the application.
+* New `Icon` component to automatically handle accessibility standards for Font Awesome icons.
+* New `Search` component to replace legacy `$.Lookup`
+* New `Footer` component to display the standard brand footer
+* New `OhioStateNavbar` component to encapsulate the required OSU brand navbar
+* Many other new components, including `Button`, `Badge`, etc
+
 **Changes still a WIP, but expected to be part of the 4.0.0 release**
 
 * Upgraded Bootstrap to latest 4.X.X
