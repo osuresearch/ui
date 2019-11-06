@@ -13,6 +13,8 @@ const ExternalLink = (props) => (
         <Icon name="external-link" /> {` `}
         {React.Children.count(props.children) > 0 && props.children}
         {React.Children.count(props.children) < 1 && props.href}
+
+        {!props.redirect && <span className="sr-only">(Opens in a new window)</span>}
     </a>
 );
 
