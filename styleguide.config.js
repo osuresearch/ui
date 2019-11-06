@@ -103,7 +103,7 @@ module.exports = {
         {
             name: 'Components',
             content: 'src/components/readme.md',
-            components: 'src/components/**/*.js',
+            components: 'src/components/**/index.js',
             ignore: 'src/components/_legacy/*.js'
         },
         {
@@ -114,7 +114,7 @@ module.exports = {
         {
             name: 'Experimental',
             content: 'src/experimental/readme.md',
-            components: 'src/experimental/**/*.js'
+            components: 'src/experimental/**/index.js'
         }
     ]
 };
