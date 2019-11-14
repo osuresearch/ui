@@ -4,6 +4,7 @@ import '../internal/jQueryPluginChanges';
 export { default as AppAlert } from './AppAlert';
 export { default as Badge } from './Badge';
 export { default as Button } from './Button';
+export { default as Emulate } from './Emulate';
 export { default as ExternalLink } from './ExternalLink';
 export { default as Footer } from './Footer';
 export { default as Icon } from './Icon';
