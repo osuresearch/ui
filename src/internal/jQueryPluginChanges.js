@@ -1,6 +1,6 @@
 
 // Apply default overrides to jQuery dependencies
-if (window.$) {
+if (window && window.$) {
     // Ensure addon icons trigger the sibling inputs.
     window.$(document).on(
         'click',
