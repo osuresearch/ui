@@ -32,6 +32,8 @@ class Modal extends React.Component {
 
     /**
      * Activates and displays the modal
+     *
+     * @public
      */
     show() {
         window.$(this.ref.current).modal(this.props);
@@ -39,6 +41,8 @@ class Modal extends React.Component {
 
     /**
      * Hides the modal from the end user
+     *
+     * @public
      */
     hide() {
         // TODO: Destroy instead? It might be more react-friendly
