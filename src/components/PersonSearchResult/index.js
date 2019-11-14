@@ -3,21 +3,25 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 /**
- * Default implementation for a single result from `Search`. If you want to customize the
- * result renderer, you need to create your own variation of this component.
+ * Search result component for looking up people in the University.
+ * Includes their username alongside each result for better identifying
+ * the correct result when multiple people with the same name are returned.
  */
-const SearchResult = (props) => {
+const PersonSearchResult = (props) => {
     // Extract a key/value from the resource to display in the input field once selected
     const onClick = () => props.onSelect(props.resource.id, props.resource.attributes.name);
 
     return (
         <button className="dropdown-item" type="button" onClick={onClick}>
             {props.resource.attributes.name}
+            <small className="text-muted pull-right pl-2">
+                ({props.resource.attributes.username})
+            </small>
         </button>
     );
 };
 
-SearchResult.propTypes = {
+PersonSearchResult.propTypes = {
     /**
      * JSON:API resource this search result displays
      */
@@ -35,4 +39,4 @@ SearchResult.propTypes = {
     onSelect: PropTypes.func.isRequired
 };
 
-export default SearchResult;
+export default PersonSearchResult;
