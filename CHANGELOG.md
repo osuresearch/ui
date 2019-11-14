@@ -29,6 +29,10 @@ __Backwards Breaking Changes:__
 * Component imports must now come from the `@oris/ui` package
 * `Lookup` component has been replaced by `Search` - with similar arguments and less jQuery
 * `Modal` component now has additional wrapper DOM. Recommended to use new `ModalHeader` and `ModalBody` as the only children.
+* Removed `AppLoader` component
+* Removed `AppError` component
+* Removed `ShibbolethMonitor` component
+* Removed `Util.debounce` function
 
 __New Features:__
 
