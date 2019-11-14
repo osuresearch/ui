@@ -24,7 +24,9 @@ var ExternalLink = function ExternalLink(props) {
     rel: "noopener noreferrer"
   }, _react.default.createElement(_Icon.default, {
     name: "external-link"
-  }), " ", " ", _react.default.Children.count(props.children) > 0 && props.children, _react.default.Children.count(props.children) < 1 && props.href);
+  }), " ", " ", _react.default.Children.count(props.children) > 0 && props.children, _react.default.Children.count(props.children) < 1 && props.href, !props.redirect && _react.default.createElement("span", {
+    className: "sr-only"
+  }, "(Opens in a new window)"));
 };
 
 ExternalLink.propTypes = {

@@ -12,10 +12,11 @@ var _react = _interopRequireDefault(require("react"));
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
 /**
- * Default implementation for a single result from `Search`. If you want to customize the
- * result renderer, you need to create your own variation of this component.
+ * Search result component for looking up people in the University.
+ * Includes their username alongside each result for better identifying
+ * the correct result when multiple people with the same name are returned.
  */
-var SearchResult = function SearchResult(props) {
+var PersonSearchResult = function PersonSearchResult(props) {
   // Extract a key/value from the resource to display in the input field once selected
   var onClick = function onClick() {
     return props.onSelect(props.resource.id, props.resource.attributes.name);
@@ -25,10 +26,12 @@ var SearchResult = function SearchResult(props) {
     className: "dropdown-item",
     type: "button",
     onClick: onClick
-  }, props.resource.attributes.name);
+  }, props.resource.attributes.name, _react.default.createElement("small", {
+    className: "text-muted pull-right pl-2"
+  }, "(", props.resource.attributes.username, ")"));
 };
 
-SearchResult.propTypes = {
+PersonSearchResult.propTypes = {
   /**
    * JSON:API resource this search result displays
    */
@@ -45,5 +48,5 @@ SearchResult.propTypes = {
    */
   onSelect: _propTypes.default.func.isRequired
 };
-var _default = SearchResult;
+var _default = PersonSearchResult;
 exports.default = _default;

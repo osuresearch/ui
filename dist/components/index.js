@@ -23,6 +23,12 @@ Object.defineProperty(exports, "Button", {
     return _Button.default;
   }
 });
+Object.defineProperty(exports, "Emulate", {
+  enumerable: true,
+  get: function get() {
+    return _Emulate.default;
+  }
+});
 Object.defineProperty(exports, "ExternalLink", {
   enumerable: true,
   get: function get() {
@@ -39,6 +45,24 @@ Object.defineProperty(exports, "Icon", {
   enumerable: true,
   get: function get() {
     return _Icon.default;
+  }
+});
+Object.defineProperty(exports, "Modal", {
+  enumerable: true,
+  get: function get() {
+    return _Modal.default;
+  }
+});
+Object.defineProperty(exports, "ModalHeader", {
+  enumerable: true,
+  get: function get() {
+    return _ModalHeader.default;
+  }
+});
+Object.defineProperty(exports, "ModalBody", {
+  enumerable: true,
+  get: function get() {
+    return _ModalBody.default;
   }
 });
 Object.defineProperty(exports, "Navbar", {
@@ -71,28 +95,10 @@ Object.defineProperty(exports, "SearchResult", {
     return _SearchResult.default;
   }
 });
-Object.defineProperty(exports, "AppSearch", {
+Object.defineProperty(exports, "PersonSearchResult", {
   enumerable: true,
   get: function get() {
-    return _AppSearch.default;
-  }
-});
-Object.defineProperty(exports, "Banner", {
-  enumerable: true,
-  get: function get() {
-    return _Banner.default;
-  }
-});
-Object.defineProperty(exports, "TabList", {
-  enumerable: true,
-  get: function get() {
-    return _TabList.default;
-  }
-});
-Object.defineProperty(exports, "TabItem", {
-  enumerable: true,
-  get: function get() {
-    return _TabItem.default;
+    return _PersonSearchResult.default;
   }
 });
 
@@ -104,11 +110,19 @@ var _Badge = _interopRequireDefault(require("./Badge"));
 
 var _Button = _interopRequireDefault(require("./Button"));
 
+var _Emulate = _interopRequireDefault(require("./Emulate"));
+
 var _ExternalLink = _interopRequireDefault(require("./ExternalLink"));
 
 var _Footer = _interopRequireDefault(require("./Footer"));
 
 var _Icon = _interopRequireDefault(require("./Icon"));
+
+var _Modal = _interopRequireDefault(require("./Modal"));
+
+var _ModalHeader = _interopRequireDefault(require("./ModalHeader"));
+
+var _ModalBody = _interopRequireDefault(require("./ModalBody"));
 
 var _Navbar = _interopRequireDefault(require("./Navbar"));
 
@@ -120,10 +134,4 @@ var _Search = _interopRequireDefault(require("./Search"));
 
 var _SearchResult = _interopRequireDefault(require("./SearchResult"));
 
-var _AppSearch = _interopRequireDefault(require("../experimental/AppSearch"));
-
-var _Banner = _interopRequireDefault(require("../experimental/Banner"));
-
-var _TabList = _interopRequireDefault(require("../experimental/TabList"));
-
-var _TabItem = _interopRequireDefault(require("../experimental/TabItem"));
+var _PersonSearchResult = _interopRequireDefault(require("./PersonSearchResult"));

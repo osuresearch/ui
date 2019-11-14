@@ -36,3 +36,10 @@
         color: shade($gray, 40%);
     }
 }
+
+// Case where a button is .btn-link without .btn
+.btn-link:not(.btn) {
+    border: none;
+    margin: 0;
+    padding: 0;
+}
