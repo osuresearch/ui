@@ -8,27 +8,40 @@ Versions follow [Semantic Versioning](https://semver.org/) guidelines - given a 
 3. PATCH version when you make backwards-compatible bug fixes.
 
 
+# 4.1.0 (Unreleased)
+
+**Changes still a WIP, but expected to be part of the 4.1.0 release**
+
+* Upgraded Bootstrap to latest 4.X.X
+* Added TypeScript definitions for components and props [insert cool screenshot here]
+
+
 # 4.0.0 (Unreleased)
+
+__New Styleguide and Interactive Examples System:__
+
+Styleguide documentation has been integrated directly into the project via [React Styleguidist](https://react-styleguidist.js.org/). Simply `git checkout` a copy of oris/ui and do a `npm start` to start up a local interactive styleguide.
 
 __Backwards Breaking Changes:__
 
 * All non-React components have been removed or replaced with React-equivalents
-* Composer support has been removed. Now only installable through NPM
+* Composer support has been removed. Now installable as a `npm` package
 * Component imports must now come from the `@oris/ui` package
+* `Lookup` component has been replaced by `Search` - with similar arguments and less jQuery
+* `Modal` component now has additional wrapper DOM. Recommended to use new `ModalHeader` and `ModalBody` as the only children.
 
 __New Features:__
 
-* New `ExternalLink` component to automatically handle accessibility and security standards for links out of the application.
+* New `ExternalLink` component to automatically handle accessibility and security standards for links out of an application.
 * New `Icon` component to automatically handle accessibility standards for Font Awesome icons.
 * New `Search` component to replace legacy `$.Lookup`
 * New `Footer` component to display the standard brand footer
 * New `OhioStateNavbar` component to encapsulate the required OSU brand navbar
-* Many other new components, including `Button`, `Badge`, etc
-
-**Changes still a WIP, but expected to be part of the 4.0.0 release**
-
-* Upgraded Bootstrap to latest 4.X.X
-* Added TypeScript definitions for components and props [insert cool screenshot here]
+* New `PersonSearchResult` renderer component for `Search` to standardize how person results look across applications.
+* New `Button` component
+* New `Badge` component
+* New `ModalHeader` component
+* New `ModalBody` component
 
 
 # 3.3.0 (2019-05-14)

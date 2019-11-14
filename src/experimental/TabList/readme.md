@@ -2,7 +2,8 @@
 ### Examples
 
 ```jsx
-import { TabItem, Badge } from '@oris/ui';
+import { Badge } from '@oris/ui';
+import { TabItem } from '@oris/ui/experimental';
 
 <TabList>
     <TabItem onClick={() => alert('One')}>One</TabItem>
@@ -14,7 +15,7 @@ import { TabItem, Badge } from '@oris/ui';
 Example of handling large tab lists
 
 ```jsx
-import { TabItem } from '@oris/ui';
+import { TabItem } from '@oris/ui/experimental';
 
 // This example will activate any clicked item, so you can
 // see what the active state looks like while overflowing
@@ -37,7 +38,7 @@ const isActive = (i) => state.selected == i;
 Example of a vertical layout. For a vertical layout, tabs are never collapsed into a "More" dropdown.
 
 ```jsx
-import { TabItem } from '@oris/ui';
+import { TabItem } from '@oris/ui/experimental';
 
 <TabList vertical={true}>
     <TabItem onClick={() => alert('One')}>One</TabItem>

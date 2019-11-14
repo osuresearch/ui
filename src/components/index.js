@@ -17,10 +17,3 @@ export { default as Profile } from './Profile';
 export { default as Search } from './Search';
 export { default as SearchResult } from './SearchResult';
 export { default as PersonSearchResult } from './PersonSearchResult';
-
-// Unreleased experimental components.
-export { default as AppSearch } from '../experimental/AppSearch';
-export { default as Masthead } from '../experimental/Masthead';
-export { default as MastheadItem } from '../experimental/MastheadItem';
-export { default as TabList } from '../experimental/TabList';
-export { default as TabItem } from '../experimental/TabItem';
