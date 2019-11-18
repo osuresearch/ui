@@ -49,6 +49,12 @@ __New Features:__
 * New `ModalBody` component
 
 
+# 3.3.1 (2019-10-10)
+
+__Bug Fixes:__
+* Multiple React components: Fixed `fetch` compatibility issues with Edge < 18
+
+
 # 3.3.0 (2019-05-14)
 
 __New Features:__
