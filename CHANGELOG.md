@@ -13,10 +13,10 @@ Versions follow [Semantic Versioning](https://semver.org/) guidelines - given a 
 **Changes still a WIP, but expected to be part of the 4.1.0 release**
 
 * Upgraded Bootstrap to latest 4.X.X
-* Added TypeScript definitions for components and props [insert cool screenshot here]
+* Added TypeScript definitions for components and props [insert cool usage screenshot here]
 
 
-# 4.0.0 (Unreleased)
+# 4.0.0 (2019-11-18)
 
 __New Styleguide and Interactive Examples System:__
 
@@ -25,13 +25,14 @@ Styleguide documentation has been integrated directly into the project via [Reac
 __Backwards Breaking Changes:__
 
 * All non-React components have been removed or replaced with React-equivalents
+    * This does not include every Bootstrap component. Use those as you typically would.
 * Composer support has been removed. Now installable as a `npm` package
 * Component imports must now come from the `@oris/ui` package
 * `Lookup` component has been replaced by `Search` - with similar arguments and less jQuery
 * `Modal` component now has additional wrapper DOM. Recommended to use new `ModalHeader` and `ModalBody` as the only children.
 * Removed `AppLoader` component
 * Removed `AppError` component
-* Removed `ShibbolethMonitor` component
+* Removed `ShibbolethMonitor` component - see [FWK-185](https://ordevsvc01.rf.ohio-state.edu/youtrack/issue/FWK-185) for a future replacement
 * Removed `Util.debounce` function
 
 __New Features:__
