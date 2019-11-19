@@ -116,7 +116,10 @@ module.exports = {
         {
             name: 'Experimental',
             content: 'src/experimental/readme.md',
-            components: 'src/experimental/**/index.js'
+            components: 'src/experimental/**/index.js',
+            ignore: [
+                'src/experimental/.ignore'
+            ]
         }
     ]
 };
