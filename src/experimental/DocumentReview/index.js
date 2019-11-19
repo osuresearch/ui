@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import CommentSection from './CommentSection';
+import CommentSidebar from './CommentSidebar';
 import iframeCSS from './iframe-css';
 
 import './index.scss';
@@ -105,10 +106,12 @@ class DocumentReview extends React.Component {
         style.innerText = iframeCSS;
         frameDoc.body.appendChild(style);
 
+        this.sidebar = new CommentSidebar(frameDoc);
+
         // Scrape the document and inject comment blocks. Since we're working within
         // an iframe here and there's minimal JS to deal with, we'll just be
         // dropping down to the pure Javascript API and ignore React.
-        frameDoc.querySelectorAll('[data-comment-section]').forEach((node) => {
+        /*frameDoc.querySelectorAll('[data-comment-section]').forEach((node) => {
             const section = node.dataset['commentSection'];
             this.sections[section] = new CommentSection(
                 section,
@@ -116,7 +119,7 @@ class DocumentReview extends React.Component {
                 node,
                 this.onSubmitReply
             );
-        });
+        });*/
 
         // Try to load in the comments, assuming we're both
         // document ready + comment data ready.

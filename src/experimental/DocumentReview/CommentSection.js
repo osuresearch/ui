@@ -4,24 +4,25 @@
  * lifting of manipulating content within an iframe document inside DocumentReview.
  *
  * This is *not* a React component. This is a direct DOM manager.
+ *
+ * TODO: Cache solution for position lookups so we stop querying the DOM. (Same goes for anchors)
+ * The lookups should only invalidate if the container frame dimensions change.
  */
 class CommentSection {
     /**
      * @param {string} name Unique identifier for the section
      * @param {Document} document Document that comment DOM exists within
-     * @param {HTMLElement} container Containing element that comments are associated with
+     * @param {HTMLElement} parent Containing element that comments are associated with
      */
-    constructor(name, document, container, onReplyHandler) {
+    constructor(name, document, anchor, parent, onReplyHandler) {
         this.name = name;
         this.document = document;
-        this.container = container;
+        this.parent = parent;
+        this.anchor = anchor;
         this.onReplyHandler = onReplyHandler;
+        this.onUpdateHandler = null;
 
-        // Mapping between unique comment IDs and DOM elements
-        this.comments = {};
-
-        this.onClickNewComment = this.onClickNewComment.bind(this);
-        this.onSubmitReply = this.onSubmitReply.bind(this);
+        this.onCommentChange = this.onCommentChange.bind(this);
 
         this.injectDOM();
     }
@@ -33,74 +34,50 @@ class CommentSection {
      * that's contained within an IFrame.
      */
     injectDOM() {
-        // Create a button to add new comments to the section
-        // const newCommentIcon = this.document.createElement('button');
-        // newCommentIcon.classList.add('comments-add-reply');
-        // newCommentIcon.innerText = 'New Comment';
-        // newCommentIcon.addEventListener('click', this.onClickNewComment);
-
-        this.container.classList.add('comment-section');
-
         // Add a container for all comments and our new comment form
-        const comments = this.document.createElement('div');
-        comments.classList.add('comments');
+        const container = this.document.createElement('div');
+        container.classList.add('comment-section');
 
-        const commentsContainer = this.document.createElement('div');
-        commentsContainer.classList.add('comments-container');
-
-        const newCommentButton = this.document.createElement('button');
-        newCommentButton.classList.add('comments-add');
-        newCommentButton.innerText = 'Add Comment';
-        newCommentButton.addEventListener('click', this.onClickNewComment);
-
-        // Add a field for inserting new replies / comments
-        const reply = this.document.createElement('form');
-        reply.innerHTML = `
-            <textarea class="comment-textarea" placeholder="Add Comment"></textarea>
-            <button class="comment-submit" type="submit">Submit</button>
+        // Header
+        const header = this.document.createElement('div');
+        header.classList.add('comment-header');
+        header.innerHTML = `mcmanning.1
+            <span class="comment-info">
+                timestamp
+                <button class="comment-delete">Delete</button>
+            </span>
         `;
+        container.appendChild(header);
 
-        reply.addEventListener('submit', this.onSubmitReply);
+        // Input for the comment content
+        this.topLevelComment = this.document.createElement('div');
+        this.topLevelComment.classList.add('comment-editable');
+        this.topLevelComment.innerText = this.name;
+        this.topLevelComment.contentEditable = true;
+        this.topLevelComment.addEventListener('input', this.onCommentChange);
+        container.appendChild(this.topLevelComment);
 
-        comments.appendChild(commentsContainer);
-        comments.appendChild(newCommentButton);
-        comments.appendChild(reply);
+        // TODO: Replies and such
 
-        // this.container.prepend(newCommentIcon);
-        this.container.appendChild(comments);
+        // Add reply button
+        // const reply = this.document.createElement('button');
+        // reply.classList.add('comment-reply-button');
+        // reply.innerText = 'Reply';
+        // // TODO: Click event and such
+        // container.appendChild(reply);
 
-        // this.newCommentIcon = newCommentIcon;
-        this.block = comments;
-        this.reply = reply;
-
-        this.commentsContainer = commentsContainer;
+        this.container = container;
+        this.parent.appendChild(container);
     }
 
-    /**
-     * Insert a new comment into this section
-     */
-    addComment(id, author, date, message) {
-        // if (id in this.comments) {
-        //     return;
-        // }
+    onCommentChange(e) {
+        console.log('onCommentChange', e);
 
-        // TODO: Deal with new comments separately somehow
-        // since they won't have an ID. Maybe hash props instead?
+        // TODO: Debounce
 
-        const comment = this.document.createElement('div');
-        comment.classList.add('comment');
-
-        const prettyDate = window.moment(date).fromNow();
-
-        comment.innerHTML = `
-            <div class="comment-info">${prettyDate} - ${author}</div>
-            <div class="comment-content">${this.nl2br(message)}</div>
-        `;
-
-        this.commentsContainer.appendChild(comment);
-        this.comments[id] = comment;
-
-        this.block.classList.add('has-comments');
+        if (this.onUpdateHandler) {
+            this.onUpdateHandler();
+        }
     }
 
     /**
@@ -113,38 +90,118 @@ class CommentSection {
         return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1<br/>$2');
     }
 
-    onClickNewComment(e) {
-        const textarea = this.reply.getElementsByTagName('textarea')[0];
-        this.block.classList.add('has-reply-visible');
-        // this.newCommentIcon.classList.add('has-reply-visible');
+    /**
+     * Return Document position of the anchored element
+     */
+    getAnchorRect() {
+        const clientRect = this.anchor.getBoundingClientRect();
+        const window = this.document.defaultView;
+        const left = clientRect.left + window.scrollX;
+        const top = clientRect.top + window.scrollY;
 
-        // Wait for next repaint before focusing the comment box.
-        // Because it could've been hidden before this was clicked,
-        // and we can't focus() a hidden element.
-        window.setTimeout(() => textarea.focus(), 100);
-
-        e.preventDefault();
-        return false;
+        return {
+            left,
+            top,
+            right: left + clientRect.width,
+            bottom: top + clientRect.height
+        };
     }
 
     /**
-     * @param {Event} e
+     * Focus the user to the comment entry box
      */
-    onSubmitReply(e) {
-        const textarea = this.reply.getElementsByTagName('textarea')[0];
-        const message = textarea.value;
+    focus() {
+        this.topLevelComment.focus();
+    }
 
-        // Add immediately to the comment list
-        this.addComment(null, '(You)', Date.now(), message);
+    /**
+     * Set the absolute top position of this comment section in the document
+     *
+     * @param {integer} top
+     */
+    setTop(top) {
+        this.container.style.top = `${top}px`;
 
-        // Call listening delegate
-        this.onReplyHandler(this, message);
+        // TODO: Impl.
+        this.updateSVGEdge();
+    }
 
-        this.block.classList.remove('has-reply-visible');
-        this.reply.reset();
+    /**
+     * Should this comment section be displayed as a collapsed section
+     *
+     * @param {boolean} collapsed
+     */
+    setCollapsed(collapsed) {
+        // TODO: Impl. Pretty much just a class change
+    }
 
-        e.preventDefault();
-        return false;
+    /**
+     * Reposition the SVG dashed line between this comment section and the anchor
+     */
+    updateSVGEdge() {
+        if (!this.svg) {
+            const svg = this.document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            const lineFromAnchor = this.document.createElementNS('http://www.w3.org/2000/svg', 'line');
+            const lineToComment = this.document.createElementNS('http://www.w3.org/2000/svg', 'line');
+            svg.classList.add('comment-svg');
+
+            lineToComment.setAttribute('stroke-dasharray', '5, 5');
+            lineToComment.setAttribute('stroke-dasharray', '5, 5');
+            svg.appendChild(lineFromAnchor);
+            svg.appendChild(lineToComment);
+            this.document.body.appendChild(svg);
+
+            // Monitor focus events on the parent.
+            // IDEALLY, svg would just be a child of the container. But dealing with
+            // positioning absolutely on the document is a PITA when factoring in a moving
+            // container. So I just attach it straight to <body> instead and use events.
+            this.container.addEventListener('mouseenter', () => svg.classList.add('is-focused'));
+            this.container.addEventListener('mouseleave', () => svg.classList.remove('is-focused'));
+
+            this.svg = svg;
+            this.lineFromAnchor = lineFromAnchor;
+            this.lineToComment = lineToComment;
+        }
+
+        const anchorRect = this.getAnchorRect();
+        const commentRect = this.container.getBoundingClientRect();
+        const bodyRect = this.document.body.getBoundingClientRect();
+        const window = this.document.defaultView;
+
+        const anchorPt = {
+            // For elements that are full width of the page (e.g. blocks)
+            // we won't have a proper overline. So we correct this by offsetting
+            // to the right slightly.
+            x: Math.max(anchorRect.left, anchorRect.right - 50),
+            y: anchorRect.top - (bodyRect.top + window.scrollY)
+        };
+
+        // Bend at the right edge of the body window
+        const bendPt = {
+            x: bodyRect.right,
+            y: anchorPt.y
+        };
+
+        // And connect to the comment box itself.
+        const commentPt = {
+            x: commentRect.left + window.pageXOffset,
+            y: commentRect.top + window.pageYOffset
+        };
+
+        this.lineFromAnchor.setAttribute('x1', anchorPt.x);
+        this.lineFromAnchor.setAttribute('y1', anchorPt.y);
+        this.lineFromAnchor.setAttribute('x2', bendPt.x);
+        this.lineFromAnchor.setAttribute('y2', bendPt.y);
+
+        this.lineToComment.setAttribute('x1', bendPt.x);
+        this.lineToComment.setAttribute('y1', bendPt.y);
+        this.lineToComment.setAttribute('x2', commentPt.x);
+        this.lineToComment.setAttribute('y2', commentPt.y);
+    }
+
+    getHeight() {
+        // TODO: Handle collapsed heights
+        return this.container.getBoundingClientRect().height;
     }
 }
 
