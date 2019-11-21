@@ -2,9 +2,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import CommentSection from './CommentSection';
+import CommentThread from './CommentThread';
 import CommentSidebar from './CommentSidebar';
-import iframeCSS from './iframe-css';
 
 import './index.scss';
 
@@ -101,12 +100,11 @@ class DocumentReview extends React.Component {
     onFrameDocumentLoad() {
         const frameDoc = this.iframe.current.contentDocument;
 
-        // Inject required CSS for comments
-        const style = frameDoc.createElement('style');
-        style.innerText = iframeCSS;
-        frameDoc.body.appendChild(style);
-
-        this.sidebar = new CommentSidebar(frameDoc);
+        this.sidebar = new CommentSidebar(
+            this.iframe.current.contentDocument,
+            this.props.blockNodes,
+            this.props.textNodes
+        );
 
         // Scrape the document and inject comment blocks. Since we're working within
         // an iframe here and there's minimal JS to deal with, we'll just be
@@ -161,12 +159,30 @@ DocumentReview.propTypes = {
     /**
      * Endpoint to reviewable document HTML
      */
-    document: PropTypes.string.isRequired
+    document: PropTypes.string.isRequired,
+
+    /**
+     * DOM node selectors that support commenting on the full element.
+     *
+     * When the user mouses over these nodes, they will be highlighted
+     * and allow the user to click to enter a new comment chain.
+     */
+    blockNodes: PropTypes.arrayOf(PropTypes.string).isRequired,
+
+    /**
+     * DOM node selectors that support commenting on text ranges.
+     *
+     * When the user selects a range of text within these nodes,
+     * they can add a new comment chain tied to that specific range.
+     */
+    textNodes: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 DocumentReview.defaultProps = {
     comments: null,
-    document: null
+    document: null,
+    blockNodes: ['h1', 'h2', 'h3'],
+    textNodes: ['p']
 };
 
 export default DocumentReview;

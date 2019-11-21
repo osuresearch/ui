@@ -1,19 +1,68 @@
 
-import CommentSection from './CommentSection';
+import CommentThread from './CommentThread';
+import iframeCSS from './iframe-css';
+
+/**
+ * Reference point in the document that a comment is linked to
+ */
+class CommentAnchor {
+    constructor(range) {
+        // Need to be able to support:
+        // some DOM range that isn't wrapped yet (from another source)
+        // or a section anchor
+    }
+}
 
 /**
  * Management of positioning comments on the document sidebar
  */
 class CommentSidebar {
-    constructor(document) {
+    constructor(document, selectableBlockNodes, selectableTextNodes) {
         this.document = document;
 
-        // List of CommentSection objects on the page
-        this.sections = [];
-
-        this.injectDOM();
+        // List of CommentThread objects on the page
+        this.threads = [];
 
         this.reflow = this.reflow.bind(this);
+
+        // DOM selectors that can be selected as a whole block
+        this.selectableBlockNodes = selectableBlockNodes;
+
+        // DOM selectors that can have text inline selectable
+        this.selectableTextNodes = selectableTextNodes;
+
+        this.injectCSS();
+        this.injectDOM();
+    }
+
+    /**
+     * Add required CSS for highlighting, commenting, etc
+     */
+    injectCSS() {
+        // Core static CSS
+        let css = iframeCSS;
+
+        // Dynamic CSS based on whitelisted selectors
+        this.selectableBlockNodes.forEach((selector) => {
+            css += `
+                ${selector}:hover {
+                    background: #fff2a8;
+                    cursor: pointer;
+                }
+            `;
+        });
+
+        this.selectableTextNodes.forEach((selector) => {
+            css += `
+                ${selector} {
+                    user-select: text;
+                }
+            `
+        });
+
+        const style = this.document.createElement('style');
+        style.innerText = css;
+        this.document.body.appendChild(style);
     }
 
     injectDOM() {
@@ -37,6 +86,14 @@ class CommentSidebar {
             });
 
             node.appendChild(button);
+        });
+
+        this.document.querySelectorAll(this.selectableBlockNodes).forEach((node) => {
+            node.addEventListener('click', (e) => {
+                this.insertComment(e.target, 'TODO: Section?');
+                e.preventDefault();
+                return false;
+            });
         });
 
         // Shortcut for commenting on some highlighted text.
@@ -131,7 +188,7 @@ class CommentSidebar {
      * @param {string} section
      */
     insertComment(node, section) {
-        const instance = new CommentSection(
+        const instance = new CommentThread(
             section,
             this.document,
             node,
@@ -143,7 +200,7 @@ class CommentSidebar {
         instance.onUpdateHandler = this.reflow;
 
         const idx = this.findBestInsertIndex(instance.getAnchorRect().top);
-        this.sections.splice(idx, 0, instance);
+        this.threads.splice(idx, 0, instance);
 
         // Reflow and focus once we get a DOM paint and alignment
         this.document.defaultView.requestAnimationFrame(() => {
@@ -156,13 +213,13 @@ class CommentSidebar {
      * @param {integer} top
      */
     findBestInsertIndex(top) {
-        for (let i = 0; i < this.sections.length; i++) {
-            if (this.sections[i].getAnchorRect().top > top) {
+        for (let i = 0; i < this.threads.length; i++) {
+            if (this.threads[i].getAnchorRect().top > top) {
                 return i;
             }
         }
 
-        return this.sections.length;
+        return this.threads.length;
     }
 
     /**
@@ -187,8 +244,8 @@ class CommentSidebar {
 
         // Construct a faster data structure to iterate through
         let sizes = [];
-        for (let i = 0; i < this.sections.length; i++) {
-            const section = this.sections[i];
+        for (let i = 0; i < this.threads.length; i++) {
+            const section = this.threads[i];
             sizes.push({
                 top: section.getAnchorRect().top,
                 desiredTop: section.getAnchorRect().top,
@@ -248,14 +305,14 @@ class CommentSidebar {
             // }
 
             minimumTop = Math.max(0, minimumTop - offset);
-            console.log(`Minimum top set to ${minimumTop}`);
+            // console.log(`Minimum top set to ${minimumTop}`);
         }
 
         // Have updated positions after minimization, apply to the DOM
         for (let i = 0; i < sizes.length; i++) {
-            console.log(`${i} (${this.sections[i].name}) at ${sizes[i].top}px with height ${sizes[i].height}`);
-            this.sections[i].setTop(sizes[i].top);
-            this.sections[i].setCollapsed(sizes[i].height < sizes[i].maxHeight);
+            // console.log(`${i} (${this.threads[i].name}) at ${sizes[i].top}px with height ${sizes[i].height}`);
+            this.threads[i].setTop(sizes[i].top);
+            this.threads[i].setCollapsed(sizes[i].height < sizes[i].maxHeight);
         }
     }
 }

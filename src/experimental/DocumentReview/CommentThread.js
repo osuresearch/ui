@@ -1,6 +1,6 @@
 
 /**
- * Manager for a section of comments within a document. This performs the heavy
+ * Manager for a thread of comments within a document. This performs the heavy
  * lifting of manipulating content within an iframe document inside DocumentReview.
  *
  * This is *not* a React component. This is a direct DOM manager.
@@ -8,7 +8,7 @@
  * TODO: Cache solution for position lookups so we stop querying the DOM. (Same goes for anchors)
  * The lookups should only invalidate if the container frame dimensions change.
  */
-class CommentSection {
+class CommentThread {
     /**
      * @param {string} name Unique identifier for the section
      * @param {Document} document Document that comment DOM exists within
@@ -52,7 +52,7 @@ class CommentSection {
         // Input for the comment content
         this.topLevelComment = this.document.createElement('div');
         this.topLevelComment.classList.add('comment-editable');
-        this.topLevelComment.innerText = this.name;
+        this.topLevelComment.innerText = ''; // TODO: Prefill text
         this.topLevelComment.contentEditable = true;
         this.topLevelComment.addEventListener('input', this.onCommentChange);
         container.appendChild(this.topLevelComment);
@@ -205,4 +205,4 @@ class CommentSection {
     }
 }
 
-export default CommentSection;
+export default CommentThread;

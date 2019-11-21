@@ -9,6 +9,25 @@
 // TODO: This is just a mess of me constantly re-pasting from chrome. Clean up.
 const iframeCSS = `
 /* DocumentReview Commenting CSS */
+
+* {
+    /* Blacklist text selection for anything outside of the selectors
+        injected by CommentSidebar::injectCSS() */
+    user-select: none;
+}
+
+/* Selection yellow for blocks & text selection */
+/* TODO: this affects .comment-editable. Probably shouldn't */
+::selection,
+::-moz-selection {
+    background: #fff2a8; /* Gecko Browsers */
+}
+
+/* Let the user still select their own comment text while editing */
+.comment-editable, .comment-editable * {
+    user-select: text;
+}
+
 body {
     /* Add a right margin for the commenting.
         We do this to the full body so that we don't
@@ -44,7 +63,7 @@ body {
 
     /* Ignore events on the line - it's just visual */
     pointer-events: none;
-    z-index: -1;
+    z-index: 9999;
 }
 
 .comment-svg line {

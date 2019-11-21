@@ -7,6 +7,17 @@ import { CommentApiMock } from './mocks';
 const documentUrl = 'http://localhost:6060/src/experimental/DocumentReview/mock.html';
 
 <DocumentReview comments={CommentApiMock} document={documentUrl} />
+
+/*
+// Buck-IRB legacy document example
+const documentUrl = 'http://localhost:6060/src/experimental/DocumentReview/amendment-mock.html';
+<DocumentReview
+  comments={CommentApiMock}
+  document={documentUrl}
+  blockNodes={['legend', 'label', '.uploaded-files li']}
+  textNodes={['.text-output', '.text-wrap', 'ui-checkbox span']}
+/>
+*/
 ```
 
 
