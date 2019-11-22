@@ -6,10 +6,34 @@ import iframeCSS from './iframe-css';
  * Reference point in the document that a comment is linked to
  */
 class CommentAnchor {
-    constructor(range) {
+    /**
+     * @param {string} section
+     * @param {Range} range
+     */
+    constructor(node, section, range) {
         // Need to be able to support:
         // some DOM range that isn't wrapped yet (from another source)
         // or a section anchor
+        this.node = node;
+        this.section = section;
+        this.range = range;
+    }
+}
+
+class CommentContent {
+    /**
+     * @param {string} username
+     * @param {string} datetime
+     * @param {string} content
+     * @param {boolean} editable
+     */
+    constructor(username, datetime, content, editable) {
+        this.username = username;
+        this.datetime = datetime;
+        this.content = content;
+        this.editable = editable;
+
+        this.node = null;
     }
 }
 
@@ -80,7 +104,7 @@ class CommentSidebar {
             button.innerText = '📝';
 
             button.addEventListener('click', (e) => {
-                this.insertComment(e.target, section);
+                this.insertThread(e.target, section);
                 e.preventDefault();
                 return false;
             });
@@ -90,7 +114,7 @@ class CommentSidebar {
 
         this.document.querySelectorAll(this.selectableBlockNodes).forEach((node) => {
             node.addEventListener('click', (e) => {
-                this.insertComment(e.target, 'TODO: Section?');
+                this.insertThread(e.target, 'TODO: Section?');
                 e.preventDefault();
                 return false;
             });
@@ -143,7 +167,7 @@ class CommentSidebar {
                 const highlighter = this.document.createElement('span');
                 highlighter.classList.add('comment-highlight');
                 range.surroundContents(highlighter);
-                this.insertComment(highlighter, '');
+                this.insertThread(highlighter, '');
                 return true;
             }
         } catch (e) {
@@ -187,13 +211,21 @@ class CommentSidebar {
      * @param {HTMLElement} node
      * @param {string} section
      */
-    insertComment(node, section) {
+    insertThread(node, section) {
         const instance = new CommentThread(
-            section,
             this.document,
-            node,
             this.container,
-            null
+            new CommentAnchor(
+                node,
+                section,
+                null
+            ),
+            new CommentContent(
+                'mcmanning.1',
+                'timestamp',
+                '',
+                true
+            )
         );
 
         // Reflow all comments whenever one is being updated

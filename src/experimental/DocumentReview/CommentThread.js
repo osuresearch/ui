@@ -10,19 +10,21 @@
  */
 class CommentThread {
     /**
-     * @param {string} name Unique identifier for the section
      * @param {Document} document Document that comment DOM exists within
-     * @param {HTMLElement} parent Containing element that comments are associated with
+     * @param {HTMLElement} parent Containing element that threads are associated with
+     * @param {CommentAnchor} anchor Document anchor for this thread
+     * @param {CommentContent} comment Top level comment for this section
      */
-    constructor(name, document, anchor, parent, onReplyHandler) {
-        this.name = name;
+    constructor(document, parent, anchor, comment) {
         this.document = document;
         this.parent = parent;
         this.anchor = anchor;
-        this.onReplyHandler = onReplyHandler;
-        this.onUpdateHandler = null;
+        this.topLevelComment = comment;
+
+        this.replies = [];
 
         this.onCommentChange = this.onCommentChange.bind(this);
+        this.onUpdateHandler = null;
 
         this.injectDOM();
     }
@@ -38,24 +40,28 @@ class CommentThread {
         const container = this.document.createElement('div');
         container.classList.add('comment-section');
 
+        const { username, datetime, content, editable } = this.topLevelComment;
+
         // Header
         const header = this.document.createElement('div');
         header.classList.add('comment-header');
-        header.innerHTML = `mcmanning.1
+        header.innerHTML = `${username}
             <span class="comment-info">
-                timestamp
+                ${datetime}
                 <button class="comment-delete">Delete</button>
             </span>
         `;
         container.appendChild(header);
 
-        // Input for the comment content
-        this.topLevelComment = this.document.createElement('div');
-        this.topLevelComment.classList.add('comment-editable');
-        this.topLevelComment.innerText = ''; // TODO: Prefill text
-        this.topLevelComment.contentEditable = true;
-        this.topLevelComment.addEventListener('input', this.onCommentChange);
-        container.appendChild(this.topLevelComment);
+        // DOM element for the top level comment
+        const comment = this.document.createElement('div');
+        comment.classList.add('comment-editable');
+        comment.innerText = ''; // TODO: Prefill text
+        comment.contentEditable = true;
+        comment.addEventListener('input', this.onCommentChange);
+
+        container.appendChild(comment);
+        this.topLevelComment.node = comment;
 
         // TODO: Replies and such
 
@@ -94,7 +100,7 @@ class CommentThread {
      * Return Document position of the anchored element
      */
     getAnchorRect() {
-        const clientRect = this.anchor.getBoundingClientRect();
+        const clientRect = this.anchor.node.getBoundingClientRect();
         const window = this.document.defaultView;
         const left = clientRect.left + window.scrollX;
         const top = clientRect.top + window.scrollY;
@@ -111,7 +117,7 @@ class CommentThread {
      * Focus the user to the comment entry box
      */
     focus() {
-        this.topLevelComment.focus();
+        this.topLevelComment.node.focus();
     }
 
     /**
