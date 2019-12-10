@@ -2,6 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import Icon from '../Icon';
 import SearchResult from '../SearchResult';
 // import FlowContext from '../context/FlowContext';
 
@@ -444,6 +445,8 @@ class Search extends React.Component {
         // const { isPrint, isDiff, isLoading } = this.context;
         // const { bind } = this.props;
         const value = this.state.value || '';
+        const hasValue = value.length > 0;
+
         // const name = bind.name;
         const { name, onFocus, onBlur } = this.props;
 
@@ -478,13 +481,17 @@ class Search extends React.Component {
         // }
 
         // Wrap the control in a  `.is-invalid` if there's any validation errors
-        let classNames = 'form-control';
+        let classNames = 'form-control search-input';
         // if (bind.error) {
         //     classNames += ' is-invalid';
         // }
 
+        if (hasValue) {
+            classNames += ' search-input-has-value';
+        }
+
         return (
-            <div className="input-group input-search">
+            <div className="input-group search">
                 <span className="input-group-prefix">
                     <i className={this.getPrefixIconClasses()} aria-hidden="true"></i>
                 </span>
@@ -500,12 +507,10 @@ class Search extends React.Component {
                     onBlur={onBlur}
                 />
 
-                {this.state.lockSearchInput &&
-                    <span className="input-group-suffix">
-                        <button className="btn btn-secondary" type="button"
-                            aria-label="clear selection"
-                            onClick={this.clear}>Clear</button>
-                    </span>
+                {hasValue &&
+                    <button className="btn btn-link search-clear" type="button"
+                        aria-label="clear selection"
+                        onClick={this.clear}><Icon name="close"></Icon></button>
                 }
 
                 {(this.state.showSearchResults || this.props.alwaysShowResults) &&
