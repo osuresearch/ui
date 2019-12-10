@@ -38,6 +38,8 @@
         .navbar-brand {
             padding: 0;
             padding-top: 0.1em;
+            text-shadow: none;
+            box-shadow: none;
 
             // Organization name (Office of Research) in the app header
             .navbar-org {
@@ -101,6 +103,8 @@
         color: rgba(0,0,0,0.5);
         padding: .5rem;
         margin: 0 0.25rem;
+        text-shadow: none;
+        box-shadow: none;
 
         &:hover {
             background: #f0f0f0;
