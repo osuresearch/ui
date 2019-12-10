@@ -5,6 +5,8 @@
 <Search name="example-1" endpoint="https://orapps.osu.edu/api/v1/person" />
 ```
 
+Search input with a default value loaded:
+
 ```jsx
 const onChange = (e) => alert(
     `You selected ${JSON.stringify(e.target.value)} for ${e.target.name}`
@@ -20,6 +22,22 @@ const defaultValue = {
     endpoint="https://orapps.osu.edu/api/v1/person"
     onChange={onChange}
     defaultValue={defaultValue}
+/>
+```
+
+Read-only search input:
+
+```jsx
+const defaultValue = {
+    key: '200275154',
+    value: 'Chase McManning'
+};
+
+<Search
+    name="example-2"
+    endpoint="https://orapps.osu.edu/api/v1/person"
+    defaultValue={defaultValue}
+    readOnly={true}
 />
 ```
 
