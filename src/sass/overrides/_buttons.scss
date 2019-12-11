@@ -36,3 +36,16 @@
         color: shade($gray, 40%);
     }
 }
+
+// Case where a button is .btn-link without .btn
+.btn-link:not(.btn) {
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+// Fix for .btn.btn-link having a background color on :active
+.btn-link:not(:disabled):not(.disabled):active {
+    background: none;
+    color: $link-hover-color;
+}

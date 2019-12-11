@@ -1,0 +1,62 @@
+// Based on Google's Bottom Nav component:
+// https://material.io/guidelines/components/bottom-navigation.html#
+
+.tabbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: none;
+
+    z-index: $zindex-fixed;
+
+    box-shadow: 0 0 2px 0 transparentize($black, 0.92), 0 -2px 4px 0 transparentize($black, 0.94);
+
+    .nav-link {
+        text-align: center;
+        color: $navbar-light-color;
+
+        .fa {
+            display: block;
+            font-size: 1.5rem;
+        }
+    }
+
+    .nav {
+        flex-direction: row;
+        font-size: 1rem;
+    }
+
+    .nav-item {
+        flex-grow: 1;
+        min-height: 4rem;
+        background-color: tint($gray, 5%);
+        position: relative;
+        white-space: nowrap;
+
+        &.active .nav-link {
+            color: $scarlet;
+        }
+
+        &:hover {
+            background: tint($gray, 10%);
+        }
+    }
+
+    // Badges are used as status pips
+    .badge {
+        position: absolute;
+        top: 0.5rem;
+        right: 30%;
+    }
+
+    @include media-breakpoint-down(sm) {
+        display: block;
+
+        // Add additional margin to the footer so that
+        // the tab bar doesn't overlap footer content
+        + footer {
+            margin-bottom: 4rem;
+        }
+    }
+}

@@ -1,0 +1,26 @@
+
+// TODO: These settings come directly from Chrome dev tools.
+// Update to implement BS4 configurables.
+// Style is set to match what has been defined for DataTables pagination.
+
+.page-link {
+    border: 0;
+    font-size: 1.2rem;
+    line-height: 2;
+    padding: 0 10px;
+    border-radius: 2px;
+    min-width: 2em;
+    text-align: center;
+
+    &:hover,
+    &:active,
+    &:focus {
+        background: $gray-100;
+    }
+}
+
+.page-item.active .page-link {
+    color: $gray;
+    background: none;
+    cursor: default;
+}

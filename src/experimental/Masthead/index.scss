@@ -1,0 +1,58 @@
+
+$masthead-themes: (
+    'project': (primary: #26686d, secondary: #4d8377), // Blue
+    'proposal': (primary: #497c27, secondary: #69993c), // hsl(76, 99%, 29%)), // Green
+    'org': (primary: #584c46, secondary: #6a605a), // Saturated brown
+    'person': (primary: #55595c, secondary: #767676), // Grey
+    'protocol': (primary: #998c68, secondary: #b2a379), // Tan
+    'award': (primary: #851e5e, secondary: hsl(312, 56%, 40%)) // Purple
+);
+
+.masthead {
+    .masthead-title {
+        color: #fff;
+        opacity: 0.9;
+    }
+
+    .masthead-subtitle {
+        color: #fff;
+        opacity: 0.75;
+    }
+
+    .masthead-aside {
+        text-align: right;
+        color: #fff;
+        opacity: 0.9;
+    }
+
+    .masthead-aside-subtitle {
+        text-align: right;
+        color: #fff;
+        opacity: 0.75;
+    }
+
+    .masthead-list {
+        display: flex;
+        flex-direction: row;
+        border: 1px solid #CCC;
+        border-left: none;
+    }
+}
+
+// Generate CSS classes for supported themes
+@each $name, $theme in $masthead-themes {
+    .masthead-#{$name} {
+        color: #fff;
+        padding: 2rem;
+
+        background: map-get($theme, primary);
+        background: linear-gradient(
+            to right,
+            map-get($theme, primary),
+            map-get($theme, secondary)
+        )
+    }
+}
+
+
+

@@ -1,2 +1,0 @@
-
-Vendor Javascript that gets built into ui.js. It is expected that vendor code is compartmentalized correctly and doesn't interfere with other code (i.e. changing the way an application loads anchors globally). Basically, be careful adding vendor code unless it's absolutely necessary for some internal components to function.

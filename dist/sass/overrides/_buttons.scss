@@ -1,0 +1,45 @@
+
+.btn {
+    // If the developer leaves out a theme, use the primary button
+    @extend .btn-primary;
+
+    // Because Bootstrap doesn't use the right pointers for buttons
+    cursor: pointer;
+
+    // Reiterate that link buttons don't have a border
+    // (overriding the extended default above)
+    &.btn-link {
+        border: 0;
+    }
+
+    &:disabled {
+        cursor: not-allowed;
+    }
+
+    &.btn-outline {
+        @extend .btn-outline-secondary;
+
+        // Force all "outline" buttons to use a white background,
+        // as it's too easy to make a low contrast button.
+        background: $white;
+    }
+
+    // Fix link buttons not being styled properly when used as a dropdown
+    &.dropdown-toggle.btn-link {
+        background-color: transparent;
+        border: 0;
+    }
+
+    // Darken the text slightly in the secondary outline button,
+    // otherwise it looks too similar to a disabled button
+    &.btn-outline-secondary:not(:hover) {
+        color: shade($gray, 40%);
+    }
+}
+
+// Case where a button is .btn-link without .btn
+.btn-link:not(.btn) {
+    border: none;
+    margin: 0;
+    padding: 0;
+}

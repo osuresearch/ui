@@ -7,6 +7,55 @@ Versions follow [Semantic Versioning](https://semver.org/) guidelines - given a 
 2. MINOR version when you add functionality in a backwards-compatible manner, and
 3. PATCH version when you make backwards-compatible bug fixes.
 
+
+# 4.1.0 (Unreleased)
+
+**Changes still a WIP, but expected to be part of the 4.1.0 release**
+
+* Upgraded Bootstrap to latest 4.X.X
+* Added TypeScript definitions for components and props [insert cool usage screenshot here]
+
+
+# 4.0.0 (2019-11-18)
+
+__New Styleguide and Interactive Examples System:__
+
+Styleguide documentation has been integrated directly into the project via [React Styleguidist](https://react-styleguidist.js.org/). Simply `git checkout` a copy of oris/ui and do a `npm start` to start up a local interactive styleguide.
+
+__Backwards Breaking Changes:__
+
+* All non-React components have been removed or replaced with React-equivalents
+    * This does not include every Bootstrap component. Use those as you typically would.
+* Composer support has been removed. Now installable as a `npm` package
+* Component imports must now come from the `@oris/ui` package
+* `Lookup` component has been replaced by `Search` - with similar arguments and less jQuery
+* `Modal` component now has additional wrapper DOM. Recommended to use new `ModalHeader` and `ModalBody` as the only children.
+* Removed `AppLoader` component
+* Removed `AppError` component
+* Removed `ShibbolethMonitor` component - see [FWK-185](https://ordevsvc01.rf.ohio-state.edu/youtrack/issue/FWK-185) for a future replacement
+* Removed `Util.debounce` function
+
+__New Features:__
+
+* New `ExternalLink` component to automatically handle accessibility and security standards for links out of an application.
+* New `Icon` component to automatically handle accessibility standards for Font Awesome icons.
+* New `Search` component to replace legacy `$.Lookup`
+    * No longer jQuery-based
+    * Has multiple new props for configuration
+* New `Footer` component to display the standard brand footer
+* New `OhioStateNavbar` component to encapsulate the required OSU brand navbar
+* New `PersonSearchResult` renderer component for `Search` to standardize how person results look across applications.
+* New `Button` component
+* New `Badge` component
+* New `ModalHeader` component
+* New `ModalBody` component
+
+__Accessibility Improvements:__
+
+* Links now have an underline by default
+* `Search` "Clear" button has been changed to an X that is now always persistent as long as there is text in the input.
+
+
 # 3.3.1 (2019-10-10)
 
 __Bug Fixes:__
@@ -15,7 +64,7 @@ __Bug Fixes:__
 
 # 3.3.0 (2019-05-14)
 
-__New Features__
+__New Features:__
 * Add new React components for common ORIS application features (Emulate, AppLoader, AppError, Lookup, Modal, Profile, Navbar, SystemAlert, ShibbolethMonitor)
 * Add `i.required-asterisk` component style to render out the red asterisk used on required fields in any context that a designer wants (e.g. for individual checkbox labels or a form heading)
 

@@ -3,3 +3,5 @@
 /vendor
 /node_modules
 /composer.lock
+uikit_fonts
+/styleguide

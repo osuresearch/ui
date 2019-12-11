@@ -1,0 +1,16 @@
+
+// Sass styles specifically for rendering within react-styleguidst.
+
+// In order to render out demo-able components in the styleguide, we need
+// to import ORIS/UI prior to flow. When applications include flow, they
+// will import oris/ui separately on their own, so we exclude this from flow.scss
+
+// Set our assets source to one of the remote servers, so that
+// they aren't served from Webpack's dev server.
+$vendor-images: 'https://orapps.osu.edu/assets/img/vendor';
+$vendor-fonts: 'https://orapps.osu.edu/assets/fonts/vendor';
+
+@import './index';
+
+// Styleguide-specific component styles
+@import '../internal/Palette';

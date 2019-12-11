@@ -1,0 +1,30 @@
+
+.search {
+    // Override Bootstrap's default 'display:none' on dropdowns.
+    // We don't include it in the DOM until it's needed anyway.
+    .dropdown-menu {
+        display: block;
+    }
+
+    // Make room for the X clear button
+    .search-input {
+        padding-right: 3em;
+    }
+
+    // Inline the X button to the right of the input
+    .search-clear {
+        position: absolute;
+        right: 0;
+        top: 1px; // Because of invisible border boxing
+        margin: 0;
+        color: $body-color;
+        z-index: 4;
+
+        text-shadow: none;
+        box-shadow: none;
+    }
+
+    .search-clear:focus {
+        color: $link-hover-color;
+    }
+}

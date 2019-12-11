@@ -1,0 +1,65 @@
+/*!
+ * This file is a composition of all the actual .scss source
+ * files for vendor libraries, mixins, components, etc.
+ *
+ * You may directly reference ui.scss in your application if you
+ * want access to the full functionality of SASS (mixins, functions, etc)
+ * or you may include a build of dist/css/ui.css.
+ *
+ * We do recommend the SASS compilation route.
+ */
+@charset 'UTF-8';
+
+// Branding colors and fonts
+@import 'colors';
+@import 'fonts';
+
+// Vendor theme settings
+@import 'settings';
+
+// Vendor libraries
+@import 'vendor/bootstrap-4.0.0/bootstrap';
+@import 'vendor/font-awesome';
+@import 'vendor/datatables';
+@import 'vendor/datepicker-1.3.1/build3';
+@import 'vendor/uploadifive-1.1.0';
+
+// Overrides of non-configurable Bootstrap 4 components
+// Note that this should be in the same order as bootstrap.scss
+@import 'overrides/alert';
+@import 'overrides/badge';
+@import 'overrides/buttons';
+@import 'overrides/code';
+@import 'overrides/custom-forms';
+@import 'overrides/datatables';
+@import 'overrides/datepicker';
+@import 'overrides/forms';
+@import 'overrides/input-group';
+@import 'overrides/navbar';
+@import 'overrides/pagination';
+@import 'overrides/reboot';
+@import 'overrides/tables';
+@import 'overrides/type';
+
+// Components
+@import 'components/alert-banner';
+@import 'components/application-alert';
+@import 'components/footer';
+@import 'components/formflow';
+@import 'components/horizontal-scroll';
+@import 'components/lookup';
+@import 'components/osu-navbar';
+@import 'components/profile';
+@import 'components/required-asterisk';
+@import 'components/richtext';
+@import 'components/sticky-header';
+@import 'components/support';
+@import 'components/tabbar';
+@import 'components/uploader';
+
+@import '../components/Button';
+@import '../components/Search';
+
+@import '../experimental/TabList';
+@import '../experimental/AppSearch';
+@import '../experimental/Masthead';

@@ -1,0 +1,73 @@
+.form-group {
+    margin-bottom: 2rem;
+
+    // Enforce 1em padding between components in a form group
+    textarea,
+    input,
+    select,
+    label,
+    legend,
+    .input-group {
+        margin-bottom: 1em;
+    }
+
+    // Have vertical (default) form legends behave
+    // the same way as horizontal/inline form legends
+    legend {
+        @extend .col-form-label;
+        padding: 0;
+    }
+
+    // Fix cursor for disabled form controls
+    .form-control:disabled,
+    .custom-control-input:disabled ~ .custom-control-label::after {
+        cursor: not-allowed;
+    }
+
+    // Small (help text) padding improvements
+    .form-text {
+        font-size: 80%;
+        color: $text-muted;
+        margin-top: 0;
+        margin-bottom: 1rem;
+    }
+
+    // Required star for form groups.
+    // Attaches to the first label or legend found
+    &.is-required label:first-child::after,
+    &.is-required legend:first-child::after {
+        color: $scarlet;
+        font-family: FontAwesome;
+        font-size: 0.5em;
+        padding-left: 0.5em;
+        vertical-align: top;
+        content: '\f069';
+    }
+
+    // Margins won't collapse if the form-group is also a .col-*
+    // (since the .col has padding) - so we reduce the margin to 1rem
+    // and have it non-collapsed with the last component in the group
+    // that - presumably - has a 1rem margin.
+    &.col, &[class*="col-"] {
+        margin-bottom: 1rem;
+    }
+}
+
+// Edge case: According to HTML5 spec, fieldsets establish a new block
+// formatting context which prevents margin collapsing. So we end up
+// giving these a smaller bottom margin to be combined with inner content
+// margins. Do note that combining a fieldset with a row may have undesired
+// layout bugs.
+// Why a fieldset.form-group? Because we use it for checkbox groups to apply
+// a <legend> to the group as a whole for screen readers. We can't use <legend>
+// without the parent <fieldset>
+fieldset.form-group {
+    margin-bottom: 1rem;
+}
+
+// Fix margins when an input-group is used as an append
+// section of a parent input-group
+// (cases where we want two adjacent inputs)
+.input-group-append .input-group {
+    margin: 0;
+}

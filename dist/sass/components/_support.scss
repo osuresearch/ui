@@ -1,0 +1,64 @@
+
+// The floating button
+button.support {
+    position: fixed;
+    bottom: 0.5em;
+    right: 0.5em;
+    font-size: 0.8em;
+    background-color: $white;
+}
+
+// The associated support modal itself
+.support-modal {
+    .modal-dialog {
+        max-width: 35em;
+    }
+
+    .form-group {
+        border: 0;
+        margin: 0;
+        padding: 0 1rem;
+
+        .custom-controls-stacked {
+            padding-bottom: 0;
+        }
+    }
+
+    .support-help,
+    .support-feedback {
+        display: none;
+        border-top: 1px solid tint($gray, 40%);
+        padding-top: 1em;
+        margin-top: 1em;
+    }
+
+    .support-submit {
+        display: none;
+    }
+
+    p {
+        font-size: 80%;
+        margin: 1rem;
+        color: $gray;
+    }
+
+    &.is-help {
+        .support-help {
+            display: block;
+        }
+
+        .support-submit {
+            display: block;
+        }
+    }
+
+    &.is-feedback {
+        .support-feedback {
+            display: block;
+        }
+
+        .support-submit {
+            display: block;
+        }
+    }
+}

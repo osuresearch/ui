@@ -1,0 +1,44 @@
+
+.profile {
+    display: inline-block;
+
+    // For incredibly long usernames, we give a max width
+    // for mobile displays and just ellisis overflow it.
+    @media screen and (max-width: 470px) {
+        .dropdown-toggle {
+            max-width: 10em;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: inline-block;
+            padding-right: 1em;
+
+            // Fix the caret's location so we don't
+            // hide it by overflowing
+            &::after {
+                position: absolute;
+                right: 0;
+                top: 1em;
+            }
+        }
+    }
+
+    // Fix for popper not right aligning the menu when
+    // it's in a sticky flexbox (at least I think that's
+    // the issue?). Happens everywhere else. TODO: Investigate!
+    .dropdown-menu:not([x-placement]) {
+        right: 0;
+        left: unset;
+    }
+
+    > a {
+        // Color fix so we're not using link blue in the navbar
+        color: $gray;
+        line-height: 2;
+
+        &:hover,
+        &:active,
+        &:focus {
+            color: $gray;
+        }
+    }
+}

@@ -1,0 +1,46 @@
+
+.custom-control-input {
+    ~ .custom-control-label::before {
+        @include box-shadow($input-box-shadow);
+
+        border: 1px solid $input-border-color;
+        background-color: $white;
+    }
+
+    &:checked ~ .custom-control-label::before {
+        border: 1px solid $input-border-color;
+    }
+}
+
+// Correct positioning & font size of feedback message
+.invalid-feedback {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 0.8rem;
+}
+
+.form-check,
+.form-check-inline {
+    // Bootstrap does not support adding an .is-invalid
+    // state to the control set wrapper
+    &.is-invalid {
+        ~ .invalid-feedback {
+            display: block;
+        }
+
+        .custom-control-label::before {
+            border-color: theme-color('danger');
+        }
+
+        .custom-control-label {
+            color: theme-color('danger');
+        }
+    }
+}
+
+.form-check-inline {
+    // Fix margins between inline checks/radios
+    .custom-control:not(:first-child) {
+        margin-left: 1.5rem;
+    }
+}

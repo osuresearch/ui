@@ -1,80 +1,61 @@
-# ORIS UI Package
+# @oris/ui
 
-Frontend UI components built on [Bootstrap 4](https://getbootstrap.com) for use in Office of Research applications. Includes:
-* SASS build with utilities for advanced usage
-* Compiled `dist/css/ui.css` and `dist/js/ui.es5.js` scripts
-* Common frontend components, including lookups, date pickers, emulation, and multi-file uploaders
+Collection of React components and a rebranded [Bootstrap 4.0](https://getbootstrap.com/docs/4.0/getting-started/introduction/) build for Office of Research applications.
 
-Current unresolved issues can be found and reported on [YouTrack](https://ordevsvc01.rf.ohio-state.edu/youtrack/issues?q=project%3A+%7BPHP+Framework%7D+component%3A+ORIS%5CUI+%23Unresolved+)
-
-The [Styleguide app on the dev server](https://orwebdev02.rf.ohio-state.edu/styleguide) contains usage references and demos for this framework.
-
-## Requirements
-* PHP 5.6+
-* Composer
-* NodeJS/NPM If you're not using the compiled ui.css and ui.es5.js
-
-### CSS Support
-The gulp build process uses the following compatibility table for autoprefixing CSS:
-```
-Chrome >= 35
-Firefox >= 31
-Edge >= 12
-Explorer >= 9
-iOS >= 8
-Safari >= 8
-Android 2.3
-Android >= 4
-Opera >= 12
-```
-
-As per University policy, official support for IE is **IE11 only**.
 
 ## Installation
-This library is installable via Composer through `composer.json`, as long as you add UCR as a GitLab repository source:
+
+>NOTE: The below instructions are for when I officially tag the 4.0 release. Until then, replace `#semver:^4.0` with `#v4-dev`
+
+These components are available as a private npm package. Simply run:
 
 ```
+npm install git+ssh://git@code.osu.edu:ORIS/ui.git#semver:^4.0
+```
+
+**- Or -** add the following to your `package.json` and run `npm install`:
+
+```json
 {
-    "repositories": [
-        {
-            "type": "gitlab",
-            "url":  "git@code.osu.edu:ORIS/ui.git"
-        }
-    ],
-    "config": {
-        "gitlab-domains": [
-            "code.osu.edu"
-        ]
-    },
-    "require": {
-        "oris/ui": "^3.0"
-    },
-    ... etc ...
+    ...
+    "dependencies": {
+        "@oris/ui": "git+ssh://git@code.osu.edu:ORIS/ui.git#semver:^4.0"
+    }
 }
 ```
 
-### Including SASS/CSS
-If your project's stylesheets are built using SASS (i.e. you have a `/sass/index.scss` in your project), add the following import:
+
+## Usage
+
+Each component is importable from `@oris/ui`, for example:
+
+```jsx
+import React from 'react';
+import { Icon, Button } from '@oris/ui';
+
+const MyPage = () =>
+    <div className="my-page">
+        ...
+        <Button theme="danger" onClick={onDelete}>
+            <Icon name="trash">Delete</Icon>
+        </Button>
+    </div>
 ```
-@import "../vendor/oris/ui/src/sass/ui.scss";
+
+To import the SASS styles into your application, import the following in whatever your primary sass file is (typically an `index.sass`):
+
+```css
+@import "@oris/ui/dist/sass";
 ```
 
-If not, copy `vendor/ui/dist/css/ui.css` to your project's `css` folder, or reference it directly.
 
-**Important** - Do make sure you are cache busting the included CSS file. Otherwise future updates will potentially break display for clients.
+## Styleguide and Examples
 
-### Including Javascript
-An ES5-compatible build is made every release and found in `vendor/ui/dist/js/ui.es5.js`. You may either concatenate that into your application's Javascript or include it separately.
+This project uses [React Styleguidist](https://react-styleguidist.js.org/) to provide a styleguide with interactive examples.
 
-If your application is in ES6, you can import `src/js/ui.js` into your bundle. An basic example of how this works is available in the `oris/template` project.
+To view the styleguide, `git clone` this project and run `npm install && npm start`.
 
-Just like with the CSS, ensure you are cache busting your Javascript files to ensure clients always have the correct version.
-
-## Testing
-
-TBD
 
 ## Contributing
 
-Check out open issues on [YouTrack](https://ordevsvc01.rf.ohio-state.edu/youtrack/issues?q=project%3A+%7BPHP+Framework%7D+component%3A+ORIS%5CUI+%23Unresolved+) and create merge requests for implementations.
-
+Check out [CONTRIBUTING](CONTRIBUTING.md)

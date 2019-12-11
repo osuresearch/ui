@@ -1,0 +1,9 @@
+
+// Override for only h1/h2 levels of headings
+// to be Capita scarlet
+h1,
+h2 {
+    color: $scarlet;
+    font-family: 'Capita', 'Times New Roman', serif;
+    line-height: 1.4; // 1.2 seems to have too much crowding for wrapped headers
+}
