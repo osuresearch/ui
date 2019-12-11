@@ -43,3 +43,9 @@
     margin: 0;
     padding: 0;
 }
+
+// Fix for .btn.btn-link having a background color on :active
+.btn-link:not(:disabled):not(.disabled):active {
+    background: none;
+    color: $link-hover-color;
+}

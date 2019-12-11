@@ -94,10 +94,10 @@ function (_React$Component) {
         "aria-hidden": "true",
         ref: this.ref
       }, _react.default.createElement("div", {
-        class: "modal-dialog",
+        className: "modal-dialog",
         role: "document"
       }, _react.default.createElement("div", {
-        class: "modal-content"
+        className: "modal-content"
       }, this.props.children))), this.el);
     }
   }]);

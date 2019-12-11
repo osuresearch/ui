@@ -9,12 +9,20 @@ footer {
 
     .wordmark {
         border: none;
+        box-shadow: none;
     }
 
     // Make links slightly thicker to fix contrast issues
     // against the dark background
     a {
+        color: $white;
         font-weight: 300;
+        text-shadow: none;
+        text-decoration-color: $white;
+
+        &:hover {
+            color: $white;
+        }
     }
 
     ul {
