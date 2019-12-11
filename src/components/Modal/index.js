@@ -54,8 +54,8 @@ class Modal extends React.Component {
         return ReactDOM.createPortal(
             <div className="modal fade" tabIndex="-1" role="dialog"
                 aria-hidden="true" ref={this.ref}>
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
+                <div className="modal-dialog" role="document">
+                    <div className="modal-content">
                         {this.props.children}
                     </div>
                 </div>
