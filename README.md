@@ -5,8 +5,6 @@ Collection of React components and a rebranded [Bootstrap 4.0](https://getbootst
 
 ## Installation
 
->NOTE: The below instructions are for when I officially tag the 4.0 release. Until then, replace `#semver:^4.0` with `#v4-dev`
-
 These components are available as a private npm package. Simply run:
 
 ```
