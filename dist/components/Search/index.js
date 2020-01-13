@@ -25,6 +25,8 @@ var _react = _interopRequireDefault(require("react"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
+var _Icon = _interopRequireDefault(require("../Icon"));
+
 var _SearchResult = _interopRequireDefault(require("../SearchResult"));
 
 var _JsonApiUtility = require("../../internal/JsonApiUtility");
@@ -136,7 +138,7 @@ function (_React$Component) {
         key: defaultValue.key,
         value: defaultValue.value,
         // Lock if a value was loaded and we should go readonly immediately
-        lockSearchInput: this.props.readonlyAfterSelection
+        lockSearchInput: this.props.readOnlyAfterSelection
       });
     }
     /**
@@ -337,7 +339,7 @@ function (_React$Component) {
         key: key,
         value: value,
         showSearchResults: false,
-        lockSearchInput: this.props.readonlyAfterSelection
+        lockSearchInput: this.props.readOnlyAfterSelection
       }); // Delegate to the parent HOF to update the bind
       // with an object containing {key, value} properties
 
@@ -482,12 +484,14 @@ function (_React$Component) {
     value: function render() {
       // const { isPrint, isDiff, isLoading } = this.context;
       // const { bind } = this.props;
-      var value = this.state.value || ''; // const name = bind.name;
+      var value = this.state.value || '';
+      var hasValue = value.length > 0; // const name = bind.name;
 
       var _this$props = this.props,
           name = _this$props.name,
           onFocus = _this$props.onFocus,
-          onBlur = _this$props.onBlur; // If we're loading content (not search results, but initial form content),
+          onBlur = _this$props.onBlur,
+          readOnly = _this$props.readOnly; // If we're loading content (not search results, but initial form content),
       // display a lazy loader placeholder
       // if (isLoading) {
       //     return (
@@ -515,12 +519,16 @@ function (_React$Component) {
       // }
       // Wrap the control in a  `.is-invalid` if there's any validation errors
 
-      var classNames = 'form-control'; // if (bind.error) {
+      var classNames = 'form-control search-input'; // if (bind.error) {
       //     classNames += ' is-invalid';
       // }
 
+      if (hasValue) {
+        classNames += ' search-input-has-value';
+      }
+
       return _react.default.createElement("div", {
-        className: "input-group input-search"
+        className: "input-group search"
       }, _react.default.createElement("span", {
         className: "input-group-prefix"
       }, _react.default.createElement("i", {
@@ -536,19 +544,19 @@ function (_React$Component) {
         "aria-autocomplete": "list",
         "aria-haspopup": "true",
         "aria-owns": name + '-results',
-        readOnly: this.state.lockSearchInput,
+        readOnly: this.state.lockSearchInput || readOnly,
         ref: this.input,
         onChange: this.onChange,
         onFocus: onFocus,
         onBlur: onBlur
-      }), this.state.lockSearchInput && _react.default.createElement("span", {
-        className: "input-group-suffix"
-      }, _react.default.createElement("button", {
-        className: "btn btn-secondary",
+      }), hasValue && !readOnly && _react.default.createElement("button", {
+        className: "btn btn-link search-clear",
         type: "button",
         "aria-label": "clear selection",
         onClick: this.clear
-      }, "Clear")), (this.state.showSearchResults || this.props.alwaysShowResults) && this.getDropdownContent());
+      }, _react.default.createElement(_Icon.default, {
+        name: "close"
+      })), (this.state.showSearchResults || this.props.alwaysShowResults) && this.getDropdownContent());
     }
   }]);
   return Search;
@@ -639,8 +647,11 @@ Search.propTypes = {
    * If true, the input will go readonly once the user selects an option.
    * This is to prevent the user from selecting something, and then changing
    * the contents of the input to differ slightly from what was expected.
+   *
+   * Note that this will still allow the user to clear the selection unlike
+   * setting `readOnly={true}`.
    */
-  readonlyAfterSelection: _propTypes.default.bool.isRequired,
+  readOnlyAfterSelection: _propTypes.default.bool.isRequired,
 
   /**
    * Minimum characters required before searching
@@ -662,19 +673,26 @@ Search.propTypes = {
    * to pass `termDelta`, but the stopped typing implies that they
    * are waiting for a result response
    */
-  delay: _propTypes.default.number.isRequired
+  delay: _propTypes.default.number.isRequired,
+
+  /**
+   * Can the search input be modified by the end user. Setting this to `true`
+   * will also disable the user's ability to clear the selection.
+   */
+  readOnly: _propTypes.default.bool.isRequired
 };
 Search.defaultProps = {
   query: {},
   onChange: null,
   onFocus: null,
   onBlur: null,
-  readonlyAfterSelection: true,
+  readOnlyAfterSelection: true,
   dropdownContentRenderer: null,
   alwaysShowResults: false,
   threshold: 3,
   termDelta: 5,
-  delay: 500
+  delay: 500,
+  readOnly: false
 }; // Search.contextType = FlowContext;
 
 var _default = Search;

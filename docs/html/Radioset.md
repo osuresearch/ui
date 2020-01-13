@@ -8,19 +8,19 @@
     </legend>
     <div className="form-check">
         <div className="custom-control custom-radio">
-            <input type="radio" name="color"
-                className="custom-control-input" id="rgb" />
-            <label className="custom-control-label" htmlFor="rgb">RGB</label>
+            <input type="radio" name="color1"
+                className="custom-control-input" id="rgb-123" />
+            <label className="custom-control-label" htmlFor="rgb-123">RGB</label>
         </div>
         <div className="custom-control custom-radio">
-            <input type="radio" name="color"
-                className="custom-control-input" id="cmyk" />
-            <label className="custom-control-label" htmlFor="cmyk">CMYK</label>
+            <input type="radio" name="color1"
+                className="custom-control-input" id="cmyk-123" />
+            <label className="custom-control-label" htmlFor="cmyk-123">CMYK</label>
         </div>
         <div className="custom-control custom-radio">
-            <input type="radio" name="color"
-                className="custom-control-input" id="hsl" disabled />
-            <label className="custom-control-label" htmlFor="hsl">HSL</label>
+            <input type="radio" name="color1"
+                className="custom-control-input" id="hsl-123" disabled />
+            <label className="custom-control-label" htmlFor="hsl-123">HSL</label>
         </div>
     </div>
     <small className="form-text">
@@ -37,14 +37,14 @@
     </legend>
     <div className="form-check is-invalid">
         <div className="custom-control custom-radio">
-            <input type="radio" name="color"
-                className="custom-control-input" id="yes2" />
-            <label className="custom-control-label" htmlFor="yes2">Yes</label>
+            <input type="radio" name="yesno-123"
+                className="custom-control-input" id="yes-123" />
+            <label className="custom-control-label" htmlFor="yes-123">Yes</label>
         </div>
         <div className="custom-control custom-radio">
-            <input type="radio" name="color"
-                className="custom-control-input" id="no2" />
-            <label className="custom-control-label" htmlFor="no2">No</label>
+            <input type="radio" name="yesno-123"
+                className="custom-control-input" id="no-123" />
+            <label className="custom-control-label" htmlFor="no-123">No</label>
         </div>
     </div>
     <div className="invalid-feedback">
@@ -64,14 +64,14 @@
     </legend>
     <div className="form-check form-check-inline">
         <div className="custom-control custom-radio">
-            <input type="radio" name="color"
-                className="custom-control-input" id="yes3" />
-            <label className="custom-control-label" htmlFor="yes3">Yes</label>
+            <input type="radio" name="yesno-456"
+                className="custom-control-input" id="yes-456" />
+            <label className="custom-control-label" htmlFor="yes-456">Yes</label>
         </div>
         <div className="custom-control custom-radio">
-            <input type="radio" name="color"
-                className="custom-control-input" id="no3" />
-            <label className="custom-control-label" htmlFor="no3">No</label>
+            <input type="radio" name="yesno-456"
+                className="custom-control-input" id="no-456" />
+            <label className="custom-control-label" htmlFor="no-456">No</label>
         </div>
     </div>
     <small className="form-text">

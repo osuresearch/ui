@@ -40,6 +40,8 @@ __New Features:__
 * New `ExternalLink` component to automatically handle accessibility and security standards for links out of an application.
 * New `Icon` component to automatically handle accessibility standards for Font Awesome icons.
 * New `Search` component to replace legacy `$.Lookup`
+    * No longer jQuery-based
+    * Has multiple new props for configuration
 * New `Footer` component to display the standard brand footer
 * New `OhioStateNavbar` component to encapsulate the required OSU brand navbar
 * New `PersonSearchResult` renderer component for `Search` to standardize how person results look across applications.
@@ -47,6 +49,11 @@ __New Features:__
 * New `Badge` component
 * New `ModalHeader` component
 * New `ModalBody` component
+
+__Accessibility Improvements:__
+
+* Links now have an underline by default
+* `Search` "Clear" button has been changed to an X that is now always persistent as long as there is text in the input.
 
 
 # 3.3.1 (2019-10-10)

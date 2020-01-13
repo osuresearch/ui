@@ -2,6 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import Icon from '../Icon';
 import SearchResult from '../SearchResult';
 // import FlowContext from '../context/FlowContext';
 
@@ -107,7 +108,7 @@ class Search extends React.Component {
             key: defaultValue.key,
             value: defaultValue.value,
             // Lock if a value was loaded and we should go readonly immediately
-            lockSearchInput: this.props.readonlyAfterSelection
+            lockSearchInput: this.props.readOnlyAfterSelection
         });
     }
 
@@ -299,7 +300,7 @@ class Search extends React.Component {
             key,
             value,
             showSearchResults: false,
-            lockSearchInput: this.props.readonlyAfterSelection
+            lockSearchInput: this.props.readOnlyAfterSelection
         });
 
         // Delegate to the parent HOF to update the bind
@@ -444,8 +445,10 @@ class Search extends React.Component {
         // const { isPrint, isDiff, isLoading } = this.context;
         // const { bind } = this.props;
         const value = this.state.value || '';
+        const hasValue = value.length > 0;
+
         // const name = bind.name;
-        const { name, onFocus, onBlur } = this.props;
+        const { name, onFocus, onBlur, readOnly } = this.props;
 
         // If we're loading content (not search results, but initial form content),
         // display a lazy loader placeholder
@@ -478,13 +481,17 @@ class Search extends React.Component {
         // }
 
         // Wrap the control in a  `.is-invalid` if there's any validation errors
-        let classNames = 'form-control';
+        let classNames = 'form-control search-input';
         // if (bind.error) {
         //     classNames += ' is-invalid';
         // }
 
+        if (hasValue) {
+            classNames += ' search-input-has-value';
+        }
+
         return (
-            <div className="input-group input-search">
+            <div className="input-group search">
                 <span className="input-group-prefix">
                     <i className={this.getPrefixIconClasses()} aria-hidden="true"></i>
                 </span>
@@ -493,19 +500,17 @@ class Search extends React.Component {
                     className={classNames} value={value}
                     autoComplete="off" aria-autocomplete="list"
                     aria-haspopup="true" aria-owns={name + '-results'}
-                    readOnly={this.state.lockSearchInput}
+                    readOnly={this.state.lockSearchInput || readOnly}
                     ref={this.input}
                     onChange={this.onChange}
                     onFocus={onFocus}
                     onBlur={onBlur}
                 />
 
-                {this.state.lockSearchInput &&
-                    <span className="input-group-suffix">
-                        <button className="btn btn-secondary" type="button"
-                            aria-label="clear selection"
-                            onClick={this.clear}>Clear</button>
-                    </span>
+                {hasValue && !readOnly &&
+                    <button className="btn btn-link search-clear" type="button"
+                        aria-label="clear selection"
+                        onClick={this.clear}><Icon name="close"></Icon></button>
                 }
 
                 {(this.state.showSearchResults || this.props.alwaysShowResults) &&
@@ -601,8 +606,11 @@ Search.propTypes = {
      * If true, the input will go readonly once the user selects an option.
      * This is to prevent the user from selecting something, and then changing
      * the contents of the input to differ slightly from what was expected.
+     *
+     * Note that this will still allow the user to clear the selection unlike
+     * setting `readOnly={true}`.
      */
-    readonlyAfterSelection: PropTypes.bool.isRequired,
+    readOnlyAfterSelection: PropTypes.bool.isRequired,
 
     /**
      * Minimum characters required before searching
@@ -624,7 +632,13 @@ Search.propTypes = {
      * to pass `termDelta`, but the stopped typing implies that they
      * are waiting for a result response
      */
-    delay: PropTypes.number.isRequired
+    delay: PropTypes.number.isRequired,
+
+    /**
+     * Can the search input be modified by the end user. Setting this to `true`
+     * will also disable the user's ability to clear the selection.
+     */
+    readOnly: PropTypes.bool.isRequired
 };
 
 Search.defaultProps = {
@@ -632,12 +646,13 @@ Search.defaultProps = {
     onChange: null,
     onFocus: null,
     onBlur: null,
-    readonlyAfterSelection: true,
+    readOnlyAfterSelection: true,
     dropdownContentRenderer: null,
     alwaysShowResults: false,
     threshold: 3,
     termDelta: 5,
-    delay: 500
+    delay: 500,
+    readOnly: false
 };
 
 // Search.contextType = FlowContext;

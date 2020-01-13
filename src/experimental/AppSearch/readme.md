@@ -12,6 +12,29 @@
 />
 ```
 
+An example of combining `AppSearch` and `Profile` within your primary navigation:
+
+
+```js
+import { MemoryRouter } from 'react-router';
+import { NavLink } from 'react-router-dom';
+import { Profile, Navbar } from '@oris/ui';
+
+<MemoryRouter>
+    <Navbar title="My Cool App">
+        <NavLink to="/foo">Foo</NavLink>
+        <NavLink to="/bar">Bar</NavLink>
+
+        <AppSearch
+            endpoint="https://orapps.osu.edu/api/v1/person"
+            categorizer="attributes.college.name"
+        />
+
+        <Profile username="buckeye.1" />
+    </Navbar>
+</MemoryRouter>
+```
+
 ### API Requirements
 
 The backend API must be in standard JSON:API v1.0 format and accept a `q` query parameter with an arbitrary full text search string. Result links generated will be based on the resource's `links.homepage` URI. The `attributes.name` field is required and will be the displayed value for each result.

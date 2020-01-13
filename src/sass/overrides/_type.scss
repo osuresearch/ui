@@ -7,3 +7,22 @@ h2 {
     font-family: 'Capita', 'Times New Roman', serif;
     line-height: 1.4; // 1.2 seems to have too much crowding for wrapped headers
 }
+
+// Underline for links
+a, .btn-link {
+    text-decoration: underline;
+    text-decoration-skip-ink: auto;
+    text-decoration-color: rgba($link-color, 0.5);
+
+    // Safari support
+    text-decoration-skip: ink;
+}
+
+// Exclusions list for underlining.
+// Links are represented another way (as buttons, tabs, etc)
+a.dropdown-toggle,
+a.dropdown-item,
+a.nav-link,
+button.nav-link {
+    text-decoration: none;
+}
