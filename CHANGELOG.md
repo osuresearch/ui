@@ -14,6 +14,12 @@ __Bug Fixes:__
 * Refactored package dependencies to no longer require specific builds of node-sass or react-scripts installed when installing @oris/ui through npm.
     * Minimum supported React versions are defined via `peerDependencies` to issue warnings during `npm install` if these are not met.
 
+Note that with the above fix `react-dom` and `react-router-dom` will no longer be installed alongside @oris/ui. If your project was using an older version of @oris/ui, you will need to install these dependencies manually via:
+
+```
+npm install react-dom react-router-dom --save
+```
+
 
 # 4.0.0 (2019-11-18)
 

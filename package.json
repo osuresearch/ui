@@ -16,7 +16,7 @@
     "build:copy-ts": "node ./scripts/copy-ts.js",
     "build": "npm-run-all --parallel build:components build:styleguide --serial build:copy-sass build:copy-ts",
     "test": "react-scripts test",
-    "clean": "rm -rf ./node_modules && rm package-lock.json && npm install"
+    "clean": "rm -rf ./node_modules && rm -f package-lock.json && npm install"
   },
   "//scripts": {
     "start": "Run styleguidist server for local development of ORIS/UI",
