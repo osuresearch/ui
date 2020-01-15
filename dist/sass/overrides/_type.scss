@@ -14,8 +14,8 @@ a, .btn-link {
     text-decoration-skip-ink: auto;
     text-decoration-color: rgba($link-color, 0.5);
 
-    // Safari support
-    text-decoration-skip: ink;
+    // Safari support. See: https://github.com/postcss/autoprefixer/issues/1179
+    -webkit-text-decoration-skip: ink;
 }
 
 // Exclusions list for underlining.

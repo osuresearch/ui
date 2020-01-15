@@ -23,9 +23,7 @@ var _react = _interopRequireDefault(require("react"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
-var _CommentSection = _interopRequireDefault(require("./CommentSection"));
-
-var _iframeCss = _interopRequireDefault(require("./iframe-css"));
+var _CommentSidebar = _interopRequireDefault(require("./CommentSidebar"));
 
 require("./index.scss");
 
@@ -139,18 +137,21 @@ function (_React$Component) {
     value: function onFrameDocumentLoad() {
       var _this4 = this;
 
-      var frameDoc = this.iframe.current.contentDocument; // Inject required CSS for comments
-
-      var style = frameDoc.createElement('style');
-      style.innerText = _iframeCss.default;
-      frameDoc.body.appendChild(style); // Scrape the document and inject comment blocks. Since we're working within
+      var frameDoc = this.iframe.current.contentDocument;
+      this.sidebar = new _CommentSidebar.default(this.iframe.current.contentDocument, this.props.blockNodes, this.props.textNodes); // Scrape the document and inject comment blocks. Since we're working within
       // an iframe here and there's minimal JS to deal with, we'll just be
       // dropping down to the pure Javascript API and ignore React.
 
-      frameDoc.querySelectorAll('[data-comment-section]').forEach(function (node) {
-        var section = node.dataset['commentSection'];
-        _this4.sections[section] = new _CommentSection.default(section, frameDoc, node, _this4.onSubmitReply);
-      }); // Try to load in the comments, assuming we're both
+      /*frameDoc.querySelectorAll('[data-comment-section]').forEach((node) => {
+          const section = node.dataset['commentSection'];
+          this.sections[section] = new CommentSection(
+              section,
+              frameDoc,
+              node,
+              this.onSubmitReply
+          );
+      });*/
+      // Try to load in the comments, assuming we're both
       // document ready + comment data ready.
 
       this.setState({
@@ -176,10 +177,11 @@ function (_React$Component) {
     key: "render",
     value: function render() {
       return _react.default.createElement("div", {
-        className: "document-review"
+        className: "document-review ".concat(this.props.className)
       }, _react.default.createElement("iframe", {
         ref: this.iframe,
-        src: this.props.document
+        src: this.props.document,
+        frameBorder: "0"
       }));
     }
   }]);
@@ -187,6 +189,11 @@ function (_React$Component) {
 }(_react.default.Component);
 
 DocumentReview.propTypes = {
+  /**
+   * Additional classes to apply to the component wrapping
+   */
+  className: _propTypes.default.string.isRequired,
+
   /**
    * Function that returns a `Promise` that resolves
    * to comment API data already JSON decoded.
@@ -196,11 +203,30 @@ DocumentReview.propTypes = {
   /**
    * Endpoint to reviewable document HTML
    */
-  document: _propTypes.default.string.isRequired
+  document: _propTypes.default.string.isRequired,
+
+  /**
+   * DOM node selectors that support commenting on the full element.
+   *
+   * When the user mouses over these nodes, they will be highlighted
+   * and allow the user to click to enter a new comment chain.
+   */
+  blockNodes: _propTypes.default.arrayOf(_propTypes.default.string).isRequired,
+
+  /**
+   * DOM node selectors that support commenting on text ranges.
+   *
+   * When the user selects a range of text within these nodes,
+   * they can add a new comment chain tied to that specific range.
+   */
+  textNodes: _propTypes.default.arrayOf(_propTypes.default.string).isRequired
 };
 DocumentReview.defaultProps = {
+  className: '',
   comments: null,
-  document: null
+  document: null,
+  blockNodes: ['h1', 'h2', 'h3'],
+  textNodes: ['p']
 };
 var _default = DocumentReview;
 exports.default = _default;
