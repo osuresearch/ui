@@ -8,7 +8,7 @@ Collection of React components and a rebranded [Bootstrap 4.0](https://getbootst
 These components are available as a private npm package. Simply run:
 
 ```
-npm install git+ssh://git@code.osu.edu:ORIS/ui.git#semver:^4.0
+npm install git+ssh://git@code.osu.edu:ORIS/ui.git#semver:^4
 ```
 
 **- Or -** add the following to your `package.json` and run `npm install`:
@@ -17,7 +17,7 @@ npm install git+ssh://git@code.osu.edu:ORIS/ui.git#semver:^4.0
 {
     ...
     "dependencies": {
-        "@oris/ui": "git+ssh://git@code.osu.edu:ORIS/ui.git#semver:^4.0"
+        "@oris/ui": "git+ssh://git@code.osu.edu:ORIS/ui.git#semver:^4"
     }
 }
 ```
