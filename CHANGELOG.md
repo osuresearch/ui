@@ -7,13 +7,12 @@ Versions follow [Semantic Versioning](https://semver.org/) guidelines - given a 
 2. MINOR version when you add functionality in a backwards-compatible manner, and
 3. PATCH version when you make backwards-compatible bug fixes.
 
+# 4.0.1 (2020-01-15)
 
-# 4.1.0 (Unreleased)
+__Bug Fixes:__
 
-**Changes still a WIP, but expected to be part of the 4.1.0 release**
-
-* Upgraded Bootstrap to latest 4.X.X
-* Added TypeScript definitions for components and props [insert cool usage screenshot here]
+* Refactored package dependencies to no longer require specific builds of node-sass or react-scripts installed when installing @oris/ui through npm.
+    * Minimum supported React versions are defined via `peerDependencies` to issue warnings during `npm install` if these are not met.
 
 
 # 4.0.0 (2019-11-18)
