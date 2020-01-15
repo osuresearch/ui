@@ -35,7 +35,7 @@ class DocumentReview extends React.Component {
      * Ask the API for an updated list of comments to render
      */
     fetchComments() {
-        if (typeof(this.props.comments) !== 'function') {
+        if (typeof this.props.comments !== 'function') {
             throw new Error('Expected `comments` prop to be a function');
         }
 
@@ -142,14 +142,19 @@ class DocumentReview extends React.Component {
 
     render() {
         return (
-            <div className="document-review">
-                <iframe ref={this.iframe} src={this.props.document} />
+            <div className={`document-review ${this.props.className}`}>
+                <iframe ref={this.iframe} src={this.props.document} frameBorder="0" />
             </div>
         );
     }
 }
 
 DocumentReview.propTypes = {
+    /**
+     * Additional classes to apply to the component wrapping
+     */
+    className: PropTypes.string.isRequired,
+
     /**
      * Function that returns a `Promise` that resolves
      * to comment API data already JSON decoded.
@@ -179,6 +184,7 @@ DocumentReview.propTypes = {
 };
 
 DocumentReview.defaultProps = {
+    className: '',
     comments: null,
     document: null,
     blockNodes: ['h1', 'h2', 'h3'],

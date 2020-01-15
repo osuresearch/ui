@@ -33,7 +33,7 @@ body {
         We do this to the full body so that we don't
         need to worry about complex DOM structures
         and work entirely outside of it */
-    margin-right: 300px;
+    margin-right: 350px;
     position: relative;
 }
 
@@ -42,7 +42,7 @@ body {
     border-left: 1px solid #DDD;
     top: 0;
     right: -300px;
-    width: 200px;
+    width: 275px;
     height: 100%;
 }
 

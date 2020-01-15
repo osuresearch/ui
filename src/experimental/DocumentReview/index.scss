@@ -1,8 +1,11 @@
 
 .document-review {
+    height: 30rem;
+    border: 1px solid #999;
+
     iframe {
+        position: relative;
         width: 100%;
-        min-height: 30rem;
-        border: 1px solid #666;
+        height: 100%;
     }
 }
