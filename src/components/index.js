@@ -11,6 +11,7 @@ export { default as Icon } from './Icon';
 export { default as Modal } from './Modal';
 export { default as ModalHeader } from './ModalHeader';
 export { default as ModalBody } from './ModalBody';
+export { default as ModalFooter } from './ModalFooter';
 export { default as Navbar } from './Navbar';
 export { default as OhioStateNavbar } from './OhioStateNavbar';
 export { default as Profile } from './Profile';
