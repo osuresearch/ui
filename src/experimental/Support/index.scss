@@ -1,0 +1,25 @@
+.support-btn {
+    border-radius: 2px;
+    padding: 0.5rem 1rem;
+    background: white;
+    font-size: 0.8em;
+}
+
+.support-btn i.fa {
+    padding: 0 0.5em 0 0;
+}
+
+.feedback-form {
+    border-top: 1px solid #c2c2c2;
+    padding-top: 1em;
+    margin-top: 1em;
+}
+
+fieldset.form-group.feedback-chooser {
+    margin: 0;
+    margin-bottom: 0;
+    padding: 1em;
+}
+fieldset.form-group.feedback-chooser .custom-radio:last-of-type label {
+    margin-bottom: 0;
+}
