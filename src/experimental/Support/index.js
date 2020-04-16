@@ -43,6 +43,7 @@ const Support = props => {
                 app={props.app}
                 kbUrl={props.kbUrl}
                 meta={props.meta}
+                debug={props.debug}
                 endpoint={props.endpoint}
             />
             <button
@@ -52,10 +53,10 @@ const Support = props => {
                 style={
                     props.isFixed === true
                         ? {
-                              position: "fixed",
-                              bottom: 0.5 + "em",
-                              right: 0.5 + "em",
-                          }
+                            position: "fixed",
+                            bottom: 0.5 + "em",
+                            right: 0.5 + "em",
+                        }
                         : null
                 }
                 onClick={showModal}>
@@ -84,7 +85,8 @@ Support.propTypes = {
     app: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     kbUrl: PropTypes.string.isRequired,
-    meta: PropTypes.object.isRequired,
+    meta: PropTypes.object,
+    debug: PropTypes.object,
     endpoint: PropTypes.string.isRequired,
     isFixed: PropTypes.bool.isRequired,
 };
@@ -92,7 +94,7 @@ Support.propTypes = {
 Support.defaultProps = {
     title: "Help / Feedback",
     isFixed: true,
-    meta: {
+    debug: {
         cookieEnabled,
         doNotTrack,
         Language: language,

@@ -16,6 +16,7 @@ const SupportModal = props => {
         setFormValid,
         app,
         kbUrl,
+        debug,
         meta,
         endpoint,
     } = props;
@@ -34,6 +35,7 @@ const SupportModal = props => {
                     setFormValid={setFormValid}
                     app={app}
                     kbUrl={kbUrl}
+                    debug={debug}
                     meta={meta}
                     endpoint={endpoint}
                 />

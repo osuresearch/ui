@@ -15,6 +15,7 @@ const SupportForm = props => {
         app,
         kbUrl,
         meta,
+        debug,
         endpoint,
     } = props;
 
@@ -48,6 +49,7 @@ const SupportForm = props => {
                 location,
                 // TODO - sanitize message (if React does not do so natively...)
                 message: feedbackEntry,
+                debug,
                 meta,
             },
         };

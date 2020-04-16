@@ -5,6 +5,7 @@ import { Support } from "@oris/ui/experimental";
     app="My App" /* Required */
     kbUrl="https://orhelp.osu.edu/support/..." /* Required */
     title="Help / Feedback" /* Optional */
+    meta={my: "obj"} /* Optional metadata */
     endpoint="" /* Optional, only include if not using default endpoint */
     isFixed={false} /* Do not use - for demo purposes only */
 />;
