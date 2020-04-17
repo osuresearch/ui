@@ -72,7 +72,8 @@ const SupportForm = props => {
                 } else {
                     throw new Error(`
                     Something went wrong. Please click the OK button and resubmit the form. 
-                    If this problem persists, please contact the ORIS helpdesk.
+                    If this problem persists, please contact the ORIS helpdesk at (614) 688-8288
+                    or orhelpdesk@osu.edu.
                     `);
                 }
             })
@@ -83,29 +84,20 @@ const SupportForm = props => {
 
         // Don't wait on the form to post, close the modal and provide alert message
         hideModal();
-        let message =
-            feedbackType === "help"
-                ? "Thank you for your feedback. Our help desk will reach out to you shortly."
-                : "Thank you for your feedback.";
-        alert(message);
+        let message = feedbackTypes.filter(type =>
+            type.name === feedbackType
+        );
+        alert(message[0].messages.submit);
     };
 
     const feedbackTypes = [
         {
             name: "help",
-            label: "I need help finding something / something is incorrect",
-        },
-        {
-            name: "suggestion",
-            label: "I have a suggestion for something we can improve",
-        },
-    ];
-
-    /** Instructions to appear above feedback textarea **/
-    const feedbackInstructions =
-        feedbackType === "help" ? (
-            // Help instructions
-            <>
+            labels: {
+                choice: "I need help finding something / something is incorrect",
+                textarea: "Please describe your issue",
+            },
+            instructions: (<>
                 <p className="text-muted">
                     For general questions on how to use the {app} application,{" "}
                     <ExternalLink href={kbUrl}>
@@ -124,23 +116,40 @@ const SupportForm = props => {
                     <a href="tel:16146888288">(614) 688-8288</a> or use the form
                     below.
                 </p>
-            </>
-        ) : (
-                // Suggestion instructions
+            </>),
+            messages: {
+                invalid: "Please describe your issue",
+                submit: "Thank you for your feedback. Our help desk will reach out to you shortly.",
+            },
+        },
+        {
+            name: "suggestion",
+            labels: {
+                choice: "I have a suggestion for something we can improve",
+                textarea: "How can we improve the " + app + " application?",
+            },
+            instructions: (<>
                 <p className="text-muted">
                     This form is to provide feedback to help us improve the {app}{" "}
-                application. You may also provide feedback by emailing the help
-                desk directly at{" "}
-                    <a href="mailto:orhelpdesk@osu.edu?subject=PI Portal Feedback">
+                    application. You may also provide feedback by emailing the help
+                    desk directly at{" "}
+                    <a href={"mailto:orhelpdesk@osu.edu?subject=" + app.name + " Feedback"}>
                         orhelpdesk@osu.edu
-                </a>
+                    </a>
                 </p>
-            );
+            </>),
+            messages: {
+                invalid: "Please fill out the suggestion form",
+                submit: "Thank you for your feedback.",
+            },
+        },
+    ];
 
     return (
         <form id="feedback" onSubmit={e => handleFormSubmit(e)} noValidate>
             <fieldset className="form-group feedback-chooser">
-                <div class="custom-controlls-stacked">
+                <div className="custom-controlls-stacked">
+                    { /* Generate radio button options per feedback type */}
                     {feedbackTypes.map(type => {
                         return (
                             <Fragment key={type.name}>
@@ -158,7 +167,7 @@ const SupportForm = props => {
                                     <label
                                         className="custom-control-label"
                                         htmlFor={type.name}>
-                                        {type.label}
+                                        {type.labels.choice}
                                     </label>
                                 </div>
                             </Fragment>
@@ -166,35 +175,37 @@ const SupportForm = props => {
                     })}
                 </div>
             </fieldset>
-            {/* Display feedback instructions & textarea based on state **/}
+            {/* Display feedback instructions & textarea if feedbackType state exists **/}
             {feedbackType && (
                 <fieldset className="form-group is-required feedback-form">
-                    <div>{feedbackInstructions}</div>
-                    <label htmlFor="feedback-entry">
-                        {feedbackType === "help"
-                            ? "Please describe your issue"
-                            : "How can we improve the " + app + " application?"}
-                    </label>
-                    <textarea
-                        id="feedback-entry"
-                        name="issue"
-                        className={
-                            formValid === false
-                                ? "form-control is-invalid"
-                                : "form-control"
-                        }
-                        rows="4"
-                        value={feedbackEntry}
-                        onChange={e => {
-                            setFeedbackEntry(e.target.value);
-                            setFormValid(true);
-                        }}
-                        required></textarea>
-                    <div className="invalid-feedback">
-                        {feedbackType === "help"
-                            ? "Please describe your issue"
-                            : "Please fill out the suggestion form"}
-                    </div>
+                    {/** Generate instructions, field label, and invalid 
+                     * message for current feedbackType */}
+                    {feedbackTypes.map(type => {
+                        return (feedbackType === type.name && <>
+                            <div>{type.instructions}</div>
+                            <label htmlFor="feedback-entry">
+                                {type.labels.textarea}
+                            </label>
+                            <textarea
+                                id="feedback-entry"
+                                name="issue"
+                                className={
+                                    formValid === false
+                                        ? "form-control is-invalid"
+                                        : "form-control"
+                                }
+                                rows="4"
+                                value={feedbackEntry}
+                                onChange={e => {
+                                    setFeedbackEntry(e.target.value);
+                                    setFormValid(true);
+                                }}
+                                required></textarea>
+                            <div className="invalid-feedback">
+                                {type.messages.invalid}
+                            </div>
+                        </>);
+                    })}
                 </fieldset>
             )}
         </form>
