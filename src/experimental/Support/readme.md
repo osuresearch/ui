@@ -3,11 +3,11 @@ import { Support } from "@oris/ui/experimental";
 
 <Support
     app="My App" /* Required */
-    kbUrl="https://orhelp.osu.edu/support/..." /* Required */
+    kbUrl="https://orhelp.osu.edu/support/..." /* Optional */
     title="Help / Feedback" /* Optional */
     meta={{my: "obj"}} /* Optional metadata */
     endpoint="" /* Optional, only include if not using default endpoint */
-    isFixed={false} /* Do not use - for demo purposes only */
+    isFixed={false} /* Optional, controls if button is fixed to page bottom right (true) */
 />;
 ```
 
