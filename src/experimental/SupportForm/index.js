@@ -129,6 +129,7 @@ const SupportForm = props => {
                             value={feedbackEntry}
                             onChange={e => {
                                 setFeedbackEntry(e.target.value);
+                                e.target.setCustomValidity("");
                             }}
                             onInvalid={e => {
                                 const invalidMsg = type.messages.invalid;

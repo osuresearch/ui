@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import PropTypes from "prop-types";
 
 import SupportButton from "../SupportButton";
@@ -35,11 +35,39 @@ const Support = props => {
     } = props;
     const [feedbackType, setFeedbackType] = useState("");
     const [feedbackEntry, setFeedbackEntry] = useState("");
+    const [modalOpen, setModalOpen] = useState(false);
 
     let modal = useRef();
 
-    const showModal = () => modal.current?.show();
+    const showModal = () => {
+        // Do not show the modal if another modal is open
+        if (document.body.className.includes("modal-open")) {
+            // Get the title of the open modal
+            // This assumes there is only one open modal... 
+            const openModalTitle = document.getElementsByClassName('modal show')[0].getElementsByClassName('modal-title')[0].innerText;
+            return alert("Save or cancel '" + openModalTitle + "' to open the " + title + " dialog.");
+        }
+        // Show the modal if the modal element exists
+        if (modal) {
+            modal.current.show();
+            setModalOpen(true);
+        }
+    };
     const hideModal = () => modal.current.hide();
+
+    useEffect(() => {
+        /**
+         * Change the modalOpen state to false by attaching
+         * Bootstrap jQuery 'hide.bs.modal' event handler to the modal ref
+         **/
+        window.$(modal.current.ref.current).on('hide.bs.modal', () => {
+            setModalOpen(false);
+        });
+        return () => {
+            // Remove the event handler: https://reactjs.org/docs/hooks-reference.html#cleaning-up-an-effect
+            window.$(modal.current.ref.current).off('hide.bs.modal');
+        }
+    });
 
     const feedbackTypes = [
         {
@@ -126,7 +154,7 @@ const Support = props => {
                     )}
                 </ModalFooter>
             </Modal>
-            <SupportButton title={title} isFixed={isFixed} showModal={showModal} />
+            <SupportButton title={title} isFixed={isFixed} showModal={showModal} modalOpen={modalOpen} />
         </>
     );
 };
