@@ -11,7 +11,7 @@
   "scripts": {
     "start": "npx styleguidist server",
     "build:styleguide": "npx styleguidist build",
-    "build:components": "npx babel ./src --out-dir ./dist --extensions \".tsx,.js\"",
+    "build:components": "npx babel ./src --out-dir ./dist --extensions \".tsx,.ts,.js\"",
     "build:ts-declarations": "npx tsc --declaration --outDir ./dist --emitDeclarationOnly --declarationMap || echo tsc done, possibly with ignored errors.",
     "build:copy-sass": "node ./scripts/copy-sass.js",
     "build": "npm-run-all --parallel build:components --serial build:ts-declarations build:copy-sass",
