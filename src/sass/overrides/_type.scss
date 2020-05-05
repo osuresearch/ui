@@ -23,6 +23,7 @@ a, .btn-link {
 a.dropdown-toggle,
 a.dropdown-item,
 a.nav-link,
+a[role='button'],
 button.nav-link {
     text-decoration: none;
 }
