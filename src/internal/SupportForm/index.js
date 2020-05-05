@@ -24,11 +24,11 @@ const SupportForm = props => {
         const body = {
             data: {
                 type: "support",
+                meta,
                 attributes: {
                     isFeedback: feedbackType === "suggestion",
                     location,
                     message: feedbackEntry,
-                    meta,
                 }
             }
         };
@@ -36,7 +36,7 @@ const SupportForm = props => {
         fetch(endpoint, {
             method: "post",
             headers: {
-                "Content-type": "application/json",
+                "Content-Type": "application/json",
             },
             credentials: "same-origin",
             body: JSON.stringify(body),
