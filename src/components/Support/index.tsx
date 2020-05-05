@@ -1,43 +1,57 @@
 import React, { useState, useRef, useEffect } from "react";
-import PropTypes from "prop-types";
 
-import SupportButton from "../SupportButton";
-import SupportForm from "../SupportForm";
+import SupportButton from "../../internal/SupportButton";
+import SupportForm from "../../internal/SupportForm";
 
-import Button from "../../components/Button";
-import ExternalLink from "../../components/ExternalLink";
-import Modal from "../../components/Modal";
-import ModalHeader from "../../components/ModalHeader";
-import ModalBody from "../../components/ModalBody";
-import ModalFooter from "../../components/ModalFooter";
+import Button from "../Button";
+import ExternalLink from "../ExternalLink";
+import Modal from "../Modal";
+import ModalHeader from "../ModalHeader";
+import ModalBody from "../ModalBody";
+import ModalFooter from "../ModalFooter";
+
+export interface Props {
+    /** Application Name */
+    app: string;
+
+    /** Title in the button */
+    title?: string;
+    
+    /** Knowledgebase article link, if one exists */
+    kbUrl?: string;
+
+    /** Additional per-application metadata to be sent alongside the report */
+    meta?: object;
+    
+    /** Endpoint for form submissions */
+    endpoint?: string;
+
+    /** Controls if button is fixed to bottom right of page (true) or in its DOM position (false) */
+    isFixed?: boolean;
+}
 
 /**
- * React implementation of the Support form originally from PI Portal.
- *
+ * Support and feedback collection for applications.
+ * 
  * Users click on button fixed on bottom right of page, which
  * shows a form within a modal. The user selects a feedback type (help
  * or suggestion) and is provided instructions for providing such
  * feedback. Instructions for users seeking help include a link to the
  * knowledgebase (kb) for the application and the phone number to the helpdesk.
- *
- * See original implementation: https://orapps.osu.edu/piportal/
  */
-
-const Support = props => {
-    const {
-        app,
-        title,
-        kbUrl,
-        meta,
-        debug,
-        endpoint,
-        isFixed,
-    } = props;
+const Support: React.FC<Props> = ({
+    app,
+    title = 'Help / Feedback',
+    kbUrl = undefined,
+    meta = undefined,
+    endpoint = '/api/v1/support',
+    isFixed = true
+}) => {
     const [feedbackType, setFeedbackType] = useState("");
     const [feedbackEntry, setFeedbackEntry] = useState("");
     const [modalOpen, setModalOpen] = useState(false);
 
-    let modal = useRef();
+    let modal = useRef<Modal>(null);
 
     const showModal = () => {
         // Do not show the modal if another modal is open
@@ -48,24 +62,26 @@ const Support = props => {
             return alert("Save or cancel '" + openModalTitle + "' to open the " + title + " dialog.");
         }
         // Show the modal if the modal element exists
-        if (modal) {
+        if (modal.current) {
             modal.current.show();
             setModalOpen(true);
         }
     };
-    const hideModal = () => modal.current.hide();
+    const hideModal = () => modal.current?.hide();
 
     useEffect(() => {
         /**
          * Change the modalOpen state to false by attaching
          * Bootstrap jQuery 'hide.bs.modal' event handler to the modal ref
          **/
-        window.$(modal.current.ref.current).on('hide.bs.modal', () => {
+        // @ts-ignore 
+        window.$(modal.current?.ref.current).on('hide.bs.modal', () => {
             setModalOpen(false);
         });
         return () => {
             // Remove the event handler: https://reactjs.org/docs/hooks-reference.html#cleaning-up-an-effect
-            window.$(modal.current.ref.current).off('hide.bs.modal');
+            // @ts-ignore
+            window.$(modal.current?.ref.current).off('hide.bs.modal');
         }
     });
 
@@ -120,10 +136,34 @@ const Support = props => {
         },
     ];
 
+    // TODO: Refactor what kind of metadata we're sending up.
+    // Need to identify what's useful here for help desk
+
+    // Navigator metadata
+    const {
+        cookieEnabled,
+        doNotTrack,
+        language,
+        onLine,
+        oscpu,
+        plugins,
+        userAgent,
+    } = navigator;
+
+    const debug = {
+        cookieEnabled,
+        doNotTrack,
+        language,
+        onLine,
+        oscpu,
+        plugins,
+        userAgent
+    };
+
     return (
         <>
             <Modal ref={modal} keyboard={true} backdrop="static">
-                <ModalHeader hasCloseButton={true}>How can we help?</ModalHeader>
+                <ModalHeader>How can we help?</ModalHeader>
                 <ModalBody>
                     <SupportForm
                         showModal={showModal}
@@ -142,7 +182,7 @@ const Support = props => {
                 <ModalFooter>
                     <Button theme="outline-secondary" onClick={hideModal}>
                         Cancel
-                </Button>
+                    </Button>
                     {feedbackType && (
                         <button
                             type="submit"
@@ -157,52 +197,6 @@ const Support = props => {
             <SupportButton title={title} isFixed={isFixed} showModal={showModal} modalOpen={modalOpen} />
         </>
     );
-};
-
-/**
- * Get metadata from the navigator object
- */
-const {
-    cookieEnabled,
-    doNotTrack,
-    language,
-    onLine,
-    oscpu,
-    plugins,
-    userAgent,
-} = navigator;
-
-/* Set propTypes and defaultProps */
-Support.propTypes = {
-    // Application Name
-    app: PropTypes.string.isRequired,
-    // Title in the button
-    title: PropTypes.string.isRequired,
-    // Knowledgebase article link, if one exists
-    kbUrl: PropTypes.string,
-    // Metadata object for (...)
-    meta: PropTypes.object,
-    // Information from browser for debugging
-    debug: PropTypes.object,
-    // Endpoint for form submissions
-    endpoint: PropTypes.string.isRequired,
-    // Controls if button is fixed to bottom right of page (true) or in its DOM position (false)
-    isFixed: PropTypes.bool.isRequired,
-};
-
-Support.defaultProps = {
-    title: "Help / Feedback",
-    isFixed: true,
-    debug: {
-        cookieEnabled,
-        doNotTrack,
-        Language: language,
-        onLine,
-        os: oscpu,
-        plugins,
-        userAgent,
-    },
-    endpoint: "",
 };
 
 export default Support;

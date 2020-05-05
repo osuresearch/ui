@@ -18,6 +18,9 @@ const MyModal = (props) => {
                 <ModalBody>
                     Your content goes here
                 </ModalBody>
+                <ModalFooter>
+                    Your footer content here
+                </ModalFooter>
             </Modal>
 
             <Button theme="primary" onClick={showModal}>

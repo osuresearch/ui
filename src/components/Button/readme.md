@@ -10,7 +10,11 @@ Default button with a click event handler.
 Small themed button
 
 ```jsx
-<Button small={true} theme="danger">Delete</Button>
+<Button 
+    className="btn-sm" 
+    theme="danger" 
+    onClick={() => alert('Deleted!')}
+>Delete</Button>
 ```
 
 ### Themes
@@ -58,7 +62,7 @@ Do not combine icons and words together in buttons, unless it is to represent so
 ```jsx
 import { Icon } from '@oris/ui';
 
-<Button>
+<Button disabled={true}>
     <Icon name="spinner" spin={true} /> Saving...
 </Button>
 ```

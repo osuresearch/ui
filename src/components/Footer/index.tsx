@@ -1,11 +1,22 @@
 
 import React from 'react';
-import PropTypes from 'prop-types';
+
+export interface Props {
+    department?: string;
+    website?: string;
+    address?: string;
+    contact?: string;
+}
 
 /**
  * Office of Research brand footer with help and support information
  */
-const Footer = (props) => (
+const Footer: React.FC<Props> = ({
+    department = 'Office of Research',
+    website = 'https://research.osu.edu',
+    address = '1960 Kenny Road | Columbus, OH 43210',
+    contact = 'https://research.osu.edu/contact'
+}) => (
     <footer>
         <ul>
             <li>
@@ -18,12 +29,12 @@ const Footer = (props) => (
             <li>
                 &copy; {(new Date()).getFullYear()},
                 The Ohio State University
-                - <a href={props.website} target="_blank" rel="noopener noreferrer">
-                    {props.department}
+                - <a href={website} target="_blank" rel="noopener noreferrer">
+                    {department}
                 </a>
             </li>
             <li className="hidden-xs-down">
-                {props.address} | <a href={props.contact} target="_blank" rel="noopener noreferrer">
+                {address} | <a href={contact} target="_blank" rel="noopener noreferrer">
                     Contact
                 </a>
             </li>
@@ -36,19 +47,5 @@ const Footer = (props) => (
         </ul>
     </footer>
 );
-
-Footer.propTypes = {
-    department: PropTypes.string.isRequired,
-    website: PropTypes.string.isRequired,
-    address: PropTypes.string.isRequired,
-    contact: PropTypes.string.isRequired
-};
-
-Footer.defaultProps = {
-    department: 'Office of Research',
-    website: 'https://research.osu.edu',
-    address: '1960 Kenny Road | Columbus, OH 43210',
-    contact: 'https://research.osu.edu/contact'
-};
 
 export default Footer;

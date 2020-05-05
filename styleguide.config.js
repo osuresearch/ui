@@ -64,7 +64,7 @@ module.exports = {
     },
     getComponentPathLine: (componentPath) => {
         // Naming convention for ../Component/index.js
-        const dirname = path.dirname(componentPath, '.js');
+        const dirname = path.dirname(componentPath);
         const name = dirname.split(path.sep).slice(-1)[0];
 
         // The assumption is that all (public) components are exported
@@ -91,6 +91,17 @@ module.exports = {
         // Aliasing so we don't have awful import '../../../..' in examples.
         '@oris/ui': path.join(__dirname, './src/components')
     },
+    propsParser: (filePath, source, resolver, handlers) => {
+        // Handle TypeScript prop parsing
+        if (filePath.substr(-3) === 'tsx') {
+            return require('react-docgen-typescript').withCustomConfig(
+                './tsconfig.json'
+            ).parse(filePath);
+        }
+
+        // Assume Javascript
+        return require('react-docgen').parse(source, resolver, handlers);
+    },
     sections: [
         {
             name: '',
@@ -103,7 +114,7 @@ module.exports = {
         {
             name: 'Components',
             content: 'src/components/readme.md',
-            components: 'src/components/**/index.js',
+            components: 'src/components/**/index.?(js|tsx)',
             ignore: [
                 'src/components/index.js'
             ]

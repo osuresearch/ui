@@ -16,6 +16,8 @@ import {
  * Renders itself as a link to open the modal. Once emulation has
  * changed, the entire application will be refreshed to load
  * under the new emulated user.
+ * 
+ * @deprecated Use @oris/auth
  */
 class Emulate extends React.Component {
     constructor(props) {
