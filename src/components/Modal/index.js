@@ -14,8 +14,7 @@ import PropTypes from 'prop-types';
  * 
  * Bootstrap modal modifier classes (such as .modal-dialog-centered and 
  * .modal-sm) and custom wrapping classes can also be passed in using the 
- * **className** prop. This prop accepts both strings (for a single class) 
- * and arrays (for multiple classes). Note that the classes are added to the
+ * **className** prop. Note that the classes are added to the
  * '.modal-dialog' element and not the outermost '.modal' element.
  * 
 
@@ -61,14 +60,7 @@ class Modal extends React.Component {
         return ReactDOM.createPortal(
             <div className="modal fade" tabIndex="-1" role="dialog"
                 aria-hidden="true" ref={this.ref}>
-                <div className={"modal-dialog " +
-                    // Concatenate the className class(es) if they were passed in
-                    (this.props.className
-                        ? Array.isArray(this.props.className)
-                            ? this.props.className.join(' ')
-                            : this.props.className
-                        : '')
-                } role="document">
+                <div className={"modal-dialog" + (this.props.className ? " " + this.props.className : '')} role="document">
                     <div className="modal-content">
                         {this.props.children}
                     </div>
@@ -80,10 +72,7 @@ class Modal extends React.Component {
 }
 
 Modal.propTypes = {
-    className: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.array,
-    ]),
+    className: PropTypes.string,
     children: PropTypes.oneOfType([
         PropTypes.arrayOf(PropTypes.node),
         PropTypes.object

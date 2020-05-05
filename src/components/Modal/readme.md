@@ -12,10 +12,10 @@ const MyModal = (props) => {
     return (
         <>
             <Modal 
-                ref={modal} 
-                keyboard={true} 
-                backdrop="static" 
-                className={["modal-dialog-centered", "modal-lg", "my-super-awesome-wrapper-class"]}
+                ref={modal}
+                keyboard={true}
+                backdrop="static"
+                className="modal-dialog-centered modal-lg my-super-awesome-wrapper-class"
             >
                 <ModalHeader hasCloseButton={true}>
                     Modal Title
