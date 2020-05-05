@@ -9,9 +9,7 @@ const SupportForm = props => {
         feedbackEntry,
         setFeedbackType,
         setFeedbackEntry,
-        app,
         meta,
-        debug,
         endpoint,
     } = props;
 
@@ -23,24 +21,16 @@ const SupportForm = props => {
     const sendRequest = () => {
         const location = document.URL;
 
-        /**
-         * Get the requesting username from the profile dropdown
-         * Wondering if there is a more React-y way of doing this...
-         **/
-        const user = document.getElementById("profile-dropdown").textContent;
-
         const body = {
-            type: "support",
-            attributes: {
-                isFeedback: feedbackType === "suggestion" ? true : false,
-                application: app,
-                user,
-                location,
-                // TODO - sanitize message (if React does not do so natively...)
-                message: feedbackEntry,
-                debug,
-                meta,
-            },
+            data: {
+                type: "support",
+                attributes: {
+                    isFeedback: feedbackType === "suggestion",
+                    location,
+                    message: feedbackEntry,
+                    meta,
+                }
+            }
         };
 
         fetch(endpoint, {
@@ -108,8 +98,8 @@ const SupportForm = props => {
             </fieldset>
             {/* Display feedback instructions & textarea if feedbackType state exists **/}
             {feedbackType && feedbackTypes.map(type => {
-                {/** Generate instructions, field label, and invalid 
-                * message for current feedbackType */}
+                // Generate instructions, field label, and invalid 
+                // message for current feedbackType
                 return (feedbackType === type.name &&
                     <div
                         key={type.name + "-entry"}

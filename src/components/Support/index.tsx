@@ -23,7 +23,7 @@ export interface Props {
     /** Additional per-application metadata to be sent alongside the report */
     meta?: object;
     
-    /** Endpoint for form submissions */
+    /** Endpoint for form submissions. */
     endpoint?: string;
 
     /** Controls if button is fixed to bottom right of page (true) or in its DOM position (false) */
@@ -44,7 +44,7 @@ const Support: React.FC<Props> = ({
     title = 'Help / Feedback',
     kbUrl = undefined,
     meta = undefined,
-    endpoint = '/api/v1/support',
+    endpoint = `${process.env.PUBLIC_URL}/api/v1/support`,
     isFixed = true
 }) => {
     const [feedbackType, setFeedbackType] = useState("");
@@ -54,13 +54,6 @@ const Support: React.FC<Props> = ({
     let modal = useRef<Modal>(null);
 
     const showModal = () => {
-        // Do not show the modal if another modal is open
-        if (document.body.className.includes("modal-open")) {
-            // Get the title of the open modal
-            // This assumes there is only one open modal... 
-            const openModalTitle = document.getElementsByClassName('modal show')[0].getElementsByClassName('modal-title')[0].innerText;
-            return alert("Save or cancel '" + openModalTitle + "' to open the " + title + " dialog.");
-        }
         // Show the modal if the modal element exists
         if (modal.current) {
             modal.current.show();
@@ -136,30 +129,6 @@ const Support: React.FC<Props> = ({
         },
     ];
 
-    // TODO: Refactor what kind of metadata we're sending up.
-    // Need to identify what's useful here for help desk
-
-    // Navigator metadata
-    const {
-        cookieEnabled,
-        doNotTrack,
-        language,
-        onLine,
-        oscpu,
-        plugins,
-        userAgent,
-    } = navigator;
-
-    const debug = {
-        cookieEnabled,
-        doNotTrack,
-        language,
-        onLine,
-        oscpu,
-        plugins,
-        userAgent
-    };
-
     return (
         <>
             <Modal ref={modal} keyboard={true} backdrop="static">
@@ -173,8 +142,6 @@ const Support: React.FC<Props> = ({
                         feedbackEntry={feedbackEntry}
                         setFeedbackType={setFeedbackType}
                         setFeedbackEntry={setFeedbackEntry}
-                        app={app}
-                        debug={debug}
                         meta={meta}
                         endpoint={endpoint}
                     />
