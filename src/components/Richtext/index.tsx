@@ -16,6 +16,20 @@ export interface Props {
     onChange?(newValue: string): void;
 }
 
+// CKEditor 5 Toolbar configurations.
+// We can't use the default because it includes plugins that we don't support (e.g. image uploads)
+// The full list of available toolbar items comes from running `editor.ui.componentFactory.names()`
+const DEFAULT_TOOLBAR_ITEMS = [
+    "|", "heading", 
+    "|", "fontfamily", "fontsize", "fontColor", "fontBackgroundColor",
+    "|", "bold", "italic", "underline", "strikethrough",
+    "|", "alignment", 
+    "|", "numberedList", "bulletedList", 
+    "|", "indent", "outdent", 
+    "|", "link", "blockquote", /*"imageUpload",*/ "insertTable", "mediaEmbed", 
+    /* "|", "undo", "redo" */
+];
+
 /**
  * Simple preconfigured Richtext editor
  */
@@ -42,7 +56,17 @@ const Richtext: React.FC<Props> = ({
 
         // https://ckeditor.com/docs/ckeditor5/latest/api/module_core_editor_editorconfig-EditorConfig.html
         const opts = {
-            initialData
+            initialData,
+            toolbar: {
+                items: DEFAULT_TOOLBAR_ITEMS
+            },
+            // TODO: Disable the "Insert Image" plugin entirely, we're not supporting it.
+            // All of the below didn't work so far. Only thing I found to work 
+            // is to completely replace the full toolbar.
+            // removePlugins: [ 'ckfinder', 'imageUpload', 'imageInsert' ],
+            // imageEditing: {
+            //     isEnabled: false
+            // }
         };
 
         cke.create(editorRef.current, opts)
@@ -52,7 +76,6 @@ const Richtext: React.FC<Props> = ({
 
                 // Bind CKE's change event to our own onChange
                 editor.model.document.on('change:data', () => {
-                    console.log( 'The data has changed!' );
                     if (onChange) {
                         onChange(editor.getData() as string);
                     }
