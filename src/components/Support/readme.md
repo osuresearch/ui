@@ -11,7 +11,7 @@ import { Support } from "@oris/ui";
 
 ### API Requirements
 
-The Support component requires an API endpoint to send submitted support and feedback payloads. By default, the component assumes your endpoint is hosted at `{process.env.PUBLIC_URL}/api/support`, but you can override this by setting the `endpoint` prop of the component.
+The Support component requires an API endpoint to send submitted support and feedback payloads. By default, the component assumes your endpoint is hosted at `{process.env.PUBLIC_URL}/api/support`, but you can override this by setting the `endpoint` prop to an alternative target.
 
 The following payload is sent to the above endpoint:
 
@@ -37,3 +37,4 @@ Content-Type: application-json
 ```
 
 The component expects a 200 or 201 response for a successful submission.
+

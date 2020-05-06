@@ -1,8 +1,6 @@
 
 import React, { MouseEvent } from 'react';
 
-import './index.scss';
-
 export interface Props {
     /** Bootstrap theme name (e.g. `danger`, `success`) */
     theme?: string;

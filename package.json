@@ -4,7 +4,7 @@
   "description": "React UI components for ORIS applications",
   "author": "Chase McManning <mcmanning.1@osu.edu>",
   "private": true,
-  "main": "dist/components/index.js",
+  "main": "dist/index.js",
   "files": [
     "dist"
   ],

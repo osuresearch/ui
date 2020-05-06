@@ -89,7 +89,7 @@ module.exports = {
     ],
     moduleAliases: {
         // Aliasing so we don't have awful import '../../../..' in examples.
-        '@oris/ui': path.join(__dirname, './src/components')
+        '@oris/ui': path.join(__dirname, './src')
     },
     propsParser: (filePath, source, resolver, handlers) => {
         // Handle TypeScript prop parsing
@@ -116,7 +116,7 @@ module.exports = {
             content: 'src/components/readme.md',
             components: 'src/components/**/index.?(js|tsx)',
             ignore: [
-                'src/components/index.js'
+                'src/components/.ignore'
             ]
         },
         {
