@@ -4,6 +4,10 @@
     white-space: nowrap;
 }
 
+.nav-link {
+    background-color: transparent;
+}
+
 // Fix the border under a tab item
 .nav-link.active {
     border-bottom-color: #fff !important;
