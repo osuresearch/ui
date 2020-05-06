@@ -9,47 +9,41 @@ exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _propTypes = _interopRequireDefault(require("prop-types"));
-
 /**
  * Office of Research brand footer with help and support information
  */
-var Footer = function Footer(props) {
-  return _react.default.createElement("footer", null, _react.default.createElement("ul", null, _react.default.createElement("li", null, _react.default.createElement("a", {
+var Footer = function Footer(_ref) {
+  var _ref$department = _ref.department,
+      department = _ref$department === void 0 ? 'Office of Research' : _ref$department,
+      _ref$website = _ref.website,
+      website = _ref$website === void 0 ? 'https://research.osu.edu' : _ref$website,
+      _ref$address = _ref.address,
+      address = _ref$address === void 0 ? '1960 Kenny Road | Columbus, OH 43210' : _ref$address,
+      _ref$contact = _ref.contact,
+      contact = _ref$contact === void 0 ? 'https://research.osu.edu/contact' : _ref$contact;
+  return /*#__PURE__*/_react.default.createElement("footer", null, /*#__PURE__*/_react.default.createElement("ul", null, /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("a", {
     href: "http://www.osu.edu/",
     className: "wordmark"
-  }, _react.default.createElement("img", {
+  }, /*#__PURE__*/_react.default.createElement("img", {
     src: "https://orapps.osu.edu/assets/img/osu-footer-wordmark.png",
     alt: "The Ohio State University",
     title: "The Ohio State University home page"
-  }))), _react.default.createElement("li", null, "\xA9 ", new Date().getFullYear(), ", The Ohio State University - ", _react.default.createElement("a", {
-    href: props.website,
+  }))), /*#__PURE__*/_react.default.createElement("li", null, "\xA9 ", new Date().getFullYear(), ", The Ohio State University - ", /*#__PURE__*/_react.default.createElement("a", {
+    href: website,
     target: "_blank",
     rel: "noopener noreferrer"
-  }, props.department)), _react.default.createElement("li", {
+  }, department)), /*#__PURE__*/_react.default.createElement("li", {
     className: "hidden-xs-down"
-  }, props.address, " | ", _react.default.createElement("a", {
-    href: props.contact,
+  }, address, " | ", /*#__PURE__*/_react.default.createElement("a", {
+    href: contact,
     target: "_blank",
     rel: "noopener noreferrer"
-  }, "Contact")), _react.default.createElement("li", null, "If you have trouble accessing this page and need to request an alternate format, contact the ", _react.default.createElement("a", {
+  }, "Contact")), /*#__PURE__*/_react.default.createElement("li", null, "If you have trouble accessing this page and need to request an alternate format, contact the ", /*#__PURE__*/_react.default.createElement("a", {
     href: "https://orapps.osu.edu/webmaster",
     target: "_blank",
     rel: "noopener noreferrer"
   }, "webmaster"), ".")));
 };
 
-Footer.propTypes = {
-  department: _propTypes.default.string.isRequired,
-  website: _propTypes.default.string.isRequired,
-  address: _propTypes.default.string.isRequired,
-  contact: _propTypes.default.string.isRequired
-};
-Footer.defaultProps = {
-  department: 'Office of Research',
-  website: 'https://research.osu.edu',
-  address: '1960 Kenny Road | Columbus, OH 43210',
-  contact: 'https://research.osu.edu/contact'
-};
 var _default = Footer;
 exports.default = _default;

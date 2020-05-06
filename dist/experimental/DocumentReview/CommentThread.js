@@ -20,9 +20,7 @@ var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/creat
  * TODO: Cache solution for position lookups so we stop querying the DOM. (Same goes for anchors)
  * The lookups should only invalidate if the container frame dimensions change.
  */
-var CommentThread =
-/*#__PURE__*/
-function () {
+var CommentThread = /*#__PURE__*/function () {
   /**
    * @param {Document} document Document that comment DOM exists within
    * @param {HTMLElement} parent Containing element that threads are associated with

@@ -9,16 +9,12 @@ exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _propTypes = _interopRequireDefault(require("prop-types"));
-
-var ModalBody = function ModalBody(props) {
-  return _react.default.createElement("div", {
+var ModalBody = function ModalBody(_ref) {
+  var children = _ref.children;
+  return /*#__PURE__*/_react.default.createElement("div", {
     className: "modal-body"
-  }, props.children);
+  }, children);
 };
 
-ModalBody.propTypes = {
-  children: _propTypes.default.oneOfType([_propTypes.default.arrayOf(_propTypes.default.node), _propTypes.default.object])
-};
 var _default = ModalBody;
 exports.default = _default;

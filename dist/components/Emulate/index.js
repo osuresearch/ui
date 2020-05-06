@@ -11,13 +11,13 @@ var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/cl
 
 var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
 
-var _possibleConstructorReturn2 = _interopRequireDefault(require("@babel/runtime/helpers/possibleConstructorReturn"));
-
-var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime/helpers/getPrototypeOf"));
-
 var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/helpers/assertThisInitialized"));
 
 var _inherits2 = _interopRequireDefault(require("@babel/runtime/helpers/inherits"));
+
+var _possibleConstructorReturn2 = _interopRequireDefault(require("@babel/runtime/helpers/possibleConstructorReturn"));
+
+var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime/helpers/getPrototypeOf"));
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -25,23 +25,29 @@ var _propTypes = _interopRequireDefault(require("prop-types"));
 
 var _ui = require("@oris/ui");
 
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = (0, _getPrototypeOf2.default)(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = (0, _getPrototypeOf2.default)(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return (0, _possibleConstructorReturn2.default)(this, result); }; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
 /**
  * Modal to change emulation of users within the application.
  *
  * Renders itself as a link to open the modal. Once emulation has
  * changed, the entire application will be refreshed to load
  * under the new emulated user.
+ * 
+ * @deprecated Use @oris/auth
  */
-var Emulate =
-/*#__PURE__*/
-function (_React$Component) {
+var Emulate = /*#__PURE__*/function (_React$Component) {
   (0, _inherits2.default)(Emulate, _React$Component);
+
+  var _super = _createSuper(Emulate);
 
   function Emulate(props) {
     var _this;
 
     (0, _classCallCheck2.default)(this, Emulate);
-    _this = (0, _possibleConstructorReturn2.default)(this, (0, _getPrototypeOf2.default)(Emulate).call(this, props));
+    _this = _super.call(this, props);
     _this.modal = _react.default.createRef();
     _this.onClick = _this.onClick.bind((0, _assertThisInitialized2.default)(_this));
     _this.onEmulate = _this.onEmulate.bind((0, _assertThisInitialized2.default)(_this));
@@ -159,34 +165,34 @@ function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
-      return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_ui.Modal, {
+      return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_ui.Modal, {
         ref: this.modal
-      }, _react.default.createElement(_ui.ModalHeader, {
+      }, /*#__PURE__*/_react.default.createElement(_ui.ModalHeader, {
         hasCloseButton: true
-      }, "Emulate User"), _react.default.createElement(_ui.ModalBody, null, _react.default.createElement(_ui.Search, {
+      }, "Emulate User"), /*#__PURE__*/_react.default.createElement(_ui.ModalBody, null, /*#__PURE__*/_react.default.createElement(_ui.Search, {
         name: "emulate-user-lookup",
         endpoint: this.props.lookupEndpoint,
         hasClearButton: false,
         onChange: this.onEmulate,
         resultComponent: _ui.PersonSearchResult
-      }), this.props.isEmulating && _react.default.createElement("small", {
+      }), this.props.isEmulating && /*#__PURE__*/_react.default.createElement("small", {
         className: "form-text"
-      }, "Currently emulating ", _react.default.createElement("strong", null, this.props.username, ". "), _react.default.createElement("button", {
+      }, "Currently emulating ", /*#__PURE__*/_react.default.createElement("strong", null, this.props.username, ". "), /*#__PURE__*/_react.default.createElement("button", {
         className: "btn-link",
         onClick: this.onReset
-      }, "Click to clear emulation.")), _react.default.createElement("div", {
+      }, "Click to clear emulation.")), /*#__PURE__*/_react.default.createElement("div", {
         className: "emulate-history"
       }, this.state.localStorage.map(function (item) {
-        return _react.default.createElement("span", {
+        return /*#__PURE__*/_react.default.createElement("span", {
           key: item.id
-        }, " ", _react.default.createElement("a", {
+        }, " ", /*#__PURE__*/_react.default.createElement("a", {
           href: "#",
           className: "badge badge-secondary",
           onClick: function onClick() {
             return _this2.emulate(item.id, item.name);
           }
         }, item.name));
-      })))), _react.default.createElement("button", {
+      })))), /*#__PURE__*/_react.default.createElement("button", {
         type: "button",
         className: this.props.className,
         onClick: this.onClick

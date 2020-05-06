@@ -1,5 +1,7 @@
 "use strict";
 
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
+
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 Object.defineProperty(exports, "__esModule", {
@@ -7,89 +9,58 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
+var _slicedToArray2 = _interopRequireDefault(require("@babel/runtime/helpers/slicedToArray"));
 
-var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
+var _react = _interopRequireWildcard(require("react"));
 
-var _possibleConstructorReturn2 = _interopRequireDefault(require("@babel/runtime/helpers/possibleConstructorReturn"));
-
-var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime/helpers/getPrototypeOf"));
-
-var _inherits2 = _interopRequireDefault(require("@babel/runtime/helpers/inherits"));
-
-var _react = _interopRequireDefault(require("react"));
-
-var _propTypes = _interopRequireDefault(require("prop-types"));
+var _ExternalLink = _interopRequireDefault(require("../ExternalLink"));
 
 /**
  * Red server-wide alert banner. May appear for network issues,
  * planned outages, buckeye alerts, etc.
  */
-var AppAlert =
-/*#__PURE__*/
-function (_React$Component) {
-  (0, _inherits2.default)(AppAlert, _React$Component);
+var AppAlert = function AppAlert(_ref) {
+  var _ref$endpoint = _ref.endpoint,
+      endpoint = _ref$endpoint === void 0 ? "".concat(process.env.PUBLIC_URL, "/api/alert") : _ref$endpoint;
 
-  function AppAlert(props) {
-    var _this;
+  var _useState = (0, _react.useState)(''),
+      _useState2 = (0, _slicedToArray2.default)(_useState, 2),
+      message = _useState2[0],
+      setMessage = _useState2[1];
 
-    (0, _classCallCheck2.default)(this, AppAlert);
-    _this = (0, _possibleConstructorReturn2.default)(this, (0, _getPrototypeOf2.default)(AppAlert).call(this, props));
-    _this.state = {
-      message: null
-    };
-    return _this;
-  }
-  /**
-   * Load the alert contents from the endpoint on mount
-   */
-
-
-  (0, _createClass2.default)(AppAlert, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var _this2 = this;
-
-      fetch(this.props.endpoint, {
-        cache: 'no-cache',
-        redirect: 'follow',
-        credentials: 'same-origin'
-      }).then(function (res) {
-        return res.json();
-      }).then(function (res) {
-        return _this2.setState({
-          message: res.data
-        });
-      }).catch(function () {
-        return _this2.setState({
-          message: 'Could not communicate with the alerting API'
-        });
-      });
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      if (!this.state.message) {
-        return null;
+  (0, _react.useEffect)(function () {
+    var cancelled = false;
+    fetch(endpoint, {
+      cache: 'no-cache',
+      redirect: 'follow',
+      credentials: 'same-origin'
+    }).then(function (res) {
+      return res.json();
+    }).then(function (res) {
+      if (!cancelled) {
+        setMessage(res.data);
       }
+    }).catch(function () {
+      if (!cancelled) {
+        setMessage('Could not communicate with the alerting API');
+      }
+    });
+    return function () {
+      // Cancel request in scope on unmount.
+      cancelled = true;
+    };
+  }, [endpoint]);
 
-      return _react.default.createElement("div", {
-        className: "application-alert"
-      }, this.state.message, ". Contact the ", _react.default.createElement("a", {
-        href: "https://orhelp.osu.edu",
-        target: "_blank",
-        rel: "noopener noreferrer"
-      }, "OR Help Desk"), " for more information.");
-    }
-  }]);
-  return AppAlert;
-}(_react.default.Component);
+  if (!message) {
+    return null;
+  }
 
-AppAlert.propTypes = {
-  /**
-   * API endpoint to query for alerts
-   */
-  endpoint: _propTypes.default.string.isRequired
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "application-alert"
+  }, message, ". Contact the ", /*#__PURE__*/_react.default.createElement(_ExternalLink.default, {
+    href: "https://orhelp.osu.edu"
+  }, "OR Help Desk"), " for more information.");
 };
+
 var _default = AppAlert;
 exports.default = _default;

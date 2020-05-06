@@ -11,19 +11,23 @@ var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/cl
 
 var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
 
-var _possibleConstructorReturn2 = _interopRequireDefault(require("@babel/runtime/helpers/possibleConstructorReturn"));
-
-var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime/helpers/getPrototypeOf"));
-
 var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/helpers/assertThisInitialized"));
 
 var _inherits2 = _interopRequireDefault(require("@babel/runtime/helpers/inherits"));
+
+var _possibleConstructorReturn2 = _interopRequireDefault(require("@babel/runtime/helpers/possibleConstructorReturn"));
+
+var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime/helpers/getPrototypeOf"));
 
 var _react = _interopRequireDefault(require("react"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
 var _Search = _interopRequireDefault(require("../../components/Search"));
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = (0, _getPrototypeOf2.default)(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = (0, _getPrototypeOf2.default)(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return (0, _possibleConstructorReturn2.default)(this, result); }; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 /**
  * Application-wide searching. For use with the navbar.
@@ -33,16 +37,16 @@ var _Search = _interopRequireDefault(require("../../components/Search"));
  * within an application - and linking to those resources (pages) rather than
  * filling in a search input after selection.
  */
-var AppSearch =
-/*#__PURE__*/
-function (_React$Component) {
+var AppSearch = /*#__PURE__*/function (_React$Component) {
   (0, _inherits2.default)(AppSearch, _React$Component);
+
+  var _super = _createSuper(AppSearch);
 
   function AppSearch(props) {
     var _this;
 
     (0, _classCallCheck2.default)(this, AppSearch);
-    _this = (0, _possibleConstructorReturn2.default)(this, (0, _getPrototypeOf2.default)(AppSearch).call(this, props));
+    _this = _super.call(this, props);
     _this.state = {
       focused: false
     };
@@ -94,7 +98,7 @@ function (_React$Component) {
       }
 
       if (error) {
-        return _react.default.createElement("div", {
+        return /*#__PURE__*/_react.default.createElement("div", {
           className: "app-search-error"
         }, "Something went wrong");
       } // Bucket results based on the categorizer
@@ -116,17 +120,17 @@ function (_React$Component) {
         return right[key] = buckets[key];
       });
       right = this.balanceBuckets(right);
-      return _react.default.createElement("div", {
+      return /*#__PURE__*/_react.default.createElement("div", {
         id: "app-search-results",
         className: "app-search-results",
         style: style
-      }, _react.default.createElement("div", {
+      }, /*#__PURE__*/_react.default.createElement("div", {
         className: "row"
-      }, _react.default.createElement("div", {
+      }, /*#__PURE__*/_react.default.createElement("div", {
         className: "col-6"
       }, leftKeys.map(function (key) {
         return _this2.renderCategory(key, left[key]);
-      })), _react.default.createElement("div", {
+      })), /*#__PURE__*/_react.default.createElement("div", {
         className: "col-6"
       }, rightKeys.map(function (key) {
         return _this2.renderCategory(key, right[key]);
@@ -135,14 +139,14 @@ function (_React$Component) {
   }, {
     key: "renderCategory",
     value: function renderCategory(category, results) {
-      return _react.default.createElement("div", {
+      return /*#__PURE__*/_react.default.createElement("div", {
         className: "app-search-category"
-      }, _react.default.createElement("div", {
+      }, /*#__PURE__*/_react.default.createElement("div", {
         className: "app-search-category-header"
-      }, category), _react.default.createElement("ul", {
+      }, category), /*#__PURE__*/_react.default.createElement("ul", {
         className: "app-search-category-results"
       }, results.map(function (result) {
-        return _react.default.createElement("li", {
+        return /*#__PURE__*/_react.default.createElement("li", {
           key: result.id
         }, result.attributes.name);
       })));
@@ -237,9 +241,9 @@ function (_React$Component) {
           endpoint = _this$props.endpoint,
           token = _this$props.token,
           query = _this$props.query;
-      return _react.default.createElement("div", {
+      return /*#__PURE__*/_react.default.createElement("div", {
         className: "app-search"
-      }, _react.default.createElement(_Search.default, {
+      }, /*#__PURE__*/_react.default.createElement(_Search.default, {
         name: "app-search",
         endpoint: endpoint,
         token: token,

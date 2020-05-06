@@ -53,9 +53,7 @@ function CommentContent(username, datetime, content, editable) {
  */
 
 
-var CommentSidebar =
-/*#__PURE__*/
-function () {
+var CommentSidebar = /*#__PURE__*/function () {
   function CommentSidebar(document, selectableBlockNodes, selectableTextNodes) {
     (0, _classCallCheck2.default)(this, CommentSidebar);
     this.document = document; // List of CommentThread objects on the page
@@ -143,14 +141,14 @@ function () {
     value: function tryCommentHighlighted() {
       /*
       There's a LOT that can go wrong here, and edge cases to handle:
-           - How to guard selectable text from unselectable
+            - How to guard selectable text from unselectable
               (e.g should they be able to select actual questions in the document?)
           - Dealing with links? (e.g. filenames)
           - What if they select something that intersects (not wraps) an already
               selected section? Or even just arbitrary DOM. E.g.:
-               <p>Some text here that <strong>is bolded</strong> for emphasis</p>
+                <p>Some text here that <strong>is bolded</strong> for emphasis</p>
               and they select "Some text here that is"
-           For dealing with nested DOM, it's apparently a hard problem with no proper API.
+            For dealing with nested DOM, it's apparently a hard problem with no proper API.
           See:
           https://wikimedium-server.firebaseapp.com/wiki/Stack_Overflow
           https://stackoverflow.com/questions/6328718/how-to-wrap-surround-highlighted-text-with-an-element
