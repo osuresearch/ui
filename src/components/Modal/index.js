@@ -11,6 +11,12 @@ import PropTypes from 'prop-types';
  *
  * Bootstrap's modal jQuery options can be passed in as React props.
  * For the complete list see https://getbootstrap.com/docs/4.0/components/modal/#options
+ * 
+ * Bootstrap modal modifier classes (such as .modal-dialog-centered and 
+ * .modal-sm) and custom wrapping classes can also be passed in using the 
+ * **className** prop. Note that the classes are added to the
+ * '.modal-dialog' element and not the outermost '.modal' element.
+ * 
 
  * This more-or-less follows the pattern at https://reactjs.org/docs/portals.html
  */
@@ -54,7 +60,7 @@ class Modal extends React.Component {
         return ReactDOM.createPortal(
             <div className="modal fade" tabIndex="-1" role="dialog"
                 aria-hidden="true" ref={this.ref}>
-                <div className="modal-dialog" role="document">
+                <div className={"modal-dialog" + (this.props.className ? " " + this.props.className : '')} role="document">
                     <div className="modal-content">
                         {this.props.children}
                     </div>
@@ -66,6 +72,7 @@ class Modal extends React.Component {
 }
 
 Modal.propTypes = {
+    className: PropTypes.string,
     children: PropTypes.oneOfType([
         PropTypes.arrayOf(PropTypes.node),
         PropTypes.object
