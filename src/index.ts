@@ -21,3 +21,5 @@ export { default as PersonSearchResult } from './components/PersonSearchResult';
 export { default as Support } from './components/Support';
 export { default as TabList } from './components/TabList';
 export { default as TabItem } from './components/TabItem';
+export { default as Richtext } from './components/Richtext';
+

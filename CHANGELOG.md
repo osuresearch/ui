@@ -7,6 +7,33 @@ Versions follow [Semantic Versioning](https://semver.org/) guidelines - given a 
 2. MINOR version when you add functionality in a backwards-compatible manner, and
 3. PATCH version when you make backwards-compatible bug fixes.
 
+# 4.1.0 (Unreleased)
+
+__Deprecated Components:__
+
+Components marked as deprecated will be removed in a future release. They will continue to work until their removal.
+
+* `Profile` - Now part of the [@oris/auth](https://code.osu.edu/ORIS/auth/) package.
+* `Emulate` - Now part of the [@oris/auth](https://code.osu.edu/ORIS/auth/) package.
+
+__Minor Breaking Changes:__
+
+* `Button` - Removed `small` prop. Use `className="btn-sm"` instead.
+* `Icon` - Removed the use of `children` prop for screen reader labeling. Use `label` prop instead. 
+* `ModalHeader` - Changed default of `hasCloseButton` prop to `true`. Previous usage that assumed the close button would be hidden 
+
+__New Features:__
+
+* New `Richtext` component based on CKEditor 5
+* New `TabList` and `TabItem` components for a responsive list of many tabs
+* `Button` - Added optional `className` and `disabled` props
+* `Icon` - Added optional `label` prop for screen reader labels
+
+__UI Fixes:__
+
+* `ExternalLink` - Made the icon less obtrusive
+
+
 # 4.0.1 (2020-01-15)
 
 __Bug Fixes:__
