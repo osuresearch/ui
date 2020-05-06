@@ -14,6 +14,11 @@ export interface Props {
      * This **must** be a memoized callback (e.g. wrapped with `useCallback`)
      */
     onChange?(newValue: string): void;
+
+    /**
+     * Additional class names to apply to the component
+     */
+    className?: string;
 }
 
 // CKEditor 5 Toolbar configurations.
@@ -36,7 +41,8 @@ const DEFAULT_TOOLBAR_ITEMS = [
 const Richtext: React.FC<Props> = ({
     defaultValue = '',
     readOnly = false,
-    onChange
+    onChange,
+    className = ''
 }) => {
     const [initialData, ] = useState(defaultValue);
     const [error, setError] = useState<string>();
@@ -120,7 +126,7 @@ const Richtext: React.FC<Props> = ({
     }
 
     return (
-        <div className="richtext">
+        <div className={`richtext ${className}`}>
             <div className="richtext-toolbar" ref={toolbarRef}></div>
             <div className="richtext-editor-container">
                 <div className="richtext-editor" ref={editorRef}></div>    
