@@ -6,6 +6,7 @@ export interface Props {
     website?: string;
     address?: string;
     contact?: string;
+    accessibilityContact?: string;
 }
 
 /**
@@ -15,7 +16,8 @@ const Footer: React.FC<Props> = ({
     department = 'Office of Research',
     website = 'https://research.osu.edu',
     address = '1960 Kenny Road | Columbus, OH 43210',
-    contact = 'https://research.osu.edu/contact'
+    contact = 'https://research.osu.edu/contact',
+    accessibilityContact = 'mailto:oraccessibility@osu.edu'
 }) => (
     <footer>
         <ul>
@@ -39,10 +41,8 @@ const Footer: React.FC<Props> = ({
                 </a>
             </li>
             <li>
-                If you have trouble accessing this page and need to request an alternate format,
-                contact the <a href="https://orapps.osu.edu/webmaster" target="_blank" rel="noopener noreferrer">
-                    webmaster
-                </a>.
+                If you have a disability and experience difficulty accessing this content, 
+                please contact the <a href={accessibilityContact}>Accessibility Coordinator</a>
             </li>
         </ul>
     </footer>

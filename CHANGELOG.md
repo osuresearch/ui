@@ -29,9 +29,10 @@ __New Features:__
 * `Button` - Added optional `className` and `disabled` props
 * `Icon` - Added optional `label` prop for screen reader labels
 
-__UI Fixes:__
+__UI Changes:__
 
 * `ExternalLink` - Made the icon less obtrusive
+* `Footer` - Replaced webmaster contact with Accessibility Coordinator. For technical support contact, use the `Support` component.
 
 
 # 4.0.1 (2020-01-15)
