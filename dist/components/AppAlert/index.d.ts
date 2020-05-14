@@ -1,8 +1,12 @@
-
-import React from 'React';
-
-export interface AppAlertProps {
-    endpoint: string;
+import React from 'react';
+export interface Props {
+    /** API endpoint to query for alerts */
+    endpoint?: string;
 }
-
-export default class AppAlert extends React.Component<AppAlertProps, any> {}
+/**
+ * Red server-wide alert banner. May appear for network issues,
+ * planned outages, buckeye alerts, etc.
+ */
+declare const AppAlert: React.FC<Props>;
+export default AppAlert;
+//# sourceMappingURL=index.d.ts.map

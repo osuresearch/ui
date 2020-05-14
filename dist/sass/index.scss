@@ -44,6 +44,7 @@
 // Components
 @import 'components/alert-banner';
 @import 'components/application-alert';
+@import 'components/external-link';
 @import 'components/footer';
 @import 'components/formflow';
 @import 'components/horizontal-scroll';
@@ -55,11 +56,11 @@
 @import 'components/sticky-header';
 @import 'components/support';
 @import 'components/tabbar';
+@import 'components/tablist';
 @import 'components/uploader';
 
 @import '../components/Button';
 @import '../components/Search';
 
-@import '../experimental/TabList';
 @import '../experimental/AppSearch';
 @import '../experimental/Masthead';

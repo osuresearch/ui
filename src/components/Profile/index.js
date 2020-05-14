@@ -6,6 +6,8 @@ import PropTypes from 'prop-types';
  * Provides a dropdown for the logged in user to update their profile or logout.
  *
  * Typically rendered within the `Navbar` of an application.
+ * 
+ * @deprecated Use oris/auth 
  */
 const Profile = (props) => (
     <div className="profile dropdown">

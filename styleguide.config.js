@@ -57,14 +57,15 @@ module.exports = {
                 // Vendor libraries required for certain custom components
                 { src: ASSETS_HOST + '/assets/js/vendor/bootstrap-datepicker-1.6.1.min.js' },
                 { src: ASSETS_HOST + '/assets/js/vendor/moment-2.14.1.min.js' },
-                { src: ASSETS_HOST + '/assets/js/vendor/ckeditor-4.6.2/ckeditor.js' },
+                // { src: ASSETS_HOST + '/assets/js/vendor/ckeditor-4.6.2/ckeditor.js' },
                 { src: ASSETS_HOST + '/assets/js/vendor/datatables-1.10.10.min.js' },
+                { src: 'https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js' },
             ]
         }
     },
     getComponentPathLine: (componentPath) => {
         // Naming convention for ../Component/index.js
-        const dirname = path.dirname(componentPath, '.js');
+        const dirname = path.dirname(componentPath);
         const name = dirname.split(path.sep).slice(-1)[0];
 
         // The assumption is that all (public) components are exported
@@ -89,7 +90,18 @@ module.exports = {
     ],
     moduleAliases: {
         // Aliasing so we don't have awful import '../../../..' in examples.
-        '@oris/ui': path.join(__dirname, './src/components')
+        '@oris/ui': path.join(__dirname, './src')
+    },
+    propsParser: (filePath, source, resolver, handlers) => {
+        // Handle TypeScript prop parsing
+        if (filePath.substr(-3) === 'tsx') {
+            return require('react-docgen-typescript').withCustomConfig(
+                './tsconfig.json'
+            ).parse(filePath);
+        }
+
+        // Assume Javascript
+        return require('react-docgen').parse(source, resolver, handlers);
     },
     sections: [
         {
@@ -103,9 +115,9 @@ module.exports = {
         {
             name: 'Components',
             content: 'src/components/readme.md',
-            components: 'src/components/**/index.js',
+            components: 'src/components/**/index.?(js|tsx)',
             ignore: [
-                'src/components/index.js'
+                'src/components/.ignore'
             ]
         },
         {

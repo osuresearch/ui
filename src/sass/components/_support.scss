@@ -1,64 +1,35 @@
-
-// The floating button
-button.support {
+#support-btn-wrapper.is-fixed {
     position: fixed;
     bottom: 0.5em;
     right: 0.5em;
-    font-size: 0.8em;
-    background-color: $white;
+    z-index: 9999999999;    
 }
 
-// The associated support modal itself
-.support-modal {
-    .modal-dialog {
-        max-width: 35em;
-    }
+.support-btn {
+    border-radius: 2px;
+    padding: 0.5rem 1rem;
+    background: white;
+    font-size: 0.8em;
+    :disabled { background: #ccc; }
+    .fa { padding: 0 0.5em 0 0; }
+}
 
-    .form-group {
-        border: 0;
+#feedback {
+    p { margin: 1em 0; }
+    p:last-child { margin: 1em 0 2em 0; }
+    textarea:invalid { box-shadow: none; }
+    .feedback-form { border-top: 1px solid #c2c2c2; }
+    .form-group { 
         margin: 0;
-        padding: 0 1rem;
+        padding: 1em;
+        
+        .feedback-form { 
+            padding-top: 1em;
+            margin-top: 1em;
 
-        .custom-controls-stacked {
-            padding-bottom: 0;
-        }
-    }
-
-    .support-help,
-    .support-feedback {
-        display: none;
-        border-top: 1px solid tint($gray, 40%);
-        padding-top: 1em;
-        margin-top: 1em;
-    }
-
-    .support-submit {
-        display: none;
-    }
-
-    p {
-        font-size: 80%;
-        margin: 1rem;
-        color: $gray;
-    }
-
-    &.is-help {
-        .support-help {
-            display: block;
-        }
-
-        .support-submit {
-            display: block;
-        }
-    }
-
-    &.is-feedback {
-        .support-feedback {
-            display: block;
-        }
-
-        .support-submit {
-            display: block;
+            .feedback-chooser {
+                padding-bottom: 0;
+            }
         }
     }
 }

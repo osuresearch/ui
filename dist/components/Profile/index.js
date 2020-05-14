@@ -15,28 +15,30 @@ var _propTypes = _interopRequireDefault(require("prop-types"));
  * Provides a dropdown for the logged in user to update their profile or logout.
  *
  * Typically rendered within the `Navbar` of an application.
+ * 
+ * @deprecated Use oris/auth 
  */
 var Profile = function Profile(props) {
-  return _react.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("div", {
     className: "profile dropdown"
-  }, _react.default.createElement("a", {
+  }, /*#__PURE__*/_react.default.createElement("a", {
     href: "#",
     className: "dropdown-toggle",
     id: "profile-dropdown",
     "data-toggle": "dropdown",
     "aria-haspopup": "true",
     "aria-expanded": "false"
-  }, props.username), _react.default.createElement("div", {
+  }, props.username), /*#__PURE__*/_react.default.createElement("div", {
     className: "dropdown-menu dropdown-menu-right",
     "aria-labelledby": "profile-dropdown"
-  }, _react.default.createElement("a", {
+  }, /*#__PURE__*/_react.default.createElement("a", {
     className: "dropdown-item",
     href: props.editProfileUrl,
     target: "_blank",
     rel: "noopener noreferrer"
-  }, "My Profile"), props.children, _react.default.createElement("div", {
+  }, "My Profile"), props.children, /*#__PURE__*/_react.default.createElement("div", {
     className: "dropdown-divider"
-  }), _react.default.createElement("a", {
+  }), /*#__PURE__*/_react.default.createElement("a", {
     className: "dropdown-item profile-logout",
     href: props.shibbolethLogoutUrl
   }, "Logout")));

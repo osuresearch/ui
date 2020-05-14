@@ -13,13 +13,13 @@ var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/cl
 
 var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
 
-var _possibleConstructorReturn2 = _interopRequireDefault(require("@babel/runtime/helpers/possibleConstructorReturn"));
-
-var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime/helpers/getPrototypeOf"));
-
 var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/helpers/assertThisInitialized"));
 
 var _inherits2 = _interopRequireDefault(require("@babel/runtime/helpers/inherits"));
+
+var _possibleConstructorReturn2 = _interopRequireDefault(require("@babel/runtime/helpers/possibleConstructorReturn"));
+
+var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime/helpers/getPrototypeOf"));
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -31,22 +31,24 @@ var _SearchResult = _interopRequireDefault(require("../SearchResult"));
 
 var _JsonApiUtility = require("../../internal/JsonApiUtility");
 
-// import FlowContext from '../context/FlowContext';
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = (0, _getPrototypeOf2.default)(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = (0, _getPrototypeOf2.default)(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return (0, _possibleConstructorReturn2.default)(this, result); }; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 /**
  * Search input field. Pure-React replacement of Lookup.
  * Requires a JSON:API compliant backend endpoint.
  */
-var Search =
-/*#__PURE__*/
-function (_React$Component) {
+var Search = /*#__PURE__*/function (_React$Component) {
   (0, _inherits2.default)(Search, _React$Component);
+
+  var _super = _createSuper(Search);
 
   function Search(props) {
     var _this;
 
     (0, _classCallCheck2.default)(this, Search);
-    _this = (0, _possibleConstructorReturn2.default)(this, (0, _getPrototypeOf2.default)(Search).call(this, props));
+    _this = _super.call(this, props);
     _this.state = {
       searching: false,
       error: false,
@@ -438,15 +440,15 @@ function (_React$Component) {
       var name = this.props.name;
 
       if (this.state.error) {
-        return _react.default.createElement("div", {
+        return /*#__PURE__*/_react.default.createElement("div", {
           id: name + '-results',
           className: "dropdown-menu",
           role: "listbox"
-        }, _react.default.createElement("div", {
+        }, /*#__PURE__*/_react.default.createElement("div", {
           className: "dropdown-header"
-        }, _react.default.createElement("span", {
+        }, /*#__PURE__*/_react.default.createElement("span", {
           className: "lookup-error text-danger"
-        }, "Something went wrong. Try reloading the page. If the problem persists, contact ", _react.default.createElement("a", {
+        }, "Something went wrong. Try reloading the page. If the problem persists, contact ", /*#__PURE__*/_react.default.createElement("a", {
           href: "mailto:orhelpdesk@osu.edu"
         }, "orhelpdesk@osu.edu"))));
       } // At least one result came back
@@ -455,27 +457,27 @@ function (_React$Component) {
       if (this.state.results.length > 0) {
         var ResultComponent = this.props.resultComponent || _SearchResult.default;
         var additionalResultsCount = this.state.totalResults - this.state.results.length;
-        return _react.default.createElement("div", {
+        return /*#__PURE__*/_react.default.createElement("div", {
           id: name + '-results',
           className: "dropdown-menu",
           role: "listbox"
         }, this.state.results.map(function (result, idx) {
-          return _react.default.createElement(ResultComponent, {
+          return /*#__PURE__*/_react.default.createElement(ResultComponent, {
             key: idx,
             resource: result,
             onSelect: _this4.onResultSelect
           });
-        }), additionalResultsCount > 0 && _react.default.createElement("div", {
+        }), additionalResultsCount > 0 && /*#__PURE__*/_react.default.createElement("div", {
           className: "dropdown-header"
-        }, "There are ", _react.default.createElement("strong", null, additionalResultsCount), " additional results. Please narrow your search."));
+        }, "There are ", /*#__PURE__*/_react.default.createElement("strong", null, additionalResultsCount), " additional results. Please narrow your search."));
       } // Default content: no results
 
 
-      return _react.default.createElement("div", {
+      return /*#__PURE__*/_react.default.createElement("div", {
         id: name + '-results',
         className: "dropdown-menu",
         role: "listbox"
-      }, _react.default.createElement("div", {
+      }, /*#__PURE__*/_react.default.createElement("div", {
         className: "dropdown-header"
       }, "There are no matching results."));
     }
@@ -527,14 +529,14 @@ function (_React$Component) {
         classNames += ' search-input-has-value';
       }
 
-      return _react.default.createElement("div", {
+      return /*#__PURE__*/_react.default.createElement("div", {
         className: "input-group search"
-      }, _react.default.createElement("span", {
+      }, /*#__PURE__*/_react.default.createElement("span", {
         className: "input-group-prefix"
-      }, _react.default.createElement("i", {
+      }, /*#__PURE__*/_react.default.createElement("i", {
         className: this.getPrefixIconClasses(),
         "aria-hidden": "true"
-      })), _react.default.createElement("input", {
+      })), /*#__PURE__*/_react.default.createElement("input", {
         id: name,
         name: name,
         type: "text",
@@ -549,12 +551,12 @@ function (_React$Component) {
         onChange: this.onChange,
         onFocus: onFocus,
         onBlur: onBlur
-      }), hasValue && !readOnly && _react.default.createElement("button", {
+      }), hasValue && !readOnly && /*#__PURE__*/_react.default.createElement("button", {
         className: "btn btn-link search-clear",
         type: "button",
         "aria-label": "clear selection",
         onClick: this.clear
-      }, _react.default.createElement(_Icon.default, {
+      }, /*#__PURE__*/_react.default.createElement(_Icon.default, {
         name: "close"
       })), (this.state.showSearchResults || this.props.alwaysShowResults) && this.getDropdownContent());
     }

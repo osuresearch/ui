@@ -9,29 +9,23 @@ exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _propTypes = _interopRequireDefault(require("prop-types"));
-
-var ModalHeader = function ModalHeader(props) {
-  return _react.default.createElement("div", {
+var ModalHeader = function ModalHeader(_ref) {
+  var children = _ref.children,
+      _ref$hasCloseButton = _ref.hasCloseButton,
+      hasCloseButton = _ref$hasCloseButton === void 0 ? true : _ref$hasCloseButton;
+  return /*#__PURE__*/_react.default.createElement("div", {
     className: "modal-header"
-  }, _react.default.createElement("h5", {
+  }, /*#__PURE__*/_react.default.createElement("h5", {
     className: "modal-title"
-  }, props.children), props.hasCloseButton && _react.default.createElement("button", {
+  }, children), hasCloseButton && /*#__PURE__*/_react.default.createElement("button", {
     type: "button",
     className: "close",
     "data-dismiss": "modal",
     "aria-label": "Close"
-  }, _react.default.createElement("span", {
+  }, /*#__PURE__*/_react.default.createElement("span", {
     "aria-hidden": "true"
   }, "\xD7")));
 };
 
-ModalHeader.propTypes = {
-  children: _propTypes.default.oneOfType([_propTypes.default.arrayOf(_propTypes.default.node), _propTypes.default.object]),
-  hasCloseButton: _propTypes.default.bool
-};
-ModalHeader.defaultProps = {
-  hasCloseButton: false
-};
 var _default = ModalHeader;
 exports.default = _default;

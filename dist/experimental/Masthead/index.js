@@ -11,13 +11,13 @@ var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/cl
 
 var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
 
-var _possibleConstructorReturn2 = _interopRequireDefault(require("@babel/runtime/helpers/possibleConstructorReturn"));
-
-var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime/helpers/getPrototypeOf"));
-
 var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/helpers/assertThisInitialized"));
 
 var _inherits2 = _interopRequireDefault(require("@babel/runtime/helpers/inherits"));
+
+var _possibleConstructorReturn2 = _interopRequireDefault(require("@babel/runtime/helpers/possibleConstructorReturn"));
+
+var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime/helpers/getPrototypeOf"));
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -27,22 +27,26 @@ var _debounce = _interopRequireDefault(require("lodash/debounce"));
 
 require("./index.scss");
 
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = (0, _getPrototypeOf2.default)(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = (0, _getPrototypeOf2.default)(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return (0, _possibleConstructorReturn2.default)(this, result); }; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
 /**
  * Masthead for a resource details page (project, award, protocol, etc)
  *
  * Supports dynamic resizing of the title font based on container
  * size and a horizontal list of additional metadata.
  */
-var Masthead =
-/*#__PURE__*/
-function (_React$Component) {
+var Masthead = /*#__PURE__*/function (_React$Component) {
   (0, _inherits2.default)(Masthead, _React$Component);
+
+  var _super = _createSuper(Masthead);
 
   function Masthead(props) {
     var _this;
 
     (0, _classCallCheck2.default)(this, Masthead);
-    _this = (0, _possibleConstructorReturn2.default)(this, (0, _getPrototypeOf2.default)(Masthead).call(this, props));
+    _this = _super.call(this, props);
     _this.ref = _react.default.createRef();
     _this.onBodyResize = _this.onBodyResize.bind((0, _assertThisInitialized2.default)(_this));
     return _this;
@@ -90,26 +94,26 @@ function (_React$Component) {
           aside = _this$props2.aside,
           asideSubtitle = _this$props2.asideSubtitle,
           children = _this$props2.children;
-      return _react.default.createElement("div", {
+      return /*#__PURE__*/_react.default.createElement("div", {
         className: "masthead"
-      }, _react.default.createElement("div", {
+      }, /*#__PURE__*/_react.default.createElement("div", {
         className: "row no-gutters masthead-".concat(theme)
-      }, _react.default.createElement("div", {
+      }, /*#__PURE__*/_react.default.createElement("div", {
         className: aside ? 'col-9' : 'col-12'
-      }, subtitle && _react.default.createElement("div", {
+      }, subtitle && /*#__PURE__*/_react.default.createElement("div", {
         className: "masthead-subtitle"
-      }, subtitle), _react.default.createElement("h1", {
+      }, subtitle), /*#__PURE__*/_react.default.createElement("h1", {
         className: "masthead-title",
         ref: this.ref
-      }, title)), aside && _react.default.createElement("div", {
+      }, title)), aside && /*#__PURE__*/_react.default.createElement("div", {
         className: "col-3"
-      }, _react.default.createElement("h2", {
+      }, /*#__PURE__*/_react.default.createElement("h2", {
         className: "masthead-aside"
-      }, aside), asideSubtitle && _react.default.createElement("h5", {
+      }, aside), asideSubtitle && /*#__PURE__*/_react.default.createElement("h5", {
         className: "masthead-aside-subtitle"
-      }, asideSubtitle))), children && _react.default.createElement("div", {
+      }, asideSubtitle))), children && /*#__PURE__*/_react.default.createElement("div", {
         className: "row no-gutters"
-      }, _react.default.createElement("div", {
+      }, /*#__PURE__*/_react.default.createElement("div", {
         className: "col-12 masthead-list"
       }, children)));
     }

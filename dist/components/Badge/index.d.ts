@@ -1,9 +1,7 @@
-
-import { ReactNode } from 'React';
-
-export interface BadgeProps {
-    children?: ReactNode;
-    theme: string;
+import React from 'react';
+export interface Props {
+    theme?: string;
 }
-
-export default class Badge extends React.Component<BadgeProps, any> {}
+declare const Badge: React.FC<Props>;
+export default Badge;
+//# sourceMappingURL=index.d.ts.map

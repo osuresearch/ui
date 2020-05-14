@@ -1,13 +1,12 @@
 
 // CKEditor redesign to match our branding
 
-// Disabling class name linting since we can't change `cke_chrome`
-// sass-lint:disable class-name-format
-
 // Change the editor border to match our default textareas
-// (effectively making the transition between the two transparent
-// to the end user)
-.form-group {
+.richtext {
+    &.is-error {
+        color: $form-feedback-invalid-color;
+    }
+
     .cke_chrome {
         margin-bottom: 1rem;
         box-shadow: none;
@@ -31,6 +30,7 @@
         .cke_bottom {
             overflow: visible;
             padding: 0;
+            border: 0;
         }
 
         .cke_resizer {
@@ -61,5 +61,3 @@
         box-shadow: 0 0 0 .2rem transparentize($form-feedback-valid-color, 0.75);
     }
 }
-
-
