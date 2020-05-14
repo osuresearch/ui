@@ -33,15 +33,3 @@ const isActive = (i) => state.selected == i;
     <TabItem onClick={onClick(8)} active={isActive(8)}>Western IRB (WIRB)</TabItem>
 </TabList>
 ```
-
-Example of a vertical layout. For a vertical layout, tabs are never collapsed into a "More" dropdown.
-
-```jsx
-import { TabItem } from '@oris/ui';
-
-<TabList vertical={true}>
-    <TabItem onClick={() => alert('One')}>One</TabItem>
-    <TabItem onClick={() => alert('Two')} active={true}>Two</TabItem>
-    <TabItem onClick={() => alert('Three')}>Three</TabItem>
-</TabList>
-```

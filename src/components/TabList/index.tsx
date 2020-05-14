@@ -2,13 +2,12 @@
 import React, { useState, useRef, useLayoutEffect } from 'react';
 
 import Icon from '../Icon';
-import TabItem from '../TabItem';
 
 export interface Props {
-    vertical?: boolean;
+    
 }
 
-const TabList: React.FC<Props> = ({ children, vertical = false }) => {
+const TabList: React.FC<Props> = ({ children }) => {
     const [overflowIndex, setOverflowIndex] = useState(9999);
     const ref = useRef<HTMLElement>(null);
 
@@ -56,13 +55,6 @@ const TabList: React.FC<Props> = ({ children, vertical = false }) => {
         childRects[index] = rect;
     }
 
-    let classNames = 'nav';
-    if (vertical) {
-        classNames += ' flex-column';
-    } else {
-        classNames += ' nav-tabs';
-    }
-
     // Custom render each child with a forced ref
     const childrenArr = React.Children.toArray(children);
     const overflowChildren: any[] = []; // TODO: Typed
@@ -90,9 +82,8 @@ const TabList: React.FC<Props> = ({ children, vertical = false }) => {
 
     return (
         <nav role="navigation" ref={ref}>
-            <ul className={classNames}>
-                {!vertical && renderChildren()}
-                {vertical && children}
+            <ul className="nav nav-tabs">
+                {renderChildren()}
 
                 {overflowChildren.length > 0 &&
                 <li className="nav-item dropdown">
