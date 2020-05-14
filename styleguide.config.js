@@ -59,7 +59,7 @@ module.exports = {
                 { src: ASSETS_HOST + '/assets/js/vendor/moment-2.14.1.min.js' },
                 // { src: ASSETS_HOST + '/assets/js/vendor/ckeditor-4.6.2/ckeditor.js' },
                 { src: ASSETS_HOST + '/assets/js/vendor/datatables-1.10.10.min.js' },
-                { src: 'https://cdn.ckeditor.com/ckeditor5/19.0.0/decoupled-document/ckeditor.js' },
+                { src: 'https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js' },
             ]
         }
     },

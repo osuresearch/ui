@@ -2,11 +2,14 @@
 import React, { useLayoutEffect, useState, useRef, memo } from 'react';
 
 export interface Props {
-    /** Initial content for the component. */
+    /** Initial content for the component as a raw HTML string. */
     defaultValue?: string;
     
     /** Should the contents of the editor only be rendered as read-only */
     readOnly?: boolean;
+
+    /** Display the simplified version of the editor */
+    simple?: boolean;
 
     /**
      * Change callback containing updated document data.
@@ -19,20 +22,29 @@ export interface Props {
      * Additional class names to apply to the component
      */
     className?: string;
+
+    /** External CSS file to apply style to the editor content. It should reflect the 
+     *  CSS used in the target pages where the content is to be displayed.
+     * 
+     * For more information, see [CKEditor 4 contentsCss](https://ckeditor.com/docs/ckeditor4/latest/api/CKEDITOR_config.html#cfg-contentsCss)
+     */
+    contentsCss?: string;
 }
 
-// CKEditor 5 Toolbar configurations.
-// We can't use the default because it includes plugins that we don't support (e.g. image uploads)
-// The full list of available toolbar items comes from running `editor.ui.componentFactory.names()`
-const DEFAULT_TOOLBAR_ITEMS = [
-    "|", "heading", 
-    "|", "fontfamily", "fontsize", "fontColor", "fontBackgroundColor",
-    "|", "bold", "italic", "underline", "strikethrough",
-    "|", "alignment", 
-    "|", "numberedList", "bulletedList", 
-    "|", "indent", "outdent", 
-    "|", "link", "blockquote", /*"imageUpload",*/ "insertTable", "mediaEmbed", 
-    /* "|", "undo", "redo" */
+/** Full confiugration (that we're willing to support) */
+const FULL_TOOLBAR_CONFIG = [
+    { name: 'styles', items: [ 'Format' ] },
+    { name: 'basicstyles', items: [ 'Bold', 'Italic', 'Underline', 'Strike' ] },
+    { name: 'paragraph', items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock' ] },
+    { name: 'links', items: [ 'Link', 'Unlink' ] },
+    { name: 'insert', items: [ 'Table', 'HorizontalRule' ] }
+];
+
+/** Reduced configuration that's just very basic formatting, lists, and links */
+const SIMPLE_TOOLBAR_CONFIG = [
+    { name: 'basicstyles', items: [ 'Bold', 'Italic', 'Underline', 'Strike' ] },
+    { name: 'paragraph', items: [ 'NumberedList', 'BulletedList' ] },
+    { name: 'links', items: [ 'Link', 'Unlink' ] }
 ];
 
 /**
@@ -41,81 +53,55 @@ const DEFAULT_TOOLBAR_ITEMS = [
 const Richtext: React.FC<Props> = ({
     defaultValue = '',
     readOnly = false,
+    simple = false,
     onChange,
-    className = ''
+    className = '',
+    contentsCss = 'https://orapps.osu.edu/assets/css/ckeditor/contents.css'
 }) => {
     const [initialData, ] = useState(defaultValue);
     const [error, setError] = useState<string>();
-    const editorRef = useRef<HTMLDivElement>(null);
-    const toolbarRef = useRef<HTMLDivElement>(null);
+    const editorRef = useRef<HTMLTextAreaElement>(null);
 
     useLayoutEffect(() => {
         // @ts-ignore 
-        const cke = window.DecoupledEditor;
+        const cke = window.CKEDITOR;
         let editor: any = undefined; // No type info exists for CKE
 
         if (!cke) {
             // TODO: Error message improvements
-            setError('window.DecoupledEditor is undefined. Are you missing a dependency?');
+            setError('window.CKEDITOR is undefined. Are you missing an external script?');
             return;
         }
 
-        // https://ckeditor.com/docs/ckeditor5/latest/api/module_core_editor_editorconfig-EditorConfig.html
+        let toolbar = simple ? SIMPLE_TOOLBAR_CONFIG : FULL_TOOLBAR_CONFIG;
+
         const opts = {
-            initialData,
-            toolbar: {
-                items: DEFAULT_TOOLBAR_ITEMS
-            },
-            // TODO: Disable the "Insert Image" plugin entirely, we're not supporting it.
-            // All of the below didn't work so far. Only thing I found to work 
-            // is to completely replace the full toolbar.
-            // removePlugins: [ 'ckfinder', 'imageUpload', 'imageInsert' ],
-            // imageEditing: {
-            //     isEnabled: false
-            // }
+            toolbar,
+
+            // TODO: Prop to provide extra plugins (e.g. Signet signature captures)
+            extraPlugins: '',
+
+            // Disable the body > blockquote > p ... path in the editor footer
+            removePlugins: 'elementspath',
+
+            contentsCss
         };
 
-        cke.create(editorRef.current, opts)
-            .then((instance: any) => {
-                editor = instance;
-                editor.isReadOnly = readOnly;
-
-                // Bind CKE's change event to our own onChange
-                editor.model.document.on('change:data', () => {
-                    if (onChange) {
-                        onChange(editor.getData() as string);
-                    }
-                });
-
-                // Setup toolbar DOM
-                if (toolbarRef.current) {
-                    toolbarRef.current.innerHTML = '';
-
-                    if (!readOnly) {
-                        toolbarRef.current.appendChild(
-                            editor.ui.view.toolbar.element
-                        );
-                    }
-                }
-            })
-            .catch((err: any) => {
-                console.error('CKEditor Load Error', err);
-                setError('Failed to load CKEditor. Check Console for additional information');
-            });
+        editor = cke.replace(editorRef.current, opts);
+        editor.setData(initialData);
+        editor.on('change', () => {
+            if (onChange) {
+                onChange(editor.getData() as string);
+            }
+        });
 
         return () => {
             if (editor) {
-                editor.destroy()
-                    .catch((err: any) => {
-                        console.error('CKEditor Unload Error', err);
-                    });
+                editor.destroy();
+                editor = undefined;
             }
         };
-    }, [initialData, readOnly, onChange]);
-
-    // TODO: Toggling readOnly isn't super efficient here, since 
-    // it'll recreate the editor from scratch. But I don't envision
-    // many use cases where we'll be doing that.
+    }, [initialData, simple, contentsCss, onChange]);
 
     if (error) {
         return (
@@ -125,12 +111,13 @@ const Richtext: React.FC<Props> = ({
         );
     }
 
+    // TODO: Toggling readOnly isn't super efficient here, since 
+    // it'll recreate the editor from scratch. But I don't envision
+    // many use cases where we'll be doing that.
+
     return (
-        <div className={`richtext ${className}`}>
-            <div className="richtext-toolbar" ref={toolbarRef}></div>
-            <div className="richtext-editor-container">
-                <div className="richtext-editor" ref={editorRef}></div>    
-            </div>
+        <div className={`richtext ${className} ${readOnly ? 'is-readonly' : ''}`}>
+            <textarea className="richtext-editor" ref={editorRef} disabled={readOnly}></textarea>
         </div>
     );
 }

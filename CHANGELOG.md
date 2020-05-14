@@ -24,7 +24,7 @@ __Minor Breaking Changes:__
 
 __New Features:__
 
-* New `Richtext` component based on CKEditor 5
+* New `Richtext` component based on CKEditor 4
 * New `TabList` and `TabItem` components for a responsive list of many tabs
 * `Button` - Added optional `className` and `disabled` props
 * `Icon` - Added optional `label` prop for screen reader labels
