@@ -7,7 +7,8 @@ Versions follow [Semantic Versioning](https://semver.org/) guidelines - given a 
 2. MINOR version when you add functionality in a backwards-compatible manner, and
 3. PATCH version when you make backwards-compatible bug fixes.
 
-# 4.1.0 (Unreleased)
+
+# 4.1.0 (2020-05-18)
 
 __Deprecated Components:__
 
