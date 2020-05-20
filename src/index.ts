@@ -1,9 +1,13 @@
 
 import './internal/jQueryPluginChanges';
+import 'time-input-polyfill/auto';
 
 export { default as AppAlert } from './components/AppAlert';
 export { default as Badge } from './components/Badge';
 export { default as Button } from './components/Button';
+export { default as DatePicker } from './components/DatePicker';
+export { default as DateTimePicker } from './components/DateTimePicker';
+export { default as TimeField } from './components/TimeField';
 export { default as Emulate } from './components/Emulate';
 export { default as ExternalLink } from './components/ExternalLink';
 export { default as Footer } from './components/Footer';
