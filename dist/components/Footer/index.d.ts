@@ -4,6 +4,7 @@ export interface Props {
     website?: string;
     address?: string;
     contact?: string;
+    accessibilityContact?: string;
 }
 /**
  * Office of Research brand footer with help and support information

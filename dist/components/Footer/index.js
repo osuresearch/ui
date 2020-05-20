@@ -20,7 +20,9 @@ var Footer = function Footer(_ref) {
       _ref$address = _ref.address,
       address = _ref$address === void 0 ? '1960 Kenny Road | Columbus, OH 43210' : _ref$address,
       _ref$contact = _ref.contact,
-      contact = _ref$contact === void 0 ? 'https://research.osu.edu/contact' : _ref$contact;
+      contact = _ref$contact === void 0 ? 'https://research.osu.edu/contact' : _ref$contact,
+      _ref$accessibilityCon = _ref.accessibilityContact,
+      accessibilityContact = _ref$accessibilityCon === void 0 ? 'mailto:oraccessibility@osu.edu' : _ref$accessibilityCon;
   return /*#__PURE__*/_react.default.createElement("footer", null, /*#__PURE__*/_react.default.createElement("ul", null, /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("a", {
     href: "http://www.osu.edu/",
     className: "wordmark"
@@ -38,11 +40,9 @@ var Footer = function Footer(_ref) {
     href: contact,
     target: "_blank",
     rel: "noopener noreferrer"
-  }, "Contact")), /*#__PURE__*/_react.default.createElement("li", null, "If you have trouble accessing this page and need to request an alternate format, contact the ", /*#__PURE__*/_react.default.createElement("a", {
-    href: "https://orapps.osu.edu/webmaster",
-    target: "_blank",
-    rel: "noopener noreferrer"
-  }, "webmaster"), ".")));
+  }, "Contact")), /*#__PURE__*/_react.default.createElement("li", null, "If you have a disability and experience difficulty accessing this content, please contact the ", /*#__PURE__*/_react.default.createElement("a", {
+    href: accessibilityContact
+  }, "Accessibility Coordinator"))));
 };
 
 var _default = Footer;

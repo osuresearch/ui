@@ -13,14 +13,35 @@ var _slicedToArray2 = _interopRequireDefault(require("@babel/runtime/helpers/sli
 
 var _react = _interopRequireWildcard(require("react"));
 
-// CKEditor 5 Toolbar configurations.
-// We can't use the default because it includes plugins that we don't support (e.g. image uploads)
-// The full list of available toolbar items comes from running `editor.ui.componentFactory.names()`
-var DEFAULT_TOOLBAR_ITEMS = ["|", "heading", "|", "fontfamily", "fontsize", "fontColor", "fontBackgroundColor", "|", "bold", "italic", "underline", "strikethrough", "|", "alignment", "|", "numberedList", "bulletedList", "|", "indent", "outdent", "|", "link", "blockquote",
-/*"imageUpload",*/
-"insertTable", "mediaEmbed"
-/* "|", "undo", "redo" */
-];
+/** Full confiugration (that we're willing to support) */
+var FULL_TOOLBAR_CONFIG = [{
+  name: 'styles',
+  items: ['Format']
+}, {
+  name: 'basicstyles',
+  items: ['Bold', 'Italic', 'Underline', 'Strike']
+}, {
+  name: 'paragraph',
+  items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock']
+}, {
+  name: 'links',
+  items: ['Link', 'Unlink']
+}, {
+  name: 'insert',
+  items: ['Table', 'HorizontalRule']
+}];
+/** Reduced configuration that's just very basic formatting, lists, and links */
+
+var SIMPLE_TOOLBAR_CONFIG = [{
+  name: 'basicstyles',
+  items: ['Bold', 'Italic', 'Underline', 'Strike']
+}, {
+  name: 'paragraph',
+  items: ['NumberedList', 'BulletedList']
+}, {
+  name: 'links',
+  items: ['Link', 'Unlink']
+}];
 /**
  * Simple preconfigured Richtext editor
  */
@@ -30,9 +51,13 @@ var Richtext = function Richtext(_ref) {
       defaultValue = _ref$defaultValue === void 0 ? '' : _ref$defaultValue,
       _ref$readOnly = _ref.readOnly,
       readOnly = _ref$readOnly === void 0 ? false : _ref$readOnly,
+      _ref$simple = _ref.simple,
+      simple = _ref$simple === void 0 ? false : _ref$simple,
       onChange = _ref.onChange,
       _ref$className = _ref.className,
-      className = _ref$className === void 0 ? '' : _ref$className;
+      className = _ref$className === void 0 ? '' : _ref$className,
+      _ref$contentsCss = _ref.contentsCss,
+      contentsCss = _ref$contentsCss === void 0 ? 'https://orapps.osu.edu/assets/css/ckeditor/contents.css' : _ref$contentsCss;
 
   var _useState = (0, _react.useState)(defaultValue),
       _useState2 = (0, _slicedToArray2.default)(_useState, 1),
@@ -44,81 +69,57 @@ var Richtext = function Richtext(_ref) {
       setError = _useState4[1];
 
   var editorRef = (0, _react.useRef)(null);
-  var toolbarRef = (0, _react.useRef)(null);
   (0, _react.useLayoutEffect)(function () {
     // @ts-ignore 
-    var cke = window.DecoupledEditor;
+    var cke = window.CKEDITOR;
     var editor = undefined; // No type info exists for CKE
 
     if (!cke) {
       // TODO: Error message improvements
-      setError('window.DecoupledEditor is undefined. Are you missing a dependency?');
+      setError('window.CKEDITOR is undefined. Are you missing an external script?');
       return;
-    } // https://ckeditor.com/docs/ckeditor5/latest/api/module_core_editor_editorconfig-EditorConfig.html
+    }
 
-
+    var toolbar = simple ? SIMPLE_TOOLBAR_CONFIG : FULL_TOOLBAR_CONFIG;
     var opts = {
-      initialData: initialData,
-      toolbar: {
-        items: DEFAULT_TOOLBAR_ITEMS
-      } // TODO: Disable the "Insert Image" plugin entirely, we're not supporting it.
-      // All of the below didn't work so far. Only thing I found to work 
-      // is to completely replace the full toolbar.
-      // removePlugins: [ 'ckfinder', 'imageUpload', 'imageInsert' ],
-      // imageEditing: {
-      //     isEnabled: false
-      // }
-
+      toolbar: toolbar,
+      // TODO: Prop to provide extra plugins (e.g. Signet signature captures)
+      extraPlugins: '',
+      // Disable the body > blockquote > p ... path in the editor footer
+      removePlugins: 'elementspath',
+      contentsCss: contentsCss
     };
-    cke.create(editorRef.current, opts).then(function (instance) {
-      editor = instance;
-      editor.isReadOnly = readOnly; // Bind CKE's change event to our own onChange
-
-      editor.model.document.on('change:data', function () {
-        if (onChange) {
-          onChange(editor.getData());
-        }
-      }); // Setup toolbar DOM
-
-      if (toolbarRef.current) {
-        toolbarRef.current.innerHTML = '';
-
-        if (!readOnly) {
-          toolbarRef.current.appendChild(editor.ui.view.toolbar.element);
-        }
+    editor = cke.replace(editorRef.current, opts);
+    editor.setData(initialData);
+    editor.on('change', function () {
+      if (onChange) {
+        onChange(editor.getData());
       }
-    }).catch(function (err) {
-      console.error('CKEditor Load Error', err);
-      setError('Failed to load CKEditor. Check Console for additional information');
     });
     return function () {
       if (editor) {
-        editor.destroy().catch(function (err) {
-          console.error('CKEditor Unload Error', err);
-        });
+        editor.destroy();
+        editor = undefined;
       }
     };
-  }, [initialData, readOnly, onChange]); // TODO: Toggling readOnly isn't super efficient here, since 
-  // it'll recreate the editor from scratch. But I don't envision
-  // many use cases where we'll be doing that.
+  }, [initialData, simple, contentsCss, onChange]);
 
   if (error) {
     return /*#__PURE__*/_react.default.createElement("div", {
       className: "richtext is-error"
     }, error);
-  }
+  } // TODO: Toggling readOnly isn't super efficient here, since 
+  // it'll recreate the editor from scratch. But I don't envision
+  // many use cases where we'll be doing that.
+
 
   return /*#__PURE__*/_react.default.createElement("div", {
-    className: "richtext ".concat(className)
-  }, /*#__PURE__*/_react.default.createElement("div", {
-    className: "richtext-toolbar",
-    ref: toolbarRef
-  }), /*#__PURE__*/_react.default.createElement("div", {
-    className: "richtext-editor-container"
-  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "richtext ".concat(className, " ").concat(readOnly ? 'is-readonly' : '')
+  }, /*#__PURE__*/_react.default.createElement("textarea", {
     className: "richtext-editor",
-    ref: editorRef
-  })));
+    ref: editorRef,
+    disabled: readOnly
+  }));
 };
 
 var _default = (0, _react.memo)(Richtext);
