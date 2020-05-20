@@ -1,6 +1,6 @@
 {
   "name": "@oris/ui",
-  "version": "4.1.0",
+  "version": "4.1.1",
   "description": "React UI components for ORIS applications",
   "author": "Chase McManning <mcmanning.1@osu.edu>",
   "private": true,
