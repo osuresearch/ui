@@ -26,7 +26,7 @@ export interface Props {
 const Button: React.FC<Props> = ({
     children, 
     to,
-    theme = 'secondary',
+    theme = 'primary',
     className = '',
     disabled = false,
     onClick = undefined,
