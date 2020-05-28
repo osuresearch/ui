@@ -17,6 +17,18 @@ Small themed button
 >Delete</Button>
 ```
 
+Link button (will render as a React Router Link themed to look like a button):
+
+```jsx
+import { MemoryRouter } from 'react-router';
+
+{/* Memory router is used here to be able to use React Router 
+    in the demo code. Do not include it in your app */}
+<MemoryRouter>
+    <Button to="/home">Go Home</Button>
+</MemoryRouter>
+```
+
 ### Themes
 
 Filled buttons for primary actions, such as submitting a form
