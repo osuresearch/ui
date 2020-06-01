@@ -1,6 +1,5 @@
 
 import './internal/jQueryPluginChanges';
-import 'time-input-polyfill/auto';
 
 export { default as AppAlert } from './components/AppAlert';
 export { default as Badge } from './components/Badge';

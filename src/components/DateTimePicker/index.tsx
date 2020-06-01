@@ -1,8 +1,9 @@
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, } from 'react';
 
 // @ts-ignore
 import RDatePicker from 'react-datepicker';
+import TimeField from '../TimeField';
 
 export interface Props {
     /**
@@ -34,9 +35,9 @@ export interface Props {
 /**
  * Provides a date picker and time input for a datetime field.
  *
- * This is a wrapper around [react-datepicker](https://reactdatepicker.com)
+ * This is a wrapper around [react-datepicker](https://reactdatepicker.com) and [TimeField](#timefield).
  * 
- * For Date-only fields, use [DatePicker](#datepicker). 
+ * For Date-only fields, use [DatePicker](#datepicker).
  * For Time-only fields, use [TimeField](#timefield).
  */
 const DateTimePicker: React.FC<Props> = ({ defaultValue, filterDate, minDate, maxDate, disabled }) => {
@@ -46,32 +47,18 @@ const DateTimePicker: React.FC<Props> = ({ defaultValue, filterDate, minDate, ma
         setDate(defaultValue);
     }, [defaultValue]);
 
-    const supportsTime = require('time-input-polyfill/supportsTime');
-    const TimePolyfill = require('time-input-polyfill');
-
-    const timeRef = useRef<HTMLInputElement>(null);
-
-    const polyfillTime = () => {
-        if (!supportsTime) {
-            console.log(timeRef);
-            if (!timeRef?.current?.hasAttribute('data-value')) {
-                new TimePolyfill(timeRef?.current);
-            }
-        }
-    }
-
-    const TimeInput = ({ value, onChange }) => (
-        <>
-            <label htmlFor="mytime">My label</label>
-            <input
-                ref={timeRef}
-                id="mytime"
-                type="time"
+    const TimeFieldWrapper = ({ value, onChange }) => {
+        console.log(value);
+        console.log(onChange);
+        return (
+            <TimeField
+                label="Time:"
                 value={value}
-                onChange={e => onChange(e.target.value)}
+                defaultValue={value}
+                onChange={onChange}
             />
-        </>
-    );
+        );
+    };
 
     return (
         <div className="input-group oris-datetimepickers">
@@ -85,13 +72,12 @@ const DateTimePicker: React.FC<Props> = ({ defaultValue, filterDate, minDate, ma
                 onChange={(newDate: Date) => {
                     setDate(newDate);
                 }}
-                onBlur={polyfillTime}
                 filterDate={filterDate}
                 minDate={minDate}
                 maxDate={maxDate}
-                timeInputLabel="Time:"
+                timeInputLabel=""
                 showTimeInput
-                customTimeInput={<TimeInput />}
+                customTimeInput={<TimeFieldWrapper />}
                 dateFormat='MM/dd/yyyy h:mm aa'
                 disabled={disabled}
             />

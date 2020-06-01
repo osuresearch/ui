@@ -1,33 +1,85 @@
+.time-field {
+    fieldset {
+        legend {
+            width: auto;
+            font-size: inherit;
+        }
+        
+        .field-wrapper{
+            appearance: listbox;
+            display: initial;
 
-// Theme overrides to brand react-datepicker
-// $datepicker__border-color: red;
+            .fa {
+                padding: 0 0.5rem 0 0;
+                margin-left: -0.25rem;
+            }
 
-@import "react-datepicker/src/stylesheets/datepicker";
+            &:focus-within {
+                outline: auto;
+                outline-color: -webkit-focus-ring-color;
+            }
 
-.react-datepicker-wrapper {
-    display: block;
+            label { margin-bottom: 0; }
+
+            input {
+                border: 0;
+                caret-color: transparent;
+                cursor: default;
+                text-align: center;
+                width: 1.65rem;
+
+                &:focus {
+                    outline: none; // General rule is to NEVER do this, but we're outlining the parent instead
+                    background: Highlight;
+                }
+
+                &::selection,
+                &::-moz-selection {
+                    background: transparent;
+                }
+
+                // Hide the spin icons (we still want the stepping functionality)
+                &[type="number"] {
+                    -webkit-appearance: textfield;
+                    -moz-appearance: textfield;
+                    appearance: textfield;
+
+                    &::-webkit-inner-spin-button,
+                    &::-webkit-outer-spin-button {
+                        -webkit-appearance: none;
+                        margin: 0;
+                    }
+                }
+
+                &[name='am-pm'] {
+                    margin-left: 0.15rem;
+                }
+            }
+        }
+
+        &:disabled{
+            .field-wrapper {
+                background-color: tint($gray, 20%);
+
+                input {
+                    background-color: tint($gray, 20%);
+                    color: tint($gray, 80%);
+                }
+
+                .fa {
+                    color: tint($gray, 80%);
+                }
+            }
+        }
+    }
 }
 
-// Fix input size for the time input with an annoying level of nesting.
-// Seriously - they use BEM but still nest selectors? Idiotic.
-.react-datepicker__input-time-container .react-datepicker-time__input-container .react-datepicker-time__input input {
-    width: 100px;
-}
+// Sass hurt itself in its confusion...
+.time-field input::selection { background: transparent; }
 
-.datetime {
-    display: block;
-    padding-left: 2em;
-}
-
-.datetime.has-time {
-    width: 13em;
-}
-
-.datetime.text-diff {
-    width: 100%;
-}
-
-// Raise popper's z to avoid conflict with other fields/icons
-.react-datepicker-popper {
-    z-index: 10;
+// Firefox overrides
+@-moz-document url-prefix('') {
+    .time-field .field-wrapper input:focus {
+        color: $white;
+    }
 }
