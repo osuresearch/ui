@@ -35,6 +35,31 @@ export interface Props {
     required?: boolean;
 }
 
+function addLeadingZero(value: string): string {
+    return value.length === 1 ? "0" + value : value;
+}
+
+function getHourValue(value: string): string {
+    if (!value.length) return '';
+
+    const parts = value.split(':').map(Number);
+    return addLeadingZero((parts[0] <= 12 ? parts[0] : parts[0] - 12).toString());
+}
+
+function getMinuteValue(value: string): string {
+    if (!value.length) return '';
+
+    const parts = value.split(':').map(Number);
+    return addLeadingZero(parts[1].toString());
+}
+
+function getMeridiemValue(value: string): string {
+    if (!value.length) return '';
+    
+    const parts = value.split(':').map(Number);
+    return parts[0] < 12 ? 'AM' : 'PM';
+}
+
 /**
  * Provides a time input for a time field.
  *
@@ -50,29 +75,19 @@ const TimeField: React.FC<Props> = ({
     label,
     inline,
     onChange,
-    defaultValue,
+    defaultValue = '',
     disabled,
     required = true,
 }) => {
-    const [hour, setHour] = useState<string>('');
+    const [hour, setHour] = useState<string>(getHourValue(defaultValue));
     const hourRef = useRef<HTMLInputElement>(null);
-    const [minutes, setMinutes] = useState<string>('');
+    const [minutes, setMinutes] = useState<string>(getMinuteValue(defaultValue));
     const minutesRef = useRef<HTMLInputElement>(null);
-    const [amPm, setAmPm] = useState<string>('');
+    const [amPm, setAmPm] = useState<string>(getMeridiemValue(defaultValue));
     const amPmRef = useRef<HTMLInputElement>(null);
 
     // Random number for our A11y description IDs in case this component is used multiple times on one page
     const random = Math.floor(Math.random() * 1000);
-
-    useEffect(() => {
-        // Set time parts with defaultValue if it is passed in
-        if (defaultValue) {
-            const value = defaultValue.split(':').map(Number);
-            setHour(addLeadingZero((value[0] <= 12 ? value[0] : value[0] - 12).toString()));
-            setMinutes(addLeadingZero(value[1].toString()));
-            setAmPm(value[0] < 12 ? 'AM' : 'PM');
-        }
-    }, [defaultValue]);
 
     useEffect(() => {
         if (hour && minutes && amPm) {
@@ -80,8 +95,6 @@ const TimeField: React.FC<Props> = ({
             onChange((amPm === 'AM' ? hourInt : (hourInt === 12) ? 12 : hourInt + 12).toString() + ':' + minutes);
         }
     }, [onChange, hour, minutes, amPm]);
-
-    const addLeadingZero = (value: string) => value.length === 1 ? "0" + value : value;
 
     // Select the input text
     const handleClick = (e: React.MouseEvent) => (e.target as HTMLInputElement).select();
