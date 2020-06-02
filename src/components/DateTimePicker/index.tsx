@@ -45,13 +45,13 @@ type Props = {
  * For Date-only fields, use [DatePicker](#datepicker).
  * For Time-only fields, use [TimeField](#timefield).
  */
-const DateTimePicker: React.FC<Props> = ({ 
-    defaultValue = null, 
-    onChange, 
-    filterDate, 
-    minDate, 
-    maxDate, 
-    disabled 
+const DateTimePicker: React.FC<Props> = ({
+    defaultValue = null,
+    onChange,
+    filterDate,
+    minDate,
+    maxDate,
+    disabled
 }) => {
     const [date, setDate] = useState<Date | null>(defaultValue);
 
@@ -76,7 +76,7 @@ const DateTimePicker: React.FC<Props> = ({
                 maxDate={maxDate}
                 timeInputLabel=""
                 showTimeInput
-                customTimeInput={<TimeField label="Time:" />}
+                customTimeInput={<TimeField label="Time:" inline />}
                 dateFormat='MM/dd/yyyy h:mm aa'
                 disabled={disabled}
             />
