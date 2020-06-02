@@ -35,6 +35,7 @@ const Component = () => {
         <TimeField
             label='All time fields require a label'
             defaultValue={defaultValue}
+            value={time}
             onChange={setTime}
         />
     );
@@ -57,6 +58,7 @@ const Component = () => {
         <TimeField
             label='All time fields require a label'
             defaultValue={defaultValue}
+            value={time}
             onChange={setTime}
             disabled
         />
@@ -81,6 +83,7 @@ const Component = () => {
         <TimeField
             label='All time fields require a label'
             defaultValue={defaultValue}
+            value={time}
             onChange={setTime}
             inline
         />
