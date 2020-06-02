@@ -5,7 +5,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import RDatePicker from 'react-datepicker';
 import TimeField from '../TimeField';
 
-export interface Props {
+type Props = {
     /**
      * Default value
      */
@@ -45,35 +45,20 @@ export interface Props {
  * For Date-only fields, use [DatePicker](#datepicker).
  * For Time-only fields, use [TimeField](#timefield).
  */
-const DateTimePicker: React.FC<Props> = ({ defaultValue, onChange, filterDate, minDate, maxDate, disabled }) => {
-    const [date, setDate] = useState<Date>();
-
-    useEffect(() => {
-        setDate(defaultValue);
-    }, [defaultValue]);
+const DateTimePicker: React.FC<Props> = ({ 
+    defaultValue = null, 
+    onChange, 
+    filterDate, 
+    minDate, 
+    maxDate, 
+    disabled 
+}) => {
+    const [date, setDate] = useState<Date | null>(defaultValue);
 
     const handleChange = (newDate: Date) => {
         setDate(newDate);
         onChange(newDate);
     }
-
-    const TimeFieldWrapper = ({ value, onChange }) => {
-        return (
-            /**
-             * This needs fixed - the onChange function passed in here
-             * repeatedly calls setState in the react-datepicker inputTime
-             * component, which causes the app to crash. I'm probably 
-             * missing something really obvious; I just can't figure it out.
-             * See https://github.com/Hacker0x01/react-datepicker/blob/master/src/inputTime.jsx#L20
-             */
-            <TimeField
-                label="Time:"
-                inline
-                defaultValue={value}
-                onChange={onChange}
-            />
-        )
-    };
 
     return (
         <div className="input-group datetimepicker">
@@ -91,7 +76,7 @@ const DateTimePicker: React.FC<Props> = ({ defaultValue, onChange, filterDate, m
                 maxDate={maxDate}
                 timeInputLabel=""
                 showTimeInput
-                customTimeInput={<TimeFieldWrapper />}
+                customTimeInput={<TimeField label="Time:" />}
                 dateFormat='MM/dd/yyyy h:mm aa'
                 disabled={disabled}
             />
