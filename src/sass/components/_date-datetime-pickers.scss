@@ -26,11 +26,13 @@
 }
 
 .datetimepicker {
-    .fa{ 
-        &.fa-clock-o {
-            margin-left: -0.69rem;
-            font-size: 0.55rem;
-            margin-top: 0rem;
+    .input-group-prefix {
+        .fa { 
+            &.fa-clock-o {
+                margin-left: -0.69rem;
+                font-size: 0.55rem;
+                margin-top: 0rem;
+            }
         }
-    }
+    }    
 }
