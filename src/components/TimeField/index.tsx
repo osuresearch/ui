@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef, memo } from 'react';
 
 type Props = {
     /** Field label (required) - is actually a caption for the fieldset */
-    label: string;
+    label: string | HTMLLabelElement;
 
     /** Inline label (optional) - align the label inline with the field */
     inline?: boolean;
@@ -242,10 +242,22 @@ const TimeField: React.FC<Props> = ({
         }
     }
 
+    console.log(label);
+
     return (
         <div className="input-group time-field">
-            <fieldset disabled={disabled}>
-                <legend className={inline ? 'float-left mr-2' : ''}>{label}</legend>
+            <fieldset
+                disabled={disabled}
+                id={typeof label === 'string' ? '' : label?.htmlFor}
+            >
+                <legend
+                    className={
+                        (inline ? 'float-left mr-2' : '') +
+                        (typeof label === 'string' ? '' : ' sr-only')
+                    }
+                >
+                    {(typeof label === 'string') ? label : label?.innerText}
+                </legend>
                 <div className={'field-wrapper form-control' + (inline ? ' float-right' : '')}>
                     <span className='fa fa-clock-o' aria-hidden='true'></span>
                     <label>
