@@ -13,7 +13,7 @@ export interface Props {
     /**
      * onChange handler (required) - a state setter for the parent component
      */
-    onChange: (date: Date) => Function;
+    onChange(date: Date | null): void;
 
     /**
      * Apply a filter function to disallow certain dates
@@ -44,12 +44,8 @@ export interface Props {
  * For Date & Time fields, use [DateTimePicker](#datetimepicker). 
  * For Time fields, use [TimeField](#timefield).
  */
-const DatePicker: React.FC<Props> = ({ defaultValue, onChange, filterDate, minDate, maxDate, disabled }) => {
-    const [date, setDate] = useState<Date>();
-
-    useEffect(() => {
-        setDate(defaultValue);
-    }, [defaultValue]);
+const DatePicker: React.FC<Props> = ({ defaultValue = null, onChange, filterDate, minDate, maxDate, disabled }) => {
+    const [date, setDate] = useState<Date | null>(defaultValue);
 
     const handleChange = (newDate: Date) => {
         setDate(newDate);
