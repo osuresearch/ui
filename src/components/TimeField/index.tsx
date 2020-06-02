@@ -1,37 +1,30 @@
 /* eslint-disable jsx-a11y/no-redundant-roles */
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, memo } from 'react';
 
-// @ts-ignore
-export interface Props {
-    /**
-     * Field label (required) - is actually a caption for the fieldset
-     */
+type Props = {
+    /** Field label (required) - is actually a caption for the fieldset */
     label: string;
 
-    /**
-     * Inline label (optional) - align the label inline with the field
-     */
+    /** Inline label (optional) - align the label inline with the field */
     inline?: boolean;
 
-    /**
-     * Default time value (optional) - must be an hour:minutes string in 24h format 
-     */
+    /** Default time value (optional) - must be an hour:minutes string in 24h format  */
     defaultValue?: string;
 
-    /**
-     * onChange handler (required) - a state setter for the parent component
-     */
-    onChange: (string: string) => Function;
+    /** Explicit value (optional) - must be an hour:minutes string in 24h format */
+    value?: string;
 
-    /**
-     * Disabled (optional) - Disables all of the inputs in the component
+    /** 
+     * Callback called when the time is updated. 
+     * Returns the time in a 24h format, e.g. `14:05` 
      */
+    onChange?(newValue: string): void;
+
+    /** Disabled (optional) - Disables all of the inputs in the component */
     disabled?: boolean;
 
-    /**
-     * Required (optional, default true) - Makes the form fields required
-     */
+    /** Required (optional, default true) - Makes the form fields required */
     required?: boolean;
 }
 
@@ -55,7 +48,7 @@ function getMinuteValue(value: string): string {
 
 function getMeridiemValue(value: string): string {
     if (!value.length) return '';
-    
+
     const parts = value.split(':').map(Number);
     return parts[0] < 12 ? 'AM' : 'PM';
 }
@@ -76,6 +69,7 @@ const TimeField: React.FC<Props> = ({
     inline,
     onChange,
     defaultValue = '',
+    value = '',
     disabled,
     required = true,
 }) => {
@@ -90,11 +84,23 @@ const TimeField: React.FC<Props> = ({
     const random = Math.floor(Math.random() * 1000);
 
     useEffect(() => {
-        if (hour && minutes && amPm) {
-            const hourInt = parseInt(hour);
-            onChange((amPm === 'AM' ? hourInt : (hourInt === 12) ? 12 : hourInt + 12).toString() + ':' + minutes);
+        const hourInt = parseInt(hour);
+        const newTime = (amPm === 'AM' ? hourInt : (hourInt === 12) ? 12 : hourInt + 12).toString() + ':' + minutes;
+
+        // Fire onChange handler IFF there's a time and the 
+        // time does not differ from the driving `value` prop
+        if (hour && minutes && amPm && newTime !== value && onChange) {
+            onChange(newTime);
         }
-    }, [onChange, hour, minutes, amPm]);
+    }, [hour, minutes, amPm, value, onChange]);
+
+    // Detect when the parent component updates the controlling value
+    // and update internal states - without firing onChange
+    useEffect(() => {
+        setHour(getHourValue(value));
+        setMinutes(getMinuteValue(value))
+        setAmPm(getMeridiemValue(value));
+    }, [value]);
 
     // Select the input text
     const handleClick = (e: React.MouseEvent) => (e.target as HTMLInputElement).select();
@@ -345,4 +351,4 @@ const TimeField: React.FC<Props> = ({
     );
 }
 
-export default TimeField;
+export default memo(TimeField);
