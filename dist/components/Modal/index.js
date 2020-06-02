@@ -36,6 +36,12 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
  *
  * Bootstrap's modal jQuery options can be passed in as React props.
  * For the complete list see https://getbootstrap.com/docs/4.0/components/modal/#options
+ * 
+ * Bootstrap modal modifier classes (such as .modal-dialog-centered and 
+ * .modal-sm) and custom wrapping classes can also be passed in using the 
+ * **className** prop. Note that the classes are added to the
+ * '.modal-dialog' element and not the outermost '.modal' element.
+ * 
 
  * This more-or-less follows the pattern at https://reactjs.org/docs/portals.html
  */
@@ -98,7 +104,7 @@ var Modal = /*#__PURE__*/function (_React$Component) {
         "aria-hidden": "true",
         ref: this.ref
       }, /*#__PURE__*/_react.default.createElement("div", {
-        className: "modal-dialog",
+        className: "modal-dialog" + (this.props.className ? " " + this.props.className : ''),
         role: "document"
       }, /*#__PURE__*/_react.default.createElement("div", {
         className: "modal-content"
@@ -109,6 +115,7 @@ var Modal = /*#__PURE__*/function (_React$Component) {
 }(_react.default.Component);
 
 Modal.propTypes = {
+  className: _propTypes.default.string,
   children: _propTypes.default.oneOfType([_propTypes.default.arrayOf(_propTypes.default.node), _propTypes.default.object])
 };
 var _default = Modal;

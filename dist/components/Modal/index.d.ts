@@ -8,6 +8,12 @@ export default Modal;
  *
  * Bootstrap's modal jQuery options can be passed in as React props.
  * For the complete list see https://getbootstrap.com/docs/4.0/components/modal/#options
+ *
+ * Bootstrap modal modifier classes (such as .modal-dialog-centered and
+ * .modal-sm) and custom wrapping classes can also be passed in using the
+ * **className** prop. Note that the classes are added to the
+ * '.modal-dialog' element and not the outermost '.modal' element.
+ *
 
  * This more-or-less follows the pattern at https://reactjs.org/docs/portals.html
  */
@@ -33,6 +39,7 @@ declare class Modal extends React.Component<any, any, any> {
 }
 declare namespace Modal {
     export namespace propTypes {
+        export const className: PropTypes.Requireable<string>;
         export const children: PropTypes.Requireable<object>;
     }
 }

@@ -16,9 +16,7 @@ var _react = _interopRequireWildcard(require("react"));
 var _Icon = _interopRequireDefault(require("../Icon"));
 
 var TabList = function TabList(_ref) {
-  var children = _ref.children,
-      _ref$vertical = _ref.vertical,
-      vertical = _ref$vertical === void 0 ? false : _ref$vertical;
+  var children = _ref.children;
 
   var _useState = (0, _react.useState)(9999),
       _useState2 = (0, _slicedToArray2.default)(_useState, 2),
@@ -67,15 +65,7 @@ var TabList = function TabList(_ref) {
 
   var onChildBoundingRect = function onChildBoundingRect(index, rect) {
     childRects[index] = rect;
-  };
-
-  var classNames = 'nav';
-
-  if (vertical) {
-    classNames += ' flex-column';
-  } else {
-    classNames += ' nav-tabs';
-  } // Custom render each child with a forced ref
+  }; // Custom render each child with a forced ref
 
 
   var childrenArr = _react.default.Children.toArray(children);
@@ -108,8 +98,8 @@ var TabList = function TabList(_ref) {
     role: "navigation",
     ref: ref
   }, /*#__PURE__*/_react.default.createElement("ul", {
-    className: classNames
-  }, !vertical && renderChildren(), vertical && children, overflowChildren.length > 0 && /*#__PURE__*/_react.default.createElement("li", {
+    className: "nav nav-tabs"
+  }, renderChildren(), overflowChildren.length > 0 && /*#__PURE__*/_react.default.createElement("li", {
     className: "nav-item dropdown"
   }, /*#__PURE__*/_react.default.createElement("button", {
     className: "btn btn-link nav-link dropdown-toggle tablist-dropdown",
