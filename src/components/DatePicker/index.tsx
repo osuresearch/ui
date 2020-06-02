@@ -11,6 +11,11 @@ export interface Props {
     defaultValue?: Date;
 
     /**
+     * onChange handler (required) - a state setter for the parent component
+     */
+    onChange: (date: Date) => Function;
+
+    /**
      * Apply a filter function to disallow certain dates
      */
     filterDate?(date: Date): boolean;
@@ -39,15 +44,20 @@ export interface Props {
  * For Date & Time fields, use [DateTimePicker](#datetimepicker). 
  * For Time fields, use [TimeField](#timefield).
  */
-const DatePicker: React.FC<Props> = ({ defaultValue, filterDate, minDate, maxDate, disabled }) => {
+const DatePicker: React.FC<Props> = ({ defaultValue, onChange, filterDate, minDate, maxDate, disabled }) => {
     const [date, setDate] = useState<Date>();
 
     useEffect(() => {
         setDate(defaultValue);
     }, [defaultValue]);
 
+    const handleChange = (newDate: Date) => {
+        setDate(newDate);
+        onChange(newDate);
+    }
+
     return (
-        <div className="input-group oris-datetimepickers">
+        <div className="input-group datepicker">
             <span className="input-group-prefix">
                 <i className='fa fa-calendar' aria-hidden="true"></i>
             </span>
@@ -55,7 +65,7 @@ const DatePicker: React.FC<Props> = ({ defaultValue, filterDate, minDate, maxDat
             <RDatePicker
                 selected={date}
                 className='form-control date'
-                onChange={(newDate: Date) => setDate(newDate)}
+                onChange={handleChange}
                 filterDate={filterDate}
                 minDate={minDate}
                 maxDate={maxDate}

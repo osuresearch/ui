@@ -7,11 +7,15 @@
         
         .field-wrapper{
             appearance: listbox;
-            display: initial;
+            display: block;
+            width: 7.75rem; // Using rems here so the div width scales with zoom
+            
+            &.form-control {
+                padding: 0.2em 0.5em;
+            }
 
             .fa {
-                padding: 0 0.5rem 0 0;
-                margin-left: -0.25rem;
+                padding: 0 0.25rem 0 0;
             }
 
             &:focus-within {

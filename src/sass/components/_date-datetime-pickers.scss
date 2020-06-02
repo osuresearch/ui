@@ -11,23 +11,26 @@
 // Fix input size for the time input with an annoying level of nesting.
 // Seriously - they use BEM but still nest selectors? Idiotic.
 .react-datepicker__input-time-container .react-datepicker-time__input-container .react-datepicker-time__input input {
-    width: 100px;
-}
-
-.datetime {
-    display: block;
-    padding-left: 2em;
-}
-
-.datetime.has-time {
-    width: 13em;
-}
-
-.datetime.text-diff {
-    width: 100%;
+    width: 1.65rem;
 }
 
 // Raise popper's z to avoid conflict with other fields/icons
 .react-datepicker-popper {
     z-index: 10;
+}
+
+// Component styling
+.date, .datetime {
+    display: block;
+    padding-left: 2em;
+}
+
+.datetimepicker {
+    .fa{ 
+        &.fa-clock-o {
+            margin-left: -0.69rem;
+            font-size: 0.55rem;
+            margin-top: 0rem;
+        }
+    }
 }

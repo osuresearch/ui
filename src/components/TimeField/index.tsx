@@ -10,6 +10,11 @@ export interface Props {
     label: string;
 
     /**
+     * Inline label (optional) - align the label inline with the field
+     */
+    inline?: boolean;
+
+    /**
      * Default time value (optional) - must be an hour:minutes string in 24h format 
      */
     defaultValue?: string;
@@ -17,12 +22,17 @@ export interface Props {
     /**
      * onChange handler (required) - a state setter for the parent component
      */
-    //onChange: (string: string) => Function;
+    onChange: (string: string) => Function;
 
     /**
      * Disabled (optional) - Disables all of the inputs in the component
      */
     disabled?: boolean;
+
+    /**
+     * Required (optional, default true) - Makes the form fields required
+     */
+    required?: boolean;
 }
 
 /**
@@ -36,7 +46,14 @@ export interface Props {
  * For Date fields, use [DatePicker](#datepicker). 
  * For Datetime fields, use [DateTimePicker](#datetimepicker).
  */
-const TimeField: React.FC<Props> = ({ label, onChange, defaultValue, disabled }) => {
+const TimeField: React.FC<Props> = ({
+    label,
+    inline,
+    onChange,
+    defaultValue,
+    disabled,
+    required = true,
+}) => {
     const [hour, setHour] = useState<string>('');
     const hourRef = useRef<HTMLInputElement>(null);
     const [minutes, setMinutes] = useState<string>('');
@@ -59,9 +76,8 @@ const TimeField: React.FC<Props> = ({ label, onChange, defaultValue, disabled })
 
     useEffect(() => {
         if (hour && minutes && amPm) {
-            onChange((amPm === 'AM' ? hour : parseInt(hour) + 12) + ':' + minutes);
-        } else {
-            //onChange('');
+            const hourInt = parseInt(hour);
+            onChange((amPm === 'AM' ? hourInt : (hourInt === 12) ? 12 : hourInt + 12).toString() + ':' + minutes);
         }
     }, [onChange, hour, minutes, amPm]);
 
@@ -113,11 +129,8 @@ const TimeField: React.FC<Props> = ({ label, onChange, defaultValue, disabled })
                 break;
             case 'ArrowUp':
                 name === 'am-pm' && setAmPm(value === 'AM' ? 'PM' : 'AM');
-                if (value === max) {
+                if (value === max || value === '') {
                     name === 'hour' && setHour('01');
-                    name === 'minute' && setMinutes('00');
-                    e.preventDefault();
-                } else if (value === '') {
                     name === 'minute' && setMinutes('00');
                     e.preventDefault();
                 }
@@ -213,8 +226,8 @@ const TimeField: React.FC<Props> = ({ label, onChange, defaultValue, disabled })
     return (
         <div className="input-group time-field">
             <fieldset disabled={disabled}>
-                <legend>{label}</legend>
-                <div className='field-wrapper form-control'>
+                <legend className={inline ? 'float-left mr-2' : ''}>{label}</legend>
+                <div className={'field-wrapper form-control' + (inline ? ' float-right' : '')}>
                     <span className='fa fa-clock-o' aria-hidden='true'></span>
                     <label>
                         <span className='sr-only'>Hour</span>
@@ -234,7 +247,7 @@ const TimeField: React.FC<Props> = ({ label, onChange, defaultValue, disabled })
                             onKeyDown={handleKeyDown}
                             onKeyPress={handleKeyPress}
                             onChange={handleHourChange}
-                            required
+                            required={required}
                         />
                     </label>
                     <span>:</span>
@@ -256,7 +269,7 @@ const TimeField: React.FC<Props> = ({ label, onChange, defaultValue, disabled })
                             onKeyDown={handleKeyDown}
                             onKeyPress={handleKeyPress}
                             onChange={handleMinuteChange}
-                            required
+                            required={required}
                         />
                     </label>
                     <label>
@@ -271,7 +284,7 @@ const TimeField: React.FC<Props> = ({ label, onChange, defaultValue, disabled })
                             onClick={handleClick}
                             onKeyUp={handleKeyUp}
                             onKeyDown={handleKeyDown}
-                            required
+                            required={required}
                         />
                     </label>
                 </div>

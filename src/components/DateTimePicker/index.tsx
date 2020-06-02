@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 // @ts-ignore
 import RDatePicker from 'react-datepicker';
@@ -10,6 +10,11 @@ export interface Props {
      * Default value
      */
     defaultValue?: Date;
+
+    /**
+     * onChange handler (required) - a state setter for the parent component
+     */
+    onChange: (date: Date) => Function;
 
     /**
      * Apply a filter function to disallow certain dates
@@ -40,38 +45,47 @@ export interface Props {
  * For Date-only fields, use [DatePicker](#datepicker).
  * For Time-only fields, use [TimeField](#timefield).
  */
-const DateTimePicker: React.FC<Props> = ({ defaultValue, filterDate, minDate, maxDate, disabled }) => {
+const DateTimePicker: React.FC<Props> = ({ defaultValue, onChange, filterDate, minDate, maxDate, disabled }) => {
     const [date, setDate] = useState<Date>();
 
     useEffect(() => {
         setDate(defaultValue);
     }, [defaultValue]);
 
+    const handleChange = (newDate: Date) => {
+        setDate(newDate);
+        onChange(newDate);
+    }
+
     const TimeFieldWrapper = ({ value, onChange }) => {
-        console.log(value);
-        console.log(onChange);
         return (
+            /**
+             * This needs fixed - the onChange function passed in here
+             * repeatedly calls setState in the react-datepicker inputTime
+             * component, which causes the app to crash. I'm probably 
+             * missing something really obvious; I just can't figure it out.
+             * See https://github.com/Hacker0x01/react-datepicker/blob/master/src/inputTime.jsx#L20
+             */
             <TimeField
                 label="Time:"
-                value={value}
+                inline
                 defaultValue={value}
                 onChange={onChange}
             />
-        );
+        )
     };
 
     return (
-        <div className="input-group oris-datetimepickers">
+        <div className="input-group datetimepicker">
             <span className="input-group-prefix">
-                <i className='fa fa-calendar' aria-hidden="true"></i>
+                <i className='fa fa-calendar-o' aria-hidden="true"></i>
+                <i className='fa fa-clock-o' aria-hidden="true"></i>
             </span>
 
             <RDatePicker
                 selected={date}
                 className='form-control datetime'
-                onChange={(newDate: Date) => {
-                    setDate(newDate);
-                }}
+                onChange={handleChange}
                 filterDate={filterDate}
                 minDate={minDate}
                 maxDate={maxDate}
