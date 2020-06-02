@@ -55,7 +55,7 @@ function getMinuteValue(value: string): string {
 
 function getMeridiemValue(value: string): string {
     if (!value.length) return '';
-    
+
     const parts = value.split(':').map(Number);
     return parts[0] < 12 ? 'AM' : 'PM';
 }
@@ -188,10 +188,10 @@ const TimeField: React.FC<Props> = ({
         const { name } = e.target as HTMLInputElement;
         /* Change input to next field when key is greater than the highest possible first digit of the hour/minute */
         if (name === "hour" && /[3-9]/.test(key)) {
-            minutesRef?.current?.focus();
+            minutesRef?.current?.select();
         }
         if (name === 'minute' && /[6-9]/.test(key)) {
-            amPmRef?.current?.focus();
+            amPmRef?.current?.select();
         }
     }
 
@@ -204,8 +204,8 @@ const TimeField: React.FC<Props> = ({
         } else if (value.length > 2) {
             /* Two-digit typing, i.e. the value is going to be three digits */
             const intValue = parseInt(value);
-            // Focus to the minutes input
-            minutesRef?.current?.focus();
+            // Select the minutes input
+            minutesRef?.current?.select();
             // Convert military time values to 12h time
             if (intValue >= 13 && intValue <= 23) {
                 setAmPm('PM');
@@ -230,8 +230,8 @@ const TimeField: React.FC<Props> = ({
             setMinutes(value);
         } else if (value.length > 2) {
             /* Two-digit typing, i.e. the value is going to be three digits */
-            // Focus to AM/PM
-            amPmRef?.current?.focus();
+            // Select AM/PM
+            amPmRef?.current?.select();
             setMinutes(value.slice(-2));
         }
     }
