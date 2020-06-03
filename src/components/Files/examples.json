@@ -1,0 +1,53 @@
+{
+    "jsonapi": {
+        "version": "1.0"
+    },
+    "data": {
+        "attributes": {
+            "directory": {
+                "Submitted": [
+                    {
+                        "id": "1",
+                        "filename": "Foo.TXT",
+                        "section": "Summary",
+                        "link": "#"
+                    },
+                    {
+                        "id": "2",
+                        "filename": "Bar.txt",
+                        "section": "Summary",
+                        "link": "#"
+                    }
+                ],
+                "Approved": [
+                    {
+                        "id": "1",
+                        "filename": "Foo.txt",
+                        "section": "Summary",
+                        "link": "#"
+                    },
+                    {
+                        "id": "2",
+                        "filename": "Bar.txt",
+                        "section": "Summary",
+                        "link": "#"
+                    }
+                ],
+                "Attached": [
+                    {
+                        "id": "1",
+                        "filename": "Foo.txt",
+                        "section": "Summary",
+                        "link": "#"
+                    },
+                    {
+                        "id": "2",
+                        "filename": "Bar.txt",
+                        "section": "Summary",
+                        "link": "#"
+                    }
+                ]
+            }
+        }
+    }
+}

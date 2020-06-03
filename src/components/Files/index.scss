@@ -1,0 +1,188 @@
+
+@import "../../sass/colors";
+
+.files {
+    .card { 
+        border-bottom: 0;
+
+        &:last-of-type {
+            border-bottom: 1px solid rgba(0,0,0,0.125);
+        }
+    }
+
+    .card-header { 
+        padding: 0.5rem 0.75rem; 
+        background-color: tint($peach, 70%); 
+        font-weight: 400;
+        color: shade($peach, 60%);
+
+        &.main-header{
+            padding: 0.75rem 1.25rem;
+            background-color: shade($peach, 80%);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            h2 { 
+                margin-bottom: 0;
+                line-height: 1;
+                font-weight: 500;
+            }
+
+            a { color: $white; text-decoration-color: $white; }
+        }
+    }
+
+    .badge.badge-pill.badge-dark {
+        background: shade($peach, 60%);
+        font-size: 1rem;
+        font-weight: 300;
+        width: 2.5rem;
+    }
+
+    .table {
+        margin-bottom: 0;
+
+        &.table-hover tbody tr:hover {
+            background-color: tint($polo-blue, 10%);
+        }
+        
+        td, th {
+            vertical-align: middle;
+        }
+
+        th {
+            &[scope='col'] {
+                text-transform: capitalize;
+            }
+
+            &[scope='row'] {
+                font-size: initial;
+
+                a {
+                    /* File icons */
+                    &::before {
+                        display: inline-block;
+                        font: normal normal normal 1rem FontAwesome;
+                        text-rendering: auto;
+                        -webkit-font-smoothing: antialiased;
+                        -moz-osx-font-smoothing: grayscale;
+                        margin: 0 0.25rem 0 0;
+                        content: '\f016';
+                    }
+                    // Archives
+                    // Audio
+                    // Code
+                    &[data-file-type='log'],
+                    &[data-file-type='md'],
+                    Amigaguide
+                    HTML – HyperText Markup Language (.html, .htm)
+                    XHTML (xhtml, xht) – eXtensible HyperText Markup Language
+                    XML – eXtensible Markup Language
+                    // Excel/Spreadsheets
+                    CSV
+                    OSHEET – Synology Drive Office Spreadsheet
+                    // Images
+                    // PDF
+                    &[data-file-type='pdf']
+                    {
+                        &::before {
+                            content: '\f1c1';
+                        }                        
+                    }
+                    // PowerPoint/Presentations
+                    // Text
+                    &[data-file-type='txt'],
+                    &[data-file-type='0'],
+                    &[data-file-type='1st'],
+                    &[data-file-type='600'],
+                    &[data-file-type='ans'],
+                    &[data-file-type='asc'],
+                    &[data-file-type='me'],
+                    &[data-file-type='ott'],
+                    &[data-file-type='rtf'],
+                    &[data-file-type='tex'],
+                    &[data-file-type='info']
+                    {
+                        &::before {
+                            content: '\f0f6';
+                        }                        
+                    }
+                    // Video
+                    // Word/Documents
+                    &[data-file-type='abw'],
+                    &[data-file-type='acl'],
+                    &[data-file-type='afp'],
+                    &[data-file-type='ami'],
+                    &[data-file-type='aww'],
+                    &[data-file-type='cwk'],
+                    &[data-file-type='doc'],
+                    &[data-file-type='docx'],
+                    &[data-file-type='docm'],
+                    &[data-file-type='dot'],
+                    &[data-file-type='dotx'],
+                    &[data-file-type='dwd'],
+                    &[data-file-type='gdoc'],
+                    &[data-file-type='hwp'],
+                    &[data-file-type='lwp'],
+                    &[data-file-type='mcw'],
+                    &[data-file-type='nb'],
+                    &[data-file-type='odm'],
+                    &[data-file-type='odoc'],
+                    &[data-file-type='odt'],
+                    &[data-file-type='omm'],
+                    &[data-file-type='pages'],
+                    &[data-file-type='pap'],
+                    &[data-file-type='sdw'],
+                    &[data-file-type='stw'],
+                    &[data-file-type='sxw'],
+                    &[data-file-type='wpd'],
+                    &[data-file-type='wps'],
+                    &[data-file-type='wpt'],
+                    &[data-file-type='wrd'],
+                    &[data-file-type='wrf'],
+                    &[data-file-type='wri']
+                    {
+                        &::before {
+                            content: '\f1c2';
+                        }                        
+                    }
+                    
+
+
+
+
+                    // PDF
+                    
+                    // PowerPoint/Presentations
+                    &[data-file-type='ppt'],
+                    &[data-file-type='pptx']
+                    {
+                        &::before {
+                            content: '\f1c4';
+                        }                        
+                    }
+                    // Excel/Spreadsheets
+                    &[data-file-type='xls'],
+                    &[data-file-type='xlsx'],
+                    &[data-file-type='xlsm'],
+                    &[data-file-type='xltx']
+                    {
+                        &::before {
+                            content: '\f1c3';
+                        }                        
+                    }
+                    // Archives
+                    ,
+                    &[data-file-type='rar'],
+                    &[data-file-type='gzip']
+                    {
+                        &::before {
+                            content: '\f1c3';
+                        }                        
+                    }
+                }
+            }
+        }
+    }
+}
