@@ -3,12 +3,6 @@
 import React, { useState, useEffect, useRef, memo } from 'react';
 
 type Props = {
-    /** Field label (required) - is actually a caption for the fieldset */
-    label: string | HTMLLabelElement;
-
-    /** Inline label (optional) - align the label inline with the field */
-    inline?: boolean;
-
     /** Default time value (optional) - must be an hour:minutes string in 24h format  */
     defaultValue?: string;
 
@@ -21,10 +15,16 @@ type Props = {
      */
     onChange?(newValue: string): void;
 
-    /** Disabled (optional) - Disables all of the inputs in the component */
-    disabled?: boolean;
+    /** ID */
+    id: string;
 
-    /** Required (optional, default true) - Makes the form fields required */
+    /** className */
+    className?: string;
+
+    /** readonly (optional) - Makes the field readonly */
+    readOnly?: boolean;
+
+    /** required (optional) - Makes the form fields required */
     required?: boolean;
 }
 
@@ -63,15 +63,17 @@ function getMeridiemValue(value: string): string {
  * 
  * For Date fields, use [DatePicker](#datepicker). 
  * For Datetime fields, use [DateTimePicker](#datetimepicker).
+ * 
+ * Still to-do: Allow minimum and maximum times
  */
 const TimeField: React.FC<Props> = ({
-    label,
-    inline,
     onChange,
     defaultValue = '',
     value = '',
-    disabled,
-    required = true,
+    id,
+    className,
+    readOnly,
+    required
 }) => {
     const [hour, setHour] = useState<string>(getHourValue(defaultValue));
     const hourRef = useRef<HTMLInputElement>(null);
@@ -79,9 +81,6 @@ const TimeField: React.FC<Props> = ({
     const minutesRef = useRef<HTMLInputElement>(null);
     const [amPm, setAmPm] = useState<string>(getMeridiemValue(defaultValue));
     const amPmRef = useRef<HTMLInputElement>(null);
-
-    // Random number for our A11y description IDs in case this component is used multiple times on one page
-    const random = Math.floor(Math.random() * 1000);
 
     useEffect(() => {
         const hourInt = parseInt(hour);
@@ -107,7 +106,8 @@ const TimeField: React.FC<Props> = ({
 
     const handleKeyDown = (e: React.KeyboardEvent) => {
         const { key } = e;
-        const { name, value, min, max } = e.target as HTMLInputElement;
+        const { name, value, min, max, readOnly } = e.target as HTMLInputElement;
+
         /* Prevent non-numeric characters from being input for hour/minutes */
         if (key.length === 1 && /\D/.test(key) && name !== 'am-pm') {
             e.preventDefault();
@@ -118,27 +118,29 @@ const TimeField: React.FC<Props> = ({
             /* Clear field on Delete/Backspace */
             case 'Delete':
             case 'Backspace':
+                if (readOnly) { e.preventDefault(); return; }
                 name === 'hour' && setHour('');
                 name === 'minute' && setMinutes('');
                 name === 'am-pm' && setAmPm('');
                 break;
             case 'ArrowRight':
                 // Hour To Minutes input
-                if (name === 'hour') { minutesRef?.current?.focus(); }
+                if (name === 'hour') { minutesRef?.current?.select(); }
                 // Minutes to AM/PM input
-                if (name === 'minute') { amPmRef?.current?.focus(); }
+                if (name === 'minute') { amPmRef?.current?.select(); }
                 // AM/PM to Hour input
-                if (name === 'am-pm') { hourRef?.current?.focus(); }
+                if (name === 'am-pm') { hourRef?.current?.select(); }
                 break;
             case 'ArrowLeft':
                 // Hour to AM/PM input
-                if (name === 'hour') { amPmRef?.current?.focus(); }
+                if (name === 'hour') { amPmRef?.current?.select(); }
                 // Minutes to Hour input
-                if (name === 'minute') { hourRef?.current?.focus(); }
+                if (name === 'minute') { hourRef?.current?.select(); }
                 // AM/PM to Minutes input
-                if (name === 'am-pm') { minutesRef?.current?.focus(); }
+                if (name === 'am-pm') { minutesRef?.current?.select(); }
                 break;
             case 'ArrowDown':
+                if (readOnly) { e.preventDefault(); return; }
                 name === 'am-pm' && setAmPm(value === 'AM' ? 'PM' : 'AM');
                 if (value <= min) {
                     name === 'hour' && setHour('12');
@@ -147,6 +149,7 @@ const TimeField: React.FC<Props> = ({
                 }
                 break;
             case 'ArrowUp':
+                if (readOnly) { e.preventDefault(); return; }
                 name === 'am-pm' && setAmPm(value === 'AM' ? 'PM' : 'AM');
                 if (value === max || value === '') {
                     name === 'hour' && setHour('01');
@@ -156,22 +159,26 @@ const TimeField: React.FC<Props> = ({
                 break;
             case 'Home':
                 // Spinbutton behavior: https://www.w3.org/TR/wai-aria-practices-1.1/#spinbutton
+                if (readOnly) { e.preventDefault(); return; }
                 name === 'hour' && setHour('01');
                 name === 'minute' && setMinutes('00');
                 e.preventDefault();
                 break;
             case 'End':
                 // Spinbutton behavior: https://www.w3.org/TR/wai-aria-practices-1.1/#spinbutton
+                if (readOnly) { e.preventDefault(); return; }
                 name === 'hour' && setHour('12');
                 name === 'minute' && setMinutes('59');
                 e.preventDefault();
                 break;
             case 'a':
             case 'A':
+                if (readOnly) { e.preventDefault(); return; }
                 setAmPm('AM');
                 break;
             case 'p':
             case 'P':
+                if (readOnly) { e.preventDefault(); return; }
                 setAmPm('PM');
                 break;
             default:
@@ -192,6 +199,7 @@ const TimeField: React.FC<Props> = ({
     const handleKeyPress = (e: React.KeyboardEvent) => {
         const { key } = e;
         const { name } = e.target as HTMLInputElement;
+
         /* Change input to next field when key is greater than the highest possible first digit of the hour/minute */
         if (name === "hour" && /[3-9]/.test(key)) {
             minutesRef?.current?.select();
@@ -242,123 +250,121 @@ const TimeField: React.FC<Props> = ({
         }
     }
 
-    console.log(label);
-
     return (
-        <div className="input-group time-field">
-            <fieldset
-                disabled={disabled}
-                id={typeof label === 'string' ? '' : label?.htmlFor}
-            >
-                <legend
-                    className={
-                        (inline ? 'float-left mr-2' : '') +
-                        (typeof label === 'string' ? '' : ' sr-only')
-                    }
-                >
-                    {(typeof label === 'string') ? label : label?.innerText}
-                </legend>
-                <div className={'field-wrapper form-control' + (inline ? ' float-right' : '')}>
-                    <span className='fa fa-clock-o' aria-hidden='true'></span>
-                    <label>
-                        <span className='sr-only'>Hour</span>
-                        <input
-                            ref={hourRef}
-                            type='number'
-                            name='hour'
-                            min='01'
-                            max='12'
-                            step='1'
-                            placeholder='--'
-                            role='textbox' // Linter is mad about this; it fixes VoiceOver bug
-                            aria-describedby={'hours-description-' + random}
-                            value={hour}
-                            onClick={handleClick}
-                            onKeyUp={handleKeyUp}
-                            onKeyDown={handleKeyDown}
-                            onKeyPress={handleKeyPress}
-                            onChange={handleHourChange}
-                            required={required}
-                        />
-                    </label>
-                    <span>:</span>
-                    <label>
-                        <span className='sr-only'>Minutes</span>
-                        <input
-                            ref={minutesRef}
-                            type='number'
-                            name='minute'
-                            min='00'
-                            max='59'
-                            step='1'
-                            placeholder='--'
-                            role='textbox' // Linter is mad about this; it fixes VoiceOver bug
-                            aria-describedby={'minutes-description-' + random}
-                            value={minutes}
-                            onClick={handleClick}
-                            onKeyUp={handleKeyUp}
-                            onKeyDown={handleKeyDown}
-                            onKeyPress={handleKeyPress}
-                            onChange={handleMinuteChange}
-                            required={required}
-                        />
-                    </label>
-                    <label>
-                        <span className='sr-only'>AM/PM</span>
-                        <input
-                            ref={amPmRef}
-                            type='text'
-                            name='am-pm'
-                            placeholder='--'
-                            aria-describedby={'ampm-description-' + random}
-                            value={amPm}
-                            onClick={handleClick}
-                            onKeyUp={handleKeyUp}
-                            onKeyDown={handleKeyDown}
-                            required={required}
-                        />
-                    </label>
-                </div>
-                <div id={'hours-description-' + random} className='sr-only'>
-                    {!hour &&
-                        <span>You have not yet selected an hour.</span>
-                    }
-                    {hour &&
-                        <span>{hour} hour selected.</span>
-                    }
-                    {minutes &&
-                        <span>{minutes} minutes selected.</span>
-                    }
-                    {amPm &&
-                        <span>{amPm} selected.</span>
-                    } To increment the hour, press the up arrow. To decrement, press the down arrow. Tab or press the right arrow to move to the minutes selector.</div>
-                <div id={'minutes-description-' + random} className='sr-only'>
-                    {!minutes &&
-                        <span>You have not yet selected minutes.</span>
-                    }
-                    {minutes &&
-                        <span>{minutes} minutes selected.</span>
-                    }
-                    {hour &&
-                        <span>{hour} hour selected.</span>
-                    }
-                    {amPm &&
-                        <span>{amPm} selected.</span>
-                    } To increment the minutes, press the up arrow. To decrement, press the down arrow. Tab or press the right arrow to move to the AM/PM selector. Press the left arrow to move to the hour selector.</div>
-                <div id={'ampm-description-' + random} className='sr-only'>
-                    {!amPm &&
-                        <span>You have not yet selected AM or PM.</span>
-                    }
-                    {amPm &&
-                        <span>{amPm} selected.</span>
-                    }
-                    {hour &&
-                        <span>{hour} hour selected.</span>
-                    }
-                    {minutes &&
-                        <span>{minutes} minutes selected.</span>
-                    } To select {amPm === 'AM' ? 'PM' : 'AM'}, press the up or down arrow. Press the right arrow to return to the hour selector. Press the left arrow to return to the minutes selector.</div>
-            </fieldset>
+        <div className={
+            'time-field form-control ' +
+            (className ? className : '') +
+            (readOnly ? 'readonly' : '')
+        }>
+            <span className='fa fa-clock-o' aria-hidden='true'></span>
+            <label>
+                <span className='sr-only'>,,,Hour (HH)</span> {/** commas for short screen reader pause */}
+                <input
+                    ref={hourRef}
+                    id={id}
+                    type='number'
+                    name='hour'
+                    min='01'
+                    max='12'
+                    step='1'
+                    placeholder='--'
+                    role='textbox' // Linter is mad about this; it fixes VoiceOver bug
+                    aria-describedby={'hours-description-' + id}
+                    value={hour}
+                    onClick={handleClick}
+                    onKeyUp={handleKeyUp}
+                    onKeyDown={handleKeyDown}
+                    onKeyPress={handleKeyPress}
+                    onChange={handleHourChange}
+                    required={required}
+                    readOnly={readOnly}
+                />
+            </label>
+            <span>:</span>
+            <input
+                ref={minutesRef}
+                id={id + '-minutes'}
+                aria-label='Minutes (MM)'
+                type='number'
+                name='minute'
+                min='00'
+                max='59'
+                step='1'
+                placeholder='--'
+                role='textbox' // Linter is mad about this; it fixes VoiceOver bug
+                aria-describedby={'minutes-description-' + id}
+                value={minutes}
+                onClick={handleClick}
+                onKeyUp={handleKeyUp}
+                onKeyDown={handleKeyDown}
+                onKeyPress={handleKeyPress}
+                onChange={handleMinuteChange}
+                required={required}
+                readOnly={readOnly}
+            />
+            <input
+                ref={amPmRef}
+                id={id + '-meridiem'}
+                aria-label='AM or PM'
+                type='text'
+                name='am-pm'
+                placeholder='--'
+                aria-describedby={'ampm-description-' + id}
+                value={amPm}
+                onClick={handleClick}
+                onKeyUp={handleKeyUp}
+                onKeyDown={handleKeyDown}
+                required={required}
+                readOnly={readOnly}
+            />
+            <div id={'hours-description-' + id} className='sr-only'>
+                {readOnly && <span>This field is disabled. </span>}
+                {!hour &&
+                    <span>You have not yet selected an hour. </span>
+                }
+                {hour &&
+                    <span>{hour} hour selected. </span>
+                }
+                {minutes &&
+                    <span>{minutes} minutes selected. </span>
+                }
+                {amPm &&
+                    <span>{amPm} selected. </span>
+                }
+                {!readOnly && <span>To increment the hour, press the up arrow. To decrement, press the down arrow. Tab or press the right arrow to move to the minutes selector.</span>}
+            </div>
+            <div id={'minutes-description-' + id} className='sr-only'>
+                {readOnly && <span>This field is disabled. </span>}
+                {!minutes &&
+                    <span>You have not yet selected minutes. </span>
+                }
+                {minutes &&
+                    <span>{minutes} minutes selected. </span>
+                }
+                {hour &&
+                    <span>{hour} hour selected. </span>
+                }
+                {amPm &&
+                    <span>{amPm} selected. </span>
+                }
+                {!readOnly && <span>To increment the minutes, press the up arrow. To decrement, press the down arrow. Tab or press the right arrow to move to the AM/PM selector. Press the left arrow to move to the hour selector.</span>}
+            </div>
+            <div id={'ampm-description-' + id} className='sr-only'>
+                {readOnly && <span>This field is disabled. </span>}
+                {!amPm &&
+                    <span>You have not yet selected AM or PM. </span>
+                }
+                {amPm &&
+                    <span>{amPm} selected. </span>
+                }
+                {hour &&
+                    <span>{hour} hour selected. </span>
+                }
+                {minutes &&
+                    <span>{minutes} minutes selected. </span>
+                }
+                {!readOnly && <span>To select {amPm === 'AM' ? 'PM' : 'AM'}, press the up or down arrow. Press the right arrow to return to the hour selector. Press the left arrow to return to the minutes selector.</span>}
+            </div>
         </div>
     );
 }

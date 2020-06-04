@@ -4,10 +4,14 @@
 import { useState } from 'react';
 const [date, setDate] = useState(new Date());
 
-<DatePicker
-    defaultValue={date}
-    onChange={setDate}
-/>
+<>
+    <label htmlFor='choose-date'>Choose a date</label>
+    <DatePicker
+        id='choose-date'
+        defaultValue={date}
+        onChange={setDate}
+    />
+</>
 ```
 #### Specify custom range for selectable dates
 
@@ -20,11 +24,15 @@ const isWeekday = (date) => {
     return day !== 0 && day !== 6;
 };
 
-<DatePicker
-    defaultValue={date}
-    onChange={setDate}
-    minDate={new Date('2020-01-01T00:00:00-05:00')}
-    maxDate={new Date('2025-12-31T00:00:00-05:00')}
-    filterDate={isWeekday}
-/>
+<>
+    <label htmlFor='choose-weekday'>Choose a weekday</label>
+    <DatePicker
+        id='choose-weekday'
+        defaultValue={date}
+        onChange={setDate}
+        minDate={new Date('2020-01-01T00:00:00-05:00')}
+        maxDate={new Date('2025-12-31T00:00:00-05:00')}
+        filterDate={isWeekday}
+    />
+</>
 ```

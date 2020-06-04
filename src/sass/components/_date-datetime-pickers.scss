@@ -29,9 +29,11 @@
     .input-group-prefix {
         .fa { 
             &.fa-clock-o {
-                margin-left: -0.69rem;
-                font-size: 0.55rem;
-                margin-top: 0rem;
+                font-size: 0.7rem;
+                position: absolute;
+                bottom: 0;
+                right: -0.2rem;
+                background: white;
             }
         }
     }    

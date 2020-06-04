@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState } from 'react';
 
 // @ts-ignore
 import RDatePicker from 'react-datepicker';
@@ -32,6 +32,21 @@ type Props = {
     maxDate?: Date;
 
     /**
+     * ID
+     */
+    id: string;
+
+    /**
+     * Additional classes to append to field
+     */
+    className?: string;
+
+    /**
+     * Make field read only
+     */
+    readOnly?: boolean;
+
+    /**
      * Disable field
      */
     disabled?: boolean;
@@ -51,6 +66,9 @@ const DateTimePicker: React.FC<Props> = ({
     filterDate,
     minDate,
     maxDate,
+    id,
+    className,
+    readOnly,
     disabled
 }) => {
     const [date, setDate] = useState<Date | null>(defaultValue);
@@ -63,21 +81,23 @@ const DateTimePicker: React.FC<Props> = ({
     return (
         <div className="input-group datetimepicker">
             <span className="input-group-prefix">
-                <i className='fa fa-calendar-o' aria-hidden="true"></i>
+                <i className='fa fa-calendar' aria-hidden="true"></i>
                 <i className='fa fa-clock-o' aria-hidden="true"></i>
             </span>
 
             <RDatePicker
+                id={id}
                 selected={date}
-                className='form-control datetime'
+                className={'form-control datetime ' + (className ? className : '')}
                 onChange={handleChange}
                 filterDate={filterDate}
                 minDate={minDate}
                 maxDate={maxDate}
-                timeInputLabel=""
+                timeInputLabel={<label htmlFor={id + '-time'}>Time</label>}
                 showTimeInput
-                customTimeInput={<TimeField label="Time:" inline />}
+                customTimeInput={<TimeField id={id + '-time'} />}
                 dateFormat='MM/dd/yyyy h:mm aa'
+                readOnly={readOnly}
                 disabled={disabled}
             />
         </div>
