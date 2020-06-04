@@ -1,9 +1,9 @@
 ### Examples
 
 ```jsx
-const payload = require('./examples.json');
+const body = require('./examples.json');
 
 <Files
-    payload={payload}
+    body={body}
 />
 ```

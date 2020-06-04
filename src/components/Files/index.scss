@@ -71,115 +71,239 @@
                         content: '\f016';
                     }
                     // Archives
+                    &[data-filetype='7z'],
+                    &[data-filetype='ace'],
+                    &[data-filetype='alz'],
+                    &[data-filetype='arj'],
+                    &[data-filetype='bz2'],
+                    &[data-filetype='gz'],
+                    &[data-filetype='lzh'],
+                    &[data-filetype='lz'],
+                    &[data-filetype='rar'],
+                    &[data-filetype='tar'],
+                    &[data-filetype='xz'],
+                    &[data-filetype='zip']
+                    {
+                        &::before {
+                            content: '\f1c3';
+                        }
+                    }
                     // Audio
-                    // Code
-                    &[data-file-type='log'],
-                    &[data-file-type='md'],
-                    Amigaguide
-                    HTML – HyperText Markup Language (.html, .htm)
-                    XHTML (xhtml, xht) – eXtensible HyperText Markup Language
-                    XML – eXtensible Markup Language
+                    &[data-filetype='aac'],
+                    &[data-filetype='alac'],
+                    &[data-filetype='flac'],
+                    &[data-filetype='ogg'],
+                    &[data-filetype='mid'],
+                    &[data-filetype='mp1'],
+                    &[data-filetype='mp2'],
+                    &[data-filetype='mp3'],
+                    &[data-filetype='wav'],
+                    &[data-filetype='wma']
+                    {
+                        &::before {
+                            content: '\f1c7';
+                        }
+                    }
                     // Excel/Spreadsheets
-                    CSV
-                    OSHEET – Synology Drive Office Spreadsheet
+                    &[data-filetype='123'],
+                    &[data-filetype='ab2'],
+                    &[data-filetype='ab3'],
+                    &[data-filetype='aws'],
+                    &[data-filetype='bcsv'],
+                    &[data-filetype='clf'],
+                    &[data-filetype='cell'],
+                    &[data-filetype='csv'],
+                    &[data-filetype='gsheet'],
+                    &[data-filetype='numbers'],
+                    &[data-filetype='gnumeric'],
+                    &[data-filetype='ods'],
+                    &[data-filetype='osheet'],
+                    &[data-filetype='ots'],
+                    &[data-filetype='qpw'],
+                    &[data-filetype='sdc'],
+                    &[data-filetype='stc'],
+                    &[data-filetype='sxc'],
+                    &[data-filetype='tab'],
+                    &[data-filetype='tsv'],
+                    &[data-filetype='vc'],
+                    &[data-filetype='wk1'],
+                    &[data-filetype='wk3'],
+                    &[data-filetype='wk4'],
+                    &[data-filetype='wks'],
+                    &[data-filetype='wq1'],
+                    &[data-filetype='xlk'],
+                    &[data-filetype='xls'],
+                    &[data-filetype='xlsb'],
+                    &[data-filetype='xlsm'],
+                    &[data-filetype='xlsx'],
+                    &[data-filetype='xlr'],
+                    &[data-filetype='xlt'],
+                    &[data-filetype='xltm'],
+                    &[data-filetype='xlw']
+                    {
+                        &::before {
+                            content: '\f1c3';
+                        }
+                    }
                     // Images
+                    &[data-filetype='ai'],
+                    &[data-filetype='awg'],
+                    &[data-filetype='bmp'],
+                    &[data-filetype='cgm'],
+                    &[data-filetype='cdr'],
+                    &[data-filetype='cmx'],
+                    &[data-filetype='cpt'],
+                    &[data-filetype='dxf'],
+                    &[data-filetype='eps'],
+                    &[data-filetype='gif'],  
+                    &[data-filetype='icns'],
+                    &[data-filetype='ico'],
+                    &[data-filetype='jpg'],
+                    &[data-filetype='jpeg'],
+                    &[data-filetype='jp2'],
+                    &[data-filetype='jps'],
+                    &[data-filetype='miff'],
+                    &[data-filetype='nitf'],
+                    &[data-filetype='odg'],
+                    &[data-filetype='pbm'],
+                    &[data-filetype='pdn'],
+                    &[data-filetype='pict'],
+                    &[data-filetype='pct'],
+                    &[data-filetype='png'],
+                    &[data-filetype='pnm'],
+                    &[data-filetype='pns'],
+                    &[data-filetype='psb'],
+                    &[data-filetype='psd'],
+                    &[data-filetype='pdd'],
+                    &[data-filetype='psp'],
+                    &[data-filetype='pxm'],
+                    &[data-filetype='pxr'],
+                    &[data-filetype='raw'],
+                    &[data-filetype='svg'],
+                    &[data-filetype='sxd'],
+                    &[data-filetype='tga'],
+                    &[data-filetype='targa'],
+                    &[data-filetype='tif'],
+                    &[data-filetype='tiff'],
+                    &[data-filetype='vsd'],
+                    &[data-filetype='vsdx'],
+                    &[data-filetype='xcf'] {
+                        &::before {
+                            content: '\f1c5';
+                        }
+                    }
                     // PDF
-                    &[data-file-type='pdf']
+                    &[data-filetype='pdf']
                     {
                         &::before {
                             content: '\f1c1';
-                        }                        
+                        }
                     }
                     // PowerPoint/Presentations
-                    // Text
-                    &[data-file-type='txt'],
-                    &[data-file-type='0'],
-                    &[data-file-type='1st'],
-                    &[data-file-type='600'],
-                    &[data-file-type='ans'],
-                    &[data-file-type='asc'],
-                    &[data-file-type='me'],
-                    &[data-file-type='ott'],
-                    &[data-file-type='rtf'],
-                    &[data-file-type='tex'],
-                    &[data-file-type='info']
-                    {
-                        &::before {
-                            content: '\f0f6';
-                        }                        
-                    }
-                    // Video
-                    // Word/Documents
-                    &[data-file-type='abw'],
-                    &[data-file-type='acl'],
-                    &[data-file-type='afp'],
-                    &[data-file-type='ami'],
-                    &[data-file-type='aww'],
-                    &[data-file-type='cwk'],
-                    &[data-file-type='doc'],
-                    &[data-file-type='docx'],
-                    &[data-file-type='docm'],
-                    &[data-file-type='dot'],
-                    &[data-file-type='dotx'],
-                    &[data-file-type='dwd'],
-                    &[data-file-type='gdoc'],
-                    &[data-file-type='hwp'],
-                    &[data-file-type='lwp'],
-                    &[data-file-type='mcw'],
-                    &[data-file-type='nb'],
-                    &[data-file-type='odm'],
-                    &[data-file-type='odoc'],
-                    &[data-file-type='odt'],
-                    &[data-file-type='omm'],
-                    &[data-file-type='pages'],
-                    &[data-file-type='pap'],
-                    &[data-file-type='sdw'],
-                    &[data-file-type='stw'],
-                    &[data-file-type='sxw'],
-                    &[data-file-type='wpd'],
-                    &[data-file-type='wps'],
-                    &[data-file-type='wpt'],
-                    &[data-file-type='wrd'],
-                    &[data-file-type='wrf'],
-                    &[data-file-type='wri']
-                    {
-                        &::before {
-                            content: '\f1c2';
-                        }                        
-                    }
-                    
-
-
-
-
-                    // PDF
-                    
-                    // PowerPoint/Presentations
-                    &[data-file-type='ppt'],
-                    &[data-file-type='pptx']
+                    &[data-filetype='gslides'],
+                    &[data-filetype='key'],
+                    &[data-filetype='keynote'],
+                    &[data-filetype='nb'],
+                    &[data-filetype='nbp'],
+                    &[data-filetype='odp'],
+                    &[data-filetype='otp'],
+                    &[data-filetype='pez'],
+                    &[data-filetype='pot'],
+                    &[data-filetype='pps'],
+                    &[data-filetype='ppt'],
+                    &[data-filetype='pptx'],
+                    &[data-filetype='prz'],
+                    &[data-filetype='sdd'],
+                    &[data-filetype='show'],
+                    &[data-filetype='shw'],
+                    &[data-filetype='slp'],
+                    &[data-filetype='sspss'],
+                    &[data-filetype='sti'],
+                    &[data-filetype='sxi'],
+                    &[data-filetype='thmx'],
+                    &[data-filetype='watch']
                     {
                         &::before {
                             content: '\f1c4';
-                        }                        
+                        }
                     }
-                    // Excel/Spreadsheets
-                    &[data-file-type='xls'],
-                    &[data-file-type='xlsx'],
-                    &[data-file-type='xlsm'],
-                    &[data-file-type='xltx']
+                    // Text
+                    &[data-filetype='txt'],
+                    &[data-filetype='0'],
+                    &[data-filetype='1st'],
+                    &[data-filetype='600'],
+                    &[data-filetype='ans'],
+                    &[data-filetype='asc'],
+                    &[data-filetype='me'],
+                    &[data-filetype='ott'],
+                    &[data-filetype='rtf'],
+                    &[data-filetype='tex'],
+                    &[data-filetype='info']
                     {
                         &::before {
-                            content: '\f1c3';
-                        }                        
+                            content: '\f0f6';
+                        }
                     }
-                    // Archives
-                    ,
-                    &[data-file-type='rar'],
-                    &[data-file-type='gzip']
+                    // Video
+                    &[data-filetype='3gp'],
+                    &[data-filetype='aaf'],
+                    &[data-filetype='asf'],
+                    &[data-filetype='avchd'],
+                    &[data-filetype='avi'],
+                    &[data-filetype='collab'],
+                    &[data-filetype='m1v'],
+                    &[data-filetype='m2v'],
+                    &[data-filetype='m4v'],
+                    &[data-filetype='mkv'],
+                    &[data-filetype='mov'],
+                    &[data-filetype='mp4'],
+                    &[data-filetype='mpe'],
+                    &[data-filetype='mpeg'],
+                    &[data-filetype='mpg'],
+                    &[data-filetype='rm'],
+                    &[data-filetype='wmv'],
+                    &[data-filetype='webm'] {
+                        &::before {
+                            content: '\f1c8';
+                        }
+                    }
+                    // Word/Documents
+                    &[data-filetype='abw'],
+                    &[data-filetype='acl'],
+                    &[data-filetype='afp'],
+                    &[data-filetype='ami'],
+                    &[data-filetype='aww'],
+                    &[data-filetype='cwk'],
+                    &[data-filetype='doc'],
+                    &[data-filetype='docx'],
+                    &[data-filetype='docm'],
+                    &[data-filetype='dot'],
+                    &[data-filetype='dotx'],
+                    &[data-filetype='dwd'],
+                    &[data-filetype='gdoc'],
+                    &[data-filetype='hwp'],
+                    &[data-filetype='lwp'],
+                    &[data-filetype='mcw'],
+                    &[data-filetype='nb'],
+                    &[data-filetype='odm'],
+                    &[data-filetype='odoc'],
+                    &[data-filetype='odt'],
+                    &[data-filetype='omm'],
+                    &[data-filetype='pages'],
+                    &[data-filetype='pap'],
+                    &[data-filetype='sdw'],
+                    &[data-filetype='stw'],
+                    &[data-filetype='sxw'],
+                    &[data-filetype='wpd'],
+                    &[data-filetype='wps'],
+                    &[data-filetype='wpt'],
+                    &[data-filetype='wrd'],
+                    &[data-filetype='wrf'],
+                    &[data-filetype='wri']
                     {
                         &::before {
-                            content: '\f1c3';
-                        }                        
+                            content: '\f1c2';
+                        }
                     }
                 }
             }

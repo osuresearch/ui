@@ -12,33 +12,56 @@ import './index.scss';
  *
  */
 
+export interface Body {
+    data: {
+        attributes: {
+            directory: {
+                [key: string]: [{
+                    id: string;
+                    filename: string;
+                    size?: string;
+                    section?: string;
+                    uploaded?: string;
+                    link: string;
+                }]
+            }
+        },
+        links?: {
+            dms?: string;
+        }
+    }
+}
+
 export interface Props {
-    // Payload
-    payload: object;
-    // Card header - shows main "Files" header (with DMS link, if applicable)
+    /** Response body */
+    body: Body;
+
+    /** 
+     * Card header - shows main "Files" header (with DMS link, if applicable)
+     */
     header?: boolean;
-    // Attached files - file IDs when used as part of a form
-    attached?: Array<object>;
-    // Disabled - input disabled status when used as part of a form (i.e. read only)
+
+    /**
+     * Attachments - file IDs when used as part of a form
+     */
+    attachments?: Array<string>;
+
+    /** Disabled - Attachment inputs disabled */
     disabled?: boolean;
-    // Change Handler for forms
+
+    /** Change Handler */
     onChange?(newValue: string): void;
 }
 
 const Files: React.FC<Props> = ({
-    payload,
+    body,
     header,
-    attached,
+    attachments,
     disabled,
     onChange,
 }) => {
-    const files = payload.data.attributes.directory;
-    const dmsLink = payload.data.links?.dms;
-
-    /* Return an error message if the fetch throws an error */
-    if (files === false) {
-        return <div>Sorry, the files for this submission cannot be retrieved at this time.</div>;
-    }
+    const files = body.data.attributes.directory;
+    const dmsLink = body.data.links?.dms;
 
     /* Return a loader until getFiles has returned */
     if (!files) {
@@ -59,7 +82,7 @@ const Files: React.FC<Props> = ({
                 header &&
                 <div className='card-header main-header'>
                     <h2 className='h5'>Files</h2>
-                    {// If the state includes a DMS link
+                    {// If DMS link exists
                         dmsLink &&
                         <span>
                             <a
@@ -92,8 +115,8 @@ const Files: React.FC<Props> = ({
                                             <th scope='col' key={heading}>{heading}</th>
                                         )
                                 }
-                                {// If there are to be attachments, add as final column
-                                    attached &&
+                                {// If there are attachments, add a final Include column
+                                    attachments &&
                                     <th scope='col'>Include</th>
                                 }
                             </tr>
@@ -101,22 +124,34 @@ const Files: React.FC<Props> = ({
                         <tbody>
                             {
                                 files[directory].map((file) => (
-                                    <tr key={file.link} >
-                                        <th scope='row'>
-                                            <a href={file.link} target='_blank' rel='noopener noreferrer' data-file-type={(file.filename.split('.').reverse()[0]).toLowerCase()}>
-                                                {file.filename}
-                                            </a>
-                                        </th>
-                                        <td>{file.section}</td>
+                                    <tr key={file.id}>
+                                        {Object.keys(file)
+                                            .filter((k) => !['id', 'link'].includes(k))
+                                            .map((attr) => {
+                                                switch (attr) {
+                                                    case 'filename':
+                                                        return (<th scope='row' key={file.id + attr}>
+                                                            <a href={file.link} target='_blank' rel='noopener noreferrer' data-filetype={(file.filename.split('.').reverse()[0]).toLowerCase()}
+                                                            >{file.filename}</a>
+                                                        </th>);
+                                                    case 'uploaded':
+                                                        return (<td key={file.id + attr}>
+                                                            {new Date(file[attr] as string).toLocaleString()}
+                                                        </td>)
+                                                    default:
+                                                        return (<td key={file.id + attr}>{file[attr]}</td>);
+                                                }
+                                            })
+                                        }
                                         {// Display checkmarks for attachments
-                                            attached &&
+                                            attachments &&
                                             <td className='text-center'>
                                                 <input
                                                     type='checkbox'
                                                     className='m-0'
                                                     id={file.id}
                                                     onChange={onChange}
-                                                    checked={attached.includes(file.id.toString())}
+                                                    checked={attachments.includes(file.id)}
                                                     disabled={disabled}
                                                 />
                                             </td>
