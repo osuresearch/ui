@@ -2,28 +2,19 @@
 ### Examples
 
 ```js
-import { CommentApiMock } from './mocks';
+import { SourceMock } from './mocks';
 
-const documentUrl = 'http://localhost:6060/src/experimental/DocumentReview/mock.html';
-
-<DocumentReview
-    comments={CommentApiMock}
-    document={documentUrl}
-    blockNodes={['li']}
-    textNodes={['p']}
-/>
-
-/*
-// Buck-IRB legacy document example
-const documentUrl = 'http://localhost:6060/src/experimental/DocumentReview/amendment-mock.html';
+const comments = [];
 
 <DocumentReview
-  comments={CommentApiMock}
-  document={documentUrl}
-  blockNodes={['legend', 'label', '.uploaded-files li', '.ui-checkbox span']}
-  textNodes={['.text-output', '.text-wrap']}
+    src={SourceMock}
+    comments={comments}
+    onAddComment={(c) => console.debug('Add Comment', c)}
+    onUpdateComment={(c) => console.debug('Update Comment', c)}
+    onRemoveComment={(c) => console.debug('Remove Comment', c)}
+    defaultOwner="(me)"
+    canEditAnyComment={true}
 />
-*/
 ```
 
 
