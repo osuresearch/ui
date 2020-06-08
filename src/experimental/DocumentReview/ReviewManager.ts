@@ -4,6 +4,7 @@ import TableOfContentsElement from './TableOfContentsElement';
 import SidebarElement from './SidebarElement';
 import CommentElement from './CommentElement';
 import CSSElement from './CSSElement';
+import SelectionManager from './SelectionManager';
 
 /**
  * Management for a document that can be commented on by the end user
@@ -13,6 +14,7 @@ import CSSElement from './CSSElement';
  */
 export default class ReviewManager {
     SECTION_DATA_ATTR = 'data-comment-section';
+    SECTION_LEVEL_DATA_ATTR = 'data-comment-section-level';
     BLOCK_COMMENT_DATA_ATTR = 'data-comment-block';
     INLINE_COMMENT_DATA_ATTR = 'data-comment-inline';
 
@@ -50,6 +52,8 @@ export default class ReviewManager {
 
     private sections: Map<string, Section>;
     private commentElements: Map<number, CommentElement>;
+
+    private selection?: SelectionManager;
     
     constructor() { 
         this.defaultOwner = '(me)';
@@ -90,6 +94,7 @@ export default class ReviewManager {
         
         this.css = new CSSElement(document);
         this.sidebar = new SidebarElement(document);
+        this.selection = new SelectionManager(document);
 
         // Generate a dynamic TOC within the document
         this.loadSections();
@@ -120,6 +125,7 @@ export default class ReviewManager {
         const elements = this.document.querySelectorAll(attr);
         elements.forEach((el) => {
             const title = el.getAttribute(this.SECTION_DATA_ATTR) as string;
+            const level = parseInt(el.getAttribute(this.SECTION_LEVEL_DATA_ATTR) || '0');
 
             if (!el.id) {
                 console.warn(
@@ -137,7 +143,7 @@ export default class ReviewManager {
                 );
             }
 
-            this.sections.set(title, { el, title });
+            this.sections.set(title, { el, title, level });
         });
     }
 
@@ -244,11 +250,12 @@ export default class ReviewManager {
     private bindInlineCommentTargetEvents() {
         this.document.addEventListener('keydown', (e) => {
             if (e.key === 'c') {
-                if (this.canCommentOnSelectionRange()) {
-                    this.addNewCommentOnSelectionRange();
-                    e.preventDefault();
-                    return false;
-                }
+                this.selection?.highlightSelection();
+                // if (this.canCommentOnSelectionRange()) {
+                //     this.addNewCommentOnSelectionRange();
+                //     e.preventDefault();
+                //     return false;
+                // }
             }
         });
 

@@ -19,7 +19,12 @@ const DOCUMENT_CSS = `
     cursor: pointer;
 }
 
-[data-comment-inline] {
+.highlight {
+  background: pink;
+}
+
+[data-comment-inline],
+.highlight {
     user-select: text;
 }
 
@@ -48,15 +53,24 @@ const TOC_CSS = `
 .comments-toc {
   position: sticky;
   align-self: flex-start; /* Required for sticky to work */
-  top: 32px;
+  top: 0;
   
+  height: 100vh;
+}
+
+.comments-toc-wrapper {
   min-width: 250px;
   width: 250px;
   
+  margin-left: -250px;
   margin-right: 16px;
-  margin-top: 32px;
- 
-  height: calc(100vh - 32px);
+  
+  transition: margin-left 0.5s ease-in-out;
+  height: calc(100vh - 40px - 20px);
+}
+
+.comments-toc.is-visible .comments-toc-wrapper {
+  margin-left: 0;
 }
 
 .comments-toc-scrollbox {
@@ -115,6 +129,30 @@ const TOC_CSS = `
 
 .comments-toc:hover .comments-toc-fade {
   display: none;
+}
+
+/* Smaller font size for subsections */
+.comments-section.comments-section-level-1 a {
+  font-size: 95%;
+  margin-left: 1em;
+}
+
+.comments-section.comments-section-level-2 a {
+  font-size: 90%;
+  margin-left: 2em;
+}
+
+/* Hamburger button */
+.comments-toc-toggle {
+  border: 0;
+  background: 0;
+  font-size: 22px;
+  margin-top: 6px;
+  margin-left: 0;
+  
+  height: 40px;
+  
+  cursor: pointer;
 }
 `;
 

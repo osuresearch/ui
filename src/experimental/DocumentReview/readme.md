@@ -2,12 +2,13 @@
 ### Examples
 
 ```js
-import { SourceMock } from './mocks';
+import { SourceMock } from './mock';
+import { HTML } from './mock/irb-amendment';
 
 const comments = [];
 
 <DocumentReview
-    src={SourceMock}
+    src={HTML}
     comments={comments}
     onAddComment={(c) => console.debug('Add Comment', c)}
     onUpdateComment={(c) => console.debug('Update Comment', c)}

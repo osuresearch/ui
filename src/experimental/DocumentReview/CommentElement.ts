@@ -18,6 +18,11 @@ function prettifyDate(date: Date): string {
     return date.toLocaleDateString();
 }
 
+function isWithinFiveMinutes(created: Date, updated: Date): boolean {
+    const threshold = 5 * 60 * 1000;
+    return updated.getTime() - created.getTime() < threshold;
+}
+
 /**
  * Custom element abstraction for comment blocks
  */
@@ -42,7 +47,7 @@ export default class CommentElement {
     }
 
     public get isEdited(): boolean {
-        return this.comment.created.getTime() !== this.comment.updated.getTime();
+        return !isWithinFiveMinutes(this.comment.created, this.comment.updated);
     }
 
     public get canDelete(): boolean {

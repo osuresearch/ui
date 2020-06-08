@@ -35,6 +35,9 @@ export interface Section {
 
     /** Human readable title */
     title: string;
+
+    /** Nesting level under a previous section in the TOC */
+    level: number;
 }
 
 function isAncestorOf(parent: Element, el: Element): boolean {
