@@ -1,0 +1,84 @@
+.time-field {
+        appearance: listbox;
+        display: block;
+        width: 7.75rem; // Using rems here so the div width scales with zoom
+        
+        &.form-control {
+            padding: 0.2em 0.5em;
+        }
+
+        &.readonly {
+            background-color: tint($gray, 20%);
+
+            input {
+                background-color: tint($gray, 20%);
+                color: tint($gray, 80%);
+            }
+
+            .fa {
+                color: tint($gray, 80%);
+            }
+        }
+
+        .fa {
+            padding: 0 0.25rem 0 0;
+        }
+
+        &:focus-within {
+            outline: auto;
+            outline-color: -webkit-focus-ring-color;
+        }
+
+        label { margin-bottom: 0; }
+
+        input {
+            border: 0;
+            caret-color: transparent;
+            cursor: default;
+            text-align: center;
+            width: 1.65rem;
+
+            &:focus {
+                outline: none; // General rule is to NEVER do this, but we're outlining the parent instead
+                background: Highlight;
+            }
+
+            &::selection,
+            &::-moz-selection {
+                //background: transparent;
+            }
+
+            // Hide the spin icons (we still want the stepping functionality)
+            &[type="number"] {
+                -webkit-appearance: textfield;
+                -moz-appearance: textfield;
+                appearance: textfield;
+
+                &::-webkit-inner-spin-button,
+                &::-webkit-outer-spin-button {
+                    -webkit-appearance: none;
+                    margin: 0;
+                }
+            }
+
+            &[name='am-pm'] {
+                margin-left: 0.15rem;
+            }
+        }
+}
+
+// Sass hurt itself in its confusion...
+.time-field input::selection { background: transparent; }
+
+// Firefox overrides
+@-moz-document url-prefix('') {
+    .time-field input:focus {
+        color: $white;
+    }
+}
+// Edge/IE11 (maybe?) overrides
+@supports (-ms-ime-align:auto) {
+    .time-field input:focus {
+        color: $white;
+    }
+}

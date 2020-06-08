@@ -1,0 +1,40 @@
+
+// Theme overrides to brand react-datepicker
+// $datepicker__border-color: red;
+
+@import "react-datepicker/src/stylesheets/datepicker";
+
+.react-datepicker-wrapper {
+    display: block;
+}
+
+// Fix input size for the time input with an annoying level of nesting.
+// Seriously - they use BEM but still nest selectors? Idiotic.
+.react-datepicker__input-time-container .react-datepicker-time__input-container .react-datepicker-time__input input {
+    width: 1.65rem;
+}
+
+// Raise popper's z to avoid conflict with other fields/icons
+.react-datepicker-popper {
+    z-index: 10;
+}
+
+// Component styling
+.date, .datetime {
+    display: block;
+    padding-left: 2em;
+}
+
+.datetimepicker {
+    .input-group-prefix {
+        .fa { 
+            &.fa-clock-o {
+                font-size: 0.7rem;
+                position: absolute;
+                bottom: 0;
+                right: -0.2rem;
+                background: white;
+            }
+        }
+    }    
+}
