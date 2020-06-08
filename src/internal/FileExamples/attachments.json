@@ -1,0 +1,33 @@
+{
+    "jsonapi": {
+        "version": "1.0"
+    },
+    "data": {
+        "attributes": {
+            "id": "12",
+            "subject": "Your submission was approved",
+            "to": "buckeye.1@osu.edu",
+            "from": "smith.401@osu.edu",
+            "cc": "hawk.99@osu.edu, paul.615@osu.edu",
+            "content": "To whom it may concern, ...",
+            "files": [
+                {
+                    "id": "1",
+                    "filename": "ltricies mauris ut tellus cursus.txt",
+                    "section": "Summary",
+                    "uploaded": "2019-11-15T19:04:42-0500",
+                    "size": "1.2 KB",
+                    "link": "#"
+                },
+                {
+                    "id": "25",
+                    "filename": "No longer exists.gsheet",
+                    "section": "Summary",
+                    "uploaded": "2019-11-15T19:04:42-05:00",
+                    "size": "1.2 KB",
+                    "link": "#"
+                }
+            ]
+        }
+    }
+}

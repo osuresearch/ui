@@ -1,0 +1,68 @@
+{
+    "jsonapi": {
+        "version": "1.0"
+    },
+    "data": {
+        "attributes": {
+            "directory": {
+                "Submitted": [
+                    {
+                        "id": "1",
+                        "filename": "ltricies mauris ut tellus cursus.txt",
+                        "section": "Summary",
+                        "uploaded": "2019-11-15T19:04:42-05:00",
+                        "size": "1.2 KB",
+                        "link": "#"
+                    },
+                    {
+                        "id": "2",
+                        "filename": "id viverra mi nunc sit amet nisi.mkv",
+                        "section": "Summary",
+                        "uploaded": "2019-11-15T19:04:42-05:00",
+                        "size": "220 MB",
+                        "link": "#"
+                    }
+                ],
+                "Approved": [
+                    {
+                        "id": "3",
+                        "filename": "ut libero at orci tincidunt suscipit eu ullamcorper nisl.xlsx",
+                        "section": "Summary",
+                        "uploaded": "2019-12-03T09:19:31-05:00",
+                        "size": "1.7 MB",
+                        "link": "#"
+                    },
+                    {
+                        "id": "4",
+                        "filename": "Maecenas risus diam.docx",
+                        "section": "Summary",
+                        "uploaded": "2019-12-04T22:12:09-05:00",
+                        "size": "1 MB",
+                        "link": "#"
+                    }
+                ],
+                "Attached": [
+                    {
+                        "id": "5",
+                        "filename": "Nunc in porttitor magna.pdf",
+                        "section": "Summary",
+                        "uploaded": "2020-02-29T11:33:11-05:00",
+                        "size": "3 MB",
+                        "link": "#"
+                    },
+                    {
+                        "id": "6",
+                        "filename": "Etiam.jpeg",
+                        "section": "Summary",
+                        "uploaded": "2020-02-29T11:33:11-05:00",
+                        "size": "5 MB",
+                        "link": "#"
+                    }
+                ]
+            }
+        },
+        "links": {
+            "dms": "#"
+        }
+    }
+}

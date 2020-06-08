@@ -1,29 +1,19 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
-import './index.scss';
+interface File {
+    id: string;
+    filename: string;
+    section?: string;
+    uploaded?: string;
+    size?: string;
+    link: string;
+}
 
-/**
- *
- * Displays file links and metadata. Optionally handles 
- * attachments for forms.
- * 
- * Todo: Add error for when attachments do not exist 
- * (see FileSelector)
- *
- */
-
-export interface Body {
+interface Body {
     data: {
         attributes: {
             directory: {
-                [key: string]: [{
-                    id: string;
-                    filename: string;
-                    size?: string;
-                    section?: string;
-                    uploaded?: string;
-                    link: string;
-                }]
+                [key: string]: Array<File>
             }
         },
         links?: {
@@ -42,28 +32,81 @@ export interface Props {
     header?: boolean;
 
     /**
-     * Attachments - file IDs when used as part of a form
+     * Selected Files
      */
-    attachments?: Array<string>;
+    selectedFiles?: Array<File>;
 
-    /** Disabled - Attachment inputs disabled */
-    disabled?: boolean;
+    /** Form ID */
+    formId?: string;
 
-    /** Change Handler */
-    onChange?(newValue: string): void;
+    /**
+     * Selection handler
+     */
+    onSelect?(newArray: Array<object>): void;
+
+    /* SelectedFiles form - read only */
+    readOnly?: boolean;
 }
+
+
+/**
+ *
+ * This component displays files and directories from
+ * a Document Management System (DMS) parent directory
+ * (or other similar endpoint).
+ * 
+ * Optionally, it can be used as a file selector for forms.
+ * 
+ * To-do: Display selected files that were removed from DMS
+ *
+ */
 
 const Files: React.FC<Props> = ({
     body,
     header,
-    attachments,
-    disabled,
-    onChange,
+    selectedFiles,
+    formId,
+    onSelect,
+    readOnly
 }) => {
     const files = body.data.attributes.directory;
     const dmsLink = body.data.links?.dms;
 
-    /* Return a loader until getFiles has returned */
+    // Form handling
+    const [selected, setSelected] = useState<Array<File> | undefined>(selectedFiles);
+
+    const isChecked = (fileid: string) => {
+        if (selected && selected?.findIndex(file => file.id === fileid) !== -1) return true;
+        return false;
+    }
+
+    const handleSelectionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = JSON.parse(JSON.stringify(e.target.dataset));
+        const selectedIndex = selected?.findIndex(attachment => attachment.id === file.id);
+
+        if (selectedIndex === -1 /* not found */) {
+            // Add it to selected
+            setSelected((prevSelected: any  /** forgive me... */) => {
+                return [...prevSelected, file]
+            });
+        } else {
+            // Remove it from selected
+            setSelected(selected?.filter((ele, i) => i !== selectedIndex));
+        }
+    }
+
+    useEffect(() => {
+        if (typeof (onSelect) !== 'undefined' && typeof (selected) !== 'undefined')
+            onSelect(selected);
+    }, [onSelect, selected]);
+
+    useEffect(() => {
+        // Account for possible delay in the creation of the selectedFiles array
+        if (selected?.length === 0) setSelected(selectedFiles);
+    }, [selectedFiles, selected]);
+
+    /* Return a loader until files are available */
+    // To-do - replace this functionality with skeleton loader
     if (!files) {
         return (
             <div className='app-loader'>
@@ -81,18 +124,16 @@ const Files: React.FC<Props> = ({
             {// If header prop is true, then display main header
                 header &&
                 <div className='card-header main-header'>
-                    <h2 className='h5'>Files</h2>
+                    <h2>Files</h2>
                     {// If DMS link exists
                         dmsLink &&
                         <span>
                             <a
                                 href={dmsLink}
-                                title='Open in Document Management Server'
+                                title='Open in Document Management System'
                                 target='_blank'
                                 rel='noopener noreferrer'
-                            >
-                                <span className='fa fa-external-link mr-1' aria-hidden='true'></span>Open in DMS
-                            </a>
+                            >Open in DMS</a>
                         </span>
                     }
                 </div>
@@ -101,22 +142,25 @@ const Files: React.FC<Props> = ({
                 // Only display directory if it contains files
                 files[directory].length > 0 &&
                 <div className='card' key={directory}>
-                    <div className='card-header text-dark'><span className='fa fa-folder-open-o mr-2' aria-hidden='true'></span>{directory}
-                        <span className='float-right badge badge-pill badge-dark'>{files[directory].length}</span>
+                    <div className='card-header text-dark'>
+                        <span className='fa fa-folder-open-o mr-2' aria-hidden='true'></span>
+                        <span>{directory}</span>
+                        <span className='float-right badge badge-pill badge-dark'>{files[directory].length}<span className='sr-only'> files in this folder</span></span>
                     </div>
-                    <table className='table table-hover'>
+                    <table className={'table table-hover cols-' + (Object.keys(files[directory][0]).length).toString()}>
                         <caption className='sr-only'>{directory + ' Files'}</caption>
                         <thead>
                             <tr>
-                                {
-                                    Object.keys(files[directory][0])
-                                        .filter((h) => !['id', 'link'].includes(h))
-                                        .map((heading) =>
-                                            <th scope='col' key={heading}>{heading}</th>
-                                        )
+                                {Object.keys(files[directory][0])
+                                    /** Use file object keys as table headings */
+                                    // Filter out ID and Link keys
+                                    .filter((h) => !['id', 'link'].includes(h))
+                                    .map((heading) =>
+                                        <th scope='col' key={heading}>{heading}</th>
+                                    )
                                 }
-                                {// If there are attachments, add a final Include column
-                                    attachments &&
+                                {// If there are selected files, add a final Include column heading
+                                    selectedFiles &&
                                     <th scope='col'>Include</th>
                                 }
                             </tr>
@@ -126,33 +170,53 @@ const Files: React.FC<Props> = ({
                                 files[directory].map((file) => (
                                     <tr key={file.id}>
                                         {Object.keys(file)
+                                            /** Map file properties to th/td */
+                                            // Filter out ID and Link
                                             .filter((k) => !['id', 'link'].includes(k))
                                             .map((attr) => {
                                                 switch (attr) {
                                                     case 'filename':
-                                                        return (<th scope='row' key={file.id + attr}>
-                                                            <a href={file.link} target='_blank' rel='noopener noreferrer' data-filetype={(file.filename.split('.').reverse()[0]).toLowerCase()}
-                                                            >{file.filename}</a>
-                                                        </th>);
+                                                        // Filenames are wrapped in links to download file
+                                                        return (
+                                                            <th scope='row' key={file.id + attr}>
+                                                                <a href={file.link} target='_blank' rel='noopener noreferrer' data-filetype={(file.filename.split('.').reverse()[0]).toLowerCase()}
+                                                                >{file.filename}</a>
+                                                            </th>);
                                                     case 'uploaded':
-                                                        return (<td key={file.id + attr}>
-                                                            {new Date(file[attr] as string).toLocaleString()}
-                                                        </td>)
+                                                        // Convert uploaded string to local date string
+                                                        return (
+                                                            <td key={file.id + attr}>
+                                                                {new Date(file[attr] as string).toLocaleDateString()}
+                                                            </td>);
+                                                    case 'size':
+                                                    case 'section':
+                                                        return (
+                                                            <td key={file.id + attr}>
+                                                                {file[attr]}
+                                                            </td>
+                                                        );
                                                     default:
-                                                        return (<td key={file.id + attr}>{file[attr]}</td>);
+                                                        return '';
                                                 }
                                             })
                                         }
-                                        {// Display checkmarks for attachments
-                                            attachments &&
-                                            <td className='text-center'>
+                                        {// Display checkmarks for selected files
+                                            selectedFiles &&
+                                            <td>
                                                 <input
                                                     type='checkbox'
                                                     className='m-0'
-                                                    id={file.id}
-                                                    onChange={onChange}
-                                                    checked={attachments.includes(file.id)}
-                                                    disabled={disabled}
+                                                    form={formId}
+                                                    data-id={file.id}
+                                                    data-filename={file.filename}
+                                                    data-section={file?.section}
+                                                    data-uploaded={file?.uploaded}
+                                                    data-size={file?.size}
+                                                    data-link={file.link}
+                                                    onChange={handleSelectionChange}
+                                                    checked={isChecked(file.id)}
+                                                    readOnly={readOnly}
+                                                    disabled={readOnly}
                                                 />
                                             </td>
                                         }
