@@ -1,10 +1,11 @@
 
-import { Comment, Section } from './types';
+import { Comment, Section, getDocumentRect } from './types';
 import TableOfContentsElement from './TableOfContentsElement';
 import SidebarElement from './SidebarElement';
 import CommentElement from './CommentElement';
 import CSSElement from './CSSElement';
 import SelectionManager from './SelectionManager';
+import CommentContext from './CommentContext';
 
 /**
  * Management for a document that can be commented on by the end user
@@ -53,6 +54,9 @@ export default class ReviewManager {
     private sections: Map<string, Section>;
     private commentElements: Map<number, CommentElement>;
 
+    /** Mapping between an element ID and context metadata */
+    private contexts: Map<string, CommentContext>;
+
     private selection?: SelectionManager;
     
     constructor() { 
@@ -60,6 +64,7 @@ export default class ReviewManager {
         this.canEditAnyComment = false;
         this.sections = new Map<string, Section>();
         this.commentElements = new Map<number, CommentElement>();
+        this.contexts = new Map<string, CommentContext>();
         
         // TODO: I initialize to the current document instead of the iframe
         // just to make things easier on the linter. But, honestly, this 
@@ -109,10 +114,7 @@ export default class ReviewManager {
             this.loadComments(this.initialComments);
         }
 
-        // Reflow and focus once we get first DOM paint and alignment
-        document.defaultView?.requestAnimationFrame(() => {
-            this.reflow();
-        });
+        // this.reflow();
     }
 
     /**
@@ -191,8 +193,11 @@ export default class ReviewManager {
                 );
                 return;
             }
-            
-            const commentEl = new CommentElement(this.document, target, comment);
+
+            const context = this.getOrCreateContext(target);
+            const commentEl = new CommentElement(this.document, comment, context);
+
+            // TODO: Something for setting context to a range selector
             if (comment.startRange !== comment.endRange) {
                 this.bestFitInsertRangeComment(
                     commentEl, 
@@ -217,12 +222,24 @@ export default class ReviewManager {
                 return;
             }
 
-            const replyEl = new CommentElement(this.document, parentEl.target, reply);
+            const replyEl = new CommentElement(this.document, reply, parentEl.context);
             parentEl.addReply(replyEl);
 
             this.bindUserEvents(replyEl);
             this.commentElements.set(reply.id, replyEl);
         });
+
+        this.reflow();
+    }
+
+    private getOrCreateContext(target: Element): CommentContext {
+        let context = this.contexts.get(target.id);
+        if (!context) {
+            context = new CommentContext(target);
+            this.contexts.set(target.id, context);
+        }
+
+        return context;
     }
 
     /**
@@ -284,10 +301,8 @@ export default class ReviewManager {
         // Re-render updated comment data
         el.refresh();
 
-        // If the comment container is increasing in size, we'll need 
-        // to reflow elements below it to avoid overlap. 
         this.reflow(el);
-
+        
         // Fire to listeners passed in from the React app
         if (this.onUpdateComment) {
             this.onUpdateComment(comment);
@@ -323,7 +338,7 @@ export default class ReviewManager {
         const reply = this.createReply(comment);
         
         // Create DOM nested under the parent comment
-        const replyEl = new CommentElement(this.document, el.target, reply);
+        const replyEl = new CommentElement(this.document, reply, el.context);
         
         el.addReply(replyEl);
         this.bindUserEvents(replyEl);
@@ -417,8 +432,10 @@ export default class ReviewManager {
      * Insert a new block comment associated with the given element
      */
     private addNewBlockComment(section: Section, target: Element) {
+        const context = this.getOrCreateContext(target);
         const comment = this.createComment(section.title, target.id);
-        const commentEl = new CommentElement(this.document, target, comment);
+
+        const commentEl = new CommentElement(this.document, comment, context);
 
         this.bestFitInsertBlockComment(commentEl, target);
         this.bindUserEvents(commentEl);
@@ -454,7 +471,9 @@ export default class ReviewManager {
         comment.startRange = startRange;
         comment.endRange = endRange;
 
-        const commentEl = new CommentElement(this.document, target, comment);
+        // TODO: Pass in the range somehow - or target the created span instead
+        const context = this.getOrCreateContext(target);
+        const commentEl = new CommentElement(this.document, comment, context);
         this.bestFitInsertRangeComment(commentEl, target, startRange, endRange);
         this.bindUserEvents(commentEl);
         
@@ -477,8 +496,70 @@ export default class ReviewManager {
             throw new Error('Tried to fit without a sidebar');
         }
 
-        // TODO: Magic
         this.sidebar.container.appendChild(el.container);
+        return;
+
+        const contextTop = el.context.rect.top;
+        let insertAfter: HTMLElement | undefined;
+
+        const children = this.sidebar.container.childNodes;
+
+        for (let i = 0; i < children.length; i++) {
+            const comment = this.getCommentElementForNode(children[i]);
+            if (comment) {
+                const otherContextTop = comment.context.rect.top;
+                console.debug('[bestFit] compare', otherContextTop, contextTop, comment);
+                if (otherContextTop >= contextTop) {
+                    insertAfter = comment.container;
+                    break;
+                }
+            }
+
+
+            // const node = children[i];
+            // if (node instanceof HTMLElement) {
+            //     const top = parseInt(node.style.top);
+
+            //     if (top >= contextTop) {
+            //         // If we should insert before this node in sidebar ordering,
+            //         // also make sure we don't accidentally insert above a comment
+            //         // that's pointing to a context that's higher in the DOM than 
+            //         // our target. 
+            //         const comment = this.getCommentElementForNode(node);
+            //         const otherContextTop = comment?.context.rect.top || 0;
+                    
+            //         if (otherContextTop > contextTop) {
+            //             insertBefore = node;
+            //             break;
+            //         }
+            //     }
+            // }
+        }
+
+        console.debug('[bestFit] result', insertAfter);
+
+        // algorithm needs to keep comments together.
+
+        if (insertAfter) {
+            // insertAfter.after(el.container);
+            this.sidebar.container.insertBefore(el.container, insertAfter);
+        } else {
+            this.sidebar.container.appendChild(el.container);
+        }
+    }
+
+    private getCommentElementForNode(node: Node): CommentElement | undefined {
+        if (!(node instanceof HTMLElement)) {
+            return undefined;
+        }
+
+        const parts = node.id.split('-');
+        if (parts.length < 2 || parts[0] !== 'comment') {
+            return undefined;
+        }
+
+        const id = parseInt(parts[1]);
+        return this.commentElements.get(id);
     }
 
     /**
@@ -494,6 +575,8 @@ export default class ReviewManager {
         this.sidebar.container.appendChild(el.container);
     }
 
+    private isPendingReflow: boolean = false;
+
     /**
      * Realign comments based on current DOM dimensions
      * 
@@ -501,6 +584,93 @@ export default class ReviewManager {
      *                      If not supplied, will realign every comment
      */
     private reflow(startingFrom?: CommentElement) {
-        // TODO: magic
+        if (this.isPendingReflow) {
+            // Don't queue up another requestAnimationFrame() if we already have one.
+            return;
+        }
+
+        this.isPendingReflow = true;
+
+        // Wait a DOM paint before reflow - just in case this is called
+        // immediately after adding DOM but before paint 
+        document.defaultView?.requestAnimationFrame(() => {
+            this.isPendingReflow = false;
+            
+            // If the element we're starting from hasn't changed height at all, 
+            // just short circuit the update. This implies that nothing should really
+            // move around - so we don't need to perform any heavy DOM manipulation.
+            if (startingFrom) {
+                if (startingFrom.container.clientHeight <= startingFrom.prevClientHeight) {
+                    console.debug('[reflow] skip - not increased height', startingFrom.container.clientHeight, startingFrom.prevClientHeight)
+                    return;
+                }
+
+                startingFrom.prevClientHeight = startingFrom.container.clientHeight;
+            }
+
+            // Sort comments based on context's DOM position and relative date
+            let comments = Array.from(this.commentElements.values()); // TODO: Array.from polyfill?
+            comments = comments.sort((a, b) => {
+                // Short circuit for replies - don't care what their order is. 
+                // It's ordered right in the DOM already.
+                if (a.isReply || b.isReply) {
+                    return 0;
+                }
+
+                // Same context? Sort by date.
+                if (a.context === b.context) {
+                    return a.comment.created.getTime() < b.comment.created.getTime() ? -1 : 1;
+                }
+
+                // Different context? Sort by context's position in the DOM
+                return a.context.rect.top < b.context.rect.top ? -1 : 1;
+            });
+
+            console.debug('[reflow] Sorted', comments);
+
+            // Then run through, updating top for each comment.
+            // TODO: This can be optimized by only moving stuff after startingFrom (if defined). 
+            // And by not moving comments under other comments that have not calculated a new position.
+            // But I don't know all the edge cases where this may fail - so I'm just going to 
+            // keep recalculating *everything* until there's a noticeable performance drop. 
+            let prevBottom = 0;
+
+            for (let i = 0; i < comments.length; i++) {
+                const comment = comments[i];
+                if (comment.isReply) continue;
+
+                const top = Math.max(comment.context.rect.top, prevBottom);
+                const height = comment.container.clientHeight;
+                const topPx = top + 'px';
+                
+                comment.container.style.top = topPx;
+                comment.prevClientHeight = height;
+                prevBottom = top + height;
+
+                comment.connector?.refresh();
+            }
+
+            // let node: HTMLElement | null = startingFrom.container;
+            // let minTop = parseInt(node.style.top) + node.clientHeight;
+            // node = node.nextElementSibling as HTMLElement;
+            
+            // while (node) {
+            //     const top = parseInt(node.style.top);
+
+            //     // If the next sibling doesn't need to shift down - we're done. 
+            //     // There's no reason to reflow any other siblings.
+            //     if (!node || top > minTop) {
+            //         break;
+            //     }
+
+            //     // Otherwise, adjust top and recalculate for next sibling
+            //     node.style.top = minTop + 'px';
+            //     minTop = minTop + node.clientHeight;
+                
+            //     node = node.nextElementSibling as HTMLElement;
+            // }
+
+            // this.isPendingReflow = false;
+        });
     }
 }

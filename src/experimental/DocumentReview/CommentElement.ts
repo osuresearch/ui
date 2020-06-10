@@ -1,5 +1,7 @@
 
-import { Comment } from './types';
+import { Comment, getDocumentRect } from './types';
+import CommentContext from './CommentContext';
+import ContextConnectorElement from './ContextConnectorElement';
 
 /**
  * Convert a date to either the time (if same day) or just the locale date
@@ -28,8 +30,8 @@ function isWithinFiveMinutes(created: Date, updated: Date): boolean {
  */
 export default class CommentElement {
     public comment: Comment;
-    public target: Element;
-
+    public context: CommentContext;
+    
     public container: HTMLDivElement;
     private info: HTMLDivElement;
     private updated: HTMLDivElement;
@@ -38,9 +40,14 @@ export default class CommentElement {
     private replyButton?: HTMLButtonElement;
     private deleteButton?: HTMLButtonElement;
 
+    public connector?: ContextConnectorElement;
+
     public onDelete?: (el: CommentElement) => void;
     public onReply?: (el: CommentElement) => void;
     public onChange?: (el: CommentElement, content: string) => void;
+
+    /** Track the clientHeight since the last time we reflowed comments */
+    public prevClientHeight: number = 0;
 
     public get isReply(): boolean {
         return this.comment.parentId !== undefined;
@@ -66,23 +73,49 @@ export default class CommentElement {
         return this.replies.childNodes.length > 0;
     }
 
+    // public get rect(): DOMRect {
+    //     if (!this.cachedRect) {
+    //         this.cachedRect = getDocumentRect(this.container);
+    //     }
+
+    //     return this.cachedRect;
+    // }
+
+    // public recalculateRect() {
+    //     this.cachedRect = getDocumentRect(this.container);
+    // }
+
+    // private cachedRect?: DOMRect;
+
     /**
      * Setup internal DOM for the given Comment
      */
-    constructor(document: Document, target: Element, comment: Comment) {
-        this.target = target;
+    constructor(document: Document, comment: Comment, context: CommentContext) {
         this.comment = comment;
+        this.context = context;
 
         this.onDeleteButtonClick = this.onDeleteButtonClick.bind(this);
         this.onReplyButtonClick = this.onReplyButtonClick.bind(this);
         this.onContentEditableInput = this.onContentEditableInput.bind(this);
         this.onContentEditableBlur = this.onContentEditableBlur.bind(this);
+        this.onMouseEnter = this.onMouseEnter.bind(this);
+        this.onMouseLeave = this.onMouseLeave.bind(this);
 
         const container = document.createElement('div');
+        container.id = 'comment-' + comment.id;
         container.classList.add('comment');
-        if (comment.parentId) {
+        if (this.isReply) {
             container.classList.add('is-reply');
         }
+        
+        container.style.top = this.context.rect.top + 'px';
+
+        // Add events to highlight the target whenever we enter/leave this comment
+        if (!this.isReply) {
+            container.addEventListener('mouseenter', this.onMouseEnter);
+            container.addEventListener('mouseleave', this.onMouseLeave);
+        }
+        
         this.container = container;
 
         // Header content
@@ -132,6 +165,12 @@ export default class CommentElement {
             this.replyButton = replyButton;
         }
         
+        // Add a visual edge connecting this comment to the context.
+        if (!this.isReply) {
+            // document.defaultView?.requestAnimationFrame(() => {
+            this.connector = new ContextConnectorElement(document, this, context);
+        }
+
         this.refresh();
     }
 
@@ -180,6 +219,20 @@ export default class CommentElement {
     }
 
     /**
+     * Highlight the context of this comment
+     */
+    private onMouseEnter(e: MouseEvent) {
+        this.context.focus();
+    }
+
+    /**
+     * Remove highlighting from the context of this comment
+     */
+    private onMouseLeave(e: MouseEvent) {
+        this.context.blur();
+    }
+
+    /**
      * Refresh DOM content to match updated Comment information
      */
     public refresh() {
@@ -196,19 +249,29 @@ export default class CommentElement {
         if (content.innerText !== comment.message) {
             content.innerText = comment.message;
         }
+
+        this.connector?.refresh();
     }
 
     /**
      * Remove this comment from the DOM
      */
     public remove() {
+        this.context.blur();
         this.container.remove();
+        this.connector?.remove();
     }
 
+    /**
+     * Focus on the editable of this comment
+     */
     public focus() {
         this.content.focus();
     }
 
+    /**
+     * Nest a CommentElement under this one
+     */
     public addReply(el: CommentElement) {
         if (this.isReply) {
             throw new Error('Cannot nest replies');

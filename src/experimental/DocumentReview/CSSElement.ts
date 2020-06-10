@@ -158,6 +158,7 @@ const TOC_CSS = `
 
 const SIDEBAR_CSS = `
 .comments-sidebar {
+  position: relative;
   min-width: 300px;
   width: 300px;
   
@@ -167,14 +168,20 @@ const SIDEBAR_CSS = `
 
 const COMMENT_CSS = `
 .comment {
-  position: relative; /* Eventually absolute... */
+  position: absolute;
+  width: 100%;
+  left: 0;
   
-  padding-bottom: 24px;
+  padding-bottom: 16px;
   padding-right: 16px;
   padding-left: 16px;
   
   font-family: sans-serif; 
   font-size: 12px;
+}
+
+.comment.is-reply {
+  position: initial;
 }
 
 /* I'm using a psuedo element instead of giving the .comment a border-left
@@ -203,13 +210,13 @@ const COMMENT_CSS = `
 
 .comment-updated {
   color: #666;
-  display: none;
+  visibility: hidden;
 }
 
 .comment-reply,
 .comment-delete {
   float: right;
-  display: none;
+  visibility: hidden;
   
   font-family: sans-serif; 
   font-size: 12px;
@@ -238,7 +245,7 @@ const COMMENT_CSS = `
 .comment:hover > .comment-reply,
 .comment:hover > .comment-header > .comment-updated,
 .comment:hover > .comment-header > .comment-delete {
-  display: inline;
+  visibility: visible;
 }
 
 .comment-delete {
@@ -250,6 +257,33 @@ const COMMENT_CSS = `
   word-break: break-word;
   padding-bottom: 0.5em;
 }
+
+/* CSS to apply to the focused question / context of a comment */
+.comment-context-focus {
+  background: rgba(255, 0, 0, 0.1);
+}
+`;
+
+const CONNECTOR_CSS = `
+.comment-context-connection {
+  position: absolute;
+  width: 100%;
+  
+  /* Ignore events on the line - it's just visual */
+  pointer-events: none;
+  z-index: 9999;
+
+  
+  /* For debugging container size 
+  background: rgba(255, 0, 0, 0.05);
+  */
+}
+
+.comment-context-connection line {
+    stroke: rgba(255, 0, 0, 0.5);
+    stroke-width: 1;
+}
+
 `;
 
 export default class CSSElement {
@@ -261,7 +295,8 @@ export default class CSSElement {
           DOCUMENT_CSS + 
           TOC_CSS + 
           SIDEBAR_CSS + 
-          COMMENT_CSS;
+          COMMENT_CSS +
+          CONNECTOR_CSS;
 
         document.body.appendChild(style);
         this.style = style;
