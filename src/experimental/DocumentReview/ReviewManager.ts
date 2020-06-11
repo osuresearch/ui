@@ -1,11 +1,16 @@
 
-import { Comment, Section, getDocumentRect } from './types';
+import { Comment, Section, Highlight, getDocumentRect } from './types';
 import TableOfContentsElement from './TableOfContentsElement';
 import SidebarElement from './SidebarElement';
 import CommentElement from './CommentElement';
 import CSSElement from './CSSElement';
 import SelectionManager from './SelectionManager';
 import CommentContext from './CommentContext';
+
+const SECTION_DATA_ATTR = 'data-comment-section';
+const SECTION_LEVEL_DATA_ATTR = 'data-comment-section-level';
+const BLOCK_COMMENT_DATA_ATTR = 'data-comment-block';
+const INLINE_COMMENT_DATA_ATTR = 'data-comment-inline';
 
 /**
  * Management for a document that can be commented on by the end user
@@ -14,11 +19,6 @@ import CommentContext from './CommentContext';
  * within an IFrame without any external Javascript support (e.g. React)
  */
 export default class ReviewManager {
-    SECTION_DATA_ATTR = 'data-comment-section';
-    SECTION_LEVEL_DATA_ATTR = 'data-comment-section-level';
-    BLOCK_COMMENT_DATA_ATTR = 'data-comment-block';
-    INLINE_COMMENT_DATA_ATTR = 'data-comment-inline';
-
     // Event handlers that API integration components can provide
     public onAddComment?: (comment: Comment) => void;
     public onUpdateComment?: (comment: Comment) => void;
@@ -27,12 +27,12 @@ export default class ReviewManager {
     /**
      * Display name for any new comments or replies
      */
-    public defaultOwner: string;
+    public defaultAuthor: string;
 
     /**
      * Default access control if any `Comment.canEdit/canDelete` are undefined.
      * 
-     * If false, only comments with `Comment.owner === defaultOwner` will be editable.
+     * If false, only comments with `Comment.author === defaultAuthor` will be editable.
      */
     public canEditAnyComment: boolean;
 
@@ -60,7 +60,7 @@ export default class ReviewManager {
     private selection?: SelectionManager;
     
     constructor() { 
-        this.defaultOwner = '(me)';
+        this.defaultAuthor = '(me)';
         this.canEditAnyComment = false;
         this.sections = new Map<string, Section>();
         this.commentElements = new Map<number, CommentElement>();
@@ -107,7 +107,7 @@ export default class ReviewManager {
 
         // Bind events to the DOM
         this.bindBlockCommentTargetEvents();
-        this.bindInlineCommentTargetEvents();
+        this.bindRangeCommentTargetEvents();
 
         // Load any initial comments into the document
         if (this.initialComments) {
@@ -123,11 +123,11 @@ export default class ReviewManager {
     private loadSections() {
         this.sections.clear();
 
-        const attr = `[${this.SECTION_DATA_ATTR}]`;
+        const attr = `[${SECTION_DATA_ATTR}]`;
         const elements = this.document.querySelectorAll(attr);
         elements.forEach((el) => {
-            const title = el.getAttribute(this.SECTION_DATA_ATTR) as string;
-            const level = parseInt(el.getAttribute(this.SECTION_LEVEL_DATA_ATTR) || '0');
+            const title = el.getAttribute(SECTION_DATA_ATTR) as string;
+            const level = parseInt(el.getAttribute(SECTION_LEVEL_DATA_ATTR) || '0');
 
             if (!el.id) {
                 console.warn(
@@ -185,8 +185,17 @@ export default class ReviewManager {
                 return;
             }
             
-            // Add as top level comment
-            const target = this.document.querySelector('#' + comment.elementId);
+            let target: Element | null = null;
+
+            if (comment.startRange !== comment.endRange) {
+                // Block comment pointing to existing DOM 
+                target = this.document.querySelector('#' + comment.elementId);
+            } else {
+                // Need to target a text selection. To do this we need to 
+                // identify the selection, add a highlight to it, and then 
+                // return the new highlight element as the target.
+            }
+           
             if (!target) {
                 console.warn(
                     `Ignoring comment "${comment.id}" - missing element ID "${comment.elementId}"`
@@ -195,22 +204,7 @@ export default class ReviewManager {
             }
 
             const context = this.getOrCreateContext(target);
-            const commentEl = new CommentElement(this.document, comment, context);
-
-            // TODO: Something for setting context to a range selector
-            if (comment.startRange !== comment.endRange) {
-                this.bestFitInsertRangeComment(
-                    commentEl, 
-                    target, 
-                    comment.startRange, 
-                    comment.endRange
-                );
-            } else {
-                this.bestFitInsertBlockComment(commentEl, target);
-            }
-
-            this.bindUserEvents(commentEl);
-            this.commentElements.set(comment.id, commentEl);
+            this.addNewComment(comment, context);
         });
 
         repliesToAdd.forEach((reply) => {
@@ -232,6 +226,20 @@ export default class ReviewManager {
         this.reflow();
     }
 
+    /**
+     * Look for the closest parent section for a given element
+     */
+    private findClosestSection(el: Element): Section | null {
+        const attr = `[${SECTION_DATA_ATTR}]`;
+        const closest = el.closest(attr);
+        if (!closest) {
+            return null;
+        }
+        
+        const title = el.getAttribute(SECTION_DATA_ATTR) as string;
+        return this.sections.get(title) || null;
+    }
+    
     private getOrCreateContext(target: Element): CommentContext {
         let context = this.contexts.get(target.id);
         if (!context) {
@@ -247,7 +255,7 @@ export default class ReviewManager {
      */
     private bindBlockCommentTargetEvents() {
         // Scrape the document and add hooks for adding comments
-        const attr = `[${this.BLOCK_COMMENT_DATA_ATTR}]`;
+        const attr = `[${BLOCK_COMMENT_DATA_ATTR}]`;
         
         // TODO: What's faster - querySelectorAll @ document or per section?
         this.sections.forEach((section) => {
@@ -264,15 +272,13 @@ export default class ReviewManager {
     /**
      * Bind selection events to all DOM elements that are tagged for supporting inline comments
      */
-    private bindInlineCommentTargetEvents() {
+    private bindRangeCommentTargetEvents() {
         this.document.addEventListener('keydown', (e) => {
             if (e.key === 'c') {
-                this.selection?.highlightSelection();
-                // if (this.canCommentOnSelectionRange()) {
-                //     this.addNewCommentOnSelectionRange();
-                //     e.preventDefault();
-                //     return false;
-                // }
+                const highlight = this.selection?.highlightSelection();
+                if (highlight) {
+                    this.addNewRangeComment(highlight);
+                }
             }
         });
 
@@ -365,19 +371,19 @@ export default class ReviewManager {
     /**
      * Check if the user's current selection is valid and comment-able
      */
-    private canCommentOnSelectionRange(): boolean {
-        const range = this.document.getSelection()?.getRangeAt(0);
-        if (!range || range.collapsed) {
-            return false;
-        }
+    // private canCommentOnSelectionRange(): boolean {
+    //     const range = this.document.getSelection()?.getRangeAt(0);
+    //     if (!range || range.collapsed) {
+    //         return false;
+    //     }
 
-        const attr = `[${this.INLINE_COMMENT_DATA_ATTR}]`;
+    //     const attr = `[${INLINE_COMMENT_DATA_ATTR}]`;
 
-        // TODO: Check if parent has the right data attr.
-        // TODO: Various inline stripping magic bullshit. 
+    //     // TODO: Check if parent has the right data attr.
+    //     // TODO: Various inline stripping magic bullshit. 
 
-        return false;
-    }
+    //     return false;
+    // }
 
     /**
      * Ensure all the right fields of the comment are filled out, and adjust if not.
@@ -385,7 +391,7 @@ export default class ReviewManager {
     private validateComment(comment: Comment) {
         // If the comment didn't specify access controls, create them
         // based on the ownership controls defined in this manager
-        const hasRW = this.canEditAnyComment || (comment.owner === this.defaultOwner);
+        const hasRW = this.canEditAnyComment || (comment.author === this.defaultAuthor);
 
         if (!comment.canEdit) {
             comment.canEdit = hasRW;
@@ -405,7 +411,7 @@ export default class ReviewManager {
         return {
             id: this.getNewCommentId(),
             parentId: undefined,
-            owner: this.defaultOwner,
+            author: this.defaultAuthor,
             message: '',
             created: now,
             updated: now,
@@ -435,46 +441,40 @@ export default class ReviewManager {
         const context = this.getOrCreateContext(target);
         const comment = this.createComment(section.title, target.id);
 
-        const commentEl = new CommentElement(this.document, comment, context);
-
-        this.bestFitInsertBlockComment(commentEl, target);
-        this.bindUserEvents(commentEl);
-        
-        this.commentElements.set(comment.id, commentEl);
-
-        this.reflow(commentEl);
-        commentEl.focus();
-
-        if (this.onAddComment) {
-            this.onAddComment(comment);
-        }
+        this.addNewComment(comment, context);
     }
 
     /**
-     * Insert a new range comment on the user's current selection
+     * Add a new text range comment associated with the given Highlight
      */
-    private addNewCommentOnSelectionRange() {
-        const range = this.document.getSelection()?.getRangeAt(0);
-        if (!range) return;
+    private addNewRangeComment(highlight: Highlight) {
+        // context needs to point to the highlight el
+        if (!highlight.el) {
+            throw new Error(
+                'addNewRangeComment() requires Highlight to contain the wrapping element'
+            );
+        }
 
-        // TODO: Identify section of selection
-        const section: Section = undefined;
+        const section = this.findClosestSection(highlight.el);
 
-        // TODO: Identify target Element
-        const target: Element = undefined;
+        if (!section) {
+            throw new Error(
+                'Could not find a matching section. This should not have been highlighted'
+            );
+        }
 
-        // TODO: Range
-        const startRange = 0;
-        const endRange = 100;
+        const context = this.getOrCreateContext(highlight.el);
+        const comment = this.createComment(section.title, highlight.containerId);
+        comment.startRange = highlight.start;
+        comment.endRange = highlight.end;
+        
+        this.addNewComment(comment, context);
+    }
 
-        const comment = this.createComment(section.title, target.id);
-        comment.startRange = startRange;
-        comment.endRange = endRange;
-
-        // TODO: Pass in the range somehow - or target the created span instead
-        const context = this.getOrCreateContext(target);
+    private addNewComment(comment: Comment, context: CommentContext) {
         const commentEl = new CommentElement(this.document, comment, context);
-        this.bestFitInsertRangeComment(commentEl, target, startRange, endRange);
+
+        this.bestFitInsertComment(commentEl, context.el);
         this.bindUserEvents(commentEl);
         
         this.commentElements.set(comment.id, commentEl);
@@ -491,61 +491,62 @@ export default class ReviewManager {
      * Identify the best insert order for the comment in the sidebar DOM 
      * based on distance from the target element. 
      */
-    private bestFitInsertBlockComment(el: CommentElement, target: Element) {
+    private bestFitInsertComment(el: CommentElement, target: Element) {
         if (!this.sidebar) {
             throw new Error('Tried to fit without a sidebar');
         }
 
+        // We're just going to dump it in the sidebar without sorting.
+        // reflow() will sort by context positions and other metadata.
         this.sidebar.container.appendChild(el.container);
-        return;
 
-        const contextTop = el.context.rect.top;
-        let insertAfter: HTMLElement | undefined;
+        // const contextTop = el.context.rect.top;
+        // let insertAfter: HTMLElement | undefined;
 
-        const children = this.sidebar.container.childNodes;
+        // const children = this.sidebar.container.childNodes;
 
-        for (let i = 0; i < children.length; i++) {
-            const comment = this.getCommentElementForNode(children[i]);
-            if (comment) {
-                const otherContextTop = comment.context.rect.top;
-                console.debug('[bestFit] compare', otherContextTop, contextTop, comment);
-                if (otherContextTop >= contextTop) {
-                    insertAfter = comment.container;
-                    break;
-                }
-            }
+        // for (let i = 0; i < children.length; i++) {
+        //     const comment = this.getCommentElementForNode(children[i]);
+        //     if (comment) {
+        //         const otherContextTop = comment.context.rect.top;
+        //         console.debug('[bestFit] compare', otherContextTop, contextTop, comment);
+        //         if (otherContextTop >= contextTop) {
+        //             insertAfter = comment.container;
+        //             break;
+        //         }
+        //     }
 
 
-            // const node = children[i];
-            // if (node instanceof HTMLElement) {
-            //     const top = parseInt(node.style.top);
+        //     // const node = children[i];
+        //     // if (node instanceof HTMLElement) {
+        //     //     const top = parseInt(node.style.top);
 
-            //     if (top >= contextTop) {
-            //         // If we should insert before this node in sidebar ordering,
-            //         // also make sure we don't accidentally insert above a comment
-            //         // that's pointing to a context that's higher in the DOM than 
-            //         // our target. 
-            //         const comment = this.getCommentElementForNode(node);
-            //         const otherContextTop = comment?.context.rect.top || 0;
+        //     //     if (top >= contextTop) {
+        //     //         // If we should insert before this node in sidebar ordering,
+        //     //         // also make sure we don't accidentally insert above a comment
+        //     //         // that's pointing to a context that's higher in the DOM than 
+        //     //         // our target. 
+        //     //         const comment = this.getCommentElementForNode(node);
+        //     //         const otherContextTop = comment?.context.rect.top || 0;
                     
-            //         if (otherContextTop > contextTop) {
-            //             insertBefore = node;
-            //             break;
-            //         }
-            //     }
-            // }
-        }
+        //     //         if (otherContextTop > contextTop) {
+        //     //             insertBefore = node;
+        //     //             break;
+        //     //         }
+        //     //     }
+        //     // }
+        // }
 
-        console.debug('[bestFit] result', insertAfter);
+        // console.debug('[bestFit] result', insertAfter);
 
-        // algorithm needs to keep comments together.
+        // // algorithm needs to keep comments together.
 
-        if (insertAfter) {
-            // insertAfter.after(el.container);
-            this.sidebar.container.insertBefore(el.container, insertAfter);
-        } else {
-            this.sidebar.container.appendChild(el.container);
-        }
+        // if (insertAfter) {
+        //     // insertAfter.after(el.container);
+        //     this.sidebar.container.insertBefore(el.container, insertAfter);
+        // } else {
+        //     this.sidebar.container.appendChild(el.container);
+        // }
     }
 
     private getCommentElementForNode(node: Node): CommentElement | undefined {
@@ -560,19 +561,6 @@ export default class ReviewManager {
 
         const id = parseInt(parts[1]);
         return this.commentElements.get(id);
-    }
-
-    /**
-     * Identify the best insert order for the comment in the sidebar DOM 
-     * based on distance from the target element. 
-     */
-    private bestFitInsertRangeComment(el: CommentElement, target: Element, start: number, end: number) {
-        if (!this.sidebar) {
-            throw new Error('Tried to fit without a sidebar');
-        }
-
-        // TODO: Magic
-        this.sidebar.container.appendChild(el.container);
     }
 
     private isPendingReflow: boolean = false;

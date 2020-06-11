@@ -237,8 +237,8 @@ export default class CommentElement {
      */
     public refresh() {
         const comment = this.comment;
-
-        this.info.innerText = comment.owner;
+        
+        this.info.innerText = comment.author;
         this.updated.innerText = `${prettifyDate(comment.updated)} ${this.isEdited ? '(edited)' : ''}`;
         
         const content = this.content;

@@ -13,7 +13,7 @@ const comments = [];
     onAddComment={(c) => console.debug('Add Comment', c)}
     onUpdateComment={(c) => console.debug('Update Comment', c)}
     onRemoveComment={(c) => console.debug('Remove Comment', c)}
-    defaultOwner="(me)"
+    defaultAuthor="(me)"
     canEditAnyComment={true}
 />
 ```

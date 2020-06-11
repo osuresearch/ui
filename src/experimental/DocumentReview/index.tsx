@@ -23,7 +23,7 @@ type Props = {
     onRemoveComment(comment: Comment): void;
 
     /** Username to use for new comments, and to determine if an existing comment is editable */
-    defaultOwner: string;
+    defaultAuthor: string;
     
     /** Does the user have the power to update any comments */
     canEditAnyComment: boolean;
@@ -55,7 +55,7 @@ const DocumentReview: React.FC<Props> = ({
     onAddComment,
     onUpdateComment,
     onRemoveComment,
-    defaultOwner,
+    defaultAuthor,
     canEditAnyComment,
     id,
     className = ''
@@ -72,7 +72,7 @@ const DocumentReview: React.FC<Props> = ({
         manager.onAddComment = onAddComment;
         manager.onUpdateComment = onUpdateComment;
         manager.onRemoveComment = onRemoveComment;
-        manager.defaultOwner = defaultOwner;
+        manager.defaultAuthor = defaultAuthor;
         manager.canEditAnyComment = canEditAnyComment;
         return manager;
     });

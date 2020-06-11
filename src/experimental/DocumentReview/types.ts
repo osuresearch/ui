@@ -41,7 +41,7 @@ export interface Comment {
     id: number;
     parentId?: number;
 
-    owner: string;
+    author: string;
     message: string;
 
     created: Date;
@@ -74,9 +74,27 @@ export interface Section {
     level: number;
 }
 
+/** Metadata about a highlighted section of a document */
+export type Highlight = {
+    /** DOM element where start/end are relative to */
+    containerId: string;
+
+    /** The new element wrapping this highlight */
+    el?: Element;
+
+    /** Character range start for restoring the highlight */
+    start: number;
+
+    /** Character range end for restoring the highlight */
+    end: number;
+
+    /** Highlighted text */
+    context: string;
+}
+
 function isAncestorOf(parent: Element, el: Element): boolean {
     do {
-        if (el == parent) {
+        if (el === parent) {
             return true;
         }
 

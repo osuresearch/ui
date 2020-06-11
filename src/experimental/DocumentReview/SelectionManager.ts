@@ -5,20 +5,7 @@ import 'rangy/lib/rangy-textrange';
 import 'rangy/lib/rangy-classapplier';
 import 'rangy/lib/rangy-highlighter';
 import 'rangy/lib/rangy-serializer';
-
-type Highlight = {
-    /** DOM element where start/end are relative to */
-    containerId: string;
-
-    /** Character range start for restoring the highlight */
-    start: number;
-
-    /** Character range end for restoring the highlight */
-    end: number;
-
-    /** Highlighted text */
-    context: string;
-}
+import { Highlight } from './types';
 
 /**
  * Find the closest ancestor element with an `id` and a `data-comment-*` attribute
