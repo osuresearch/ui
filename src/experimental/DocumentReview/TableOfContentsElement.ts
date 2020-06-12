@@ -1,13 +1,22 @@
 
 import { Section } from './types';
 
+/**
+ * Render a list of `Section` as document anchor links
+ */
 export default class TableOfContentsElement {
     public container: HTMLDivElement;
 
     constructor(document: Document, sections: Map<string, Section>) {
+        const windowInnerWidth = document.defaultView?.innerWidth || 9999;
+        const startCollapsed = windowInnerWidth < 1200;
+
         const container = document.createElement('div');
         container.classList.add('comments-toc');
-        container.classList.add('is-visible');
+        if (startCollapsed) {
+            container.classList.add('is-collapsed');
+        }
+
         document.body.prepend(container);
         this.container = container;
 
@@ -41,7 +50,7 @@ export default class TableOfContentsElement {
     }
 
     private onToggle() {
-        this.container.classList.toggle('is-visible');
+        this.container.classList.toggle('is-collapsed');
     }
     
     public remove() {

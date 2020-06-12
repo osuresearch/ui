@@ -19,13 +19,14 @@ const DOCUMENT_CSS = `
     cursor: pointer;
 }
 
+/* TODO: Better highlight color? */
 .highlight {
-  background: pink;
+  background: #fff9d8;
 }
 
 [data-comment-inline],
 .highlight {
-    user-select: text;
+  user-select: text;
 }
 
 .body-wrapper {
@@ -62,15 +63,15 @@ const TOC_CSS = `
   min-width: 250px;
   width: 250px;
   
-  margin-left: -250px;
+  margin-left: 0;
   margin-right: 16px;
   
   transition: margin-left 0.5s ease-in-out;
   height: calc(100vh - 40px - 20px);
 }
 
-.comments-toc.is-visible .comments-toc-wrapper {
-  margin-left: 0;
+.comments-toc.is-collapsed .comments-toc-wrapper {
+  margin-left: -250px;
 }
 
 .comments-toc-scrollbox {
@@ -187,13 +188,12 @@ const COMMENT_CSS = `
 /* I'm using a psuedo element instead of giving the .comment a border-left
   because I don't want the border to go the full height - I want some height
   to spill over so that the action buttons are easier to click on :hover */
-.comment::before {
-  content: '';
+.comment-edge {
   position: absolute;
   left: 0;
   top: 0;
   bottom: 14px;
-  border-left: 2px solid red;
+  width: 2px;
 }
 
 .comment-header {
@@ -277,13 +277,21 @@ const CONNECTOR_CSS = `
   /* For debugging container size 
   background: rgba(255, 0, 0, 0.05);
   */
+
+  opacity: 0.25;
 }
 
 .comment-context-connection line {
-    stroke: rgba(255, 0, 0, 0.5);
     stroke-width: 1;
 }
 
+/* Note: :focus-within doesn't work in IE11 but 
+  this degradation won't affect usability so who cares */
+
+.comment:hover .comment-context-connection,
+.comment:focus-within .comment-context-connection {
+  opacity: 1;
+}
 `;
 
 export default class CSSElement {

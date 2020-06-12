@@ -1,5 +1,6 @@
 
-import { Comment, getDocumentRect } from './types';
+import { Comment } from './types';
+import { colorToCss } from './utility';
 import CommentContext from './CommentContext';
 import ContextConnectorElement from './ContextConnectorElement';
 
@@ -118,6 +119,15 @@ export default class CommentElement {
         
         this.container = container;
 
+        // The colored line between the comment and the document. 
+        // This is a visual indicator to help identify the commenter
+        if (!this.isReply) {
+            const edge = document.createElement('div');
+            edge.classList.add('comment-edge');
+            edge.style.backgroundColor = colorToCss(comment.color);
+            container.appendChild(edge);
+        }
+        
         // Header content
         const header = document.createElement('div');
         header.classList.add('comment-header');
@@ -168,7 +178,12 @@ export default class CommentElement {
         // Add a visual edge connecting this comment to the context.
         if (!this.isReply) {
             // document.defaultView?.requestAnimationFrame(() => {
-            this.connector = new ContextConnectorElement(document, this, context);
+            this.connector = new ContextConnectorElement(
+                document, 
+                this, 
+                context, 
+                comment.color
+            );
         }
 
         this.refresh();
@@ -222,7 +237,7 @@ export default class CommentElement {
      * Highlight the context of this comment
      */
     private onMouseEnter(e: MouseEvent) {
-        this.context.focus();
+        this.context.focus(this.comment.color);
     }
 
     /**

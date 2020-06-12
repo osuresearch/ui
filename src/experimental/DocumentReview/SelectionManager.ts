@@ -29,7 +29,7 @@ function findClosestCommentInlineElement(node: Node): Element | null {
     return el.closest('[id][data-comment-inline]');
 }
 
-
+/* Rangy types that aren't defined, but we need to hint */
 type CharacterRange = {
     start: number;
     end: number;
@@ -140,7 +140,9 @@ export default class SelectionManager {
     /**
      * Add a new highlight to the DOM.
      * 
-     * If `el` is already known, it can be passed in to avoid a lookup call
+     * If `el` is already known, it can be passed in to avoid a lookup call.
+     * 
+     * The provided Highlight will have `.el` updated to the inserted span. 
      */
     public add(highlight: Highlight, el: Element | null = null) {
         const id = highlight.containerId;
@@ -155,13 +157,22 @@ export default class SelectionManager {
         }
 
         const range = rangy.createRange(this.document);
+        console.debug('[add] range before apply', range);
+
         range.selectCharacters(el, highlight.start, highlight.end);
         this.classApplier.applyToRange(range);
+
+        // Grab the new parent element of the selection range - 
+        // this should be the selection span (hopefully?)
+        highlight.el = range.startContainer.parentElement;
+
+        console.debug('[add] range after apply', range);
 
         // Track it in the map 
         const arr = this.highlights.get(id) || [];
         arr.push(highlight);
         this.highlights.set(id, arr);
+
 
         console.debug('[add] New list', id, arr);
     }

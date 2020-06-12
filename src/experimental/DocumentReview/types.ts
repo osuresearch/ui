@@ -1,40 +1,14 @@
 
+/** RGB byte (0-255) tuple */
+export type Color = [number, number, number];
+
 export type Coordinates = {
     top: number;
     left: number;
 }
 
-/**
- * Calculate absolute position relative to the Document for an element
- * 
- * @author https://stackoverflow.com/a/26230989
- */
-export function getDocumentRect(el: Element): DOMRect {
-    if (!el.ownerDocument) {
-        throw new Error('Element is not in a document');
-    }
-
-    const box = el.getBoundingClientRect();
-
-    const body = el.ownerDocument.body;
-    const docEl = el.ownerDocument.documentElement;
-
-    const scrollTop = /* window.pageYOffset || */ docEl.scrollTop || body.scrollTop;
-    const scrollLeft = /* window.pageXOffset || */ docEl.scrollLeft || body.scrollLeft;
-
-    const clientTop = docEl.clientTop || body.clientTop || 0;
-    const clientLeft = docEl.clientLeft || body.clientLeft || 0;
-
-    const top  = Math.round(box.top +  scrollTop - clientTop);
-    const left = Math.round(box.left + scrollLeft - clientLeft);
-    const width = box.width;
-    const height = box.height;
-
-    return new DOMRect(left, top, width, height);
-}
-
 /** A comment on a reviewable document */
-export interface Comment {
+export type Comment = {
     /** 
      * Unique identifier for this comment. Used for parent/child hierarchies.
      */
@@ -61,9 +35,12 @@ export interface Comment {
     // automatically set these based on what it knows about the owner.
     canEdit?: boolean;
     canDelete?: boolean;
+
+    /** Base color to apply to all elements associated with this comment */
+    color: Color;
 }
 
-export interface Section {
+export type Section = {
     /** Root DOM element for this section */
     el: Element;
 
@@ -90,16 +67,4 @@ export type Highlight = {
 
     /** Highlighted text */
     context: string;
-}
-
-function isAncestorOf(parent: Element, el: Element): boolean {
-    do {
-        if (el === parent) {
-            return true;
-        }
-
-        el = (el.parentElement || el.parentNode) as Element;
-    } while (el !== null && el.nodeType === 1);
-
-    return false;
 }

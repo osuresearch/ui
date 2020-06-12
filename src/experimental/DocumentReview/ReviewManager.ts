@@ -1,11 +1,11 @@
 
-import { Comment, Section, Highlight, getDocumentRect } from './types';
+import { Comment, Section, Highlight } from './types';
 import TableOfContentsElement from './TableOfContentsElement';
 import SidebarElement from './SidebarElement';
 import CommentElement from './CommentElement';
 import CSSElement from './CSSElement';
 import SelectionManager from './SelectionManager';
-import CommentContext from './CommentContext';
+import CommentContext, { ContextTarget } from './CommentContext';
 
 const SECTION_DATA_ATTR = 'data-comment-section';
 const SECTION_LEVEL_DATA_ATTR = 'data-comment-section-level';
@@ -54,8 +54,8 @@ export default class ReviewManager {
     private sections: Map<string, Section>;
     private commentElements: Map<number, CommentElement>;
 
-    /** Mapping between an element ID and context metadata */
-    private contexts: Map<string, CommentContext>;
+    /** Fast hashmap between a target and context metadata */
+    private contexts: Map<ContextTarget, CommentContext>;
 
     private selection?: SelectionManager;
     
@@ -64,7 +64,7 @@ export default class ReviewManager {
         this.canEditAnyComment = false;
         this.sections = new Map<string, Section>();
         this.commentElements = new Map<number, CommentElement>();
-        this.contexts = new Map<string, CommentContext>();
+        this.contexts = new Map<ContextTarget, CommentContext>();
         
         // TODO: I initialize to the current document instead of the iframe
         // just to make things easier on the linter. But, honestly, this 
@@ -185,17 +185,7 @@ export default class ReviewManager {
                 return;
             }
             
-            let target: Element | null = null;
-
-            if (comment.startRange !== comment.endRange) {
-                // Block comment pointing to existing DOM 
-                target = this.document.querySelector('#' + comment.elementId);
-            } else {
-                // Need to target a text selection. To do this we need to 
-                // identify the selection, add a highlight to it, and then 
-                // return the new highlight element as the target.
-            }
-           
+            let target = this.document.querySelector('#' + comment.elementId);
             if (!target) {
                 console.warn(
                     `Ignoring comment "${comment.id}" - missing element ID "${comment.elementId}"`
@@ -203,6 +193,22 @@ export default class ReviewManager {
                 return;
             }
 
+            // If this is a range, we need to add an associated highlight
+            // and use *that* as the context's target
+            if (comment.startRange !== comment.endRange) {
+                const highlight: Highlight = {
+                    containerId: comment.elementId,
+                    start: comment.startRange,
+                    end: comment.endRange,
+                    context: '', // TODO: Recalculate? 
+                };
+
+                this.selection?.add(highlight, target);
+
+                // .el is updated with the new highlight element once added
+                target = highlight.el as Element;
+            }
+           
             const context = this.getOrCreateContext(target);
             this.addNewComment(comment, context);
         });
@@ -236,15 +242,15 @@ export default class ReviewManager {
             return null;
         }
         
-        const title = el.getAttribute(SECTION_DATA_ATTR) as string;
+        const title = closest.getAttribute(SECTION_DATA_ATTR) as string;
         return this.sections.get(title) || null;
     }
     
-    private getOrCreateContext(target: Element): CommentContext {
-        let context = this.contexts.get(target.id);
+    private getOrCreateContext(target: ContextTarget): CommentContext {
+        let context = this.contexts.get(target);
         if (!context) {
             context = new CommentContext(target);
-            this.contexts.set(target.id, context);
+            this.contexts.set(target, context);
         }
 
         return context;
@@ -420,7 +426,8 @@ export default class ReviewManager {
             startRange: -1,
             endRange: -1,
             canEdit: true,
-            canDelete: true
+            canDelete: true,
+            color: [0, 0, 255]
         };
     }
 
@@ -474,7 +481,7 @@ export default class ReviewManager {
     private addNewComment(comment: Comment, context: CommentContext) {
         const commentEl = new CommentElement(this.document, comment, context);
 
-        this.bestFitInsertComment(commentEl, context.el);
+        this.bestFitInsertComment(commentEl);
         this.bindUserEvents(commentEl);
         
         this.commentElements.set(comment.id, commentEl);
@@ -491,7 +498,7 @@ export default class ReviewManager {
      * Identify the best insert order for the comment in the sidebar DOM 
      * based on distance from the target element. 
      */
-    private bestFitInsertComment(el: CommentElement, target: Element) {
+    private bestFitInsertComment(el: CommentElement) {
         if (!this.sidebar) {
             throw new Error('Tried to fit without a sidebar');
         }
@@ -599,11 +606,10 @@ export default class ReviewManager {
             // Sort comments based on context's DOM position and relative date
             let comments = Array.from(this.commentElements.values()); // TODO: Array.from polyfill?
             comments = comments.sort((a, b) => {
-                // Short circuit for replies - don't care what their order is. 
-                // It's ordered right in the DOM already.
-                if (a.isReply || b.isReply) {
-                    return 0;
-                }
+                // Short circuit for replies - they need to be sent to the end of the list 
+                // so they don't interfere with ordering on context.rect.top comparisons
+                if (a.isReply) return 1;
+                if (b.isReply) return -1;
 
                 // Same context? Sort by date.
                 if (a.context === b.context) {

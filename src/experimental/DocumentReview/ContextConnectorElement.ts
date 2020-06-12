@@ -1,6 +1,7 @@
 import CommentElement from "./CommentElement";
 import CommentContext from "./CommentContext";
-import { getDocumentRect } from "./types";
+import { Color } from "./types";
+import { colorToCss, getDocumentRect } from "./utility";
 
 /**
  * Simple SVG line that connects a comment to its context
@@ -14,7 +15,7 @@ export default class ContextConnectorElement {
     private lineFromContext: SVGLineElement;
     private lineToComment: SVGLineElement;
 
-    constructor(document: Document, comment: CommentElement, context: CommentContext) {
+    constructor(document: Document, comment: CommentElement, context: CommentContext, color: Color) {
         this.document = document;
         this.comment = comment;
         this.context = context;
@@ -23,11 +24,13 @@ export default class ContextConnectorElement {
         svg.classList.add('comment-context-connection');
         
         const lineFromContext = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-        lineFromContext.setAttribute('stroke-dasharray', '5, 5');
+        // lineFromContext.setAttribute('stroke-dasharray', '5, 5');
+        lineFromContext.style.stroke = colorToCss(color);
         svg.appendChild(lineFromContext);
         
         const lineToComment = document.createElementNS('http://www.w3.org/2000/svg', 'line');
         lineToComment.setAttribute('stroke-dasharray', '5, 5');
+        lineToComment.style.stroke = colorToCss(color);
         svg.appendChild(lineToComment);
 
         // HAS To be a child of the comment because:
@@ -63,7 +66,7 @@ export default class ContextConnectorElement {
         // const contextRect = this.context.rect;
 
         // TODO: Load from a cached location
-        const contextRect = getDocumentRect(this.context.el);
+        const contextRect = this.context.rect;
         const commentRect = getDocumentRect(this.comment.container);
 
         const height = (commentRect.top - contextRect.top + 10);
@@ -84,7 +87,13 @@ export default class ContextConnectorElement {
         const anchorLeft = contextRect.width;
         const anchorTop = 0;
 
-        this.lineFromContext.setAttribute('x1', '0');
+        // This doesn't start at `left: 0` because if the context is an inline element
+        // that wraps in the document (e.g. text range) the top left point of the containing 
+        // rect may not be within the highlighted block. The safest bet is placing this 
+        // on the right edge with roughly the width of a couple letters.
+        const left = contextRect.width - 20;
+
+        this.lineFromContext.setAttribute('x1', left + 'px');
         this.lineFromContext.setAttribute('y1', '0');
         this.lineFromContext.setAttribute('x2', anchorLeft + '');
         this.lineFromContext.setAttribute('y2', anchorTop + '');
