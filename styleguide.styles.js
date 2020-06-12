@@ -55,7 +55,7 @@ const theme = {
         h5: 16,
         h6: 16
     },
-    maxWidth: 900,
+    maxWidth: 1200,
     sidebarWidth: 240
 }
 
@@ -234,6 +234,12 @@ const styles = {
             '& div[class*="para"]': {
                 marginBottom: `${rhythm(0.125)} !important`
             }
+        }
+    },
+    Type: {
+        type: {
+            minWidth: '150px',
+            display: 'inline-block'
         }
     }
 }
