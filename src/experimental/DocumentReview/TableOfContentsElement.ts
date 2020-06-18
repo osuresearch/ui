@@ -1,5 +1,6 @@
 
 import { Section } from './types';
+import HamburgerButtonElement from './HamburgerButtonElement';
 
 /**
  * Render a list of `Section` as document anchor links
@@ -7,15 +8,14 @@ import { Section } from './types';
 export default class TableOfContentsElement {
     public container: HTMLDivElement;
 
+    private hamburger: HamburgerButtonElement;
+
     constructor(document: Document, sections: Map<string, Section>) {
         const windowInnerWidth = document.defaultView?.innerWidth || 9999;
         const startCollapsed = windowInnerWidth < 1200;
 
         const container = document.createElement('div');
         container.classList.add('comments-toc');
-        if (startCollapsed) {
-            container.classList.add('is-collapsed');
-        }
 
         document.body.prepend(container);
         this.container = container;
@@ -42,18 +42,28 @@ export default class TableOfContentsElement {
         `;
         
         // Mmmm, hamburgers
-        const toggle = document.createElement('button');
-        toggle.classList.add('comments-toc-toggle');
-        toggle.innerText = '🍔';
-        toggle.addEventListener('click', this.onToggle.bind(this));
-        container.prepend(toggle);
+        const hamburger = new HamburgerButtonElement(document);
+        hamburger.onOpen = this.onOpen.bind(this);
+        hamburger.onClose = this.onClose.bind(this);
+        container.prepend(hamburger.el);
+        this.hamburger = hamburger;
+
+        if (startCollapsed) {
+            // Closing the hamburger will propagate to the onClose event handler
+            hamburger.isOpen = false;
+        }
     }
 
-    private onToggle() {
-        this.container.classList.toggle('is-collapsed');
+    private onOpen() {
+        this.container.classList.remove('is-collapsed');
+    }
+    
+    private onClose() {
+        this.container.classList.add('is-collapsed');
     }
     
     public remove() {
+        this.hamburger.remove();
         this.container.remove();
     }
 }

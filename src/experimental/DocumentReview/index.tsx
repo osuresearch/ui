@@ -7,10 +7,10 @@ import ReviewManager from './ReviewManager';
 import './index.scss';
 
 type Props = {
-    /** Reviewable document source. This is full HTML DOM */
+    /** Reviewable document source. This is full HTML DOM as a string */
     src: string;
 
-    /** Array of comments already present on the document */
+    /** Array of initial comments to load once the IFrame has been mounted */
     comments: Comment[];
 
     /** Callback on when the user adds a new comment */
@@ -21,6 +21,9 @@ type Props = {
 
     /** Callback on when the user removes an existing comment */
     onRemoveComment(comment: Comment): void;
+
+    /** Callback when the ReviewManager has finished binding to a Document */
+    onReady(manager: ReviewManager): void;
 
     /** Username to use for new comments, and to determine if an existing comment is editable */
     defaultAuthor: string;
@@ -55,6 +58,7 @@ const DocumentReview: React.FC<Props> = ({
     onAddComment,
     onUpdateComment,
     onRemoveComment,
+    onReady,
     defaultAuthor,
     canEditAnyComment,
     id,
@@ -72,6 +76,7 @@ const DocumentReview: React.FC<Props> = ({
         manager.onAddComment = onAddComment;
         manager.onUpdateComment = onUpdateComment;
         manager.onRemoveComment = onRemoveComment;
+        manager.onReady = onReady;
         manager.defaultAuthor = defaultAuthor;
         manager.canEditAnyComment = canEditAnyComment;
         return manager;

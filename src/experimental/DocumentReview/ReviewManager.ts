@@ -23,6 +23,7 @@ export default class ReviewManager {
     public onAddComment?: (comment: Comment) => void;
     public onUpdateComment?: (comment: Comment) => void;
     public onRemoveComment?: (comment: Comment) => void;
+    public onReady?: (manager: ReviewManager) => void;
 
     /**
      * Display name for any new comments or replies
@@ -74,6 +75,19 @@ export default class ReviewManager {
         this.internalOnChangeComment = this.internalOnChangeComment.bind(this);
         this.internalOnDeleteComment = this.internalOnDeleteComment.bind(this);
         this.internalOnReplyComment = this.internalOnReplyComment.bind(this);
+        this.internalOnFocusComment = this.internalOnFocusComment.bind(this);
+        this.internalOnBlurComment = this.internalOnBlurComment.bind(this);
+    }
+
+    /**
+     * Retrieve an array of Sections in the document.
+     * 
+     * NOTE: This **does not have IE support** (internally uses `Array.from`).
+     * This method is only used for data mocking in development at the moment
+     * so it's a non issue.
+     */
+    public getSections(): Section[] {
+        return Array.from(this.sections.values());
     }
 
     /**
@@ -87,7 +101,10 @@ export default class ReviewManager {
         this.document = document;
 
         // Reparent the entire body to add a wrapper.
-        // This is ... not high performance ... but I need the body wrapped for CSS.
+        // This is ... not high performance ... but I need the body wrapped for
+        // generating a fixed width page around the source document and I can't
+        // guarantee that every incoming document will have DOM wrapped in a 
+        // specific way. 
         // TODO: Any way around this?
         const wrapper = document.createElement('div');
         wrapper.classList.add('body-wrapper');
@@ -114,7 +131,9 @@ export default class ReviewManager {
             this.loadComments(this.initialComments);
         }
 
-        // this.reflow();
+        if (this.onReady) {
+            this.onReady(this);
+        }
     }
 
     /**
@@ -185,7 +204,7 @@ export default class ReviewManager {
                 return;
             }
             
-            let target = this.document.querySelector('#' + comment.elementId);
+            let target = this.document.getElementById(comment.elementId);
             if (!target) {
                 console.warn(
                     `Ignoring comment "${comment.id}" - missing element ID "${comment.elementId}"`
@@ -206,7 +225,7 @@ export default class ReviewManager {
                 this.selection?.add(highlight, target);
 
                 // .el is updated with the new highlight element once added
-                target = highlight.el as Element;
+                target = highlight.el as HTMLElement;
             }
            
             const context = this.getOrCreateContext(target);
@@ -267,6 +286,11 @@ export default class ReviewManager {
         this.sections.forEach((section) => {
             section.el?.querySelectorAll(attr).forEach((el) => {
                 el.addEventListener('click', (e) => {
+                    // Do not override default behavior for anchors that are inside blocks 
+                    if ((e.target as Element).tagName === 'A') {
+                        return true;
+                    }
+
                     this.addNewBlockComment(section, el);
                     e.preventDefault();
                     return false;
@@ -284,6 +308,8 @@ export default class ReviewManager {
                 const highlight = this.selection?.highlightSelection();
                 if (highlight) {
                     this.addNewRangeComment(highlight);
+                    e.preventDefault();
+                    return false;
                 }
             }
         });
@@ -299,6 +325,8 @@ export default class ReviewManager {
         el.onChange = this.internalOnChangeComment;
         el.onDelete = this.internalOnDeleteComment;
         el.onReply = this.internalOnReplyComment;
+        el.onFocus = this.internalOnFocusComment;
+        el.onBlur = this.internalOnBlurComment;
     }
 
     /**
@@ -364,6 +392,29 @@ export default class ReviewManager {
         if (this.onAddComment) {
             this.onAddComment(comment);
         }
+    }
+
+    /**
+     * Event callback when a user hovers their cursor (or clicks into) a comment thread.
+     * 
+     * This will highlight the associated document context of that comment thread.
+     */
+    private internalOnFocusComment(el: CommentElement) {
+        if (el.context.isHighlight) {
+            this.selection?.focus(el.context.getHighlight(), el.comment.color);
+        } else {
+            el.context.focus(el.comment.color);
+        }
+    }
+
+    /**
+     * Event callback when a user de-focuses a comment thread.
+     * 
+     * This will remove any extra highlighting from the associated document context
+     */
+    private internalOnBlurComment(el: CommentElement) {
+        this.selection?.blur();
+        el.context.blur();
     }
 
     /**
@@ -470,7 +521,7 @@ export default class ReviewManager {
             );
         }
 
-        const context = this.getOrCreateContext(highlight.el);
+        const context = this.getOrCreateContext(highlight);
         const comment = this.createComment(section.title, highlight.containerId);
         comment.startRange = highlight.start;
         comment.endRange = highlight.end;

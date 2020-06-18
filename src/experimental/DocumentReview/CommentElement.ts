@@ -46,6 +46,8 @@ export default class CommentElement {
     public onDelete?: (el: CommentElement) => void;
     public onReply?: (el: CommentElement) => void;
     public onChange?: (el: CommentElement, content: string) => void;
+    public onFocus?: (el: CommentElement) => void;
+    public onBlur?: (el: CommentElement) => void;
 
     /** Track the clientHeight since the last time we reflowed comments */
     public prevClientHeight: number = 0;
@@ -233,18 +235,16 @@ export default class CommentElement {
         }
     }
 
-    /**
-     * Highlight the context of this comment
-     */
     private onMouseEnter(e: MouseEvent) {
-        this.context.focus(this.comment.color);
+        if (this.onFocus) {
+            this.onFocus(this);
+        }
     }
 
-    /**
-     * Remove highlighting from the context of this comment
-     */
     private onMouseLeave(e: MouseEvent) {
-        this.context.blur();
+        if (this.onBlur) {
+            this.onBlur(this);
+        }
     }
 
     /**
@@ -282,6 +282,7 @@ export default class CommentElement {
      */
     public focus() {
         this.content.focus();
+        // TODO: Also scroll document to put this comment in view.. somehow.
     }
 
     /**

@@ -1,5 +1,6 @@
 
 import { Comment } from './types';
+import ReviewManager from '../ReviewManager';
 
 const SourceMock = `
 <html>
@@ -74,6 +75,70 @@ function rndForwardDate(date: Date) {
     return ret;
 }
 
+/**
+ * Generates mock comments and injects them into the manager.
+ * 
+ * @param manager Target to feed comments into
+ * @param density   Arbitrary value to indicate how many comments to generate.
+ *                  This is not an exact value but bigger density = more comments.
+ */
+function generateMockComments(manager: ReviewManager, density: number) {
+    const potentialOwners = ['mcmanning.1', 'coplin.7', 'ray.30', 'buckeye.1', 'siperstein.1'];
+
+    const chanceToBeABlockComment = 70; // % chance to generate a block comment instead of an inline
+    const chanceToHaveReplies = 30; // % chance a comment will have replies added
+    const chanceToHaveRepliesDegradation = 10; // subtraction to the chance by each reply added
+
+    const owners = [manager.defaultAuthor];
+    owners.push('mcmanning.1 (Secondary Reviewer)');
+    owners.push('coplin.7 (IRB Analyst)');
+    owners.push('buckeye.1 (IRB Analyst)');
+
+    const comments: Comment[] = [];
+
+    const sections = manager.getSections();
+
+    while (comments.length < density) {
+        // Generate a random context for the comment
+        let el: HTMLElement | undefined = undefined;
+        let rangeStart = -1;
+        let rangeEnd = -1;
+
+        const section = sections[rnd(0, sections.length)];
+        if (rnd(0, 101) < chanceToBeABlockComment) {
+            const blocks = section.el.querySelectorAll('[data-comment-block]');
+            const block = blocks[rnd(0, blocks.length)] as HTMLElement;
+            if (!block) continue;
+
+            el = block;
+        } else {
+            const inlines = section.el.querySelectorAll('[data-comment-inline]');
+            const inline = inlines[rnd(0, inlines.length)] as HTMLElement;
+            if (!inline) continue;
+
+            // innerText can add a LOT of whitespace noise that's ultimately ignored
+            // by the selection range algorithms. To play it safe, we keep it under
+            // half the actual length. This won't really match up with the expected
+            // ranges that we'd use in comments - but it doesn't matter since this
+            // is just for mocking. 
+            const estimatedTextLength = inline.innerText.length / 2; 
+
+            el = inline;
+            rangeStart = rnd(0, estimatedTextLength);
+            rangeEnd = rnd(rangeStart, Math.min(rangeStart + 200, estimatedTextLength));
+        }
+
+        // Add comment
+        const id = 'mock-comment-' + comments.length;
+        comments.push({
+
+        });
+
+        // Add replies
+
+    }
+}
+
 // function generateMockComments(
 //     sections: string[], 
 //     count: number, 
@@ -123,5 +188,5 @@ function rndForwardDate(date: Date) {
 
 export {
     SourceMock,
-    // generateMockComments
+    generateMockComments
 }

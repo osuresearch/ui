@@ -34,18 +34,21 @@ export default class CommentContext {
      * Focus the context with a specific color highlighter
      */
     public focus(color: Color) {
-        const background = colorToCss(color, 0.1);
+        // Removing color highlighting - we don't do it for inline due to complications
+        // and I want block highlights to also have the same behavior.
+        
+        // const background = colorToCss(color, 0.1);
 
         this.getTargetElements().forEach((el) => {
-            // el.classList.add('comment-context-focus');
-            el.style.background = colorToCss(color, 0.1);
+            el.classList.add('comment-context-focus');
+            // el.style.background = colorToCss(color, 0.1);
         });
     }
 
     public blur() {
         this.getTargetElements().forEach((el) => {
-            // el.classList.remove('comment-context-focus');
-            el.style.background = '';
+            el.classList.remove('comment-context-focus');
+            // el.style.background = '';
         });
     }
 
@@ -65,5 +68,16 @@ export default class CommentContext {
         }
 
         return elements;
+    }
+
+    /**
+     * Returns the Highlight target, if this is a highlight context
+     */
+    public getHighlight(): Highlight {
+        return this.target as Highlight;
+    }
+
+    public get isHighlight(): boolean {
+        return (this.target as Highlight).containerId !== undefined;
     }
 }

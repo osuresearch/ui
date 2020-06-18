@@ -9,12 +9,16 @@ export type Coordinates = {
 
 /** A comment on a reviewable document */
 export type Comment = {
-    /** 
-     * Unique identifier for this comment. Used for parent/child hierarchies.
-     */
+    /** Unique identifier for this comment. Used for parent/child reply hierarchies */
     id: number;
+
+    /** 
+     * Parent's unique ID, if this is a reply. Note that only one level of reply
+     * nesting is supported. If the parent comment is also a reply - an error will be raised.
+     */
     parentId?: number;
 
+    /** Display name of the comment author */
     author: string;
     message: string;
 
@@ -27,17 +31,44 @@ export type Comment = {
     /** DOM Element `id` attribute that this comment attached */
     elementId: string;
 
-    /** Start and end text range of an inline comment field */
+    /** If this comment points to a text range, this is the start index of the range */
     startRange: number;
+
+    /** If this comment points to a text range, this is the end index of the range */
     endRange: number;
 
-    // Access controls. If not provided, the DocumentManager will
-    // automatically set these based on what it knows about the owner.
-    canEdit?: boolean;
-    canDelete?: boolean;
-
-    /** Base color to apply to all elements associated with this comment */
+    /** 
+     * Base color to apply to all elements associated with this comment.
+     * Typically - you should give each author their own color
+     */
     color: Color;
+
+    // Everything above this point is required to be filled out.
+    // Everything below is optional and can be computed.
+
+    /**
+     * Text or block fragment this comment is associated with. 
+     * 
+     * This is optional and will be filled in automatically by comments
+     * based on `elementId` and `startRange`/`endRange`
+     */
+    // context?: string;
+
+    /** 
+     * Optional edit access control.
+     * 
+     * If not provided, the ReviewManager will automatically set to true
+     * if the author of a comment matches the default author in the manager.
+     */
+    canEdit?: boolean;
+    
+    /** 
+     * Optional delete access control.
+     * 
+     * If not provided, the ReviewManager will automatically set to true
+     * if the author of a comment matches the default author in the manager.
+     */
+    canDelete?: boolean;
 }
 
 export type Section = {

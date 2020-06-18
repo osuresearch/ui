@@ -1,4 +1,8 @@
 
+// I know this is incredibly dumb, but we need to inject a CSS file into 
+// the DOM of an IFrame without accessing external scripts for portability. 
+// So each component has its own CSS block that gets combined by CSSElement.
+
 const DOCUMENT_CSS = `
 * {
   box-sizing: border-box;
@@ -11,20 +15,26 @@ const DOCUMENT_CSS = `
 /* Selection highlight for blocks & text selection */
 .body-wrapper ::selection,
 .body-wrapper ::-moz-selection {
-    background: #fff2a8;
+    background: #ffe168;
 }
 
 [data-comment-block]:hover {
-    background: #fff2a8;
+    background: #ffe168;
     cursor: pointer;
 }
 
 /* TODO: Better highlight color? */
 .highlight {
-  background: #fff9d8;
+  background: #fff0b4;
 }
 
-[data-comment-inline],
+.highlight-focus,
+.comment-context-focus {
+  background: #ffe168;
+}
+
+[data-comment-inline], 
+[data-comment-inline] *,
 .highlight {
   user-select: text;
 }
@@ -47,6 +57,7 @@ body {
   display: flex;
   flex-direction: row;
   margin: 0;
+  background: #f8f9fa;
 }
 `;
 
@@ -142,19 +153,71 @@ const TOC_CSS = `
   font-size: 90%;
   margin-left: 2em;
 }
+`;
 
-/* Hamburger button */
-.comments-toc-toggle {
-  border: 0;
-  background: 0;
-  font-size: 22px;
-  margin-top: 6px;
-  margin-left: 0;
-  
-  height: 40px;
-  
+const HAMBURGER_BUTTON_CSS = `
+/*!
+ * Hamburgers
+ * @description Tasty CSS-animated hamburgers
+ * @author Jonathan Suh @jonsuh
+ * @site https://jonsuh.com/hamburgers
+ * @link https://github.com/jonsuh/hamburgers
+ */
+.hamburger {
+  padding: 15px 15px;
+  display: inline-block;
   cursor: pointer;
-}
+  transition-property: opacity, filter;
+  transition-duration: 0.15s;
+  transition-timing-function: linear;
+  font: inherit;
+  color: inherit;
+  text-transform: none;
+  background-color: transparent;
+  border: 0;
+  margin: 0;
+  overflow: visible; }
+  .hamburger:hover {
+    opacity: 0.7; }
+  .hamburger.is-active:hover {
+    opacity: 0.7; }
+  .hamburger.is-active .hamburger-inner,
+  .hamburger.is-active .hamburger-inner::before,
+  .hamburger.is-active .hamburger-inner::after {
+    background-color: #888; }
+  
+.hamburger-box {
+  width: 20px;
+  height: 24px;
+  display: inline-block;
+  position: relative; }
+
+.hamburger-inner {
+  display: block;
+  top: 50%;
+  margin-top: -2px; }
+  .hamburger-inner, .hamburger-inner::before, .hamburger-inner::after {
+    width: 20px;
+    height: 3px;
+    background-color: #888;
+    border-radius: 4px;
+    position: absolute;
+    transition-property: transform;
+    transition-duration: 0.15s;
+    transition-timing-function: ease; }
+  .hamburger-inner::before, .hamburger-inner::after {
+    content: "";
+    display: block; }
+  .hamburger-inner::before {
+    top: -8px; }
+  .hamburger-inner::after {
+    bottom: -8px; }
+
+.hamburger--arrow.is-active .hamburger-inner::before {
+  transform: translate3d(-5px, 4px, 0) rotate(-45deg) scale(0.7, 1); }
+
+.hamburger--arrow.is-active .hamburger-inner::after {
+  transform: translate3d(-5px, -4px, 0) rotate(45deg) scale(0.7, 1); }
 `;
 
 const SIDEBAR_CSS = `
@@ -225,14 +288,15 @@ const COMMENT_CSS = `
   border: 0;
   background: none;
 
-  color: blue;
+  color: rgb(50, 131, 200);
   text-decoration: underline;
   cursor: pointer;
 }
   
 .comment.is-reply {
   padding-right: 0;
-  padding-bottom: 8px;
+  padding-bottom: 0;
+  margin-top: 8px;
 }
 
 .comment-delete {
@@ -256,11 +320,6 @@ const COMMENT_CSS = `
   user-select: text;
   word-break: break-word;
   padding-bottom: 0.5em;
-}
-
-/* CSS to apply to the focused question / context of a comment */
-.comment-context-focus {
-  background: rgba(255, 0, 0, 0.1);
 }
 `;
 
@@ -304,6 +363,7 @@ export default class CSSElement {
           TOC_CSS + 
           SIDEBAR_CSS + 
           COMMENT_CSS +
+          HAMBURGER_BUTTON_CSS + 
           CONNECTOR_CSS;
 
         document.body.appendChild(style);

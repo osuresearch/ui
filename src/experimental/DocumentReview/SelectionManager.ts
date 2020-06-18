@@ -5,7 +5,9 @@ import 'rangy/lib/rangy-textrange';
 import 'rangy/lib/rangy-classapplier';
 import 'rangy/lib/rangy-highlighter';
 import 'rangy/lib/rangy-serializer';
-import { Highlight } from './types';
+
+import { Highlight, Color } from './types';
+import { colorToCss } from './utility';
 
 /**
  * Find the closest ancestor element with an `id` and a `data-comment-*` attribute
@@ -44,10 +46,14 @@ type SelectionRange = {
  * Abstraction over range selection save, restore, and associations
  */
 export default class SelectionManager {
-    highlighter: any;
-    document: Document;
+    private document: Document;
 
-    classApplier: any;
+    private highlighter: any; // Rangy.Highlighter
+    
+    private classApplier: any; // Rangy.ClassApplier
+
+    private focusClassApplier: any; // Rangy.ClassApplier
+    private focused?: any; // Rangy.Range
 
     /** Mapping between an element ID and all the highlights associated with it */
     private highlights: Map<string, Highlight[]>;
@@ -57,13 +63,16 @@ export default class SelectionManager {
         this.document = document;
         this.highlights = new Map<string, Highlight[]>();
 
-        this.classApplier = rangy.createClassApplier('highlight', {
+        const classApplierOpts = {
             ignoreWhiteSpace: true,
-            tagNames: ["span", "a"]
-        });
+            tagNames: ['span', 'a', 'i', 'b', 'em', 'strong', 'br']
+        };
 
+        this.classApplier = rangy.createClassApplier('highlight', classApplierOpts);
         this.highlighter = rangy.createHighlighter(document, 'TextRange');
         this.highlighter.addClassApplier(this.classApplier);
+
+        this.focusClassApplier = rangy.createClassApplier('highlight-focus', classApplierOpts);
     }
 
     public highlightSelection(): Highlight | null {
@@ -168,11 +177,12 @@ export default class SelectionManager {
 
         console.debug('[add] range after apply', range);
 
-        // Track it in the map 
+        // Track it, mapped to the container element. This is to 
+        // speed up removal calculations on large documents that may
+        // contain hundreds of highlights across multiple container elements.
         const arr = this.highlights.get(id) || [];
         arr.push(highlight);
         this.highlights.set(id, arr);
-
 
         console.debug('[add] New list', id, arr);
     }
@@ -203,7 +213,7 @@ export default class SelectionManager {
         range.selectCharacters(el, highlight.start, highlight.end);
         this.classApplier.undoToRange(range);
 
-        // Remove from tracked highlights
+        // Remove from tracked highlights within the container element
         let arr = this.highlights.get(id) || [];
         arr = arr.filter((h) => h.start !== highlight.start && h.end !== highlight.end);
         this.highlights.set(id, arr);
@@ -224,5 +234,53 @@ export default class SelectionManager {
             range.selectCharacters(el, h.start, h.end);
             this.classApplier.applyToRange(range);
         });
+    }
+
+    /**
+     * Temporarily focus on a specific Highlight range
+     * 
+     * This applies a different class wrap to the highlight to bring user's
+     * focus to it without interfering with other highlighted text in the document.
+     */
+    public focus(highlight: Highlight, color: Color) {
+        // Blur out whatever was previously focused (can only have one at a time)
+        this.blur();
+
+        // Use the container element - as the target .el for the Highlight
+        // may not exist in some situations 
+        const el = this.document.getElementById(highlight.containerId);
+        
+        const range = rangy.createRange(this.document);
+        range.selectCharacters(el, highlight.start, highlight.end);
+
+        console.debug('[focus] Range', highlight, range);
+
+        this.focusClassApplier.applyToRange(range);
+        this.focused = range;
+
+        // This doesn't work because:
+        // 1. if the highlight spans multiple elements, we're not coloring them all
+        // 2. somehow rangy loses the ability to delete the span on blur() 
+        // There is an option to configure extra properties as part of createClassApplier,
+        // but I don't know of a way to UPDATE options for Rangy.
+        // See: https://github.com/timdown/rangy/wiki/Class-Applier-Module
+        // For now - we'll just have a consistent highlight color and not attempt to 
+        // change the highlight color to match the comment color. Probably better
+        // for accessibility anyway...
+        // range.startContainer.parentElement.style.backgroundColor = colorToCss(color, 0.5);
+    }
+
+    /**
+     * Blur the previously focused highlight
+     */
+    public blur() {
+        if (typeof this.focused !== 'undefined') {
+            const range = this.focused;
+            // range.startContainer.parentElement.style.backgroundColor = '';
+            this.focusClassApplier.undoToRange(range);
+            this.focused = undefined;
+        }
+
+        // there's also .undoToAncestor(ancestorWithClass, positionsToPreserve)
     }
 }

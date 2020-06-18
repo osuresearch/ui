@@ -1,5 +1,6 @@
 
-import { Color } from './types';
+import { Color, Highlight } from './types';
+import { ContextTarget } from './CommentContext';
 
 /**
  * Calculate absolute position relative to the Document for an element
@@ -34,7 +35,7 @@ export function colorToCss(color: Color, alpha: number = 1) {
     return `rgba(${color[0]}, ${color[1]}, ${color[2]}, ${alpha})`;
 }
 
-function isAncestorOf(parent: Element, el: Element): boolean {
+export function isAncestorOf(parent: Element, el: Element): boolean {
     do {
         if (el === parent) {
             return true;
