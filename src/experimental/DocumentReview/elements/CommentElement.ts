@@ -1,7 +1,7 @@
 
-import { Comment } from './types';
-import { colorToCss } from './utility';
-import CommentContext from './CommentContext';
+import { Comment } from '../types';
+import { colorToCss } from '../utility';
+import CommentContext from '../CommentContext';
 import ContextConnectorElement from './ContextConnectorElement';
 
 /**

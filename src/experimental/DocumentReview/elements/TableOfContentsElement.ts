@@ -1,5 +1,5 @@
 
-import { Section } from './types';
+import { Section } from '../types';
 import HamburgerButtonElement from './HamburgerButtonElement';
 
 /**

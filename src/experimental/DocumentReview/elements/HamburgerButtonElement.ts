@@ -1,5 +1,5 @@
 
-import { Section } from './types';
+import { Section } from '../types';
 
 /**
  * Render a hamburger button that fires toggle events.

@@ -1,7 +1,7 @@
 import CommentElement from "./CommentElement";
-import CommentContext from "./CommentContext";
-import { Color } from "./types";
-import { colorToCss, getDocumentRect } from "./utility";
+import CommentContext from "../CommentContext";
+import { Color } from "../types";
+import { colorToCss, getDocumentRect } from "../utility";
 
 /**
  * Simple SVG line that connects a comment to its context

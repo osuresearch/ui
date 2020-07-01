@@ -1,9 +1,9 @@
 
 import { Comment, Section, Highlight } from './types';
-import TableOfContentsElement from './TableOfContentsElement';
-import SidebarElement from './SidebarElement';
-import CommentElement from './CommentElement';
-import CSSElement from './CSSElement';
+import TableOfContentsElement from './elements/TableOfContentsElement';
+import SidebarElement from './elements/SidebarElement';
+import CommentElement from './elements/CommentElement';
+import CSSElement from './elements/CSSElement';
 import SelectionManager from './SelectionManager';
 import CommentContext, { ContextTarget } from './CommentContext';
 
