@@ -122,6 +122,12 @@ module.exports = {
             jquery: 'jQuery'
         }
 
+        // Disable minification due to bug with custom styles in builds
+        // See: https://github.com/styleguidist/react-styleguidist/issues/1525
+        webpackConfig.optimization = {
+            minimize: false
+        };
+
         return webpackConfig
     },
     require: [
