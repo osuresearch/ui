@@ -1,7 +1,5 @@
 
 import React from 'react';
-
-// @ts-ignore
 import { Link } from 'react-router-dom'; 
 
 export interface Props {
@@ -17,7 +15,7 @@ export interface Props {
  */
 const Navbar: React.FC<Props> = ({ children, title }) => (
     <nav className="navbar navbar-main">
-        <Link exact="true" to="/" className="navbar-brand">
+        <Link to="/" className="navbar-brand">
             <div className="navbar-org">Office of Research</div>
             {title}
         </Link>
