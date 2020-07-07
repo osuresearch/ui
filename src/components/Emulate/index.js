@@ -17,7 +17,7 @@ import {
  * changed, the entire application will be refreshed to load
  * under the new emulated user.
  * 
- * @deprecated Use @oris/auth
+ * @deprecated Use `@oris/auth`. Will be removed in a future version of `@oris/ui`
  */
 class Emulate extends React.Component {
     constructor(props) {

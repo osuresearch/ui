@@ -565,7 +565,7 @@ Search.propTypes = {
      *
      * Defaults to the `SearchResult` component if not supplied.
      */
-    resultComponent: PropTypes.node,
+    resultComponent: PropTypes.elementType,
 
     /**
      * Callback to render custom content in place of the dropdown.

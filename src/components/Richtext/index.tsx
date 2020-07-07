@@ -2,6 +2,9 @@
 import React, { useLayoutEffect, useState, useRef, memo } from 'react';
 
 export interface Props {
+    /** ID attribute for the underlying editor */
+    id?: string;
+
     /** Initial content for the component as a raw HTML string. */
     defaultValue?: string;
     
@@ -51,10 +54,11 @@ const SIMPLE_TOOLBAR_CONFIG = [
  * Simple preconfigured Richtext editor
  */
 const Richtext: React.FC<Props> = ({
+    id,
+    onChange,
     defaultValue = '',
     readOnly = false,
     simple = false,
-    onChange,
     className = '',
     contentsCss = 'https://orapps.osu.edu/assets/css/ckeditor/contents.css'
 }) => {
@@ -117,7 +121,7 @@ const Richtext: React.FC<Props> = ({
 
     return (
         <div className={`richtext ${className} ${readOnly ? 'is-readonly' : ''}`}>
-            <textarea className="richtext-editor" ref={editorRef} disabled={readOnly}></textarea>
+            <textarea id={id} className="richtext-editor" ref={editorRef} disabled={readOnly}></textarea>
         </div>
     );
 }
