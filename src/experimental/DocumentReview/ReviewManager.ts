@@ -60,12 +60,15 @@ export default class ReviewManager {
 
     private selection?: SelectionManager;
     
+    private isPendingReflow: boolean;
+
     constructor() { 
         this.defaultAuthor = '(me)';
         this.canEditAnyComment = false;
         this.sections = new Map<string, Section>();
         this.commentElements = new Map<number, CommentElement>();
         this.contexts = new Map<ContextTarget, CommentContext>();
+        this.isPendingReflow = false;
         
         // TODO: I initialize to the current document instead of the iframe
         // just to make things easier on the linter. But, honestly, this 
@@ -620,8 +623,6 @@ export default class ReviewManager {
         const id = parseInt(parts[1]);
         return this.commentElements.get(id);
     }
-
-    private isPendingReflow: boolean = false;
 
     /**
      * Realign comments based on current DOM dimensions

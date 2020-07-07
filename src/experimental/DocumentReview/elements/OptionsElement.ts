@@ -12,7 +12,7 @@ export default class OptionsElement {
         this.container = container;
     }
 
-    public focus(target: HTMLElement, offset: ????) {
+    // public focus(target: HTMLElement, offset: ????) {
         
-    }
+    // }
 }

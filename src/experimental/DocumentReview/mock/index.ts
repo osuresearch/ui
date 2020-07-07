@@ -1,5 +1,5 @@
 
-import { Comment } from './types';
+import { Comment } from '../types';
 import ReviewManager from '../ReviewManager';
 
 const SourceMock = `
@@ -98,6 +98,10 @@ function generateMockComments(manager: ReviewManager, density: number) {
 
     const sections = manager.getSections();
 
+    return;
+
+    // TODO: Finish impl. It's an infinite loop right now if I uncomment.
+
     while (comments.length < density) {
         // Generate a random context for the comment
         let el: HTMLElement | undefined = undefined;
@@ -130,9 +134,9 @@ function generateMockComments(manager: ReviewManager, density: number) {
 
         // Add comment
         const id = 'mock-comment-' + comments.length;
-        comments.push({
+        // comments.push({
 
-        });
+        // });
 
         // Add replies
 

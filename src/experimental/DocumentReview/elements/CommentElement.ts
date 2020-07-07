@@ -50,7 +50,7 @@ export default class CommentElement {
     public onBlur?: (el: CommentElement) => void;
 
     /** Track the clientHeight since the last time we reflowed comments */
-    public prevClientHeight: number = 0;
+    public prevClientHeight: number;
 
     public get isReply(): boolean {
         return this.comment.parentId !== undefined;
@@ -96,6 +96,7 @@ export default class CommentElement {
     constructor(document: Document, comment: Comment, context: CommentContext) {
         this.comment = comment;
         this.context = context;
+        this.prevClientHeight = 0;
 
         this.onDeleteButtonClick = this.onDeleteButtonClick.bind(this);
         this.onReplyButtonClick = this.onReplyButtonClick.bind(this);
