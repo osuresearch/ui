@@ -100,7 +100,6 @@ class Search extends React.Component {
         let { defaultValue } = this.props;
 
         if (typeof defaultValue !== 'object') {
-            this.clear();
             return;
         }
 
@@ -415,10 +414,10 @@ class Search extends React.Component {
                 <div id={name + '-results'} className="dropdown-menu" role="listbox">
                     {this.state.results.map(
                         (result, idx) => <ResultComponent
-                                        key={idx}
-                                        resource={result}
-                                        onSelect={this.onResultSelect}
-                                    />
+                            key={idx}
+                            resource={result}
+                            onSelect={this.onResultSelect}
+                        />
                     )}
 
                     {additionalResultsCount > 0 &&
