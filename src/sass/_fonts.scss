@@ -2,8 +2,10 @@
 // Vendor configurations for paths to assets.
 // Vendor static assets (fonts, images) are stored separate
 // from the application that may include vendor CSS.
-$vendor-fonts: '/assets/fonts/vendor' !default;
-$vendor-images: '/assets/img/vendor' !default;
+// These point to the production server by default to be compatible 
+// with local development on Webpack servers
+$vendor-images: 'https://orapps.osu.edu/assets/img/vendor' !default;
+$vendor-fonts: 'https://orapps.osu.edu/assets/fonts/vendor' !default;
 
 /**
  * Support for Proxima Nova & Capita (OSU branding)

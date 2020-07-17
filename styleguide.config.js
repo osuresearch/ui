@@ -13,6 +13,8 @@ const BUILD_PATH = path.join(__dirname, './styleguide');
 // Where standard static vendor assets are loaded from.
 const ASSETS_HOST = 'https://orapps.osu.edu';
 
+const ISOLATED_COMPONENTS = process.env.ISOLATE_COMPONENTS || undefined;
+
 /**
  * Custom aggregator for the `HTML Components` section
  */
@@ -28,6 +30,48 @@ function listHtmlComponents() {
     });
 
     return sections;
+}
+
+// Default sections of the styleguide
+let sections = [
+    {
+        name: '',
+        content: 'docs/readme.md'
+    },
+    {
+        name: 'Colors',
+        content: 'docs/colors.md'
+    },
+    {
+        name: 'Components',
+        content: 'src/components/readme.md',
+        components: 'src/components/**/index.?(js|tsx)',
+        ignore: [
+            'src/components/.ignore'
+        ]
+    },
+    {
+        name: 'HTML Components',
+        content: 'docs/html/readme.md',
+        sections: listHtmlComponents()
+    },
+    {
+        name: 'Experimental',
+        content: 'src/experimental/readme.md',
+        components: 'src/experimental/**/index.?(js|tsx)',
+        ignore: [
+            'src/experimental/.ignore'
+        ]
+    }
+];
+
+// If we're isolating, replace the sections with just those components.
+if (ISOLATED_COMPONENTS) {
+    sections = [{
+        name: 'Isolated Components',
+        description: `Subset of @oris/ui components matching filter: \`${ISOLATED_COMPONENTS}\``,
+        components: ISOLATED_COMPONENTS
+    }];
 }
 
 /**
@@ -78,6 +122,12 @@ module.exports = {
             jquery: 'jQuery'
         }
 
+        // Disable minification due to bug with custom styles in builds
+        // See: https://github.com/styleguidist/react-styleguidist/issues/1525
+        webpackConfig.optimization = {
+            minimize: false
+        };
+
         return webpackConfig
     },
     require: [
@@ -103,35 +153,5 @@ module.exports = {
         // Assume Javascript
         return require('react-docgen').parse(source, resolver, handlers);
     },
-    sections: [
-        {
-            name: '',
-            content: 'docs/readme.md'
-        },
-        {
-            name: 'Colors',
-            content: 'docs/colors.md'
-        },
-        {
-            name: 'Components',
-            content: 'src/components/readme.md',
-            components: 'src/components/**/index.?(js|tsx)',
-            ignore: [
-                'src/components/.ignore'
-            ]
-        },
-        {
-            name: 'HTML Components',
-            content: 'docs/html/readme.md',
-            sections: listHtmlComponents()
-        },
-        {
-            name: 'Experimental',
-            content: 'src/experimental/readme.md',
-            components: 'src/experimental/**/index.js',
-            ignore: [
-                'src/experimental/.ignore'
-            ]
-        }
-    ]
+    sections: sections 
 };
