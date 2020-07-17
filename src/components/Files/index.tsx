@@ -1,53 +1,89 @@
 import React, { useState, useEffect } from 'react';
 
-interface File {
+// @ts-ignore
+import bytes from 'bytes';
+
+// @ts-ignore
+import startCase from 'lodash/startCase';
+
+interface Record {
     id: string;
-    filename: string;
+    name: string;
     section?: string;
-    uploaded?: string;
+    modifiedDate?: string;
     size?: string;
     link: string;
 }
 
-interface Body {
-    data: {
-        attributes: {
-            directory: {
-                [key: string]: Array<File>
-            }
-        },
-        links?: {
-            dms?: string;
-        }
-    }
+interface Directory {
+    name: string;
+    files: Array<Record>;
+}
+
+interface Directories {
+    [key: string]: Directory;
 }
 
 export interface Props {
-    /** Response body */
-    body: Body;
+    /** Directories */
+    directories: Directories;
+
+    /** 
+     * DMS Management Link - direct link to the 
+     * parent folder in the DMS
+     */
+    dmsLink?: string;
 
     /** 
      * Card header - shows main "Files" header (with DMS link, if applicable)
      */
-    header?: boolean;
+    showHeader?: boolean;
 
     /**
      * Selected Files
      */
-    selectedFiles?: Array<File>;
-
-    /** Form ID */
-    formId?: string;
+    selectedFiles?: Array<Record>;
 
     /**
      * Selection handler
      */
-    onSelect?(newArray: Array<object>): void;
+    onSelect?(selectedFiles: Array<Record>): void;
 
     /* SelectedFiles form - read only */
     readOnly?: boolean;
 }
 
+function formatAttribute(file: Record, attribute: string) {
+    switch (attribute) {
+        case 'name':
+            // Filenames are wrapped in links to download file
+            return (
+                <th scope='row' key={file.id + attribute}>
+                    <a href={file.link} target='_blank' rel='noopener noreferrer' data-filetype={(file.name.split('.').reverse()[0]).toLowerCase()}
+                    >{file.name}</a>
+                </th>);
+        case 'modifiedDate':
+            // Convert modifiedDate string to local date string
+            return (
+                <td key={file.id + attribute}>
+                    {new Date(file[attribute] as string).toLocaleDateString()}
+                </td>);
+        case 'size':
+            return (
+                <td key={file.id + attribute}>
+                    {bytes(file[attribute], { unitSeparator: ' ' })}
+                </td>
+            )
+        case 'section':
+            return (
+                <td key={file.id + attribute}>
+                    {file[attribute]}
+                </td>
+            );
+        default:
+            return '';
+    }
+}
 
 /**
  *
@@ -62,18 +98,15 @@ export interface Props {
  */
 
 const Files: React.FC<Props> = ({
-    body,
-    header,
+    directories,
+    dmsLink,
+    showHeader,
     selectedFiles,
-    formId,
     onSelect,
     readOnly
 }) => {
-    const files = body.data.attributes.directory;
-    const dmsLink = body.data.links?.dms;
-
     // Form handling
-    const [selected, setSelected] = useState<Array<File> | undefined>(selectedFiles);
+    const [selected, setSelected] = useState<Array<Record> | undefined>(selectedFiles);
 
     const isChecked = (fileid: string) => {
         if (selected && selected?.findIndex(file => file.id === fileid) !== -1) return true;
@@ -105,9 +138,9 @@ const Files: React.FC<Props> = ({
         if (selected?.length === 0) setSelected(selectedFiles);
     }, [selectedFiles, selected]);
 
-    /* Return a loader until files are available */
+    /* Return a loader until directories/files are available */
     // To-do - replace this functionality with skeleton loader
-    if (!files) {
+    if (!directories) {
         return (
             <div className='app-loader'>
                 <i className='fa fa-spinner fa-spin'></i>
@@ -121,12 +154,12 @@ const Files: React.FC<Props> = ({
     /* Return the files in tables */
     return (
         <div className='files'>
-            {// If header prop is true, then display main header
-                header &&
+
+            {/** Header */}
+            {showHeader &&
                 <div className='card-header main-header'>
                     <h2>Files</h2>
-                    {// If DMS link exists
-                        dmsLink &&
+                    {dmsLink && // If DMS link exists
                         <span>
                             <a
                                 href={dmsLink}
@@ -138,79 +171,88 @@ const Files: React.FC<Props> = ({
                     }
                 </div>
             }
-            {Object.keys(files).map((directory) => (
-                // Only display directory if it contains files
-                files[directory].length > 0 &&
-                <div className='card' key={directory}>
-                    <div className='card-header text-dark'>
-                        <span className='fa fa-folder-open-o mr-2' aria-hidden='true'></span>
-                        <span>{directory}</span>
-                        <span className='float-right badge badge-pill badge-dark'>{files[directory].length}<span className='sr-only'> files in this folder</span></span>
-                    </div>
-                    <table className={'table table-hover cols-' + (Object.keys(files[directory][0]).length).toString()}>
-                        <caption className='sr-only'>{directory + ' Files'}</caption>
-                        <thead>
-                            <tr>
-                                {Object.keys(files[directory][0])
-                                    /** Use file object keys as table headings */
-                                    // Filter out ID and Link keys
-                                    .filter((h) => !['id', 'link'].includes(h))
-                                    .map((heading) =>
-                                        <th scope='col' key={heading}>{heading}</th>
-                                    )
-                                }
-                                {// If there are selected files, add a final Include column heading
-                                    selectedFiles &&
-                                    <th scope='col'>Include</th>
-                                }
-                            </tr>
-                        </thead>
-                        <tbody>
+
+            {/** Body */}
+            {
+                Object.keys(directories).map((directory) => (
+                    directories[directory].files.length > 0 &&
+
+                    <div className='card' key={directories[directory].name}>
+                        {/** Directory Heading */}
+                        <div className='card-header text-dark'>
+                            <span className='fa fa-folder-open-o mr-2' aria-hidden='true'></span>
+
+                            <span>{directories[directory].name}</span>
+
+                            <span className='float-right badge badge-pill badge-dark'>
+                                {directories[directory].files.length}
+
+                                <span className='sr-only'> files in this folder</span>
+                            </span>
+                        </div>
+
+                        {/** Table of Files in Directory */}
+                        <table className=
                             {
-                                files[directory].map((file) => (
+                                'table table-hover cols-' +
+                                /* number of columns */
+                                (directories[directory].files.length.toString())
+                            }
+                        >
+                            <caption className='sr-only'>
+                                {`${directories[directory].name} Files`}
+                            </caption>
+
+                            <thead>
+                                <tr>
+                                    {/** Use file object keys as the table's headings */}
+                                    {Object.keys(directories[directory].files[0])
+
+                                        // Filter out ID & link keys
+                                        .filter((h) => !['id', 'link'].includes(h))
+
+                                        // Map the keys to THs and split instances of camelCase to startCase
+                                        .map(heading => (
+                                            <th
+                                                scope='col'
+                                                key={`${directories[directory].name}-${heading}`}
+                                            >
+                                                {startCase(heading)}
+                                            </th>
+                                        ))}
+
+                                    {/** Add heading for when this component is used in a form */}
+                                    {selectedFiles &&
+                                        <th scope='col'>Include</th>
+                                    }
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                {/** Map each file to a row */}
+                                {directories[directory].files.map(file => (
                                     <tr key={file.id}>
+                                        {/** Map file attributes to columns */}
+
                                         {Object.keys(file)
-                                            /** Map file properties to th/td */
-                                            // Filter out ID and Link
-                                            .filter((k) => !['id', 'link'].includes(k))
-                                            .map((attr) => {
-                                                switch (attr) {
-                                                    case 'filename':
-                                                        // Filenames are wrapped in links to download file
-                                                        return (
-                                                            <th scope='row' key={file.id + attr}>
-                                                                <a href={file.link} target='_blank' rel='noopener noreferrer' data-filetype={(file.filename.split('.').reverse()[0]).toLowerCase()}
-                                                                >{file.filename}</a>
-                                                            </th>);
-                                                    case 'uploaded':
-                                                        // Convert uploaded string to local date string
-                                                        return (
-                                                            <td key={file.id + attr}>
-                                                                {new Date(file[attr] as string).toLocaleDateString()}
-                                                            </td>);
-                                                    case 'size':
-                                                    case 'section':
-                                                        return (
-                                                            <td key={file.id + attr}>
-                                                                {file[attr]}
-                                                            </td>
-                                                        );
-                                                    default:
-                                                        return '';
-                                                }
-                                            })
+
+                                            // Filter out id and link
+                                            .filter(k => !['id', 'link'].includes(k))
+
+                                            // Map/format the rest
+                                            .map(attr => formatAttribute(file, attr))
                                         }
-                                        {// Display checkmarks for selected files
-                                            selectedFiles &&
+
+                                        {/** Display checkmarks when this component is used as a form element */}
+                                        {selectedFiles &&
                                             <td>
                                                 <input
                                                     type='checkbox'
                                                     className='m-0'
-                                                    form={formId}
                                                     data-id={file.id}
-                                                    data-filename={file.filename}
+                                                    data-name={file.name}
                                                     data-section={file?.section}
-                                                    data-uploaded={file?.uploaded}
+                                                    data-modified-date={file?.modifiedDate}
                                                     data-size={file?.size}
                                                     data-link={file.link}
                                                     onChange={handleSelectionChange}
@@ -221,13 +263,12 @@ const Files: React.FC<Props> = ({
                                             </td>
                                         }
                                     </tr>
-                                ))
-                            }
-                        </tbody>
-                    </table>
-                </div>
-            )
-            )}
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                ))
+            }
         </div>
     );
 };

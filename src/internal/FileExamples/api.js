@@ -4,9 +4,11 @@ export const api = (type, id, attributes) => {
     switch (type) {
         case 'dms':
             json = require('./examples.json');
+            json = json.data.submission.attachments;
             break;
-        case 'attachments':
+        case 'email':
             json = require('./attachments.json');
+            json = json.data.email.attachments;
             break;
         default:
             break;

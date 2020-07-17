@@ -6,113 +6,93 @@
 import { api } from '../../internal/FileExamples/api';
 
 const submissionId = '12';
-const body = api('dms', submissionId); // Just an example - use your app's internal api hook or fetch here.
+const submissionAttachments = api('dms', submissionId); // Just an example - use your app's internal api hook or fetch here.
+const dmsLink = submissionAttachments.managementUrl;
+const directories = submissionAttachments.directories;
 
-<Files header body={body} />
+<Files 
+    showHeader
+    dmsLink={dmsLink} 
+    directories={directories} 
+/>
 ```
 
 #### Incorporating *Files* into a form
 The Files component can also serve as file selector for forms. To do so, pass in the following:
 * `selectedFiles` -- An array for/of file objects (can be empty)
 * `onSelect` -- A callback function for when a checkbox is checked/unchecked (the argument is an updated `selectedFiles` array)
-* `formId` -- The ID of the form in which this component is being used
 * `readOnly` (optional) -- Sets the checkboxes as readonly
 
 ```jsx
 import { useState, useEffect } from 'react';
 import { api } from '../../internal/FileExamples/api';
 
-const [selectedFiles, setSelectedFiles] = useState([]);
-
 const submissionId = '12';
 
-const body = api('dms', submissionId); // Just an example - use your app's internal api hook or fetch here.
+const [selectedFiles, setSelectedFiles] = useState(api('email', submissionId));
 
-const attachments = api('attachments', submissionId);
-useEffect(() => {
-    setSelectedFiles(attachments.data.attributes.files);
-}, [attachments]);
+const submissionAttachments = api('dms', submissionId); // Just an example - use your app's internal api hook or fetch here.
+const directories = submissionAttachments.directories;
 
 <Files
-    body={body}
+    directories={directories}
     selectedFiles={selectedFiles}
     onSelect={setSelectedFiles}
-    formId='correspondence-form' // Always include the form ID when using attachments
 />
 ```
 
 ### API Requirements
 
 #### DMS
-The Files component requires an API endpoint to get the directories/files from the Document Management System. The body of the response is passed into the Files component via `body` to be rendered.
+The Files component requires an API endpoint to get the directories/files from the Document Management System. This endpoint should return a `directories` array for the component to render.
 
 ```text
 GET /api/dms HTTP/1.1
 Content-Type: application/json
 ```
 
-The response body must be structured as follows:
+The `directories` array must be structured as follows
 
 ```json
 {
-    "jsonapi": {
-        "version": "1.0"
-    },
-    "data": {
-        "attributes": {
-            "directory": {
-                "Submitted": [ // Directory
-                    {
-                        "id": "1",
-                        "filename": "ltricies mauris ut tellus cursus.txt",
-                        "section": "Summary", // Optional
-                        "uploaded": "2019-11-15T19:04:42-0500", // Optional
-                        "size": "1.2 KB", // Optional
-                        "link": "#"
-                    },
-                    // additional files...
-                ],
-                // additional directories...
-            }
+    "directories": [
+        {
+        "name": "Submitted",
+        "files": [
+            {
+                "id": "5557323",
+                "name": "02 - Protocol_Amendment_I4V-MC-JAHZ_07Dec2018.pdf",
+                "modifiedDate": "2020-06-18T20:28:33-04:00",
+                "size": 11522911,
+                "section": "FDA Device Approved Labeling",
+                "link": "https://osu.link.example/u2na329123ja"
+              },
+              // additional files...
+        ]
         },
-        "links": {  
-            "dms": "#" // Optional, will appear as an external link in header
-        }
-    }
+        // additional directories...
+    ]
 }
 ```
 
 #### Selected Files
-The Files component is completely agnostic to the endpoint for getting/setting selected files. The only requirement is that selected files are an array of file objects.
+The Files component is completely agnostic to the endpoint for getting/setting selected files. The only requirement is that selected files are objects that contain an id, name, and link.
 ```text
 GET /api/exampleCorrespondenceEndpoint/12 HTTP/1.1
 Content-Type: application/json
 ```
 ```json
 {
-    "jsonapi": {
-        "version": "1.0"
-    },
-    "data": {
-        "attributes": {
-            "id": "12",
-            "subject": "Your submission was approved",
-            "to": "buckeye.1@osu.edu",
-            "from": "smith.401@osu.edu",
-            "cc": "hawk.99@osu.edu, paul.615@osu.edu",
-            "content": "To whom it may concern, ...",
-            "files": [
-                {
-                    "id": "1",
-                    "filename": "ltricies mauris ut tellus cursus.txt",
-                    "section": "Summary",
-                    "uploaded": "2019-11-15T19:04:42-0500",
-                    "size": "1.2 KB",
-                    "link": "#"
-                },
-                // etc...
-            ]            
-        }
-    }
+    "attachments": [
+        {
+            "id": "5473558",
+            "name": "ICF infrom consent individual face to face interview  020417 (2).doc",
+            "modifiedDate": "2020-06-08T15:07:07-04:00",
+            "size": 0,
+            "section": "Consent Process",
+            "link": "https://osu.link.example/2a63hasdy42"
+        },
+        // etc ...
+    ]
 }
 ```

@@ -1,68 +1,112 @@
 {
-    "jsonapi": {
-        "version": "1.0"
-    },
     "data": {
-        "attributes": {
-            "directory": {
-                "Submitted": [
+        "submission": {
+            "attachments": {
+                "managementUrl": "https://ordocstest.rf.ohio-state.edu:8443/display?folderId=5441459",
+                "directories": [
                     {
-                        "id": "1",
-                        "filename": "ltricies mauris ut tellus cursus.txt",
-                        "section": "Summary",
-                        "uploaded": "2019-11-15T19:04:42-05:00",
-                        "size": "1.2 KB",
-                        "link": "#"
+                        "name": "Approved",
+                        "files": []
                     },
                     {
-                        "id": "2",
-                        "filename": "id viverra mi nunc sit amet nisi.mkv",
-                        "section": "Summary",
-                        "uploaded": "2019-11-15T19:04:42-05:00",
-                        "size": "220 MB",
-                        "link": "#"
-                    }
-                ],
-                "Approved": [
-                    {
-                        "id": "3",
-                        "filename": "ut libero at orci tincidunt suscipit eu ullamcorper nisl.xlsx",
-                        "section": "Summary",
-                        "uploaded": "2019-12-03T09:19:31-05:00",
-                        "size": "1.7 MB",
-                        "link": "#"
+                        "name": "Deleted",
+                        "files": []
                     },
                     {
-                        "id": "4",
-                        "filename": "Maecenas risus diam.docx",
-                        "section": "Summary",
-                        "uploaded": "2019-12-04T22:12:09-05:00",
-                        "size": "1 MB",
-                        "link": "#"
-                    }
-                ],
-                "Attached": [
-                    {
-                        "id": "5",
-                        "filename": "Nunc in porttitor magna.pdf",
-                        "section": "Summary",
-                        "uploaded": "2020-02-29T11:33:11-05:00",
-                        "size": "3 MB",
-                        "link": "#"
+                        "name": "Reference",
+                        "files": []
                     },
                     {
-                        "id": "6",
-                        "filename": "Etiam.jpeg",
-                        "section": "Summary",
-                        "uploaded": "2020-02-29T11:33:11-05:00",
-                        "size": "5 MB",
-                        "link": "#"
+                        "name": "Submitted",
+                        "files": [
+                            {
+                                "id": "5557323",
+                                "name": "02 - Protocol_Amendment_I4V-MC-JAHZ_07Dec2018.pdf",
+                                "modifiedDate": "2020-06-18T20:28:33-04:00",
+                                "size": 11522911,
+                                "section": "FDA Device Approved Labeling",
+                                "link": "#"
+                            },
+                            {
+                                "id": "5473554",
+                                "name": "App Init.html",
+                                "modifiedDate": "2020-05-14T13:47:02-04:00",
+                                "size": 0,
+                                "section": "Study - Submission Document",
+                                "link": "#"
+                            },
+                            {
+                                "id": "5557353",
+                                "name": "Chases Large File 1 (86MB).mp4",
+                                "modifiedDate": "2020-07-14T20:16:46-04:00",
+                                "size": 88215030,
+                                "section": null,
+                                "link": "#"
+                            },
+                            {
+                                "id": "5557354",
+                                "name": "Chases Large File 2 (550 MB).7z",
+                                "modifiedDate": "2020-07-14T20:16:50-04:00",
+                                "size": 560757576,
+                                "section": null,
+                                "link": "#"
+                            },
+                            {
+                                "id": "5557355",
+                                "name": "Chases Weird \"File\" 'test'.pdf",
+                                "modifiedDate": "2020-07-14T20:16:50-04:00",
+                                "size": 1192580,
+                                "section": null,
+                                "link": "#"
+                            },
+                            {
+                                "id": "5473558",
+                                "name": "ICF infrom consent individual face to face interview  020417 (2).doc",
+                                "modifiedDate": "2020-06-08T15:07:07-04:00",
+                                "size": 0,
+                                "section": "Consent Process",
+                                "link": "#"
+                            },
+                            {
+                                "id": "5473557",
+                                "name": "Inst focus group with pregnant women 020517.doc",
+                                "modifiedDate": "2020-06-08T15:07:07-04:00",
+                                "size": 0,
+                                "section": "Surveys and/or questionnaires",
+                                "link": "#"
+                            },
+                            {
+                                "id": "5473556",
+                                "name": "Inst screening form for focus group  020417.doc",
+                                "modifiedDate": "2020-06-08T15:07:07-04:00",
+                                "size": 0,
+                                "section": "Surveys and/or questionnaires",
+                                "link": "#"
+                            },
+                            {
+                                "id": "5557322",
+                                "name": "LY3009104 IB (RA, Inflam Dis) 28Mar2018.pdf",
+                                "modifiedDate": "2020-06-18T20:28:33-04:00",
+                                "size": 1192580,
+                                "section": "FDA Device Approved Labeling",
+                                "link": "#"
+                            },
+                            {
+                                "id": "5473555",
+                                "name": "Protocol Research protocol focus and individual interview 020417.doc",
+                                "modifiedDate": "2020-06-08T15:07:07-04:00",
+                                "size": 0,
+                                "section": "Research Protocol",
+                                "link": "#"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Attached",
+                        "files": []
                     }
                 ]
             }
-        },
-        "links": {
-            "dms": "#"
         }
     }
 }
