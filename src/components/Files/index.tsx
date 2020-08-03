@@ -6,21 +6,23 @@ import bytes from 'bytes';
 // @ts-ignore
 import startCase from 'lodash/startCase';
 
-interface Record {
+export interface Record {
     id: string;
     name: string;
-    section?: string;
-    modifiedDate?: string;
-    size?: string;
+    modifiedDate: string;
+    size: number;
+    section: string | null;
     link: string;
+    [key: string]: string | number | null;
 }
 
 interface Directory {
     name: string;
     files: Array<Record>;
+    [key: string]: string | Array<Record>;
 }
 
-interface Directories {
+export interface Directories {
     [key: string]: Directory;
 }
 
@@ -245,10 +247,11 @@ const Files: React.FC<Props> = ({
 
                                         {/** Display checkmarks when this component is used as a form element */}
                                         {selectedFiles &&
-                                            <td>
+                                            <td className='custom-control custom-checkbox'>
                                                 <input
                                                     type='checkbox'
-                                                    className='m-0'
+                                                    className='m-0 custom-control-input'
+                                                    id={`select-file-${file.id}`}
                                                     data-id={file.id}
                                                     data-name={file.name}
                                                     data-section={file?.section}
@@ -260,6 +263,14 @@ const Files: React.FC<Props> = ({
                                                     readOnly={readOnly}
                                                     disabled={readOnly}
                                                 />
+                                                <label
+                                                    className='custom-control-label'
+                                                    htmlFor={`select-file-${file.id}`}
+                                                >
+                                                    <span className='sr-only'>
+                                                        {`Include this file`}
+                                                    </span>
+                                                </label>
                                             </td>
                                         }
                                     </tr>

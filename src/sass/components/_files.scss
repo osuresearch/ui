@@ -2,6 +2,7 @@
 .files {
     .card { 
         border-bottom: 0;
+        overflow: auto;
 
         &:last-of-type {
             border-bottom: 1px solid rgba(0,0,0,0.125);
@@ -354,6 +355,16 @@
                             &::before {
                                 content: '\f1c2';
                             }
+                        }
+                    }
+                }
+            }
+
+            td {
+                label {
+                    &.custom-control-label {
+                        &::before, &::after {
+                            margin: 0.25rem 0.5rem;
                         }
                     }
                 }
