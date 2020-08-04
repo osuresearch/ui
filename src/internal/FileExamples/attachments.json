@@ -1,0 +1,38 @@
+{
+    "data": {
+        "email": {
+            "id": "12",
+            "subject": "Your submission was approved",
+            "to": "buckeye.1@osu.edu",
+            "from": "smith.401@osu.edu",
+            "cc": "hawk.99@osu.edu, paul.615@osu.edu",
+            "content": "To whom it may concern, ...",
+            "attachments": [
+                {
+                    "id": "5557323",
+                    "name": "02 - Protocol_Amendment_I4V-MC-JAHZ_07Dec2018.pdf",
+                    "modifiedDate": "2020-06-18T20:28:33-04:00",
+                    "size": 11522911,
+                    "section": "FDA Device Approved Labeling",
+                    "link": "#"
+                },
+                {
+                    "id": "5473556",
+                    "name": "Inst screening form for focus group  020417.doc",
+                    "modifiedDate": "2020-06-08T15:07:07-04:00",
+                    "size": 0,
+                    "section": "Surveys and/or questionnaires",
+                    "link": "#"
+                },
+                {
+                    "id": "5473557",
+                    "name": "Inst focus group with pregnant women 020517.doc",
+                    "modifiedDate": "2020-06-08T15:07:07-04:00",
+                    "size": 0,
+                    "section": "Surveys and/or questionnaires",
+                    "link": "#"
+                }
+            ]
+        }
+    }
+}
