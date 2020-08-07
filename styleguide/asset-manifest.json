@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/static/css/main.37c6cb0a.css",
+    "main.js": "/build/bundle.acc78004.js",
+    "index.html": "/index.html",
+    "precache-manifest.67fa8fdc3332c94632614869d2cd1217.js": "/precache-manifest.67fa8fdc3332c94632614869d2cd1217.js",
+    "service-worker.js": "/service-worker.js"
+  },
+  "entrypoints": [
+    "static/css/main.37c6cb0a.css",
+    "build/bundle.acc78004.js"
+  ]
+}
