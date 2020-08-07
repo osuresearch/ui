@@ -76,9 +76,9 @@ var TabList = function TabList(_ref) {
     return childrenArr.map(function (child, idx) {
       var isOverflow = idx >= overflowIndex;
 
-      if (_react.default.isValidElement(child)) {
+      if ( /*#__PURE__*/_react.default.isValidElement(child)) {
         // TODO: Test if it's a TabItem, ignore the rest.
-        var clone = _react.default.cloneElement(child, {
+        var clone = /*#__PURE__*/_react.default.cloneElement(child, {
           index: idx,
           asDropdownItem: isOverflow,
           onBoundingRect: onChildBoundingRect

@@ -1,15 +1,10 @@
 export default Palette;
 declare class Palette extends React.Component<any, any, any> {
     constructor(props: any);
-    state: {
-        className: string;
-        sass: string;
-    };
     getColorClassName(tintOrShade: any, level: any): string;
     getColorSass(tintOrShade: any, level: any): string;
     onClick(tintOrShade: any, level: any): void;
     getColorLink(tintOrShade: any, level: any): JSX.Element;
-    render(): JSX.Element;
 }
 declare namespace Palette {
     export namespace propTypes {

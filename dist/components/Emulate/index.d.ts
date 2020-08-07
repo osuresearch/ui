@@ -6,7 +6,7 @@ export default Emulate;
  * changed, the entire application will be refreshed to load
  * under the new emulated user.
  *
- * @deprecated Use @oris/auth
+ * @deprecated Use `@oris/auth`. Will be removed in a future version of `@oris/ui`
  */
 declare class Emulate extends React.Component<any, any, any> {
     constructor(props: any);
@@ -27,9 +27,6 @@ declare class Emulate extends React.Component<any, any, any> {
      * Submits an emulation DELETE request and refreshes the current page.
      */
     onReset(e: any): void;
-    state: {
-        localStorage: any;
-    };
     /**
      * Submit emulation for an individual, by ID
      *
@@ -46,7 +43,6 @@ declare class Emulate extends React.Component<any, any, any> {
      * @param {string} name Display name
      */
     addToHistory(id: string, name: string): void;
-    render(): JSX.Element;
 }
 declare namespace Emulate {
     export namespace propTypes {

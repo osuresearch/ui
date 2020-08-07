@@ -1,5 +1,7 @@
 import React from 'react';
 export interface Props {
+    /** ID attribute for the underlying editor */
+    id?: string;
     /** Initial content for the component as a raw HTML string. */
     defaultValue?: string;
     /** Should the contents of the editor only be rendered as read-only */

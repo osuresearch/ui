@@ -47,13 +47,14 @@ var SIMPLE_TOOLBAR_CONFIG = [{
  */
 
 var Richtext = function Richtext(_ref) {
-  var _ref$defaultValue = _ref.defaultValue,
+  var id = _ref.id,
+      onChange = _ref.onChange,
+      _ref$defaultValue = _ref.defaultValue,
       defaultValue = _ref$defaultValue === void 0 ? '' : _ref$defaultValue,
       _ref$readOnly = _ref.readOnly,
       readOnly = _ref$readOnly === void 0 ? false : _ref$readOnly,
       _ref$simple = _ref.simple,
       simple = _ref$simple === void 0 ? false : _ref$simple,
-      onChange = _ref.onChange,
       _ref$className = _ref.className,
       className = _ref$className === void 0 ? '' : _ref$className,
       _ref$contentsCss = _ref.contentsCss,
@@ -116,12 +117,13 @@ var Richtext = function Richtext(_ref) {
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "richtext ".concat(className, " ").concat(readOnly ? 'is-readonly' : '')
   }, /*#__PURE__*/_react.default.createElement("textarea", {
+    id: id,
     className: "richtext-editor",
     ref: editorRef,
     disabled: readOnly
   }));
 };
 
-var _default = (0, _react.memo)(Richtext);
+var _default = /*#__PURE__*/(0, _react.memo)(Richtext);
 
 exports.default = _default;

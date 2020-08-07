@@ -5,8 +5,6 @@ export default MastheadItem;
 declare class MastheadItem extends React.Component<any, any, any> {
     constructor(props: any);
     popper: React.RefObject<any>;
-    componentDidMount(): void;
-    render(): JSX.Element;
 }
 declare namespace MastheadItem {
     export namespace propTypes {

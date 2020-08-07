@@ -21,8 +21,6 @@ declare class Modal extends React.Component<any, any, any> {
     constructor(props: any);
     el: HTMLDivElement;
     ref: React.RefObject<any>;
-    componentDidMount(): void;
-    componentWillUnmount(): void;
     /**
      * Activates and displays the modal
      *
@@ -35,7 +33,6 @@ declare class Modal extends React.Component<any, any, any> {
      * @public
      */
     public hide(): void;
-    render(): React.ReactPortal;
 }
 declare namespace Modal {
     export namespace propTypes {

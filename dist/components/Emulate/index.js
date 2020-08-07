@@ -25,7 +25,7 @@ var _propTypes = _interopRequireDefault(require("prop-types"));
 
 var _ui = require("@oris/ui");
 
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = (0, _getPrototypeOf2.default)(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = (0, _getPrototypeOf2.default)(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return (0, _possibleConstructorReturn2.default)(this, result); }; }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = (0, _getPrototypeOf2.default)(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = (0, _getPrototypeOf2.default)(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return (0, _possibleConstructorReturn2.default)(this, result); }; }
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
@@ -36,7 +36,7 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
  * changed, the entire application will be refreshed to load
  * under the new emulated user.
  * 
- * @deprecated Use @oris/auth
+ * @deprecated Use `@oris/auth`. Will be removed in a future version of `@oris/ui`
  */
 var Emulate = /*#__PURE__*/function (_React$Component) {
   (0, _inherits2.default)(Emulate, _React$Component);
@@ -48,7 +48,7 @@ var Emulate = /*#__PURE__*/function (_React$Component) {
 
     (0, _classCallCheck2.default)(this, Emulate);
     _this = _super.call(this, props);
-    _this.modal = _react.default.createRef();
+    _this.modal = /*#__PURE__*/_react.default.createRef();
     _this.onClick = _this.onClick.bind((0, _assertThisInitialized2.default)(_this));
     _this.onEmulate = _this.onEmulate.bind((0, _assertThisInitialized2.default)(_this));
     _this.onReset = _this.onReset.bind((0, _assertThisInitialized2.default)(_this));

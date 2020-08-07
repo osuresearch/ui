@@ -16,7 +16,7 @@ var _propTypes = _interopRequireDefault(require("prop-types"));
  *
  * Typically rendered within the `Navbar` of an application.
  * 
- * @deprecated Use oris/auth 
+ * @deprecated Use `@oris/auth`. Will be removed in a future version of `@oris/ui`
  */
 var Profile = function Profile(props) {
   return /*#__PURE__*/_react.default.createElement("div", {

@@ -9,9 +9,6 @@ declare class Masthead extends React.Component<any, any, any> {
     constructor(props: any);
     ref: React.RefObject<any>;
     onBodyResize(): void;
-    componentDidMount(): void;
-    componentWillUnmount(): void;
-    render(): JSX.Element;
 }
 declare namespace Masthead {
     export namespace propTypes {

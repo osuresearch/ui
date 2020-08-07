@@ -5,16 +5,6 @@ export default Search;
  */
 declare class Search extends React.Component<any, any, any> {
     constructor(props: any);
-    state: {
-        searching: boolean;
-        error: boolean;
-        showSearchResults: boolean;
-        lockSearchInput: boolean;
-        totalResults: number;
-        results: never[];
-        lastSearchTerm: string;
-        lastSearchTime: number;
-    };
     /**
      * Custom change handler, as typing in the search box does
      * *not* automatically update the field we should PATCH back.
@@ -49,18 +39,12 @@ declare class Search extends React.Component<any, any, any> {
      * @return string
      */
     getPrefixIconClasses(): "fa fa-spinner fa-spin" | "fa fa-exclamation-circle text-danger" | "fa fa-search";
-    componentDidMount(): void;
-    componentDidUpdate(prevProps: any): void;
     /**
      * Reset the search to what was supplied in the `defaultValue` prop
      *
      * @public
      */
     public reset(): void;
-    /**
-     * Cancel all async requests currently pending
-     */
-    componentWillUnmount(): void;
     /**
      * Determine if we should fire off a new search.
      *
@@ -108,7 +92,6 @@ declare class Search extends React.Component<any, any, any> {
      * Get DOM that should be rendered in the dropdown
      */
     getDropdownContent(): any;
-    render(): JSX.Element;
 }
 declare namespace Search {
     export namespace propTypes {
@@ -120,7 +103,7 @@ declare namespace Search {
         export const onChange: PropTypes.Requireable<(...args: any[]) => any>;
         export const onFocus: PropTypes.Requireable<(...args: any[]) => any>;
         export const onBlur: PropTypes.Requireable<(...args: any[]) => any>;
-        export const resultComponent: PropTypes.Requireable<PropTypes.ReactNodeLike>;
+        export const resultComponent: PropTypes.Requireable<PropTypes.ReactComponentLike>;
         export const dropdownContentRenderer: PropTypes.Requireable<(...args: any[]) => any>;
         export const alwaysShowResults: PropTypes.Validator<boolean>;
         export const endpoint: PropTypes.Validator<string>;

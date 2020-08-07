@@ -31,7 +31,7 @@ var _SearchResult = _interopRequireDefault(require("../SearchResult"));
 
 var _JsonApiUtility = require("../../internal/JsonApiUtility");
 
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = (0, _getPrototypeOf2.default)(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = (0, _getPrototypeOf2.default)(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return (0, _possibleConstructorReturn2.default)(this, result); }; }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = (0, _getPrototypeOf2.default)(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = (0, _getPrototypeOf2.default)(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return (0, _possibleConstructorReturn2.default)(this, result); }; }
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
@@ -69,7 +69,7 @@ var Search = /*#__PURE__*/function (_React$Component) {
     _this.onResultSelect = _this.onResultSelect.bind((0, _assertThisInitialized2.default)(_this));
     _this.clear = _this.clear.bind((0, _assertThisInitialized2.default)(_this));
     _this.onChangeTimeout = _this.onChangeTimeout.bind((0, _assertThisInitialized2.default)(_this));
-    _this.input = _react.default.createRef();
+    _this.input = /*#__PURE__*/_react.default.createRef();
 
     if (!window.AbortController || !window.AbortSignal) {
       throw new Error('Browser does not support AbortController/AbortSignal');
@@ -132,7 +132,6 @@ var Search = /*#__PURE__*/function (_React$Component) {
       var defaultValue = this.props.defaultValue;
 
       if ((0, _typeof2.default)(defaultValue) !== 'object') {
-        this.clear();
         return;
       }
 
@@ -608,7 +607,7 @@ Search.propTypes = {
    *
    * Defaults to the `SearchResult` component if not supplied.
    */
-  resultComponent: _propTypes.default.node,
+  resultComponent: _propTypes.default.elementType,
 
   /**
    * Callback to render custom content in place of the dropdown.

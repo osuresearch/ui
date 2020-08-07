@@ -1,4 +1,11 @@
 export default Profile;
+/**
+ * Provides a dropdown for the logged in user to update their profile or logout.
+ *
+ * Typically rendered within the `Navbar` of an application.
+ *
+ * @deprecated Use `@oris/auth`. Will be removed in a future version of `@oris/ui`
+ */
 declare function Profile(props: any): JSX.Element;
 declare namespace Profile {
     export namespace propTypes {

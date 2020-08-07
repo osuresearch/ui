@@ -4,8 +4,14 @@ export interface Props {
     theme?: string;
     /** Additional class names to apply to the button */
     className?: string;
-    /** Should click events be ignored */
+    /** Should click events / link redirects be ignored */
     disabled?: boolean;
+    /**
+     * Button link target. Will render as a React Router <Link> if supplied.
+     *
+     * Buttons with a `to` will not execute `onClick`.
+     */
+    to?: string;
     /** Click event callback */
     onClick?(event: MouseEvent<HTMLButtonElement>): void;
 }

@@ -9,9 +9,6 @@ export default AppSearch;
  */
 declare class AppSearch extends React.Component<any, any, any> {
     constructor(props: any);
-    state: {
-        focused: boolean;
-    };
     contentRenderer(totalResults: any, results: any, error: any): JSX.Element;
     /**
      * Event handler for the underlying input's `onFocus`
@@ -37,7 +34,6 @@ declare class AppSearch extends React.Component<any, any, any> {
      * @return {object} Mapping bucket names to an array of values
      */
     createBuckets(results: any): object;
-    render(): JSX.Element;
 }
 declare namespace AppSearch {
     export namespace propTypes {

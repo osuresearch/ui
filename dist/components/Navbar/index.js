@@ -11,8 +11,6 @@ var _react = _interopRequireDefault(require("react"));
 
 var _reactRouterDom = require("react-router-dom");
 
-// @ts-ignore
-
 /**
  * Standard brand application header.
  *
@@ -25,7 +23,6 @@ var Navbar = function Navbar(_ref) {
   return /*#__PURE__*/_react.default.createElement("nav", {
     className: "navbar navbar-main"
   }, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
-    exact: "true",
     to: "/",
     className: "navbar-brand"
   }, /*#__PURE__*/_react.default.createElement("div", {
