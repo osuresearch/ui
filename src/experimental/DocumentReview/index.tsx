@@ -97,6 +97,7 @@ const DocumentReview: React.FC<Props> = ({
         }
 
         iframeDocument.write(src);
+        iframeDocument.close();
         manager.bind(iframeDocument);
     }, [src, manager, iframe]);
     
