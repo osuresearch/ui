@@ -35,8 +35,10 @@ export const Context = React.createContext<Props>({
  * 
  * ### Subcomponents
  * * `Select.Label` (required) – The label that corresponds with the `Select.Control`
- *  * **Props** – Accepts [HTML Global attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes).
- * * `Select.Control` (required) - A control container for options (this is the actual `<select>` in native HTML)
+ *  * **Props**
+ *      * `hide` – Visually hide the label. The content will continue to be readable in screen readers. Use this with caution; hiding the label can lead to usability and accessibility issues.
+ *      * Accepts [HTML Global attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes).
+ * * `Select.Control` (required) - A control container for options (this is `<select>` in native HTML)
  *  * **Props** – Accepts [`<select> attributes`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select) and React event handler attributes
  * * `Select.Option` (required) - An option nested in a `Select.Control` list (this is `<option>` in native HTML)
  *  * **Props**
