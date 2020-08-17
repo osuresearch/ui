@@ -51,6 +51,11 @@ let sections = [
         ]
     },
     {
+        name: 'Form Components',
+        content: 'src/form/readme.md',
+        components: 'src/form/**/index.?(js|tsx)'
+    },
+    {
         name: 'HTML Components',
         content: 'docs/html/readme.md',
         sections: listHtmlComponents()
@@ -153,5 +158,5 @@ module.exports = {
         // Assume Javascript
         return require('react-docgen').parse(source, resolver, handlers);
     },
-    sections: sections 
+    sections: sections
 };

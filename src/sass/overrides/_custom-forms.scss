@@ -22,7 +22,7 @@
 .form-check,
 .form-check-inline {
     // Bootstrap does not support adding an .is-invalid
-    // state to the control set wrapper
+    // or .is-valid state to the control set wrapper
     &.is-invalid {
         ~ .invalid-feedback {
             display: block;
@@ -34,6 +34,20 @@
 
         .custom-control-label {
             color: theme-color('danger');
+        }
+    }
+
+    &.is-valid {
+        ~ .valid-feedback {
+            display: block;
+        }
+
+        .custom-control-label::before {
+            border-color: theme-color('success');
+        }
+
+        .custom-control-label {
+            color: theme-color('success');
         }
     }
 }
