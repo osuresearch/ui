@@ -1,15 +1,22 @@
 import React, { useContext } from 'react';
-import { CheckboxContext } from '.';
+import { Context } from './';
 
 import LabelCommon from '../../internal/FormCommon/Label';
 
 export interface LabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> { };
 
 export const Label: React.FC<LabelProps> = ({ children, ...props }) => {
-    const { id } = useContext(CheckboxContext);
+    const { id, required } = useContext(Context);
 
     return (
-        <LabelCommon {...props} htmlFor={id}>
+        <LabelCommon
+            className={
+                (required ? ' is-required' : '')
+            }
+            {...props}
+
+            htmlFor={id}
+        >
             {children}
         </LabelCommon>
     )

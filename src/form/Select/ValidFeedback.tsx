@@ -1,0 +1,19 @@
+import React, { useContext } from 'react';
+import ValidFeedbackCommon from '../../internal/FormCommon/ValidFeedback';
+import { Context } from '.';
+
+export interface ValidFeedbackProps extends React.HTMLAttributes<HTMLDivElement> { }
+
+export const ValidFeedback: React.FC<ValidFeedbackProps> = ({ children, ...props }) => {
+    const { valid } = useContext(Context);
+
+    if (valid) {
+        return (
+            <ValidFeedbackCommon {...props}>
+                {children}
+            </ValidFeedbackCommon>
+        )
+    } else {
+        return <></>
+    }
+}

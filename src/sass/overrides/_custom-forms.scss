@@ -13,7 +13,7 @@
 }
 
 // Correct positioning & font size of feedback message
-.invalid-feedback {
+.invalid-feedback, .valid-feedback {
     margin-top: 0;
     margin-bottom: 1rem;
     font-size: 0.8rem;
