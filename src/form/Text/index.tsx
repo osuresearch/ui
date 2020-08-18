@@ -1,64 +1,46 @@
-import React, { createContext, useMemo, useState, useEffect, useCallback } from 'react';
-import { FieldBind, NullFieldBind, SetFieldBindValue, IFieldBind, OnChangeFormField, FormFieldProps } from './etc';
+import React, { createContext } from 'react';
+import { FieldBind, NullFieldBind, IFieldBind, FormFieldProps } from './etc';
 import { Label, LabelProps } from './Label';
 import { Help, HelpProps } from './Help';
+import { Error, ErrorProps } from './Error';
 import { Input, InputProps } from './Input';
-import useFieldBind from './useFieldBind';
 import useFieldBindOrProps from './useFieldBindOrProps';
 
 type Props = FormFieldProps<string> & {
-    /** 
-     * Number of lines for this field's input editor.
-     * Will toggle between input and textarea accordingly. 
-     */
-    lines?: number
-}
-
-interface ITextContext {
-    bind: IFieldBind<string>;
-    lines: number;
+    // Add your other top level props here.
+    // foo: number
 }
 
 interface ITextComposition {
-    Label: React.FC<LabelProps>;
-    Help: React.FC<HelpProps>;
-    Input: React.FC<InputProps>;
-    // ValidFeedback: React.FC<ValidFeedbackProps>;
-    // InvalidFeedback: React.FC<InvalidFeedbackProps>;
+    Label: React.FC<LabelProps>
+    Help: React.FC<HelpProps>
+    Input: React.FC<InputProps>
+    Error: React.FC<ErrorProps>
+}
+
+interface ITextContext {
+    bind: IFieldBind<string>
+
+    // Add your other props  here that should be made available to consumers
+    // foo: number
 }
 
 export const TextContext = createContext<ITextContext>({
     bind: new NullFieldBind<string>(),
-    // setValue: () => 0,
-    lines: 0
+
+    // Add your other prop defaults here that should be made available to consumers
+    // foo: 1
 });
 
-function createFieldBindFromProps<T>(props: any): FieldBind<T> {
-    // We cast it off to a matching interface and
-    // then map fields onto a concrete instance.
-    const ifb = props as IFieldBind<T>;
-    const bind = new FieldBind<T>();
-
-    bind.error = ifb.error;
-    bind.help = ifb.help;
-    bind.instructions = ifb.instructions;
-    bind.name = ifb.name;
-    bind.id = ifb.id;
-    bind.readOnly = ifb.readOnly;
-    bind.value = ifb.value;
-
-    return bind;
-}
-
 const Text: React.FC<Props> & ITextComposition = ({ 
-    lines = 1, 
+    // foo = 1
     children,
-    ...props // everything else is of FieldBind<string>
+    ...props // everything else is of FormFieldProps<string>
 }) => {
     const { bind } = useFieldBindOrProps(props);
 
     return (
-        <TextContext.Provider value={{ bind, lines }}>
+        <TextContext.Provider value={{ bind, /* foo */ }}>
             <div className="form-group">
                 {children}
             </div>
@@ -69,5 +51,6 @@ const Text: React.FC<Props> & ITextComposition = ({
 Text.Label = Label;
 Text.Help = Help;
 Text.Input = Input;
+Text.Error = Error;
 
 export default Text;

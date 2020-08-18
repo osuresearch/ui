@@ -4,12 +4,46 @@
 Inlining values
 
 ```jsx
-<Text id="foo" value="foo bar">
+import { useState } from 'react';
+import { Button } from '@oris/ui';
+
+const [readOnly, setReadOnly] = useState(false);
+const [error, setError] = useState('');
+
+<div>
+    <Text id="foo1" name="foo" value="foo bar" readOnly={readOnly} error={error}>
+        <Text.Label>
+            Label here
+        </Text.Label>
+
+        <Text.Input />
+
+        <Text.Help>
+            Help stuff go here
+        </Text.Help>
+        
+        <Text.Error />
+    </Text>
+
+    <Button onClick={() => setReadOnly(!readOnly)}>
+        Toggle Read Only
+    </Button>
+    
+    <Button onClick={() => setError(error ? '' : 'Do better')}>
+        Toggle Error
+    </Button>
+</div>
+```
+
+Rendering as a textarea
+
+```jsx
+<Text id="foo2" name="foo" value="foo bar">
     <Text.Label>
         Label here
     </Text.Label>
 
-    <Text.Input />
+    <Text.Input lines={3} />
 
     <Text.Help>
         Help stuff go here
@@ -20,7 +54,7 @@ Inlining values
 Defaulting to parent `<Text>` props 
 
 ```jsx
-<Text id="foo" value="foo bar" instructions="Label here" help="Help stuff">
+<Text id="foo3" value="foo bar" instructions="Label here" help="Help stuff">
     <Text.Label />
     <Text.Input />
     <Text.Help />
@@ -30,15 +64,27 @@ Defaulting to parent `<Text>` props
 Providing a `bind` class instance:
 
 ```jsx
+import { Button } from '@oris/ui';
 import { MyMockStringBind } from './etc';
 
-const bind = new MyMockStringBind('foo', 'foo bar');
+const bind = new MyMockStringBind('foo4', 'foo bar');
 
-<Text bind={bind}>
-    <Text.Label />
-    <Text.Input />
-    <Text.Help />
-</Text>
+<div>
+    <Text bind={bind}>
+        <Text.Label />
+        <Text.Input />
+        <Text.Help />
+        <Text.Error />
+    </Text>
+
+    <Button onClick={() => bind.readOnly = !bind.readOnly}>
+        Toggle Read Only
+    </Button>
+    
+    <Button onClick={() => bind.error = bind.error ? '' : 'Do better'}>
+        Toggle Error
+    </Button>
+</div>
 ```
 
 Change Handling (without binds)
@@ -54,7 +100,7 @@ const onChange = (foo, prevFoo) => {
     setPrev(prevFoo);
 };
 
-<Text id="foo" value={value} onChange={onChange}>
+<Text id="foo5" value={value} onChange={onChange}>
     <Text.Label>Instructions here</Text.Label>
     <Text.Input />
 
@@ -69,7 +115,7 @@ Getting bind values on form submit:
 import React, { useEffect } from 'react';
 import { MyMockStringBind } from './etc';
 
-const bind = new MyMockStringBind('foo', 'foo bar');
+const bind = new MyMockStringBind('foo6', 'foo bar');
 console.log('create bind', bind);
 
 function MyComponent() {
@@ -103,7 +149,7 @@ import React, { useEffect, useState } from 'react';
 import { Button } from '@oris/ui';
 import { MyMockStringBind } from './etc';
 
-const bind = new MyMockStringBind('foo', 'foo bar');
+const bind = new MyMockStringBind('foo7', 'foo bar');
 
 <div>
     <Text bind={bind}>
@@ -128,7 +174,7 @@ import { Button } from '@oris/ui';
 import { MyMockStringBind } from './etc';
 import useFieldBind from './useFieldBind';
 
-const bind = new MyMockStringBind('foo', 'foo bar');
+const bind = new MyMockStringBind('foo8', 'foo bar');
 
 function MyComponent() {
     // Add to redraw this component on changes to the bind.

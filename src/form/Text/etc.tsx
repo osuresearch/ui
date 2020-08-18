@@ -33,6 +33,16 @@ export interface IFieldBind<T> {
 
     /** Event delegates for when the field changes */
     onChange: Action<OnChangeFormField<T>>
+
+    // TODO: Maybe a onStateChange action delegate list
+    // and wrap all the other properties as getters/setters that 
+    // trigger the delegates (e.g. calling onStateChange for bind.readOnly = true)
+    // That way React components can also register to state changes
+    // and trigger re-renders. 
+
+    // TODO: .hashCode() so we can track an overall picture of changes in an instance.
+    // However, if we implement onStateChange action delegates, probably wouldn't
+    // need this any longer? 
 }
 
 /** Base props for a form field. Handles binds + spreading the bind as props */
@@ -68,7 +78,7 @@ export type FormFieldProps<T> = {
     /**
      * Change callback when `bind || value` is updated. 
      */
-    onChange?: OnChangeFormField<T>;
+    onChange?: OnChangeFormField<T>
 }
 
 export class FieldBind<T> implements IFieldBind<T> {

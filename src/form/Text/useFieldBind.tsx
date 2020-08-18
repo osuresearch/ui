@@ -13,6 +13,14 @@ export default function useFieldBind<T>(ref: IFieldBind<T> | IFieldBindFactory<T
     // Value is stored to trigger re-renders, but we don't really use it.
     const [value, setValue] = useState(bind.value);
 
+    // Update local store if the referenced bind changes
+    useEffect(() => {
+        // TODO: What about the callable? That may cause issues when someone
+        // is inlining a lambda like: `useFieldBind(() => new ...)`
+        // Maybe just get rid of the IFieldBindFactory support?
+        setBind(ref);
+    }, [ref]);
+
     // Register our state setter as a bind change handler to trigger a 
     // refresh of this component/context upon value change 
     useEffect(() => {

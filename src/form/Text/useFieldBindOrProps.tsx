@@ -48,27 +48,41 @@ export default function useFieldBindOrProps<T>(props: FormFieldProps<T>) {
     // If the bind object reference changes, apply the new bind.
     // Or - if any of the props change, update the props copy bind.
     useEffect(() => {
-        if (bind) {
-            console.debug('[useFieldBindOrProps] Bind change, setting state', bind);
-            setBind(bind);
+        if (props.bind) {
+            console.debug('[useFieldBindOrProps] Bind change, setting state', props.bind);
+            setBind(props.bind);
         } else {
             // It was removed, fallback to a props copy
             console.debug('[useFieldBindOrProps] Bind undefined, falling back to props', props);
             setBind(createFieldBindFromProps(props));
         }
-    }, [bind, props.value, props.error, props.help, props.instructions]); 
-    // ... and so on... unfortunately.
+    }, [
+        props.bind, 
+        props.id,
+        props.name,
+        props.error,
+        props.help, 
+        props.instructions,
+        props.value, 
+        props.readOnly
+    ]);
 
+    // TODO: While the above monitors props, it doesn't monitor the bind itself.
+    // I'd probably want some sort of state hash of the bind to check against.
+    // e.g. your typical .hashCode() method that just bitwise combines properties.
+    
     // On change of the bind or onChange delegate, (un)register the delegate.
     // This will also deal with cleaning up the delegate on unmount
     useEffect(() => {
         if (props.onChange) {
             bind.onChange.add(props.onChange);
+            console.debug('[useFieldBindOrProps] Register onChange', bind);
         }
 
         return () => {
             if (props.onChange) {
                 bind.onChange.remove(props.onChange);
+                console.debug('[useFieldBindOrProps] Unregister onChange', bind);
             }
         }
     }, [bind, props.onChange]);
