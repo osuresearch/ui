@@ -10,19 +10,16 @@ function createFieldBindFromProps<T>(props: FormFieldProps<T>): FieldBind<T> {
     const bind = new FieldBind<T>();
 
     bind.error = props.error;
-    bind.help = props.help;
-    bind.instructions = props.instructions;
     bind.name = props.name;
     bind.id = props.id;
     bind.readOnly = props.readOnly;
-    bind.value = props.value;
 
     return bind;
 }
 
 function isFormFieldProps<T>(props: any): props is FormFieldProps<T> {
     return typeof (props as FormFieldProps<T>).bind !== 'undefined' ||
-            typeof (props as FormFieldProps<T>).name !== 'undefined';
+        typeof (props as FormFieldProps<T>).name !== 'undefined';
 }
 
 /**
@@ -57,20 +54,20 @@ export default function useFieldBindOrProps<T>(props: FormFieldProps<T>) {
             setBind(createFieldBindFromProps(props));
         }
     }, [
-        props.bind, 
+        props.bind,
         props.id,
         props.name,
         props.error,
-        props.help, 
+        props.help,
         props.instructions,
-        props.value, 
+        props.value,
         props.readOnly
     ]);
 
     // TODO: While the above monitors props, it doesn't monitor the bind itself.
     // I'd probably want some sort of state hash of the bind to check against.
     // e.g. your typical .hashCode() method that just bitwise combines properties.
-    
+
     // On change of the bind or onChange delegate, (un)register the delegate.
     // This will also deal with cleaning up the delegate on unmount
     useEffect(() => {

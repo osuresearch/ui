@@ -33,7 +33,7 @@ export interface IFieldBind<T> {
     required?: boolean
 
     /** Get/update the field value */
-    value: Nullable<T> 
+    value: Nullable<T>
 
     /** Delegates to notify when the value changes */
     onChange: Action<OnChangeDelegate<T>>
@@ -49,19 +49,12 @@ export type FormFieldProps<T> = {
      * 
      * If not provided, the props (id, name, etc) will be used instead.
      */
-    bind?: IFieldBind<T>
-        
+    bind: IFieldBind<T>
+
+} | {
+
     /** Unique ID of the form field */
-    id?: string
-
-    /** Name of the form field, for retrieval through FormData */
-    name?: string
-
-    /** Instructional labeling for the field */
-    instructions?: string
-
-    /** Additional help text to display alongside the field */
-    help?: string
+    id: string
 
     /** Validation error to display for the field */
     error?: string
@@ -71,14 +64,6 @@ export type FormFieldProps<T> = {
 
     /** Should the field be indicated as (soft) required */
     required?: boolean
-
-    /** Get/update the field value */
-    value?: Nullable<T>
-
-    /**
-     * Change callback when `bind || value` is updated. 
-     */
-    onChange?: OnChangeDelegate<T>
 }
 
 export class FieldBind<T> implements IFieldBind<T> {

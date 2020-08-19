@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { TextContext } from '.';
 
-export type InputProps =  React.InputHTMLAttributes<HTMLInputElement> & { 
+export type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
     /** 
      * Number of lines for this field's input editor.
      * Will toggle between input and textarea accordingly. 
@@ -14,8 +14,8 @@ export const Input: React.FC<InputProps> = ({ lines = 1, ...props }) => {
 
     console.log('redraw input', bind);
 
-    const classNames = 'form-control ' + 
-        (props.className ?? '') + 
+    const classNames = 'form-control ' +
+        (props.className ?? '') +
         (bind.error ? ' is-invalid' : '');
 
     if (lines < 2) {
@@ -24,11 +24,14 @@ export const Input: React.FC<InputProps> = ({ lines = 1, ...props }) => {
                 {...props}
                 type="text"
                 id={bind.id}
-                name={bind.name}
+                name={bind.name || props.name}
                 readOnly={bind.readOnly}
-                value={bind.value || ''}
+                value={bind.value || props.value}
                 className={classNames}
-                onChange={(e) => bind.value = e.currentTarget.value}
+                onChange={
+                    props.onChange
+                        ? props.onChange
+                        : (e) => bind.value = e.currentTarget.value}
             />
         );
     }
@@ -43,7 +46,7 @@ export const Input: React.FC<InputProps> = ({ lines = 1, ...props }) => {
             name={bind.name}
             readOnly={bind.readOnly}
             rows={lines}
-            value={bind.value || ''}
+            value={bind.value || props.value}
             className={classNames}
             onChange={(e) => bind.value = e.currentTarget.value}
         />
