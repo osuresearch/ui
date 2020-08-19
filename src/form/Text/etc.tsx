@@ -44,7 +44,7 @@ export interface IFieldBind<T> {
 
 export type FormFieldBindProp<T> = {
     bind: IFieldBind<T>;
-    onChange: OnChangeDelegate<T>
+    onChange?: OnChangeDelegate<T>
 }
 
 export type FormFieldSpreadProps<T> = {
