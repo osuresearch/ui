@@ -38,9 +38,9 @@ const [error, setError] = useState('');
 Rendering as a textarea
 
 ```jsx
-<Text id="foo2" name="foo" value="foo bar">
+<Text id="foo-textarea" name="foo" value="foo bar">
     <Text.Label>
-        Label here
+        Tell us about yourself
     </Text.Label>
 
     <Text.Input lines={3} />
@@ -59,7 +59,7 @@ import { useState } from 'react';
 const [value, setValue] = useState('200275154|Chase McManning');
 
 <div>
-    <Text id="foo2-search" value={value} onChange={setValue}>
+    <Text id="foo-search" value={value} onChange={setValue}>
         <Text.Label>
             Label here
         </Text.Label>
@@ -71,6 +71,16 @@ const [value, setValue] = useState('200275154|Chase McManning');
         </Text.Help>
     </Text>
 </div>
+```
+
+Email input example
+
+```jsx
+<Text id="foo-email">
+    <Text.Label>Provide your email address</Text.Label>
+    <Text.Email />
+    <Text.Error />
+</Text>
 ```
 
 Defaulting to parent `<Text>` props 
@@ -145,7 +155,7 @@ function MyComponent() {
         e.preventDefault();
         const form = new FormData(e.currentTarget);
 
-        alert(`"${form.get('foo')}" === "${bind.value}"`);
+        alert(`"${form.get('foo6')}" === "${bind.value}"`);
     }
 
     return (

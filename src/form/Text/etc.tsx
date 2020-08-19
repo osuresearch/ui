@@ -4,7 +4,8 @@ import Action from './Action';
 /** Typical nullable type container because TS doesn't include one by default. */
 export type Nullable<T> = T | null;
 
-export type OnChangeFormField<T> = (newValue: Nullable<T>, oldValue: Nullable<T>, bind: FieldBind<T>) => void;
+export type OnChangeDelegate<T> = (newValue: Nullable<T>, oldValue: Nullable<T>, bind: IFieldBind<T>) => void;
+export type OnStateChangeDelegate<T> = (bind: IFieldBind<T>) => void;
 export type SetFieldBindValue<T> = (newValue: Nullable<T>) => void;
 
 export type IFieldBindFactory<T> = () => IFieldBind<T>;
@@ -16,23 +17,29 @@ export interface IFieldBind<T> {
     /** Name of the form field, for retrieval through FormData */
     name?: string
 
-    /** Should the field be loaded as read-only */
-    readOnly?: boolean
-
-    /** Validation error to display for the field */
-    error?: string
-
     /** Instructional labeling for the field */
     instructions?: string
 
     /** Additional help text to display alongside the field */
     help?: string
 
+    /** Validation error to display for the field */
+    error?: string
+
+    /** Should the field be loaded as read-only */
+    readOnly?: boolean
+
+    /** Should the field be indicated as (soft) required */
+    required?: boolean
+
     /** Get/update the field value */
     value: Nullable<T> 
 
-    /** Event delegates to notify when the field value changes */
-    onChange: Action<OnChangeFormField<T>>
+    /** Delegates to notify when the value changes */
+    onChange: Action<OnChangeDelegate<T>>
+
+    /** Delegates to notify when the state changes */
+    onStateChange: Action<OnStateChangeDelegate<T>>
 
     // TODO: Maybe a onStateChange action delegate list
     // and wrap all the other properties as getters/setters that 
@@ -60,17 +67,20 @@ export type FormFieldProps<T> = {
     /** Name of the form field, for retrieval through FormData */
     name?: string
 
-    /** Should the field be loaded as read-only */
-    readOnly?: boolean
-
-    /** Validation error to display for the field */
-    error?: string
-
     /** Instructional labeling for the field */
     instructions?: string
 
     /** Additional help text to display alongside the field */
     help?: string
+
+    /** Validation error to display for the field */
+    error?: string
+
+    /** Should the field be loaded as read-only */
+    readOnly?: boolean
+
+    /** Should the field be indicated as (soft) required */
+    required?: boolean
 
     /** Get/update the field value */
     value: Nullable<T>
@@ -78,7 +88,7 @@ export type FormFieldProps<T> = {
     /**
      * Change callback when `bind || value` is updated. 
      */
-    onChange?: OnChangeFormField<T>
+    onChange?: OnChangeDelegate<T>
 }
 
 export class FieldBind<T> implements IFieldBind<T> {
@@ -88,37 +98,55 @@ export class FieldBind<T> implements IFieldBind<T> {
     /** Name of the form field, for retrieval through FormData */
     public name?: string
 
-    /** Should the field be loaded as read-only */
-    public readOnly?: boolean
-
-    /** Validation error to display for the field */
-    public error?: string
-
     /** Instructional labeling for the field */
     public instructions?: string
 
     /** Additional help text to display alongside the field */
     public help?: string
 
-    /** Retrieve the field's value */
+    /** Validation error. */
+    public get error(): string {
+        return this._error;
+    }
+
+    /** On update, notify all onStateChange delegates */
+    public set error(value: string) {
+        this._error = value;
+        this.onStateChange.dispatch(this);
+    }
+
+    /** Should the field be loaded as read-only. */
+    public get readOnly(): boolean {
+        return this._readOnly;
+    }
+
+    /** On update, notify all onStateChange delegates */
+    public set readOnly(value: boolean) {
+        this._readOnly = value;
+        this.onStateChange.dispatch(this);
+    }
+
+    /** The backing value for the field. */
     public get value(): Nullable<T> {
         return this._value;
     }
 
-    /** Update the field's value. This will notify all onChange delegates */
-    public set value(newValue: Nullable<T>) {
+    /**On update, track previous value and notify all onChange delegates */
+    public set value(value: Nullable<T>) {
         this._previousValue = this._value;
-        this._value = newValue;
+        this._value = value;
 
         console.debug('set value', this);
-        this.onChange.dispatch(newValue, this._previousValue, this);
+        this.onChange.dispatch(value, this._previousValue, this);
     }
 
+    protected _error: string = '';
+    protected _readOnly: boolean = false;
     protected _value: Nullable<T> = null;
     protected _previousValue: Nullable<T> = null;
 
-    /** Event delegates for when the field changes */
-    public readonly onChange: Action<OnChangeFormField<T>> = new Action<OnChangeFormField<T>>();
+    public readonly onChange: Action<OnChangeDelegate<T>> = new Action<OnChangeDelegate<T>>();
+    public readonly onStateChange: Action<OnStateChangeDelegate<T>> = new Action<OnStateChangeDelegate<T>>();
 }
 
 /**

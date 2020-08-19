@@ -1,11 +1,13 @@
 import React, { createContext } from 'react';
-import { FieldBind, NullFieldBind, IFieldBind, FormFieldProps } from './etc';
+import { NullFieldBind, IFieldBind, FormFieldProps } from './etc';
+import useFieldBindOrProps from './useFieldBindOrProps';
+
 import { Label, LabelProps } from './Label';
 import { Help, HelpProps } from './Help';
 import { Error, ErrorProps } from './Error';
 import { Input, InputProps } from './Input';
-import useFieldBindOrProps from './useFieldBindOrProps';
 import { Search, SearchProps } from './Search';
+import { Email, EmailProps } from './Email';
 
 type Props = FormFieldProps<string> & {
     // Add your other top level props here.
@@ -18,6 +20,7 @@ interface ITextComposition {
     Input: React.FC<InputProps>
     Error: React.FC<ErrorProps>
     Search: React.FC<SearchProps>
+    Email: React.FC<EmailProps>
 }
 
 interface ITextContext {
@@ -55,5 +58,6 @@ Text.Help = Help;
 Text.Input = Input;
 Text.Error = Error;
 Text.Search = Search;
+Text.Email = Email;
 
 export default Text;
