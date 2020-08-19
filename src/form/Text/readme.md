@@ -9,14 +9,15 @@ import { Button } from '@oris/ui';
 
 const [readOnly, setReadOnly] = useState(false);
 const [error, setError] = useState('');
+const [value, setValue] = useState('foo bar');
 
 <div>
-    <Text id="foo1" name="foo" value="foo bar" readOnly={readOnly} error={error}>
+    <Text id="foo1" name="foo" readOnly={readOnly} error={error}>
         <Text.Label>
             Label here
         </Text.Label>
 
-        <Text.Input />
+        <Text.Input value={value} onChange={(e) => setValue(e.currentTarget.value)} />
 
         <Text.Help>
             Help stuff go here
@@ -33,22 +34,6 @@ const [error, setError] = useState('');
         Toggle Error
     </Button>
 </div>
-```
-
-Rendering as a textarea
-
-```jsx
-<Text id="foo-textarea" name="foo" value="foo bar">
-    <Text.Label>
-        Tell us about yourself
-    </Text.Label>
-
-    <Text.Input lines={3} />
-
-    <Text.Help>
-        Help stuff go here
-    </Text.Help>
-</Text>
 ```
 
 An example involving a Search transformed back and forth from a `key|name` string:
@@ -83,16 +68,6 @@ Email input example
 </Text>
 ```
 
-Defaulting to parent `<Text>` props 
-
-```jsx
-<Text id="foo3" value="foo bar" instructions="Label here" help="Help stuff">
-    <Text.Label />
-    <Text.Input />
-    <Text.Help />
-</Text>
-```
-
 Providing a `bind` class instance:
 
 ```jsx
@@ -117,28 +92,6 @@ const bind = new MyMockStringBind('foo4', 'foo bar');
         Toggle Error
     </Button>
 </div>
-```
-
-Change Handling (without binds)
-
-```jsx
-import { useState } from 'react';
-
-const [value, setValue] = useState('foo bar');
-const [prev, setPrev] = useState('');
-
-const onChange = (foo, prevFoo) => {
-    setValue(foo);
-    setPrev(prevFoo);
-};
-
-<Text id="foo5" value={value} onChange={onChange}>
-    <Text.Label>Instructions here</Text.Label>
-    <Text.Input />
-
-    <p>Previous value: {prev}</p>
-    <p>Current value: {value}</p>
-</Text>
 ```
 
 Getting bind values on form submit:

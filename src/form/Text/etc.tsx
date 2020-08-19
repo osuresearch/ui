@@ -42,17 +42,12 @@ export interface IFieldBind<T> {
     onStateChange: Action<OnStateChangeDelegate<T>>
 }
 
-/** Base props for a form field. Handles binds + spreading the bind as props */
-export type FormFieldProps<T> = {
-    /**
-     * Optional bind object instance.
-     * 
-     * If not provided, the props (id, name, etc) will be used instead.
-     */
-    bind: IFieldBind<T>
+export type FormFieldBindProp<T> = {
+    bind: IFieldBind<T>;
+    onChange: OnChangeDelegate<T>
+}
 
-} | {
-
+export type FormFieldSpreadProps<T> = {
     /** Unique ID of the form field */
     id: string
 
@@ -65,6 +60,9 @@ export type FormFieldProps<T> = {
     /** Should the field be indicated as (soft) required */
     required?: boolean
 }
+
+/** Base props for a form field. Handles binds + spreading the bind as props */
+export type FormFieldProps<T> = FormFieldBindProp<T> | FormFieldSpreadProps<T>;
 
 export class FieldBind<T> implements IFieldBind<T> {
     /** Unique ID of the form field */

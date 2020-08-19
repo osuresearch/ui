@@ -1,15 +1,9 @@
 import React, { useContext } from 'react';
 import { TextContext } from '.';
 
-export type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
-    /** 
-     * Number of lines for this field's input editor.
-     * Will toggle between input and textarea accordingly. 
-     */
-    lines?: number;
-}
+export type InputProps = React.InputHTMLAttributes<HTMLInputElement>;
 
-export const Input: React.FC<InputProps> = ({ lines = 1, ...props }) => {
+export const Input: React.FC<InputProps> = (props) => {
     const { bind } = useContext(TextContext);
 
     console.log('redraw input', bind);
@@ -18,37 +12,19 @@ export const Input: React.FC<InputProps> = ({ lines = 1, ...props }) => {
         (props.className ?? '') +
         (bind.error ? ' is-invalid' : '');
 
-    if (lines < 2) {
-        return (
-            <input
-                {...props}
-                type="text"
-                id={bind.id}
-                name={bind.name || props.name}
-                readOnly={bind.readOnly}
-                value={bind.value || props.value}
-                className={classNames}
-                onChange={
-                    props.onChange
-                        ? props.onChange
-                        : (e) => bind.value = e.currentTarget.value}
-            />
-        );
-    }
-
-    // Multiple lines, show as a textarea
-    // TODO: The props as ... isn't great since typescript will block
-    // any textarea-specific props passed down into Input.
     return (
-        <textarea
-            {...props as React.InputHTMLAttributes<HTMLTextAreaElement>}
+        <input
+            {...props}
+            type="text"
             id={bind.id}
-            name={bind.name}
+            name={bind.name || props.name}
             readOnly={bind.readOnly}
-            rows={lines}
             value={bind.value || props.value}
             className={classNames}
-            onChange={(e) => bind.value = e.currentTarget.value}
+            onChange={(e) => {
+                bind.value = e.currentTarget.value;
+                if (props.onChange) props.onChange(e);
+            }}
         />
     );
 }

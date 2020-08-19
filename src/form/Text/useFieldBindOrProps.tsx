@@ -1,25 +1,27 @@
 
 import { useState, useEffect } from "react";
-import { IFieldBind, IFieldBindFactory, FormFieldProps, FieldBind } from "./etc";
+import { IFieldBind, IFieldBindFactory, FormFieldProps, FieldBind, FormFieldBindProp, FormFieldSpreadProps, OnChangeDelegate } from "./etc";
 import useFieldBind from "./useFieldBind";
 
 /**
  * Factory to convert a set of FormFieldProps over to an IFieldBind
  */
-function createFieldBindFromProps<T>(props: FormFieldProps<T>): FieldBind<T> {
+function createFieldBindFromProps<T>(props: FormFieldSpreadProps<T>): FieldBind<T> {
     const bind = new FieldBind<T>();
 
-    bind.error = props.error;
-    bind.name = props.name;
+    bind.error = props.error || '';
+
+    // bind.name = props.name; // TODO: Fix this one. Placeholdering to ID for a sec.
+    bind.name = props.id;
+
     bind.id = props.id;
-    bind.readOnly = props.readOnly;
+    bind.readOnly = props.readOnly || false;
 
     return bind;
 }
 
-function isFormFieldProps<T>(props: any): props is FormFieldProps<T> {
-    return typeof (props as FormFieldProps<T>).bind !== 'undefined' ||
-        typeof (props as FormFieldProps<T>).name !== 'undefined';
+function isFormFieldBindProp<T>(props: FormFieldProps<T>): props is FormFieldBindProp<T> {
+    return typeof (props as FormFieldBindProp<T>).bind !== 'undefined';
 }
 
 /**
@@ -33,7 +35,7 @@ function isFormFieldProps<T>(props: any): props is FormFieldProps<T> {
  */
 export default function useFieldBindOrProps<T>(props: FormFieldProps<T>) {
     const [bind, setBind] = useState<IFieldBind<T>>(() => {
-        if (props.bind) {
+        if (isFormFieldBindProp(props)) {
             console.debug('[useFieldBindOrProps] Initializing from IFieldBind ref', props.bind);
             return props.bind;
         }
@@ -45,7 +47,7 @@ export default function useFieldBindOrProps<T>(props: FormFieldProps<T>) {
     // If the bind object reference changes, apply the new bind.
     // Or - if any of the props change, update the props copy bind.
     useEffect(() => {
-        if (props.bind) {
+        if (isFormFieldBindProp(props)) {
             console.debug('[useFieldBindOrProps] Bind change, setting state', props.bind);
             setBind(props.bind);
         } else {
@@ -53,17 +55,8 @@ export default function useFieldBindOrProps<T>(props: FormFieldProps<T>) {
             console.debug('[useFieldBindOrProps] Bind undefined, falling back to props', props);
             setBind(createFieldBindFromProps(props));
         }
-    }, [
-        props.bind,
-        props.id,
-        props.name,
-        props.error,
-        props.help,
-        props.instructions,
-        props.value,
-        props.readOnly
-    ]);
-
+    }, Object.values(props));
+    
     // TODO: While the above monitors props, it doesn't monitor the bind itself.
     // I'd probably want some sort of state hash of the bind to check against.
     // e.g. your typical .hashCode() method that just bitwise combines properties.
@@ -71,6 +64,8 @@ export default function useFieldBindOrProps<T>(props: FormFieldProps<T>) {
     // On change of the bind or onChange delegate, (un)register the delegate.
     // This will also deal with cleaning up the delegate on unmount
     useEffect(() => {
+        if (!isFormFieldBindProp(props)) return;
+
         if (props.onChange) {
             bind.onChange.add(props.onChange);
             console.debug('[useFieldBindOrProps] Register onChange', bind);
@@ -82,7 +77,10 @@ export default function useFieldBindOrProps<T>(props: FormFieldProps<T>) {
                 console.debug('[useFieldBindOrProps] Unregister onChange', bind);
             }
         }
-    }, [bind, props.onChange]);
+    }, [
+        bind, 
+        (props as FormFieldBindProp<T>).onChange
+    ]);
 
     return useFieldBind(bind);
 }
