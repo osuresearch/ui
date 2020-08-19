@@ -5,6 +5,7 @@ import { Help, HelpProps } from './Help';
 import { Error, ErrorProps } from './Error';
 import { Input, InputProps } from './Input';
 import useFieldBindOrProps from './useFieldBindOrProps';
+import { Search, SearchProps } from './Search';
 
 type Props = FormFieldProps<string> & {
     // Add your other top level props here.
@@ -16,6 +17,7 @@ interface ITextComposition {
     Help: React.FC<HelpProps>
     Input: React.FC<InputProps>
     Error: React.FC<ErrorProps>
+    Search: React.FC<SearchProps>
 }
 
 interface ITextContext {
@@ -52,5 +54,6 @@ Text.Label = Label;
 Text.Help = Help;
 Text.Input = Input;
 Text.Error = Error;
+Text.Search = Search;
 
 export default Text;

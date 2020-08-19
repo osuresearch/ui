@@ -31,7 +31,7 @@ export interface IFieldBind<T> {
     /** Get/update the field value */
     value: Nullable<T> 
 
-    /** Event delegates for when the field changes */
+    /** Event delegates to notify when the field value changes */
     onChange: Action<OnChangeFormField<T>>
 
     // TODO: Maybe a onStateChange action delegate list
@@ -92,7 +92,7 @@ export class FieldBind<T> implements IFieldBind<T> {
     public readOnly?: boolean
 
     /** Validation error to display for the field */
-    public  error?: string
+    public error?: string
 
     /** Instructional labeling for the field */
     public instructions?: string

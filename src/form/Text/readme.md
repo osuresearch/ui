@@ -51,6 +51,28 @@ Rendering as a textarea
 </Text>
 ```
 
+An example involving a Search transformed back and forth from a `key|name` string:
+
+```jsx
+import { useState } from 'react';
+
+const [value, setValue] = useState('200275154|Chase McManning');
+
+<div>
+    <Text id="foo2-search" value={value} onChange={setValue}>
+        <Text.Label>
+            Label here
+        </Text.Label>
+
+        <Text.Search />
+
+        <Text.Help>
+            You picked <strong>{value ? value : 'nobody'}</strong>
+        </Text.Help>
+    </Text>
+</div>
+```
+
 Defaulting to parent `<Text>` props 
 
 ```jsx
