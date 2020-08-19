@@ -22,6 +22,7 @@ function createFieldBindFromProps<T>(props: FormFieldSpreadProps<T>): FieldBind<
 
 function fillFieldBindFromProps<T>(bind: FieldBind<T>, props: FormFieldSpreadProps<T>) {
     bind.error = props.error || '';
+    bind.success = props.success || '';
     bind.name = props.id; // TODO: Same as above
     bind.id = props.id;
     bind.readOnly = props.readOnly || false;

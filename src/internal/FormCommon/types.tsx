@@ -26,6 +26,9 @@ export interface IFieldBind<T> {
     /** Validation error to display for the field */
     error?: string
 
+    /** Validation success message to display for the field */
+    success?: string
+
     /** Should the field be loaded as read-only */
     readOnly?: boolean
 
@@ -53,6 +56,9 @@ export type FormFieldSpreadProps<T> = {
 
     /** Validation error to display for the field */
     error?: string
+
+    /** Validation success message to display for the field */
+    success?: string
 
     /** Should the field be loaded as read-only */
     readOnly?: boolean
@@ -90,6 +96,18 @@ export class FieldBind<T> implements IFieldBind<T> {
         this.onStateChange.dispatch(this);
     }
 
+    /** Validation success */
+    public get success(): string {
+        return this._success;
+    }
+
+    /** On update, notify all onStateChange delegates */
+    public set success(value: string) {
+        this._success = value;
+        this.onStateChange.dispatch(this);
+    }
+
+
     /** Should the field be loaded as read-only. */
     public get readOnly(): boolean {
         return this._readOnly;
@@ -116,6 +134,7 @@ export class FieldBind<T> implements IFieldBind<T> {
     }
 
     protected _error: string = '';
+    protected _success: string = '';
     protected _readOnly: boolean = false;
     protected _value: Nullable<T> = null;
     protected _previousValue: Nullable<T> = null;

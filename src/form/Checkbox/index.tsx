@@ -1,42 +1,38 @@
 import React from 'react';
+import { NullFieldBind, IFieldBind, FormFieldProps } from '../../internal/FormCommon/types';
+import useFieldBindOrProps from '../../internal/FormCommon/hooks/useFieldBindOrProps';
 
-// Basically, import components from the FormCommon, unless
-// the component needs to be wrapped in this component's
-// context - in which case, they need to be their own component
 import { Input, InputProps } from './Input';
 import { Label, LabelProps } from './Label';
-import Help, { HelpProps } from '../../internal/FormCommon/Components/Help';
-import { ValidFeedback, ValidFeedbackProps } from './ValidFeedback';
-import { InvalidFeedback, InvalidFeedbackProps } from './InvalidFeedback';
+import { Help, HelpProps } from './Help';
+import { Success, SuccessProps } from './Success';
+import { Error, ErrorProps } from './Error';
 
-interface CheckboxComposition {
-    Input: React.FC<InputProps>;
-    Label: React.FC<LabelProps>;
-    Help: React.FC<HelpProps>;
-    ValidFeedback: React.FC<ValidFeedbackProps>;
-    InvalidFeedback: React.FC<InvalidFeedbackProps>;
+type Props = FormFieldProps<boolean> & {
+    // Add your other top level props here.
+    // foo: number
 }
 
-interface Props {
-    /** ID cascades down to `Checkbox.Input` and `Checkbox.Label` */
-    id: string;
-    name?: string;
-    invalid?: boolean;
-    valid?: boolean;
+interface ICheckboxComposition {
+    Label: React.FC<LabelProps>
+    Help: React.FC<HelpProps>
+    Input: React.FC<InputProps>
+    Error: React.FC<ErrorProps>
+    Success: React.FC<SuccessProps>
 }
 
-interface Context {
-    id: string;
-    name: string | undefined;
-    invalid: boolean | undefined;
-    valid: boolean | undefined;
+interface ICheckboxContext {
+    bind: IFieldBind<boolean>
+
+    // Add your other props  here that should be made available to consumers
+    // foo: number
 }
 
-export const CheckboxContext = React.createContext<Context>({
-    id: '',
-    name: undefined,
-    invalid: undefined,
-    valid: undefined,
+export const CheckboxContext = React.createContext<ICheckboxContext>({
+    bind: new NullFieldBind<boolean>(),
+
+    // Add your other prop defaults here that should be made available to consumers
+    // foo: 1
 });
 
 /**
@@ -49,13 +45,18 @@ export const CheckboxContext = React.createContext<Context>({
  * * `Checkbox.Label` (required) - Label for the `Checkbox`
  *  * **Props** – Accepts [HTML Global attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes).
  * * `Checkbox.Help` – Help text for the `Checkbox`
- * * `Checkbox.InvalidFeedback` (required if `Checkbox` requires validation) – Provides instructions on how to resolve the validation error; will display when `invalid` is set in `Checkbox`
- * * `Checkbox.ValidFeedback` – Feedback for when the set meets the validation rules; will display when `valid` is set in `Checkbox`
+ * * `Checkbox.Error` (required if `Checkbox` requires validation) – Provides instructions on how to resolve the validation error; will display when `error` is set in `Checkbox`
+ * * `Checkbox.Success` – Feedback for when the set meets the validation rules; will display when `success` is set in `Checkbox`
  * 
  */
-const Checkbox: React.FC<Props> & CheckboxComposition = ({ children, id, name, invalid, valid }) => {
+const Checkbox: React.FC<Props> & ICheckboxComposition = ({
+    children,
+    ...props // everything else is of FormFieldProps<string>
+}) => {
+    const { bind } = useFieldBindOrProps(props);
+
     return (
-        <CheckboxContext.Provider value={{ id, name, invalid, valid }}>
+        <CheckboxContext.Provider value={{ bind }}>
             <div className='custom-control custom-checkbox'>
                 {children}
             </div>
@@ -66,8 +67,8 @@ const Checkbox: React.FC<Props> & CheckboxComposition = ({ children, id, name, i
 Checkbox.Input = Input;
 Checkbox.Label = Label;
 Checkbox.Help = Help;
-Checkbox.ValidFeedback = ValidFeedback;
-Checkbox.InvalidFeedback = InvalidFeedback;
+Checkbox.Success = Success;
+Checkbox.Error = Error;
 
 export default Checkbox;
 

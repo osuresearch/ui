@@ -29,19 +29,34 @@
 
 #### Validation
 ```jsx
-<Checkbox id="terms-and-services" invalid>
-    <Checkbox.Input required />
+import { useState } from 'react';
+import { Button } from '@oris/ui';
 
-    <Checkbox.Label>
-        I agree to the terms and services
-    </Checkbox.Label>
+const [error, setError] = useState();
+const [success, setSuccess] = useState();
 
-    <Checkbox.InvalidFeedback>
-        You must accept the terms and services
-    </Checkbox.InvalidFeedback>
+<div>
+    <Checkbox id="terms" error={error} success={success}>
+        <Checkbox.Input required />
 
-    <Checkbox.ValidFeedback>
-        Thank you for accepting the terms and services
-    </Checkbox.ValidFeedback>
-</Checkbox>
+        <Checkbox.Label>
+            I agree to the terms and services
+        </Checkbox.Label>
+
+        <Checkbox.Error />
+        <Checkbox.Success />
+    </Checkbox>
+
+    <div className='mt-3'>
+        <Button theme='danger' onClick={() => {
+            setSuccess();
+            setError('You must accept the terms and services');
+        }}>Show Error</Button>
+
+        <Button theme='success' onClick={() => {
+            setError();
+            setSuccess('Thank you for accepting the terms and services');
+        }}>Show Success</Button>
+    </div>
+</div>
 ```

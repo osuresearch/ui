@@ -1,13 +1,11 @@
 import React, { useContext } from 'react';
 import ErrorCommon from '../../internal/FormCommon/Components/Error';
-import { TextContext } from '.';
+import { CheckboxContext } from '.';
 
-export type ErrorProps = React.HTMLAttributes<HTMLDivElement> & {
-
-}
+export interface ErrorProps extends React.HTMLAttributes<HTMLDivElement> { }
 
 export const Error: React.FC<ErrorProps> = (props) => {
-    const { bind } = useContext(TextContext);
+    const { bind } = useContext(CheckboxContext);
 
     if (bind.error) {
         return (
