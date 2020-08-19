@@ -8,9 +8,11 @@ export const Input: React.FC<InputProps> = (props) => {
 
     console.log('redraw input', bind);
 
-    const classNames = 'form-control ' +
+    const classNames = 'custom-control-input ' +
         (props.className ?? '') +
-        (bind.error ? ' is-invalid' : '');
+        (bind.error ? ' is-invalid' : '') +
+        (bind.success ? ' is-valid' : '')
+        ;
 
     return (
         <input

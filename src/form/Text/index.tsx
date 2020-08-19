@@ -5,6 +5,7 @@ import useFieldBindOrProps from '../../internal/FormCommon/hooks/useFieldBindOrP
 import { Label, LabelProps } from './Label';
 import { Help, HelpProps } from './Help';
 import { Error, ErrorProps } from './Error';
+import { Success, SuccessProps } from './Success';
 import { Input, InputProps } from './Input';
 import { Search, SearchProps } from './Search';
 import { Email, EmailProps } from './Email';
@@ -19,6 +20,7 @@ interface ITextComposition {
     Help: React.FC<HelpProps>
     Input: React.FC<InputProps>
     Error: React.FC<ErrorProps>
+    Success: React.FC<SuccessProps>
     Search: React.FC<SearchProps>
     Email: React.FC<EmailProps>
 }
@@ -57,6 +59,7 @@ Text.Label = Label;
 Text.Help = Help;
 Text.Input = Input;
 Text.Error = Error;
+Text.Success = Success;
 Text.Search = Search;
 Text.Email = Email;
 
