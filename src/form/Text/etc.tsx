@@ -4,7 +4,7 @@ import Action from './Action';
 /** Typical nullable type container because TS doesn't include one by default. */
 export type Nullable<T> = T | null;
 
-export type OnChangeDelegate<T> = (newValue: Nullable<T>, oldValue: Nullable<T>, bind: IFieldBind<T>) => void;
+export type OnValueChangeDelegate<T> = (newValue: Nullable<T>, oldValue: Nullable<T>, bind: IFieldBind<T>) => void;
 export type OnStateChangeDelegate<T> = (bind: IFieldBind<T>) => void;
 export type SetFieldBindValue<T> = (newValue: Nullable<T>) => void;
 
@@ -36,7 +36,7 @@ export interface IFieldBind<T> {
     value: Nullable<T>
 
     /** Delegates to notify when the value changes */
-    onChange: Action<OnChangeDelegate<T>>
+    onValueChange: Action<OnValueChangeDelegate<T>>
 
     /** Delegates to notify when the state changes */
     onStateChange: Action<OnStateChangeDelegate<T>>
@@ -44,7 +44,7 @@ export interface IFieldBind<T> {
 
 export type FormFieldBindProp<T> = {
     bind: IFieldBind<T>;
-    onChange?: OnChangeDelegate<T>
+    onChange?: OnValueChangeDelegate<T>
 }
 
 export type FormFieldSpreadProps<T> = {
@@ -59,6 +59,8 @@ export type FormFieldSpreadProps<T> = {
 
     /** Should the field be indicated as (soft) required */
     required?: boolean
+
+    onChange?: OnValueChangeDelegate<T>
 }
 
 /** Base props for a form field. Handles binds + spreading the bind as props */
@@ -110,7 +112,7 @@ export class FieldBind<T> implements IFieldBind<T> {
         this._value = value;
 
         console.debug('set value', this);
-        this.onChange.dispatch(value, this._previousValue, this);
+        this.onValueChange.dispatch(value, this._previousValue, this);
     }
 
     protected _error: string = '';
@@ -118,7 +120,7 @@ export class FieldBind<T> implements IFieldBind<T> {
     protected _value: Nullable<T> = null;
     protected _previousValue: Nullable<T> = null;
 
-    public readonly onChange: Action<OnChangeDelegate<T>> = new Action<OnChangeDelegate<T>>();
+    public readonly onValueChange: Action<OnValueChangeDelegate<T>> = new Action<OnValueChangeDelegate<T>>();
     public readonly onStateChange: Action<OnStateChangeDelegate<T>> = new Action<OnStateChangeDelegate<T>>();
 }
 

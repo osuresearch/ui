@@ -37,13 +37,13 @@ export default function useFieldBind<T>(ref: IFieldBind<T> | IFieldBindFactory<T
         }
 
         // Register change listeners
-        bind.onChange.add(setValue);
+        bind.onValueChange.add(setValue);
         bind.onStateChange.add(incrementState);
 
         // Unregister change listeners
         return () => {
             console.debug('[useFieldBind] Unbind onChange', bind);
-            bind.onChange.remove(setValue);
+            bind.onValueChange.remove(setValue);
             bind.onStateChange.remove(incrementState);
         }
     }, [bind]);

@@ -10,9 +10,15 @@ import { Button } from '@oris/ui';
 const [readOnly, setReadOnly] = useState(false);
 const [error, setError] = useState('');
 const [value, setValue] = useState('foo bar');
+const [prev, setPrev] = useState('');
+
+const onChange = (currentValue, prevValue) => {
+    console.debug('called onChange');
+    setPrev(prevValue);
+}
 
 <div>
-    <Text id="foo1" name="foo" readOnly={readOnly} error={error}>
+    <Text id="foo1" name="foo" readOnly={readOnly} error={error} onChange={onChange}>
         <Text.Label>
             Label here
         </Text.Label>
@@ -33,6 +39,9 @@ const [value, setValue] = useState('foo bar');
     <Button onClick={() => setError(error ? '' : 'Do better')}>
         Toggle Error
     </Button>
+    
+    <p>Current value: {value}</p>
+    <p>Previous value: {prev}</p>
 </div>
 ```
 

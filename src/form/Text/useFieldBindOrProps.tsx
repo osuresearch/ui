@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react";
-import { IFieldBind, IFieldBindFactory, FormFieldProps, FieldBind, FormFieldBindProp, FormFieldSpreadProps, OnChangeDelegate } from "./etc";
+import { IFieldBind, IFieldBindFactory, FormFieldProps, FieldBind, FormFieldBindProp, FormFieldSpreadProps, OnValueChangeDelegate } from "./etc";
 import useFieldBind from "./useFieldBind";
 
 /**
@@ -20,6 +20,13 @@ function createFieldBindFromProps<T>(props: FormFieldSpreadProps<T>): FieldBind<
     return bind;
 }
 
+function fillFieldBindFromProps<T>(bind: FieldBind<T>, props: FormFieldSpreadProps<T>) {
+    bind.error = props.error || '';
+    bind.name = props.id; // TODO: Same as above
+    bind.id = props.id;
+    bind.readOnly = props.readOnly || false;
+}
+
 function isFormFieldBindProp<T>(props: FormFieldProps<T>): props is FormFieldBindProp<T> {
     return typeof (props as FormFieldBindProp<T>).bind !== 'undefined';
 }
@@ -34,14 +41,19 @@ function isFormFieldBindProp<T>(props: FormFieldProps<T>): props is FormFieldBin
  * result and safely unregister when the component is unmounted.
  */
 export default function useFieldBindOrProps<T>(props: FormFieldProps<T>) {
+    // Local bind copy to update from props, if one isn't supplied.
+    const [propsBind,] = useState(new FieldBind<T>());
+
     const [bind, setBind] = useState<IFieldBind<T>>(() => {
         if (isFormFieldBindProp(props)) {
             console.debug('[useFieldBindOrProps] Initializing from IFieldBind ref', props.bind);
             return props.bind;
         }
 
-        console.debug('[useFieldBindOrProps] Initializing from props', props);
-        return createFieldBindFromProps(props);
+        console.debug('[useFieldBindOrProps] Initialize from props', props);
+        fillFieldBindFromProps(propsBind, props);
+        return propsBind;
+        // return createFieldBindFromProps(props);
     });
 
     // If the bind object reference changes, apply the new bind.
@@ -53,7 +65,8 @@ export default function useFieldBindOrProps<T>(props: FormFieldProps<T>) {
         } else {
             // It was removed, fallback to a props copy
             console.debug('[useFieldBindOrProps] Bind undefined, falling back to props', props);
-            setBind(createFieldBindFromProps(props));
+            fillFieldBindFromProps(propsBind, props);
+            setBind(propsBind);
         }
     }, Object.values(props));
     
@@ -64,23 +77,18 @@ export default function useFieldBindOrProps<T>(props: FormFieldProps<T>) {
     // On change of the bind or onChange delegate, (un)register the delegate.
     // This will also deal with cleaning up the delegate on unmount
     useEffect(() => {
-        if (!isFormFieldBindProp(props)) return;
-
         if (props.onChange) {
-            bind.onChange.add(props.onChange);
+            bind.onValueChange.add(props.onChange);
             console.debug('[useFieldBindOrProps] Register onChange', bind);
         }
 
         return () => {
             if (props.onChange) {
-                bind.onChange.remove(props.onChange);
+                bind.onValueChange.remove(props.onChange);
                 console.debug('[useFieldBindOrProps] Unregister onChange', bind);
             }
         }
-    }, [
-        bind, 
-        (props as FormFieldBindProp<T>).onChange
-    ]);
+    }, [bind, props.onChange]);
 
     return useFieldBind(bind);
 }

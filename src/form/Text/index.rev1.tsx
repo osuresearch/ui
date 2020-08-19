@@ -79,13 +79,13 @@ const Text: React.FC<Props> & ITextComposition = ({
         console.debug('bind onchange', realBind);
 
         // Register change listeners
-        realBind.onChange.add(setValue);
-        if (onChange) realBind.onChange.add(onChange);
+        realBind.onValueChange.add(setValue);
+        if (onChange) realBind.onValueChange.add(onChange);
 
         // Unregister change listeners
         return () => {
-            realBind.onChange.remove(setValue);
-            if (onChange) realBind.onChange.remove(onChange);
+            realBind.onValueChange.remove(setValue);
+            if (onChange) realBind.onValueChange.remove(onChange);
         }
     }, [realBind, onChange]);
 
