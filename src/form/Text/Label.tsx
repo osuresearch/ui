@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { TextContext } from './';
 
-import LabelCommon from '../../internal/FormCommon/Label';
+import LabelCommon from '../../internal/FormCommon/Components/Label';
 
 export type LabelProps = React.LabelHTMLAttributes<HTMLLabelElement> & {
     // any Text.Label specific props here.

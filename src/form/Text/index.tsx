@@ -1,6 +1,6 @@
 import React, { createContext } from 'react';
-import { NullFieldBind, IFieldBind, FormFieldProps } from './etc';
-import useFieldBindOrProps from './useFieldBindOrProps';
+import { NullFieldBind, IFieldBind, FormFieldProps } from '../../internal/FormCommon/types';
+import useFieldBindOrProps from '../../internal/FormCommon/hooks/useFieldBindOrProps';
 
 import { Label, LabelProps } from './Label';
 import { Help, HelpProps } from './Help';
@@ -37,7 +37,7 @@ export const TextContext = createContext<ITextContext>({
     // foo: 1
 });
 
-const Text: React.FC<Props> & ITextComposition = ({ 
+const Text: React.FC<Props> & ITextComposition = ({
     // foo = 1
     children,
     ...props // everything else is of FormFieldProps<string>

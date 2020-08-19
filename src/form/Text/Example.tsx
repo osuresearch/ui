@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MyMockStringBind } from './etc';
+import { MyMockStringBind } from '../../internal/FormCommon/types';
 
 import Text from './';
 

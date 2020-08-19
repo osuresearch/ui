@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import InvalidFeedbackCommon from '../../internal/FormCommon/InvalidFeedback';
+import InvalidFeedbackCommon from '../../internal/FormCommon/Components/InvalidFeedback';
 import { Context } from '.';
 
 export interface InvalidFeedbackProps extends React.HTMLAttributes<HTMLDivElement> { }

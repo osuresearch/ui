@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react";
-import { IFieldBind, IFieldBindFactory, FormFieldProps, FieldBind, FormFieldBindProp, FormFieldSpreadProps, OnValueChangeDelegate } from "./etc";
+import { IFieldBind, IFieldBindFactory, FormFieldProps, FieldBind, FormFieldBindProp, FormFieldSpreadProps, OnValueChangeDelegate } from "../types";
 import useFieldBind from "./useFieldBind";
 
 /**
@@ -69,7 +69,7 @@ export default function useFieldBindOrProps<T>(props: FormFieldProps<T>) {
             setBind(propsBind);
         }
     }, Object.values(props));
-    
+
     // TODO: While the above monitors props, it doesn't monitor the bind itself.
     // I'd probably want some sort of state hash of the bind to check against.
     // e.g. your typical .hashCode() method that just bitwise combines properties.

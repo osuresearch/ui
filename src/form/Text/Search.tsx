@@ -2,9 +2,9 @@ import React, { useContext } from 'react';
 import ThatOtherSearch from '../../components/Search';
 
 import { TextContext } from '.';
-import { Nullable } from './etc';
+import { Nullable } from '../../internal/FormCommon/types';
 
-export type SearchProps = { 
+export type SearchProps = {
     endpoint?: string
 }
 
@@ -32,7 +32,7 @@ function toSearchPair(value: Nullable<string>): SearchPair | undefined {
  */
 function fromSearchPair(pair: SearchPair): Nullable<string> {
     if (!pair.key) return null;
-        
+
     return `${pair.key}|${pair.value}`;
 }
 
@@ -40,7 +40,7 @@ function fromSearchPair(pair: SearchPair): Nullable<string> {
  * Jams a standard ORIS/UI search result pair into a single  
  * string value bind in the form `key|name`
  */
-export const Search: React.FC<SearchProps> = ({ 
+export const Search: React.FC<SearchProps> = ({
     endpoint = 'https://orapps.osu.edu/api/v1/person'
 }) => {
     const { bind } = useContext(TextContext);

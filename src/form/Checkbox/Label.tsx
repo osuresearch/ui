@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { CheckboxContext } from '.';
 
-import LabelCommon from '../../internal/FormCommon/Label';
+import LabelCommon from '../../internal/FormCommon/Components/Label';
 
 export interface LabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> { };
 

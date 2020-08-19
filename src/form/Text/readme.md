@@ -81,7 +81,7 @@ Providing a `bind` class instance:
 
 ```jsx
 import { Button } from '@oris/ui';
-import { MyMockStringBind } from './etc';
+import { MyMockStringBind } from '../../internal/FormCommon/types';
 
 const bind = new MyMockStringBind('foo4', 'foo bar');
 
@@ -107,7 +107,7 @@ Getting bind values on form submit:
 
 ```jsx
 import React, { useEffect } from 'react';
-import { MyMockStringBind } from './etc';
+import { MyMockStringBind } from '../../internal/FormCommon/types';
 
 const bind = new MyMockStringBind('foo6', 'foo bar');
 console.log('create bind', bind);
@@ -141,7 +141,7 @@ Update binds externally
 ```jsx
 import React, { useEffect, useState } from 'react';
 import { Button } from '@oris/ui';
-import { MyMockStringBind } from './etc';
+import { MyMockStringBind } from '../../internal/FormCommon/types';
 
 const bind = new MyMockStringBind('foo7', 'foo bar');
 
@@ -165,8 +165,8 @@ Also demos another component that uses the `useFieldBind` hook to monitor a bind
 ```jsx
 import React, { useEffect } from 'react';
 import { Button } from '@oris/ui';
-import { MyMockStringBind } from './etc';
-import useFieldBind from './useFieldBind';
+import { MyMockStringBind } from '../../internal/FormCommon/types';
+import useFieldBind from '../../internal/FormCommon/hooks/useFieldBind';
 
 const bind = new MyMockStringBind('foo8', 'foo bar');
 

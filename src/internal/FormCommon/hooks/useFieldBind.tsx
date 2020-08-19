@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react";
-import { IFieldBind, IFieldBindFactory } from "./etc";
+import { IFieldBind, IFieldBindFactory } from "../types";
 
 /**
  * Automatically monitor an IFieldBind for changes and redraw the component.

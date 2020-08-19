@@ -3,7 +3,7 @@ import React from 'react';
 import { Label, LabelProps } from './Label';
 import { Control, ControlProps } from './Control';
 import { Option, OptionProps } from './Option';
-import Help, { HelpProps } from '../../internal/FormCommon/Help';
+import Help, { HelpProps } from '../../internal/FormCommon/Components/Help';
 import { InvalidFeedback, InvalidFeedbackProps } from './InvalidFeedback';
 import { ValidFeedback, ValidFeedbackProps } from './ValidFeedback';
 

@@ -1,5 +1,5 @@
 import React, { createContext, useMemo, useState, useEffect, useCallback } from 'react';
-import { FieldBind, NullFieldBind, SetFieldBindValue, IFieldBind, OnChangeFormField, FormFieldProps } from './etc';
+import { FieldBind, NullFieldBind, SetFieldBindValue, IFieldBind, OnChangeFormField, FormFieldProps } from '../../internal/FormCommon/types';
 import { Label, LabelProps } from './Label';
 import { Help, HelpProps } from './Help';
 import { Input, InputProps } from './Input';
@@ -50,10 +50,10 @@ function createFieldBindFromProps<T>(props: any): FieldBind<T> {
     return bind;
 }
 
-const Text: React.FC<Props> & ITextComposition = ({ 
-    lines = 1, 
-    bind, 
-    children, 
+const Text: React.FC<Props> & ITextComposition = ({
+    lines = 1,
+    bind,
+    children,
     onChange,
     ...props // everything else is of FieldBind<string>
 }) => {

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import ValidFeedbackCommon from '../../internal/FormCommon/ValidFeedback';
+import ValidFeedbackCommon from '../../internal/FormCommon/Components/ValidFeedback';
 import { CheckboxSetContext } from '.';
 
 export interface ValidFeedbackProps extends React.HTMLAttributes<HTMLDivElement> { }

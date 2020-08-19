@@ -5,7 +5,7 @@ import React from 'react';
 // context - in which case, they need to be their own component
 import { Input, InputProps } from './Input';
 import { Label, LabelProps } from './Label';
-import Help, { HelpProps } from '../../internal/FormCommon/Help';
+import Help, { HelpProps } from '../../internal/FormCommon/Components/Help';
 import { ValidFeedback, ValidFeedbackProps } from './ValidFeedback';
 import { InvalidFeedback, InvalidFeedbackProps } from './InvalidFeedback';
 

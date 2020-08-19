@@ -1,7 +1,7 @@
 import React from 'react';
-import Legend, { LegendProps } from '../../internal/FormCommon/Legend';
+import Legend, { LegendProps } from '../../internal/FormCommon/Components/Legend';
 import { Fields, FieldsProps } from './Fields';
-import Help, { HelpProps } from '../../internal/FormCommon/Help';
+import Help, { HelpProps } from '../../internal/FormCommon/Components/Help';
 import { InvalidFeedback, InvalidFeedbackProps } from './InvalidFeedback';
 import { ValidFeedback, ValidFeedbackProps } from './ValidFeedback';
 
