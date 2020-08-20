@@ -63,9 +63,7 @@ const Select: React.FC<Props> & ISelectComposition = ({
 
     return (
         <Context.Provider value={{ bind, /* foo */ }}>
-            <div className="form-group">
-                {children}
-            </div>
+            {children}
         </Context.Provider>
     );
 }

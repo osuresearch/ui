@@ -11,7 +11,7 @@ export function Success(props: SuccessProps) {
 
     return (
         <div {...props} className='valid-feedback'>
-            {props.children ?? bind.error}
+            {props.children ?? bind.success}
         </div>
     );
 }

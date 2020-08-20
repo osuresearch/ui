@@ -48,9 +48,7 @@ const Text: React.FC<Props> & ITextComposition = ({
 
     return (
         <Context.Provider value={{ bind, /* foo */ }}>
-            <div className="form-group">
-                {children}
-            </div>
+            {children}
         </Context.Provider>
     );
 }

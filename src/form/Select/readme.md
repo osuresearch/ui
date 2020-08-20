@@ -2,6 +2,8 @@
 ### Examples
 
 ```jsx
+import { Form } from '@oris/ui';
+
 const dropdownOptions = {
        value: {
           cheddar: 'Cheddar Cheese',
@@ -9,61 +11,77 @@ const dropdownOptions = {
         }
     };
 
-<Select id="bind-test">
-    <Select.Label>Bind Test</Select.Label>
+<Form>
+    <Form.Group>
+        <Select id="bind-test">
+            <Select.Label>Bind Test</Select.Label>
 
-    <Select.Control>
-        <Select.Option optionsBind={dropdownOptions} />
-    </Select.Control>
+            <Select.Control>
+                <Select.Option optionsBind={dropdownOptions} />
+            </Select.Control>
 
-    <Select.Help>
-        Some additional help text here
-    </Select.Help>
-</Select>
+            <Select.Help>
+                Some additional help text here
+            </Select.Help>
+        </Select>
+    </Form.Group>
+</Form>
 ```
 
 ```jsx
-<Select id="color-select">
-    <Select.Label>Select a Color Profile</Select.Label>
+import { Form } from '@oris/ui';
 
-    <Select.Control>
-        <Select.Option value="">
-            -- Please choose an option --
-        </Select.Option>
-        <Select.Option value="RGB">RGB</Select.Option>
-        <Select.Option value="CMYK">CMYK</Select.Option>
-        <Select.Option value="HSL">HSL</Select.Option>
-    </Select.Control>
+<Form>
+    <Form.Group>
+        <Select id="color-select">
+            <Select.Label>Select a Color Profile</Select.Label>
 
-    <Select.Help>
-        Some additional help text here
-    </Select.Help>
-</Select>
+            <Select.Control>
+                <Select.Option value="">
+                    -- Please choose an option --
+                </Select.Option>
+                <Select.Option value="RGB">RGB</Select.Option>
+                <Select.Option value="CMYK">CMYK</Select.Option>
+                <Select.Option value="HSL">HSL</Select.Option>
+            </Select.Control>
+
+            <Select.Help>
+                Some additional help text here
+            </Select.Help>
+        </Select>
+    </Form.Group>
+</Form>
 ```
 
 ```jsx
-<Select id="error-example" required>
-    <Select.Label>Erroneous selection</Select.Label>
+import { Form } from '@oris/ui';
 
-    <Select.Control name="color-profiles">
-        <Select.Option value="">
-            -- Please choose an option --
-        </Select.Option>
-        <Select.Option value="RGB">RGB</Select.Option>
-        <Select.Option value="CMYK">CMYK</Select.Option>
-        <Select.Option value="HSL">HSL</Select.Option>
-    </Select.Control>
+<Form>
+    <Form.Group>
+        <Select id="error-example" required>
+            <Select.Label>Erroneous selection</Select.Label>
 
-    <Select.Error>
-        You must select a color profile
-    </Select.Error>
+            <Select.Control name="color-profiles">
+                <Select.Option value="">
+                    -- Please choose an option --
+                </Select.Option>
+                <Select.Option value="RGB">RGB</Select.Option>
+                <Select.Option value="CMYK">CMYK</Select.Option>
+                <Select.Option value="HSL">HSL</Select.Option>
+            </Select.Control>
 
-    <Select.Success>
-        Your selection is correct
-    </Select.Success>
+            <Select.Error>
+                You must select a color profile
+            </Select.Error>
 
-    <Select.Help>
-        Some additional help text here
-    </Select.Help>
-</Select>
+            <Select.Success>
+                Your selection is correct
+            </Select.Success>
+
+            <Select.Help>
+                Some additional help text here
+            </Select.Help>
+        </Select>
+    </Form.Group>
+</Form>
 ```

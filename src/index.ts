@@ -26,3 +26,10 @@ export { default as TabList } from './components/TabList';
 export { default as TabItem } from './components/TabItem';
 export { default as Richtext } from './components/Richtext';
 
+// Form components
+export { default as Checkbox } from './form/Checkbox';
+export { default as Form } from './form/Form';
+export { default as Select } from './form/Select';
+export { default as Set } from './form/Set';
+export { default as Text } from './form/Text';
+

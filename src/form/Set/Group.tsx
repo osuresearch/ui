@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
 import { Context } from '.';
 
-export interface FieldsProps {
+export interface GroupProps {
     name?: string;
     inline?: boolean;
     children: React.ReactHTMLElement<HTMLInputElement> | React.ReactHTMLElement<HTMLInputElement>[];
 };
 
-export const Fields: React.FC<FieldsProps> = ({
+export const Group: React.FC<GroupProps> = ({
     children,
     inline,
     name

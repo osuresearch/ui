@@ -4,50 +4,64 @@
 #### Basic Implementation
 
 ```jsx
-<Checkbox id="receive-newsletter">
-    <Checkbox.Input />
+import { Form } from '@oris/ui';
 
-    <Checkbox.Label>
-        Yes! I would like to receive your newsletter
-    </Checkbox.Label>
+<Form>
+    <Form.Group>
+        <Checkbox id="receive-newsletter">
+            <Checkbox.Input />
 
-    <Checkbox.Help>
-        We will not spam your inbox
-    </Checkbox.Help>
-</Checkbox>
+            <Checkbox.Label>
+                Yes! I would like to receive your newsletter
+            </Checkbox.Label>
+
+            <Checkbox.Help>
+                We will not spam your inbox
+            </Checkbox.Help>
+        </Checkbox>
+    </Form.Group>
+</Form>
 ```
 
 #### Disabled field
 ```jsx
-<Checkbox id="checkbox-disabled">
-    <Checkbox.Input disabled />
-    <Checkbox.Label>
-        This checkbox field is disabled
-    </Checkbox.Label>
-</Checkbox>
+import { Form } from '@oris/ui';
+
+<Form>
+    <Form.Group>
+        <Checkbox id="checkbox-disabled">
+            <Checkbox.Input disabled />
+            <Checkbox.Label>
+                This checkbox field is disabled
+            </Checkbox.Label>
+        </Checkbox>
+    </Form.Group>
+</Form>
 ```
 
 #### Validation
 ```jsx
 import { useState } from 'react';
-import { Button } from '@oris/ui';
+import { Form, Button } from '@oris/ui';
 
 const [error, setError] = useState();
 const [success, setSuccess] = useState();
 
-<div>
-    <Checkbox id="terms" error={error} success={success}>
-        <Checkbox.Input required />
+<Form>
+    <Form.Group>
+        <Checkbox id="terms" error={error} success={success}>
+            <Checkbox.Input required />
 
-        <Checkbox.Label>
-            I agree to the terms and services
-        </Checkbox.Label>
+            <Checkbox.Label>
+                I agree to the terms and services
+            </Checkbox.Label>
 
-        <Checkbox.Error />
-        <Checkbox.Success />
-    </Checkbox>
+            <Checkbox.Error />
+            <Checkbox.Success />
+        </Checkbox>
+    </Form.Group>
 
-    <div className='mt-3'>
+    <Form.Group>
         <Button theme='danger' onClick={() => {
             setSuccess();
             setError('You must accept the terms and services');
@@ -57,6 +71,6 @@ const [success, setSuccess] = useState();
             setError();
             setSuccess('Thank you for accepting the terms and services');
         }}>Show Success</Button>
-    </div>
-</div>
+    </Form.Group>
+</Form>
 ```

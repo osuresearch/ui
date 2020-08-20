@@ -5,7 +5,7 @@ Inlining values
 
 ```jsx
 import { useState } from 'react';
-import { Button } from '@oris/ui';
+import { Form, Button } from '@oris/ui';
 
 const [readOnly, setReadOnly] = useState(false);
 const [error, setError] = useState('');
@@ -17,96 +17,110 @@ const onChange = (currentValue, prevValue) => {
     setPrev(prevValue);
 }
 
-<div>
-    <Text id="foo1" name="foo" readOnly={readOnly} error={error} onChange={onChange}>
-        <Text.Label>
-            Label here
-        </Text.Label>
+<Form>
+    <Form.Group>
+        <Text id="foo1" name="foo" readOnly={readOnly} error={error} onChange={onChange}>
+            <Text.Label>
+                Label here
+            </Text.Label>
 
-        <Text.Input value={value} onChange={(e) => setValue(e.currentTarget.value)} />
+            <Text.Input value={value} onChange={(e) => setValue(e.currentTarget.value)} />
 
-        <Text.Help>
-            Help stuff go here
-        </Text.Help>
+            <Text.Help>
+                Help stuff go here
+            </Text.Help>
+            
+            <Text.Error />
+        </Text>
+
+        <Button onClick={() => setReadOnly(!readOnly)}>
+            Toggle Read Only
+        </Button>
         
-        <Text.Error />
-    </Text>
-
-    <Button onClick={() => setReadOnly(!readOnly)}>
-        Toggle Read Only
-    </Button>
-    
-    <Button onClick={() => setError(error ? '' : 'Do better')}>
-        Toggle Error
-    </Button>
-    
-    <p>Current value: {value}</p>
-    <p>Previous value: {prev}</p>
-</div>
+        <Button onClick={() => setError(error ? '' : 'Do better')}>
+            Toggle Error
+        </Button>
+        
+        <p>Current value: {value}</p>
+        <p>Previous value: {prev}</p>
+    </Form.Group>
+</Form>
 ```
 
 An example involving a Search transformed back and forth from a `key|name` string:
 
 ```jsx
 import { useState } from 'react';
+import { Form } from '@oris/ui';
 
 const [value, setValue] = useState('200275154|Chase McManning');
 
-<div>
-    <Text id="foo-search" value={value} onChange={setValue}>
-        <Text.Label>
-            Label here
-        </Text.Label>
+<Form>
+    <Form.Group>
+        <Text id="foo-search" value={value} onChange={setValue}>
+            <Text.Label>
+                Label here
+            </Text.Label>
 
-        <Text.Search />
+            <Text.Search />
 
-        <Text.Help>
-            You picked <strong>{value ? value : 'nobody'}</strong>
-        </Text.Help>
-    </Text>
-</div>
+            <Text.Help>
+                You picked <strong>{value ? value : 'nobody'}</strong>
+            </Text.Help>
+        </Text>
+    </Form.Group>
+</Form>
 ```
 
 Email input example
 
 ```jsx
-<Text id="foo-email">
-    <Text.Label>Provide your email address</Text.Label>
-    <Text.Email />
-    <Text.Error />
-</Text>
+import { Form } from '@oris/ui';
+
+<Form>
+    <Form.Group>
+        <Text id="foo-email">
+            <Text.Label>Provide your email address</Text.Label>
+            <Text.Email />
+            <Text.Error />
+        </Text>
+    </Form.Group>
+</Form>
 ```
 
 Providing a `bind` class instance:
 
 ```jsx
-import { Button } from '@oris/ui';
+import { Form, Button } from '@oris/ui';
 import { MyMockStringBind } from '../../internal/FormCommon/types';
 
 const bind = new MyMockStringBind('foo4', 'foo bar');
 
-<div>
-    <Text bind={bind}>
-        <Text.Label />
-        <Text.Input />
-        <Text.Help />
-        <Text.Error />
-    </Text>
+<Form>
+    <Form.Group>
+        <Text bind={bind}>
+            <Text.Label />
+            <Text.Input />
+            <Text.Help />
+            <Text.Error />
+        </Text>
+    </Form.Group>
 
     <Button onClick={() => bind.readOnly = !bind.readOnly}>
         Toggle Read Only
     </Button>
-    
+        
     <Button onClick={() => bind.error = bind.error ? '' : 'Do better'}>
         Toggle Error
     </Button>
-</div>
+</Form>
 ```
 
 Getting bind values on form submit:
 
 ```jsx
 import React, { useEffect } from 'react';
+import { Form, Button } from '@oris/ui';
 import { MyMockStringBind } from '../../internal/FormCommon/types';
 
 const bind = new MyMockStringBind('foo6', 'foo bar');
@@ -121,15 +135,17 @@ function MyComponent() {
     }
 
     return (
-        <form onSubmit={onSubmit}>
-            <Text bind={bind}>
-                <Text.Label />
-                <Text.Input />
-                <Text.Help />
-            </Text>
+        <Form onSubmit={onSubmit}>
+            <Form.Group>
+                <Text bind={bind}>
+                    <Text.Label />
+                    <Text.Input />
+                    <Text.Help />
+                </Text>
+            </Form.Group>
 
-            <button type="submit">Submit</button>
-        </form>
+            <Button type="submit">Submit</Button>
+        </Form>
     );
 }
 
@@ -140,22 +156,24 @@ Update binds externally
 
 ```jsx
 import React, { useEffect, useState } from 'react';
-import { Button } from '@oris/ui';
+import { Form, Button } from '@oris/ui';
 import { MyMockStringBind } from '../../internal/FormCommon/types';
 
 const bind = new MyMockStringBind('foo7', 'foo bar');
 
-<div>
-    <Text bind={bind}>
-        <Text.Label />
-        <Text.Input />
-        <Text.Help />
-    </Text>
+<Form>
+    <Form.Group>
+        <Text bind={bind}>
+            <Text.Label />
+            <Text.Input />
+            <Text.Help />
+        </Text>
+    </Form.Group>
 
     <Button onClick={() => bind.value = 'fizz buzz'}>
         1. Change to 'fizz buzz'
     </Button>
-</div>
+</Form>
 ```
 
 Two Fields One Bind
@@ -164,7 +182,7 @@ Also demos another component that uses the `useFieldBind` hook to monitor a bind
 
 ```jsx
 import React, { useEffect } from 'react';
-import { Button } from '@oris/ui';
+import { Form, Button } from '@oris/ui';
 import { MyMockStringBind } from '../../internal/FormCommon/types';
 import useFieldBind from '../../internal/FormCommon/hooks/useFieldBind';
 
@@ -184,25 +202,36 @@ function MyComponent() {
     );
 }
 
-<div>
-    <Text bind={bind}>
-        <Text.Label />
-        <Text.Input />
-        <Text.Help />
-    </Text>
-    <Text bind={bind}>
-        <Text.Label />
-        <Text.Input />
-        <Text.Help />
-    </Text>
+<Form>
+    <Form.Group>
+        <Text bind={bind}>
+            <Text.Label />
+            <Text.Input />
+            <Text.Help />
+        </Text>
+    </Form.Group>
+    <Form.Group>
+        <Text bind={bind}>
+            <Text.Label />
+            <Text.Input />
+            <Text.Help />
+        </Text>
+    </Form.Group>
+
     <MyComponent />
-</div>
+</Form>
 ```
 
 ```jsx
-<Text id="something">
-    <Text.Label>My Label</Text.Label>
+import { Form } from '@oris/ui';
 
-    <Text.Area />
-</Text>
+<Form>
+    <Form.Group>
+        <Text id="something">
+            <Text.Label>My Label</Text.Label>
+
+            <Text.Area />
+        </Text>
+    </Form.Group>
+</Form>
 ```
