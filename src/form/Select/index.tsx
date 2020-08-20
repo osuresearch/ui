@@ -1,34 +1,41 @@
-import React from 'react';
+import React, { createContext } from 'react';
+import { NullFieldBind, IFieldBind, FormFieldProps } from '../../internal/FormCommon/types';
+import useFieldBindOrProps from '../../internal/FormCommon/hooks/useFieldBindOrProps';
 
 import { Label, LabelProps } from './Label';
+import { Help, HelpProps } from './Help';
+import { Error, ErrorProps } from './Error';
+import { Success, SuccessProps } from './Success';
 import { Control, ControlProps } from './Control';
 import { Option, OptionProps } from './Option';
-import Help, { HelpProps } from '../../internal/FormCommon/Components/Help';
-import { InvalidFeedback, InvalidFeedbackProps } from './InvalidFeedback';
-import { ValidFeedback, ValidFeedbackProps } from './ValidFeedback';
 
-interface SelectComposition {
-    Label: React.FC<LabelProps>;
-    Control: React.FC<ControlProps>;
-    Option: React.FC<OptionProps>;
-    Help: React.FC<HelpProps>;
-    InvalidFeedback: React.FC<InvalidFeedbackProps>;
-    ValidFeedback: React.FC<ValidFeedbackProps>;
+type Props = FormFieldProps<string> & {
+    // Add your other top level props here.
+    // foo: number
 }
 
-interface Props {
-    id: string;
-    invalid?: boolean | undefined;
-    valid?: boolean | undefined;
-    required?: boolean | undefined;
+interface ISelectComposition {
+    Label: React.FC<LabelProps>
+    Help: React.FC<HelpProps>
+    Control: React.FC<ControlProps>
+    Option: (props: OptionProps) => JSX.Element | JSX.Element[]
+    Error: React.FC<ErrorProps>
+    Success: React.FC<SuccessProps>
 }
 
-export const Context = React.createContext<Props>({
-    id: '',
-    invalid: undefined,
-    valid: undefined,
-    required: undefined
-})
+interface ISelectContext {
+    bind: IFieldBind<string>
+
+    // Add your other props  here that should be made available to consumers
+    // foo: number
+}
+
+export const SelectContext = createContext<ISelectContext>({
+    bind: new NullFieldBind<string>(),
+
+    // Add your other prop defaults here that should be made available to consumers
+    // foo: 1
+});
 
 /**
  * A styled Select drop-down component
@@ -39,38 +46,37 @@ export const Context = React.createContext<Props>({
  *      * `hide` – Visually hide the label. The content will continue to be readable in screen readers. Use this with caution; hiding the label can lead to usability and accessibility issues.
  *      * Accepts [HTML Global attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes).
  * * `Select.Control` (required) - A control container for options (this is `<select>` in native HTML)
- *  * **Props** – Accepts [`<select> attributes`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select) and React event handler attributes
+ *  * **Props** – Accepts [`<select>` attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select) and React event handler attributes
  * * `Select.Option` (required) - An option nested in a `Select.Control` list (this is `<option>` in native HTML)
  *  * **Props**
  *      * `value` (required)
  *      * Accepts [`<option>` attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option)
  * * `Select.Help` – Help text for the `Select`
- * * `Select.InvalidFeedback` (required if `Select` requires validation) – Provides instructions on how to resolve the validation error; will display when `invalid` is set in `Select`
- * * `Select.ValidFeedback` – Feedback for when the set meets the validation rules; will display when `valid` is set in `Select`
+ * * `Select.Error` (required if `Select` requires validation) – Provides instructions on how to resolve the validation error; will display when `invalid` is set in `Select`
+ * * `Select.Success` – Feedback for when the set meets the validation rules; will display when `valid` is set in `Select`
  * 
  */
-
-const Select: React.FC<Props> & SelectComposition = ({
+const Select: React.FC<Props> & ISelectComposition = ({
+    // foo = 1
     children,
-    id,
-    invalid,
-    valid,
-    required
+    ...props // everything else is of FormFieldProps<string>
 }) => {
+    const { bind } = useFieldBindOrProps(props);
+
     return (
-        <Context.Provider value={{ id, invalid, valid, required }}>
-            <div className='form-group'>
+        <SelectContext.Provider value={{ bind, /* foo */ }}>
+            <div className="form-group">
                 {children}
             </div>
-        </Context.Provider>
-    )
+        </SelectContext.Provider>
+    );
 }
 
 Select.Label = Label;
 Select.Control = Control;
 Select.Option = Option;
 Select.Help = Help;
-Select.InvalidFeedback = InvalidFeedback;
-Select.ValidFeedback = ValidFeedback;
+Select.Error = Error;
+Select.Success = Success;
 
 export default Select;

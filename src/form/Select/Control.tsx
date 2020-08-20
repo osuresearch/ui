@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Context } from './';
+import { SelectContext } from './';
 import { Option } from './Option';
 
 export interface ControlProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
@@ -7,20 +7,21 @@ export interface ControlProps extends React.SelectHTMLAttributes<HTMLSelectEleme
 };
 
 export const Control: React.FC<ControlProps> = ({ children, ...props }) => {
-    const { id, invalid, valid, required } = useContext(Context);
+    const { bind } = useContext(SelectContext);
 
     return (
         <select
-            name={id} // set the name prop to its ID - will be overridden if name is set on the Select.Control component
+            name={bind.id} // set the name prop to its ID - will be overridden if name is set on the Select.Control component
             {...props}
-            id={id}
+            id={bind.id}
             className={
                 'form-control custom-select' +
-                (invalid ? ' is-invalid' : '') +
-                (valid ? ' is-valid' : '') +
+                (bind.error ? ' is-invalid' : '') +
+                (bind.success ? ' is-valid' : '') +
                 (props.className ? ' ' + props.className : '')
             }
-            required={required}
+            required={bind.required}
+            defaultValue={bind.value ? bind.value : undefined}
         >
             {children}
         </select>

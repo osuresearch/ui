@@ -2,6 +2,27 @@
 ### Examples
 
 ```jsx
+const dropdownOptions = {
+       value: {
+          cheddar: 'Cheddar Cheese',
+          feta: 'Feta Cheese'
+        }
+    };
+
+<Select id="bind-test">
+    <Select.Label>Bind Test</Select.Label>
+
+    <Select.Control>
+        <Select.Option optionsBind={dropdownOptions} />
+    </Select.Control>
+
+    <Select.Help>
+        Some additional help text here
+    </Select.Help>
+</Select>
+```
+
+```jsx
 <Select id="color-select">
     <Select.Label>Select a Color Profile</Select.Label>
 
@@ -21,7 +42,7 @@
 ```
 
 ```jsx
-<Select id="error-example" invalid required>
+<Select id="error-example" required>
     <Select.Label>Erroneous selection</Select.Label>
 
     <Select.Control name="color-profiles">
@@ -33,13 +54,13 @@
         <Select.Option value="HSL">HSL</Select.Option>
     </Select.Control>
 
-    <Select.InvalidFeedback>
+    <Select.Error>
         You must select a color profile
-    </Select.InvalidFeedback>
+    </Select.Error>
 
-    <Select.ValidFeedback>
+    <Select.Success>
         Your selection is correct
-    </Select.ValidFeedback>
+    </Select.Success>
 
     <Select.Help>
         Some additional help text here

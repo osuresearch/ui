@@ -38,6 +38,9 @@ export interface IFieldBind<T> {
     /** Get/update the field value */
     value: Nullable<T>
 
+    /** Initial value for isDiff */
+    initialValue?: Nullable<T>
+
     /** Delegates to notify when the value changes */
     onValueChange: Action<OnValueChangeDelegate<T>>
 

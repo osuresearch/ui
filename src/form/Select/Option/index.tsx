@@ -1,0 +1,57 @@
+import React, { useContext } from 'react';
+import { SelectContext } from '..';
+import FormContext from '../../../internal/FormCommon/FormContext';
+import { IFieldBind, FormFieldProps } from '../../../internal/FormCommon/types';
+
+import Print from './Print';
+import Diff from './Diff';
+
+import '../../../internal/FormCommon/style.scss';
+
+export interface Value {
+    [key: string]: string;
+}
+
+export type OptionProps = FormFieldProps<object> & React.OptionHTMLAttributes<HTMLOptionElement> & {
+    optionsBind?: IFieldBind<Value>;
+    children?: string;
+}
+
+export const Option = (props: OptionProps) => {
+    const { bind } = useContext(SelectContext);
+    const { isDiff, isPrint } = useContext(FormContext);
+
+    if (props.optionsBind) {
+        if (isPrint) {
+            return <Print>{props.optionsBind.value![bind.value!]}</Print>
+        }
+
+        if (isDiff) {
+            return (
+                <Diff
+                    removed={
+                        !(bind.initialValue! in props.optionsBind.value!) ?
+                            props.optionsBind.initialValue![bind.initialValue!] :
+                            props.optionsBind.value![bind.initialValue!]
+                    }
+                    added={
+                        props.optionsBind.value![bind.value!]
+                    }
+                />
+            )
+        }
+
+        return (
+            Object.keys(props.optionsBind.value!).map((key) =>
+                <option {...props} key={key} value={key}>
+                    {props.optionsBind!.value![key]}
+                </option>
+            )
+        )
+    }
+
+    return (
+        <option {...props}>{props.children}</option>
+    )
+
+}

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Context } from './';
+import { SelectContext } from './';
 
 import LabelCommon from '../../internal/FormCommon/Components/Label';
 
@@ -12,17 +12,17 @@ export const Label: React.FC<LabelProps> = ({
     hide,
     ...props
 }) => {
-    const { id, required } = useContext(Context);
+    const { bind } = useContext(SelectContext);
 
     return (
         <LabelCommon
             className={
-                (required ? ' is-required' : '') +
+                (bind.required ? ' is-required' : '') +
                 (hide ? ' sr-only' : '')
             }
             {...props}
 
-            htmlFor={id}
+            htmlFor={bind.id}
         >
             {children}
         </LabelCommon>
