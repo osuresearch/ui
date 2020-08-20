@@ -1,13 +1,18 @@
-import React, { createContext } from 'react';
-import { NullFieldBind, IFieldBind, FormFieldProps } from '../../internal/FormCommon/types';
+import React from 'react';
+import { NullFieldBind, FormFieldProps, IFormFieldContext } from '../../internal/FormCommon/types';
 import useFieldBindOrProps from '../../internal/FormCommon/hooks/useFieldBindOrProps';
 
-import { Label, LabelProps } from './Label';
-import { Help, HelpProps } from './Help';
-import { Error, ErrorProps } from './Error';
-import { Success, SuccessProps } from './Success';
+import { withFormContext } from '../../internal/FormCommon/HOC/withFormContext';
+
 import { Control, ControlProps } from './Control';
 import { Option, OptionProps } from './Option';
+
+import {
+    Label, LabelProps,
+    Help, HelpProps,
+    Error, ErrorProps,
+    Success, SuccessProps
+} from '../../internal/FormCommon/Components';
 
 type Props = FormFieldProps<string> & {
     // Add your other top level props here.
@@ -18,19 +23,12 @@ interface ISelectComposition {
     Label: React.FC<LabelProps>
     Help: React.FC<HelpProps>
     Control: React.FC<ControlProps>
-    Option: (props: OptionProps) => JSX.Element | JSX.Element[]
+    Option: (props: OptionProps) => React.ReactElement | React.ReactElement[]
     Error: React.FC<ErrorProps>
     Success: React.FC<SuccessProps>
 }
 
-interface ISelectContext {
-    bind: IFieldBind<string>
-
-    // Add your other props  here that should be made available to consumers
-    // foo: number
-}
-
-export const SelectContext = createContext<ISelectContext>({
+export const Context = React.createContext<IFormFieldContext<string>>({
     bind: new NullFieldBind<string>(),
 
     // Add your other prop defaults here that should be made available to consumers
@@ -64,19 +62,19 @@ const Select: React.FC<Props> & ISelectComposition = ({
     const { bind } = useFieldBindOrProps(props);
 
     return (
-        <SelectContext.Provider value={{ bind, /* foo */ }}>
+        <Context.Provider value={{ bind, /* foo */ }}>
             <div className="form-group">
                 {children}
             </div>
-        </SelectContext.Provider>
+        </Context.Provider>
     );
 }
 
-Select.Label = Label;
 Select.Control = Control;
 Select.Option = Option;
-Select.Help = Help;
-Select.Error = Error;
-Select.Success = Success;
+Select.Label = withFormContext<LabelProps>(Label, Context);
+Select.Help = withFormContext<HelpProps>(Help, Context);
+Select.Error = withFormContext<ErrorProps>(Error, Context);
+Select.Success = withFormContext<SuccessProps>(Success, Context);
 
 export default Select;

@@ -1,12 +1,17 @@
 import React from 'react';
-import { NullFieldBind, IFieldBind, FormFieldProps } from '../../internal/FormCommon/types';
+import { NullFieldBind, FormFieldProps, IFormFieldContext } from '../../internal/FormCommon/types';
 import useFieldBindOrProps from '../../internal/FormCommon/hooks/useFieldBindOrProps';
 
+import { withFormContext } from '../../internal/FormCommon/HOC/withFormContext';
+
 import { Input, InputProps } from './Input';
-import { Label, LabelProps } from './Label';
-import { Help, HelpProps } from './Help';
-import { Success, SuccessProps } from './Success';
-import { Error, ErrorProps } from './Error';
+
+import {
+    Label, LabelProps,
+    Help, HelpProps,
+    Error, ErrorProps,
+    Success, SuccessProps
+} from '../../internal/FormCommon/Components';
 
 type Props = FormFieldProps<boolean> & {
     // Add your other top level props here.
@@ -21,14 +26,7 @@ interface ICheckboxComposition {
     Success: React.FC<SuccessProps>
 }
 
-interface ICheckboxContext {
-    bind: IFieldBind<boolean>
-
-    // Add your other props  here that should be made available to consumers
-    // foo: number
-}
-
-export const CheckboxContext = React.createContext<ICheckboxContext>({
+export const Context = React.createContext<IFormFieldContext<boolean>>({
     bind: new NullFieldBind<boolean>(),
 
     // Add your other prop defaults here that should be made available to consumers
@@ -56,19 +54,19 @@ const Checkbox: React.FC<Props> & ICheckboxComposition = ({
     const { bind } = useFieldBindOrProps(props);
 
     return (
-        <CheckboxContext.Provider value={{ bind }}>
+        <Context.Provider value={{ bind }}>
             <div className='custom-control custom-checkbox'>
                 {children}
             </div>
-        </CheckboxContext.Provider>
+        </Context.Provider>
     )
 }
 
 Checkbox.Input = Input;
-Checkbox.Label = Label;
-Checkbox.Help = Help;
-Checkbox.Success = Success;
-Checkbox.Error = Error;
+Checkbox.Label = withFormContext<LabelProps>(Label, Context);
+Checkbox.Help = withFormContext<HelpProps>(Help, Context);
+Checkbox.Success = withFormContext<SuccessProps>(Success, Context);
+Checkbox.Error = withFormContext<ErrorProps>(Error, Context);
 
 export default Checkbox;
 

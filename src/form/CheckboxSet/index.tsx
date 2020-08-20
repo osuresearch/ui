@@ -1,37 +1,36 @@
 import React from 'react';
-import Legend, { LegendProps } from '../../internal/FormCommon/Components/Legend';
-import { Fields, FieldsProps } from './Fields';
-import Help, { HelpProps } from '../../internal/FormCommon/Components/Help';
-import { InvalidFeedback, InvalidFeedbackProps } from './InvalidFeedback';
-import { ValidFeedback, ValidFeedbackProps } from './ValidFeedback';
+import { NullFieldBind, FormFieldProps, IFormFieldContext } from '../../internal/FormCommon/types';
+import useFieldBindOrProps from '../../internal/FormCommon/hooks/useFieldBindOrProps';
 
-interface CheckboxSetComposition {
+import { withFormContext } from '../../internal/FormCommon/HOC/withFormContext';
+
+import { Fields, FieldsProps } from './Fields';
+
+import {
+    Legend, LegendProps,
+    Help, HelpProps,
+    Error, ErrorProps,
+    Success, SuccessProps
+} from '../../internal/FormCommon/Components';
+
+interface ICheckboxSetComposition {
     Legend: React.FC<LegendProps>;
     Fields: React.FC<FieldsProps>;
     Help: React.FC<HelpProps>;
-    InvalidFeedback: React.FC<InvalidFeedbackProps>;
-    ValidFeedback: React.FC<ValidFeedbackProps>;
+    Error: React.FC<ErrorProps>;
+    Success: React.FC<SuccessProps>;
 }
 
-interface Props {
-    /** Make this fieldset required */
-    required?: boolean;
-
-    /** Indicate that this fieldset failed validation */
-    invalid?: boolean;
-
-    /** Indicate that this fieldset met validation (not recommended unless you have a good reason) */
-    valid?: boolean;
-};
-
-interface Context {
-    invalid: boolean | undefined;
-    valid: boolean | undefined;
+type Props = FormFieldProps<boolean> & {
+    // Add your other top level props here.
+    // foo: number
 }
 
-export const CheckboxSetContext = React.createContext<Context>({
-    invalid: undefined,
-    valid: undefined,
+export const Context = React.createContext<IFormFieldContext<boolean>>({
+    bind: new NullFieldBind<boolean>(),
+
+    // Add your other prop defaults here that should be made available to consumers
+    // foo: 1
 });
 
 /**
@@ -57,31 +56,30 @@ export const CheckboxSetContext = React.createContext<Context>({
  * @param {boolean} invalid
  * @param {boolean} valid
  */
-
-const CheckboxSet: React.FC<Props> & CheckboxSetComposition = ({
+const CheckboxSet: React.FC<Props> & ICheckboxSetComposition = ({
     children,
-    required,
-    invalid,
-    valid
+    ...props // everything else is of FormFieldProps<string>
 }) => {
+    const { bind } = useFieldBindOrProps(props);
+
     return (
-        <CheckboxSetContext.Provider value={{ invalid, valid }}>
+        <Context.Provider value={{ bind }}>
             <fieldset
                 className={
                     "form-group" +
-                    (required ? " is-required" : "")
+                    (bind.required ? " is-required" : "")
                 }
             >
                 {children}
             </fieldset>
-        </CheckboxSetContext.Provider>
-    );
+        </Context.Provider>
+    )
 }
 
-CheckboxSet.Legend = Legend;
+CheckboxSet.Legend = withFormContext<LegendProps>(Legend, Context);
 CheckboxSet.Fields = Fields;
-CheckboxSet.Help = Help;
-CheckboxSet.InvalidFeedback = InvalidFeedback;
-CheckboxSet.ValidFeedback = ValidFeedback;
+CheckboxSet.Help = withFormContext<HelpProps>(Help, Context);
+CheckboxSet.Error = withFormContext<ErrorProps>(Error, Context);
+CheckboxSet.Success = withFormContext<SuccessProps>(Success, Context);
 
 export default CheckboxSet;

@@ -158,6 +158,10 @@ export class NullFieldBind<T> extends FieldBind<T> {
     }
 }
 
+export interface IFormFieldContext<T> {
+    bind: IFieldBind<T>
+}
+
 /**
  * Mock implementation of a stricter bind (e.g. data that comes from a backend API). 
  * Used for the readme.md examples since we can't write Typescript in examples

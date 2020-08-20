@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { TextContext } from '.';
+import { Context } from '.';
 
 export type EmailProps = React.InputHTMLAttributes<HTMLInputElement>;
 
@@ -7,9 +7,9 @@ export type EmailProps = React.InputHTMLAttributes<HTMLInputElement>;
  * Email input field with automatic validation for invalid email addresses
  */
 export const Email: React.FC<EmailProps> = (props) => {
-    const { bind } = useContext(TextContext);
+    const { bind } = useContext(Context);
 
-    const classNames = 'form-control ' + 
+    const classNames = 'form-control ' +
         (bind.error ? ' is-invalid' : '');
 
     const nativeOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {

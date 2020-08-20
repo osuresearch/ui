@@ -1,14 +1,20 @@
-import React, { createContext } from 'react';
-import { NullFieldBind, IFieldBind, FormFieldProps } from '../../internal/FormCommon/types';
+import React from 'react';
+import { NullFieldBind, FormFieldProps, IFormFieldContext } from '../../internal/FormCommon/types';
 import useFieldBindOrProps from '../../internal/FormCommon/hooks/useFieldBindOrProps';
 
-import { Label, LabelProps } from './Label';
-import { Help, HelpProps } from './Help';
-import { Error, ErrorProps } from './Error';
-import { Success, SuccessProps } from './Success';
+import { withFormContext } from '../../internal/FormCommon/HOC/withFormContext';
+
 import { Input, InputProps } from './Input';
 import { Search, SearchProps } from './Search';
 import { Email, EmailProps } from './Email';
+import { TextArea, TextAreaProps } from './Area'
+
+import {
+    Label, LabelProps,
+    Help, HelpProps,
+    Error, ErrorProps,
+    Success, SuccessProps
+} from '../../internal/FormCommon/Components';
 
 type Props = FormFieldProps<string> & {
     // Add your other top level props here.
@@ -23,16 +29,10 @@ interface ITextComposition {
     Success: React.FC<SuccessProps>
     Search: React.FC<SearchProps>
     Email: React.FC<EmailProps>
+    Area: React.FC<TextAreaProps>
 }
 
-interface ITextContext {
-    bind: IFieldBind<string>
-
-    // Add your other props  here that should be made available to consumers
-    // foo: number
-}
-
-export const TextContext = createContext<ITextContext>({
+export const Context = React.createContext<IFormFieldContext<string>>({
     bind: new NullFieldBind<string>(),
 
     // Add your other prop defaults here that should be made available to consumers
@@ -47,20 +47,22 @@ const Text: React.FC<Props> & ITextComposition = ({
     const { bind } = useFieldBindOrProps(props);
 
     return (
-        <TextContext.Provider value={{ bind, /* foo */ }}>
+        <Context.Provider value={{ bind, /* foo */ }}>
             <div className="form-group">
                 {children}
             </div>
-        </TextContext.Provider>
+        </Context.Provider>
     );
 }
 
-Text.Label = Label;
-Text.Help = Help;
+
 Text.Input = Input;
-Text.Error = Error;
-Text.Success = Success;
 Text.Search = Search;
 Text.Email = Email;
+Text.Area = TextArea;
+Text.Label = withFormContext<LabelProps>(Label, Context);
+Text.Help = withFormContext<HelpProps>(Help, Context);
+Text.Error = withFormContext<ErrorProps>(Error, Context);
+Text.Success = withFormContext<SuccessProps>(Success, Context);
 
 export default Text;

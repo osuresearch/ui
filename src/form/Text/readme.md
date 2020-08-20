@@ -198,3 +198,11 @@ function MyComponent() {
     <MyComponent />
 </div>
 ```
+
+```jsx
+<Text id="something">
+    <Text.Label>My Label</Text.Label>
+
+    <Text.Area />
+</Text>
+```

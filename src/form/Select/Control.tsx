@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { SelectContext } from './';
+import { Context } from './';
 import { Option } from './Option';
 
 export interface ControlProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
@@ -7,7 +7,7 @@ export interface ControlProps extends React.SelectHTMLAttributes<HTMLSelectEleme
 };
 
 export const Control: React.FC<ControlProps> = ({ children, ...props }) => {
-    const { bind } = useContext(SelectContext);
+    const { bind } = useContext(Context);
 
     return (
         <select

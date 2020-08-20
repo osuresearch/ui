@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { SelectContext } from '..';
+import { Context } from '..';
 import FormContext from '../../../internal/FormCommon/FormContext';
 import { IFieldBind, FormFieldProps } from '../../../internal/FormCommon/types';
 
@@ -18,7 +18,7 @@ export type OptionProps = FormFieldProps<object> & React.OptionHTMLAttributes<HT
 }
 
 export const Option = (props: OptionProps) => {
-    const { bind } = useContext(SelectContext);
+    const { bind } = useContext(Context);
     const { isDiff, isPrint } = useContext(FormContext);
 
     if (props.optionsBind) {

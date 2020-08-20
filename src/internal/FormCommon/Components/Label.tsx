@@ -1,19 +1,24 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { IFormFieldContext } from '../types';
 
-export interface LabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> { };
+export type LabelProps = React.LabelHTMLAttributes<HTMLLabelElement> & {
+    // Will automatically be provided by an HOC
+    context: React.Context<IFormFieldContext<any>>;
+}
 
-const Label: React.FC<LabelProps> = ({ children, ...props }) => {
+export function Label(props: LabelProps) {
+    const { bind } = useContext(props.context);
+
     return (
         <label
             {...props}
+            htmlFor={bind.id}
             className={
                 'custom-control-label' +
                 (props.className ? ' ' + props.className : '')
             }
         >
-            {children}
+            {props.children ?? bind.instructions}
         </label>
-    )
+    );
 }
-
-export default Label;

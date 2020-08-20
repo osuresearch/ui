@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { CheckboxSetContext } from '.';
+import { Context } from '.';
 
 export interface FieldsProps {
     name?: string;
@@ -12,14 +12,14 @@ export const Fields: React.FC<FieldsProps> = ({
     inline,
     name
 }) => {
-    const { valid, invalid } = useContext(CheckboxSetContext);
+    const { bind } = useContext(Context);
 
     return (
         <div className={
             'form-check' +
             (inline ? ' form-check-inline' : '') +
-            (valid ? ' is-valid' : '') +
-            (invalid ? ' is-invalid' : '')
+            (bind.success ? ' is-valid' : '') +
+            (bind.error ? ' is-invalid' : '')
         }>
             {name && <>
                 {Array.isArray(children)

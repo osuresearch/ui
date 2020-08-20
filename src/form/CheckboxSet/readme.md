@@ -34,7 +34,7 @@ import { Checkbox } from '@oris/ui/form';
 </CheckboxSet>
 ```
 
-#### Validation
+<!-- #### Validation
 Tip: Try changing invalid to valid in the example below.
 
 ```jsx
@@ -65,7 +65,7 @@ import { Checkbox } from '@oris/ui/form';
         You did it!
     </CheckboxSet.ValidFeedback>
 </CheckboxSet>
-```
+``` -->
 
 #### Inline Checkboxes
 ```jsx

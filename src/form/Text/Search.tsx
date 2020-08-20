@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import ThatOtherSearch from '../../components/Search';
 
-import { TextContext } from '.';
+import { Context } from '.';
 import { Nullable } from '../../internal/FormCommon/types';
 
 export type SearchProps = {
@@ -43,7 +43,7 @@ function fromSearchPair(pair: SearchPair): Nullable<string> {
 export const Search: React.FC<SearchProps> = ({
     endpoint = 'https://orapps.osu.edu/api/v1/person'
 }) => {
-    const { bind } = useContext(TextContext);
+    const { bind } = useContext(Context);
 
     const onChange = (e: any) => {
         bind.value = fromSearchPair(e.target.value);

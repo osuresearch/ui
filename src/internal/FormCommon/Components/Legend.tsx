@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { IFormFieldContext } from '../types';
 
-export interface LegendProps extends React.HTMLAttributes<HTMLElement> { };
-
-const Legend: React.FC<LegendProps> = ({ children, ...props }) => {
-    return (
-        <legend {...props}>
-            {children}
-        </legend>
-    )
+export type LegendProps = React.HTMLAttributes<HTMLElement> & {
+    // Will automatically be provided by an HOC
+    context: React.Context<IFormFieldContext<any>>;
 }
 
-export default Legend;
+export function Legend(props: LegendProps) {
+    const { bind } = useContext(props.context);
+
+    return (
+        <legend {...props}>
+            {props.children ?? bind.instructions}
+        </legend>
+    );
+}

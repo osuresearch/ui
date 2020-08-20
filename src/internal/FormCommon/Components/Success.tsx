@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { IFormFieldContext } from '../types';
 
-interface Props extends React.HTMLAttributes<HTMLDivElement> { }
-
-const Success: React.FC<Props> = ({ children, ...props }) => {
-    return (
-        <div {...props} className='valid-feedback'>
-            {children}
-        </div>
-    )
+export type SuccessProps = React.HTMLAttributes<HTMLDivElement> & {
+    // Will automatically be provided by an HOC
+    context: React.Context<IFormFieldContext<any>>;
 }
 
-export default Success;
+export function Success(props: SuccessProps) {
+    const { bind } = useContext(props.context);
+
+    return (
+        <div {...props} className='valid-feedback'>
+            {props.children ?? bind.error}
+        </div>
+    );
+}

@@ -1,17 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { IFormFieldContext } from '../types';
 
-export interface HelpProps extends React.HTMLAttributes<HTMLElement> { }
+export type HelpProps = React.HTMLAttributes<HTMLDivElement> & {
+    // Will automatically be provided by an HOC
+    context: React.Context<IFormFieldContext<any>>;
+}
 
-const Help: React.FC<HelpProps> = ({ children, ...props }) => {
+export function Help(props: HelpProps) {
+    const { bind } = useContext(props.context);
+
     return (
         <small
             {...props}
             id={props.id}
             className='form-text text-muted'
         >
-            {children}
+            {props.children ?? bind.help}
         </small>
-    )
+    );
 }
-
-export default Help;
