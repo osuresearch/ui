@@ -10,9 +10,19 @@
         &.readonly {
             background-color: tint($gray, 20%);
 
+            &:focus-within {
+                background-color: tint($gray, 20%);
+                border-color: $gray;
+                box-shadow: 0 0 0 0.2rem rgba(43, 43, 43, 0.25);
+            }
+
             input {
                 background-color: tint($gray, 20%);
                 color: tint($gray, 80%);
+
+                &:focus {
+                    background: $gray;
+                }
             }
 
             .fa {
@@ -25,8 +35,11 @@
         }
 
         &:focus-within {
-            outline: auto;
-            outline-color: -webkit-focus-ring-color;
+            color: #525252;
+            background-color: #fff;
+            border-color: #50bac2;
+            outline: 0;
+            box-shadow: 0 0 0 0.2rem rgba(38, 104, 109, 0.25);
         }
 
         label { margin-bottom: 0; }
@@ -37,15 +50,17 @@
             cursor: default;
             text-align: center;
             width: 1.65rem;
+            margin-bottom: 0;
 
             &:focus {
                 outline: none; // General rule is to NEVER do this, but we're outlining the parent instead
-                background: Highlight;
+                background: $casal;
+                color: white;
             }
 
             &::selection,
             &::-moz-selection {
-                //background: transparent;
+                background: transparent;
             }
 
             // Hide the spin icons (we still want the stepping functionality)
@@ -69,16 +84,3 @@
 
 // Sass hurt itself in its confusion...
 .time-field input::selection { background: transparent; }
-
-// Firefox overrides
-@-moz-document url-prefix('') {
-    .time-field input:focus {
-        color: $white;
-    }
-}
-// Edge/IE11 (maybe?) overrides
-@supports (-ms-ime-align:auto) {
-    .time-field input:focus {
-        color: $white;
-    }
-}
