@@ -235,3 +235,17 @@ import { Form } from '@oris/ui';
     </Form.Group>
 </Form>
 ```
+
+```jsx
+import { Form } from '@oris/ui';
+
+<Form>
+    <Form.Group>
+        <Text id="rich-text-editor">
+            <Text.Label>Rich Text Editor input</Text.Label>
+
+            <Text.Rich />
+        </Text>
+    </Form.Group>
+</Form>
+```

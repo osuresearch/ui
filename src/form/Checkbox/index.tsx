@@ -19,10 +19,39 @@ type Props = FormFieldProps<boolean> & {
 }
 
 interface ICheckboxComposition {
+    /**
+     * Label for the `Checkbox` (equivalent of `<label>`)
+     * 
+     * * **Props**
+     *  * [HTML Global attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes)
+    */
     Label: React.FC<LabelProps>
+
+    /** Help text for the `Checkbox` */
     Help: React.FC<HelpProps>
+
+    /**
+     * Input field for `Checkbox` (equivalent of `<input type='checkbox'>`)
+     * 
+     * * **Props**
+     *  * [`checkbox` input attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox)
+     *  * [React event handlers](https://reactjs.org/docs/events.html#supported-events)
+     *  * All common [`<input>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input) attributes
+    */
     Input: React.FC<InputProps>
+
+    /** 
+     * (required if single `Checkbox` that requires validation)
+     * 
+     * Provides instructions on how to resolve the validation 
+     * error; will display when `error` is set in `Checkbox`
+    */
     Error: React.FC<ErrorProps>
+
+    /**
+     * Feedback for when the set meets the validation rules; 
+     * will display when `success` is set in `Checkbox`
+     */
     Success: React.FC<SuccessProps>
 }
 
@@ -38,13 +67,30 @@ export const Context = React.createContext<IFormFieldContext<boolean>>({
  * 
  * ### Subcomponents
  * 
- * * `Checkbox.Input` (required) – Input field for the `Checkbox`. 
- *  * **Props** – Accepts [`checkbox` input attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox), React event handler attributes, and all common [`<input>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input) attributes
- * * `Checkbox.Label` (required) - Label for the `Checkbox`
- *  * **Props** – Accepts [HTML Global attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes).
- * * `Checkbox.Help` – Help text for the `Checkbox`
- * * `Checkbox.Error` (required if `Checkbox` requires validation) – Provides instructions on how to resolve the validation error; will display when `error` is set in `Checkbox`
- * * `Checkbox.Success` – Feedback for when the set meets the validation rules; will display when `success` is set in `Checkbox`
+ * #### `Checkbox.Input` (required)
+ * Input field for `Checkbox` (equivalent of `<input type='checkbox'>`)
+ * 
+ * * **Props**
+ *  * [`checkbox` input attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox)
+ *  * [React event handlers](https://reactjs.org/docs/events.html#supported-events)
+ *  * All common [`<input>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input) attributes
+ * 
+ * #### `Checkbox.Label` (required)
+ * Label for the `Checkbox` (equivalent of `<label>`)
+ * 
+ * * **Props**
+ *  * [HTML Global attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes)
+ * 
+ * #### `Checkbox.Help`
+ * Help text for the `Checkbox`
+ * 
+ * #### `Checkbox.Error` (required if single `Checkbox` that requires validation)
+ * Provides instructions on how to resolve the validation error; 
+ * will display when `error` is set in `Checkbox`
+ * 
+ * #### `Checkbox.Success`
+ * Feedback for when the set meets the validation rules; will 
+ * display when `success` is set in `Checkbox`
  * 
  */
 const Checkbox: React.FC<Props> & ICheckboxComposition = ({

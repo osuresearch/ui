@@ -7,6 +7,7 @@ import { withFormContext } from '../../internal/FormCommon/HOC/withFormContext';
 import { Input, InputProps } from './Input';
 import { Search, SearchProps } from './Search';
 import { Email, EmailProps } from './Email';
+import Rich, { RichProps } from './Rich';
 import { TextArea, TextAreaProps } from './Area'
 
 import {
@@ -30,6 +31,7 @@ interface ITextComposition {
     Search: React.FC<SearchProps>
     Email: React.FC<EmailProps>
     Area: React.FC<TextAreaProps>
+    Rich: React.FC<RichProps>
 }
 
 export const Context = React.createContext<IFormFieldContext<string>>({
@@ -38,6 +40,25 @@ export const Context = React.createContext<IFormFieldContext<string>>({
     // Add your other prop defaults here that should be made available to consumers
     // foo: 1
 });
+
+/**
+ * Text
+ * 
+ * ### Subcomponents
+ * 
+ * #### `Text.Label` (required)
+ * Equivalent of `<label>`
+ * 
+ * #### `Text.Input`
+ * Equivalent of `<input type='text'>`
+ * 
+ * #### `Text.Area`
+ * Equivalent of `<textarea>`
+ * 
+ * #### `Text.Rich`
+ * A rich text editor (RTE) based on CKEditor
+ * 
+ */
 
 const Text: React.FC<Props> & ITextComposition = ({
     // foo = 1
@@ -58,6 +79,7 @@ Text.Input = Input;
 Text.Search = Search;
 Text.Email = Email;
 Text.Area = TextArea;
+Text.Rich = Rich;
 Text.Label = withFormContext<LabelProps>(Label, Context);
 Text.Help = withFormContext<HelpProps>(Help, Context);
 Text.Error = withFormContext<ErrorProps>(Error, Context);
