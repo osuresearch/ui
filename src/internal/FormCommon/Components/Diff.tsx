@@ -1,11 +1,13 @@
 import React from 'react';
 
-interface Props {
-    removed: string;
-    added: string;
+import '../style.scss';
+
+export interface DiffProps {
+    removed?: string | JSX.Element | null;
+    added?: string | JSX.Element | null;
 }
 
-export default function Diff({ removed, added }: Props) {
+export function Diff({ removed, added }: DiffProps) {
     return (
         <p className="text-diff text-print">
             <span className='is-removed'>

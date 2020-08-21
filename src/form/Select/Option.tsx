@@ -1,12 +1,11 @@
 import React, { useContext } from 'react';
-import { Context } from '..';
-import FormContext from '../../../internal/FormCommon/FormContext';
-import { IFieldBind, FormFieldProps } from '../../../internal/FormCommon/types';
+import { Context } from '.';
+import FormContext from '../../internal/FormCommon/FormContext';
+import { IFieldBind, FormFieldProps } from '../../internal/FormCommon/types';
 
-import Print from './Print';
-import Diff from './Diff';
+import { Print, Diff } from '../../internal/FormCommon/Components';
 
-import '../../../internal/FormCommon/style.scss';
+import '../../internal/FormCommon/style.scss';
 
 export interface Value {
     [key: string]: string;

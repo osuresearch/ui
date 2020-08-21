@@ -5,6 +5,7 @@ export function getHourValue(value: string | undefined) {
         return '';
     }
 
-    const parts = value.split(':').map(Number);
-    return addLeadingZero((parts[0] <= 12 ? parts[0] : parts[0] - 12).toString());
+    const hour = value.split(':').map(Number)[0];
+
+    return addLeadingZero((hour > 12 ? hour - 12 : hour === 0 ? 12 : hour).toString());
 }

@@ -3,14 +3,14 @@
 ```jsx
 import { useState } from 'react';
 import { Form } from '@oris/ui';
-const [date, setDate] = useState(new Date());
+const [date, setDate] = useState();
 
 <Form.Group>
     <DatePicker id="choose-date">
         <DatePicker.Label>Choose a date</DatePicker.Label>
 
         <DatePicker.Input
-            defaultValue={date}
+            selected={date}
             onChange={setDate}
         />
     </DatePicker>
@@ -21,7 +21,7 @@ const [date, setDate] = useState(new Date());
 ```jsx
 import { useState } from 'react';
 import { Form } from '@oris/ui';
-const [date, setDate] = useState(new Date());
+const [date, setDate] = useState();
 
 const isWeekday = (date) => {
     const day = date.getDay();
@@ -33,7 +33,7 @@ const isWeekday = (date) => {
         <DatePicker.Label>Choose a weekday</DatePicker.Label>
 
         <DatePicker.Input
-            defaultValue={date}
+            selected={date}
             onChange={setDate}
             minDate={new Date('2020-01-01T00:00:00-05:00')}
             maxDate={new Date('2025-12-31T00:00:00-05:00')}
