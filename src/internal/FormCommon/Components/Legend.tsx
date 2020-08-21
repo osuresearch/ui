@@ -7,10 +7,12 @@ export type LegendProps = React.HTMLAttributes<HTMLElement> & {
 }
 
 export function Legend(props: LegendProps) {
-    const { bind } = useContext(props.context);
+    // Separate context from the other props (or else they are added as props to the component itself)
+    const { context, ...otherProps } = props;
+    const { bind } = useContext(context);
 
     return (
-        <legend {...props}>
+        <legend {...otherProps}>
             {props.children ?? bind.instructions}
         </legend>
     );

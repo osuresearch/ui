@@ -7,11 +7,13 @@ export type LabelProps = React.LabelHTMLAttributes<HTMLLabelElement> & {
 }
 
 export function Label(props: LabelProps) {
-    const { bind } = useContext(props.context);
+    // Separate context from the other props (or else they are added as props to the component itself)
+    const { context, ...otherProps } = props;
+    const { bind } = useContext(context);
 
     return (
         <label
-            {...props}
+            {...otherProps}
             htmlFor={bind.id}
             className={
                 'custom-control-label' +

@@ -7,10 +7,12 @@ export type ErrorProps = React.HTMLAttributes<HTMLDivElement> & {
 }
 
 export function Error(props: ErrorProps) {
-    const { bind } = useContext(props.context);
+    // Separate context from the other props (or else they are added as props to the component itself)
+    const { context, ...otherProps } = props;
+    const { bind } = useContext(context);
 
     return (
-        <div {...props} className='invalid-feedback'>
+        <div {...otherProps} className='invalid-feedback'>
             {props.children ?? bind.error}
         </div>
     );

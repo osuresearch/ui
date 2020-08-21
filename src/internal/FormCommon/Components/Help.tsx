@@ -7,12 +7,13 @@ export type HelpProps = React.HTMLAttributes<HTMLDivElement> & {
 }
 
 export function Help(props: HelpProps) {
-    const { bind } = useContext(props.context);
+    // Separate context from the other props (or else they are added as props to the component itself)
+    const { context, ...otherProps } = props;
+    const { bind } = useContext(context);
 
     return (
         <small
-            {...props}
-            id={props.id}
+            {...otherProps}
             className='form-text text-muted'
         >
             {props.children ?? bind.help}
