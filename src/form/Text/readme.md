@@ -22,28 +22,28 @@ const onChange = (currentValue, prevValue) => {
         <Text id="foo1" name="foo" readOnly={readOnly} error={error} onChange={onChange}>
             <Text.Label>
                 Label here
-            </Text.Label>
+                </Text.Label>
 
             <Text.Input value={value} onChange={(e) => setValue(e.currentTarget.value)} />
 
             <Text.Help>
                 Help stuff go here
-            </Text.Help>
-            
+                </Text.Help>
+
             <Text.Error />
         </Text>
-
-        <Button onClick={() => setReadOnly(!readOnly)}>
-            Toggle Read Only
-        </Button>
-        
-        <Button onClick={() => setError(error ? '' : 'Do better')}>
-            Toggle Error
-        </Button>
-        
-        <p>Current value: {value}</p>
-        <p>Previous value: {prev}</p>
     </Form.Group>
+
+    <Button onClick={() => setReadOnly(!readOnly)}>
+        Toggle Read Only
+            </Button>
+
+    <Button onClick={() => setError(error ? '' : 'Do better')}>
+        Toggle Error
+            </Button>
+
+    <p>Current value: {value}</p>
+    <p>Previous value: {prev}</p>
 </Form>
 ```
 
@@ -55,21 +55,19 @@ import { Form } from '@oris/ui';
 
 const [value, setValue] = useState('200275154|Chase McManning');
 
-<Form>
-    <Form.Group>
-        <Text id="foo-search" value={value} onChange={setValue}>
-            <Text.Label>
-                Label here
+<Form.Group>
+    <Text id="foo-search" value={value} onChange={setValue}>
+        <Text.Label>
+            Label here
             </Text.Label>
 
-            <Text.Search />
+        <Text.Search />
 
-            <Text.Help>
-                You picked <strong>{value ? value : 'nobody'}</strong>
-            </Text.Help>
-        </Text>
-    </Form.Group>
-</Form>
+        <Text.Help>
+            You picked <strong>{value ? value : 'nobody'}</strong>
+        </Text.Help>
+    </Text>
+</Form.Group>
 ```
 
 Email input example
@@ -77,15 +75,13 @@ Email input example
 ```jsx
 import { Form } from '@oris/ui';
 
-<Form>
-    <Form.Group>
-        <Text id="foo-email">
-            <Text.Label>Provide your email address</Text.Label>
-            <Text.Email />
-            <Text.Error />
-        </Text>
-    </Form.Group>
-</Form>
+<Form.Group>
+    <Text id="foo-email">
+        <Text.Label>Provide your email address</Text.Label>
+        <Text.Email />
+        <Text.Error />
+    </Text>
+</Form.Group>
 ```
 
 Providing a `bind` class instance:
@@ -225,27 +221,23 @@ function MyComponent() {
 ```jsx
 import { Form } from '@oris/ui';
 
-<Form>
-    <Form.Group>
-        <Text id="something">
-            <Text.Label>My Label</Text.Label>
+<Form.Group>
+    <Text id="something">
+        <Text.Label>My Label</Text.Label>
 
-            <Text.Area />
-        </Text>
-    </Form.Group>
-</Form>
+        <Text.Area />
+    </Text>
+</Form.Group>
 ```
 
 ```jsx
 import { Form } from '@oris/ui';
 
-<Form>
-    <Form.Group>
-        <Text id="rich-text-editor">
-            <Text.Label>Rich Text Editor input</Text.Label>
+<Form.Group>
+    <Text id="rich-text-editor">
+        <Text.Label>Rich Text Editor input</Text.Label>
 
-            <Text.Rich />
-        </Text>
-    </Form.Group>
-</Form>
+        <Text.Rich />
+    </Text>
+</Form.Group>
 ```

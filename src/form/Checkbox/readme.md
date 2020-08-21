@@ -6,37 +6,33 @@
 ```jsx
 import { Form } from '@oris/ui';
 
-<Form>
-    <Form.Group>
-        <Checkbox id="receive-newsletter">
-            <Checkbox.Input />
+<Form.Group>
+    <Checkbox id="receive-newsletter">
+        <Checkbox.Input />
 
-            <Checkbox.Label>
-                Yes! I would like to receive your newsletter
+        <Checkbox.Label>
+            Yes! I would like to receive your newsletter
             </Checkbox.Label>
 
-            <Checkbox.Help>
-                We will not spam your inbox
+        <Checkbox.Help>
+            We will not spam your inbox
             </Checkbox.Help>
-        </Checkbox>
-    </Form.Group>
-</Form>
+    </Checkbox>
+</Form.Group>
 ```
 
 #### Disabled field
 ```jsx
 import { Form } from '@oris/ui';
 
-<Form>
-    <Form.Group>
-        <Checkbox id="checkbox-disabled">
-            <Checkbox.Input disabled />
-            <Checkbox.Label>
-                This checkbox field is disabled
+<Form.Group>
+    <Checkbox id="checkbox-disabled">
+        <Checkbox.Input disabled />
+        <Checkbox.Label>
+            This checkbox field is disabled
             </Checkbox.Label>
-        </Checkbox>
-    </Form.Group>
-</Form>
+    </Checkbox>
+</Form.Group>
 ```
 
 #### Validation
@@ -61,16 +57,14 @@ const [success, setSuccess] = useState();
         </Checkbox>
     </Form.Group>
 
-    <Form.Group>
-        <Button theme='danger' onClick={() => {
-            setSuccess();
-            setError('You must accept the terms and services');
-        }}>Show Error</Button>
+    <Button theme='danger' onClick={() => {
+        setSuccess();
+        setError('You must accept the terms and services');
+    }}>Show Error</Button>
 
-        <Button theme='success' onClick={() => {
-            setError();
-            setSuccess('Thank you for accepting the terms and services');
-        }}>Show Success</Button>
-    </Form.Group>
+    <Button theme='success' onClick={() => {
+        setError();
+        setSuccess('Thank you for accepting the terms and services');
+    }}>Show Success</Button>
 </Form>
 ```

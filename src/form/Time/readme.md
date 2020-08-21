@@ -5,55 +5,64 @@
 
 ```jsx
 import { useState } from 'react';
+import { Form } from '@oris/ui';
 
 const [time, setTime] = useState();
 
-<Time id="start-time">
-    <Time.Label>Start Time</Time.Label>
+<Form.Group>
+    <Time id="start-time">
+        <Time.Label>Start Time</Time.Label>
 
-    <Time.Input
-        value={time}
-        onChange={setTime}
-    />
-</Time>
+        <Time.Input
+            value={time}
+            onChange={setTime}
+        />
+    </Time>
+</Form.Group>
 ```
 
 #### Input with Default Value
 ```jsx
 import { useState } from 'react';
+import { Form } from '@oris/ui';
 
 const [time, setTime] = useState();
 
 const now = new Date();
 const defaultValue = now.toLocaleTimeString('en-GB').substring(0, 5); // Convert date to 24h time string, then use substring to remove the seconds from the string
 
-<Time id='signature-time'>
-    <Time.Label>Signature Time</Time.Label>
+<Form.Group>
+    <Time id='signature-time'>
+        <Time.Label>Signature Time</Time.Label>
 
-    <Time.Input
-        defaultValue={defaultValue}
-        value={time}
-        onChange={setTime}
-    />
-</Time>
+        <Time.Input
+            defaultValue={defaultValue}
+            value={time}
+            onChange={setTime}
+        />
+    </Time>
+</Form.Group>
 ```
 
 #### Read-only
 ```jsx
 import { useState } from 'react';
+import { Form } from '@oris/ui';
 
 const [time, setTime] = useState();
 
 const defaultValue = '13:30';
 
-<Time id='appointment-time'>
-    <Time.Label>Appointment Time</Time.Label>
+<Form.Group>
+    <Time id='appointment-time'>
+        <Time.Label>Appointment Time</Time.Label>
 
-    <Time.Input 
-        defaultValue={defaultValue}
-        value={time}
-        onChange={setTime}
-        readOnly
-    />
-</Time>
+        <Time.Input 
+            defaultValue={defaultValue}
+            value={time}
+            onChange={setTime}
+            readOnly
+        />
+    </Time>
+</Form.Group>
 ```

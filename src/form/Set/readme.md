@@ -5,41 +5,39 @@
 ```jsx
 import { Form, Checkbox, Text } from '@oris/ui';
 
-<Form>
-    <Form.Group>
-        <Set>
-            <Set.Legend>
-                Collection of checkboxes in a <code>Set</code>
-            </Set.Legend>
+<Form.Group>
+    <Set>
+        <Set.Legend>
+            Collection of checkboxes in a <code>Set</code>
+        </Set.Legend>
 
-            <Set.Group name="colors">
-                <Checkbox id="rgb">
-                    <Checkbox.Input />
-                    <Checkbox.Label>RGB</Checkbox.Label>
-                </Checkbox>
+        <Set.Group name="colors">
+            <Checkbox id="rgb">
+                <Checkbox.Input />
+                <Checkbox.Label>RGB</Checkbox.Label>
+            </Checkbox>
 
-                <Checkbox id="cmyk">
-                    <Checkbox.Input />
-                    <Checkbox.Label>CMYK</Checkbox.Label>
-                </Checkbox>
+            <Checkbox id="cmyk">
+                <Checkbox.Input />
+                <Checkbox.Label>CMYK</Checkbox.Label>
+            </Checkbox>
 
-                <Checkbox id="hsl">
-                    <Checkbox.Input disabled />
-                    <Checkbox.Label>HSL</Checkbox.Label>
-                </Checkbox>
-            </Set.Group>
+            <Checkbox id="hsl">
+                <Checkbox.Input disabled />
+                <Checkbox.Label>HSL</Checkbox.Label>
+            </Checkbox>
+        </Set.Group>
 
-            <Text id="text-in-my-set">
-                <Text.Label>You put a text in my set</Text.Label>
-                <Text.Input />
-            </Text>
+        <Text id="text-in-my-set">
+            <Text.Label>You put a text in my set</Text.Label>
+            <Text.Input />
+        </Text>
 
-            <Set.Help>
-                Use a <strong>1em</strong> padding between elements in the same <code>Set</code>
-            </Set.Help>
-        </Set>
-    </Form.Group>
-</Form>
+        <Set.Help>
+            Use a <strong>1em</strong> padding between elements in the same <code>Set</code>
+        </Set.Help>
+    </Set>
+</Form.Group>
 ```
 
 <!-- #### Validation
