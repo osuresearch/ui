@@ -1,102 +1,60 @@
+import React from 'react';
+import { NullFieldBind, FormFieldProps, IFormFieldContext } from '../../internal/FormCommon/types';
+import useFieldBindOrProps from '../../internal/FormCommon/hooks/useFieldBindOrProps';
 
-import React, { useState } from 'react';
+import { withFormContext } from '../../internal/FormCommon/HOC/withFormContext';
 
-// @ts-ignore
-import RDatePicker from 'react-datepicker';
+import {
+    Label, LabelProps,
+    Help, HelpProps,
+    Error, ErrorProps,
+    Success, SuccessProps
+} from '../../internal/FormCommon/Components';
 
-export interface Props {
-    /**
-     * Default value
-     */
-    defaultValue?: Date;
+import Input, { InputProps } from './Input';
 
-    /**
-     * onChange handler (required) - a state setter for the parent component
-     */
-    onChange: (date: Date) => Function;
-
-    /**
-     * Apply a filter function to disallow certain dates
-     */
-    filterDate?(date: Date): boolean;
-
-    /**
-     * Minimum selectable date
-     */
-    minDate?: Date;
-
-    /**
-     * Maximum selectable date
-     */
-    maxDate?: Date;
-
-    /**
-     * ID
-     */
-    id: string;
-
-    /**
-     * Additional classes to append to field
-     */
-    className?: string;
-
-    /**
-     * Make field read only
-     */
-    readOnly?: boolean;
-
-    /**
-     * Disable field
-     */
-    disabled?: boolean;
+type Props = FormFieldProps<string> & {
+    // Add your other top level props here.
+    // foo: number
 }
+
+interface IDatePickerComposition {
+    Label: React.FC<LabelProps>
+    Help: React.FC<HelpProps>
+    Input: React.FC<InputProps>
+    Error: React.FC<ErrorProps>
+    Success: React.FC<SuccessProps>
+}
+
+export const Context = React.createContext<IFormFieldContext<string>>({
+    bind: new NullFieldBind<string>(),
+
+    // Add your other prop defaults here that should be made available to consumers
+    // foo: 1
+});
 
 /**
- * Provides a calendar date picker for a date field.
- *
- * This is a wrapper around [react-datepicker](https://reactdatepicker.com)
+ * Provides a date picker and time input for a datetime field.
  * 
- * For Date & Time fields, use [DateTimePicker](#datetimepicker). 
- * For Time fields, use [TimeField](#timefield).
  */
-const DatePicker: React.FC<Props> = ({
-    defaultValue = null,
-    onChange,
-    filterDate,
-    minDate,
-    maxDate,
-    id,
-    className,
-    readOnly,
-    disabled
+const DatePicker: React.FC<Props> & IDatePickerComposition = ({
+    // foo = 1
+    children,
+    ...props // everything else is of FormFieldProps<string>
 }) => {
-    const [date, setDate] = useState<Date | null>(defaultValue);
-
-    const handleChange = (newDate: Date) => {
-        setDate(newDate);
-        onChange(newDate);
-    }
+    const { bind } = useFieldBindOrProps(props);
 
     return (
-        <div className="input-group datepicker">
-            <span className="input-group-prefix">
-                <i className='fa fa-calendar' aria-hidden="true"></i>
-            </span>
-
-            <RDatePicker
-                id={id}
-                selected={date}
-                className={'form-control date ' + (className ? className : '')}
-                onChange={handleChange}
-                filterDate={filterDate}
-                minDate={minDate}
-                maxDate={maxDate}
-                dateFormat='MM/dd/yyyy'
-                readOnly={readOnly}
-                disabled={disabled}
-            />
-        </div>
+        <Context.Provider value={{ bind, /* foo */ }}>
+            {children}
+        </Context.Provider>
     );
 }
+
+DatePicker.Input = Input;
+DatePicker.Label = withFormContext<LabelProps>(Label, Context);
+DatePicker.Help = withFormContext<HelpProps>(Help, Context);
+DatePicker.Error = withFormContext<ErrorProps>(Error, Context);
+DatePicker.Success = withFormContext<SuccessProps>(Success, Context);
 
 export default DatePicker;

@@ -1,9 +1,9 @@
+
 import React, { useState, useContext } from 'react';
 import { Context } from '.';
 
 // @ts-ignore
 import DatePicker from 'react-datepicker';
-import Time from '../Time';
 
 export interface InputProps {
     /**
@@ -36,27 +36,21 @@ export interface InputProps {
      */
     className?: string;
 
-    /**
-     * Make field read only
-     */
-    readOnly?: boolean;
-
     disabled?: boolean;
 }
 
-export default function Input({
-    defaultValue,
+const Input: React.FC<InputProps> = ({
+    defaultValue = null,
     onChange,
     filterDate,
     minDate,
     maxDate,
     className,
-    readOnly,
     disabled
-}: InputProps) {
+}) => {
     const { bind } = useContext(Context);
 
-    const [date, setDate] = useState<Date | undefined>(defaultValue);
+    const [date, setDate] = useState<Date | null>(defaultValue);
 
     const handleChange = (newDate: Date) => {
         setDate(newDate);
@@ -64,28 +58,21 @@ export default function Input({
     }
 
     return (
-        <div className="input-group datetimepicker">
+        <div className="input-group datepicker">
             <span className="input-group-prefix">
                 <i className='fa fa-calendar' aria-hidden="true"></i>
-                <i className='fa fa-clock-o' aria-hidden="true"></i>
             </span>
 
             <DatePicker
                 id={bind.id}
                 selected={date}
-                className={'form-control datetime ' + (className ? className : '')}
+                className={'form-control date ' + (className ? className : '')}
                 onChange={handleChange}
                 filterDate={filterDate}
                 minDate={minDate}
                 maxDate={maxDate}
-                shouldCloseOnSelect={false}
-                showTimeInput
-                timeInputLabel={<label htmlFor={`${bind.id}-time`}>Time</label>}
-                customTimeInput={
-                    <Time.Input id={`${bind.id}-time`} />
-                }
-                dateFormat='MM/dd/yyyy h:mm aa'
-                readOnly={readOnly}
+                dateFormat='MM/dd/yyyy'
+                readOnly={bind.readOnly}
                 disabled={disabled}
             >
                 <div className='keyboard-notice'>
@@ -93,5 +80,7 @@ export default function Input({
                 </div>
             </DatePicker>
         </div>
-    )
+    );
 }
+
+export default Input;

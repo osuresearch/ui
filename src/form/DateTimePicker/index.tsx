@@ -36,11 +36,7 @@ export const Context = React.createContext<IFormFieldContext<string>>({
 
 /**
  * Provides a date picker and time input for a datetime field.
- *
- * This is a wrapper around [react-datepicker](https://reactdatepicker.com) and [TimeField](#timefield).
  * 
- * For Date-only fields, use [DatePicker](#datepicker).
- * For Time-only fields, use [TimeField](#timefield).
  */
 const DateTimePicker: React.FC<Props> & IDateTimePickerComposition = ({
     // foo = 1
