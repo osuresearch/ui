@@ -96,7 +96,9 @@ export const Context = React.createContext<IFormFieldContext<string>>({
  * 
  * 
  * ##### `<Text.Rich>`
- * A rich text editor (RTE) based on CKEditor
+ * A rich text editor (RTE) based on CKEditor (additional 
+ * requirements must be met to use this component; see the 
+ * section on `<Text.Rich>` below for more details)
  * 
  * 
  * ##### `<Text.Search>`

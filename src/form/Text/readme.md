@@ -1,7 +1,9 @@
 
 ### Examples
 
-Inlining values
+#### `<Text.Input>`
+
+##### Inlining values
 
 ```jsx
 import { useState } from 'react';
@@ -47,44 +49,7 @@ const onChange = (currentValue, prevValue) => {
 </Form>
 ```
 
-An example involving a Search transformed back and forth from a `key|name` string:
-
-```jsx
-import { useState } from 'react';
-import { Form } from '@oris/ui';
-
-const [value, setValue] = useState('200275154|Chase McManning');
-
-<Form.Group>
-    <Text id="foo-search" value={value} onChange={setValue}>
-        <Text.Label>
-            Label here
-            </Text.Label>
-
-        <Text.Search />
-
-        <Text.Help>
-            You picked <strong>{value ? value : 'nobody'}</strong>
-        </Text.Help>
-    </Text>
-</Form.Group>
-```
-
-Email input example
-
-```jsx
-import { Form } from '@oris/ui';
-
-<Form.Group>
-    <Text id="foo-email">
-        <Text.Label>Provide your email address</Text.Label>
-        <Text.Email />
-        <Text.Error />
-    </Text>
-</Form.Group>
-```
-
-Providing a `bind` class instance:
+##### Providing a `bind` class instance:
 
 ```jsx
 import { Form, Button } from '@oris/ui';
@@ -112,7 +77,7 @@ const bind = new MyMockStringBind('foo4', 'foo bar');
 </Form>
 ```
 
-Getting bind values on form submit:
+##### Getting bind values on form submit:
 
 ```jsx
 import React, { useEffect } from 'react';
@@ -148,7 +113,7 @@ function MyComponent() {
 <MyComponent />
 ```
 
-Update binds externally
+##### Update binds externally
 
 ```jsx
 import React, { useEffect, useState } from 'react';
@@ -172,7 +137,7 @@ const bind = new MyMockStringBind('foo7', 'foo bar');
 </Form>
 ```
 
-Two Fields One Bind
+##### Two Fields One Bind
 
 Also demos another component that uses the `useFieldBind` hook to monitor a bind for changes or apply changes.
 
@@ -216,6 +181,44 @@ function MyComponent() {
 
     <MyComponent />
 </Form>
+```
+
+#### `<Text.Search>`
+An example involving a Search transformed back and forth from a `key|name` string:
+
+```jsx
+import { useState } from 'react';
+import { Form } from '@oris/ui';
+
+const [value, setValue] = useState('200275154|Chase McManning');
+
+<Form.Group>
+    <Text id="foo-search" value={value} onChange={setValue}>
+        <Text.Label>
+            Label here
+            </Text.Label>
+
+        <Text.Search />
+
+        <Text.Help>
+            You picked <strong>{value ? value : 'nobody'}</strong>
+        </Text.Help>
+    </Text>
+</Form.Group>
+```
+
+#### `<Text.Email>`
+
+```jsx
+import { Form } from '@oris/ui';
+
+<Form.Group>
+    <Text id="foo-email">
+        <Text.Label>Provide your email address</Text.Label>
+        <Text.Email />
+        <Text.Error />
+    </Text>
+</Form.Group>
 ```
 
 #### `<Text.Area>`
@@ -265,37 +268,75 @@ import { Form, FieldSet, Checkbox } from '@oris/ui';
 </Form.Group>
 ```
 
-```js
-<fieldset className="form-group">
-    <label htmlFor="textarea-with-na">
-        Textarea with Not Applicable option - a common pattern used in our apps
-    </label>
-    <textarea className="form-control" id="textarea-with-na" rows="3"></textarea>
+#### `<Text.Rich>`
 
-    <div className="form-check">
-        <div className="custom-control custom-checkbox">
-            <input type="checkbox" name="na" className="custom-control-input" id="na-check" />
-            <label className="custom-control-label" htmlFor="na-check">Not Applicable</label>
-        </div>
-    </div>
-    <small className="form-text">
-        Use a <strong>1em</strong> padding between elements
-        in the same <code>div</code>
-    </small>
-</fieldset>
+##### Requirements
+Include the following CDN script in your application.
+
+```html
+<script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
 ```
 
-#### Rich Text Editor
+By default, the content iframe inside the editor uses a CSS file in the Assets project. You can provide your own app-specific CSS by providing an alternative source file in `contentsCss`. 
+
+##### Provide the HTML value as a string
+
 ```jsx
 import { Form } from '@oris/ui';
+
+const html = "<h1>Hello World</h1><p>I am <strong>rich</strong> text!</p>";
 
 <Form.Group>
     <Text id="rich-text-editor">
         <Text.Label>Rich Text Editor input</Text.Label>
 
-        <Text.Rich />
+        <Text.Rich defaultValue={html} />
     </Text>
 </Form.Group>
+```
+
+##### Simple version
+A "simple" version is also supplied if you do not need (or want) the full range of controls in your app:
+
+```jsx
+import { Form } from '@oris/ui';
+
+const html = "Hello World! <p>I am <strong>rich</strong> text!</p>";
+
+<Form.Group>
+    <Text id="simple-rte">
+        <Text.Label>I am a simple Rich Text Editor</Text.Label>
+
+        <Text.Rich defaultValue={html} simple />
+    </Text>
+</Form.Group>
+```
+
+##### Setting and changing values
+
+Use the `defaultValue` and `onChange` props to set and extract the text from your own component:
+
+```jsx
+import { useState } from 'react';
+import { Form } from '@oris/ui';
+
+const [content, setContent] = useState('<p>Start typing and see it update live</p>');
+
+<Form>
+    <Form.Group>
+        <Text id="set-change-values">
+            <Text.Label>Live Update</Text.Label>
+
+            <Text.Rich 
+                defaultValue={content}
+                onChange={setContent}
+            />
+        </Text>
+    </Form.Group>
+
+    Raw Content
+    <p><code>{content}</code> </p>
+</Form>
 ```
 
 #### Validation
@@ -341,94 +382,4 @@ const success = "This is valid!";
         </Text.Help>
     </Text>
 </Form.Group>
-```
-
-
-
-```js
-<fieldset className="form-group">
-    <label htmlFor="textarea-with-na">
-        Textarea with Not Applicable option - a common pattern used in our apps
-    </label>
-    <textarea className="form-control" id="textarea-with-na" rows="3"></textarea>
-
-    <div className="form-check">
-        <div className="custom-control custom-checkbox">
-            <input type="checkbox" name="na" className="custom-control-input" id="na-check" />
-            <label className="custom-control-label" htmlFor="na-check">Not Applicable</label>
-        </div>
-    </div>
-    <small className="form-text">
-        Use a <strong>1em</strong> padding between elements
-        in the same <code>div</code>
-    </small>
-</fieldset>
-```
-
-### Full Form Example
-
-```js
-<form>
-    <div className="row">
-        <div className="form-group col-6 is-required">
-            <label htmlFor="inputEmail4">Email</label>
-            <input type="email" className="form-control" id="inputEmail4"
-                placeholder="buckeye.1@osu.edu"
-                autoComplete="osu-email"
-                required={true} />
-            <small className="form-text">
-                Must be a valid OSU email address
-            </small>
-        </div>
-        <div className="form-group col-6 is-required">
-            <label htmlFor="inputPassword4">Password</label>
-            <input type="password" className="form-control"
-                id="inputPassword4" placeholder="Password"
-                required={true} autoComplete="current-password" />
-            <small className="form-text">
-                Must not be a commonly used password or password previously exposed through a third party data breach
-            </small>
-        </div>
-    </div>
-    <div className="form-group">
-        <label htmlFor="inputAddress">Address</label>
-        <input type="text" className="form-control" id="inputAddress"
-            placeholder="1234 Main St" />
-    </div>
-    <div className="form-group">
-        <label htmlFor="inputAddress2">Address 2</label>
-        <input type="text" className="form-control" id="inputAddress2"
-            placeholder="Apartment, studio, or floor" />
-    </div>
-    <div className="row">
-        <div className="form-group col-6">
-            <label htmlFor="inputCity">City</label>
-            <input type="text" className="form-control" id="inputCity" />
-        </div>
-        <div className="form-group col-4">
-            <label htmlFor="inputState">State</label>
-            <select id="inputState" className="form-control custom-select">
-                <option disabled>Choose</option>
-                <option value="MI">Michigan</option>
-                <option value="OH">Ohio</option>
-            </select>
-        </div>
-        <div className="form-group col-2">
-            <label htmlFor="inputZip">Zip</label>
-            <input type="text" className="form-control" id="inputZip" />
-        </div>
-    </div>
-    <div className="form-group">
-        <div className="form-check is-required">
-            <div className="custom-control custom-checkbox">
-                <input type="checkbox" name="agree"
-                    className="custom-control-input" id="agree" />
-                <label className="custom-control-label" htmlFor="agree">
-                    I agree to the terms and services
-                </label>
-            </div>
-        </div>
-    </div>
-    <button type="submit" className="btn btn-success">Register</button>
-</form>
 ```
