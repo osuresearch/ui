@@ -57,6 +57,9 @@ export type FormFieldSpreadProps<T> = {
     /** Unique ID of the form field */
     id: string
 
+    /** Name of the form control. Submitted with the form as part of a name/value pair. */
+    name?: string
+
     /** Validation error to display for the field */
     error?: string
 

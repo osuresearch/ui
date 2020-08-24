@@ -74,3 +74,18 @@ fieldset.form-group {
 .input-group-append .input-group {
     margin: 0;
 }
+
+// Support adding .is-invalid and .is-valid to fieldsets
+fieldset {
+    &.is-invalid {
+        .invalid-feedback {
+            display: block;
+        }
+    }
+
+    &.is-valid {
+        .valid-feedback {
+            display: block;
+        }
+    }
+}

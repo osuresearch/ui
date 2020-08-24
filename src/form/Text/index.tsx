@@ -23,15 +23,45 @@ type Props = FormFieldProps<string> & {
 }
 
 interface ITextComposition {
+    /** Equivalent of `<label>` */
     Label: React.FC<LabelProps>
-    Help: React.FC<HelpProps>
+
+    /** Equivalent of `<input type='text'>` */
     Input: React.FC<InputProps>
-    Error: React.FC<ErrorProps>
-    Success: React.FC<SuccessProps>
+
+    /** 
+     * Jams a standard ORIS/UI search result pair into 
+     * a single string value bind in the form `key|name`
+     */
     Search: React.FC<SearchProps>
+
+    /** 
+     * Email input field with automatic validation for invalid 
+     * email addresses 
+     */
     Email: React.FC<EmailProps>
+
+    /** Equivalent of `<textarea>` */
     Area: React.FC<TextAreaProps>
+
+    /** A rich text editor (RTE) based on CKEditor */
     Rich: React.FC<RichProps>
+
+    /** Help text for the `<Text>` */
+    Help: React.FC<HelpProps>
+
+    /**
+     * (required if `<Text>` requires validation)
+     * Provides instructions on how to resolve the validation 
+     * error; will display when `error` is set in `<Text>`
+     */
+    Error: React.FC<ErrorProps>
+
+    /**
+     * Feedback for when the set meets the validation rules; 
+     * will display when `success` is set in `<Text>`
+     */
+    Success: React.FC<SuccessProps>
 }
 
 export const Context = React.createContext<IFormFieldContext<string>>({
@@ -42,21 +72,50 @@ export const Context = React.createContext<IFormFieldContext<string>>({
 });
 
 /**
- * Text
+ * Multiple types of text inputs
  * 
  * ### Subcomponents
  * 
- * #### `Text.Label` (required)
+ * #### `<Text.Label>` (required)
  * Equivalent of `<label>`
  * 
- * #### `Text.Input`
+ * 
+ * #### Input Components (one is required):
+ * 
+ * ##### `<Text.Input>`
  * Equivalent of `<input type='text'>`
  * 
- * #### `Text.Area`
+ * 
+ * ##### `<Text.Area>`
  * Equivalent of `<textarea>`
  * 
- * #### `Text.Rich`
+ * 
+ * ##### `<Text.Email>`
+ * Email input field with automatic validation for invalid email 
+ * addresses
+ * 
+ * 
+ * ##### `<Text.Rich>`
  * A rich text editor (RTE) based on CKEditor
+ * 
+ * 
+ * ##### `<Text.Search>`
+ * Jams a standard ORIS/UI search result pair into a single  
+ * string value bind in the form `key|name`
+ * 
+ * 
+ * #### `<Text.Help>`
+ * Help text for the `<Text>`
+ * 
+ * 
+ * #### `<Text.Error>` (required if `<Text>` requires validation)
+ * Provides instructions on how to resolve the validation error; 
+ * will display when `error` is set in `<Text>`
+ * 
+ * 
+ * #### `<Text.Success>`
+ * Feedback for when the set meets the validation rules; will 
+ * display when `success` is set in `<Text>`
  * 
  */
 

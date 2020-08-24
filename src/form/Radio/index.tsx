@@ -18,7 +18,7 @@ type Props = FormFieldProps<string> & {
 interface IRadioComposition {
     /**
      * #### `Radio.Label` (required)
-     * Label for `Radio` (equivalent of `<label>`)
+     * Equivalent of `<label>`
      * 
      * * **Props**
      *  * [HTML Global attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes)
@@ -27,7 +27,7 @@ interface IRadioComposition {
 
     /**
      * #### `Radio.Input` (required)
-     * Input field for `Radio` (equivalent of `<input type='radio'>`)
+     * Equivalent of `<input type='radio'>`
      * 
      * * **Props**
      *  * [`radio` input attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio#Additional_attributes)
@@ -47,10 +47,13 @@ export const Context = React.createContext<IFormFieldContext<string>>({
 /**
  * Radio input and label
  * 
+ * `<Radio>` components **must** always be contained within
+ * a `<FieldSet>`
+ * 
  * ### Subcomponents
  * 
- * #### `Radio.Input` (required)
- * Input field for `Radio` (equivalent of `<input type='radio'>`)
+ * #### `<Radio.Input>` (required)
+ * Equivalent of `<input type='radio'>`
  * 
  * * **Props**
  *  * [`radio` input attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio#Additional_attributes)
@@ -58,8 +61,8 @@ export const Context = React.createContext<IFormFieldContext<string>>({
  *  * All common [`<input>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input) attributes
  * 
  * 
- * #### `Radio.Label` (required)
- * Label for `Radio` (equivalent of `<label>`)
+ * #### `<Radio.Label>` (required)
+ * Equivalent of `<label>`
  * 
  * * **Props**
  *  * [HTML Global attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes)

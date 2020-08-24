@@ -5,14 +5,16 @@ import FormContext from '../../internal/FormCommon/FormContext';
 import { Print, Diff } from '../../internal/FormCommon/Components';
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-    value: string | number
+    value?: string | number
 }
 
 export const Input: React.FC<InputProps> = (props) => {
     const { bind } = useContext(Context);
     const { isDiff, isPrint } = useContext(FormContext);
 
-    const checked: boolean = props.checked || (props.value === '' + bind.value);
+    const checked: boolean | undefined = props.checked || (props.value === '' + bind.value) || undefined;
+
+    const value = bind.value || props.value || undefined;
 
     // If printing, just return the current value
     if (isPrint) {
@@ -59,12 +61,9 @@ export const Input: React.FC<InputProps> = (props) => {
             id={bind.id}
             name={bind.name || props.name}
             checked={checked}
-            value={props.value}
+            value={value}
             className={classNames}
-            onChange={(e) => {
-                //bind.value = e.currentTarget.checked;
-                if (props.onChange) props.onChange(e);
-            }}
+
             readOnly={bind.readOnly || props.readOnly}
             required={bind.required || props.required}
         />

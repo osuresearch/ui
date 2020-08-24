@@ -54,7 +54,14 @@ let sections = [
         name: 'Form Components',
         content: 'src/form/readme.md',
         components: 'src/form/**/index.?(js|tsx)',
-        usageMode: 'collapse'
+        ignore: [
+            'src/form/Form/index.tsx'
+        ],
+        sections: [{
+            name: 'Form',
+            usageMode: 'collapse',
+            components: 'src/form/Form/index.tsx'
+        }]
     },
     {
         name: 'HTML Components',

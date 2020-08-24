@@ -2,7 +2,7 @@
 
 ```jsx
 <Radio id="only-in-set">
-    <Radio.Input value="i-am-required" />
-    <Radio.Label>I only go into a <code>Set</code></Radio.Label>
+    <Radio.Input />
+    <Radio.Label>I only go into a <code>FieldSet</code></Radio.Label>
 </Radio>
 ```
