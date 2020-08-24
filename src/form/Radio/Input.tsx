@@ -1,10 +1,50 @@
 import React, { useContext } from 'react';
 import { Context } from '.';
+import FormContext from '../../internal/FormCommon/FormContext';
 
-export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> { }
+import { Print, Diff } from '../../internal/FormCommon/Components';
+
+export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+    value: string | number
+}
 
 export const Input: React.FC<InputProps> = (props) => {
     const { bind } = useContext(Context);
+    const { isDiff, isPrint } = useContext(FormContext);
+
+    const checked: boolean = props.checked || (props.value === '' + bind.value);
+
+    // If printing, just return the current value
+    if (isPrint) {
+        return (
+            <Print>
+                {checked && <i className="fa fa-check-square-o" aria-label="Radio button was selected,,"></i>}
+                {!checked && <i className="fa fa-square-o" aria-label="Radio button was not selected,,"></i>}
+                &nbsp; {bind.instructions}
+            </Print>
+        );
+    }
+
+    if (isDiff) {
+        const wasChecked: boolean = (props.value === '' + bind.initialValue);
+
+        return (
+            <Diff
+                removed={wasChecked && !checked ?
+                    <span>
+                        <i className="fa fa-square-o" aria-label="Radio button was not selected,,"></i>
+                        &nbsp; {bind.instructions}
+                    </span> : undefined
+                }
+                added={!wasChecked && checked ?
+                    <span>
+                        <i className="fa fa-check-square-o" aria-label="Radio button was selected,,"></i>
+                        &nbsp; {bind.instructions}
+                    </span> : undefined
+                }
+            />
+        );
+    }
 
     const classNames = 'custom-control-input ' +
         (props.className ?? '') +
@@ -18,14 +58,15 @@ export const Input: React.FC<InputProps> = (props) => {
             type='radio'
             id={bind.id}
             name={bind.name || props.name}
-            readOnly={bind.readOnly}
-            checked={props.checked}
-            value={bind.value ? bind.value : ''}
+            checked={checked}
+            value={props.value}
             className={classNames}
             onChange={(e) => {
                 //bind.value = e.currentTarget.checked;
                 if (props.onChange) props.onChange(e);
             }}
+            readOnly={bind.readOnly || props.readOnly}
+            required={bind.required || props.required}
         />
     )
 }

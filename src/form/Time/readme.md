@@ -10,7 +10,7 @@ import { Form } from '@oris/ui';
 const [time, setTime] = useState();
 
 <Form.Group>
-    <Time id="start-time">
+    <Time id="start-time" required>
         <Time.Label>Start Time</Time.Label>
 
         <Time.Input
@@ -54,14 +54,13 @@ const [time, setTime] = useState();
 const defaultValue = '13:30';
 
 <Form.Group>
-    <Time id='appointment-time'>
+    <Time id='appointment-time' readOnly>
         <Time.Label>Appointment Time</Time.Label>
 
         <Time.Input 
             defaultValue={defaultValue}
             value={time}
             onChange={setTime}
-            readOnly
         />
     </Time>
 </Form.Group>

@@ -1,12 +1,30 @@
 import React, { useContext } from 'react';
 import { Context } from '.';
+import FormContext from '../../internal/FormCommon/FormContext';
+
+import Print from './Print';
+import Diff from './Diff';
 
 export type InputProps = React.InputHTMLAttributes<HTMLInputElement>;
 
 export const Input: React.FC<InputProps> = (props) => {
     const { bind } = useContext(Context);
+    const { isDiff, isPrint } = useContext(FormContext);
 
-    console.log('redraw input', bind);
+    const value = bind.value || props.value;
+
+    if (isDiff) {
+        return (
+            <Diff
+                value={typeof (value) === 'string' ? value : undefined}
+                prevValue={typeof (bind.initialValue) === 'string' ? bind.initialValue : undefined}
+            />
+        )
+    }
+
+    if (isPrint) {
+        return <Print value={typeof (value) === 'string' ? value : ''} />
+    }
 
     const classNames = 'form-control ' +
         (props.className ?? '') +
@@ -20,13 +38,14 @@ export const Input: React.FC<InputProps> = (props) => {
             type="text"
             id={bind.id}
             name={bind.name || props.name}
-            readOnly={bind.readOnly}
-            value={bind.value || props.value}
+            value={value}
             className={classNames}
             onChange={(e) => {
                 bind.value = e.currentTarget.value;
                 if (props.onChange) props.onChange(e);
             }}
+            readOnly={bind.readOnly || props.readOnly}
+            required={bind.required || props.required}
         />
     );
 }

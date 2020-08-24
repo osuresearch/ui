@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { Context } from './';
+import FormContext from '../../internal/FormCommon/FormContext';
 import { Option } from './Option';
 
 export interface ControlProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
@@ -8,20 +9,29 @@ export interface ControlProps extends React.SelectHTMLAttributes<HTMLSelectEleme
 
 export const Control: React.FC<ControlProps> = ({ children, ...props }) => {
     const { bind } = useContext(Context);
+    const { isDiff, isPrint } = useContext(FormContext);
+
+    const classNames = `form-control custom-select ${bind.error && 'is-invalid'} ${bind.success && 'is-valid'} ${props.className && props.className}`;
+
+    const defaultValue = bind.value || props.defaultValue;
+
+    if (isDiff || isPrint || bind.readOnly) {
+        // Let the Option component handle the diff/print/readOnly rendering
+        return <>{children}</>
+    }
 
     return (
         <select
-            name={bind.id} // set the name prop to its ID - will be overridden if name is set on the Select.Control component
             {...props}
             id={bind.id}
-            className={
-                'form-control custom-select' +
-                (bind.error ? ' is-invalid' : '') +
-                (bind.success ? ' is-valid' : '') +
-                (props.className ? ' ' + props.className : '')
-            }
-            required={bind.required}
-            defaultValue={bind.value ? bind.value : undefined}
+            name={bind.name || props.name}
+            className={classNames}
+            required={bind.required || props.required}
+            defaultValue={defaultValue}
+            onChange={(e) => {
+                bind.value = e.currentTarget.value;
+                if (props.onChange) props.onChange(e);
+            }}
         >
             {children}
         </select>

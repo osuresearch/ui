@@ -9,7 +9,7 @@ import MeridiemInput from './MeridiemInput';
 
 import SRDescriptions from './SRDescriptions';
 
-export interface InputProps {
+type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
     /** Default time value (optional) - must be an hour:minutes string in 24h format  */
     defaultValue?: string;
 
@@ -21,28 +21,12 @@ export interface InputProps {
      * Returns the time in a 24h format, e.g. `14:05` 
      */
     onChange?(newValue: string): void;
-
-    /** className */
-    className?: string;
-
-    /** readonly (optional) - Makes the field readonly */
-    readOnly?: boolean;
-
-    /** 
-     * ID - INTERNAL USE ONLY 
-     * (for DateTimePicker compatability) 
-     */
-    id?: string;
 }
 
-export function Input({
-    defaultValue,
-    value,
-    onChange,
-    className,
-    readOnly,
-    id
-}: InputProps) {
+export function Input(props: InputProps) {
+    // Most commonly used props
+    const { defaultValue, value, onChange } = props;
+
     const { bind } = useContext(Context);
 
     const [hour, setHour] = useState<string>(getHourValue(defaultValue));
@@ -77,17 +61,18 @@ export function Input({
     // Select the input text
     const handleClick = (e: React.MouseEvent) => (e.target as HTMLInputElement).select();
 
+    const readOnly = bind.readOnly || props.readOnly;
+    const required = bind.required || props.required;
+
+    const classNames = `time-field form-control ${props.className ? props.className : ''} ${readOnly ? 'readonly' : ''}`
+
     return (
-        <div className={
-            'time-field form-control ' +
-            (className ? className : '') +
-            (readOnly ? 'readonly' : '')
-        }>
+        <div className={classNames}>
             <span className='fa fa-clock-o' aria-hidden='true'></span>
 
             <HourInput
                 ref={hourRef}
-                id={id || bind.id}
+                id={props.id || bind.id}
                 hour={hour}
                 setHour={setHour}
                 setMeridiem={setMeridiem}
@@ -95,36 +80,38 @@ export function Input({
                 minutesRef={minutesRef}
                 meridiemRef={meridiemRef}
                 readOnly={readOnly}
-                required={bind.required}
+                required={required}
             />
 
             <span>:</span>
 
             <MinutesInput
                 ref={minutesRef}
-                id={id || bind.id}
+                id={props.id || bind.id}
                 minutes={minutes}
                 setMinutes={setMinutes}
                 handleClick={handleClick}
                 hourRef={hourRef}
                 meridiemRef={meridiemRef}
                 readOnly={readOnly}
+                required={required}
             />
 
             <MeridiemInput
                 ref={meridiemRef}
-                id={id || bind.id}
+                id={props.id || bind.id}
                 meridiem={meridiem}
                 setMeridiem={setMeridiem}
                 handleClick={handleClick}
                 hourRef={hourRef}
                 minutesRef={minutesRef}
                 readOnly={readOnly}
+                required={required}
             />
 
             <SRDescriptions
                 readOnly={readOnly}
-                id={id || bind.id}
+                id={props.id || bind.id}
                 hour={hour}
                 minutes={minutes}
                 meridiem={meridiem}

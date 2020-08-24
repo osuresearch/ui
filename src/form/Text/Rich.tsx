@@ -1,6 +1,10 @@
 
 import React, { useLayoutEffect, useState, useRef, memo, useContext } from 'react';
 import { Context } from '.';
+import FormContext from '../../internal/FormCommon/FormContext';
+
+import Print from './Print';
+import Diff from './Diff';
 
 export interface RichProps {
     /** Initial content for the component as a raw HTML string. */
@@ -27,6 +31,12 @@ export interface RichProps {
      * For more information, see [CKEditor 4 contentsCss](https://ckeditor.com/docs/ckeditor4/latest/api/CKEDITOR_config.html#cfg-contentsCss)
      */
     contentsCss?: string;
+
+    /** name attribute */
+    name?: string;
+
+    /** required attribute */
+    required?: boolean;
 }
 
 /** Full confiugration (that we're willing to support) */
@@ -53,54 +63,86 @@ const Rich: React.FC<RichProps> = ({
     defaultValue = '',
     simple = false,
     className = '',
-    contentsCss = 'https://orapps.osu.edu/assets/css/ckeditor/contents.css'
+    contentsCss = 'https://orapps.osu.edu/assets/css/ckeditor/contents.css',
+    name,
+    required
 }) => {
     const { bind } = useContext(Context);
+    const { isDiff, isPrint } = useContext(FormContext);
 
-    const [initialData,] = useState(defaultValue);
+    const value = bind.value || defaultValue;
+
+    const [initialData,] = useState(value);
     const [error, setError] = useState<string>();
     const editorRef = useRef<HTMLTextAreaElement>(null);
 
     useLayoutEffect(() => {
-        // @ts-ignore 
-        const cke = window.CKEDITOR;
-        let editor: any = undefined; // No type info exists for CKE
+        if (!(isDiff || isPrint)) {
+            // @ts-ignore 
+            const cke = window.CKEDITOR;
+            let editor: any = undefined; // No type info exists for CKE
 
-        if (!cke) {
-            // TODO: Error message improvements
-            setError('window.CKEDITOR is undefined. Are you missing an external script?');
-            return;
+            if (!cke) {
+                // TODO: Error message improvements
+                setError('window.CKEDITOR is undefined. Are you missing an external script?');
+                return;
+            }
+
+            let toolbar = simple ? SIMPLE_TOOLBAR_CONFIG : FULL_TOOLBAR_CONFIG;
+
+            const opts = {
+                toolbar,
+
+                // TODO: Prop to provide extra plugins (e.g. Signet signature captures)
+                extraPlugins: '',
+
+                // Disable the body > blockquote > p ... path in the editor footer
+                removePlugins: 'elementspath',
+
+                contentsCss
+            };
+
+            editor = cke.replace(editorRef.current, opts);
+            editor.setData(initialData);
+            editor.on('change', () => {
+                const newValue = editor.getData() as string;
+                bind.value = newValue;
+                if (onChange) {
+                    onChange(newValue);
+                }
+            });
+
+            if (bind.required || required) {
+                editor.on('required', (e: Event) => {
+                    bind.error = "This field is required"
+
+                    // @ts-ignore
+                    e.cancel();
+                })
+            }
+
+            return () => {
+                if (editor) {
+                    editor.destroy();
+                    editor = undefined;
+                }
+            };
         }
+    }, [initialData, simple, contentsCss, onChange, bind, required, isPrint, isDiff]);
 
-        let toolbar = simple ? SIMPLE_TOOLBAR_CONFIG : FULL_TOOLBAR_CONFIG;
+    if (isDiff) {
+        // TODO - This really isn't going to work with HTML
+        return (
+            <Diff
+                value={typeof (value) === 'string' ? value : undefined}
+                prevValue={typeof (bind.initialValue) === 'string' ? bind.initialValue : undefined}
+            />
+        )
+    }
 
-        const opts = {
-            toolbar,
-
-            // TODO: Prop to provide extra plugins (e.g. Signet signature captures)
-            extraPlugins: '',
-
-            // Disable the body > blockquote > p ... path in the editor footer
-            removePlugins: 'elementspath',
-
-            contentsCss
-        };
-
-        editor = cke.replace(editorRef.current, opts);
-        editor.setData(initialData);
-        editor.on('change', () => {
-            if (onChange) {
-                onChange(editor.getData() as string);
-            }
-        });
-
-        return () => {
-            if (editor) {
-                editor.destroy();
-                editor = undefined;
-            }
-        };
-    }, [initialData, simple, contentsCss, onChange]);
+    if (isPrint) {
+        return <Print value={typeof (value) === 'string' ? value : ''} />
+    }
 
     if (error) {
         return (
@@ -116,7 +158,13 @@ const Rich: React.FC<RichProps> = ({
 
     return (
         <div className={`richtext ${className} ${bind.readOnly ? 'is-readonly' : ''}`}>
-            <textarea id={bind.id} className="richtext-editor" ref={editorRef} disabled={bind.readOnly}></textarea>
+            <textarea
+                id={bind.id}
+                name={bind.name || name}
+                className="richtext-editor"
+                ref={editorRef}
+                disabled={bind.readOnly}
+            />
         </div>
     );
 }

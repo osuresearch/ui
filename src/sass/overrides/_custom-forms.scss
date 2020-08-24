@@ -10,6 +10,11 @@
     &:checked ~ .custom-control-label::before {
         border: 1px solid $input-border-color;
     }
+
+    // Remove required star from control labels if they are accidentally added
+    ~ .custom-control-label.is-required::after {
+        content: '';
+    }
 }
 
 // Correct positioning & font size of feedback message

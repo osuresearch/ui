@@ -122,6 +122,17 @@ export class FieldBind<T> implements IFieldBind<T> {
         this.onStateChange.dispatch(this);
     }
 
+    /** Should the field be required */
+    public get required(): boolean {
+        return this._required;
+    }
+
+    /** On update, notify all onStateChange delegates */
+    public set required(value: boolean) {
+        this._required = value;
+        this.onStateChange.dispatch(this);
+    }
+
     /** The backing value for the field. */
     public get value(): Nullable<T> {
         return this._value;
@@ -139,6 +150,7 @@ export class FieldBind<T> implements IFieldBind<T> {
     protected _error: string = '';
     protected _success: string = '';
     protected _readOnly: boolean = false;
+    protected _required: boolean = false;
     protected _value: Nullable<T> = null;
     protected _previousValue: Nullable<T> = null;
 

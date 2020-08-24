@@ -1,4 +1,7 @@
 
+export { ControlLabel } from './ControlLabel';
+export type { ControlLabelProps } from './ControlLabel';
+
 export { Diff } from './Diff';
 export type { DiffProps } from './Diff';
 

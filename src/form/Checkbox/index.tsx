@@ -7,7 +7,7 @@ import { withFormContext } from '../../internal/FormCommon/HOC/withFormContext';
 import { Input, InputProps } from './Input';
 
 import {
-    Label, LabelProps,
+    ControlLabel, ControlLabelProps,
     Help, HelpProps,
     Error, ErrorProps,
     Success, SuccessProps
@@ -25,7 +25,7 @@ interface ICheckboxComposition {
      * * **Props**
      *  * [HTML Global attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes)
     */
-    Label: React.FC<LabelProps>
+    Label: React.FC<ControlLabelProps>
 
     /** Help text for the `Checkbox` */
     Help: React.FC<HelpProps>
@@ -109,7 +109,7 @@ const Checkbox: React.FC<Props> & ICheckboxComposition = ({
 }
 
 Checkbox.Input = Input;
-Checkbox.Label = withFormContext<LabelProps>(Label, Context);
+Checkbox.Label = withFormContext<ControlLabelProps>(ControlLabel, Context);
 Checkbox.Help = withFormContext<HelpProps>(Help, Context);
 Checkbox.Success = withFormContext<SuccessProps>(Success, Context);
 Checkbox.Error = withFormContext<ErrorProps>(Error, Context);

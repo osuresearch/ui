@@ -1,17 +1,27 @@
 import React from 'react';
+import FormContext from '../../internal/FormCommon/FormContext';
 
 import Group from './Group';
 
-type Props = React.FormHTMLAttributes<HTMLFormElement> & {};
+type Props = React.FormHTMLAttributes<HTMLFormElement> & {
+    isDiff: boolean,
+    isPrint: boolean
+};
 
 interface IFormComposition {
     Group: React.FC
 }
 
-const Form: React.FC<Props> & IFormComposition = (props) => {
+const Form: React.FC<Props> & IFormComposition = ({
+    isDiff = false,
+    isPrint = false,
+    ...props
+}) => {
     return (
         <form {...props}>
-            {props.children}
+            <FormContext.Provider value={{ isDiff, isPrint }}>
+                {props.children}
+            </FormContext.Provider>
         </form>
     )
 }

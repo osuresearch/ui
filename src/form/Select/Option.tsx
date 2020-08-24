@@ -21,7 +21,7 @@ export const Option = (props: OptionProps) => {
     const { isDiff, isPrint } = useContext(FormContext);
 
     if (props.optionsBind) {
-        if (isPrint) {
+        if (isPrint || bind.readOnly) {
             return <Print>{props.optionsBind.value![bind.value!]}</Print>
         }
 

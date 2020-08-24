@@ -26,6 +26,7 @@ function fillFieldBindFromProps<T>(bind: FieldBind<T>, props: FormFieldSpreadPro
     bind.name = props.id; // TODO: Same as above
     bind.id = props.id;
     bind.readOnly = props.readOnly || false;
+    bind.required = props.required || false;
 }
 
 function isFormFieldBindProp<T>(props: FormFieldProps<T>): props is FormFieldBindProp<T> {
