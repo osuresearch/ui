@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import { Context } from './';
 import FormContext from '../../internal/FormCommon/FormContext';
-import { Option } from './Option';
+import { OptionProps } from './Option';
 
-export interface ControlProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
-    children: typeof Option | typeof Option[]
+export type ControlProps = React.SelectHTMLAttributes<HTMLSelectElement> & {
+    children: React.ReactElement<OptionProps>[] | React.ReactElement<OptionProps>
 };
 
 export const Control: React.FC<ControlProps> = ({ children, ...props }) => {

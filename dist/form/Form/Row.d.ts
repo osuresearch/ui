@@ -1,5 +1,5 @@
 import React from 'react';
-declare type RowProps = React.HTMLAttributes<HTMLDivElement> & {};
+export declare type RowProps = React.HTMLAttributes<HTMLDivElement> & {};
 /**
  * Wrapping component for form components
  *

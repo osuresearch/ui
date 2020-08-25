@@ -8,5 +8,5 @@ export declare type OptionProps = FormFieldProps<object> & React.OptionHTMLAttri
     optionsBind?: IFieldBind<Value>;
     children?: string;
 };
-export declare const Option: (props: OptionProps) => JSX.Element | JSX.Element[];
+export declare const Option: React.FC<OptionProps>;
 //# sourceMappingURL=Option.d.ts.map

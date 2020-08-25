@@ -16,7 +16,7 @@ export type OptionProps = FormFieldProps<object> & React.OptionHTMLAttributes<HT
     children?: string;
 }
 
-export const Option = (props: OptionProps) => {
+export const Option: React.FC<OptionProps> = (props) => {
     const { bind } = useContext(Context);
     const { isDiff, isPrint } = useContext(FormContext);
 
@@ -40,13 +40,13 @@ export const Option = (props: OptionProps) => {
             )
         }
 
-        return (
-            Object.keys(props.optionsBind.value!).map((key) =>
+        return (<>
+            {Object.keys(props.optionsBind.value!).map((key) =>
                 <option {...props} key={key} value={key}>
                     {props.optionsBind!.value![key]}
                 </option>
-            )
-        )
+            )}
+        </>)
     }
 
     return (

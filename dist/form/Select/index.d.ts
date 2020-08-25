@@ -25,7 +25,7 @@ interface ISelectComposition {
      *      * `value` (required)
      *      * Accepts [`<option>` attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option)
      */
-    Option: (props: OptionProps) => React.ReactElement | React.ReactElement[];
+    Option: React.FC<OptionProps>;
     /**
      * Provides instructions on how to resolve the validation
      * error; will display when `error` is set in `<Select>`

@@ -41,12 +41,12 @@ var Option = function Option(props) {
       });
     }
 
-    return Object.keys(props.optionsBind.value).map(function (key) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, Object.keys(props.optionsBind.value).map(function (key) {
       return /*#__PURE__*/_react.default.createElement("option", (0, _extends2.default)({}, props, {
         key: key,
         value: key
       }), props.optionsBind.value[key]);
-    });
+    }));
   }
 
   return /*#__PURE__*/_react.default.createElement("option", props, props.children);

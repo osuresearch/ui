@@ -3,7 +3,7 @@ import { IFormFieldContext } from '../types';
 
 export type ControlLabelProps = React.LabelHTMLAttributes<HTMLLabelElement> & {
     // Will automatically be provided by an HOC
-    context: React.Context<IFormFieldContext<any>>;
+    context?: React.Context<IFormFieldContext<any>>;
 }
 /**
  * Label for custom controls, i.e. checkboxes and radios.
@@ -13,7 +13,7 @@ export type ControlLabelProps = React.LabelHTMLAttributes<HTMLLabelElement> & {
 export function ControlLabel(props: ControlLabelProps) {
     // Separate context from the other props (or else they are added as props to the component itself)
     const { context, ...otherProps } = props;
-    const { bind } = useContext(context);
+    const { bind } = useContext(context!);
 
     return (
         <label

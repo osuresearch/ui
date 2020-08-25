@@ -19,8 +19,6 @@ var _ = require("./");
 
 var _FormContext = _interopRequireDefault(require("../../internal/FormCommon/FormContext"));
 
-;
-
 var Control = function Control(_ref) {
   var children = _ref.children,
       props = (0, _objectWithoutProperties2.default)(_ref, ["children"]);

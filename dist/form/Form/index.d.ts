@@ -1,4 +1,6 @@
 import React from 'react';
+import { GroupProps } from './Group';
+import { RowProps } from './Row';
 declare type Props = React.FormHTMLAttributes<HTMLFormElement> & {
     isDiff?: boolean;
     isPrint?: boolean;
@@ -9,13 +11,13 @@ interface IFormComposition {
      * `<Form.Group>`. Typically, a `<Form.Group>` will contain
      * a single form component.
      */
-    Group: React.FC;
+    Group: React.FC<GroupProps>;
     /**
      * Wrap multiple `<Form.Group>` components in a `<Form.Row>`
      * if
      * they use the [Bootstrap layout column classes](https://getbootstrap.com/docs/4.0/layout/grid/#responsive-classes)
      */
-    Row: React.FC;
+    Row: React.FC<RowProps>;
 }
 /**
  * (Somewhat) self-explanatory form container

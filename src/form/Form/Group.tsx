@@ -1,6 +1,6 @@
 import React from 'react';
 
-type GroupProps = React.HTMLAttributes<HTMLDivElement> & {};
+export type GroupProps = React.HTMLAttributes<HTMLDivElement> & {};
 
 /**
  * Wrapping component for form components

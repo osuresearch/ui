@@ -1,7 +1,7 @@
 import React from 'react';
 import { IFormFieldContext } from '../types';
 export declare type ControlLabelProps = React.LabelHTMLAttributes<HTMLLabelElement> & {
-    context: React.Context<IFormFieldContext<any>>;
+    context?: React.Context<IFormFieldContext<any>>;
 };
 /**
  * Label for custom controls, i.e. checkboxes and radios.
