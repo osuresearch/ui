@@ -5,8 +5,8 @@ import Group from './Group';
 import Row from './Row';
 
 type Props = React.FormHTMLAttributes<HTMLFormElement> & {
-    isDiff: boolean,
-    isPrint: boolean
+    isDiff?: boolean,
+    isPrint?: boolean
 };
 
 interface IFormComposition {

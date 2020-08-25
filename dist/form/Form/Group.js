@@ -15,7 +15,8 @@ var _react = _interopRequireDefault(require("react"));
  * Wrapping component for form components
  * 
  */
-var Group = function Group(props) {
+var Group = function Group(_ref) {
+  var props = (0, _extends2.default)({}, _ref);
   return /*#__PURE__*/_react.default.createElement("div", (0, _extends2.default)({}, props, {
     className: "form-group ".concat(props.className ? props.className : '')
   }), props.children);

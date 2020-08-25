@@ -1,7 +1,7 @@
 import React from 'react';
 declare type Props = React.FormHTMLAttributes<HTMLFormElement> & {
-    isDiff: boolean;
-    isPrint: boolean;
+    isDiff?: boolean;
+    isPrint?: boolean;
 };
 interface IFormComposition {
     /**
