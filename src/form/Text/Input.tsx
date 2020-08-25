@@ -7,7 +7,7 @@ import Diff from './Diff';
 
 export type InputProps = React.InputHTMLAttributes<HTMLInputElement>;
 
-export const Input: React.FC<InputProps> = (props) => {
+export const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     const { bind } = useContext(Context);
     const { isDiff, isPrint } = useContext(FormContext);
 
@@ -34,6 +34,7 @@ export const Input: React.FC<InputProps> = (props) => {
 
     return (
         <input
+            ref={ref}
             {...props}
             type="text"
             id={bind.id}
@@ -48,4 +49,4 @@ export const Input: React.FC<InputProps> = (props) => {
             required={bind.required || props.required}
         />
     );
-}
+});

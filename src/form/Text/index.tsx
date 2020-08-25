@@ -27,7 +27,7 @@ interface ITextComposition {
     Label: React.FC<LabelProps>
 
     /** Equivalent of `<input type='text'>` */
-    Input: React.FC<InputProps>
+    Input: React.ForwardRefExoticComponent<InputProps & React.RefAttributes<HTMLInputElement> & InputProps>
 
     /** 
      * Jams a standard ORIS/UI search result pair into 
