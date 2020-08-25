@@ -11,6 +11,8 @@ var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/cl
 
 var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
 
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
+
 var _utility = require("../utility");
 
 var _ContextConnectorElement = _interopRequireDefault(require("./ContextConnectorElement"));
@@ -91,6 +93,22 @@ var CommentElement = /*#__PURE__*/function () {
 
   function CommentElement(document, comment, context) {
     (0, _classCallCheck2.default)(this, CommentElement);
+    (0, _defineProperty2.default)(this, "comment", void 0);
+    (0, _defineProperty2.default)(this, "context", void 0);
+    (0, _defineProperty2.default)(this, "container", void 0);
+    (0, _defineProperty2.default)(this, "info", void 0);
+    (0, _defineProperty2.default)(this, "updated", void 0);
+    (0, _defineProperty2.default)(this, "content", void 0);
+    (0, _defineProperty2.default)(this, "replies", void 0);
+    (0, _defineProperty2.default)(this, "replyButton", void 0);
+    (0, _defineProperty2.default)(this, "deleteButton", void 0);
+    (0, _defineProperty2.default)(this, "connector", void 0);
+    (0, _defineProperty2.default)(this, "onDelete", void 0);
+    (0, _defineProperty2.default)(this, "onReply", void 0);
+    (0, _defineProperty2.default)(this, "onChange", void 0);
+    (0, _defineProperty2.default)(this, "onFocus", void 0);
+    (0, _defineProperty2.default)(this, "onBlur", void 0);
+    (0, _defineProperty2.default)(this, "prevClientHeight", void 0);
     this.comment = comment;
     this.context = context;
     this.prevClientHeight = 0;

@@ -9,7 +9,7 @@ import MeridiemInput from './MeridiemInput';
 
 import SRDescriptions from './SRDescriptions';
 
-type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
+export type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
     /** Default time value (optional) - must be an hour:minutes string in 24h format  */
     defaultValue?: string;
 

@@ -21,7 +21,9 @@ var Button = function Button(_ref) {
       _ref$disabled = _ref.disabled,
       disabled = _ref$disabled === void 0 ? false : _ref$disabled,
       _ref$onClick = _ref.onClick,
-      onClick = _ref$onClick === void 0 ? undefined : _ref$onClick;
+      onClick = _ref$onClick === void 0 ? undefined : _ref$onClick,
+      _ref$type = _ref.type,
+      type = _ref$type === void 0 ? 'button' : _ref$type;
 
   // Sanity check for developers - make sure they do not specify `to` and `onClick` at once
   if (to && onClick) {
@@ -37,7 +39,7 @@ var Button = function Button(_ref) {
   }
 
   return /*#__PURE__*/_react.default.createElement("button", {
-    type: "button",
+    type: type,
     disabled: disabled,
     className: "btn btn-".concat(theme, " ").concat(className),
     onClick: !disabled ? onClick : undefined

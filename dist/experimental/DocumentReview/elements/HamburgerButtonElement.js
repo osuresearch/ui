@@ -11,6 +11,8 @@ var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/cl
 
 var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
 
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
+
 /**
  * Render a hamburger button that fires toggle events.
  * 
@@ -19,6 +21,10 @@ var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/creat
 var HamburgerButtonElement = /*#__PURE__*/function () {
   function HamburgerButtonElement(document) {
     (0, _classCallCheck2.default)(this, HamburgerButtonElement);
+    (0, _defineProperty2.default)(this, "onOpen", void 0);
+    (0, _defineProperty2.default)(this, "onClose", void 0);
+    (0, _defineProperty2.default)(this, "active", void 0);
+    (0, _defineProperty2.default)(this, "el", void 0);
     this.active = false; // Mmmm, hamburgers
 
     var button = document.createElement('button');

@@ -14,6 +14,8 @@ export interface Props {
     to?: string;
     /** Click event callback */
     onClick?(event: MouseEvent<HTMLButtonElement>): void;
+    /** Type */
+    type?: 'button' | 'reset' | 'submit';
 }
 declare const Button: React.FC<Props>;
 export default Button;
