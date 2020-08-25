@@ -17,7 +17,7 @@ interface ISelectComposition {
      * A control container for options (this is `<select>` in
      * native HTML)
      */
-    Control: React.FC<ControlProps>;
+    Control: React.ForwardRefExoticComponent<ControlProps & React.RefAttributes<HTMLSelectElement>>;
     /**
      * An option nested in a `Select.Control` list (this is
      * `<option>` in native HTML)

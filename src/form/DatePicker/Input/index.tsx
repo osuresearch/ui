@@ -21,7 +21,7 @@ export type InputProps = ReactDatePickerProps & {
     onChange: (date: string) => Function;
 }
 
-interface DatePickerRef {
+export interface DatePickerRef {
     name?: string;
     value?: string;
 }

@@ -21,7 +21,7 @@ interface IRadioComposition {
      *  * [React event handlers](https://reactjs.org/docs/events.html#supported-events)
      *  * All common [`<input>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input) attributes
      */
-    Input: React.FC<InputProps>;
+    Input: React.ForwardRefExoticComponent<InputProps & React.RefAttributes<HTMLInputElement>>;
 }
 export declare const Context: React.Context<IFormFieldContext<string>>;
 /**

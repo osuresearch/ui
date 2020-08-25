@@ -27,7 +27,7 @@ interface ITextComposition {
     Label: React.FC<LabelProps>
 
     /** Equivalent of `<input type='text'>` */
-    Input: React.ForwardRefExoticComponent<InputProps & React.RefAttributes<HTMLInputElement> & InputProps>
+    Input: React.ForwardRefExoticComponent<InputProps & React.RefAttributes<HTMLInputElement>>
 
     /** 
      * Jams a standard ORIS/UI search result pair into 
@@ -39,10 +39,10 @@ interface ITextComposition {
      * Email input field with automatic validation for invalid 
      * email addresses 
      */
-    Email: React.FC<EmailProps>
+    Email: React.ForwardRefExoticComponent<EmailProps & React.RefAttributes<HTMLInputElement>>
 
     /** Equivalent of `<textarea>` */
-    Area: React.FC<TextAreaProps>
+    Area: React.ForwardRefExoticComponent<TextAreaProps & React.RefAttributes<HTMLTextAreaElement>>
 
     /** A rich text editor (RTE) based on CKEditor */
     Rich: React.FC<RichProps>

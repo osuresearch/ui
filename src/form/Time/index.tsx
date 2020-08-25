@@ -5,7 +5,7 @@ import useFieldBindOrProps from '../../internal/FormCommon/hooks/useFieldBindOrP
 
 import { withFormContext } from '../../internal/FormCommon/HOC/withFormContext';
 
-import { Input, InputProps } from './Input';
+import { Input, InputProps, TimeRef } from './Input';
 
 import {
     Label, LabelProps,
@@ -20,10 +20,30 @@ type Props = FormFieldProps<string> & {
 }
 
 interface ITimeComposition {
+    /** Equivalent of `<label>` */
     Label: React.FC<LabelProps>
+
+    /** Help text for the `<Time>` */
     Help: React.FC<HelpProps>
-    Input: React.FC<InputProps>
+
+    /**
+     * * **Props**
+     *  * `defaultValue` – must be an hour:minutes string in 24h format 
+     *  * `value` – must be an hour:minutes string in 24h format
+     *  * `onChange` – Returns the time in a 24h format, e.g. `14:05`
+     */
+    Input: React.ForwardRefExoticComponent<InputProps & React.RefAttributes<TimeRef>>
+
+    /**
+     * Provides instructions on how to resolve the validation 
+     * error; will display when `error` is set in `<Time>`
+     */
     Error: React.FC<ErrorProps>
+
+    /**
+     * Feedback for when the set meets the validation rules; 
+     * will display when `success` is set in `<Time>`
+     */
     Success: React.FC<SuccessProps>
 }
 

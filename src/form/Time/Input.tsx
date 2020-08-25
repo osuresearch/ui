@@ -23,7 +23,7 @@ export type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
     onChange?(newValue: string): void;
 }
 
-interface TimeRef {
+export interface TimeRef {
     name?: string;
     value?: string;
 }
