@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useContext } from 'react';
+import React, { useState, useEffect, useRef, useContext, useCallback } from 'react';
 import { Context } from '.';
 
 import { getHourValue, getMinuteValue, getMeridiemValue } from './helpers';
@@ -23,7 +23,12 @@ export type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
     onChange?(newValue: string): void;
 }
 
-export function Input(props: InputProps) {
+interface TimeRef {
+    name?: string;
+    value?: string;
+}
+
+export const Input = React.forwardRef<TimeRef, InputProps>((props, ref) => {
     // Most commonly used props
     const { defaultValue, value, onChange } = props;
 
@@ -37,16 +42,25 @@ export function Input(props: InputProps) {
     const minutesRef = useRef<HTMLInputElement>(null);
     const meridiemRef = useRef<HTMLInputElement>(null);
 
+    const makeNewTime = useCallback(() => {
+        let newTime;
+        if (hour && minutes && meridiem) {
+            const hourInt = parseInt(hour);
+            newTime = (meridiem === 'AM' ? hourInt : (hourInt === 12) ? 12 : hourInt + 12).toString() + ':' + minutes;
+        }
+
+        return newTime;
+    }, [hour, minutes, meridiem]);
+
     useEffect(() => {
-        const hourInt = parseInt(hour);
-        const newTime = (meridiem === 'AM' ? hourInt : (hourInt === 12) ? 12 : hourInt + 12).toString() + ':' + minutes;
+        const newTime = makeNewTime();
 
         // Fire onChange handler IFF there's a time and the 
         // time does not differ from the driving `value` prop
-        if (hour && minutes && meridiem && newTime !== value && onChange) {
+        if (hour && minutes && meridiem && newTime && newTime !== value && onChange) {
             onChange(newTime);
         }
-    }, [hour, minutes, meridiem, value, onChange]);
+    }, [hour, minutes, meridiem, value, onChange, ref, makeNewTime]);
 
     // Detect when the parent component updates the controlling value
     // and update internal states - without firing onChange
@@ -64,10 +78,22 @@ export function Input(props: InputProps) {
     const readOnly = bind.readOnly || props.readOnly;
     const required = bind.required || props.required;
 
-    const classNames = `time-field form-control ${props.className ? props.className : ''} ${readOnly ? 'readonly' : ''}`
+    const classNames = `time-field form-control ${props.className ? props.className : ''} ${readOnly ? 'readonly' : ''}`;
 
     return (
-        <div className={classNames}>
+        <div
+            className={classNames}
+            ref={() => {
+                // Faux field name/value return for ref
+                // See https://stackoverflow.com/a/62238917
+                if (ref && !(typeof ref === 'function')) {
+                    (ref as React.MutableRefObject<TimeRef>).current = {
+                        name: props.name || bind.name,
+                        value: makeNewTime()
+                    }
+                }
+            }}
+        >
             <span className='fa fa-clock-o' aria-hidden='true'></span>
 
             <HourInput
@@ -118,4 +144,4 @@ export function Input(props: InputProps) {
             />
         </div>
     )
-}
+});

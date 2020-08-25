@@ -48,6 +48,7 @@ export const Context = React.createContext<IFormFieldContext<string>>({
  * * **Exceptions**
  *  * The following props are disabled due to not meeting accessibility standards:
  *      * `customTimeInput`, `timeInputLabel`, `disabledKeyboardNavigation`, `showMonthYearPicker`, `showMonthYearDropdown`, `monthsShown`, `withPortal`, `showQuarterYearPicker`, `showTimeSelect`, `showTimeSelectOnly`, `todayButton`, `showYearPicker`
+ *  * `showMonthDropdown` and `showYearDropdown` MUST be used with `dropdownMode="select"` to meet accessibility requirements
  *  * If you wish to use one of these, please submit a merge request with a patch that resolves the issues.
  * 
  * 

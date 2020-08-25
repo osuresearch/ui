@@ -21,7 +21,7 @@ var _Print = _interopRequireDefault(require("./Print"));
 
 var _Diff = _interopRequireDefault(require("./Diff"));
 
-var TextArea = function TextArea(props) {
+var TextArea = /*#__PURE__*/_react.default.forwardRef(function (props, ref) {
   var _props$className;
 
   var _useContext = (0, _react.useContext)(_.Context),
@@ -31,7 +31,7 @@ var TextArea = function TextArea(props) {
       isDiff = _useContext2.isDiff,
       isPrint = _useContext2.isPrint;
 
-  var value = bind.value || props.value;
+  var value = bind.value || props.defaultValue;
   var minLength = props.minLength,
       maxLength = props.maxLength;
 
@@ -49,10 +49,12 @@ var TextArea = function TextArea(props) {
   }
 
   var classNames = 'form-control ' + ((_props$className = props.className) !== null && _props$className !== void 0 ? _props$className : '') + (bind.error ? ' is-invalid' : '') + (bind.success ? ' is-valid' : '');
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("textarea", (0, _extends2.default)({}, props, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("textarea", (0, _extends2.default)({
+    ref: ref
+  }, props, {
     id: bind.id,
     name: bind.name || props.name,
-    value: value,
+    defaultValue: value,
     className: classNames,
     onChange: function onChange(e) {
       bind.value = e.currentTarget.value;
@@ -65,6 +67,6 @@ var TextArea = function TextArea(props) {
   }, "".concat(minLength, " characters required \u2013 ").concat(minLength - value.length, " more needed")), typeof value === 'string' && maxLength && /*#__PURE__*/_react.default.createElement("div", {
     className: "small text-muted"
   }, "".concat(value.length, " of ").concat(maxLength, " character limit")));
-};
+});
 
 exports.TextArea = TextArea;

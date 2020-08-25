@@ -11,7 +11,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref)
     const { bind } = useContext(Context);
     const { isDiff, isPrint } = useContext(FormContext);
 
-    const value = bind.value || props.value;
+    const value = bind.value || props.defaultValue;
 
     if (isDiff) {
         return (
@@ -39,7 +39,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref)
             type="text"
             id={bind.id}
             name={bind.name || props.name}
-            value={value}
+            defaultValue={value}
             className={classNames}
             onChange={(e) => {
                 bind.value = e.currentTarget.value;

@@ -10,11 +10,11 @@ export type TextAreaProps = React.TextareaHTMLAttributes<HTMLTextAreaElement> & 
     minLength?: number;
 }
 
-export const TextArea: React.FC<TextAreaProps> = (props) => {
+export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>((props, ref) => {
     const { bind } = useContext(Context);
     const { isDiff, isPrint } = useContext(FormContext);
 
-    const value = bind.value || props.value;
+    const value = bind.value || props.defaultValue;
     const { minLength, maxLength } = props;
 
     if (isDiff) {
@@ -38,10 +38,11 @@ export const TextArea: React.FC<TextAreaProps> = (props) => {
 
     return (<>
         <textarea
+            ref={ref}
             {...props}
             id={bind.id}
             name={bind.name || props.name}
-            value={value}
+            defaultValue={value}
             className={classNames}
             onChange={(e) => {
                 bind.value = e.currentTarget.value;
@@ -62,4 +63,4 @@ export const TextArea: React.FC<TextAreaProps> = (props) => {
             </div>
         }
     </>);
-}
+});

@@ -31,7 +31,7 @@ var Input = /*#__PURE__*/_react.default.forwardRef(function (props, ref) {
       isDiff = _useContext2.isDiff,
       isPrint = _useContext2.isPrint;
 
-  var value = bind.value || props.value;
+  var value = bind.value || props.defaultValue;
 
   if (isDiff) {
     return /*#__PURE__*/_react.default.createElement(_Diff.default, {
@@ -53,7 +53,7 @@ var Input = /*#__PURE__*/_react.default.forwardRef(function (props, ref) {
     type: "text",
     id: bind.id,
     name: bind.name || props.name,
-    value: value,
+    defaultValue: value,
     className: classNames,
     onChange: function onChange(e) {
       bind.value = e.currentTarget.value;

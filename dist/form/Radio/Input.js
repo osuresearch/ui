@@ -19,7 +19,7 @@ var _FormContext = _interopRequireDefault(require("../../internal/FormCommon/For
 
 var _Components = require("../../internal/FormCommon/Components");
 
-var Input = function Input(props) {
+var Input = /*#__PURE__*/_react.default.forwardRef(function (props, ref) {
   var _props$className;
 
   var _useContext = (0, _react.useContext)(_.Context),
@@ -57,16 +57,18 @@ var Input = function Input(props) {
   }
 
   var classNames = 'custom-control-input ' + ((_props$className = props.className) !== null && _props$className !== void 0 ? _props$className : '') + (bind.error ? ' is-invalid' : '') + (bind.success ? ' is-valid' : '');
-  return /*#__PURE__*/_react.default.createElement("input", (0, _extends2.default)({}, props, {
+  return /*#__PURE__*/_react.default.createElement("input", (0, _extends2.default)({
+    ref: ref
+  }, props, {
     type: "radio",
     id: bind.id,
     name: bind.name || props.name,
-    checked: checked,
+    defaultChecked: checked,
     value: value,
     className: classNames,
     readOnly: bind.readOnly || props.readOnly,
     required: bind.required || props.required
   }));
-};
+});
 
 exports.Input = Input;

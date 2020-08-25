@@ -7,7 +7,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Input = Input;
+exports.Input = void 0;
 
 var _slicedToArray2 = _interopRequireDefault(require("@babel/runtime/helpers/slicedToArray"));
 
@@ -25,7 +25,7 @@ var _MeridiemInput = _interopRequireDefault(require("./MeridiemInput"));
 
 var _SRDescriptions = _interopRequireDefault(require("./SRDescriptions"));
 
-function Input(props) {
+var Input = /*#__PURE__*/_react.default.forwardRef(function (props, _ref) {
   // Most commonly used props
   var defaultValue = props.defaultValue,
       value = props.value,
@@ -52,15 +52,24 @@ function Input(props) {
   var hourRef = (0, _react.useRef)(null);
   var minutesRef = (0, _react.useRef)(null);
   var meridiemRef = (0, _react.useRef)(null);
+  var makeNewTime = (0, _react.useCallback)(function () {
+    var newTime;
+
+    if (hour && minutes && meridiem) {
+      var hourInt = parseInt(hour);
+      newTime = (meridiem === 'AM' ? hourInt : hourInt === 12 ? 12 : hourInt + 12).toString() + ':' + minutes;
+    }
+
+    return newTime;
+  }, [hour, minutes, meridiem]);
   (0, _react.useEffect)(function () {
-    var hourInt = parseInt(hour);
-    var newTime = (meridiem === 'AM' ? hourInt : hourInt === 12 ? 12 : hourInt + 12).toString() + ':' + minutes; // Fire onChange handler IFF there's a time and the 
+    var newTime = makeNewTime(); // Fire onChange handler IFF there's a time and the 
     // time does not differ from the driving `value` prop
 
-    if (hour && minutes && meridiem && newTime !== value && onChange) {
+    if (hour && minutes && meridiem && newTime && newTime !== value && onChange) {
       onChange(newTime);
     }
-  }, [hour, minutes, meridiem, value, onChange]); // Detect when the parent component updates the controlling value
+  }, [hour, minutes, meridiem, value, onChange, _ref, makeNewTime]); // Detect when the parent component updates the controlling value
   // and update internal states - without firing onChange
 
   (0, _react.useEffect)(function () {
@@ -79,7 +88,17 @@ function Input(props) {
   var required = bind.required || props.required;
   var classNames = "time-field form-control ".concat(props.className ? props.className : '', " ").concat(readOnly ? 'readonly' : '');
   return /*#__PURE__*/_react.default.createElement("div", {
-    className: classNames
+    className: classNames,
+    ref: function ref() {
+      // Faux field name/value return for ref
+      // See https://stackoverflow.com/a/62238917
+      if (_ref && !(typeof _ref === 'function')) {
+        _ref.current = {
+          name: props.name || bind.name,
+          value: makeNewTime()
+        };
+      }
+    }
   }, /*#__PURE__*/_react.default.createElement("span", {
     className: "fa fa-clock-o",
     "aria-hidden": "true"
@@ -121,4 +140,6 @@ function Input(props) {
     minutes: minutes,
     meridiem: meridiem
   }));
-}
+});
+
+exports.Input = Input;

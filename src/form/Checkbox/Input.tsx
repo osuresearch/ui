@@ -6,7 +6,7 @@ import { Print, Diff } from '../../internal/FormCommon/Components';
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> { }
 
-export const Input: React.FC<InputProps> = (props) => {
+export const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     const { bind } = useContext(Context);
     const { isDiff, isPrint } = useContext(FormContext);
 
@@ -52,12 +52,13 @@ export const Input: React.FC<InputProps> = (props) => {
 
     return (
         <input
+            ref={ref}
             {...props}
             type='checkbox'
             id={bind.id}
             name={bind.name || props.name}
             className={classNames}
-            checked={checked}
+            defaultChecked={checked}
             onChange={(e) => {
                 bind.value = e.currentTarget.checked;
                 if (props.onChange) props.onChange(e);
@@ -66,4 +67,4 @@ export const Input: React.FC<InputProps> = (props) => {
             required={bind.required || props.required}
         />
     )
-}
+});

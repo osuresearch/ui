@@ -3,5 +3,8 @@ export declare type TextAreaProps = React.TextareaHTMLAttributes<HTMLTextAreaEle
     maxLength?: number;
     minLength?: number;
 };
-export declare const TextArea: React.FC<TextAreaProps>;
+export declare const TextArea: React.ForwardRefExoticComponent<React.TextareaHTMLAttributes<HTMLTextAreaElement> & {
+    maxLength?: number | undefined;
+    minLength?: number | undefined;
+} & React.RefAttributes<HTMLTextAreaElement>>;
 //# sourceMappingURL=Area.d.ts.map

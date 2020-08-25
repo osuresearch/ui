@@ -8,7 +8,7 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
     value?: string | number
 }
 
-export const Input: React.FC<InputProps> = (props) => {
+export const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     const { bind } = useContext(Context);
     const { isDiff, isPrint } = useContext(FormContext);
 
@@ -56,11 +56,12 @@ export const Input: React.FC<InputProps> = (props) => {
 
     return (
         <input
+            ref={ref}
             {...props}
             type='radio'
             id={bind.id}
             name={bind.name || props.name}
-            checked={checked}
+            defaultChecked={checked}
             value={value}
             className={classNames}
 
@@ -68,4 +69,4 @@ export const Input: React.FC<InputProps> = (props) => {
             required={bind.required || props.required}
         />
     )
-}
+});

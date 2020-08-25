@@ -11,18 +11,13 @@ exports.Control = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutProperties"));
-
 var _react = _interopRequireWildcard(require("react"));
 
 var _ = require("./");
 
 var _FormContext = _interopRequireDefault(require("../../internal/FormCommon/FormContext"));
 
-var Control = function Control(_ref) {
-  var children = _ref.children,
-      props = (0, _objectWithoutProperties2.default)(_ref, ["children"]);
-
+var Control = /*#__PURE__*/_react.default.forwardRef(function (props, ref) {
   var _useContext = (0, _react.useContext)(_.Context),
       bind = _useContext.bind;
 
@@ -35,10 +30,12 @@ var Control = function Control(_ref) {
 
   if (isDiff || isPrint || bind.readOnly) {
     // Let the Option component handle the diff/print/readOnly rendering
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, children);
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, props.children);
   }
 
-  return /*#__PURE__*/_react.default.createElement("select", (0, _extends2.default)({}, props, {
+  return /*#__PURE__*/_react.default.createElement("select", (0, _extends2.default)({
+    ref: ref
+  }, props, {
     id: bind.id,
     name: bind.name || props.name,
     className: classNames,
@@ -48,7 +45,7 @@ var Control = function Control(_ref) {
       bind.value = e.currentTarget.value;
       if (props.onChange) props.onChange(e);
     }
-  }), children);
-};
+  }), props.children);
+});
 
 exports.Control = Control;

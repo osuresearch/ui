@@ -21,18 +21,19 @@ export type InputProps = ReactDatePickerProps & {
     onChange: (date: string) => Function;
 }
 
-const Input: React.FC<InputProps> = (allprops) => {
+interface DatePickerRef {
+    name?: string;
+    value?: string;
+}
+
+const Input = React.forwardRef<DatePickerRef, InputProps>((
+    allprops,
+    ref
+) => {
     // Remove props that we don't want the developer to be
     // accidentally use because of accessibility issues
     // TODO - fix the MonthYear picker (that will be useful)
     const { customTimeInput, timeInputLabel, disabledKeyboardNavigation, showMonthYearPicker, showMonthYearDropdown, monthsShown, withPortal, showQuarterYearPicker, showTimeSelect, showTimeSelectOnly, todayButton, showYearPicker, ...props } = allprops;
-
-    /**
-     * TODO - Add to documentation
-     * 
-     * showMonthDropdown, showYearDropdown MUST be used with
-     * dropdownMode="select" for a11y
-     */
 
 
     const { bind } = useContext(Context);
@@ -61,8 +62,8 @@ const Input: React.FC<InputProps> = (allprops) => {
         }
     };
 
-    const formatter = (timestamp: number | undefined) => {
-        if (typeof (timestamp) === 'undefined' || isNaN(timestamp)) return '';
+    const formatter = (timestamp: string | number | undefined) => {
+        if (typeof (timestamp) === 'undefined' || typeof (timestamp) === 'string' || isNaN(timestamp)) return undefined;
 
         let date = new Date(timestamp)
         let formatted = date.toLocaleDateString("en-US");
@@ -107,7 +108,19 @@ const Input: React.FC<InputProps> = (allprops) => {
     }
 
     return (
-        <div className={`input-group datepicker ${props.showTimeInput && 'datetimepicker'}`}>
+        <div
+            className={`input-group datepicker ${props.showTimeInput && 'datetimepicker'}`}
+            ref={() => {
+                // Faux field name/value return for ref
+                // See https://stackoverflow.com/a/62238917
+                if (ref && !(typeof ref === 'function')) {
+                    (ref as React.MutableRefObject<DatePickerRef>).current = {
+                        name: props.name || bind.name,
+                        value: bind.value || props.selected
+                    }
+                }
+            }}
+        >
             {!props.showTimeInput && <DatePrefix />}
             {props.showTimeInput && <DateTimePrefix />}
 
@@ -134,6 +147,6 @@ const Input: React.FC<InputProps> = (allprops) => {
             </DatePicker>
         </div>
     );
-}
+});
 
 export default Input;

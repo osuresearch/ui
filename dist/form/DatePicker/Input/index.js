@@ -29,7 +29,7 @@ var _DatePrefix = _interopRequireDefault(require("./DatePrefix"));
 
 var _DateTimePrefix = _interopRequireDefault(require("./DateTimePrefix"));
 
-var Input = function Input(allprops) {
+var Input = /*#__PURE__*/_react.default.forwardRef(function (allprops, _ref) {
   // Remove props that we don't want the developer to be
   // accidentally use because of accessibility issues
   // TODO - fix the MonthYear picker (that will be useful)
@@ -46,12 +46,6 @@ var Input = function Input(allprops) {
       todayButton = allprops.todayButton,
       showYearPicker = allprops.showYearPicker,
       props = (0, _objectWithoutProperties2.default)(allprops, ["customTimeInput", "timeInputLabel", "disabledKeyboardNavigation", "showMonthYearPicker", "showMonthYearDropdown", "monthsShown", "withPortal", "showQuarterYearPicker", "showTimeSelect", "showTimeSelectOnly", "todayButton", "showYearPicker"]);
-  /**
-   * TODO - Add to documentation
-   * 
-   * showMonthDropdown, showYearDropdown MUST be used with
-   * dropdownMode="select" for a11y
-   */
 
   var _useContext = (0, _react.useContext)(_.Context),
       bind = _useContext.bind;
@@ -85,7 +79,7 @@ var Input = function Input(allprops) {
   };
 
   var formatter = function formatter(timestamp) {
-    if (typeof timestamp === 'undefined' || isNaN(timestamp)) return '';
+    if (typeof timestamp === 'undefined' || typeof timestamp === 'string' || isNaN(timestamp)) return undefined;
     var date = new Date(timestamp);
     var formatted = date.toLocaleDateString("en-US");
 
@@ -123,7 +117,17 @@ var Input = function Input(allprops) {
   }
 
   return /*#__PURE__*/_react.default.createElement("div", {
-    className: "input-group datepicker ".concat(props.showTimeInput && 'datetimepicker')
+    className: "input-group datepicker ".concat(props.showTimeInput && 'datetimepicker'),
+    ref: function ref() {
+      // Faux field name/value return for ref
+      // See https://stackoverflow.com/a/62238917
+      if (_ref && !(typeof _ref === 'function')) {
+        _ref.current = {
+          name: props.name || bind.name,
+          value: bind.value || props.selected
+        };
+      }
+    }
   }, !props.showTimeInput && /*#__PURE__*/_react.default.createElement(_DatePrefix.default, null), props.showTimeInput && /*#__PURE__*/_react.default.createElement(_DateTimePrefix.default, null), /*#__PURE__*/_react.default.createElement(_reactDatepicker.default, (0, _extends2.default)({}, props, {
     id: bind.id,
     name: bind.name || props.name,
@@ -144,7 +148,7 @@ var Input = function Input(allprops) {
   }), /*#__PURE__*/_react.default.createElement("div", {
     className: "keyboard-notice"
   }, /*#__PURE__*/_react.default.createElement("small", null, /*#__PURE__*/_react.default.createElement("em", null, "Keyboard users: Exit this dialog with the ", /*#__PURE__*/_react.default.createElement("code", null, "esc"), " key")))));
-};
+});
 
 var _default = Input;
 exports.default = _default;

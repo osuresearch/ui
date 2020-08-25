@@ -6,15 +6,16 @@ export type EmailProps = React.InputHTMLAttributes<HTMLInputElement>;
 /**
  * Email input field with automatic validation for invalid email addresses
  */
-export const Email: React.FC<EmailProps> = (props) => {
+export const Email = React.forwardRef<HTMLInputElement, EmailProps>((props, ref) => {
     const { bind } = useContext(Context);
 
-    const classNames = 'form-control ' +
-        (bind.error ? ' is-invalid' : '');
+    const value = bind.value || props.defaultValue;
 
-    const nativeOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        bind.value = e.currentTarget.value;
-    }
+    const classNames = 'form-control ' +
+        (props.className ?? '') +
+        (bind.error ? ' is-invalid' : '') +
+        (bind.success ? ' is-valid' : '')
+        ;
 
     /** SIMPLE email validation. Updates the bind's error state on invalid email */
     const nativeOnBlur = (e: React.FocusEvent<HTMLInputElement>) => {
@@ -34,15 +35,20 @@ export const Email: React.FC<EmailProps> = (props) => {
 
     return (
         <input
+            ref={ref}
             {...props}
             type="text"
             id={bind.id}
-            name={bind.name}
-            readOnly={bind.readOnly}
-            value={bind.value || ''}
+            name={bind.name || props.name}
+            defaultValue={value}
             className={classNames}
-            onChange={nativeOnChange}
+            onChange={(e) => {
+                bind.value = e.currentTarget.value;
+                if (props.onChange) props.onChange(e);
+            }}
             onBlur={nativeOnBlur}
+            readOnly={bind.readOnly || props.readOnly}
+            required={bind.required || props.required}
         />
     );
-}
+});

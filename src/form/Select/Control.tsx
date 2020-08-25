@@ -7,7 +7,7 @@ export type ControlProps = React.SelectHTMLAttributes<HTMLSelectElement> & {
     children: React.ReactElement<OptionProps>[] | React.ReactElement<OptionProps>
 };
 
-export const Control: React.FC<ControlProps> = ({ children, ...props }) => {
+export const Control = React.forwardRef<HTMLSelectElement, ControlProps>((props, ref) => {
     const { bind } = useContext(Context);
     const { isDiff, isPrint } = useContext(FormContext);
 
@@ -17,11 +17,12 @@ export const Control: React.FC<ControlProps> = ({ children, ...props }) => {
 
     if (isDiff || isPrint || bind.readOnly) {
         // Let the Option component handle the diff/print/readOnly rendering
-        return <>{children}</>
+        return <>{props.children}</>
     }
 
     return (
         <select
+            ref={ref}
             {...props}
             id={bind.id}
             name={bind.name || props.name}
@@ -33,7 +34,7 @@ export const Control: React.FC<ControlProps> = ({ children, ...props }) => {
                 if (props.onChange) props.onChange(e);
             }}
         >
-            {children}
+            {props.children}
         </select>
     )
-}
+});
