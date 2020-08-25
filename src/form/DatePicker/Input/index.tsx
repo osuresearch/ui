@@ -11,7 +11,7 @@ import Time from '../../Time';
 import DatePrefix from './DatePrefix';
 import DateTimePrefix from './DateTimePrefix';
 
-export type InputProps = Omit<ReactDatePickerProps, 'onChange|selected'> & {
+export type InputProps = Omit<ReactDatePickerProps, 'onChange' | 'selected'> & {
     /** The selected date - **must** be an ISO8601 timestamp string **/
     selected?: string;
 
