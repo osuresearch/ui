@@ -3,8 +3,6 @@ import React, { useContext } from 'react';
 import { Context } from '../';
 import FormContext from '../../../internal/FormCommon/FormContext';
 
-import { RHFCustomElement } from '../../../internal/FormCommon/types';
-
 import { Print, Diff } from '../../../internal/FormCommon/Components';
 
 import DatePicker, { ReactDatePickerProps } from 'react-datepicker';
@@ -45,6 +43,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((
     if (typeof (initial) !== 'undefined') {
         initial = Date.parse(initial);
     }
+
+    const name = bind.name || props.name;
+    const readOnly = bind.readOnly || props.readOnly;
 
     const dateFormat = props.dateFormat || props.showTimeInput ? 'MM/dd/yyyy h:mm aa' : 'MM/dd/yyyy';
 
@@ -104,26 +105,17 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((
         )
     }
 
+
+
     return (
-        <div
-            className={`input-group datepicker ${props.showTimeInput && 'datetimepicker'}`}
-            ref={() => {
-                // Faux field name/value return for ref
-                // See https://stackoverflow.com/a/62238917
-                if (ref && !(typeof ref === 'function')) {
-                    ref.current!.name = props.name || bind.name || '';
-                    ref.current!.value = bind.value || props.selected || '';
-                    ref.current!.readOnly = bind.readOnly || props.readOnly || false;
-                }
-            }}
-        >
+        <div className={`input-group datepicker ${props.showTimeInput && 'datetimepicker'}`}>
             {!props.showTimeInput && <DatePrefix />}
             {props.showTimeInput && <DateTimePrefix />}
 
             <DatePicker
                 {...props}
                 id={bind.id}
-                name={bind.name || props.name}
+                name={name}
                 selected={selected ? new Date(selected) : null}
                 className={'form-control date ' + (props.className ? props.className : '')}
                 onChange={handleChange}
@@ -134,13 +126,16 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((
                     <Time.Input id={`${bind.id}-time`} />
                 }
                 dateFormat={dateFormat}
-                readOnly={bind.readOnly || props.readOnly}
+                readOnly={readOnly}
                 required={bind.required || props.required}
             >
                 <div className='keyboard-notice'>
                     <small><em>Keyboard users: Exit this dialog with the <code>esc</code> key</em></small>
                 </div>
             </DatePicker>
+
+            {/* Hidden field to register a ref to */}
+            <input type='hidden' ref={ref} name={name} value={selected} readOnly={readOnly} />
         </div>
     );
 });

@@ -1,5 +1,5 @@
 import React from 'react';
-import { NullFieldBind, FormFieldProps, IFormFieldContext, RHFCustomElement } from '../../internal/FormCommon/types';
+import { NullFieldBind, FormFieldProps, IFormFieldContext } from '../../internal/FormCommon/types';
 import useFieldBindOrProps from '../../internal/FormCommon/hooks/useFieldBindOrProps';
 
 import { withFormContext } from '../../internal/FormCommon/HOC/withFormContext';

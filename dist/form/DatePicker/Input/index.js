@@ -29,7 +29,7 @@ var _DatePrefix = _interopRequireDefault(require("./DatePrefix"));
 
 var _DateTimePrefix = _interopRequireDefault(require("./DateTimePrefix"));
 
-var Input = /*#__PURE__*/_react.default.forwardRef(function (allprops, _ref) {
+var Input = /*#__PURE__*/_react.default.forwardRef(function (allprops, ref) {
   // Remove props that we don't want the developer to be
   // accidentally use because of accessibility issues
   // TODO - fix the MonthYear picker (that will be useful)
@@ -66,6 +66,8 @@ var Input = /*#__PURE__*/_react.default.forwardRef(function (allprops, _ref) {
     initial = Date.parse(initial);
   }
 
+  var name = bind.name || props.name;
+  var readOnly = bind.readOnly || props.readOnly;
   var dateFormat = props.dateFormat || props.showTimeInput ? 'MM/dd/yyyy h:mm aa' : 'MM/dd/yyyy'; // Transform selected date to ISO timestamp
 
   var handleChange = function handleChange(date) {
@@ -117,19 +119,10 @@ var Input = /*#__PURE__*/_react.default.forwardRef(function (allprops, _ref) {
   }
 
   return /*#__PURE__*/_react.default.createElement("div", {
-    className: "input-group datepicker ".concat(props.showTimeInput && 'datetimepicker'),
-    ref: function ref() {
-      // Faux field name/value return for ref
-      // See https://stackoverflow.com/a/62238917
-      if (_ref && !(typeof _ref === 'function')) {
-        _ref.current.name = props.name || bind.name || '';
-        _ref.current.value = bind.value || props.selected || '';
-        _ref.current.readOnly = bind.readOnly || props.readOnly || false;
-      }
-    }
+    className: "input-group datepicker ".concat(props.showTimeInput && 'datetimepicker')
   }, !props.showTimeInput && /*#__PURE__*/_react.default.createElement(_DatePrefix.default, null), props.showTimeInput && /*#__PURE__*/_react.default.createElement(_DateTimePrefix.default, null), /*#__PURE__*/_react.default.createElement(_reactDatepicker.default, (0, _extends2.default)({}, props, {
     id: bind.id,
-    name: bind.name || props.name,
+    name: name,
     selected: selected ? new Date(selected) : null,
     className: 'form-control date ' + (props.className ? props.className : ''),
     onChange: handleChange,
@@ -142,11 +135,17 @@ var Input = /*#__PURE__*/_react.default.forwardRef(function (allprops, _ref) {
       id: "".concat(bind.id, "-time")
     }),
     dateFormat: dateFormat,
-    readOnly: bind.readOnly || props.readOnly,
+    readOnly: readOnly,
     required: bind.required || props.required
   }), /*#__PURE__*/_react.default.createElement("div", {
     className: "keyboard-notice"
-  }, /*#__PURE__*/_react.default.createElement("small", null, /*#__PURE__*/_react.default.createElement("em", null, "Keyboard users: Exit this dialog with the ", /*#__PURE__*/_react.default.createElement("code", null, "esc"), " key")))));
+  }, /*#__PURE__*/_react.default.createElement("small", null, /*#__PURE__*/_react.default.createElement("em", null, "Keyboard users: Exit this dialog with the ", /*#__PURE__*/_react.default.createElement("code", null, "esc"), " key")))), /*#__PURE__*/_react.default.createElement("input", {
+    type: "hidden",
+    ref: ref,
+    name: name,
+    value: selected,
+    readOnly: readOnly
+  }));
 });
 
 var _default = Input;
