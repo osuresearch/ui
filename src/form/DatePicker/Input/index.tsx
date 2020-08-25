@@ -23,7 +23,7 @@ export type InputProps = Omit<ReactDatePickerProps, 'onChange' | 'selected'> & {
     onChange: (date: string) => void;
 }
 
-const Input = React.forwardRef<RHFCustomElement, InputProps>((
+const Input = React.forwardRef<HTMLInputElement, InputProps>((
     allprops,
     ref
 ) => {
@@ -111,11 +111,9 @@ const Input = React.forwardRef<RHFCustomElement, InputProps>((
                 // Faux field name/value return for ref
                 // See https://stackoverflow.com/a/62238917
                 if (ref && !(typeof ref === 'function')) {
-                    (ref as React.MutableRefObject<RHFCustomElement>).current = {
-                        name: props.name || bind.name || '',
-                        value: bind.value || props.selected,
-                        disabled: bind.readOnly || props.readOnly
-                    }
+                    ref.current!.name = props.name || bind.name || '';
+                    ref.current!.value = bind.value || props.selected || '';
+                    ref.current!.readOnly = bind.readOnly || props.readOnly || false;
                 }
             }}
         >

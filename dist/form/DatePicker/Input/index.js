@@ -122,11 +122,9 @@ var Input = /*#__PURE__*/_react.default.forwardRef(function (allprops, _ref) {
       // Faux field name/value return for ref
       // See https://stackoverflow.com/a/62238917
       if (_ref && !(typeof _ref === 'function')) {
-        _ref.current = {
-          name: props.name || bind.name || '',
-          value: bind.value || props.selected,
-          disabled: bind.readOnly || props.readOnly
-        };
+        _ref.current.name = props.name || bind.name || '';
+        _ref.current.value = bind.value || props.selected || '';
+        _ref.current.readOnly = bind.readOnly || props.readOnly || false;
       }
     }
   }, !props.showTimeInput && /*#__PURE__*/_react.default.createElement(_DatePrefix.default, null), props.showTimeInput && /*#__PURE__*/_react.default.createElement(_DateTimePrefix.default, null), /*#__PURE__*/_react.default.createElement(_reactDatepicker.default, (0, _extends2.default)({}, props, {

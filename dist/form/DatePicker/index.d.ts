@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormFieldProps, IFormFieldContext, RHFCustomElement } from '../../internal/FormCommon/types';
+import { FormFieldProps, IFormFieldContext } from '../../internal/FormCommon/types';
 import { LabelProps, HelpProps, ErrorProps, SuccessProps } from '../../internal/FormCommon/Components';
 import { InputProps } from './Input';
 declare type Props = FormFieldProps<string> & {};
@@ -27,7 +27,7 @@ interface IDatePickerComposition {
      *  * `showMonthDropdown` and `showYearDropdown` MUST be used with `dropdownMode="select"` to meet accessibility requirements
      *  * If you wish to use one of these, please submit a merge request with a patch that resolves the issues.
      */
-    Input: React.ForwardRefExoticComponent<InputProps & React.RefAttributes<RHFCustomElement>>;
+    Input: React.ForwardRefExoticComponent<InputProps & React.RefAttributes<HTMLInputElement>>;
     /**
      * Provides instructions on how to resolve the validation
      * error; will display when `error` is set in `<DatePicker>`

@@ -1,5 +1,4 @@
 import React from 'react';
-import { RHFCustomElement } from '../../../internal/FormCommon/types';
 import { ReactDatePickerProps } from 'react-datepicker';
 export declare type InputProps = Omit<ReactDatePickerProps, 'onChange' | 'selected'> & {
     /** The selected date - **must** be an ISO8601 timestamp string **/
@@ -16,6 +15,6 @@ declare const Input: React.ForwardRefExoticComponent<Pick<ReactDatePickerProps, 
      * onChange handler (required) - a state setter for the parent component
      */
     onChange: (date: string) => void;
-} & React.RefAttributes<RHFCustomElement>>;
+} & React.RefAttributes<HTMLInputElement>>;
 export default Input;
 //# sourceMappingURL=index.d.ts.map
