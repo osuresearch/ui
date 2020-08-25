@@ -3,6 +3,8 @@ import React, { useContext } from 'react';
 import { Context } from '../';
 import FormContext from '../../../internal/FormCommon/FormContext';
 
+import { RHFCustomElement } from '../../../internal/FormCommon/types';
+
 import { Print, Diff } from '../../../internal/FormCommon/Components';
 
 import DatePicker, { ReactDatePickerProps } from 'react-datepicker';
@@ -21,12 +23,7 @@ export type InputProps = Omit<ReactDatePickerProps, 'onChange' | 'selected'> & {
     onChange: (date: string) => void;
 }
 
-export interface DatePickerRef {
-    name?: string;
-    value?: string;
-}
-
-const Input = React.forwardRef<DatePickerRef, InputProps>((
+const Input = React.forwardRef<RHFCustomElement, InputProps>((
     allprops,
     ref
 ) => {
@@ -114,9 +111,10 @@ const Input = React.forwardRef<DatePickerRef, InputProps>((
                 // Faux field name/value return for ref
                 // See https://stackoverflow.com/a/62238917
                 if (ref && !(typeof ref === 'function')) {
-                    (ref as React.MutableRefObject<DatePickerRef>).current = {
-                        name: props.name || bind.name,
-                        value: bind.value || props.selected
+                    (ref as React.MutableRefObject<RHFCustomElement>).current = {
+                        name: props.name || bind.name || '',
+                        value: bind.value || props.selected,
+                        disabled: bind.readOnly || props.readOnly
                     }
                 }
             }}

@@ -123,8 +123,9 @@ var Input = /*#__PURE__*/_react.default.forwardRef(function (allprops, _ref) {
       // See https://stackoverflow.com/a/62238917
       if (_ref && !(typeof _ref === 'function')) {
         _ref.current = {
-          name: props.name || bind.name,
-          value: bind.value || props.selected
+          name: props.name || bind.name || '',
+          value: bind.value || props.selected,
+          disabled: bind.readOnly || props.readOnly
         };
       }
     }

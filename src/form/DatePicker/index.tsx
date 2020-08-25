@@ -1,5 +1,5 @@
 import React from 'react';
-import { NullFieldBind, FormFieldProps, IFormFieldContext } from '../../internal/FormCommon/types';
+import { NullFieldBind, FormFieldProps, IFormFieldContext, RHFCustomElement } from '../../internal/FormCommon/types';
 import useFieldBindOrProps from '../../internal/FormCommon/hooks/useFieldBindOrProps';
 
 import { withFormContext } from '../../internal/FormCommon/HOC/withFormContext';
@@ -11,7 +11,7 @@ import {
     Success, SuccessProps
 } from '../../internal/FormCommon/Components';
 
-import Input, { InputProps, DatePickerRef } from './Input';
+import Input, { InputProps } from './Input';
 
 type Props = FormFieldProps<string> & {
     // Add your other top level props here.
@@ -44,7 +44,7 @@ interface IDatePickerComposition {
      *  * `showMonthDropdown` and `showYearDropdown` MUST be used with `dropdownMode="select"` to meet accessibility requirements
      *  * If you wish to use one of these, please submit a merge request with a patch that resolves the issues.
      */
-    Input: React.ForwardRefExoticComponent<InputProps & React.RefAttributes<DatePickerRef>>
+    Input: React.ForwardRefExoticComponent<InputProps & React.RefAttributes<RHFCustomElement>>
 
     /**
      * Provides instructions on how to resolve the validation 

@@ -178,6 +178,20 @@ export interface IFormFieldContext<T> {
 }
 
 /**
+ * Type for compatability with [react-hook-form](https://react-hook-form.com)
+ */
+export type RHFCustomElement = {
+    name: string;
+    type?: string;
+    value?: any;
+    disabled?: boolean;
+    checked?: boolean;
+    options?: HTMLOptionsCollection;
+    files?: FileList | null;
+    focus?: () => void;
+};
+
+/**
  * Mock implementation of a stricter bind (e.g. data that comes from a backend API). 
  * Used for the readme.md examples since we can't write Typescript in examples
  */
