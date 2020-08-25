@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Context } from '.';
 import FormContext from '../../internal/FormCommon/FormContext';
-import { IFieldBind, FormFieldProps } from '../../internal/FormCommon/types';
+import { IFieldBind } from '../../internal/FormCommon/types';
 
 import { Print, Diff } from '../../internal/FormCommon/Components';
 
@@ -11,7 +11,7 @@ export interface Value {
     [key: string]: string;
 }
 
-export type OptionProps = FormFieldProps<object> & React.OptionHTMLAttributes<HTMLOptionElement> & {
+export type OptionProps = React.OptionHTMLAttributes<HTMLOptionElement> & {
     optionsBind?: IFieldBind<Value>;
     children?: string;
 }
