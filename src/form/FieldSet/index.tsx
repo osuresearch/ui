@@ -108,24 +108,22 @@ const FieldSet: React.FC<Props> & IFieldSetComposition = ({
                 }
                 name={bind.name}
             >
-                {children.map((element, i) => {
-                    console.log('element', element);
-                    return (
-                        <Fragment key={`${i}-in-${bind.id}-set`}>{
-                            IsInput(element)
-                                // Add the name, success, and error 
-                                // props to the inputs
-                                ? React.cloneElement(element, {
-                                    name: props.name,
-                                    error: bind.error,
-                                    success: bind.success
-                                })
+                {children.map((element, i) => (
+                    <Fragment key={`${i}-in-${bind.id}-set`}>{
+                        IsInput(element)
+                            // Add the name, success, and error 
+                            // props to the inputs
+                            ? React.cloneElement(element, {
+                                name: props.name,
+                                error: bind.error,
+                                success: bind.success
+                            })
 
-                                // Else, clone it as-is
-                                : React.cloneElement(element)
-                        }</Fragment>
-                    )
-                })}
+                            // Else, clone it as-is
+                            : React.cloneElement(element)
+                    }</Fragment>
+                )
+                )}
             </fieldset>
         </Context.Provider>
     )
