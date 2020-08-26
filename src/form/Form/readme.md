@@ -1,68 +1,222 @@
 
 ### Example
+This example uses [React Hook Form](https://www.react-hook-form.com) for validation.
 
 ```jsx
-import { Text, Select, Checkbox, Button } from '@oris/ui';
+import { useForm, Controller } from 'react-hook-form';
+import {
+    Form,
+    Text,
+    Select,
+    Checkbox,
+    DatePicker,
+    FieldSet,
+    Radio,
+    Time,
+    Button
+} from '@oris/ui';
 
-<Form>
+const { register, errors, handleSubmit, control } = useForm();
+
+const onSubmit = data => console.log('submit', data);
+
+<Form onSubmit={handleSubmit(onSubmit)} noValidate>
     <Form.Row>
         <Form.Group className='col-md-6'>
-            <Text id="input-email" required>
+            <Text
+                id="email"
+                required
+                error={errors.email && errors.email.message}
+            >
                 <Text.Label>Email</Text.Label>
-                <Text.Email placeholder='me.9876@osu.edu' />
+                <Text.Email
+                    placeholder='me.9876@osu.edu'
+                    ref={register({
+                        required: 'Input a valid email address'
+                    })}
+                />
                 <Text.Error />
             </Text>
+        </Form.Group>
+
+        <Form.Group className='col-md-6'>
+            <DatePicker
+                id="birthdate"
+                required
+                error={errors.birthdate && 'Input your birthdate'}
+            >
+                <DatePicker.Label>
+                    Date of Birth
+                </DatePicker.Label>
+                <Controller
+                    name='birthdate'
+                    control={control}
+                    rules={{ required: true }}
+                    render={props => <DatePicker.Input {...props} />}
+                />
+                <DatePicker.Error />
+            </DatePicker>
         </Form.Group>
     </Form.Row>
 
     <Form.Group>
-        <Text id="input-address" required>
+        <Text
+            id="address"
+            required
+            error={errors.address && errors.address.message}
+        >
             <Text.Label>Address</Text.Label>
-            <Text.Input placeholder='1234 Main St' />
+            <Text.Input
+                placeholder='1234 Main St'
+                ref={register({
+                    required: 'Input your street address'
+                })}
+                defaultValue='5678 Water St'
+            />
             <Text.Error />
         </Text>
     </Form.Group>
 
     <Form.Group>
-        <Text id="input-address-2">
+        <Text id="address2">
             <Text.Label>Address 2</Text.Label>
-            <Text.Input placeholder='Apartment, studio, or floor' />
+            <Text.Input
+                placeholder='Apartment, studio, or floor'
+                ref={register}
+            />
         </Text>
     </Form.Group>
 
     <Form.Row>
         <Form.Group className='col-md-6'>
-            <Text id="input-city" required>
+            <Text
+                id="city"
+                required
+                error={errors.city && errors.city.message}
+            >
                 <Text.Label>City</Text.Label>
-                <Text.Input />
+                <Text.Input ref={register({
+                    required: 'Input your city'
+                })} />
                 <Text.Error />
             </Text>
         </Form.Group>
-
         <Form.Group className='col-md-4'>
-            <Select id="input-state" required>
+            <Select
+                id="state"
+                required
+                error={errors.state && errors.state.message}
+            >
                 <Select.Label>State</Select.Label>
-                <Select.Control>
-                    <Select.Option selected>Choose...</Select.Option>
+                <Select.Control ref={register({ required: 'Select your state' })}>
+                    <Select.Option value=''>Choose...</Select.Option>
                     <Select.Option>...</Select.Option>
                 </Select.Control>
                 <Select.Error />
             </Select>
         </Form.Group>
-
         <Form.Group className='col-md-2'>
-            <Text id="input-zip" required>
+            <Text
+                id="zip"
+                required
+                error={errors.zip && errors.zip.message}
+            >
                 <Text.Label>ZIP</Text.Label>
-                <Text.Input />
+                <Text.Input ref={register({ required: 'Input your ZIP Code' })} />
                 <Text.Error />
             </Text>
         </Form.Group>
     </Form.Row>
 
     <Form.Group>
-        <Checkbox id="grid-check">
-            <Checkbox.Input />
+        <FieldSet
+            id='favorite-food'
+            error={errors["favorite-food"] && 'Choose your favorite food'}
+            required
+        >
+            <FieldSet.Legend>
+                Favorite Food
+            </FieldSet.Legend>
+            <FieldSet.Inline>
+                <Radio id='pizza'>
+                    <Radio.Input ref={register({ required: true })} />
+                    <Radio.Label>Pizza</Radio.Label>
+                </Radio>
+                <Radio id='mac-n-cheese'>
+                    <Radio.Input ref={register({ required: true })} />
+                    <Radio.Label>Mac 'N Cheese</Radio.Label>
+                </Radio>
+                <Radio
+                    id='sushi'
+                >
+                    <Radio.Input
+                        ref={register({ required: true })}
+                    />
+                    <Radio.Label>Sushi</Radio.Label>
+                </Radio>
+            </FieldSet.Inline>
+            <FieldSet.Error />
+        </FieldSet>
+    </Form.Group>
+
+    <Form.Group>
+        <FieldSet id='opt-in'>
+            <FieldSet.Legend>
+                I want to receive
+            </FieldSet.Legend>
+            <Checkbox id='newsletter'>
+                <Checkbox.Input ref={register} />
+                <Checkbox.Label>
+                    The weekly newsletter
+                </Checkbox.Label>
+            </Checkbox>
+            <Checkbox id='company-offers'>
+                <Checkbox.Input ref={register} />
+                <Checkbox.Label>
+                    Offers from the company
+                </Checkbox.Label>
+            </Checkbox>
+            <Checkbox id='assoc-company-offers'>
+                <Checkbox.Input ref={register} />
+                <Checkbox.Label>
+                    Offers from associated companies
+                </Checkbox.Label>
+            </Checkbox>
+            <FieldSet.Help>
+                Choose all that apply
+            </FieldSet.Help>
+            <FieldSet.Error />
+        </FieldSet>
+    </Form.Group>
+
+    <Form.Group>
+        <Time
+            id="pick-up"
+            error={errors["pick-up"] && 'Enter the time you will pick up your drycleaning'}
+            required
+        >
+            <Time.Label>
+                Time to Pick Up Drycleaning
+            </Time.Label>
+            <Controller
+                name='pick-up'
+                control={control}
+                rules={{ required: true }}
+                render={props => <Time.Input {...props} />}
+            />
+            <Time.Error />
+        </Time>
+    </Form.Group>
+
+    <Form.Group>
+        <Checkbox
+            id="check"
+            required
+            error={errors.check && errors.check.message}
+        >
+            <Checkbox.Input ref={register({ required: 'Check this box' })} />
             <Checkbox.Label>Check me out</Checkbox.Label>
+            <Checkbox.Error />
         </Checkbox>
     </Form.Group>
 
