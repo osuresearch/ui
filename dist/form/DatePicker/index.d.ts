@@ -27,7 +27,7 @@ interface IDatePickerComposition {
      *  * `showMonthDropdown` and `showYearDropdown` MUST be used with `dropdownMode="select"` to meet accessibility requirements
      *  * If you wish to use one of these, please submit a merge request with a patch that resolves the issues.
      */
-    Input: React.ForwardRefExoticComponent<InputProps & React.RefAttributes<HTMLInputElement>>;
+    Input: React.FC<InputProps>;
     /**
      * Provides instructions on how to resolve the validation
      * error; will display when `error` is set in `<DatePicker>`

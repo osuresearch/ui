@@ -11,8 +11,6 @@ exports.default = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _slicedToArray2 = _interopRequireDefault(require("@babel/runtime/helpers/slicedToArray"));
-
 var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutProperties"));
 
 var _react = _interopRequireWildcard(require("react"));
@@ -31,7 +29,7 @@ var _DatePrefix = _interopRequireDefault(require("./DatePrefix"));
 
 var _DateTimePrefix = _interopRequireDefault(require("./DateTimePrefix"));
 
-var Input = /*#__PURE__*/_react.default.forwardRef(function (allprops, ref) {
+var Input = function Input(allprops) {
   // Remove props that we don't want the developer to be
   // accidentally use because of accessibility issues
   // TODO - fix the MonthYear picker (that will be useful)
@@ -56,11 +54,7 @@ var Input = /*#__PURE__*/_react.default.forwardRef(function (allprops, ref) {
       isDiff = _useContext2.isDiff,
       isPrint = _useContext2.isPrint;
 
-  var _useState = (0, _react.useState)(bind.value || props.selected),
-      _useState2 = (0, _slicedToArray2.default)(_useState, 2),
-      selected = _useState2[0],
-      setSelected = _useState2[1];
-
+  var selected = bind.value || props.value;
   var initial = bind.initialValue || undefined;
   var name = bind.name || props.name;
   var readOnly = bind.readOnly || props.readOnly;
@@ -69,7 +63,6 @@ var Input = /*#__PURE__*/_react.default.forwardRef(function (allprops, ref) {
 
   var handleChange = function handleChange(date) {
     var newSelected = date ? date.toISOString() : '';
-    setSelected(newSelected);
 
     if (props.onChange) {
       props.onChange(newSelected);
@@ -84,7 +77,10 @@ var Input = /*#__PURE__*/_react.default.forwardRef(function (allprops, ref) {
     var formatted = date.toLocaleDateString("en-US");
 
     if (props.showTimeInput) {
-      formatted += ' ' + date.toLocaleTimeString("en-US");
+      formatted += ' ' + date.toLocaleTimeString("en-US", {
+        hour: '2-digit',
+        minute: '2-digit'
+      });
     }
 
     return formatted;
@@ -121,6 +117,7 @@ var Input = /*#__PURE__*/_react.default.forwardRef(function (allprops, ref) {
   }, !props.showTimeInput && /*#__PURE__*/_react.default.createElement(_DatePrefix.default, null), props.showTimeInput && /*#__PURE__*/_react.default.createElement(_DateTimePrefix.default, null), /*#__PURE__*/_react.default.createElement(_reactDatepicker.default, (0, _extends2.default)({}, props, {
     id: bind.id,
     selected: selected ? new Date(selected) : null,
+    value: selected && formatter(selected),
     className: 'form-control date',
     onChange: handleChange,
     shouldCloseOnSelect: !props.showTimeInput // @ts-ignore
@@ -136,17 +133,8 @@ var Input = /*#__PURE__*/_react.default.forwardRef(function (allprops, ref) {
     required: bind.required || props.required
   }), /*#__PURE__*/_react.default.createElement("div", {
     className: "keyboard-notice"
-  }, /*#__PURE__*/_react.default.createElement("small", null, /*#__PURE__*/_react.default.createElement("em", null, "Keyboard users: Exit this dialog with the ", /*#__PURE__*/_react.default.createElement("code", null, "esc"), " key")))), /*#__PURE__*/_react.default.createElement("input", {
-    type: "hidden",
-    ref: ref,
-    name: name,
-    value: selected && selected,
-    disabled: readOnly,
-    onChange: function onChange(e) {
-      return e.currentTarget.blur();
-    }
-  }));
-});
+  }, /*#__PURE__*/_react.default.createElement("small", null, /*#__PURE__*/_react.default.createElement("em", null, "Keyboard users: Exit this dialog with the ", /*#__PURE__*/_react.default.createElement("code", null, "esc"), " key")))));
+};
 
 var _default = Input;
 exports.default = _default;

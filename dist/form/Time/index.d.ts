@@ -14,7 +14,7 @@ interface ITimeComposition {
      *  * `value` – must be an hour:minutes string in 24h format
      *  * `onChange` – Returns the time in a 24h format, e.g. `14:05`
      */
-    Input: React.ForwardRefExoticComponent<InputProps & React.RefAttributes<HTMLInputElement>>;
+    Input: React.FC<InputProps>;
     /**
      * Provides instructions on how to resolve the validation
      * error; will display when `error` is set in `<Time>`

@@ -12,7 +12,7 @@ const [date, setDate] = useState();
         <DatePicker.Label>Choose a date</DatePicker.Label>
 
         <DatePicker.Input
-            selected={date}
+            value={date}
             onChange={setDate}
         />
     </DatePicker>
@@ -35,7 +35,7 @@ const isWeekday = (date) => {
         <DatePicker.Label>Choose a weekday</DatePicker.Label>
 
         <DatePicker.Input
-            selected={date}
+            value={date}
             onChange={setDate}
             minDate={new Date('2020-01-01T00:00:00-05:00')}
             maxDate={new Date('2025-12-31T00:00:00-05:00')}
@@ -56,7 +56,7 @@ const [date, setDate] = useState();
         <DatePicker.Label>Choose a date and time</DatePicker.Label>
 
         <DatePicker.Input
-            selected={date}
+            value={date}
             onChange={setDate}
             showTimeInput
         />

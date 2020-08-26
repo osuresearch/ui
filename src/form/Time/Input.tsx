@@ -23,7 +23,7 @@ export type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
     onChange?(newValue: string): void;
 }
 
-export const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
+export const Input: React.FC<InputProps> = (props) => {
     // Most commonly used props
     const { defaultValue, value, onChange } = props;
 
@@ -55,7 +55,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref)
         if (hour && minutes && meridiem && newTime && newTime !== value && onChange) {
             onChange(newTime);
         }
-    }, [hour, minutes, meridiem, value, onChange, ref, makeNewTime]);
+    }, [hour, minutes, meridiem, value, onChange, makeNewTime]);
 
     // Detect when the parent component updates the controlling value
     // and update internal states - without firing onChange
@@ -126,9 +126,6 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref)
                 minutes={minutes}
                 meridiem={meridiem}
             />
-
-            {/* Hidden input to register a ref to */}
-            <input type='hidden' ref={ref} name={name} value={makeNewTime()} disabled={readOnly} onChange={(e) => e.currentTarget.blur()} />
         </div>
     )
-});
+};

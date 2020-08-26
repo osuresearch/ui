@@ -1,5 +1,5 @@
 
-import React, { useState, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { Context } from '../';
 import FormContext from '../../../internal/FormCommon/FormContext';
 
@@ -13,18 +13,15 @@ import DateTimePrefix from './DateTimePrefix';
 
 export type InputProps = Omit<ReactDatePickerProps, 'onChange' | 'selected'> & {
     /** The selected date - **must** be an ISO8601 timestamp string **/
-    selected?: string;
+    value: string;
 
     /**
      * onChange handler - a state setter for the parent component
      */
-    onChange?: (date: string) => void;
+    onChange: (date: string) => void;
 }
 
-const Input = React.forwardRef<HTMLInputElement, InputProps>((
-    allprops,
-    ref
-) => {
+const Input: React.FC<InputProps> = (allprops) => {
     // Remove props that we don't want the developer to be
     // accidentally use because of accessibility issues
     // TODO - fix the MonthYear picker (that will be useful)
@@ -34,7 +31,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((
     const { bind } = useContext(Context);
     const { isDiff, isPrint } = useContext(FormContext);
 
-    const [selected, setSelected] = useState<string | undefined>(bind.value || props.selected);
+    const selected: string | undefined = bind.value || props.value;
 
     const initial: string | undefined = bind.initialValue || undefined;
 
@@ -48,7 +45,6 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((
     // Transform selected date to ISO timestamp
     const handleChange = (date: Date) => {
         const newSelected = date ? date.toISOString() : '';
-        setSelected(newSelected);
 
         if (props.onChange) {
             props.onChange(newSelected);
@@ -63,7 +59,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((
         let date = new Date(timestamp)
         let formatted = date.toLocaleDateString("en-US");
         if (props.showTimeInput) {
-            formatted += ' ' + date.toLocaleTimeString("en-US");
+            formatted += ' ' + date.toLocaleTimeString("en-US", { hour: '2-digit', minute: '2-digit' });
         }
         return formatted;
     }
@@ -111,6 +107,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((
                 {...props}
                 id={bind.id}
                 selected={selected ? new Date(selected) : null}
+                value={selected && formatter(selected)}
                 className={'form-control date'}
                 onChange={handleChange}
                 shouldCloseOnSelect={!props.showTimeInput}
@@ -127,11 +124,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((
                     <small><em>Keyboard users: Exit this dialog with the <code>esc</code> key</em></small>
                 </div>
             </DatePicker>
-
-            {/* Hidden input to register a ref to */}
-            <input type='hidden' ref={ref} name={name} value={selected && selected} disabled={readOnly} onChange={(e) => e.currentTarget.blur()} />
         </div>
     );
-});
+};
 
 export default Input;

@@ -25,7 +25,7 @@ var _MeridiemInput = _interopRequireDefault(require("./MeridiemInput"));
 
 var _SRDescriptions = _interopRequireDefault(require("./SRDescriptions"));
 
-var Input = /*#__PURE__*/_react.default.forwardRef(function (props, ref) {
+var Input = function Input(props) {
   // Most commonly used props
   var defaultValue = props.defaultValue,
       value = props.value,
@@ -69,7 +69,7 @@ var Input = /*#__PURE__*/_react.default.forwardRef(function (props, ref) {
     if (hour && minutes && meridiem && newTime && newTime !== value && onChange) {
       onChange(newTime);
     }
-  }, [hour, minutes, meridiem, value, onChange, ref, makeNewTime]); // Detect when the parent component updates the controlling value
+  }, [hour, minutes, meridiem, value, onChange, makeNewTime]); // Detect when the parent component updates the controlling value
   // and update internal states - without firing onChange
 
   (0, _react.useEffect)(function () {
@@ -130,16 +130,7 @@ var Input = /*#__PURE__*/_react.default.forwardRef(function (props, ref) {
     hour: hour,
     minutes: minutes,
     meridiem: meridiem
-  }), /*#__PURE__*/_react.default.createElement("input", {
-    type: "hidden",
-    ref: ref,
-    name: name,
-    value: makeNewTime(),
-    disabled: readOnly,
-    onChange: function onChange(e) {
-      return e.currentTarget.blur();
-    }
   }));
-});
+};
 
 exports.Input = Input;
