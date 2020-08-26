@@ -7,8 +7,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = exports.Context = void 0;
 
-var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutProperties"));
-
 var _react = _interopRequireDefault(require("react"));
 
 var _types = require("../../internal/FormCommon/types");
@@ -54,10 +52,7 @@ var Context = /*#__PURE__*/_react.default.createContext({
 
 exports.Context = Context;
 
-var Radio = function Radio(_ref) {
-  var children = _ref.children,
-      props = (0, _objectWithoutProperties2.default)(_ref, ["children"]);
-
+var Radio = function Radio(props) {
   var _useFieldBindOrProps = (0, _useFieldBindOrProps2.default)(props),
       bind = _useFieldBindOrProps.bind;
 
@@ -67,7 +62,7 @@ var Radio = function Radio(_ref) {
     }
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "custom-control custom-radio"
-  }, children));
+  }, props.children));
 };
 
 Radio.Input = _Input.Input;

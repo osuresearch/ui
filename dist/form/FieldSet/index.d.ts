@@ -25,7 +25,7 @@ interface IFieldSetComposition {
      */
     Success: React.FC<SuccessProps>;
 }
-declare type Props = FormFieldProps<boolean> & {
+declare type Props = FormFieldProps<string> & {
     /**
      * The value of the `name` prop will cascade down to be the
      * `name` in each child component in the `<FieldSet>`.
@@ -33,7 +33,7 @@ declare type Props = FormFieldProps<boolean> & {
     name?: string;
     children: React.ReactElement[];
 };
-export declare const Context: React.Context<IFormFieldContext<boolean>>;
+export declare const Context: React.Context<IFormFieldContext<string>>;
 /**
  * A set of related input components
  *

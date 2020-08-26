@@ -30,7 +30,7 @@ var Input = /*#__PURE__*/_react.default.forwardRef(function (props, ref) {
       isPrint = _useContext2.isPrint;
 
   var checked = props.checked || props.value === '' + bind.value || undefined;
-  var value = bind.value || props.value || undefined; // If printing, just return the current value
+  var value = bind.value || props.value || bind.id; // If printing, just return the current value
 
   if (isPrint) {
     return /*#__PURE__*/_react.default.createElement(_Components.Print, null, checked && /*#__PURE__*/_react.default.createElement("i", {
@@ -64,8 +64,12 @@ var Input = /*#__PURE__*/_react.default.forwardRef(function (props, ref) {
     id: bind.id,
     name: bind.name || props.name,
     defaultChecked: checked,
-    value: value,
+    defaultValue: value,
     className: classNames,
+    onChange: function onChange(e) {
+      bind.value = e.currentTarget.value;
+      if (props.onChange) props.onChange(e);
+    },
     readOnly: bind.readOnly || props.readOnly,
     required: bind.required || props.required
   }));

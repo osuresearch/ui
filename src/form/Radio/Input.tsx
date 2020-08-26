@@ -14,7 +14,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref)
 
     const checked: boolean | undefined = props.checked || (props.value === '' + bind.value) || undefined;
 
-    const value = bind.value || props.value || undefined;
+    const value = bind.value || props.value || bind.id;
 
     // If printing, just return the current value
     if (isPrint) {
@@ -62,9 +62,12 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref)
             id={bind.id}
             name={bind.name || props.name}
             defaultChecked={checked}
-            value={value}
+            defaultValue={value}
             className={classNames}
-
+            onChange={(e) => {
+                bind.value = e.currentTarget.value;
+                if (props.onChange) props.onChange(e);
+            }}
             readOnly={bind.readOnly || props.readOnly}
             required={bind.required || props.required}
         />

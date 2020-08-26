@@ -68,16 +68,13 @@ export const Context = React.createContext<IFormFieldContext<string>>({
  *  * [HTML Global attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes)
  * 
  */
-const Radio: React.FC<Props> & IRadioComposition = ({
-    children,
-    ...props // everything else is of FormFieldProps<string>
-}) => {
+const Radio: React.FC<Props> & IRadioComposition = (props) => {
     const { bind } = useFieldBindOrProps(props);
 
     return (
         <Context.Provider value={{ bind }}>
             <div className='custom-control custom-radio'>
-                {children}
+                {props.children}
             </div>
         </Context.Provider>
     )

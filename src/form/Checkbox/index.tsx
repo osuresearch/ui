@@ -97,16 +97,13 @@ export const Context = React.createContext<IFormFieldContext<boolean>>({
  * display when `success` is set in `<Checkbox>`
  * 
  */
-const Checkbox: React.FC<Props> & ICheckboxComposition = ({
-    children,
-    ...props // everything else is of FormFieldProps<string>
-}) => {
+const Checkbox: React.FC<Props> & ICheckboxComposition = (props) => {
     const { bind } = useFieldBindOrProps(props);
 
     return (
         <Context.Provider value={{ bind }}>
             <div className='custom-control custom-checkbox'>
-                {children}
+                {props.children}
             </div>
         </Context.Provider>
     )

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { NullFieldBind, FormFieldProps, IFormFieldContext } from '../../internal/FormCommon/types';
 import useFieldBindOrProps from '../../internal/FormCommon/hooks/useFieldBindOrProps';
 
@@ -41,7 +41,7 @@ interface IFieldSetComposition {
     Success: React.FC<SuccessProps>
 }
 
-type Props = FormFieldProps<boolean> & {
+type Props = FormFieldProps<string> & {
     /**
      * The value of the `name` prop will cascade down to be the 
      * `name` in each child component in the `<FieldSet>`.
@@ -51,8 +51,8 @@ type Props = FormFieldProps<boolean> & {
     children: React.ReactElement[];
 }
 
-export const Context = React.createContext<IFormFieldContext<boolean>>({
-    bind: new NullFieldBind<boolean>(),
+export const Context = React.createContext<IFormFieldContext<string>>({
+    bind: new NullFieldBind<string>(),
 
     // Add your other prop defaults here that should be made available to consumers
     // foo: 1
@@ -63,7 +63,8 @@ const IsInput = (element: React.ReactElement) => {
     switch (element?.type.name) {
         case 'FieldSet':
         case 'Radio':
-        case 'Text':
+        case 'Checkbox':
+            //case 'Text':
             return true;
         default:
             return false;
@@ -107,18 +108,23 @@ const FieldSet: React.FC<Props> & IFieldSetComposition = ({
                 }
                 name={bind.name}
             >
-                {children.map(element => {
-                    if (IsInput(element)) {
-                        // Add the name, success, and error 
-                        // props to the inputs
-                        return React.cloneElement(element, {
-                            name: props.name,
-                            error: bind.error,
-                            success: bind.success
-                        })
-                    }
+                {children.map((element, i) => {
+                    console.log('element', element);
+                    return (
+                        <Fragment key={`${i}-in-${bind.id}-set`}>{
+                            IsInput(element)
+                                // Add the name, success, and error 
+                                // props to the inputs
+                                ? React.cloneElement(element, {
+                                    name: props.name,
+                                    error: bind.error,
+                                    success: bind.success
+                                })
 
-                    return React.cloneElement(element);
+                                // Else, clone it as-is
+                                : React.cloneElement(element)
+                        }</Fragment>
+                    )
                 })}
             </fieldset>
         </Context.Provider>
