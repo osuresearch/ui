@@ -23,12 +23,7 @@ export type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
     onChange?(newValue: string): void;
 }
 
-export interface TimeRef {
-    name?: string;
-    value?: string;
-}
-
-export const Input = React.forwardRef<TimeRef, InputProps>((props, ref) => {
+export const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     // Most commonly used props
     const { defaultValue, value, onChange } = props;
 
@@ -75,25 +70,14 @@ export const Input = React.forwardRef<TimeRef, InputProps>((props, ref) => {
     // Select the input text
     const handleClick = (e: React.MouseEvent) => (e.target as HTMLInputElement).select();
 
+    const name = bind.name || props.name;
     const readOnly = bind.readOnly || props.readOnly;
     const required = bind.required || props.required;
 
-    const classNames = `time-field form-control ${props.className ? props.className : ''} ${readOnly ? 'readonly' : ''}`;
+    const classNames = `time-field input-group form-control ${props.className ? props.className : ''} ${props.className ? props.className : ''} ${bind.error ? 'is-invalid' : ''} ${bind.success ? 'is-valid' : ''} ${readOnly ? 'readonly' : ''}`;
 
     return (
-        <div
-            className={classNames}
-            ref={() => {
-                // Faux field name/value return for ref
-                // See https://stackoverflow.com/a/62238917
-                if (ref && !(typeof ref === 'function')) {
-                    (ref as React.MutableRefObject<TimeRef>).current = {
-                        name: props.name || bind.name,
-                        value: makeNewTime()
-                    }
-                }
-            }}
-        >
+        <div className={classNames}>
             <span className='fa fa-clock-o' aria-hidden='true'></span>
 
             <HourInput
@@ -142,6 +126,9 @@ export const Input = React.forwardRef<TimeRef, InputProps>((props, ref) => {
                 minutes={minutes}
                 meridiem={meridiem}
             />
+
+            {/* Hidden input to register a ref to */}
+            <input type='hidden' ref={ref} name={name} value={makeNewTime()} disabled={readOnly} />
         </div>
     )
 });

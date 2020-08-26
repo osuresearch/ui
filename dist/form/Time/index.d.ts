@@ -1,6 +1,6 @@
 import React from 'react';
 import { FormFieldProps, IFormFieldContext } from '../../internal/FormCommon/types';
-import { InputProps, TimeRef } from './Input';
+import { InputProps } from './Input';
 import { LabelProps, HelpProps, ErrorProps, SuccessProps } from '../../internal/FormCommon/Components';
 declare type Props = FormFieldProps<string> & {};
 interface ITimeComposition {
@@ -14,7 +14,7 @@ interface ITimeComposition {
      *  * `value` – must be an hour:minutes string in 24h format
      *  * `onChange` – Returns the time in a 24h format, e.g. `14:05`
      */
-    Input: React.ForwardRefExoticComponent<InputProps & React.RefAttributes<TimeRef>>;
+    Input: React.ForwardRefExoticComponent<InputProps & React.RefAttributes<HTMLInputElement>>;
     /**
      * Provides instructions on how to resolve the validation
      * error; will display when `error` is set in `<Time>`

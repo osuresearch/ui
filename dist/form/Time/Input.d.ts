@@ -10,10 +10,6 @@ export declare type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
      */
     onChange?(newValue: string): void;
 };
-export interface TimeRef {
-    name?: string;
-    value?: string;
-}
 export declare const Input: React.ForwardRefExoticComponent<React.InputHTMLAttributes<HTMLInputElement> & {
     /** Default time value (optional) - must be an hour:minutes string in 24h format  */
     defaultValue?: string | undefined;
@@ -24,5 +20,5 @@ export declare const Input: React.ForwardRefExoticComponent<React.InputHTMLAttri
      * Returns the time in a 24h format, e.g. `14:05`
      */
     onChange?(newValue: string): void;
-} & React.RefAttributes<TimeRef>>;
+} & React.RefAttributes<HTMLInputElement>>;
 //# sourceMappingURL=Input.d.ts.map

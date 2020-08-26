@@ -17,6 +17,8 @@ const [time, setTime] = useState();
             value={time}
             onChange={setTime}
         />
+
+        <Time.Error />
     </Time>
 </Form.Group>
 ```

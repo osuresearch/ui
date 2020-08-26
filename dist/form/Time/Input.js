@@ -25,7 +25,7 @@ var _MeridiemInput = _interopRequireDefault(require("./MeridiemInput"));
 
 var _SRDescriptions = _interopRequireDefault(require("./SRDescriptions"));
 
-var Input = /*#__PURE__*/_react.default.forwardRef(function (props, _ref) {
+var Input = /*#__PURE__*/_react.default.forwardRef(function (props, ref) {
   // Most commonly used props
   var defaultValue = props.defaultValue,
       value = props.value,
@@ -69,7 +69,7 @@ var Input = /*#__PURE__*/_react.default.forwardRef(function (props, _ref) {
     if (hour && minutes && meridiem && newTime && newTime !== value && onChange) {
       onChange(newTime);
     }
-  }, [hour, minutes, meridiem, value, onChange, _ref, makeNewTime]); // Detect when the parent component updates the controlling value
+  }, [hour, minutes, meridiem, value, onChange, ref, makeNewTime]); // Detect when the parent component updates the controlling value
   // and update internal states - without firing onChange
 
   (0, _react.useEffect)(function () {
@@ -84,21 +84,12 @@ var Input = /*#__PURE__*/_react.default.forwardRef(function (props, _ref) {
     return e.target.select();
   };
 
+  var name = bind.name || props.name;
   var readOnly = bind.readOnly || props.readOnly;
   var required = bind.required || props.required;
-  var classNames = "time-field form-control ".concat(props.className ? props.className : '', " ").concat(readOnly ? 'readonly' : '');
+  var classNames = "time-field input-group form-control ".concat(props.className ? props.className : '', " ").concat(props.className ? props.className : '', " ").concat(bind.error ? 'is-invalid' : '', " ").concat(bind.success ? 'is-valid' : '', " ").concat(readOnly ? 'readonly' : '');
   return /*#__PURE__*/_react.default.createElement("div", {
-    className: classNames,
-    ref: function ref() {
-      // Faux field name/value return for ref
-      // See https://stackoverflow.com/a/62238917
-      if (_ref && !(typeof _ref === 'function')) {
-        _ref.current = {
-          name: props.name || bind.name,
-          value: makeNewTime()
-        };
-      }
-    }
+    className: classNames
   }, /*#__PURE__*/_react.default.createElement("span", {
     className: "fa fa-clock-o",
     "aria-hidden": "true"
@@ -139,6 +130,12 @@ var Input = /*#__PURE__*/_react.default.forwardRef(function (props, _ref) {
     hour: hour,
     minutes: minutes,
     meridiem: meridiem
+  }), /*#__PURE__*/_react.default.createElement("input", {
+    type: "hidden",
+    ref: ref,
+    name: name,
+    value: makeNewTime(),
+    disabled: readOnly
   }));
 });
 

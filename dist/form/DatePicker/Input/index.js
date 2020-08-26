@@ -11,6 +11,8 @@ exports.default = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
+var _slicedToArray2 = _interopRequireDefault(require("@babel/runtime/helpers/slicedToArray"));
+
 var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutProperties"));
 
 var _react = _interopRequireWildcard(require("react"));
@@ -54,24 +56,20 @@ var Input = /*#__PURE__*/_react.default.forwardRef(function (allprops, ref) {
       isDiff = _useContext2.isDiff,
       isPrint = _useContext2.isPrint;
 
-  var selected = bind.value || props.selected;
-
-  if (typeof selected !== 'undefined') {
-    selected = Date.parse(selected);
-  }
+  var _useState = (0, _react.useState)(bind.value || props.selected),
+      _useState2 = (0, _slicedToArray2.default)(_useState, 2),
+      selected = _useState2[0],
+      setSelected = _useState2[1];
 
   var initial = bind.initialValue || undefined;
-
-  if (typeof initial !== 'undefined') {
-    initial = Date.parse(initial);
-  }
-
   var name = bind.name || props.name;
   var readOnly = bind.readOnly || props.readOnly;
+  var classNames = "input-group datepicker ".concat(props.showTimeInput && 'datetimepicker', " ").concat(props.className ? props.className : '', " ").concat(bind.error ? 'is-invalid' : '', " ").concat(bind.success ? 'is-valid' : '');
   var dateFormat = props.dateFormat || props.showTimeInput ? 'MM/dd/yyyy h:mm aa' : 'MM/dd/yyyy'; // Transform selected date to ISO timestamp
 
   var handleChange = function handleChange(date) {
     var newSelected = date ? date.toISOString() : '';
+    setSelected(newSelected);
 
     if (props.onChange) {
       props.onChange(newSelected);
@@ -81,7 +79,7 @@ var Input = /*#__PURE__*/_react.default.forwardRef(function (allprops, ref) {
   };
 
   var formatter = function formatter(timestamp) {
-    if (typeof timestamp === 'undefined' || typeof timestamp === 'string' || isNaN(timestamp)) return undefined;
+    if (typeof timestamp === 'undefined') return undefined;
     var date = new Date(timestamp);
     var formatted = date.toLocaleDateString("en-US");
 
@@ -119,12 +117,11 @@ var Input = /*#__PURE__*/_react.default.forwardRef(function (allprops, ref) {
   }
 
   return /*#__PURE__*/_react.default.createElement("div", {
-    className: "input-group datepicker ".concat(props.showTimeInput && 'datetimepicker')
+    className: classNames
   }, !props.showTimeInput && /*#__PURE__*/_react.default.createElement(_DatePrefix.default, null), props.showTimeInput && /*#__PURE__*/_react.default.createElement(_DateTimePrefix.default, null), /*#__PURE__*/_react.default.createElement(_reactDatepicker.default, (0, _extends2.default)({}, props, {
     id: bind.id,
-    name: name,
     selected: selected ? new Date(selected) : null,
-    className: 'form-control date ' + (props.className ? props.className : ''),
+    className: 'form-control date',
     onChange: handleChange,
     shouldCloseOnSelect: !props.showTimeInput // @ts-ignore
     ,
@@ -143,8 +140,8 @@ var Input = /*#__PURE__*/_react.default.forwardRef(function (allprops, ref) {
     type: "hidden",
     ref: ref,
     name: name,
-    value: selected,
-    readOnly: readOnly
+    value: selected && selected,
+    disabled: readOnly
   }));
 });
 

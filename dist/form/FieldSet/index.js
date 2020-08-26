@@ -77,7 +77,8 @@ var FieldSet = function FieldSet(_ref) {
       bind: bind
     }
   }, /*#__PURE__*/_react.default.createElement("fieldset", {
-    className: (bind.required ? "is-required" : "") + (bind.error ? " is-invalid" : "")
+    className: (bind.required ? "is-required" : "") + (bind.error ? " is-invalid" : ""),
+    name: bind.name
   }, children.map(function (element) {
     if (IsInput(element)) {
       // Add the name, success, and error 

@@ -105,6 +105,7 @@ const FieldSet: React.FC<Props> & IFieldSetComposition = ({
                     (bind.required ? "is-required" : "") +
                     (bind.error ? " is-invalid" : "")
                 }
+                name={bind.name}
             >
                 {children.map(element => {
                     if (IsInput(element)) {

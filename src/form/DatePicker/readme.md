@@ -3,11 +3,9 @@
 #### Basic Implementation
 
 ```jsx
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { Form } from '@oris/ui';
 const [date, setDate] = useState();
-
-const ref = useRef();
 
 <Form.Group>
     <DatePicker id="choose-date">
@@ -16,7 +14,6 @@ const ref = useRef();
         <DatePicker.Input
             selected={date}
             onChange={setDate}
-            ref={ref}
         />
     </DatePicker>
 </Form.Group>

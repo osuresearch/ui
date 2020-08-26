@@ -1,5 +1,5 @@
 
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { Context } from '../';
 import FormContext from '../../../internal/FormCommon/FormContext';
 
@@ -16,9 +16,9 @@ export type InputProps = Omit<ReactDatePickerProps, 'onChange' | 'selected'> & {
     selected?: string;
 
     /**
-     * onChange handler (required) - a state setter for the parent component
+     * onChange handler - a state setter for the parent component
      */
-    onChange: (date: string) => void;
+    onChange?: (date: string) => void;
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>((
@@ -34,24 +34,21 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((
     const { bind } = useContext(Context);
     const { isDiff, isPrint } = useContext(FormContext);
 
-    let selected: string | number | undefined = bind.value || props.selected;
-    if (typeof (selected) !== 'undefined') {
-        selected = Date.parse(selected);
-    }
+    const [selected, setSelected] = useState<string | undefined>(bind.value || props.selected);
 
-    let initial: string | number | undefined = bind.initialValue || undefined;
-    if (typeof (initial) !== 'undefined') {
-        initial = Date.parse(initial);
-    }
+    const initial: string | undefined = bind.initialValue || undefined;
 
     const name = bind.name || props.name;
     const readOnly = bind.readOnly || props.readOnly;
+
+    const classNames = `input-group datepicker ${props.showTimeInput && 'datetimepicker'} ${props.className ? props.className : ''} ${bind.error ? 'is-invalid' : ''} ${bind.success ? 'is-valid' : ''}`;
 
     const dateFormat = props.dateFormat || props.showTimeInput ? 'MM/dd/yyyy h:mm aa' : 'MM/dd/yyyy';
 
     // Transform selected date to ISO timestamp
     const handleChange = (date: Date) => {
         const newSelected = date ? date.toISOString() : '';
+        setSelected(newSelected);
 
         if (props.onChange) {
             props.onChange(newSelected);
@@ -60,8 +57,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((
         }
     };
 
-    const formatter = (timestamp: string | number | undefined) => {
-        if (typeof (timestamp) === 'undefined' || typeof (timestamp) === 'string' || isNaN(timestamp)) return undefined;
+    const formatter = (timestamp: string | undefined) => {
+        if (typeof (timestamp) === 'undefined') return undefined;
 
         let date = new Date(timestamp)
         let formatted = date.toLocaleDateString("en-US");
@@ -105,19 +102,16 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((
         )
     }
 
-
-
     return (
-        <div className={`input-group datepicker ${props.showTimeInput && 'datetimepicker'}`}>
+        <div className={classNames}>
             {!props.showTimeInput && <DatePrefix />}
             {props.showTimeInput && <DateTimePrefix />}
 
             <DatePicker
                 {...props}
                 id={bind.id}
-                name={name}
                 selected={selected ? new Date(selected) : null}
-                className={'form-control date ' + (props.className ? props.className : '')}
+                className={'form-control date'}
                 onChange={handleChange}
                 shouldCloseOnSelect={!props.showTimeInput}
                 // @ts-ignore
@@ -134,8 +128,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((
                 </div>
             </DatePicker>
 
-            {/* Hidden field to register a ref to */}
-            <input type='hidden' ref={ref} name={name} value={selected} readOnly={readOnly} />
+            {/* Hidden input to register a ref to */}
+            <input type='hidden' ref={ref} name={name} value={selected && selected} disabled={readOnly} />
         </div>
     );
 });

@@ -78,6 +78,26 @@ export type FormFieldSpreadProps<T> = {
 /** Base props for a form field. Handles binds + spreading the bind as props */
 export type FormFieldProps<T> = FormFieldBindProp<T> | FormFieldSpreadProps<T>;
 
+/** Base props for a FieldSet */
+export type FormFieldSetProps = {
+    /** 
+     * Name of the FieldSet. Submitted with the form as part of a name/value pair. The value of the `name` prop will cascade down to be the `name` in each child component in the `<FieldSet>`.
+     */
+    name: string
+
+    /** Validation error to display for the FieldSet */
+    error?: string
+
+    /** Validation success message to display for the FieldSet */
+    success?: string
+
+    /** Should the fields in the FieldSet be loaded as read-only */
+    readOnly?: boolean
+
+    /** Should the fields in the FieldSet be indicated as (soft) required */
+    required?: boolean
+}
+
 export class FieldBind<T> implements IFieldBind<T> {
     /** Unique ID of the form field */
     public id?: string
@@ -176,20 +196,6 @@ export class NullFieldBind<T> extends FieldBind<T> {
 export interface IFormFieldContext<T> {
     bind: IFieldBind<T>
 }
-
-/**
- * Type for compatability with [react-hook-form](https://react-hook-form.com)
- */
-export type RHFCustomElement = {
-    name: string;
-    type?: string;
-    value?: any;
-    disabled?: boolean;
-    checked?: boolean;
-    options?: HTMLOptionsCollection;
-    files?: FileList | null;
-    focus?: () => void;
-};
 
 /**
  * Mock implementation of a stricter bind (e.g. data that comes from a backend API). 
