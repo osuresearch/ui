@@ -128,7 +128,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref)
             />
 
             {/* Hidden input to register a ref to */}
-            <input type='hidden' ref={ref} name={name} value={makeNewTime()} disabled={readOnly} />
+            <input type='hidden' ref={ref} name={name} value={makeNewTime()} disabled={readOnly} onChange={(e) => e.currentTarget.blur()} />
         </div>
     )
 });

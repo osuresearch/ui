@@ -129,7 +129,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((
             </DatePicker>
 
             {/* Hidden input to register a ref to */}
-            <input type='hidden' ref={ref} name={name} value={selected && selected} disabled={readOnly} />
+            <input type='hidden' ref={ref} name={name} value={selected && selected} disabled={readOnly} onChange={(e) => e.currentTarget.blur()} />
         </div>
     );
 });

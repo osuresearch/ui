@@ -141,7 +141,10 @@ var Input = /*#__PURE__*/_react.default.forwardRef(function (allprops, ref) {
     ref: ref,
     name: name,
     value: selected && selected,
-    disabled: readOnly
+    disabled: readOnly,
+    onChange: function onChange(e) {
+      return e.currentTarget.blur();
+    }
   }));
 });
 
