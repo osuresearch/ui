@@ -55,9 +55,7 @@ const Form: React.FC<Props> & IFormComposition = ({
 }) => {
     return (
         <form {...props}>
-            <FormContext.Provider value={{ isDiff, isPrint }}>
-                {props.children}
-            </FormContext.Provider>
+            {props.children}
         </form>
     )
 }

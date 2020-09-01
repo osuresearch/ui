@@ -11,8 +11,6 @@ var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/h
 
 var _react = _interopRequireDefault(require("react"));
 
-var _FormContext = _interopRequireDefault(require("../../internal/FormCommon/FormContext"));
-
 var _Group = _interopRequireDefault(require("./Group"));
 
 var _Row = _interopRequireDefault(require("./Row"));
@@ -46,12 +44,7 @@ var Form = function Form(_ref) {
       _ref$isPrint = _ref.isPrint,
       isPrint = _ref$isPrint === void 0 ? false : _ref$isPrint,
       props = (0, _objectWithoutProperties2.default)(_ref, ["isDiff", "isPrint"]);
-  return /*#__PURE__*/_react.default.createElement("form", props, /*#__PURE__*/_react.default.createElement(_FormContext.default.Provider, {
-    value: {
-      isDiff: isDiff,
-      isPrint: isPrint
-    }
-  }, props.children));
+  return /*#__PURE__*/_react.default.createElement("form", props, props.children);
 };
 
 Form.Group = _Group.default;
