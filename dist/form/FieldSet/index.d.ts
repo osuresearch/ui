@@ -1,7 +1,6 @@
 import React from 'react';
 import { FormFieldProps, IFormFieldContext } from '../../internal/FormCommon/types';
 import { LegendProps, HelpProps, ErrorProps, SuccessProps } from '../../internal/FormCommon/Components';
-import { InlineProps } from './Inline';
 interface IFieldSetComposition {
     /**
      * Serves as a label for all of the components in the
@@ -9,7 +8,7 @@ interface IFieldSetComposition {
      */
     Legend: React.FC<LegendProps>;
     /** Display the form components inline */
-    Inline: React.FC<InlineProps>;
+    Inline: React.FC;
     /** Help text for the `<FieldSet>` */
     Help: React.FC<HelpProps>;
     /**
@@ -31,7 +30,6 @@ declare type Props = FormFieldProps<string> & {
      * `name` in each child component in the `<FieldSet>`.
      */
     name?: string;
-    children: React.ReactElement[] | React.ReactElement;
 };
 export declare const Context: React.Context<IFormFieldContext<string>>;
 /**

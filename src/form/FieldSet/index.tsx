@@ -11,7 +11,7 @@ import {
     Success, SuccessProps
 } from '../../internal/FormCommon/Components';
 
-import Inline, { InlineProps } from './Inline';
+import Inline from './Inline';
 
 interface IFieldSetComposition {
     /**
@@ -21,7 +21,7 @@ interface IFieldSetComposition {
     Legend: React.FC<LegendProps>
 
     /** Display the form components inline */
-    Inline: React.FC<InlineProps>
+    Inline: React.FC
 
     /** Help text for the `<FieldSet>` */
     Help: React.FC<HelpProps>
@@ -47,8 +47,6 @@ type Props = FormFieldProps<string> & {
      * `name` in each child component in the `<FieldSet>`.
      */
     name?: string;
-
-    children: React.ReactElement[] | React.ReactElement;
 }
 
 export const Context = React.createContext<IFormFieldContext<string>>({
@@ -108,22 +106,23 @@ const FieldSet: React.FC<Props> & IFieldSetComposition = ({
                 }
                 name={bind.name}
             >
-                {React.Children.map(children, (element: React.ReactElement, i) => (
-                    <Fragment key={`${i}-in-${bind.id}-set`}>{
-                        IsInput(element)
-                            // Add the name, success, and error 
-                            // props to the inputs
-                            ? React.cloneElement(element, {
+                {React.Children.map<React.ReactNode, React.ReactNode>(children, node => {
+                    if (React.isValidElement(node)) {
+                        if (IsInput(node)) {
+                            return React.cloneElement(node, {
+                                // Add the name, success, and 
+                                // error props to the inputs
                                 name: props.name,
                                 error: bind.error,
                                 success: bind.success
                             })
-
-                            // Else, clone it as-is
-                            : React.cloneElement(element)
-                    }</Fragment>
-                )
-                )}
+                        } else { // Else, clone it as-is
+                            return React.cloneElement(node)
+                        }
+                    } else {
+                        return node
+                    }
+                })}
             </fieldset>
         </Context.Provider>
     )

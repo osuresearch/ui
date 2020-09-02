@@ -1,24 +1,23 @@
 import React, { useContext, Fragment } from 'react';
 import { Context } from '.';
 
-export interface InlineProps {
-    children: React.ReactElement[] | React.ReactElement;
-}
 
-const Inline: React.FC<InlineProps> = ({ children }) => {
+const Inline: React.FC = ({ children }) => {
     const { bind } = useContext(Context);
 
     return (
         <div className='form-check-inline'>
-            {React.Children.map(children, (child: React.ReactElement) => (
-                <Fragment key={`${child.props.id}-in-set`}>
-                    {React.cloneElement(child, {
+            {React.Children.map<React.ReactNode, React.ReactNode>(children, node => {
+                if (React.isValidElement(node)) {
+                    return React.cloneElement(node, {
                         name: bind.name,
                         error: bind.error,
                         success: bind.success
-                    })}
-                </Fragment>
-            ))}
+                    })
+                } else {
+                    return node
+                }
+            })}
         </div>
     )
 }

@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 Object.defineProperty(exports, "__esModule", {
@@ -11,7 +9,7 @@ exports.default = exports.Context = void 0;
 
 var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutProperties"));
 
-var _react = _interopRequireWildcard(require("react"));
+var _react = _interopRequireDefault(require("react"));
 
 var _types = require("../../internal/FormCommon/types");
 
@@ -82,21 +80,23 @@ var FieldSet = function FieldSet(_ref) {
   }, /*#__PURE__*/_react.default.createElement("fieldset", {
     className: (bind.required ? "is-required" : "") + (bind.error ? " is-invalid" : ""),
     name: bind.name
-  }, _react.default.Children.map(children, function (element, i) {
-    return /*#__PURE__*/_react.default.createElement(_react.Fragment, {
-      key: "".concat(i, "-in-").concat(bind.id, "-set")
-    }, IsInput(element) // Add the name, success, and error 
-    // props to the inputs
-    ?
-    /*#__PURE__*/
-    _react.default.cloneElement(element, {
-      name: props.name,
-      error: bind.error,
-      success: bind.success
-    }) // Else, clone it as-is
-    :
-    /*#__PURE__*/
-    _react.default.cloneElement(element));
+  }, _react.default.Children.map(children, function (node) {
+    if ( /*#__PURE__*/_react.default.isValidElement(node)) {
+      if (IsInput(node)) {
+        return /*#__PURE__*/_react.default.cloneElement(node, {
+          // Add the name, success, and 
+          // error props to the inputs
+          name: props.name,
+          error: bind.error,
+          success: bind.success
+        });
+      } else {
+        // Else, clone it as-is
+        return /*#__PURE__*/_react.default.cloneElement(node);
+      }
+    } else {
+      return node;
+    }
   })));
 };
 

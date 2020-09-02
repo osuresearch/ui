@@ -1,7 +1,4 @@
 import React from 'react';
-export interface InlineProps {
-    children: React.ReactElement[] | React.ReactElement;
-}
-declare const Inline: React.FC<InlineProps>;
+declare const Inline: React.FC;
 export default Inline;
 //# sourceMappingURL=Inline.d.ts.map
