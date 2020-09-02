@@ -82,7 +82,7 @@ var FieldSet = function FieldSet(_ref) {
   }, /*#__PURE__*/_react.default.createElement("fieldset", {
     className: (bind.required ? "is-required" : "") + (bind.error ? " is-invalid" : ""),
     name: bind.name
-  }, children.map(function (element, i) {
+  }, _react.default.Children.map(children, function (element, i) {
     return /*#__PURE__*/_react.default.createElement(_react.Fragment, {
       key: "".concat(i, "-in-").concat(bind.id, "-set")
     }, IsInput(element) // Add the name, success, and error 

@@ -48,7 +48,7 @@ type Props = FormFieldProps<string> & {
      */
     name?: string;
 
-    children: React.ReactElement[];
+    children: React.ReactElement[] | React.ReactElement;
 }
 
 export const Context = React.createContext<IFormFieldContext<string>>({
@@ -108,7 +108,7 @@ const FieldSet: React.FC<Props> & IFieldSetComposition = ({
                 }
                 name={bind.name}
             >
-                {children.map((element, i) => (
+                {React.Children.map(children, (element: React.ReactElement, i) => (
                     <Fragment key={`${i}-in-${bind.id}-set`}>{
                         IsInput(element)
                             // Add the name, success, and error 

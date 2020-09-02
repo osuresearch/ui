@@ -1,6 +1,6 @@
 import React from 'react';
 export interface InlineProps {
-    children: React.ReactElement[];
+    children: React.ReactElement[] | React.ReactElement;
 }
 declare const Inline: React.FC<InlineProps>;
 export default Inline;

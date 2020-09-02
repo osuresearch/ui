@@ -2,7 +2,7 @@ import React, { useContext, Fragment } from 'react';
 import { Context } from '.';
 
 export interface InlineProps {
-    children: React.ReactElement[];
+    children: React.ReactElement[] | React.ReactElement;
 }
 
 const Inline: React.FC<InlineProps> = ({ children }) => {
@@ -10,9 +10,9 @@ const Inline: React.FC<InlineProps> = ({ children }) => {
 
     return (
         <div className='form-check-inline'>
-            {children.map(element => (
-                <Fragment key={`${element.props.id}-in-set`}>
-                    {React.cloneElement(element, {
+            {React.Children.map(children, (child: React.ReactElement) => (
+                <Fragment key={`${child.props.id}-in-set`}>
+                    {React.cloneElement(child, {
                         name: bind.name,
                         error: bind.error,
                         success: bind.success

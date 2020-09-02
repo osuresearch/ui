@@ -31,7 +31,7 @@ declare type Props = FormFieldProps<string> & {
      * `name` in each child component in the `<FieldSet>`.
      */
     name?: string;
-    children: React.ReactElement[];
+    children: React.ReactElement[] | React.ReactElement;
 };
 export declare const Context: React.Context<IFormFieldContext<string>>;
 /**
