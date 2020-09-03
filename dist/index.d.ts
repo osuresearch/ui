@@ -24,6 +24,7 @@ export { default as Checkbox } from './form/Checkbox';
 export { default as DatePicker } from './form/DatePicker';
 export { default as FieldSet } from './form/FieldSet';
 export { default as Form } from './form/Form';
+export { default as Number } from './form/Number';
 export { default as Radio } from './form/Radio';
 export { default as Select } from './form/Select';
 export { default as Text } from './form/Text';

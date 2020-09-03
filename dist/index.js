@@ -155,6 +155,12 @@ Object.defineProperty(exports, "Form", {
     return _Form.default;
   }
 });
+Object.defineProperty(exports, "Number", {
+  enumerable: true,
+  get: function get() {
+    return _Number.default;
+  }
+});
 Object.defineProperty(exports, "Radio", {
   enumerable: true,
   get: function get() {
@@ -231,6 +237,8 @@ var _DatePicker = _interopRequireDefault(require("./form/DatePicker"));
 var _FieldSet = _interopRequireDefault(require("./form/FieldSet"));
 
 var _Form = _interopRequireDefault(require("./form/Form"));
+
+var _Number = _interopRequireDefault(require("./form/Number"));
 
 var _Radio = _interopRequireDefault(require("./form/Radio"));
 
