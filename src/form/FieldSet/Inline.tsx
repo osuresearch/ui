@@ -11,8 +11,8 @@ const Inline: React.FC = ({ children }) => {
                 if (React.isValidElement(node)) {
                     return React.cloneElement(node, {
                         name: node.props.name || bind.name,
-                        error: bind.error,
-                        success: bind.success
+                        error: node.props.error || bind.error,
+                        success: node.props.success || bind.success
                     })
                 } else {
                     return node

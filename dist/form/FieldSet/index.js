@@ -88,8 +88,8 @@ var FieldSet = function FieldSet(_ref) {
           // Add the name, success, and 
           // error props to the inputs
           name: node.props.name || bind.id,
-          error: bind.error,
-          success: bind.success
+          error: node.props.error || bind.error,
+          success: node.props.success || bind.success
         });
       } else {
         // Else, clone it as-is
