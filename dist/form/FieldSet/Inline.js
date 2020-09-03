@@ -21,8 +21,9 @@ var Inline = function Inline(_ref) {
     className: "form-check-inline"
   }, _react.default.Children.map(children, function (node) {
     if ( /*#__PURE__*/_react.default.isValidElement(node)) {
+      console.log('node', node);
       return /*#__PURE__*/_react.default.cloneElement(node, {
-        name: bind.name,
+        name: node.props.name || bind.name,
         error: bind.error,
         success: bind.success
       });

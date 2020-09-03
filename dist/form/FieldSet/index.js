@@ -86,7 +86,7 @@ var FieldSet = function FieldSet(_ref) {
         return /*#__PURE__*/_react.default.cloneElement(node, {
           // Add the name, success, and 
           // error props to the inputs
-          name: props.name,
+          name: node.props.name || props.name,
           error: bind.error,
           success: bind.success
         });

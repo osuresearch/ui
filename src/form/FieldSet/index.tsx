@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { NullFieldBind, FormFieldProps, IFormFieldContext } from '../../internal/FormCommon/types';
 import useFieldBindOrProps from '../../internal/FormCommon/hooks/useFieldBindOrProps';
 
@@ -112,7 +112,7 @@ const FieldSet: React.FC<Props> & IFieldSetComposition = ({
                             return React.cloneElement(node, {
                                 // Add the name, success, and 
                                 // error props to the inputs
-                                name: props.name,
+                                name: node.props.name || props.name,
                                 error: bind.error,
                                 success: bind.success
                             })
