@@ -12,7 +12,12 @@ export function Error(props: ErrorProps) {
     const { bind } = useContext(context!);
 
     return (
-        <div {...otherProps} className='invalid-feedback'>
+        <div
+            {...otherProps}
+            className='invalid-feedback'
+            role='alert'
+            aria-live='assertive'
+        >
             {props.children ?? bind.error}
         </div>
     );

@@ -67,8 +67,7 @@ export declare const Context: React.Context<IFormFieldContext<string>>;
  * Help text for the `<Select>`
  *
  *
- * #### `<Select.Error>` (required if component requires
- * validation)
+ * #### `<Select.Error>` (required if component requires validation)
  * Provides instructions on how to resolve the validation error;
  * will display when `error` is set in `<Select>`
  *

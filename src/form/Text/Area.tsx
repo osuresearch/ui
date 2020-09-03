@@ -44,6 +44,7 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>((pr
             name={bind.name || props.name}
             defaultValue={value}
             className={classNames}
+            aria-describedBy={`${bind.id}-help`}
             onChange={(e) => {
                 bind.value = e.currentTarget.value;
                 if (props.onChange) props.onChange(e);

@@ -65,6 +65,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref)
             }}
             readOnly={bind.readOnly || props.readOnly}
             required={bind.required || props.required}
+            aria-describedBy={`${bind.id}-help`}
         />
     )
 });

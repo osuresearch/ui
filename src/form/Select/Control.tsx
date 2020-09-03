@@ -29,6 +29,7 @@ export const Control = React.forwardRef<HTMLSelectElement, ControlProps>((props,
             className={classNames}
             required={bind.required || props.required}
             defaultValue={defaultValue}
+            aria-describedBy={`${bind.id}-help`}
             onChange={(e) => {
                 bind.value = e.currentTarget.value;
                 if (props.onChange) props.onChange(e);

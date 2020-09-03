@@ -14,6 +14,7 @@ export function Help(props: HelpProps) {
     return (
         <small
             {...otherProps}
+            id={`${bind.id}-help`}
             className='form-text text-muted'
         >
             {props.children ?? bind.help}

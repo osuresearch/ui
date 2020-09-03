@@ -69,7 +69,8 @@ var Input = /*#__PURE__*/_react.default.forwardRef(function (props, ref) {
       if (props.onChange) props.onChange(e);
     },
     readOnly: bind.readOnly || props.readOnly,
-    required: bind.required || props.required
+    required: bind.required || props.required,
+    "aria-describedBy": "".concat(bind.id, "-help")
   }));
 });
 

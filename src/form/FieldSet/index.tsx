@@ -105,6 +105,7 @@ const FieldSet: React.FC<Props> & IFieldSetComposition = ({
                     (bind.error ? " is-invalid" : "")
                 }
                 name={bind.name}
+                aria-describedBy={`${bind.id}-help`}
             >
                 {React.Children.map<React.ReactNode, React.ReactNode>(children, node => {
                     if (React.isValidElement(node)) {
@@ -112,7 +113,7 @@ const FieldSet: React.FC<Props> & IFieldSetComposition = ({
                             return React.cloneElement(node, {
                                 // Add the name, success, and 
                                 // error props to the inputs
-                                name: node.props.name || props.name,
+                                name: node.props.name || bind.id,
                                 error: bind.error,
                                 success: bind.success
                             })

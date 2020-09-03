@@ -165,7 +165,8 @@ var Rich = function Rich(_ref) {
     name: bind.name || name,
     className: "richtext-editor",
     ref: editorRef,
-    disabled: bind.readOnly
+    disabled: bind.readOnly,
+    "aria-describedBy": "".concat(bind.id, "-help")
   }));
 };
 

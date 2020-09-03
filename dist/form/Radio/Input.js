@@ -66,6 +66,7 @@ var Input = /*#__PURE__*/_react.default.forwardRef(function (props, ref) {
     defaultChecked: checked,
     defaultValue: value,
     className: classNames,
+    "aria-describedBy": "".concat(bind.id, "-help"),
     onChange: function onChange(e) {
       bind.value = e.currentTarget.value;
       if (props.onChange) props.onChange(e);

@@ -175,7 +175,7 @@ var HourInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
     placeholder: "--",
     role: "textbox" // Linter is mad about this; it fixes VoiceOver bug
     ,
-    "aria-describedby": 'hours-description-' + id,
+    "aria-describedby": "".concat(id, "-help hours-description-").concat(id),
     value: hour,
     onClick: handleClick,
     onKeyUp: handleKeyUp,

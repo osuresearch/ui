@@ -6,7 +6,7 @@
 import { Form, Checkbox } from '@oris/ui';
 
 <Form.Group>
-    <FieldSet name="colors">
+    <FieldSet id="colors">
         <FieldSet.Legend>
             Collection of checkboxes in a <code>FieldSet</code>
         </FieldSet.Legend>
@@ -38,7 +38,7 @@ import { Form, Checkbox } from '@oris/ui';
 import { Form, Radio } from '@oris/ui';
 
 <Form.Group>
-    <FieldSet name="color-1">
+    <FieldSet id="color-1">
         <FieldSet.Legend>
             Collection of radio buttons
         </FieldSet.Legend>
@@ -73,7 +73,7 @@ import { Form, Radio, Button } from '@oris/ui';
 const [error, setError] = useState('');
 
 <Form.Group>
-    <FieldSet name="yes-no-123" error={error} required>
+    <FieldSet id="yes-no-123" error={error} required>
         <FieldSet.Legend>FieldSet with an error</FieldSet.Legend>
 
         <Radio id="yes-123">
@@ -103,7 +103,7 @@ const [error, setError] = useState('');
 import { Form, Radio } from '@oris/ui';
 
 <Form.Group>
-    <FieldSet name="yes-no-456">
+    <FieldSet id="yes-no-456">
         <FieldSet.Legend>
             A common yes/no radio pattern
         </FieldSet.Legend>

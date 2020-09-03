@@ -47,6 +47,9 @@ var Context = /*#__PURE__*/_react.default.createContext({
  * * **Props**
  *  * [HTML Global attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes)
  * 
+ * #### `<Radio.Help>`
+ * Help text for the `<Radio>`
+ * 
  */
 
 
@@ -66,6 +69,7 @@ var Radio = function Radio(props) {
 };
 
 Radio.Input = _Input.Input;
+Radio.Help = (0, _withFormContext.withFormContext)(_Components.Help, Context);
 Radio.Label = (0, _withFormContext.withFormContext)(_Components.ControlLabel, Context);
 var _default = Radio; // Compound Component pattern adapted from https://blog.martindidiego.com/compound-components-typescript/
 

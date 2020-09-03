@@ -71,6 +71,21 @@ var Input = function Input(allprops) {
     }
   };
 
+  var ref = (0, _react.useRef)(null);
+
+  var handleFocus = function handleFocus() {
+    if (ref) {
+      var _ref$current;
+
+      // Add screen reader instructions onFocus. This
+      // includes the instructions included in this
+      // component, as well as any text in
+      // `<DatePicker.Help>`
+      // @ts-ignore
+      (_ref$current = ref.current) === null || _ref$current === void 0 ? void 0 : _ref$current.input.setAttribute('aria-describedby', "sr-instructions ".concat(bind.id, "-help"));
+    }
+  };
+
   var formatter = function formatter(timestamp) {
     if (typeof timestamp === 'undefined') return undefined;
     var date = new Date(timestamp);
@@ -114,12 +129,15 @@ var Input = function Input(allprops) {
 
   return /*#__PURE__*/_react.default.createElement("div", {
     className: classNames
-  }, !props.showTimeInput && /*#__PURE__*/_react.default.createElement(_DatePrefix.default, null), props.showTimeInput && /*#__PURE__*/_react.default.createElement(_DateTimePrefix.default, null), /*#__PURE__*/_react.default.createElement(_reactDatepicker.default, (0, _extends2.default)({}, props, {
+  }, !props.showTimeInput && /*#__PURE__*/_react.default.createElement(_DatePrefix.default, null), props.showTimeInput && /*#__PURE__*/_react.default.createElement(_DateTimePrefix.default, null), /*#__PURE__*/_react.default.createElement(_reactDatepicker.default, (0, _extends2.default)({
+    ref: ref
+  }, props, {
     id: bind.id,
     selected: selected ? new Date(selected) : null,
     value: selected && formatter(selected),
     className: 'form-control date',
     onChange: handleChange,
+    onFocus: handleFocus,
     shouldCloseOnSelect: !props.showTimeInput // @ts-ignore
     ,
     timeInputLabel: /*#__PURE__*/_react.default.createElement("label", {
@@ -133,7 +151,10 @@ var Input = function Input(allprops) {
     required: bind.required || props.required
   }), /*#__PURE__*/_react.default.createElement("div", {
     className: "keyboard-notice"
-  }, /*#__PURE__*/_react.default.createElement("small", null, /*#__PURE__*/_react.default.createElement("em", null, "Keyboard users: Exit this dialog with the ", /*#__PURE__*/_react.default.createElement("code", null, "esc"), " key")))));
+  }, /*#__PURE__*/_react.default.createElement("small", null, /*#__PURE__*/_react.default.createElement("em", null, "Keyboard users: Exit this dialog with the ", /*#__PURE__*/_react.default.createElement("code", null, "esc"), " key"))), /*#__PURE__*/_react.default.createElement("div", {
+    id: "sr-instructions",
+    className: "sr-only"
+  }, "A calendar widget ", props.showTimeInput && 'with a time input', " is open. To interact with the calendar, press the up or down arrow keys. ", props.showTimeInput && 'To navigate to the time input, press the tab key.', " To exit, press the escape key,,")));
 };
 
 var _default = Input;

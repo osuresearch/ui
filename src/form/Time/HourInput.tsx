@@ -147,7 +147,7 @@ const HourInput = React.forwardRef<HTMLInputElement, Props>(({
 
     return (
         <label>
-            <span className='sr-only'>,,,Hour (HH)</span> {/** commas for short screen reader pause */}
+            <span className='sr-only'>,,,Hour (HH)</span> {/* commas for short screen reader pause */}
             <input
                 ref={ref}
                 id={id}
@@ -158,7 +158,7 @@ const HourInput = React.forwardRef<HTMLInputElement, Props>(({
                 step='1'
                 placeholder='--'
                 role='textbox' // Linter is mad about this; it fixes VoiceOver bug
-                aria-describedby={'hours-description-' + id}
+                aria-describedby={`${id}-help hours-description-${id}`}
                 value={hour}
                 onClick={handleClick}
                 onKeyUp={handleKeyUp}

@@ -26,6 +26,7 @@ function Help(props) {
       bind = _useContext.bind;
 
   return /*#__PURE__*/_react.default.createElement("small", (0, _extends2.default)({}, otherProps, {
+    id: "".concat(bind.id, "-help"),
     className: "form-text text-muted"
   }), (_props$children = props.children) !== null && _props$children !== void 0 ? _props$children : bind.help);
 }

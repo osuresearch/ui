@@ -164,6 +164,7 @@ const Rich: React.FC<RichProps> = ({
                 className="richtext-editor"
                 ref={editorRef}
                 disabled={bind.readOnly}
+                aria-describedBy={`${bind.id}-help`}
             />
         </div>
     );

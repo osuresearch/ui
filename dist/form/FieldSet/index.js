@@ -79,14 +79,15 @@ var FieldSet = function FieldSet(_ref) {
     }
   }, /*#__PURE__*/_react.default.createElement("fieldset", {
     className: (bind.required ? "is-required" : "") + (bind.error ? " is-invalid" : ""),
-    name: bind.name
+    name: bind.name,
+    "aria-describedBy": "".concat(bind.id, "-help")
   }, _react.default.Children.map(children, function (node) {
     if ( /*#__PURE__*/_react.default.isValidElement(node)) {
       if (IsInput(node)) {
         return /*#__PURE__*/_react.default.cloneElement(node, {
           // Add the name, success, and 
           // error props to the inputs
-          name: node.props.name || props.name,
+          name: node.props.name || bind.id,
           error: bind.error,
           success: bind.success
         });

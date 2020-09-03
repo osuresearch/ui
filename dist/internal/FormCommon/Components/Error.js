@@ -26,6 +26,8 @@ function Error(props) {
       bind = _useContext.bind;
 
   return /*#__PURE__*/_react.default.createElement("div", (0, _extends2.default)({}, otherProps, {
-    className: "invalid-feedback"
+    className: "invalid-feedback",
+    role: "alert",
+    "aria-live": "assertive"
   }), (_props$children = props.children) !== null && _props$children !== void 0 ? _props$children : bind.error);
 }

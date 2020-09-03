@@ -32,6 +32,12 @@
         margin-bottom: 1rem;
     }
 
+    // Tighten margin between custom labels and help text when it immediately follows
+    .custom-control-label + .form-text {
+        margin-top: -0.75rem;
+        margin-bottom: 0.75rem;
+    }
+
     // Required star for labels and legends
     // In required form groups, attaches to the 
     // first label or legend found

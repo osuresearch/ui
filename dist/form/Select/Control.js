@@ -41,6 +41,7 @@ var Control = /*#__PURE__*/_react.default.forwardRef(function (props, ref) {
     className: classNames,
     required: bind.required || props.required,
     defaultValue: defaultValue,
+    "aria-describedBy": "".concat(bind.id, "-help"),
     onChange: function onChange(e) {
       bind.value = e.currentTarget.value;
       if (props.onChange) props.onChange(e);

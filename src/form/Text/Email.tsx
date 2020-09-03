@@ -42,6 +42,7 @@ export const Email = React.forwardRef<HTMLInputElement, EmailProps>((props, ref)
             name={bind.name || props.name}
             defaultValue={value}
             className={classNames}
+            aria-describedBy={`${bind.id}-help`}
             onChange={(e) => {
                 bind.value = e.currentTarget.value;
                 if (props.onChange) props.onChange(e);

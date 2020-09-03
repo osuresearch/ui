@@ -31,7 +31,7 @@ export default function SRDescriptions({
                 {meridiem &&
                     <span>{meridiem} selected. </span>
                 }
-                {!readOnly && <span>To increment the hour, press the up arrow. To decrement, press the down arrow. Tab or press the right arrow to move to the minutes selector.</span>}
+                {!readOnly && <span>Press the up arrow to increment the hour. Press the down arrow to decrement. Tab or press the right arrow to move to the minutes selector.</span>}
             </div>
 
             <div id={'minutes-description-' + id} className='sr-only'>
@@ -48,7 +48,7 @@ export default function SRDescriptions({
                 {meridiem &&
                     <span>{meridiem} selected. </span>
                 }
-                {!readOnly && <span>To increment the minutes, press the up arrow. To decrement, press the down arrow. Tab or press the right arrow to move to the AM/PM selector. Press the left arrow to move to the hour selector.</span>}
+                {!readOnly && <span>Press the up arrow to increment the minutes. Press the down arrow to decrement. Tab or press the right arrow to move to the AM/PM selector. Press the left arrow to move to the hour selector.</span>}
             </div>
 
             <div id={'meridiem-description-' + id} className='sr-only'>

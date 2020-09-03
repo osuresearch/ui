@@ -1,5 +1,5 @@
 
-import React, { useEffect, useContext } from 'react';
+import React, { useContext, useRef } from 'react';
 import { Context } from '../';
 import FormContext from '../../../internal/FormCommon/FormContext';
 
@@ -53,6 +53,19 @@ const Input: React.FC<InputProps> = (allprops) => {
         }
     };
 
+    const ref = useRef<DatePicker>(null);
+
+    const handleFocus = () => {
+        if (ref) {
+            // Add screen reader instructions onFocus. This
+            // includes the instructions included in this
+            // component, as well as any text in
+            // `<DatePicker.Help>`
+            // @ts-ignore
+            ref.current?.input.setAttribute('aria-describedby', `sr-instructions ${bind.id}-help`);
+        }
+    }
+
     const formatter = (timestamp: string | undefined) => {
         if (typeof (timestamp) === 'undefined') return undefined;
 
@@ -104,12 +117,14 @@ const Input: React.FC<InputProps> = (allprops) => {
             {props.showTimeInput && <DateTimePrefix />}
 
             <DatePicker
+                ref={ref}
                 {...props}
                 id={bind.id}
                 selected={selected ? new Date(selected) : null}
                 value={selected && formatter(selected)}
                 className={'form-control date'}
                 onChange={handleChange}
+                onFocus={handleFocus}
                 shouldCloseOnSelect={!props.showTimeInput}
                 // @ts-ignore
                 timeInputLabel={<label htmlFor={`${bind.id}-time`}>Time</label>}
@@ -122,6 +137,9 @@ const Input: React.FC<InputProps> = (allprops) => {
             >
                 <div className='keyboard-notice'>
                     <small><em>Keyboard users: Exit this dialog with the <code>esc</code> key</em></small>
+                </div>
+                <div id='sr-instructions' className='sr-only'>
+                    A calendar widget {props.showTimeInput && 'with a time input'} is open. To interact with the calendar, press the up or down arrow keys. {props.showTimeInput && 'To navigate to the time input, press the tab key.'} To exit, press the escape key,,
                 </div>
             </DatePicker>
         </div>

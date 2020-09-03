@@ -64,6 +64,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref)
             defaultChecked={checked}
             defaultValue={value}
             className={classNames}
+            aria-describedBy={`${bind.id}-help`}
             onChange={(e) => {
                 bind.value = e.currentTarget.value;
                 if (props.onChange) props.onChange(e);

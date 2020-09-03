@@ -15,6 +15,10 @@ const [date, setDate] = useState();
             value={date}
             onChange={setDate}
         />
+
+        <DatePicker.Help>
+            You may type in the field or select a date in the calendar
+        </DatePicker.Help>
     </DatePicker>
 </Form.Group>
 ```

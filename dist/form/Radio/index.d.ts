@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormFieldProps, IFormFieldContext } from '../../internal/FormCommon/types';
 import { InputProps } from './Input';
-import { ControlLabelProps } from '../../internal/FormCommon/Components';
+import { ControlLabelProps, HelpProps } from '../../internal/FormCommon/Components';
 declare type Props = FormFieldProps<string> & {};
 interface IRadioComposition {
     /**
@@ -12,6 +12,8 @@ interface IRadioComposition {
      *  * [HTML Global attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes)
      */
     Label: React.FC<ControlLabelProps>;
+    /** Help text for the `Radio` */
+    Help: React.FC<HelpProps>;
     /**
      * #### `Radio.Input` (required)
      * Equivalent of `<input type='radio'>`
@@ -46,6 +48,9 @@ export declare const Context: React.Context<IFormFieldContext<string>>;
  *
  * * **Props**
  *  * [HTML Global attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes)
+ *
+ * #### `<Radio.Help>`
+ * Help text for the `<Radio>`
  *
  */
 declare const Radio: React.FC<Props> & IRadioComposition;
