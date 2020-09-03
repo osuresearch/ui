@@ -1,4 +1,4 @@
-import React, { useContext, Fragment } from 'react';
+import React, { useContext } from 'react';
 import { Context } from '.';
 
 
@@ -9,7 +9,6 @@ const Inline: React.FC = ({ children }) => {
         <div className='form-check-inline'>
             {React.Children.map<React.ReactNode, React.ReactNode>(children, node => {
                 if (React.isValidElement(node)) {
-                    console.log('node', node);
                     return React.cloneElement(node, {
                         name: node.props.name || bind.name,
                         error: bind.error,
