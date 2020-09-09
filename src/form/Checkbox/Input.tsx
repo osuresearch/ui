@@ -10,7 +10,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref)
     const { bind } = useContext(Context);
     const { isDiff, isPrint } = useContext(FormContext);
 
-    const checked: boolean = bind.value || props.checked || false;
+    const checked: boolean = bind.value || props.defaultChecked || false;
 
     // If printing, just return the current value
     if (isPrint) {

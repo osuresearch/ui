@@ -29,7 +29,7 @@ var Input = /*#__PURE__*/_react.default.forwardRef(function (props, ref) {
       isDiff = _useContext2.isDiff,
       isPrint = _useContext2.isPrint;
 
-  var checked = bind.value || props.checked || false; // If printing, just return the current value
+  var checked = bind.value || props.defaultChecked || false; // If printing, just return the current value
 
   if (isPrint) {
     return /*#__PURE__*/_react.default.createElement(_Components.Print, null, checked && /*#__PURE__*/_react.default.createElement("i", {
