@@ -56,9 +56,10 @@ const SIMPLE_TOOLBAR_CONFIG = [
 ];
 
 /**
- * Simple preconfigured Richtext editor
+ * A rich text editor (RTE) based on CKEditor (additional requirements must be 3
+ * met to use this component; see the section on `<Text.Rich>` below for more details)
  */
-const Rich: React.FC<RichProps> = ({
+export const Rich: React.FC<RichProps> = ({
     onChange,
     defaultValue = '',
     simple = false,
@@ -170,4 +171,4 @@ const Rich: React.FC<RichProps> = ({
     );
 }
 
-export default memo(Rich);
+// export default memo(Rich);

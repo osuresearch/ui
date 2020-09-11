@@ -5,12 +5,15 @@ import FormContext from '../../../internal/FormCommon/FormContext';
 import Print from '../Print';
 import Diff from '../Diff';
 
-export type TextAreaProps = React.TextareaHTMLAttributes<HTMLTextAreaElement> & {
+export type AreaProps = React.TextareaHTMLAttributes<HTMLTextAreaElement> & {
     maxLength?: number;
     minLength?: number;
 }
 
-export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>((props, ref) => {
+/**
+ * Equivalent of `<textarea>`
+ */
+export const Area = React.forwardRef<HTMLTextAreaElement, AreaProps>((props, ref) => {
     const { bind } = useContext(Context);
     const { isDiff, isPrint } = useContext(FormContext);
 
