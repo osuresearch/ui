@@ -1,9 +1,12 @@
 import React, { useContext } from 'react';
-import { Context } from '.';
+import { Context } from '..';
 
-export type InputProps = React.InputHTMLAttributes<HTMLInputElement>;
+export type EmailProps = React.InputHTMLAttributes<HTMLInputElement>;
 
-export const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
+/**
+ * Email input field with automatic validation for invalid email addresses
+ */
+export const Email = React.forwardRef<HTMLInputElement, EmailProps>((props, ref) => {
     const { bind } = useContext(Context);
 
     const value = bind.value || props.defaultValue;
@@ -14,11 +17,27 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref)
         (bind.success ? ' is-valid' : '')
         ;
 
+    /** SIMPLE email validation. Updates the bind's error state on invalid email */
+    const nativeOnBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+        if (!bind.value) {
+            if (props.required) {
+                bind.error = 'You must specify an email address'
+            }
+            return;
+        }
+
+        if (!/[^@]+@[^\.]+\..+/g.test(bind.value)) {
+            bind.error = 'Invalid email';
+        } else {
+            bind.error = '';
+        }
+    }
+
     return (
         <input
             ref={ref}
             {...props}
-            type="number"
+            type="text"
             id={bind.id}
             name={bind.name || props.name}
             defaultValue={value}
@@ -28,6 +47,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref)
                 bind.value = e.currentTarget.value;
                 if (props.onChange) props.onChange(e);
             }}
+            onBlur={nativeOnBlur}
             readOnly={bind.readOnly || props.readOnly}
             required={bind.required || props.required}
         />

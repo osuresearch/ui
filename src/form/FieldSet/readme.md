@@ -1,3 +1,8 @@
+
+### Accessibility Guidelines
+
+`<Radio>` buttons must be wrapped in a `<FieldSet>` and include a `<FieldSet.Legend>` element as the first child for screen readers. The legend is your primary fieldset description.
+
 ### Examples
 
 #### Basic Implementation
@@ -38,23 +43,23 @@ import { Form, Checkbox } from '@oris/ui';
 import { Form, Radio } from '@oris/ui';
 
 <Form.Group>
-    <FieldSet id="color-1">
+    <FieldSet id="color-1" required>
         <FieldSet.Legend>
             Collection of radio buttons
         </FieldSet.Legend>
 
         <Radio id="rgb-123">
-            <Radio.Input />
+            <Radio.Input value="rgb" />
             <Radio.Label>RGB</Radio.Label>
         </Radio>
 
         <Radio id="cmyk-123">
-            <Radio.Input />
+            <Radio.Input value="cmyk" />
             <Radio.Label>CMYK</Radio.Label>
         </Radio>
 
         <Radio id="hsl-123">
-            <Radio.Input />
+            <Radio.Input value="hsl" />
             <Radio.Label>HSL</Radio.Label>
         </Radio>
 
@@ -126,7 +131,3 @@ import { Form, Radio } from '@oris/ui';
     </FieldSet>
 </Form.Group>
 ```
-
-### Accessibility Guidelines
-
-`<Radio>` buttons must be wrapped in a `<FieldSet>` and include a `<FieldSet.Legend>` element as the first child for screen readers. The legend is your primary fieldset description.

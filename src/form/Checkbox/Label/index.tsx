@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import { IFormFieldContext } from '../types';
+import { IFormFieldContext } from '../../../internal/FormCommon/types'
 
 export type LabelProps = React.LabelHTMLAttributes<HTMLLabelElement> & {
-    // Will automatically be provided by an HOC
+    /** Will automatically be provided by an HOC */
     context?: React.Context<IFormFieldContext<any>>;
 }
 
@@ -16,7 +16,7 @@ export function Label(props: LabelProps) {
             {...otherProps}
             htmlFor={bind.id}
             className={
-                (bind.required ? 'is-required' : '') +
+                'custom-control-label' +
                 (props.className ? ' ' + props.className : '')
             }
         >

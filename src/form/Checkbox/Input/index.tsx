@@ -1,11 +1,19 @@
 import React, { useContext } from 'react';
-import { Context } from '.';
-import FormContext from '../../internal/FormCommon/FormContext';
+import { Context } from '..';
+import FormContext from '../../../internal/FormCommon/FormContext';
 
-import { Print, Diff } from '../../internal/FormCommon/Components';
+import { Print } from '../../../internal/FormCommon/Utility/Print';
+import { Diff } from '../../../internal/FormCommon/Utility/Diff';
 
-export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> { }
+export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> { 
 
+    /** Foo prop */
+    foo?: number;
+}
+
+/**
+ * `<Checkbox.Input />` Subcomponent. Accepts all `HTMLInputElement` props.
+ */
 export const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     const { bind } = useContext(Context);
     const { isDiff, isPrint } = useContext(FormContext);

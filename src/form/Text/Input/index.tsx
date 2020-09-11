@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
-import { Context } from '.';
-import FormContext from '../../internal/FormCommon/FormContext';
+import { Context } from '..';
+import FormContext from '../../../internal/FormCommon/FormContext';
 
-import Print from './Print';
-import Diff from './Diff';
+import Print from '../Print';
+import Diff from '../Diff';
 
 export type InputProps = React.InputHTMLAttributes<HTMLInputElement>;
 

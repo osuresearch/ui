@@ -1,13 +1,22 @@
 import React, { useContext } from 'react';
-import { Context } from '.';
-import FormContext from '../../internal/FormCommon/FormContext';
+import { Context } from '..';
+import FormContext from '../../../internal/FormCommon/FormContext';
 
-import { Print, Diff } from '../../internal/FormCommon/Components';
+import { Print } from '../../../internal/FormCommon/Utility/Print';
+import { Diff } from '../../../internal/FormCommon/Utility/Diff';
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
     value?: string | number
 }
 
+/**
+ * Styled equivalent of `<input type="radio"/>`
+ * 
+ * Additional accepted props:
+ *  * [`radio` input attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio#Additional_attributes)
+ *  * [React event handlers](https://reactjs.org/docs/events.html#supported-events)
+ *  * All common [`<input>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input) attributes
+ */
 export const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     const { bind } = useContext(Context);
     const { isDiff, isPrint } = useContext(FormContext);

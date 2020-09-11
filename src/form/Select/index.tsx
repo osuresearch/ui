@@ -67,52 +67,16 @@ export const Context = React.createContext<IFormFieldContext<string>>({
 
 /**
  * A styled Select drop-down component
- * 
- * ### Subcomponents
- * #### `<Select.Label>` (required)
- * Equivalent of `<label>`
- * 
- *  * **Props**
- *      * [HTML Global attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes)
- * 
- * 
- * #### `<Select.Control>` (required)
- * A control container for options (this is `<select>` in 
- * native HTML)
- * 
- * 
- * #### `<Select.Option>` (required)
- * An option nested in a `<Select.Control>` (this is 
- * `<option>` in native HTML)
- *  * **Props**
- *      * One of the following are required:
- *          * `value`
- *          * `optionsBind`
- *      * Accepts [`<option>` attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option)
- * 
- * #### `<Select.Help>`
- * Help text for the `<Select>`
- * 
- * 
- * #### `<Select.Error>` (required if component requires validation)
- * Provides instructions on how to resolve the validation error; 
- * will display when `error` is set in `<Select>`
- * 
- * 
- * #### `<Select.Success>`
- * Feedback for when the set meets the validation rules; will 
- * display when `success` is set in `<Select>`
- * 
+ *
  */
 const Select: React.FC<Props> & ISelectComposition = ({
-    // foo = 1
     children,
-    ...props // everything else is of FormFieldProps<string>
+    ...props
 }) => {
     const { bind } = useFieldBindOrProps(props);
 
     return (
-        <Context.Provider value={{ bind, /* foo */ }}>
+        <Context.Provider value={{ bind }}>
             {children}
         </Context.Provider>
     );

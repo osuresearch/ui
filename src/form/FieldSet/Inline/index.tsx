@@ -1,7 +1,9 @@
 import React, { useContext } from 'react';
-import { Context } from '.';
+import { Context } from '..';
 
-
+/**
+ * Display the form components inline
+ */
 const Inline: React.FC = ({ children }) => {
     const { bind } = useContext(Context);
 

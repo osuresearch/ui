@@ -1,19 +1,21 @@
 import React, { useContext } from 'react';
-import { IFormFieldContext } from '../types';
+import { IFormFieldContext } from '../../../internal/FormCommon/types';
 
-export type SuccessProps = React.HTMLAttributes<HTMLDivElement> & {
+export type LegendProps = React.HTMLAttributes<HTMLElement> & {
     // Will automatically be provided by an HOC
     context?: React.Context<IFormFieldContext<any>>;
 }
 
-export function Success(props: SuccessProps) {
+export function Legend(props: LegendProps) {
     // Separate context from the other props (or else they are added as props to the component itself)
     const { context, ...otherProps } = props;
     const { bind } = useContext(context!);
 
     return (
-        <div {...otherProps} className='valid-feedback'>
-            {props.children ?? bind.success}
-        </div>
+        <legend {...otherProps} className={
+            bind.required ? 'is-required' : ''
+        }>
+            {props.children ?? bind.instructions}
+        </legend>
     );
 }

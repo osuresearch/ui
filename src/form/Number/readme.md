@@ -12,3 +12,20 @@ import { Form } from '@oris/ui';
     </Number>
 </Form.Group>
 ```
+
+#### Change Events
+
+```jsx
+import { Form } from '@oris/ui';
+
+const onChange = (newIntValue, oldIntValue) => {
+    alert(`Number changed from ${oldIntValue} to ${newIntValue}`);
+}
+
+<Form.Group>
+    <Number id="change-value" onChange={onChange}>
+        <Number.Label>Change this value</Number.Label>
+        <Number.Input />
+    </Number>
+</Form.Group>
+```

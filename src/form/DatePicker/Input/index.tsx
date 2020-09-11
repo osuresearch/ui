@@ -1,11 +1,12 @@
 
 import React, { useContext, useRef } from 'react';
+import DatePicker, { ReactDatePickerProps } from 'react-datepicker';
 import { Context } from '../';
 import FormContext from '../../../internal/FormCommon/FormContext';
 
-import { Print, Diff } from '../../../internal/FormCommon/Components';
+import { Print } from '../../../internal/FormCommon/Utility/Print';
+import { Diff } from '../../../internal/FormCommon/Utility/Diff';
 
-import DatePicker, { ReactDatePickerProps } from 'react-datepicker';
 import Time from '../../Time';
 
 import DatePrefix from './DatePrefix';

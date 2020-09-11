@@ -14,8 +14,7 @@ import {
 } from '../../internal/FormCommon/Components';
 
 type Props = FormFieldProps<string> & {
-    // Add your other top level props here.
-    // foo: number
+    
 }
 
 interface INumberComposition {
@@ -43,54 +42,24 @@ interface INumberComposition {
 }
 
 export const Context = React.createContext<IFormFieldContext<string>>({
-    bind: new NullFieldBind<string>(),
-
-    // Add your other prop defaults here that should be made available to consumers
-    // foo: 1
+    bind: new NullFieldBind<string>()
 });
 
 /**
- * Number input
- * 
- * ### Subcomponents
- * 
- * #### `<Number.Label>` (required)
- * Equivalent of `<label>`
- * 
- * 
- * #### `<Number.Input>` (required)
- * Equivalent of `<input type='number'>`
- * 
- * 
- * #### `<Number.Help>`
- * Help text for the `<Number>`
- * 
- * 
- * #### `<Number.Error>` (required if `<Number>` requires validation)
- * Provides instructions on how to resolve the validation error; 
- * will display when `error` is set in `<Number>`
- * 
- * 
- * #### `<Number.Success>`
- * Feedback for when the set meets the validation rules; will 
- * display when `success` is set in `<Number>`
- * 
+ * Numeric input
  */
-
 const Number: React.FC<Props> & INumberComposition = ({
-    // foo = 1
     children,
-    ...props // everything else is of FormFieldProps<string>
+    ...props
 }) => {
     const { bind } = useFieldBindOrProps(props);
 
     return (
-        <Context.Provider value={{ bind, /* foo */ }}>
+        <Context.Provider value={{ bind }}>
             {children}
         </Context.Provider>
     );
 }
-
 
 Number.Input = Input;
 Number.Label = withFormContext<LabelProps>(Label, Context);

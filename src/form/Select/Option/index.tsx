@@ -1,21 +1,33 @@
 import React, { useContext } from 'react';
-import { Context } from '.';
-import FormContext from '../../internal/FormCommon/FormContext';
-import { IFieldBind } from '../../internal/FormCommon/types';
+import { Context } from '..';
+import FormContext from '../../../internal/FormCommon/FormContext';
+import { IFieldBind } from '../../../internal/FormCommon/types';
 
-import { Print, Diff } from '../../internal/FormCommon/Components';
+import { Print } from '../../../internal/FormCommon/Utility/Print';
+import { Diff } from '../../../internal/FormCommon/Utility/Diff';
 
-import '../../internal/FormCommon/style.scss';
+import '../../../internal/FormCommon/style.scss';
 
-export interface Value {
+// TODO: Move elsewhere. Maybe as a standard enum type?
+export interface OptionKeyValuePair {
     [key: string]: string;
 }
 
 export type OptionProps = React.OptionHTMLAttributes<HTMLOptionElement> & {
-    optionsBind?: IFieldBind<Value>;
+    /**
+     * FieldBind that contains an enumeration of key/value pairs.
+     */
+    optionsBind?: IFieldBind<OptionKeyValuePair>;
     children?: string;
 }
 
+/**
+ * An option nested in a `<Select.Control>`
+ * 
+ * Requires *either* a `value` or `optionsBind` prop.
+ * 
+ * Accepts standard [`<option>` attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option)
+ */
 export const Option: React.FC<OptionProps> = (props) => {
     const { bind } = useContext(Context);
     const { isDiff, isPrint } = useContext(FormContext);

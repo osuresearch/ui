@@ -1,12 +1,17 @@
 import React, { useContext } from 'react';
-import { Context } from './';
-import FormContext from '../../internal/FormCommon/FormContext';
-import { OptionProps } from './Option';
+import { Context } from '..';
+import FormContext from '../../../internal/FormCommon/FormContext';
+import { OptionProps } from '../Option';
 
 export type ControlProps = React.SelectHTMLAttributes<HTMLSelectElement> & {
     children: React.ReactElement<OptionProps>[] | React.ReactElement<OptionProps>
 };
 
+/**
+ * A control container for `<Select.Option>` children.
+ * 
+ * Accepts standard [`<select>` attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select)
+ */
 export const Control = React.forwardRef<HTMLSelectElement, ControlProps>((props, ref) => {
     const { bind } = useContext(Context);
     const { isDiff, isPrint } = useContext(FormContext);

@@ -1,10 +1,10 @@
 
 import React, { useLayoutEffect, useState, useRef, memo, useContext } from 'react';
-import { Context } from '.';
-import FormContext from '../../internal/FormCommon/FormContext';
+import { Context } from '..';
+import FormContext from '../../../internal/FormCommon/FormContext';
 
-import Print from './Print';
-import Diff from './Diff';
+import Print from '../Print';
+import Diff from '../Diff';
 
 export interface RichProps {
     /** Initial content for the component as a raw HTML string. */

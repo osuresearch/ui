@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import ThatOtherSearch from '../../components/Search';
+import ThatOtherSearch from '../../../components/Search';
 
-import { Context } from '.';
-import { Nullable } from '../../internal/FormCommon/types';
+import { Context } from '..';
+import { Nullable } from '../../../internal/FormCommon/types';
 
 export type SearchProps = {
     endpoint?: string

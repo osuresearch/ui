@@ -1,5 +1,5 @@
 import React from 'react';
-import { Print as PrintCommon } from '../../internal/FormCommon/Components';
+import { Print as PrintCommon } from '../../internal/FormCommon/Utility/Print';
 
 interface Props {
     value?: string;

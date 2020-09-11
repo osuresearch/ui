@@ -1,11 +1,14 @@
 import React, { useContext } from 'react';
-import { IFormFieldContext } from '../types';
+import { IFormFieldContext } from '../../types';
 
 export type HelpProps = React.HTMLAttributes<HTMLDivElement> & {
-    // Will automatically be provided by an HOC
+    /** Will automatically be provided by an HOC */
     context?: React.Context<IFormFieldContext<any>>;
 }
 
+/**
+ * Additional (small) help text to go alongside the field
+ */
 export function Help(props: HelpProps) {
     // Separate context from the other props (or else they are added as props to the component itself)
     const { context, ...otherProps } = props;
