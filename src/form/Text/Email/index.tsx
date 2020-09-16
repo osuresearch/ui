@@ -53,7 +53,6 @@ const Email = React.forwardRef<HTMLInputElement, EmailProps>((props, ref) => {
             }}
             onBlur={nativeOnBlur}
             readOnly={bind.readOnly || props.readOnly}
-            required={bind.required || props.required}
         />
     );
 });

@@ -34,7 +34,6 @@ const Control = React.forwardRef<HTMLSelectElement, ControlProps>((props, ref) =
             id={bind.id}
             name={bind.name || props.name}
             className={classNames}
-            required={bind.required || props.required}
             defaultValue={defaultValue}
             aria-describedBy={`${bind.id}-help`}
             onChange={(e) => {

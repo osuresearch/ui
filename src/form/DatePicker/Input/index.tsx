@@ -13,7 +13,7 @@ import DatePrefix from './DatePrefix';
 import DateTimePrefix from './DateTimePrefix';
 
 // The following props are disabled due to not meeting accessibility standards
-type DisabledReactDatePickerProps = 
+type DisabledReactDatePickerProps =
     'customTimeInput' | 'timeInputLabel' | 'disabledKeyboardNavigation'
     | 'showMonthYearPicker' | 'showMonthYearDropdown' | 'monthsShown'
     | 'withPortal' | 'showQuarterYearPicker' | 'showTimeSelect'
@@ -154,7 +154,6 @@ const Input: React.FC<InputProps> = (props) => {
                 }
                 dateFormat={dateFormat}
                 readOnly={readOnly}
-                required={bind.required || props.required}
             >
                 <div className='keyboard-notice'>
                     <small><em>Keyboard users: Exit this dialog with the <code>esc</code> key</em></small>

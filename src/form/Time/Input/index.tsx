@@ -78,7 +78,6 @@ export const Input: React.FC<InputProps> = (props) => {
 
     const name = bind.name || props.name;
     const readOnly = bind.readOnly || props.readOnly;
-    const required = bind.required || props.required;
 
     const classNames = `time-field input-group form-control ${props.className ? props.className : ''} ${props.className ? props.className : ''} ${bind.error ? 'is-invalid' : ''} ${bind.success ? 'is-valid' : ''} ${readOnly ? 'readonly' : ''}`;
 
@@ -96,7 +95,6 @@ export const Input: React.FC<InputProps> = (props) => {
                 minutesRef={minutesRef}
                 meridiemRef={meridiemRef}
                 readOnly={readOnly}
-                required={required}
             />
 
             <span>:</span>
@@ -110,7 +108,6 @@ export const Input: React.FC<InputProps> = (props) => {
                 hourRef={hourRef}
                 meridiemRef={meridiemRef}
                 readOnly={readOnly}
-                required={required}
             />
 
             <MeridiemInput
@@ -122,7 +119,6 @@ export const Input: React.FC<InputProps> = (props) => {
                 hourRef={hourRef}
                 minutesRef={minutesRef}
                 readOnly={readOnly}
-                required={required}
             />
 
             <SRDescriptions

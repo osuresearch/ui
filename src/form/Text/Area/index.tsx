@@ -57,7 +57,6 @@ const Area = React.forwardRef<HTMLTextAreaElement, AreaProps>((props, ref) => {
                 if (props.onChange) props.onChange(e);
             }}
             readOnly={bind.readOnly || props.readOnly}
-            required={bind.required || props.required}
         />
 
         {typeof (value) === 'string' && minLength && (value.length < minLength) &&

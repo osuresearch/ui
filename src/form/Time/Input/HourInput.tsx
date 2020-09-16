@@ -10,7 +10,6 @@ interface Props {
     handleClick: (e: React.MouseEvent) => void;
     minutesRef?: React.RefObject<HTMLInputElement>;
     meridiemRef?: React.RefObject<HTMLInputElement>;
-    required?: boolean;
     readOnly?: boolean;
 }
 
@@ -22,7 +21,6 @@ const HourInput = React.forwardRef<HTMLInputElement, Props>(({
     handleClick,
     minutesRef,
     meridiemRef,
-    required,
     readOnly
 }, ref) => {
     const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -165,7 +163,6 @@ const HourInput = React.forwardRef<HTMLInputElement, Props>(({
                 onKeyDown={handleKeyDown}
                 onKeyPress={handleKeyPress}
                 onChange={handleHourChange}
-                required={required}
                 readOnly={readOnly}
             />
         </label>

@@ -54,7 +54,6 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
                 if (props.onChange) props.onChange(e);
             }}
             readOnly={bind.readOnly || props.readOnly}
-            required={bind.required || props.required}
         />
     );
 });
