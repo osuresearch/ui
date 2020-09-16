@@ -12,9 +12,13 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
 }
 
 /**
- * `<Checkbox.Input />` Subcomponent. Accepts all `HTMLInputElement` props.
+ * `<Checkbox.Input />` sub-component. 
+ * 
+ * Accepts all 
+ * [HTMLInputElement attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox)
+ * as props.
  */
-export const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
+const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     const { bind } = useContext(Context);
     const { isDiff, isPrint } = useContext(FormContext);
 
@@ -77,3 +81,5 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref)
         />
     )
 });
+
+export default Input;

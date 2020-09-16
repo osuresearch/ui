@@ -6,7 +6,7 @@ export type LabelProps = React.LabelHTMLAttributes<HTMLLabelElement> & {
     context?: React.Context<IFormFieldContext<any>>;
 }
 
-export function Label(props: LabelProps) {
+const Label: React.FC<LabelProps> = (props) => {
     // Separate context from the other props (or else they are added as props to the component itself)
     const { context, ...otherProps } = props;
     const { bind } = useContext(context!);
@@ -24,3 +24,5 @@ export function Label(props: LabelProps) {
         </label>
     );
 }
+
+export default Label;

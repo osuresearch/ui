@@ -17,7 +17,7 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
  *  * [React event handlers](https://reactjs.org/docs/events.html#supported-events)
  *  * All common [`<input>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input) attributes
  */
-export const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
+const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     const { bind } = useContext(Context);
     const { isDiff, isPrint } = useContext(FormContext);
 
@@ -83,3 +83,5 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref)
         />
     )
 });
+
+export default Input;

@@ -12,23 +12,43 @@ import Time from '../../Time';
 import DatePrefix from './DatePrefix';
 import DateTimePrefix from './DateTimePrefix';
 
-export type InputProps = Omit<ReactDatePickerProps, 'onChange' | 'selected'> & {
+// The following props are disabled due to not meeting accessibility standards
+type DisabledReactDatePickerProps = 
+    'customTimeInput' | 'timeInputLabel' | 'disabledKeyboardNavigation'
+    | 'showMonthYearPicker' | 'showMonthYearDropdown' | 'monthsShown'
+    | 'withPortal' | 'showQuarterYearPicker' | 'showTimeSelect'
+    | 'showTimeSelectOnly' | 'todayButton' | 'showYearPicker'
+    | 'onChange' | 'selected'
+
+export type InputProps = Omit<ReactDatePickerProps, DisabledReactDatePickerProps> & {
     /** The selected date - **must** be an ISO8601 timestamp string **/
     value: string;
 
-    /**
-     * onChange handler - a state setter for the parent component
-     */
+    /** Include time input in the calendar popup */
+    showTimeInput?: boolean;
+
+    /** Returns the updated date as an ISO8601 timestamp string */
     onChange: (date: string) => void;
 }
 
-const Input: React.FC<InputProps> = (allprops) => {
-    // Remove props that we don't want the developer to be
-    // accidentally use because of accessibility issues
-    // TODO - fix the MonthYear picker (that will be useful)
-    const { customTimeInput, timeInputLabel, disabledKeyboardNavigation, showMonthYearPicker, showMonthYearDropdown, monthsShown, withPortal, showQuarterYearPicker, showTimeSelect, showTimeSelectOnly, todayButton, showYearPicker, ...props } = allprops;
-
-
+/**
+ * Dropdown to select a date and time.
+ * 
+ * This component will accept *most* props supported by [react-datepicker](https://reactdatepicker.com/)
+ * with the exception of the following that fail to meet accessibility standards:
+ * 
+ * ```ts
+ * type DisabledReactDatePickerProps = 
+ * 'customTimeInput' | 'timeInputLabel' | 'disabledKeyboardNavigation'
+ *  | 'showMonthYearPicker' | 'showMonthYearDropdown' | 'monthsShown'
+ *  | 'withPortal' | 'showQuarterYearPicker' | 'showTimeSelect'
+ *  | 'showTimeSelectOnly' | 'todayButton' | 'showYearPicker'
+ *  | 'onChange' | 'selected'
+ *  ```
+ * 
+ * If you wish to use one of these, please submit a merge request with a patch that resolves the issues.
+ */
+const Input: React.FC<InputProps> = (props) => {
     const { bind } = useContext(Context);
     const { isDiff, isPrint } = useContext(FormContext);
 

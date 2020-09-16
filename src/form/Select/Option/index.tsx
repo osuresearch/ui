@@ -26,9 +26,11 @@ export type OptionProps = React.OptionHTMLAttributes<HTMLOptionElement> & {
  * 
  * Requires *either* a `value` or `optionsBind` prop.
  * 
- * Accepts standard [`<option>` attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option)
+ * Accepts all 
+ * [HTMLOptionElement](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option)
+ * props.
  */
-export const Option: React.FC<OptionProps> = (props) => {
+const Option: React.FC<OptionProps> = (props) => {
     const { bind } = useContext(Context);
     const { isDiff, isPrint } = useContext(FormContext);
 
@@ -58,11 +60,12 @@ export const Option: React.FC<OptionProps> = (props) => {
                     {props.optionsBind!.value![key]}
                 </option>
             )}
-        </>)
+        </>);
     }
 
     return (
         <option {...props}>{props.children}</option>
-    )
-
+    );
 }
+
+export default Option;

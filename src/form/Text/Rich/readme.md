@@ -9,7 +9,9 @@ Include the following CDN script in your application.
 
 By default, the content iframe inside the editor uses a CSS file in the Assets project. You can provide your own app-specific CSS by providing an alternative source file in `contentsCss`. 
 
-##### Provide the HTML value as a string
+### Examples
+
+Provide the HTML value as a string
 
 ```jsx
 import { Text } from '@oris/ui';
@@ -23,10 +25,7 @@ const html = "<h1>Hello World</h1><p>I am <strong>rich</strong> text!</p>";
 </Text>
 ```
 
-### Examples
-
-##### Simple version
-A "simple" version is also supplied if you do not need (or want) the full range of controls in your app:
+A "simple" UI version is also available if you do not need (or want) the full range of controls in your app:
 
 ```jsx
 import { Text } from '@oris/ui';
@@ -39,8 +38,6 @@ const html = "Hello World! <p>I am <strong>rich</strong> text!</p>";
     <Text.Rich defaultValue={html} simple />
 </Text>
 ```
-
-##### Setting and changing values
 
 Use the `defaultValue` and `onChange` props to set and extract the text from your own component:
 

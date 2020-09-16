@@ -9,8 +9,12 @@ export type InputProps = React.InputHTMLAttributes<HTMLInputElement>;
 
 /**
  * Equivalent of `<input type='text'>`
+ * 
+ * Accepts all
+ * [HTMLInputElement](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/text)
+ * props.
  */
-export const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
+const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     const { bind } = useContext(Context);
     const { isDiff, isPrint } = useContext(FormContext);
 
@@ -54,3 +58,5 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref)
         />
     );
 });
+
+export default Input;

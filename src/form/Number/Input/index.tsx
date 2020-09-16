@@ -5,8 +5,12 @@ export type InputProps = React.InputHTMLAttributes<HTMLInputElement>;
 
 /**
  * Equivalent of `<input type='number'>`
+ * 
+ * Accepts all 
+ * [HTMLInputElement attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox)
+ * as props.
  */
-export const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
+const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     const { bind } = useContext(Context);
 
     const value = bind.value || props.defaultValue;
@@ -36,3 +40,5 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref)
         />
     );
 });
+
+export default Input;

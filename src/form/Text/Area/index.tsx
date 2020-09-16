@@ -12,8 +12,12 @@ export type AreaProps = React.TextareaHTMLAttributes<HTMLTextAreaElement> & {
 
 /**
  * Equivalent of `<textarea>`
+ * 
+ * Accepts all
+ * [HTMLTextAreaElement](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea)
+ * props.
  */
-export const Area = React.forwardRef<HTMLTextAreaElement, AreaProps>((props, ref) => {
+const Area = React.forwardRef<HTMLTextAreaElement, AreaProps>((props, ref) => {
     const { bind } = useContext(Context);
     const { isDiff, isPrint } = useContext(FormContext);
 
@@ -68,3 +72,5 @@ export const Area = React.forwardRef<HTMLTextAreaElement, AreaProps>((props, ref
         }
     </>);
 });
+
+export default Area;

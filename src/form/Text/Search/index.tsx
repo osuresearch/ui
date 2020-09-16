@@ -40,7 +40,7 @@ function fromSearchPair(pair: SearchPair): Nullable<string> {
  * Jams a standard ORIS/UI search result pair into a single string value bind 
  * in the form `key|name`
  */
-export const Search: React.FC<SearchProps> = ({
+const Search: React.FC<SearchProps> = ({
     endpoint = 'https://orapps.osu.edu/api/v1/person'
 }) => {
     const { bind } = useContext(Context);
@@ -58,3 +58,5 @@ export const Search: React.FC<SearchProps> = ({
         />
     );
 }
+
+export default Search;

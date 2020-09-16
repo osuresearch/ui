@@ -4,41 +4,29 @@ import useFieldBindOrProps from '../../internal/FormCommon/hooks/useFieldBindOrP
 
 import { withFormContext } from '../../internal/FormCommon/HOC/withFormContext';
 
-import { Input, InputProps } from './Input';
+import Input, { InputProps } from './Input';
 
 import {
+    ICommonComposition,
     Label, LabelProps,
     Help, HelpProps,
     Error, ErrorProps,
-    Success, SuccessProps
+    Success, SuccessProps, 
 } from '../../internal/FormCommon/Components';
 
 type Props = FormFieldProps<string> & {
     
 }
 
-interface INumberComposition {
-    /** Equivalent of `<label>` */
-    Label: React.FC<LabelProps>
-
-    /** Equivalent of `<input type='text'>` */
+interface INumberComposition extends ICommonComposition {
+    /**
+     * Equivalent of `<input type='number'>`
+     * 
+     * Accepts all 
+     * [HTMLInputElement attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox)
+     * as props.
+     */
     Input: React.ForwardRefExoticComponent<InputProps & React.RefAttributes<HTMLInputElement>>
-
-    /** Help text for the `<Number>` */
-    Help: React.FC<HelpProps>
-
-    /**
-     * (required if `<Number>` requires validation)
-     * Provides instructions on how to resolve the validation 
-     * error; will display when `error` is set in `<Number>`
-     */
-    Error: React.FC<ErrorProps>
-
-    /**
-     * Feedback for when the set meets the validation rules; 
-     * will display when `success` is set in `<Number>`
-     */
-    Success: React.FC<SuccessProps>
 }
 
 export const Context = React.createContext<IFormFieldContext<string>>({

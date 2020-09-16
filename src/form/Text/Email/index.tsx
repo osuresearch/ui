@@ -5,8 +5,12 @@ export type EmailProps = React.InputHTMLAttributes<HTMLInputElement>;
 
 /**
  * Email input field with automatic validation for invalid email addresses
+ * 
+ * Accepts all
+ * [HTMLInputElement](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/email)
+ * props.
  */
-export const Email = React.forwardRef<HTMLInputElement, EmailProps>((props, ref) => {
+const Email = React.forwardRef<HTMLInputElement, EmailProps>((props, ref) => {
     const { bind } = useContext(Context);
 
     const value = bind.value || props.defaultValue;
@@ -53,3 +57,5 @@ export const Email = React.forwardRef<HTMLInputElement, EmailProps>((props, ref)
         />
     );
 });
+
+export default Email;

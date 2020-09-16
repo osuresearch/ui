@@ -60,7 +60,7 @@ function listFormComponents() {
         // to ensure it's first in the list 
         if (component === 'Form') {
             sections = [{ 
-                name: 'Form',
+                name: '<Form>',
                 usageMode: 'collapse',
                 components: 'src/form/Form/index.tsx'
             }, ...sections];

@@ -10,9 +10,11 @@ export type ControlProps = React.SelectHTMLAttributes<HTMLSelectElement> & {
 /**
  * A control container for `<Select.Option>` children.
  * 
- * Accepts standard [`<select>` attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select)
+ * Accepts all 
+ * [HTMLSelectElement](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select)
+ * props.
  */
-export const Control = React.forwardRef<HTMLSelectElement, ControlProps>((props, ref) => {
+const Control = React.forwardRef<HTMLSelectElement, ControlProps>((props, ref) => {
     const { bind } = useContext(Context);
     const { isDiff, isPrint } = useContext(FormContext);
 
@@ -44,3 +46,5 @@ export const Control = React.forwardRef<HTMLSelectElement, ControlProps>((props,
         </select>
     )
 });
+
+export default Control;

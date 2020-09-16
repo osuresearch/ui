@@ -4,8 +4,8 @@ import useFieldBindOrProps from '../../internal/FormCommon/hooks/useFieldBindOrP
 
 import { withFormContext } from '../../internal/FormCommon/HOC/withFormContext';
 
-import { Input, InputProps } from './Input';
-import { Label, LabelProps } from './Label';
+import Input, { InputProps } from './Input';
+import Label, { LabelProps } from './Label';
 
 import {
     Help, HelpProps,
@@ -13,27 +13,19 @@ import {
 
 type Props = FormFieldProps<string> & {
     // Add your other top level props here.
-    // foo: number
 }
 
 interface IRadioComposition {
-    /**
-     * #### `Radio.Label` (required)
-     * Equivalent of `<label>`
-     * 
-     * * **Props**
-     *  * [HTML Global attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes)
-     */
+    /** Labeling for the radio */
     Label: React.FC<LabelProps>
 
     /** Help text for the `Radio` */
     Help: React.FC<HelpProps>
 
     /**
-     * #### `Radio.Input` (required)
-     * Equivalent of `<input type='radio'>`
+     * Styled equivalent of `<input type="radio"/>`
      * 
-     * * **Props**
+     * Additional accepted props:
      *  * [`radio` input attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio#Additional_attributes)
      *  * [React event handlers](https://reactjs.org/docs/events.html#supported-events)
      *  * All common [`<input>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input) attributes
@@ -42,10 +34,7 @@ interface IRadioComposition {
 }
 
 export const Context = React.createContext<IFormFieldContext<string>>({
-    bind: new NullFieldBind<string>(),
-
-    // Add your other prop defaults here that should be made available to consumers
-    // foo: 1
+    bind: new NullFieldBind<string>()
 });
 
 /**
