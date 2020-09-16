@@ -1,10 +1,7 @@
 
 ### Examples
 
-#### `<Text.Input>`
-
-##### Inlining values
-
+Inlining values
 ```jsx
 import { useState } from 'react';
 import { Form, Button } from '@oris/ui';
@@ -24,13 +21,13 @@ const onChange = (currentValue, prevValue) => {
         <Text id="foo1" name="foo" readOnly={readOnly} error={error} onChange={onChange}>
             <Text.Label>
                 Label here
-                </Text.Label>
+            </Text.Label>
 
             <Text.Input value={value} onChange={(e) => setValue(e.currentTarget.value)} />
 
             <Text.Help>
                 Help stuff go here
-                </Text.Help>
+            </Text.Help>
 
             <Text.Error />
         </Text>
@@ -38,19 +35,18 @@ const onChange = (currentValue, prevValue) => {
 
     <Button onClick={() => setReadOnly(!readOnly)}>
         Toggle Read Only
-            </Button>
+    </Button>
 
     <Button onClick={() => setError(error ? '' : 'Do better')}>
         Toggle Error
-            </Button>
+    </Button>
 
     <p>Current value: {value}</p>
     <p>Previous value: {prev}</p>
 </Form>
 ```
 
-##### Providing a `bind` class instance:
-
+Providing a `bind` class instance:
 ```jsx
 import { Form, Button } from '@oris/ui';
 import { MyMockStringBind } from '../../internal/FormCommon/types';
@@ -77,8 +73,7 @@ const bind = new MyMockStringBind('foo4', 'foo bar');
 </Form>
 ```
 
-##### Getting bind values on form submit:
-
+Getting bind values on form submit:
 ```jsx
 import React, { useEffect } from 'react';
 import { Form, Button } from '@oris/ui';
@@ -113,8 +108,7 @@ function MyComponent() {
 <MyComponent />
 ```
 
-##### Update binds externally
-
+Update binds externally
 ```jsx
 import React, { useEffect, useState } from 'react';
 import { Form, Button } from '@oris/ui';
@@ -137,7 +131,7 @@ const bind = new MyMockStringBind('foo7', 'foo bar');
 </Form>
 ```
 
-##### Two Fields One Bind
+Two Fields One Bind
 
 Also demos another component that uses the `useFieldBind` hook to monitor a bind for changes or apply changes.
 
@@ -183,163 +177,7 @@ function MyComponent() {
 </Form>
 ```
 
-#### `<Text.Search>`
-An example involving a Search transformed back and forth from a `key|name` string:
-
-```jsx
-import { useState } from 'react';
-import { Form } from '@oris/ui';
-
-const [value, setValue] = useState('200275154|Chase McManning');
-
-<Form.Group>
-    <Text id="foo-search" value={value} onChange={setValue}>
-        <Text.Label>
-            Label here
-            </Text.Label>
-
-        <Text.Search />
-
-        <Text.Help>
-            You picked <strong>{value ? value : 'nobody'}</strong>
-        </Text.Help>
-    </Text>
-</Form.Group>
-```
-
-#### `<Text.Email>`
-
-```jsx
-import { Form } from '@oris/ui';
-
-<Form.Group>
-    <Text id="foo-email">
-        <Text.Label>Provide your email address</Text.Label>
-        <Text.Email />
-        <Text.Error />
-    </Text>
-</Form.Group>
-```
-
-#### `<Text.Area>`
-
-##### Basic `<Text.Area>`
-```jsx
-import { Form } from '@oris/ui';
-
-<Form.Group>
-    <Text id="textarea-sample" required>
-        <Text.Label>Basic textarea</Text.Label>
-
-        <Text.Area 
-            placeholder="You may include a placeholder, but it must not contain important information."
-            rows={3}
-        />
-
-        <Text.Help>
-            Textareas may expand vertically but <strong>not</strong> horizontally outside their defined container.
-        </Text.Help>
-    </Text>
-</Form.Group>
-```
-
-##### `<Text.Area>` with Not Applicable option
-```jsx
-import { Form, FieldSet, Checkbox } from '@oris/ui';
-
-<Form.Group>
-    <FieldSet>
-        <Text id="textarea-with-na">
-            <Text.Label>
-                Textarea with Not Applicable option - a common pattern used in our apps
-            </Text.Label>
-            <Text.Area rows={3} />
-        </Text>
-
-        <Checkbox id="na-check">
-            <Checkbox.Input />
-            <Checkbox.Label>Not Applicable</Checkbox.Label>
-        </Checkbox>
-
-        <FieldSet.Help>
-            Use a <strong>1em</strong> padding between elements in the same <code>div</code>
-        </FieldSet.Help>
-    </FieldSet>
-</Form.Group>
-```
-
-#### `<Text.Rich>`
-
-##### Requirements
-Include the following CDN script in your application.
-
-```html
-<script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
-```
-
-By default, the content iframe inside the editor uses a CSS file in the Assets project. You can provide your own app-specific CSS by providing an alternative source file in `contentsCss`. 
-
-##### Provide the HTML value as a string
-
-```jsx
-import { Form } from '@oris/ui';
-
-const html = "<h1>Hello World</h1><p>I am <strong>rich</strong> text!</p>";
-
-<Form.Group>
-    <Text id="rich-text-editor">
-        <Text.Label>Rich Text Editor input</Text.Label>
-
-        <Text.Rich defaultValue={html} />
-    </Text>
-</Form.Group>
-```
-
-##### Simple version
-A "simple" version is also supplied if you do not need (or want) the full range of controls in your app:
-
-```jsx
-import { Form } from '@oris/ui';
-
-const html = "Hello World! <p>I am <strong>rich</strong> text!</p>";
-
-<Form.Group>
-    <Text id="simple-rte">
-        <Text.Label>I am a simple Rich Text Editor</Text.Label>
-
-        <Text.Rich defaultValue={html} simple />
-    </Text>
-</Form.Group>
-```
-
-##### Setting and changing values
-
-Use the `defaultValue` and `onChange` props to set and extract the text from your own component:
-
-```jsx
-import { useState } from 'react';
-import { Form } from '@oris/ui';
-
-const [content, setContent] = useState('<p>Start typing and see it update live</p>');
-
-<Form>
-    <Form.Group>
-        <Text id="set-change-values">
-            <Text.Label>Live Update</Text.Label>
-
-            <Text.Rich 
-                defaultValue={content}
-                onChange={setContent}
-            />
-        </Text>
-    </Form.Group>
-
-    Raw Content
-    <p><code>{content}</code> </p>
-</Form>
-```
-
-#### Validation
+Validation
 ```jsx
 import { Form } from '@oris/ui';
 

@@ -24,7 +24,7 @@ const onSubmit = data => console.log('submit', data);
     <Form.Row>
         <Form.Group className='col-md-6'>
             <Text
-                id="email"
+                id="my-email"
                 required
                 error={errors.email && errors.email.message}
             >
@@ -43,7 +43,7 @@ const onSubmit = data => console.log('submit', data);
             <DatePicker
                 id="birthdate"
                 required
-                error={errors.birthdate && 'Input your birthdate'}
+                error={errors.birthdate && errors.birthdate.message}
             >
                 <DatePicker.Label>
                     Date of Birth
@@ -51,7 +51,7 @@ const onSubmit = data => console.log('submit', data);
                 <Controller
                     name='birthdate'
                     control={control}
-                    rules={{ required: true }}
+                    rules={{ required: 'Input your birthdate' }}
                     render={props => <DatePicker.Input {...props} />}
                 />
                 <DatePicker.Error />

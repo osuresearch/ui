@@ -1,0 +1,24 @@
+import React, { useContext } from 'react';
+import { IFormFieldContext } from '../../../internal/FormCommon/types';
+
+export type LegendProps = React.HTMLAttributes<HTMLElement> & {
+    /** 
+     * Will automatically be provided by an HOC
+     * @ignore
+     */
+    context?: React.Context<IFormFieldContext<any>>;
+}
+
+export function Legend(props: LegendProps) {
+    // Separate context from the other props (or else they are added as props to the component itself)
+    const { context, ...otherProps } = props;
+    const { bind } = useContext(context!);
+
+    return (
+        <legend {...otherProps} className={
+            bind.required ? 'is-required' : ''
+        }>
+            {props.children ?? bind.instructions}
+        </legend>
+    );
+}

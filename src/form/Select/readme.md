@@ -94,3 +94,33 @@ const [success, setSuccess] = useState('');
     }}>Trigger Success</Button>
 </Form>
 ```
+
+#### Change Events
+
+```jsx
+import { Form } from '@oris/ui';
+
+const onChange = (newStrValue, oldStrValue) => {
+    alert(`Selection changed from ${oldStrValue} to ${newStrValue}`);
+}
+
+<Form.Group>
+    <Select id="vertex-component-type" onChange={onChange}>
+        <Select.Label>Select a data type for vertex components</Select.Label>
+
+        <Select.Control>
+            <Select.Option value="">
+                -- Please choose an option --
+                </Select.Option>
+            <Select.Option value="Float32">32-bit float number</Select.Option>
+            <Select.Option value="Float16">16-bit float number</Select.Option>
+            <Select.Option value="UNorm8">8-bit unsigned normalized number</Select.Option>
+            <Select.Option value="SNorm16">8-bit signed normalized number</Select.Option>
+        </Select.Control>
+
+        <Select.Help>
+            Some additional help text here
+        </Select.Help>
+    </Select>
+</Form.Group>
+```

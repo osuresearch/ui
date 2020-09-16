@@ -5,11 +5,12 @@ import useFieldBindOrProps from '../../internal/FormCommon/hooks/useFieldBindOrP
 import { withFormContext } from '../../internal/FormCommon/HOC/withFormContext';
 
 import {
-    Legend, LegendProps,
     Help, HelpProps,
     Error, ErrorProps,
-    Success, SuccessProps
+    Success, SuccessProps, 
 } from '../../internal/FormCommon/Components';
+
+import { Legend, LegendProps } from './Legend';
 
 import Inline from './Inline';
 
@@ -70,26 +71,7 @@ const IsInput = (element: React.ReactElement) => {
 }
 
 /**
- * A set of related input components
- * 
- * ### Subcomponents
- * #### `<FieldSet.Legend>` (required)
- * Serves as a label for all of the components in the `FieldSet`
- * 
- * 
- * #### `<FieldSet.Help>`
- * Help text for the `<FieldSet>`
- * 
- * 
- * #### `<FieldSet.Error>` (required if `<FieldSet>` requires validation)
- * Provides instructions on how to resolve the validation error; 
- * will display when `error` is set in `<FieldSet>`
- * 
- * 
- * #### `<FieldSet.Success>`
- * Feedback for when the set meets the validation rules; will 
- * display when `success` is set in `<FieldSet>`
- * 
+ * A set of related form components.
  */
 const FieldSet: React.FC<Props> & IFieldSetComposition = ({
     children,

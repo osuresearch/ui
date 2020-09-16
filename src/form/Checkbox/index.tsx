@@ -4,13 +4,14 @@ import useFieldBindOrProps from '../../internal/FormCommon/hooks/useFieldBindOrP
 
 import { withFormContext } from '../../internal/FormCommon/HOC/withFormContext';
 
-import { Input, InputProps } from './Input';
+import Input, { InputProps } from './Input';
+import Label, { LabelProps } from './Label';
 
 import {
-    ControlLabel, ControlLabelProps,
+    ICommonComposition,
     Help, HelpProps,
     Error, ErrorProps,
-    Success, SuccessProps
+    Success, SuccessProps, 
 } from '../../internal/FormCommon/Components';
 
 type Props = FormFieldProps<boolean> & {
@@ -18,84 +19,27 @@ type Props = FormFieldProps<boolean> & {
     // foo: number
 }
 
-interface ICheckboxComposition {
+interface ICheckboxComposition extends Omit<ICommonComposition, 'Label'> {
     /**
-     * Equivalent of `<label>`
+     * `<Checkbox.Input />` sub-component. 
      * 
-     * * **Props**
-     *  * [HTML Global attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes)
-    */
-    Label: React.FC<ControlLabelProps>
-
-    /** Help text for the `Checkbox` */
-    Help: React.FC<HelpProps>
-
-    /**
-     * Equivalent of `<input type='checkbox'>`
-     * 
-     * * **Props**
-     *  * [`checkbox` input attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox)
-     *  * [React event handlers](https://reactjs.org/docs/events.html#supported-events)
-     *  * All common [`<input>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input) attributes
-    */
+     * Accepts all 
+     * [HTMLInputElement attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox)
+     * as props.
+     */
     Input: React.ForwardRefExoticComponent<InputProps & React.RefAttributes<HTMLInputElement>>
 
-    /** 
-     * (required if single `<Checkbox>` that requires validation)
-     * 
-     * Provides instructions on how to resolve the validation 
-     * error; will display when `error` is set in `<Checkbox>`
-    */
-    Error: React.FC<ErrorProps>
-
-    /**
-     * Feedback for when the set meets the validation rules; 
-     * will display when `success` is set in `<Checkbox>`
-     */
-    Success: React.FC<SuccessProps>
+    Label: React.FC<LabelProps>
 }
 
 export const Context = React.createContext<IFormFieldContext<boolean>>({
-    bind: new NullFieldBind<boolean>(),
-
-    // Add your other prop defaults here that should be made available to consumers
-    // foo: 1
+    bind: new NullFieldBind<boolean>()
 });
 
 /**
- * A single checkbox
+ * A single checkbox. 
  * 
- * ### Subcomponents
- * 
- * #### `<Checkbox.Input>` (required)
- * Equivalent of `<input type='checkbox'>`
- * 
- * * **Props**
- *  * [`checkbox` input attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox)
- *  * [React event handlers](https://reactjs.org/docs/events.html#supported-events)
- *  * All common [`<input>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input) attributes
- * 
- * 
- * #### `<Checkbox.Label>` (required)
- * Equivalent of `<label>`
- * 
- * * **Props**
- *  * [HTML Global attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes)
- * 
- * 
- * #### `<Checkbox.Help>`
- * Help text for the `<Checkbox>`
- * 
- * 
- * #### `<Checkbox.Error>` (required if single `<Checkbox>` that requires validation)
- * Provides instructions on how to resolve the validation error; 
- * will display when `error` is set in `<Checkbox>`
- * 
- * 
- * #### `<Checkbox.Success>`
- * Feedback for when the set meets the validation rules; will 
- * display when `success` is set in `<Checkbox>`
- * 
+ * Requires `<Checkbox.Input />` and `<Checkbox.Label />` child components.
  */
 const Checkbox: React.FC<Props> & ICheckboxComposition = (props) => {
     const { bind } = useFieldBindOrProps(props);
@@ -110,7 +54,7 @@ const Checkbox: React.FC<Props> & ICheckboxComposition = (props) => {
 }
 
 Checkbox.Input = Input;
-Checkbox.Label = withFormContext<ControlLabelProps>(ControlLabel, Context);
+Checkbox.Label = withFormContext<LabelProps>(Label, Context);
 Checkbox.Help = withFormContext<HelpProps>(Help, Context);
 Checkbox.Success = withFormContext<SuccessProps>(Success, Context);
 Checkbox.Error = withFormContext<ErrorProps>(Error, Context);

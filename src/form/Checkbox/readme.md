@@ -12,11 +12,11 @@ import { Form } from '@oris/ui';
 
         <Checkbox.Label>
             Yes! I would like to receive your newsletter
-            </Checkbox.Label>
+        </Checkbox.Label>
 
         <Checkbox.Help>
             We will not spam your inbox
-            </Checkbox.Help>
+        </Checkbox.Help>
     </Checkbox>
 </Form.Group>
 ```
@@ -30,7 +30,7 @@ import { Form } from '@oris/ui';
         <Checkbox.Input disabled />
         <Checkbox.Label>
             This checkbox field is disabled
-            </Checkbox.Label>
+        </Checkbox.Label>
     </Checkbox>
 </Form.Group>
 ```
@@ -67,4 +67,24 @@ const [success, setSuccess] = useState();
         setSuccess('Thank you for accepting the terms and services');
     }}>Show Success</Button>
 </Form>
+```
+
+#### Change Events
+
+```jsx
+import { Form } from '@oris/ui';
+
+const onChange = (newBoolValue, oldBoolValue) => {
+    alert(`Checkbox changed from ${oldBoolValue} to ${newBoolValue}`);
+}
+
+<Form.Group>
+    <Checkbox id="toggle-me" onChange={onChange}>
+        <Checkbox.Input />
+
+        <Checkbox.Label>
+            Toggle Me!
+        </Checkbox.Label>
+    </Checkbox>
+</Form.Group>
 ```
