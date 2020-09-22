@@ -32,6 +32,49 @@ function listHtmlComponents() {
     return sections;
 }
 
+function listSearchComponents() {
+    const components = glob.sync('src/search/components/*/index.tsx');
+    
+    console.log(components);
+
+    // Need to handle top level:
+    // <DebugSearch>, <SearchProvider>
+    // Anything else? useSearch hook, different drivers, 
+    // Might just need a fat readme for it
+
+    var sections = [];
+    components.forEach((componentPath) => {
+        const dirname = path.dirname(componentPath);
+        const dirs = dirname.split('/'); // src, search, components, Checkbox
+        const component = dirs[3];
+        const subPaths = glob.sync(dirname + '/*/index.tsx');
+        
+        // Component with zero or more sub-components
+        sections.push({
+            name: `<${component}>`,
+            usageMode: 'collapse',
+            components: [
+                componentPath, // Main (composite) form component listed first
+                ...subPaths, // Followed by each sub-component at `{sub-component name}/index.tsx`
+            ]
+        });
+    });
+
+    // Add section for drivers
+    sections.push({
+        name: 'Drivers',
+        content: 'src/search/drivers/readme.md',
+        usageMode: 'collapse',
+        components: [
+            'src/search/drivers/**/index.tsx'
+        ],
+    });
+
+    console.log(sections);
+    // throw new Error('');
+    return sections;
+}
+
 /**
  * Custom aggregator for the `Form Components` section with the following rules:
  * 
@@ -122,6 +165,13 @@ let sections = [
         //     'src/form/Form/index.tsx'
         // ],
         sections: listFormComponents(),
+        sectionDepth: 0,
+    }, 
+    {
+        name: 'Search Components',
+        content: 'src/search/readme.md',
+        components: 'src/search/components/*.tsx',
+        sections: listSearchComponents(),
         sectionDepth: 0,
     },
     {

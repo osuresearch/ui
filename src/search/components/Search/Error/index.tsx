@@ -1,8 +1,10 @@
 import React, { useContext } from 'react';
-import { Context } from '.';
+import { Context } from '..';
 
 /**
  * Render the error message in case the search driver fails.
+ * 
+ * @visibleName Search.Error
  */
 const Error: React.FC = ({ children }) => {
     const data = useContext(Context);

@@ -2,28 +2,52 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { 
     SearchFilters, 
-    initDynamicContext, 
     SearchContext, 
-    destroyDynamicContext, 
     SearchTerms, 
     Sort,
     IFilter, 
     ISearchContext,
-} from '../index';
+} from '..';
+
+import { 
+    destroyDynamicContext, 
+    initDynamicContext 
+} from '../SearchContext';
 
 export type Props = {
+    /** 
+     * Unique identifier used by components to reference this provider. 
+     * This allows an application to use multiple entangled search providers 
+     */
     id: string
+
+    /**
+     * Default search terms to use when loading up the application.
+     * 
+     * If `SyncSearchWithURL` is attached to this provider, the defaults 
+     * defined here will be overridden by the URL data.
+     */
     defaultTerms?: SearchTerms
+    
+    /**
+     * Default search filters to use when loading up the application.
+     * 
+     * If `SyncSearchWithURL` is attached to this provider, the defaults 
+     * defined here will be overridden by the URL data.
+     */
     defaultFilters?: SearchFilters
 }
 
 /**
- * Provider for a named set of search filters and queries
+ * Provider for a named set of search filters and queries.
+ * 
+ * All search components (`<Filters>`, `<Search>`, etc) **must** be associated
+ * with a provider to share state information. 
  */
 const SearchProvider: React.FC<Props> = ({ 
     id, 
     defaultTerms = '', 
-    defaultFilters = undefined,
+    defaultFilters,
     children 
 }) => {
     const [terms, setTerms] = useState<string>(defaultTerms);

@@ -1,8 +1,10 @@
 import React, { useContext } from 'react';
-import { Context } from '.';
+import { Context } from '..';
 
 /**
  * Render the children if the search results come back empty
+ * 
+ * @visibleName Search.Empty
  */
 const Empty: React.FC = ({ children }) => {
     const data = useContext(Context);

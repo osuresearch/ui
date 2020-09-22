@@ -1,8 +1,8 @@
 
 import React, { useContext } from 'react';
-import { YetAnotherCheckboxWrapper } from './Common';
-import { FiltersContext } from '.';
-import { Term, term } from '../..';
+import { YetAnotherCheckboxWrapper } from '../Common';
+import { Context } from '..';
+import { Term, term } from '../../..';
 
 export type Props = {
     name: string
@@ -11,9 +11,11 @@ export type Props = {
 
 /**
  * Single checkbox with custom formatting support
+ * 
+ * @visibleName Filters.Toggle
  */
 const Toggle: React.FC<Props> = ({ name, title, children }) => {
-    const ctx = useContext(FiltersContext);
+    const ctx = useContext(Context);
     const filter = ctx.getFilter<Term>(title);
     
     const onToggle = (checked: boolean) => {

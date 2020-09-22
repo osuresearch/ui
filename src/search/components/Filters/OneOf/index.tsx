@@ -1,8 +1,8 @@
 
 import React, { useContext, useState } from 'react';
-import { Term, term } from '../..';
-import { KeyValuePairs, YetAnotherRadioSetWrapper } from './Common';
-import { FiltersContext } from '.';
+import { Term, term } from '../../..';
+import { KeyValuePairs, YetAnotherRadioSetWrapper } from '../Common';
+import { Context } from '..';
 
 export type Props = {
     name: string
@@ -13,9 +13,11 @@ export type Props = {
  * Radioset (or dropdown) of options where the user may only pick one.
  * 
  * Each option is represented as a Term filter.
+ * 
+ * @visibleName Filters.OneOf
  */
 const OneOf: React.FC<Props> = ({ name, options }) => {
-    const ctx = useContext(FiltersContext);
+    const ctx = useContext(Context);
 
     // Find an active filter matching the option set
     const names = Object.values(options);

@@ -44,11 +44,13 @@ const __dynamicContextMap = new Map<string, SearchContext>();
  * Create a new dynamic SearchContext tied to a named provider
  */
 export function initDynamicContext(provider: string, data: ISearchContext): SearchContext {
-    if (__dynamicContextMap.has(provider)) {
-        throw new Error(
-            `SearchProvider "${provider}" is already registered. Registering again is an implementation error.`
-        );
-    }
+    // TODO: This *is* an implementation error for apps, but Styleguidist examples
+    // need to be able to re-instantiate a provider when an example changes.
+    // if (__dynamicContextMap.has(provider)) {
+    //     throw new Error(
+    //         `SearchProvider "${provider}" is already registered. Registering again is an implementation error.`
+    //     );
+    // }
 
     console.debug(`[initDynamicContext(${provider})]`, data);
     

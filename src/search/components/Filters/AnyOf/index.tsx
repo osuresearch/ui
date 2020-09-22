@@ -1,8 +1,8 @@
 
 import React, { useContext } from 'react';
-import { AnyOf as AnyOfFilter, anyOf } from '../..';
-import { YetAnotherCheckboxWrapper } from './Common';
-import { FiltersContext } from '.';
+import { AnyOf as AnyOfFilter, anyOf } from '../../..';
+import { YetAnotherCheckboxWrapper } from '../Common';
+import { Context } from '..';
 
 export type Props = {
     name: string
@@ -20,9 +20,11 @@ export type Props = {
  * Enumeration of options that get combined together into a single `AnyOf` filter.
  * 
  * Only supports strings for keys.
+ * 
+ * @visibleName Filters.AnyOf
  */
 const AnyOf: React.FC<Props> = ({ name, options, minimumOptionsForClearButton = 5}) => {
-    const ctx = useContext(FiltersContext);
+    const ctx = useContext(Context);
     const filter = ctx.getFilter<AnyOfFilter>(name);
 
     let values: string[] = [];

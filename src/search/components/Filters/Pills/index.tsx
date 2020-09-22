@@ -1,7 +1,7 @@
 
 import React, { useContext } from 'react';
-import { FiltersContext } from '.';
-import { IFilter, AnyOf, anyOf, AndFilters, OR, AND, OrFilters, Term } from '../..';
+import { Context } from '..';
+import { IFilter, AnyOf, anyOf, AndFilters, OR, AND, OrFilters, Term } from '../../..';
 
 type PillProps = {
     label: string
@@ -60,9 +60,11 @@ function prettyLabel(filter: IFilter): string {
 
 /**
  * Pills that show all the active filters, with an option to clear each one.
+ * 
+ * @visibleName Filters.Pills
  */
 const Pills: React.FC<Props> = () => {
-    const { terms, filters, setTerms, getFilter, addFilter, deleteFilter } = useContext(FiltersContext);
+    const { terms, filters, setTerms, getFilter, addFilter, deleteFilter } = useContext(Context);
 
     const onDeleteNamedFilter = (name: string) => {
         deleteFilter(name);

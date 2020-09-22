@@ -15,7 +15,7 @@ export type SearchData = {
  * Required props for a driver component provided to `Search.driver`
  */
 export type DriverProps = {
-    id: string
+    provider: string
     updateSearchData: (data: SearchData) => void
 }
 
@@ -157,7 +157,24 @@ export function sort(name: string, field: string, order: SortOrder = 'desc'): So
 
 //#endregion
 
-export { default as Search } from './components/Search';
+//#region Public API 
+
+// Data structures and types
 export { default as SearchFilters } from './SearchFilters';
 export type { ISearchContext, SearchContext } from './SearchContext';
-export { getDynamicContext, initDynamicContext, destroyDynamicContext } from './SearchContext';
+
+// Components
+export { default as SearchProvider } from './components/SearchProvider';
+export { default as SearchDebugger } from './components/SearchDebugger';
+export { default as SyncSearchWithURL } from './components/SyncSearchWithURL';
+export { default as Search } from './components/Search';
+export { default as Filters } from './components/Filters';
+
+// Hooks
+export { default as useSearch } from './hooks/useSearch';
+
+// Drivers are not exported here - import specific ones from `@oris/ui/search/drivers`
+// This allows us to safely load only the drivers that are needed in a project.
+// (e.g. a non-GraphQL project doesn't need to worry about GraphQL drivers)
+
+//#endregion

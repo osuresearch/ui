@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect, ChangeEvent } from 'react';
-import { Icon } from '@oris/ui';
-import { FiltersContext } from '.';
-import { term, Term } from '../..';
+import { Context } from '..';
+import { term, Term } from '../../..';
+import { Icon } from '../../../..';
 
 export type Props = {
     name: string
@@ -21,9 +21,11 @@ export type Props = {
  * 
  * The display name of the filter will be in the form of `{title}: "{value}"`.
  * For example: `Protocol: "2019H0023"`
+ * 
+ * @visibleName Filters.Match
  */
 const Match: React.FC<Props> = ({ name, prefix, placeholder, title = 'Search by keyword' }) => {
-    const ctx = useContext(FiltersContext);
+    const ctx = useContext(Context);
     const [value, setValue] = useState('');
 
     // title + ': ' causes pills to also display the term value

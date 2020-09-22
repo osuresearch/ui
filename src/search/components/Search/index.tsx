@@ -6,7 +6,7 @@ import Error from './Error';
 import Empty from './Empty';
 
 type Props = {
-    id: string
+    provider: string
     driver: SearchDriver
 };
 
@@ -16,25 +16,28 @@ interface ISearchComposition {
     Empty: React.FC
 }
 
-type SearchData = {
+interface ISearchContext {
     loading: boolean
     error?: string
     results?: any[]
 }
 
-const EmptySearchData: SearchData = {
-    loading: true
-};
+export const Context = React.createContext<ISearchContext>({} as ISearchContext);
 
-export const Context = React.createContext<SearchData>(EmptySearchData);
-
-const Search: React.FC<Props> & ISearchComposition = ({ id, driver, children }) => {
-    const [data, setData] = useState<SearchData>(EmptySearchData);
+/**
+ * Composite component that handles performing searches with a provided `driver`
+ * and displaying the results of each search. 
+ * 
+ * Drivers will typically execute a search whenever search data changes (terms, filters, or sorting).
+ * For more information on how each driver executes a search, see their respective documentation.
+ */
+const Search: React.FC<Props> & ISearchComposition = ({ provider, driver, children }) => {
+    const [data, setData] = useState<ISearchContext>({ loading: true });
 
     const DriverComponent = driver;
     return (
         <Context.Provider value={data}>
-            <DriverComponent id={id} updateSearchData={setData} />
+            <DriverComponent provider={provider} updateSearchData={setData} />
             {children}
         </Context.Provider>
     )

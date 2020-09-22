@@ -1,11 +1,13 @@
 
 import React, { useState } from 'react';
-import { Icon } from '@oris/ui';
+import { Icon } from '../../../..';
 
 export type Props = { };
 
 /**
- * Even MORE filters to show (contains a set of groups)
+ * Even MORE filters to show (contains a collapsible set of groups)
+ * 
+ * @visibleName Filters.More
  */
 const More: React.FC<Props> = ({ children }) => {
     const [more, setMore] = useState(false);

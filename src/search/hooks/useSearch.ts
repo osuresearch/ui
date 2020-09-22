@@ -1,6 +1,7 @@
 
 import { useContext } from 'react';
-import { ISearchContext, getDynamicContext } from '../index';
+import { ISearchContext } from '..';
+import { getDynamicContext } from '../SearchContext';
 
 export interface useSearchRetval extends ISearchContext { 
     // Nothing extra. Yet.
@@ -13,8 +14,8 @@ export interface useSearchRetval extends ISearchContext {
  * 
  * @author Chase McManning <mcmanning.1@osu.edu>
  */
-export default function useSearch(id: string): useSearchRetval {
-    const context = useContext(getDynamicContext(id));
+export default function useSearch(provider: string): useSearchRetval {
+    const context = useContext(getDynamicContext(provider));
     
     // There used to be work here, it's gone now. This just 
     // makes it easier to provide the dynamic context without

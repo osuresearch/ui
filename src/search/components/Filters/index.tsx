@@ -15,7 +15,8 @@ import useSearch from '../../hooks/useSearch';
 import { ISearchContext } from '../..';
 
 type Props = {
-    id: string
+    /** SearchProvider `id` to use when manipulating search data */
+    provider: string
 };
 
 interface IFiltersComposition {
@@ -32,13 +33,11 @@ interface IFiltersComposition {
 }
 
 interface IFiltersContext extends ISearchContext {
-    // .. anything? 
+    // Anything filter-tree specific goes here.
 }
 
-/**
- * Context shared by all children of a <Filters> component.
- */
-export const FiltersContext = createContext<IFiltersContext>({} as IFiltersContext);
+// Context shared by all children of <Filters>
+export const Context = createContext<IFiltersContext>({} as IFiltersContext);
 
 /**
  * Set of UI components that control the terms and filters for a search.
@@ -47,19 +46,18 @@ export const FiltersContext = createContext<IFiltersContext>({} as IFiltersConte
  * and all the child components automatically update terms and filters of
  * that search. 
  */
-const Filters: React.FC<Props> & IFiltersComposition = ({ id, children }) => {
+const Filters: React.FC<Props> & IFiltersComposition = ({ provider, children }) => {
     // This uses a search provider and shares the same provider with all child
     // components, without each one needing to also hook the provider. 
-    // const search = useSearch(id);
-    const search = useSearch(id);
+    // const search = useSearch(provider);
+    const search = useSearch(provider);
 
-    console.debug('redraw filters', search);
     return (
-        <FiltersContext.Provider value={search}>
+        <Context.Provider value={search}>
             <div className="filters">
                 {children}
             </div>
-        </FiltersContext.Provider>
+        </Context.Provider>
     );
 }
 

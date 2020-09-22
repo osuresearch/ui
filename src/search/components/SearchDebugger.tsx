@@ -1,10 +1,11 @@
 
 import React, { useState } from "react";
-import useSearch from "../../hooks/useSearch";
-import { Button, Icon } from "@oris/ui";
+import { Button } from "../..";
+import useSearch from "../hooks/useSearch";
 
 type Props = {
-    id: string
+    /** SearchProvider `id` to attach the debugger to */
+    provider: string
 }
 
 /**
@@ -12,19 +13,14 @@ type Props = {
  * 
  * Useful for testing new components and state changes.
  */
-const DebugSearch: React.FC<Props> = ({ id }) => {
+const SearchDebugger: React.FC<Props> = ({ provider }) => {
     const [show, setShow] = useState(false);
-    const { terms, filters, sort } = useSearch(id);
+    const { terms, filters, sort } = useSearch(provider);
     
-    // TODO: (TC-2) Add access controls 
-    if (window.location.hostname === 'orapps.osu.edu') {
-        return null;
-    }
-
     return (
         <div>
             <Button theme="link" onClick={() => setShow(!show)}>
-                🧪 Toggle Search Debug
+                🧪 Toggle Search Debugger
             </Button>
 
             {show && 
@@ -47,4 +43,4 @@ const DebugSearch: React.FC<Props> = ({ id }) => {
     )
 }
 
-export default DebugSearch;
+export default SearchDebugger;

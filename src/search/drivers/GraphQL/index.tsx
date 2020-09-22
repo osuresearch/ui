@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { DocumentNode, useLazyQuery } from '@apollo/client';
 
-import { DriverProps, SearchData, AND } from '..';
-import useSearch from '../hooks/useSearch';
+import { DriverProps, SearchData, AND } from '../..';
+import useSearch from '../../hooks/useSearch';
 
 /** Loose typing for GQL search results */
 type GraphQLSearchResponse = {
@@ -16,17 +16,17 @@ type GraphQLSearchResponse = {
  * 
  * - `$terms: String!` - Full text search terms
  * - `$filters: SearchFilters` - Set of filters to narrow down results
- * - `$sort: SearchSort` - Sorting rules for the results
+ * - `$sort: SearchSorting` - Sorting rules for the results
  * 
  * The *first* GraphQL field returned will be used for the results
  * and must return an array of values.
  */
 export default function GraphQL(query: DocumentNode) {
     const DriverComponent: React.FC<DriverProps> = ({
-        id,
+        provider,
         updateSearchData
     }) => {
-        const { terms, filters, sort } = useSearch(id);
+        const { terms, filters, sort } = useSearch(provider);
         const [callable, result] = useLazyQuery<GraphQLSearchResponse>(query);
         const [, setCached] = useState<SearchData>();
         

@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Icon } from '@oris/ui';
-import { FiltersContext } from '.';
+import { Context } from '..';
+import { Icon } from '../../../..';
 
 export type Props = {
     
@@ -8,9 +8,11 @@ export type Props = {
 
 /**
  * Full-text search terms input
+ * 
+ * @visibleName Filters.Terms
  */
 const Terms: React.FC<Props> = (props) => {
-    const { terms, setTerms } = useContext(FiltersContext);
+    const { terms, setTerms } = useContext(Context);
     const [value, setValue] = useState('');
     
     // Update self when an external entity modifies search terms

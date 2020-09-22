@@ -1,9 +1,8 @@
 
-import React, { useContext, useState } from 'react';
-import { KeyValuePairs, YetAnotherCheckboxWrapper } from './Common';
-import Toggle from './Toggle';
-import { FiltersContext } from '.';
-import { OrFilters, AndFilters, Term, TermValue, term, OR, AND } from '../..';
+import React, { useContext } from 'react';
+import { KeyValuePairs, YetAnotherCheckboxWrapper } from '../Common';
+import { Context } from '..';
+import { OrFilters, AndFilters, Term, term, OR, AND } from '../../..';
 
 export type Props = {
     options: KeyValuePairs
@@ -33,9 +32,11 @@ export type Props = {
  * Batch of multiple <Toggle> components matching to an enumeration 
  * between filter names and titles. Each filter will be set as a boolean
  * `true` value when checked, or deleted when unchecked.
+ * 
+ * @visibleName Filters.Toggles
  */
 const Toggles: React.FC<Props> = ({ name, options, minimumOptionsForClearButton = 5, operator = 'AND' }) => {
-    const ctx = useContext(FiltersContext);
+    const ctx = useContext(Context);
 
     let filter: OrFilters | AndFilters | undefined;
     let terms: Term[] = [];

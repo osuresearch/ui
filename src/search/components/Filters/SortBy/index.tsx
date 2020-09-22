@@ -1,7 +1,7 @@
 
 import React, { useContext } from 'react';
-import { Sort } from '../..';
-import { FiltersContext } from '.';
+import { Sort } from '../../..';
+import { Context } from '..';
 
 export type Props = {
     /** Different sort options that a user can pick from */
@@ -20,9 +20,11 @@ export type Props = {
  *  sort('Last Modified ↑', 'lastModifiedDate', 'asc')
  * ]}
  * ```
+ * 
+ * @visibleName Filters.SortBy
  */
 const SortBy: React.FC<Props> = ({ options }) => {
-    const ctx = useContext(FiltersContext);
+    const ctx = useContext(Context);
     
     const onChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const selected = options[parseInt(e.target.value)];

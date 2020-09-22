@@ -1,11 +1,11 @@
 
-
 import React, { useEffect, useState } from 'react';
-import useSearch from '../../hooks/useSearch';
-import { IFilter, Sort } from '../..';
+import useSearch from '../hooks/useSearch';
+import { IFilter, Sort } from '..';
 
 type Props = {
-    id: string
+    /** SearchProvider `id` to sync the URL parameters */
+    provider: string
 
     /** 
      * Query key prefix for every query key. This allows multiple sync
@@ -72,11 +72,22 @@ function urlDecodeSort(encoded: string): Sort | undefined {
 }
 
 /**
- * Monitors window.location for search data to update filters
- * and pushes updates to the location on search data changes
+ * Allows a user to bookmark or share searches for an application.
+ * 
+ * When the search data (terms, filters, sorting) changes, the current address
+ * is updated via the `History.ReplaceState` API to contain a serialized copy
+ * of the search data. 
+ * 
+ * If the user bookmarks (or shares) the URL, the same search data will
+ * be loaded on next visit.
+ * 
+ * This also means you need to safely handle access-based search filtering on the 
+ * backend. E.g. if an admin shares a link that contains an `adminOnlyData`
+ * search filter, then the user they shared that with may also potentially send
+ * that filter to the server as well.
  */
-const SyncSearchWithURL: React.FC<Props> = ({ id, prefix = '' }) => {
-    const search = useSearch(id);
+const SyncSearchWithURL: React.FC<Props> = ({ provider, prefix = '' }) => {
+    const search = useSearch(provider);
     const [init, setInit] = useState(true);
     
     // On update of search data, write to the address bar

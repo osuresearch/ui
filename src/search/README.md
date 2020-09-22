@@ -1,78 +1,111 @@
 
-# Payload Syntax
+Docs need:
 
-Search filters comply with the standard expected by the ORIS\GraphQL `SearchFilters` scalar. The full payload looks like:
+- `useSearch` hook usage
+- `SearchFilters` data structure usage?
+- just typical driver usage
 
-```json
-{
-    "AND": [
-        { "term": { "COLUMN_NAME_0": "published" } }
-        { "between": { "COLUMN_NAME_1": { "from": "2016-01-01", "to": "2020-01-01" } } }
-        { "OR": [ 
-            { "term": { "COLUMN_NAME_2": "foo" } },
-            { "term": { "COLUMN_NAME_3": "foo" } },
-            { "anyOf": { "COLUMN_NAME_4": ["foo", "bar"] } }
-        ]}
-    ]
+```jsx
+import { SearchProvider, Filters, Search, SearchDebugger } from '@oris/ui/search';
+import Mock from '@oris/ui/search/drivers/Mock';
+
+function PersonSearchFilters() {
+    return (
+        <Filters provider="demo">
+            <Filters.Terms />
+
+            <Filters.Group title="State" open>
+                <Filters.AnyOf name="state" options={[
+                    'Kansas',
+                    'Arizona',
+                    'California',
+                    'Alaska',
+                    'Texas',
+                ]} />
+            </Filters.Group>
+            
+            <Filters.Group title="Age Group">
+                {/* In lieu of native range support, this is doing a comma-divided key */}
+                <Filters.OneOf name="ageRange" options={{
+                    '0,24': '< 25',
+                    '25,44': '25 to 44',
+                    '45,64': '45 to 64',
+                    '65,1000': '65+'
+                }} />
+            </Filters.Group>
+            
+            <Filters.Group title="Email Domain">
+                <Filters.OneOf name="emailDomain" options={{
+                    'hotmail.com': '@hotmail.com',
+                    'yahoo.com': '@yahoo.com',
+                    'gmail.com': '@gmail.com',
+                }} />
+                <Filters.Match 
+                    prefix="Custom Domain" 
+                    name="otherEmailDomain" 
+                    placeholder="Other Domain" 
+                />
+            </Filters.Group>
+        </Filters>
+    );
 }
+
+/**
+ * Component that renders a search result. 
+ * This is up to you to create for your application.
+ */
+function PersonResultCard({ result }) {
+    return (
+        <div className="card">
+            <div className="card-body" style={{ display: 'flex' }}>
+                <img src={result.avatar} alt="Avatar" style={{ width: 100, height: 100 }} />
+                <div style={{ flex: '1 0 auto', margin: '0 1rem' }}>
+                    <strong>{result.name}</strong>
+                    <div>{result.title}</div>
+                    <p style={{ margin: 0 }}>
+                        {result.address}<br/>
+                        {result.city}, {result.state} {result.zip}
+                    </p>
+                </div>
+                <div>
+                    <a href="#">{result.email}</a><br/>
+                    <a href="#">{result.phone}</a>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+function PersonSearchResults() {
+    return (
+        <Search provider="demo" driver={Mock()}>
+            {/* You can have multiple filter groups attached to the same provider */}
+            <Filters provider="demo">
+                <Filters.Pills />
+            </Filters>
+
+            <Search.Empty>
+                No one found matching your search
+            </Search.Empty>
+
+            <Search.Error>
+                An error occurred
+            </Search.Error>
+
+            <Search.Results resultRenderer={PersonResultCard} />
+        </Search>
+    );
+}
+
+<SearchProvider id="demo">
+    <div className="row">
+        <div className="col-3">
+            <PersonSearchFilters />
+        </div>
+        <div className="col-9">
+            <PersonSearchResults />
+            <SearchDebugger provider="demo" />
+        </div>
+    </div>
+</SearchProvider>
 ```
-
-Note that AND/OR filters may be recursively nested to any depth.
-
-An additional `name` field may be added to every filter that should be ignored by the backend. 
-
-No restrictions are made to what columns can be specified by the frontend. It is the backend's responsibility to restrict access appropriately.
-
-Other backends are free to implement their own handling of search filters - using the above and the types in `index.ts` as reference.
-
-# Using Filters
-
-Looks something like:
-
-```js
-const filters = AND([
-    term('column_0', 'foo'),
-    anyOf('column_1', ['foo', 'bar']),
-    between('column_4', '2018-01-01', '2020-01-01'),
-    OR([
-        term('column_2', 'fizz%'),
-        term('column_3', 'buzz')
-    ])
-]);
-```
-
-Each method has an optional argument for a filter name. Required if context methods (`getFilter`, `deleteFilter`, etc) are to be used on a particular filter, and only works for top level filters (e.g. within the initial `AND` filter). It doesn't do any sort of smart "look for nested filter to remove" type of stuff.
-
-The best practice is to call the context's `addFilter` with a named root filter and not to name anything else under it, like:
-
-```js
-addFilter(term('column_0', 'foo', 'Is Foo'));
-
-getFilter('Is Foo');
-deleteFilter('Is Foo');
-...
-```
-
-For composites it's the same deal - do it at the top level only:
-
-```js
-addFilter(OR([
-    term('column_2', 'fizz'),
-    term('column_3', 'buzz')
-], 'Fizz or Buzz'));
-
-getFilter('Fizz or Buzz');
-deleteFilter('Fizz or Buzz');
-...
-```
-
-To remove entries from an AND/OR, make a new one with the subset that you want. The `addFilter` method will replace an existing filter with the same name.
-
-```js
-const filter = getFilter<AndFilters>('Foo');
-const values = filter.AND.filter((v) => ...);
-
-addFilter(AND(values, 'Foo'));
-```
-
-Assume `getFilter` returns an immutable value (and it may eventually). Don't ever try to modify something inside that filter object because it's not going to work the way you expect it to. 

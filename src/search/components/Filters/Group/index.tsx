@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Icon } from '@oris/ui';
+import { Icon } from '../../../..';
 
 export type Props = {
     title: string
@@ -11,6 +11,8 @@ export type Props = {
 
 /**
  * A titled and collapsible set of one or more filters
+ * 
+ * @visibleName Filters.Group
  */
 const Group: React.FC<Props> = ({ title, open = false, children }) => {
     const [collapsed, setCollapsed] = useState(!open);
