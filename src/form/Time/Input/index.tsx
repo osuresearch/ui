@@ -79,47 +79,51 @@ export const Input: React.FC<InputProps> = (props) => {
     const name = bind.name || props.name;
     const readOnly = bind.readOnly || props.readOnly;
 
-    const classNames = `time-field input-group form-control ${props.className ? props.className : ''} ${props.className ? props.className : ''} ${bind.error ? 'is-invalid' : ''} ${bind.success ? 'is-valid' : ''} ${readOnly ? 'readonly' : ''}`;
+    const classNames = `input-group ${props.className ? props.className : ''} ${props.className ? props.className : ''} ${bind.error ? 'is-invalid' : ''} ${bind.success ? 'is-valid' : ''} ${readOnly ? 'readonly' : ''}`;
 
     return (
         <div className={classNames}>
-            <span className='fa fa-clock-o' aria-hidden='true'></span>
+            <span className='input-group-prefix'>
+                <span className='fa fa-clock-o' aria-hidden='true'></span>
+            </span>
 
-            <HourInput
-                ref={hourRef}
-                id={props.id || bind.id}
-                hour={hour}
-                setHour={setHour}
-                setMeridiem={setMeridiem}
-                handleClick={handleClick}
-                minutesRef={minutesRef}
-                meridiemRef={meridiemRef}
-                readOnly={readOnly}
-            />
+            <div className='form-control'>
+                <HourInput
+                    ref={hourRef}
+                    id={props.id || bind.id}
+                    hour={hour}
+                    setHour={setHour}
+                    setMeridiem={setMeridiem}
+                    handleClick={handleClick}
+                    minutesRef={minutesRef}
+                    meridiemRef={meridiemRef}
+                    readOnly={readOnly}
+                />
 
-            <span>:</span>
+                <span>:</span>
 
-            <MinutesInput
-                ref={minutesRef}
-                id={props.id || bind.id}
-                minutes={minutes}
-                setMinutes={setMinutes}
-                handleClick={handleClick}
-                hourRef={hourRef}
-                meridiemRef={meridiemRef}
-                readOnly={readOnly}
-            />
+                <MinutesInput
+                    ref={minutesRef}
+                    id={props.id || bind.id}
+                    minutes={minutes}
+                    setMinutes={setMinutes}
+                    handleClick={handleClick}
+                    hourRef={hourRef}
+                    meridiemRef={meridiemRef}
+                    readOnly={readOnly}
+                />
 
-            <MeridiemInput
-                ref={meridiemRef}
-                id={props.id || bind.id}
-                meridiem={meridiem}
-                setMeridiem={setMeridiem}
-                handleClick={handleClick}
-                hourRef={hourRef}
-                minutesRef={minutesRef}
-                readOnly={readOnly}
-            />
+                <MeridiemInput
+                    ref={meridiemRef}
+                    id={props.id || bind.id}
+                    meridiem={meridiem}
+                    setMeridiem={setMeridiem}
+                    handleClick={handleClick}
+                    hourRef={hourRef}
+                    minutesRef={minutesRef}
+                    readOnly={readOnly}
+                />
+            </div>
 
             <SRDescriptions
                 readOnly={readOnly}

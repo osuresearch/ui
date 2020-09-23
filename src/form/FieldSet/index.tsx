@@ -7,7 +7,7 @@ import { withFormContext } from '../../internal/FormCommon/HOC/withFormContext';
 import {
     Help, HelpProps,
     Error, ErrorProps,
-    Success, SuccessProps, 
+    Success, SuccessProps,
 } from '../../internal/FormCommon/Components';
 
 import { Legend, LegendProps } from './Legend';
@@ -83,7 +83,8 @@ const FieldSet: React.FC<Props> & IFieldSetComposition = ({
         <Context.Provider value={{ bind }}>
             <fieldset
                 className={
-                    (bind.required ? "is-required" : "") +
+                    'ui-form-element' +
+                    (bind.required ? " is-required" : "") +
                     (bind.error ? " is-invalid" : "")
                 }
                 name={bind.name}

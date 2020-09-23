@@ -19,7 +19,7 @@ type Props = FormFieldProps<string> & {
     // foo: number
 }
 
-interface IDatePickerComposition extends ICommonComposition {
+interface IDateTimeComposition extends ICommonComposition {
     /**
      * Wrapper around [react-datepicker](https://reactdatepicker.com/). 
      * 
@@ -47,7 +47,7 @@ export const Context = React.createContext<IFormFieldContext<string>>({
 /**
  * Provides a date and (optional) time picker
  */
-const DatePicker: React.FC<Props> & IDatePickerComposition = ({
+const DateTime: React.FC<Props> & IDateTimeComposition = ({
     children,
     ...props
 }) => {
@@ -55,15 +55,21 @@ const DatePicker: React.FC<Props> & IDatePickerComposition = ({
 
     return (
         <Context.Provider value={{ bind }}>
-            {children}
+            <div className={
+                'ui-form-element ui-form-datetime' +
+                (bind.required ? " is-required" : "") +
+                (bind.error ? " is-invalid" : "")
+            }>
+                {children}
+            </div>
         </Context.Provider>
     );
 }
 
-DatePicker.Input = Input;
-DatePicker.Label = withFormContext<LabelProps>(Label, Context);
-DatePicker.Help = withFormContext<HelpProps>(Help, Context);
-DatePicker.Error = withFormContext<ErrorProps>(Error, Context);
-DatePicker.Success = withFormContext<SuccessProps>(Success, Context);
+DateTime.Input = Input;
+DateTime.Label = withFormContext<LabelProps>(Label, Context);
+DateTime.Help = withFormContext<HelpProps>(Help, Context);
+DateTime.Error = withFormContext<ErrorProps>(Error, Context);
+DateTime.Success = withFormContext<SuccessProps>(Success, Context);
 
-export default DatePicker;
+export default DateTime;

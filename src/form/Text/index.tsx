@@ -15,11 +15,11 @@ import {
     Label, LabelProps,
     Help, HelpProps,
     Error, ErrorProps,
-    Success, SuccessProps, 
+    Success, SuccessProps,
 } from '../../internal/FormCommon/Components';
 
 type Props = FormFieldProps<string> & {
-    
+
 }
 
 interface ITextComposition extends ICommonComposition {
@@ -60,7 +60,13 @@ const Text: React.FC<Props> & ITextComposition = ({
 
     return (
         <Context.Provider value={{ bind }}>
-            {children}
+            <div className={
+                'ui-form-element' +
+                (bind.required ? " is-required" : "") +
+                (bind.error ? " is-invalid" : "")
+            }>
+                {children}
+            </div>
         </Context.Provider>
     );
 }

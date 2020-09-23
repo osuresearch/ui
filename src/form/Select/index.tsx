@@ -12,7 +12,7 @@ import {
     Label, LabelProps,
     Help, HelpProps,
     Error, ErrorProps,
-    Success, SuccessProps, 
+    Success, SuccessProps,
 } from '../../internal/FormCommon/Components';
 
 type Props = FormFieldProps<string> & {
@@ -60,7 +60,13 @@ const Select: React.FC<Props> & ISelectComposition = ({
 
     return (
         <Context.Provider value={{ bind }}>
-            {children}
+            <div className={
+                'ui-form-element' +
+                (bind.required ? " is-required" : "") +
+                (bind.error ? " is-invalid" : "")
+            }>
+                {children}
+            </div>
         </Context.Provider>
     );
 }

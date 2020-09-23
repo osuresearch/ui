@@ -7,6 +7,8 @@ export type LabelProps = React.LabelHTMLAttributes<HTMLLabelElement> & {
      * @ignore
      */
     context?: React.Context<IFormFieldContext<any>>;
+
+    children: string;
 }
 
 /**
@@ -21,6 +23,8 @@ export function Label(props: LabelProps) {
     const { context, ...otherProps } = props;
     const { bind } = useContext(context!);
 
+    const label = props.children || bind.instructions || '';
+
     return (
         <label
             {...otherProps}
@@ -29,8 +33,9 @@ export function Label(props: LabelProps) {
                 (bind.required ? 'is-required' : '') +
                 (props.className ? ' ' + props.className : '')
             }
+            aria-label={bind.required ? `${label}, is required` : label}
         >
-            {props.children ?? bind.instructions}
+            {label}
         </label>
     );
 }

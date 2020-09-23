@@ -9,7 +9,7 @@ import {
     Text,
     Select,
     Checkbox,
-    DatePicker,
+    DateTime,
     FieldSet,
     Radio,
     Time,
@@ -21,10 +21,10 @@ const { register, errors, handleSubmit, control } = useForm();
 const onSubmit = data => console.log('submit', data);
 
 <Form onSubmit={handleSubmit(onSubmit)} noValidate>
-    <Form.Row>
-        <Form.Group className='col-md-6'>
+    <div className='row'>
+        <div className='col-md-6'>
             <Text
-                id="my-email"
+                id="email"
                 required
                 error={errors.email && errors.email.message}
             >
@@ -37,29 +37,30 @@ const onSubmit = data => console.log('submit', data);
                 />
                 <Text.Error />
             </Text>
-        </Form.Group>
+        </div>
 
-        <Form.Group className='col-md-6'>
-            <DatePicker
+        <div className='col-md-6'>
+            <DateTime
                 id="birthdate"
                 required
                 error={errors.birthdate && errors.birthdate.message}
             >
-                <DatePicker.Label>
+                <DateTime.Label>
                     Date of Birth
-                </DatePicker.Label>
+                </DateTime.Label>
+
                 <Controller
                     name='birthdate'
                     control={control}
                     rules={{ required: 'Input your birthdate' }}
-                    render={props => <DatePicker.Input {...props} />}
+                    render={props => <DateTime.Input {...props} />}
                 />
-                <DatePicker.Error />
-            </DatePicker>
-        </Form.Group>
-    </Form.Row>
+                <DateTime.Error />
+            </DateTime>
+        </div>
+    </div>
 
-    <Form.Group>
+    
         <Text
             id="address"
             required
@@ -75,9 +76,9 @@ const onSubmit = data => console.log('submit', data);
             />
             <Text.Error />
         </Text>
-    </Form.Group>
 
-    <Form.Group>
+
+
         <Text id="address2">
             <Text.Label>Address 2</Text.Label>
             <Text.Input
@@ -85,10 +86,10 @@ const onSubmit = data => console.log('submit', data);
                 ref={register}
             />
         </Text>
-    </Form.Group>
 
-    <Form.Row>
-        <Form.Group className='col-md-6'>
+
+    <div className='row'>
+        <div className='col-md-6'>
             <Text
                 id="city"
                 required
@@ -100,8 +101,8 @@ const onSubmit = data => console.log('submit', data);
                 })} />
                 <Text.Error />
             </Text>
-        </Form.Group>
-        <Form.Group className='col-md-4'>
+        </div>
+        <div className='col-md-4'>
             <Select
                 id="state"
                 required
@@ -114,8 +115,8 @@ const onSubmit = data => console.log('submit', data);
                 </Select.Control>
                 <Select.Error />
             </Select>
-        </Form.Group>
-        <Form.Group className='col-md-2'>
+        </div>
+        <div className='col-md-2'>
             <Text
                 id="zip"
                 required
@@ -125,10 +126,9 @@ const onSubmit = data => console.log('submit', data);
                 <Text.Input ref={register({ required: 'Input your ZIP Code' })} />
                 <Text.Error />
             </Text>
-        </Form.Group>
-    </Form.Row>
+        </div>
+    </div>
 
-    <Form.Group>
         <FieldSet
             id='favorite-food'
             error={errors["favorite-food"] && 'Choose your favorite food'}
@@ -157,9 +157,7 @@ const onSubmit = data => console.log('submit', data);
             </FieldSet.Inline>
             <FieldSet.Error />
         </FieldSet>
-    </Form.Group>
 
-    <Form.Group>
         <FieldSet id='opt-in'>
             <FieldSet.Legend>
                 I want to receive
@@ -187,9 +185,7 @@ const onSubmit = data => console.log('submit', data);
             </FieldSet.Help>
             <FieldSet.Error />
         </FieldSet>
-    </Form.Group>
 
-    <Form.Group>
         <Time
             id="pick-up"
             error={errors["pick-up"] && 'Enter the time you will pick up your drycleaning'}
@@ -206,9 +202,7 @@ const onSubmit = data => console.log('submit', data);
             />
             <Time.Error />
         </Time>
-    </Form.Group>
 
-    <Form.Group>
         <Checkbox
             id="check"
             required
@@ -218,7 +212,6 @@ const onSubmit = data => console.log('submit', data);
             <Checkbox.Label>Check me out</Checkbox.Label>
             <Checkbox.Error />
         </Checkbox>
-    </Form.Group>
 
     <Button type='submit' theme='primary'>Sign in</Button>
 </Form>

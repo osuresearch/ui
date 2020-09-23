@@ -1,0 +1,310 @@
+
+@import "react-datepicker/src/stylesheets/datepicker";
+
+/** ORIS/UI Form Component Library styles */
+
+// General
+.ui-form-element {
+    margin-bottom: 1.5em;
+
+    label, legend {
+        font-size: inherit;
+        margin-bottom: 1em;
+    }
+
+    // Required star for labels and legends
+    &.is-required label:first-child::after,
+    &.is-required legend:first-child::after,
+    label.is-required::after,
+    legend.is-required::after {
+        color: $scarlet;
+        font-family: FontAwesome;
+        font-size: 0.5em;
+        padding-left: 0.5em;
+        vertical-align: top;
+        content: '\f069';
+    }
+
+    &.is-invalid {
+        label, legend, select, .input-group-prefix {
+            color: theme-color('danger');
+        }
+
+        .custom-control-label {
+            &::before {
+                border-color: theme-color('danger');
+            }
+        }
+    }
+
+    &.is-valid {
+        label, legend, select, .input-group-prefix {
+            color: theme-color('success');
+        }
+
+        .custom-control-label {
+            &::before {
+                border-color: theme-color('success');
+            }
+        }
+    }
+
+    .form-text, .invalid-feedback, .valid-feedback {
+        margin: -0.5rem 0 1rem 0;
+    }
+
+    // Fix margin collapse issues
+    .form-text {
+        display: inline-block; 
+    }
+
+    .is-invalid ~ .invalid-feedback, 
+    .is-invalid input ~ .invalid-feedback,
+    .is-valid ~ .valid-feedback, 
+    .is-valid input ~ .valid-feedback {
+        display: table-caption;
+    }
+
+    .form-control {
+        display: initial;
+        margin-bottom: 1em;
+    }
+
+    .form-control {
+        margin-bottom: 1em;
+    }    
+
+    // Form text when it appears at/near the end of the 
+    // form element
+    .form-control, .input-group, .fieldset-inline, .custom-control, .form-text, .invalid-feedback, .valid-feedback {
+        + .form-text, + .invalid-feedback, + .valid-feedback {
+            margin: 0 0 1rem 0;
+        }
+    }
+}
+
+// Fieldset
+fieldset.ui-form-element {
+    // Remove margins from form elements within a fieldset
+    .ui-form-element {
+        margin-bottom: 0;
+    }
+
+    // Inline styling
+    .fieldset-inline {
+        display: inline-flex;
+        margin-bottom: 1em;
+
+        .custom-control, .form-control, .input-group {
+            padding-right: 2rem;
+
+            // Fix margins
+            .custom-control-label { 
+                margin-bottom: 0;
+            }
+        }
+    }
+}
+
+// DateTime
+.ui-form-datetime {
+    // Theme overrides to brand react-datepicker
+    // $datepicker__border-color: red;
+    .react-datepicker-wrapper {
+        display: block;
+    }
+
+    // Fix input size for the time input with an annoying level of nesting.
+    // Seriously - they use BEM but still nest selectors? Idiotic.
+    .react-datepicker__input-time-container .react-datepicker-time__input-container .react-datepicker-time__input input {
+        width: 1.65rem;
+    }
+
+    .react-datepicker__day--selected, .react-datepicker__day--in-selecting-range, .react-datepicker__day--in-range, .react-datepicker__month-text--selected, .react-datepicker__month-text--in-selecting-range, .react-datepicker__month-text--in-range, .react-datepicker__quarter-text--selected, .react-datepicker__quarter-text--in-selecting-range, .react-datepicker__quarter-text--in-range {
+        background-color: $casal;
+
+        &:hover {
+            background-color: shade($casal, 20%);
+        }
+    }
+
+    .react-datepicker__day--keyboard-selected, .react-datepicker__month-text--keyboard-selected, .react-datepicker__quarter-text--keyboard-selected {
+        background-color: $casal;
+
+        &:hover {
+            background-color: shade($casal, 20%);
+        }
+    }
+
+    .react-datepicker__input-time-container { 
+        margin: 5px 0 5px 15px;
+    }
+
+    // Raise popper's z to avoid conflict with other fields/icons
+    .react-datepicker-popper {
+        z-index: 999;
+    }
+
+    // Component styling
+    .react-datepicker__input-container{
+        .date, .datetime {
+            display: block;
+            padding-left: 2em;
+        }
+    }
+
+    .datetimepicker {
+        .input-group-prefix {
+            .fa { 
+                &.fa-clock-o {
+                    font-size: 0.7rem;
+                    position: absolute;
+                    bottom: 0;
+                    right: -0.2rem;
+                    background: white;
+                }
+            }
+        }
+    }
+
+    // A11y enhancements
+
+    // Restores outlines to selected days
+    // ... Ugh, there *is* a keyboard-selected class, but it doesn't get applied
+    // to the selected day when that day has focus, so it's completely useless
+    .react-datepicker__day {
+        &:focus{
+            outline: 1px dotted $gray;
+        }
+    }
+
+    .keyboard-notice {
+        text-align: center;
+        margin: 0 0 0.25rem 0;
+    }
+}
+
+// Time
+.ui-form-time {
+    .input-group {
+        appearance: listbox;
+        
+        .form-control {
+            padding: 0.2em 0.5em 0.2em 1.6em;
+            max-width: 7.75rem;
+
+            label { 
+                margin-bottom: 0;
+                
+                &::after {
+                    content: '';
+                    padding: 0;
+                    font-size: 0;
+                } 
+            }
+
+            input {
+                border: 0;
+                caret-color: transparent;
+                cursor: default;
+                text-align: center;
+                width: 1.65rem;
+                margin-bottom: 0;
+
+                &:focus {
+                    outline: none; // General rule is to NEVER do this, but we're outlining the parent instead
+                    background: $casal;
+                    color: white;
+                }
+
+                &::selection,
+                &::-moz-selection {
+                    background: transparent;
+                }
+
+                // Hide the spin icons (we still want the stepping functionality)
+                &[type="number"] {
+                    -webkit-appearance: textfield;
+                    -moz-appearance: textfield;
+                    appearance: textfield;
+
+                    &::-webkit-inner-spin-button,
+                    &::-webkit-outer-spin-button {
+                        -webkit-appearance: none;
+                        margin: 0;
+                    }
+                }
+
+                &[name='am-pm'] {
+                    margin-left: 0.15rem;
+                }
+            }
+        }
+
+        &.is-invalid {
+            .form-control {
+                border-color: theme-color('danger');
+            }
+
+            .form-control, input {
+                color: theme-color('danger');
+            }
+        }
+
+        &.is-valid {
+            .form-control {
+                border-color: theme-color('success');
+            }
+
+            .form-control, input {
+                color: theme-color('success');
+            }
+        }
+
+
+        &.readonly {
+            .form-control {
+                background-color: tint($gray, 20%);
+
+                &:focus-within {
+                    background-color: tint($gray, 20%);
+                    border-color: $gray;
+                    box-shadow: 0 0 0 0.2rem rgba(43, 43, 43, 0.25);
+                }
+
+                input {
+                    background-color: tint($gray, 20%);
+                    color: tint($gray, 80%);
+
+                    &:focus {
+                        background: $gray;
+                    }
+                }
+            }
+
+            .fa {
+                color: tint($gray, 80%);
+            }
+        }
+
+        .fa {
+            margin-top: 0.6rem;
+            margin-left: 0.6rem;
+        }
+
+        &:focus-within {
+            .form-control {
+                color: #525252;
+                background-color: #fff;
+                border-color: #50bac2;
+                outline: 0;
+                box-shadow: 0 0 0 0.2rem rgba(38, 104, 109, 0.25);
+            }
+        }
+
+        
+    }
+
+    // Sass hurt itself in its confusion...
+    .input-group input::selection { background: transparent; }
+}

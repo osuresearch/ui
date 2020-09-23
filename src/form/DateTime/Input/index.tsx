@@ -1,7 +1,7 @@
 
 import React, { useContext, useRef } from 'react';
 import DatePicker, { ReactDatePickerProps } from 'react-datepicker';
-import { Context } from '../';
+import { Context } from '..';
 import FormContext from '../../../internal/FormCommon/FormContext';
 
 import { Print } from '../../../internal/FormCommon/Utility/Print';
@@ -59,7 +59,7 @@ const Input: React.FC<InputProps> = (props) => {
     const name = bind.name || props.name;
     const readOnly = bind.readOnly || props.readOnly;
 
-    const classNames = `input-group datepicker ${props.showTimeInput && 'datetimepicker'} ${props.className ? props.className : ''} ${bind.error ? 'is-invalid' : ''} ${bind.success ? 'is-valid' : ''}`;
+    const classNames = `input-group ${props.showTimeInput && 'datetimepicker'} ${props.className ? props.className : ''} ${bind.error ? 'is-invalid' : ''} ${bind.success ? 'is-valid' : ''}`;
 
     const dateFormat = props.dateFormat || props.showTimeInput ? 'MM/dd/yyyy h:mm aa' : 'MM/dd/yyyy';
 

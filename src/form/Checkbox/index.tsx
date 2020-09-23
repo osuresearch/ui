@@ -11,7 +11,7 @@ import {
     ICommonComposition,
     Help, HelpProps,
     Error, ErrorProps,
-    Success, SuccessProps, 
+    Success, SuccessProps,
 } from '../../internal/FormCommon/Components';
 
 type Props = FormFieldProps<boolean> & {
@@ -46,7 +46,11 @@ const Checkbox: React.FC<Props> & ICheckboxComposition = (props) => {
 
     return (
         <Context.Provider value={{ bind }}>
-            <div className='custom-control custom-checkbox'>
+            <div className={
+                'ui-form-element custom-control custom-checkbox' +
+                (bind.required ? " is-required" : "") +
+                (bind.error ? " is-invalid" : "")
+            }>
                 {props.children}
             </div>
         </Context.Provider>

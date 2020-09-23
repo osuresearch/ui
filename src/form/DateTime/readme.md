@@ -8,18 +8,18 @@ import { Form } from '@oris/ui';
 const [date, setDate] = useState();
 
 <Form.Group>
-    <DatePicker id="choose-date">
-        <DatePicker.Label>Choose a date</DatePicker.Label>
+    <DateTime id="choose-date">
+        <DateTime.Label>Choose a date</DateTime.Label>
 
-        <DatePicker.Input
+        <DateTime.Input
             value={date}
             onChange={setDate}
         />
 
-        <DatePicker.Help>
+        <DateTime.Help>
             You may type in the field or select a date in the calendar
-        </DatePicker.Help>
-    </DatePicker>
+        </DateTime.Help>
+    </DateTime>
 </Form.Group>
 ```
 #### Specify custom range for selectable dates
@@ -35,17 +35,17 @@ const isWeekday = (date) => {
 };
 
 <Form.Group>
-    <DatePicker id="choose-weekday">
-        <DatePicker.Label>Choose a weekday</DatePicker.Label>
+    <DateTime id="choose-weekday">
+        <DateTime.Label>Choose a weekday</DateTime.Label>
 
-        <DatePicker.Input
+        <DateTime.Input
             value={date}
             onChange={setDate}
             minDate={new Date('2020-01-01T00:00:00-05:00')}
             maxDate={new Date('2025-12-31T00:00:00-05:00')}
             filterDate={isWeekday}
         />
-    </DatePicker>
+    </DateTime>
 </Form.Group>
 ```
 
@@ -56,14 +56,14 @@ import { Form } from '@oris/ui';
 const [date, setDate] = useState();
 
 <Form.Group>
-    <DatePicker id="choose-date-time">
-        <DatePicker.Label>Choose a date and time</DatePicker.Label>
+    <DateTime id="choose-date-time">
+        <DateTime.Label>Choose a date and time</DateTime.Label>
 
-        <DatePicker.Input
+        <DateTime.Input
             value={date}
             onChange={setDate}
             showTimeInput
         />
-    </DatePicker>
+    </DateTime>
 </Form.Group>
 ```

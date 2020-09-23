@@ -7,6 +7,8 @@ export type LegendProps = React.HTMLAttributes<HTMLElement> & {
      * @ignore
      */
     context?: React.Context<IFormFieldContext<any>>;
+
+    children: string;
 }
 
 export function Legend(props: LegendProps) {
@@ -14,11 +16,15 @@ export function Legend(props: LegendProps) {
     const { context, ...otherProps } = props;
     const { bind } = useContext(context!);
 
+    const legend = props.children || bind.instructions || '';
+
     return (
         <legend {...otherProps} className={
             bind.required ? 'is-required' : ''
-        }>
-            {props.children ?? bind.instructions}
+        }
+            aria-label={bind.required ? `${legend}, is required` : legend}
+        >
+            {legend}
         </legend>
     );
 }

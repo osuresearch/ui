@@ -8,7 +8,7 @@ const Inline: React.FC = ({ children }) => {
     const { bind } = useContext(Context);
 
     return (
-        <div className='form-check-inline'>
+        <div className='fieldset-inline'>
             {React.Children.map<React.ReactNode, React.ReactNode>(children, node => {
                 if (React.isValidElement(node)) {
                     return React.cloneElement(node, {
