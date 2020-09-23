@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { Context } from '..';
-import FormContext from '../../../internal/FormCommon/FormContext';
 import { OptionProps } from '../Option';
 
 export type ControlProps = React.SelectHTMLAttributes<HTMLSelectElement> & {
@@ -16,14 +15,13 @@ export type ControlProps = React.SelectHTMLAttributes<HTMLSelectElement> & {
  */
 const Control = React.forwardRef<HTMLSelectElement, ControlProps>((props, ref) => {
     const { bind } = useContext(Context);
-    const { isDiff, isPrint } = useContext(FormContext);
 
     const classNames = `form-control custom-select ${bind.error && 'is-invalid'} ${bind.success && 'is-valid'} ${props.className ? props.className : ''}`;
 
     const defaultValue = bind.value || props.defaultValue;
     const value = bind.controlled && bind.value ? bind.value : undefined;
 
-    if (isDiff || isPrint || bind.readOnly) {
+    if (bind.readOnly || bind.diff) {
         // Let the Option component handle the diff/print/readOnly rendering
         return <>{props.children}</>
     }

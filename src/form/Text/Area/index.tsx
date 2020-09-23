@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { Context } from '..';
-import FormContext from '../../../internal/FormCommon/FormContext';
 
 import Print from '../Print';
 import Diff from '../Diff';
@@ -19,14 +18,15 @@ export type AreaProps = React.TextareaHTMLAttributes<HTMLTextAreaElement> & {
  */
 const Area = React.forwardRef<HTMLTextAreaElement, AreaProps>((props, ref) => {
     const { bind } = useContext(Context);
-    const { isDiff, isPrint } = useContext(FormContext);
 
     const defaultValue = bind.value || props.defaultValue;
     const value = bind.controlled && typeof (bind.value) === 'string' ? bind.value : undefined;
 
     const { minLength, maxLength } = props;
 
-    if (isDiff) {
+    const readOnly = bind.readOnly || props.readOnly;
+
+    if (bind.diff) {
         return (
             <Diff
                 value={typeof (value) === 'string' ? value : undefined}
@@ -35,7 +35,7 @@ const Area = React.forwardRef<HTMLTextAreaElement, AreaProps>((props, ref) => {
         )
     }
 
-    if (isPrint) {
+    if (readOnly) {
         return <Print value={typeof (value) === 'string' ? value : ''} />
     }
 
@@ -56,8 +56,7 @@ const Area = React.forwardRef<HTMLTextAreaElement, AreaProps>((props, ref) => {
         onChange: (e) => {
             bind.value = e.currentTarget.value;
             if (props.onChange) props.onChange(e);
-        },
-        readOnly: bind.readOnly || props.readOnly
+        }
     }
 
     if (bind.controlled) {

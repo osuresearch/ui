@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { Context } from '..';
-import FormContext from '../../../internal/FormCommon/FormContext';
 
 import { Print } from '../../../internal/FormCommon/Utility/Print';
 import { Diff } from '../../../internal/FormCommon/Utility/Diff';
@@ -19,14 +18,17 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
  */
 const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     const { bind } = useContext(Context);
-    const { isDiff, isPrint } = useContext(FormContext);
 
-    const checked: boolean | undefined = props.checked || (props.defaultValue === '' + bind.value) || undefined;
+    const defaultChecked: boolean | undefined = props.checked || (props.defaultValue === '' + bind.value) || undefined;
+    const checked = (props.defaultValue === '' + bind.value) ?? false;
 
-    const value = bind.value || props.defaultValue || bind.id;
+    const defaultValue = bind.value || props.defaultValue || bind.id;
+    const value = bind.value || bind.id;
 
-    // If printing, just return the current value
-    if (isPrint) {
+    const readOnly = bind.readOnly || props.readOnly || false;
+
+    // If readOnly, view the field in print view
+    if (readOnly) {
         return (
             <Print>
                 {checked && <i className="fa fa-check-square-o" aria-label="Radio button was selected,,"></i>}
@@ -36,7 +38,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         );
     }
 
-    if (isDiff) {
+    if (bind.diff) {
         const wasChecked: boolean = (props.value === '' + bind.initialValue);
 
         return (
@@ -63,23 +65,28 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         (bind.success ? ' is-valid' : '')
         ;
 
+    let inputProps: React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> = {
+        ref: ref,
+        ...props,
+        id: bind.id,
+        name: bind.name || props.name,
+        defaultChecked: defaultChecked,
+        defaultValue: defaultValue,
+        className: classNames,
+        "aria-describedby": `${bind.id}-help`,
+        onChange: (e) => {
+            bind.value = e.currentTarget.value;
+            if (props.onChange) props.onChange(e);
+        }
+    }
+
+    if (bind.controlled) {
+        inputProps.checked = checked;
+        inputProps.value = value;
+    }
+
     return (
-        <input
-            ref={ref}
-            {...props}
-            type='radio'
-            id={bind.id}
-            name={bind.name || props.name}
-            defaultChecked={checked}
-            defaultValue={value}
-            className={classNames}
-            aria-describedBy={`${bind.id}-help`}
-            onChange={(e) => {
-                bind.value = e.currentTarget.value;
-                if (props.onChange) props.onChange(e);
-            }}
-            readOnly={bind.readOnly || props.readOnly}
-        />
+        <input {...inputProps} />
     )
 });
 

@@ -1,7 +1,6 @@
 
-import React, { useLayoutEffect, useState, useRef, memo, useContext } from 'react';
+import React, { useLayoutEffect, useState, useRef, useContext } from 'react';
 import { Context } from '..';
-import FormContext from '../../../internal/FormCommon/FormContext';
 
 import Print from '../Print';
 import Diff from '../Diff';
@@ -69,7 +68,6 @@ const Rich: React.FC<RichProps> = ({
     required
 }) => {
     const { bind } = useContext(Context);
-    const { isDiff, isPrint } = useContext(FormContext);
 
     const value = bind.value || defaultValue;
 
@@ -78,7 +76,7 @@ const Rich: React.FC<RichProps> = ({
     const editorRef = useRef<HTMLTextAreaElement>(null);
 
     useLayoutEffect(() => {
-        if (!(isDiff || isPrint)) {
+        if (!(bind.readOnly || bind.diff)) {
             // @ts-ignore 
             const cke = window.CKEDITOR;
             let editor: any = undefined; // No type info exists for CKE
@@ -129,9 +127,9 @@ const Rich: React.FC<RichProps> = ({
                 }
             };
         }
-    }, [initialData, simple, contentsCss, onChange, bind, required, isPrint, isDiff]);
+    }, [initialData, simple, contentsCss, onChange, bind, required]);
 
-    if (isDiff) {
+    if (bind.diff) {
         // TODO - This really isn't going to work with HTML
         return (
             <Diff
@@ -141,7 +139,7 @@ const Rich: React.FC<RichProps> = ({
         )
     }
 
-    if (isPrint) {
+    if (bind.readOnly) {
         return <Print value={typeof (value) === 'string' ? value : ''} />
     }
 
@@ -158,13 +156,12 @@ const Rich: React.FC<RichProps> = ({
     // many use cases where we'll be doing that.
 
     return (
-        <div className={`richtext ${className} ${bind.readOnly ? 'is-readonly' : ''}`}>
+        <div className={`richtext ${className}`}>
             <textarea
                 id={bind.id}
                 name={bind.name || name}
                 className="richtext-editor"
                 ref={editorRef}
-                disabled={bind.readOnly}
                 aria-describedBy={`${bind.id}-help`}
             />
         </div>

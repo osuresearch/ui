@@ -2,7 +2,6 @@
 import React, { useContext, useRef } from 'react';
 import DatePicker, { ReactDatePickerProps } from 'react-datepicker';
 import { Context } from '..';
-import FormContext from '../../../internal/FormCommon/FormContext';
 
 import { Print } from '../../../internal/FormCommon/Utility/Print';
 import { Diff } from '../../../internal/FormCommon/Utility/Diff';
@@ -50,7 +49,6 @@ export type InputProps = Omit<ReactDatePickerProps, DisabledReactDatePickerProps
  */
 const Input: React.FC<InputProps> = (props) => {
     const { bind } = useContext(Context);
-    const { isDiff, isPrint } = useContext(FormContext);
 
     const selected: string | undefined = bind.value || props.value;
 
@@ -98,7 +96,7 @@ const Input: React.FC<InputProps> = (props) => {
         return formatted;
     }
 
-    if (isPrint) {
+    if (readOnly) {
         return (
             <Print>
                 <span className="input-group-prefix">
@@ -110,7 +108,7 @@ const Input: React.FC<InputProps> = (props) => {
         )
     }
 
-    if (isDiff) {
+    if (bind.diff) {
         if (selected !== initial) {
             return (
                 <Diff

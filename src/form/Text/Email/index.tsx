@@ -1,6 +1,9 @@
 import React, { useContext } from 'react';
 import { Context } from '..';
 
+import Print from '../Print';
+import Diff from '../Diff';
+
 export type EmailProps = React.InputHTMLAttributes<HTMLInputElement>;
 
 /**
@@ -15,6 +18,21 @@ const Email = React.forwardRef<HTMLInputElement, EmailProps>((props, ref) => {
 
     const defaultValue = bind.value || props.defaultValue;
     const value = bind.controlled && typeof (bind.value) === 'string' ? bind.value : undefined;
+
+    const readOnly = bind.readOnly || props.readOnly;
+
+    if (bind.diff) {
+        return (
+            <Diff
+                value={typeof (value) === 'string' ? value : undefined}
+                prevValue={typeof (bind.initialValue) === 'string' ? bind.initialValue : undefined}
+            />
+        )
+    }
+
+    if (readOnly) {
+        return <Print value={typeof (value) === 'string' ? value : ''} />
+    }
 
     const classNames = 'form-control ' +
         (props.className ?? '') +

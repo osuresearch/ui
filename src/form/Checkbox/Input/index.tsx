@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { Context } from '..';
-import FormContext from '../../../internal/FormCommon/FormContext';
 
 import { Print } from '../../../internal/FormCommon/Utility/Print';
 import { Diff } from '../../../internal/FormCommon/Utility/Diff';
@@ -20,12 +19,14 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
  */
 const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     const { bind } = useContext(Context);
-    const { isDiff, isPrint } = useContext(FormContext);
 
-    const checked: boolean = bind.value || props.defaultChecked || false;
+    const defaultChecked: boolean = bind.value || props.defaultChecked || false;
+    const checked: boolean = bind.value ? bind.value : false;
 
-    // If printing, just return the current value
-    if (isPrint) {
+    const readOnly = bind.readOnly || props.readOnly;
+
+    // If readOnly, display as print
+    if (readOnly) {
         return (
             <Print>
                 {checked && <i className="fa fa-check-square-o" aria-label="Checkbox was checked,,"></i>}
@@ -35,7 +36,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         );
     }
 
-    if (isDiff) {
+    // Diff mode
+    if (bind.diff) {
         const wasChecked: boolean = bind.initialValue === true;
 
         return (
@@ -62,22 +64,27 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         (bind.success ? ' is-valid' : '')
         ;
 
+    let inputProps: React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> = {
+        ref: ref,
+        ...props,
+        type: 'checkbox',
+        id: bind.id,
+        name: bind.name || props.name,
+        className: classNames,
+        defaultChecked: defaultChecked,
+        onChange: (e) => {
+            bind.value = e.currentTarget.checked;
+            if (props.onChange) props.onChange(e);
+        },
+        "aria-describedby": `${bind.id}-help`
+    }
+
+    if (bind.controlled) {
+        inputProps.checked = checked;
+    }
+
     return (
-        <input
-            ref={ref}
-            {...props}
-            type='checkbox'
-            id={bind.id}
-            name={bind.name || props.name}
-            className={classNames}
-            defaultChecked={checked}
-            onChange={(e) => {
-                bind.value = e.currentTarget.checked;
-                if (props.onChange) props.onChange(e);
-            }}
-            readOnly={bind.readOnly || props.readOnly}
-            aria-describedBy={`${bind.id}-help`}
-        />
+        <input {...inputProps} />
     )
 });
 

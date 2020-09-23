@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { Context } from '..';
-import FormContext from '../../../internal/FormCommon/FormContext';
 import { IFieldBind } from '../../../internal/FormCommon/types';
 
 import { Print } from '../../../internal/FormCommon/Utility/Print';
@@ -32,14 +31,13 @@ export type OptionProps = React.OptionHTMLAttributes<HTMLOptionElement> & {
  */
 const Option: React.FC<OptionProps> = (props) => {
     const { bind } = useContext(Context);
-    const { isDiff, isPrint } = useContext(FormContext);
 
     if (props.optionsBind) {
-        if (isPrint || bind.readOnly) {
+        if (bind.readOnly) {
             return <Print>{props.optionsBind.value![bind.value!]}</Print>
         }
 
-        if (isDiff) {
+        if (bind.diff) {
             return (
                 <Diff
                     removed={
