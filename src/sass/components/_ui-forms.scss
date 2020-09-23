@@ -54,10 +54,6 @@
     }
 
     // Fix margin collapse issues
-    .form-text {
-        display: inline-block; 
-    }
-
     .is-invalid ~ .invalid-feedback, 
     .is-invalid input ~ .invalid-feedback,
     .is-valid ~ .valid-feedback, 
@@ -76,7 +72,7 @@
 
     // Form text when it appears at/near the end of the 
     // form element
-    .form-control, .input-group, .fieldset-inline, .custom-control, .form-text, .invalid-feedback, .valid-feedback {
+    .form-control, .input-group, .fieldset-inline, .custom-control, .custom-select, .form-text {
         + .form-text, + .invalid-feedback, + .valid-feedback {
             margin: 0 0 1rem 0;
         }

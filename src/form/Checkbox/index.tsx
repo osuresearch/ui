@@ -46,11 +46,7 @@ const Checkbox: React.FC<Props> & ICheckboxComposition = (props) => {
 
     return (
         <Context.Provider value={{ bind }}>
-            <div className={
-                'ui-form-element custom-control custom-checkbox' +
-                (bind.required ? " is-required" : "") +
-                (bind.error ? " is-invalid" : "")
-            }>
+            <div className={`ui-form-element custom-control custom-checkbox ${bind.required ? 'is-required' : ''} ${bind.error && 'is-invalid'} ${bind.success && 'is-valid'} ${props.className ? props.className : ''}`}>
                 {props.children}
             </div>
         </Context.Provider>

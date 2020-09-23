@@ -41,6 +41,9 @@ export interface IFieldBind<T> {
     /** Initial value for isDiff */
     initialValue?: Nullable<T>
 
+    /** If this is a controlled element (will be true by default) */
+    controlled?: boolean
+
     /** Delegates to notify when the value changes */
     onValueChange: Action<OnValueChangeDelegate<T>>
 
@@ -53,7 +56,7 @@ export type FormFieldBindProp<T> = {
      * Data binding strictly typed to `<T>`
      */
     bind: IFieldBind<T>;
-    
+
     /**
      * Callback with the signature `(newValue: T, oldValue: T) => void`
      */
@@ -66,6 +69,9 @@ export type FormFieldSpreadProps<T> = {
 
     /** Name of the form control. Submitted with the form as part of a name/value pair. */
     name?: string
+
+    /** Additional classes to add to the field wrapper */
+    className?: string
 
     /** Validation error to display for the field */
     error?: string
@@ -172,6 +178,17 @@ export class FieldBind<T> implements IFieldBind<T> {
         this.onStateChange.dispatch(this);
     }
 
+    /** Should the field be controlled */
+    public get controlled(): boolean {
+        return this._controlled;
+    }
+
+    /** On update, notify all onStateChange delegates */
+    public set controlled(value: boolean) {
+        this._controlled = value;
+        this.onStateChange.dispatch(this);
+    }
+
     /** The backing value for the field. */
     public get value(): Nullable<T> {
         return this._value;
@@ -190,6 +207,7 @@ export class FieldBind<T> implements IFieldBind<T> {
     protected _success: string = '';
     protected _readOnly: boolean = false;
     protected _required: boolean = false;
+    protected _controlled: boolean = false;
     protected _value: Nullable<T> = null;
     protected _previousValue: Nullable<T> = null;
 

@@ -49,6 +49,7 @@ export default function useFieldBindOrProps<T>(props: FormFieldProps<T>) {
     const [bind, setBind] = useState<IFieldBind<T>>(() => {
         if (isFormFieldBindProp(props)) {
             console.debug('[useFieldBindOrProps] Initializing from IFieldBind ref', props.bind);
+            props.bind.controlled = true;
             return props.bind;
         }
 

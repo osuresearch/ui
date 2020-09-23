@@ -5,21 +5,19 @@ An example involving a Search transformed back and forth from a `key|name` strin
 
 ```jsx
 import { useState } from 'react';
-import { Text, Form } from '@oris/ui';
+import { Text } from '@oris/ui';
 
 const [value, setValue] = useState('200275154|Chase McManning');
 
-<Form.Group>
-    <Text id="foo-search" value={value} onChange={setValue}>
-        <Text.Label>
-            Label here
-            </Text.Label>
+<Text id="foo-search" value={value} onChange={setValue}>
+    <Text.Label>
+        Label here
+    </Text.Label>
 
-        <Text.Search />
+    <Text.Search />
 
-        <Text.Help>
-            You picked <strong>{value ? value : 'nobody'}</strong>
-        </Text.Help>
-    </Text>
-</Form.Group>
+    <Text.Help>
+        You picked <strong>{value ? value : 'nobody'}</strong>
+    </Text.Help>
+</Text>
 ```

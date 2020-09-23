@@ -17,21 +17,19 @@ const onChange = (currentValue, prevValue) => {
 }
 
 <Form>
-    <Form.Group>
-        <Text id="foo1" name="foo" readOnly={readOnly} error={error} onChange={onChange}>
-            <Text.Label>
-                Label here
+    <Text id="foo1" name="foo" readOnly={readOnly} error={error} onChange={onChange}>
+        <Text.Label>
+            Label here
             </Text.Label>
 
-            <Text.Input value={value} onChange={(e) => setValue(e.currentTarget.value)} />
+        <Text.Input value={value} onChange={(e) => setValue(e.currentTarget.value)} />
 
-            <Text.Help>
-                Help stuff go here
+        <Text.Help>
+            Help stuff go here
             </Text.Help>
 
-            <Text.Error />
-        </Text>
-    </Form.Group>
+        <Text.Error />
+    </Text>
 
     <Button onClick={() => setReadOnly(!readOnly)}>
         Toggle Read Only
@@ -54,19 +52,17 @@ import { MyMockStringBind } from '../../internal/FormCommon/types';
 const bind = new MyMockStringBind('foo4', 'foo bar');
 
 <Form>
-    <Form.Group>
-        <Text bind={bind}>
-            <Text.Label />
-            <Text.Input />
-            <Text.Help />
-            <Text.Error />
-        </Text>
-    </Form.Group>
+    <Text bind={bind}>
+        <Text.Label />
+        <Text.Input />
+        <Text.Help />
+        <Text.Error />
+    </Text>
 
     <Button onClick={() => bind.readOnly = !bind.readOnly}>
         Toggle Read Only
     </Button>
-        
+
     <Button onClick={() => bind.error = bind.error ? '' : 'Do better'}>
         Toggle Error
     </Button>
@@ -92,13 +88,11 @@ function MyComponent() {
 
     return (
         <Form onSubmit={onSubmit}>
-            <Form.Group>
-                <Text bind={bind}>
-                    <Text.Label />
-                    <Text.Input />
-                    <Text.Help />
-                </Text>
-            </Form.Group>
+            <Text bind={bind}>
+                <Text.Label />
+                <Text.Input />
+                <Text.Help />
+            </Text>
 
             <Button type="submit">Submit</Button>
         </Form>
@@ -117,13 +111,11 @@ import { MyMockStringBind } from '../../internal/FormCommon/types';
 const bind = new MyMockStringBind('foo7', 'foo bar');
 
 <Form>
-    <Form.Group>
-        <Text bind={bind}>
-            <Text.Label />
-            <Text.Input />
-            <Text.Help />
-        </Text>
-    </Form.Group>
+    <Text bind={bind}>
+        <Text.Label />
+        <Text.Input />
+        <Text.Help />
+    </Text>
 
     <Button onClick={() => bind.value = 'fizz buzz'}>
         1. Change to 'fizz buzz'
@@ -158,20 +150,16 @@ function MyComponent() {
 }
 
 <Form>
-    <Form.Group>
-        <Text bind={bind}>
-            <Text.Label />
-            <Text.Input />
-            <Text.Help />
-        </Text>
-    </Form.Group>
-    <Form.Group>
-        <Text bind={bind}>
-            <Text.Label />
-            <Text.Input />
-            <Text.Help />
-        </Text>
-    </Form.Group>
+    <Text bind={bind}>
+        <Text.Label />
+        <Text.Input />
+        <Text.Help />
+    </Text>
+    <Text bind={bind}>
+        <Text.Label />
+        <Text.Input />
+        <Text.Help />
+    </Text>
 
     <MyComponent />
 </Form>
@@ -179,45 +167,37 @@ function MyComponent() {
 
 Validation
 ```jsx
-import { Form } from '@oris/ui';
-
 const error = 'You must fill out this field';
 
-<Form.Group>
-    <Text id="input-invalid-sample" error={error} required>
-        <Text.Label>
-            Input with a serverside-generated error message. Bootstrap 4 is now opinionated about how to handle clientside errors. See the <a href="https://getbootstrap.com/docs/4.0/components/forms/#validation" target="_blank">official validation documentation</a>.
-        </Text.Label>
+<Text id="input-invalid-sample" error={error} required>
+    <Text.Label>
+        Input with a serverside-generated error message. Bootstrap 4 is now opinionated about how to handle clientside errors. See the <a href="https://getbootstrap.com/docs/4.0/components/forms/#validation" target="_blank">official validation documentation</a>.
+    </Text.Label>
 
-        <Text.Input />
+    <Text.Input />
 
-        <Text.Error />
+    <Text.Error />
 
-        <Text.Help>
-            We recommend adding some clientside validation (but not relying on it) for ensuring that basic validation rules are met (like field lengths, a field matching a Regex, etc)
-        </Text.Help>
-    </Text>
-</Form.Group>
+    <Text.Help>
+        We recommend adding some clientside validation (but not relying on it) for ensuring that basic validation rules are met (like field lengths, a field matching a Regex, etc)
+    </Text.Help>
+</Text>
 ```
 
 ```jsx
-import { Form } from '@oris/ui';
-
 const success = "This is valid!";
 
-<Form.Group>
-    <Text id="input-valid-sample" success={success}>
-        <Text.Label>
-            An input updated with a "this is valid!" message. Useful if you want some basic validation feedback while the user is filling out the form.
-        </Text.Label>
+<Text id="input-valid-sample" success={success}>
+    <Text.Label>
+        An input updated with a "this is valid!" message. Useful if you want some basic validation feedback while the user is filling out the form.
+    </Text.Label>
 
-        <Text.Input defaultValue="some value" />
+    <Text.Input defaultValue="some value" />
 
-        <Text.Success />
+    <Text.Success />
 
-        <Text.Help>
-            This is some additional help text
-        </Text.Help>
-    </Text>
-</Form.Group>
+    <Text.Help>
+        This is some additional help text
+    </Text.Help>
+</Text>
 ```

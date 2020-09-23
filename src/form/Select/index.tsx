@@ -60,11 +60,8 @@ const Select: React.FC<Props> & ISelectComposition = ({
 
     return (
         <Context.Provider value={{ bind }}>
-            <div className={
-                'ui-form-element' +
-                (bind.required ? " is-required" : "") +
-                (bind.error ? " is-invalid" : "")
-            }>
+            <div className={`ui-form-element ${bind.required ? 'is-required' : ''} ${bind.error && 'is-invalid'} ${bind.success && 'is-valid'} ${props.className ? props.className : ''}`}
+            >
                 {children}
             </div>
         </Context.Provider>

@@ -18,7 +18,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     const { bind } = useContext(Context);
     const { isDiff, isPrint } = useContext(FormContext);
 
-    const value = bind.value || props.defaultValue;
+    const defaultValue = bind.value || props.defaultValue;
+    const value = bind.controlled && typeof (bind.value) === 'string' ? bind.value : undefined;
 
     if (isDiff) {
         return (
@@ -39,22 +40,29 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         (bind.success ? ' is-valid' : '')
         ;
 
+    let inputProps: React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> = {
+        ref: ref,
+        ...props,
+        type: "text",
+        id: bind.id,
+        name: bind.name || props.name,
+        defaultValue: defaultValue,
+        className: classNames,
+        'aria-describedby': `${bind.id}-help`,
+        onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+            bind.value = e.currentTarget.value;
+            if (props.onChange) props.onChange(e);
+        },
+        readOnly: bind.readOnly || props.readOnly
+    }
+
+    // Assign a value to the input if it is controlled
+    if (bind.controlled) {
+        inputProps.value = value
+    }
+
     return (
-        <input
-            ref={ref}
-            {...props}
-            type="text"
-            id={bind.id}
-            name={bind.name || props.name}
-            defaultValue={value}
-            className={classNames}
-            aria-describedBy={`${bind.id}-help`}
-            onChange={(e) => {
-                bind.value = e.currentTarget.value;
-                if (props.onChange) props.onChange(e);
-            }}
-            readOnly={bind.readOnly || props.readOnly}
-        />
+        <input {...inputProps} />
     );
 });
 

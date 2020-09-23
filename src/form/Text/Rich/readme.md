@@ -48,13 +48,11 @@ import { Form, Text } from '@oris/ui';
 const [content, setContent] = useState('<p>Start typing and see it update live</p>');
 
 <Form>
-    <Form.Group>
-        <Text id="set-change-values" onChange={setContent}>
-            <Text.Label>Live Update</Text.Label>
+    <Text id="set-change-values" onChange={setContent}>
+        <Text.Label>Live Update</Text.Label>
 
-            <Text.Rich defaultValue={content} />
-        </Text>
-    </Form.Group>
+        <Text.Rich defaultValue={content} />
+    </Text>
 
     Raw Content
     <p><code>{content}</code> </p>

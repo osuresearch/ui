@@ -4,29 +4,25 @@
 
 ```jsx
 import { useState } from 'react';
-import { Form } from '@oris/ui';
 const [date, setDate] = useState();
 
-<Form.Group>
-    <DateTime id="choose-date">
-        <DateTime.Label>Choose a date</DateTime.Label>
+<DateTime id="choose-date">
+    <DateTime.Label>Choose a date</DateTime.Label>
 
-        <DateTime.Input
-            value={date}
-            onChange={setDate}
-        />
+    <DateTime.Input
+        value={date}
+        onChange={setDate}
+    />
 
-        <DateTime.Help>
-            You may type in the field or select a date in the calendar
-        </DateTime.Help>
-    </DateTime>
-</Form.Group>
+    <DateTime.Help>
+        You may type in the field or select a date in the calendar
+    </DateTime.Help>
+</DateTime>
 ```
 #### Specify custom range for selectable dates
 
 ```jsx
 import { useState } from 'react';
-import { Form } from '@oris/ui';
 const [date, setDate] = useState();
 
 const isWeekday = (date) => {
@@ -34,36 +30,31 @@ const isWeekday = (date) => {
     return day !== 0 && day !== 6;
 };
 
-<Form.Group>
-    <DateTime id="choose-weekday">
-        <DateTime.Label>Choose a weekday</DateTime.Label>
+<DateTime id="choose-weekday">
+    <DateTime.Label>Choose a weekday</DateTime.Label>
 
-        <DateTime.Input
-            value={date}
-            onChange={setDate}
-            minDate={new Date('2020-01-01T00:00:00-05:00')}
-            maxDate={new Date('2025-12-31T00:00:00-05:00')}
-            filterDate={isWeekday}
-        />
-    </DateTime>
-</Form.Group>
+    <DateTime.Input
+        value={date}
+        onChange={setDate}
+        minDate={new Date('2020-01-01T00:00:00-05:00')}
+        maxDate={new Date('2025-12-31T00:00:00-05:00')}
+        filterDate={isWeekday}
+    />
+</DateTime>
 ```
 
 #### Include a `<Time>` field with the calendar
 ```jsx
 import { useState } from 'react';
-import { Form } from '@oris/ui';
 const [date, setDate] = useState();
 
-<Form.Group>
-    <DateTime id="choose-date-time">
-        <DateTime.Label>Choose a date and time</DateTime.Label>
+<DateTime id="choose-date-time">
+    <DateTime.Label>Choose a date and time</DateTime.Label>
 
-        <DateTime.Input
-            value={date}
-            onChange={setDate}
-            showTimeInput
-        />
-    </DateTime>
-</Form.Group>
+    <DateTime.Input
+        value={date}
+        onChange={setDate}
+        showTimeInput
+    />
+</DateTime>
 ```
