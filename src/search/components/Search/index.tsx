@@ -2,18 +2,24 @@ import React, { useState } from 'react';
 import { SearchDriver } from '../..';
 
 import Results, { Props as ResultsProps } from './Results';
-import Error from './Error';
-import Empty from './Empty';
+import Error, { Props as ErrorProps } from './Error';
+import Empty, { Props as EmptyProps } from './Empty';
 
 type Props = {
+    /** SearchProvider `id` to use when manipulating search data */
     provider: string
+
+    /** The API integration driver to submit search data */
     driver: SearchDriver
+    
+    /** Children are required for this component. */
+    children: React.ReactNode
 };
 
 interface ISearchComposition {
     Results: React.FC<ResultsProps>
-    Error: React.FC
-    Empty: React.FC
+    Error: React.FC<ErrorProps>
+    Empty: React.FC<EmptyProps>
 }
 
 interface ISearchContext {

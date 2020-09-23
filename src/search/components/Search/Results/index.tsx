@@ -20,8 +20,6 @@ export type Props = {
  * Render the results of a search as a simple list of components. 
  * 
  * Provide your own component to render each result (e.g. as table rows, Kanban cards, etc).
- * 
- * @visibleName Search.Results
  */
 const Results: React.FC<Props> = ({
     resultRenderer

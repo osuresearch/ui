@@ -1,5 +1,5 @@
 
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Sort } from '../../..';
 import { Context } from '..';
 
@@ -11,17 +11,7 @@ export type Props = {
 /**
  * Sort options for a search.
  * 
- * Provide multiple `Sort` instances for the user to pick from.
- * 
- * ```tsx
- * <Filter.SortBy options={[
- *  sort('Relevance', 'rank'), 
- *  sort('Last Modified ↓', 'lastModifiedDate', 'desc')
- *  sort('Last Modified ↑', 'lastModifiedDate', 'asc')
- * ]}
- * ```
- * 
- * @visibleName Filters.SortBy
+ * Provide multiple `Sort` rules for the user to pick from.
  */
 const SortBy: React.FC<Props> = ({ options }) => {
     const ctx = useContext(Context);
@@ -33,6 +23,7 @@ const SortBy: React.FC<Props> = ({ options }) => {
 
     return (
         <select className="custom-select custom-select-sm filters-sort" onChange={onChange}>
+            <option disabled selected={ctx.sort === undefined}>Sort by</option>
             {options.map((opt, index) =>
                 <option key={index}
                     selected={opt.name === ctx.sort?.name} 

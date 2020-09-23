@@ -5,9 +5,9 @@ import { Icon } from '../../../..';
 export type Props = { };
 
 /**
- * Even MORE filters to show (contains a collapsible set of groups)
+ * Even MORE filters to show (contains a collapsible set of groups).
  * 
- * @visibleName Filters.More
+ * We suggest you only have one `<Filters.More>` at the end of your filter list.
  */
 const More: React.FC<Props> = ({ children }) => {
     const [more, setMore] = useState(false);

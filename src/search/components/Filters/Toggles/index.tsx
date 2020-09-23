@@ -16,14 +16,12 @@ export type Props = {
     name: string
 
     /** 
-     * Minimum options displayed before the clear button is also included.
-     * 
-     * It's not included by default because it doesn't make sense for one or two options.
+     * Minimum options displayed before the clear button is also displayed.
      */
     minimumOptionsForClearButton?: number
 
     /**
-     * How should individual terms be combined. Defaults to `AND`
+     * How should individual terms be combined
      */
     operator?: 'AND' | 'OR' 
 };
@@ -32,8 +30,6 @@ export type Props = {
  * Batch of multiple <Toggle> components matching to an enumeration 
  * between filter names and titles. Each filter will be set as a boolean
  * `true` value when checked, or deleted when unchecked.
- * 
- * @visibleName Filters.Toggles
  */
 const Toggles: React.FC<Props> = ({ name, options, minimumOptionsForClearButton = 5, operator = 'AND' }) => {
     const ctx = useContext(Context);

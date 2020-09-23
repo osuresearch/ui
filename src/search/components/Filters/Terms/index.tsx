@@ -8,8 +8,6 @@ export type Props = {
 
 /**
  * Full-text search terms input
- * 
- * @visibleName Filters.Terms
  */
 const Terms: React.FC<Props> = (props) => {
     const { terms, setTerms } = useContext(Context);

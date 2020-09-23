@@ -1,5 +1,5 @@
 
-### Example
+### Examples
 
 Declare your GraphQL query with the required variables and pass it in as an argument to the driver when declaring your `<Search>` component. 
 

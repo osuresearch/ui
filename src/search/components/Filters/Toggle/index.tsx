@@ -11,8 +11,6 @@ export type Props = {
 
 /**
  * Single checkbox with custom formatting support
- * 
- * @visibleName Filters.Toggle
  */
 const Toggle: React.FC<Props> = ({ name, title, children }) => {
     const ctx = useContext(Context);

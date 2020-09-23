@@ -258,8 +258,30 @@ module.exports = {
     getComponentPathLine: (componentPath) => {
         // Naming convention for ../Component/index.js
         const dirname = path.dirname(componentPath);
+        const basename = path.basename(componentPath, path.extname(componentPath));
         const paths = dirname.split(path.sep); // .slice(-1);
-        const name = paths[paths.length - 1];
+
+        // If basename is index, then we assume it's /ComponentName/index.ext
+        // Otherwise, we assume ComponentName.ext
+        const name = basename === 'index' ? paths[paths.length - 1] : basename;
+
+        // Handle import conventions for search components:
+        // 1. Drivers are direct imports per-driver
+        // 2. Subcomponents are imported via their parent only through the composite index.ts
+        // 3. Everything else (provider, debuggers, etc) are in the composite index.ts
+        if (paths[1] === 'search') {
+            if (paths[2] === 'drivers') {
+                return `import ${name} from '@oris/ui/search/drivers/${name}'`;
+            }
+
+            // Some sort of subcomponent - import line is for the parent
+            if (paths[2] === 'components' && paths.length > 3) {
+                return `import { ${paths[3]} } from '@oris/ui/search'`;
+            }
+
+            // Otherwise, assume a direct import
+            return `import { ${name} } from '@oris/ui/search'`;
+        }
 
         // TODO: Can't figure out how to deal with subcomponents that come from generics.
         // E.g. a subcomponent path is `src/form/Checkbox/Label` but a generic would

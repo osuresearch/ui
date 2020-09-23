@@ -19,10 +19,8 @@ export type Props = {
 /**
  * Match an exact value for a given field.
  * 
- * The display name of the filter will be in the form of `{title}: "{value}"`.
+ * The display name of the filter will be in the form of `{prefix}: "{value}"`.
  * For example: `Protocol: "2019H0023"`
- * 
- * @visibleName Filters.Match
  */
 const Match: React.FC<Props> = ({ name, prefix, placeholder, title = 'Search by keyword' }) => {
     const ctx = useContext(Context);

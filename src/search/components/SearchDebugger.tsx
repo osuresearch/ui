@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { Button } from "../..";
 import useSearch from "../hooks/useSearch";
 
+import './SearchDebugger.scss';
+
 type Props = {
     /** SearchProvider `id` to attach the debugger to */
     provider: string
@@ -18,7 +20,7 @@ const SearchDebugger: React.FC<Props> = ({ provider }) => {
     const { terms, filters, sort } = useSearch(provider);
     
     return (
-        <div>
+        <div className="search-debugger">
             <Button theme="link" onClick={() => setShow(!show)}>
                 🧪 Toggle Search Debugger
             </Button>

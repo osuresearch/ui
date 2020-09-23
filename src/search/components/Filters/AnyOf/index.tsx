@@ -20,8 +20,6 @@ export type Props = {
  * Enumeration of options that get combined together into a single `AnyOf` filter.
  * 
  * Only supports strings for keys.
- * 
- * @visibleName Filters.AnyOf
  */
 const AnyOf: React.FC<Props> = ({ name, options, minimumOptionsForClearButton = 5}) => {
     const ctx = useContext(Context);

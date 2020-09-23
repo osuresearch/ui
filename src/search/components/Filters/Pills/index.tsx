@@ -60,8 +60,6 @@ function prettyLabel(filter: IFilter): string {
 
 /**
  * Pills that show all the active filters, with an option to clear each one.
- * 
- * @visibleName Filters.Pills
  */
 const Pills: React.FC<Props> = () => {
     const { terms, filters, setTerms, getFilter, addFilter, deleteFilter } = useContext(Context);

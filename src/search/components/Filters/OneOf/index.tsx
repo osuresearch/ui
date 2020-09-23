@@ -12,9 +12,7 @@ export type Props = {
 /**
  * Radioset (or dropdown) of options where the user may only pick one.
  * 
- * Each option is represented as a Term filter.
- * 
- * @visibleName Filters.OneOf
+ * Each option is represented as a `Term` filter.
  */
 const OneOf: React.FC<Props> = ({ name, options }) => {
     const ctx = useContext(Context);
