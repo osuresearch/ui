@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { NullFieldBind, FormFieldProps, IFormFieldContext } from '../../internal/FormCommon/types';
 import useFieldBindOrProps from '../../internal/FormCommon/hooks/useFieldBindOrProps';
 
@@ -42,7 +42,7 @@ interface IFieldSetComposition {
     Success: React.FC<SuccessProps>
 }
 
-type Props = FormFieldProps<string> & {
+type Props = FormFieldProps<string | string[]> & {
     /**
      * The value of the `name` prop will cascade down to be the 
      * `name` in each child component in the `<FieldSet>`.
@@ -50,25 +50,18 @@ type Props = FormFieldProps<string> & {
     name?: string;
 }
 
-export const Context = React.createContext<IFormFieldContext<string>>({
-    bind: new NullFieldBind<string>(),
+export const Context = React.createContext<IFormFieldContext<string | string[]>>({
+    bind: new NullFieldBind<string | string[]>(),
 
     // Add your other prop defaults here that should be made available to consumers
     // foo: 1
 });
 
-const IsInput = (element: React.ReactElement) => {
-    // @ts-ignore
-    switch (element?.type.name) {
-        case 'FieldSet':
-        case 'Radio':
-        case 'Checkbox':
-            //case 'Text':
-            return true;
-        default:
-            return false;
-    }
-}
+// @ts-ignore
+const IsCheckbox = (element: React.ReactElement) => element.type.name === 'Checkbox';
+
+// @ts-ignore
+const IsRadio = (element: React.ReactElement) => element.type.name === 'Radio';
 
 /**
  * A set of related form components.
@@ -79,6 +72,19 @@ const FieldSet: React.FC<Props> & IFieldSetComposition = ({
 }) => {
     const { bind } = useFieldBindOrProps(props);
 
+    const handleCheckboxChange = useCallback((value: boolean, id: string) => {
+        // Store the checked (i.e. true) Checkbox names in an array
+        let bindValue = Array.isArray(bind.value) ? [...bind.value] : [];
+
+        if (!value) {
+            bindValue = bindValue.filter(checkbox => checkbox !== id);
+        } else {
+            bindValue.push(id);
+        }
+
+        bind.value = bindValue;
+    }, [bind]);
+
     return (
         <Context.Provider value={{ bind }}>
             <fieldset
@@ -88,13 +94,25 @@ const FieldSet: React.FC<Props> & IFieldSetComposition = ({
             >
                 {React.Children.map<React.ReactNode, React.ReactNode>(children, node => {
                     if (React.isValidElement(node)) {
-                        if (IsInput(node)) {
+                        const cloneProps = {
+                            // Add the name, success, and 
+                            // error props to the inputs
+                            name: node.props.name || bind.id,
+                            error: node.props.error || bind.error,
+                            success: node.props.success || bind.success
+                        }
+
+                        if (IsCheckbox(node)) {
                             return React.cloneElement(node, {
-                                // Add the name, success, and 
-                                // error props to the inputs
-                                name: node.props.name || bind.id,
-                                error: node.props.error || bind.error,
-                                success: node.props.success || bind.success
+                                ...cloneProps,
+                                onChange: (value: boolean) => handleCheckboxChange(value, node.props.id)
+                            })
+                        }
+
+                        if (IsRadio(node)) {
+                            return React.cloneElement(node, {
+                                ...cloneProps,
+                                onChange: (value: string) => bind.value = value
                             })
                         } else { // Else, clone it as-is
                             return React.cloneElement(node)

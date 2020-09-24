@@ -74,3 +74,32 @@ const onChange = (newBoolValue, oldBoolValue) => {
     </Checkbox.Label>
 </Checkbox>
 ```
+
+```jsx
+import { FieldSet } from '@oris/ui';
+
+const onChange = (newArrayValue, oldArrayValue) => {
+    alert(`Selected options changed from [${oldArrayValue}] to [${newArrayValue}]`);
+}
+
+<FieldSet id="light-types" onChange={onChange}>
+    <FieldSet.Legend>
+        Select your light types
+    </FieldSet.Legend>
+
+    <Checkbox id="light-types-spot">
+        <Checkbox.Input />
+        <Checkbox.Label>Spot light</Checkbox.Label>
+    </Checkbox>
+
+    <Checkbox id="light-types-directional">
+        <Checkbox.Input  />
+        <Checkbox.Label>Directional Light</Checkbox.Label>
+    </Checkbox>
+
+    <Checkbox id="light-types-point">
+        <Checkbox.Input />
+        <Checkbox.Label>Point Light</Checkbox.Label>
+    </Checkbox>
+</FieldSet>
+```

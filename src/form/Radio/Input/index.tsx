@@ -68,6 +68,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     let inputProps: React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> = {
         ref: ref,
         ...props,
+        type: 'radio',
         id: bind.id,
         name: bind.name || props.name,
         defaultChecked: defaultChecked,
