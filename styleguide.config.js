@@ -59,14 +59,14 @@ function listFormComponents() {
         // Special handling for the root Form component
         // to ensure it's first in the list 
         if (component === 'Form') {
-            sections = [{ 
+            sections = [{
                 name: '<Form>',
                 usageMode: 'collapse',
                 components: 'src/form/Form/index.tsx'
             }, ...sections];
         } else {
             const subPaths = glob.sync(dirname + '/*/index.tsx');
-            
+
             // Components from FormCommon that we include as subcomponents
             // for all components by default. 
             let generics = glob.sync('src/internal/FormCommon/Components/*/index.tsx');
@@ -158,9 +158,9 @@ const reactDocgenTypescriptOptions = {
         // Skip props merged from node_modules
         // E.g. const MyComponent: React.FC<React.HTMLAttributes<HTMLDivElement>> = ()...
         if (prop.parent) {
-          return !prop.parent.fileName.includes('node_modules');
+            return !prop.parent.fileName.includes('node_modules');
         }
-     
+
         return true;
     },
 };
@@ -200,11 +200,16 @@ module.exports = {
             ]
         }
     },
-    // updateDocs: (docs, file) => {
-    //     console.log(file);
-    //     console.log(docs);
-    //     return docs;
-    // },
+    updateDocs: (docs, file) => {
+        const path = file.split('/src/')[1].split('/');
+
+        // Add brackets to the names of the top-level form components
+        if (path[0] === 'form' && path[2] === 'index.tsx') {
+            docs.displayName = `<${docs.displayName}>`
+        }
+
+        return docs;
+    },
     getComponentPathLine: (componentPath) => {
         // Naming convention for ../Component/index.js
         const dirname = path.dirname(componentPath);
@@ -264,5 +269,9 @@ module.exports = {
         // Assume Javascript
         return require('react-docgen').parse(source, resolver, handlers);
     },
-    sections: sections
+    sections: sections,
+    // Override Styleguidist components
+    styleguideComponents: {
+        TableOfContents: path.join(__dirname, 'src/styleguide/TableOfContents')
+    },
 };
