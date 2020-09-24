@@ -19,24 +19,13 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
 const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     const { bind } = useContext(Context);
 
-    const defaultChecked: boolean | undefined = props.checked || (props.defaultValue === '' + bind.value) || undefined;
+    const defaultChecked: boolean | undefined = props.checked || props.defaultChecked || (props.defaultValue === '' + bind.value) || undefined;
     const checked = (props.defaultValue === '' + bind.value) ?? false;
 
     const defaultValue = bind.value || props.defaultValue || bind.id;
     const value = bind.value || bind.id;
 
-    const readOnly = bind.readOnly || props.readOnly || false;
-
-    // If readOnly, view the field in print view
-    if (readOnly) {
-        return (
-            <Print>
-                {checked && <i className="fa fa-check-square-o" aria-label="Radio button was selected,,"></i>}
-                {!checked && <i className="fa fa-square-o" aria-label="Radio button was not selected,,"></i>}
-                &nbsp; {bind.instructions}
-            </Print>
-        );
-    }
+    const readOnly = bind.readOnly || props.readOnly;
 
     if (bind.diff) {
         const wasChecked: boolean = (props.value === '' + bind.initialValue);
@@ -75,10 +64,17 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         defaultValue: defaultValue,
         className: classNames,
         "aria-describedby": `${bind.id}-help`,
+        onClick: (e) => {
+            if (readOnly) {
+                return e.preventDefault();
+            }
+        },
         onChange: (e) => {
             bind.value = e.currentTarget.value;
             if (props.onChange) props.onChange(e);
-        }
+        },
+        readOnly: readOnly,
+        "aria-disabled": readOnly
     }
 
     if (bind.controlled) {

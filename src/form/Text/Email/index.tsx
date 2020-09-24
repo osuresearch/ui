@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { Context } from '..';
 
-import Print from '../Print';
 import Diff from '../Diff';
 
 export type EmailProps = React.InputHTMLAttributes<HTMLInputElement>;
@@ -28,10 +27,6 @@ const Email = React.forwardRef<HTMLInputElement, EmailProps>((props, ref) => {
                 prevValue={typeof (bind.initialValue) === 'string' ? bind.initialValue : undefined}
             />
         )
-    }
-
-    if (readOnly) {
-        return <Print value={typeof (value) === 'string' ? value : ''} />
     }
 
     const classNames = 'form-control ' +
@@ -70,7 +65,8 @@ const Email = React.forwardRef<HTMLInputElement, EmailProps>((props, ref) => {
             if (props.onChange) props.onChange(e);
         },
         onBlur: nativeOnBlur,
-        readOnly: bind.readOnly || props.readOnly
+        readOnly: readOnly,
+        "aria-disabled": readOnly
     }
 
     // Assign a value to the input if it is controlled

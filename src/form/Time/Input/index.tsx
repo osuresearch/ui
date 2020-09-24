@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useContext, useCallback } from 'react';
 import { Context } from '..';
+import { Print } from '../../../internal/FormCommon/Utility';
 
 import { getHourValue, getMinuteValue, getMeridiemValue } from '../helpers';
 
@@ -79,7 +80,7 @@ export const Input: React.FC<InputProps> = (props) => {
     const name = bind.name || props.name;
     const readOnly = bind.readOnly || props.readOnly;
 
-    const classNames = `input-group ${props.className ? props.className : ''} ${props.className ? props.className : ''} ${bind.error ? 'is-invalid' : ''} ${bind.success ? 'is-valid' : ''} ${readOnly ? 'readonly' : ''}`;
+    const classNames = `input-group ${props.className ? props.className : ''} ${props.className ? props.className : ''} ${bind.error && 'is-invalid'} ${bind.success && 'is-valid'} ${readOnly ? 'readonly' : ''}`;
 
     return (
         <div className={classNames}>
@@ -87,43 +88,53 @@ export const Input: React.FC<InputProps> = (props) => {
                 <span className='fa fa-clock-o' aria-hidden='true'></span>
             </span>
 
-            <div className='form-control'>
-                <HourInput
-                    ref={hourRef}
+            {readOnly &&
+                <Print
                     id={props.id || bind.id}
-                    hour={hour}
-                    setHour={setHour}
-                    setMeridiem={setMeridiem}
-                    handleClick={handleClick}
-                    minutesRef={minutesRef}
-                    meridiemRef={meridiemRef}
-                    readOnly={readOnly}
+                    name={name}
+                    value={hour && minutes && meridiem && `${hour}:${minutes} ${meridiem}`}
                 />
+            }
 
-                <span>:</span>
+            {!readOnly &&
+                <div className='form-control'>
+                    <HourInput
+                        ref={hourRef}
+                        id={props.id || bind.id}
+                        hour={hour}
+                        setHour={setHour}
+                        setMeridiem={setMeridiem}
+                        handleClick={handleClick}
+                        minutesRef={minutesRef}
+                        meridiemRef={meridiemRef}
+                        readOnly={readOnly}
+                    />
 
-                <MinutesInput
-                    ref={minutesRef}
-                    id={props.id || bind.id}
-                    minutes={minutes}
-                    setMinutes={setMinutes}
-                    handleClick={handleClick}
-                    hourRef={hourRef}
-                    meridiemRef={meridiemRef}
-                    readOnly={readOnly}
-                />
+                    <span>:</span>
 
-                <MeridiemInput
-                    ref={meridiemRef}
-                    id={props.id || bind.id}
-                    meridiem={meridiem}
-                    setMeridiem={setMeridiem}
-                    handleClick={handleClick}
-                    hourRef={hourRef}
-                    minutesRef={minutesRef}
-                    readOnly={readOnly}
-                />
-            </div>
+                    <MinutesInput
+                        ref={minutesRef}
+                        id={props.id || bind.id}
+                        minutes={minutes}
+                        setMinutes={setMinutes}
+                        handleClick={handleClick}
+                        hourRef={hourRef}
+                        meridiemRef={meridiemRef}
+                        readOnly={readOnly}
+                    />
+
+                    <MeridiemInput
+                        ref={meridiemRef}
+                        id={props.id || bind.id}
+                        meridiem={meridiem}
+                        setMeridiem={setMeridiem}
+                        handleClick={handleClick}
+                        hourRef={hourRef}
+                        minutesRef={minutesRef}
+                        readOnly={readOnly}
+                    />
+                </div>
+            }
 
             <SRDescriptions
                 readOnly={readOnly}

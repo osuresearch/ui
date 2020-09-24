@@ -25,6 +25,19 @@ const html = "<h1>Hello World</h1><p>I am <strong>rich</strong> text!</p>";
 </Text>
 ```
 
+Read Only
+```jsx
+import { Text } from '@oris/ui';
+
+const html = "<h1>Hello World</h1><p>I am <strong>rich</strong> text!</p>";
+
+<Text id="rich-text-editor" readOnly>
+    <Text.Label>Rich Text Editor input</Text.Label>
+
+    <Text.Rich defaultValue={html} />
+</Text>
+```
+
 A "simple" UI version is also available if you do not need (or want) the full range of controls in your app:
 
 ```jsx

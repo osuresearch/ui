@@ -17,12 +17,12 @@
 </Checkbox>
 ```
 
-#### Disabled field
+#### Read Only
 ```jsx
-<Checkbox id="checkbox-disabled">
-    <Checkbox.Input disabled />
+<Checkbox id="checkbox-readonly" readOnly={true}>
+    <Checkbox.Input defaultChecked={true} />
     <Checkbox.Label>
-        This checkbox field is disabled
+        This checkbox field is read only
     </Checkbox.Label>
 </Checkbox>
 ```

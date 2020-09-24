@@ -1,8 +1,7 @@
 import React, { useContext } from 'react';
 import { Context } from '..';
 
-// Need to move these to common
-import Print from '../../Text/Print';
+// Need to move to common
 import Diff from '../../Text/Diff';
 
 export type InputProps = React.InputHTMLAttributes<HTMLInputElement>;
@@ -31,10 +30,6 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         )
     }
 
-    if (readOnly) {
-        return <Print value={typeof (value) === 'string' ? value : ''} />
-    }
-
     const classNames = 'form-control ' +
         (props.className ?? '') +
         (bind.error ? ' is-invalid' : '') +
@@ -53,7 +48,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
             bind.value = e.currentTarget.value;
             if (props.onChange) props.onChange(e);
-        }
+        },
+        readOnly: readOnly,
+        "aria-disabled": readOnly
     }
 
     // Assign a value to the input if it is controlled

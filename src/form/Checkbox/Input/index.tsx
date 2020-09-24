@@ -25,17 +25,6 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
 
     const readOnly = bind.readOnly || props.readOnly;
 
-    // If readOnly, display as print
-    if (readOnly) {
-        return (
-            <Print>
-                {checked && <i className="fa fa-check-square-o" aria-label="Checkbox was checked,,"></i>}
-                {!checked && <i className="fa fa-square-o" aria-label="Checkbox was not checked,,"></i>}
-                &nbsp; {bind.instructions}
-            </Print>
-        );
-    }
-
     // Diff mode
     if (bind.diff) {
         const wasChecked: boolean = bind.initialValue === true;
@@ -72,11 +61,18 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         name: bind.name || props.name,
         className: classNames,
         defaultChecked: defaultChecked,
+        onClick: (e) => {
+            if (readOnly) {
+                return e.preventDefault();
+            }
+        },
         onChange: (e) => {
             bind.value = e.currentTarget.checked;
             if (props.onChange) props.onChange(e);
         },
-        "aria-describedby": `${bind.id}-help`
+        "aria-describedby": `${bind.id}-help`,
+        readOnly: readOnly,
+        "aria-disabled": readOnly
     }
 
     if (bind.controlled) {

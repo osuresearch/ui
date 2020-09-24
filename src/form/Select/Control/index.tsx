@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Context } from '..';
 import { OptionProps } from '../Option';
+import { Print } from '../../../internal/FormCommon/Utility';
 
 export type ControlProps = React.SelectHTMLAttributes<HTMLSelectElement> & {
     children: React.ReactElement<OptionProps>[] | React.ReactElement<OptionProps>
@@ -18,11 +19,21 @@ const Control = React.forwardRef<HTMLSelectElement, ControlProps>((props, ref) =
 
     const classNames = `form-control custom-select ${bind.error && 'is-invalid'} ${bind.success && 'is-valid'} ${props.className ? props.className : ''}`;
 
-    const defaultValue = bind.value || props.defaultValue;
-    const value = bind.controlled && bind.value ? bind.value : undefined;
+    const value = bind.value || props.defaultValue || props.value;
 
-    if (bind.readOnly || bind.diff) {
-        // Let the Option component handle the diff/print/readOnly rendering
+    // Display Read Only as readOnly text input
+    if (bind.readOnly) {
+        return (
+            <Print
+                id={bind.id}
+                name={bind.name || props.name}
+                value={value}
+            />
+        )
+    }
+
+    if (bind.diff) {
+        // Let the Option component handle the diff
         return <>{props.children}</>
     }
 
@@ -32,7 +43,7 @@ const Control = React.forwardRef<HTMLSelectElement, ControlProps>((props, ref) =
         id: bind.id,
         name: bind.name || props.name,
         className: classNames,
-        defaultValue: defaultValue,
+        defaultValue: value,
         "aria-describedby": `${bind.id}-help`,
         onChange: (e) => {
             bind.value = e.currentTarget.value;

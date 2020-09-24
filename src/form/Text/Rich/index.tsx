@@ -2,7 +2,6 @@
 import React, { useLayoutEffect, useState, useRef, useContext } from 'react';
 import { Context } from '..';
 
-import Print from '../Print';
 import Diff from '../Diff';
 
 export interface RichProps {
@@ -76,7 +75,7 @@ const Rich: React.FC<RichProps> = ({
     const editorRef = useRef<HTMLTextAreaElement>(null);
 
     useLayoutEffect(() => {
-        if (!(bind.readOnly || bind.diff)) {
+        if (!(bind.diff)) {
             // @ts-ignore 
             const cke = window.CKEDITOR;
             let editor: any = undefined; // No type info exists for CKE
@@ -139,10 +138,6 @@ const Rich: React.FC<RichProps> = ({
         )
     }
 
-    if (bind.readOnly) {
-        return <Print value={typeof (value) === 'string' ? value : ''} />
-    }
-
     if (error) {
         return (
             <div className="richtext is-error">
@@ -152,13 +147,15 @@ const Rich: React.FC<RichProps> = ({
     }
 
     return (
-        <div className={`richtext ${className}`}>
+        <div className={`richtext ${className} ${bind.readOnly ? 'readonly' : ''}`}>
             <textarea
                 id={bind.id}
                 name={bind.name || name}
                 className="richtext-editor"
                 ref={editorRef}
                 aria-describedBy={`${bind.id}-help`}
+                disabled={bind.readOnly}
+                aria-disabled={bind.readOnly}
             />
         </div>
     );

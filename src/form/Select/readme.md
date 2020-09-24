@@ -9,7 +9,7 @@
     <Select.Control>
         <Select.Option value="">
             -- Please choose an option --
-                </Select.Option>
+        </Select.Option>
         <Select.Option value="RGB">RGB</Select.Option>
         <Select.Option value="CMYK">CMYK</Select.Option>
         <Select.Option value="HSL">HSL</Select.Option>

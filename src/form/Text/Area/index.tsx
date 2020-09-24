@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { Context } from '..';
 
-import Print from '../Print';
 import Diff from '../Diff';
 
 export type AreaProps = React.TextareaHTMLAttributes<HTMLTextAreaElement> & {
@@ -35,10 +34,6 @@ const Area = React.forwardRef<HTMLTextAreaElement, AreaProps>((props, ref) => {
         )
     }
 
-    if (readOnly) {
-        return <Print value={typeof (value) === 'string' ? value : ''} />
-    }
-
     const classNames = 'form-control ' +
         (props.className ?? '') +
         (bind.error ? ' is-invalid' : '') +
@@ -56,7 +51,9 @@ const Area = React.forwardRef<HTMLTextAreaElement, AreaProps>((props, ref) => {
         onChange: (e) => {
             bind.value = e.currentTarget.value;
             if (props.onChange) props.onChange(e);
-        }
+        },
+        readOnly: readOnly,
+        "aria-disabled": readOnly
     }
 
     if (bind.controlled) {

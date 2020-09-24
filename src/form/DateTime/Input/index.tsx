@@ -96,18 +96,6 @@ const Input: React.FC<InputProps> = (props) => {
         return formatted;
     }
 
-    if (readOnly) {
-        return (
-            <Print>
-                <span className="input-group-prefix">
-                    <i className='fa fa-calendar' aria-hidden="true"></i>
-                </span>
-
-                {formatter(selected)}
-            </Print>
-        )
-    }
-
     if (bind.diff) {
         if (selected !== initial) {
             return (
@@ -152,6 +140,7 @@ const Input: React.FC<InputProps> = (props) => {
                 }
                 dateFormat={dateFormat}
                 readOnly={readOnly}
+                aria-disabled={readOnly}
             >
                 <div className='keyboard-notice'>
                     <small><em>Keyboard users: Exit this dialog with the <code>esc</code> key</em></small>

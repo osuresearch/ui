@@ -73,16 +73,18 @@ const FieldSet: React.FC<Props> & IFieldSetComposition = ({
     const { bind } = useFieldBindOrProps(props);
 
     const handleCheckboxChange = useCallback((value: boolean, id: string) => {
-        // Store the checked (i.e. true) Checkbox names in an array
-        let bindValue = Array.isArray(bind.value) ? [...bind.value] : [];
+        if (!bind.readOnly) {
+            // Store the checked (i.e. true) Checkbox names in an array
+            let bindValue = Array.isArray(bind.value) ? [...bind.value] : [];
 
-        if (!value) {
-            bindValue = bindValue.filter(checkbox => checkbox !== id);
-        } else {
-            bindValue.push(id);
+            if (!value) {
+                bindValue = bindValue.filter(checkbox => checkbox !== id);
+            } else {
+                bindValue.push(id);
+            }
+
+            bind.value = bindValue;
         }
-
-        bind.value = bindValue;
     }, [bind]);
 
     return (
@@ -95,11 +97,14 @@ const FieldSet: React.FC<Props> & IFieldSetComposition = ({
                 {React.Children.map<React.ReactNode, React.ReactNode>(children, node => {
                     if (React.isValidElement(node)) {
                         const cloneProps = {
-                            // Add the name, success, and 
-                            // error props to the inputs
+                            // Add the FieldSet props to the
+                            // inputs (if the inputs have not
+                            // already defined them)
                             name: node.props.name || bind.id,
                             error: node.props.error || bind.error,
-                            success: node.props.success || bind.success
+                            success: node.props.success || bind.success,
+                            readOnly: node.props.readOnly || bind.readOnly,
+                            required: node.props.required || bind.required
                         }
 
                         if (IsCheckbox(node)) {

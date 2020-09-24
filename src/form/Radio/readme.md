@@ -34,6 +34,33 @@ import { FieldSet } from '@oris/ui';
 </FieldSet>
 ```
 
+#### Read Only
+```jsx
+import { FieldSet } from '@oris/ui';
+
+<FieldSet id="output-format" readOnly={true}>
+    <FieldSet.Legend>
+        Output format
+    </FieldSet.Legend>
+
+    <Radio id="text-file">
+        <Radio.Input value="text" defaultChecked={true} />
+        <Radio.Label>Text file</Radio.Label>
+    </Radio>
+
+    <Radio id="csv-file">
+        <Radio.Input value="csv" />
+        <Radio.Label>CSV file</Radio.Label>
+    </Radio>
+
+    <Radio id="html-file">
+        <Radio.Input value="html" />
+        <Radio.Label>HTML File</Radio.Label>
+    </Radio>
+</FieldSet>
+```
+
+
 
 #### Change Events
 
@@ -43,9 +70,6 @@ import { FieldSet } from '@oris/ui';
 const onChange = (newStrValue, oldStrValue) => {
     alert(`Selected option changed from ${oldStrValue} to ${newStrValue}`);
 }
-
-// TODO (Chase): This example doesn't work - but it's the expected
-// use case for something like this (IMO)
 
 <FieldSet id="light-type" onChange={onChange}>
     <FieldSet.Legend>
