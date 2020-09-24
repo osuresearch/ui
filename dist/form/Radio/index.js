@@ -15,41 +15,19 @@ var _useFieldBindOrProps2 = _interopRequireDefault(require("../../internal/FormC
 
 var _withFormContext = require("../../internal/FormCommon/HOC/withFormContext");
 
-var _Input = require("./Input");
+var _Input = _interopRequireDefault(require("./Input"));
+
+var _Label = _interopRequireDefault(require("./Label"));
 
 var _Components = require("../../internal/FormCommon/Components");
 
 var Context = /*#__PURE__*/_react.default.createContext({
-  bind: new _types.NullFieldBind() // Add your other prop defaults here that should be made available to consumers
-  // foo: 1
-
+  bind: new _types.NullFieldBind()
 });
 /**
  * Radio input and label
  * 
- * `<Radio>` components **must** always be contained within
- * a `<FieldSet>`
- * 
- * ### Subcomponents
- * 
- * #### `<Radio.Input>` (required)
- * Equivalent of `<input type='radio'>`
- * 
- * * **Props**
- *  * [`radio` input attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio#Additional_attributes)
- *  * [React event handlers](https://reactjs.org/docs/events.html#supported-events)
- *  * All common [`<input>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input) attributes
- * 
- * 
- * #### `<Radio.Label>` (required)
- * Equivalent of `<label>`
- * 
- * * **Props**
- *  * [HTML Global attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes)
- * 
- * #### `<Radio.Help>`
- * Help text for the `<Radio>`
- * 
+ * `<Radio>` components **must** always be contained within a `<FieldSet>`
  */
 
 
@@ -64,13 +42,13 @@ var Radio = function Radio(props) {
       bind: bind
     }
   }, /*#__PURE__*/_react.default.createElement("div", {
-    className: "custom-control custom-radio"
+    className: "ui-form-element custom-control custom-radio ".concat(bind.required ? 'is-required' : '', " ").concat(bind.error && 'is-invalid', " ").concat(bind.success && 'is-valid')
   }, props.children));
 };
 
-Radio.Input = _Input.Input;
+Radio.Input = _Input.default;
 Radio.Help = (0, _withFormContext.withFormContext)(_Components.Help, Context);
-Radio.Label = (0, _withFormContext.withFormContext)(_Components.ControlLabel, Context);
+Radio.Label = (0, _withFormContext.withFormContext)(_Label.default, Context);
 var _default = Radio; // Compound Component pattern adapted from https://blog.martindidiego.com/compound-components-typescript/
 
 exports.default = _default;

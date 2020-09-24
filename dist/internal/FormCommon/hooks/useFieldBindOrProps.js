@@ -61,6 +61,7 @@ function useFieldBindOrProps(props) {
   var _useState3 = (0, _react.useState)(function () {
     if (isFormFieldBindProp(props)) {
       console.debug('[useFieldBindOrProps] Initializing from IFieldBind ref', props.bind);
+      props.bind.controlled = true;
       return props.bind;
     }
 

@@ -47,7 +47,7 @@ const Radio: React.FC<Props> & IRadioComposition = (props) => {
 
     return (
         <Context.Provider value={{ bind }}>
-            <div className={`ui-form-element custom-control custom-radio ${bind.required ? 'is-required' : ''} ${bind.error && 'is-invalid'} ${bind.success && 'is-valid'} ${props.className ? props.className : ''}`}
+            <div className={`ui-form-element custom-control custom-radio ${bind.required ? 'is-required' : ''} ${bind.error && 'is-invalid'} ${bind.success && 'is-valid'}`}
             >
                 {props.children}
             </div>

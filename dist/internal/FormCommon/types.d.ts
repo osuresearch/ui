@@ -20,8 +20,12 @@ export interface IFieldBind<T> {
     success?: string;
     /** Should the field be loaded as read-only */
     readOnly?: boolean;
+    /** Should the field be displayed as a diff */
+    diff?: boolean;
     /** Should the field be indicated as (soft) required */
     required?: boolean;
+    /** If this is a controlled element (will be true by default) */
+    controlled?: boolean;
     /** Get/update the field value */
     value: Nullable<T>;
     /** Initial value for isDiff */
@@ -32,7 +36,13 @@ export interface IFieldBind<T> {
     onStateChange: Action<OnStateChangeDelegate<T>>;
 }
 export declare type FormFieldBindProp<T> = {
+    /**
+     * Data binding strictly typed to `<T>`
+     */
     bind: IFieldBind<T>;
+    /**
+     * Callback with the signature `(newValue: T, oldValue: T) => void`
+     */
     onChange?: OnValueChangeDelegate<T>;
 };
 export declare type FormFieldSpreadProps<T> = {
@@ -40,6 +50,8 @@ export declare type FormFieldSpreadProps<T> = {
     id: string;
     /** Name of the form control. Submitted with the form as part of a name/value pair. */
     name?: string;
+    /** Additional classes to add to the field wrapper */
+    className?: string;
     /** Validation error to display for the field */
     error?: string;
     /** Validation success message to display for the field */
@@ -48,6 +60,9 @@ export declare type FormFieldSpreadProps<T> = {
     readOnly?: boolean;
     /** Should the field be indicated as (soft) required */
     required?: boolean;
+    /**
+     * Callback with the signature `(newValue: T, oldValue: T) => void`
+     */
     onChange?: OnValueChangeDelegate<T>;
 };
 /** Base props for a form field. Handles binds + spreading the bind as props */
@@ -67,6 +82,12 @@ export declare type FormFieldSetProps = {
     /** Should the fields in the FieldSet be indicated as (soft) required */
     required?: boolean;
 };
+/**
+ * Generic concrete implementation of IFieldBind.
+ *
+ * Manages delegates for state and value change events and safely
+ * fields with appropriate read/write accessors.
+ */
 export declare class FieldBind<T> implements IFieldBind<T> {
     /** Unique ID of the form field */
     id?: string;
@@ -88,10 +109,18 @@ export declare class FieldBind<T> implements IFieldBind<T> {
     get readOnly(): boolean;
     /** On update, notify all onStateChange delegates */
     set readOnly(value: boolean);
+    /** Should the field be displayed as a diff. */
+    get diff(): boolean;
+    /** On update, notify all onStateChange delegates */
+    set diff(value: boolean);
     /** Should the field be required */
     get required(): boolean;
     /** On update, notify all onStateChange delegates */
     set required(value: boolean);
+    /** Should the field be controlled */
+    get controlled(): boolean;
+    /** On update, notify all onStateChange delegates */
+    set controlled(value: boolean);
     /** The backing value for the field. */
     get value(): Nullable<T>;
     /**On update, track previous value and notify all onChange delegates */
@@ -99,7 +128,9 @@ export declare class FieldBind<T> implements IFieldBind<T> {
     protected _error: string;
     protected _success: string;
     protected _readOnly: boolean;
+    protected _diff: boolean;
     protected _required: boolean;
+    protected _controlled: boolean;
     protected _value: Nullable<T>;
     protected _previousValue: Nullable<T>;
     readonly onValueChange: Action<OnValueChangeDelegate<T>>;

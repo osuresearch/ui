@@ -15,49 +15,19 @@ var _useFieldBindOrProps2 = _interopRequireDefault(require("../../internal/FormC
 
 var _withFormContext = require("../../internal/FormCommon/HOC/withFormContext");
 
-var _Input = require("./Input");
+var _Input = _interopRequireDefault(require("./Input"));
+
+var _Label = _interopRequireDefault(require("./Label"));
 
 var _Components = require("../../internal/FormCommon/Components");
 
 var Context = /*#__PURE__*/_react.default.createContext({
-  bind: new _types.NullFieldBind() // Add your other prop defaults here that should be made available to consumers
-  // foo: 1
-
+  bind: new _types.NullFieldBind()
 });
 /**
- * A single checkbox
+ * A single checkbox. 
  * 
- * ### Subcomponents
- * 
- * #### `<Checkbox.Input>` (required)
- * Equivalent of `<input type='checkbox'>`
- * 
- * * **Props**
- *  * [`checkbox` input attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox)
- *  * [React event handlers](https://reactjs.org/docs/events.html#supported-events)
- *  * All common [`<input>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input) attributes
- * 
- * 
- * #### `<Checkbox.Label>` (required)
- * Equivalent of `<label>`
- * 
- * * **Props**
- *  * [HTML Global attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes)
- * 
- * 
- * #### `<Checkbox.Help>`
- * Help text for the `<Checkbox>`
- * 
- * 
- * #### `<Checkbox.Error>` (required if single `<Checkbox>` that requires validation)
- * Provides instructions on how to resolve the validation error; 
- * will display when `error` is set in `<Checkbox>`
- * 
- * 
- * #### `<Checkbox.Success>`
- * Feedback for when the set meets the validation rules; will 
- * display when `success` is set in `<Checkbox>`
- * 
+ * Requires `<Checkbox.Input />` and `<Checkbox.Label />` child components.
  */
 
 
@@ -72,12 +42,12 @@ var Checkbox = function Checkbox(props) {
       bind: bind
     }
   }, /*#__PURE__*/_react.default.createElement("div", {
-    className: "custom-control custom-checkbox"
+    className: "ui-form-element custom-control custom-checkbox ".concat(bind.required ? 'is-required' : '', " ").concat(bind.error && 'is-invalid', " ").concat(bind.success && 'is-valid')
   }, props.children));
 };
 
-Checkbox.Input = _Input.Input;
-Checkbox.Label = (0, _withFormContext.withFormContext)(_Components.ControlLabel, Context);
+Checkbox.Input = _Input.default;
+Checkbox.Label = (0, _withFormContext.withFormContext)(_Label.default, Context);
 Checkbox.Help = (0, _withFormContext.withFormContext)(_Components.Help, Context);
 Checkbox.Success = (0, _withFormContext.withFormContext)(_Components.Success, Context);
 Checkbox.Error = (0, _withFormContext.withFormContext)(_Components.Error, Context);

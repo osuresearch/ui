@@ -3,16 +3,10 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-Object.defineProperty(exports, "ControlLabel", {
+Object.defineProperty(exports, "Success", {
   enumerable: true,
   get: function get() {
-    return _ControlLabel.ControlLabel;
-  }
-});
-Object.defineProperty(exports, "Diff", {
-  enumerable: true,
-  get: function get() {
-    return _Diff.Diff;
+    return _Success.Success;
   }
 });
 Object.defineProperty(exports, "Error", {
@@ -21,49 +15,23 @@ Object.defineProperty(exports, "Error", {
     return _Error.Error;
   }
 });
-Object.defineProperty(exports, "Help", {
-  enumerable: true,
-  get: function get() {
-    return _Help.Help;
-  }
-});
 Object.defineProperty(exports, "Label", {
   enumerable: true,
   get: function get() {
     return _Label.Label;
   }
 });
-Object.defineProperty(exports, "Legend", {
+Object.defineProperty(exports, "Help", {
   enumerable: true,
   get: function get() {
-    return _Legend.Legend;
-  }
-});
-Object.defineProperty(exports, "Print", {
-  enumerable: true,
-  get: function get() {
-    return _Print.Print;
-  }
-});
-Object.defineProperty(exports, "Success", {
-  enumerable: true,
-  get: function get() {
-    return _Success.Success;
+    return _Help.Help;
   }
 });
 
-var _ControlLabel = require("./ControlLabel");
-
-var _Diff = require("./Diff");
+var _Success = require("./Success");
 
 var _Error = require("./Error");
 
-var _Help = require("./Help");
-
 var _Label = require("./Label");
 
-var _Legend = require("./Legend");
-
-var _Print = require("./Print");
-
-var _Success = require("./Success");
+var _Help = require("./Help");

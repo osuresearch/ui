@@ -44,7 +44,7 @@ const Number: React.FC<Props> & INumberComposition = ({
 
     return (
         <Context.Provider value={{ bind }}>
-            <div className={`ui-form-element ${bind.required ? 'is-required' : ''} ${bind.error && 'is-invalid'} ${bind.success && 'is-valid'} ${props.className ? props.className : ''}`}
+            <div className={`ui-form-element ${bind.required ? 'is-required' : ''} ${bind.error && 'is-invalid'} ${bind.success && 'is-valid'}`}
             >
                 {children}
             </div>

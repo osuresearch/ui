@@ -82,7 +82,7 @@ const FieldSet: React.FC<Props> & IFieldSetComposition = ({
     return (
         <Context.Provider value={{ bind }}>
             <fieldset
-                className={`ui-form-element ${bind.required ? 'is-required' : ''} ${bind.error && 'is-invalid'} ${bind.success && 'is-valid'} ${props.className ? props.className : ''}`}
+                className={`ui-form-element ${bind.required ? 'is-required' : ''} ${bind.error && 'is-invalid'} ${bind.success && 'is-valid'}`}
                 name={bind.name}
                 aria-describedBy={`${bind.id}-help`}
             >

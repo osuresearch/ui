@@ -151,10 +151,6 @@ const Rich: React.FC<RichProps> = ({
         );
     }
 
-    // TODO: Toggling readOnly isn't super efficient here, since 
-    // it'll recreate the editor from scratch. But I don't envision
-    // many use cases where we'll be doing that.
-
     return (
         <div className={`richtext ${className}`}>
             <textarea

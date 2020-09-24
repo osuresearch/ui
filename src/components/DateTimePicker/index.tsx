@@ -93,6 +93,7 @@ const DateTimePicker: React.FC<Props> = ({
                 filterDate={filterDate}
                 minDate={minDate}
                 maxDate={maxDate}
+                // @ts-ignore
                 timeInputLabel={<label htmlFor={id + '-time'}>Time</label>}
                 showTimeInput
                 customTimeInput={<TimeField id={id + '-time'} />}
