@@ -1,7 +1,5 @@
 
-### Examples
-
-#### Basic Implementation
+### Basic Implementation
 
 ```jsx
 <Checkbox id="receive-newsletter">
@@ -14,16 +12,6 @@
     <Checkbox.Help>
         We will not spam your inbox
     </Checkbox.Help>
-</Checkbox>
-```
-
-#### Read Only
-```jsx
-<Checkbox id="checkbox-readonly" readOnly={true}>
-    <Checkbox.Input defaultChecked={true} />
-    <Checkbox.Label>
-        This checkbox field is read only
-    </Checkbox.Label>
 </Checkbox>
 ```
 
