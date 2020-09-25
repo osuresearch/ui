@@ -266,6 +266,7 @@ module.exports = {
     // Override Styleguidist components
     styleguideComponents: {
         StyleGuide: path.join(__dirname, 'src/styleguide/StyleGuide'),
-        ReactComponent: path.join(__dirname, 'src/styleguide/ReactComponent')
+        ReactComponent: path.join(__dirname, 'src/styleguide/ReactComponent'),
+        ExamplesRenderer: path.join(__dirname, 'src/styleguide/ExamplesRenderer')
     },
 };
