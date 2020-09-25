@@ -32,7 +32,6 @@ interface IDateTimeComposition extends ICommonComposition {
      *  | 'showMonthYearPicker' | 'showMonthYearDropdown' | 'monthsShown'
      *  | 'withPortal' | 'showQuarterYearPicker' | 'showTimeSelect'
      *  | 'showTimeSelectOnly' | 'todayButton' | 'showYearPicker'
-     *  | 'onChange' | 'selected'
      *  ```
      * 
      * If you wish to use one of these, please submit a merge request with a patch that resolves the issues.

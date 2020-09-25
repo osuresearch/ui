@@ -1,5 +1,5 @@
 
-### Requirements
+#### Requirements:
 
 Include the following CDN script in your application.
 
@@ -9,7 +9,7 @@ Include the following CDN script in your application.
 
 By default, the content iframe inside the editor uses a CSS file in the Assets project. You can provide your own app-specific CSS by providing an alternative source file in `contentsCss`. 
 
-### Examples
+#### Examples:
 
 Provide the HTML value as a string
 

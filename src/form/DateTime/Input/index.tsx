@@ -31,7 +31,7 @@ export type InputProps = Omit<ReactDatePickerProps, DisabledReactDatePickerProps
 }
 
 /**
- * Dropdown to select a date and time.
+ * Input and popup calendar to select a date (and optionally time).
  * 
  * This component will accept *most* props supported by [react-datepicker](https://reactdatepicker.com/)
  * with the exception of the following that fail to meet accessibility standards:
@@ -42,7 +42,6 @@ export type InputProps = Omit<ReactDatePickerProps, DisabledReactDatePickerProps
  *  | 'showMonthYearPicker' | 'showMonthYearDropdown' | 'monthsShown'
  *  | 'withPortal' | 'showQuarterYearPicker' | 'showTimeSelect'
  *  | 'showTimeSelectOnly' | 'todayButton' | 'showYearPicker'
- *  | 'onChange' | 'selected'
  *  ```
  * 
  * If you wish to use one of these, please submit a merge request with a patch that resolves the issues.
@@ -105,17 +104,6 @@ const Input: React.FC<InputProps> = (props) => {
                 />
             )
         }
-
-        // No change - render as a basic single value print
-        return (
-            <Print>
-                <span className="input-group-prefix">
-                    <i className='fa fa-calendar' aria-hidden="true"></i>
-                </span>
-
-                {formatter(selected)}
-            </Print>
-        )
     }
 
     return (

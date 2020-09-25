@@ -2,6 +2,18 @@
 ### Example
 This example uses [React Hook Form](https://www.react-hook-form.com) for validation.
 
+```jsx noeditor 
+import { Icon } from '@oris/ui';
+
+<div className="alert alert-primary">
+    <Icon name='thumbs-o-up' circled />
+
+    <p>
+        React Hook Form is <em>highly</em> recommended for managing forms in OR React applications
+    </p>
+</div>
+```
+
 ```jsx
 import { useForm, Controller } from 'react-hook-form';
 import {

@@ -1,4 +1,10 @@
+
+Sub-component will inherit `id`, `onChange`, and `readOnly` props from parent component.
+
+#### Examples:
+
 Inlining values
+
 ```jsx
 import { useState } from 'react';
 import { Form, Button, Text } from '@oris/ui';
@@ -20,49 +26,6 @@ const onChange = (currentValue, prevValue) => {
         </Text.Label>
 
         <Text.Input value={value} onChange={(e) => setValue(e.currentTarget.value)} />
-
-        <Text.Help>
-            Help stuff go here
-        </Text.Help>
-
-        <Text.Error />
-    </Text>
-
-    <Button onClick={() => setReadOnly(!readOnly)}>
-        Toggle Read Only
-    </Button>
-
-    <Button onClick={() => setError(error ? '' : 'Do better')}>
-        Toggle Error
-    </Button>
-
-    <p>Current value: {value}</p>
-    <p>Previous value: {prev}</p>
-</Form>
-```
-
-React Hook Form with readOnly print
-```jsx
-import { useState } from 'react';
-import { useForm } from "react-hook-form";
-import { Form, Button, Text } from '@oris/ui';
-
-const [readOnly, setReadOnly] = useState(false);
-const [error, setError] = useState('');
-const [value, setValue] = useState('foo bar');
-const [prev, setPrev] = useState('');
-
-const { register, handleSubmit, watch, errors } = useForm();
-
-console.log('watch field', watch('foo'));
-
-<Form>
-    <Text id="foo2" name="foo" readOnly={readOnly} error={error}>
-        <Text.Label>
-            Label here
-        </Text.Label>
-
-        <Text.Input ref={register} />
 
         <Text.Help>
             Help stuff go here
@@ -244,4 +207,16 @@ const success = "This is valid!";
         This is some additional help text
     </Text.Help>
 </Text>
+```
+
+```js noeditor
+import { Icon } from '@oris/ui';
+
+<div className="alert alert-primary">
+    <Icon name="universal-access" circled={true} />
+    <p><strong>Accessibility</strong></p>
+    <p>
+        The sub-component will inherit the <code>id</code> from the parent component and will be automatically associated with the <code>Text.Label</code>.
+    </p>
+</div>
 ```

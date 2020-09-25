@@ -103,3 +103,5 @@ const onChange = (newArrayValue, oldArrayValue) => {
     </Checkbox>
 </FieldSet>
 ```
+
+### Subcomponents

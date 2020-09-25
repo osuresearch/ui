@@ -1,6 +1,7 @@
 
-### Examples
+Sub-component will inherit `id`, `onChange`, and `readOnly` props from parent component.
 
+#### Examples:
 
 Basic `<Text.Area>`
 ```jsx
@@ -41,4 +42,16 @@ import { Text, FieldSet, Checkbox } from '@oris/ui';
         Use a <strong>1em</strong> padding between elements in the same <code>div</code>
     </FieldSet.Help>
 </FieldSet>
+```
+
+```js noeditor
+import { Icon } from '@oris/ui';
+
+<div className="alert alert-primary">
+    <Icon name="universal-access" circled={true} />
+    <p><strong>Accessibility</strong></p>
+    <p>
+        The sub-component will inherit the <code>id</code> from the parent component and will be automatically associated with the <code>Text.Label</code>.
+    </p>
+</div>
 ```

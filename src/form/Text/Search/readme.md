@@ -1,5 +1,5 @@
 
-### Examples
+#### Examples:
 
 An example involving a Search transformed back and forth from a `key|name` string:
 

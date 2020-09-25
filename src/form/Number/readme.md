@@ -1,11 +1,19 @@
-TODO - Additional examples
-
 ### Examples
 ```jsx
 <Number id="age" required>
     <Number.Label>Provide your age</Number.Label>
     <Number.Input />
     <Number.Error />
+</Number>
+```
+
+```jsx
+<Number id='one-and-ten'>
+    <Number.Label>Pick a number between one (1) and ten (10)</Number.Label>
+    <Number.Input 
+        min={1}
+        max={10}
+    />
 </Number>
 ```
 
@@ -21,3 +29,5 @@ const onChange = (newIntValue, oldIntValue) => {
     <Number.Input />
 </Number>
 ```
+
+### Subcomponents
