@@ -85,11 +85,10 @@ export default class ReactComponent extends Component<ReactComponentProps, React
                     </SectionHeading>
                 }
                 examples={
-                    examples.length > 0 ? (
+                    examples.length > 0 && (
                         <Examples examples={examples} name={name} exampleMode={exampleMode} />
-                    ) : (
-                            <ExamplePlaceholder name={name} />
-                        )
+                        // Prompt to create example was removed
+                    )
                 }
                 tabButtons={
                     // Only display props table if the component actually has props
