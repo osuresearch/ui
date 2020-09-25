@@ -2,7 +2,11 @@ import React, { useContext } from 'react';
 import { IFormFieldContext } from '../../../internal/FormCommon/types'
 
 export type LabelProps = React.LabelHTMLAttributes<HTMLLabelElement> & {
-    /** Will automatically be provided by an HOC */
+    /** 
+     * Will automatically be provided by an HOC 
+     * 
+     * @ignore
+     */
     context?: React.Context<IFormFieldContext<any>>;
 }
 

@@ -1,6 +1,6 @@
 
 
-### Font Stack
+## Font Stack
 
 Our base font stack is `'ProximaNova', sans-serif` at a baseline of `16px`.
 
@@ -8,7 +8,7 @@ For headers, our stack is `'Capita', 'Times New Roman', serif`.
 
 Supported weights are `200, 300, 400, 500, 700`
 
-### Headings
+## Headings
 
 ```js
 <h1>h1. Heading</h1>
@@ -18,7 +18,7 @@ Supported weights are `200, 300, 400, 500, 700`
 <h5>h5. Heading</h5>
 ```
 
-### Inline Text Styles
+## Inline Text Styles
 
 ```js
 <p>You can use the mark tag to <mark>highlight</mark> text.</p>
@@ -31,7 +31,7 @@ Supported weights are `200, 300, 400, 500, 700`
 <p><em>This line rendered as italicized text.</em></p>
 ```
 
-### Links
+## Links
 
 ```js
 <a href="/path/to/url">Some link</a>
@@ -52,7 +52,7 @@ import { ExternalLink } from '@oris/ui';
 ```
 
 
-### Best Practices
+## Best Practices
 
 * Always define your font sizes using `em` or `rem` for [consistent experiences](https://www.w3.org/QA/Tips/font-size)
 * Avoid more than 3 or 4 font sizes per page

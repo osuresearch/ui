@@ -114,6 +114,10 @@ let sections = [
         content: 'docs/colors.md',
     },
     {
+        name: 'Typography',
+        content: 'docs/Typography.md'
+    },
+    {
         name: 'Components',
         content: 'src/components/readme.md',
         components: 'src/components/**/index.?(js|tsx)',
@@ -181,7 +185,7 @@ module.exports = {
     usageMode: 'expand',
     tocMode: 'collapse',
     styleguideDir: BUILD_PATH,
-    skipComponentsWithoutExample: false,
+    skipComponentsWithoutExample: true,
     pagePerSection: true,
     styles,
     theme,

@@ -1,18 +1,11 @@
 import React, { useContext } from 'react';
 import { Context } from '..';
 
-import { Print } from '../../../internal/FormCommon/Utility/Print';
 import { Diff } from '../../../internal/FormCommon/Utility/Diff';
 
-export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> { }
 
-    /** Foo prop */
-    foo?: number;
-}
-
-/**
- * `<Checkbox.Input />` sub-component. 
- * 
+/** 
  * Accepts all 
  * [HTMLInputElement attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox)
  * as props.
