@@ -92,7 +92,8 @@ export default class ReactComponent extends Component<ReactComponentProps, React
                         )
                 }
                 tabButtons={
-                    showUsage && (
+                    // Only display props table if the component actually has props
+                    showUsage && component.props?.props && component.props.props.length > 0 && (
                         <Slot
                             name="docsTabButtons"
                             active={activeTab}
