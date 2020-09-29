@@ -32,10 +32,19 @@
         margin-bottom: 1rem;
     }
 
-    // Required star for form groups.
-    // Attaches to the first label or legend found
+    // Tighten margin between custom labels and help text when it immediately follows
+    .custom-control-label + .form-text {
+        margin-top: -0.75rem;
+        margin-bottom: 0.75rem;
+    }
+
+    // Required star for labels and legends
+    // In required form groups, attaches to the 
+    // first label or legend found
     &.is-required label:first-child::after,
-    &.is-required legend:first-child::after {
+    &.is-required legend:first-child::after,
+    label.is-required::after,
+    legend.is-required::after {
         color: $scarlet;
         font-family: FontAwesome;
         font-size: 0.5em;
@@ -70,4 +79,19 @@ fieldset.form-group {
 // (cases where we want two adjacent inputs)
 .input-group-append .input-group {
     margin: 0;
+}
+
+// Support adding .is-invalid and .is-valid to fieldsets
+fieldset {
+    &.is-invalid {
+        .invalid-feedback {
+            display: block;
+        }
+    }
+
+    &.is-valid {
+        .valid-feedback {
+            display: block;
+        }
+    }
 }

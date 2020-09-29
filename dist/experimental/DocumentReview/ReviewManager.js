@@ -11,6 +11,8 @@ var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/cl
 
 var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
 
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
+
 var _TableOfContentsElement = _interopRequireDefault(require("./elements/TableOfContentsElement"));
 
 var _SidebarElement = _interopRequireDefault(require("./elements/SidebarElement"));
@@ -59,6 +61,22 @@ var ReviewManager = /*#__PURE__*/function () {
   /** Fast hashmap between a target and context metadata */
   function ReviewManager() {
     (0, _classCallCheck2.default)(this, ReviewManager);
+    (0, _defineProperty2.default)(this, "onAddComment", void 0);
+    (0, _defineProperty2.default)(this, "onUpdateComment", void 0);
+    (0, _defineProperty2.default)(this, "onRemoveComment", void 0);
+    (0, _defineProperty2.default)(this, "onReady", void 0);
+    (0, _defineProperty2.default)(this, "defaultAuthor", void 0);
+    (0, _defineProperty2.default)(this, "canEditAnyComment", void 0);
+    (0, _defineProperty2.default)(this, "initialComments", void 0);
+    (0, _defineProperty2.default)(this, "document", void 0);
+    (0, _defineProperty2.default)(this, "sidebar", void 0);
+    (0, _defineProperty2.default)(this, "toc", void 0);
+    (0, _defineProperty2.default)(this, "css", void 0);
+    (0, _defineProperty2.default)(this, "sections", void 0);
+    (0, _defineProperty2.default)(this, "commentElements", void 0);
+    (0, _defineProperty2.default)(this, "contexts", void 0);
+    (0, _defineProperty2.default)(this, "selection", void 0);
+    (0, _defineProperty2.default)(this, "isPendingReflow", void 0);
     this.defaultAuthor = '(me)';
     this.canEditAnyComment = false;
     this.sections = new Map();

@@ -11,6 +11,8 @@ var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/cl
 
 var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
 
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
+
 var _utility = require("./utility");
 
 /**
@@ -20,6 +22,8 @@ var CommentContext = /*#__PURE__*/function () {
   /** Rect of the context element relative to the Document */
   function CommentContext(target) {
     (0, _classCallCheck2.default)(this, CommentContext);
+    (0, _defineProperty2.default)(this, "target", void 0);
+    (0, _defineProperty2.default)(this, "rect", void 0);
     this.target = target; // This only really ever needs to be calculated once since the document
     // is in a fixed width container (thus can never reflow vertically)
 

@@ -66,7 +66,8 @@ var DateTimePicker = function DateTimePicker(_ref) {
     onChange: handleChange,
     filterDate: filterDate,
     minDate: minDate,
-    maxDate: maxDate,
+    maxDate: maxDate // @ts-ignore
+    ,
     timeInputLabel: /*#__PURE__*/_react.default.createElement("label", {
       htmlFor: id + '-time'
     }, "Time"),

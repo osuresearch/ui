@@ -11,6 +11,8 @@ var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/cl
 
 var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
 
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
+
 var _HamburgerButtonElement = _interopRequireDefault(require("./HamburgerButtonElement"));
 
 /**
@@ -21,6 +23,8 @@ var TableOfContentsElement = /*#__PURE__*/function () {
     var _document$defaultView;
 
     (0, _classCallCheck2.default)(this, TableOfContentsElement);
+    (0, _defineProperty2.default)(this, "container", void 0);
+    (0, _defineProperty2.default)(this, "hamburger", void 0);
     var windowInnerWidth = ((_document$defaultView = document.defaultView) === null || _document$defaultView === void 0 ? void 0 : _document$defaultView.innerWidth) || 9999;
     var startCollapsed = windowInnerWidth < 1200;
     var container = document.createElement('div');

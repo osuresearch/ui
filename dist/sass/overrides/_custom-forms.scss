@@ -10,10 +10,15 @@
     &:checked ~ .custom-control-label::before {
         border: 1px solid $input-border-color;
     }
+
+    // Remove required star from control labels if they are accidentally added
+    ~ .custom-control-label.is-required::after {
+        content: '';
+    }
 }
 
 // Correct positioning & font size of feedback message
-.invalid-feedback {
+.invalid-feedback, .valid-feedback {
     margin-top: 0;
     margin-bottom: 1rem;
     font-size: 0.8rem;
@@ -22,7 +27,7 @@
 .form-check,
 .form-check-inline {
     // Bootstrap does not support adding an .is-invalid
-    // state to the control set wrapper
+    // or .is-valid state to the control set wrapper
     &.is-invalid {
         ~ .invalid-feedback {
             display: block;
@@ -34,6 +39,20 @@
 
         .custom-control-label {
             color: theme-color('danger');
+        }
+    }
+
+    &.is-valid {
+        ~ .valid-feedback {
+            display: block;
+        }
+
+        .custom-control-label::before {
+            border-color: theme-color('success');
+        }
+
+        .custom-control-label {
+            color: theme-color('success');
         }
     }
 }

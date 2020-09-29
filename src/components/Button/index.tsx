@@ -21,15 +21,19 @@ export interface Props {
 
     /** Click event callback */
     onClick?(event: MouseEvent<HTMLButtonElement>): void;
+
+    /** Type */
+    type?: 'button' | 'reset' | 'submit'
 }
 
 const Button: React.FC<Props> = ({
-    children, 
+    children,
     to,
     theme = 'primary',
     className = '',
     disabled = false,
     onClick = undefined,
+    type = 'button'
 }) => {
     // Sanity check for developers - make sure they do not specify `to` and `onClick` at once
     if (to && onClick) {
@@ -43,10 +47,10 @@ const Button: React.FC<Props> = ({
     }
 
     return (
-        <button type="button" disabled={disabled}
-            className={`btn btn-${theme} ${className}`} 
+        <button type={type} disabled={disabled}
+            className={`btn btn-${theme} ${className}`}
             onClick={!disabled ? onClick : undefined}>
-                {children}
+            {children}
         </button>
     );
 };

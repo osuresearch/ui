@@ -32,15 +32,90 @@ function listHtmlComponents() {
     return sections;
 }
 
+/**
+ * Custom aggregator for the `Form Components` section with the following rules:
+ * 
+ * - Each component creates a section named as the top level component
+ *   - e.g. `src/form/Text/index.tsx` creates a `Text` section.
+ * 
+ * - A sub-section is then added for every sub-component (indicated as subfolders)
+ *   to that top level component directory.
+ *   - e.g. `src/form/Text/Input/index.tsx` will create an `Input` subsection.
+ * 
+ * - Common components in `src/internal/FormCommon/Components` will also be
+ *   added *per section* UNLESS there's a local override matching the name.
+ *   - e.g. Radio will get `src/internal/FormCommon/Label/index.tsx` UNLESS
+ *     it has its own `src/form/Radio/Label/index.tsx`
+ */
+function listFormComponents() {
+    const components = glob.sync('src/form/*/index.tsx');
+
+    var sections = [];
+    components.forEach((componentPath) => {
+        const dirname = path.dirname(componentPath);
+        const dirs = dirname.split('/'); // src, form, Checkbox
+        const component = dirs[2];
+
+        // Special handling for the root Form component
+        // to ensure it's first in the list 
+        if (component === 'Form') {
+            sections = [{
+                name: component,
+                usageMode: 'hide',
+                hasSubcomponents: true,
+                wrapNamesInBrackets: true,
+                components: 'src/form/Form/index.tsx'
+            }, ...sections];
+        } else {
+            const subPaths = glob.sync(dirname + '/*/index.tsx');
+
+            // Components from FormCommon that we include as subcomponents
+            // for all components by default. 
+            let generics = glob.sync('src/internal/FormCommon/Components/*/index.tsx');
+
+            // For all generics - if there's a copy locally defined to this component
+            // then we replace it with the local copy (e.g. if `src/form/Text/Label/index.tsx` exists)
+            subPaths.forEach((p) => {
+                const subName = p.split('/')[3];
+                generics = generics.filter(s => s.indexOf(subName + '/index.tsx') === -1);
+            });
+
+            const label = generics.find(s => s.match(/.*\/Label\/.*/));
+            generics = generics.filter(s => s !== label);
+
+            // Component with zero or more sub-components
+            sections.push({
+                name: component,
+                hasSubcomponents: true,
+                wrapNamesInBrackets: true,
+                components: [
+                    componentPath, // Main (composite) form component listed first
+                    ...((label && component !== 'FieldSet') ? [label] : []), // If label component exists, display that next (except for FieldSets - don't display it at all then)
+                    ...subPaths, // Followed by each sub-component at `{sub-component name}/index.tsx`
+                    ...generics // And then any generics not overridden
+                ]
+            });
+        }
+    });
+
+    // console.log(sections);
+
+    return sections;
+}
+
 // Default sections of the styleguide
 let sections = [
     {
         name: '',
-        content: 'docs/readme.md'
+        content: 'docs/readme.md',
     },
     {
         name: 'Colors',
-        content: 'docs/colors.md'
+        content: 'docs/colors.md',
+    },
+    {
+        name: 'Typography',
+        content: 'docs/Typography.md'
     },
     {
         name: 'Components',
@@ -51,9 +126,16 @@ let sections = [
         ]
     },
     {
+        name: 'Form Components',
+        content: 'src/form/readme.md',
+        sections: listFormComponents(),
+        sectionDepth: 0,
+    },
+    {
         name: 'HTML Components',
         content: 'docs/html/readme.md',
-        sections: listHtmlComponents()
+        sections: listHtmlComponents(),
+        sectionDepth: 0,
     },
     {
         name: 'Experimental',
@@ -61,7 +143,8 @@ let sections = [
         components: 'src/experimental/**/index.?(js|tsx)',
         ignore: [
             'src/experimental/.ignore'
-        ]
+        ],
+        sectionDepth: 1,
     }
 ];
 
@@ -75,6 +158,21 @@ if (ISOLATED_COMPONENTS) {
 }
 
 /**
+ * Configurations for the react-docgen-typescript plugin
+ */
+const reactDocgenTypescriptOptions = {
+    propFilter: (prop, component) => {
+        // Skip props merged from node_modules
+        // E.g. const MyComponent: React.FC<React.HTMLAttributes<HTMLDivElement>> = ()...
+        if (prop.parent) {
+            return !prop.parent.fileName.includes('node_modules');
+        }
+
+        return true;
+    },
+};
+
+/**
  * Reconfigure Webpack for Styleguidist
  *
  * References:
@@ -85,8 +183,10 @@ if (ISOLATED_COMPONENTS) {
 module.exports = {
     title: 'UI Components ' + packageManifest.version,
     usageMode: 'expand',
+    tocMode: 'collapse',
     styleguideDir: BUILD_PATH,
     skipComponentsWithoutExample: true,
+    pagePerSection: true,
     styles,
     theme,
     template: {
@@ -110,7 +210,19 @@ module.exports = {
     getComponentPathLine: (componentPath) => {
         // Naming convention for ../Component/index.js
         const dirname = path.dirname(componentPath);
-        const name = dirname.split(path.sep).slice(-1)[0];
+        const paths = dirname.split(path.sep); // .slice(-1);
+        const name = paths[paths.length - 1];
+
+        // TODO: Can't figure out how to deal with subcomponents that come from generics.
+        // E.g. a subcomponent path is `src/form/Checkbox/Label` but a generic would
+        // be `src/internal/FormCommon/Components/Error`. Both should return
+        // `import { Checkbox } from '@oris/ui'` but there's no way to identify
+        // that `Checkbox` is the right import for the generic, given the function args.
+        // In either case though - we can't import the subcomponent directly, we only
+        // import the parent and access it as a child to that parent component entity.
+
+        // So - for now - subcomponents don't get import documentation.
+        if (paths.length > 3) return;
 
         // The assumption is that all (public) components are exported
         // by name from the primary index of the package.
@@ -128,7 +240,7 @@ module.exports = {
             minimize: false
         };
 
-        return webpackConfig
+        return webpackConfig;
     },
     require: [
         // Bake in global SASS styles together, rather than
@@ -146,12 +258,20 @@ module.exports = {
         // Handle TypeScript prop parsing
         if (filePath.substr(-3) === 'tsx') {
             return require('react-docgen-typescript').withCustomConfig(
-                './tsconfig.json'
+                './tsconfig.json',
+                reactDocgenTypescriptOptions
             ).parse(filePath);
         }
 
         // Assume Javascript
         return require('react-docgen').parse(source, resolver, handlers);
     },
-    sections: sections 
+    sections: sections,
+    // Override Styleguidist components
+    styleguideComponents: {
+        StyleGuide: path.join(__dirname, 'src/styleguide/StyleGuide'),
+        ReactComponent: path.join(__dirname, 'src/styleguide/ReactComponent'),
+        ReactComponentRenderer: path.join(__dirname, 'src/styleguide/ReactComponentRenderer'),
+        ExamplesRenderer: path.join(__dirname, 'src/styleguide/ExamplesRenderer')
+    },
 };

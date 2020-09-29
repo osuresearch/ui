@@ -7,7 +7,7 @@ export interface Props {
 
     /** Initial content for the component as a raw HTML string. */
     defaultValue?: string;
-    
+
     /** Should the contents of the editor only be rendered as read-only */
     readOnly?: boolean;
 
@@ -36,24 +36,27 @@ export interface Props {
 
 /** Full confiugration (that we're willing to support) */
 const FULL_TOOLBAR_CONFIG = [
-    { name: 'styles', items: [ 'Format' ] },
-    { name: 'basicstyles', items: [ 'Bold', 'Italic', 'Underline', 'Strike' ] },
-    { name: 'paragraph', items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock' ] },
-    { name: 'links', items: [ 'Link', 'Unlink' ] },
-    { name: 'insert', items: [ 'Table', 'HorizontalRule' ] }
+    { name: 'styles', items: ['Format'] },
+    { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike'] },
+    { name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'] },
+    { name: 'links', items: ['Link', 'Unlink'] },
+    { name: 'insert', items: ['Table', 'HorizontalRule'] }
 ];
 
 /** Reduced configuration that's just very basic formatting, lists, and links */
 const SIMPLE_TOOLBAR_CONFIG = [
-    { name: 'basicstyles', items: [ 'Bold', 'Italic', 'Underline', 'Strike' ] },
-    { name: 'paragraph', items: [ 'NumberedList', 'BulletedList' ] },
-    { name: 'links', items: [ 'Link', 'Unlink' ] }
+    { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike'] },
+    { name: 'paragraph', items: ['NumberedList', 'BulletedList'] },
+    { name: 'links', items: ['Link', 'Unlink'] }
 ];
 
 /**
  * Simple preconfigured Richtext editor
+ * 
+ * @deprecated Use `<Text.Rich>` from `@oris/ui` Form Components. Will be removed in a future version of `@oris/ui`
+ * 
  */
-const Richtext: React.FC<Props> = ({
+function Richtext({
     id,
     onChange,
     defaultValue = '',
@@ -61,8 +64,8 @@ const Richtext: React.FC<Props> = ({
     simple = false,
     className = '',
     contentsCss = 'https://orapps.osu.edu/assets/css/ckeditor/contents.css'
-}) => {
-    const [initialData, ] = useState(defaultValue);
+}: Props) {
+    const [initialData,] = useState(defaultValue);
     const [error, setError] = useState<string>();
     const editorRef = useRef<HTMLTextAreaElement>(null);
 
@@ -124,6 +127,6 @@ const Richtext: React.FC<Props> = ({
             <textarea id={id} className="richtext-editor" ref={editorRef} disabled={readOnly}></textarea>
         </div>
     );
-}
+};
 
 export default memo(Richtext);

@@ -11,6 +11,8 @@ var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/cl
 
 var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
 
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
+
 // I know this is incredibly dumb, but we need to inject a CSS file into 
 // the DOM of an IFrame without accessing external scripts for portability. 
 // So each component has its own CSS block that gets combined by CSSElement.
@@ -24,6 +26,7 @@ var CONNECTOR_CSS = "\n.comment-context-connection {\n  position: absolute;\n  w
 var CSSElement = /*#__PURE__*/function () {
   function CSSElement(document) {
     (0, _classCallCheck2.default)(this, CSSElement);
+    (0, _defineProperty2.default)(this, "style", void 0);
     var style = document.createElement('style');
     style.innerText = DOCUMENT_CSS + TOC_CSS + SIDEBAR_CSS + COMMENT_CSS + HAMBURGER_BUTTON_CSS + CONNECTOR_CSS;
     document.body.appendChild(style);

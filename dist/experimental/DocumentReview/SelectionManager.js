@@ -11,6 +11,8 @@ var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/cl
 
 var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
 
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
+
 var _rangy = _interopRequireDefault(require("rangy"));
 
 require("rangy/lib/rangy-textrange");
@@ -59,6 +61,12 @@ var SelectionManager = /*#__PURE__*/function () {
   /** Mapping between an element ID and all the highlights associated with it */
   function SelectionManager(document) {
     (0, _classCallCheck2.default)(this, SelectionManager);
+    (0, _defineProperty2.default)(this, "document", void 0);
+    (0, _defineProperty2.default)(this, "highlighter", void 0);
+    (0, _defineProperty2.default)(this, "classApplier", void 0);
+    (0, _defineProperty2.default)(this, "focusClassApplier", void 0);
+    (0, _defineProperty2.default)(this, "focused", void 0);
+    (0, _defineProperty2.default)(this, "highlights", void 0);
 
     _rangy.default.init();
 

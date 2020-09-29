@@ -1,0 +1,1 @@
+{"version":3,"file":"Diff.d.ts","sourceRoot":"","sources":["../../../../src/internal/FormCommon/Components/Diff.tsx"],"names":[],"mappings":";AAEA,OAAO,eAAe,CAAC;AAEvB,MAAM,WAAW,SAAS;IACtB,OAAO,CAAC,EAAE,MAAM,GAAG,GAAG,CAAC,OAAO,GAAG,IAAI,CAAC;IACtC,KAAK,CAAC,EAAE,MAAM,GAAG,GAAG,CAAC,OAAO,GAAG,IAAI,CAAC;CACvC;AAED,wBAAgB,IAAI,CAAC,EAAE,OAAO,EAAE,KAAK,EAAE,EAAE,SAAS,eAYjD"}

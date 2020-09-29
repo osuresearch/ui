@@ -11,6 +11,8 @@ var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/cl
 
 var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
 
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
+
 var _utility = require("../utility");
 
 /**
@@ -19,6 +21,12 @@ var _utility = require("../utility");
 var ContextConnectorElement = /*#__PURE__*/function () {
   function ContextConnectorElement(document, comment, context, color) {
     (0, _classCallCheck2.default)(this, ContextConnectorElement);
+    (0, _defineProperty2.default)(this, "document", void 0);
+    (0, _defineProperty2.default)(this, "comment", void 0);
+    (0, _defineProperty2.default)(this, "context", void 0);
+    (0, _defineProperty2.default)(this, "svg", void 0);
+    (0, _defineProperty2.default)(this, "lineFromContext", void 0);
+    (0, _defineProperty2.default)(this, "lineToComment", void 0);
     this.document = document;
     this.comment = comment;
     this.context = context;
