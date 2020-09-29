@@ -96,7 +96,7 @@ export default class StyleGuide extends Component<StyleGuideProps, StyleGuideSta
             welcomeScreen,
             patterns,
             displayMode,
-            allSections,
+            allSections: allSec,
             pagePerSection,
             codeRevision,
             cssRevision,
@@ -111,9 +111,13 @@ export default class StyleGuide extends Component<StyleGuideProps, StyleGuideSta
             return <Welcome patterns={patterns} />;
         }
 
+        console.log(allSec);
+
         let sections = [...sec];
+        let allSections = allSec ? [...allSec] : [];
 
         FormatSubcomponents(sections);
+        FormatSubcomponents(allSections);
 
         return (
             <Context.Provider
