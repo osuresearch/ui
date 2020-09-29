@@ -98,6 +98,7 @@ const MeridiemInput = React.forwardRef<HTMLInputElement, Props>(({
             onClick={handleClick}
             onKeyUp={handleKeyUp}
             onKeyDown={handleKeyDown}
+            onChange={() => { }} // Surpress console warning - handleKeyDown sets the meridian value
             readOnly={readOnly}
         />
     )

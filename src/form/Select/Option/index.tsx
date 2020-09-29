@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import { Context } from '..';
 import { IFieldBind } from '../../../internal/FormCommon/types';
 
-import { Print } from '../../../internal/FormCommon/Utility/Print';
 import { Diff } from '../../../internal/FormCommon/Utility/Diff';
 
 import '../../../internal/FormCommon/style.scss';
@@ -31,38 +30,35 @@ export type OptionProps = React.OptionHTMLAttributes<HTMLOptionElement> & {
  */
 const Option: React.FC<OptionProps> = (props) => {
     const { bind } = useContext(Context);
+    const { optionsBind, ...otherProps } = props;
 
-    if (props.optionsBind) {
-        if (bind.readOnly) {
-            return <Print>{props.optionsBind.value![bind.value!]}</Print>
-        }
-
+    if (optionsBind) {
         if (bind.diff) {
             return (
                 <Diff
                     removed={
-                        !(bind.initialValue! in props.optionsBind.value!) ?
-                            props.optionsBind.initialValue![bind.initialValue!] :
-                            props.optionsBind.value![bind.initialValue!]
+                        !(bind.initialValue! in optionsBind.value!) ?
+                            optionsBind.initialValue![bind.initialValue!] :
+                            optionsBind.value![bind.initialValue!]
                     }
                     added={
-                        props.optionsBind.value![bind.value!]
+                        optionsBind.value![bind.value!]
                     }
                 />
             )
         }
 
         return (<>
-            {Object.keys(props.optionsBind.value!).map((key) =>
-                <option {...props} key={key} value={key}>
-                    {props.optionsBind!.value![key]}
+            {Object.keys(optionsBind.value!).map((key) =>
+                <option {...otherProps} key={key} value={key}>
+                    {optionsBind!.value![key]}
                 </option>
             )}
         </>);
     }
 
     return (
-        <option {...props}>{props.children}</option>
+        <option {...otherProps}>{props.children}</option>
     );
 }
 

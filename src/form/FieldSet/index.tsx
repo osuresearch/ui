@@ -94,7 +94,7 @@ const FieldSet: React.FC<Props> & IFieldSetComposition = ({
             <fieldset
                 className={`ui-form-element ${bind.required ? 'is-required' : ''} ${bind.error && 'is-invalid'} ${bind.success && 'is-valid'}`}
                 name={bind.name}
-                aria-describedBy={`${bind.id}-help`}
+                aria-describedby={`${bind.id}-help`}
             >
                 {React.Children.map<React.ReactNode, React.ReactNode>(children, node => {
                     if (React.isValidElement(node)) {

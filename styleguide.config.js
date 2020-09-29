@@ -271,6 +271,7 @@ module.exports = {
     styleguideComponents: {
         StyleGuide: path.join(__dirname, 'src/styleguide/StyleGuide'),
         ReactComponent: path.join(__dirname, 'src/styleguide/ReactComponent'),
+        ReactComponentRenderer: path.join(__dirname, 'src/styleguide/ReactComponentRenderer'),
         ExamplesRenderer: path.join(__dirname, 'src/styleguide/ExamplesRenderer')
     },
 };

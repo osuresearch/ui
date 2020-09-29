@@ -5,7 +5,7 @@ import SectionHeading from 'react-styleguidist/lib/client/rsg-components/Section
 import JsDoc from 'react-styleguidist/lib/client/rsg-components/JsDoc';
 import Markdown from 'react-styleguidist/lib/client/rsg-components/Markdown';
 import Slot from 'react-styleguidist/lib/client/rsg-components/Slot';
-import ReactComponentRenderer from 'react-styleguidist/lib/client/rsg-components/ReactComponent/ReactComponentRenderer';
+import ReactComponentRenderer from './ReactComponentRenderer';
 import Context from 'react-styleguidist/lib/client/rsg-components/Context';
 import ExamplePlaceholderDefault from 'react-styleguidist/lib/client/rsg-components/ExamplePlaceholder';
 import { DOCS_TAB_USAGE } from 'react-styleguidist/lib/client/rsg-components/slots';

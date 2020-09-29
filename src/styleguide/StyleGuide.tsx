@@ -111,8 +111,6 @@ export default class StyleGuide extends Component<StyleGuideProps, StyleGuideSta
             return <Welcome patterns={patterns} />;
         }
 
-        console.log(allSec);
-
         let sections = [...sec];
         let allSections = allSec ? [...allSec] : [];
 

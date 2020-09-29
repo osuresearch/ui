@@ -5,8 +5,6 @@
 import { useState } from 'react';
 const [date, setDate] = useState('2011-07-09');
 
-console.log('date', date);
-
 <DateTime id="choose-date">
     <DateTime.Label>Choose a date</DateTime.Label>
 
