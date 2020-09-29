@@ -22,7 +22,6 @@ __Minor Breaking Changes:__
 __New Features:__
 
 * Introduces new Form Components (`Form`, `FieldSet`, `Checkbox`, `Text`, etc) to abstract away the complexities of setting up accessible forms. 
-* Added new `Files` component to display files and directories from a Document Management System
 * `Richtext` - Added `id` prop
 * `Button` - Added `type` prop (one of `'button' | 'reset' | 'submit'` - defaults to `button`).
 * `Button` - Added `to` prop. When specified, the button renders as a React Router `<Link>` to the designated route
