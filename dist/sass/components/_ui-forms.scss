@@ -50,7 +50,7 @@
     }
 
     .form-text, .invalid-feedback, .valid-feedback {
-        margin: -0.5rem 0 1rem 0;
+        margin: -0.75rem 0 1rem 0;
     }
 
     // Fix margin collapse issues
@@ -76,6 +76,47 @@
         + .form-text, + .invalid-feedback, + .valid-feedback {
             margin: 0 0 1rem 0;
         }
+    }
+
+    // readOnly print styles
+    .form-control {
+        &[readonly] {
+            background-color: $white;
+            border-color: $input-border-color;
+            box-shadow: none;
+        }
+    }
+
+    &.custom-checkbox, &.custom-radio {
+        .custom-control-input[readonly] {
+            ~.custom-control-label {
+                &::before {
+                    background-color: transparent;
+                    border-color: transparent;
+                }
+
+                &::after {
+                    background-image: none;
+                    content: "\f096"; // Empty square
+                    font-family: "FontAwesome";
+                    font-size: 1.25rem;
+                    top: -2px;
+                }
+            }
+
+            &:checked {
+                ~ .custom-control-label {
+                    &::after {
+                        content: "\f046"; // Square w/ check
+                    }
+                }
+            }
+        }
+    }
+
+    .richtext.readonly {
+        // Hide the CKEditor toolbar
+        .cke_top { display: none; }
     }
 }
 
@@ -133,7 +174,16 @@ fieldset.ui-form-element {
     }
 
     .react-datepicker__input-time-container { 
-        margin: 5px 0 5px 15px;
+        border-top: 1px solid;
+        border-bottom: 1px solid;
+        border-color: tint($gray, 30%);
+        background-color: tint($gray, 10%);
+        padding: 0.5em 1.5em 0;
+        margin: 0.25em 0;
+
+        .form-control {
+            margin-bottom: 0;
+        }
     }
 
     // Raise popper's z to avoid conflict with other fields/icons
@@ -150,7 +200,7 @@ fieldset.ui-form-element {
     }
 
     .datetimepicker {
-        .input-group-prefix {
+        > .input-group-prefix {
             .fa { 
                 &.fa-clock-o {
                     font-size: 0.7rem;
@@ -181,7 +231,7 @@ fieldset.ui-form-element {
 }
 
 // Time
-.ui-form-time {
+.ui-form-time, .react-datepicker-time__input {
     .input-group {
         appearance: listbox;
         
@@ -257,29 +307,24 @@ fieldset.ui-form-element {
             }
         }
 
-
         &.readonly {
             .form-control {
-                background-color: tint($gray, 20%);
+                padding: 0.3em 0.5em 0.2em 1.75em;
+                letter-spacing: 0.25px;
 
                 &:focus-within {
-                    background-color: tint($gray, 20%);
-                    border-color: $gray;
-                    box-shadow: 0 0 0 0.2rem rgba(43, 43, 43, 0.25);
+                    background-color: $white;
+                    border-color: $input-border-color;
+                    box-shadow: none;
                 }
 
                 input {
-                    background-color: tint($gray, 20%);
-                    color: tint($gray, 80%);
+                    background-color: $white;
 
                     &:focus {
                         background: $gray;
                     }
                 }
-            }
-
-            .fa {
-                color: tint($gray, 80%);
             }
         }
 

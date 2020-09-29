@@ -44,9 +44,12 @@ var SIMPLE_TOOLBAR_CONFIG = [{
 }];
 /**
  * Simple preconfigured Richtext editor
+ * 
+ * @deprecated Use `<Text.Rich>` from `@oris/ui` Form Components. Will be removed in a future version of `@oris/ui`
+ * 
  */
 
-var Richtext = function Richtext(_ref) {
+function Richtext(_ref) {
   var id = _ref.id,
       onChange = _ref.onChange,
       _ref$defaultValue = _ref.defaultValue,
@@ -122,7 +125,9 @@ var Richtext = function Richtext(_ref) {
     ref: editorRef,
     disabled: readOnly
   }));
-};
+}
+
+;
 
 var _default = /*#__PURE__*/(0, _react.memo)(Richtext);
 

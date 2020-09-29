@@ -17,7 +17,7 @@ var _reactDatepicker = _interopRequireDefault(require("react-datepicker"));
 
 var _ = require("..");
 
-var _Print = require("../../../internal/FormCommon/Utility/Print");
+var _dayjs = _interopRequireDefault(require("dayjs"));
 
 var _Diff = require("../../../internal/FormCommon/Utility/Diff");
 
@@ -28,7 +28,7 @@ var _DatePrefix = _interopRequireDefault(require("./DatePrefix"));
 var _DateTimePrefix = _interopRequireDefault(require("./DateTimePrefix"));
 
 /**
- * Dropdown to select a date and time.
+ * Input and popup calendar to select a date (and optionally time).
  * 
  * This component will accept *most* props supported by [react-datepicker](https://reactdatepicker.com/)
  * with the exception of the following that fail to meet accessibility standards:
@@ -39,7 +39,6 @@ var _DateTimePrefix = _interopRequireDefault(require("./DateTimePrefix"));
  *  | 'showMonthYearPicker' | 'showMonthYearDropdown' | 'monthsShown'
  *  | 'withPortal' | 'showQuarterYearPicker' | 'showTimeSelect'
  *  | 'showTimeSelectOnly' | 'todayButton' | 'showYearPicker'
- *  | 'onChange' | 'selected'
  *  ```
  * 
  * If you wish to use one of these, please submit a merge request with a patch that resolves the issues.
@@ -53,10 +52,15 @@ var Input = function Input(props) {
   var name = bind.name || props.name;
   var readOnly = bind.readOnly || props.readOnly;
   var classNames = "input-group ".concat(props.showTimeInput && 'datetimepicker', " ").concat(props.className ? props.className : '', " ").concat(bind.error ? 'is-invalid' : '', " ").concat(bind.success ? 'is-valid' : '');
-  var dateFormat = props.dateFormat || props.showTimeInput ? 'MM/dd/yyyy h:mm aa' : 'MM/dd/yyyy'; // Transform selected date to ISO timestamp
+  var dateFormat = props.dateFormat || props.showTimeInput ? 'MM/dd/yyyy h:mm aa' : 'MM/dd/yyyy'; // Transform selected date to appropriate return value
 
   var handleChange = function handleChange(date) {
-    var newSelected = date ? date.toISOString() : '';
+    // Default - return as `Y-m-d`, e.g. `2011-05-23`
+    var newSelected = date ? (0, _dayjs.default)(date).format('YYYY-MM-DD') : ''; // If the time input is included, return it as an ISO8601 datetime string
+
+    if (props.showTimeInput) {
+      newSelected = date ? (0, _dayjs.default)(date).toISOString() : '';
+    }
 
     if (props.onChange) {
       props.onChange(newSelected);
@@ -81,28 +85,16 @@ var Input = function Input(props) {
   };
 
   var formatter = function formatter(timestamp) {
-    if (typeof timestamp === 'undefined') return undefined;
-    var date = new Date(timestamp);
-    var formatted = date.toLocaleDateString("en-US");
+    if (typeof timestamp === 'undefined') return undefined; // let formatted = date.toLocaleDateString("en-US");
+
+    var formatted = (0, _dayjs.default)(timestamp).format('MM/DD/YYYY');
 
     if (props.showTimeInput) {
-      formatted += ' ' + date.toLocaleTimeString("en-US", {
-        hour: '2-digit',
-        minute: '2-digit'
-      });
+      formatted = (0, _dayjs.default)(timestamp).format('MM/DD/YYYY hh:mm A');
     }
 
     return formatted;
   };
-
-  if (readOnly) {
-    return /*#__PURE__*/_react.default.createElement(_Print.Print, null, /*#__PURE__*/_react.default.createElement("span", {
-      className: "input-group-prefix"
-    }, /*#__PURE__*/_react.default.createElement("i", {
-      className: "fa fa-calendar",
-      "aria-hidden": "true"
-    })), formatter(selected));
-  }
 
   if (bind.diff) {
     if (selected !== initial) {
@@ -110,15 +102,7 @@ var Input = function Input(props) {
         removed: formatter(initial),
         added: formatter(selected)
       });
-    } // No change - render as a basic single value print
-
-
-    return /*#__PURE__*/_react.default.createElement(_Print.Print, null, /*#__PURE__*/_react.default.createElement("span", {
-      className: "input-group-prefix"
-    }, /*#__PURE__*/_react.default.createElement("i", {
-      className: "fa fa-calendar",
-      "aria-hidden": "true"
-    })), formatter(selected));
+    }
   }
 
   return /*#__PURE__*/_react.default.createElement("div", {
@@ -127,7 +111,7 @@ var Input = function Input(props) {
     ref: ref
   }, props, {
     id: bind.id,
-    selected: selected ? new Date(selected) : null,
+    selected: selected ? (0, _dayjs.default)(selected).toDate() : null,
     value: selected && formatter(selected),
     className: 'form-control date',
     onChange: handleChange,
@@ -141,7 +125,8 @@ var Input = function Input(props) {
       id: "".concat(bind.id, "-time")
     }),
     dateFormat: dateFormat,
-    readOnly: readOnly
+    readOnly: readOnly,
+    "aria-disabled": readOnly
   }), /*#__PURE__*/_react.default.createElement("div", {
     className: "keyboard-notice"
   }, /*#__PURE__*/_react.default.createElement("small", null, /*#__PURE__*/_react.default.createElement("em", null, "Keyboard users: Exit this dialog with the ", /*#__PURE__*/_react.default.createElement("code", null, "esc"), " key"))), /*#__PURE__*/_react.default.createElement("div", {

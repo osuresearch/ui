@@ -15,6 +15,8 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _ = require("..");
 
+var _Utility = require("../../../internal/FormCommon/Utility");
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -31,11 +33,18 @@ var Control = /*#__PURE__*/_react.default.forwardRef(function (props, ref) {
       bind = _useContext.bind;
 
   var classNames = "form-control custom-select ".concat(bind.error && 'is-invalid', " ").concat(bind.success && 'is-valid', " ").concat(props.className ? props.className : '');
-  var defaultValue = bind.value || props.defaultValue;
-  var value = bind.controlled && bind.value ? bind.value : undefined;
+  var value = bind.value || props.defaultValue || props.value; // Display Read Only as readOnly text input
 
-  if (bind.readOnly || bind.diff) {
-    // Let the Option component handle the diff/print/readOnly rendering
+  if (bind.readOnly) {
+    return /*#__PURE__*/_react.default.createElement(_Utility.Print, {
+      id: bind.id,
+      name: bind.name || props.name,
+      value: value
+    });
+  }
+
+  if (bind.diff) {
+    // Let the Option component handle the diff
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, props.children);
   }
 
@@ -45,7 +54,7 @@ var Control = /*#__PURE__*/_react.default.forwardRef(function (props, ref) {
     id: bind.id,
     name: bind.name || props.name,
     className: classNames,
-    defaultValue: defaultValue,
+    defaultValue: value,
     "aria-describedby": "".concat(bind.id, "-help"),
     onChange: function onChange(e) {
       bind.value = e.currentTarget.value;

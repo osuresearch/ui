@@ -11,11 +11,11 @@ exports.default = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
+var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutProperties"));
+
 var _react = _interopRequireWildcard(require("react"));
 
 var _ = require("..");
-
-var _Print = require("../../../internal/FormCommon/Utility/Print");
 
 var _Diff = require("../../../internal/FormCommon/Utility/Diff");
 
@@ -34,27 +34,26 @@ var Option = function Option(props) {
   var _useContext = (0, _react.useContext)(_.Context),
       bind = _useContext.bind;
 
-  if (props.optionsBind) {
-    if (bind.readOnly) {
-      return /*#__PURE__*/_react.default.createElement(_Print.Print, null, props.optionsBind.value[bind.value]);
-    }
+  var optionsBind = props.optionsBind,
+      otherProps = (0, _objectWithoutProperties2.default)(props, ["optionsBind"]);
 
+  if (optionsBind) {
     if (bind.diff) {
       return /*#__PURE__*/_react.default.createElement(_Diff.Diff, {
-        removed: !(bind.initialValue in props.optionsBind.value) ? props.optionsBind.initialValue[bind.initialValue] : props.optionsBind.value[bind.initialValue],
-        added: props.optionsBind.value[bind.value]
+        removed: !(bind.initialValue in optionsBind.value) ? optionsBind.initialValue[bind.initialValue] : optionsBind.value[bind.initialValue],
+        added: optionsBind.value[bind.value]
       });
     }
 
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, Object.keys(props.optionsBind.value).map(function (key) {
-      return /*#__PURE__*/_react.default.createElement("option", (0, _extends2.default)({}, props, {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, Object.keys(optionsBind.value).map(function (key) {
+      return /*#__PURE__*/_react.default.createElement("option", (0, _extends2.default)({}, otherProps, {
         key: key,
         value: key
-      }), props.optionsBind.value[key]);
+      }), optionsBind.value[key]);
     }));
   }
 
-  return /*#__PURE__*/_react.default.createElement("option", props, props.children);
+  return /*#__PURE__*/_react.default.createElement("option", otherProps, props.children);
 };
 
 var _default = Option;

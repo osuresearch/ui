@@ -108,6 +108,8 @@ var MeridiemInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) 
     onClick: handleClick,
     onKeyUp: handleKeyUp,
     onKeyDown: handleKeyDown,
+    onChange: function onChange() {} // Surpress console warning - handleKeyDown sets the meridian value
+    ,
     readOnly: readOnly
   });
 });

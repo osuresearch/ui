@@ -15,8 +15,6 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _ = require("..");
 
-var _Print = require("../../../internal/FormCommon/Utility/Print");
-
 var _Diff = require("../../../internal/FormCommon/Utility/Diff");
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -37,21 +35,11 @@ var Input = /*#__PURE__*/_react.default.forwardRef(function (props, ref) {
   var _useContext = (0, _react.useContext)(_.Context),
       bind = _useContext.bind;
 
-  var defaultChecked = props.checked || props.defaultValue === '' + bind.value || undefined;
+  var defaultChecked = props.checked || props.defaultChecked || props.defaultValue === '' + bind.value || undefined;
   var checked = (_ref = props.defaultValue === '' + bind.value) !== null && _ref !== void 0 ? _ref : false;
   var defaultValue = bind.value || props.defaultValue || bind.id;
   var value = bind.value || bind.id;
-  var readOnly = bind.readOnly || props.readOnly || false; // If readOnly, view the field in print view
-
-  if (readOnly) {
-    return /*#__PURE__*/_react.default.createElement(_Print.Print, null, checked && /*#__PURE__*/_react.default.createElement("i", {
-      className: "fa fa-check-square-o",
-      "aria-label": "Radio button was selected,,"
-    }), !checked && /*#__PURE__*/_react.default.createElement("i", {
-      className: "fa fa-square-o",
-      "aria-label": "Radio button was not selected,,"
-    }), "\xA0 ", bind.instructions);
-  }
+  var readOnly = bind.readOnly || props.readOnly;
 
   if (bind.diff) {
     var wasChecked = props.value === '' + bind.initialValue;
@@ -72,16 +60,24 @@ var Input = /*#__PURE__*/_react.default.forwardRef(function (props, ref) {
   var inputProps = _objectSpread(_objectSpread({
     ref: ref
   }, props), {}, {
+    type: 'radio',
     id: bind.id,
     name: bind.name || props.name,
     defaultChecked: defaultChecked,
     defaultValue: defaultValue,
     className: classNames,
     "aria-describedby": "".concat(bind.id, "-help"),
+    onClick: function onClick(e) {
+      if (readOnly) {
+        return e.preventDefault();
+      }
+    },
     onChange: function onChange(e) {
       bind.value = e.currentTarget.value;
       if (props.onChange) props.onChange(e);
-    }
+    },
+    readOnly: readOnly,
+    "aria-disabled": readOnly
   });
 
   if (bind.controlled) {

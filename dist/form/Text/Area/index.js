@@ -15,8 +15,6 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _ = require("..");
 
-var _Print = _interopRequireDefault(require("../Print"));
-
 var _Diff = _interopRequireDefault(require("../Diff"));
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -49,12 +47,6 @@ var Area = /*#__PURE__*/_react.default.forwardRef(function (props, ref) {
     });
   }
 
-  if (readOnly) {
-    return /*#__PURE__*/_react.default.createElement(_Print.default, {
-      value: typeof value === 'string' ? value : ''
-    });
-  }
-
   var classNames = 'form-control ' + ((_props$className = props.className) !== null && _props$className !== void 0 ? _props$className : '') + (bind.error ? ' is-invalid' : '') + (bind.success ? ' is-valid' : '');
 
   var textAreaProps = _objectSpread(_objectSpread({
@@ -68,7 +60,9 @@ var Area = /*#__PURE__*/_react.default.forwardRef(function (props, ref) {
     onChange: function onChange(e) {
       bind.value = e.currentTarget.value;
       if (props.onChange) props.onChange(e);
-    }
+    },
+    readOnly: readOnly,
+    "aria-disabled": readOnly
   });
 
   if (bind.controlled) {

@@ -16,7 +16,7 @@ var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/h
 var _react = _interopRequireWildcard(require("react"));
 
 /**
- * Provides instructions on how to resolve the validation error.
+ * Provides instructions on how to resolve a validation error.
  * 
  * Will display when error is set in the parent form component or 
  * the parent's `bind` prop is in an error state.

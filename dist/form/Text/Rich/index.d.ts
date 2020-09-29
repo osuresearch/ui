@@ -20,14 +20,10 @@ export interface RichProps {
      * For more information, see [CKEditor 4 contentsCss](https://ckeditor.com/docs/ckeditor4/latest/api/CKEDITOR_config.html#cfg-contentsCss)
      */
     contentsCss?: string;
-    /** name attribute */
-    name?: string;
-    /** required attribute */
-    required?: boolean;
 }
 /**
- * A rich text editor (RTE) based on CKEditor (additional requirements must be 3
- * met to use this component; see the section on `<Text.Rich>` below for more details)
+ * A rich text editor (RTE) based on CKEditor
+ *
  */
 declare const Rich: React.FC<RichProps>;
 export default Rich;

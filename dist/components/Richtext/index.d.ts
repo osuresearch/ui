@@ -25,6 +25,13 @@ export interface Props {
      */
     contentsCss?: string;
 }
-declare const _default: React.NamedExoticComponent<Props>;
+/**
+ * Simple preconfigured Richtext editor
+ *
+ * @deprecated Use `<Text.Rich>` from `@oris/ui` Form Components. Will be removed in a future version of `@oris/ui`
+ *
+ */
+declare function Richtext({ id, onChange, defaultValue, readOnly, simple, className, contentsCss }: Props): JSX.Element;
+declare const _default: React.MemoExoticComponent<typeof Richtext>;
 export default _default;
 //# sourceMappingURL=index.d.ts.map

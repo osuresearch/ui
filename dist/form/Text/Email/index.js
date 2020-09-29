@@ -15,8 +15,6 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _ = require("..");
 
-var _Print = _interopRequireDefault(require("../Print"));
-
 var _Diff = _interopRequireDefault(require("../Diff"));
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -44,12 +42,6 @@ var Email = /*#__PURE__*/_react.default.forwardRef(function (props, ref) {
     return /*#__PURE__*/_react.default.createElement(_Diff.default, {
       value: typeof value === 'string' ? value : undefined,
       prevValue: typeof bind.initialValue === 'string' ? bind.initialValue : undefined
-    });
-  }
-
-  if (readOnly) {
-    return /*#__PURE__*/_react.default.createElement(_Print.default, {
-      value: typeof value === 'string' ? value : ''
     });
   }
 
@@ -86,7 +78,8 @@ var Email = /*#__PURE__*/_react.default.forwardRef(function (props, ref) {
       if (props.onChange) props.onChange(e);
     },
     onBlur: nativeOnBlur,
-    readOnly: bind.readOnly || props.readOnly
+    readOnly: readOnly,
+    "aria-disabled": readOnly
   }); // Assign a value to the input if it is controlled
 
 
