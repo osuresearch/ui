@@ -123,7 +123,10 @@ const onSubmit = data => console.log('submit', data);
                 <Select.Label>State</Select.Label>
                 <Select.Control ref={register({ required: 'Select your state' })}>
                     <Select.Option value=''>Choose...</Select.Option>
-                    <Select.Option>...</Select.Option>
+                    <Select.Option value='CA'>California</Select.Option>
+                    <Select.Option value='OH'>Ohio</Select.Option>
+                    <Select.Option value='AZ'>Arizona</Select.Option>
+                    <Select.Option value='NY'>New York</Select.Option>
                 </Select.Control>
                 <Select.Error />
             </Select>
