@@ -1,6 +1,9 @@
 
-import React, { useLayoutEffect, useState, useRef, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Context } from '..';
+
+// @ts-ignore
+import CKEditor from 'ckeditor4-react';
 
 import Diff from '../Diff';
 
@@ -30,14 +33,11 @@ export interface RichProps {
      */
     contentsCss?: string;
 
-    /** name attribute */
-    name?: string;
-
-    /** required attribute */
-    required?: boolean;
+    /** Label text - the text of the `<Text.Label>` must be passed in for proper accessibility */
+    labelText: string;
 }
 
-/** Full confiugration (that we're willing to support) */
+/** Full configuration (that we're willing to support) */
 const FULL_TOOLBAR_CONFIG = [
     { name: 'styles', items: ['Format'] },
     { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike'] },
@@ -54,8 +54,8 @@ const SIMPLE_TOOLBAR_CONFIG = [
 ];
 
 /**
- * A rich text editor (RTE) based on CKEditor (additional requirements must be 3
- * met to use this component; see the section on `<Text.Rich>` below for more details)
+ * A rich text editor (RTE) based on CKEditor
+ * 
  */
 const Rich: React.FC<RichProps> = ({
     onChange,
@@ -63,70 +63,11 @@ const Rich: React.FC<RichProps> = ({
     simple = false,
     className = '',
     contentsCss = 'https://orapps.osu.edu/assets/css/ckeditor/contents.css',
-    name,
-    required
+    labelText
 }) => {
     const { bind } = useContext(Context);
 
     const value = bind.value || defaultValue;
-
-    const [initialData,] = useState(value);
-    const [error, setError] = useState<string>();
-    const editorRef = useRef<HTMLTextAreaElement>(null);
-
-    useLayoutEffect(() => {
-        if (!(bind.diff)) {
-            // @ts-ignore 
-            const cke = window.CKEDITOR;
-            let editor: any = undefined; // No type info exists for CKE
-
-            if (!cke) {
-                // TODO: Error message improvements
-                setError('window.CKEDITOR is undefined. Are you missing an external script?');
-                return;
-            }
-
-            let toolbar = simple ? SIMPLE_TOOLBAR_CONFIG : FULL_TOOLBAR_CONFIG;
-
-            const opts = {
-                toolbar,
-
-                // TODO: Prop to provide extra plugins (e.g. Signet signature captures)
-                extraPlugins: '',
-
-                // Disable the body > blockquote > p ... path in the editor footer
-                removePlugins: 'elementspath',
-
-                contentsCss
-            };
-
-            editor = cke.replace(editorRef.current, opts);
-            editor.setData(initialData);
-            editor.on('change', () => {
-                const newValue = editor.getData() as string;
-                bind.value = newValue;
-                if (onChange) {
-                    onChange(newValue);
-                }
-            });
-
-            if (bind.required || required) {
-                editor.on('required', (e: Event) => {
-                    bind.error = "This field is required"
-
-                    // @ts-ignore
-                    e.cancel();
-                })
-            }
-
-            return () => {
-                if (editor) {
-                    editor.destroy();
-                    editor = undefined;
-                }
-            };
-        }
-    }, [initialData, simple, contentsCss, onChange, bind, required]);
 
     if (bind.diff) {
         // TODO - This really isn't going to work with HTML
@@ -138,28 +79,30 @@ const Rich: React.FC<RichProps> = ({
         )
     }
 
-    if (error) {
-        return (
-            <div className="richtext is-error">
-                {error}
-            </div>
-        );
-    }
-
     return (
         <div className={`richtext ${className} ${bind.readOnly ? 'readonly' : ''}`}>
-            <textarea
-                id={bind.id}
-                name={bind.name || name}
-                className="richtext-editor"
-                ref={editorRef}
-                aria-describedBy={`${bind.id}-help`}
-                disabled={bind.readOnly}
-                aria-disabled={bind.readOnly}
+            <CKEditor
+                data={value}
+                config={{
+                    toolbar: (simple ? SIMPLE_TOOLBAR_CONFIG : FULL_TOOLBAR_CONFIG),
+                    // TODO: Prop to provide extra plugins (e.g. Signet signature captures)
+                    extraPlugins: '',
+                    // Disable the body > blockquote > p ... path in the editor footer
+                    removePlugins: 'elementspath',
+                    contentsCss,
+                    title: labelText
+                }}
+                readOnly={bind.readOnly}
+                onChange={(e: any) => {
+                    const newValue = e.editor.getData() as string;
+                    bind.value = newValue;
+                    if (onChange) {
+                        onChange(newValue);
+                    }
+                }}
             />
         </div>
     );
 }
 
-// export default memo(Rich);
 export default Rich;
