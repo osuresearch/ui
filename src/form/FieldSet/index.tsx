@@ -42,12 +42,14 @@ interface IFieldSetComposition {
     Success: React.FC<SuccessProps>
 }
 
+
 type Props = FormFieldProps<string | string[]> & {
     /**
-     * The value of the `name` prop will cascade down to be the 
-     * `name` in each child component in the `<FieldSet>`.
+     * REQUIRED - The value of the `name` prop will cascade down 
+     * to be the `name` in each child component in the 
+     * `<FieldSet>`.
      */
-    name?: string;
+    name: string;
 }
 
 export const Context = React.createContext<IFormFieldContext<string | string[]>>({
@@ -100,7 +102,7 @@ const FieldSet: React.FC<Props> & IFieldSetComposition = ({
                             // Add the FieldSet props to the
                             // inputs (if the inputs have not
                             // already defined them)
-                            name: node.props.name || bind.id,
+                            name: bind.name,
                             error: node.props.error || bind.error,
                             success: node.props.success || bind.success,
                             readOnly: node.props.readOnly || bind.readOnly,

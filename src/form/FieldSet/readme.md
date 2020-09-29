@@ -17,7 +17,7 @@ import { Icon } from '@oris/ui';
 ```jsx
 import { Checkbox } from '@oris/ui';
 
-<FieldSet id="colors">
+<FieldSet name="colors" id="colors">
     <FieldSet.Legend>
         Collection of checkboxes in a <code>FieldSet</code>
     </FieldSet.Legend>
@@ -47,7 +47,7 @@ import { Checkbox } from '@oris/ui';
 ```jsx
 import { Radio } from '@oris/ui';
 
-<FieldSet id="color-1" required>
+<FieldSet name="colors" id="colors-1" required>
     <FieldSet.Legend>
         Collection of radio buttons
         </FieldSet.Legend>
@@ -81,7 +81,7 @@ import { Form, Radio, Button } from '@oris/ui';
 const [error, setError] = useState('');
 
 <Form>
-    <FieldSet id="yes-no-123" error={error} required>
+    <FieldSet name="yes-no-123" id="yes-no-123" error={error} required>
         <FieldSet.Legend>FieldSet with an error</FieldSet.Legend>
 
         <Radio id="yes-123">

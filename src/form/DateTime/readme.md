@@ -1,10 +1,11 @@
 ### Examples
 
 #### Basic Implementation
-
 ```jsx
 import { useState } from 'react';
-const [date, setDate] = useState();
+const [date, setDate] = useState('2011-07-09');
+
+console.log('date', date);
 
 <DateTime id="choose-date">
     <DateTime.Label>Choose a date</DateTime.Label>
@@ -19,6 +20,7 @@ const [date, setDate] = useState();
     </DateTime.Help>
 </DateTime>
 ```
+
 #### Specify custom range for selectable dates
 
 ```jsx
@@ -46,7 +48,7 @@ const isWeekday = (date) => {
 #### Include a `<Time>` field with the calendar
 ```jsx
 import { useState } from 'react';
-const [date, setDate] = useState();
+const [date, setDate] = useState('2025-12-31T08:00:00-05:00');
 
 <DateTime id="choose-date-time">
     <DateTime.Label>Choose a date and time</DateTime.Label>

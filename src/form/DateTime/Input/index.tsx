@@ -3,7 +3,8 @@ import React, { useContext, useRef } from 'react';
 import DatePicker, { ReactDatePickerProps } from 'react-datepicker';
 import { Context } from '..';
 
-import { Print } from '../../../internal/FormCommon/Utility/Print';
+import dayjs from 'dayjs';
+
 import { Diff } from '../../../internal/FormCommon/Utility/Diff';
 
 import Time from '../../Time';
@@ -20,13 +21,13 @@ type DisabledReactDatePickerProps =
     | 'onChange' | 'selected'
 
 export type InputProps = Omit<ReactDatePickerProps, DisabledReactDatePickerProps> & {
-    /** The selected date - **must** be an ISO8601 timestamp string **/
+    /** The selected date - should be `YYYY-MM-DD` for dates and an ISO8601 string for datetimes **/
     value: string;
 
     /** Include time input in the calendar popup */
     showTimeInput?: boolean;
 
-    /** Returns the updated date as an ISO8601 timestamp string */
+    /** Returns the updated date as `YYYY-MM-DD` for dates and ISO8601 for timestamps */
     onChange: (date: string) => void;
 }
 
@@ -60,9 +61,15 @@ const Input: React.FC<InputProps> = (props) => {
 
     const dateFormat = props.dateFormat || props.showTimeInput ? 'MM/dd/yyyy h:mm aa' : 'MM/dd/yyyy';
 
-    // Transform selected date to ISO timestamp
+    // Transform selected date to appropriate return value
     const handleChange = (date: Date) => {
-        const newSelected = date ? date.toISOString() : '';
+        // Default - return as `Y-m-d`, e.g. `2011-05-23`
+        let newSelected = date ? dayjs(date).format('YYYY-MM-DD') : '';
+
+        // If the time input is included, return it as an ISO8601 datetime string
+        if (props.showTimeInput) {
+            newSelected = date ? dayjs(date).toISOString() : '';
+        }
 
         if (props.onChange) {
             props.onChange(newSelected);
@@ -87,10 +94,10 @@ const Input: React.FC<InputProps> = (props) => {
     const formatter = (timestamp: string | undefined) => {
         if (typeof (timestamp) === 'undefined') return undefined;
 
-        let date = new Date(timestamp)
-        let formatted = date.toLocaleDateString("en-US");
+        // let formatted = date.toLocaleDateString("en-US");
+        let formatted = dayjs(timestamp).format('MM/DD/YYYY');
         if (props.showTimeInput) {
-            formatted += ' ' + date.toLocaleTimeString("en-US", { hour: '2-digit', minute: '2-digit' });
+            formatted = dayjs(timestamp).format('MM/DD/YYYY hh:mm A');
         }
         return formatted;
     }
@@ -115,7 +122,7 @@ const Input: React.FC<InputProps> = (props) => {
                 ref={ref}
                 {...props}
                 id={bind.id}
-                selected={selected ? new Date(selected) : null}
+                selected={selected ? dayjs(selected).toDate() : null}
                 value={selected && formatter(selected)}
                 className={'form-control date'}
                 onChange={handleChange}
