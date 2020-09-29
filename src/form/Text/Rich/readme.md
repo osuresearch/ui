@@ -13,10 +13,7 @@ const html = "<h1>Hello World</h1><p>I am <strong>rich</strong> text!</p>";
 <Text id="rich-text-editor">
     <Text.Label>Rich Text Editor input</Text.Label>
 
-    <Text.Rich 
-        defaultValue={html} 
-        labelText='Rich Text Editor input'
-    />
+    <Text.Rich defaultValue={html} />
 </Text>
 ```
 
@@ -29,10 +26,7 @@ const html = "<h1>Hello World</h1><p>I am <strong>rich</strong> text!</p>";
 <Text id="rich-text-editor-read-only" readOnly>
     <Text.Label>Rich Text Editor input</Text.Label>
 
-    <Text.Rich 
-        defaultValue={html}
-        labelText='Rich Text Editor input'
-    />
+    <Text.Rich defaultValue={html} />
 </Text>
 ```
 
@@ -66,10 +60,7 @@ const [content, setContent] = useState('<p>Start typing and see it update live</
     <Text id="set-change-values" onChange={setContent}>
         <Text.Label>Live Update</Text.Label>
 
-        <Text.Rich 
-            defaultValue={content}
-            labelText='Live Updates'
-        />
+        <Text.Rich defaultValue={content} />
     </Text>
 
     Raw Content

@@ -1,5 +1,5 @@
 
-import React, { useContext } from 'react';
+import React, { useContext, useState, useLayoutEffect } from 'react';
 import { Context } from '..';
 
 // @ts-ignore
@@ -32,9 +32,6 @@ export interface RichProps {
      * For more information, see [CKEditor 4 contentsCss](https://ckeditor.com/docs/ckeditor4/latest/api/CKEDITOR_config.html#cfg-contentsCss)
      */
     contentsCss?: string;
-
-    /** Label text - the text of the `<Text.Label>` must be passed in for proper accessibility */
-    labelText: string;
 }
 
 /** Full configuration (that we're willing to support) */
@@ -62,12 +59,25 @@ const Rich: React.FC<RichProps> = ({
     defaultValue = '',
     simple = false,
     className = '',
-    contentsCss = 'https://orapps.osu.edu/assets/css/ckeditor/contents.css',
-    labelText
+    contentsCss = 'https://orapps.osu.edu/assets/css/ckeditor/contents.css'
 }) => {
+    const [label, setLabel] = useState<string>();
     const { bind } = useContext(Context);
 
     const value = bind.value || defaultValue;
+
+    useLayoutEffect(() => {
+        // @ts-ignore
+        const labelText = document.querySelector(`label[for="${bind.id}"]`)?.innerText;
+
+        if (labelText) {
+            setLabel(labelText);
+        } else if (bind.instructions) {
+            setLabel(bind.instructions);
+        } else {
+            setLabel('Rich Text Editor')
+        }
+    }, [bind]);
 
     if (bind.diff) {
         // TODO - This really isn't going to work with HTML
@@ -77,6 +87,11 @@ const Rich: React.FC<RichProps> = ({
                 prevValue={typeof (bind.initialValue) === 'string' ? bind.initialValue : undefined}
             />
         )
+    }
+
+    // Wait to render the editor until a label is set
+    if (!label) {
+        return <></>
     }
 
     return (
@@ -90,7 +105,7 @@ const Rich: React.FC<RichProps> = ({
                     // Disable the body > blockquote > p ... path in the editor footer
                     removePlugins: 'elementspath',
                     contentsCss,
-                    title: labelText
+                    title: label
                 }}
                 readOnly={bind.readOnly}
                 onChange={(e: any) => {
