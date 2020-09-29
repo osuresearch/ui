@@ -7,6 +7,38 @@ Versions follow [Semantic Versioning](https://semver.org/) guidelines - given a 
 2. MINOR version when you add functionality in a backwards-compatible manner, and
 3. PATCH version when you make backwards-compatible bug fixes.
 
+# 4.2.0 (2020-09-29)
+
+__Deprecated Components:__
+
+Components marked as deprecated will be removed in a future release. They will continue to work until their removal.
+
+* `Richtext` has been deprecated in favor of `Text.Rich` in the new Form Components
+
+__Minor Breaking Changes:__
+
+* `Button` - Changed the default theme to `primary` (previously was `secondary`)
+
+__New Features:__
+
+* Introduces new Form Components (`Form`, `FieldSet`, `Checkbox`, `Text`, etc) to abstract away the complexities of setting up accessible forms. 
+* Added new `Files` component to display files and directories from a Document Management System
+* `Richtext` - Added `id` prop
+* `Button` - Added `type` prop (one of `'button' | 'reset' | 'submit'` - defaults to `button`).
+* `Button` - Added `to` prop. When specified, the button renders as a React Router `<Link>` to the designated route
+
+__Bug Fixes:__
+
+* Changed defaults for `$vendor-fonts` and `$vendor-images` to not use a local server copy of `/assets` and instead point to the production copy at `orapps.osu.edu`
+* Fixed text underlines on badges that were wrapped within anchors
+* `Navbar` - Removed `exact` from Link elements to fix compatibility with newer React Router versions
+* `Search` - Fixed bug where Search inputs without `defaultValue` focus on load
+
+__Internal Changes:__
+
+* Fixed Styleguidst mangling component names during styleguide builds - preventing deployments
+* Added support for deploying a build of the styleguide to the dev server
+
 # 4.1.1 (2020-05-20)
 
 Rebuilt ES5 distribution files that were not correctly built for the 4.1.0 release.
