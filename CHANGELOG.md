@@ -7,13 +7,13 @@ Versions follow [Semantic Versioning](https://semver.org/) guidelines - given a 
 2. MINOR version when you add functionality in a backwards-compatible manner, and
 3. PATCH version when you make backwards-compatible bug fixes.
 
-# 4.3.0 (2020-09-30)
+# 4.2.1 (2020-09-30)
 
 __Bug Fixes:__
 
 * Removed outdated form components from the distribution folder that were causing some form subcomponents to crash
 
-__New Features:__
+__Internal Changes:__
 
 * Build process will now delete the dist folder prior to build
 
