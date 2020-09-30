@@ -14,6 +14,21 @@ import { Icon } from '@oris/ui';
 </div>
 ```
 
+```js noeditor
+import { Icon } from '@oris/ui';
+
+<div className="alert alert-secondary">
+    <Icon name="universal-access" circled={true} />
+    <p><strong>Accessibility</strong></p>
+    <p>
+        It is best to validate form fields on blur. This provides screen reader users contextual error feedback while they are completing the form.
+    </p>
+    <p>
+        To accomplish this in React Hook Form, set the <code>mode</code> argument to <code>onBlur</code> when calling the <code>useForm</code> function (see implementation below)      
+    </p>
+</div>
+```
+
 ```jsx
 import { useForm, Controller } from 'react-hook-form';
 import {
@@ -28,7 +43,7 @@ import {
     Button
 } from '@oris/ui';
 
-const { register, errors, handleSubmit, control } = useForm();
+const { register, errors, handleSubmit, control } = useForm({ mode: 'onBlur' });
 
 const onSubmit = data => console.log('submit', data);
 

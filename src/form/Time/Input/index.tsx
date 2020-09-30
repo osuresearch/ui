@@ -28,6 +28,7 @@ export type InputProps = {
     className?: string;
     readOnly?: boolean;
     required?: boolean;
+    onBlur?: () => void;
 }
 
 export const Input: React.FC<InputProps> = (props) => {
@@ -77,13 +78,30 @@ export const Input: React.FC<InputProps> = (props) => {
     // Select the input text
     const handleClick = (e: React.MouseEvent) => (e.target as HTMLInputElement).select();
 
+    // Callback onBlur when the user exits the component
+    // https://gist.github.com/pstoica/4323d3e6e37e8a23dd59
+    const handleInternalBlur = (e: React.FocusEvent) => {
+        const currentTarget = e.currentTarget;
+
+        // Check the newly focused element in the next tick of the event loop
+        setTimeout(() => {
+            // Check if the new activeElement is a child of the original container
+            if (!currentTarget.contains(document.activeElement)) {
+                props.onBlur && props.onBlur();
+            }
+        }, 0);
+    }
+
     const name = bind.name || props.name;
     const readOnly = bind.readOnly || props.readOnly;
+    const required = bind.required || props.required;
 
     const classNames = `input-group ${props.className ? props.className : ''} ${props.className ? props.className : ''} ${bind.error && 'is-invalid'} ${bind.success && 'is-valid'} ${readOnly ? 'readonly' : ''}`;
 
     return (
-        <div className={classNames}>
+        <div className={classNames}
+            onBlur={handleInternalBlur}
+        >
             <span className='input-group-prefix'>
                 <span className='fa fa-clock-o' aria-hidden='true'></span>
             </span>
@@ -108,6 +126,8 @@ export const Input: React.FC<InputProps> = (props) => {
                         minutesRef={minutesRef}
                         meridiemRef={meridiemRef}
                         readOnly={readOnly}
+                        required={required}
+                        invalid={bind.error ? true : false}
                     />
 
                     <span>:</span>
@@ -121,6 +141,8 @@ export const Input: React.FC<InputProps> = (props) => {
                         hourRef={hourRef}
                         meridiemRef={meridiemRef}
                         readOnly={readOnly}
+                        required={required}
+                        invalid={bind.error ? true : false}
                     />
 
                     <MeridiemInput
@@ -132,6 +154,8 @@ export const Input: React.FC<InputProps> = (props) => {
                         hourRef={hourRef}
                         minutesRef={minutesRef}
                         readOnly={readOnly}
+                        required={required}
+                        invalid={bind.error ? true : false}
                     />
                 </div>
             }

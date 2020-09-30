@@ -6,6 +6,8 @@
 // General
 .ui-form-element {
     margin-bottom: 1.5em;
+    display: flex;
+    flex-direction: column;
 
     label, legend {
         font-size: inherit;
@@ -50,15 +52,13 @@
     }
 
     .form-text, .invalid-feedback, .valid-feedback {
-        margin: -0.75rem 0 1rem 0;
+        margin: 0 0 1rem 0;
     }
 
-    // Fix margin collapse issues
-    .is-invalid ~ .invalid-feedback, 
-    .is-invalid input ~ .invalid-feedback,
-    .is-valid ~ .valid-feedback, 
-    .is-valid input ~ .valid-feedback {
-        display: table-caption;
+    .custom-control-label {
+        + .form-text {
+            margin: -0.75rem 0 1rem 0;
+        }
     }
 
     .form-control {
@@ -68,14 +68,6 @@
 
     .form-control {
         margin-bottom: 1em;
-    }    
-
-    // Form text when it appears at/near the end of the 
-    // form element
-    .form-control, .input-group, .fieldset-inline, .custom-control, .custom-select, .form-text {
-        + .form-text, + .invalid-feedback, + .valid-feedback {
-            margin: 0 0 1rem 0;
-        }
     }
 
     // readOnly print styles

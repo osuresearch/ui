@@ -26,6 +26,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     const value = bind.value || bind.id;
 
     const readOnly = bind.readOnly || props.readOnly;
+    const required = bind.required || props.required;
 
     if (bind.diff) {
         const wasChecked: boolean = (props.value === '' + bind.initialValue);
@@ -74,7 +75,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
             if (props.onChange) props.onChange(e);
         },
         readOnly: readOnly,
-        "aria-disabled": readOnly
+        "aria-disabled": readOnly,
+        "aria-required": required,
+        "aria-invalid": bind.error ? true : false
     }
 
     if (bind.controlled) {
