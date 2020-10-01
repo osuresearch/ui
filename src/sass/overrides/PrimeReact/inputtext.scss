@@ -1,0 +1,79 @@
+// Based on https://raw.githubusercontent.com/primefaces/primereact/master/public/themes/bootstrap4-light-blue/theme.css
+
+.p-inputtext {
+    font-family: $font-family-sans-serif;
+    font-size: $font-size-base;
+    color: $input-color;
+    background: $input-bg;
+    padding: $input-padding-y $input-padding-x;
+    border: $input-border-width solid $input-border-color;
+    transition: $input-transition;
+    appearance: none;
+    border-radius: $input-border-radius;
+
+    &:hover {
+        border-color: $input-border-color;
+    }
+
+    &:focus {
+        outline: 0 none;
+        outline-offset: 0;
+        background: $input-focus-bg;
+        color: $input-focus-color;
+        width: $input-focus-width;
+        box-shadow: $input-focus-box-shadow;
+        border-color: $input-focus-border-color;
+    }
+
+    &.p-error,
+    &.p-invalid {
+        border-color: $danger;
+    }
+
+    &.p-inputtext-sm {
+        font-size: 0.875rem;
+        padding: 0.4375rem 0.65625rem;
+    }
+
+    &.p-inputtext-lg {
+        font-size: 1.25rem;
+        padding: 0.625rem 0.9375rem;
+    }
+}
+
+.p-input-filled {
+    .p-inputtext {
+        background-color: $gray-900;
+
+        &:hover,
+        &:focus {
+            background-color: $gray-900;
+        }
+    }
+}
+
+.p-inputtext-sm {
+    .p-inputtext {
+        font-size: 0.875rem;
+        padding: 0.4375rem 0.65625rem;
+    }
+}
+
+.p-inputtext-lg {
+    .p-inputtext {
+        font-size: 1.25rem;
+        padding: 0.625rem 0.9375rem;
+    }
+}
+
+.p-input-icon-left {
+    > .p-inputtext {
+        padding-left: 2.5rem;
+    }
+}
+
+.p-input-icon-right {
+    > .p-inputtext {
+        padding-right: 2.5rem;
+    }
+}

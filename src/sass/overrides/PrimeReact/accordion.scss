@@ -1,0 +1,133 @@
+// Based on https://raw.githubusercontent.com/primefaces/primereact/master/public/themes/bootstrap4-light-blue/theme.css
+
+.p-accordion {
+    .p-accordion-header {
+        .p-accordion-header-link {
+            padding: 1.5rem 1.25rem;
+            border: $card-border-width solid $card-border-color;
+            color: $gray-900;
+            background: $card-cap-bg;
+            border-radius: $card-inner-border-radius $card-inner-border-radius 0 0;
+            font-size: 1.1rem;
+
+            .p-accordion-toggle-icon {
+                margin-right: 0.5rem;
+            }
+        }
+
+        &.p-disabled {
+            .p-accordion-header-link {
+                background: lighten($card-cap-bg, 50%);
+                border-color: lighten($card-border-color, 50%);
+                color: lighten($gray-900, 50%);
+            }
+        }
+
+        &:not(.p-disabled) {
+            .p-accordion-header-link {
+                &:focus {
+                    outline: 0 none;
+                    outline-offset: 0;
+                    box-shadow: 0 0 0 0.1rem $gray-400;
+                }
+            }
+
+            &.p-highlight {
+                .p-accordion-header-link {
+                    background: $card-cap-bg;
+                    border-color: $card-border-color;
+                    color: $gray-900;
+                    border-bottom-right-radius: 0;
+                    border-bottom-left-radius: 0;
+                }
+
+                &:hover {
+                    .p-accordion-header-link {
+                        border-color: $card-border-color;
+                        background: $gray-200;
+                        color: $gray-900;
+                    }
+                }
+            }
+        }
+
+        &:not(.p-highlight) {
+            &:not(.p-disabled) {
+                &:hover {
+                    .p-accordion-header-link {
+                        background: $gray-200;
+                        border-color: $card-border-color;
+                        color: $gray-900;
+                    }
+                }
+            }
+        }
+    }
+
+    .p-accordion-content {
+        padding: $card-spacer-x;
+        border: $card-border-width solid $card-border-color;
+        background: $card-bg;
+        color: $gray-900;
+        border-top: 0;
+        border-radius: 0;
+    }
+
+    .p-accordion-tab {
+        margin-bottom: 0;
+
+        .p-accordion-header {
+            .p-accordion-header-link {
+                border-radius: 0;
+            }
+        }
+
+        &:not(:first-child) {
+            .p-accordion-header {
+                .p-accordion-header-link {
+                    border-top: 0 none;
+                }
+
+                &:not(.p-highlight) {
+                    &:not(.p-disabled) {
+                        &:hover {
+                            .p-accordion-header-link {
+                                border-top: 0 none;
+                            }
+                        }
+                    }
+                }
+
+                &:not(.p-disabled) {
+                    &.p-highlight {
+                        &:hover {
+                            .p-accordion-header-link {
+                                border-top: 0 none;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        &:first-child {
+            .p-accordion-header {
+                .p-accordion-header-link {
+                    border-top-right-radius: $card-inner-border-radius;
+                    border-top-left-radius: $card-inner-border-radius;
+                }
+            }
+        }
+
+        &:last-child {
+            .p-accordion-header {
+                &:not(.p-highlight) {
+                    .p-accordion-header-link {
+                        border-bottom-right-radius: $card-inner-border-radius;
+                        border-bottom-left-radius: $card-inner-border-radius;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -11,58 +11,69 @@
 @charset 'UTF-8';
 
 // Branding colors and fonts
-@import 'colors';
-@import 'fonts';
+@import "colors";
+@import "fonts";
 
 // Vendor theme settings
-@import 'settings';
+@import "settings";
 
 // Vendor libraries
-@import 'vendor/bootstrap-4.0.0/bootstrap';
-@import 'vendor/font-awesome';
-@import 'vendor/datatables';
-@import 'vendor/datepicker-1.3.1/build3';
-@import 'vendor/uploadifive-1.1.0';
+@import "vendor/bootstrap-4.0.0/bootstrap";
+@import "vendor/font-awesome";
+@import "vendor/datatables";
+@import "vendor/datepicker-1.3.1/build3";
+@import "vendor/primeicons-4.0.0/primeicons";
+@import "vendor/primereact-5.0.0/primereact";
+@import "vendor/uploadifive-1.1.0";
 
-// Overrides of non-configurable Bootstrap 4 components
+// Overrides
+// Non-configurable Bootstrap 4 components
 // Note that this should be in the same order as bootstrap.scss
-@import 'overrides/alert';
-@import 'overrides/badge';
-@import 'overrides/buttons';
-@import 'overrides/code';
-@import 'overrides/custom-forms';
-@import 'overrides/datatables';
-@import 'overrides/datepicker';
-@import 'overrides/forms';
-@import 'overrides/input-group';
-@import 'overrides/navbar';
-@import 'overrides/pagination';
-@import 'overrides/reboot';
-@import 'overrides/tables';
-@import 'overrides/type';
+@import "overrides/Bootstrap/alert";
+@import "overrides/Bootstrap/badge";
+@import "overrides/Bootstrap/buttons";
+@import "overrides/Bootstrap/code";
+@import "overrides/Bootstrap/custom-forms";
+@import "overrides/Bootstrap/forms";
+@import "overrides/Bootstrap/input-group";
+@import "overrides/Bootstrap/navbar";
+@import "overrides/Bootstrap/pagination";
+@import "overrides/Bootstrap/reboot";
+@import "overrides/Bootstrap/tables";
+@import "overrides/Bootstrap/type";
+// PrimeReact
+@import "overrides/PrimeReact/accordion.scss";
+@import "overrides/PrimeReact/autocomplete.scss";
+@import "overrides/PrimeReact/chips.scss";
+@import "overrides/PrimeReact/general.scss";
+@import "overrides/PrimeReact/inputgroup.scss";
+@import "overrides/PrimeReact/inputtext.scss";
+// Misc overrides
+@import "overrides/datatables";
+@import "overrides/datepicker";
 
 // Components
-@import 'components/alert-banner';
-@import 'components/application-alert';
-@import 'components/external-link';
-@import 'components/files';
-@import 'components/footer';
-@import 'components/formflow';
-@import 'components/horizontal-scroll';
-@import 'components/lookup';
-@import 'components/osu-navbar';
-@import 'components/profile';
-@import 'components/required-asterisk';
-@import 'components/richtext';
-@import 'components/sticky-header';
-@import 'components/support';
-@import 'components/tabbar';
-@import 'components/tablist';
-@import 'components/ui-forms';
-@import 'components/uploader';
+@import "components/alert-banner";
+@import "components/application-alert";
+@import "components/external-link";
+@import "components/files";
+@import "components/footer";
+@import "components/formflow";
+@import "components/horizontal-scroll";
+@import "components/lookup";
+@import "components/osu-navbar";
+@import "components/profile";
+@import "components/required-asterisk";
+@import "components/richtext";
+@import "components/sticky-header";
+@import "components/support";
+@import "components/tabbar";
+@import "components/tablist";
+@import "components/ui-forms";
+@import "components/uploader";
 
-@import '../components/Button';
-@import '../components/Search';
+@import "../components/Button";
+@import "../components/Search";
 
-@import '../experimental/AppSearch';
-@import '../experimental/Masthead';
+@import "../experimental/AppSearch";
+@import "../experimental/Masthead";
