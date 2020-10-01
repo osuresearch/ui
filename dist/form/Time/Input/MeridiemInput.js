@@ -16,7 +16,9 @@ var MeridiemInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) 
       handleClick = _ref.handleClick,
       hourRef = _ref.hourRef,
       minutesRef = _ref.minutesRef,
-      readOnly = _ref.readOnly;
+      readOnly = _ref.readOnly,
+      required = _ref.required,
+      invalid = _ref.invalid;
 
   var handleKeyDown = function handleKeyDown(e) {
     var _hourRef$current, _minutesRef$current;
@@ -110,7 +112,9 @@ var MeridiemInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) 
     onKeyDown: handleKeyDown,
     onChange: function onChange() {} // Surpress console warning - handleKeyDown sets the meridian value
     ,
-    readOnly: readOnly
+    readOnly: readOnly,
+    "aria-required": required,
+    "aria-invalid": invalid
   });
 });
 

@@ -51,6 +51,7 @@ var Input = function Input(props) {
   var initial = bind.initialValue || undefined;
   var name = bind.name || props.name;
   var readOnly = bind.readOnly || props.readOnly;
+  var required = bind.required || props.required;
   var classNames = "input-group ".concat(props.showTimeInput && 'datetimepicker', " ").concat(props.className ? props.className : '', " ").concat(bind.error ? 'is-invalid' : '', " ").concat(bind.success ? 'is-valid' : '');
   var dateFormat = props.dateFormat || props.showTimeInput ? 'MM/dd/yyyy h:mm aa' : 'MM/dd/yyyy'; // Transform selected date to appropriate return value
 
@@ -126,7 +127,9 @@ var Input = function Input(props) {
     }),
     dateFormat: dateFormat,
     readOnly: readOnly,
-    "aria-disabled": readOnly
+    "aria-disabled": readOnly,
+    "aria-required": required,
+    "aria-invalid": bind.error ? true : false
   }), /*#__PURE__*/_react.default.createElement("div", {
     className: "keyboard-notice"
   }, /*#__PURE__*/_react.default.createElement("small", null, /*#__PURE__*/_react.default.createElement("em", null, "Keyboard users: Exit this dialog with the ", /*#__PURE__*/_react.default.createElement("code", null, "esc"), " key"))), /*#__PURE__*/_react.default.createElement("div", {

@@ -25,7 +25,9 @@ function Legend(props) {
 
   var legend = props.children || bind.instructions || '';
   return /*#__PURE__*/_react.default.createElement("legend", (0, _extends2.default)({}, otherProps, {
-    className: bind.required ? 'is-required' : '',
-    "aria-label": bind.required ? "".concat(legend, ", is required") : legend
-  }), legend);
+    className: bind.required ? 'is-required' : ''
+  }), legend, " ", bind.required && /*#__PURE__*/_react.default.createElement("span", {
+    className: "sr-only"
+  }, ",Required") // fieldsets do not have a native way to indicate that the group of components are required, so use the legend to communicate that: https://www.w3.org/WAI/tutorials/forms/grouping/#associating-related-controls-with-fieldset
+  );
 }

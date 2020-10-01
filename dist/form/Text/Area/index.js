@@ -39,6 +39,7 @@ var Area = /*#__PURE__*/_react.default.forwardRef(function (props, ref) {
   var minLength = props.minLength,
       maxLength = props.maxLength;
   var readOnly = bind.readOnly || props.readOnly;
+  var required = bind.required || props.required;
 
   if (bind.diff) {
     return /*#__PURE__*/_react.default.createElement(_Diff.default, {
@@ -62,7 +63,9 @@ var Area = /*#__PURE__*/_react.default.forwardRef(function (props, ref) {
       if (props.onChange) props.onChange(e);
     },
     readOnly: readOnly,
-    "aria-disabled": readOnly
+    "aria-disabled": readOnly,
+    "aria-required": required,
+    "aria-invalid": bind.error ? true : false
   });
 
   if (bind.controlled) {
