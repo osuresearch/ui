@@ -1,0 +1,147 @@
+// Based on https://raw.githubusercontent.com/primefaces/primereact/master/public/themes/bootstrap4-light-blue/theme.css
+// SCSS conversion by https://sebastianpontow.de/css2compass/
+
+// Colors
+$primary: $casal;
+$danger: #db3b21;
+
+.p-multiselect {
+    background: $white;
+    border: $input-border-width solid $input-border-color;
+    transition: $input-transition;
+    border-radius: 0px;
+    .p-multiselect-label {
+        padding: 0.5rem 0.75rem;
+
+        > div {
+            padding: 0.25rem 0.75rem;
+            margin-right: 0.5rem;
+            background: $primary;
+            color: $white;
+            display: inline;
+        }
+    }
+    .p-multiselect-trigger {
+        background: transparent;
+        color: $gray-900;
+        width: 2.357rem;
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 0px;
+    }
+    &.p-error {
+        border-color: $danger;
+    }
+    &.p-invalid {
+        border-color: $danger;
+    }
+    &:not(.p-disabled) {
+        &.p-focus {
+            outline: 0 none;
+            outline-offset: 0;
+            box-shadow: $input-focus-box-shadow;
+            border-color: $input-focus-border-color;
+        }
+    }
+}
+.p-multiselect-panel {
+    background: $white;
+    color: $gray-900;
+    border: $input-border-width solid $input-border-color;
+    border-radius: 0px;
+    box-shadow: none;
+    .p-multiselect-header {
+        padding: 0.75rem 1.5rem;
+        border-bottom: 1px solid $gray-200;
+        color: $gray-900;
+        background: $gray-100;
+        margin: 0;
+        border-top-right-radius: 0px;
+        border-top-left-radius: 0px;
+        .p-multiselect-filter-container {
+            .p-inputtext {
+                padding-right: 1.75rem;
+            }
+            .p-multiselect-filter-icon {
+                right: 0.75rem;
+                color: $gray-900;
+            }
+        }
+        .p-checkbox {
+            margin-right: 0.5rem;
+        }
+        .p-multiselect-close {
+            margin-left: 0.5rem;
+            width: 2rem;
+            height: 2rem;
+            color: $gray-900;
+            border: 1px solid $gray-100;
+            background: transparent;
+            border-radius: 0;
+            box-shadow: 0;
+            &:focus {
+                outline: 0 none;
+                outline-offset: 0;
+                box-shadow: $input-focus-box-shadow;
+            }
+            &:enabled:hover {
+                color: $gray-900;
+                border-color: transparent;
+                background: transparent;
+            }
+        }
+    }
+    .p-multiselect-items {
+        padding: 0.5rem 0;
+        .p-multiselect-item {
+            margin: 0;
+            padding: 0.5rem 1.5rem;
+            border: 0 none;
+            color: $gray-900;
+            background: transparent;
+            //Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
+            transition: box-shadow 0.15s;
+            //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+            border-radius: 0;
+            &.p-highlight {
+                color: $white;
+                background: $primary;
+
+                .p-checkbox {
+                    .p-checkbox-box {
+                        border: $input-border-width solid $white;
+                    }
+                }
+
+                &:focus {
+                    .p-checkbox {
+                        .p-checkbox-box {
+                            box-shadow: 0 0 0 $input-btn-focus-width rgba($white, 0.25);
+                        }
+                    }
+                }
+            }
+            &:focus {
+                outline: 0 none;
+                outline-offset: 0;
+
+                .p-checkbox {
+                    .p-checkbox-box {
+                        box-shadow: $input-focus-box-shadow;
+                    }
+                }
+            }
+            .p-checkbox {
+                margin-right: 0.5rem;
+            }
+            &:not(.p-highlight):not(.p-disabled):hover {
+                color: $gray-900;
+                background: $gray-100;
+            }
+        }
+        .p-multiselect-empty-message {
+            padding: 0.5rem 1.5rem;
+            color: $gray-900;
+            background: transparent;
+        }
+    }
+}
