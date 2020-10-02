@@ -14,7 +14,7 @@ import {
     Success, SuccessProps,
 } from '../../internal/FormCommon/Components';
 
-type Props = FormFieldProps<string[]> & {
+type Props = FormFieldProps<string[] | string> & {
 
 }
 
@@ -23,8 +23,8 @@ interface IAutoCompleteComposition extends ICommonComposition {
     Input: React.FC<InputProps>;
 }
 
-export const Context = React.createContext<IFormFieldContext<string[]>>({
-    bind: new NullFieldBind<string[]>()
+export const Context = React.createContext<IFormFieldContext<string[] | string>>({
+    bind: new NullFieldBind<string[] | string>()
 });
 
 /**

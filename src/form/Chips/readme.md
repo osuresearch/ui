@@ -1,3 +1,7 @@
+Chips requires an array as its `value` and `onChange` callback to update the model.
+
+[Chips documentation sourced from PrimeReact website](https://www.primefaces.org/primereact/showcase/#/chips)
+
 ### Examples
 
 #### Basic
@@ -33,7 +37,10 @@ const [values, setValues] = useState([]);
 </Chips>
 ```
 
-#### Template
+#### Custom Content
+
+A chip is customized using `itemTemplate` function where value is passed to return JSX.
+
 ```jsx
 import React, { useState } from 'react';
 import { Icon } from '@oris/ui';
