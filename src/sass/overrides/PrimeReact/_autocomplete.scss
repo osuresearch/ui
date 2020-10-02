@@ -5,6 +5,39 @@
         right: 0.75rem;
     }
 
+    .p-autocomplete-panel {
+        background: $white;
+        color: $input-color;
+        border: 1px solid $input-border-color;
+        border-radius: 0;
+        box-shadow: none;
+        min-width: 0;
+
+        .p-autocomplete-items {
+            padding: 0.5rem 0;
+
+            .p-autocomplete-item {
+                margin: 0;
+                padding: 0.5rem 1.5rem;
+                border: 0 none;
+                color: $input-color;
+                background: transparent;
+                transition: box-shadow 0.15s;
+                border-radius: 0;
+
+                &.p-highlight {
+                    color: $white;
+                    background: $casal;
+                }
+
+                &:hover {
+                    color: $input-color;
+                    background: $gray-200;
+                }
+            }
+        }
+    }
+
     &.p-autocomplete-dd {
         .p-autocomplete-loader {
             right: 3.107rem;
@@ -40,10 +73,6 @@
             }
 
             &:not(.p-disabled) {
-                &:hover {
-                    border-color: $gray-100;
-                }
-
                 &.p-focus {
                     outline: 0 none;
                     outline-offset: 0;
@@ -52,44 +81,16 @@
                 }
             }
         }
+
+        .p-autocomplete-panel {
+            min-width: 100%;
+        }
     }
 
     &.p-error,
     &.p-invalid {
         > .p-inputtext {
             border-color: $danger;
-        }
-    }
-}
-
-.p-autocomplete-panel {
-    background: $white;
-    color: $input-color;
-    border: 1px solid $input-color;
-    border-radius: $border-radius;
-    box-shadow: none;
-
-    .p-autocomplete-items {
-        padding: 0.5rem 0;
-
-        .p-autocomplete-item {
-            margin: 0;
-            padding: 0.5rem 1.5rem;
-            border: 0 none;
-            color: $input-color;
-            background: transparent;
-            transition: box-shadow 0.15s;
-            border-radius: 0;
-
-            &.p-highlight {
-                color: $white;
-                background: $casal;
-            }
-
-            &:hover {
-                color: $input-color;
-                background: $gray-200;
-            }
         }
     }
 }

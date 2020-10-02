@@ -42,12 +42,13 @@
 @import "overrides/Bootstrap/tables";
 @import "overrides/Bootstrap/type";
 // PrimeReact
-@import "overrides/PrimeReact/accordion.scss";
-@import "overrides/PrimeReact/autocomplete.scss";
-@import "overrides/PrimeReact/chips.scss";
-@import "overrides/PrimeReact/general.scss";
-@import "overrides/PrimeReact/inputgroup.scss";
-@import "overrides/PrimeReact/inputtext.scss";
+@import "overrides/PrimeReact/accordion";
+@import "overrides/PrimeReact/autocomplete";
+@import "overrides/PrimeReact/button";
+@import "overrides/PrimeReact/chips";
+@import "overrides/PrimeReact/general";
+@import "overrides/PrimeReact/inputgroup";
+@import "overrides/PrimeReact/inputtext";
 // Misc overrides
 @import "overrides/datatables";
 @import "overrides/datepicker";
