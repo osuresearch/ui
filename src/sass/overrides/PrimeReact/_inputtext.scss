@@ -10,6 +10,7 @@
     transition: $input-transition;
     appearance: none;
     border-radius: $input-border-radius;
+    max-width: 100%;
 
     &:hover {
         border-color: $input-border-color;

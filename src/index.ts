@@ -1,9 +1,11 @@
 
 import './internal/jQueryPluginChanges';
 
+export { default as Accordion } from './components/Accordion';
 export { default as AppAlert } from './components/AppAlert';
 export { default as Badge } from './components/Badge';
 export { default as Button } from './components/Button';
+export { default as DataTable } from './components/DataTable';
 export { default as Emulate } from './components/Emulate';
 export { default as ExternalLink } from './components/ExternalLink';
 export { default as Footer } from './components/Footer';
@@ -26,8 +28,10 @@ export { default as Richtext } from './components/Richtext';
 // Form components
 export { default as Checkbox } from './form/Checkbox';
 export { default as DateTime } from './form/DateTime';
+export { default as Dropdown } from './form/Dropdown';
 export { default as FieldSet } from './form/FieldSet';
 export { default as Form } from './form/Form';
+export { default as MultiSelect } from './form/MultiSelect';
 export { default as Number } from './form/Number';
 export { default as Radio } from './form/Radio';
 export { default as Select } from './form/Select';

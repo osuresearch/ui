@@ -6,6 +6,7 @@ $primary: $casal;
 $danger: #db3b21;
 
 .p-checkbox {
+    display: initial;
     .p-checkbox-box {
         border: $input-border-width solid $input-border-color;
         background: $white;

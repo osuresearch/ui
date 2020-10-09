@@ -1,0 +1,248 @@
+// Based on https://raw.githubusercontent.com/primefaces/primereact/master/public/themes/bootstrap4-light-blue/theme.css
+// SCSS conversion by https://sebastianpontow.de/css2compass/
+
+// Colors
+$primary: $casal;
+
+//@extend-elements
+//original selectors
+//.p-datatable .p-datatable-tbody >tr >td .p-row-toggler, .p-datatable .p-datatable-tbody >tr >td .p-row-editor-init, .p-datatable .p-datatable-tbody >tr >td .p-row-editor-save, .p-datatable .p-datatable-tbody >tr >td .p-row-editor-cancel
+%extend_1 {
+    width: 2rem;
+    height: 2rem;
+    color: $gray-400;
+    border: 0 none;
+    background: transparent;
+    border-radius: 0;
+    transition: box-shadow 0.15s;
+}
+
+//original selectors
+//.p-datatable .p-datatable-tbody >tr >td .p-row-toggler:enabled:hover, .p-datatable .p-datatable-tbody >tr >td .p-row-editor-init:enabled:hover, .p-datatable .p-datatable-tbody >tr >td .p-row-editor-save:enabled:hover, .p-datatable .p-datatable-tbody >tr >td .p-row-editor-cancel:enabled:hover
+%extend_2 {
+    color: $gray-900;
+    border-color: transparent;
+    background: transparent;
+}
+
+//original selectors
+//.p-datatable .p-datatable-tbody >tr >td .p-row-toggler:focus, .p-datatable .p-datatable-tbody >tr >td .p-row-editor-init:focus, .p-datatable .p-datatable-tbody >tr >td .p-row-editor-save:focus, .p-datatable .p-datatable-tbody >tr >td .p-row-editor-cancel:focus
+%extend_3 {
+    outline: 0 none;
+    outline-offset: 0;
+    box-shadow: 0 0 0 0.2rem $primary;
+}
+
+.p-datatable {
+    border-width: $table-border-width;
+
+    .ui-form-element {
+        margin-bottom: 0;
+    }
+
+    .p-paginator-bottom {
+        border-width: 1px 0 0 0;
+        border-radius: 0;
+    }
+    .p-datatable-header {
+        color: $gray-900;
+        border: solid $table-border-color;
+        border-width: 1px 0;
+        padding: 1rem;
+        font-weight: 600;
+    }
+    .p-datatable-footer {
+        background: $gray-100;
+        color: $gray-900;
+        border: 1px solid $table-border-color;
+        border-width: 1px 0 1px 0;
+        padding: 1rem;
+        font-weight: 600;
+    }
+    .p-sortable-column {
+        outline-color: $primary;
+        .p-sortable-column-icon {
+            color: #ccc;
+            position: absolute;
+            left: 0.25rem;
+            font-family: "FontAwesome";
+
+            &::before {
+                content: "\f0d8";
+                display: block;
+                line-height: 0.65rem;
+            }
+            &::after {
+                content: "\f0d7";
+                display: block;
+                line-height: 0.25rem;
+            }
+
+            &.pi-sort-amount-down {
+                &::before {
+                    display: none;
+                }
+                &::after {
+                    line-height: 1.25rem;
+                }
+            }
+            &.pi-sort-amount-up-alt {
+                &::before {
+                    line-height: 1.25rem;
+                }
+                &::after {
+                    display: none;
+                }
+            }
+        }
+        .p-sortable-column-badge {
+            border-radius: 50%;
+            height: 1.143rem;
+            min-width: 1.143rem;
+            line-height: 1.143rem;
+            color: $white;
+            background: $primary;
+            margin-left: 0.5rem;
+        }
+        &.p-highlight {
+            .p-sortable-column-icon {
+                color: $gray-900;
+            }
+        }
+    }
+    .p-column-resizer-helper {
+        background: $primary;
+    }
+    .p-datatable-scrollable-header {
+        background: $gray-100;
+    }
+    .p-datatable-scrollable-footer {
+        background: $gray-100;
+    }
+    .p-datatable-loading-icon {
+        font-size: 2rem;
+    }
+    &.p-datatable-gridlines {
+        .p-datatable-header {
+            border-width: 1px 1px 0 1px;
+        }
+        .p-datatable-footer {
+            border-width: 0 1px 1px 1px;
+        }
+        .p-paginator-top {
+            border-width: 0 1px 0 1px;
+        }
+        .p-paginator-bottom {
+            border-width: 0 1px 1px 1px;
+        }
+        .p-datatable-thead > tr > th {
+            border-width: 1px 1px 2px 1px;
+        }
+        .p-datatable-tbody > tr > td {
+            border-width: 1px;
+        }
+        .p-datatable-tfoot > tr > td {
+            border-width: 1px;
+        }
+    }
+    .p-datatable-thead > tr > th {
+        text-align: left;
+        padding: $table-cell-padding;
+        border: 1px solid $table-border-color;
+        border-width: 0 0 1px 0;
+        font-weight: 500;
+        color: rgba(0, 0, 0, 0.55);
+        font-size: 0.85em;
+        position: relative;
+
+        &.p-sortable-column {
+            padding-left: 1.75rem;
+        }
+    }
+    .p-datatable-tfoot > tr > td {
+        text-align: left;
+        padding: $table-cell-padding;
+        border: 1px solid $table-border-color;
+        border-width: 1px 0 1px 0;
+        font-weight: 600;
+        color: $gray-900;
+        background: $white;
+    }
+    .p-datatable-tbody > tr {
+        background: $white;
+        color: $gray-900;
+        outline-color: $primary;
+        > td {
+            text-align: left;
+            border: 0;
+            padding: $table-cell-padding;
+            .p-row-toggler {
+                @extend %extend_1;
+                &:focus {
+                    @extend %extend_3;
+                }
+                &:enabled:hover {
+                    @extend %extend_2;
+                }
+            }
+            .p-row-editor-init {
+                @extend %extend_1;
+                &:focus {
+                    @extend %extend_3;
+                }
+                &:enabled:hover {
+                    @extend %extend_2;
+                }
+            }
+            .p-row-editor-save {
+                @extend %extend_1;
+                margin-right: 0.5rem;
+                &:focus {
+                    @extend %extend_3;
+                }
+                &:enabled:hover {
+                    @extend %extend_2;
+                }
+            }
+            .p-row-editor-cancel {
+                @extend %extend_1;
+                &:focus {
+                    @extend %extend_3;
+                }
+                &:enabled:hover {
+                    @extend %extend_2;
+                }
+            }
+        }
+        &.p-highlight {
+            background: $gray-700;
+            color: $white;
+        }
+        &.p-datatable-dragpoint-top > td {
+            box-shadow: inset 0 2px 0 0 $primary;
+        }
+        &.p-datatable-dragpoint-bottom > td {
+            box-shadow: inset 0 -2px 0 0 $primary;
+        }
+    }
+    &.p-datatable-hoverable-rows .p-datatable-tbody > tr:not(.p-highlight):hover {
+        background: $gray-100;
+    }
+    &.p-datatable-striped .p-datatable-tbody > tr:nth-child(even) {
+        background: $table-accent-bg;
+        &.p-highlight {
+            background: $gray-800;
+            color: $white;
+            .p-row-toggler {
+                color: $white;
+                &:hover {
+                    color: $white;
+                }
+            }
+        }
+    }
+}
+.p-datatable .p-paginator-top {
+    border-width: 1px 0 0 0;
+    border-radius: 0;
+}
