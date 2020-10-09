@@ -6,26 +6,30 @@
 //.p-paginator .p-paginator-first, .p-paginator .p-paginator-prev, .p-paginator .p-paginator-next, .p-paginator .p-paginator-last
 %extend_1 {
     background-color: $white;
-    border: 1px solid $gray-100;
-    color: $casal;
+    color: $gray-700;
     min-width: 2.357rem;
     height: 2.357rem;
     margin: 0 0 0 -1px;
     border-radius: 0;
+    box-shadow: none;
 }
 
 //original selectors
 //.p-paginator .p-paginator-first:not(.p-disabled):not(.p-highlight):hover, .p-paginator .p-paginator-prev:not(.p-disabled):not(.p-highlight):hover, .p-paginator .p-paginator-next:not(.p-disabled):not(.p-highlight):hover, .p-paginator .p-paginator-last:not(.p-disabled):not(.p-highlight):hover
 %extend_2 {
     background: $gray-100;
-    border-color: $gray-100;
-    color: $casal;
+    color: $gray-900;
+}
+
+// Disabled
+%extend_3 {
+    color: $gray-400;
+    box-shadow: none;
 }
 
 .p-paginator {
     background: $white;
     color: $casal;
-    border: solid $gray-100;
     border-width: 0;
     padding: 0.75rem;
     border-radius: 0;
@@ -36,17 +40,26 @@
         &:not(.p-disabled):not(.p-highlight):hover {
             @extend %extend_2;
         }
+        &.p-disabled {
+            @extend %extend_3;
+        }
     }
     .p-paginator-prev {
         @extend %extend_1;
         &:not(.p-disabled):not(.p-highlight):hover {
             @extend %extend_2;
         }
+        &.p-disabled {
+            @extend %extend_3;
+        }
     }
     .p-paginator-next {
         @extend %extend_1;
         &:not(.p-disabled):not(.p-highlight):hover {
             @extend %extend_2;
+        }
+        &.p-disabled {
+            @extend %extend_3;
         }
     }
     .p-paginator-last {
@@ -55,6 +68,9 @@
         border-bottom-right-radius: 0px;
         &:not(.p-disabled):not(.p-highlight):hover {
             @extend %extend_2;
+        }
+        &.p-disabled {
+            @extend %extend_3;
         }
     }
     .p-dropdown {
@@ -66,21 +82,20 @@
     }
     .p-paginator-current {
         background-color: $white;
-        border: 1px solid $gray-100;
-        color: $casal;
+        border: 0;
+        color: $gray-700;
         min-width: 2.357rem;
         height: 2.357rem;
-        margin: 0 0 0 -1px;
         padding: 0 0.5rem;
     }
     .p-paginator-pages .p-paginator-page {
         background-color: $white;
-        border: 1px solid $gray-100;
-        color: $casal;
+        color: $gray-700;
         min-width: 2.357rem;
         height: 2.357rem;
         margin: 0 0 0 -1px;
         border-radius: 0;
+        box-shadow: none;
         &.p-highlight {
             background: $casal;
             border-color: $casal;
@@ -88,8 +103,8 @@
         }
         &:not(.p-highlight):hover {
             background: $gray-100;
-            border-color: $gray-100;
-            color: $casal;
+            border-color: $gray-200;
+            color: $gray-900;
         }
     }
 }

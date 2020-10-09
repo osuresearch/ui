@@ -46,6 +46,7 @@ export type ColumnProps = {
     filterFunction?(value: any, filter: any): void;
     editor?(props: any): JSX.Element | undefined;
     editorValidator?(props: any): boolean;
+
 }
 
 export default function Column(props: ColumnProps) {

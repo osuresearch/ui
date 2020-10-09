@@ -1,6 +1,6 @@
 
 ```jsx
-import React, { useState } from 'react';
+import React from 'react';
 
 const products = require('./products-small').default;
 

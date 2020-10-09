@@ -241,6 +241,28 @@ $primary: $casal;
             }
         }
     }
+    td.plus-expander {
+        // Override the icon to look like the plus expander in PI Portal
+        .pi-chevron-right::before {
+            font-family: "FontAwesome";
+            content: "\f196";
+            color: $link-color;
+        }
+
+        .pi-chevron-down::before {
+            font-family: "FontAwesome";
+            content: "\f147";
+            color: $link-color;
+        }
+
+        .p-row-toggler:enabled:hover {
+            background-color: $white !important;
+            .pi-chevron-right::before,
+            .pi-chevron-down::before {
+                color: $link-hover-color;
+            }
+        }
+    }
 }
 .p-datatable .p-paginator-top {
     border-width: 1px 0 0 0;
