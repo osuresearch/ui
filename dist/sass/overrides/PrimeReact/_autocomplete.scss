@@ -1,0 +1,96 @@
+// Based on https://raw.githubusercontent.com/primefaces/primereact/master/public/themes/bootstrap4-light-blue/theme.css
+
+.p-autocomplete {
+    .p-autocomplete-loader {
+        right: 0.75rem;
+    }
+
+    .p-autocomplete-panel {
+        background: $white;
+        color: $input-color;
+        border: 1px solid $input-border-color;
+        border-radius: 0;
+        box-shadow: none;
+        min-width: 0;
+
+        .p-autocomplete-items {
+            padding: 0.5rem 0;
+
+            .p-autocomplete-item {
+                margin: 0;
+                padding: 0.5rem 1.5rem;
+                border: 0 none;
+                color: $input-color;
+                background: transparent;
+                transition: box-shadow 0.15s;
+                border-radius: 0;
+
+                &.p-highlight {
+                    color: $white;
+                    background: $casal;
+                }
+
+                &:hover {
+                    color: $input-color;
+                    background: $gray-200;
+                }
+            }
+        }
+    }
+
+    &.p-autocomplete-dd {
+        .p-autocomplete-loader {
+            right: 3.107rem;
+        }
+    }
+
+    &.p-autocomplete-multiple {
+        .p-autocomplete-multiple-container {
+            padding: 0.25rem 0.75rem;
+
+            .p-autocomplete-input-token {
+                padding: 0.25rem 0;
+
+                input {
+                    font-family: $font-family-sans-serif;
+                    font-size: $font-size-base;
+                    color: $input-color;
+                    padding: 0;
+                    margin: 0;
+                }
+            }
+
+            .p-autocomplete-token {
+                padding: 0.25rem 0.75rem;
+                margin-right: 0.5rem;
+                background: $casal;
+                color: $white;
+                border-radius: $border-radius;
+
+                .p-autocomplete-token-icon {
+                    margin-left: 0.5rem;
+                }
+            }
+
+            &:not(.p-disabled) {
+                &.p-focus {
+                    outline: 0 none;
+                    outline-offset: 0;
+                    box-shadow: $input-focus-box-shadow;
+                    border-color: $input-focus-border-color;
+                }
+            }
+        }
+
+        .p-autocomplete-panel {
+            min-width: 100%;
+        }
+    }
+
+    &.p-error,
+    &.p-invalid {
+        > .p-inputtext {
+            border-color: $danger;
+        }
+    }
+}

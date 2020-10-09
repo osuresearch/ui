@@ -5,6 +5,6 @@ interface ExamplesRendererProps extends JssInjectedProps {
     name?: string;
 }
 export declare const ExamplesRenderer: React.FunctionComponent<ExamplesRendererProps>;
-declare const _default: React.ComponentType<Pick<ExamplesRendererProps, "name" | "children">>;
+declare const _default: React.ComponentType<Pick<ExamplesRendererProps, "children" | "name">>;
 export default _default;
 //# sourceMappingURL=ExamplesRenderer.d.ts.map
