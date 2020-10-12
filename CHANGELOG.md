@@ -7,7 +7,7 @@ Versions follow [Semantic Versioning](https://semver.org/) guidelines - given a 
 2. MINOR version when you add functionality in a backwards-compatible manner, and
 3. PATCH version when you make backwards-compatible bug fixes.
 
-# 4.2.2 (2020-10-1)
+# 4.2.2 (2020-10-12)
 
 __Accessibility Fixes:__
 
@@ -16,6 +16,7 @@ __Accessibility Fixes:__
 * Added the `aria-invalid` attribute to form inputs/controls to aid in error validation for users of assistive technologies.
 
 __Bug Fixes:__
+
 * Fixed a minor display bug for help text and success/error messages in Chrome
 
 # 4.2.1 (2020-09-30)
