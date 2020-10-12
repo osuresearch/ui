@@ -32,7 +32,13 @@ export interface IFieldBind<T> {
     onStateChange: Action<OnStateChangeDelegate<T>>;
 }
 export declare type FormFieldBindProp<T> = {
+    /**
+     * Data binding strictly typed to `<T>`
+     */
     bind: IFieldBind<T>;
+    /**
+     * Callback with the signature `(newValue: T, oldValue: T) => void`
+     */
     onChange?: OnValueChangeDelegate<T>;
 };
 export declare type FormFieldSpreadProps<T> = {
@@ -48,6 +54,9 @@ export declare type FormFieldSpreadProps<T> = {
     readOnly?: boolean;
     /** Should the field be indicated as (soft) required */
     required?: boolean;
+    /**
+     * Callback with the signature `(newValue: T, oldValue: T) => void`
+     */
     onChange?: OnValueChangeDelegate<T>;
 };
 /** Base props for a form field. Handles binds + spreading the bind as props */
@@ -67,6 +76,12 @@ export declare type FormFieldSetProps = {
     /** Should the fields in the FieldSet be indicated as (soft) required */
     required?: boolean;
 };
+/**
+ * Generic concrete implementation of IFieldBind.
+ *
+ * Manages delegates for state and value change events and safely
+ * fields with appropriate read/write accessors.
+ */
 export declare class FieldBind<T> implements IFieldBind<T> {
     /** Unique ID of the form field */
     id?: string;

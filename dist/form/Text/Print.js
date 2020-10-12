@@ -9,7 +9,7 @@ exports.default = Print;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _Components = require("../../internal/FormCommon/Components");
+var _Print = require("../../internal/FormCommon/Utility/Print");
 
 function Print(_ref) {
   var value = _ref.value;
@@ -30,7 +30,7 @@ function Print(_ref) {
     tokens.push(splitValue[i]);
   }
 
-  return /*#__PURE__*/_react.default.createElement(_Components.Print, null, tokens.map(function (token) {
+  return /*#__PURE__*/_react.default.createElement(_Print.Print, null, tokens.map(function (token) {
     return token;
   }));
 }

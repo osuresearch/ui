@@ -1,0 +1,18 @@
+
+.search-debugger {
+    margin-top: 0.5rem;
+    float: right;
+    
+    .btn {
+        margin: 0;
+        padding: 0;
+        font-size: 80%;
+        text-decoration: none;
+    }
+
+    > div {
+        padding: 0.5rem;
+        border: 1px solid #ccc;
+        background: #fcfcfc;
+    }
+}

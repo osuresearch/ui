@@ -1,0 +1,115 @@
+"use strict";
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = Mock;
+
+var _react = require("react");
+
+var _faker = _interopRequireWildcard(require("faker"));
+
+var _useSearch2 = _interopRequireDefault(require("../../hooks/useSearch"));
+
+var FAKE_DATA = Array.from({
+  length: 100
+}, function () {
+  var card = _faker.default.helpers.createCard();
+
+  return {
+    id: _faker.random.number(),
+    name: card.name,
+    age: _faker.random.number(50) + 18,
+    username: card.username,
+    address: card.address.streetA,
+    city: card.address.city,
+    state: card.address.state,
+    zip: card.address.zipcode,
+    company: card.company.name,
+    bs: card.company.bs,
+    email: card.email,
+    phone: card.phone,
+    about: card.posts[0].paragraph,
+    title: _faker.name.jobTitle(),
+    avatar: _faker.image.avatar()
+  };
+});
+/**
+ * Search driver that generates mock results. This is really only
+ * for showing off examples in Styleguidist.
+ */
+
+function Mock() {
+  var DriverComponent = function DriverComponent(_ref) {
+    var provider = _ref.provider,
+        updateSearchData = _ref.updateSearchData;
+
+    var _useSearch = (0, _useSearch2.default)(provider),
+        terms = _useSearch.terms,
+        sort = _useSearch.sort,
+        filters = _useSearch.filters;
+
+    var people = []; // Fire off a new query if anything in the search state changes
+
+    (0, _react.useEffect)(function () {
+      var ageRange = [0, 1000];
+      var states = [];
+      var emailDomain = '';
+      var otherEmailDomain = ''; // REAALLLY bad code here for hardcoding the demo to work.
+      // Obviously, never do this for realsies.
+
+      filters.forEach(function (f) {
+        if (Object.keys(f).indexOf('term') >= 0) {
+          var key = Object.keys(f.term)[0];
+          var value = f.term[key];
+
+          if (key === 'ageRange') {
+            ageRange = value.split(',').map(function (s) {
+              return parseInt(s);
+            });
+          } else if (key === 'emailDomain') {
+            emailDomain = value;
+          } else if (key === 'otherEmailDomain') {
+            otherEmailDomain = value;
+          }
+        } else if (Object.keys(f).indexOf('anyOf')) {
+          states = f.anyOf.state;
+        }
+      });
+      var results = FAKE_DATA.filter(function (p) {
+        var match = true;
+
+        if (terms.length > 0) {
+          var re = new RegExp(terms, 'i');
+          match = p.name.match(re) !== null || p.address.match(re) !== null || p.title.match(re) !== null || p.city.match(re) !== null || p.state.match(re) !== null || p.email.match(re) !== null;
+        }
+
+        console.debug(ageRange);
+        match = match && p.age >= ageRange[0] && p.age <= ageRange[1];
+        match = match && (emailDomain.length < 1 || p.email.endsWith(emailDomain)) && (otherEmailDomain.length < 1 || p.email.endsWith(otherEmailDomain));
+
+        if (states.length > 0) {
+          match = match && states.includes(p.state);
+        }
+
+        return match;
+      }); // Top 10 results only
+
+      results = results.slice(0, 10);
+      var data = {
+        loading: false,
+        results: results
+      };
+      console.debug('SENDING MOCK DATA', data);
+      updateSearchData(data);
+    }, [terms, filters, sort, updateSearchData]); // Driver components are renderless. It's just a stateful container
+
+    return null;
+  };
+
+  return DriverComponent;
+}

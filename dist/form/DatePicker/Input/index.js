@@ -11,17 +11,17 @@ exports.default = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutProperties"));
-
 var _react = _interopRequireWildcard(require("react"));
+
+var _reactDatepicker = _interopRequireDefault(require("react-datepicker"));
 
 var _ = require("../");
 
 var _FormContext = _interopRequireDefault(require("../../../internal/FormCommon/FormContext"));
 
-var _Components = require("../../../internal/FormCommon/Components");
+var _Print = require("../../../internal/FormCommon/Utility/Print");
 
-var _reactDatepicker = _interopRequireDefault(require("react-datepicker"));
+var _Diff = require("../../../internal/FormCommon/Utility/Diff");
 
 var _Time = _interopRequireDefault(require("../../Time"));
 
@@ -29,24 +29,24 @@ var _DatePrefix = _interopRequireDefault(require("./DatePrefix"));
 
 var _DateTimePrefix = _interopRequireDefault(require("./DateTimePrefix"));
 
-var Input = function Input(allprops) {
-  // Remove props that we don't want the developer to be
-  // accidentally use because of accessibility issues
-  // TODO - fix the MonthYear picker (that will be useful)
-  var customTimeInput = allprops.customTimeInput,
-      timeInputLabel = allprops.timeInputLabel,
-      disabledKeyboardNavigation = allprops.disabledKeyboardNavigation,
-      showMonthYearPicker = allprops.showMonthYearPicker,
-      showMonthYearDropdown = allprops.showMonthYearDropdown,
-      monthsShown = allprops.monthsShown,
-      withPortal = allprops.withPortal,
-      showQuarterYearPicker = allprops.showQuarterYearPicker,
-      showTimeSelect = allprops.showTimeSelect,
-      showTimeSelectOnly = allprops.showTimeSelectOnly,
-      todayButton = allprops.todayButton,
-      showYearPicker = allprops.showYearPicker,
-      props = (0, _objectWithoutProperties2.default)(allprops, ["customTimeInput", "timeInputLabel", "disabledKeyboardNavigation", "showMonthYearPicker", "showMonthYearDropdown", "monthsShown", "withPortal", "showQuarterYearPicker", "showTimeSelect", "showTimeSelectOnly", "todayButton", "showYearPicker"]);
-
+/**
+ * Dropdown to select a date and time.
+ * 
+ * This component will accept *most* props supported by [react-datepicker](https://reactdatepicker.com/)
+ * with the exception of the following that fail to meet accessibility standards:
+ * 
+ * ```ts
+ * type DisabledReactDatePickerProps = 
+ * 'customTimeInput' | 'timeInputLabel' | 'disabledKeyboardNavigation'
+ *  | 'showMonthYearPicker' | 'showMonthYearDropdown' | 'monthsShown'
+ *  | 'withPortal' | 'showQuarterYearPicker' | 'showTimeSelect'
+ *  | 'showTimeSelectOnly' | 'todayButton' | 'showYearPicker'
+ *  | 'onChange' | 'selected'
+ *  ```
+ * 
+ * If you wish to use one of these, please submit a merge request with a patch that resolves the issues.
+ */
+var Input = function Input(props) {
   var _useContext = (0, _react.useContext)(_.Context),
       bind = _useContext.bind;
 
@@ -102,7 +102,7 @@ var Input = function Input(allprops) {
   };
 
   if (isPrint) {
-    return /*#__PURE__*/_react.default.createElement(_Components.Print, null, /*#__PURE__*/_react.default.createElement("span", {
+    return /*#__PURE__*/_react.default.createElement(_Print.Print, null, /*#__PURE__*/_react.default.createElement("span", {
       className: "input-group-prefix"
     }, /*#__PURE__*/_react.default.createElement("i", {
       className: "fa fa-calendar",
@@ -112,14 +112,14 @@ var Input = function Input(allprops) {
 
   if (isDiff) {
     if (selected !== initial) {
-      return /*#__PURE__*/_react.default.createElement(_Components.Diff, {
+      return /*#__PURE__*/_react.default.createElement(_Diff.Diff, {
         removed: formatter(initial),
         added: formatter(selected)
       });
     } // No change - render as a basic single value print
 
 
-    return /*#__PURE__*/_react.default.createElement(_Components.Print, null, /*#__PURE__*/_react.default.createElement("span", {
+    return /*#__PURE__*/_react.default.createElement(_Print.Print, null, /*#__PURE__*/_react.default.createElement("span", {
       className: "input-group-prefix"
     }, /*#__PURE__*/_react.default.createElement("i", {
       className: "fa fa-calendar",
@@ -147,8 +147,7 @@ var Input = function Input(allprops) {
       id: "".concat(bind.id, "-time")
     }),
     dateFormat: dateFormat,
-    readOnly: readOnly,
-    required: bind.required || props.required
+    readOnly: readOnly
   }), /*#__PURE__*/_react.default.createElement("div", {
     className: "keyboard-notice"
   }, /*#__PURE__*/_react.default.createElement("small", null, /*#__PURE__*/_react.default.createElement("em", null, "Keyboard users: Exit this dialog with the ", /*#__PURE__*/_react.default.createElement("code", null, "esc"), " key"))), /*#__PURE__*/_react.default.createElement("div", {

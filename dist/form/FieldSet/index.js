@@ -19,6 +19,8 @@ var _withFormContext = require("../../internal/FormCommon/HOC/withFormContext");
 
 var _Components = require("../../internal/FormCommon/Components");
 
+var _Legend = require("./Legend");
+
 var _Inline = _interopRequireDefault(require("./Inline"));
 
 var Context = /*#__PURE__*/_react.default.createContext({
@@ -43,26 +45,7 @@ var IsInput = function IsInput(element) {
   }
 };
 /**
- * A set of related input components
- * 
- * ### Subcomponents
- * #### `<FieldSet.Legend>` (required)
- * Serves as a label for all of the components in the `FieldSet`
- * 
- * 
- * #### `<FieldSet.Help>`
- * Help text for the `<FieldSet>`
- * 
- * 
- * #### `<FieldSet.Error>` (required if `<FieldSet>` requires validation)
- * Provides instructions on how to resolve the validation error; 
- * will display when `error` is set in `<FieldSet>`
- * 
- * 
- * #### `<FieldSet.Success>`
- * Feedback for when the set meets the validation rules; will 
- * display when `success` is set in `<FieldSet>`
- * 
+ * A set of related form components.
  */
 
 
@@ -102,7 +85,7 @@ var FieldSet = function FieldSet(_ref) {
 };
 
 FieldSet.Inline = _Inline.default;
-FieldSet.Legend = (0, _withFormContext.withFormContext)(_Components.Legend, Context);
+FieldSet.Legend = (0, _withFormContext.withFormContext)(_Legend.Legend, Context);
 FieldSet.Help = (0, _withFormContext.withFormContext)(_Components.Help, Context);
 FieldSet.Error = (0, _withFormContext.withFormContext)(_Components.Error, Context);
 FieldSet.Success = (0, _withFormContext.withFormContext)(_Components.Success, Context);

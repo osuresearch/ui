@@ -27,6 +27,12 @@ function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflec
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
+/**
+ * Generic concrete implementation of IFieldBind.
+ * 
+ * Manages delegates for state and value change events and safely
+ * fields with appropriate read/write accessors. 
+ */
 var FieldBind = /*#__PURE__*/function () {
   function FieldBind() {
     (0, _classCallCheck2.default)(this, FieldBind);
