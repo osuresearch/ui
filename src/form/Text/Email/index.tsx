@@ -19,6 +19,7 @@ const Email = React.forwardRef<HTMLInputElement, EmailProps>((props, ref) => {
     const value = bind.controlled && typeof (bind.value) === 'string' ? bind.value : undefined;
 
     const readOnly = bind.readOnly || props.readOnly;
+    const required = bind.required || props.required;
 
     if (bind.diff) {
         return (
@@ -66,7 +67,9 @@ const Email = React.forwardRef<HTMLInputElement, EmailProps>((props, ref) => {
         },
         onBlur: nativeOnBlur,
         readOnly: readOnly,
-        "aria-disabled": readOnly
+        "aria-disabled": readOnly,
+        "aria-required": required,
+        "aria-invalid": bind.error ? true : false
     }
 
     // Assign a value to the input if it is controlled

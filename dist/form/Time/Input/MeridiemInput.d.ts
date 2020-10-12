@@ -7,6 +7,8 @@ interface Props {
     hourRef?: React.RefObject<HTMLInputElement>;
     minutesRef?: React.RefObject<HTMLInputElement>;
     readOnly?: boolean;
+    required?: boolean;
+    invalid?: boolean;
 }
 declare const MeridiemInput: React.ForwardRefExoticComponent<Props & React.RefAttributes<HTMLInputElement>>;
 export default MeridiemInput;

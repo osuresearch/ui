@@ -19,7 +19,9 @@ var MinutesInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
       handleClick = _ref.handleClick,
       hourRef = _ref.hourRef,
       meridiemRef = _ref.meridiemRef,
-      readOnly = _ref.readOnly;
+      readOnly = _ref.readOnly,
+      required = _ref.required,
+      invalid = _ref.invalid;
 
   var handleKeyDown = function handleKeyDown(e) {
     var _meridiemRef$current, _hourRef$current;
@@ -163,7 +165,9 @@ var MinutesInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
     onKeyDown: handleKeyDown,
     onKeyPress: handleKeyPress,
     onChange: handleMinuteChange,
-    readOnly: readOnly
+    readOnly: readOnly,
+    "aria-required": required,
+    "aria-invalid": invalid
   });
 });
 

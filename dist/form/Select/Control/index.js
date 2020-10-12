@@ -33,7 +33,8 @@ var Control = /*#__PURE__*/_react.default.forwardRef(function (props, ref) {
       bind = _useContext.bind;
 
   var classNames = "form-control custom-select ".concat(bind.error && 'is-invalid', " ").concat(bind.success && 'is-valid', " ").concat(props.className ? props.className : '');
-  var value = bind.value || props.defaultValue || props.value; // Display Read Only as readOnly text input
+  var value = bind.value || props.defaultValue || props.value;
+  var required = bind.required || props.required; // Display Read Only as readOnly text input
 
   if (bind.readOnly) {
     return /*#__PURE__*/_react.default.createElement(_Utility.Print, {
@@ -59,7 +60,9 @@ var Control = /*#__PURE__*/_react.default.forwardRef(function (props, ref) {
     onChange: function onChange(e) {
       bind.value = e.currentTarget.value;
       if (props.onChange) props.onChange(e);
-    }
+    },
+    'aria-required': required,
+    "aria-invalid": bind.error ? true : false
   }); // Assign a value to the select if it is controlled
 
 

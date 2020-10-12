@@ -56,6 +56,7 @@ const Input: React.FC<InputProps> = (props) => {
 
     const name = bind.name || props.name;
     const readOnly = bind.readOnly || props.readOnly;
+    const required = bind.required || props.required;
 
     const classNames = `input-group ${props.showTimeInput && 'datetimepicker'} ${props.className ? props.className : ''} ${bind.error ? 'is-invalid' : ''} ${bind.success ? 'is-valid' : ''}`;
 
@@ -136,6 +137,8 @@ const Input: React.FC<InputProps> = (props) => {
                 dateFormat={dateFormat}
                 readOnly={readOnly}
                 aria-disabled={readOnly}
+                aria-required={required}
+                aria-invalid={bind.error ? true : false}
             >
                 <div className='keyboard-notice'>
                     <small><em>Keyboard users: Exit this dialog with the <code>esc</code> key</em></small>

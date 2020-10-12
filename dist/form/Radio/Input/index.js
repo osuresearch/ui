@@ -40,6 +40,7 @@ var Input = /*#__PURE__*/_react.default.forwardRef(function (props, ref) {
   var defaultValue = bind.value || props.defaultValue || bind.id;
   var value = bind.value || bind.id;
   var readOnly = bind.readOnly || props.readOnly;
+  var required = bind.required || props.required;
 
   if (bind.diff) {
     var wasChecked = props.value === '' + bind.initialValue;
@@ -77,7 +78,9 @@ var Input = /*#__PURE__*/_react.default.forwardRef(function (props, ref) {
       if (props.onChange) props.onChange(e);
     },
     readOnly: readOnly,
-    "aria-disabled": readOnly
+    "aria-disabled": readOnly,
+    "aria-required": required,
+    "aria-invalid": bind.error ? true : false
   });
 
   if (bind.controlled) {

@@ -22,9 +22,9 @@ export function Legend(props: LegendProps) {
         <legend {...otherProps} className={
             bind.required ? 'is-required' : ''
         }
-            aria-label={bind.required ? `${legend}, is required` : legend}
         >
-            {legend}
+            {legend} {bind.required && <span className='sr-only'>,Required</span> // fieldsets do not have a native way to indicate that the group of components are required, so use the legend to communicate that: https://www.w3.org/WAI/tutorials/forms/grouping/#associating-related-controls-with-fieldset
+            }
         </legend>
     );
 }

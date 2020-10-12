@@ -18,6 +18,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     const value = bind.value || props.defaultValue || props.value;
 
     const readOnly = bind.readOnly || props.readOnly;
+    const required = bind.required || props.required;
 
     if (bind.diff) {
         return (
@@ -48,7 +49,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
             if (props.onChange) props.onChange(e);
         },
         readOnly: readOnly,
-        "aria-disabled": readOnly
+        "aria-disabled": readOnly,
+        "aria-required": required,
+        "aria-invalid": bind.error ? true : false
     }
 
     // Assign a value to the input if it is controlled

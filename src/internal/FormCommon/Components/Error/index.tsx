@@ -29,7 +29,6 @@ export function Error(props: ErrorProps) {
             {...otherProps}
             className='invalid-feedback'
             role='alert'
-            aria-live='assertive'
         >
             {props.children ?? bind.error}
         </div>

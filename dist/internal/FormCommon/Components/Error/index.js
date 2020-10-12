@@ -37,7 +37,6 @@ function Error(props) {
 
   return /*#__PURE__*/_react.default.createElement("div", (0, _extends2.default)({}, otherProps, {
     className: "invalid-feedback",
-    role: "alert",
-    "aria-live": "assertive"
+    role: "alert"
   }), (_props$children = props.children) !== null && _props$children !== void 0 ? _props$children : bind.error);
 }

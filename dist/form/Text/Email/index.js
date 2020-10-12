@@ -37,6 +37,7 @@ var Email = /*#__PURE__*/_react.default.forwardRef(function (props, ref) {
   var defaultValue = bind.value || props.defaultValue;
   var value = bind.controlled && typeof bind.value === 'string' ? bind.value : undefined;
   var readOnly = bind.readOnly || props.readOnly;
+  var required = bind.required || props.required;
 
   if (bind.diff) {
     return /*#__PURE__*/_react.default.createElement(_Diff.default, {
@@ -79,7 +80,9 @@ var Email = /*#__PURE__*/_react.default.forwardRef(function (props, ref) {
     },
     onBlur: nativeOnBlur,
     readOnly: readOnly,
-    "aria-disabled": readOnly
+    "aria-disabled": readOnly,
+    "aria-required": required,
+    "aria-invalid": bind.error ? true : false
   }); // Assign a value to the input if it is controlled
 
 

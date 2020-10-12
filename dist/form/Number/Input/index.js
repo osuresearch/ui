@@ -37,6 +37,7 @@ var Input = /*#__PURE__*/_react.default.forwardRef(function (props, ref) {
   var defaultValue = bind.value || props.defaultValue;
   var value = (_bind$value = bind.value) !== null && _bind$value !== void 0 ? _bind$value : undefined;
   var readOnly = bind.readOnly || props.readOnly;
+  var required = bind.required || props.required;
 
   if (bind.diff) {
     return /*#__PURE__*/_react.default.createElement(_Diff.default, {
@@ -61,7 +62,9 @@ var Input = /*#__PURE__*/_react.default.forwardRef(function (props, ref) {
       if (props.onChange) props.onChange(e);
     },
     readOnly: readOnly,
-    "aria-disabled": readOnly
+    "aria-disabled": readOnly,
+    "aria-required": required,
+    "aria-invalid": bind.error ? true : false
   }); // Assign a value to the input if it is controlled
 
 
