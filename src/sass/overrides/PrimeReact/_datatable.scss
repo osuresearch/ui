@@ -12,7 +12,7 @@ $primary: $casal;
     height: 2rem;
     color: $gray-400;
     border: 0 none;
-    background: transparent;
+    background: transparent !important;
     border-radius: 0;
     transition: box-shadow 0.15s;
 }
@@ -101,7 +101,7 @@ $primary: $casal;
             min-width: 1.143rem;
             line-height: 1.143rem;
             color: $white;
-            background: $primary;
+            background: $gray-900;
             margin-left: 0.5rem;
         }
         &.p-highlight {
