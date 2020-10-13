@@ -1,5 +1,7 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
 Object.defineProperty(exports, "__esModule", {
@@ -10,6 +12,12 @@ exports.default = void 0;
 var _react = _interopRequireWildcard(require("react"));
 
 var _ = require("..");
+
+var _Mapper = _interopRequireDefault(require("./Mapper"));
+
+var _Panel = _interopRequireDefault(require("./Panel"));
+
+var _AggregatePanel = _interopRequireDefault(require("./AggregatePanel"));
 
 /**
  * Render the results of a search as a simple list of components. 
@@ -31,5 +39,8 @@ var Results = function Results(_ref) {
   }));
 };
 
+Results.Mapper = _Mapper.default;
+Results.Panel = _Panel.default;
+Results.AggregatePanel = _AggregatePanel.default;
 var _default = Results;
 exports.default = _default;
