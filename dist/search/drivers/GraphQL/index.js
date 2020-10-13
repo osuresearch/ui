@@ -57,7 +57,7 @@ function GraphQL(query) {
       callable({
         variables: {
           terms: terms,
-          filters: (0, _.AND)(filters),
+          filters: filters ? (0, _.AND)(filters) : null,
           sort: sort
         }
       });

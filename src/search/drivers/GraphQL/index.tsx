@@ -33,18 +33,18 @@ export default function GraphQL(query: DocumentNode) {
         const { terms, filters, sort } = useSearch(provider);
         const [callable, result] = useLazyQuery<GraphQLSearchResponse>(query);
         const [, setCached] = useState<SearchData>();
-        
+
         // Fire off a new query if anything in the search state changes
         useEffect(() => {
             callable({
                 variables: {
                     terms,
-                    filters: AND(filters),
+                    filters: filters ? AND(filters) : null,
                     sort,
                 }
             });
         }, [terms, filters, sort, callable]);
-        
+
         // Store previous search results each time we make a query so we 
         // can display these while still fetching fresh data in the background.
         useEffect(() => {
@@ -53,7 +53,7 @@ export default function GraphQL(query: DocumentNode) {
                     loading: result.loading,
                     results: prev?.results
                 };
-                    
+
                 if (result.data !== undefined) {
                     const firstKey = Object.keys(result.data)[0];
                     data.results = result.data[firstKey];
