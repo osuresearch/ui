@@ -50,6 +50,9 @@ export type Props = {
      */
     defaultValue?: SearchValue
 
+    /** Placeholder text to appear in Search box */
+    placeholder?: string
+
     /**
      * Callable for when an item is selected from the search results, or the search is cleared.
      *
@@ -78,6 +81,7 @@ const AutoComplete = React.forwardRef<SearchMethods, Props>(({
     provider,
     name,
     defaultValue,
+    placeholder,
     onChange,
     onFocus,
     onBlur,
@@ -153,6 +157,7 @@ const AutoComplete = React.forwardRef<SearchMethods, Props>(({
                 type="text"
                 className={classNames}
                 value={terms || value?.display}
+                placeholder={placeholder}
                 autoComplete="off"
                 aria-autocomplete="list"
                 aria-haspopup="true"

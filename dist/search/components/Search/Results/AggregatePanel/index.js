@@ -26,6 +26,7 @@ var AggregatePanel = function AggregatePanel(_ref) {
       results = _ref.results,
       totalResults = _ref.totalResults,
       categorizeBy = _ref.categorizeBy,
+      placeholder = _ref.placeholder,
       children = _ref.children;
 
   var _useSearch = (0, _useSearch2.default)(provider),
@@ -104,7 +105,17 @@ var AggregatePanel = function AggregatePanel(_ref) {
     }, "Something went wrong. Try reloading the page. If the problem persists, contact ", /*#__PURE__*/_react.default.createElement("a", {
       href: "mailto:orhelpdesk@osu.edu"
     }, "orhelpdesk@osu.edu"))))));
-  } // Return null if there are no terms
+  } // Display placeholder
+
+
+  if (placeholder) {
+    var Placeholder = placeholder;
+    return /*#__PURE__*/_react.default.createElement("div", {
+      id: provider + '-results',
+      className: "dropdown-menu search-aggregate-panel",
+      role: "listbox"
+    }, /*#__PURE__*/_react.default.createElement(Placeholder, null));
+  } // Return null if there are no terms or placeholder
 
 
   return null;

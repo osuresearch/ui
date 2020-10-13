@@ -37,6 +37,8 @@ export declare type Props = {
      * Preloaded value to start with when initializing the component
      */
     defaultValue?: SearchValue;
+    /** Placeholder text to appear in Search box */
+    placeholder?: string;
     /**
      * Callable for when an item is selected from the search results, or the search is cleared.
      *

@@ -22,6 +22,7 @@ export type Props = {
      * Dot-notation can be used to select a nested JSON path.
      */
     categorizeBy: string;
+    placeholder?: React.FC;
     children: React.ReactElement;
 }
 
@@ -30,6 +31,7 @@ const AggregatePanel: React.FC<Props> = ({
     results,
     totalResults,
     categorizeBy,
+    placeholder,
     children
 }) => {
     const { terms } = useSearch(provider);
@@ -115,7 +117,17 @@ const AggregatePanel: React.FC<Props> = ({
         </>);
     }
 
-    // Return null if there are no terms
+    // Display placeholder
+    if (placeholder) {
+        const Placeholder = placeholder;
+        return (
+            <div id={provider + '-results'} className="dropdown-menu search-aggregate-panel" role="listbox">
+                <Placeholder />
+            </div>
+        )
+    }
+
+    // Return null if there are no terms or placeholder
     return null;
 }
 
