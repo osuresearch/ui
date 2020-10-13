@@ -1,19 +1,12 @@
 import React, { useContext } from 'react';
 import { Context } from '..';
 
-export type ResultRendererProps = {
-    result: any // ??
-}
-
 export type Props = {
-    /** 
-     * Component used to render each search result. 
-     * 
-     * The component must accept a `result` prop that contains the payload
-     * of the search result (e.g. a GraphQL type, a JSON:API resource, etc).
-     * For TypeScript, you may safely type this prop to your expected type.
+    /**
+     * A **single** React Element Component that will receive 
+     * the results array
      */
-    resultRenderer: React.FC<ResultRendererProps>
+    children: React.ReactElement;
 }
 
 /**
@@ -22,20 +15,17 @@ export type Props = {
  * Provide your own component to render each result (e.g. as table rows, Kanban cards, etc).
  */
 const Results: React.FC<Props> = ({
-    resultRenderer
+    children
 }) => {
     const data = useContext(Context);
-    
+
     if (!data.results) {
         return null;
     }
 
-    const RenderComponent = resultRenderer;
     return (
         <div className="search-results">
-            {data.results.map((result: any, index) =>
-                <RenderComponent key={index} result={result} />
-            )}
+            {React.cloneElement(children, { results: data.results })}
         </div>
     );
 }

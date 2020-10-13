@@ -13,7 +13,15 @@ var _slicedToArray2 = _interopRequireDefault(require("@babel/runtime/helpers/sli
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _AutoComplete = _interopRequireDefault(require("./AutoComplete"));
+
 var _Results = _interopRequireDefault(require("./Results"));
+
+var _Mapper = _interopRequireDefault(require("./Results/Mapper"));
+
+var _Panel = _interopRequireDefault(require("./Results/Panel"));
+
+var _AggregatePanel = _interopRequireDefault(require("./Results/AggregatePanel"));
 
 var _Error = _interopRequireDefault(require("./Error"));
 
@@ -52,7 +60,11 @@ var Search = function Search(_ref) {
   }), children);
 };
 
+Search.AutoComplete = _AutoComplete.default;
 Search.Results = _Results.default;
+Search.Results.Mapper = _Mapper.default;
+Search.Results.Panel = _Panel.default;
+Search.Results.AggregatePanel = _AggregatePanel.default;
 Search.Error = _Error.default;
 Search.Empty = _Empty.default;
 var _default = Search;

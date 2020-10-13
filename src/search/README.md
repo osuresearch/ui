@@ -92,7 +92,11 @@ function PersonSearchResults() {
                 An error occurred
             </Search.Error>
 
-            <Search.Results resultRenderer={PersonResultCard} />
+            <Search.Results>
+                <Search.Results.Mapper>
+                    <PersonResultCard />
+                </Search.Results.Mapper>
+            </Search.Results>
         </Search>
     );
 }

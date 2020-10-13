@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import { SearchDriver } from '../..';
 
+import AutoComplete, { Props as AutoCompleteProps } from './AutoComplete';
 import Results, { Props as ResultsProps } from './Results';
+import Mapper, { Props as MapperProps } from './Results/Mapper';
+import Panel, { Props as PanelProps } from './Results/Panel';
+import AggregatePanel, { Props as AggregatePanelProps } from './Results/AggregatePanel';
 import Error, { Props as ErrorProps } from './Error';
 import Empty, { Props as EmptyProps } from './Empty';
 
@@ -11,13 +15,18 @@ type Props = {
 
     /** The API integration driver to submit search data */
     driver: SearchDriver
-    
+
     /** Children are required for this component. */
     children: React.ReactNode
 };
 
 interface ISearchComposition {
-    Results: React.FC<ResultsProps>
+    AutoComplete: React.ForwardRefExoticComponent<AutoCompleteProps>
+    Results: React.FC<ResultsProps> & {
+        Mapper?: React.FC<MapperProps>
+        Panel?: React.FC<PanelProps>
+        AggregatePanel?: React.FC<AggregatePanelProps>
+    }
     Error: React.FC<ErrorProps>
     Empty: React.FC<EmptyProps>
 }
@@ -49,7 +58,11 @@ const Search: React.FC<Props> & ISearchComposition = ({ provider, driver, childr
     )
 }
 
+Search.AutoComplete = AutoComplete;
 Search.Results = Results;
+Search.Results.Mapper = Mapper;
+Search.Results.Panel = Panel;
+Search.Results.AggregatePanel = AggregatePanel;
 Search.Error = Error;
 Search.Empty = Empty;
 

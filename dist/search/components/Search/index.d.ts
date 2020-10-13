@@ -1,6 +1,10 @@
 import React from 'react';
 import { SearchDriver } from '../..';
+import { Props as AutoCompleteProps } from './AutoComplete';
 import { Props as ResultsProps } from './Results';
+import { Props as MapperProps } from './Results/Mapper';
+import { Props as PanelProps } from './Results/Panel';
+import { Props as AggregatePanelProps } from './Results/AggregatePanel';
 import { Props as ErrorProps } from './Error';
 import { Props as EmptyProps } from './Empty';
 declare type Props = {
@@ -12,7 +16,12 @@ declare type Props = {
     children: React.ReactNode;
 };
 interface ISearchComposition {
-    Results: React.FC<ResultsProps>;
+    AutoComplete: React.ForwardRefExoticComponent<AutoCompleteProps>;
+    Results: React.FC<ResultsProps> & {
+        Mapper?: React.FC<MapperProps>;
+        Panel?: React.FC<PanelProps>;
+        AggregatePanel?: React.FC<AggregatePanelProps>;
+    };
     Error: React.FC<ErrorProps>;
     Empty: React.FC<EmptyProps>;
 }

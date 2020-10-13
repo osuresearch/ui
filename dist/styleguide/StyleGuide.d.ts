@@ -38,7 +38,7 @@ export default class StyleGuide extends Component<StyleGuideProps, StyleGuideSta
         pagePerSection: PropTypes.Requireable<boolean>;
     };
     static defaultProps: {
-        displayMode: any;
+        displayMode: string;
     };
     state: {
         error: boolean;

@@ -1,16 +1,10 @@
 import React from 'react';
-export declare type ResultRendererProps = {
-    result: any;
-};
 export declare type Props = {
     /**
-     * Component used to render each search result.
-     *
-     * The component must accept a `result` prop that contains the payload
-     * of the search result (e.g. a GraphQL type, a JSON:API resource, etc).
-     * For TypeScript, you may safely type this prop to your expected type.
+     * A **single** React Element Component that will receive
+     * the results array
      */
-    resultRenderer: React.FC<ResultRendererProps>;
+    children: React.ReactElement;
 };
 /**
  * Render the results of a search as a simple list of components.
