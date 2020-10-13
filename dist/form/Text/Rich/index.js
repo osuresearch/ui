@@ -15,13 +15,13 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _ = require("..");
 
-var _FormContext = _interopRequireDefault(require("../../../internal/FormCommon/FormContext"));
-
-var _Print = _interopRequireDefault(require("../Print"));
+var _ckeditor4React = _interopRequireDefault(require("ckeditor4-react"));
 
 var _Diff = _interopRequireDefault(require("../Diff"));
 
-/** Full confiugration (that we're willing to support) */
+// @ts-ignore
+
+/** Full configuration (that we're willing to support) */
 var FULL_TOOLBAR_CONFIG = [{
   name: 'styles',
   items: ['Format']
@@ -51,8 +51,8 @@ var SIMPLE_TOOLBAR_CONFIG = [{
   items: ['Link', 'Unlink']
 }];
 /**
- * A rich text editor (RTE) based on CKEditor (additional requirements must be 3
- * met to use this component; see the section on `<Text.Rich>` below for more details)
+ * A rich text editor (RTE) based on CKEditor
+ * 
  */
 
 var Rich = function Rich(_ref) {
@@ -64,113 +64,79 @@ var Rich = function Rich(_ref) {
       _ref$className = _ref.className,
       className = _ref$className === void 0 ? '' : _ref$className,
       _ref$contentsCss = _ref.contentsCss,
-      contentsCss = _ref$contentsCss === void 0 ? 'https://orapps.osu.edu/assets/css/ckeditor/contents.css' : _ref$contentsCss,
-      name = _ref.name,
-      required = _ref.required;
+      contentsCss = _ref$contentsCss === void 0 ? 'https://orapps.osu.edu/assets/css/ckeditor/contents.css' : _ref$contentsCss;
+
+  var _useState = (0, _react.useState)(),
+      _useState2 = (0, _slicedToArray2.default)(_useState, 2),
+      label = _useState2[0],
+      setLabel = _useState2[1];
 
   var _useContext = (0, _react.useContext)(_.Context),
       bind = _useContext.bind;
 
-  var _useContext2 = (0, _react.useContext)(_FormContext.default),
-      isDiff = _useContext2.isDiff,
-      isPrint = _useContext2.isPrint;
-
   var value = bind.value || defaultValue;
-
-  var _useState = (0, _react.useState)(value),
-      _useState2 = (0, _slicedToArray2.default)(_useState, 1),
-      initialData = _useState2[0];
-
-  var _useState3 = (0, _react.useState)(),
-      _useState4 = (0, _slicedToArray2.default)(_useState3, 2),
-      error = _useState4[0],
-      setError = _useState4[1];
-
-  var editorRef = (0, _react.useRef)(null);
   (0, _react.useLayoutEffect)(function () {
-    if (!(isDiff || isPrint)) {
-      // @ts-ignore 
-      var cke = window.CKEDITOR;
-      var editor = undefined; // No type info exists for CKE
+    var _document$querySelect;
 
-      if (!cke) {
-        // TODO: Error message improvements
-        setError('window.CKEDITOR is undefined. Are you missing an external script?');
-        return;
-      }
+    // @ts-ignore
+    var labelText = (_document$querySelect = document.querySelector("label[for=\"".concat(bind.id, "\"]"))) === null || _document$querySelect === void 0 ? void 0 : _document$querySelect.innerText;
 
-      var toolbar = simple ? SIMPLE_TOOLBAR_CONFIG : FULL_TOOLBAR_CONFIG;
-      var opts = {
-        toolbar: toolbar,
-        // TODO: Prop to provide extra plugins (e.g. Signet signature captures)
-        extraPlugins: '',
-        // Disable the body > blockquote > p ... path in the editor footer
-        removePlugins: 'elementspath',
-        contentsCss: contentsCss
-      };
-      editor = cke.replace(editorRef.current, opts);
-      editor.setData(initialData);
-      editor.on('change', function () {
-        var newValue = editor.getData();
-        bind.value = newValue;
-
-        if (onChange) {
-          onChange(newValue);
-        }
-      });
-
-      if (bind.required || required) {
-        editor.on('required', function (e) {
-          bind.error = "This field is required"; // @ts-ignore
-
-          e.cancel();
-        });
-      }
-
-      return function () {
-        if (editor) {
-          editor.destroy();
-          editor = undefined;
-        }
-      };
+    if (labelText) {
+      setLabel(labelText);
+    } else if (bind.instructions) {
+      setLabel(bind.instructions);
+    } else {
+      setLabel('Rich Text Editor');
     }
-  }, [initialData, simple, contentsCss, onChange, bind, required, isPrint, isDiff]);
+  }, [bind]);
 
-  if (isDiff) {
+  if (bind.diff) {
     // TODO - This really isn't going to work with HTML
     return /*#__PURE__*/_react.default.createElement(_Diff.default, {
       value: typeof value === 'string' ? value : undefined,
       prevValue: typeof bind.initialValue === 'string' ? bind.initialValue : undefined
     });
+  } // Wait to render the editor until a label is set
+
+
+  if (!label) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null);
   }
-
-  if (isPrint) {
-    return /*#__PURE__*/_react.default.createElement(_Print.default, {
-      value: typeof value === 'string' ? value : ''
-    });
-  }
-
-  if (error) {
-    return /*#__PURE__*/_react.default.createElement("div", {
-      className: "richtext is-error"
-    }, error);
-  } // TODO: Toggling readOnly isn't super efficient here, since 
-  // it'll recreate the editor from scratch. But I don't envision
-  // many use cases where we'll be doing that.
-
 
   return /*#__PURE__*/_react.default.createElement("div", {
-    className: "richtext ".concat(className, " ").concat(bind.readOnly ? 'is-readonly' : '')
-  }, /*#__PURE__*/_react.default.createElement("textarea", {
-    id: bind.id,
-    name: bind.name || name,
-    className: "richtext-editor",
-    ref: editorRef,
-    disabled: bind.readOnly,
-    "aria-describedBy": "".concat(bind.id, "-help")
-  }));
-}; // export default memo(Rich);
+    className: "richtext ".concat(className, " ").concat(bind.readOnly ? 'readonly' : '')
+  }, /*#__PURE__*/_react.default.createElement(_ckeditor4React.default, {
+    data: value,
+    config: {
+      toolbar: simple ? SIMPLE_TOOLBAR_CONFIG : FULL_TOOLBAR_CONFIG,
+      // TODO: Prop to provide extra plugins (e.g. Signet signature captures)
+      extraPlugins: '',
+      // Disable the body > blockquote > p ... path in the editor footer
+      removePlugins: 'elementspath',
+      contentsCss: contentsCss,
+      title: label
+    },
+    readOnly: bind.readOnly,
+    onChange: function (_onChange) {
+      function onChange(_x) {
+        return _onChange.apply(this, arguments);
+      }
 
+      onChange.toString = function () {
+        return _onChange.toString();
+      };
+
+      return onChange;
+    }(function (e) {
+      var newValue = e.editor.getData();
+      bind.value = newValue;
+
+      if (onChange) {
+        onChange(newValue);
+      }
+    })
+  }));
+};
 
 var _default = Rich;
 exports.default = _default;

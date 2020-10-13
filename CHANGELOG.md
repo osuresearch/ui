@@ -7,6 +7,59 @@ Versions follow [Semantic Versioning](https://semver.org/) guidelines - given a 
 2. MINOR version when you add functionality in a backwards-compatible manner, and
 3. PATCH version when you make backwards-compatible bug fixes.
 
+# 4.2.2 (2020-10-12)
+
+__Accessibility Fixes:__
+
+* The common Label component included an `aria-label` that denoted required fields. This was removed in favor of adding an `aria-required` attribute to form inputs/controls - the more semantic solution
+* `aria-live` was removed from the Error component, since `role="alert"` automatically makes the component an assertive live region. Additionally, a recommendation to perform validation on blur was added to the Form component documentation. Validating on blur will allow for the alerts to perform properly, per [this article recommended by Jen](https://hiddedevries.nl/en/blog/2017-04-04-how-to-make-inline-error-messages-accessible) and testing in macOS VoiceOver.
+* Added the `aria-invalid` attribute to form inputs/controls to aid in error validation for users of assistive technologies.
+
+__Bug Fixes:__
+
+* Fixed a minor display bug for help text and success/error messages in Chrome
+
+# 4.2.1 (2020-09-30)
+
+__Bug Fixes:__
+
+* Removed outdated form components from the distribution folder that were causing some form subcomponents to crash
+
+__Internal Changes:__
+
+* Build process will now delete the dist folder prior to build
+
+# 4.2.0 (2020-09-29)
+
+__Deprecated Components:__
+
+Components marked as deprecated will be removed in a future release. They will continue to work until their removal.
+
+* `Richtext` has been deprecated in favor of `Text.Rich` in the new Form Components
+
+__Minor Breaking Changes:__
+
+* `Button` - Changed the default theme to `primary` (previously was `secondary`)
+
+__New Features:__
+
+* Introduces new Form Components (`Form`, `FieldSet`, `Checkbox`, `Text`, etc) to abstract away the complexities of setting up accessible forms. 
+* `Richtext` - Added `id` prop
+* `Button` - Added `type` prop (one of `'button' | 'reset' | 'submit'` - defaults to `button`).
+* `Button` - Added `to` prop. When specified, the button renders as a React Router `<Link>` to the designated route
+
+__Bug Fixes:__
+
+* Changed defaults for `$vendor-fonts` and `$vendor-images` to not use a local server copy of `/assets` and instead point to the production copy at `orapps.osu.edu`
+* Fixed text underlines on badges that were wrapped within anchors
+* `Navbar` - Removed `exact` from Link elements to fix compatibility with newer React Router versions
+* `Search` - Fixed bug where Search inputs without `defaultValue` focus on load
+
+__Internal Changes:__
+
+* Fixed Styleguidst mangling component names during styleguide builds - preventing deployments
+* Added support for deploying a build of the styleguide to the dev server
+
 # 4.1.1 (2020-05-20)
 
 Rebuilt ES5 distribution files that were not correctly built for the 4.1.0 release.

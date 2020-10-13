@@ -14,6 +14,7 @@ export declare type InputProps = {
     className?: string;
     readOnly?: boolean;
     required?: boolean;
+    onBlur?: () => void;
 };
 export declare const Input: React.FC<InputProps>;
 //# sourceMappingURL=index.d.ts.map

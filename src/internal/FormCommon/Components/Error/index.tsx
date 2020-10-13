@@ -10,7 +10,7 @@ export type ErrorProps = React.HTMLAttributes<HTMLDivElement> & {
 }
 
 /**
- * Provides instructions on how to resolve the validation error.
+ * Provides instructions on how to resolve a validation error.
  * 
  * Will display when error is set in the parent form component or 
  * the parent's `bind` prop is in an error state.
@@ -29,7 +29,6 @@ export function Error(props: ErrorProps) {
             {...otherProps}
             className='invalid-feedback'
             role='alert'
-            aria-live='assertive'
         >
             {props.children ?? bind.error}
         </div>

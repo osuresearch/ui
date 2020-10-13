@@ -4,9 +4,6 @@ import './internal/jQueryPluginChanges';
 export { default as AppAlert } from './components/AppAlert';
 export { default as Badge } from './components/Badge';
 export { default as Button } from './components/Button';
-//export { default as DatePicker } from './components/DatePicker';
-//export { default as DateTimePicker } from './components/DateTimePicker';
-//export { default as TimeField } from './components/TimeField';
 export { default as Emulate } from './components/Emulate';
 export { default as ExternalLink } from './components/ExternalLink';
 export { default as Footer } from './components/Footer';
@@ -28,7 +25,7 @@ export { default as Richtext } from './components/Richtext';
 
 // Form components
 export { default as Checkbox } from './form/Checkbox';
-export { default as DatePicker } from './form/DatePicker';
+export { default as DateTime } from './form/DateTime';
 export { default as FieldSet } from './form/FieldSet';
 export { default as Form } from './form/Form';
 export { default as Number } from './form/Number';

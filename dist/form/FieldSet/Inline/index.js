@@ -21,11 +21,11 @@ var Inline = function Inline(_ref) {
       bind = _useContext.bind;
 
   return /*#__PURE__*/_react.default.createElement("div", {
-    className: "form-check-inline"
+    className: "fieldset-inline"
   }, _react.default.Children.map(children, function (node) {
     if ( /*#__PURE__*/_react.default.isValidElement(node)) {
       return /*#__PURE__*/_react.default.cloneElement(node, {
-        name: node.props.name || bind.name,
+        name: bind.name,
         error: node.props.error || bind.error,
         success: node.props.success || bind.success
       });

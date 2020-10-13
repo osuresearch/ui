@@ -15,6 +15,8 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _ = require("..");
 
+var _Utility = require("../../../internal/FormCommon/Utility");
+
 var _helpers = require("../helpers");
 
 var _HourInput = _interopRequireDefault(require("./HourInput"));
@@ -82,17 +84,40 @@ var Input = function Input(props) {
 
   var handleClick = function handleClick(e) {
     return e.target.select();
+  }; // Callback onBlur when the user exits the component
+  // https://gist.github.com/pstoica/4323d3e6e37e8a23dd59
+
+
+  var handleInternalBlur = function handleInternalBlur(e) {
+    var currentTarget = e.currentTarget; // Check the newly focused element in the next tick of the event loop
+
+    setTimeout(function () {
+      // Check if the new activeElement is a child of the original container
+      if (!currentTarget.contains(document.activeElement)) {
+        props.onBlur && props.onBlur();
+      }
+    }, 0);
   };
 
   var name = bind.name || props.name;
   var readOnly = bind.readOnly || props.readOnly;
-  var classNames = "time-field input-group form-control ".concat(props.className ? props.className : '', " ").concat(props.className ? props.className : '', " ").concat(bind.error ? 'is-invalid' : '', " ").concat(bind.success ? 'is-valid' : '', " ").concat(readOnly ? 'readonly' : '');
+  var required = bind.required || props.required;
+  var classNames = "input-group ".concat(props.className ? props.className : '', " ").concat(props.className ? props.className : '', " ").concat(bind.error && 'is-invalid', " ").concat(bind.success && 'is-valid', " ").concat(readOnly ? 'readonly' : '');
   return /*#__PURE__*/_react.default.createElement("div", {
-    className: classNames
+    className: classNames,
+    onBlur: handleInternalBlur
+  }, /*#__PURE__*/_react.default.createElement("span", {
+    className: "input-group-prefix"
   }, /*#__PURE__*/_react.default.createElement("span", {
     className: "fa fa-clock-o",
     "aria-hidden": "true"
-  }), /*#__PURE__*/_react.default.createElement(_HourInput.default, {
+  })), readOnly && /*#__PURE__*/_react.default.createElement(_Utility.Print, {
+    id: props.id || bind.id,
+    name: name,
+    value: hour && minutes && meridiem && "".concat(hour, ":").concat(minutes, " ").concat(meridiem)
+  }), !readOnly && /*#__PURE__*/_react.default.createElement("div", {
+    className: "form-control"
+  }, /*#__PURE__*/_react.default.createElement(_HourInput.default, {
     ref: hourRef,
     id: props.id || bind.id,
     hour: hour,
@@ -101,7 +126,9 @@ var Input = function Input(props) {
     handleClick: handleClick,
     minutesRef: minutesRef,
     meridiemRef: meridiemRef,
-    readOnly: readOnly
+    readOnly: readOnly,
+    required: required,
+    invalid: bind.error ? true : false
   }), /*#__PURE__*/_react.default.createElement("span", null, ":"), /*#__PURE__*/_react.default.createElement(_MinutesInput.default, {
     ref: minutesRef,
     id: props.id || bind.id,
@@ -110,7 +137,9 @@ var Input = function Input(props) {
     handleClick: handleClick,
     hourRef: hourRef,
     meridiemRef: meridiemRef,
-    readOnly: readOnly
+    readOnly: readOnly,
+    required: required,
+    invalid: bind.error ? true : false
   }), /*#__PURE__*/_react.default.createElement(_MeridiemInput.default, {
     ref: meridiemRef,
     id: props.id || bind.id,
@@ -119,8 +148,10 @@ var Input = function Input(props) {
     handleClick: handleClick,
     hourRef: hourRef,
     minutesRef: minutesRef,
-    readOnly: readOnly
-  }), /*#__PURE__*/_react.default.createElement(_SRDescriptions.default, {
+    readOnly: readOnly,
+    required: required,
+    invalid: bind.error ? true : false
+  })), /*#__PURE__*/_react.default.createElement(_SRDescriptions.default, {
     readOnly: readOnly,
     id: props.id || bind.id,
     hour: hour,

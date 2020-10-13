@@ -2,6 +2,33 @@
 ### Example
 This example uses [React Hook Form](https://www.react-hook-form.com) for validation.
 
+```jsx noeditor 
+import { Icon } from '@oris/ui';
+
+<div className="alert alert-primary">
+    <Icon name='thumbs-o-up' circled />
+
+    <p>
+        React Hook Form is <em>highly</em> recommended for managing forms in OR React applications
+    </p>
+</div>
+```
+
+```js noeditor
+import { Icon } from '@oris/ui';
+
+<div className="alert alert-secondary">
+    <Icon name="universal-access" circled={true} />
+    <p><strong>Accessibility</strong></p>
+    <p>
+        It is best to validate form fields on blur. This provides screen reader users contextual error feedback while they are completing the form.
+    </p>
+    <p>
+        To accomplish this in React Hook Form, set the <code>mode</code> argument to <code>onBlur</code> when calling the <code>useForm</code> function (see implementation below)      
+    </p>
+</div>
+```
+
 ```jsx
 import { useForm, Controller } from 'react-hook-form';
 import {
@@ -9,22 +36,22 @@ import {
     Text,
     Select,
     Checkbox,
-    DatePicker,
+    DateTime,
     FieldSet,
     Radio,
     Time,
     Button
 } from '@oris/ui';
 
-const { register, errors, handleSubmit, control } = useForm();
+const { register, errors, handleSubmit, control } = useForm({ mode: 'onBlur' });
 
 const onSubmit = data => console.log('submit', data);
 
 <Form onSubmit={handleSubmit(onSubmit)} noValidate>
-    <Form.Row>
-        <Form.Group className='col-md-6'>
+    <div className='row'>
+        <div className='col-md-6'>
             <Text
-                id="my-email"
+                id="email"
                 required
                 error={errors.email && errors.email.message}
             >
@@ -37,29 +64,30 @@ const onSubmit = data => console.log('submit', data);
                 />
                 <Text.Error />
             </Text>
-        </Form.Group>
+        </div>
 
-        <Form.Group className='col-md-6'>
-            <DatePicker
+        <div className='col-md-6'>
+            <DateTime
                 id="birthdate"
                 required
                 error={errors.birthdate && errors.birthdate.message}
             >
-                <DatePicker.Label>
+                <DateTime.Label>
                     Date of Birth
-                </DatePicker.Label>
+                </DateTime.Label>
+
                 <Controller
                     name='birthdate'
                     control={control}
                     rules={{ required: 'Input your birthdate' }}
-                    render={props => <DatePicker.Input {...props} />}
+                    render={props => <DateTime.Input {...props} />}
                 />
-                <DatePicker.Error />
-            </DatePicker>
-        </Form.Group>
-    </Form.Row>
+                <DateTime.Error />
+            </DateTime>
+        </div>
+    </div>
 
-    <Form.Group>
+    
         <Text
             id="address"
             required
@@ -75,9 +103,9 @@ const onSubmit = data => console.log('submit', data);
             />
             <Text.Error />
         </Text>
-    </Form.Group>
 
-    <Form.Group>
+
+
         <Text id="address2">
             <Text.Label>Address 2</Text.Label>
             <Text.Input
@@ -85,10 +113,10 @@ const onSubmit = data => console.log('submit', data);
                 ref={register}
             />
         </Text>
-    </Form.Group>
 
-    <Form.Row>
-        <Form.Group className='col-md-6'>
+
+    <div className='row'>
+        <div className='col-md-6'>
             <Text
                 id="city"
                 required
@@ -100,8 +128,8 @@ const onSubmit = data => console.log('submit', data);
                 })} />
                 <Text.Error />
             </Text>
-        </Form.Group>
-        <Form.Group className='col-md-4'>
+        </div>
+        <div className='col-md-4'>
             <Select
                 id="state"
                 required
@@ -110,12 +138,15 @@ const onSubmit = data => console.log('submit', data);
                 <Select.Label>State</Select.Label>
                 <Select.Control ref={register({ required: 'Select your state' })}>
                     <Select.Option value=''>Choose...</Select.Option>
-                    <Select.Option>...</Select.Option>
+                    <Select.Option value='CA'>California</Select.Option>
+                    <Select.Option value='OH'>Ohio</Select.Option>
+                    <Select.Option value='AZ'>Arizona</Select.Option>
+                    <Select.Option value='NY'>New York</Select.Option>
                 </Select.Control>
                 <Select.Error />
             </Select>
-        </Form.Group>
-        <Form.Group className='col-md-2'>
+        </div>
+        <div className='col-md-2'>
             <Text
                 id="zip"
                 required
@@ -125,10 +156,9 @@ const onSubmit = data => console.log('submit', data);
                 <Text.Input ref={register({ required: 'Input your ZIP Code' })} />
                 <Text.Error />
             </Text>
-        </Form.Group>
-    </Form.Row>
+        </div>
+    </div>
 
-    <Form.Group>
         <FieldSet
             id='favorite-food'
             error={errors["favorite-food"] && 'Choose your favorite food'}
@@ -157,9 +187,7 @@ const onSubmit = data => console.log('submit', data);
             </FieldSet.Inline>
             <FieldSet.Error />
         </FieldSet>
-    </Form.Group>
 
-    <Form.Group>
         <FieldSet id='opt-in'>
             <FieldSet.Legend>
                 I want to receive
@@ -187,9 +215,7 @@ const onSubmit = data => console.log('submit', data);
             </FieldSet.Help>
             <FieldSet.Error />
         </FieldSet>
-    </Form.Group>
 
-    <Form.Group>
         <Time
             id="pick-up"
             error={errors["pick-up"] && 'Enter the time you will pick up your drycleaning'}
@@ -206,9 +232,7 @@ const onSubmit = data => console.log('submit', data);
             />
             <Time.Error />
         </Time>
-    </Form.Group>
 
-    <Form.Group>
         <Checkbox
             id="check"
             required
@@ -218,7 +242,6 @@ const onSubmit = data => console.log('submit', data);
             <Checkbox.Label>Check me out</Checkbox.Label>
             <Checkbox.Error />
         </Checkbox>
-    </Form.Group>
 
     <Button type='submit' theme='primary'>Sign in</Button>
 </Form>

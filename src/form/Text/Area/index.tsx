@@ -1,8 +1,6 @@
 import React, { useContext } from 'react';
 import { Context } from '..';
-import FormContext from '../../../internal/FormCommon/FormContext';
 
-import Print from '../Print';
 import Diff from '../Diff';
 
 export type AreaProps = React.TextareaHTMLAttributes<HTMLTextAreaElement> & {
@@ -19,12 +17,16 @@ export type AreaProps = React.TextareaHTMLAttributes<HTMLTextAreaElement> & {
  */
 const Area = React.forwardRef<HTMLTextAreaElement, AreaProps>((props, ref) => {
     const { bind } = useContext(Context);
-    const { isDiff, isPrint } = useContext(FormContext);
 
-    const value = bind.value || props.defaultValue;
+    const defaultValue = bind.value || props.defaultValue;
+    const value = bind.controlled && typeof (bind.value) === 'string' ? bind.value : undefined;
+
     const { minLength, maxLength } = props;
 
-    if (isDiff) {
+    const readOnly = bind.readOnly || props.readOnly;
+    const required = bind.required || props.required;
+
+    if (bind.diff) {
         return (
             <Diff
                 value={typeof (value) === 'string' ? value : undefined}
@@ -33,31 +35,36 @@ const Area = React.forwardRef<HTMLTextAreaElement, AreaProps>((props, ref) => {
         )
     }
 
-    if (isPrint) {
-        return <Print value={typeof (value) === 'string' ? value : ''} />
-    }
-
     const classNames = 'form-control ' +
         (props.className ?? '') +
         (bind.error ? ' is-invalid' : '') +
         (bind.success ? ' is-valid' : '')
         ;
 
+    let textAreaProps: React.DetailedHTMLProps<React.TextareaHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement> = {
+        ref: ref,
+        ...props,
+        id: bind.id,
+        name: bind.name || props.name,
+        defaultValue: defaultValue,
+        className: classNames,
+        'aria-describedby': `${bind.id}-help`,
+        onChange: (e) => {
+            bind.value = e.currentTarget.value;
+            if (props.onChange) props.onChange(e);
+        },
+        readOnly: readOnly,
+        "aria-disabled": readOnly,
+        "aria-required": required,
+        "aria-invalid": bind.error ? true : false
+    }
+
+    if (bind.controlled) {
+        textAreaProps.value = value;
+    }
+
     return (<>
-        <textarea
-            ref={ref}
-            {...props}
-            id={bind.id}
-            name={bind.name || props.name}
-            defaultValue={value}
-            className={classNames}
-            aria-describedBy={`${bind.id}-help`}
-            onChange={(e) => {
-                bind.value = e.currentTarget.value;
-                if (props.onChange) props.onChange(e);
-            }}
-            readOnly={bind.readOnly || props.readOnly}
-        />
+        <textarea {...textAreaProps} />
 
         {typeof (value) === 'string' && minLength && (value.length < minLength) &&
             <div className='small text-muted'>

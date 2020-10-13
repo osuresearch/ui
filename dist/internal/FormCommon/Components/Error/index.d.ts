@@ -8,7 +8,7 @@ export declare type ErrorProps = React.HTMLAttributes<HTMLDivElement> & {
     context?: React.Context<IFormFieldContext<any>>;
 };
 /**
- * Provides instructions on how to resolve the validation error.
+ * Provides instructions on how to resolve a validation error.
  *
  * Will display when error is set in the parent form component or
  * the parent's `bind` prop is in an error state.

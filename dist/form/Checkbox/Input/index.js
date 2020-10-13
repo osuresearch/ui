@@ -9,21 +9,19 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
 
 var _react = _interopRequireWildcard(require("react"));
 
 var _ = require("..");
 
-var _FormContext = _interopRequireDefault(require("../../../internal/FormCommon/FormContext"));
-
-var _Print = require("../../../internal/FormCommon/Utility/Print");
-
 var _Diff = require("../../../internal/FormCommon/Utility/Diff");
 
-/**
- * `<Checkbox.Input />` sub-component. 
- * 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+/** 
  * Accepts all 
  * [HTMLInputElement attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox)
  * as props.
@@ -34,23 +32,12 @@ var Input = /*#__PURE__*/_react.default.forwardRef(function (props, ref) {
   var _useContext = (0, _react.useContext)(_.Context),
       bind = _useContext.bind;
 
-  var _useContext2 = (0, _react.useContext)(_FormContext.default),
-      isDiff = _useContext2.isDiff,
-      isPrint = _useContext2.isPrint;
+  var defaultChecked = bind.value || props.defaultChecked || false;
+  var checked = bind.value ? bind.value : false;
+  var readOnly = bind.readOnly || props.readOnly;
+  var required = bind.required || props.required; // Diff mode
 
-  var checked = bind.value || props.defaultChecked || false; // If printing, just return the current value
-
-  if (isPrint) {
-    return /*#__PURE__*/_react.default.createElement(_Print.Print, null, checked && /*#__PURE__*/_react.default.createElement("i", {
-      className: "fa fa-check-square-o",
-      "aria-label": "Checkbox was checked,,"
-    }), !checked && /*#__PURE__*/_react.default.createElement("i", {
-      className: "fa fa-square-o",
-      "aria-label": "Checkbox was not checked,,"
-    }), "\xA0 ", bind.instructions);
-  }
-
-  if (isDiff) {
+  if (bind.diff) {
     var wasChecked = bind.initialValue === true;
     return /*#__PURE__*/_react.default.createElement(_Diff.Diff, {
       removed: wasChecked && !checked ? /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement("i", {
@@ -65,21 +52,36 @@ var Input = /*#__PURE__*/_react.default.forwardRef(function (props, ref) {
   }
 
   var classNames = 'custom-control-input ' + ((_props$className = props.className) !== null && _props$className !== void 0 ? _props$className : '') + (bind.error ? ' is-invalid' : '') + (bind.success ? ' is-valid' : '');
-  return /*#__PURE__*/_react.default.createElement("input", (0, _extends2.default)({
+
+  var inputProps = _objectSpread(_objectSpread({
     ref: ref
-  }, props, {
-    type: "checkbox",
+  }, props), {}, {
+    type: 'checkbox',
     id: bind.id,
     name: bind.name || props.name,
     className: classNames,
-    defaultChecked: checked,
+    defaultChecked: defaultChecked,
+    onClick: function onClick(e) {
+      if (readOnly) {
+        return e.preventDefault();
+      }
+    },
     onChange: function onChange(e) {
       bind.value = e.currentTarget.checked;
       if (props.onChange) props.onChange(e);
     },
-    readOnly: bind.readOnly || props.readOnly,
-    "aria-describedBy": "".concat(bind.id, "-help")
-  }));
+    "aria-describedby": "".concat(bind.id, "-help"),
+    readOnly: readOnly,
+    "aria-disabled": readOnly,
+    "aria-required": required,
+    "aria-invalid": bind.error ? true : false
+  });
+
+  if (bind.controlled) {
+    inputProps.checked = checked;
+  }
+
+  return /*#__PURE__*/_react.default.createElement("input", inputProps);
 });
 
 var _default = Input;

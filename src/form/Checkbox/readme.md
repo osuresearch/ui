@@ -1,38 +1,30 @@
 
-### Examples
-
-#### Basic Implementation
+### Basic Implementation
 
 ```jsx
-import { Form } from '@oris/ui';
+<Checkbox id="receive-newsletter">
+    <Checkbox.Input />
 
-<Form.Group>
-    <Checkbox id="receive-newsletter">
-        <Checkbox.Input />
+    <Checkbox.Label>
+        Yes! I would like to receive your newsletter
+    </Checkbox.Label>
 
-        <Checkbox.Label>
-            Yes! I would like to receive your newsletter
-        </Checkbox.Label>
-
-        <Checkbox.Help>
-            We will not spam your inbox
-        </Checkbox.Help>
-    </Checkbox>
-</Form.Group>
+    <Checkbox.Help>
+        We will not spam your inbox
+    </Checkbox.Help>
+</Checkbox>
 ```
 
-#### Disabled field
+### Read Only
 ```jsx
-import { Form } from '@oris/ui';
+import { Checkbox } from '@oris/ui';
 
-<Form.Group>
-    <Checkbox id="checkbox-disabled">
-        <Checkbox.Input disabled />
-        <Checkbox.Label>
-            This checkbox field is disabled
-        </Checkbox.Label>
-    </Checkbox>
-</Form.Group>
+<Checkbox id="checkbox-readonly" readOnly={true}>
+    <Checkbox.Input defaultChecked={true} />
+    <Checkbox.Label>
+        This checkbox field is read only
+    </Checkbox.Label>
+</Checkbox>
 ```
 
 #### Validation
@@ -44,18 +36,16 @@ const [error, setError] = useState();
 const [success, setSuccess] = useState();
 
 <Form>
-    <Form.Group>
-        <Checkbox id="terms" error={error} success={success}>
-            <Checkbox.Input required />
+    <Checkbox id="terms" error={error} success={success}>
+        <Checkbox.Input required />
 
-            <Checkbox.Label>
-                I agree to the terms and services
-            </Checkbox.Label>
+        <Checkbox.Label>
+            I agree to the terms and services
+        </Checkbox.Label>
 
-            <Checkbox.Error />
-            <Checkbox.Success />
-        </Checkbox>
-    </Form.Group>
+        <Checkbox.Error />
+        <Checkbox.Success />
+    </Checkbox>
 
     <Button theme='danger' onClick={() => {
         setSuccess();
@@ -72,19 +62,46 @@ const [success, setSuccess] = useState();
 #### Change Events
 
 ```jsx
-import { Form } from '@oris/ui';
-
 const onChange = (newBoolValue, oldBoolValue) => {
     alert(`Checkbox changed from ${oldBoolValue} to ${newBoolValue}`);
 }
 
-<Form.Group>
-    <Checkbox id="toggle-me" onChange={onChange}>
-        <Checkbox.Input />
+<Checkbox id="toggle-me" onChange={onChange}>
+    <Checkbox.Input />
 
-        <Checkbox.Label>
-            Toggle Me!
-        </Checkbox.Label>
-    </Checkbox>
-</Form.Group>
+    <Checkbox.Label>
+        Toggle Me!
+    </Checkbox.Label>
+</Checkbox>
 ```
+
+```jsx
+import { FieldSet } from '@oris/ui';
+
+const onChange = (newArrayValue, oldArrayValue) => {
+    alert(`Selected options changed from [${oldArrayValue}] to [${newArrayValue}]`);
+}
+
+<FieldSet id="light-types" onChange={onChange}>
+    <FieldSet.Legend>
+        Select your light types
+    </FieldSet.Legend>
+
+    <Checkbox id="light-types-spot">
+        <Checkbox.Input />
+        <Checkbox.Label>Spot light</Checkbox.Label>
+    </Checkbox>
+
+    <Checkbox id="light-types-directional">
+        <Checkbox.Input  />
+        <Checkbox.Label>Directional Light</Checkbox.Label>
+    </Checkbox>
+
+    <Checkbox id="light-types-point">
+        <Checkbox.Input />
+        <Checkbox.Label>Point Light</Checkbox.Label>
+    </Checkbox>
+</FieldSet>
+```
+
+### Subcomponents

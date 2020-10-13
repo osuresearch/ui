@@ -42,7 +42,7 @@ var Radio = function Radio(props) {
       bind: bind
     }
   }, /*#__PURE__*/_react.default.createElement("div", {
-    className: "custom-control custom-radio"
+    className: "ui-form-element custom-control custom-radio ".concat(bind.required ? 'is-required' : '', " ").concat(bind.error && 'is-invalid', " ").concat(bind.success && 'is-valid')
   }, props.children));
 };
 

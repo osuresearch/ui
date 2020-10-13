@@ -20,8 +20,12 @@ export interface IFieldBind<T> {
     success?: string;
     /** Should the field be loaded as read-only */
     readOnly?: boolean;
+    /** Should the field be displayed as a diff */
+    diff?: boolean;
     /** Should the field be indicated as (soft) required */
     required?: boolean;
+    /** If this is a controlled element (will be true by default) */
+    controlled?: boolean;
     /** Get/update the field value */
     value: Nullable<T>;
     /** Initial value for isDiff */
@@ -46,6 +50,8 @@ export declare type FormFieldSpreadProps<T> = {
     id: string;
     /** Name of the form control. Submitted with the form as part of a name/value pair. */
     name?: string;
+    /** Additional classes to add to the field wrapper */
+    className?: string;
     /** Validation error to display for the field */
     error?: string;
     /** Validation success message to display for the field */
@@ -103,10 +109,18 @@ export declare class FieldBind<T> implements IFieldBind<T> {
     get readOnly(): boolean;
     /** On update, notify all onStateChange delegates */
     set readOnly(value: boolean);
+    /** Should the field be displayed as a diff. */
+    get diff(): boolean;
+    /** On update, notify all onStateChange delegates */
+    set diff(value: boolean);
     /** Should the field be required */
     get required(): boolean;
     /** On update, notify all onStateChange delegates */
     set required(value: boolean);
+    /** Should the field be controlled */
+    get controlled(): boolean;
+    /** On update, notify all onStateChange delegates */
+    set controlled(value: boolean);
     /** The backing value for the field. */
     get value(): Nullable<T>;
     /**On update, track previous value and notify all onChange delegates */
@@ -114,7 +128,9 @@ export declare class FieldBind<T> implements IFieldBind<T> {
     protected _error: string;
     protected _success: string;
     protected _readOnly: boolean;
+    protected _diff: boolean;
     protected _required: boolean;
+    protected _controlled: boolean;
     protected _value: Nullable<T>;
     protected _previousValue: Nullable<T>;
     readonly onValueChange: Action<OnValueChangeDelegate<T>>;

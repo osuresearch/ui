@@ -8,6 +8,8 @@ interface Props {
     hourRef?: React.RefObject<HTMLInputElement>;
     minutesRef?: React.RefObject<HTMLInputElement>;
     readOnly?: boolean;
+    required?: boolean;
+    invalid?: boolean;
 }
 
 const MeridiemInput = React.forwardRef<HTMLInputElement, Props>(({
@@ -17,7 +19,9 @@ const MeridiemInput = React.forwardRef<HTMLInputElement, Props>(({
     handleClick,
     hourRef,
     minutesRef,
-    readOnly
+    readOnly,
+    required,
+    invalid
 }, ref) => {
     const handleKeyDown = (e: React.KeyboardEvent) => {
         const { key } = e;
@@ -98,7 +102,10 @@ const MeridiemInput = React.forwardRef<HTMLInputElement, Props>(({
             onClick={handleClick}
             onKeyUp={handleKeyUp}
             onKeyDown={handleKeyDown}
+            onChange={() => { }} // Surpress console warning - handleKeyDown sets the meridian value
             readOnly={readOnly}
+            aria-required={required}
+            aria-invalid={invalid}
         />
     )
 });

@@ -32,8 +32,14 @@ export interface IFieldBind<T> {
     /** Should the field be loaded as read-only */
     readOnly?: boolean
 
+    /** Should the field be displayed as a diff */
+    diff?: boolean
+
     /** Should the field be indicated as (soft) required */
     required?: boolean
+
+    /** If this is a controlled element (will be true by default) */
+    controlled?: boolean
 
     /** Get/update the field value */
     value: Nullable<T>
@@ -53,7 +59,7 @@ export type FormFieldBindProp<T> = {
      * Data binding strictly typed to `<T>`
      */
     bind: IFieldBind<T>;
-    
+
     /**
      * Callback with the signature `(newValue: T, oldValue: T) => void`
      */
@@ -66,6 +72,9 @@ export type FormFieldSpreadProps<T> = {
 
     /** Name of the form control. Submitted with the form as part of a name/value pair. */
     name?: string
+
+    /** Additional classes to add to the field wrapper */
+    className?: string
 
     /** Validation error to display for the field */
     error?: string
@@ -161,6 +170,17 @@ export class FieldBind<T> implements IFieldBind<T> {
         this.onStateChange.dispatch(this);
     }
 
+    /** Should the field be displayed as a diff. */
+    public get diff(): boolean {
+        return this._diff;
+    }
+
+    /** On update, notify all onStateChange delegates */
+    public set diff(value: boolean) {
+        this._diff = value;
+        this.onStateChange.dispatch(this);
+    }
+
     /** Should the field be required */
     public get required(): boolean {
         return this._required;
@@ -169,6 +189,17 @@ export class FieldBind<T> implements IFieldBind<T> {
     /** On update, notify all onStateChange delegates */
     public set required(value: boolean) {
         this._required = value;
+        this.onStateChange.dispatch(this);
+    }
+
+    /** Should the field be controlled */
+    public get controlled(): boolean {
+        return this._controlled;
+    }
+
+    /** On update, notify all onStateChange delegates */
+    public set controlled(value: boolean) {
+        this._controlled = value;
         this.onStateChange.dispatch(this);
     }
 
@@ -189,7 +220,9 @@ export class FieldBind<T> implements IFieldBind<T> {
     protected _error: string = '';
     protected _success: string = '';
     protected _readOnly: boolean = false;
+    protected _diff: boolean = false;
     protected _required: boolean = false;
+    protected _controlled: boolean = false;
     protected _value: Nullable<T> = null;
     protected _previousValue: Nullable<T> = null;
 

@@ -23,8 +23,6 @@ var _react = _interopRequireWildcard(require("react"));
  * props.
  */
 function Label(props) {
-  var _props$children;
-
   // Separate context from the other props (or else they are added as props to the component itself)
   var context = props.context,
       otherProps = (0, _objectWithoutProperties2.default)(props, ["context"]);
@@ -32,8 +30,9 @@ function Label(props) {
   var _useContext = (0, _react.useContext)(context),
       bind = _useContext.bind;
 
+  var label = props.children || bind.instructions || '';
   return /*#__PURE__*/_react.default.createElement("label", (0, _extends2.default)({}, otherProps, {
     htmlFor: bind.id,
     className: (bind.required ? 'is-required' : '') + (props.className ? ' ' + props.className : '')
-  }), (_props$children = props.children) !== null && _props$children !== void 0 ? _props$children : bind.instructions);
+  }), label);
 }

@@ -6,6 +6,7 @@ export declare type LegendProps = React.HTMLAttributes<HTMLElement> & {
      * @ignore
      */
     context?: React.Context<IFormFieldContext<any>>;
+    children: string;
 };
 export declare function Legend(props: LegendProps): JSX.Element;
 //# sourceMappingURL=index.d.ts.map

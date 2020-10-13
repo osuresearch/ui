@@ -102,14 +102,16 @@ function listFormComponents() {
         // Special handling for the root Form component
         // to ensure it's first in the list 
         if (component === 'Form') {
-            sections = [{ 
-                name: '<Form>',
-                usageMode: 'collapse',
+            sections = [{
+                name: component,
+                usageMode: 'hide',
+                hasSubcomponents: true,
+                wrapNamesInBrackets: true,
                 components: 'src/form/Form/index.tsx'
             }, ...sections];
         } else {
             const subPaths = glob.sync(dirname + '/*/index.tsx');
-            
+
             // Components from FormCommon that we include as subcomponents
             // for all components by default. 
             let generics = glob.sync('src/internal/FormCommon/Components/*/index.tsx');
@@ -118,15 +120,20 @@ function listFormComponents() {
             // then we replace it with the local copy (e.g. if `src/form/Text/Label/index.tsx` exists)
             subPaths.forEach((p) => {
                 const subName = p.split('/')[3];
-                generics = generics.filter(s => s.indexOf(subName + '/index.tsx'));
+                generics = generics.filter(s => s.indexOf(subName + '/index.tsx') === -1);
             });
+
+            const label = generics.find(s => s.match(/.*\/Label\/.*/));
+            generics = generics.filter(s => s !== label);
 
             // Component with zero or more sub-components
             sections.push({
-                name: `<${component}>`,
-                usageMode: 'collapse',
+                name: component,
+                hasSubcomponents: true,
+                wrapNamesInBrackets: true,
                 components: [
                     componentPath, // Main (composite) form component listed first
+                    ...((label && component !== 'FieldSet') ? [label] : []), // If label component exists, display that next (except for FieldSets - don't display it at all then)
                     ...subPaths, // Followed by each sub-component at `{sub-component name}/index.tsx`
                     ...generics // And then any generics not overridden
                 ]
@@ -150,6 +157,10 @@ let sections = [
         content: 'docs/colors.md',
     },
     {
+        name: 'Typography',
+        content: 'docs/Typography.md'
+    },
+    {
         name: 'Components',
         content: 'src/components/readme.md',
         components: 'src/components/**/index.?(js|tsx)',
@@ -160,10 +171,6 @@ let sections = [
     {
         name: 'Form Components',
         content: 'src/form/readme.md',
-        // components: 'src/form/*/index.?(js|tsx)',
-        // ignore: [
-        //     'src/form/Form/index.tsx'
-        // ],
         sections: listFormComponents(),
         sectionDepth: 0,
     }, 
@@ -208,9 +215,9 @@ const reactDocgenTypescriptOptions = {
         // Skip props merged from node_modules
         // E.g. const MyComponent: React.FC<React.HTMLAttributes<HTMLDivElement>> = ()...
         if (prop.parent) {
-          return !prop.parent.fileName.includes('node_modules');
+            return !prop.parent.fileName.includes('node_modules');
         }
-     
+
         return true;
     },
 };
@@ -228,7 +235,7 @@ module.exports = {
     usageMode: 'expand',
     tocMode: 'collapse',
     styleguideDir: BUILD_PATH,
-    skipComponentsWithoutExample: false,
+    skipComponentsWithoutExample: true,
     pagePerSection: true,
     styles,
     theme,
@@ -250,11 +257,6 @@ module.exports = {
             ]
         }
     },
-    // updateDocs: (docs, file) => {
-    //     console.log(file);
-    //     console.log(docs);
-    //     return docs;
-    // },
     getComponentPathLine: (componentPath) => {
         // Naming convention for ../Component/index.js
         const dirname = path.dirname(componentPath);
@@ -336,5 +338,12 @@ module.exports = {
         // Assume Javascript
         return require('react-docgen').parse(source, resolver, handlers);
     },
-    sections: sections
+    sections: sections,
+    // Override Styleguidist components
+    styleguideComponents: {
+        StyleGuide: path.join(__dirname, 'src/styleguide/StyleGuide'),
+        ReactComponent: path.join(__dirname, 'src/styleguide/ReactComponent'),
+        ReactComponentRenderer: path.join(__dirname, 'src/styleguide/ReactComponentRenderer'),
+        ExamplesRenderer: path.join(__dirname, 'src/styleguide/ExamplesRenderer')
+    },
 };

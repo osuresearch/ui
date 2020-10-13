@@ -1,9 +1,10 @@
 
-import React, { useLayoutEffect, useState, useRef, memo, useContext } from 'react';
+import React, { useContext, useState, useLayoutEffect } from 'react';
 import { Context } from '..';
-import FormContext from '../../../internal/FormCommon/FormContext';
 
-import Print from '../Print';
+// @ts-ignore
+import CKEditor from 'ckeditor4-react';
+
 import Diff from '../Diff';
 
 export interface RichProps {
@@ -31,15 +32,9 @@ export interface RichProps {
      * For more information, see [CKEditor 4 contentsCss](https://ckeditor.com/docs/ckeditor4/latest/api/CKEDITOR_config.html#cfg-contentsCss)
      */
     contentsCss?: string;
-
-    /** name attribute */
-    name?: string;
-
-    /** required attribute */
-    required?: boolean;
 }
 
-/** Full confiugration (that we're willing to support) */
+/** Full configuration (that we're willing to support) */
 const FULL_TOOLBAR_CONFIG = [
     { name: 'styles', items: ['Format'] },
     { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike'] },
@@ -56,82 +51,35 @@ const SIMPLE_TOOLBAR_CONFIG = [
 ];
 
 /**
- * A rich text editor (RTE) based on CKEditor (additional requirements must be 3
- * met to use this component; see the section on `<Text.Rich>` below for more details)
+ * A rich text editor (RTE) based on CKEditor
+ * 
  */
 const Rich: React.FC<RichProps> = ({
     onChange,
     defaultValue = '',
     simple = false,
     className = '',
-    contentsCss = 'https://orapps.osu.edu/assets/css/ckeditor/contents.css',
-    name,
-    required
+    contentsCss = 'https://orapps.osu.edu/assets/css/ckeditor/contents.css'
 }) => {
+    const [label, setLabel] = useState<string>();
     const { bind } = useContext(Context);
-    const { isDiff, isPrint } = useContext(FormContext);
 
     const value = bind.value || defaultValue;
 
-    const [initialData,] = useState(value);
-    const [error, setError] = useState<string>();
-    const editorRef = useRef<HTMLTextAreaElement>(null);
-
     useLayoutEffect(() => {
-        if (!(isDiff || isPrint)) {
-            // @ts-ignore 
-            const cke = window.CKEDITOR;
-            let editor: any = undefined; // No type info exists for CKE
+        // @ts-ignore
+        const labelText = document.querySelector(`label[for="${bind.id}"]`)?.innerText;
 
-            if (!cke) {
-                // TODO: Error message improvements
-                setError('window.CKEDITOR is undefined. Are you missing an external script?');
-                return;
-            }
-
-            let toolbar = simple ? SIMPLE_TOOLBAR_CONFIG : FULL_TOOLBAR_CONFIG;
-
-            const opts = {
-                toolbar,
-
-                // TODO: Prop to provide extra plugins (e.g. Signet signature captures)
-                extraPlugins: '',
-
-                // Disable the body > blockquote > p ... path in the editor footer
-                removePlugins: 'elementspath',
-
-                contentsCss
-            };
-
-            editor = cke.replace(editorRef.current, opts);
-            editor.setData(initialData);
-            editor.on('change', () => {
-                const newValue = editor.getData() as string;
-                bind.value = newValue;
-                if (onChange) {
-                    onChange(newValue);
-                }
-            });
-
-            if (bind.required || required) {
-                editor.on('required', (e: Event) => {
-                    bind.error = "This field is required"
-
-                    // @ts-ignore
-                    e.cancel();
-                })
-            }
-
-            return () => {
-                if (editor) {
-                    editor.destroy();
-                    editor = undefined;
-                }
-            };
+        if (labelText) {
+            setLabel(labelText);
+        } else if (bind.instructions) {
+            setLabel(bind.instructions);
+        } else {
+            setLabel('Rich Text Editor')
         }
-    }, [initialData, simple, contentsCss, onChange, bind, required, isPrint, isDiff]);
+    }, [bind]);
 
-    if (isDiff) {
+    if (bind.diff) {
         // TODO - This really isn't going to work with HTML
         return (
             <Diff
@@ -141,35 +89,35 @@ const Rich: React.FC<RichProps> = ({
         )
     }
 
-    if (isPrint) {
-        return <Print value={typeof (value) === 'string' ? value : ''} />
+    // Wait to render the editor until a label is set
+    if (!label) {
+        return <></>
     }
-
-    if (error) {
-        return (
-            <div className="richtext is-error">
-                {error}
-            </div>
-        );
-    }
-
-    // TODO: Toggling readOnly isn't super efficient here, since 
-    // it'll recreate the editor from scratch. But I don't envision
-    // many use cases where we'll be doing that.
 
     return (
-        <div className={`richtext ${className} ${bind.readOnly ? 'is-readonly' : ''}`}>
-            <textarea
-                id={bind.id}
-                name={bind.name || name}
-                className="richtext-editor"
-                ref={editorRef}
-                disabled={bind.readOnly}
-                aria-describedBy={`${bind.id}-help`}
+        <div className={`richtext ${className} ${bind.readOnly ? 'readonly' : ''}`}>
+            <CKEditor
+                data={value}
+                config={{
+                    toolbar: (simple ? SIMPLE_TOOLBAR_CONFIG : FULL_TOOLBAR_CONFIG),
+                    // TODO: Prop to provide extra plugins (e.g. Signet signature captures)
+                    extraPlugins: '',
+                    // Disable the body > blockquote > p ... path in the editor footer
+                    removePlugins: 'elementspath',
+                    contentsCss,
+                    title: label
+                }}
+                readOnly={bind.readOnly}
+                onChange={(e: any) => {
+                    const newValue = e.editor.getData() as string;
+                    bind.value = newValue;
+                    if (onChange) {
+                        onChange(newValue);
+                    }
+                }}
             />
         </div>
     );
 }
 
-// export default memo(Rich);
 export default Rich;

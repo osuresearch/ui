@@ -9,17 +9,17 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
 
 var _react = _interopRequireWildcard(require("react"));
 
 var _ = require("..");
 
-var _FormContext = _interopRequireDefault(require("../../../internal/FormCommon/FormContext"));
-
-var _Print = _interopRequireDefault(require("../Print"));
-
 var _Diff = _interopRequireDefault(require("../Diff"));
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 /**
  * Equivalent of `<textarea>`
@@ -34,42 +34,45 @@ var Area = /*#__PURE__*/_react.default.forwardRef(function (props, ref) {
   var _useContext = (0, _react.useContext)(_.Context),
       bind = _useContext.bind;
 
-  var _useContext2 = (0, _react.useContext)(_FormContext.default),
-      isDiff = _useContext2.isDiff,
-      isPrint = _useContext2.isPrint;
-
-  var value = bind.value || props.defaultValue;
+  var defaultValue = bind.value || props.defaultValue;
+  var value = bind.controlled && typeof bind.value === 'string' ? bind.value : undefined;
   var minLength = props.minLength,
       maxLength = props.maxLength;
+  var readOnly = bind.readOnly || props.readOnly;
+  var required = bind.required || props.required;
 
-  if (isDiff) {
+  if (bind.diff) {
     return /*#__PURE__*/_react.default.createElement(_Diff.default, {
       value: typeof value === 'string' ? value : undefined,
       prevValue: typeof bind.initialValue === 'string' ? bind.initialValue : undefined
     });
   }
 
-  if (isPrint) {
-    return /*#__PURE__*/_react.default.createElement(_Print.default, {
-      value: typeof value === 'string' ? value : ''
-    });
-  }
-
   var classNames = 'form-control ' + ((_props$className = props.className) !== null && _props$className !== void 0 ? _props$className : '') + (bind.error ? ' is-invalid' : '') + (bind.success ? ' is-valid' : '');
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("textarea", (0, _extends2.default)({
+
+  var textAreaProps = _objectSpread(_objectSpread({
     ref: ref
-  }, props, {
+  }, props), {}, {
     id: bind.id,
     name: bind.name || props.name,
-    defaultValue: value,
+    defaultValue: defaultValue,
     className: classNames,
-    "aria-describedBy": "".concat(bind.id, "-help"),
+    'aria-describedby': "".concat(bind.id, "-help"),
     onChange: function onChange(e) {
       bind.value = e.currentTarget.value;
       if (props.onChange) props.onChange(e);
     },
-    readOnly: bind.readOnly || props.readOnly
-  })), typeof value === 'string' && minLength && value.length < minLength && /*#__PURE__*/_react.default.createElement("div", {
+    readOnly: readOnly,
+    "aria-disabled": readOnly,
+    "aria-required": required,
+    "aria-invalid": bind.error ? true : false
+  });
+
+  if (bind.controlled) {
+    textAreaProps.value = value;
+  }
+
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("textarea", textAreaProps), typeof value === 'string' && minLength && value.length < minLength && /*#__PURE__*/_react.default.createElement("div", {
     className: "small text-muted"
   }, "".concat(minLength, " characters required \u2013 ").concat(minLength - value.length, " more needed")), typeof value === 'string' && maxLength && /*#__PURE__*/_react.default.createElement("div", {
     className: "small text-muted"

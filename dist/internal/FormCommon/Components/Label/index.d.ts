@@ -6,6 +6,7 @@ export declare type LabelProps = React.LabelHTMLAttributes<HTMLLabelElement> & {
      * @ignore
      */
     context?: React.Context<IFormFieldContext<any>>;
+    children: string;
 };
 /**
  * Primary instructions for filling out a field

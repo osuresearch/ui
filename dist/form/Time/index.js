@@ -48,7 +48,9 @@ var Time = function Time(_ref) {
     value: {
       bind: bind
     }
-  }, children);
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "ui-form-element ui-form-time ".concat(bind.required ? 'is-required' : '', " ").concat(bind.error && 'is-invalid', " ").concat(bind.success && 'is-valid')
+  }, children));
 };
 
 Time.Input = _Input.Input;

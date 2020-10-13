@@ -137,10 +137,10 @@ Object.defineProperty(exports, "Checkbox", {
     return _Checkbox.default;
   }
 });
-Object.defineProperty(exports, "DatePicker", {
+Object.defineProperty(exports, "DateTime", {
   enumerable: true,
   get: function get() {
-    return _DatePicker.default;
+    return _DateTime.default;
   }
 });
 Object.defineProperty(exports, "FieldSet", {
@@ -232,7 +232,7 @@ var _Richtext = _interopRequireDefault(require("./components/Richtext"));
 
 var _Checkbox = _interopRequireDefault(require("./form/Checkbox"));
 
-var _DatePicker = _interopRequireDefault(require("./form/DatePicker"));
+var _DateTime = _interopRequireDefault(require("./form/DateTime"));
 
 var _FieldSet = _interopRequireDefault(require("./form/FieldSet"));
 

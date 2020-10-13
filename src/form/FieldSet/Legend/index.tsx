@@ -7,6 +7,8 @@ export type LegendProps = React.HTMLAttributes<HTMLElement> & {
      * @ignore
      */
     context?: React.Context<IFormFieldContext<any>>;
+
+    children: string;
 }
 
 export function Legend(props: LegendProps) {
@@ -14,11 +16,15 @@ export function Legend(props: LegendProps) {
     const { context, ...otherProps } = props;
     const { bind } = useContext(context!);
 
+    const legend = props.children || bind.instructions || '';
+
     return (
         <legend {...otherProps} className={
             bind.required ? 'is-required' : ''
-        }>
-            {props.children ?? bind.instructions}
+        }
+        >
+            {legend} {bind.required && <span className='sr-only'>,Required</span> // fieldsets do not have a native way to indicate that the group of components are required, so use the legend to communicate that: https://www.w3.org/WAI/tutorials/forms/grouping/#associating-related-controls-with-fieldset
+            }
         </legend>
     );
 }

@@ -25,14 +25,15 @@ interface IFieldSetComposition {
      */
     Success: React.FC<SuccessProps>;
 }
-declare type Props = FormFieldProps<string> & {
+declare type Props = FormFieldProps<string | string[]> & {
     /**
-     * The value of the `name` prop will cascade down to be the
-     * `name` in each child component in the `<FieldSet>`.
+     * REQUIRED - The value of the `name` prop will cascade down
+     * to be the `name` in each child component in the
+     * `<FieldSet>`.
      */
-    name?: string;
+    name: string;
 };
-export declare const Context: React.Context<IFormFieldContext<string>>;
+export declare const Context: React.Context<IFormFieldContext<string | string[]>>;
 /**
  * A set of related form components.
  */

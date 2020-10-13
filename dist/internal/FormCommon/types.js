@@ -43,7 +43,9 @@ var FieldBind = /*#__PURE__*/function () {
     (0, _defineProperty2.default)(this, "_error", '');
     (0, _defineProperty2.default)(this, "_success", '');
     (0, _defineProperty2.default)(this, "_readOnly", false);
+    (0, _defineProperty2.default)(this, "_diff", false);
     (0, _defineProperty2.default)(this, "_required", false);
+    (0, _defineProperty2.default)(this, "_controlled", false);
     (0, _defineProperty2.default)(this, "_value", null);
     (0, _defineProperty2.default)(this, "_previousValue", null);
     (0, _defineProperty2.default)(this, "onValueChange", new _Action.default());
@@ -89,6 +91,19 @@ var FieldBind = /*#__PURE__*/function () {
       this._readOnly = value;
       this.onStateChange.dispatch(this);
     }
+    /** Should the field be displayed as a diff. */
+
+  }, {
+    key: "diff",
+    get: function get() {
+      return this._diff;
+    }
+    /** On update, notify all onStateChange delegates */
+    ,
+    set: function set(value) {
+      this._diff = value;
+      this.onStateChange.dispatch(this);
+    }
     /** Should the field be required */
 
   }, {
@@ -100,6 +115,19 @@ var FieldBind = /*#__PURE__*/function () {
     ,
     set: function set(value) {
       this._required = value;
+      this.onStateChange.dispatch(this);
+    }
+    /** Should the field be controlled */
+
+  }, {
+    key: "controlled",
+    get: function get() {
+      return this._controlled;
+    }
+    /** On update, notify all onStateChange delegates */
+    ,
+    set: function set(value) {
+      this._controlled = value;
       this.onStateChange.dispatch(this);
     }
     /** The backing value for the field. */

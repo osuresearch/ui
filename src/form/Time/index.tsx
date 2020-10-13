@@ -12,7 +12,7 @@ import {
     Label, LabelProps,
     Help, HelpProps,
     Error, ErrorProps,
-    Success, SuccessProps, 
+    Success, SuccessProps,
 } from '../../internal/FormCommon/Components';
 
 type Props = FormFieldProps<string> & {
@@ -44,7 +44,10 @@ const Time: React.FC<Props> & ITimeComposition = ({
 
     return (
         <Context.Provider value={{ bind }}>
-            {children}
+            <div className={`ui-form-element ui-form-time ${bind.required ? 'is-required' : ''} ${bind.error && 'is-invalid'} ${bind.success && 'is-valid'}`}
+            >
+                {children}
+            </div>
         </Context.Provider>
     );
 }

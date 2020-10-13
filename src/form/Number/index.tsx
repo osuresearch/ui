@@ -11,11 +11,11 @@ import {
     Label, LabelProps,
     Help, HelpProps,
     Error, ErrorProps,
-    Success, SuccessProps, 
+    Success, SuccessProps,
 } from '../../internal/FormCommon/Components';
 
 type Props = FormFieldProps<string> & {
-    
+
 }
 
 interface INumberComposition extends ICommonComposition {
@@ -44,7 +44,10 @@ const Number: React.FC<Props> & INumberComposition = ({
 
     return (
         <Context.Provider value={{ bind }}>
-            {children}
+            <div className={`ui-form-element ${bind.required ? 'is-required' : ''} ${bind.error && 'is-invalid'} ${bind.success && 'is-valid'}`}
+            >
+                {children}
+            </div>
         </Context.Provider>
     );
 }

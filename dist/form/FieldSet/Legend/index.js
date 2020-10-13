@@ -16,8 +16,6 @@ var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/h
 var _react = _interopRequireWildcard(require("react"));
 
 function Legend(props) {
-  var _props$children;
-
   // Separate context from the other props (or else they are added as props to the component itself)
   var context = props.context,
       otherProps = (0, _objectWithoutProperties2.default)(props, ["context"]);
@@ -25,7 +23,11 @@ function Legend(props) {
   var _useContext = (0, _react.useContext)(context),
       bind = _useContext.bind;
 
+  var legend = props.children || bind.instructions || '';
   return /*#__PURE__*/_react.default.createElement("legend", (0, _extends2.default)({}, otherProps, {
     className: bind.required ? 'is-required' : ''
-  }), (_props$children = props.children) !== null && _props$children !== void 0 ? _props$children : bind.instructions);
+  }), legend, " ", bind.required && /*#__PURE__*/_react.default.createElement("span", {
+    className: "sr-only"
+  }, ",Required") // fieldsets do not have a native way to indicate that the group of components are required, so use the legend to communicate that: https://www.w3.org/WAI/tutorials/forms/grouping/#associating-related-controls-with-fieldset
+  );
 }

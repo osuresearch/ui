@@ -42,7 +42,9 @@ var Number = function Number(_ref) {
     value: {
       bind: bind
     }
-  }, children);
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "ui-form-element ".concat(bind.required ? 'is-required' : '', " ").concat(bind.error && 'is-invalid', " ").concat(bind.success && 'is-valid')
+  }, children));
 };
 
 Number.Input = _Input.default;

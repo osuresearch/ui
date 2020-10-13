@@ -39,5 +39,6 @@ To deploy new releases of @oris/ui, you need to follow these steps **exactly**:
 3. Update the version in `package.json` **on master**
 4. Update the `CHANGELOG.md` with the new version block **on master**
 5. Run `npm build` to rebuild the `dist` folder **on master**
-6. Tag your new version number in the format `A.B.C` **on master**
-7. Notify people of the new release, typically via a message to the Teams General chat. 
+6. Run `npm build:styleguide` to rebuild the `styleguide` folder **on master**
+7. Tag your new version number in the format `A.B.C` **on master**
+8. Notify people of the new release, typically via a message to the Teams General chat. 
