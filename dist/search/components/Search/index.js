@@ -17,6 +17,12 @@ var _AutoComplete = _interopRequireDefault(require("./AutoComplete"));
 
 var _Results = _interopRequireDefault(require("./Results"));
 
+var _Mapper = _interopRequireDefault(require("./Results/Mapper"));
+
+var _Panel = _interopRequireDefault(require("./Results/Panel"));
+
+var _AggregatePanel = _interopRequireDefault(require("./Results/AggregatePanel"));
+
 var _Error = _interopRequireDefault(require("./Error"));
 
 var _Empty = _interopRequireDefault(require("./Empty"));
@@ -56,6 +62,9 @@ var Search = function Search(_ref) {
 
 Search.AutoComplete = _AutoComplete.default;
 Search.Results = _Results.default;
+Search.Results.Mapper = _Mapper.default;
+Search.Results.Panel = _Panel.default;
+Search.Results.AggregatePanel = _AggregatePanel.default;
 Search.Error = _Error.default;
 Search.Empty = _Empty.default;
 var _default = Search;

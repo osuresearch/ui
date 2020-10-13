@@ -3,6 +3,9 @@ import { SearchDriver } from '../..';
 
 import AutoComplete, { Props as AutoCompleteProps } from './AutoComplete';
 import Results, { Props as ResultsProps, IResultsComposition } from './Results';
+import Mapper from './Results/Mapper';
+import Panel from './Results/Panel';
+import AggregatePanel from './Results/AggregatePanel';
 import Error, { Props as ErrorProps } from './Error';
 import Empty, { Props as EmptyProps } from './Empty';
 
@@ -53,6 +56,9 @@ const Search: React.FC<Props> & ISearchComposition = ({ provider, driver, childr
 
 Search.AutoComplete = AutoComplete;
 Search.Results = Results;
+Search.Results.Mapper = Mapper;
+Search.Results.Panel = Panel;
+Search.Results.AggregatePanel = AggregatePanel;
 Search.Error = Error;
 Search.Empty = Empty;
 
