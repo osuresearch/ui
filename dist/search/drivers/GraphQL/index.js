@@ -50,8 +50,9 @@ function GraphQL(query) {
 
     var _useState = (0, _react.useState)(),
         _useState2 = (0, _slicedToArray2.default)(_useState, 2),
-        setCached = _useState2[1]; // Fire off a new query if anything in the search state changes
+        setCached = _useState2[1];
 
+    console.log('filters', filters); // Fire off a new query if anything in the search state changes
 
     (0, _react.useEffect)(function () {
       callable({

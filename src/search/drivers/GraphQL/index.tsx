@@ -34,6 +34,8 @@ export default function GraphQL(query: DocumentNode) {
         const [callable, result] = useLazyQuery<GraphQLSearchResponse>(query);
         const [, setCached] = useState<SearchData>();
 
+        console.log('filters', filters);
+
         // Fire off a new query if anything in the search state changes
         useEffect(() => {
             callable({
