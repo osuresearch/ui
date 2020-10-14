@@ -1,6 +1,8 @@
 import React, { useContext } from 'react';
 import { Context } from '..';
 
+import get from 'lodash/get';
+
 import Mapper, { Props as MapperProps } from './Mapper';
 import Panel, { Props as PanelProps } from './Panel';
 import AggregatePanel, { Props as AggregatePanelProps } from './AggregatePanel';
@@ -11,6 +13,12 @@ export type Props = {
      * the results array
      */
     children: React.ReactElement;
+
+    /**
+     * Path to results array within data object - defaults to
+     * 'results'
+     */
+    resultsPath?: string;
 }
 
 export interface IResultsComposition {
@@ -25,17 +33,17 @@ export interface IResultsComposition {
  * Provide your own component to render each result (e.g. as table rows, Kanban cards, etc).
  */
 const Results: React.FC<Props> & IResultsComposition = ({
-    children
+    children,
+    resultsPath = 'search.results'
 }) => {
     const data = useContext(Context);
 
-    if (!data.results) {
-        return null;
-    }
+    const results = [''];
+
 
     return (
         <div className="search-results">
-            {React.cloneElement(children, { results: data.results })}
+            {React.cloneElement(children, { results })}
         </div>
     );
 }

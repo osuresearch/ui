@@ -18,7 +18,7 @@ const Mapper: React.FC<Props> = ({
 }) => {
     return (
         <div className="search-results">
-            {results.map((result: any, index) =>
+            {results?.map((result: any, index) =>
                 <React.Fragment key={`search-result-${index}`}>
                     {React.cloneElement(children, { result: result })}
                 </React.Fragment>

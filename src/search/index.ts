@@ -7,6 +7,7 @@ export type SearchData = {
     loading: boolean
     error?: string
     results?: any[]
+    search?: any
 }
 
 //#region Driver interfaces
@@ -90,14 +91,14 @@ export interface Sort {
 
 export function AND(filters: IFilter[], name?: string): AndFilters {
     return {
-        name, 
+        name,
         AND: filters
     };
 }
 
 export function OR(filters: IFilter[], name?: string): OrFilters {
     return {
-        name, 
+        name,
         OR: filters
     };
 }

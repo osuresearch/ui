@@ -37,7 +37,7 @@ export default function Mock() {
         updateSearchData
     }) => {
         const { terms, sort, filters } = useSearch(provider);
-        
+
         let people: any[] = [];
         // Fire off a new query if anything in the search state changes
         useEffect(() => {
@@ -60,7 +60,7 @@ export default function Mock() {
                     } else if (key === 'otherEmailDomain') {
                         otherEmailDomain = value;
                     }
-                    
+
                 } else if (Object.keys(f).indexOf('anyOf')) {
                     states = (f as AnyOf).anyOf.state;
                 }
@@ -73,16 +73,16 @@ export default function Mock() {
                     const re = new RegExp(terms, 'i');
                     match = p.name.match(re) !== null
                         || p.address.match(re) !== null
-                        || p.title.match(re) !== null 
+                        || p.title.match(re) !== null
                         || p.city.match(re) !== null
                         || p.state.match(re) !== null
                         || p.email.match(re) !== null;
                 }
-                
+
                 console.debug(ageRange);
                 match = match && p.age >= ageRange[0] && p.age <= ageRange[1];
-                
-                match = match 
+
+                match = match
                     && (emailDomain.length < 1 || p.email.endsWith(emailDomain))
                     && (otherEmailDomain.length < 1 || p.email.endsWith(otherEmailDomain));
 
@@ -98,14 +98,16 @@ export default function Mock() {
 
             const data: SearchData = {
                 loading: false,
-                results
+                search: {
+                    results
+                }
             };
 
             console.debug('SENDING MOCK DATA', data);
 
             updateSearchData(data);
         }, [terms, filters, sort, updateSearchData]);
-        
+
         // Driver components are renderless. It's just a stateful container
         return null;
     }
