@@ -1,11 +1,9 @@
 import React, { useContext } from 'react';
 import { Context } from '..';
 
-import get from 'lodash/get';
-
 import Mapper, { Props as MapperProps } from './Mapper';
 import Panel, { Props as PanelProps } from './Panel';
-import AggregatePanel, { Props as AggregatePanelProps } from './AggregatePanel';
+import AggregatePanel, { Props as AggregatePanelProps, PanelMethods } from './AggregatePanel';
 
 export type Props = {
     /**
@@ -18,7 +16,7 @@ export type Props = {
 export interface IResultsComposition {
     Mapper: React.FC<MapperProps>
     Panel: React.FC<PanelProps>
-    AggregatePanel: React.FC<AggregatePanelProps>
+    AggregatePanel: React.ForwardRefExoticComponent<AggregatePanelProps & React.RefAttributes<PanelMethods>>
 }
 
 // Because I can't write a simple recursive function, apparently: https://stackoverflow.com/a/39596586

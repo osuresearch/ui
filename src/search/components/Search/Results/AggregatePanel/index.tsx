@@ -8,7 +8,7 @@ import Error from '../../Error';
 
 import './index.scss';
 
-interface PanelMethods {
+export interface PanelMethods {
     show: () => void;
     hide: () => void;
 }

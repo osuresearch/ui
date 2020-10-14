@@ -5,7 +5,7 @@ import useSearch from '../../../hooks/useSearch';
 import PrefixIcon from './PrefixIcon';
 import Icon from '../../../../components/Icon';
 
-interface SearchMethods {
+export interface SearchMethods {
     /**
      * Reset the search to what was supplied in the `defaultValue` prop
      */

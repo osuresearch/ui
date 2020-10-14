@@ -1,5 +1,5 @@
 import React from 'react';
-interface SearchMethods {
+export interface SearchMethods {
     /**
      * Reset the search to what was supplied in the `defaultValue` prop
      */

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Props as MapperProps } from './Mapper';
 import { Props as PanelProps } from './Panel';
-import { Props as AggregatePanelProps } from './AggregatePanel';
+import { Props as AggregatePanelProps, PanelMethods } from './AggregatePanel';
 export declare type Props = {
     /**
      * A **single** React Element Component that will receive
@@ -12,7 +12,7 @@ export declare type Props = {
 export interface IResultsComposition {
     Mapper: React.FC<MapperProps>;
     Panel: React.FC<PanelProps>;
-    AggregatePanel: React.FC<AggregatePanelProps>;
+    AggregatePanel: React.ForwardRefExoticComponent<AggregatePanelProps & React.RefAttributes<PanelMethods>>;
 }
 /**
  * Render the results of a search as a simple list of components.

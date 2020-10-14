@@ -1,6 +1,6 @@
 import React from 'react';
 import './index.scss';
-interface PanelMethods {
+export interface PanelMethods {
     show: () => void;
     hide: () => void;
 }
