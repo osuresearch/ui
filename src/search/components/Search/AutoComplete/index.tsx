@@ -40,12 +40,6 @@ export type Props = {
     provider: string
 
     /**
-     * Unique name (and ID) of the search input. This is required in order to
-     * ensure that the appropriate Aria tags are set on the input and search results.
-     */
-    name: string
-
-    /**
      * Preloaded value to start with when initializing the component
      */
     defaultValue?: SearchValue
@@ -79,7 +73,6 @@ export type Props = {
 
 const AutoComplete = React.forwardRef<SearchMethods, Props>(({
     provider,
-    name,
     defaultValue,
     placeholder,
     onChange,
@@ -152,8 +145,8 @@ const AutoComplete = React.forwardRef<SearchMethods, Props>(({
             <PrefixIcon searching={false} error={false} />
 
             <input
-                id={name}
-                name={name}
+                id={provider}
+                name={provider}
                 type="text"
                 className={classNames}
                 value={terms || value?.display}
@@ -161,7 +154,7 @@ const AutoComplete = React.forwardRef<SearchMethods, Props>(({
                 autoComplete="off"
                 aria-autocomplete="list"
                 aria-haspopup="true"
-                aria-owns={name + '-results'}
+                aria-owns={provider + '-results'}
                 readOnly={lockSearchInput || readOnly}
                 ref={input}
                 onChange={(e) => setTerms(e.target.value)}

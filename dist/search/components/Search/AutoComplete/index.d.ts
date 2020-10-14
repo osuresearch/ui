@@ -29,11 +29,6 @@ export declare type Props = {
      */
     provider: string;
     /**
-     * Unique name (and ID) of the search input. This is required in order to
-     * ensure that the appropriate Aria tags are set on the input and search results.
-     */
-    name: string;
-    /**
      * Preloaded value to start with when initializing the component
      */
     defaultValue?: SearchValue;

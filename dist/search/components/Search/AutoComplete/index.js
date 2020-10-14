@@ -21,7 +21,6 @@ var _Icon = _interopRequireDefault(require("../../../../components/Icon"));
 
 var AutoComplete = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
   var provider = _ref.provider,
-      name = _ref.name,
       defaultValue = _ref.defaultValue,
       placeholder = _ref.placeholder,
       onChange = _ref.onChange,
@@ -120,8 +119,8 @@ var AutoComplete = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
     searching: false,
     error: false
   }), /*#__PURE__*/_react.default.createElement("input", {
-    id: name,
-    name: name,
+    id: provider,
+    name: provider,
     type: "text",
     className: classNames,
     value: terms || (value === null || value === void 0 ? void 0 : value.display),
@@ -129,7 +128,7 @@ var AutoComplete = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
     autoComplete: "off",
     "aria-autocomplete": "list",
     "aria-haspopup": "true",
-    "aria-owns": name + '-results',
+    "aria-owns": provider + '-results',
     readOnly: lockSearchInput || readOnly,
     ref: input,
     onChange: function onChange(e) {
