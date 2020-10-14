@@ -6,7 +6,8 @@ import Mock from '@oris/ui/search/drivers/Mock';
 
 const [showPanel, setShowPanel] = useState(false);
 
-const ref = useRef();
+const autoCompleteRef = useRef();
+const resultsRef = useRef();
 
 const ResultComponent = ({ result }) => (
     <button className="dropdown-item" type="button" 
@@ -19,6 +20,7 @@ const Placeholder = () => (
     <div class="row">
                 <div class="col-6 search-tips">
                     <span class="text-muted">Search Tips</span>
+                    <a href="#">Anchor</a>
                     <ul class="list-unstyled">
                         <li>
                             Type the important words:
@@ -38,17 +40,20 @@ const Placeholder = () => (
             </div>
 );
 
+console.log('results ref', resultsRef.current);
+
 <SearchProvider id="autocomplete">
     <Search provider="autocomplete" driver={Mock()}>
         <Search.AutoComplete 
             provider="autocomplete" 
-            ref={ref}
-            onFocus={() => setShowPanel(true)}
+            ref={autoCompleteRef}
+            onFocus={() => resultsRef.current.show()}
+            onBlur={() => resultsRef.current.hide()}
         />
 
-        {showPanel &&
             <Search.Results>
                 <Search.Results.AggregatePanel 
+                    ref={resultsRef}
                     provider="autocomplete"
                     categorizeBy="state"
                     placeholder={Placeholder}
@@ -56,7 +61,6 @@ const Placeholder = () => (
                     <ResultComponent />
                 </Search.Results.AggregatePanel>
             </Search.Results>
-        }
     </Search>
 
     <SearchDebugger provider="autocomplete" />

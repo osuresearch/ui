@@ -1,7 +1,8 @@
 import React from 'react';
 import './index.scss';
-export interface Buckets {
-    [key: string]: any;
+interface PanelMethods {
+    show: () => void;
+    hide: () => void;
 }
 export declare type Props = {
     provider: string;
@@ -15,6 +16,6 @@ export declare type Props = {
     placeholder?: React.FC;
     children: React.ReactElement;
 };
-declare const AggregatePanel: React.FC<Props>;
+declare const AggregatePanel: React.ForwardRefExoticComponent<Props & React.RefAttributes<PanelMethods>>;
 export default AggregatePanel;
 //# sourceMappingURL=index.d.ts.map

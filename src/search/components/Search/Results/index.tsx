@@ -13,12 +13,6 @@ export type Props = {
      * the results array
      */
     children: React.ReactElement;
-
-    /**
-     * Path to results array within data object - defaults to
-     * 'results'
-     */
-    resultsPath?: string;
 }
 
 export interface IResultsComposition {
@@ -27,19 +21,39 @@ export interface IResultsComposition {
     AggregatePanel: React.FC<AggregatePanelProps>
 }
 
+// Because I can't write a simple recursive function, apparently: https://stackoverflow.com/a/39596586
+function FindInObjByKey(obj: { [key: string]: any }, key: string): any {
+    let result;
+
+    for (let property in obj) {
+        if (obj.hasOwnProperty(property)) {
+            if (property === key) {
+                return obj[key]; // returns the value
+            }
+            else if (typeof obj[property] === "object") {
+                // Go deeper in an object
+                result = FindInObjByKey(obj[property], key);
+
+                if (typeof result !== "undefined") {
+                    return result;
+                }
+            }
+        }
+    }
+}
+
 /**
  * Render the results of a search as a simple list of components. 
  * 
  * Provide your own component to render each result (e.g. as table rows, Kanban cards, etc).
  */
 const Results: React.FC<Props> & IResultsComposition = ({
-    children,
-    resultsPath = 'search.results'
+    children
 }) => {
     const data = useContext(Context);
 
-    const results = [''];
-
+    // Locate the (possibly nested) results array in the data object
+    const results = FindInObjByKey(data, 'results');
 
     return (
         <div className="search-results">

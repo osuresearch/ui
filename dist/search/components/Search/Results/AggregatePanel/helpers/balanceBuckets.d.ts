@@ -1,4 +1,4 @@
-import { Buckets } from '../';
+import { Buckets } from '../DisplayResults';
 /**
  * Balance a column of bucket results based on number of
  * results in each bucket against a maximum number of results

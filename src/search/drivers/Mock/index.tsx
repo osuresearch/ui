@@ -98,9 +98,7 @@ export default function Mock() {
 
             const data: SearchData = {
                 loading: false,
-                search: {
-                    results
-                }
+                results
             };
 
             console.debug('SENDING MOCK DATA', data);

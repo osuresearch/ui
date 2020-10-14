@@ -1,5 +1,5 @@
 
-import { Buckets } from '../';
+import { Buckets } from '../DisplayResults';
 
 /**
  * Group JSON results payloads into buckets based on our categorizer
