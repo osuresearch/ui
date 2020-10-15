@@ -53,6 +53,13 @@ const AggregatePanel = React.forwardRef<PanelMethods, Props>(({
         }, 1);
     }
 
+    const handleKeyDown = (e: React.KeyboardEvent) => {
+        // Hide the panel if the escape key is pressed
+        if (e.key === 'Escape') {
+            setShow(false);
+        }
+    }
+
     useImperativeHandle(ref, () => ({
         show: () => setShow(true),
         hide: () => handleHide()
@@ -75,6 +82,7 @@ const AggregatePanel = React.forwardRef<PanelMethods, Props>(({
             style={{ display: show ? 'block' : 'none' }}
             ref={panel}
             onBlur={handleHide}
+            onKeyDown={handleKeyDown}
         >
             <Placeholder />
 

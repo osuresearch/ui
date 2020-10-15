@@ -56,6 +56,13 @@ var AggregatePanel = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref)
     }, 1);
   };
 
+  var handleKeyDown = function handleKeyDown(e) {
+    // Hide the panel if the escape key is pressed
+    if (e.key === 'Escape') {
+      setShow(false);
+    }
+  };
+
   (0, _react.useImperativeHandle)(ref, function () {
     return {
       show: function show() {
@@ -84,7 +91,8 @@ var AggregatePanel = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref)
       display: show ? 'block' : 'none'
     },
     ref: panel,
-    onBlur: handleHide
+    onBlur: handleHide,
+    onKeyDown: handleKeyDown
   }, /*#__PURE__*/_react.default.createElement(Placeholder, null), /*#__PURE__*/_react.default.createElement(_DisplayResults.default, {
     terms: terms,
     results: results,

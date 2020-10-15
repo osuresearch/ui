@@ -78,8 +78,7 @@ const DisplayResults: React.FC<Props> = ({
                     {// If the total number of results exceeds the results array limit, display a prompt to narrow their search
                         totalResults && (totalResults - results.length) > 0 &&
                         <div className="dropdown-header">
-                            There are <strong>{totalResults - results.length}</strong> additional
-                                results. Please narrow your search.
+                            There are <strong>{totalResults - results.length}</strong> additional results. <strong>Tip:</strong> Narrow your search for more relevant results.
                         </div>
                     }
                 </>

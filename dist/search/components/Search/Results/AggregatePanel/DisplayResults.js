@@ -66,7 +66,7 @@ var DisplayResults = function DisplayResults(_ref) {
       }))), // If the total number of results exceeds the results array limit, display a prompt to narrow their search
       totalResults && totalResults - results.length > 0 && /*#__PURE__*/_react.default.createElement("div", {
         className: "dropdown-header"
-      }, "There are ", /*#__PURE__*/_react.default.createElement("strong", null, totalResults - results.length), " additional results. Please narrow your search."));
+      }, "There are ", /*#__PURE__*/_react.default.createElement("strong", null, totalResults - results.length), " additional results. ", /*#__PURE__*/_react.default.createElement("strong", null, "Tip:"), " Narrow your search for more relevant results."));
     }
   }
 

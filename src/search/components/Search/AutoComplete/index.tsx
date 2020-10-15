@@ -164,6 +164,30 @@ const AutoComplete = React.forwardRef<SearchMethods, Props>(({
         }, 1);
     }
 
+    const handleInputBlur = () => {
+        // Only fire off onBlur if the cancelButton does not have focus
+        setTimeout(() => {
+            if (document.activeElement !== clearButton.current) {
+                if (onBlur) onBlur()
+            }
+        }, 1);
+    }
+
+    const handleKeyDown = (e: React.KeyboardEvent) => {
+        switch (e.key) {
+            case 'Escape':
+                // Fire off the onBlur event on Escape key down
+                if (onBlur) onBlur();
+                break;
+            case 'Tab':
+            case 'Enter':
+                break;
+            default:
+                // Fire off onFocus event for most other keys (i.e. the user continues to type)
+                if (onFocus) onFocus();
+        }
+    }
+
     let classNames = 'form-control search-input';
 
     if (value?.display) {
@@ -193,6 +217,8 @@ const AutoComplete = React.forwardRef<SearchMethods, Props>(({
                 ref={input}
                 onChange={handleChange}
                 onFocus={handleFocus}
+                onBlur={handleInputBlur}
+                onKeyDown={handleKeyDown}
             />
 
             <button
@@ -203,6 +229,7 @@ const AutoComplete = React.forwardRef<SearchMethods, Props>(({
                 onClick={clear}
                 onFocus={handleFocus}
                 onBlur={onBlur}
+                onKeyDown={handleKeyDown}
                 style={{ display: value?.display && !readOnly ? 'block' : 'none' }}
             >
                 <Icon name="close"></Icon>

@@ -134,6 +134,32 @@ var AutoComplete = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
     }, 1);
   };
 
+  var handleInputBlur = function handleInputBlur() {
+    // Only fire off onBlur if the cancelButton does not have focus
+    setTimeout(function () {
+      if (document.activeElement !== clearButton.current) {
+        if (onBlur) onBlur();
+      }
+    }, 1);
+  };
+
+  var handleKeyDown = function handleKeyDown(e) {
+    switch (e.key) {
+      case 'Escape':
+        // Fire off the onBlur event on Escape key down
+        if (onBlur) onBlur();
+        break;
+
+      case 'Tab':
+      case 'Enter':
+        break;
+
+      default:
+        // Fire off onFocus event for most other keys (i.e. the user continues to type)
+        if (onFocus) onFocus();
+    }
+  };
+
   var classNames = 'form-control search-input';
 
   if (value === null || value === void 0 ? void 0 : value.display) {
@@ -162,7 +188,9 @@ var AutoComplete = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
     readOnly: lockSearchInput || readOnly,
     ref: input,
     onChange: handleChange,
-    onFocus: handleFocus
+    onFocus: handleFocus,
+    onBlur: handleInputBlur,
+    onKeyDown: handleKeyDown
   }), /*#__PURE__*/_react.default.createElement("button", {
     ref: clearButton,
     className: "btn btn-link search-clear",
@@ -171,6 +199,7 @@ var AutoComplete = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
     onClick: _clear,
     onFocus: handleFocus,
     onBlur: onBlur,
+    onKeyDown: handleKeyDown,
     style: {
       display: (value === null || value === void 0 ? void 0 : value.display) && !readOnly ? 'block' : 'none'
     }
