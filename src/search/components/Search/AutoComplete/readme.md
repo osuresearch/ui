@@ -47,6 +47,8 @@ console.log('results ref', resultsRef.current);
         <Search.AutoComplete 
             provider="autocomplete" 
             ref={autoCompleteRef}
+            label="Search"
+            labelMode="placeholder"
             onFocus={() => resultsRef.current.show()}
             onBlur={() => resultsRef.current.hide()}
         />

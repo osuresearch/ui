@@ -32,8 +32,18 @@ export declare type Props = {
      * Preloaded value to start with when initializing the component
      */
     defaultValue?: SearchValue;
-    /** Placeholder text to appear in Search box */
-    placeholder?: string;
+    /** Label text */
+    label: string;
+    /**
+     * Label Mode
+     *
+     * `hidden` (default) - do not show the label
+     *
+     * `visible` - display the label above the search field
+     *
+     * `placeholder` - display the label as placeholder text in an accessible way
+     */
+    labelMode?: 'hidden' | 'visible' | 'placeholder';
     /**
      * Callable for when an item is selected from the search results, or the search is cleared.
      *

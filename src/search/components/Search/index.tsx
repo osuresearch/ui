@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { SearchDriver } from '../..';
+import useSearch from '../../hooks/useSearch';
 
 import AutoComplete, { Props as AutoCompleteProps } from './AutoComplete';
 import Results, { Props as ResultsProps, IResultsComposition } from './Results';
@@ -44,6 +45,15 @@ export const Context = React.createContext<ISearchContext>({} as ISearchContext)
  */
 const Search: React.FC<Props> & ISearchComposition = ({ provider, driver, children }) => {
     const [data, setData] = useState<ISearchContext>({ loading: true });
+    const { setSearching, setResults, setError } = useSearch(provider);
+
+    useEffect(() => {
+        if (data) {
+            setSearching(data.loading);
+            setResults(data.results);
+            setError(data.error);
+        }
+    }, [data, setError, setResults, setSearching]);
 
     const DriverComponent = driver;
     return (

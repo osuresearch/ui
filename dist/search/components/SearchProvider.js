@@ -40,7 +40,22 @@ var SearchProvider = function SearchProvider(_ref) {
   }),
       _useState4 = (0, _slicedToArray2.default)(_useState3, 2),
       filters = _useState4[0],
-      setFilters = _useState4[1]; // Prepare for some magic.
+      setFilters = _useState4[1];
+
+  var _useState5 = (0, _react.useState)(false),
+      _useState6 = (0, _slicedToArray2.default)(_useState5, 2),
+      searching = _useState6[0],
+      setSearching = _useState6[1];
+
+  var _useState7 = (0, _react.useState)(),
+      _useState8 = (0, _slicedToArray2.default)(_useState7, 2),
+      results = _useState8[0],
+      setResults = _useState8[1];
+
+  var _useState9 = (0, _react.useState)(),
+      _useState10 = (0, _slicedToArray2.default)(_useState9, 2),
+      error = _useState10[0],
+      setError = _useState10[1]; // Prepare for some magic.
   // The tl;dr: I'm dynamically creating named contexts stored in a
   // singleton map and providing each one mapped directly to a named (id) search provider.
   // This allows me to reuse a context structure for more than dataset, since each
@@ -51,11 +66,11 @@ var SearchProvider = function SearchProvider(_ref) {
   // existing provider (only executes init once when initially setting up the state)
 
 
-  var _useState5 = (0, _react.useState)(function () {
+  var _useState11 = (0, _react.useState)(function () {
     return (0, _SearchContext.initDynamicContext)(id, {});
   }),
-      _useState6 = (0, _slicedToArray2.default)(_useState5, 1),
-      context = _useState6[0]; // Destroy the dynamic context on unmount.
+      _useState12 = (0, _slicedToArray2.default)(_useState11, 1),
+      context = _useState12[0]; // Destroy the dynamic context on unmount.
 
 
   (0, _react.useEffect)(function () {
@@ -70,6 +85,9 @@ var SearchProvider = function SearchProvider(_ref) {
       terms: terms,
       filters: filters.filters,
       sort: filters.sort,
+      searching: searching,
+      results: results,
+      error: error,
       setTerms: setTerms,
       setSort: function setSort(sort) {
         setFilters(function (prev) {
@@ -94,9 +112,12 @@ var SearchProvider = function SearchProvider(_ref) {
       },
       replaceFilters: function replaceFilters(filters) {
         setFilters(new _.SearchFilters(filters));
-      }
+      },
+      setSearching: setSearching,
+      setResults: setResults,
+      setError: setError
     };
-  }, [terms, filters, setTerms, setFilters]); // Note this can't just be value={context} because we need to be
+  }, [terms, filters, searching, results, error]); // Note this can't just be value={context} because we need to be
   // able to rewrite query/filters on state change.
 
   return /*#__PURE__*/_react.default.createElement(context.Provider, {

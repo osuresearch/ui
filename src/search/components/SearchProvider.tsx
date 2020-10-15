@@ -1,17 +1,17 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
-import { 
-    SearchFilters, 
-    SearchContext, 
-    SearchTerms, 
+import {
+    SearchFilters,
+    SearchContext,
+    SearchTerms,
     Sort,
-    IFilter, 
+    IFilter,
     ISearchContext,
 } from '..';
 
-import { 
-    destroyDynamicContext, 
-    initDynamicContext 
+import {
+    destroyDynamicContext,
+    initDynamicContext
 } from '../SearchContext';
 
 export type Props = {
@@ -28,7 +28,7 @@ export type Props = {
      * defined here will be overridden by the URL data.
      */
     defaultTerms?: SearchTerms
-    
+
     /**
      * Default search filters to use when loading up the application.
      * 
@@ -44,16 +44,19 @@ export type Props = {
  * All search components (`<Filters>`, `<Search>`, etc) **must** be associated
  * with a provider to share state information. 
  */
-const SearchProvider: React.FC<Props> = ({ 
-    id, 
-    defaultTerms = '', 
+const SearchProvider: React.FC<Props> = ({
+    id,
+    defaultTerms = '',
     defaultFilters,
-    children 
+    children
 }) => {
     const [terms, setTerms] = useState<string>(defaultTerms);
     const [filters, setFilters] = useState<SearchFilters>(
         () => defaultFilters ? defaultFilters.clone() : new SearchFilters()
     );
+    const [searching, setSearching] = useState(false);
+    const [results, setResults] = useState<any[] | undefined>();
+    const [error, setError] = useState<string | undefined>();
 
     // Prepare for some magic.
 
@@ -66,7 +69,7 @@ const SearchProvider: React.FC<Props> = ({
     // add a useEffect on change but really it should be a usage error.
     // The callback argument for useState is done so that we don't overwrite an 
     // existing provider (only executes init once when initially setting up the state)
-    const [context, ] = useState<SearchContext>(
+    const [context,] = useState<SearchContext>(
         () => initDynamicContext(id, {} as ISearchContext)
     );
 
@@ -82,6 +85,9 @@ const SearchProvider: React.FC<Props> = ({
         terms,
         filters: filters.filters,
         sort: filters.sort,
+        searching,
+        results,
+        error,
         setTerms,
         setSort(sort: Sort | undefined) {
             setFilters((prev) => prev.sortBy(sort));
@@ -101,7 +107,10 @@ const SearchProvider: React.FC<Props> = ({
         replaceFilters(filters: IFilter[]) {
             setFilters(new SearchFilters(filters));
         },
-    }), [terms, filters, setTerms, setFilters]);
+        setSearching,
+        setResults,
+        setError
+    }), [terms, filters, searching, results, error]);
 
     // Note this can't just be value={context} because we need to be
     // able to rewrite query/filters on state change.

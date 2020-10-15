@@ -1,6 +1,8 @@
 
-import React, { useState, useEffect, useRef, useImperativeHandle } from 'react';
+import React, { useState, useEffect, useRef, useCallback, useImperativeHandle } from 'react';
 import useSearch from '../../../hooks/useSearch';
+
+import throttle from 'lodash/throttle';
 
 import PrefixIcon from './PrefixIcon';
 import Icon from '../../../../components/Icon';
@@ -44,8 +46,19 @@ export type Props = {
      */
     defaultValue?: SearchValue
 
-    /** Placeholder text to appear in Search box */
-    placeholder?: string
+    /** Label text */
+    label: string;
+
+    /** 
+     * Label Mode
+     * 
+     * `hidden` (default) - do not show the label
+     * 
+     * `visible` - display the label above the search field
+     * 
+     * `placeholder` - display the label as placeholder text in an accessible way
+     */
+    labelMode?: 'hidden' | 'visible' | 'placeholder';
 
     /**
      * Callable for when an item is selected from the search results, or the search is cleared.
@@ -73,14 +86,15 @@ export type Props = {
 
 const AutoComplete = React.forwardRef<SearchMethods, Props>(({
     provider,
-    defaultValue,
-    placeholder,
+    defaultValue = { display: '' },
+    label,
+    labelMode = 'hidden',
     onChange,
     onFocus,
     onBlur,
     readOnly
 }, ref) => {
-    const { setTerms, terms } = useSearch(provider);
+    const { setTerms, searching, error } = useSearch(provider);
     const [value, setValue] = useState(defaultValue);
     const [lockSearchInput, setLockSearchInput] = useState(false);
 
@@ -134,30 +148,41 @@ const AutoComplete = React.forwardRef<SearchMethods, Props>(({
         if (onChange) onChange(value);
     }
 
+    const updateTerms = useCallback(throttle(terms => setTerms(terms), 750), []);
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        set(e.target.value);
+        updateTerms(e.target.value);
+    }
+
     let classNames = 'form-control search-input';
 
     if (value?.display) {
         classNames += ' search-input-has-value';
     }
 
-    return (
+    return (<>
+        <label htmlFor={provider} className={labelMode === 'visible' ? '' : 'sr-only'}>
+            {label}
+        </label>
+
         <div className="input-group search">
-            <PrefixIcon searching={false} error={false} />
+            <PrefixIcon searching={searching} error={error ? true : false} />
 
             <input
                 id={provider}
                 name={provider}
                 type="text"
                 className={classNames}
-                value={terms || value?.display}
-                placeholder={placeholder}
+                value={value?.display}
+                placeholder={labelMode === 'placeholder' ? label : undefined}
                 autoComplete="off"
                 aria-autocomplete="list"
                 aria-haspopup="true"
                 aria-owns={provider + '-results'}
                 readOnly={lockSearchInput || readOnly}
                 ref={input}
-                onChange={(e) => setTerms(e.target.value)}
+                onChange={handleChange}
                 onFocus={onFocus}
                 onBlur={onBlur}
             />
@@ -171,7 +196,7 @@ const AutoComplete = React.forwardRef<SearchMethods, Props>(({
                 </button>
             }
         </div>
-    );
+    </>);
 });
 
 export default AutoComplete;

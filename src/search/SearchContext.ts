@@ -12,9 +12,18 @@ export interface ISearchContext {
     /** Current sort rules */
     sort: Sort | undefined
 
+    /** Search is being executed */
+    searching: boolean
+
+    /** Results from search */
+    results?: any[]
+
+    /** Error */
+    error?: string
+
     /** Update search terms */
     setTerms(value: SearchTerms): void
-    
+
     /** Update sort rules */
     setSort(sort: Sort | undefined): void
 
@@ -29,9 +38,18 @@ export interface ISearchContext {
 
     /** Delete a filter with the given name */
     deleteFilter(name: string): void
-    
+
     /** Replace the whole set of search filters with a new set */
     replaceFilters(filters: IFilter[]): void
+
+    /** Set searching state */
+    setSearching(searching: boolean): void
+
+    /** Set results */
+    setResults(results?: any[]): void
+
+    /** Set error */
+    setError(error?: string): void;
 }
 
 /** Shorthand for typing a React Context storing search data */
@@ -53,7 +71,7 @@ export function initDynamicContext(provider: string, data: ISearchContext): Sear
     // }
 
     console.debug(`[initDynamicContext(${provider})]`, data);
-    
+
     const context = createContext<ISearchContext>(data);
     __dynamicContextMap.set(provider, context);
     return context;
@@ -64,7 +82,7 @@ export function initDynamicContext(provider: string, data: ISearchContext): Sear
  */
 export function destroyDynamicContext(provider: string) {
     console.debug(`[destroyDynamicContext(${provider})]`, __dynamicContextMap.get(provider));
-    
+
     __dynamicContextMap.delete(provider);
 }
 

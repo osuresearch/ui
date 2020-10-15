@@ -15,14 +15,21 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _useSearch2 = _interopRequireDefault(require("../../../hooks/useSearch"));
 
+var _throttle = _interopRequireDefault(require("lodash/throttle"));
+
 var _PrefixIcon = _interopRequireDefault(require("./PrefixIcon"));
 
 var _Icon = _interopRequireDefault(require("../../../../components/Icon"));
 
 var AutoComplete = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
   var provider = _ref.provider,
-      defaultValue = _ref.defaultValue,
-      placeholder = _ref.placeholder,
+      _ref$defaultValue = _ref.defaultValue,
+      defaultValue = _ref$defaultValue === void 0 ? {
+    display: ''
+  } : _ref$defaultValue,
+      label = _ref.label,
+      _ref$labelMode = _ref.labelMode,
+      labelMode = _ref$labelMode === void 0 ? 'hidden' : _ref$labelMode,
       onChange = _ref.onChange,
       onFocus = _ref.onFocus,
       onBlur = _ref.onBlur,
@@ -30,7 +37,8 @@ var AutoComplete = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
 
   var _useSearch = (0, _useSearch2.default)(provider),
       setTerms = _useSearch.setTerms,
-      terms = _useSearch.terms;
+      searching = _useSearch.searching,
+      error = _useSearch.error;
 
   var _useState = (0, _react.useState)(defaultValue),
       _useState2 = (0, _slicedToArray2.default)(_useState, 2),
@@ -107,33 +115,44 @@ var AutoComplete = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
     if (onChange) onChange(value);
   };
 
+  var updateTerms = (0, _react.useCallback)((0, _throttle.default)(function (terms) {
+    return setTerms(terms);
+  }, 750), []);
+
+  var handleChange = function handleChange(e) {
+    _set(e.target.value);
+
+    updateTerms(e.target.value);
+  };
+
   var classNames = 'form-control search-input';
 
   if (value === null || value === void 0 ? void 0 : value.display) {
     classNames += ' search-input-has-value';
   }
 
-  return /*#__PURE__*/_react.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("label", {
+    htmlFor: provider,
+    className: labelMode === 'visible' ? '' : 'sr-only'
+  }, label), /*#__PURE__*/_react.default.createElement("div", {
     className: "input-group search"
   }, /*#__PURE__*/_react.default.createElement(_PrefixIcon.default, {
-    searching: false,
-    error: false
+    searching: searching,
+    error: error ? true : false
   }), /*#__PURE__*/_react.default.createElement("input", {
     id: provider,
     name: provider,
     type: "text",
     className: classNames,
-    value: terms || (value === null || value === void 0 ? void 0 : value.display),
-    placeholder: placeholder,
+    value: value === null || value === void 0 ? void 0 : value.display,
+    placeholder: labelMode === 'placeholder' ? label : undefined,
     autoComplete: "off",
     "aria-autocomplete": "list",
     "aria-haspopup": "true",
     "aria-owns": provider + '-results',
     readOnly: lockSearchInput || readOnly,
     ref: input,
-    onChange: function onChange(e) {
-      return setTerms(e.target.value);
-    },
+    onChange: handleChange,
     onFocus: onFocus,
     onBlur: onBlur
   }), (value === null || value === void 0 ? void 0 : value.display) && !readOnly && /*#__PURE__*/_react.default.createElement("button", {
@@ -143,7 +162,7 @@ var AutoComplete = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
     onClick: _clear
   }, /*#__PURE__*/_react.default.createElement(_Icon.default, {
     name: "close"
-  })));
+  }))));
 });
 
 var _default = AutoComplete;

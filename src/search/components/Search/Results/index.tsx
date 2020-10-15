@@ -19,27 +19,6 @@ export interface IResultsComposition {
     AggregatePanel: React.ForwardRefExoticComponent<AggregatePanelProps & React.RefAttributes<PanelMethods>>
 }
 
-// Because I can't write a simple recursive function, apparently: https://stackoverflow.com/a/39596586
-function FindInObjByKey(obj: { [key: string]: any }, key: string): any {
-    let result;
-
-    for (let property in obj) {
-        if (obj.hasOwnProperty(property)) {
-            if (property === key) {
-                return obj[key]; // returns the value
-            }
-            else if (typeof obj[property] === "object") {
-                // Go deeper in an object
-                result = FindInObjByKey(obj[property], key);
-
-                if (typeof result !== "undefined") {
-                    return result;
-                }
-            }
-        }
-    }
-}
-
 /**
  * Render the results of a search as a simple list of components. 
  * 
@@ -49,9 +28,7 @@ const Results: React.FC<Props> & IResultsComposition = ({
     children
 }) => {
     const data = useContext(Context);
-
-    // Locate the (possibly nested) results array in the data object
-    const results = FindInObjByKey(data, 'results');
+    const results = data.results;
 
     return (
         <div className="search-results">

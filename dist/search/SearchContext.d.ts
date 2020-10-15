@@ -8,6 +8,12 @@ export interface ISearchContext {
     filters: IFilter[];
     /** Current sort rules */
     sort: Sort | undefined;
+    /** Search is being executed */
+    searching: boolean;
+    /** Results from search */
+    results?: any[];
+    /** Error */
+    error?: string;
     /** Update search terms */
     setTerms(value: SearchTerms): void;
     /** Update sort rules */
@@ -21,6 +27,12 @@ export interface ISearchContext {
     deleteFilter(name: string): void;
     /** Replace the whole set of search filters with a new set */
     replaceFilters(filters: IFilter[]): void;
+    /** Set searching state */
+    setSearching(searching: boolean): void;
+    /** Set results */
+    setResults(results?: any[]): void;
+    /** Set error */
+    setError(error?: string): void;
 }
 /** Shorthand for typing a React Context storing search data */
 export declare type SearchContext = Context<ISearchContext>;

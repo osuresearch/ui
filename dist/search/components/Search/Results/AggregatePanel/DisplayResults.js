@@ -9,6 +9,8 @@ exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
+var _RenderCategory = _interopRequireDefault(require("./RenderCategory"));
+
 var _createBuckets = _interopRequireDefault(require("./helpers/createBuckets"));
 
 var _balanceBuckets = _interopRequireDefault(require("./helpers/balanceBuckets"));
@@ -19,22 +21,6 @@ var DisplayResults = function DisplayResults(_ref) {
       categorizeBy = _ref.categorizeBy,
       totalResults = _ref.totalResults,
       children = _ref.children;
-
-  var renderCategory = function renderCategory(category, results) {
-    return /*#__PURE__*/_react.default.createElement("div", {
-      className: "search-category"
-    }, /*#__PURE__*/_react.default.createElement("div", {
-      className: "search-category-header"
-    }, category), /*#__PURE__*/_react.default.createElement("ul", {
-      className: "search-category-results"
-    }, results.map(function (result, idx) {
-      return /*#__PURE__*/_react.default.createElement("li", {
-        key: "search-result-".concat(idx)
-      }, /*#__PURE__*/_react.default.cloneElement(children, {
-        result: result
-      }));
-    })));
-  };
 
   if (terms) {
     // At least one result came back
@@ -60,12 +46,20 @@ var DisplayResults = function DisplayResults(_ref) {
         className: "row"
       }, /*#__PURE__*/_react.default.createElement("div", {
         className: "col-6"
-      }, leftKeys.map(function (key) {
-        return renderCategory(key, leftBuckets[key]);
+      }, leftKeys.map(function (key, i) {
+        return /*#__PURE__*/_react.default.createElement(_RenderCategory.default, {
+          key: "".concat(key, "-left-").concat(i),
+          category: key,
+          results: leftBuckets[key]
+        }, children);
       })), /*#__PURE__*/_react.default.createElement("div", {
         className: "col-6"
-      }, rightKeys.map(function (key) {
-        return renderCategory(key, rightBuckets[key]);
+      }, rightKeys.map(function (key, i) {
+        return /*#__PURE__*/_react.default.createElement(_RenderCategory.default, {
+          key: "".concat(key, "-right-").concat(i),
+          category: key,
+          results: rightBuckets[key]
+        }, children);
       }))), // If the total number of results exceeds the results array limit, display a prompt to narrow their search
       totalResults && totalResults - results.length > 0 && /*#__PURE__*/_react.default.createElement("div", {
         className: "dropdown-header"

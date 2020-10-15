@@ -1,6 +1,7 @@
 
 import React from 'react';
 
+import RenderCategory from './RenderCategory';
 import createBuckets from './helpers/createBuckets';
 import balanceBuckets from './helpers/balanceBuckets';
 
@@ -23,23 +24,6 @@ const DisplayResults: React.FC<Props> = ({
     totalResults,
     children
 }) => {
-    const renderCategory = (category: string, results: any[]) => {
-        return (
-            <div className="search-category">
-                <div className="search-category-header">
-                    {category}
-                </div>
-                <ul className="search-category-results">
-                    {results.map((result, idx) =>
-                        <li key={`search-result-${idx}`}>
-                            {React.cloneElement(children, { result: result })}
-                        </li>
-                    )}
-                </ul>
-            </div>
-        );
-    }
-
     if (terms) {
         // At least one result came back
         if (results && results.length > 0) {
@@ -64,10 +48,26 @@ const DisplayResults: React.FC<Props> = ({
                 <>
                     <div className="row">
                         <div className="col-6">
-                            {leftKeys.map((key) => renderCategory(key, leftBuckets[key]))}
+                            {leftKeys.map((key, i) => (
+                                <RenderCategory
+                                    key={`${key}-left-${i}`}
+                                    category={key}
+                                    results={leftBuckets[key]}
+                                >
+                                    {children}
+                                </RenderCategory>
+                            ))}
                         </div>
                         <div className="col-6">
-                            {rightKeys.map((key) => renderCategory(key, rightBuckets[key]))}
+                            {rightKeys.map((key, i) => (
+                                <RenderCategory
+                                    key={`${key}-right-${i}`}
+                                    category={key}
+                                    results={rightBuckets[key]}
+                                >
+                                    {children}
+                                </RenderCategory>
+                            ))}
                         </div>
                     </div>
 
