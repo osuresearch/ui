@@ -13,6 +13,7 @@ type Props = {
     terms: string,
     results?: any[];
     categorizeBy: string;
+    categoryHeaderWrapper?: React.FC;
     totalResults?: number;
     children: React.ReactElement;
 }
@@ -21,6 +22,7 @@ const DisplayResults: React.FC<Props> = ({
     terms,
     results,
     categorizeBy,
+    categoryHeaderWrapper,
     totalResults,
     children
 }) => {
@@ -52,6 +54,7 @@ const DisplayResults: React.FC<Props> = ({
                                 <RenderCategory
                                     key={`${key}-left-${i}`}
                                     category={key}
+                                    categoryHeaderWrapper={categoryHeaderWrapper}
                                     results={leftBuckets[key]}
                                 >
                                     {children}
@@ -63,6 +66,7 @@ const DisplayResults: React.FC<Props> = ({
                                 <RenderCategory
                                     key={`${key}-right-${i}`}
                                     category={key}
+                                    categoryHeaderWrapper={categoryHeaderWrapper}
                                     results={rightBuckets[key]}
                                 >
                                     {children}

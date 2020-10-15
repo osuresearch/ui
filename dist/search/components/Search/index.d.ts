@@ -1,6 +1,6 @@
 import React from 'react';
 import { SearchDriver } from '../..';
-import { Props as AutoCompleteProps } from './AutoComplete';
+import { Props as AutoCompleteProps, SearchMethods } from './AutoComplete';
 import { Props as ResultsProps, IResultsComposition } from './Results';
 import { Props as ErrorProps } from './Error';
 import { Props as EmptyProps } from './Empty';
@@ -13,7 +13,7 @@ declare type Props = {
     children: React.ReactNode;
 };
 interface ISearchComposition {
-    AutoComplete: React.ForwardRefExoticComponent<AutoCompleteProps>;
+    AutoComplete: React.ForwardRefExoticComponent<AutoCompleteProps & React.RefAttributes<SearchMethods>>;
     Results: React.FC<ResultsProps> & IResultsComposition;
     Error: React.FC<ErrorProps>;
     Empty: React.FC<EmptyProps>;

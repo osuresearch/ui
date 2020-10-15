@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { SearchDriver } from '../..';
 import useSearch from '../../hooks/useSearch';
 
-import AutoComplete, { Props as AutoCompleteProps } from './AutoComplete';
+import AutoComplete, { Props as AutoCompleteProps, SearchMethods } from './AutoComplete';
 import Results, { Props as ResultsProps, IResultsComposition } from './Results';
 import Mapper from './Results/Mapper';
 import Panel from './Results/Panel';
@@ -22,7 +22,7 @@ type Props = {
 };
 
 interface ISearchComposition {
-    AutoComplete: React.ForwardRefExoticComponent<AutoCompleteProps>
+    AutoComplete: React.ForwardRefExoticComponent<AutoCompleteProps & React.RefAttributes<SearchMethods>>
     Results: React.FC<ResultsProps> & IResultsComposition
     Error: React.FC<ErrorProps>
     Empty: React.FC<EmptyProps>

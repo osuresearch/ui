@@ -22,6 +22,7 @@ export type Props = {
      * Dot-notation can be used to select a nested JSON path.
      */
     categorizeBy: string;
+    categoryHeaderWrapper?: React.FC;
     placeholder?: React.FC;
     children: React.ReactElement;
 }
@@ -31,6 +32,7 @@ const AggregatePanel = React.forwardRef<PanelMethods, Props>(({
     results,
     totalResults,
     categorizeBy,
+    categoryHeaderWrapper,
     placeholder,
     children
 }, ref) => {
@@ -80,6 +82,7 @@ const AggregatePanel = React.forwardRef<PanelMethods, Props>(({
                 terms={terms}
                 results={results}
                 categorizeBy={categorizeBy}
+                categoryHeaderWrapper={categoryHeaderWrapper}
                 totalResults={totalResults}
             >
                 {children}

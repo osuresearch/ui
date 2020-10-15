@@ -6,6 +6,7 @@ declare type Props = {
     terms: string;
     results?: any[];
     categorizeBy: string;
+    categoryHeaderWrapper?: React.FC;
     totalResults?: number;
     children: React.ReactElement;
 };

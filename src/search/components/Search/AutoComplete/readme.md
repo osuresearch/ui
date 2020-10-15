@@ -40,7 +40,11 @@ const Placeholder = () => (
             </div>
 );
 
-console.log('results ref', resultsRef.current);
+const categoryHeaderWrapper = ({ children }) => (
+    <div style={{ color: 'red' }}>
+        {children}
+    </div>
+);
 
 <SearchProvider id="autocomplete">
     <Search provider="autocomplete" driver={Mock()}>
@@ -58,6 +62,7 @@ console.log('results ref', resultsRef.current);
                     ref={resultsRef}
                     provider="autocomplete"
                     categorizeBy="state"
+                    categoryHeaderWrapper={categoryHeaderWrapper}
                     placeholder={Placeholder}
                 >
                     <ResultComponent />

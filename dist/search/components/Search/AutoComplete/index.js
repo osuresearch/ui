@@ -51,6 +51,7 @@ var AutoComplete = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
       setLockSearchInput = _useState4[1];
 
   var input = (0, _react.useRef)(null);
+  var clearButton = (0, _react.useRef)(null);
   (0, _react.useEffect)(function () {
     if ((value === null || value === void 0 ? void 0 : value.value) && !lockSearchInput) {
       setLockSearchInput(true);
@@ -94,6 +95,7 @@ var AutoComplete = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
       display: '',
       value: undefined
     });
+    setTerms('');
     setLockSearchInput(false); // Ensure the input gets focus after the search is cleared
 
     (_input$current = input.current) === null || _input$current === void 0 ? void 0 : _input$current.focus();
@@ -125,6 +127,13 @@ var AutoComplete = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
     updateTerms(e.target.value);
   };
 
+  var handleFocus = function handleFocus() {
+    // Add very small timeout to ensure that focus event is fired
+    setTimeout(function () {
+      if (onFocus) onFocus();
+    }, 1);
+  };
+
   var classNames = 'form-control search-input';
 
   if (value === null || value === void 0 ? void 0 : value.display) {
@@ -153,13 +162,18 @@ var AutoComplete = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
     readOnly: lockSearchInput || readOnly,
     ref: input,
     onChange: handleChange,
-    onFocus: onFocus,
-    onBlur: onBlur
-  }), (value === null || value === void 0 ? void 0 : value.display) && !readOnly && /*#__PURE__*/_react.default.createElement("button", {
+    onFocus: handleFocus
+  }), /*#__PURE__*/_react.default.createElement("button", {
+    ref: clearButton,
     className: "btn btn-link search-clear",
     type: "button",
     "aria-label": "clear selection",
-    onClick: _clear
+    onClick: _clear,
+    onFocus: handleFocus,
+    onBlur: onBlur,
+    style: {
+      display: (value === null || value === void 0 ? void 0 : value.display) && !readOnly ? 'block' : 'none'
+    }
   }, /*#__PURE__*/_react.default.createElement(_Icon.default, {
     name: "close"
   }))));

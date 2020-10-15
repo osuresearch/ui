@@ -28,6 +28,7 @@ var AggregatePanel = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref)
       results = _ref.results,
       totalResults = _ref.totalResults,
       categorizeBy = _ref.categorizeBy,
+      categoryHeaderWrapper = _ref.categoryHeaderWrapper,
       placeholder = _ref.placeholder,
       children = _ref.children;
 
@@ -88,6 +89,7 @@ var AggregatePanel = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref)
     terms: terms,
     results: results,
     categorizeBy: categorizeBy,
+    categoryHeaderWrapper: categoryHeaderWrapper,
     totalResults: totalResults
   }, children), /*#__PURE__*/_react.default.createElement(_Empty.default, null, /*#__PURE__*/_react.default.createElement("div", {
     className: "dropdown-header"

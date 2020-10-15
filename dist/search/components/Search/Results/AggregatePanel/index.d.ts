@@ -13,6 +13,7 @@ export declare type Props = {
      * Dot-notation can be used to select a nested JSON path.
      */
     categorizeBy: string;
+    categoryHeaderWrapper?: React.FC;
     placeholder?: React.FC;
     children: React.ReactElement;
 };

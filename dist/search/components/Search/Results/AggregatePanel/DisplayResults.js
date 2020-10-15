@@ -19,6 +19,7 @@ var DisplayResults = function DisplayResults(_ref) {
   var terms = _ref.terms,
       results = _ref.results,
       categorizeBy = _ref.categorizeBy,
+      categoryHeaderWrapper = _ref.categoryHeaderWrapper,
       totalResults = _ref.totalResults,
       children = _ref.children;
 
@@ -50,6 +51,7 @@ var DisplayResults = function DisplayResults(_ref) {
         return /*#__PURE__*/_react.default.createElement(_RenderCategory.default, {
           key: "".concat(key, "-left-").concat(i),
           category: key,
+          categoryHeaderWrapper: categoryHeaderWrapper,
           results: leftBuckets[key]
         }, children);
       })), /*#__PURE__*/_react.default.createElement("div", {
@@ -58,6 +60,7 @@ var DisplayResults = function DisplayResults(_ref) {
         return /*#__PURE__*/_react.default.createElement(_RenderCategory.default, {
           key: "".concat(key, "-right-").concat(i),
           category: key,
+          categoryHeaderWrapper: categoryHeaderWrapper,
           results: rightBuckets[key]
         }, children);
       }))), // If the total number of results exceeds the results array limit, display a prompt to narrow their search

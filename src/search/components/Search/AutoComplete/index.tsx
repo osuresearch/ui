@@ -99,6 +99,7 @@ const AutoComplete = React.forwardRef<SearchMethods, Props>(({
     const [lockSearchInput, setLockSearchInput] = useState(false);
 
     const input = useRef<HTMLInputElement>(null);
+    const clearButton = useRef<HTMLButtonElement>(null);
 
     useEffect(() => {
         if (value?.value && !lockSearchInput) {
@@ -129,6 +130,7 @@ const AutoComplete = React.forwardRef<SearchMethods, Props>(({
      */
     const clear = () => {
         setValue({ display: '', value: undefined });
+        setTerms('');
         setLockSearchInput(false);
 
         // Ensure the input gets focus after the search is cleared
@@ -153,6 +155,13 @@ const AutoComplete = React.forwardRef<SearchMethods, Props>(({
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         set(e.target.value);
         updateTerms(e.target.value);
+    }
+
+    const handleFocus = () => {
+        // Add very small timeout to ensure that focus event is fired
+        setTimeout(() => {
+            if (onFocus) onFocus()
+        }, 1);
     }
 
     let classNames = 'form-control search-input';
@@ -183,18 +192,21 @@ const AutoComplete = React.forwardRef<SearchMethods, Props>(({
                 readOnly={lockSearchInput || readOnly}
                 ref={input}
                 onChange={handleChange}
-                onFocus={onFocus}
-                onBlur={onBlur}
+                onFocus={handleFocus}
             />
 
-            {value?.display && !readOnly &&
-                <button className="btn btn-link search-clear"
-                    type="button"
-                    aria-label="clear selection"
-                    onClick={clear}>
-                    <Icon name="close"></Icon>
-                </button>
-            }
+            <button
+                ref={clearButton}
+                className="btn btn-link search-clear"
+                type="button"
+                aria-label="clear selection"
+                onClick={clear}
+                onFocus={handleFocus}
+                onBlur={onBlur}
+                style={{ display: value?.display && !readOnly ? 'block' : 'none' }}
+            >
+                <Icon name="close"></Icon>
+            </button>
         </div>
     </>);
 });
