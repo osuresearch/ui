@@ -32,6 +32,7 @@ interface ISearchContext {
     loading: boolean
     error?: string
     results?: any[]
+    totalResults?: number
 }
 
 export const Context = React.createContext<ISearchContext>({} as ISearchContext);

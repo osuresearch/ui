@@ -29,10 +29,11 @@ const Results: React.FC<Props> & IResultsComposition = ({
 }) => {
     const data = useContext(Context);
     const results = data.results;
+    const totalResults = data.totalResults;
 
     return (
         <div className="search-results">
-            {React.cloneElement(children, { results })}
+            {React.cloneElement(children, { results, totalResults })}
         </div>
     );
 }

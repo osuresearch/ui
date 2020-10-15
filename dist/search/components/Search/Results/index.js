@@ -28,10 +28,12 @@ var Results = function Results(_ref) {
   var children = _ref.children;
   var data = (0, _react.useContext)(_.Context);
   var results = data.results;
+  var totalResults = data.totalResults;
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "search-results"
   }, /*#__PURE__*/_react.default.cloneElement(children, {
-    results: results
+    results: results,
+    totalResults: totalResults
   }));
 };
 

@@ -7,6 +7,7 @@ export type SearchData = {
     loading: boolean
     error?: string
     results?: any[]
+    totalResults?: number
 }
 
 //#region Driver interfaces

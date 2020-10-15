@@ -6,6 +6,7 @@ export declare type SearchData = {
     loading: boolean;
     error?: string;
     results?: any[];
+    totalResults?: number;
 };
 /**
  * Required props for a driver component provided to `Search.driver`
