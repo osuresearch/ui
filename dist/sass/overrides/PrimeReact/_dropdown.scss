@@ -80,8 +80,8 @@ $danger: #db3b21;
             transition: box-shadow 0.15s;
             border-radius: 0;
             &.p-highlight {
-                color: $white;
-                background: $primary;
+                background: lighten($casal, 60%);
+                color: $gray-900;
             }
             &:not(.p-highlight):not(.p-disabled):hover {
                 color: $gray-900;

@@ -240,6 +240,7 @@ const header =
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
     paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown" 
     rowsPerPageOptions={[10, 25, 50]}
+    sortMode='multiple'
 >
     <DataTable.Column 
         selectionMode="multiple" 
