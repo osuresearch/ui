@@ -26,7 +26,6 @@ require("./index.scss");
 var AggregatePanel = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
   var provider = _ref.provider,
       results = _ref.results,
-      totalResults = _ref.totalResults,
       categorizeBy = _ref.categorizeBy,
       categoryHeaderWrapper = _ref.categoryHeaderWrapper,
       placeholder = _ref.placeholder,
@@ -40,9 +39,13 @@ var AggregatePanel = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref)
       show = _useState2[0],
       setShow = _useState2[1];
 
-  var panel = (0, _react.useRef)(null);
+  var _useState3 = (0, _react.useState)(false),
+      _useState4 = (0, _slicedToArray2.default)(_useState3, 2),
+      hasFocus = _useState4[0],
+      setHasFocus = _useState4[1];
 
-  var handleHide = function handleHide() {
+  var panel = (0, _react.useRef)(null);
+  var handleHide = (0, _react.useCallback)(function () {
     // Only hide the panel as long as no element within
     // the panel has focus for keyboard accessibility
     // Need a very short timeout since the hide method
@@ -54,7 +57,12 @@ var AggregatePanel = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref)
         setShow(false);
       }
     }, 1);
-  };
+  }, []);
+  (0, _react.useEffect)(function () {
+    if (!hasFocus) {
+      handleHide();
+    }
+  }, [handleHide, hasFocus]);
 
   var handleKeyDown = function handleKeyDown(e) {
     // Hide the panel if the escape key is pressed
@@ -91,14 +99,19 @@ var AggregatePanel = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref)
       display: show ? 'block' : 'none'
     },
     ref: panel,
-    onBlur: handleHide,
-    onKeyDown: handleKeyDown
+    onFocus: function onFocus() {
+      return setHasFocus(true);
+    },
+    onBlur: function onBlur() {
+      return setHasFocus(false);
+    },
+    onKeyDown: handleKeyDown,
+    tabIndex: -1
   }, /*#__PURE__*/_react.default.createElement(Placeholder, null), /*#__PURE__*/_react.default.createElement(_DisplayResults.default, {
     terms: terms,
     results: results,
     categorizeBy: categorizeBy,
-    categoryHeaderWrapper: categoryHeaderWrapper,
-    totalResults: totalResults
+    categoryHeaderWrapper: categoryHeaderWrapper
   }, children), /*#__PURE__*/_react.default.createElement(_Empty.default, null, /*#__PURE__*/_react.default.createElement("div", {
     className: "dropdown-header"
   }, "There are no matching results.")), /*#__PURE__*/_react.default.createElement(_Error.default, null, /*#__PURE__*/_react.default.createElement("div", {

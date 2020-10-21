@@ -1,5 +1,5 @@
 
-import React, { useState, useImperativeHandle, useRef } from 'react';
+import React, { useState, useCallback, useImperativeHandle, useRef, useEffect } from 'react';
 import useSearch from '../../../../hooks/useSearch';
 
 import DisplayResults from './DisplayResults';
@@ -16,7 +16,6 @@ export interface PanelMethods {
 export type Props = {
     provider: string;
     results?: any[];
-    totalResults?: number;
     /**
      * 	JSON value to extract for categorizing results into multiple buckets.
      * Dot-notation can be used to select a nested JSON path.
@@ -30,7 +29,6 @@ export type Props = {
 const AggregatePanel = React.forwardRef<PanelMethods, Props>(({
     provider,
     results,
-    totalResults,
     categorizeBy,
     categoryHeaderWrapper,
     placeholder,
@@ -38,10 +36,11 @@ const AggregatePanel = React.forwardRef<PanelMethods, Props>(({
 }, ref) => {
     const { terms } = useSearch(provider);
     const [show, setShow] = useState(false);
+    const [hasFocus, setHasFocus] = useState(false);
 
     const panel = useRef<HTMLDivElement>(null);
 
-    const handleHide = () => {
+    const handleHide = useCallback(() => {
         // Only hide the panel as long as no element within
         // the panel has focus for keyboard accessibility
         // Need a very short timeout since the hide method
@@ -51,7 +50,13 @@ const AggregatePanel = React.forwardRef<PanelMethods, Props>(({
                 setShow(false);
             }
         }, 1);
-    }
+    }, []);
+
+    useEffect(() => {
+        if (!hasFocus) {
+            handleHide();
+        }
+    }, [handleHide, hasFocus]);
 
     const handleKeyDown = (e: React.KeyboardEvent) => {
         // Hide the panel if the escape key is pressed
@@ -81,8 +86,10 @@ const AggregatePanel = React.forwardRef<PanelMethods, Props>(({
             role="listbox"
             style={{ display: show ? 'block' : 'none' }}
             ref={panel}
-            onBlur={handleHide}
+            onFocus={() => setHasFocus(true)}
+            onBlur={() => setHasFocus(false)}
             onKeyDown={handleKeyDown}
+            tabIndex={-1}
         >
             <Placeholder />
 
@@ -91,7 +98,6 @@ const AggregatePanel = React.forwardRef<PanelMethods, Props>(({
                 results={results}
                 categorizeBy={categorizeBy}
                 categoryHeaderWrapper={categoryHeaderWrapper}
-                totalResults={totalResults}
             >
                 {children}
             </DisplayResults>

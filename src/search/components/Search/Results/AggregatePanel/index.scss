@@ -1,3 +1,5 @@
+@import "../../../../../sass/index.scss";
+
 .search-results {
     position: relative;
 
@@ -9,6 +11,14 @@
         z-index: 9999;
         box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
         overflow: hidden;
+
+        .search-icon {
+            .fa {
+                font-size: 3rem;
+                color: $gray-600;
+                padding: 1rem 1.5rem;
+            }
+        }
 
         .search-category {
             margin: 1rem;

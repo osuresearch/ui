@@ -15,12 +15,13 @@ var _createBuckets = _interopRequireDefault(require("./helpers/createBuckets"));
 
 var _balanceBuckets = _interopRequireDefault(require("./helpers/balanceBuckets"));
 
+var _Icon = _interopRequireDefault(require("../../../../../components/Icon"));
+
 var DisplayResults = function DisplayResults(_ref) {
   var terms = _ref.terms,
       results = _ref.results,
       categorizeBy = _ref.categorizeBy,
       categoryHeaderWrapper = _ref.categoryHeaderWrapper,
-      totalResults = _ref.totalResults,
       children = _ref.children;
 
   if (terms) {
@@ -43,10 +44,14 @@ var DisplayResults = function DisplayResults(_ref) {
         return rightBuckets[key] = buckets[key];
       });
       rightBuckets = (0, _balanceBuckets.default)(rightBuckets);
-      return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
+      return /*#__PURE__*/_react.default.createElement("div", {
         className: "row"
       }, /*#__PURE__*/_react.default.createElement("div", {
-        className: "col-6"
+        className: "col-1 search-icon"
+      }, /*#__PURE__*/_react.default.createElement(_Icon.default, {
+        name: "search"
+      })), /*#__PURE__*/_react.default.createElement("div", {
+        className: "col-5"
       }, leftKeys.map(function (key, i) {
         return /*#__PURE__*/_react.default.createElement(_RenderCategory.default, {
           key: "".concat(key, "-left-").concat(i),
@@ -55,7 +60,7 @@ var DisplayResults = function DisplayResults(_ref) {
           results: leftBuckets[key]
         }, children);
       })), /*#__PURE__*/_react.default.createElement("div", {
-        className: "col-6"
+        className: "col-5"
       }, rightKeys.map(function (key, i) {
         return /*#__PURE__*/_react.default.createElement(_RenderCategory.default, {
           key: "".concat(key, "-right-").concat(i),
@@ -63,10 +68,7 @@ var DisplayResults = function DisplayResults(_ref) {
           categoryHeaderWrapper: categoryHeaderWrapper,
           results: rightBuckets[key]
         }, children);
-      }))), // If the total number of results exceeds the results array limit, display a prompt to narrow their search
-      totalResults && totalResults - results.length > 0 && /*#__PURE__*/_react.default.createElement("div", {
-        className: "dropdown-header"
-      }, "There are ", /*#__PURE__*/_react.default.createElement("strong", null, totalResults - results.length), " additional results. ", /*#__PURE__*/_react.default.createElement("strong", null, "Tip:"), " Narrow your search for more relevant results."));
+      })));
     }
   }
 

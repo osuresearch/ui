@@ -7,7 +7,6 @@ declare type Props = {
     results?: any[];
     categorizeBy: string;
     categoryHeaderWrapper?: React.FC;
-    totalResults?: number;
     children: React.ReactElement;
 };
 declare const DisplayResults: React.FC<Props>;

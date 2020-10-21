@@ -7,7 +7,6 @@ export interface PanelMethods {
 export declare type Props = {
     provider: string;
     results?: any[];
-    totalResults?: number;
     /**
      * 	JSON value to extract for categorizing results into multiple buckets.
      * Dot-notation can be used to select a nested JSON path.

@@ -4,6 +4,7 @@ import React from 'react';
 import RenderCategory from './RenderCategory';
 import createBuckets from './helpers/createBuckets';
 import balanceBuckets from './helpers/balanceBuckets';
+import Icon from '../../../../../components/Icon';
 
 export interface Buckets {
     [key: string]: any;
@@ -14,7 +15,6 @@ type Props = {
     results?: any[];
     categorizeBy: string;
     categoryHeaderWrapper?: React.FC;
-    totalResults?: number;
     children: React.ReactElement;
 }
 
@@ -23,7 +23,6 @@ const DisplayResults: React.FC<Props> = ({
     results,
     categorizeBy,
     categoryHeaderWrapper,
-    totalResults,
     children
 }) => {
     if (terms) {
@@ -47,41 +46,35 @@ const DisplayResults: React.FC<Props> = ({
             rightBuckets = balanceBuckets(rightBuckets);
 
             return (
-                <>
-                    <div className="row">
-                        <div className="col-6">
-                            {leftKeys.map((key, i) => (
-                                <RenderCategory
-                                    key={`${key}-left-${i}`}
-                                    category={key}
-                                    categoryHeaderWrapper={categoryHeaderWrapper}
-                                    results={leftBuckets[key]}
-                                >
-                                    {children}
-                                </RenderCategory>
-                            ))}
-                        </div>
-                        <div className="col-6">
-                            {rightKeys.map((key, i) => (
-                                <RenderCategory
-                                    key={`${key}-right-${i}`}
-                                    category={key}
-                                    categoryHeaderWrapper={categoryHeaderWrapper}
-                                    results={rightBuckets[key]}
-                                >
-                                    {children}
-                                </RenderCategory>
-                            ))}
-                        </div>
+                <div className="row">
+                    <div className="col-1 search-icon">
+                        <Icon name="search" />
                     </div>
-
-                    {// If the total number of results exceeds the results array limit, display a prompt to narrow their search
-                        totalResults && (totalResults - results.length) > 0 &&
-                        <div className="dropdown-header">
-                            There are <strong>{totalResults - results.length}</strong> additional results. <strong>Tip:</strong> Narrow your search for more relevant results.
-                        </div>
-                    }
-                </>
+                    <div className="col-5">
+                        {leftKeys.map((key, i) => (
+                            <RenderCategory
+                                key={`${key}-left-${i}`}
+                                category={key}
+                                categoryHeaderWrapper={categoryHeaderWrapper}
+                                results={leftBuckets[key]}
+                            >
+                                {children}
+                            </RenderCategory>
+                        ))}
+                    </div>
+                    <div className="col-5">
+                        {rightKeys.map((key, i) => (
+                            <RenderCategory
+                                key={`${key}-right-${i}`}
+                                category={key}
+                                categoryHeaderWrapper={categoryHeaderWrapper}
+                                results={rightBuckets[key]}
+                            >
+                                {children}
+                            </RenderCategory>
+                        ))}
+                    </div>
+                </div>
             );
         }
     }
