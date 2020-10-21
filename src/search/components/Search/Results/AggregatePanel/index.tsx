@@ -71,7 +71,7 @@ const AggregatePanel = React.forwardRef<PanelMethods, Props>(({
     }))
 
     const Placeholder = () => {
-        if (placeholder && !terms) {
+        if (placeholder && (!terms || !results)) {
             const P = placeholder;
             return <P />;
         }

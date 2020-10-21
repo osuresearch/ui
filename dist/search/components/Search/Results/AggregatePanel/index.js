@@ -83,7 +83,7 @@ var AggregatePanel = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref)
   });
 
   var Placeholder = function Placeholder() {
-    if (placeholder && !terms) {
+    if (placeholder && (!terms || !results)) {
       var P = placeholder;
       return /*#__PURE__*/_react.default.createElement(P, null);
     }
