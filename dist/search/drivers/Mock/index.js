@@ -59,8 +59,7 @@ function Mock() {
       var ageRange = [0, 1000];
       var states = [];
       var emailDomain = '';
-      var otherEmailDomain = ''; // REAALLLY bad code here for hardcoding the demo to work.
-      // Obviously, never do this for realsies.
+      var otherEmailDomain = ''; // Hardcode filtering examples against demo data
 
       filters.forEach(function (f) {
         if (Object.keys(f).indexOf('term') >= 0) {

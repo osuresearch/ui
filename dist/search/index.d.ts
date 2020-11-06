@@ -5,8 +5,7 @@ import React from 'react';
 export declare type SearchData = {
     loading: boolean;
     error?: string;
-    results?: any[];
-    totalResults?: number;
+    results?: any;
 };
 /**
  * Required props for a driver component provided to `Search.driver`

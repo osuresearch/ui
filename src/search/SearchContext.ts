@@ -15,8 +15,8 @@ export interface ISearchContext {
     /** Search is being executed */
     searching: boolean
 
-    /** Results from search */
-    results?: any[]
+    /** Results from search. Structure depends on the backend. */
+    results?: any
 
     /** Error */
     error?: string
@@ -46,7 +46,7 @@ export interface ISearchContext {
     setSearching(searching: boolean): void
 
     /** Set results */
-    setResults(results?: any[]): void
+    setResults(results?: any): void
 
     /** Set error */
     setError(error?: string): void;
@@ -88,7 +88,7 @@ export function destroyDynamicContext(provider: string) {
 
 /**
  * Get a dynamic SearchContext tied to a named provider.
- * 
+ *
  * @throws {Error} if the provider is not yet registered through a SearchProvider component
  */
 export function getDynamicContext(provider: string): SearchContext {

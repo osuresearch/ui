@@ -7,7 +7,7 @@ import AggregatePanel, { Props as AggregatePanelProps, PanelMethods } from './Ag
 
 export type Props = {
     /**
-     * A **single** React Element Component that will receive 
+     * A **single** React Element Component that will receive
      * the results array
      */
     children: React.ReactElement;
@@ -20,20 +20,21 @@ export interface IResultsComposition {
 }
 
 /**
- * Render the results of a search as a simple list of components. 
- * 
+ * Render the results of a search as a simple list of components.
+ *
  * Provide your own component to render each result (e.g. as table rows, Kanban cards, etc).
+ *
+ * @deprecated To be replaced since this is no longer necessary - search results are available directly off of the useSearch() hook so a wrapping component no longer makes sense.
  */
 const Results: React.FC<Props> & IResultsComposition = ({
     children
 }) => {
     const data = useContext(Context);
     const results = data.results;
-    const totalResults = data.totalResults;
 
     return (
         <div className="search-results">
-            {React.cloneElement(children, { results, totalResults })}
+            {React.cloneElement(children, { results })}
         </div>
     );
 }

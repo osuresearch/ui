@@ -32,8 +32,8 @@ var _Empty = _interopRequireDefault(require("./Empty"));
 var Context = /*#__PURE__*/_react.default.createContext({});
 /**
  * Composite component that handles performing searches with a provided `driver`
- * and displaying the results of each search. 
- * 
+ * and displaying the results of each search.
+ *
  * Drivers will typically execute a search whenever search data changes (terms, filters, or sorting).
  * For more information on how each driver executes a search, see their respective documentation.
  */

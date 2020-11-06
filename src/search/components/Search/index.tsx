@@ -32,15 +32,14 @@ interface ISearchContext {
     loading: boolean
     error?: string
     results?: any[]
-    totalResults?: number
 }
 
 export const Context = React.createContext<ISearchContext>({} as ISearchContext);
 
 /**
  * Composite component that handles performing searches with a provided `driver`
- * and displaying the results of each search. 
- * 
+ * and displaying the results of each search.
+ *
  * Drivers will typically execute a search whenever search data changes (terms, filters, or sorting).
  * For more information on how each driver executes a search, see their respective documentation.
  */

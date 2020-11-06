@@ -6,8 +6,7 @@ import React from 'react';
 export type SearchData = {
     loading: boolean
     error?: string
-    results?: any[]
-    totalResults?: number
+    results?: any
 }
 
 //#region Driver interfaces
@@ -139,7 +138,7 @@ export function between(field: string, from: string, to: string, name?: string):
 
 /**
  * Simple use case of sorting on a single field.
- * 
+ *
  * ```ts
  * filters.sort(
  *  sort('Relevance', 'rank', 'desc')
@@ -158,7 +157,7 @@ export function sort(name: string, field: string, order: SortOrder = 'desc'): So
 
 //#endregion
 
-//#region Public API 
+//#region Public API
 
 // Data structures and types
 export { default as SearchFilters } from './SearchFilters';

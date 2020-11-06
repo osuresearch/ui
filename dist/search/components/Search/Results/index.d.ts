@@ -18,6 +18,8 @@ export interface IResultsComposition {
  * Render the results of a search as a simple list of components.
  *
  * Provide your own component to render each result (e.g. as table rows, Kanban cards, etc).
+ *
+ * @deprecated To be replaced since this is no longer necessary - search results are available directly off of the useSearch() hook so a wrapping component no longer makes sense.
  */
 declare const Results: React.FC<Props> & IResultsComposition;
 export default Results;

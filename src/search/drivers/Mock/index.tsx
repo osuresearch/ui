@@ -46,8 +46,7 @@ export default function Mock() {
             let emailDomain = '';
             let otherEmailDomain = '';
 
-            // REAALLLY bad code here for hardcoding the demo to work.
-            // Obviously, never do this for realsies.
+            // Hardcode filtering examples against demo data
             filters.forEach((f) => {
                 if (Object.keys(f).indexOf('term') >= 0) {
                     const key = Object.keys((f as Term).term)[0];

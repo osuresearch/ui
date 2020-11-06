@@ -127,7 +127,7 @@ function between(field, from, to, name) {
 
 /**
  * Simple use case of sorting on a single field.
- * 
+ *
  * ```ts
  * filters.sort(
  *  sort('Relevance', 'rank', 'desc')
@@ -146,7 +146,7 @@ function sort(name, field) {
     }]
   };
 } //#endregion
-//#region Public API 
+//#region Public API
 // Data structures and types
 // Drivers are not exported here - import specific ones from `@oris/ui/search/drivers`
 // This allows us to safely load only the drivers that are needed in a project.

@@ -20,20 +20,20 @@ var _Panel = _interopRequireDefault(require("./Panel"));
 var _AggregatePanel = _interopRequireDefault(require("./AggregatePanel"));
 
 /**
- * Render the results of a search as a simple list of components. 
- * 
+ * Render the results of a search as a simple list of components.
+ *
  * Provide your own component to render each result (e.g. as table rows, Kanban cards, etc).
+ *
+ * @deprecated To be replaced since this is no longer necessary - search results are available directly off of the useSearch() hook so a wrapping component no longer makes sense.
  */
 var Results = function Results(_ref) {
   var children = _ref.children;
   var data = (0, _react.useContext)(_.Context);
   var results = data.results;
-  var totalResults = data.totalResults;
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "search-results"
   }, /*#__PURE__*/_react.default.cloneElement(children, {
-    results: results,
-    totalResults: totalResults
+    results: results
   }));
 };
 

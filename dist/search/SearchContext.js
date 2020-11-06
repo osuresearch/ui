@@ -43,7 +43,7 @@ function destroyDynamicContext(provider) {
 }
 /**
  * Get a dynamic SearchContext tied to a named provider.
- * 
+ *
  * @throws {Error} if the provider is not yet registered through a SearchProvider component
  */
 

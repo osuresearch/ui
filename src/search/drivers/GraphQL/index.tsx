@@ -11,17 +11,17 @@ type GraphQLSearchResponse = {
 
 /**
  * Search driver that talks with GraphQL through the default Apollo client.
- * 
+ *
  * The GraphQL query requires the following variables:
- * 
- *  - `$terms: String!` 
+ *
+ *  - `$terms: String!`
  *      - Full text search terms
- *  - `$filters: SearchFilters` 
- *      - Set of filters to narrow down results. 
+ *  - `$filters: SearchFilters`
+ *      - Set of filters to narrow down results.
  *        The `name` of each filter is ignored by the backend.
- *  - `$sort: SearchSorting` 
+ *  - `$sort: SearchSorting`
  *      - Sorting rules for the results
- * 
+ *
  * The *first* GraphQL field returned will be used for the results
  * and must return an array of type objects.
  */
@@ -45,7 +45,7 @@ export default function GraphQL(query: DocumentNode) {
             });
         }, [terms, filters, sort, callable]);
 
-        // Store previous search results each time we make a query so we 
+        // Store previous search results each time we make a query so we
         // can display these while still fetching fresh data in the background.
         useEffect(() => {
             setCached((prev) => {
@@ -54,16 +54,47 @@ export default function GraphQL(query: DocumentNode) {
                     results: prev?.results
                 };
 
-                if (result.data !== undefined) {
-                    const firstKey = Object.keys(result.data)[0];
-                    data.results = result.data[firstKey];
-                }
-
                 if (result.error) {
                     console.error('GraphQL Search Driver Error', result.error);
 
                     // TODO: Better errors? We don't really display this on the frontend anywhere.
                     data.error = 'Something went wrong';
+                }
+
+                /*
+                    GraphQL can come back with any named query field -
+                    but we only care about the value in that field.
+
+                    Example 1:
+                        query {
+                            tools(terms: "foo") {
+                                id
+                                title
+                            }
+                        }
+
+                        We only care about the `[{ id, title }]`
+                        payload within `data.tools`.
+
+                    Example 2:
+                        query {
+                            search(terms: "fizz") {
+                                totalHits
+                                maxRank
+                                hits {
+                                    id
+                                    rank
+                                    name
+                                }
+                            }
+                        }
+
+                        We grab the full `{totalHits, maxRank, hits: [...]}`
+                        payload within `data.search`.
+                */
+                if (result.data !== undefined) {
+                    const firstKey = Object.keys(result.data)[0];
+                    data.results = result.data[firstKey];
                 }
 
                 updateSearchData(data);

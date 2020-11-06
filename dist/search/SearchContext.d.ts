@@ -10,8 +10,8 @@ export interface ISearchContext {
     sort: Sort | undefined;
     /** Search is being executed */
     searching: boolean;
-    /** Results from search */
-    results?: any[];
+    /** Results from search. Structure depends on the backend. */
+    results?: any;
     /** Error */
     error?: string;
     /** Update search terms */
@@ -30,7 +30,7 @@ export interface ISearchContext {
     /** Set searching state */
     setSearching(searching: boolean): void;
     /** Set results */
-    setResults(results?: any[]): void;
+    setResults(results?: any): void;
     /** Set error */
     setError(error?: string): void;
 }
