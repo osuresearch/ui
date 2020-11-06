@@ -1,17 +1,4 @@
 
-If you are using TypeScript, you can supply an `enum` directly to options:
-
-```tsx
-enum DataClassification {
-    S1 = 'Public (S1)',
-    S2 = 'Internal (S2)',
-    S3 = 'Private (S3)',
-    S4 = 'Restricted (S4)',
-}
-
-<Filters.AnyOf name="dataClassification" options={DataClassification} />
-```
-
 The enum `value` will be added to the filter and used for the checkbox labeling.
 
 
@@ -34,4 +21,19 @@ const ID = 'demo-AnyOf';
 
     <SearchDebugger provider={ID} />
 </SearchProvider>
+```
+
+### Typescript Features
+
+If you are using TypeScript, you can supply an `enum` directly to options:
+
+```tsx static
+enum DataClassification {
+    S1 = 'Public (S1)',
+    S2 = 'Internal (S2)',
+    S3 = 'Private (S3)',
+    S4 = 'Restricted (S4)',
+}
+
+<Filters.AnyOf name="dataClassification" options={DataClassification} />
 ```
