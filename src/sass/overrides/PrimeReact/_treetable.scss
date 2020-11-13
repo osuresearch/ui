@@ -1,17 +1,6 @@
 // Based on https://raw.githubusercontent.com/primefaces/primereact/master/public/themes/bootstrap4-light-blue/theme.css
 // SCSS conversion by https://sebastianpontow.de/css2compass/
 
-//colors
-$color_0: #efefef;
-$color_1: #212529;
-$color_2: #dee2e6;
-$color_3: #ffffff;
-$color_4: rgba(38, 143, 255, 0.5);
-$color_5: #6c757d;
-$color_6: #007bff;
-$color_7: #e9ecef;
-$color_8: #495057;
-
 .p-treetable {
     .p-paginator-top {
         border-width: 1px 0 0 0;
@@ -24,25 +13,25 @@ $color_8: #495057;
         border-radius: 0;
     }
     .p-treetable-header {
-        background: $color_0;
-        color: $color_1;
-        border: solid $color_2;
+        background: white;
+        color: $gray-900;
+        border: solid $gray-100;
         border-width: 1px 0 0 0;
         padding: 1rem;
         font-weight: 600;
     }
     .p-treetable-footer {
-        background: $color_0;
-        color: $color_1;
-        border: 1px solid $color_2;
+        background: white;
+        color: $gray-900;
+        border: 1px solid $gray-100;
         border-width: 1px 0 1px 0;
         padding: 1rem;
         font-weight: 600;
     }
     .p-sortable-column {
-        outline-color: $color_4;
+        outline-color: $casal;
         .p-sortable-column-icon {
-            color: $color_5;
+            color: $gray-400;
             margin-left: 0.5rem;
         }
         .p-sortable-column-badge {
@@ -51,33 +40,33 @@ $color_8: #495057;
             height: 1.143rem;
             min-width: 1.143rem;
             line-height: 1.143rem;
-            color: $color_3;
-            background: $color_6;
+            color: white;
+            background: $gray-900;
             margin-left: 0.5rem;
         }
         &.p-highlight {
-            background: $color_3;
-            color: $color_6;
+            background: white;
+            color: $casal;
             .p-sortable-column-icon {
-                color: $color_6;
+                color: $casal;
             }
         }
         &:not(.p-highlight):hover {
-            background: $color_7;
-            color: $color_1;
+            background: white;
+            color: $gray-900;
             .p-sortable-column-icon {
-                color: $color_5;
+                color: $gray-400;
             }
         }
     }
     .p-column-resizer-helper {
-        background: $color_6;
+        background: $casal;
     }
     .p-treetable-scrollable-header {
-        background: $color_0;
+        background: white;
     }
     .p-treetable-scrollable-footer {
-        background: $color_0;
+        background: white;
     }
     .p-treetable-loading-icon {
         font-size: 2rem;
@@ -141,81 +130,77 @@ $color_8: #495057;
     }
     .p-treetable-thead > tr > th {
         text-align: left;
-        padding: 1rem;
-        border: 1px solid $color_2;
-        border-width: 1px 0 2px 0;
-        font-weight: 600;
-        color: $color_1;
-        background: $color_3;
-        //Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
-        transition: box-shadow 0.15s;
+        padding: $table-cell-padding;
+        border: 1px solid $table-border-color;
+        border-width: 0 0 1px 0;
+        font-weight: 500;
+        color: rgba(0, 0, 0, 0.55);
+        font-size: 0.85em;
+        position: relative;
     }
     .p-treetable-tfoot > tr > td {
         text-align: left;
         padding: 1rem;
-        border: 1px solid $color_2;
+        border: 1px solid $gray-100;
         border-width: 1px 0 1px 0;
         font-weight: 600;
-        color: $color_1;
-        background: $color_3;
+        color: $gray-900;
+        background: white;
     }
     .p-treetable-tbody > tr {
-        background: $color_3;
-        color: $color_1;
+        background: white;
+        color: $gray-900;
         //Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
         transition: box-shadow 0.15s;
-        outline-color: $color_4;
+        outline-color: $casal;
         > td {
             text-align: left;
-            border: 1px solid $color_2;
+            border: 1px solid $gray-100;
             border-width: 1px 0 0 0;
-            padding: 1rem;
+            padding: $table-cell-padding;
             .p-treetable-toggler {
                 width: 2rem;
                 height: 2rem;
-                color: $color_5;
+                color: $gray-400;
                 border: 0 none;
                 background: transparent;
-                //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
-                border-radius: 50%;
-                //Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
-                transition: box-shadow 0.15s;
+                box-shadow: none;
                 margin-right: 0.5rem;
                 &:focus {
                     outline: 0 none;
                     outline-offset: 0;
                     //Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
-                    box-shadow: 0 0 0 0.2rem $color_4;
+                    box-shadow: 0 0 0 0.2rem $casal;
                 }
                 &:enabled:hover {
-                    color: $color_8;
+                    color: $gray-600;
                     border-color: transparent;
                     background: transparent;
                 }
                 + .p-checkbox {
                     margin-right: 0.5rem;
                     .p-indeterminate .p-checkbox-icon {
-                        color: $color_1;
+                        color: $gray-900;
                     }
                 }
             }
         }
         &.p-highlight {
-            background: $color_6;
-            color: $color_3;
+            background: $casal;
+            color: white;
             .p-treetable-toggler {
-                color: $color_3;
+                color: white;
                 &:hover {
-                    color: $color_3;
+                    color: white;
                 }
             }
         }
     }
     &.p-treetable-hoverable-rows .p-treetable-tbody > tr:not(.p-highlight):hover {
-        background: $color_7;
-        color: $color_1;
+        background: white;
+        color: $gray-900;
         .p-treetable-toggler {
-            color: $color_1;
+            color: $gray-900;
         }
     }
 }

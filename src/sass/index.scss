@@ -61,6 +61,8 @@
 @import "overrides/datepicker";
 
 // Components
+// Core Application
+
 @import "components/alert-banner";
 @import "components/application-alert";
 @import "components/external-link";
@@ -80,8 +82,8 @@
 @import "components/ui-forms";
 @import "components/uploader";
 
-@import "../components/Button";
-@import "../components/Search";
+@import "../components/controls/Button";
+@import "../components/controls/Search";
 
 @import "../experimental/AppSearch";
 @import "../experimental/Masthead";
