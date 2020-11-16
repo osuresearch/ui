@@ -1,10 +1,7 @@
-import React from 'react';
-import { Accordion as PAccordion } from 'primereact/accordion';
-import { Tab, TabProps } from './Tab';
 
-interface IAccordionComposition {
-    Tab: React.FC<TabProps>;
-}
+// NOT A REAL COMPONENT
+// THIS FILE IS PURELY FOR DOCUMENTATION PURPOSES
+import React from 'react';
 
 // Typically we would just extend the AccordionProps interface, but PrimeReact did not include prop documentation in their interfaces
 // Documentation from https://www.primefaces.org/primereact/showcase/#/accordion
@@ -40,14 +37,25 @@ type Props = {
     onTabChange?(e: { originalEvent: Event, index: number }): void;
 }
 
-const Accordion: React.FC<Props> & IAccordionComposition = (props) => {
-    return (
-        <PAccordion {...props}>
-            {props.children}
-        </PAccordion>
-    )
-}
+/** 
+ * Accordion groups a collection of contents in tabs.
+ * 
+ * Accordion is part of the PrimeReact package, which is included in ORIS/UI. 
+ * 
+ * [Review the full documentation at the PrimeReact demo website](https://www.primefaces.org/primereact/showcase/#/accordion).
+ */
+class Accordion extends React.Component<Props, any> {
+    static defaultProps = {
+        multiple: false,
+        expandIcon: 'pi pi-chevron-right',
+        collapseIcon: 'pi pi-chevron-down'
+    }
 
-Accordion.Tab = Tab;
+    static componentPathLine = `import { Accordion, AccordionTab } from 'primereact/accordion'`;
+
+    render() {
+        return null;
+    }
+}
 
 export default Accordion;

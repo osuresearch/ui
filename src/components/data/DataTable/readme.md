@@ -1,25 +1,30 @@
 
+### Basic Implementation
 ```jsx
 import React from 'react';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
 
-const products = require('./products-small').default;
+const products = require('./demo/products-small').default;
 
 <DataTable value={products}>
-    <DataTable.Column field="code" header="Code" sortable />
-    <DataTable.Column field="name" header="Name" sortable />
-    <DataTable.Column field="category" header="Category" sortable />
-    <DataTable.Column field="quantity" header="Quantity" sortable />
+    <Column field="code" header="Code" sortable />
+    <Column field="name" header="Name" sortable />
+    <Column field="category" header="Category" sortable />
+    <Column field="quantity" header="Quantity" sortable />
 </DataTable>
 ```
 
-#### Kitchen Sink
+### Advanced Implementation
 ```jsx
 import React, { useState, useRef } from 'react';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
 
 import { MultiSelect, Button, Text, Icon, Badge, Dropdown, DateTime } from '@oris/ui';
 
 const dt = useRef(null);
-const customers = require('./customers').default;
+const customers = require('./demo/customers').default;
 const representatives = require('./demo/representatives').default;
 const [globalFilter, setGlobalFilter] = useState('');
 const [selectedCustomers, setSelectedCustomers] = useState();
@@ -242,18 +247,18 @@ const header =
     rowsPerPageOptions={[10, 25, 50]}
     sortMode='multiple'
 >
-    <DataTable.Column 
+    <Column 
         selectionMode="multiple" 
         style={{ width: '3em' }} 
     />
-    <DataTable.Column 
+    <Column 
         field="name" 
         header="Name" 
         sortable 
         filter 
         filterPlaceholder="Search by name" 
     />
-    <DataTable.Column 
+    <Column 
         sortField="country.name" 
         filterField="country.name"
         header="Country" 
@@ -263,7 +268,7 @@ const header =
         filterMatchMode="contains" 
         filterPlaceholder="Search by country" 
     />
-    <DataTable.Column 
+    <Column 
         sortField="representative.name" 
         filterField="representative.name" 
         header="Representative"
@@ -272,7 +277,7 @@ const header =
         filter 
         filterElement={representativeFilter} 
     />
-    <DataTable.Column 
+    <Column 
         field="date" 
         header="Date" 
         body={dateBodyTemplate} 
@@ -282,7 +287,7 @@ const header =
         filterFunction={filterDate} 
         filterElement={dateFilterElement} 
     />
-    <DataTable.Column 
+    <Column 
         field="status" 
         header="Status" 
         body={(row) => statusTemplate(row.status)} 
@@ -290,7 +295,7 @@ const header =
         filter 
         filterElement={statusFilter} 
     />
-    <DataTable.Column 
+    <Column 
         field="activity" 
         header="Activity" 
         body={activityBodyTemplate} 
@@ -299,11 +304,10 @@ const header =
         filterMatchMode="gte" 
         filterPlaceholder="Minimum" 
     />
-    <DataTable.Column 
+    <Column 
         body={actionBodyTemplate} 
         headerStyle={{ width: '8em', textAlign: 'center' }} 
         bodyStyle={{ textAlign: 'center', overflow: 'visible' }} 
     />
 </DataTable>
-
 ```

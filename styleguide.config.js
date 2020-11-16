@@ -61,7 +61,6 @@ function listFormComponents() {
         if (component === 'Form') {
             sections = [{
                 name: component,
-                usageMode: 'hide',
                 hasSubcomponents: true,
                 wrapSectionNameInBrackets: true,
                 wrapComponentNamesInBrackets: true,
@@ -150,8 +149,19 @@ let sections = [
         name: 'Data Components',
         content: 'src/components/data/readme.md',
         components: 'src/components/data/**/index.?(js|tsx)',
+        // sections: [
+        //     {
+        //         name: '<DataTable>',
+        //         content: 'src/components/data/DataTable/readme.md'
+        //     },
+        //     {
+        //         name: '<TreeTable>',
+        //         content: 'src/components/data/TreeTable/readme.md'
+        //     }
+        // ],
         wrapComponentNamesInBrackets: true,
         expand: true,
+
         sectionDepth: 0
     },
     {

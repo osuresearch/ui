@@ -15,7 +15,6 @@ export { default as Badge } from './components/generic/Badge';
 export { default as Icon } from './components/generic/Icon';
 
 // Controls
-export { default as Accordion } from './components/controls/Accordion';
 export { default as Button } from './components/controls/Button';
 export { default as ExternalLink } from './components/controls/ExternalLink';
 export { default as Modal } from './components/controls/Modal';
@@ -28,10 +27,6 @@ export { default as PersonSearchResult } from './components/controls/PersonSearc
 export { default as TabList } from './components/controls/TabList';
 export { default as TabItem } from './components/controls/TabItem';
 export { default as Richtext } from './components/controls/Richtext';
-
-// Data
-export { default as DataTable } from './components/data/DataTable';
-export { default as TreeTable } from './components/data/TreeTable';
 
 // Form
 export { default as Checkbox } from './components/form/Checkbox';
