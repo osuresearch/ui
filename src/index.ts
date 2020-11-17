@@ -11,12 +11,14 @@ export { default as Profile } from './components/core-application/Profile';
 export { default as Support } from './components/core-application/Support';
 
 // Generic
+export { default as Alert } from './components/generic/Alert';
 export { default as Badge } from './components/generic/Badge';
 export { default as Icon } from './components/generic/Icon';
 
 // Controls
 export { default as Button } from './components/controls/Button';
 export { default as ExternalLink } from './components/controls/ExternalLink';
+export { default as MenuButton } from './components/controls/MenuButton';
 export { default as Modal } from './components/controls/Modal';
 export { default as ModalHeader } from './components/controls/ModalHeader';
 export { default as ModalBody } from './components/controls/ModalBody';
@@ -30,6 +32,7 @@ export { default as Richtext } from './components/controls/Richtext';
 
 // Form
 export { default as Checkbox } from './components/form/Checkbox';
+export { default as Chips } from './components/form/Chips';
 export { default as DateTime } from './components/form/DateTime';
 export { default as Dropdown } from './components/form/Dropdown';
 export { default as FieldSet } from './components/form/FieldSet';

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Props as ButtonProps } from './Button';
 import { IMenuComposition } from './Menu';
-interface IDropComposition {
+interface IMenuButtonComposition {
     Button: React.FC<ButtonProps>;
     Menu: React.FC & IMenuComposition;
 }
@@ -13,6 +13,6 @@ declare type Props = {
 export declare const Context: React.Context<{
     id: string;
 }>;
-declare const Drop: React.FC<Props> & IDropComposition;
-export default Drop;
+declare const MenuButton: React.FC<Props> & IMenuButtonComposition;
+export default MenuButton;
 //# sourceMappingURL=index.d.ts.map

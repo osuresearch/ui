@@ -3,7 +3,7 @@ import Button, { Props as ButtonProps } from './Button';
 import Menu, { IMenuComposition } from './Menu';
 import Item from './Menu/Item';
 
-interface IDropComposition {
+interface IMenuButtonComposition {
     Button: React.FC<ButtonProps>;
     Menu: React.FC & IMenuComposition;
 }
@@ -18,7 +18,7 @@ export const Context = React.createContext({
     id: ''
 })
 
-const Drop: React.FC<Props> & IDropComposition = ({
+const MenuButton: React.FC<Props> & IMenuButtonComposition = ({
     id,
     children,
     className,
@@ -34,8 +34,8 @@ const Drop: React.FC<Props> & IDropComposition = ({
     )
 }
 
-Drop.Button = Button;
-Drop.Menu = Menu;
-Drop.Menu.Item = Item;
+MenuButton.Button = Button;
+MenuButton.Menu = Menu;
+MenuButton.Menu.Item = Item;
 
-export default Drop;
+export default MenuButton;

@@ -14,8 +14,8 @@ __New Features:__
 * Integration of the [PrimeReact UI Library](https://www.primefaces.org/primereact/), with support for its `DataTable`, `TreeTable`, and `Accordion` components (support for additional PrimeReact components forthcoming)
 * New `Alert` component based on [Bootstrap Alerts](https://getbootstrap.com/docs/4.0/components/alerts/)
 * New `Chips` form component based on the PrimeReact component of the same name
-* New `Drop` component based on [Bootstrap Dropdowns](https://getbootstrap.com/docs/4.0/components/dropdowns/)
 * New `Dropdown` form component based on the PrimeReact component of the same name
+* New `MenuButton` component based on [Bootstrap Dropdowns](https://getbootstrap.com/docs/4.0/components/dropdowns/)
 * New `MultiSelect` form component based on the PrimeReact component of the same name
 * Navigation improvements to styleguide by categorizing components
 

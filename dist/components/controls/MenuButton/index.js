@@ -21,7 +21,7 @@ var Context = /*#__PURE__*/_react.default.createContext({
 
 exports.Context = Context;
 
-var Drop = function Drop(_ref) {
+var MenuButton = function MenuButton(_ref) {
   var id = _ref.id,
       children = _ref.children,
       className = _ref.className,
@@ -36,8 +36,8 @@ var Drop = function Drop(_ref) {
   }, children));
 };
 
-Drop.Button = _Button.default;
-Drop.Menu = _Menu.default;
-Drop.Menu.Item = _Item.default;
-var _default = Drop;
+MenuButton.Button = _Button.default;
+MenuButton.Menu = _Menu.default;
+MenuButton.Menu.Item = _Item.default;
+var _default = MenuButton;
 exports.default = _default;

@@ -7,31 +7,31 @@ const handleClick = (e) => {
     console.log(e);
 }
 
-<Drop id="example-drop-component">
-    <Drop.Button>Drop button</Drop.Button>
+<MenuButton id="example-drop-component">
+    <MenuButton.Button>MenuButton button</MenuButton.Button>
 
-    <Drop.Menu>
-        <h6 className="dropdown-header">Drop header</h6>
+    <MenuButton.Menu>
+        <h6 className="dropdown-header">MenuButton header</h6>
 
-        <Drop.Menu.Item onClick={handleClick}>
+        <MenuButton.Menu.Item onClick={handleClick}>
             Action
-        </Drop.Menu.Item>
+        </MenuButton.Menu.Item>
 
-        <Drop.Menu.Item onClick={handleClick}>
+        <MenuButton.Menu.Item onClick={handleClick}>
             Another action
-        </Drop.Menu.Item>
+        </MenuButton.Menu.Item>
 
-        <Drop.Menu.Item onClick={handleClick}>
+        <MenuButton.Menu.Item onClick={handleClick}>
             Disabled action
-        </Drop.Menu.Item>
+        </MenuButton.Menu.Item>
 
         <div className="dropdown-divider"></div>
 
-        <Drop.Menu.Item onClick={handleClick}>
+        <MenuButton.Menu.Item onClick={handleClick}>
             Separated link
-        </Drop.Menu.Item>
-    </Drop.Menu>
-</Drop>
+        </MenuButton.Menu.Item>
+    </MenuButton.Menu>
+</MenuButton>
 ```
 
 ### Best Practices
