@@ -32,7 +32,7 @@ __Internal changes:__
 __Accessibility Fixes:__
 
 * The common Label component included an `aria-label` that denoted required fields. This was removed in favor of adding an `aria-required` attribute to form inputs/controls - the more semantic solution
-* `aria-live` was removed from the Error component, since `role="alert"` automatically makes the component an assertive live region. Additionally, a recommendation to perform validation on blur was added to the Form component documentation. Validating on blur will allow for the alerts to perform properly, per this article recommended by Jen and testing in macOS VoiceOver.
+* `aria-live` was removed from the Error component, since `role="alert"` automatically makes the component an assertive live region. Additionally, a recommendation to perform validation on blur was added to the Form component documentation. Validating on blur will allow for the alerts to perform properly, per [this article recommended by Jen](https://hiddedevries.nl/en/blog/2017-04-04-how-to-make-inline-error-messages-accessible) and testing in macOS VoiceOver.
 * Added the `aria-invalid` attribute to form inputs/controls to aid in error validation for users of assistive technologies.
 
 __Bug Fixes:__

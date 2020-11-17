@@ -33,7 +33,6 @@ export function Label(props: LabelProps) {
                 (bind.required ? 'is-required' : '') +
                 (props.className ? ' ' + props.className : '')
             }
-            aria-label={bind.required ? `${label}, is required` : label}
         >
             {label}
         </label>

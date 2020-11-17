@@ -17,6 +17,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     const checked: boolean = bind.value ? bind.value : false;
 
     const readOnly = bind.readOnly || props.readOnly;
+    const required = bind.required || props.required;
 
     // Diff mode
     if (bind.diff) {
@@ -65,7 +66,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         },
         "aria-describedby": `${bind.id}-help`,
         readOnly: readOnly,
-        "aria-disabled": readOnly
+        "aria-disabled": readOnly,
+        "aria-required": required,
+        "aria-invalid": bind.error ? true : false
     }
 
     if (bind.controlled) {

@@ -20,6 +20,7 @@ const Control = React.forwardRef<HTMLSelectElement, ControlProps>((props, ref) =
     const classNames = `form-control custom-select ${bind.error && 'is-invalid'} ${bind.success && 'is-valid'} ${props.className ? props.className : ''}`;
 
     const value = bind.value || props.defaultValue || props.value;
+    const required = bind.required || props.required;
 
     // Display Read Only as readOnly text input
     if (bind.readOnly) {
@@ -48,7 +49,9 @@ const Control = React.forwardRef<HTMLSelectElement, ControlProps>((props, ref) =
         onChange: (e) => {
             bind.value = e.currentTarget.value;
             if (props.onChange) props.onChange(e);
-        }
+        },
+        'aria-required': required,
+        "aria-invalid": bind.error ? true : false
     }
 
     // Assign a value to the select if it is controlled

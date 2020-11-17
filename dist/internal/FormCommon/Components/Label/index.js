@@ -33,7 +33,6 @@ function Label(props) {
   var label = props.children || bind.instructions || '';
   return /*#__PURE__*/_react.default.createElement("label", (0, _extends2.default)({}, otherProps, {
     htmlFor: bind.id,
-    className: (bind.required ? 'is-required' : '') + (props.className ? ' ' + props.className : ''),
-    "aria-label": bind.required ? "".concat(label, ", is required") : label
+    className: (bind.required ? 'is-required' : '') + (props.className ? ' ' + props.className : '')
   }), label);
 }
