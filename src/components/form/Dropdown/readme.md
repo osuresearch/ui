@@ -16,6 +16,10 @@ const cities = require('./cities').default;
         onChange={(e) => setSelectedCity(e.value)}
         optionLabel="name"
     />
+
+    <Dropdown.Help>
+        Dropdowns are similar to Selects
+    </Dropdown.Help>
 </Dropdown>
 ```
 

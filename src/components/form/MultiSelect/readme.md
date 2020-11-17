@@ -52,6 +52,10 @@ const cities = require('./cities').default;
         onChange={(e) => setSelectedCities(e.value)}
         optionLabel="name"    
     />
+
+    <MultiSelect.Help>
+        Select one or more cities
+    </MultiSelect.Help>
 </MultiSelect>
 ```
 

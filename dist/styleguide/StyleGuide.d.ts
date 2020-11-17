@@ -5,8 +5,10 @@ import * as Rsg from 'react-styleguidist/lib/typings';
 export declare type ExtendedRsgSection = Rsg.Section & {
     /** Indicates if the section includes subcomponents for Component.Subcomponent formatting */
     hasSubcomponents?: boolean;
-    /** Wrap the Section/Component visible names in brackets */
-    wrapNamesInBrackets?: boolean;
+    /** Wrap the Section/Component visible name in brackets */
+    wrapSectionNameInBrackets?: boolean;
+    /** Wrap the Section component names in brackets  */
+    wrapComponentNamesInBrackets?: boolean;
 };
 export interface StyleGuideProps {
     codeRevision: number;

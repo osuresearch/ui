@@ -5,34 +5,10 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-Object.defineProperty(exports, "Accordion", {
-  enumerable: true,
-  get: function get() {
-    return _Accordion.default;
-  }
-});
 Object.defineProperty(exports, "AppAlert", {
   enumerable: true,
   get: function get() {
     return _AppAlert.default;
-  }
-});
-Object.defineProperty(exports, "Badge", {
-  enumerable: true,
-  get: function get() {
-    return _Badge.default;
-  }
-});
-Object.defineProperty(exports, "Button", {
-  enumerable: true,
-  get: function get() {
-    return _Button.default;
-  }
-});
-Object.defineProperty(exports, "DataTable", {
-  enumerable: true,
-  get: function get() {
-    return _DataTable.default;
   }
 });
 Object.defineProperty(exports, "Emulate", {
@@ -41,22 +17,58 @@ Object.defineProperty(exports, "Emulate", {
     return _Emulate.default;
   }
 });
-Object.defineProperty(exports, "ExternalLink", {
-  enumerable: true,
-  get: function get() {
-    return _ExternalLink.default;
-  }
-});
 Object.defineProperty(exports, "Footer", {
   enumerable: true,
   get: function get() {
     return _Footer.default;
   }
 });
+Object.defineProperty(exports, "Navbar", {
+  enumerable: true,
+  get: function get() {
+    return _Navbar.default;
+  }
+});
+Object.defineProperty(exports, "OhioStateNavbar", {
+  enumerable: true,
+  get: function get() {
+    return _OhioStateNavbar.default;
+  }
+});
+Object.defineProperty(exports, "Profile", {
+  enumerable: true,
+  get: function get() {
+    return _Profile.default;
+  }
+});
+Object.defineProperty(exports, "Support", {
+  enumerable: true,
+  get: function get() {
+    return _Support.default;
+  }
+});
+Object.defineProperty(exports, "Badge", {
+  enumerable: true,
+  get: function get() {
+    return _Badge.default;
+  }
+});
 Object.defineProperty(exports, "Icon", {
   enumerable: true,
   get: function get() {
     return _Icon.default;
+  }
+});
+Object.defineProperty(exports, "Button", {
+  enumerable: true,
+  get: function get() {
+    return _Button.default;
+  }
+});
+Object.defineProperty(exports, "ExternalLink", {
+  enumerable: true,
+  get: function get() {
+    return _ExternalLink.default;
   }
 });
 Object.defineProperty(exports, "Modal", {
@@ -83,24 +95,6 @@ Object.defineProperty(exports, "ModalFooter", {
     return _ModalFooter.default;
   }
 });
-Object.defineProperty(exports, "Navbar", {
-  enumerable: true,
-  get: function get() {
-    return _Navbar.default;
-  }
-});
-Object.defineProperty(exports, "OhioStateNavbar", {
-  enumerable: true,
-  get: function get() {
-    return _OhioStateNavbar.default;
-  }
-});
-Object.defineProperty(exports, "Profile", {
-  enumerable: true,
-  get: function get() {
-    return _Profile.default;
-  }
-});
 Object.defineProperty(exports, "Search", {
   enumerable: true,
   get: function get() {
@@ -117,12 +111,6 @@ Object.defineProperty(exports, "PersonSearchResult", {
   enumerable: true,
   get: function get() {
     return _PersonSearchResult.default;
-  }
-});
-Object.defineProperty(exports, "Support", {
-  enumerable: true,
-  get: function get() {
-    return _Support.default;
   }
 });
 Object.defineProperty(exports, "TabList", {
@@ -212,70 +200,66 @@ Object.defineProperty(exports, "Time", {
 
 require("./internal/jQueryPluginChanges");
 
-var _Accordion = _interopRequireDefault(require("./components/Accordion"));
+var _AppAlert = _interopRequireDefault(require("./components/core-application/AppAlert"));
 
-var _AppAlert = _interopRequireDefault(require("./components/AppAlert"));
+var _Emulate = _interopRequireDefault(require("./components/core-application/Emulate"));
 
-var _Badge = _interopRequireDefault(require("./components/Badge"));
+var _Footer = _interopRequireDefault(require("./components/core-application/Footer"));
 
-var _Button = _interopRequireDefault(require("./components/Button"));
+var _Navbar = _interopRequireDefault(require("./components/core-application/Navbar"));
 
-var _DataTable = _interopRequireDefault(require("./components/DataTable"));
+var _OhioStateNavbar = _interopRequireDefault(require("./components/core-application/OhioStateNavbar"));
 
-var _Emulate = _interopRequireDefault(require("./components/Emulate"));
+var _Profile = _interopRequireDefault(require("./components/core-application/Profile"));
 
-var _ExternalLink = _interopRequireDefault(require("./components/ExternalLink"));
+var _Support = _interopRequireDefault(require("./components/core-application/Support"));
 
-var _Footer = _interopRequireDefault(require("./components/Footer"));
+var _Badge = _interopRequireDefault(require("./components/generic/Badge"));
 
-var _Icon = _interopRequireDefault(require("./components/Icon"));
+var _Icon = _interopRequireDefault(require("./components/generic/Icon"));
 
-var _Modal = _interopRequireDefault(require("./components/Modal"));
+var _Button = _interopRequireDefault(require("./components/controls/Button"));
 
-var _ModalHeader = _interopRequireDefault(require("./components/ModalHeader"));
+var _ExternalLink = _interopRequireDefault(require("./components/controls/ExternalLink"));
 
-var _ModalBody = _interopRequireDefault(require("./components/ModalBody"));
+var _Modal = _interopRequireDefault(require("./components/controls/Modal"));
 
-var _ModalFooter = _interopRequireDefault(require("./components/ModalFooter"));
+var _ModalHeader = _interopRequireDefault(require("./components/controls/ModalHeader"));
 
-var _Navbar = _interopRequireDefault(require("./components/Navbar"));
+var _ModalBody = _interopRequireDefault(require("./components/controls/ModalBody"));
 
-var _OhioStateNavbar = _interopRequireDefault(require("./components/OhioStateNavbar"));
+var _ModalFooter = _interopRequireDefault(require("./components/controls/ModalFooter"));
 
-var _Profile = _interopRequireDefault(require("./components/Profile"));
+var _Search = _interopRequireDefault(require("./components/controls/Search"));
 
-var _Search = _interopRequireDefault(require("./components/Search"));
+var _SearchResult = _interopRequireDefault(require("./components/controls/SearchResult"));
 
-var _SearchResult = _interopRequireDefault(require("./components/SearchResult"));
+var _PersonSearchResult = _interopRequireDefault(require("./components/controls/PersonSearchResult"));
 
-var _PersonSearchResult = _interopRequireDefault(require("./components/PersonSearchResult"));
+var _TabList = _interopRequireDefault(require("./components/controls/TabList"));
 
-var _Support = _interopRequireDefault(require("./components/Support"));
+var _TabItem = _interopRequireDefault(require("./components/controls/TabItem"));
 
-var _TabList = _interopRequireDefault(require("./components/TabList"));
+var _Richtext = _interopRequireDefault(require("./components/controls/Richtext"));
 
-var _TabItem = _interopRequireDefault(require("./components/TabItem"));
+var _Checkbox = _interopRequireDefault(require("./components/form/Checkbox"));
 
-var _Richtext = _interopRequireDefault(require("./components/Richtext"));
+var _DateTime = _interopRequireDefault(require("./components/form/DateTime"));
 
-var _Checkbox = _interopRequireDefault(require("./form/Checkbox"));
+var _Dropdown = _interopRequireDefault(require("./components/form/Dropdown"));
 
-var _DateTime = _interopRequireDefault(require("./form/DateTime"));
+var _FieldSet = _interopRequireDefault(require("./components/form/FieldSet"));
 
-var _Dropdown = _interopRequireDefault(require("./form/Dropdown"));
+var _Form = _interopRequireDefault(require("./components/form/Form"));
 
-var _FieldSet = _interopRequireDefault(require("./form/FieldSet"));
+var _MultiSelect = _interopRequireDefault(require("./components/form/MultiSelect"));
 
-var _Form = _interopRequireDefault(require("./form/Form"));
+var _Number = _interopRequireDefault(require("./components/form/Number"));
 
-var _MultiSelect = _interopRequireDefault(require("./form/MultiSelect"));
+var _Radio = _interopRequireDefault(require("./components/form/Radio"));
 
-var _Number = _interopRequireDefault(require("./form/Number"));
+var _Select = _interopRequireDefault(require("./components/form/Select"));
 
-var _Radio = _interopRequireDefault(require("./form/Radio"));
+var _Text = _interopRequireDefault(require("./components/form/Text"));
 
-var _Select = _interopRequireDefault(require("./form/Select"));
-
-var _Text = _interopRequireDefault(require("./form/Text"));
-
-var _Time = _interopRequireDefault(require("./form/Time"));
+var _Time = _interopRequireDefault(require("./components/form/Time"));

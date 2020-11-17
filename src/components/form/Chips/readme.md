@@ -17,6 +17,10 @@ const [values, setValues] = useState([]);
         value={values}
         onChange={(e) => setValues(e.value)}
     />
+
+    <Chips.Help>
+        Press the enter key between each chip
+    </Chips.Help>
 </Chips>
 ```
 
@@ -34,6 +38,10 @@ const [values, setValues] = useState([]);
         onChange={(e) => setValues(e.value)}
         separator=","
     />
+
+    <Chips.Help>
+        Separate chips with commas
+    </Chips.Help>
 </Chips>
 ```
 

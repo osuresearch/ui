@@ -19,7 +19,6 @@
 
 // Vendor libraries
 @import "vendor/bootstrap-4.0.0/bootstrap";
-@import "vendor/primeicons-4.0.0/primeicons";
 @import "vendor/primereact-5.0.0/primereact";
 @import "vendor/font-awesome";
 @import "vendor/datatables";
@@ -41,6 +40,7 @@
 @import "overrides/Bootstrap/reboot";
 @import "overrides/Bootstrap/tables";
 @import "overrides/Bootstrap/type";
+
 // PrimeReact
 @import "overrides/PrimeReact/accordion";
 @import "overrides/PrimeReact/autocomplete";
@@ -56,13 +56,12 @@
 @import "overrides/PrimeReact/multiselect";
 @import "overrides/PrimeReact/paginator";
 @import "overrides/PrimeReact/treetable";
+
 // Misc overrides
 @import "overrides/datatables";
 @import "overrides/datepicker";
 
 // Components
-// Core Application
-
 @import "components/alert-banner";
 @import "components/application-alert";
 @import "components/external-link";

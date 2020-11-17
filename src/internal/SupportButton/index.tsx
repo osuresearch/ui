@@ -1,6 +1,6 @@
 import React from "react";
 
-import Icon from "../../components/Icon";
+import Icon from "../../components/generic/Icon";
 
 export interface Props {
     title: string;
@@ -15,15 +15,15 @@ const SupportButton: React.FC<Props> = ({
     showModal,
     modalOpen
 }) => (
-    <div id="support-btn-wrapper" className={isFixed ? 'is-fixed' : ''}>
-        <button
-            type="button"
-            className="btn btn-outline-secondary support-btn"
-            disabled={modalOpen}
-            onClick={showModal}>
-            <Icon name="comment-o" /> {title}
-        </button>
-    </div>
-);
+        <div id="support-btn-wrapper" className={isFixed ? 'is-fixed' : ''}>
+            <button
+                type="button"
+                className="btn btn-outline-secondary support-btn"
+                disabled={modalOpen}
+                onClick={showModal}>
+                <Icon name="comment-o" /> {title}
+            </button>
+        </div>
+    );
 
 export default SupportButton;

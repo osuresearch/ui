@@ -90,7 +90,7 @@ var ReactComponent = /*#__PURE__*/function (_Component) {
   (0, _createClass2.default)(ReactComponent, [{
     key: "render",
     value: function render() {
-      var _component$props;
+      var _component$module, _component$module$def, _component$props;
 
       var activeTab = this.state.activeTab;
       var _this$context = this.context,
@@ -121,12 +121,14 @@ var ReactComponent = /*#__PURE__*/function (_Component) {
         return null;
       }
 
-      var showUsage = usageMode !== _consts.UsageModes.hide;
+      var showUsage = usageMode !== _consts.UsageModes.hide; // @ts-ignore
+
+      var pLine = ((_component$module = component.module) === null || _component$module === void 0 ? void 0 : (_component$module$def = _component$module.default) === null || _component$module$def === void 0 ? void 0 : _component$module$def.componentPathLine) || pathLine;
       return /*#__PURE__*/_react.default.createElement(_ReactComponentRenderer.default, {
         name: name,
         slug: slug,
         filepath: filepath,
-        pathLine: pathLine,
+        pathLine: pLine,
         docs: /*#__PURE__*/_react.default.createElement(_JsDoc.default, tags),
         description: description && /*#__PURE__*/_react.default.createElement(_Markdown.default, {
           text: description

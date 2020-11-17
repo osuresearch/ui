@@ -9,7 +9,7 @@ exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _Icon = _interopRequireDefault(require("../../components/Icon"));
+var _Icon = _interopRequireDefault(require("../../components/generic/Icon"));
 
 var SupportButton = function SupportButton(_ref) {
   var title = _ref.title,

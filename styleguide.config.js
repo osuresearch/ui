@@ -149,16 +149,6 @@ let sections = [
         name: 'Data Components',
         content: 'src/components/data/readme.md',
         components: 'src/components/data/**/index.?(js|tsx)',
-        // sections: [
-        //     {
-        //         name: '<DataTable>',
-        //         content: 'src/components/data/DataTable/readme.md'
-        //     },
-        //     {
-        //         name: '<TreeTable>',
-        //         content: 'src/components/data/TreeTable/readme.md'
-        //     }
-        // ],
         wrapComponentNamesInBrackets: true,
         expand: true,
 
@@ -182,7 +172,7 @@ let sections = [
         wrapComponentNamesInBrackets: true,
         expand: true,
         sectionDepth: 0
-    },    
+    },
     {
         name: 'HTML Components',
         content: 'docs/html/readme.md',

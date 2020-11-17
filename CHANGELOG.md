@@ -1,11 +1,43 @@
 # Change Log
-Current unresolved issues can be found and reported on [YouTrack](https://ordevsvc01.rf.ohio-state.edu/youtrack/issues?q=%23oris\ui+%23Unresolved+)
+Current unresolved issues can be found and reported on [YouTrack](https://ordevsvc01.rf.ohio-state.edu/youtrack/issues?q=project:%20%7BFrameworks%20and%20Packages%7D%20UI%20%23Unresolved%20)
 
 Versions follow [Semantic Versioning](https://semver.org/) guidelines - given a version number MAJOR.MINOR.PATCH:
 
 1. MAJOR version when you make incompatible API changes,
 2. MINOR version when you add functionality in a backwards-compatible manner, and
 3. PATCH version when you make backwards-compatible bug fixes.
+
+# 4.3.0
+
+__New Features:__
+
+* Integration of the [PrimeReact UI Library](https://www.primefaces.org/primereact/), with support for its `DataTable`, `TreeTable`, and `Accordion` components (support for additional PrimeReact components forthcoming)
+* New `Alert` component based on [Bootstrap Alerts](https://getbootstrap.com/docs/4.0/components/alerts/)
+* New `Chips` form component based on the PrimeReact component of the same name
+* New `Drop` component based on [Bootstrap Dropdowns](https://getbootstrap.com/docs/4.0/components/dropdowns/)
+* New `Dropdown` form component based on the PrimeReact component of the same name
+* New `MultiSelect` form component based on the PrimeReact component of the same name
+* Navigation improvements to styleguide by categorizing components
+
+__Internal changes:__
+
+* The base styleguide page no longer loads all of the components in the styleguide 
+* Added the ability to override the component path line; if `componentPathLine` is set in a component, it will override the default (i.e. `import { Component } from '@oris/ui'`)
+* Improved the method of wrapping component names in brackets
+* Moved component files into category folders within the components folder
+* Removed (now) redundant HTML docs
+
+# 4.2.2 (2020-10-12)
+
+__Accessibility Fixes:__
+
+* The common Label component included an `aria-label` that denoted required fields. This was removed in favor of adding an `aria-required` attribute to form inputs/controls - the more semantic solution
+* `aria-live` was removed from the Error component, since `role="alert"` automatically makes the component an assertive live region. Additionally, a recommendation to perform validation on blur was added to the Form component documentation. Validating on blur will allow for the alerts to perform properly, per this article recommended by Jen and testing in macOS VoiceOver.
+* Added the `aria-invalid` attribute to form inputs/controls to aid in error validation for users of assistive technologies.
+
+__Bug Fixes:__
+
+* Fixed a minor display bug for help text and success/error messages in Chrome
 
 # 4.2.1 (2020-09-30)
 

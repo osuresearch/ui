@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { IFormFieldContext } from '../../../internal/FormCommon/types'
+import { IFormFieldContext } from '../../../../internal/FormCommon/types'
 
 export type LabelProps = React.LabelHTMLAttributes<HTMLLabelElement> & {
     /** 
