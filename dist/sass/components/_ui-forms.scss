@@ -1,4 +1,3 @@
-
 @import "react-datepicker/src/stylesheets/datepicker";
 
 /** ORIS/UI Form Component Library styles */
@@ -9,7 +8,8 @@
     display: flex;
     flex-direction: column;
 
-    label, legend {
+    label,
+    legend {
         font-size: inherit;
         margin-bottom: 1em;
     }
@@ -24,34 +24,60 @@
         font-size: 0.5em;
         padding-left: 0.5em;
         vertical-align: top;
-        content: '\f069';
+        content: "\f069";
     }
 
     &.is-invalid {
-        label, legend, select, .input-group-prefix {
-            color: theme-color('danger');
+        label,
+        legend,
+        select,
+        .input-group-prefix {
+            color: theme-color("danger");
         }
 
         .custom-control-label {
             &::before {
-                border-color: theme-color('danger');
+                border-color: theme-color("danger");
             }
+        }
+
+        .richtext {
+            .cke_chrome {
+                border: 1px solid $form-feedback-invalid-color;
+
+                &.cke_focus {
+                    box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba($form-feedback-invalid-color, 0.25);
+                }
+            }
+        }
+
+        .invalid-feedback {
+            display: block;
         }
     }
 
     &.is-valid {
-        label, legend, select, .input-group-prefix {
-            color: theme-color('success');
+        label,
+        legend,
+        select,
+        .input-group-prefix {
+            color: theme-color("success");
         }
 
         .custom-control-label {
             &::before {
-                border-color: theme-color('success');
+                border-color: theme-color("success");
             }
+        }
+
+        .valid-feedback {
+            display: block;
         }
     }
 
-    .form-text, .invalid-feedback, .valid-feedback {
+    .form-text,
+    .invalid-feedback,
+    .valid-feedback {
         margin: 0 0 1rem 0;
     }
 
@@ -79,9 +105,10 @@
         }
     }
 
-    &.custom-checkbox, &.custom-radio {
+    &.custom-checkbox,
+    &.custom-radio {
         .custom-control-input[readonly] {
-            ~.custom-control-label {
+            ~ .custom-control-label {
                 &::before {
                     background-color: transparent;
                     border-color: transparent;
@@ -108,7 +135,9 @@
 
     .richtext.readonly {
         // Hide the CKEditor toolbar
-        .cke_top { display: none; }
+        .cke_top {
+            display: none;
+        }
     }
 }
 
@@ -124,11 +153,13 @@ fieldset.ui-form-element {
         display: inline-flex;
         margin-bottom: 1em;
 
-        .custom-control, .form-control, .input-group {
+        .custom-control,
+        .form-control,
+        .input-group {
             padding-right: 2rem;
 
             // Fix margins
-            .custom-control-label { 
+            .custom-control-label {
                 margin-bottom: 0;
             }
         }
@@ -145,11 +176,22 @@ fieldset.ui-form-element {
 
     // Fix input size for the time input with an annoying level of nesting.
     // Seriously - they use BEM but still nest selectors? Idiotic.
-    .react-datepicker__input-time-container .react-datepicker-time__input-container .react-datepicker-time__input input {
+    .react-datepicker__input-time-container
+        .react-datepicker-time__input-container
+        .react-datepicker-time__input
+        input {
         width: 1.65rem;
     }
 
-    .react-datepicker__day--selected, .react-datepicker__day--in-selecting-range, .react-datepicker__day--in-range, .react-datepicker__month-text--selected, .react-datepicker__month-text--in-selecting-range, .react-datepicker__month-text--in-range, .react-datepicker__quarter-text--selected, .react-datepicker__quarter-text--in-selecting-range, .react-datepicker__quarter-text--in-range {
+    .react-datepicker__day--selected,
+    .react-datepicker__day--in-selecting-range,
+    .react-datepicker__day--in-range,
+    .react-datepicker__month-text--selected,
+    .react-datepicker__month-text--in-selecting-range,
+    .react-datepicker__month-text--in-range,
+    .react-datepicker__quarter-text--selected,
+    .react-datepicker__quarter-text--in-selecting-range,
+    .react-datepicker__quarter-text--in-range {
         background-color: $casal;
 
         &:hover {
@@ -157,7 +199,9 @@ fieldset.ui-form-element {
         }
     }
 
-    .react-datepicker__day--keyboard-selected, .react-datepicker__month-text--keyboard-selected, .react-datepicker__quarter-text--keyboard-selected {
+    .react-datepicker__day--keyboard-selected,
+    .react-datepicker__month-text--keyboard-selected,
+    .react-datepicker__quarter-text--keyboard-selected {
         background-color: $casal;
 
         &:hover {
@@ -165,7 +209,7 @@ fieldset.ui-form-element {
         }
     }
 
-    .react-datepicker__input-time-container { 
+    .react-datepicker__input-time-container {
         border-top: 1px solid;
         border-bottom: 1px solid;
         border-color: tint($gray, 30%);
@@ -184,8 +228,9 @@ fieldset.ui-form-element {
     }
 
     // Component styling
-    .react-datepicker__input-container{
-        .date, .datetime {
+    .react-datepicker__input-container {
+        .date,
+        .datetime {
             display: block;
             padding-left: 2em;
         }
@@ -193,7 +238,7 @@ fieldset.ui-form-element {
 
     .datetimepicker {
         > .input-group-prefix {
-            .fa { 
+            .fa {
                 &.fa-clock-o {
                     font-size: 0.7rem;
                     position: absolute;
@@ -211,7 +256,7 @@ fieldset.ui-form-element {
     // ... Ugh, there *is* a keyboard-selected class, but it doesn't get applied
     // to the selected day when that day has focus, so it's completely useless
     .react-datepicker__day {
-        &:focus{
+        &:focus {
             outline: 1px dotted $gray;
         }
     }
@@ -223,22 +268,23 @@ fieldset.ui-form-element {
 }
 
 // Time
-.ui-form-time, .react-datepicker-time__input {
+.ui-form-time,
+.react-datepicker-time__input {
     .input-group {
         appearance: listbox;
-        
+
         .form-control {
             padding: 0.2em 0.5em 0.2em 1.6em;
             max-width: 7.75rem;
 
-            label { 
+            label {
                 margin-bottom: 0;
-                
+
                 &::after {
-                    content: '';
+                    content: "";
                     padding: 0;
                     font-size: 0;
-                } 
+                }
             }
 
             input {
@@ -273,7 +319,7 @@ fieldset.ui-form-element {
                     }
                 }
 
-                &[name='am-pm'] {
+                &[name="am-pm"] {
                     margin-left: 0.15rem;
                 }
             }
@@ -281,21 +327,23 @@ fieldset.ui-form-element {
 
         &.is-invalid {
             .form-control {
-                border-color: theme-color('danger');
+                border-color: theme-color("danger");
             }
 
-            .form-control, input {
-                color: theme-color('danger');
+            .form-control,
+            input {
+                color: theme-color("danger");
             }
         }
 
         &.is-valid {
             .form-control {
-                border-color: theme-color('success');
+                border-color: theme-color("success");
             }
 
-            .form-control, input {
-                color: theme-color('success');
+            .form-control,
+            input {
+                color: theme-color("success");
             }
         }
 
@@ -334,10 +382,10 @@ fieldset.ui-form-element {
                 box-shadow: 0 0 0 0.2rem rgba(38, 104, 109, 0.25);
             }
         }
-
-        
     }
 
     // Sass hurt itself in its confusion...
-    .input-group input::selection { background: transparent; }
+    .input-group input::selection {
+        background: transparent;
+    }
 }
