@@ -9,9 +9,14 @@ export type Props = {
      */
     className?: string
 
-    value?: JsonObject | null
+    // value?: Nullable<JsonObject>
 
-    defaultValue?: JsonObject | null
+    /**
+     * Initial value to populate the lookup in uncontrolled mode.
+     * 
+     * Use the `onChange` prop of `Lookup` to get value updates.
+     */
+    defaultValue?: Nullable<JsonObject>
 
     resultRenderer: (result: JsonObject) => JSX.Element
 
@@ -137,7 +142,7 @@ const Input: React.FC<Props> = (props) => {
                     tabIndex={-1}
                 >
                     {error && 
-                    <div className="dropdown-header">
+                    <div className="dropdown-header lookup-error">
                         {error}
                     </div>
                     }
