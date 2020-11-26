@@ -11,12 +11,18 @@ import useSearch from '../../hooks/useSearch';
  */
 export default function JsonApi(endpoint: string) {
     const DriverComponent: React.FC<DriverProps> = ({
-        provider,
-        updateSearchData
+        provider
     }) => {
-        const { terms, filters, sort } = useSearch(provider);
-        
-        throw new Error('TODO: Implement!');
+        const { 
+            terms, filters, sort,
+            setError, setSearching, setResults 
+        } = useSearch(provider);
+
+        throw new Error('TODO: Implement');
+
+        // Respond to changes in terms/filters/sort and 
+        // update the search state via the setters exposed
+        // by useSearch
 
         // Driver components are renderless. It's just a stateful container
         return null;

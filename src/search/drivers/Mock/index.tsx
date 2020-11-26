@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import faker, { random, name, internet, image } from 'faker';
 
-import { AnyOf, Term, DriverProps, SearchData } from '../..';
+import { AnyOf, Term, DriverProps } from '../..';
 import useSearch from '../../hooks/useSearch';
 import { ppid } from 'process';
 
@@ -33,10 +33,12 @@ const FAKE_DATA = Array.from({ length: 100 }, () => {
  */
 export default function Mock() {
     const DriverComponent: React.FC<DriverProps> = ({
-        provider,
-        updateSearchData
+        provider
     }) => {
-        const { terms, sort, filters } = useSearch(provider);
+        const { 
+            terms, sort, filters,
+            setResults, setSearching 
+        } = useSearch(provider);
 
         let people: any[] = [];
         // Fire off a new query if anything in the search state changes
@@ -65,7 +67,7 @@ export default function Mock() {
                 }
             });
 
-            let results = FAKE_DATA.filter((p) => {
+            let hits = FAKE_DATA.filter((p) => {
                 let match = true;
 
                 if (terms.length > 0) {
@@ -92,18 +94,16 @@ export default function Mock() {
                 return match;
             });
 
-            // Top 10 results only
-            results = results.slice(0, 10);
+            // Payload is the total hit count and 
+            // the top 10 result objects.
+            const results = {
+                hits: hits.length,
+                results: hits.slice(0, 10)
+            }
 
-            const data: SearchData = {
-                loading: false,
-                results
-            };
-
-            console.debug('SENDING MOCK DATA', data);
-
-            updateSearchData(data);
-        }, [terms, filters, sort, updateSearchData]);
+            setSearching(false);
+            setResults(results);
+        }, [terms, filters, sort, setSearching, setResults]);
 
         // Driver components are renderless. It's just a stateful container
         return null;

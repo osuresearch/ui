@@ -45,20 +45,13 @@ export const Context = React.createContext<ISearchContext>({} as ISearchContext)
  */
 const Search: React.FC<Props> & ISearchComposition = ({ provider, driver, children }) => {
     const [data, setData] = useState<ISearchContext>({ loading: true });
-    const { setSearching, setResults, setError } = useSearch(provider);
-
-    useEffect(() => {
-        if (data) {
-            setSearching(data.loading);
-            setResults(data.results);
-            setError(data.error);
-        }
-    }, [data, setError, setResults, setSearching]);
+    
+    // TODO: Remove this component. Unnecessary.
 
     const DriverComponent = driver;
     return (
         <Context.Provider value={data}>
-            <DriverComponent provider={provider} updateSearchData={setData} />
+            <DriverComponent provider={provider} />
             {children}
         </Context.Provider>
     )
