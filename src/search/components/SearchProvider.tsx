@@ -7,6 +7,7 @@ import {
     Sort,
     IFilter,
     ISearchContext,
+    SearchDriver,
 } from '..';
 
 import {
@@ -36,18 +37,22 @@ export type Props = {
      * defined here will be overridden by the URL data.
      */
     defaultFilters?: SearchFilters
+
+    /** The API integration driver to submit search data */
+    driver: SearchDriver
 }
 
 /**
  * Provider for a named set of search filters and queries.
  * 
- * All search components (`<Filters>`, `<Search>`, etc) **must** be associated
+ * All search components **must** be associated
  * with a provider to share state information. 
  */
 const SearchProvider: React.FC<Props> = ({
     id,
     defaultTerms = '',
     defaultFilters,
+    driver,
     children
 }) => {
     const [terms, setTerms] = useState<string>(defaultTerms);
@@ -55,7 +60,7 @@ const SearchProvider: React.FC<Props> = ({
         () => defaultFilters ? defaultFilters.clone() : new SearchFilters()
     );
     const [searching, setSearching] = useState(false);
-    const [results, setResults] = useState<any[] | undefined>();
+    const [results, setResults] = useState<any | undefined>();
     const [error, setError] = useState<string | undefined>();
 
     // Prepare for some magic.
@@ -80,7 +85,6 @@ const SearchProvider: React.FC<Props> = ({
 
     console.debug(`[SearchProvider(${id})] Redraw`, terms, filters);
 
-    // TODO: Can totally memoize this whole thing off of terms & filters
     const contextValue = useMemo<ISearchContext>(() => ({
         terms,
         filters: filters.filters,
@@ -112,10 +116,14 @@ const SearchProvider: React.FC<Props> = ({
         setError
     }), [terms, filters, searching, results, error]);
 
+    const DriverComponent = driver;
+
     // Note this can't just be value={context} because we need to be
     // able to rewrite query/filters on state change.
     return (
         <context.Provider value={contextValue}>
+            <DriverComponent provider={id} />
+
             {children}
         </context.Provider>
     );
