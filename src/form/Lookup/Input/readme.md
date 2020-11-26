@@ -7,9 +7,13 @@ import { Form, Lookup } from '@oris/ui';
 import { SearchProvider, SearchDebugger } from '@oris/ui/search';
 import Mock from '@oris/ui/search/drivers/Mock';
 
+const onChange = (newValue, oldValue) => {
+    alert(JSON.stringify(newValue));
+}
+
 <Form>
     <SearchProvider id="lookup-provider" driver={Mock()}>
-        <Lookup provider="lookup-provider">
+        <Lookup provider="lookup-provider" onChange={onChange}>
             <Lookup.Label>
                 Search for a person
             </Lookup.Label>

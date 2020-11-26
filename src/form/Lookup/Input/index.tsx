@@ -1,5 +1,6 @@
 import React, { useContext, useRef, useState } from 'react';
 import { Context, JsonObject } from '..';
+import { Nullable } from '../../../internal/FormCommon/types';
 import { useSearch } from '../../../search';
 
 export type Props = {
@@ -82,8 +83,8 @@ const Input: React.FC<Props> = (props) => {
     const totalHits = results?.hits || 0;
     const hits: JsonObject[] = results?.results || [];
 
-    const [value, setValue] = useState<JsonObject | undefined>(
-        props.defaultValue ? props.defaultValue : undefined
+    const [value, setValue] = useState<Nullable<JsonObject>>(
+        props.defaultValue ? props.defaultValue : null
     );
 
     const hasHits = terms.length > 0 && hits.length > 0;
@@ -91,9 +92,12 @@ const Input: React.FC<Props> = (props) => {
     const hasMoreHits = terms.length > 0 && !searching && totalHits > hits.length;
     const showResultsPane = !value && (hasHits || hasNoHits || error !== undefined);
 
-    const updateValue = (newValue?: JsonObject) => {
+    const updateValue = (newValue: Nullable<JsonObject>) => {
         setValue(newValue);
         setTerms('');
+        
+        // Notify the bind and trigger onChange of the parent Lookup.
+        bind.value = newValue;
     }
 
     return (
@@ -118,7 +122,7 @@ const Input: React.FC<Props> = (props) => {
                     {props.resultRenderer(value)}
                 </div>
 
-                <button className="lookup-value-clear" onClick={() => updateValue()}>
+                <button className="lookup-value-clear" onClick={() => updateValue(null)}>
                     &times;
                 </button>
             </div>
