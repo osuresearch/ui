@@ -185,6 +185,12 @@ Object.defineProperty(exports, "Time", {
     return _Time.default;
   }
 });
+Object.defineProperty(exports, "Lookup", {
+  enumerable: true,
+  get: function get() {
+    return _Lookup.default;
+  }
+});
 
 require("./internal/jQueryPluginChanges");
 
@@ -247,3 +253,5 @@ var _Select = _interopRequireDefault(require("./form/Select"));
 var _Text = _interopRequireDefault(require("./form/Text"));
 
 var _Time = _interopRequireDefault(require("./form/Time"));
+
+var _Lookup = _interopRequireDefault(require("./form/Lookup"));

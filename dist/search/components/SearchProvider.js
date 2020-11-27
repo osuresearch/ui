@@ -20,7 +20,7 @@ var _SearchContext = require("../SearchContext");
 /**
  * Provider for a named set of search filters and queries.
  * 
- * All search components (`<Filters>`, `<Search>`, etc) **must** be associated
+ * All search components **must** be associated
  * with a provider to share state information. 
  */
 var SearchProvider = function SearchProvider(_ref) {
@@ -28,6 +28,7 @@ var SearchProvider = function SearchProvider(_ref) {
       _ref$defaultTerms = _ref.defaultTerms,
       defaultTerms = _ref$defaultTerms === void 0 ? '' : _ref$defaultTerms,
       defaultFilters = _ref.defaultFilters,
+      driver = _ref.driver,
       children = _ref.children;
 
   var _useState = (0, _react.useState)(defaultTerms),
@@ -78,8 +79,7 @@ var SearchProvider = function SearchProvider(_ref) {
       return (0, _SearchContext.destroyDynamicContext)(id);
     };
   }, [id]);
-  console.debug("[SearchProvider(".concat(id, ")] Redraw"), terms, filters); // TODO: Can totally memoize this whole thing off of terms & filters
-
+  console.debug("[SearchProvider(".concat(id, ")] Redraw"), terms, filters);
   var contextValue = (0, _react.useMemo)(function () {
     return {
       terms: terms,
@@ -117,12 +117,15 @@ var SearchProvider = function SearchProvider(_ref) {
       setResults: setResults,
       setError: setError
     };
-  }, [terms, filters, searching, results, error]); // Note this can't just be value={context} because we need to be
+  }, [terms, filters, searching, results, error]);
+  var DriverComponent = driver; // Note this can't just be value={context} because we need to be
   // able to rewrite query/filters on state change.
 
   return /*#__PURE__*/_react.default.createElement(context.Provider, {
     value: contextValue
-  }, children);
+  }, /*#__PURE__*/_react.default.createElement(DriverComponent, {
+    provider: id
+  }), children);
 };
 
 var _default = SearchProvider;

@@ -1,18 +1,9 @@
 import React from 'react';
 /**
- * Internal state data passed from <Search> to children via a context.
- */
-export declare type SearchData = {
-    loading: boolean;
-    error?: string;
-    results?: any;
-};
-/**
  * Required props for a driver component provided to `Search.driver`
  */
 export declare type DriverProps = {
     provider: string;
-    updateSearchData: (data: SearchData) => void;
 };
 export declare type SearchDriver = React.FC<DriverProps>;
 export declare type SearchTerms = string;

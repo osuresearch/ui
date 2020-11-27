@@ -35,22 +35,26 @@ var _useSearch2 = _interopRequireDefault(require("../../hooks/useSearch"));
  */
 function GraphQL(query) {
   var DriverComponent = function DriverComponent(_ref) {
-    var provider = _ref.provider,
-        updateSearchData = _ref.updateSearchData;
+    var provider = _ref.provider;
 
     var _useSearch = (0, _useSearch2.default)(provider),
         terms = _useSearch.terms,
         filters = _useSearch.filters,
-        sort = _useSearch.sort;
+        sort = _useSearch.sort,
+        setSearching = _useSearch.setSearching,
+        setError = _useSearch.setError,
+        setResults = _useSearch.setResults;
 
     var _useLazyQuery = (0, _client.useLazyQuery)(query),
         _useLazyQuery2 = (0, _slicedToArray2.default)(_useLazyQuery, 2),
         callable = _useLazyQuery2[0],
-        result = _useLazyQuery2[1];
+        result = _useLazyQuery2[1]; // Cached results from the previous search
+
 
     var _useState = (0, _react.useState)(),
         _useState2 = (0, _slicedToArray2.default)(_useState, 2),
         setCached = _useState2[1]; // Fire off a new query if anything in the search state changes
+    // TODO: Implicit throttling on term changes
 
 
     (0, _react.useEffect)(function () {
@@ -66,29 +70,29 @@ function GraphQL(query) {
 
     (0, _react.useEffect)(function () {
       setCached(function (prev) {
-        var data = {
-          loading: result.loading,
-          results: prev === null || prev === void 0 ? void 0 : prev.results
-        };
+        // Use previously cached results if we're still loading
+        var results = prev === null || prev === void 0 ? void 0 : prev.results; // If there's an error - make it human readable.
+
+        var error = undefined;
 
         if (result.error) {
-          console.error('GraphQL Search Driver Error', result.error); // TODO: Better errors? We don't really display this on the frontend anywhere.
+          console.error('GraphQL Search Driver Error', result.error); // TODO: Better error message. May be displayed to the user.
 
-          data.error = 'Something went wrong';
+          error = 'Something went wrong';
         }
         /*
             GraphQL can come back with any named query field -
             but we only care about the value in that field.
-              Example 1:
+             Example 1:
                 query {
                     tools(terms: "foo") {
                         id
                         title
                     }
                 }
-                  We only care about the `[{ id, title }]`
+                 We only care about the `[{ id, title }]`
                 payload within `data.tools`.
-              Example 2:
+             Example 2:
                 query {
                     search(terms: "fizz") {
                         totalHits
@@ -100,20 +104,22 @@ function GraphQL(query) {
                         }
                     }
                 }
-                  We grab the full `{totalHits, maxRank, hits: [...]}`
+                 We grab the full `{totalHits, maxRank, hits: [...]}`
                 payload within `data.search`.
         */
 
 
         if (result.data !== undefined) {
           var firstKey = Object.keys(result.data)[0];
-          data.results = result.data[firstKey];
+          results = result.data[firstKey];
         }
 
-        updateSearchData(data);
-        return data;
+        setSearching(result.loading);
+        setError(error);
+        setResults(results);
+        return results;
       });
-    }, [result, updateSearchData]); // Driver components are renderless. It's just a stateful container
+    }, [result, setSearching, setError, setResults]); // Driver components are renderless. It's just a stateful container
 
     return null;
   };
