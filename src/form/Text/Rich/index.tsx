@@ -22,6 +22,12 @@ export interface RichProps {
     onChange?(newValue: string): void;
 
     /**
+     * Callback on blur
+     * 
+     */
+    onBlur?(): void;
+
+    /**
      * Additional class names to apply to the component
      */
     className?: string;
@@ -56,6 +62,7 @@ const SIMPLE_TOOLBAR_CONFIG = [
  */
 const Rich: React.FC<RichProps> = ({
     onChange,
+    onBlur,
     defaultValue = '',
     simple = false,
     className = '',
@@ -115,6 +122,7 @@ const Rich: React.FC<RichProps> = ({
                         onChange(newValue);
                     }
                 }}
+                onBlur={onBlur}
             />
         </div>
     );

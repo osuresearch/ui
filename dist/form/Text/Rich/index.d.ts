@@ -11,6 +11,11 @@ export interface RichProps {
      */
     onChange?(newValue: string): void;
     /**
+     * Callback on blur
+     *
+     */
+    onBlur?(): void;
+    /**
      * Additional class names to apply to the component
      */
     className?: string;
