@@ -5,7 +5,7 @@ Docs need:
 - `SearchFilters` data structure usage?
 - just typical driver usage
 
-```jsx static
+```jsx
 import { SearchProvider, Filters, Search, SearchDebugger } from '@oris/ui/search';
 import Mock from '@oris/ui/search/drivers/Mock';
 
@@ -23,7 +23,7 @@ function PersonSearchFilters() {
                     'Texas',
                 ]} />
             </Filters.Group>
-            
+
             <Filters.Group title="Age Group">
                 {/* In lieu of native range support, this is doing a comma-divided key */}
                 <Filters.OneOf name="ageRange" options={{
@@ -33,17 +33,17 @@ function PersonSearchFilters() {
                     '65,1000': '65+'
                 }} />
             </Filters.Group>
-            
+
             <Filters.Group title="Email Domain">
                 <Filters.OneOf name="emailDomain" options={{
                     'hotmail.com': '@hotmail.com',
                     'yahoo.com': '@yahoo.com',
                     'gmail.com': '@gmail.com',
                 }} />
-                <Filters.Match 
-                    prefix="Custom Domain" 
-                    name="otherEmailDomain" 
-                    placeholder="Other Domain" 
+                <Filters.Match
+                    prefix="Custom Domain"
+                    name="otherEmailDomain"
+                    placeholder="Other Domain"
                 />
             </Filters.Group>
         </Filters>
@@ -51,7 +51,7 @@ function PersonSearchFilters() {
 }
 
 /**
- * Component that renders a search result. 
+ * Component that renders a search result.
  * This is up to you to create for your application.
  */
 function PersonResultCard({ result }) {
@@ -78,12 +78,13 @@ function PersonResultCard({ result }) {
 
 function PersonSearchResults() {
     return (
-        <Search provider="demo" driver={Mock()}>
+        <>
             {/* You can have multiple filter groups attached to the same provider */}
             <Filters provider="demo">
                 <Filters.Pills />
             </Filters>
 
+        {/*
             <Search.Empty>
                 No one found matching your search
             </Search.Empty>
@@ -97,11 +98,13 @@ function PersonSearchResults() {
                     <PersonResultCard />
                 </Search.Results.Mapper>
             </Search.Results>
-        </Search>
+        </Search>*/}
+        <p>TODO: New components for rendering out search results. No longer subcomponents of Search.</p>
+        </>
     );
 }
 
-<SearchProvider id="demo">
+<SearchProvider id="demo" driver={Mock()}>
     <div className="row">
         <div className="col-3">
             <PersonSearchFilters />

@@ -62,7 +62,8 @@ export default function Mock() {
                     }
 
                 } else if (Object.keys(f).indexOf('anyOf')) {
-                    states = (f as AnyOfFilter).anyOf.state as string[];
+                    const anyOfKey = (f as AnyOfFilter).anyOf;
+                    states = anyOfKey && anyOfKey.state ? anyOfKey.state as string[] : [];
                 }
             });
 

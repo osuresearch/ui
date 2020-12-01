@@ -5,10 +5,11 @@ The enum `key` will be used in the filter and each radio will be labeled with th
 
 ```jsx
 import { SearchProvider, Filters, SearchDebugger } from '@oris/ui/search';
+import Mock from '@oris/ui/search/drivers/Mock';
 
 const ID = 'demo-OneOf';
 
-<SearchProvider id={ID}>
+<SearchProvider id={ID} driver={Mock()}>
     <Filters provider={ID}>
         <Filters.OneOf name="dataClassification" options={{
             S1: 'Public (S1)',

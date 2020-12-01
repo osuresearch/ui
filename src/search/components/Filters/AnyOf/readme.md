@@ -6,10 +6,11 @@ The enum `value` will be added to the filter and used for the checkbox labeling.
 
 ```jsx
 import { SearchProvider, Filters, SearchDebugger } from '@oris/ui/search';
+import Mock from '@oris/ui/search/drivers/Mock';
 
 const ID = 'demo-AnyOf';
 
-<SearchProvider id={ID}>
+<SearchProvider id={ID} driver={Mock()}>
     <Filters provider={ID}>
         <Filters.AnyOf name="dataClassification" options={[
             'Public (S1)',
