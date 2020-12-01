@@ -2,20 +2,20 @@
 import React, { useContext } from 'react';
 import { KeyValuePairs, YetAnotherCheckboxWrapper } from '../Common';
 import { Context } from '..';
-import { OrFilters, AndFilters, Term, term, OR, AND } from '../../..';
+import { OrFilters, AndFilters, TermFilter, term, OR, AND } from '../../..';
 
 export type Props = {
     options: KeyValuePairs
 
     /**
-     * Toggle group name. 
-     * 
+     * Toggle group name.
+     *
      * This does not typically need to match any backend field
      * as all toggle fields are individual terms combined with `AND/OR`
      */
     name: string
 
-    /** 
+    /**
      * Minimum options displayed before the clear button is also displayed.
      */
     minimumOptionsForClearButton?: number
@@ -23,11 +23,11 @@ export type Props = {
     /**
      * How should individual terms be combined
      */
-    operator?: 'AND' | 'OR' 
+    operator?: 'AND' | 'OR'
 };
 
 /**
- * Batch of multiple <Toggle> components matching to an enumeration 
+ * Batch of multiple <Toggle> components matching to an enumeration
  * between filter names and titles. Each filter will be set as a boolean
  * `true` value when checked, or deleted when unchecked.
  */
@@ -35,17 +35,17 @@ const Toggles: React.FC<Props> = ({ name, options, minimumOptionsForClearButton 
     const ctx = useContext(Context);
 
     let filter: OrFilters | AndFilters | undefined;
-    let terms: Term[] = [];
+    let terms: TermFilter[] = [];
 
     if (operator === 'OR') {
         filter = ctx.getFilter<OrFilters>(name);
         if (filter) {
-            terms = filter.OR as Term[];
+            terms = filter.OR as TermFilter[];
         }
     } else {
         filter = ctx.getFilter<AndFilters>(name);
         if (filter) {
-            terms = filter.AND as Term[];
+            terms = filter.AND as TermFilter[];
         }
     }
 
@@ -53,7 +53,7 @@ const Toggles: React.FC<Props> = ({ name, options, minimumOptionsForClearButton 
     terms.forEach((f) => {
         activeFields.push(Object.keys(f.term)[0]);
     });
-    
+
     /**
      * Add/Remove a key from the set of term filters
      */
@@ -85,15 +85,15 @@ const Toggles: React.FC<Props> = ({ name, options, minimumOptionsForClearButton 
     return (
         <div className="filters-toggles">
             {keys.map((key) =>
-                <YetAnotherCheckboxWrapper 
-                    name={key} 
-                    checked={activeFields.indexOf(key) >= 0} 
+                <YetAnotherCheckboxWrapper
+                    name={key}
+                    checked={activeFields.indexOf(key) >= 0}
                     onClick={(checked) => toggleTerm(key, checked)}
                 >
                     {options[key]}
                 </YetAnotherCheckboxWrapper>
             )}
-            
+
             {keys.length >= minimumOptionsForClearButton &&
                 <button className="btn btn-link" onClick={onClear}>
                     Clear

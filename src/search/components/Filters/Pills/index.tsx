@@ -1,7 +1,7 @@
 
 import React, { useContext } from 'react';
 import { Context } from '..';
-import { IFilter, AnyOf, anyOf, AndFilters, OR, AND, OrFilters, Term } from '../../..';
+import { IFilter, AnyOfFilter, anyOf, AndFilters, OR, AND, OrFilters, TermFilter } from '../../..';
 
 type PillProps = {
     label: string
@@ -12,7 +12,7 @@ const Pill: React.FC<PillProps> = ({ label, onDelete }) => {
     return (
         <button className="filters-pill" onClick={onDelete}
             title={`Remove "${label}" filter`}>
-            {label} 
+            {label}
             <span className="filters-pill-delete">
                 &times;
             </span>
@@ -22,11 +22,11 @@ const Pill: React.FC<PillProps> = ({ label, onDelete }) => {
 
 
 export type Props = {
-    
+
 };
 
-function isAnyOf(filter: IFilter): filter is AnyOf {
-    return typeof (filter as AnyOf).anyOf !== 'undefined';
+function isAnyOf(filter: IFilter): filter is AnyOfFilter {
+    return typeof (filter as AnyOfFilter).anyOf !== 'undefined';
 }
 
 function isOR(filter: IFilter): filter is OrFilters {
@@ -37,8 +37,8 @@ function isAND(filter: IFilter): filter is AndFilters {
     return typeof (filter as AndFilters).AND !== 'undefined';
 }
 
-function isTerm(filter: IFilter): filter is Term {
-    return typeof (filter as Term).term !== 'undefined';
+function isTerm(filter: IFilter): filter is TermFilter {
+    return typeof (filter as TermFilter).term !== 'undefined';
 }
 
 function prettyLabel(filter: IFilter): string {
@@ -71,18 +71,22 @@ const Pills: React.FC<Props> = () => {
     /**
      * Delete a single entry from within an AnyOf filter
      */
-    const onDeleteAnyOfEntry = (name: string, entry: string) => {
-        const filter = getFilter<AnyOf>(name);
-        let values: string[] = [];
-        
+    const onDeleteAnyOfEntry = (name: string, entry: string | number) => {
+        const filter = getFilter<AnyOfFilter>(name);
         if (!filter) {
             return;
         }
 
         const field = Object.keys(filter.anyOf)[0];
-        values = filter.anyOf[field];
-        
-        const updated = values.filter((v) => v !== entry);
+        const values = filter.anyOf[field];
+
+        let updated: any[] = []; // Any is used here because of a re-map issue to string|number arrays.
+        for (let i = 0; i < values.length; i++) {
+            if (values[i] !== entry) {
+                updated.push(values[i]);
+            }
+        }
+
         if (updated.length < 1) {
             deleteFilter(name);
         } else {
@@ -130,8 +134,8 @@ const Pills: React.FC<Props> = () => {
 
     return (
         <div className="filters-pills">
-            {terms.length > 0 && 
-                <Pill 
+            {terms.length > 0 &&
+                <Pill
                     label={`"${terms}"`}
                     onDelete={() => setTerms('')}
                 />
@@ -143,16 +147,16 @@ const Pills: React.FC<Props> = () => {
                     const field = Object.keys(filter.anyOf)[0];
                     const values = filter.anyOf[field] as string[];
 
-                    return values.map((entry) => <Pill 
+                    return values.map((entry) => <Pill
                         label={entry}
                         onDelete={() => onDeleteAnyOfEntry(filter.name as string, entry)}
                     />);
                 }
-                
+
                 // ORFilters - show each sub-filter as a (single) pill
                 // Does not support recursive complex filters (e.g. spreading AnyOf sub-filters)
                 if (filter.name && isOR(filter)) {
-                    return filter.OR.map((entry) => <Pill 
+                    return filter.OR.map((entry) => <Pill
                         label={prettyLabel(entry)}
                         onDelete={() => onDeleteOREntry(filter.name as string, entry.name as string)}
                     />);
@@ -161,7 +165,7 @@ const Pills: React.FC<Props> = () => {
                 // ANDFilters - show each sub-filter as a (single) pill.
                 // Does not support recursive complex filters (e.g. spreading AnyOf sub-filters)
                 if (filter.name && isAND(filter)) {
-                    return filter.AND.map((entry) => <Pill 
+                    return filter.AND.map((entry) => <Pill
                         label={prettyLabel(entry)}
                         onDelete={() => onDeleteANDEntry(filter.name as string, entry.name as string)}
                     />);

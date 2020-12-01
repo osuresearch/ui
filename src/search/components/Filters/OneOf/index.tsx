@@ -1,6 +1,6 @@
 
 import React, { useContext, useState } from 'react';
-import { Term, term } from '../../..';
+import { TermFilter, term } from '../../..';
 import { KeyValuePairs, YetAnotherRadioSetWrapper } from '../Common';
 import { Context } from '..';
 
@@ -11,7 +11,7 @@ export type Props = {
 
 /**
  * Radioset (or dropdown) of options where the user may only pick one.
- * 
+ *
  * Each option is represented as a `Term` filter.
  */
 const OneOf: React.FC<Props> = ({ name, options }) => {
@@ -20,8 +20,8 @@ const OneOf: React.FC<Props> = ({ name, options }) => {
     // Find an active filter matching the option set
     const names = Object.values(options);
     const active = ctx.filters.find((filter) =>
-        filter.name ? names.indexOf(filter.name) > -1 : false
-    ) as Term;
+        typeof filter.name === 'string' ? names.indexOf(filter.name) > -1 : false
+    ) as TermFilter;
 
     const onChange = (key?: string, value?: string) => {
         if (active) {
@@ -36,8 +36,8 @@ const OneOf: React.FC<Props> = ({ name, options }) => {
     return (
         <div className="filters-one-of">
             <YetAnotherRadioSetWrapper
-                name={name} 
-                options={options} 
+                name={name}
+                options={options}
                 value={active?.term[name] as string}
                 onChange={onChange}
             />

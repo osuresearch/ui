@@ -31,7 +31,7 @@ interface ISearchComposition {
 interface ISearchContext {
     loading: boolean
     error?: string
-    results?: any[]
+    results?: any
 }
 
 export const Context = React.createContext<ISearchContext>({} as ISearchContext);

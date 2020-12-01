@@ -3,7 +3,7 @@ import { AND, AndFilters, IFilter, Sort } from '.';
 
 /**
  * Immutable set of filters.
- * 
+ *
  * Any mutation methods to the filters return a new modified copy.
  */
 export default class SearchFilters {
@@ -35,7 +35,7 @@ export default class SearchFilters {
 
     /**
      * Add a new filter to the top level list of filters.
-     * 
+     *
      * If an existing filter exists with the same name, it will be replaced.
      */
     public add<T extends IFilter>(filter: T): SearchFilters {
@@ -48,14 +48,16 @@ export default class SearchFilters {
                 return clone;
             }
         }
-        
+
         // Otherwise - insert at the end as a new filter.
         clone.m_Filters.AND.push(filter);
         return clone;
     }
 
     public get<T extends IFilter>(name: string, defaultValue?: T): T | undefined {
-        return (this.m_Filters.AND.find((f) => f.name === name) as T) ?? defaultValue;
+        return (this.m_Filters.AND.find(
+            (f) => f.name === name || (Array.isArray(f.name) && f.name.indexOf(name) >= 0)) as T
+        ) ?? defaultValue;
     }
 
     public has(name: string): boolean {
@@ -67,9 +69,9 @@ export default class SearchFilters {
      */
     public delete(name: string): SearchFilters {
         const clone = this.clone();
-        
+
         clone.m_Filters.AND = clone.m_Filters.AND.filter(
-            (f) => f.name !== name
+            (f) => f.name !== name || (Array.isArray(f.name) && f.name.indexOf(name) < 0)
         );
 
         return clone;
@@ -97,7 +99,7 @@ export default class SearchFilters {
     public clone(): SearchFilters {
         const clone = new SearchFilters();
 
-        // TODO: actual deep copy. This'll at least deref the 
+        // TODO: actual deep copy. This'll at least deref the
         // parentmost array so that anything monitoring the full
         // set of filters will get a new object ref
         clone.m_Filters.AND = [...this.m_Filters.AND];

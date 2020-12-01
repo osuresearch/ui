@@ -2,7 +2,7 @@
 import React, { useContext } from 'react';
 import { YetAnotherCheckboxWrapper } from '../Common';
 import { Context } from '..';
-import { Term, term } from '../../..';
+import { TermFilter, term } from '../../..';
 
 export type Props = {
     name: string
@@ -14,8 +14,8 @@ export type Props = {
  */
 const Toggle: React.FC<Props> = ({ name, title, children }) => {
     const ctx = useContext(Context);
-    const filter = ctx.getFilter<Term>(title);
-    
+    const filter = ctx.getFilter<TermFilter>(title);
+
     const onToggle = (checked: boolean) => {
         if (checked) {
             ctx.addFilter(term(name, true, title));
@@ -26,9 +26,9 @@ const Toggle: React.FC<Props> = ({ name, title, children }) => {
 
     return (
         <div className="filters-toggle">
-            <YetAnotherCheckboxWrapper 
-                name={name} 
-                checked={filter !== undefined} 
+            <YetAnotherCheckboxWrapper
+                name={name}
+                checked={filter !== undefined}
                 onClick={onToggle}
             >
                 {children}

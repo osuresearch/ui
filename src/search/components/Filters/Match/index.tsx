@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect, ChangeEvent } from 'react';
 import { Context } from '..';
-import { term, Term } from '../../..';
+import { term, TermFilter } from '../../..';
 import { Icon } from '../../../..';
 
 export type Props = {
@@ -18,7 +18,7 @@ export type Props = {
 
 /**
  * Match an exact value for a given field.
- * 
+ *
  * The display name of the filter will be in the form of `{prefix}: "{value}"`.
  * For example: `Protocol: "2019H0023"`
  */
@@ -27,7 +27,7 @@ const Match: React.FC<Props> = ({ name, prefix, placeholder, title = 'Search by 
     const [value, setValue] = useState('');
 
     // title + ': ' causes pills to also display the term value
-    const filter = ctx.getFilter<Term>(prefix + ':');
+    const filter = ctx.getFilter<TermFilter>(prefix + ':');
     const currentValue = filter?.term[name] as string || '';
 
     // Update self when an external entity modifies the filter
@@ -43,8 +43,8 @@ const Match: React.FC<Props> = ({ name, prefix, placeholder, title = 'Search by 
                 <Icon name="search" />
             </span>
 
-            <input type="text" 
-                className="form-control" 
+            <input type="text"
+                className="form-control"
                 title={title}
                 placeholder={placeholder}
                 value={value}
@@ -53,7 +53,7 @@ const Match: React.FC<Props> = ({ name, prefix, placeholder, title = 'Search by 
             />
             <div className="input-group-append">
                 <button type="button"
-                    className="btn btn-outline-secondary" 
+                    className="btn btn-outline-secondary"
                     onClick={() => updateFilter(value)}
                 >
                     Search

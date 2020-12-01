@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import faker, { random, name, internet, image } from 'faker';
 
-import { AnyOf, Term, DriverProps, SearchData } from '../..';
+import { AnyOfFilter, TermFilter, DriverProps, SearchData } from '../..';
 import useSearch from '../../hooks/useSearch';
 import { ppid } from 'process';
 
@@ -49,8 +49,8 @@ export default function Mock() {
             // Hardcode filtering examples against demo data
             filters.forEach((f) => {
                 if (Object.keys(f).indexOf('term') >= 0) {
-                    const key = Object.keys((f as Term).term)[0];
-                    const value = (f as Term).term[key] as string;
+                    const key = Object.keys((f as TermFilter).term)[0];
+                    const value = (f as TermFilter).term[key] as string;
 
                     if (key === 'ageRange') {
                         ageRange = value.split(',').map(s => parseInt(s));
@@ -61,7 +61,7 @@ export default function Mock() {
                     }
 
                 } else if (Object.keys(f).indexOf('anyOf')) {
-                    states = (f as AnyOf).anyOf.state;
+                    states = (f as AnyOfFilter).anyOf.state as string[];
                 }
             });
 

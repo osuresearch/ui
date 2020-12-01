@@ -28,29 +28,29 @@ export type SearchDriver = React.FC<DriverProps>;
 export type SearchTerms = string;
 
 export interface IFilter {
-    /** Human-readable name for this filter */
-    name?: string
+    /** Human-readable name for this filter. If this is an AnyOf filter, there may be a name per value. */
+    name?: string | string[]
 }
 
 export type TermValue = string | number | boolean;
 
-export interface Term extends IFilter {
+export interface TermFilter extends IFilter {
     term: {
         [field: string]: TermValue
     }
 }
 
-export interface AnyOf extends IFilter {
+export interface AnyOfFilter extends IFilter {
     anyOf: {
-        [field: string]: string[]
+        [field: string]: (string | number)[]
     }
 }
 
-export interface Between extends IFilter {
+export interface BetweenFilter extends IFilter {
     between: {
         [field: string]: {
-            from: string
-            to: string
+            from: string | number
+            to: string | number
         }
     }
 }
@@ -102,7 +102,7 @@ export function OR(filters: IFilter[], name?: string): OrFilters {
     };
 }
 
-export function term(field: string, value: TermValue, name?: string): Term {
+export function term(field: string, value: TermValue, name?: string): TermFilter {
     return {
         name,
         term: {
@@ -111,7 +111,7 @@ export function term(field: string, value: TermValue, name?: string): Term {
     }
 }
 
-export function anyOf(field: string, values: string[], name?: string): AnyOf {
+export function anyOf(field: string, values: (string | number)[], name?: string | string[]): AnyOfFilter {
     return {
         name,
         anyOf: {
@@ -120,7 +120,7 @@ export function anyOf(field: string, values: string[], name?: string): AnyOf {
     }
 }
 
-export function between(field: string, from: string, to: string, name?: string): Between {
+export function between(field: string, from: string | number, to: string | number, name?: string): BetweenFilter {
     return {
         name,
         between: {
