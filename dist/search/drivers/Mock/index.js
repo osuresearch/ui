@@ -45,13 +45,14 @@ var FAKE_DATA = Array.from({
 
 function Mock() {
   var DriverComponent = function DriverComponent(_ref) {
-    var provider = _ref.provider,
-        updateSearchData = _ref.updateSearchData;
+    var provider = _ref.provider;
 
     var _useSearch = (0, _useSearch2.default)(provider),
         terms = _useSearch.terms,
         sort = _useSearch.sort,
-        filters = _useSearch.filters;
+        filters = _useSearch.filters,
+        setResults = _useSearch.setResults,
+        setSearching = _useSearch.setSearching;
 
     var people = []; // Fire off a new query if anything in the search state changes
 
@@ -79,7 +80,7 @@ function Mock() {
           states = f.anyOf.state;
         }
       });
-      var results = FAKE_DATA.filter(function (p) {
+      var hits = FAKE_DATA.filter(function (p) {
         var match = true;
 
         if (terms.length > 0) {
@@ -96,16 +97,16 @@ function Mock() {
         }
 
         return match;
-      }); // Top 10 results only
+      }); // Payload is the total hit count and 
+      // the top 10 result objects.
 
-      results = results.slice(0, 10);
-      var data = {
-        loading: false,
-        results: results
+      var results = {
+        hits: hits.length,
+        results: hits.slice(0, 10)
       };
-      console.debug('SENDING MOCK DATA', data);
-      updateSearchData(data);
-    }, [terms, filters, sort, updateSearchData]); // Driver components are renderless. It's just a stateful container
+      setSearching(false);
+      setResults(results);
+    }, [terms, filters, sort, setSearching, setResults]); // Driver components are renderless. It's just a stateful container
 
     return null;
   };

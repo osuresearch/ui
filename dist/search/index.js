@@ -70,9 +70,6 @@ var _Filters = _interopRequireDefault(require("./components/Filters"));
 
 var _useSearch = _interopRequireDefault(require("./hooks/useSearch"));
 
-/**
- * Internal state data passed from <Search> to children via a context.
- */
 //#region Driver interfaces
 
 /**

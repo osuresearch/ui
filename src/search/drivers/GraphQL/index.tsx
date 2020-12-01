@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { DocumentNode, useLazyQuery } from '@apollo/client';
 
-import { DriverProps, SearchData, AND } from '../..';
+import { DriverProps, AND } from '../..';
 import useSearch from '../../hooks/useSearch';
 
 /** Loose typing for GQL search results */
@@ -27,14 +27,20 @@ type GraphQLSearchResponse = {
  */
 export default function GraphQL(query: DocumentNode) {
     const DriverComponent: React.FC<DriverProps> = ({
-        provider,
-        updateSearchData
+        provider
     }) => {
-        const { terms, filters, sort } = useSearch(provider);
+        const { 
+            terms, filters, sort,
+            setSearching, setError, setResults 
+        } = useSearch(provider);
+        
         const [callable, result] = useLazyQuery<GraphQLSearchResponse>(query);
-        const [, setCached] = useState<SearchData>();
+
+        // Cached results from the previous search
+        const [, setCached] = useState<any>();
 
         // Fire off a new query if anything in the search state changes
+        // TODO: Implicit throttling on term changes
         useEffect(() => {
             callable({
                 variables: {
@@ -48,17 +54,17 @@ export default function GraphQL(query: DocumentNode) {
         // Store previous search results each time we make a query so we
         // can display these while still fetching fresh data in the background.
         useEffect(() => {
-            setCached((prev) => {
-                const data: SearchData = {
-                    loading: result.loading,
-                    results: prev?.results
-                };
+            setCached((prev: any) => {
+                // Use previously cached results if we're still loading
+                let results = prev?.results; 
 
+                // If there's an error - make it human readable.
+                let error: string | undefined = undefined;
                 if (result.error) {
                     console.error('GraphQL Search Driver Error', result.error);
 
-                    // TODO: Better errors? We don't really display this on the frontend anywhere.
-                    data.error = 'Something went wrong';
+                    // TODO: Better error message. May be displayed to the user.
+                    error = 'Something went wrong';
                 }
 
                 /*
@@ -94,13 +100,15 @@ export default function GraphQL(query: DocumentNode) {
                 */
                 if (result.data !== undefined) {
                     const firstKey = Object.keys(result.data)[0];
-                    data.results = result.data[firstKey];
+                    results = result.data[firstKey];
                 }
 
-                updateSearchData(data);
-                return data;
+                setSearching(result.loading);
+                setError(error);
+                setResults(results);
+                return results;
             });
-        }, [result, updateSearchData]);
+        }, [result, setSearching, setError, setResults]);
 
         // Driver components are renderless. It's just a stateful container
         return null;

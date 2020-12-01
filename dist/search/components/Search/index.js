@@ -13,8 +13,6 @@ var _slicedToArray2 = _interopRequireDefault(require("@babel/runtime/helpers/sli
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _useSearch2 = _interopRequireDefault(require("../../hooks/useSearch"));
-
 var _AutoComplete = _interopRequireDefault(require("./AutoComplete"));
 
 var _Results = _interopRequireDefault(require("./Results"));
@@ -51,26 +49,14 @@ var Search = function Search(_ref) {
   }),
       _useState2 = (0, _slicedToArray2.default)(_useState, 2),
       data = _useState2[0],
-      setData = _useState2[1];
+      setData = _useState2[1]; // TODO: Remove this component. Unnecessary.
 
-  var _useSearch = (0, _useSearch2.default)(provider),
-      setSearching = _useSearch.setSearching,
-      setResults = _useSearch.setResults,
-      setError = _useSearch.setError;
 
-  (0, _react.useEffect)(function () {
-    if (data) {
-      setSearching(data.loading);
-      setResults(data.results);
-      setError(data.error);
-    }
-  }, [data, setError, setResults, setSearching]);
   var DriverComponent = driver;
   return /*#__PURE__*/_react.default.createElement(Context.Provider, {
     value: data
   }, /*#__PURE__*/_react.default.createElement(DriverComponent, {
-    provider: provider,
-    updateSearchData: setData
+    provider: provider
   }), children);
 };
 

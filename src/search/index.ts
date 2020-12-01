@@ -1,14 +1,5 @@
 import React from 'react';
 
-/**
- * Internal state data passed from <Search> to children via a context.
- */
-export type SearchData = {
-    loading: boolean
-    error?: string
-    results?: any
-}
-
 //#region Driver interfaces
 
 /**
@@ -16,7 +7,6 @@ export type SearchData = {
  */
 export type DriverProps = {
     provider: string
-    updateSearchData: (data: SearchData) => void
 }
 
 export type SearchDriver = React.FC<DriverProps>;

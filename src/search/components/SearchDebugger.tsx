@@ -17,7 +17,10 @@ type Props = {
  */
 const SearchDebugger: React.FC<Props> = ({ provider }) => {
     const [show, setShow] = useState(false);
-    const { terms, filters, sort } = useSearch(provider);
+    const { 
+        terms, filters, sort, 
+        searching, error, results
+    } = useSearch(provider);
     
     return (
         <div className="search-debugger">
@@ -27,6 +30,12 @@ const SearchDebugger: React.FC<Props> = ({ provider }) => {
 
             {show && 
             <div>
+                <strong>Searching: </strong> {searching ? 'Yes' : 'No'}
+                <br/>
+
+                <strong>Error: </strong> {error}
+                <br/>
+
                 <strong>Full Text Terms</strong>
                 <p>{terms}</p>
 
@@ -38,6 +47,11 @@ const SearchDebugger: React.FC<Props> = ({ provider }) => {
                 <strong>Sort</strong>
                 <pre>
                     {JSON.stringify(sort, undefined, 2)}
+                </pre>
+
+                <strong>Results</strong>
+                <pre>
+                    {JSON.stringify(results, undefined, 2)}
                 </pre>
             </div>
             }

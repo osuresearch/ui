@@ -1,5 +1,5 @@
 import React from 'react';
-import { SearchFilters, SearchTerms } from '..';
+import { SearchFilters, SearchTerms, SearchDriver } from '..';
 export declare type Props = {
     /**
      * Unique identifier used by components to reference this provider.
@@ -20,11 +20,13 @@ export declare type Props = {
      * defined here will be overridden by the URL data.
      */
     defaultFilters?: SearchFilters;
+    /** The API integration driver to submit search data */
+    driver: SearchDriver;
 };
 /**
  * Provider for a named set of search filters and queries.
  *
- * All search components (`<Filters>`, `<Search>`, etc) **must** be associated
+ * All search components **must** be associated
  * with a provider to share state information.
  */
 declare const SearchProvider: React.FC<Props>;

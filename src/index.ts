@@ -33,4 +33,4 @@ export { default as Radio } from './form/Radio';
 export { default as Select } from './form/Select';
 export { default as Text } from './form/Text';
 export { default as Time } from './form/Time';
-
+export { default as Lookup } from './form/Lookup';

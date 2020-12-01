@@ -5,7 +5,7 @@ Docs need:
 - `SearchFilters` data structure usage?
 - just typical driver usage
 
-```jsx
+```jsx static
 import { SearchProvider, Filters, Search, SearchDebugger } from '@oris/ui/search';
 import Mock from '@oris/ui/search/drivers/Mock';
 
