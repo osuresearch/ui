@@ -1,5 +1,6 @@
 import React, { useContext, useRef, useState } from 'react';
 import { Context, JsonObject } from '..';
+import Icon from '../../../components/Icon';
 import { Nullable } from '../../../internal/FormCommon/types';
 import { useSearch } from '../../../search';
 
@@ -13,7 +14,7 @@ export type Props = {
 
     /**
      * Initial value to populate the lookup in uncontrolled mode.
-     * 
+     *
      * Use the `onChange` prop of `Lookup` to get value updates.
      */
     defaultValue?: Nullable<JsonObject>
@@ -23,10 +24,10 @@ export type Props = {
     /**
      * If provided, this will be rendered in place of the default
      * message when there are no hits.
-     * 
+     *
      * Implement this to customize user feedback and provide
      * helpful search tips when the user cannot find what
-     * they are looking for. 
+     * they are looking for.
      */
     emptyRenderer?: () => JSX.Element
 
@@ -54,10 +55,18 @@ const Input: React.FC<Props> = (props) => {
     // // }
 
     const classNames = `
-        form-control ${props.className ? props.className : ''} 
-        ${bind.error && ' is-invalid'} 
+        form-control ${props.className ? props.className : ''}
+        ${bind.error && ' is-invalid'}
         ${bind.success && ' is-valid'}
     `;
+
+    let iconProps = { name: 'search', spin: false };
+    if (searching) {
+        iconProps = { name: 'spinner', spin: true };
+    }
+    else if (error) {
+        iconProps = { name: 'exclamation-circle', spin: false };
+    }
 
     // let inputProps: React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> = {
     //     ref: ref,
@@ -100,25 +109,30 @@ const Input: React.FC<Props> = (props) => {
     const updateValue = (newValue: Nullable<JsonObject>) => {
         setValue(newValue);
         setTerms('');
-        
+
         // Notify the bind and trigger onChange of the parent Lookup.
         bind.value = newValue;
     }
 
     return (
-        <div className="lookup-input">
+        <div className="input-group lookup-input">
             {/* Only show the search input if we have no selection */}
-            {!value && 
-            <input 
+            {!value && <>
+
+            <span className={`input-group-prefix ${error && 'text-danger'}`}>
+                <Icon {...iconProps} />
+            </span>
+
+            <input
                 type="text"
-                id={bind.id} 
+                id={bind.id}
                 name={bind.name}
                 className={classNames}
                 onChange={(e) => {
                     setTerms(e.target.value);
                 }}
             />
-            }
+            </>}
 
             {/* Show the search value with a button to clear */}
             {value &&
@@ -133,21 +147,21 @@ const Input: React.FC<Props> = (props) => {
             </div>
             }
 
-            <div className="lookup-results">    
-                <div 
-                    id="TODO" 
-                    className="dropdown-menu" 
+            <div className="lookup-results">
+                <div
+                    id="TODO"
+                    className="dropdown-menu"
                     role="listbox"
-                    style={{display: showResultsPane ? 'block' : 'none'}} 
+                    style={{display: showResultsPane ? 'block' : 'none'}}
                     tabIndex={-1}
                 >
-                    {error && 
+                    {error &&
                     <div className="dropdown-header lookup-error">
                         {error}
                     </div>
                     }
-                
-                    {hits.map((hit, idx) => 
+
+                    {hits.map((hit, idx) =>
                     <button type="button" key={idx} onClick={() => updateValue(hit)}>
                         {props.resultRenderer(hit)}
                     </button>
@@ -160,7 +174,7 @@ const Input: React.FC<Props> = (props) => {
                     </div>
                     }
 
-                    {hasMoreHits && 
+                    {hasMoreHits &&
                     <div className="dropdown-header">
                         There are <strong>{totalHits - hits.length}</strong> additional hits.
                         Refine your search terms.

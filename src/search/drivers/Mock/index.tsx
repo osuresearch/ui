@@ -30,18 +30,25 @@ const FAKE_DATA = Array.from({ length: 100 }, () => {
  * Search driver that generates mock results. This is really only
  * for showing off examples in Styleguidist.
  */
-export default function Mock() {
+export default function Mock(searchWhenEmpty: boolean = true) {
     const DriverComponent: React.FC<DriverProps> = ({
         provider
     }) => {
         const {
-            terms, sort, filters,
-            setResults, setSearching
+            terms, filters, sort,
+            setResults, setError, setSearching
         } = useSearch(provider);
+
+        const isEmpty = terms.length < 1 && filters.length < 1 && sort === undefined;
+        const skipSearchAndClear = isEmpty && !searchWhenEmpty;
 
         let people: any[] = [];
         // Fire off a new query if anything in the search state changes
         useEffect(() => {
+            if (skipSearchAndClear) {
+                return;
+            }
+
             let ageRange: number[] = [0, 1000];
             let states: string[] = [];
             let emailDomain = '';
@@ -103,7 +110,16 @@ export default function Mock() {
 
             setSearching(false);
             setResults(results);
-        }, [terms, filters, sort, setSearching, setResults]);
+        }, [terms, filters, sort, skipSearchAndClear, setSearching, setResults]);
+
+        // Replicated from GraphQL driver - for mock testing of the same behaviour
+        useEffect(() => {
+            if (skipSearchAndClear) {
+                setSearching(false);
+                setError(undefined);
+                setResults(undefined);
+            }
+        }, [skipSearchAndClear, setSearching, setError, setResults]);
 
         // Driver components are renderless. It's just a stateful container
         return null;

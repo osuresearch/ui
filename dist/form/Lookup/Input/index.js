@@ -15,6 +15,8 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _ = require("..");
 
+var _Icon = _interopRequireDefault(require("../../../components/Icon"));
+
 var _search = require("../../../search");
 
 /**
@@ -39,7 +41,23 @@ var Input = function Input(props) {
   // // }
 
 
-  var classNames = "\n        form-control ".concat(props.className ? props.className : '', " \n        ").concat(bind.error && ' is-invalid', " \n        ").concat(bind.success && ' is-valid', "\n    "); // let inputProps: React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> = {
+  var classNames = "\n        form-control ".concat(props.className ? props.className : '', "\n        ").concat(bind.error && ' is-invalid', "\n        ").concat(bind.success && ' is-valid', "\n    ");
+  var iconProps = {
+    name: 'search',
+    spin: false
+  };
+
+  if (searching) {
+    iconProps = {
+      name: 'spinner',
+      spin: true
+    };
+  } else if (error) {
+    iconProps = {
+      name: 'exclamation-circle',
+      spin: false
+    };
+  } // let inputProps: React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> = {
   //     ref: ref,
   //     ...props,
   //     type: "text",
@@ -64,6 +82,7 @@ var Input = function Input(props) {
   // TODO: Flexible based on JSON Path.
   // Right now we assume it's always { hits: number, results: any[] }
 
+
   var totalHits = (results === null || results === void 0 ? void 0 : results.hits) || 0;
   var hits = (results === null || results === void 0 ? void 0 : results.results) || [];
 
@@ -85,8 +104,10 @@ var Input = function Input(props) {
   };
 
   return /*#__PURE__*/_react.default.createElement("div", {
-    className: "lookup-input"
-  }, !value && /*#__PURE__*/_react.default.createElement("input", {
+    className: "input-group lookup-input"
+  }, !value && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("span", {
+    className: "input-group-prefix ".concat(error && 'text-danger')
+  }, /*#__PURE__*/_react.default.createElement(_Icon.default, iconProps)), /*#__PURE__*/_react.default.createElement("input", {
     type: "text",
     id: bind.id,
     name: bind.name,
@@ -94,7 +115,7 @@ var Input = function Input(props) {
     onChange: function onChange(e) {
       setTerms(e.target.value);
     }
-  }), value && /*#__PURE__*/_react.default.createElement("div", {
+  })), value && /*#__PURE__*/_react.default.createElement("div", {
     className: "lookup-value"
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "lookup-value-content"

@@ -17,7 +17,7 @@ var _2 = require("..");
 
 /**
  * Enumeration of options that get combined together into a single `AnyOf` filter.
- * 
+ *
  * Only supports strings for keys.
  */
 var AnyOf = function AnyOf(_ref) {

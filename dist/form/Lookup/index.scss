@@ -1,6 +1,7 @@
 
 .lookup-results {
     position: relative;
+    flex: 0 0 100%;
 
     .dropdown-menu {
         margin-top: -1rem; // Force it right under the input
@@ -35,7 +36,7 @@
     flex-direction: row;
     align-items: flex-start;
     margin-bottom: 1rem;
-    
+
     &-content {
     }
 

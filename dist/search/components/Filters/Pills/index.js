@@ -83,17 +83,20 @@ var Pills = function Pills() {
 
   var onDeleteAnyOfEntry = function onDeleteAnyOfEntry(name, entry) {
     var filter = getFilter(name);
-    var values = [];
 
     if (!filter) {
       return;
     }
 
     var field = Object.keys(filter.anyOf)[0];
-    values = filter.anyOf[field];
-    var updated = values.filter(function (v) {
-      return v !== entry;
-    });
+    var values = filter.anyOf[field];
+    var updated = []; // Any is used here because of a re-map issue to string|number arrays.
+
+    for (var i = 0; i < values.length; i++) {
+      if (values[i] !== entry) {
+        updated.push(values[i]);
+      }
+    }
 
     if (updated.length < 1) {
       deleteFilter(name);

@@ -21,7 +21,7 @@ var _3 = require("../../../..");
 
 /**
  * Match an exact value for a given field.
- * 
+ *
  * The display name of the filter will be in the form of `{prefix}: "{value}"`.
  * For example: `Protocol: "2019H0023"`
  */

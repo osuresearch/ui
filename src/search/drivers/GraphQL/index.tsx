@@ -24,24 +24,40 @@ type GraphQLSearchResponse = {
  *
  * The *first* GraphQL field returned will be used for the results
  * and must return an array of type objects.
+ *
+ * @param {DocumentNode} query
+ * @param {boolean} searchWhenEmpty If true, the driver will still execute a GraphQL query
+ *                                  even if the terms, filters, and sort order are unset.
+ *                                  (This also includes on initial mount). If false, the
+ *                                  driver will *not* search unless there is at least one
+ *                                  search parameter set (terms, filters, or sort). Additionally,
+ *                                  the results in useSearch() will be set to `undefined`.
+ *
  */
-export default function GraphQL(query: DocumentNode) {
+export default function GraphQL(query: DocumentNode, searchWhenEmpty: boolean = true) {
     const DriverComponent: React.FC<DriverProps> = ({
         provider
     }) => {
-        const { 
+        const {
             terms, filters, sort,
-            setSearching, setError, setResults 
+            setSearching, setError, setResults
         } = useSearch(provider);
-        
+
         const [callable, result] = useLazyQuery<GraphQLSearchResponse>(query);
 
         // Cached results from the previous search
         const [, setCached] = useState<any>();
 
+        const isEmpty = terms.length < 1 && filters.length < 1 && sort === undefined;
+        const skipSearchAndClear = isEmpty && searchWhenEmpty;
+
         // Fire off a new query if anything in the search state changes
         // TODO: Implicit throttling on term changes
         useEffect(() => {
+            if (skipSearchAndClear) {
+                return;
+            }
+
             callable({
                 variables: {
                     terms,
@@ -49,14 +65,14 @@ export default function GraphQL(query: DocumentNode) {
                     sort,
                 }
             });
-        }, [terms, filters, sort, callable]);
+        }, [terms, filters, sort, callable, skipSearchAndClear]);
 
         // Store previous search results each time we make a query so we
         // can display these while still fetching fresh data in the background.
         useEffect(() => {
             setCached((prev: any) => {
                 // Use previously cached results if we're still loading
-                let results = prev?.results; 
+                let results = prev?.results;
 
                 // If there's an error - make it human readable.
                 let error: string | undefined = undefined;
@@ -108,7 +124,15 @@ export default function GraphQL(query: DocumentNode) {
                 setResults(results);
                 return results;
             });
-        }, [result, setSearching, setError, setResults]);
+        }, [result, skipSearchAndClear, setSearching, setError, setResults]);
+
+        useEffect(() => {
+            if (skipSearchAndClear) {
+                setSearching(false);
+                setError(undefined);
+                setResults(undefined);
+            }
+        }, [skipSearchAndClear, setSearching, setError, setResults]);
 
         // Driver components are renderless. It's just a stateful container
         return null;

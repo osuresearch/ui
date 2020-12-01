@@ -8,25 +8,25 @@ export declare type DriverProps = {
 export declare type SearchDriver = React.FC<DriverProps>;
 export declare type SearchTerms = string;
 export interface IFilter {
-    /** Human-readable name for this filter */
-    name?: string;
+    /** Human-readable name for this filter. If this is an AnyOf filter, there may be a name per value. */
+    name?: string | string[];
 }
 export declare type TermValue = string | number | boolean;
-export interface Term extends IFilter {
+export interface TermFilter extends IFilter {
     term: {
         [field: string]: TermValue;
     };
 }
-export interface AnyOf extends IFilter {
+export interface AnyOfFilter extends IFilter {
     anyOf: {
-        [field: string]: string[];
+        [field: string]: (string | number)[];
     };
 }
-export interface Between extends IFilter {
+export interface BetweenFilter extends IFilter {
     between: {
         [field: string]: {
-            from: string;
-            to: string;
+            from: string | number;
+            to: string | number;
         };
     };
 }
@@ -51,9 +51,9 @@ export interface Sort {
 }
 export declare function AND(filters: IFilter[], name?: string): AndFilters;
 export declare function OR(filters: IFilter[], name?: string): OrFilters;
-export declare function term(field: string, value: TermValue, name?: string): Term;
-export declare function anyOf(field: string, values: string[], name?: string): AnyOf;
-export declare function between(field: string, from: string, to: string, name?: string): Between;
+export declare function term(field: string, value: TermValue, name?: string): TermFilter;
+export declare function anyOf(field: string, values: (string | number)[], name?: string | string[]): AnyOfFilter;
+export declare function between(field: string, from: string | number, to: string | number, name?: string): BetweenFilter;
 /**
  * Simple use case of sorting on a single field.
  *

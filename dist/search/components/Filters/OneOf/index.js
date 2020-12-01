@@ -17,7 +17,7 @@ var _2 = require("..");
 
 /**
  * Radioset (or dropdown) of options where the user may only pick one.
- * 
+ *
  * Each option is represented as a `Term` filter.
  */
 var OneOf = function OneOf(_ref) {
@@ -27,7 +27,7 @@ var OneOf = function OneOf(_ref) {
 
   var names = Object.values(options);
   var active = ctx.filters.find(function (filter) {
-    return filter.name ? names.indexOf(filter.name) > -1 : false;
+    return typeof filter.name === 'string' ? names.indexOf(filter.name) > -1 : false;
   });
 
   var onChange = function onChange(key, value) {

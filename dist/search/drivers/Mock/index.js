@@ -44,19 +44,28 @@ var FAKE_DATA = Array.from({
  */
 
 function Mock() {
+  var searchWhenEmpty = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+
   var DriverComponent = function DriverComponent(_ref) {
     var provider = _ref.provider;
 
     var _useSearch = (0, _useSearch2.default)(provider),
         terms = _useSearch.terms,
-        sort = _useSearch.sort,
         filters = _useSearch.filters,
+        sort = _useSearch.sort,
         setResults = _useSearch.setResults,
+        setError = _useSearch.setError,
         setSearching = _useSearch.setSearching;
 
+    var isEmpty = terms.length < 1 && filters.length < 1 && sort === undefined;
+    var skipSearchAndClear = isEmpty && !searchWhenEmpty;
     var people = []; // Fire off a new query if anything in the search state changes
 
     (0, _react.useEffect)(function () {
+      if (skipSearchAndClear) {
+        return;
+      }
+
       var ageRange = [0, 1000];
       var states = [];
       var emailDomain = '';
@@ -77,7 +86,8 @@ function Mock() {
             otherEmailDomain = value;
           }
         } else if (Object.keys(f).indexOf('anyOf')) {
-          states = f.anyOf.state;
+          var anyOfKey = f.anyOf;
+          states = anyOfKey && anyOfKey.state ? anyOfKey.state : [];
         }
       });
       var hits = FAKE_DATA.filter(function (p) {
@@ -97,7 +107,7 @@ function Mock() {
         }
 
         return match;
-      }); // Payload is the total hit count and 
+      }); // Payload is the total hit count and
       // the top 10 result objects.
 
       var results = {
@@ -106,7 +116,15 @@ function Mock() {
       };
       setSearching(false);
       setResults(results);
-    }, [terms, filters, sort, setSearching, setResults]); // Driver components are renderless. It's just a stateful container
+    }, [terms, filters, sort, skipSearchAndClear, setSearching, setResults]); // Replicated from GraphQL driver - for mock testing of the same behaviour
+
+    (0, _react.useEffect)(function () {
+      if (skipSearchAndClear) {
+        setSearching(false);
+        setError(undefined);
+        setResults(undefined);
+      }
+    }, [skipSearchAndClear, setSearching, setError, setResults]); // Driver components are renderless. It's just a stateful container
 
     return null;
   };

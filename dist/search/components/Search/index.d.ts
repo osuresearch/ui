@@ -21,7 +21,7 @@ interface ISearchComposition {
 interface ISearchContext {
     loading: boolean;
     error?: string;
-    results?: any[];
+    results?: any;
 }
 export declare const Context: React.Context<ISearchContext>;
 /**

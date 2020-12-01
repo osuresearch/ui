@@ -32,8 +32,19 @@ var _useSearch2 = _interopRequireDefault(require("../../hooks/useSearch"));
  *
  * The *first* GraphQL field returned will be used for the results
  * and must return an array of type objects.
+ *
+ * @param {DocumentNode} query
+ * @param {boolean} searchWhenEmpty If true, the driver will still execute a GraphQL query
+ *                                  even if the terms, filters, and sort order are unset.
+ *                                  (This also includes on initial mount). If false, the
+ *                                  driver will *not* search unless there is at least one
+ *                                  search parameter set (terms, filters, or sort). Additionally,
+ *                                  the results in useSearch() will be set to `undefined`.
+ *
  */
 function GraphQL(query) {
+  var searchWhenEmpty = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+
   var DriverComponent = function DriverComponent(_ref) {
     var provider = _ref.provider;
 
@@ -53,11 +64,17 @@ function GraphQL(query) {
 
     var _useState = (0, _react.useState)(),
         _useState2 = (0, _slicedToArray2.default)(_useState, 2),
-        setCached = _useState2[1]; // Fire off a new query if anything in the search state changes
+        setCached = _useState2[1];
+
+    var isEmpty = terms.length < 1 && filters.length < 1 && sort === undefined;
+    var skipSearchAndClear = isEmpty && searchWhenEmpty; // Fire off a new query if anything in the search state changes
     // TODO: Implicit throttling on term changes
 
-
     (0, _react.useEffect)(function () {
+      if (skipSearchAndClear) {
+        return;
+      }
+
       callable({
         variables: {
           terms: terms,
@@ -65,7 +82,7 @@ function GraphQL(query) {
           sort: sort
         }
       });
-    }, [terms, filters, sort, callable]); // Store previous search results each time we make a query so we
+    }, [terms, filters, sort, callable, skipSearchAndClear]); // Store previous search results each time we make a query so we
     // can display these while still fetching fresh data in the background.
 
     (0, _react.useEffect)(function () {
@@ -83,16 +100,16 @@ function GraphQL(query) {
         /*
             GraphQL can come back with any named query field -
             but we only care about the value in that field.
-             Example 1:
+              Example 1:
                 query {
                     tools(terms: "foo") {
                         id
                         title
                     }
                 }
-                 We only care about the `[{ id, title }]`
+                  We only care about the `[{ id, title }]`
                 payload within `data.tools`.
-             Example 2:
+              Example 2:
                 query {
                     search(terms: "fizz") {
                         totalHits
@@ -104,7 +121,7 @@ function GraphQL(query) {
                         }
                     }
                 }
-                 We grab the full `{totalHits, maxRank, hits: [...]}`
+                  We grab the full `{totalHits, maxRank, hits: [...]}`
                 payload within `data.search`.
         */
 
@@ -119,7 +136,14 @@ function GraphQL(query) {
         setResults(results);
         return results;
       });
-    }, [result, setSearching, setError, setResults]); // Driver components are renderless. It's just a stateful container
+    }, [result, skipSearchAndClear, setSearching, setError, setResults]);
+    (0, _react.useEffect)(function () {
+      if (skipSearchAndClear) {
+        setSearching(false);
+        setError(undefined);
+        setResults(undefined);
+      }
+    }, [skipSearchAndClear, setSearching, setError, setResults]); // Driver components are renderless. It's just a stateful container
 
     return null;
   };

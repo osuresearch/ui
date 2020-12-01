@@ -16,7 +16,7 @@ var _ = require("..");
 var _2 = require("../../..");
 
 /**
- * Batch of multiple <Toggle> components matching to an enumeration 
+ * Batch of multiple <Toggle> components matching to an enumeration
  * between filter names and titles. Each filter will be set as a boolean
  * `true` value when checked, or deleted when unchecked.
  */

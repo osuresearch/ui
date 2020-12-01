@@ -19,7 +19,7 @@ var _ = require(".");
 
 /**
  * Immutable set of filters.
- * 
+ *
  * Any mutation methods to the filters return a new modified copy.
  */
 var SearchFilters = /*#__PURE__*/function () {
@@ -44,7 +44,7 @@ var SearchFilters = /*#__PURE__*/function () {
 
     /**
      * Add a new filter to the top level list of filters.
-     * 
+     *
      * If an existing filter exists with the same name, it will be replaced.
      */
     value: function add(filter) {
@@ -67,7 +67,7 @@ var SearchFilters = /*#__PURE__*/function () {
       var _ref;
 
       return (_ref = this.m_Filters.AND.find(function (f) {
-        return f.name === name;
+        return f.name === name || Array.isArray(f.name) && f.name.indexOf(name) >= 0;
       })) !== null && _ref !== void 0 ? _ref : defaultValue;
     }
   }, {
@@ -84,7 +84,7 @@ var SearchFilters = /*#__PURE__*/function () {
     value: function _delete(name) {
       var clone = this.clone();
       clone.m_Filters.AND = clone.m_Filters.AND.filter(function (f) {
-        return f.name !== name;
+        return f.name !== name || Array.isArray(f.name) && f.name.indexOf(name) < 0;
       });
       return clone;
     }
@@ -111,7 +111,7 @@ var SearchFilters = /*#__PURE__*/function () {
   }, {
     key: "clone",
     value: function clone() {
-      var clone = new SearchFilters(); // TODO: actual deep copy. This'll at least deref the 
+      var clone = new SearchFilters(); // TODO: actual deep copy. This'll at least deref the
       // parentmost array so that anything monitoring the full
       // set of filters will get a new object ref
 

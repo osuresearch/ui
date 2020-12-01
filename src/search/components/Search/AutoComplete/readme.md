@@ -1,5 +1,5 @@
 
-```jsx
+```jsx static
 import { useRef, useState } from 'react';
 import { SearchProvider, Search, SearchDebugger } from '@oris/ui/search';
 import Mock from '@oris/ui/search/drivers/Mock';
@@ -10,7 +10,7 @@ const autoCompleteRef = useRef();
 const resultsRef = useRef();
 
 const ResultComponent = ({ result }) => (
-    <button className="dropdown-item" type="button" 
+    <button className="dropdown-item" type="button"
         onClick={() => window.open(`https://www.google.com/search?q=${result.state}`, '_blank')}>
         {result.name}
     </button>
@@ -48,8 +48,8 @@ const categoryHeaderWrapper = ({ children }) => (
 
 <SearchProvider id="autocomplete">
     <Search provider="autocomplete" driver={Mock()}>
-        <Search.AutoComplete 
-            provider="autocomplete" 
+        <Search.AutoComplete
+            provider="autocomplete"
             ref={autoCompleteRef}
             label="Search"
             labelMode="placeholder"
@@ -58,7 +58,7 @@ const categoryHeaderWrapper = ({ children }) => (
         />
 
             <Search.Results>
-                <Search.Results.AggregatePanel 
+                <Search.Results.AggregatePanel
                     ref={resultsRef}
                     provider="autocomplete"
                     categorizeBy="state"
