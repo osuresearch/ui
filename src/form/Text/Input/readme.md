@@ -215,7 +215,7 @@ const error = 'You must fill out this field';
 
 <Text id="input-invalid-sample" error={error} required>
     <Text.Label>
-        Input with a serverside-generated error message. Bootstrap 4 is now opinionated about how to handle clientside errors. See the <a href="https://getbootstrap.com/docs/4.0/components/forms/#validation" target="_blank">official validation documentation</a>.
+        Input with an error message
     </Text.Label>
 
     <Text.Input />
@@ -269,7 +269,7 @@ useEffect(() => {
 <>
 <Text id="rhf-input-invalid" error={errors["rhf-input-invalid"] && "Enter at least three (3) letters"} required>
     <Text.Label>
-        Input with a serverside-generated error message. Bootstrap 4 is now opinionated about how to handle clientside errors. See the <a href="https://getbootstrap.com/docs/4.0/components/forms/#validation" target="_blank">official validation documentation</a>.
+        Input with an error message trigged by React Hook Form.
     </Text.Label>
 
     <Text.Input 
