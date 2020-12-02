@@ -12,7 +12,7 @@
 The success message can be passed into the `success` prop in the parent component
 
 ```jsx static
-<X error={successCondition && 'Success message'}>
+<X success={successCondition && 'Success message'}>
     <X.Label>Label for the component</X.Label>
     <X.Input />
     <X.Success /> // Success message will display here

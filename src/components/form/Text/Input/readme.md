@@ -42,8 +42,46 @@ const onChange = (currentValue, prevValue) => {
         Toggle Error
     </Button>
 
+    <hr/>
     <p>Current value: {value}</p>
     <p>Previous value: {prev}</p>
+</Form>
+```
+
+Inlining values with React Hook Form
+
+```jsx
+import { useForm } from 'react-hook-form';
+import { Form, Button, Text } from '@oris/ui';
+
+const { register, errors, watch, handleSubmit } = useForm({ mode: "onBlur" });
+
+const onSubmit = data => console.log(data);
+
+<Form onSubmit={handleSubmit(onSubmit)}>
+    <Text id="rhf-foo" name="foo" error={errors["foo"] && "Do better"} required>
+        <Text.Label>
+            Label here
+        </Text.Label>
+
+        <Text.Input 
+            ref={register({ required: true })}
+            placeholder="Keep this field empty to trigger error on blur and form submit"
+        />
+
+        <Text.Help>
+            Help stuff go here
+        </Text.Help>
+
+        <Text.Error />
+    </Text>
+
+    <Button type="submit">
+        Trigger Validation
+    </Button>
+
+    <hr/>
+    <p>Current value: {watch("foo")}</p>
 </Form>
 ```
 
@@ -169,6 +207,7 @@ function MyComponent() {
 ```
 
 Validation
+
 ```jsx
 import { Text } from '@oris/ui';
 
@@ -176,7 +215,7 @@ const error = 'You must fill out this field';
 
 <Text id="input-invalid-sample" error={error} required>
     <Text.Label>
-        Input with a serverside-generated error message. Bootstrap 4 is now opinionated about how to handle clientside errors. See the <a href="https://getbootstrap.com/docs/4.0/components/forms/#validation" target="_blank">official validation documentation</a>.
+        Input with an error message
     </Text.Label>
 
     <Text.Input />
@@ -207,6 +246,96 @@ const success = "This is valid!";
         This is some additional help text
     </Text.Help>
 </Text>
+```
+
+Validation with React Hook Form
+
+```jsx
+import { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { Text, Button } from '@oris/ui';
+
+const { register, errors, trigger, setValue } = useForm({ 
+    mode: "onBlur",
+    defaultValues: {
+        "rhf-input-invalid": "Hi"
+    }
+});
+
+useEffect(() => {
+    trigger(); // Trigger validation on initial load for demo
+}, []);
+
+<>
+<Text id="rhf-input-invalid" error={errors["rhf-input-invalid"] && "Enter at least three (3) letters"} required>
+    <Text.Label>
+        Input with an error message trigged by React Hook Form.
+    </Text.Label>
+
+    <Text.Input 
+        ref={register({
+            required: true,
+            pattern: /[A-Za-z]{3}/
+        })}
+    />
+
+    <Text.Error />
+
+    <Text.Help>
+        We recommend adding some clientside validation (but not relying on it) for ensuring that basic validation rules are met (like field lengths, a field matching a Regex, etc)
+    </Text.Help>
+</Text>
+
+<Button onClick={() => setValue("rhf-input-invalid", "Hello", { shouldValidate: true })}>
+    Change input to a valid value
+</Button>
+</>
+```
+
+```jsx
+import { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { Text, Button } from '@oris/ui';
+
+const { register, trigger, setValue, formState } = useForm({ 
+    mode: "onBlur",
+    defaultValues: {
+        "rhf-input-valid": "Hello"
+    }
+});
+
+useEffect(() => {
+    trigger(); // Trigger validation on initial load for demo
+}, []);
+
+<>
+<Text 
+    id="rhf-input-valid"
+    success={formState.isValid && "This is valid!"}
+    required
+>
+    <Text.Label>
+        An input updated with a "this is valid!" message. Useful if you want some basic validation feedback while the user is filling out the form.
+    </Text.Label>
+
+    <Text.Input
+        ref={register({
+            required: true,
+            pattern: /[A-Za-z]{3}/
+        })}
+    />
+
+    <Text.Success />
+
+    <Text.Help>
+        This is some additional help text
+    </Text.Help>
+</Text>
+
+<Button onClick={() => setValue("rhf-input-valid", "Hi", { shouldValidate: true })}>
+    Change input to an invalid value
+</Button>
+</>
 ```
 
 ```js noeditor

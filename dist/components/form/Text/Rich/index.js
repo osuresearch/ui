@@ -57,6 +57,7 @@ var SIMPLE_TOOLBAR_CONFIG = [{
 
 var Rich = function Rich(_ref) {
   var onChange = _ref.onChange,
+      onBlur = _ref.onBlur,
       _ref$defaultValue = _ref.defaultValue,
       defaultValue = _ref$defaultValue === void 0 ? '' : _ref$defaultValue,
       _ref$simple = _ref.simple,
@@ -134,7 +135,8 @@ var Rich = function Rich(_ref) {
       if (onChange) {
         onChange(newValue);
       }
-    })
+    }),
+    onBlur: onBlur
   }));
 };
 

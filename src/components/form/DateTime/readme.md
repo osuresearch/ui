@@ -19,6 +19,45 @@ const [date, setDate] = useState('2011-07-09');
 </DateTime>
 ```
 
+#### Basic Implementation with React Hook Form
+
+Since `<DateTime>` is a controlled component, `<DateTime.Input>` must be wrapped in a React Hook Form `<Controller>` component.
+
+```jsx
+import { useForm, Controller } from 'react-hook-form';
+
+const { control, watch } = useForm({ 
+    mode: 'onBlur',
+    defaultValues: {
+        "rhf-choose-date": "2011-07-09"
+    }
+});
+<>
+<DateTime id="rhf-choose-date">
+    <DateTime.Label>Choose a date</DateTime.Label>
+
+    <Controller
+        control={control}
+        name="rhf-choose-date"
+        render={({ onChange, value }) => (
+            <DateTime.Input
+                value={value}
+                onChange={onChange}
+            />
+        )}
+    />
+
+    <DateTime.Help>
+        You may type in the field or select a date in the calendar
+    </DateTime.Help>
+</DateTime>
+
+<hr/>
+Value:
+{watch("rhf-choose-date")}
+</>
+```
+
 #### Specify custom range for selectable dates
 
 ```jsx

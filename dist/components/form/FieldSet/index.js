@@ -92,7 +92,7 @@ var FieldSet = function FieldSet(_ref) {
         // Add the FieldSet props to the
         // inputs (if the inputs have not
         // already defined them)
-        name: bind.name,
+        name: node.props.name || bind.name,
         error: node.props.error || bind.error,
         success: node.props.success || bind.success,
         readOnly: node.props.readOnly || bind.readOnly,

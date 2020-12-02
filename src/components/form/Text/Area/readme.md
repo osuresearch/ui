@@ -21,6 +21,34 @@ import { Text } from '@oris/ui';
 </Text>
 ```
 
+Basic `<Text.Area>` with React Hook Form
+```jsx
+import { useForm } from 'react-hook-form';
+import { Text } from '@oris/ui';
+
+const { register, errors } = useForm({ mode: "onBlur" });
+
+<Text 
+    id="rhf-textarea-sample" 
+    error={errors["rhf-textarea-sample"] && "This is required"}
+    required
+>
+    <Text.Label>Basic textarea</Text.Label>
+
+    <Text.Area
+        placeholder="You may include a placeholder, but it must not contain important information."
+        rows={3}
+        ref={register({ required: true })}
+    />
+
+    <Text.Error />
+
+    <Text.Help>
+        Textareas may expand vertically but <strong>not</strong> horizontally outside their defined container.
+    </Text.Help>
+</Text>
+```
+
 `<Text.Area>` with Not Applicable option
 ```jsx
 import { Text, FieldSet, Checkbox } from '@oris/ui';
