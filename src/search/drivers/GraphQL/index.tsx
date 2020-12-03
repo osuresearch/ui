@@ -4,11 +4,6 @@ import { DocumentNode, useLazyQuery } from '@apollo/client';
 import { DriverProps, AND } from '../..';
 import useSearch from '../../hooks/useSearch';
 
-/** Loose typing for GQL search results */
-type GraphQLSearchResponse = {
-    [resultsField: string]: any[]
-}
-
 /**
  * Search driver that talks with GraphQL through the default Apollo client.
  *
@@ -43,7 +38,7 @@ export default function GraphQL(query: DocumentNode, searchWhenEmpty: boolean = 
             setSearching, setError, setResults
         } = useSearch(provider);
 
-        const [callable, result] = useLazyQuery<GraphQLSearchResponse>(query);
+        const [callable, result] = useLazyQuery<{ [field: string]: any }>(query);
 
         // Cached results from the previous search
         const [, setCached] = useState<any>();
@@ -72,7 +67,7 @@ export default function GraphQL(query: DocumentNode, searchWhenEmpty: boolean = 
         useEffect(() => {
             setCached((prev: any) => {
                 // Use previously cached results if we're still loading
-                let results = prev?.results;
+                let results = prev;
 
                 // If there's an error - make it human readable.
                 let error: string | undefined = undefined;

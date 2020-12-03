@@ -88,7 +88,7 @@ function GraphQL(query) {
     (0, _react.useEffect)(function () {
       setCached(function (prev) {
         // Use previously cached results if we're still loading
-        var results = prev === null || prev === void 0 ? void 0 : prev.results; // If there's an error - make it human readable.
+        var results = prev; // If there's an error - make it human readable.
 
         var error = undefined;
 
