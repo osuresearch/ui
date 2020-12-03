@@ -8,7 +8,7 @@ import { getDynamicContext } from '../SearchContext';
  *
  * Allows multiple components to share common search data
  */
-export default function useSearch<TResult>(provider: string): ISearchContext<TResult> {
+export default function useSearch<TResult = unknown>(provider: string): ISearchContext<TResult> {
     const context = useContext(getDynamicContext<TResult>(provider));
 
     // There used to be work here, it's gone now. This just
