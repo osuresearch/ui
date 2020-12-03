@@ -1,12 +1,8 @@
 import { ISearchContext } from '..';
-export interface useSearchRetval extends ISearchContext {
-}
 /**
  * Primary hook for interfacing with a named search.
  *
- * Allows multiple components to share common search data.
- *
- * @author Chase McManning <mcmanning.1@osu.edu>
+ * Allows multiple components to share common search data
  */
-export default function useSearch(provider: string): useSearchRetval;
+export default function useSearch<TResult>(provider: string): ISearchContext<TResult>;
 //# sourceMappingURL=useSearch.d.ts.map

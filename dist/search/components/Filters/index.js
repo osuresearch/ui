@@ -39,10 +39,10 @@ var _useSearch = _interopRequireDefault(require("../../hooks/useSearch"));
 var Context = /*#__PURE__*/(0, _react.createContext)({});
 /**
  * Set of UI components that control the terms and filters for a search.
- * 
+ *
  * At the top level, <Filters> binds to a named search (via useSearch())
  * and all the child components automatically update terms and filters of
- * that search. 
+ * that search.
  */
 
 exports.Context = Context;
@@ -51,7 +51,7 @@ var Filters = function Filters(_ref) {
   var provider = _ref.provider,
       children = _ref.children;
   // This uses a search provider and shares the same provider with all child
-  // components, without each one needing to also hook the provider. 
+  // components, without each one needing to also hook the provider.
   // const search = useSearch(provider);
   var search = (0, _useSearch.default)(provider);
   return /*#__PURE__*/_react.default.createElement(Context.Provider, {

@@ -19,9 +19,9 @@ var _SearchContext = require("../SearchContext");
 
 /**
  * Provider for a named set of search filters and queries.
- * 
+ *
  * All search components **must** be associated
- * with a provider to share state information. 
+ * with a provider to share state information.
  */
 var SearchProvider = function SearchProvider(_ref) {
   var id = _ref.id,
@@ -63,8 +63,11 @@ var SearchProvider = function SearchProvider(_ref) {
   // provider needs its own unique set of search data to pass onto components.
   // Note that a change to `id` isn't supported here. Could potentially
   // add a useEffect on change but really it should be a usage error.
-  // The callback argument for useState is done so that we don't overwrite an 
+  // The callback argument for useState is done so that we don't overwrite an
   // existing provider (only executes init once when initially setting up the state)
+  // We use `unknown` for typing here because the provider doesn't care what
+  // structure the search results will be in (and shouldn't touch it anyway).
+  // That's up to the implementing developer when they use the useSearch hook.
 
 
   var _useState11 = (0, _react.useState)(function () {

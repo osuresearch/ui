@@ -32,7 +32,7 @@ interface IFiltersComposition {
     SortBy: React.FC<SortByProps>
 }
 
-interface IFiltersContext extends ISearchContext {
+interface IFiltersContext extends ISearchContext<unknown> {
     // Anything filter-tree specific goes here.
 }
 
@@ -41,14 +41,14 @@ export const Context = createContext<IFiltersContext>({} as IFiltersContext);
 
 /**
  * Set of UI components that control the terms and filters for a search.
- * 
+ *
  * At the top level, <Filters> binds to a named search (via useSearch())
  * and all the child components automatically update terms and filters of
- * that search. 
+ * that search.
  */
 const Filters: React.FC<Props> & IFiltersComposition = ({ provider, children }) => {
     // This uses a search provider and shares the same provider with all child
-    // components, without each one needing to also hook the provider. 
+    // components, without each one needing to also hook the provider.
     // const search = useSearch(provider);
     const search = useSearch(provider);
 

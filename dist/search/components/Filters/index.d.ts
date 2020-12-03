@@ -27,7 +27,7 @@ interface IFiltersComposition {
     More: React.FC<MoreProps>;
     SortBy: React.FC<SortByProps>;
 }
-interface IFiltersContext extends ISearchContext {
+interface IFiltersContext extends ISearchContext<unknown> {
 }
 export declare const Context: React.Context<IFiltersContext>;
 /**

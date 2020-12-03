@@ -93,9 +93,11 @@ const Input: React.FC<Props> = (props) => {
     // }
 
     // TODO: Flexible based on JSON Path.
-    // Right now we assume it's always { hits: number, results: any[] }
-    const totalHits = results?.hits || 0;
-    const hits: JsonObject[] = results?.results || [];
+    // Right now we assume it's always { hits: number, results: JsonObject[] }
+    const typedResults = results ? results as { hits: number, results: JsonObject[] } : undefined;
+
+    const totalHits = typedResults?.hits || 0;
+    const hits: JsonObject[] = typedResults?.results || [];
 
     const [value, setValue] = useState<Nullable<JsonObject>>(
         props.defaultValue ? props.defaultValue : null

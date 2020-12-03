@@ -1,7 +1,7 @@
 import { Context } from 'react';
 import { IFilter, SearchTerms, Sort } from '.';
 /** A set of common states shared by search components */
-export interface ISearchContext {
+export interface ISearchContext<TResult> {
     /** Read-only copy of the current search terms */
     terms: SearchTerms;
     /** Read-only copy of current search filters */
@@ -11,7 +11,7 @@ export interface ISearchContext {
     /** Search is being executed */
     searching: boolean;
     /** Results from search. Structure depends on the backend. */
-    results?: any;
+    results?: TResult;
     /** Error */
     error?: string;
     /** Update search terms */
@@ -30,16 +30,16 @@ export interface ISearchContext {
     /** Set searching state */
     setSearching(searching: boolean): void;
     /** Set results */
-    setResults(results?: any): void;
+    setResults(results?: TResult): void;
     /** Set error */
     setError(error?: string): void;
 }
 /** Shorthand for typing a React Context storing search data */
-export declare type SearchContext = Context<ISearchContext>;
+export declare type SearchContext<TResult> = Context<ISearchContext<TResult>>;
 /**
  * Create a new dynamic SearchContext tied to a named provider
  */
-export declare function initDynamicContext(provider: string, data: ISearchContext): SearchContext;
+export declare function initDynamicContext<TResult>(provider: string, data: ISearchContext<TResult>): SearchContext<TResult>;
 /**
  * Destroy a dynamic SearchContext by name
  */
@@ -49,5 +49,5 @@ export declare function destroyDynamicContext(provider: string): void;
  *
  * @throws {Error} if the provider is not yet registered through a SearchProvider component
  */
-export declare function getDynamicContext(provider: string): SearchContext;
+export declare function getDynamicContext<TResult>(provider: string): SearchContext<TResult>;
 //# sourceMappingURL=SearchContext.d.ts.map

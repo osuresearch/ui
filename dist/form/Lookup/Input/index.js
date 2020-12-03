@@ -80,11 +80,12 @@ var Input = function Input(props) {
   //     inputProps.value = value
   // }
   // TODO: Flexible based on JSON Path.
-  // Right now we assume it's always { hits: number, results: any[] }
+  // Right now we assume it's always { hits: number, results: JsonObject[] }
 
 
-  var totalHits = (results === null || results === void 0 ? void 0 : results.hits) || 0;
-  var hits = (results === null || results === void 0 ? void 0 : results.results) || [];
+  var typedResults = results ? results : undefined;
+  var totalHits = (typedResults === null || typedResults === void 0 ? void 0 : typedResults.hits) || 0;
+  var hits = (typedResults === null || typedResults === void 0 ? void 0 : typedResults.results) || [];
 
   var _useState = (0, _react.useState)(props.defaultValue ? props.defaultValue : null),
       _useState2 = (0, _slicedToArray2.default)(_useState, 2),

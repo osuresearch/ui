@@ -16,24 +16,24 @@ import {
 } from '../SearchContext';
 
 export type Props = {
-    /** 
-     * Unique identifier used by components to reference this provider. 
-     * This allows an application to use multiple entangled search providers 
+    /**
+     * Unique identifier used by components to reference this provider.
+     * This allows an application to use multiple entangled search providers
      */
     id: string
 
     /**
      * Default search terms to use when loading up the application.
-     * 
-     * If `SyncSearchWithURL` is attached to this provider, the defaults 
+     *
+     * If `SyncSearchWithURL` is attached to this provider, the defaults
      * defined here will be overridden by the URL data.
      */
     defaultTerms?: SearchTerms
 
     /**
      * Default search filters to use when loading up the application.
-     * 
-     * If `SyncSearchWithURL` is attached to this provider, the defaults 
+     *
+     * If `SyncSearchWithURL` is attached to this provider, the defaults
      * defined here will be overridden by the URL data.
      */
     defaultFilters?: SearchFilters
@@ -44,9 +44,9 @@ export type Props = {
 
 /**
  * Provider for a named set of search filters and queries.
- * 
+ *
  * All search components **must** be associated
- * with a provider to share state information. 
+ * with a provider to share state information.
  */
 const SearchProvider: React.FC<Props> = ({
     id,
@@ -60,7 +60,7 @@ const SearchProvider: React.FC<Props> = ({
         () => defaultFilters ? defaultFilters.clone() : new SearchFilters()
     );
     const [searching, setSearching] = useState(false);
-    const [results, setResults] = useState<any | undefined>();
+    const [results, setResults] = useState<unknown | undefined>();
     const [error, setError] = useState<string | undefined>();
 
     // Prepare for some magic.
@@ -72,10 +72,14 @@ const SearchProvider: React.FC<Props> = ({
 
     // Note that a change to `id` isn't supported here. Could potentially
     // add a useEffect on change but really it should be a usage error.
-    // The callback argument for useState is done so that we don't overwrite an 
+    // The callback argument for useState is done so that we don't overwrite an
     // existing provider (only executes init once when initially setting up the state)
-    const [context,] = useState<SearchContext>(
-        () => initDynamicContext(id, {} as ISearchContext)
+
+    // We use `unknown` for typing here because the provider doesn't care what
+    // structure the search results will be in (and shouldn't touch it anyway).
+    // That's up to the implementing developer when they use the useSearch hook.
+    const [context,] = useState<SearchContext<unknown>>(
+        () => initDynamicContext(id, {} as ISearchContext<unknown>)
     );
 
     // Destroy the dynamic context on unmount.
@@ -85,7 +89,7 @@ const SearchProvider: React.FC<Props> = ({
 
     console.debug(`[SearchProvider(${id})] Redraw`, terms, filters);
 
-    const contextValue = useMemo<ISearchContext>(() => ({
+    const contextValue = useMemo<ISearchContext<unknown>>(() => ({
         terms,
         filters: filters.filters,
         sort: filters.sort,

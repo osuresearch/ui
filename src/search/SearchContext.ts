@@ -2,7 +2,7 @@ import { Context, createContext } from 'react';
 import { IFilter, SearchTerms, Sort } from '.';
 
 /** A set of common states shared by search components */
-export interface ISearchContext {
+export interface ISearchContext<TResult> {
     /** Read-only copy of the current search terms */
     terms: SearchTerms
 
@@ -16,7 +16,7 @@ export interface ISearchContext {
     searching: boolean
 
     /** Results from search. Structure depends on the backend. */
-    results?: any
+    results?: TResult
 
     /** Error */
     error?: string
@@ -46,22 +46,22 @@ export interface ISearchContext {
     setSearching(searching: boolean): void
 
     /** Set results */
-    setResults(results?: any): void
+    setResults(results?: TResult): void
 
     /** Set error */
     setError(error?: string): void;
 }
 
 /** Shorthand for typing a React Context storing search data */
-export type SearchContext = Context<ISearchContext>;
+export type SearchContext<TResult> = Context<ISearchContext<TResult>>;
 
 /** Singleton storing all dynamic SearchContext instances during the app lifecycle */
-const __dynamicContextMap = new Map<string, SearchContext>();
+const __dynamicContextMap = new Map<string, SearchContext<any>>();
 
 /**
  * Create a new dynamic SearchContext tied to a named provider
  */
-export function initDynamicContext(provider: string, data: ISearchContext): SearchContext {
+export function initDynamicContext<TResult>(provider: string, data: ISearchContext<TResult>): SearchContext<TResult> {
     // TODO: This *is* an implementation error for apps, but Styleguidist examples
     // need to be able to re-instantiate a provider when an example changes.
     // if (__dynamicContextMap.has(provider)) {
@@ -72,7 +72,7 @@ export function initDynamicContext(provider: string, data: ISearchContext): Sear
 
     console.debug(`[initDynamicContext(${provider})]`, data);
 
-    const context = createContext<ISearchContext>(data);
+    const context = createContext<ISearchContext<TResult>>(data);
     __dynamicContextMap.set(provider, context);
     return context;
 }
@@ -91,7 +91,7 @@ export function destroyDynamicContext(provider: string) {
  *
  * @throws {Error} if the provider is not yet registered through a SearchProvider component
  */
-export function getDynamicContext(provider: string): SearchContext {
+export function getDynamicContext<TResult>(provider: string): SearchContext<TResult> {
     const context = __dynamicContextMap.get(provider);
 
     // Ensure it exists - for type safe useContext() calls.
