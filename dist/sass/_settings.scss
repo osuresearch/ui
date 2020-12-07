@@ -15,31 +15,29 @@ $gray-800: shade($gray, 40%);
 $gray-900: shade($gray, 60%);
 
 $theme-colors: (
-    primary: $casal, // PMS 5473
-    secondary: tint($gray, 70%),
-    info: shade($polo-blue, 20%), //#3283c8, // Link blue
-
-    success: #1aaa55, // Current UCR success green
-    // success: #38ae67, // Old UCR sucess green
-
-    // Slightly darker than current UCR warning yellow
-    // If it's any lighter than this, button font will
-    // automatically become black for fixing contrast.
-    warning: shade(#fc9403, 8%),
-
-    //warning: #fc8a51, // Old UCR warning yellow
-    danger: #db3b21, // Current UCR alert red
+    primary: $casal,
+    // PMS 5473
+    secondary: tint($gray, 90%),
+    info: shade($polo-blue, 32%),
+    //#3283c8, // Link blue
+    success: #158844,
+    // success: #1aaa55, Previous UCR success green
+    // success: #38ae67, // Old old UCR sucess green
+    warning: shade($flame-pea, 7%),
+    //warning: shade(#fc9403, 8%), // Previous UCR warning yellow
+    //warning: #fc8a51, // Old old UCR warning yellow
+    danger: #db3b21,
+    // Current UCR alert red
     // danger: #e52c5a, // Old UCR alert red
-
     light: $gray-100,
-    dark: $gray-800
+    dark: $gray-800,
 ) !default;
 
 $enable-rounded: false;
 $enable-shadows: false;
 
-// Slightly darker link color - TODO: Not hardcoded?
-$link-color: #3283c8;
+// Link color meets minimum contrast requirements with white background (4.5:1)
+$link-color: rgb(47, 122, 186);
 $link-hover-color: darken($link-color, 15%);
 
 // Remove underline from link hover. We'll be using a border
@@ -101,7 +99,7 @@ $datepicker-button-active-fg: $white;
 $datepicker-button-active-bg: $casal;
 
 $datepicker-dropdown-bg: $white;
-$datepicker-dropdown-border-color: rgba($black, .15);
+$datepicker-dropdown-border-color: rgba($black, 0.15);
 
 /*
     Settings for DataTables

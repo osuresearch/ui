@@ -7,6 +7,11 @@ Versions follow [Semantic Versioning](https://semver.org/) guidelines - given a 
 2. MINOR version when you add functionality in a backwards-compatible manner, and
 3. PATCH version when you make backwards-compatible bug fixes.
 
+# 4.2.4 (2020-11-07)
+
+__Accessibility Fixes:__
+* Resolves color-contrast issues with link text (FWK-250) and theme colors (FWK-237)
+
 # 4.2.3 (2020-10-25)
 
 This version adds additional documentation for form components.
