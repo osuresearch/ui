@@ -1,5 +1,5 @@
 
-import { AND, AndFilters, IFilter, Sort } from '.';
+import { AND, AndFilters, IFilter, SortFields } from '.';
 
 /**
  * Immutable set of filters.
@@ -11,7 +11,7 @@ export default class SearchFilters {
     protected readonly m_Filters: AndFilters;
 
     /** Current search filter */
-    protected m_Sort: Sort | undefined;
+    protected m_Sort: SortFields | undefined;
 
     // TODO: Just slap terms in here too instead of tracking separately?
 
@@ -27,9 +27,9 @@ export default class SearchFilters {
     }
 
     /**
-     * Get a readonly copy of the current sort rules
+     * Get a readonly copy of the current sort fields
      */
-    public get sort(): Sort | undefined {
+    public get sort(): SortFields | undefined {
         return this.m_Sort;
     }
 
@@ -80,7 +80,7 @@ export default class SearchFilters {
     /**
      * Replace current sort rules and return a new immutable copy of this class
      */
-    public sortBy(sort: Sort | undefined): SearchFilters {
+    public sortBy(sort: SortFields | undefined): SearchFilters {
         const clone = this.clone();
 
         // Deep(ish) copy the input sort

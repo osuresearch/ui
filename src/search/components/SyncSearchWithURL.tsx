@@ -1,18 +1,18 @@
 
 import React, { useEffect, useState } from 'react';
 import useSearch from '../hooks/useSearch';
-import { IFilter, Sort } from '..';
+import { IFilter, SortFields } from '..';
 
 type Props = {
     /** SearchProvider `id` to sync the URL parameters */
     provider: string
 
-    /** 
+    /**
      * Query key prefix for every query key. This allows multiple sync
-     * components to coexist for different search providers as long 
+     * components to coexist for different search providers as long
      * as each one uses a different prefix.
-     * 
-     * Suggest you keep this to one or two characters. 
+     *
+     * Suggest you keep this to one or two characters.
      */
     prefix?: string
 }
@@ -31,7 +31,7 @@ function urlEncodeFilters(filters: IFilter[]): string {
 
 /**
  * Decode from a URL into a new copy of SearchFilters
- * 
+ *
  * Will return undefined if the payload cannot be safely decoded
  */
 function urlDecodeFilters(encoded: string): IFilter[] {
@@ -46,7 +46,7 @@ function urlDecodeFilters(encoded: string): IFilter[] {
     return [];
 }
 
-function urlEncodeSort(sort: Sort | undefined): string {
+function urlEncodeSort(sort: SortFields | undefined): string {
     if (!sort) {
         return '';
     }
@@ -55,14 +55,14 @@ function urlEncodeSort(sort: Sort | undefined): string {
     return window.btoa(str);
 }
 
-function urlDecodeSort(encoded: string): Sort | undefined {
+function urlDecodeSort(encoded: string): SortFields | undefined {
     if (encoded.length < 1) {
         return undefined;
     }
 
     try {
         const str = window.atob(encoded);
-        const data = JSON.parse(str) as Sort;
+        const data = JSON.parse(str) as SortFields;
         return data;
     } catch {
         // Silently ignore other decoding errors
@@ -73,15 +73,15 @@ function urlDecodeSort(encoded: string): Sort | undefined {
 
 /**
  * Allows a user to bookmark or share searches for an application.
- * 
+ *
  * When the search data (terms, filters, sorting) changes, the current address
  * is updated via the `History.ReplaceState` API to contain a serialized copy
- * of the search data. 
- * 
+ * of the search data.
+ *
  * If the user bookmarks (or shares) the URL, the same search data will
  * be loaded on next visit.
- * 
- * This also means you need to safely handle access-based search filtering on the 
+ *
+ * This also means you need to safely handle access-based search filtering on the
  * backend. E.g. if an admin shares a link that contains an `adminOnlyData`
  * search filter, then the user they shared that with may also potentially send
  * that filter to the server as well.
@@ -89,7 +89,7 @@ function urlDecodeSort(encoded: string): Sort | undefined {
 const SyncSearchWithURL: React.FC<Props> = ({ provider, prefix = '' }) => {
     const search = useSearch(provider);
     const [init, setInit] = useState(true);
-    
+
     // On update of search data, write to the address bar
     useEffect(() => {
         const url = new URL(window.location.href);
@@ -107,7 +107,7 @@ const SyncSearchWithURL: React.FC<Props> = ({ provider, prefix = '' }) => {
             terms ? url.searchParams.set(termsKey, terms) : url.searchParams.delete(termsKey);
             filters ? url.searchParams.set(filtersKey, filters) : url.searchParams.delete(filtersKey);
             sort ? url.searchParams.set(sortKey, sort) : url.searchParams.delete(sortKey);
-            
+
             // Replace (not push) our history state without a remote refresh
             window.history.replaceState(null, document.title, url.href);
         } else {
@@ -122,7 +122,7 @@ const SyncSearchWithURL: React.FC<Props> = ({ provider, prefix = '' }) => {
             filters && search.replaceFilters(filters);
             sort && search.setSort(sort);
         }
-        
+
     }, [search, init, setInit]);
 
     return null;

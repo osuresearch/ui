@@ -4,7 +4,7 @@ import {
     SearchFilters,
     SearchContext,
     SearchTerms,
-    Sort,
+    SortFields,
     IFilter,
     ISearchContext,
     SearchDriver,
@@ -97,7 +97,7 @@ const SearchProvider: React.FC<Props> = ({
         results,
         error,
         setTerms,
-        setSort(sort: Sort | undefined) {
+        setSort(sort: SortFields | undefined) {
             setFilters((prev) => prev.sortBy(sort));
         },
         addFilter(filter: IFilter) {

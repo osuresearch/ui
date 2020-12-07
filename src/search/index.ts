@@ -68,7 +68,7 @@ export interface SortField {
 }
 
 /** Collection of fields to sort on */
-export interface Sort {
+export interface SortFields {
     /** Human readable name for this sort */
     name?: string
     sort: SortField[]
@@ -135,7 +135,7 @@ export function between(field: string, from: string | number, to: string | numbe
  * )
  * ```
  */
-export function sort(name: string, field: string, order: SortOrder = 'desc'): Sort {
+export function sort(name: string, field: string, order: SortOrder = 'desc'): SortFields {
     return {
         name,
         sort: [{
