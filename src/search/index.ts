@@ -78,6 +78,12 @@ export interface SortFields {
 
 //#region Filter vanity functions
 
+/**
+ * Factory method to create an `AndFilters` rule
+ *
+ * @param filters
+ * @param name
+ */
 export function AND(filters: IFilter[], name?: string): AndFilters {
     return {
         name,
@@ -85,6 +91,12 @@ export function AND(filters: IFilter[], name?: string): AndFilters {
     };
 }
 
+/**
+ * Factory method to create an `OrFilters` rule
+ *
+ * @param filters
+ * @param name
+ */
 export function OR(filters: IFilter[], name?: string): OrFilters {
     return {
         name,
@@ -92,6 +104,13 @@ export function OR(filters: IFilter[], name?: string): OrFilters {
     };
 }
 
+/**
+ * Factory method to create a `TermFilter` rule
+ *
+ * @param field
+ * @param value
+ * @param name
+ */
 export function term(field: string, value: TermValue, name?: string): TermFilter {
     return {
         name,
@@ -101,6 +120,13 @@ export function term(field: string, value: TermValue, name?: string): TermFilter
     }
 }
 
+/**
+ * Factory method to create an `AnyOfFilter` rule
+ *
+ * @param field
+ * @param values
+ * @param name
+ */
 export function anyOf(field: string, values: (string | number)[], name?: string | string[]): AnyOfFilter {
     return {
         name,
@@ -110,6 +136,14 @@ export function anyOf(field: string, values: (string | number)[], name?: string 
     }
 }
 
+/**
+ * Factory method to create a `BetweenFilter` rule
+ *
+ * @param field
+ * @param from
+ * @param to
+ * @param name
+ */
 export function between(field: string, from: string | number, to: string | number, name?: string): BetweenFilter {
     return {
         name,
@@ -157,7 +191,6 @@ export type { ISearchContext, SearchContext } from './SearchContext';
 export { default as SearchProvider } from './components/SearchProvider';
 export { default as SearchDebugger } from './components/SearchDebugger';
 export { default as SyncSearchWithURL } from './components/SyncSearchWithURL';
-export { default as Search } from './components/Search';
 export { default as Filters } from './components/Filters';
 
 // Hooks

@@ -7,15 +7,19 @@ import useSearch from '../../hooks/useSearch';
 /**
  * Search driver that talks with GraphQL through the default Apollo client.
  *
- * The GraphQL query requires the following variables:
+ * The GraphQL query MUST support the following variables:
  *
  *  - `$terms: String!`
  *      - Full text search terms
  *  - `$filters: SearchFilters`
  *      - Set of filters to narrow down results.
- *        The `name` of each filter is ignored by the backend.
+ *      - The `name` of each filter is ignored by the backend.
+ *      - You can omit this if you do not use filters in your searches.
  *  - `$sort: SearchSorting`
- *      - Sorting rules for the results
+ *      - Sorting rules for the results.
+ *      - You can omit this if you do not use sorting in your searches.
+ *
+ * The GraphQL types `SearchFilters` and `SearchSorting` are provided by the ORIS\GraphQL composer package.
  *
  * The *first* GraphQL field returned will be used for the results
  * and must return an array of type objects.
