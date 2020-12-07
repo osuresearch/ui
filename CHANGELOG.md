@@ -7,6 +7,16 @@ Versions follow [Semantic Versioning](https://semver.org/) guidelines - given a 
 2. MINOR version when you add functionality in a backwards-compatible manner, and
 3. PATCH version when you make backwards-compatible bug fixes.
 
+# 4.2.3 (2020-10-25)
+
+This version adds additional documentation for form components.
+
+__Bug Fixes:__
+* The `name` property of form field components inside of a `FieldSet` is no longer overridden by the `name` property in the `FieldSet` bind
+* An `onBlur` callback was added to `Text.Rich` for RHF compatability
+* Improved error state styles for `Text.Rich`
+* Error and Success subcomponents will display when the parent `.ui-form-element` also has `.is-invalid` or `.is-valid` class, respectively (resolves FWK-251)
+
 # 4.2.2 (2020-10-12)
 
 __Accessibility Fixes:__

@@ -21,6 +21,35 @@
 </Select>
 ```
 
+#### Basic Implementation with React Hook Form
+```jsx
+import { useForm } from 'react-hook-form';
+
+const { register, watch } = useForm({ mode: "onBlur" });
+
+<>
+<Select id="rhf-color-select">
+    <Select.Label>Select a Color Profile</Select.Label>
+
+    <Select.Control ref={register}>
+        <Select.Option value="">
+            -- Please choose an option --
+        </Select.Option>
+        <Select.Option value="RGB">RGB</Select.Option>
+        <Select.Option value="CMYK">CMYK</Select.Option>
+        <Select.Option value="HSL">HSL</Select.Option>
+    </Select.Control>
+
+    <Select.Help>
+        Some additional help text here
+    </Select.Help>
+</Select>
+
+<hr/>
+Value: {watch("rhf-color-select")}
+</>
+```
+
 #### Using `optionsBind` in React Flow
 ```jsx
 const dropdownOptions = {
@@ -82,6 +111,46 @@ const [success, setSuccess] = useState('');
         setError('');
         setSuccess('Your selection is correct');
     }}>Trigger Success</Button>
+</Form>
+```
+
+#### Validation with React Hook Form
+```jsx
+import { useForm } from 'react-hook-form';
+import { Form, Button } from '@oris/ui';
+
+const { register, errors, formState, handleSubmit } = useForm({ mode: "onBlur" });
+
+const onSubmit = data => console.log(data);
+
+<Form onSubmit={handleSubmit(onSubmit)}>
+    <Select 
+        id="rhf-error-example" 
+        error={errors["rhf-error-example"] && "You must select a color option"} 
+        success={formState.isValid && "Your selection is correct"} 
+        required
+    >
+        <Select.Label>Which color model is used for print?</Select.Label>
+
+        <Select.Control ref={register({ required: true })}>
+            <Select.Option value="">
+                -- Please choose an option --
+                </Select.Option>
+            <Select.Option value="RGB">RGB</Select.Option>
+            <Select.Option value="CMYK">CMYK</Select.Option>
+            <Select.Option value="HSL">HSL</Select.Option>
+        </Select.Control>
+
+        <Select.Error />
+
+        <Select.Success />
+
+        <Select.Help>
+            Some additional help text here
+        </Select.Help>
+    </Select>
+
+    <Button theme="primary" type="submit">Trigger Validation</Button>
 </Form>
 ```
 
