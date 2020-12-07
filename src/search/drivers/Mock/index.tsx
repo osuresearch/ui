@@ -1,15 +1,44 @@
 import React, { useEffect } from 'react';
-import faker, { random, name, internet, image } from 'faker';
+import faker, { random, name, image } from 'faker';
 
 import { AnyOfFilter, TermFilter, DriverProps } from '../..';
 import useSearch from '../../hooks/useSearch';
 
+/**
+ * Get an avatar containing a user's initials, similar to Microsoft products
+ *
+ * Reference: https://codepen.io/felipepucinelli/pen/QyVJbM
+ */
+function getInitialsAvatar(firstName: string, lastName: string, size: number = 80) {
+    const colors = ["#1abc9c", "#2ecc71", "#3498db", "#9b59b6", "#34495e", "#16a085", "#27ae60", "#2980b9", "#8e44ad", "#2c3e50", "#f1c40f", "#e67e22", "#e74c3c", "#f39c12", "#d35400", "#c0392b", "#7f8c8d"];
+    const index = (firstName.charCodeAt(0) - 65) % colors.length;
+
+    const style: React.CSSProperties = {
+        backgroundColor: colors[index],
+        width: size,
+        height: size,
+        font: (size / 2) + 'px Arial',
+        color: '#fff',
+        textAlign: 'center',
+        lineHeight: size + 'px',
+        borderRadius: '50%'
+    };
+
+    return (
+        <div style={style}>
+            {firstName[0].toUpperCase() + lastName[0].toUpperCase()}
+        </div>
+    )
+}
+
 const FAKE_DATA = Array.from({ length: 100 }, () => {
     const card = faker.helpers.createCard();
+    const firstName = name.firstName();
+    const lastName = name.lastName();
 
     return {
         id: random.number(),
-        name: card.name,
+        name: firstName + ' ' + lastName,
         age: random.number(50) + 18,
         username: card.username,
         address: card.address.streetA,
@@ -22,7 +51,9 @@ const FAKE_DATA = Array.from({ length: 100 }, () => {
         phone: card.phone,
         about: card.posts[0].paragraph,
         title: name.jobTitle(),
-        avatar: image.avatar(),
+        // .avatar uses uifaces.co which has become a paid service
+        // avatar: image.avatar(),
+        avatar: getInitialsAvatar(firstName, lastName)
     }
 });
 
@@ -42,7 +73,6 @@ export default function Mock(searchWhenEmpty: boolean = true) {
         const isEmpty = terms.length < 1 && filters.length < 1 && sort === undefined;
         const skipSearchAndClear = isEmpty && !searchWhenEmpty;
 
-        let people: any[] = [];
         // Fire off a new query if anything in the search state changes
         useEffect(() => {
             if (skipSearchAndClear) {
