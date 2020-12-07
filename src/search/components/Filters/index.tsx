@@ -42,7 +42,7 @@ export const Context = createContext<IFiltersContext>({} as IFiltersContext);
 /**
  * Set of UI components that control the terms and filters for a search.
  *
- * At the top level, <Filters> binds to a named search (via useSearch())
+ * At the top level `<Filters>` binds to a named search via `useSearch()`
  * and all the child components automatically update terms and filters of
  * that search.
  */
