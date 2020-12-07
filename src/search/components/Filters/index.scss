@@ -18,15 +18,6 @@
         margin: 0;
     }
 
-    &-terms {
-        margin-bottom: 1.5rem;
-
-        // Fix Bootstrap's extra padding
-        &.input-group .form-control:not(:last-child) {
-            padding-right: 0.75rem;
-        }
-    }
-
     &-group {
         margin: 0;
         margin-bottom: 1.25rem;
@@ -35,13 +26,13 @@
             @include button-reset;
 
             width: 100%;
-            
+
             padding: 0.8rem 0;
             border-top: 1px solid #ccc;
 
             font-size: 1.2rem;
             font-weight: 400;
-            
+
             .fa {
                 float: right;
                 color: #ccc;
@@ -65,7 +56,7 @@
         border-radius: 15px;
 
         color: #666;
-        
+
         &-delete {
             margin-left: 0.5em;
         }
