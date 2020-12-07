@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+import uniqueId from 'lodash/uniqueId';
+
 import { NullFieldBind, FormFieldProps, IFormFieldContext } from '../../internal/FormCommon/types';
 import useFieldBindOrProps from '../../internal/FormCommon/hooks/useFieldBindOrProps';
 import { withFormContext } from '../../internal/FormCommon/HOC/withFormContext';
@@ -26,14 +28,14 @@ export type JsonObject = {
 type Props = FormFieldProps<JsonObject> & {
     /**
      * Search provider to use for interacting with a search API.
-     * 
+     *
      * You MUST specify EITHER the `provider` or `driver` prop.
      */
     provider?: string
 
     /**
      * Search driver to use for interacting with a search API.
-     * 
+     *
      * You MUST specify EITHER the `provider` or `driver` prop.
      */
     driver?: SearchDriver
@@ -45,7 +47,7 @@ interface ILookupComposition extends ICommonComposition {
 }
 
 type LookupContext = IFormFieldContext<JsonObject> & {
-    provider: string  
+    provider: string
 }
 
 export const Context = React.createContext<LookupContext>({
@@ -61,6 +63,10 @@ const Lookup: React.FC<Props> & ILookupComposition = ({
     ...props
 }) => {
     const { bind } = useFieldBindOrProps(props);
+    const [provider, ] = useState(() => {
+        // If we provide a driver directly, we need to generate a unique provider ID *once*
+        return props.provider ?? 'local-provider-' + uniqueId();
+    });
 
     // Make sure either a provider or driver was supplied
     if (props.driver !== undefined && props.provider !== undefined) {
@@ -71,20 +77,11 @@ const Lookup: React.FC<Props> & ILookupComposition = ({
         throw new Error('You must specify either `driver` or `provider` for a Lookup.');
     }
 
-    let provider = props.provider;
-    let useLocalProvider = false;
-
-    // If there's no provider, instantiate one local to this Lookup. 
-    if (provider === undefined) {
-        useLocalProvider = true;
-        provider = 'RandomProviderName'; // TODO: Randomize (but only once - re-renders shouldn't ever change this)
-    }
-
     const contextWrappedDOM = (
-        <Context.Provider value={{ bind, provider }}>   
+        <Context.Provider value={{ bind, provider }}>
             <div className={`
-                ui-form-element ${bind.required ? 'is-required' : ''} 
-                ${bind.error && ' is-invalid'} 
+                ui-form-element ${bind.required ? 'is-required' : ''}
+                ${bind.error && ' is-invalid'}
                 ${bind.success && 'is-valid'}
             `}>
                 {children}
@@ -94,9 +91,9 @@ const Lookup: React.FC<Props> & ILookupComposition = ({
 
     // If we aren't using an external provider - instantiate a local
     // search provider with the supplied driver.
-    if (useLocalProvider) {
+    if (props.driver !== undefined) {
         return (
-            <SearchProvider id={provider} driver={props.driver as SearchDriver}>
+            <SearchProvider id={provider} driver={props.driver}>
                 {contextWrappedDOM}
             </SearchProvider>
         );
@@ -109,7 +106,7 @@ const Lookup: React.FC<Props> & ILookupComposition = ({
 Lookup.Input = Input;
 
 // `as any` hacks are needed because we expand the context with data
-// that's unexpected by withFormContext. It's safe to do here, 
+// that's unexpected by withFormContext. It's safe to do here,
 // we safely typed the context beforehand.
 Lookup.Label = withFormContext<LabelProps>(Label, Context as any);
 Lookup.Help = withFormContext<HelpProps>(Help, Context as any);

@@ -1,4 +1,5 @@
-import React, { useContext, useRef, useState } from 'react';
+import throttle from 'lodash/throttle';
+import React, { useCallback, useContext, useRef, useState } from 'react';
 import { Context, JsonObject } from '..';
 import Icon from '../../../components/Icon';
 import { Nullable } from '../../../internal/FormCommon/types';
@@ -34,6 +35,29 @@ export type Props = {
     resultJsonPath?: string
 
     hitsJsonPath?: string
+
+    /**
+     * Change handler for use with React Hook Form's `<Controller>`.
+     *
+     * **Do not use this directly. This is not supported for usage outside of RHF.**
+     * **Use the `onChange` prop in `<Lookup>` instead.**
+     */
+    onChange?: (newValue: Nullable<JsonObject>) => void
+
+    /**
+     * Blur handler for use with React Hook Form's `<Controller>`.
+     *
+     * **Do not use this directly. This is not supported for usage outside of RHF.**
+     */
+    onBlur?: () => void
+
+    /**
+     * Controlled value for use with React Hook Form's `<Controller>`.
+     *
+     * **Do not use this directly. This is not supported for usage outside of RHF.**
+     * **Use a combination of defaultValue and the `onChange` prop in `<Lookup>` instead.**
+     */
+    value?: Nullable<JsonObject>
 }
 
 /**
@@ -42,6 +66,8 @@ export type Props = {
 const Input: React.FC<Props> = (props) => {
     const { bind, provider } = useContext(Context);
     const { terms, searching, error, results, setTerms } = useSearch(provider);
+
+    console.debug('RHF stuff', props.onChange, props.onBlur, props.value);
 
     // const value = bind.value || props.defaultValue || props.value;
 
@@ -99,7 +125,7 @@ const Input: React.FC<Props> = (props) => {
     const totalHits = typedResults?.hits || 0;
     const hits: JsonObject[] = typedResults?.results || [];
 
-    const [value, setValue] = useState<Nullable<JsonObject>>(
+    const [value, setValue] = useState<Nullable<JsonObject>>(() =>
         props.defaultValue ? props.defaultValue : null
     );
 
@@ -108,14 +134,32 @@ const Input: React.FC<Props> = (props) => {
     const hasMoreHits = terms.length > 0 && !searching && totalHits > hits.length;
     const showResultsPane = !value && (hasHits || hasNoHits || error !== undefined);
 
+    const setTermsThrottled = useCallback(
+        throttle(terms => setTerms(terms), 750),
+        [throttle]
+    );
+
     const updateValue = (newValue: Nullable<JsonObject>) => {
         setValue(newValue);
         setTerms('');
+
+        if (props.onChange) {
+            props.onChange(newValue);
+        }
+
+        // Blur gets fired at the same time as onChange due to the
+        // input either existing or not existing once a change happens.
+        if (props.onBlur) {
+            props.onBlur();
+        }
 
         // Notify the bind and trigger onChange of the parent Lookup.
         bind.value = newValue;
     }
 
+    // If this is a controlled component, we use props.value.
+    // Otherwise we use the uncontrolled local value state.
+    const renderedValue = props.value || value;
     return (
         <div className="input-group lookup-input">
             {/* Only show the search input if we have no selection */}
@@ -130,17 +174,18 @@ const Input: React.FC<Props> = (props) => {
                 id={bind.id}
                 name={bind.name}
                 className={classNames}
+                onBlur={props.onBlur}
                 onChange={(e) => {
-                    setTerms(e.target.value);
+                    setTermsThrottled(e.target.value);
                 }}
             />
             </>}
 
             {/* Show the search value with a button to clear */}
-            {value &&
+            {renderedValue &&
             <div className="lookup-value">
                 <div className="lookup-value-content">
-                    {props.resultRenderer(value)}
+                    {props.resultRenderer(renderedValue)}
                 </div>
 
                 <button className="lookup-value-clear" onClick={() => updateValue(null)}>
