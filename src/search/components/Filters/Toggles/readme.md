@@ -21,20 +21,3 @@ const ID = 'demo-Toggles';
     <SearchDebugger provider={ID} />
 </SearchProvider>
 ```
-
-### Typescript Features
-
-If you are using TypeScript, you can supply an `enum` directly to options:
-
-```tsx static
-enum DataClassification {
-    S1 = 'Public (S1)',
-    S2 = 'Internal (S2)',
-    S3 = 'Private (S3)',
-    S4 = 'Restricted (S4)',
-}
-
-<Filters.Toggles name="dataClassification" options={DataClassification} />
-```
-
-The enum `key` will be used for each filter and each checkbox labeled with the enum `value`.

@@ -6,7 +6,7 @@ import { Icon } from '../../../..';
 export type Props = {
     name: string
 
-    /** Prefix displayed in the pill for this filter */
+    /** Prefix for the filter name */
     prefix: string
 
     /** HTML title attribute for the input */
@@ -49,7 +49,7 @@ const Match: React.FC<Props> = ({ name, prefix, placeholder, title = 'Search by 
                 placeholder={placeholder}
                 value={value}
                 onChange={(e) => setValue(e.currentTarget.value)}
-                onKeyUp={(e) => e.keyCode === 13 && updateFilter(value)}
+                onKeyUp={(e) => e.key === 'Enter' && updateFilter(value)}
             />
             <div className="input-group-append">
                 <button type="button"
