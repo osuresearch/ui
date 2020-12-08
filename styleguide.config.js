@@ -273,16 +273,13 @@ module.exports = {
         // 3. Everything else (provider, debuggers, etc) are in the composite index.ts
         if (paths[1] === 'search') {
             if (paths[2] === 'drivers') {
-                return `import ${name} from '@oris/ui/search/drivers/${name}'`;
+                return `import ${name} from '@oris/ui/dist/search/drivers/${name}'`;
             }
 
             // Some sort of subcomponent - import line is for the parent
             if (paths[2] === 'components' && paths.length > 3) {
-                return `import { ${paths[3]} } from '@oris/ui/search'`;
+                return `import { ${paths[3]} } from '@oris/ui'`;
             }
-
-            // Otherwise, assume a direct import
-            return `import { ${name} } from '@oris/ui/search'`;
         }
 
         // TODO: Can't figure out how to deal with subcomponents that come from generics.
@@ -298,7 +295,7 @@ module.exports = {
 
         // The assumption is that all (public) components are exported
         // by name from the primary index of the package.
-        return 'import { ' + name + ' } from \'@oris/ui\'';
+        return `import { ${name} } from '@oris/ui'`;
     },
     dangerouslyUpdateWebpackConfig: (webpackConfig, env) => {
         // Ignore any jQuery imports. They'll be resolved via the CDN script
