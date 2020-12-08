@@ -2,10 +2,15 @@
 import React, { useContext } from 'react';
 import { KeyValuePairs, YetAnotherCheckboxWrapper } from '../Common';
 import { Context } from '..';
-import { OrFilters, AndFilters, TermFilter, term, OR, AND } from '../../..';
+import { OrFilters, AndFilters, TermFilter, term, OR, AND, TermValue } from '../../..';
 
 export type Props = {
     options: KeyValuePairs
+
+    /**
+     * Values to set to the filter per option. If omitted, boolean `true` will be used instead.
+     */
+    values?: KeyValuePairs
 
     /**
      * Toggle group name.
@@ -31,7 +36,7 @@ export type Props = {
  * between filter names and titles. Each filter will be set as a boolean
  * `true` value when checked, or deleted when unchecked.
  */
-const Toggles: React.FC<Props> = ({ name, options, minimumOptionsForClearButton = 5, operator = 'AND' }) => {
+const Toggles: React.FC<Props> = ({ name, options, values, minimumOptionsForClearButton = 5, operator = 'AND' }) => {
     const ctx = useContext(Context);
 
     let filter: OrFilters | AndFilters | undefined;
@@ -65,7 +70,8 @@ const Toggles: React.FC<Props> = ({ name, options, minimumOptionsForClearButton 
         });
 
         if (checked) {
-            terms.push(term(key, true, options[key]));
+            const value: TermValue = (values) ? values[key] : true;
+            terms.push(term(key, value, options[key]));
         }
 
         // Finally - replace the filter with new terms
