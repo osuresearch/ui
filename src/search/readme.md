@@ -1,10 +1,4 @@
 
-Docs need:
-
-- `useSearch` hook usage
-- `SearchFilters` data structure usage?
-- just typical driver usage
-
 ```jsx
 import { SearchProvider, Filters, SearchDebugger, useSearch } from '@oris/ui/search';
 import Mock from '@oris/ui/search/drivers/Mock';

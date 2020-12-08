@@ -160,6 +160,30 @@ const PROVIDER = 'example-lookup-with-filtering';
 </SearchProvider>
 ```
 
+### Searching Against `/api/v1/person`
+
+The public JSON:API endpoint https://orapps.osu.edu/api/v1/person can be searched against using the `JsonApi` search driver.
+
+```jsx
+import JsonApi from '@oris/ui/search/drivers/JsonApi';
+
+<Lookup id="example-json-api-person" driver={JsonApi('https://orapps.osu.edu/api/v1/person')}>
+    <Lookup.Label>
+        Search for a person
+    </Lookup.Label>
+
+    <Lookup.Input resultRenderer={
+        (hit) => <span>
+            {hit.attributes.name}&nbsp;
+            <small className="text-muted">
+                ({hit.attributes.username})
+            </small>
+        </span>
+    } />
+
+    <Lookup.Error />
+</Lookup>
+```
 
 ### GraphQL Driver Support
 
@@ -235,7 +259,7 @@ function PersonLookup() {
 
 ### JSON:API Driver Support
 
-Not yet supported.
+TODO: Notes?
 
 
 ### Custom Driver Support
