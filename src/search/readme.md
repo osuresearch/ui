@@ -83,7 +83,7 @@ function PersonSearchResults() {
         <>
             {/* You can have multiple filter groups attached to the same provider */}
             <Filters provider="demo">
-                <Filters.Pills />
+                <Filters.Active />
             </Filters>
 
             {/* If there's an error - show a helpful error message */}

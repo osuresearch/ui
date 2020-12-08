@@ -20,7 +20,7 @@ const ID = 'demo-AnyOf';
         ]} />
 
         <hr/>
-        <Filters.Pills />
+        <Filters.Active />
     </Filters>
 
     <SearchDebugger provider={ID} />

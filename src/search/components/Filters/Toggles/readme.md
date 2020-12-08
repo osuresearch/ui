@@ -18,7 +18,7 @@ const ID = 'demo-Toggles';
         }} />
 
         <hr/>
-        <Filters.Pills />
+        <Filters.Active />
     </Filters>
 
     <SearchDebugger provider={ID} />

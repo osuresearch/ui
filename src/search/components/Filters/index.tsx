@@ -1,13 +1,13 @@
 import React, { createContext } from 'react';
 import './index.scss';
 
+import Active, { Props as ActiveProps } from './Active';
 import Terms, { Props as TermsProps } from './Terms';
 import Group, { Props as GroupProps } from './Group';
 import OneOf, { Props as OneOfProps } from './OneOf';
 import AnyOf, { Props as AnyOfProps } from './AnyOf';
 import Toggle, { Props as ToggleProps } from './Toggle';
 import Match, { Props as MatchProps } from './Match';
-import Pills, { Props as PillsProps } from './Pills';
 import More, { Props as MoreProps } from './More';
 import Toggles, { Props as TogglesProps } from './Toggles';
 import SortBy, { Props as SortByProps } from './SortBy';
@@ -20,6 +20,7 @@ type Props = {
 };
 
 interface IFiltersComposition {
+    Active: React.FC<ActiveProps>
     Terms: React.FC<TermsProps>
     Group: React.FC<GroupProps>
     OneOf: React.FC<OneOfProps>
@@ -27,7 +28,6 @@ interface IFiltersComposition {
     Toggles: React.FC<TogglesProps>
     Toggle: React.FC<ToggleProps>
     Match: React.FC<MatchProps>
-    Pills: React.FC<PillsProps>
     More: React.FC<MoreProps>
     SortBy: React.FC<SortByProps>
 }
@@ -68,7 +68,7 @@ Filters.AnyOf = AnyOf;
 Filters.Toggles = Toggles;
 Filters.Toggle = Toggle;
 Filters.Match = Match;
-Filters.Pills = Pills;
+Filters.Active = Active;
 Filters.More = More;
 Filters.SortBy = SortBy;
 

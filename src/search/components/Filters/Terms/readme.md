@@ -12,7 +12,7 @@ const ID = 'demo-Terms';
         <Filters.Terms />
 
         <hr/>
-        <Filters.Pills />
+        <Filters.Active />
     </Filters>
 
     <SearchDebugger provider={ID} />
@@ -33,7 +33,7 @@ const ID = 'demo-terms-live';
         <Filters.Terms live />
 
         <hr/>
-        <Filters.Pills />
+        <Filters.Active />
     </Filters>
 
     <SearchDebugger provider={ID} />

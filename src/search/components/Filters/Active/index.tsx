@@ -64,7 +64,7 @@ function prettyLabel(filter: IFilter): string {
 /**
  * Pills that show all the active filters, with an option to clear each one.
  */
-const Pills: React.FC<Props> = ({ includeTerms = true }) => {
+const Active: React.FC<Props> = ({ includeTerms = true }) => {
     const { terms, filters, setTerms, getFilter, addFilter, deleteFilter } = useContext(Context);
 
     const onDeleteNamedFilter = (name: string) => {
@@ -187,4 +187,4 @@ const Pills: React.FC<Props> = ({ includeTerms = true }) => {
     );
 }
 
-export default Pills;
+export default Active;

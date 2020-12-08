@@ -12,7 +12,7 @@ const ID = 'demo-Match';
         <Filters.Match name="sponsor" prefix="Sponsor" />
 
         <hr/>
-        <Filters.Pills />
+        <Filters.Active />
     </Filters>
 
     <SearchDebugger provider={ID} />
