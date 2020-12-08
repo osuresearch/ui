@@ -3,7 +3,7 @@
 ### Examples
 
 ```jsx
-import { SearchProvider, Filters, SearchDebugger } from '@oris/ui/search';
+import { SearchProvider, Filters, SearchDebugger } from '@oris/ui';
 import Mock from '@oris/ui/search/drivers/Mock';
 
 const ID = 'demo-Toggles';
@@ -16,6 +16,9 @@ const ID = 'demo-Toggles';
             S3: 'Private (S3)',
             S4: 'Restricted (S4)',
         }} />
+
+        <hr/>
+        <Filters.Pills />
     </Filters>
 
     <SearchDebugger provider={ID} />

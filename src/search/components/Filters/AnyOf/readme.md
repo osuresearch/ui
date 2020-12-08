@@ -5,7 +5,7 @@ The enum `value` will be added to the filter and used for the checkbox labeling.
 ### Examples
 
 ```jsx
-import { SearchProvider, Filters, SearchDebugger } from '@oris/ui/search';
+import { SearchProvider, Filters, SearchDebugger } from '@oris/ui';
 import Mock from '@oris/ui/search/drivers/Mock';
 
 const ID = 'demo-AnyOf';
@@ -18,6 +18,9 @@ const ID = 'demo-AnyOf';
             'Private (S3)',
             'Restricted (S4)',
         ]} />
+
+        <hr/>
+        <Filters.Pills />
     </Filters>
 
     <SearchDebugger provider={ID} />

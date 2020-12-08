@@ -2,7 +2,7 @@
 ### Examples
 
 ```jsx
-import { SearchProvider, Filters, SearchDebugger } from '@oris/ui/search';
+import { SearchProvider, Filters, SearchDebugger } from '@oris/ui';
 import Mock from '@oris/ui/search/drivers/Mock';
 
 const ID = 'demo-Terms';
@@ -10,6 +10,9 @@ const ID = 'demo-Terms';
 <SearchProvider id={ID} driver={Mock()}>
     <Filters provider={ID}>
         <Filters.Terms />
+
+        <hr/>
+        <Filters.Pills />
     </Filters>
 
     <SearchDebugger provider={ID} />
@@ -20,7 +23,7 @@ The terms input can also be ran in "live" mode to automatically update search te
 
 
 ```jsx
-import { SearchProvider, Filters, SearchDebugger } from '@oris/ui/search';
+import { SearchProvider, Filters, SearchDebugger } from '@oris/ui';
 import Mock from '@oris/ui/search/drivers/Mock';
 
 const ID = 'demo-terms-live';
@@ -28,6 +31,9 @@ const ID = 'demo-terms-live';
 <SearchProvider id={ID} driver={Mock()}>
     <Filters provider={ID}>
         <Filters.Terms live />
+
+        <hr/>
+        <Filters.Pills />
     </Filters>
 
     <SearchDebugger provider={ID} />

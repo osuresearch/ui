@@ -82,7 +82,7 @@ Value: {JSON.stringify(watch('rhf-lookup'))}
 #### Change Events
 
 ```jsx
-import { SearchProvider, SearchDebugger } from '@oris/ui/search';
+import { SearchProvider, SearchDebugger } from '@oris/ui';
 import Mock from '@oris/ui/search/drivers/Mock';
 
 const onChange = (newValue, oldValue) => {
@@ -120,7 +120,7 @@ const onChange = (newValue, oldValue) => {
 To support `<Filters>` and other external search tooling you can provide a `provider` prop to Lookup instead of the driver directly.
 
 ```jsx
-import { SearchProvider, Filters, SearchDebugger } from '@oris/ui/search';
+import { SearchProvider, Filters, SearchDebugger } from '@oris/ui';
 import Mock from '@oris/ui/search/drivers/Mock';
 
 const PROVIDER = 'example-lookup-with-filtering';
