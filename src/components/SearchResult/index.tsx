@@ -18,16 +18,18 @@ export interface Props {
 }
 
 /**
- * Default implementation for a single result from `Search`. 
- * 
- * If you want to customize the result renderer, you need to 
+ * Default implementation for a single result from `Search`.
+ *
+ * If you want to customize the result renderer, you need to
  * create your own variation of this component.
+ *
+ * @deprecated Use the `Lookup` form component. Will be removed in `@oris/ui^5.0`
  */
 const SearchResult: React.FC<Props> = ({
     resource,
     onSelect
 }) => (
-    <button className="dropdown-item" type="button" 
+    <button className="dropdown-item" type="button"
         onClick={() => onSelect(resource.id, resource.attributes.name)}>
         {resource.attributes.name}
     </button>
