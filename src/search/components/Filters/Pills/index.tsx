@@ -22,7 +22,10 @@ const Pill: React.FC<PillProps> = ({ label, onDelete }) => {
 
 
 export type Props = {
-
+    /**
+     * Should the search terms also be shown as a pill. Defaults to `true`
+     */
+    includeTerms?: boolean
 };
 
 function isAnyOf(filter: IFilter): filter is AnyOfFilter {
@@ -61,7 +64,7 @@ function prettyLabel(filter: IFilter): string {
 /**
  * Pills that show all the active filters, with an option to clear each one.
  */
-const Pills: React.FC<Props> = () => {
+const Pills: React.FC<Props> = ({ includeTerms = true }) => {
     const { terms, filters, setTerms, getFilter, addFilter, deleteFilter } = useContext(Context);
 
     const onDeleteNamedFilter = (name: string) => {
@@ -128,13 +131,9 @@ const Pills: React.FC<Props> = () => {
         }
     }
 
-    if (terms.length < 1 && filters.length < 1) {
-        return null;
-    }
-
     return (
         <div className="filters-pills">
-            {terms.length > 0 &&
+            {terms.length > 0 && includeTerms &&
                 <Pill
                     label={`"${terms}"`}
                     onDelete={() => setTerms('')}
