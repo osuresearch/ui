@@ -1,7 +1,7 @@
 
 import React, { useState } from "react";
 import { Button } from "../..";
-import useSearch from "../hooks/useSearch";
+import useSearchProvider from "../hooks/useSearchProvider";
 
 import './SearchDebugger.scss';
 
@@ -11,24 +11,24 @@ type Props = {
 }
 
 /**
- * Print out the current state of search data. 
- * 
+ * Print out the current state of search data.
+ *
  * Useful for testing new components and state changes.
  */
 const SearchDebugger: React.FC<Props> = ({ provider }) => {
     const [show, setShow] = useState(false);
-    const { 
-        terms, filters, sort, 
+    const {
+        terms, filters, sort,
         searching, error, results
-    } = useSearch(provider);
-    
+    } = useSearchProvider(provider);
+
     return (
         <div className="search-debugger">
             <Button theme="link" onClick={() => setShow(!show)}>
                 🧪 Toggle Search Debugger
             </Button>
 
-            {show && 
+            {show &&
             <div>
                 <strong>Searching: </strong> {searching ? 'Yes' : 'No'}
                 <br/>

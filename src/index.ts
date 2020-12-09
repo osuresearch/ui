@@ -43,7 +43,7 @@ export { default as SyncSearchWithURL } from './search/components/SyncSearchWith
 export { default as Filters } from './search/components/Filters';
 
 // Search hooks
-export { default as useSearch } from './search/hooks/useSearch';
+export { default as useSearchProvider } from './search/hooks/useSearchProvider';
 
 // Search data types
 export type {

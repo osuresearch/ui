@@ -1,6 +1,6 @@
 
 ```jsx
-import { SearchProvider, Filters, SearchDebugger, useSearch } from '@oris/ui';
+import { SearchProvider, Filters, SearchDebugger, useSearchProvider } from '@oris/ui';
 import Mock from '@oris/ui/search/drivers/Mock';
 
 function PersonSearchFilters() {
@@ -71,7 +71,7 @@ function PersonResultCard(result) {
 }
 
 function PersonSearchResults() {
-    const { results, searching, error } = useSearch('demo');
+    const { results, searching, error } = useSearchProvider('demo');
 
     // If there are no results from the search, you will want to show a
     // helpful message to the end user. The check for "don't have results" is

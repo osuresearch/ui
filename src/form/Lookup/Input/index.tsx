@@ -3,7 +3,7 @@ import React, { useCallback, useContext, useRef, useState } from 'react';
 import { Context, JsonObject } from '..';
 import Icon from '../../../components/Icon';
 import { Nullable } from '../../../internal/FormCommon/types';
-import { useSearch } from '../../../search';
+import { useSearchProvider } from '../../../search';
 
 export type Props = {
     /**
@@ -65,7 +65,7 @@ export type Props = {
  */
 const Input: React.FC<Props> = (props) => {
     const { bind, provider } = useContext(Context);
-    const { terms, searching, error, results, setTerms } = useSearch(provider);
+    const { terms, searching, error, results, setTerms } = useSearchProvider(provider);
 
     console.debug('RHF stuff', props.onChange, props.onBlur, props.value);
 

@@ -77,7 +77,7 @@ const SearchProvider: React.FC<Props> = ({
 
     // We use `unknown` for typing here because the provider doesn't care what
     // structure the search results will be in (and shouldn't touch it anyway).
-    // That's up to the implementing developer when they use the useSearch hook.
+    // That's up to the implementing developer when they use the useSearchProvider hook.
     const [context,] = useState<SearchContext<unknown>>(
         () => initDynamicContext(id, {} as ISearchContext<unknown>)
     );

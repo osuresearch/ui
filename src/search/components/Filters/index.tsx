@@ -11,7 +11,7 @@ import Match, { Props as MatchProps } from './Match';
 import More, { Props as MoreProps } from './More';
 import Toggles, { Props as TogglesProps } from './Toggles';
 import SortBy, { Props as SortByProps } from './SortBy';
-import useSearch from '../../hooks/useSearch';
+import useSearchProvider from '../../hooks/useSearchProvider';
 import { ISearchContext } from '../..';
 
 type Props = {
@@ -42,15 +42,15 @@ export const Context = createContext<IFiltersContext>({} as IFiltersContext);
 /**
  * Set of UI components that control the terms and filters for a search.
  *
- * At the top level `<Filters>` binds to a named search via `useSearch()`
+ * At the top level `<Filters>` binds to a named search via `useSearchProvider()`
  * and all the child components automatically update terms and filters of
  * that search.
  */
 const Filters: React.FC<Props> & IFiltersComposition = ({ provider, children }) => {
     // This uses a search provider and shares the same provider with all child
     // components, without each one needing to also hook the provider.
-    // const search = useSearch(provider);
-    const search = useSearch(provider);
+    // const search = useSearchProvider(provider);
+    const search = useSearchProvider(provider);
 
     return (
         <Context.Provider value={search}>

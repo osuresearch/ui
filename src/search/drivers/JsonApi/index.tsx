@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { DriverProps } from '../..';
 import { JsonObject } from '../../../form/Lookup';
 import { validateAndTransformJsonApiResponse } from '../../../internal/JsonApiUtility';
-import useSearch from '../../hooks/useSearch';
+import useSearchProvider from '../../hooks/useSearchProvider';
 
 type JsonApiSearchResult = {
     type: string
@@ -28,7 +28,7 @@ export default function JsonApi(endpoint: string) {
         const {
             terms,
             setError, setSearching, setResults
-        } = useSearch(provider);
+        } = useSearchProvider(provider);
 
         useEffect(() => {
             // Clear results on clearing search terms

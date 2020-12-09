@@ -21,7 +21,7 @@ const SEARCH_TOOLS = gql`
 `;
 
 function MySearchResultsComponent() {
-    const { results } = useSearch('Tools');
+    const { results } = useSearchProvider('Tools');
 
     return (
         <div>

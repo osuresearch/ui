@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { DocumentNode, useLazyQuery } from '@apollo/client';
 
 import { DriverProps, AND } from '../..';
-import useSearch from '../../hooks/useSearch';
+import useSearchProvider from '../../hooks/useSearchProvider';
 
 /**
  * Search driver that talks with GraphQL through the default Apollo client.
@@ -30,7 +30,7 @@ import useSearch from '../../hooks/useSearch';
  *                                  (This also includes on initial mount). If false, the
  *                                  driver will *not* search unless there is at least one
  *                                  search parameter set (terms, filters, or sort). Additionally,
- *                                  the results in useSearch() will be set to `undefined`.
+ *                                  the results in useSearchProvider() will be set to `undefined`.
  *
  */
 export default function GraphQL(query: DocumentNode, searchWhenEmpty: boolean = true) {
@@ -40,7 +40,7 @@ export default function GraphQL(query: DocumentNode, searchWhenEmpty: boolean = 
         const {
             terms, filters, sort,
             setSearching, setError, setResults
-        } = useSearch(provider);
+        } = useSearchProvider(provider);
 
         const [callable, result] = useLazyQuery<{ [field: string]: any }>(query);
 

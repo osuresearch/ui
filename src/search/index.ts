@@ -194,7 +194,7 @@ export { default as SyncSearchWithURL } from './components/SyncSearchWithURL';
 export { default as Filters } from './components/Filters';
 
 // Hooks
-export { default as useSearch } from './hooks/useSearch';
+export { default as useSearchProvider } from './hooks/useSearchProvider';
 
 // Drivers are not exported here - import specific ones from `@oris/ui/search/drivers`
 // This allows us to safely load only the drivers that are needed in a project.

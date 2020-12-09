@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import faker, { random, name, image } from 'faker';
 
 import { AnyOfFilter, TermFilter, DriverProps } from '../..';
-import useSearch from '../../hooks/useSearch';
+import useSearchProvider from '../../hooks/useSearchProvider';
 
 /**
  * Get an avatar containing a user's initials, similar to Microsoft products
@@ -68,7 +68,7 @@ export default function Mock(searchWhenEmpty: boolean = true) {
         const {
             terms, filters, sort,
             setResults, setError, setSearching
-        } = useSearch(provider);
+        } = useSearchProvider(provider);
 
         const isEmpty = terms.length < 1 && filters.length < 1 && sort === undefined;
         const skipSearchAndClear = isEmpty && !searchWhenEmpty;

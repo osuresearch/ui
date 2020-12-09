@@ -264,7 +264,7 @@ TODO: Notes?
 
 ### Custom Driver Support
 
-Lookup expects the `results` object returned by `useSearch` to adhere to the following TypeScript type:
+Lookup expects the `results` object returned by `useSearchProvider` to adhere to the following TypeScript type:
 
 ```ts static
 type SearchResponse = {

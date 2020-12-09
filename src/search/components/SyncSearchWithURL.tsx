@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import useSearch from '../hooks/useSearch';
+import useSearchProvider from '../hooks/useSearchProvider';
 import { IFilter, SortFields } from '..';
 
 type Props = {
@@ -87,7 +87,7 @@ function urlDecodeSort(encoded: string): SortFields | undefined {
  * that filter to the server as well.
  */
 const SyncSearchWithURL: React.FC<Props> = ({ provider, prefix = '' }) => {
-    const search = useSearch(provider);
+    const search = useSearchProvider(provider);
     const [init, setInit] = useState(true);
 
     // On update of search data, write to the address bar
