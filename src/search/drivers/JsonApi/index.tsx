@@ -5,7 +5,7 @@ import { JsonObject } from '../../../form/Lookup';
 import { validateAndTransformJsonApiResponse } from '../../../internal/JsonApiUtility';
 import useSearchProvider from '../../hooks/useSearchProvider';
 
-type JsonApiSearchResult = {
+type JsonApiResource = {
     type: string
     id: string
     attributes: {
@@ -17,9 +17,27 @@ type JsonApiSearchResult = {
 }
 
 /**
- * Search driver for JSON:API compliant endpoints (e.g. https://orapps.osu.edu/api/v1/person)
+ * Search driver for [JSON:API](https://jsonapi.org/) compliant endpoints (e.g. https://orapps.osu.edu/api/v1/person)
  *
- * Terms are passed as the `?q=` query parameter. Filters and sorting are not supported.
+ * Terms are passed as the `?q=` query parameter.
+ *
+ * Not supported:
+ * - Filters and sorting rules
+ * - `included` and `links` JSON:API objects
+ *
+ * The `results` of the search will be an object in the shape of:
+ *
+ * ```ts
+ * type JsonApiResult = {
+ *  hits: number
+ *  results: JsonApiResource[]
+ * }
+ * ```
+ *
+ * Where `JsonApiResource` conforms to [JSON:API Resource Objects](https://jsonapi.org/format/#document-resource-objects).
+ *
+ * If `meta.hits` is specified at the top level of the response JSON, then `hits` will be set to that value.
+ * Otherwise, `hits` becomes the total number of objects in `results`.
  */
 export default function JsonApi(endpoint: string) {
     const DriverComponent: React.FC<DriverProps> = ({
@@ -52,7 +70,7 @@ export default function JsonApi(endpoint: string) {
                 cache: 'no-cache',
                 redirect: 'follow',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/vnd.api+json'
                 }
             };
 
@@ -62,7 +80,7 @@ export default function JsonApi(endpoint: string) {
                 .then((json: any) => {
                     // Data gets reshaped to { hits, results } to be automatically
                     // supported by the Lookup form component.
-                    const results = json.data as JsonApiSearchResult[];
+                    const results = json.data as JsonApiResource[];
                     const hits = (json.meta?.total || results.length) as number;
 
                     setSearching(false);
