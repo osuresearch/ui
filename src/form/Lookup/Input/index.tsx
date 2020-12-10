@@ -1,9 +1,14 @@
 import throttle from 'lodash/throttle';
-import React, { useCallback, useContext, useRef, useState } from 'react';
+import findIndex from 'lodash/findIndex';
+import React, { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { Context, JsonObject } from '..';
-import Icon from '../../../components/Icon';
 import { Nullable } from '../../../internal/FormCommon/types';
 import { useSearchProvider } from '../../../search';
+
+import InputGroup from './InputGroup';
+import SearchValue from './SearchValue';
+import Result from './Result';
+import ResultMessages from './ResultMessages';
 
 export type Props = {
     /**
@@ -86,38 +91,6 @@ const Input: React.FC<Props> = (props) => {
         ${bind.success && ' is-valid'}
     `;
 
-    let iconProps = { name: 'search', spin: false };
-    if (searching) {
-        iconProps = { name: 'spinner', spin: true };
-    }
-    else if (error) {
-        iconProps = { name: 'exclamation-circle', spin: false };
-    }
-
-    // let inputProps: React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> = {
-    //     ref: ref,
-    //     ...props,
-    //     type: "text",
-    //     id: bind.id,
-    //     name: bind.name || props.name,
-    //     defaultValue: value,
-    //     className: classNames,
-    //     'aria-describedby': `${bind.id}-help`,
-    //     onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-    //         bind.value = e.currentTarget.value;
-    //         if (props.onChange) props.onChange(e);
-    //     },
-    //     readOnly: readOnly,
-    //     "aria-disabled": readOnly,
-    //     "aria-required": required,
-    //     "aria-invalid": bind.error ? true : false
-    // }
-
-    // // Assign a value to the input if it is controlled
-    // if (bind.controlled) {
-    //     inputProps.value = value
-    // }
-
     // TODO: Flexible based on JSON Path.
     // Right now we assume it's always { hits: number, results: JsonObject[] }
     const typedResults = results ? results as { hits: number, results: JsonObject[] } : undefined;
@@ -132,7 +105,16 @@ const Input: React.FC<Props> = (props) => {
     const hasHits = terms.length > 0 && hits.length > 0;
     const hasNoHits = terms.length > 0 && !searching && totalHits < 1;
     const hasMoreHits = terms.length > 0 && !searching && totalHits > hits.length;
-    const showResultsPane = !value && (hasHits || hasNoHits || error !== undefined);
+
+    const [showResultsPane, setShowResultsPane] = useState(false);
+
+    useEffect(() => {
+        setShowResultsPane(!value && (hasHits || hasNoHits || error !== undefined));
+    }, [error, hasHits, hasNoHits, value]);
+
+    const inputRef = useRef<HTMLInputElement>(null);
+    const resultsRef = useRef<HTMLDivElement>(null);
+    const valueRef = useRef<HTMLDivElement>(null);
 
     const setTermsThrottled = useCallback(
         throttle(terms => setTerms(terms), 750),
@@ -157,76 +139,141 @@ const Input: React.FC<Props> = (props) => {
         bind.value = newValue;
     }
 
+    const handleInputKeyDown = (e: React.KeyboardEvent) => {
+        const results = resultsRef.current?.querySelectorAll('.lookup-result');
+        const activeDescendantIndex = results && activeDescendant ? findIndex(results, { id: activeDescendant }) : undefined;
+
+        if (e.key !== "ArrowUp" && e.key !== "ArrowDown") {
+            setActiveDescendant(undefined);
+        }
+
+        // Down Arrow - If the grid is displayed, moves focus to the first suggested value.
+        if (showResultsPane && e.key === "ArrowDown") {
+            // Prevent viewport from moving down
+            e.preventDefault();
+
+            if (results) {
+                if (typeof (activeDescendantIndex) !== 'undefined') {
+                    if (typeof (results[activeDescendantIndex + 1]) !== "undefined") {
+                        setActiveDescendant(results[activeDescendantIndex + 1].id);
+                    } else {
+                        setActiveDescendant(results[0].id);
+                    }
+                } else {
+                    setActiveDescendant(results[0].id);
+                }
+            }
+        }
+
+        // Up Arrow - If the grid is displayed, moves focus to the last suggested value.
+        if (showResultsPane && e.key === "ArrowUp") {
+            // Prevent viewport from moving up
+            e.preventDefault();
+
+            if (results) {
+                if (typeof (activeDescendantIndex) !== 'undefined') {
+                    if (typeof (results[activeDescendantIndex - 1]) !== "undefined") {
+                        setActiveDescendant(results[activeDescendantIndex - 1].id);
+                    } else {
+                        setActiveDescendant(results[results.length - 1].id);
+                    }
+                } else {
+                    setActiveDescendant(results[results.length - 1].id);
+                }
+            }
+        }
+
+        // Escape - If the grid is displayed, closes it. If the grid is not displayed, clears the textbox.
+        if (e.key === "Escape") {
+            if (showResultsPane) {
+                setShowResultsPane(false);
+            } else {
+                if (inputRef.current) {
+                    inputRef.current.value = '';
+                    setTerms('');
+                }
+            }
+        }
+
+        // Enter - Select the activeDescendant if one is defined
+        if (showResultsPane && e.key === "Enter") {
+            (resultsRef.current?.querySelector(`#${activeDescendant}`) as HTMLDivElement)?.click();
+        }
+    }
+
+    const [activeDescendant, setActiveDescendant] = useState<string | undefined>(undefined);
+
+    const isActiveDescendant = (idx: number) => {
+        return activeDescendant === `${bind.id}-result-${idx}`;
+    }
+
+    useEffect(() => {
+        if (value) {
+            setTimeout(() => valueRef.current?.focus(), 100);
+        } else {
+            setTimeout(() => inputRef.current?.focus(), 100);
+        }
+    }, [value]);
+
     // If this is a controlled component, we use props.value.
     // Otherwise we use the uncontrolled local value state.
     const renderedValue = props.value || value;
     return (
         <div className="input-group lookup-input">
             {/* Only show the search input if we have no selection */}
-            {!value && <>
-
-            <span className={`input-group-prefix ${error && 'text-danger'}`}>
-                <Icon {...iconProps} />
-            </span>
-
-            <input
-                type="text"
-                id={bind.id}
-                name={bind.name}
-                className={classNames}
-                onBlur={props.onBlur}
-                onChange={(e) => {
-                    setTermsThrottled(e.target.value);
-                }}
-            />
-            </>}
-
-            {/* Show the search value with a button to clear */}
-            {renderedValue &&
-            <div className="lookup-value">
-                <div className="lookup-value-content">
-                    {props.resultRenderer(renderedValue)}
-                </div>
-
-                <button className="lookup-value-clear" onClick={() => updateValue(null)}>
-                    &times;
-                </button>
-            </div>
+            {!value &&
+                <InputGroup
+                    error={error}
+                    searching={searching}
+                    bind={bind}
+                    onChange={(e) => {
+                        setTermsThrottled(e.target.value);
+                    }}
+                    onBlur={props.onBlur}
+                    onKeyDown={handleInputKeyDown}
+                    classNames={classNames}
+                    showResultsPane={showResultsPane}
+                    activeDescendant={activeDescendant}
+                />
             }
 
+            {/* Show the search value with a button to clear */}
+            <SearchValue
+                ref={valueRef}
+                bind={bind}
+                updateValue={updateValue}
+            >
+                {renderedValue && props.resultRenderer(renderedValue)}
+            </SearchValue>
+
             <div className="lookup-results">
-                <div
-                    id="TODO"
-                    className="dropdown-menu"
-                    role="listbox"
-                    style={{display: showResultsPane ? 'block' : 'none'}}
-                    tabIndex={-1}
+                <div tabIndex={-1}
+                    className={`dropdown-menu ${showResultsPane ? 'd-block' : 'd-none'}`}
                 >
-                    {error &&
-                    <div className="dropdown-header lookup-error">
-                        {error}
+                    <div
+                        ref={resultsRef}
+                        aria-labelledby={bind.id}
+                        role="listbox"
+                        id={`${bind.id}-lookup-results`}
+                    >
+                        {hits.map((hit, idx) =>
+                            <Result
+                                id={`${bind.id}-result-${idx}`}
+                                onClick={() => updateValue(hit)}
+                                isSelected={isActiveDescendant(idx)}
+                            >
+                                {props.resultRenderer(hit)}
+                            </Result>
+                        )}
                     </div>
-                    }
 
-                    {hits.map((hit, idx) =>
-                    <button type="button" key={idx} onClick={() => updateValue(hit)}>
-                        {props.resultRenderer(hit)}
-                    </button>
-                    )}
-
-                    {hasNoHits &&
-                    <div className="dropdown-header">
-                        There are no hits.
-                        Try different search terms.
-                    </div>
-                    }
-
-                    {hasMoreHits &&
-                    <div className="dropdown-header">
-                        There are <strong>{totalHits - hits.length}</strong> additional hits.
-                        Refine your search terms.
-                    </div>
-                    }
+                    <ResultMessages
+                        hits={hits}
+                        hasNoHits={hasNoHits}
+                        hasMoreHits={hasMoreHits}
+                        totalHits={totalHits}
+                        error={error}
+                    />
                 </div>
             </div>
         </div>
