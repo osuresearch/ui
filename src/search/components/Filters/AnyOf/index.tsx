@@ -2,12 +2,14 @@
 import React, { useContext } from 'react';
 import { AnyOfFilter, anyOf } from '../../..';
 import Checkbox from '../../../../form/Checkbox';
-import FieldSet from '../../../../form/FieldSet';
 import { Context } from '..';
 
 export type Props = {
     name: string
     options: string[]
+
+    /** Title - must either be defined at the component level or in the parent `Filters.Group` */
+    title?: string
 
     /**
      * Minimum options displayed before the clear button is also included.
@@ -22,7 +24,7 @@ export type Props = {
  *
  * Only supports strings for keys.
  */
-const AnyOf: React.FC<Props> = ({ name, options, minimumOptionsForClearButton = 5 }) => {
+const AnyOf: React.FC<Props> = ({ name, options, title, minimumOptionsForClearButton = 5 }) => {
     const ctx = useContext(Context);
     const filter = ctx.getFilter<AnyOfFilter>(name);
 
@@ -49,9 +51,14 @@ const AnyOf: React.FC<Props> = ({ name, options, minimumOptionsForClearButton = 
         ctx.deleteFilter(name);
     }
 
+    if (!title) {
+        return <span className="text-danger">Title property not defined</span>
+    }
+
     return (
         <div className="filters-any-of">
-            <FieldSet id="t" name="t">
+            <fieldset>
+                <legend className="sr-only">{title}</legend>
                 {options.map((entry) =>
                     <Checkbox
                         id={`${name}-${entry}`}
@@ -64,7 +71,7 @@ const AnyOf: React.FC<Props> = ({ name, options, minimumOptionsForClearButton = 
                         <Checkbox.Label>{entry}</Checkbox.Label>
                     </Checkbox>
                 )}
-            </FieldSet>
+            </fieldset>
 
 
             {options.length >= minimumOptionsForClearButton &&

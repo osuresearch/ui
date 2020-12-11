@@ -11,7 +11,7 @@ const ID = 'demo-OneOf';
 
 <SearchProvider id={ID} driver={Mock()}>
     <Filters provider={ID}>
-        <Filters.OneOf name="dataClassification" options={{
+        <Filters.OneOf name="dataClassification" title="Data Classification" options={{
             S1: 'Public (S1)',
             S2: 'Internal (S2)',
             S3: 'Private (S3)',

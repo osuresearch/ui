@@ -2,7 +2,7 @@ import { uniqueId } from 'lodash';
 import throttle from 'lodash/throttle';
 import React, { useState, useContext, useEffect, useCallback } from 'react';
 import { Context } from '..';
-import { Icon } from '../../../..';
+import { Icon, Text } from '../../../..';
 
 import './index.scss';
 
@@ -39,6 +39,9 @@ export type Props = SafeInputHTMLAttributes & {
      * Additional classes to add to the wrapping div element.
      */
     className?: string
+
+    /** Title - must either be defined at the component level or in the parent `Filters.Group` */
+    title?: string
 };
 
 // Should probably take input props so we can add things like aria-owns, aria-haspopup, etc
@@ -56,11 +59,12 @@ const Terms: React.FC<Props> = ({
     throttleRate = 750,
     className = '',
     id,
+    title,
     ...props
 }) => {
     const { terms, searching, setTerms } = useContext(Context);
     const [value, setValue] = useState('');
-    const [elementId, ] = useState(id ?? uniqueId('terms-'));
+    const [elementId,] = useState(id ?? uniqueId('terms-'));
 
     // Update self when an external entity modifies search terms
     useEffect(() => setValue(terms), [terms]);
@@ -79,50 +83,52 @@ const Terms: React.FC<Props> = ({
         }
     }
 
+    if (!title) {
+        return <span className="text-danger">Title property not defined</span>
+    }
+
     return (
-        <div className={'input-group terms ' + (live ? 'is-live ' : ' ') + className}>
-            <label htmlFor={elementId} className="sr-only">
-                Search Terms
-            </label>
+        <Text id={elementId}>
+            <Text.Label className="sr-only">{title}</Text.Label>
 
-            <span className="input-group-prefix">
-                {searching && <Icon name="spinner" spin />}
-                {!searching && <Icon name="search" />}
-            </span>
+            <div className={'input-group terms ' + (live ? 'is-live ' : ' ') + className}>
 
-            <input
-                {...props}
-                type="text"
-                id={elementId}
-                className="form-control"
-                title="Search by keywords"
-                value={value}
-                onChange={onChange}
-                onKeyUp={(e) => e.key === 'Enter' && setTerms(value)}
-            />
+                <span className="input-group-prefix">
+                    {searching && <Icon name="spinner" spin />}
+                    {!searching && <Icon name="search" />}
+                </span>
 
-            {!live &&
-            <div className="input-group-append">
-                <button type="button"
-                    className="btn btn-outline-secondary"
-                    onClick={() => setTerms(value)}
-                >
-                    Search
-                </button>
+                <Text.Input
+                    {...props}
+                    title="Search by keywords"
+                    value={value}
+                    onChange={onChange}
+                    onKeyUp={(e) => e.key === 'Enter' && setTerms(value)}
+                />
+
+                {!live &&
+                    <div className="input-group-append">
+                        <button type="button"
+                            className="btn btn-outline-secondary"
+                            onClick={() => setTerms(value)}
+                        >
+                            Search
+                    </button>
+                    </div>
+                }
+
+                {live && terms.length > 0 &&
+                    <button
+                        className="btn btn-link terms-clear"
+                        type="button"
+                        title="Clear search terms"
+                        onClick={() => setTerms('')}
+                    >
+                        <Icon name="close"></Icon>
+                    </button>
+                }
             </div>
-            }
-
-            {live && terms.length > 0 &&
-            <button
-                className="btn btn-link terms-clear"
-                type="button"
-                title="Clear search terms"
-                onClick={() => setTerms('')}
-            >
-                <Icon name="close"></Icon>
-            </button>
-            }
-        </div>
+        </Text>
     );
 }
 
