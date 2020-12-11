@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/static/css/main.46ac1e7a.css",
-    "main.js": "/build/bundle.9717d779.js",
+    "main.css": "/static/css/main.511821eb.css",
+    "main.js": "/build/bundle.8217675e.js",
     "index.html": "/index.html",
-    "precache-manifest.5da9f3085256a78f3deaf1bf6fe3d840.js": "/precache-manifest.5da9f3085256a78f3deaf1bf6fe3d840.js",
+    "precache-manifest.7e53c825d69dc07cd5164d83dc446f04.js": "/precache-manifest.7e53c825d69dc07cd5164d83dc446f04.js",
     "service-worker.js": "/service-worker.js"
   },
   "entrypoints": [
-    "static/css/main.46ac1e7a.css",
-    "build/bundle.9717d779.js"
+    "static/css/main.511821eb.css",
+    "build/bundle.8217675e.js"
   ]
 }

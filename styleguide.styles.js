@@ -21,7 +21,7 @@ const colors = {
     secondary: '#666', // Grey
     tertiary: '#203a44',
     danger: '#db3b21',
-    link: '#3283c8'
+    link: '#2f79ba'
 }
 
 const theme = {
