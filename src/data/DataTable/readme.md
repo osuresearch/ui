@@ -200,7 +200,7 @@ const activityBodyTemplate = (rowData) => {
 
 const actionBodyTemplate = () => {
     return (
-        <Button theme='secondary'>
+        <Button theme='secondary' className='btn-sm'>
             <Icon name='cog' label='Settings' />
         </Button>
     );

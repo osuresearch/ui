@@ -181,7 +181,7 @@
         background: white;
         color: $gray-900;
         transition: box-shadow 0.15s;
-        outline-color: $casal;
+        outline-color: $gray-300;
         > td {
             text-align: left;
             border: 1px solid $gray-100;
@@ -198,7 +198,6 @@
                 &:focus {
                     outline: 0 none;
                     outline-offset: 0;
-                    box-shadow: 0 0 0 0.2rem $casal;
                 }
                 &:enabled:hover {
                     color: $gray-600;

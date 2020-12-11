@@ -122,7 +122,7 @@ export default function Input(props: InputProps) {
 
     const readOnly = bind.readOnly || props.readOnly;
 
-    const classNames = `input-group ${props.className ? props.className : ''} ${bind.error && 'is-invalid'} ${bind.success && 'is-valid'}`;
+    const classNames = `form-control ${props.className ? props.className : ''} ${bind.error && 'is-invalid'} ${bind.success && 'is-valid'}`;
 
     return (
         <Dropdown

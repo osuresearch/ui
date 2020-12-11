@@ -10,7 +10,13 @@ $danger: #db3b21;
     border: 1px solid $input-border-color;
     transition: $input-transition;
     border-radius: 0;
-    margin-bottom: 1rem;
+    display: inline-flex !important;
+
+    &.form-control {
+        .p-inputtext {
+            padding: 0;
+        }
+    }
 
     .p-dropdown-label {
         background: transparent;
