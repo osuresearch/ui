@@ -16,8 +16,6 @@ export type Props = {
      */
     className?: string
 
-    // value?: Nullable<JsonObject>
-
     /**
      * Initial value to populate the lookup in uncontrolled mode.
      *
@@ -67,23 +65,13 @@ export type Props = {
 
 /**
  * Lookup input
+ * 
+ * Based on W3C Combobox pattern: https://w3c.github.io/aria-practices/examples/combobox/grid-combo.html
+ * 
  */
 const Input: React.FC<Props> = (props) => {
     const { bind, provider } = useContext(Context);
     const { terms, searching, error, results, setTerms } = useSearchProvider(provider);
-
-    console.debug('RHF stuff', props.onChange, props.onBlur, props.value);
-
-    // const value = bind.value || props.defaultValue || props.value;
-
-    // const readOnly = bind.readOnly || props.readOnly;
-    // const required = bind.required || props.required;
-
-    // // TODO: Diff support
-
-    // // if (readOnly) {
-    // //     return <Print value={typeof (value) === 'string' ? value : ''} />
-    // // }
 
     const classNames = `
         form-control ${props.className ? props.className : ''}
@@ -139,59 +127,58 @@ const Input: React.FC<Props> = (props) => {
         bind.value = newValue;
     }
 
+    const [activeDescendant, setActiveDescendant] = useState<string | undefined>(undefined);
+
+    const isActiveDescendant = (idx: number) => {
+        return activeDescendant === `${bind.id}-result-${idx}`;
+    }
+
     const handleInputKeyDown = (e: React.KeyboardEvent) => {
         const results = resultsRef.current?.querySelectorAll('.lookup-result');
         const activeDescendantIndex = results && activeDescendant ? findIndex(results, { id: activeDescendant }) : undefined;
 
         if (e.key !== "ArrowUp" && e.key !== "ArrowDown") {
+            // Clear activeDescendant
             setActiveDescendant(undefined);
         }
 
-        // Down Arrow - If the grid is displayed, moves focus to the first suggested value.
-        if (showResultsPane && e.key === "ArrowDown") {
+        // Down Arrow - If the listbox is displayed
+        if (showResultsPane && e.key === "ArrowDown" && results) {
             // Prevent viewport from moving down
             e.preventDefault();
 
-            if (results) {
-                if (typeof (activeDescendantIndex) !== 'undefined') {
-                    if (typeof (results[activeDescendantIndex + 1]) !== "undefined") {
-                        setActiveDescendant(results[activeDescendantIndex + 1].id);
-                    } else {
-                        setActiveDescendant(results[0].id);
-                    }
-                } else {
-                    setActiveDescendant(results[0].id);
-                }
+            if (typeof (activeDescendantIndex) !== "undefined" && typeof (results[activeDescendantIndex + 1]) !== "undefined") {
+                // Move activeDescendant focus to next item
+                setActiveDescendant(results[activeDescendantIndex + 1].id);
+            } else {
+                // Move activeDescendant focus to the first suggested value
+                setActiveDescendant(results[0].id);
             }
         }
 
-        // Up Arrow - If the grid is displayed, moves focus to the last suggested value.
-        if (showResultsPane && e.key === "ArrowUp") {
+        // Up Arrow - If the listbox is displayed
+        if (showResultsPane && e.key === "ArrowUp" && results) {
             // Prevent viewport from moving up
             e.preventDefault();
 
-            if (results) {
-                if (typeof (activeDescendantIndex) !== 'undefined') {
-                    if (typeof (results[activeDescendantIndex - 1]) !== "undefined") {
-                        setActiveDescendant(results[activeDescendantIndex - 1].id);
-                    } else {
-                        setActiveDescendant(results[results.length - 1].id);
-                    }
-                } else {
-                    setActiveDescendant(results[results.length - 1].id);
-                }
+            if (typeof (activeDescendantIndex) !== "undefined" && typeof (results[activeDescendantIndex - 1]) !== "undefined") {
+                // Move activeDescendant focus to previous item
+                setActiveDescendant(results[activeDescendantIndex - 1].id);
+            } else {
+                // Move activeDescendant focus to the last suggested value
+                setActiveDescendant(results[results.length - 1].id);
             }
         }
 
-        // Escape - If the grid is displayed, closes it. If the grid is not displayed, clears the textbox.
+        // Escape
         if (e.key === "Escape") {
             if (showResultsPane) {
+                // If the listbox is displayed, close it
                 setShowResultsPane(false);
-            } else {
-                if (inputRef.current) {
-                    inputRef.current.value = '';
-                    setTerms('');
-                }
+            } else if (inputRef.current) {
+                // If the listbox is not displayed, clear the textbox
+                inputRef.current.value = '';
+                setTerms('');
             }
         }
 
@@ -201,28 +188,27 @@ const Input: React.FC<Props> = (props) => {
         }
     }
 
-    const [activeDescendant, setActiveDescendant] = useState<string | undefined>(undefined);
-
-    const isActiveDescendant = (idx: number) => {
-        return activeDescendant === `${bind.id}-result-${idx}`;
-    }
-
-    useEffect(() => {
-        if (value) {
-            setTimeout(() => valueRef.current?.focus(), 100);
-        } else {
-            setTimeout(() => inputRef.current?.focus(), 100);
-        }
-    }, [value]);
-
     // If this is a controlled component, we use props.value.
     // Otherwise we use the uncontrolled local value state.
     const renderedValue = props.value || value;
+
+    // Read only 
+    // TODO - Diff support
+    if (bind.readOnly) {
+        return (
+            <SearchValue bind={bind}>
+                {renderedValue ? props.resultRenderer(renderedValue) : <span></span>}
+            </SearchValue>
+        );
+    }
+
+    // Edit
     return (
         <div className="input-group lookup-input">
             {/* Only show the search input if we have no selection */}
             {!value &&
                 <InputGroup
+                    ref={inputRef}
                     error={error}
                     searching={searching}
                     bind={bind}
@@ -241,7 +227,12 @@ const Input: React.FC<Props> = (props) => {
             <SearchValue
                 ref={valueRef}
                 bind={bind}
-                updateValue={updateValue}
+                onClear={() => {
+                    updateValue(null);
+                    // Focus in the search input onClear
+                    // Needs setTimeout for the effect to apply correctly in Safari
+                    setTimeout(() => inputRef.current?.focus(), 100);
+                }}
             >
                 {renderedValue && props.resultRenderer(renderedValue)}
             </SearchValue>
@@ -259,7 +250,11 @@ const Input: React.FC<Props> = (props) => {
                         {hits.map((hit, idx) =>
                             <Result
                                 id={`${bind.id}-result-${idx}`}
-                                onClick={() => updateValue(hit)}
+                                onClick={() => {
+                                    updateValue(hit);
+                                    // Needs setTimeout for the effect to apply correctly in Safari
+                                    setTimeout(() => valueRef.current?.focus(), 100);
+                                }}
                                 isSelected={isActiveDescendant(idx)}
                             >
                                 {props.resultRenderer(hit)}
@@ -272,6 +267,7 @@ const Input: React.FC<Props> = (props) => {
                         hasNoHits={hasNoHits}
                         hasMoreHits={hasMoreHits}
                         totalHits={totalHits}
+                        emptyRenderer={props.emptyRenderer}
                         error={error}
                     />
                 </div>

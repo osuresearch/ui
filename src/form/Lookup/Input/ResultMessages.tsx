@@ -7,6 +7,7 @@ type Props = {
     hasNoHits: boolean,
     hasMoreHits: boolean,
     totalHits: number,
+    emptyRenderer?: () => JSX.Element,
     error: any
 }
 
@@ -15,6 +16,7 @@ export default function ResultMessages({
     hasNoHits,
     hasMoreHits,
     totalHits,
+    emptyRenderer,
     error
 }: Props) {
     return (
@@ -31,12 +33,14 @@ export default function ResultMessages({
                 </div>
             }
 
-            {hasNoHits &&
+            {hasNoHits && !emptyRenderer &&
                 <div className="dropdown-header">
                     There are no hits.
                     Try different search terms.
                 </div>
             }
+
+            {hasNoHits && emptyRenderer && emptyRenderer()}
 
             {hasMoreHits &&
                 <div className="dropdown-header">

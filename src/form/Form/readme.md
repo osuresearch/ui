@@ -40,8 +40,10 @@ import {
     FieldSet,
     Radio,
     Time,
+    Lookup,
     Button
 } from '@oris/ui';
+import JsonApi from '@oris/ui/search/drivers/JsonApi';
 
 const { register, errors, handleSubmit, control } = useForm({ mode: 'onBlur' });
 
@@ -49,7 +51,37 @@ const onSubmit = data => console.log('submit', data);
 
 <Form onSubmit={handleSubmit(onSubmit)} noValidate>
     <div className='row'>
-        <div className='col-md-6'>
+        <div className='col'>
+            <Lookup 
+                id="search-for-person" 
+                driver={JsonApi('https://orapps.osu.edu/api/v1/person')} 
+                error={errors['search-for-person'] && "Select a person"}
+                required
+            >
+                <Lookup.Label>
+                    Search for a person
+                </Lookup.Label>
+
+                <Controller
+                    name="search-for-person"
+                    control={control}
+                    rules={{ required: true }}
+                    render={props =>
+                        <Lookup.Input {...props} resultRenderer={
+                            (hit) => <span>
+                                {hit.attributes.name}&nbsp;
+                                <small className="text-muted">
+                                    ({hit.attributes.username})
+                                </small>
+                            </span>
+                        } />
+                    }
+                />
+
+                <Lookup.Error />
+            </Lookup>
+        </div>
+        <div className='col'>
             <Text
                 id="email"
                 required
@@ -66,7 +98,7 @@ const onSubmit = data => console.log('submit', data);
             </Text>
         </div>
 
-        <div className='col-md-6'>
+        <div className='col'>
             <DateTime
                 id="birthdate"
                 required

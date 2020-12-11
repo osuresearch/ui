@@ -79,6 +79,38 @@ Value: {JSON.stringify(watch('rhf-lookup'))}
 </>
 ```
 
+#### Default Value
+```jsx
+import Mock from '@oris/ui/search/drivers/Mock';
+
+const defaultValue = {"id":89693,"name":"Sigurd Dickens","age":34,"username":"Brenden.Vandervort71","address":"Welch Island","city":"South Odessa","state":"West Virginia","zip":"83794","company":"Aufderhar, Ferry and Welch","bs":"utilize one-to-one interfaces","email":"Sage.McCullough@yahoo.com","phone":"864-230-0669 x9699","about":"Voluptates voluptatem laboriosam sequi molestias suscipit provident sint sunt. Aspernatur quis incidunt reiciendis. Vel deleniti aspernatur omnis ducimus. Dicta iusto omnis accusamus magni sit ratione vel. Eos nam atque adipisci voluptatibus id et quaerat rerum dolor.","title":"National Brand Facilitator","avatar":{"type":"div","key":null,"ref":null,"props":{"style":{"backgroundColor":"#2ecc71","width":80,"height":80,"font":"40px Arial","color":"#fff","textAlign":"center","lineHeight":"80px","borderRadius":"50%"},"children":"SD"},"_owner":null,"_store":{}}};
+
+<Lookup id="example-lookup-default-value" driver={Mock()}>
+    <Lookup.Label>
+        Search for a person
+    </Lookup.Label>
+
+    <Lookup.Input 
+        resultRenderer={
+            (hit) => <span>
+                {hit.name}&nbsp;
+                <small className="text-muted">
+                    ({hit.username})
+                </small>
+            </span>
+        } 
+        defaultValue={defaultValue}
+    />
+
+    <Lookup.Help>
+        This is searching mock data.
+        Replace the mock with your own GQL or JSON:API data source.
+    </Lookup.Help>
+
+    <Lookup.Error />
+</Lookup>
+```
+
 #### Change Events
 
 ```jsx

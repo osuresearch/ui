@@ -1,17 +1,17 @@
 
 import React from 'react';
 import { JsonObject } from '..';
-import { IFieldBind, Nullable } from '../../../internal/FormCommon/types';
+import { IFieldBind } from '../../../internal/FormCommon/types';
 
 type Props = {
     bind: IFieldBind<JsonObject>,
-    updateValue: (newValue: Nullable<JsonObject>) => void,
+    onClear?: () => void,
     children: React.ReactNode;
 }
 
 const SearchValue = React.forwardRef<HTMLDivElement, Props>(({
     bind,
-    updateValue,
+    onClear,
     children
 }, ref) => {
     return (
@@ -25,9 +25,11 @@ const SearchValue = React.forwardRef<HTMLDivElement, Props>(({
                 {children}
             </div>
 
-            <button className="lookup-value-clear" aria-label="Clear value" title="Clear value" onClick={() => updateValue(null)}>
-                <span aria-hidden>&times;</span>
-            </button>
+            {onClear &&
+                <button className="lookup-value-clear" aria-label="Clear value" title="Clear value" onClick={onClear}>
+                    <span aria-hidden>&times;</span>
+                </button>
+            }
         </div>
     );
 });

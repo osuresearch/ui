@@ -52,6 +52,7 @@ const InputGroup = React.forwardRef<HTMLInputElement, Props>(({
             id={bind.id}
             name={bind.name}
             className={classNames}
+            required={bind.required}
             onBlur={onBlur}
             onChange={onChange}
             onKeyDown={onKeyDown}
