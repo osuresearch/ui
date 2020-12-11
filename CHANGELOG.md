@@ -27,6 +27,11 @@ __Internal changes:__
 * Moved component files into category folders within the components folder
 * Removed (now) redundant HTML docs
 
+# 4.2.4 (2020-11-07)
+
+__Accessibility Fixes:__
+* Resolves color-contrast issues with link text (FWK-250) and theme colors (FWK-237)
+
 # 4.2.3 (2020-10-25)
 
 This version adds additional documentation for form components.
