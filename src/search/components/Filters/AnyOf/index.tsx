@@ -52,6 +52,7 @@ const AnyOf: React.FC<Props> = ({ name, options, minimumOptionsForClearButton = 
         <div className="filters-any-of">
             {options.map((entry) =>
                 <YetAnotherCheckboxWrapper
+                    key={`anyOf-${name}-${entry}`} 
                     name={`${name}-${entry}`}
                     checked={values.indexOf(entry) >= 0}
                     onClick={(checked: boolean) => onToggle(entry, checked)}
