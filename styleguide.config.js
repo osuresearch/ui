@@ -48,13 +48,13 @@ function listHtmlComponents() {
  *     it has its own `src/form/Radio/Label/index.tsx`
  */
 function listFormComponents() {
-    const components = glob.sync('src/components/form/*/index.tsx');
+    const components = glob.sync('src/form/*/index.tsx');
 
     var sections = [];
     components.forEach((componentPath) => {
         const dirname = path.dirname(componentPath);
         const dirs = dirname.split('/'); // src, form, Checkbox
-        const component = dirs[3];
+        const component = dirs[2];
 
         // Special handling for the root Form component
         // to ensure it's first in the list 
@@ -64,7 +64,7 @@ function listFormComponents() {
                 hasSubcomponents: true,
                 wrapSectionNameInBrackets: true,
                 wrapComponentNamesInBrackets: true,
-                components: 'src/components/form/Form/index.tsx'
+                components: 'src/form/Form/index.tsx'
             }, ...sections];
         } else {
             const subPaths = glob.sync(dirname + '/*/index.tsx');
@@ -123,32 +123,32 @@ let sections = [
     },
     {
         name: 'Core Application Components',
-        content: 'src/components/core-application/readme.md',
-        components: 'src/components/core-application/**/index.?(js|tsx)',
+        content: 'src/core-application/readme.md',
+        components: 'src/core-application/**/index.?(js|tsx)',
         wrapComponentNamesInBrackets: true,
         expand: true,
         sectionDepth: 0
     },
     {
         name: 'Generic Components',
-        content: 'src/components/generic/readme.md',
-        components: 'src/components/generic/**/index.?(js|tsx)',
+        content: 'src/generic/readme.md',
+        components: 'src/generic/**/index.?(js|tsx)',
         wrapComponentNamesInBrackets: true,
         expand: true,
         sectionDepth: 0
     },
     {
         name: 'Control Components',
-        content: 'src/components/controls/readme.md',
-        components: 'src/components/controls/**/index.?(js|tsx)',
+        content: 'src/controls/readme.md',
+        components: 'src/controls/**/index.?(js|tsx)',
         wrapComponentNamesInBrackets: true,
         expand: true,
         sectionDepth: 0
     },
     {
         name: 'Data Components',
-        content: 'src/components/data/readme.md',
-        components: 'src/components/data/**/index.?(js|tsx)',
+        content: 'src/data/readme.md',
+        components: 'src/data/**/index.?(js|tsx)',
         wrapComponentNamesInBrackets: true,
         expand: true,
 
@@ -156,7 +156,7 @@ let sections = [
     },
     {
         name: 'Form Components',
-        content: 'src/components/form/readme.md',
+        content: 'src/form/readme.md',
         sections: listFormComponents(),
         wrapComponentNamesInBrackets: true,
         expand: true,

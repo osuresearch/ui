@@ -30,6 +30,7 @@ $danger: #db3b21;
     .p-dropdown-clear-icon {
         color: $gray-600;
         right: 2.357rem;
+        margin-top: -0.7rem;
     }
     &.p-error {
         border-color: $danger;
@@ -68,6 +69,7 @@ $danger: #db3b21;
         }
         .p-dropdown-filter-icon {
             right: 0.75rem;
+            margin-top: -0.75rem;
             color: $gray-600;
         }
     }

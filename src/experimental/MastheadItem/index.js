@@ -2,8 +2,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import ExternalLink from '../../components/controls/ExternalLink';
-import Icon from '../../components/generic/Icon';
+import ExternalLink from '../../controls/ExternalLink';
+import Icon from '../../generic/Icon';
 
 import './index.scss';
 
