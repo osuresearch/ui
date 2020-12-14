@@ -2,7 +2,7 @@
 
 .p-chips {
     .p-chips-multiple-container {
-        padding: 0.25rem 0.75rem;
+        padding: 0.375rem 0.75rem;
         margin-bottom: 1em;
 
         &:not(.p-disabled) {
@@ -15,7 +15,7 @@
         }
 
         .p-chips-token {
-            padding: 0.25rem 0.75rem;
+            padding: 0 0.5rem;
             margin-right: 0.5rem;
             background: $casal;
             color: $white;
@@ -27,7 +27,7 @@
         }
 
         .p-chips-input-token {
-            padding: 0.25rem 0;
+            padding: 0;
 
             input {
                 font-family: $font-family-sans-serif;

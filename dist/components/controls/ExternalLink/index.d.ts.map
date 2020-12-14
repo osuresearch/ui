@@ -1,1 +1,0 @@
-{"version":3,"file":"index.d.ts","sourceRoot":"","sources":["../../../../src/components/controls/ExternalLink/index.tsx"],"names":[],"mappings":"AACA,OAAO,KAAK,MAAM,OAAO,CAAC;AAG1B,MAAM,WAAW,KAAK;IAClB,mCAAmC;IACnC,IAAI,EAAE,MAAM,CAAC;IAEb,kFAAkF;IAClF,QAAQ,CAAC,EAAE,OAAO,CAAC;CACtB;AAED;;;GAGG;AACH,QAAA,MAAM,YAAY,EAAE,KAAK,CAAC,EAAE,CAAC,KAAK,CAY7B,CAAC;AAEN,eAAe,YAAY,CAAC"}

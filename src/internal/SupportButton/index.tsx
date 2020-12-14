@@ -1,6 +1,6 @@
 import React from "react";
 
-import Icon from "../../components/generic/Icon";
+import Icon from "../../generic/Icon";
 
 export interface Props {
     title: string;

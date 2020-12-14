@@ -148,22 +148,27 @@ $primary: $casal;
             border-width: 1px;
         }
     }
-    .p-datatable-thead > tr > th {
-        text-align: left;
-        padding: $table-cell-padding;
+    .p-datatable-thead {
         border: 1px solid $table-border-color;
         border-width: 0 0 1px 0;
-        font-weight: 500;
-        color: rgba(0, 0, 0, 0.55);
-        font-size: 0.85em;
-        position: relative;
 
-        &.p-sortable-column {
-            padding-left: 1.75rem;
-        }
+        > tr > th {
+            text-align: left;
+            padding: $table-cell-padding;
 
-        &.p-filter-column {
-            background-color: $gray-100;
+            border-width: 0;
+            font-weight: 500;
+            color: rgba(0, 0, 0, 0.55);
+            font-size: 0.85em;
+            position: relative;
+
+            &.p-sortable-column {
+                padding-left: 1.75rem;
+            }
+
+            &.p-filter-column {
+                padding-top: 0;
+            }
         }
     }
     .p-datatable-tfoot > tr > td {
