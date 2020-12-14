@@ -3,7 +3,7 @@ import Button, { Props as ButtonProps } from './Button';
 import Menu, { IMenuComposition } from './Menu';
 import Item from './Menu/Item';
 
-interface IMenuButtonComposition {
+interface IDropOverlayComposition {
     Button: React.FC<ButtonProps>;
     Menu: React.FC & IMenuComposition;
 }
@@ -16,9 +16,13 @@ type Props = {
 
 export const Context = React.createContext({
     id: ''
-})
+});
 
-const MenuButton: React.FC<Props> & IMenuButtonComposition = ({
+/**
+ * DropOverlay is a React implementation of [Bootstrap Dropdowns](https://getbootstrap.com/docs/4.0/components/dropdowns/)
+ * 
+ */
+const DropOverlay: React.FC<Props> & IDropOverlayComposition = ({
     id,
     children,
     className,
@@ -34,8 +38,8 @@ const MenuButton: React.FC<Props> & IMenuButtonComposition = ({
     )
 }
 
-MenuButton.Button = Button;
-MenuButton.Menu = Menu;
-MenuButton.Menu.Item = Item;
+DropOverlay.Button = Button;
+DropOverlay.Menu = Menu;
+DropOverlay.Menu.Item = Item;
 
-export default MenuButton;
+export default DropOverlay;

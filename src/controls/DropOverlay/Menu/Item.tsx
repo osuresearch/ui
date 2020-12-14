@@ -9,6 +9,7 @@ const Item: React.FC<Props> = ({ onClick, children }) => {
         <button
             className="dropdown-item"
             onClick={onClick}
+            type="button"
         >
             {children}
         </button>

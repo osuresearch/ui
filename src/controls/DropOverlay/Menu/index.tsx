@@ -6,10 +6,14 @@ export interface IMenuComposition {
     Item: React.FC<ItemProps>;
 }
 
-const Menu: React.FC & IMenuComposition = ({ children }) => {
+type Props = {
+    positionRight?: boolean
+}
+
+const Menu: React.FC<Props> & IMenuComposition = ({ children, positionRight }) => {
     const { id } = useContext(Context);
     return (
-        <div className="dropdown-menu" aria-labelledby={id}>
+        <div className={`dropdown-menu ${positionRight && 'dropdown-menu-right'}`} aria-labelledby={id}>
             {children}
         </div>
     )

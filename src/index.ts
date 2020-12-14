@@ -18,7 +18,7 @@ export { default as Icon } from './generic/Icon';
 // Controls
 export { default as Button } from './controls/Button';
 export { default as ExternalLink } from './controls/ExternalLink';
-export { default as MenuButton } from './controls/MenuButton';
+export { default as DropOverlay } from './controls/DropOverlay';
 export { default as Modal } from './controls/Modal';
 export { default as ModalHeader } from './controls/ModalHeader';
 export { default as ModalBody } from './controls/ModalBody';

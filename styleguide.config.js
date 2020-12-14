@@ -257,7 +257,7 @@ module.exports = {
         // import the parent and access it as a child to that parent component entity.
 
         // So - for now - subcomponents don't get import documentation.
-        if (paths.length > 4) return;
+        if (paths.length > 3) return;
 
         // The assumption is that all (public) components are exported
         // by name from the primary index of the package.
