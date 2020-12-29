@@ -7,6 +7,11 @@ Versions follow [Semantic Versioning](https://semver.org/) guidelines - given a 
 2. MINOR version when you add functionality in a backwards-compatible manner, and
 3. PATCH version when you make backwards-compatible bug fixes.
 
+# 4.2.5 (2020-12-29)
+
+__New Features:__
+* Adds support for installation through GitLab Packages
+
 # 4.2.4 (2020-11-07)
 
 __Accessibility Fixes:__
