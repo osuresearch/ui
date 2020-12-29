@@ -1,4 +1,3 @@
-# Automatically publish as an npm package for the group (GitLab CI template)
 default:
   image: node:15.4
 
@@ -25,7 +24,7 @@ validate_package_scope:
         exit 1
       fi
 
-# If no .npmrc is included in the repo, generate a temporary one to use during the publish step
+# If no .npmrc if included in the repo, generate a temporary one to use during the publish step
 # that is configured to publish to GitLab's NPM registry
 create_npmrc:
   stage: build
@@ -35,7 +34,7 @@ create_npmrc:
         echo 'No .npmrc found! Creating one now. Please review the following link for more information: https://docs.gitlab.com/ee/user/packages/npm_registry/index.html#authenticating-with-a-ci-job-token'
 
         {
-          echo '@${CI_PROJECT_ROOT_NAMESPACE}:registry=${CI_SERVER_PROTOCOL}://${CI_SERVER_HOST}:${CI_SERVER_PORT}/api/v4/packages/npm/'
+          echo '@${CI_PROJECT_ROOT_NAMESPACE}:registry=${CI_SERVER_PROTOCOL}://${CI_SERVER_HOST}:${CI_SERVER_PORT}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/'
           echo '//${CI_SERVER_HOST}:${CI_SERVER_PORT}/api/v4/packages/npm/:_authToken=${CI_JOB_TOKEN}'
           echo '//${CI_SERVER_HOST}:${CI_SERVER_PORT}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken=${CI_JOB_TOKEN}'
         } >> .npmrc
@@ -53,7 +52,6 @@ publish_package:
   script:
     - |
       {
-        cat .npmrc &&
         npm publish &&
         echo "Successfully published version ${NPM_PACKAGE_VERSION} of ${NPM_PACKAGE_NAME} to GitLab's NPM registry: ${CI_PROJECT_URL}/-/packages"
       } || {
