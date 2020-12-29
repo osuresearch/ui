@@ -1,6 +1,6 @@
 # Automatically publish as an npm package for the group (GitLab CI template)
 default:
-  image: node:latest
+  image: node:15.4
 
   # Validate that the repository contains a package.json and extract a few values from it.
   before_script:
