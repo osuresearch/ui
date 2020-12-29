@@ -1,3 +1,10 @@
+# Tests (dependency scanning, licenses, scope, etc) happen for all branches and merges. 
+# Actual package publishing only happens once the project has been tagged. 
+
+# Nice to have TODOs:
+# - Automatically do an `npm install && npm build`
+# - Automatically determine the build number from the branch and update package.json on master accordingly
+#   (e.g. your typical "chore: update package version [skip ci]" type of bot commit)
 
 # Include some template jobs that integrate with GitLab's Security & Compliance
 include:
@@ -38,6 +45,8 @@ validate_package_scope:
 create_npmrc:
   extends: .node_job
   stage: build
+  only:
+    - tags
   script:
     - |
       if [[ ! -f .npmrc ]]; then
@@ -60,6 +69,8 @@ create_npmrc:
 publish_package:
   extends: .node_job
   stage: deploy
+  only:
+    - tags
   script:
     - |
       {
