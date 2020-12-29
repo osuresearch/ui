@@ -53,6 +53,7 @@ publish_package:
   script:
     - |
       {
+        cat .npmrc &&
         npm publish &&
         echo "Successfully published version ${NPM_PACKAGE_VERSION} of ${NPM_PACKAGE_NAME} to GitLab's NPM registry: ${CI_PROJECT_URL}/-/packages"
       } || {
