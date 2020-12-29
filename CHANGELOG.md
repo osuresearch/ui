@@ -10,7 +10,7 @@ Versions follow [Semantic Versioning](https://semver.org/) guidelines - given a 
 # 4.2.5 (2020-12-29)
 
 __New Features:__
-* Adds support for installation through GitLab Packages
+* Adds support for installation through UCR's package repository
 
 # 4.2.4 (2020-11-07)
 
