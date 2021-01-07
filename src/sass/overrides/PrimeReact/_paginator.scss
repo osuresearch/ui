@@ -17,7 +17,7 @@
 //original selectors
 //.p-paginator .p-paginator-first:not(.p-disabled):not(.p-highlight):hover, .p-paginator .p-paginator-prev:not(.p-disabled):not(.p-highlight):hover, .p-paginator .p-paginator-next:not(.p-disabled):not(.p-highlight):hover, .p-paginator .p-paginator-last:not(.p-disabled):not(.p-highlight):hover
 %extend_2 {
-    background: $gray-100;
+    background: $gray-100 !important;
     color: $gray-900;
 }
 
@@ -73,6 +73,17 @@
             @extend %extend_3;
         }
     }
+    .p-paginator-first,
+    .p-paginator-prev,
+    .p-paginator-next,
+    .p-paginator-last {
+        &:focus {
+            background: $gray-100 !important;
+            border-color: $gray-200;
+            color: $gray-900;
+        }
+    }
+
     .p-dropdown {
         margin-left: 0.5rem;
         height: 2.357rem;
@@ -101,7 +112,8 @@
             border-color: $casal;
             color: $white;
         }
-        &:not(.p-highlight):hover {
+        &:not(.p-highlight):hover,
+        &:not(.p-highlight):focus {
             background: $gray-100;
             border-color: $gray-200;
             color: $gray-900;
