@@ -18,7 +18,7 @@ const More: React.FC<Props> = ({ children }) => {
 
             <button className="btn btn-link filters-more-toggle" onClick={() => setMore(!more)}>
                 {more && <>Show Fewer Filters <Icon name="chevron-up" /></>}
-                {!more && <>Show More <Icon name="chevron-down" /></>}
+                {!more && <>Show More Filters <Icon name="chevron-down" /></>}
             </button>
         </div>
     );
