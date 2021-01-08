@@ -32,7 +32,7 @@ function MySearchResultsComponent() {
     );
 }
 
-<SearchProvider id="Tools" driver={GraphQL(SEARCH_TOOLS)}>
+<SearchProvider id="Tools" driver={Apollo(SEARCH_TOOLS)}>
     <MySearchResultsComponent />
 </SearchProvider>
 ```

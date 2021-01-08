@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import { TermFilter, term } from '../../..';
 import { KeyValuePairs } from '../Common';
 import { Context } from '..';
-import { Radio, FieldSet } from '../../../..';
+import { Radio } from '../../../..';
 
 export type Props = {
     name: string

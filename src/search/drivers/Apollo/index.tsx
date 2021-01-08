@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { DocumentNode, useLazyQuery } from '@apollo/client';
+import { ApolloClient, DocumentNode, useLazyQuery } from '@apollo/client';
 
 import { DriverProps, AND } from '../..';
 import useSearchProvider from '../../hooks/useSearchProvider';
@@ -19,7 +19,8 @@ import useSearchProvider from '../../hooks/useSearchProvider';
  *      - Sorting rules for the results.
  *      - You can omit this if you do not use sorting in your searches.
  *
- * The GraphQL types `SearchFilters` and `SearchSorting` are provided by the ORIS\GraphQL composer package.
+ * The GraphQL types `SearchFilters` and `SearchSorting` are provided by the
+ * [ORIS\GraphQL](https://code.osu.edu/ORIS/graphql) composer package.
  *
  * The *first* GraphQL field returned will be used for the results
  * and must return an array of type objects.
@@ -31,9 +32,14 @@ import useSearchProvider from '../../hooks/useSearchProvider';
  *                                  driver will *not* search unless there is at least one
  *                                  search parameter set (terms, filters, or sort). Additionally,
  *                                  the results in useSearchProvider() will be set to `undefined`.
- *
+ * @param {ApolloClient} client     An `ApolloClient` instance. By default this driver uses the
+ *                                  client passed down via context.
  */
-export default function GraphQL(query: DocumentNode, searchWhenEmpty: boolean = true) {
+export default function Apollo(
+    query: DocumentNode,
+    searchWhenEmpty: boolean = true,
+    client?: ApolloClient<any>
+) {
     const DriverComponent: React.FC<DriverProps> = ({
         provider
     }) => {
@@ -42,7 +48,9 @@ export default function GraphQL(query: DocumentNode, searchWhenEmpty: boolean = 
             setSearching, setError, setResults
         } = useSearchProvider(provider);
 
-        const [callable, result] = useLazyQuery<{ [field: string]: any }>(query);
+        const [callable, result] = useLazyQuery<{ [field: string]: any }>(query, {
+            client
+        });
 
         // Cached results from the previous search
         const [, setCached] = useState<any>();
@@ -76,10 +84,13 @@ export default function GraphQL(query: DocumentNode, searchWhenEmpty: boolean = 
                 // If there's an error - make it human readable.
                 let error: string | undefined = undefined;
                 if (result.error) {
-                    console.error('GraphQL Search Driver Error', result.error);
+                    console.error('Apollo Search Driver Error', result.error);
 
-                    // TODO: Better error message. May be displayed to the user.
-                    error = 'Something went wrong';
+                    if (result.error.graphQLErrors.length) {
+                        error = result.error.graphQLErrors[0].message;
+                    } else {
+                        error = result.error.message;
+                    }
                 }
 
                 /*

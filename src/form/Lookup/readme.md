@@ -90,7 +90,7 @@ const defaultValue = {"id":89693,"name":"Sigurd Dickens","age":34,"username":"Br
         Search for a person
     </Lookup.Label>
 
-    <Lookup.Input 
+    <Lookup.Input
         resultRenderer={
             (hit) => <span>
                 {hit.name}&nbsp;
@@ -98,7 +98,7 @@ const defaultValue = {"id":89693,"name":"Sigurd Dickens","age":34,"username":"Br
                     ({hit.username})
                 </small>
             </span>
-        } 
+        }
         defaultValue={defaultValue}
     />
 
@@ -164,7 +164,7 @@ const PROVIDER = 'example-lookup-with-filtering';
         </Lookup.Label>
 
         <Filters provider={PROVIDER}>
-            <Filters.AnyOf name="state" options={[
+            <Filters.AnyOf name="state" title="State" options={[
                 'Kansas',
                 'Arizona',
                 'California',
@@ -217,7 +217,7 @@ import JsonApi from '@oris/ui/search/drivers/JsonApi';
 </Lookup>
 ```
 
-### GraphQL Driver Support
+### Apollo Driver Support (GraphQL)
 
 The following is an example of how to structure your GraphQL query and types:
 
@@ -237,9 +237,9 @@ type YourSearchResponse {
 
 Replace `yourQueryName` with whatever you like (e.g. searchSponsors, people, etc).
 
-User input to the component will be passed to the `term` input of your query.
+User input to the component will be passed to the `terms` input of your query.
 
-The `SearchFilters` type is built into ORIS/GraphQL to work with the suite of search filter components provided in this package and is optional. Only include if your backend supports it.
+The `SearchFilters` type is built into [ORIS/GraphQL](https://code.osu.edu/ORIS/graphql) to work with the suite of search filter components provided in this package and is optional. Only include if your backend supports it.
 
 The `YourResultType` returned in the response may contain whatever you like, this is on a per-application basis. For example, a person search may look like:
 
@@ -280,7 +280,7 @@ const SEARCH_PEOPLE = gql`{
 
 function PersonLookup() {
     return (
-        <Lookup id="people" driver={GraphQL(SEARCH_PEOPLE)}>
+        <Lookup id="people" driver={Apollo(SEARCH_PEOPLE)}>
             <Lookup.Label>Find a person</Lookup.Label>
             <Lookup.Input resultRenderer={(p) => p.name} />
         </Lookup>
@@ -291,7 +291,11 @@ function PersonLookup() {
 
 ### JSON:API Driver Support
 
-TODO: Notes?
+Any JSON:API resources returned in the `data` array will be provided to the `resultRenderer` directly. User input will be passed as the `q` query parameter.
+
+A top level `meta.hits` field is **required** to be returned by the backend.
+
+For more information, see the example in the [JsonApi Driver docs](#/Search%20Components/Drivers?id=jsonapi)
 
 
 ### Custom Driver Support
