@@ -35,22 +35,16 @@ Object.defineProperty(exports, "SyncSearchWithURL", {
     return _SyncSearchWithURL.default;
   }
 });
-Object.defineProperty(exports, "Search", {
-  enumerable: true,
-  get: function get() {
-    return _Search.default;
-  }
-});
 Object.defineProperty(exports, "Filters", {
   enumerable: true,
   get: function get() {
     return _Filters.default;
   }
 });
-Object.defineProperty(exports, "useSearch", {
+Object.defineProperty(exports, "useSearchProvider", {
   enumerable: true,
   get: function get() {
-    return _useSearch.default;
+    return _useSearchProvider.default;
   }
 });
 
@@ -64,11 +58,9 @@ var _SearchDebugger = _interopRequireDefault(require("./components/SearchDebugge
 
 var _SyncSearchWithURL = _interopRequireDefault(require("./components/SyncSearchWithURL"));
 
-var _Search = _interopRequireDefault(require("./components/Search"));
-
 var _Filters = _interopRequireDefault(require("./components/Filters"));
 
-var _useSearch = _interopRequireDefault(require("./hooks/useSearch"));
+var _useSearchProvider = _interopRequireDefault(require("./hooks/useSearchProvider"));
 
 //#region Driver interfaces
 
@@ -83,12 +75,26 @@ var _useSearch = _interopRequireDefault(require("./hooks/useSearch"));
 /** Collection of fields to sort on */
 //#endregion
 //#region Filter vanity functions
+
+/**
+ * Factory method to create an `AndFilters` rule
+ *
+ * @param filters
+ * @param name
+ */
 function AND(filters, name) {
   return {
     name: name,
     AND: filters
   };
 }
+/**
+ * Factory method to create an `OrFilters` rule
+ *
+ * @param filters
+ * @param name
+ */
+
 
 function OR(filters, name) {
   return {
@@ -96,6 +102,14 @@ function OR(filters, name) {
     OR: filters
   };
 }
+/**
+ * Factory method to create a `TermFilter` rule
+ *
+ * @param field
+ * @param value
+ * @param name
+ */
+
 
 function term(field, value, name) {
   return {
@@ -103,6 +117,14 @@ function term(field, value, name) {
     term: (0, _defineProperty2.default)({}, field, value)
   };
 }
+/**
+ * Factory method to create an `AnyOfFilter` rule
+ *
+ * @param field
+ * @param values
+ * @param name
+ */
+
 
 function anyOf(field, values, name) {
   return {
@@ -110,6 +132,15 @@ function anyOf(field, values, name) {
     anyOf: (0, _defineProperty2.default)({}, field, values)
   };
 }
+/**
+ * Factory method to create a `BetweenFilter` rule
+ *
+ * @param field
+ * @param from
+ * @param to
+ * @param name
+ */
+
 
 function between(field, from, to, name) {
   return {

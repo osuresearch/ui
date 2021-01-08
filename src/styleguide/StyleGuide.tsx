@@ -1,14 +1,23 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import TableOfContents from './TableOfContents';
+// @ts-ignore
 import StyleGuideRenderer from 'react-styleguidist/lib/client/rsg-components/StyleGuide/StyleGuideRenderer';
+// @ts-ignore
 import Sections from 'react-styleguidist/lib/client/rsg-components/Sections';
+// @ts-ignore
 import Welcome from 'react-styleguidist/lib/client/rsg-components/Welcome';
+// @ts-ignore
 import Error from 'react-styleguidist/lib/client/rsg-components/Error';
+// @ts-ignore
 import NotFound from 'react-styleguidist/lib/client/rsg-components/NotFound';
+// @ts-ignore
 import Context from 'react-styleguidist/lib/client/rsg-components/Context';
+// @ts-ignore
 import { HOMEPAGE } from 'react-styleguidist/lib/scripts/consts';
+// @ts-ignore
 import { DisplayModes } from 'react-styleguidist/lib/client/consts';
+// @ts-ignore
 import * as Rsg from 'react-styleguidist/lib/typings';
 
 import { FormatSubcomponents } from './Utility';

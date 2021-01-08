@@ -11,7 +11,7 @@ var _slicedToArray2 = _interopRequireDefault(require("@babel/runtime/helpers/sli
 
 var _react = require("react");
 
-var _useSearch = _interopRequireDefault(require("../hooks/useSearch"));
+var _useSearchProvider = _interopRequireDefault(require("../hooks/useSearchProvider"));
 
 /**
  * Encode a serialized copy for safe inclusion in a URL
@@ -26,7 +26,7 @@ function urlEncodeFilters(filters) {
 }
 /**
  * Decode from a URL into a new copy of SearchFilters
- * 
+ *
  * Will return undefined if the payload cannot be safely decoded
  */
 
@@ -67,15 +67,15 @@ function urlDecodeSort(encoded) {
 }
 /**
  * Allows a user to bookmark or share searches for an application.
- * 
+ *
  * When the search data (terms, filters, sorting) changes, the current address
  * is updated via the `History.ReplaceState` API to contain a serialized copy
- * of the search data. 
- * 
+ * of the search data.
+ *
  * If the user bookmarks (or shares) the URL, the same search data will
  * be loaded on next visit.
- * 
- * This also means you need to safely handle access-based search filtering on the 
+ *
+ * This also means you need to safely handle access-based search filtering on the
  * backend. E.g. if an admin shares a link that contains an `adminOnlyData`
  * search filter, then the user they shared that with may also potentially send
  * that filter to the server as well.
@@ -86,7 +86,7 @@ var SyncSearchWithURL = function SyncSearchWithURL(_ref) {
   var provider = _ref.provider,
       _ref$prefix = _ref.prefix,
       prefix = _ref$prefix === void 0 ? '' : _ref$prefix;
-  var search = (0, _useSearch.default)(provider);
+  var search = (0, _useSearchProvider.default)(provider);
 
   var _useState = (0, _react.useState)(true),
       _useState2 = (0, _slicedToArray2.default)(_useState, 2),

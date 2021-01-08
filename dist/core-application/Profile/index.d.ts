@@ -4,7 +4,7 @@ export default Profile;
  *
  * Typically rendered within the `Navbar` of an application.
  *
- * @deprecated Use `@oris/auth`. Will be removed in a future version of `@oris/ui`
+ * @deprecated Use `@oris/auth`. Will be removed in `@oris/ui^5.0`
  */
 declare function Profile(props: any): JSX.Element;
 declare namespace Profile {

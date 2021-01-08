@@ -40,7 +40,11 @@ var Group = function Group(_ref) {
     name: collapsed ? 'angle-down' : 'angle-up'
   })), !collapsed && /*#__PURE__*/_react.default.createElement("div", {
     className: "filters-group-filters"
-  }, children));
+  }, _react.default.Children.map(children, function (child) {
+    return /*#__PURE__*/_react.default.isValidElement(child) ? /*#__PURE__*/_react.default.cloneElement(child, {
+      title: child.props.title || title
+    }) : child;
+  })));
 };
 
 var _default = Group;

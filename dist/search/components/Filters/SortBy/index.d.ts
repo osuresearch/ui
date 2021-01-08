@@ -1,8 +1,13 @@
 import React from 'react';
-import { Sort } from '../../..';
+import { SortFields } from '../../..';
 export declare type Props = {
     /** Different sort options that a user can pick from */
-    options: Sort[];
+    options: SortFields[];
+    /** Title - must either be defined at the component level or in the parent `Filters.Group` */
+    title?: string;
+    name: string;
+    /** Size - If needed, make the size of the select control large (lg) or small(sm) */
+    size?: 'lg' | 'sm';
 };
 /**
  * Sort options for a search.

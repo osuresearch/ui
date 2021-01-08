@@ -67,7 +67,7 @@ var SearchProvider = function SearchProvider(_ref) {
   // existing provider (only executes init once when initially setting up the state)
   // We use `unknown` for typing here because the provider doesn't care what
   // structure the search results will be in (and shouldn't touch it anyway).
-  // That's up to the implementing developer when they use the useSearch hook.
+  // That's up to the implementing developer when they use the useSearchProvider hook.
 
 
   var _useState11 = (0, _react.useState)(function () {

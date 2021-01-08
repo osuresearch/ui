@@ -128,7 +128,7 @@ var SearchFilters = /*#__PURE__*/function () {
       return this.m_Filters.AND;
     }
     /**
-     * Get a readonly copy of the current sort rules
+     * Get a readonly copy of the current sort fields
      */
 
   }, {

@@ -1,5 +1,5 @@
 import { Context } from 'react';
-import { IFilter, SearchTerms, Sort } from '.';
+import { IFilter, SearchTerms, SortFields } from '.';
 /** A set of common states shared by search components */
 export interface ISearchContext<TResult> {
     /** Read-only copy of the current search terms */
@@ -7,7 +7,7 @@ export interface ISearchContext<TResult> {
     /** Read-only copy of current search filters */
     filters: IFilter[];
     /** Current sort rules */
-    sort: Sort | undefined;
+    sort: SortFields | undefined;
     /** Search is being executed */
     searching: boolean;
     /** Results from search. Structure depends on the backend. */
@@ -17,7 +17,7 @@ export interface ISearchContext<TResult> {
     /** Update search terms */
     setTerms(value: SearchTerms): void;
     /** Update sort rules */
-    setSort(sort: Sort | undefined): void;
+    setSort(sort: SortFields | undefined): void;
     addFilter(filter: IFilter): void;
     /** Get a filter by name, returning defaultValue if it isn't set */
     getFilter<T extends IFilter>(name: string, defaultValue?: T): T | undefined;

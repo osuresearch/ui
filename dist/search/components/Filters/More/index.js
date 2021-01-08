@@ -17,7 +17,7 @@ var _ = require("../../../..");
 
 /**
  * Even MORE filters to show (contains a collapsible set of groups).
- * 
+ *
  * We suggest you only have one `<Filters.More>` at the end of your filter list.
  */
 var More = function More(_ref) {
@@ -35,9 +35,9 @@ var More = function More(_ref) {
     onClick: function onClick() {
       return setMore(!more);
     }
-  }, more && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, "Show Less ", /*#__PURE__*/_react.default.createElement(_.Icon, {
+  }, more && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, "Show Fewer Filters ", /*#__PURE__*/_react.default.createElement(_.Icon, {
     name: "chevron-up"
-  })), !more && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, "Show More ", /*#__PURE__*/_react.default.createElement(_.Icon, {
+  })), !more && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, "Show More Filters ", /*#__PURE__*/_react.default.createElement(_.Icon, {
     name: "chevron-down"
   }))));
 };

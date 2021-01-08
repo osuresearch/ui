@@ -13,6 +13,6 @@ interface SectionRendererProps extends JssInjectedProps {
     [prop: string]: any;
 }
 export declare const SectionRenderer: React.FunctionComponent<SectionRendererProps>;
-declare const _default: React.ComponentType<Pick<SectionRendererProps, React.ReactText>>;
+declare const _default: any;
 export default _default;
 //# sourceMappingURL=SectionRenderer.d.ts.map

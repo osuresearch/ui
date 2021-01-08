@@ -2,6 +2,8 @@ import React from 'react';
 export declare type Props = {
     name: string;
     options: string[];
+    /** Title - must either be defined at the component level or in the parent `Filters.Group` */
+    title?: string;
     /**
      * Minimum options displayed before the clear button is also included.
      *

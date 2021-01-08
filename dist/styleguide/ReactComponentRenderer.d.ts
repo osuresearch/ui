@@ -1,6 +1,7 @@
 import React from 'react';
 import { JssInjectedProps } from 'react-styleguidist/lib/client/rsg-components/Styled/Styled';
 interface ReactComponentRendererProps extends JssInjectedProps {
+    classes: any;
     name: string;
     heading?: React.ReactNode;
     filepath?: string;
@@ -14,6 +15,6 @@ interface ReactComponentRendererProps extends JssInjectedProps {
     isolated?: boolean;
 }
 export declare const ReactComponentRenderer: React.FunctionComponent<ReactComponentRendererProps>;
-declare const _default: React.ComponentType<Pick<ReactComponentRendererProps, "name" | "heading" | "pathLine" | "description" | "docs" | "examples" | "tabButtons" | "tabBody" | "filepath" | "slug" | "isolated">>;
+declare const _default: any;
 export default _default;
 //# sourceMappingURL=ReactComponentRenderer.d.ts.map

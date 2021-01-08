@@ -1,10 +1,12 @@
 import React from 'react';
 export declare type Props = {
     name: string;
-    /** Prefix displayed in the pill for this filter */
+    /** Prefix for the filter name */
     prefix: string;
-    /** HTML title attribute for the input */
+    /** Title - must either be defined at the component level or in the parent `Filters.Group` */
     title?: string;
+    /** HTML title attribute for the input */
+    inputTitle?: string;
     /** HTML input placeholder */
     placeholder?: string;
 };

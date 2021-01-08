@@ -10,10 +10,12 @@ exports.default = void 0;
 var _react = _interopRequireDefault(require("react"));
 
 /**
- * Default implementation for a single result from `Search`. 
- * 
- * If you want to customize the result renderer, you need to 
+ * Default implementation for a single result from `Search`.
+ *
+ * If you want to customize the result renderer, you need to
  * create your own variation of this component.
+ *
+ * @deprecated Use the `Lookup` form component. Will be removed in `@oris/ui^5.0`
  */
 var SearchResult = function SearchResult(_ref) {
   var resource = _ref.resource,

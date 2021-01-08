@@ -15,6 +15,8 @@ var _Pathline = _interopRequireDefault(require("react-styleguidist/lib/client/rs
 
 var _Styled = _interopRequireDefault(require("react-styleguidist/lib/client/rsg-components/Styled/Styled"));
 
+// @ts-ignore
+// @ts-ignore
 var styles = function styles(_ref) {
   var color = _ref.color,
       fontSize = _ref.fontSize,

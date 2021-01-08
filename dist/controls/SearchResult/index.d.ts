@@ -18,6 +18,8 @@ export interface Props {
  *
  * If you want to customize the result renderer, you need to
  * create your own variation of this component.
+ *
+ * @deprecated Use the `Lookup` form component. Will be removed in `@oris/ui^5.0`
  */
 declare const SearchResult: React.FC<Props>;
 export default SearchResult;

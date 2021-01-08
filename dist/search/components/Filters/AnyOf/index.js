@@ -1,5 +1,7 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
 Object.defineProperty(exports, "__esModule", {
@@ -11,7 +13,7 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _ = require("../../..");
 
-var _Common = require("../Common");
+var _Checkbox = _interopRequireDefault(require("../../../../form/Checkbox"));
 
 var _2 = require("..");
 
@@ -23,6 +25,7 @@ var _2 = require("..");
 var AnyOf = function AnyOf(_ref) {
   var name = _ref.name,
       options = _ref.options,
+      title = _ref.title,
       _ref$minimumOptionsFo = _ref.minimumOptionsForClearButton,
       minimumOptionsForClearButton = _ref$minimumOptionsFo === void 0 ? 5 : _ref$minimumOptionsFo;
   var ctx = (0, _react.useContext)(_2.Context);
@@ -54,17 +57,28 @@ var AnyOf = function AnyOf(_ref) {
     ctx.deleteFilter(name);
   };
 
+  if (!title) {
+    return /*#__PURE__*/_react.default.createElement("span", {
+      className: "text-danger"
+    }, "Title property not defined");
+  }
+
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "filters-any-of"
-  }, options.map(function (entry) {
-    return /*#__PURE__*/_react.default.createElement(_Common.YetAnotherCheckboxWrapper, {
+  }, /*#__PURE__*/_react.default.createElement("fieldset", null, /*#__PURE__*/_react.default.createElement("legend", {
+    className: "sr-only"
+  }, title), options.map(function (entry) {
+    return /*#__PURE__*/_react.default.createElement(_Checkbox.default, {
+      id: "".concat(name, "-").concat(entry),
       name: "".concat(name, "-").concat(entry),
-      checked: values.indexOf(entry) >= 0,
-      onClick: function onClick(checked) {
+      key: "anyOf-".concat(name, "-").concat(entry),
+      onChange: function onChange(checked) {
         return onToggle(entry, checked);
       }
-    }, entry);
-  }), options.length >= minimumOptionsForClearButton && /*#__PURE__*/_react.default.createElement("button", {
+    }, /*#__PURE__*/_react.default.createElement(_Checkbox.default.Input, {
+      checked: values.indexOf(entry) >= 0
+    }), /*#__PURE__*/_react.default.createElement(_Checkbox.default.Label, null, entry));
+  })), options.length >= minimumOptionsForClearButton && /*#__PURE__*/_react.default.createElement("button", {
     className: "btn btn-link",
     onClick: onClear
   }, "Clear"));

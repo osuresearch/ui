@@ -15,13 +15,13 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _ = require("../..");
 
-var _useSearch2 = _interopRequireDefault(require("../hooks/useSearch"));
+var _useSearchProvider2 = _interopRequireDefault(require("../hooks/useSearchProvider"));
 
 require("./SearchDebugger.scss");
 
 /**
- * Print out the current state of search data. 
- * 
+ * Print out the current state of search data.
+ *
  * Useful for testing new components and state changes.
  */
 var SearchDebugger = function SearchDebugger(_ref) {
@@ -32,13 +32,13 @@ var SearchDebugger = function SearchDebugger(_ref) {
       show = _useState2[0],
       setShow = _useState2[1];
 
-  var _useSearch = (0, _useSearch2.default)(provider),
-      terms = _useSearch.terms,
-      filters = _useSearch.filters,
-      sort = _useSearch.sort,
-      searching = _useSearch.searching,
-      error = _useSearch.error,
-      results = _useSearch.results;
+  var _useSearchProvider = (0, _useSearchProvider2.default)(provider),
+      terms = _useSearchProvider.terms,
+      filters = _useSearchProvider.filters,
+      sort = _useSearchProvider.sort,
+      searching = _useSearchProvider.searching,
+      error = _useSearchProvider.error,
+      results = _useSearchProvider.results;
 
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "search-debugger"

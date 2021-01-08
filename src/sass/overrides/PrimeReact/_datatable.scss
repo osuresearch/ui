@@ -168,6 +168,10 @@ $primary: $casal;
 
             &.p-filter-column {
                 padding-top: 0;
+
+                .ui-form-element .input-group {
+                    margin-bottom: 0;
+                }
             }
         }
     }

@@ -1,4 +1,3 @@
-/// <reference types="react" />
 interface Props {
     value?: string;
     prevValue?: string;

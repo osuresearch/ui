@@ -1,4 +1,4 @@
-import { AndFilters, IFilter, Sort } from '.';
+import { AndFilters, IFilter, SortFields } from '.';
 /**
  * Immutable set of filters.
  *
@@ -8,16 +8,16 @@ export default class SearchFilters {
     /** All top level filters are ANDed together */
     protected readonly m_Filters: AndFilters;
     /** Current search filter */
-    protected m_Sort: Sort | undefined;
+    protected m_Sort: SortFields | undefined;
     constructor(initialFilters?: IFilter[]);
     /**
      * Get a readonly copy of the current filters
      */
     get filters(): IFilter[];
     /**
-     * Get a readonly copy of the current sort rules
+     * Get a readonly copy of the current sort fields
      */
-    get sort(): Sort | undefined;
+    get sort(): SortFields | undefined;
     /**
      * Add a new filter to the top level list of filters.
      *
@@ -33,7 +33,7 @@ export default class SearchFilters {
     /**
      * Replace current sort rules and return a new immutable copy of this class
      */
-    sortBy(sort: Sort | undefined): SearchFilters;
+    sortBy(sort: SortFields | undefined): SearchFilters;
     clone(): SearchFilters;
 }
 //# sourceMappingURL=SearchFilters.d.ts.map

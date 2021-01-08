@@ -9,20 +9,48 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = Mock;
 
-var _react = require("react");
+var _react = _interopRequireWildcard(require("react"));
 
 var _faker = _interopRequireWildcard(require("faker"));
 
-var _useSearch2 = _interopRequireDefault(require("../../hooks/useSearch"));
+var _useSearchProvider2 = _interopRequireDefault(require("../../hooks/useSearchProvider"));
+
+/**
+ * Get an avatar containing a user's initials, similar to Microsoft products
+ *
+ * Reference: https://codepen.io/felipepucinelli/pen/QyVJbM
+ */
+function getInitialsAvatar(firstName, lastName) {
+  var size = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 80;
+  var colors = ["#1abc9c", "#2ecc71", "#3498db", "#9b59b6", "#34495e", "#16a085", "#27ae60", "#2980b9", "#8e44ad", "#2c3e50", "#f1c40f", "#e67e22", "#e74c3c", "#f39c12", "#d35400", "#c0392b", "#7f8c8d"];
+  var index = (firstName.charCodeAt(0) - 65) % colors.length;
+  var style = {
+    backgroundColor: colors[index],
+    width: size,
+    height: size,
+    font: size / 2 + 'px Arial',
+    color: '#fff',
+    textAlign: 'center',
+    lineHeight: size + 'px',
+    borderRadius: '50%'
+  };
+  return /*#__PURE__*/_react.default.createElement("div", {
+    style: style
+  }, firstName[0].toUpperCase() + lastName[0].toUpperCase());
+}
 
 var FAKE_DATA = Array.from({
   length: 100
 }, function () {
   var card = _faker.default.helpers.createCard();
 
+  var firstName = _faker.name.firstName();
+
+  var lastName = _faker.name.lastName();
+
   return {
     id: _faker.random.number(),
-    name: card.name,
+    name: firstName + ' ' + lastName,
     age: _faker.random.number(50) + 18,
     username: card.username,
     address: card.address.streetA,
@@ -35,7 +63,9 @@ var FAKE_DATA = Array.from({
     phone: card.phone,
     about: card.posts[0].paragraph,
     title: _faker.name.jobTitle(),
-    avatar: _faker.image.avatar()
+    // .avatar uses uifaces.co which has become a paid service
+    // avatar: image.avatar(),
+    avatar: getInitialsAvatar(firstName, lastName)
   };
 });
 /**
@@ -49,17 +79,16 @@ function Mock() {
   var DriverComponent = function DriverComponent(_ref) {
     var provider = _ref.provider;
 
-    var _useSearch = (0, _useSearch2.default)(provider),
-        terms = _useSearch.terms,
-        filters = _useSearch.filters,
-        sort = _useSearch.sort,
-        setResults = _useSearch.setResults,
-        setError = _useSearch.setError,
-        setSearching = _useSearch.setSearching;
+    var _useSearchProvider = (0, _useSearchProvider2.default)(provider),
+        terms = _useSearchProvider.terms,
+        filters = _useSearchProvider.filters,
+        sort = _useSearchProvider.sort,
+        setResults = _useSearchProvider.setResults,
+        setError = _useSearchProvider.setError,
+        setSearching = _useSearchProvider.setSearching;
 
     var isEmpty = terms.length < 1 && filters.length < 1 && sort === undefined;
-    var skipSearchAndClear = isEmpty && !searchWhenEmpty;
-    var people = []; // Fire off a new query if anything in the search state changes
+    var skipSearchAndClear = isEmpty && !searchWhenEmpty; // Fire off a new query if anything in the search state changes
 
     (0, _react.useEffect)(function () {
       if (skipSearchAndClear) {

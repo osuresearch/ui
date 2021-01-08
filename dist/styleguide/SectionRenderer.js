@@ -17,6 +17,9 @@ var _SectionHeading = _interopRequireDefault(require("react-styleguidist/lib/cli
 
 var _Markdown = _interopRequireDefault(require("react-styleguidist/lib/client/rsg-components/Markdown"));
 
+// @ts-ignore
+// @ts-ignore
+// @ts-ignore
 var styles = function styles(_ref) {
   var space = _ref.space;
   return {

@@ -9,11 +9,11 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _Common = require("../Common");
-
 var _ = require("..");
 
 var _2 = require("../../..");
+
+var _3 = require("../../../..");
 
 /**
  * Batch of multiple <Toggle> components matching to an enumeration
@@ -22,7 +22,9 @@ var _2 = require("../../..");
  */
 var Toggles = function Toggles(_ref) {
   var name = _ref.name,
+      title = _ref.title,
       options = _ref.options,
+      values = _ref.values,
       _ref$minimumOptionsFo = _ref.minimumOptionsForClearButton,
       minimumOptionsForClearButton = _ref$minimumOptionsFo === void 0 ? 5 : _ref$minimumOptionsFo,
       _ref$operator = _ref.operator,
@@ -61,7 +63,8 @@ var Toggles = function Toggles(_ref) {
     });
 
     if (checked) {
-      terms.push((0, _2.term)(key, true, options[key]));
+      var value = values ? values[key] : true;
+      terms.push((0, _2.term)(key, value, options[key]));
     } // Finally - replace the filter with new terms
 
 
@@ -77,17 +80,29 @@ var Toggles = function Toggles(_ref) {
   };
 
   var keys = Object.keys(options);
+
+  if (!title) {
+    return /*#__PURE__*/_react.default.createElement("span", {
+      className: "text-danger"
+    }, "Title property not defined");
+  }
+
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "filters-toggles"
-  }, keys.map(function (key) {
-    return /*#__PURE__*/_react.default.createElement(_Common.YetAnotherCheckboxWrapper, {
+  }, /*#__PURE__*/_react.default.createElement("fieldset", null, /*#__PURE__*/_react.default.createElement("legend", {
+    className: "sr-only"
+  }, title), keys.map(function (key) {
+    return /*#__PURE__*/_react.default.createElement(_3.Checkbox, {
+      id: "filter-checkbox-".concat(key),
+      key: "filter-checkbox-".concat(key),
       name: key,
-      checked: activeFields.indexOf(key) >= 0,
-      onClick: function onClick(checked) {
+      onChange: function onChange(checked) {
         return toggleTerm(key, checked);
       }
-    }, options[key]);
-  }), keys.length >= minimumOptionsForClearButton && /*#__PURE__*/_react.default.createElement("button", {
+    }, /*#__PURE__*/_react.default.createElement(_3.Checkbox.Input, {
+      checked: activeFields.indexOf(key) >= 0
+    }), /*#__PURE__*/_react.default.createElement(_3.Checkbox.Label, null, options[key]));
+  })), keys.length >= minimumOptionsForClearButton && /*#__PURE__*/_react.default.createElement("button", {
     className: "btn btn-link",
     onClick: onClear
   }, "Clear"));

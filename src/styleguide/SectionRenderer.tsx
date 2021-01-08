@@ -1,8 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+// @ts-ignore
 import Styled, { JssInjectedProps } from 'react-styleguidist/lib/client/rsg-components/Styled/Styled';
+// @ts-ignore
 import SectionHeading from 'react-styleguidist/lib/client/rsg-components/SectionHeading';
+// @ts-ignore
 import Markdown from 'react-styleguidist/lib/client/rsg-components/Markdown';
+// @ts-ignore
 import * as Rsg from 'react-styleguidist/lib/typings';
 
 const styles = ({ space }: Rsg.Theme) => ({

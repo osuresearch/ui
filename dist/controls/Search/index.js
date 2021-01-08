@@ -38,6 +38,8 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 /**
  * Search input field. Pure-React replacement of Lookup.
  * Requires a JSON:API compliant backend endpoint.
+ *
+ * @deprecated Use the `Lookup` form component. Will be removed in `@oris/ui^5.0`
  */
 var Search = /*#__PURE__*/function (_React$Component) {
   (0, _inherits2.default)(Search, _React$Component);

@@ -221,6 +221,72 @@ Object.defineProperty(exports, "Lookup", {
     return _Lookup.default;
   }
 });
+Object.defineProperty(exports, "SearchProvider", {
+  enumerable: true,
+  get: function get() {
+    return _SearchProvider.default;
+  }
+});
+Object.defineProperty(exports, "SearchDebugger", {
+  enumerable: true,
+  get: function get() {
+    return _SearchDebugger.default;
+  }
+});
+Object.defineProperty(exports, "SyncSearchWithURL", {
+  enumerable: true,
+  get: function get() {
+    return _SyncSearchWithURL.default;
+  }
+});
+Object.defineProperty(exports, "Filters", {
+  enumerable: true,
+  get: function get() {
+    return _Filters.default;
+  }
+});
+Object.defineProperty(exports, "useSearchProvider", {
+  enumerable: true,
+  get: function get() {
+    return _useSearchProvider.default;
+  }
+});
+Object.defineProperty(exports, "AND", {
+  enumerable: true,
+  get: function get() {
+    return _search.AND;
+  }
+});
+Object.defineProperty(exports, "OR", {
+  enumerable: true,
+  get: function get() {
+    return _search.OR;
+  }
+});
+Object.defineProperty(exports, "term", {
+  enumerable: true,
+  get: function get() {
+    return _search.term;
+  }
+});
+Object.defineProperty(exports, "anyOf", {
+  enumerable: true,
+  get: function get() {
+    return _search.anyOf;
+  }
+});
+Object.defineProperty(exports, "between", {
+  enumerable: true,
+  get: function get() {
+    return _search.between;
+  }
+});
+Object.defineProperty(exports, "sort", {
+  enumerable: true,
+  get: function get() {
+    return _search.sort;
+  }
+});
 
 require("./internal/jQueryPluginChanges");
 
@@ -295,3 +361,15 @@ var _Text = _interopRequireDefault(require("./form/Text"));
 var _Time = _interopRequireDefault(require("./form/Time"));
 
 var _Lookup = _interopRequireDefault(require("./form/Lookup"));
+
+var _SearchProvider = _interopRequireDefault(require("./search/components/SearchProvider"));
+
+var _SearchDebugger = _interopRequireDefault(require("./search/components/SearchDebugger"));
+
+var _SyncSearchWithURL = _interopRequireDefault(require("./search/components/SyncSearchWithURL"));
+
+var _Filters = _interopRequireDefault(require("./search/components/Filters"));
+
+var _useSearchProvider = _interopRequireDefault(require("./search/hooks/useSearchProvider"));
+
+var _search = require("./search");

@@ -13,6 +13,7 @@ var _propTypes = _interopRequireDefault(require("prop-types"));
 
 var _Styled = _interopRequireDefault(require("react-styleguidist/lib/client/rsg-components/Styled/Styled"));
 
+// @ts-ignore
 var styles = function styles(_ref) {
   var space = _ref.space;
   return {

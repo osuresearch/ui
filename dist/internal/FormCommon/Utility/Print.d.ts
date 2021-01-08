@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import '../style.scss';
 interface Props {
     id?: string;

@@ -44,15 +44,49 @@ export interface SortField {
     order: SortOrder;
 }
 /** Collection of fields to sort on */
-export interface Sort {
+export interface SortFields {
     /** Human readable name for this sort */
     name?: string;
     sort: SortField[];
 }
+/**
+ * Factory method to create an `AndFilters` rule
+ *
+ * @param filters
+ * @param name
+ */
 export declare function AND(filters: IFilter[], name?: string): AndFilters;
+/**
+ * Factory method to create an `OrFilters` rule
+ *
+ * @param filters
+ * @param name
+ */
 export declare function OR(filters: IFilter[], name?: string): OrFilters;
+/**
+ * Factory method to create a `TermFilter` rule
+ *
+ * @param field
+ * @param value
+ * @param name
+ */
 export declare function term(field: string, value: TermValue, name?: string): TermFilter;
+/**
+ * Factory method to create an `AnyOfFilter` rule
+ *
+ * @param field
+ * @param values
+ * @param name
+ */
 export declare function anyOf(field: string, values: (string | number)[], name?: string | string[]): AnyOfFilter;
+/**
+ * Factory method to create a `BetweenFilter` rule
+ *
+ * @param field
+ * @param from
+ * @param to
+ * @param name
+ */
 export declare function between(field: string, from: string | number, to: string | number, name?: string): BetweenFilter;
 /**
  * Simple use case of sorting on a single field.
@@ -63,13 +97,12 @@ export declare function between(field: string, from: string | number, to: string
  * )
  * ```
  */
-export declare function sort(name: string, field: string, order?: SortOrder): Sort;
+export declare function sort(name: string, field: string, order?: SortOrder): SortFields;
 export { default as SearchFilters } from './SearchFilters';
 export type { ISearchContext, SearchContext } from './SearchContext';
 export { default as SearchProvider } from './components/SearchProvider';
 export { default as SearchDebugger } from './components/SearchDebugger';
 export { default as SyncSearchWithURL } from './components/SyncSearchWithURL';
-export { default as Search } from './components/Search';
 export { default as Filters } from './components/Filters';
-export { default as useSearch } from './hooks/useSearch';
+export { default as useSearchProvider } from './hooks/useSearchProvider';
 //# sourceMappingURL=index.d.ts.map

@@ -1,4 +1,3 @@
-/// <reference types="react" />
 /**
  * Ohio State brand navbar
  */

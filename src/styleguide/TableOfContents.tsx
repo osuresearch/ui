@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+// @ts-ignore
 import ComponentsList from 'react-styleguidist/lib/client/rsg-components/ComponentsList';
+// @ts-ignore
 import TableOfContentsRenderer from 'react-styleguidist/lib/client/rsg-components/TableOfContents/TableOfContentsRenderer';
+// @ts-ignore
 import filterSectionsByName from 'react-styleguidist/lib/client//utils/filterSectionsByName';
+// @ts-ignore
 import { getHash } from 'react-styleguidist/lib/client//utils/handleHash';
+// @ts-ignore
 import * as Rsg from 'react-styleguidist/lib/typings';
 
 interface TableOfContentsProps {

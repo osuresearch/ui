@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+// @ts-ignore
 import Pathline from 'react-styleguidist/lib/client/rsg-components/Pathline';
+// @ts-ignore
 import Styled, { JssInjectedProps } from 'react-styleguidist/lib/client/rsg-components/Styled/Styled';
+// @ts-ignore
 import * as Rsg from 'react-styleguidist/lib/typings';
 
 const styles = ({ color, fontSize, space }: Rsg.Theme) => ({
@@ -29,6 +32,7 @@ const styles = ({ color, fontSize, space }: Rsg.Theme) => ({
 });
 
 interface ReactComponentRendererProps extends JssInjectedProps {
+    classes: any;
     name: string;
     heading?: React.ReactNode; // Change - made this optional
     filepath?: string;

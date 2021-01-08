@@ -19,7 +19,7 @@ export default class ReactComponent extends Component<ReactComponentProps, React
     };
     static contextType: any;
     state: {
-        activeTab: string | undefined;
+        activeTab: any;
     };
     private handleTabChange;
     render(): JSX.Element | null;

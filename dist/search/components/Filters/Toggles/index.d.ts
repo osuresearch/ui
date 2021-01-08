@@ -3,12 +3,18 @@ import { KeyValuePairs } from '../Common';
 export declare type Props = {
     options: KeyValuePairs;
     /**
+     * Values to set to the filter per option. If omitted, boolean `true` will be used instead.
+     */
+    values?: KeyValuePairs;
+    /**
      * Toggle group name.
      *
      * This does not typically need to match any backend field
      * as all toggle fields are individual terms combined with `AND/OR`
      */
     name: string;
+    /** Title - must either be defined at the component level or in the parent `Filters.Group` */
+    title?: string;
     /**
      * Minimum options displayed before the clear button is also displayed.
      */

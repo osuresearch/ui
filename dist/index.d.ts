@@ -34,4 +34,12 @@ export { default as Radio } from './form/Radio';
 export { default as Select } from './form/Select';
 export { default as Text } from './form/Text';
 export { default as Time } from './form/Time';
+export { default as Lookup } from './form/Lookup';
+export { default as SearchProvider } from './search/components/SearchProvider';
+export { default as SearchDebugger } from './search/components/SearchDebugger';
+export { default as SyncSearchWithURL } from './search/components/SyncSearchWithURL';
+export { default as Filters } from './search/components/Filters';
+export { default as useSearchProvider } from './search/hooks/useSearchProvider';
+export type { SearchDriver, SearchTerms, SearchFilters, TermValue, TermFilter, AnyOfFilter, BetweenFilter, AndFilters, OrFilters, SortOrder, SortField, SortFields } from './search';
+export { AND, OR, term, anyOf, between, sort } from './search';
 //# sourceMappingURL=index.d.ts.map

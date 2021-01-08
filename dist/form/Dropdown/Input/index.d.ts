@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import TooltipOptions from 'primereact/components/tooltip/TooltipOptions';
 export declare type InputProps = {
     /** Will inherit from parent Dropdown */

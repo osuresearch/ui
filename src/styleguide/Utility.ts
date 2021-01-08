@@ -7,7 +7,7 @@ export const WrapNameInBrackets = (name?: string) => name ? `<${name}>` : undefi
 /** Formats Styleguide subcomponents when they meet certain requirements */
 export const FormatSubcomponents = (sections: ExtendedRsgSection[]) => {
     sections.forEach(section => {
-        section.components?.forEach(function (component) {
+        section.components?.forEach(function (component: any) {
             // @ts-ignore - TS doesn't understand that we're
             // using `this` in scope of the forEach `thisArg`
             const section = this;

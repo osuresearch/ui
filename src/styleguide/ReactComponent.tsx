@@ -1,15 +1,26 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+// @ts-ignore
 import Examples from 'react-styleguidist/lib/client/rsg-components/Examples';
+// @ts-ignore
 import SectionHeading from 'react-styleguidist/lib/client/rsg-components/SectionHeading';
+// @ts-ignore
 import JsDoc from 'react-styleguidist/lib/client/rsg-components/JsDoc';
+// @ts-ignore
 import Markdown from 'react-styleguidist/lib/client/rsg-components/Markdown';
+// @ts-ignore
 import Slot from 'react-styleguidist/lib/client/rsg-components/Slot';
+// @ts-ignore
 import ReactComponentRenderer from './ReactComponentRenderer';
+// @ts-ignore
 import Context from 'react-styleguidist/lib/client/rsg-components/Context';
+// @ts-ignore
 import ExamplePlaceholderDefault from 'react-styleguidist/lib/client/rsg-components/ExamplePlaceholder';
+// @ts-ignore
 import { DOCS_TAB_USAGE } from 'react-styleguidist/lib/client/rsg-components/slots';
+// @ts-ignore
 import { DisplayModes, UsageModes } from 'react-styleguidist/lib/client/consts';
+// @ts-ignore
 import * as Rsg from 'react-styleguidist/lib/typings';
 
 const ExamplePlaceholder =
