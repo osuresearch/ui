@@ -15,8 +15,10 @@ __New Features:__
 * New `Alert` component based on [Bootstrap Alerts](https://getbootstrap.com/docs/4.0/components/alerts/)
 * New `Chips` form component based on the PrimeReact component of the same name
 * New `Dropdown` form component based on the PrimeReact component of the same name
-* New `MenuButton` component based on [Bootstrap Dropdowns](https://getbootstrap.com/docs/4.0/components/dropdowns/)
+* New `DropOverlay` component based on [Bootstrap Dropdowns](https://getbootstrap.com/docs/4.0/components/dropdowns/)
 * New `MultiSelect` form component based on the PrimeReact component of the same name
+* New search components `SearchProvider` and `Filters.*` to standardize search and filtering tools in apps (supports both GraphQL and JSON:API backends)
+* New `Lookup` form component that uses the new search and filtering tools
 * Navigation improvements to styleguide by categorizing components
 
 __Internal changes:__
