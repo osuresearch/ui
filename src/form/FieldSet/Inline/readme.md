@@ -1,18 +1,18 @@
 ```jsx
 import { FieldSet, Radio } from '@oris/ui';
 
-<FieldSet id="yes-no-456">
+<FieldSet id="yes-no-inline">
     <FieldSet.Legend>
         A common yes/no radio pattern
     </FieldSet.Legend>
 
     <FieldSet.Inline>
-        <Radio id="yes-456">
+        <Radio id="yes-inline">
             <Radio.Input />
             <Radio.Label>Yes</Radio.Label>
         </Radio>
 
-        <Radio id="no-456">
+        <Radio id="no-inline">
             <Radio.Input />
             <Radio.Label>No</Radio.Label>
         </Radio>

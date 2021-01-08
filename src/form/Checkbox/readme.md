@@ -21,8 +21,9 @@
 ```jsx
 import { useForm } from 'react-hook-form';
 
-const { register } = useForm({ mode: 'onBlur' });
+const { register, watch } = useForm({ mode: 'onBlur' });
 
+<>
 <Checkbox id="rhf-receive-newsletter">
     <Checkbox.Input ref={register} />
 
@@ -34,6 +35,10 @@ const { register } = useForm({ mode: 'onBlur' });
         We will not spam your inbox
     </Checkbox.Help>
 </Checkbox>
+
+<hr/>
+Value: {watch("rhf-receive-newsletter") ? 'Yes' : 'No'}
+</>
 ```
 
 #### Read Only
@@ -90,10 +95,10 @@ const { register, errors, formState, reset, handleSubmit } = useForm({ mode: 'on
 const onSubmit = data => console.log(data);
 
 <Form onSubmit={handleSubmit(onSubmit)}>
-    <Checkbox 
+    <Checkbox
         id="rhf-terms"
-        error={errors["rhf-terms"] && "You must accept the terms and services"} 
-        success={formState.isValid && "Thank you for accepting the terms and services"} 
+        error={errors["rhf-terms"] && "You must accept the terms and services"}
+        success={formState.isValid && "Thank you for accepting the terms and services"}
         required
     >
         <Checkbox.Input ref={register({ required: true })} />
@@ -163,11 +168,11 @@ const onChange = (newArrayValue, oldArrayValue) => {
 import { useForm } from 'react-hook-form';
 import { FieldSet } from '@oris/ui';
 
-const { register, watch } = useForm({ 
-    mode: 'onBlur', 
+const { register, watch } = useForm({
+    mode: 'onBlur',
     defaultValues: {
         "light-types": ["directional"]
-    } 
+    }
 });
 
 const selectedLightTypes = watch('light-types');

@@ -1,6 +1,7 @@
 
 import './internal/jQueryPluginChanges';
 
+// Standard components
 export { default as AppAlert } from './components/AppAlert';
 export { default as Badge } from './components/Badge';
 export { default as Button } from './components/Button';
@@ -33,4 +34,39 @@ export { default as Radio } from './form/Radio';
 export { default as Select } from './form/Select';
 export { default as Text } from './form/Text';
 export { default as Time } from './form/Time';
+export { default as Lookup } from './form/Lookup';
 
+// Search components
+export { default as SearchProvider } from './search/components/SearchProvider';
+export { default as SearchDebugger } from './search/components/SearchDebugger';
+export { default as SyncSearchWithURL } from './search/components/SyncSearchWithURL';
+export { default as Filters } from './search/components/Filters';
+
+// Search hooks
+export { default as useSearchProvider } from './search/hooks/useSearchProvider';
+
+// Search data types
+export type {
+    SearchDriver,
+    SearchTerms,
+    SearchFilters,
+    TermValue,
+    TermFilter,
+    AnyOfFilter,
+    BetweenFilter,
+    AndFilters,
+    OrFilters,
+    SortOrder,
+    SortField,
+    SortFields
+} from './search';
+
+// Search functions
+export {
+    AND,
+    OR,
+    term,
+    anyOf,
+    between,
+    sort
+} from './search';

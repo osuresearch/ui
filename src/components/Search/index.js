@@ -13,6 +13,8 @@ import {
 /**
  * Search input field. Pure-React replacement of Lookup.
  * Requires a JSON:API compliant backend endpoint.
+ *
+ * @deprecated Use the `Lookup` form component. Will be removed in `@oris/ui^5.0`
  */
 class Search extends React.Component {
     constructor(props) {

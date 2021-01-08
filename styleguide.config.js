@@ -32,6 +32,49 @@ function listHtmlComponents() {
     return sections;
 }
 
+function listSearchComponents() {
+    const components = glob.sync('src/search/components/*/index.tsx');
+    
+    console.log(components);
+
+    // Need to handle top level:
+    // <DebugSearch>, <SearchProvider>
+    // Anything else? useSearch hook, different drivers, 
+    // Might just need a fat readme for it
+
+    var sections = [];
+    components.forEach((componentPath) => {
+        const dirname = path.dirname(componentPath);
+        const dirs = dirname.split('/'); // src, search, components, Checkbox
+        const component = dirs[3];
+        const subPaths = glob.sync(dirname + '/*/index.tsx');
+        
+        // Component with zero or more sub-components
+        sections.push({
+            name: `<${component}>`,
+            usageMode: 'collapse',
+            components: [
+                componentPath, // Main (composite) form component listed first
+                ...subPaths, // Followed by each sub-component at `{sub-component name}/index.tsx`
+            ]
+        });
+    });
+
+    // Add section for drivers
+    sections.push({
+        name: 'Drivers',
+        content: 'src/search/drivers/readme.md',
+        usageMode: 'collapse',
+        components: [
+            'src/search/drivers/**/index.tsx'
+        ],
+    });
+
+    console.log(sections);
+    // throw new Error('');
+    return sections;
+}
+
 /**
  * Custom aggregator for the `Form Components` section with the following rules:
  * 
@@ -130,6 +173,13 @@ let sections = [
         content: 'src/form/readme.md',
         sections: listFormComponents(),
         sectionDepth: 0,
+    }, 
+    {
+        name: 'Search Components',
+        content: 'src/search/readme.md',
+        components: 'src/search/components/*.tsx',
+        sections: listSearchComponents(),
+        sectionDepth: 0,
     },
     {
         name: 'HTML Components',
@@ -210,8 +260,27 @@ module.exports = {
     getComponentPathLine: (componentPath) => {
         // Naming convention for ../Component/index.js
         const dirname = path.dirname(componentPath);
+        const basename = path.basename(componentPath, path.extname(componentPath));
         const paths = dirname.split(path.sep); // .slice(-1);
-        const name = paths[paths.length - 1];
+
+        // If basename is index, then we assume it's /ComponentName/index.ext
+        // Otherwise, we assume ComponentName.ext
+        const name = basename === 'index' ? paths[paths.length - 1] : basename;
+
+        // Handle import conventions for search components:
+        // 1. Drivers are direct imports per-driver
+        // 2. Subcomponents are imported via their parent only through the composite index.ts
+        // 3. Everything else (provider, debuggers, etc) are in the composite index.ts
+        if (paths[1] === 'search') {
+            if (paths[2] === 'drivers') {
+                return `import ${name} from '@oris/ui/dist/search/drivers/${name}'`;
+            }
+
+            // Some sort of subcomponent - import line is for the parent
+            if (paths[2] === 'components' && paths.length > 3) {
+                return `import { ${paths[3]} } from '@oris/ui'`;
+            }
+        }
 
         // TODO: Can't figure out how to deal with subcomponents that come from generics.
         // E.g. a subcomponent path is `src/form/Checkbox/Label` but a generic would
@@ -226,7 +295,7 @@ module.exports = {
 
         // The assumption is that all (public) components are exported
         // by name from the primary index of the package.
-        return 'import { ' + name + ' } from \'@oris/ui\'';
+        return `import { ${name} } from '@oris/ui'`;
     },
     dangerouslyUpdateWebpackConfig: (webpackConfig, env) => {
         // Ignore any jQuery imports. They'll be resolved via the CDN script

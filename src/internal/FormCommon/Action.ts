@@ -57,22 +57,22 @@ class BaseAction<F> {
     }
 }
 
-class Action1<T> extends BaseAction<(arg: T) => void> {
-    public dispatch(arg: T): void {
-        this.delegates.forEach(
-            (delegate) => delegate(arg)
-        );
-    }
-}
+// class Action1<T> extends BaseAction<(arg: T) => void> {
+//     public dispatch(arg: T): void {
+//         this.delegates.forEach(
+//             (delegate) => delegate(arg)
+//         );
+//     }
+// }
 
-// This sucks. Can't just extend a generic with the same name
-// to support `a: Action<float>` and `b: Action<string, float>` like in C#.
-class Action2<T, U> extends BaseAction<(arg: T, arg2: U) => void> {
-    public dispatch(arg: T, arg2: U): void {
-        this.delegates.forEach(
-            (delegate) => delegate(arg, arg2)
-        );
-    }
-}
+// // This sucks. Can't just extend a generic with the same name
+// // to support `a: Action<float>` and `b: Action<string, float>` like in C#.
+// class Action2<T, U> extends BaseAction<(arg: T, arg2: U) => void> {
+//     public dispatch(arg: T, arg2: U): void {
+//         this.delegates.forEach(
+//             (delegate) => delegate(arg, arg2)
+//         );
+//     }
+// }
 
 export default Action;
