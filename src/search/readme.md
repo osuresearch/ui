@@ -51,7 +51,7 @@ function PersonSearchFilters() {
  */
 function PersonResultCard(result) {
     return (
-        <div className="card">
+        <li className="card" key={`search-result-${result.name}`}>
             <div className="card-body" style={{ display: 'flex' }}>
                 {result.avatar}
                 <div style={{ flex: '1 0 auto', margin: '0 1rem' }}>
@@ -67,7 +67,7 @@ function PersonResultCard(result) {
                     <a href="#">{result.phone}</a>
                 </div>
             </div>
-        </div>
+        </li>
     );
 }
 
@@ -87,9 +87,15 @@ function PersonSearchResults() {
                 <Filters.Active />
             </Filters>
 
+            {results &&
+                <div className="sr-only" role="status">
+                    {results.results.length} results found
+                </div>
+            }
+
             {/* If there's an error - show a helpful error message */}
             {error &&
-                <p>
+                <p role="status">
                     An error has occurred. Tips on how to fix this would go here.
                     (e.g. refresh the page, contact support, etc)
                 </p>
@@ -97,7 +103,7 @@ function PersonSearchResults() {
 
             {/* If there are no hits - show a helpful empty message */}
             {hasNoHits &&
-                <p>
+                <p role="status">
                     No one found matching your search terms and filters.
                     Tips on how to resolve this would go here (narrow terms,
                     add a new record, etc. Based on your use case)
@@ -108,7 +114,11 @@ function PersonSearchResults() {
                 This is entirely up to you and your app's needs -
                 show cards, swim lanes, a table, calendar view, etc.
             */}
-            {results && results.results.map(PersonResultCard)}
+            {results && 
+                <ul className="list-unstyled">
+                    {results.results.map(PersonResultCard)}
+                </ul>
+            }
         </>
     );
 }

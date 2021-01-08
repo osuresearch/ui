@@ -10,13 +10,15 @@ type PillProps = {
 
 const Pill: React.FC<PillProps> = ({ label, onDelete }) => {
     return (
-        <button className="filters-pill" onClick={onDelete}
-            title={`Remove "${label}" filter`}>
-            {label}
-            <span className="filters-pill-delete">
-                &times;
-            </span>
-        </button>
+        <li className="list-inline-item">
+            <button className="filters-pill" onClick={onDelete}
+                title={`Remove "${label}" filter`}>
+                {label}
+                <span className="filters-pill-delete" aria-hidden>
+                    &times;
+                </span>
+            </button>
+        </li>
     );
 }
 
@@ -133,57 +135,61 @@ const Active: React.FC<Props> = ({ includeTerms = true }) => {
 
     return (
         <div className="filters-pills">
-            {terms.length > 0 && includeTerms &&
-                <Pill
-                    label={`"${terms}"`}
-                    onDelete={() => setTerms('')}
-                />
-            }
-
-            {filters.map((filter) => {
-                // AnyOf - add a pill for each entry
-                if (filter.name && isAnyOf(filter)) {
-                    const field = Object.keys(filter.anyOf)[0];
-                    const values = filter.anyOf[field] as string[];
-
-                    return values.map((entry) => <Pill
-                        label={entry}
-                        onDelete={() => onDeleteAnyOfEntry(filter.name as string, entry)}
-                    />);
+            <div className="sr-only" id="active-filters">
+                Active Filters
+            </div>
+            <ul className="list-inline" aria-labelledby="active-filters">
+                {terms.length > 0 && includeTerms &&
+                    <Pill
+                        label={`"${terms}"`}
+                        onDelete={() => setTerms('')}
+                    />
                 }
 
-                // ORFilters - show each sub-filter as a (single) pill
-                // Does not support recursive complex filters (e.g. spreading AnyOf sub-filters)
-                if (filter.name && isOR(filter)) {
-                    return filter.OR.map((entry) => <Pill
-                        label={prettyLabel(entry)}
-                        onDelete={() => onDeleteOREntry(filter.name as string, entry.name as string)}
-                    />);
-                }
+                {filters.map((filter) => {
+                    // AnyOf - add a pill for each entry
+                    if (filter.name && isAnyOf(filter)) {
+                        const field = Object.keys(filter.anyOf)[0];
+                        const values = filter.anyOf[field] as string[];
 
-                // ANDFilters - show each sub-filter as a (single) pill.
-                // Does not support recursive complex filters (e.g. spreading AnyOf sub-filters)
-                if (filter.name && isAND(filter)) {
-                    return filter.AND.map((entry) => <Pill
-                        label={prettyLabel(entry)}
-                        onDelete={() => onDeleteANDEntry(filter.name as string, entry.name as string)}
-                    />);
-                }
+                        return values.map((entry) => <Pill
+                            label={entry}
+                            onDelete={() => onDeleteAnyOfEntry(filter.name as string, entry)}
+                        />);
+                    }
 
-                // All other types - add just a single pill
-                if (filter.name) {
-                    return (
-                        <Pill
-                            label={prettyLabel(filter)}
-                            onDelete={() => onDeleteNamedFilter(filter.name as string)}
-                        />
-                    );
-                }
+                    // ORFilters - show each sub-filter as a (single) pill
+                    // Does not support recursive complex filters (e.g. spreading AnyOf sub-filters)
+                    if (filter.name && isOR(filter)) {
+                        return filter.OR.map((entry) => <Pill
+                            label={prettyLabel(entry)}
+                            onDelete={() => onDeleteOREntry(filter.name as string, entry.name as string)}
+                        />);
+                    }
 
-                // Unnamed filters are hidden
-                return null;
-            })}
-        </div>
+                    // ANDFilters - show each sub-filter as a (single) pill.
+                    // Does not support recursive complex filters (e.g. spreading AnyOf sub-filters)
+                    if (filter.name && isAND(filter)) {
+                        return filter.AND.map((entry) => <Pill
+                            label={prettyLabel(entry)}
+                            onDelete={() => onDeleteANDEntry(filter.name as string, entry.name as string)}
+                        />);
+                    }
+
+                    // All other types - add just a single pill
+                    if (filter.name) {
+                        return (
+                            <Pill
+                                label={prettyLabel(filter)}
+                                onDelete={() => onDeleteNamedFilter(filter.name as string)}
+                            />
+                        );
+                    }
+
+                    // Unnamed filters are hidden
+                    return null;
+                })}
+            </ul>
     );
 }
 
