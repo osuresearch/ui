@@ -37,7 +37,11 @@ const Match: React.FC<Props> = ({ name, prefix, placeholder, title, inputTitle =
     useEffect(() => setValue(currentValue), [currentValue]);
 
     const updateFilter = (newValue: string) => {
-        ctx.addFilter(term(name, newValue, prefix + ':'));
+        if (newValue.length < 1) {
+            ctx.deleteFilter(prefix + ':');
+        } else {
+            ctx.addFilter(term(name, newValue, prefix + ':'));
+        }
     }
 
     if (!title) {
