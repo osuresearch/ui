@@ -6,7 +6,7 @@ import Mock from '@oris/ui/search/drivers/Mock';
 function PersonSearchFilters() {
     return (
         <Filters provider="demo">
-            <Filters.Terms />
+            <Filters.Terms title="Search by Keyword" />
 
             <Filters.Group title="State" open>
                 <Filters.AnyOf name="state" options={[
@@ -37,6 +37,7 @@ function PersonSearchFilters() {
                 <Filters.Match
                     prefix="Custom Domain"
                     name="otherEmailDomain"
+                    title="Other Domain"
                     placeholder="Other Domain"
                 />
             </Filters.Group>

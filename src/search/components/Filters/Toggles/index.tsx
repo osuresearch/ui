@@ -1,8 +1,9 @@
 
 import React, { useContext } from 'react';
-import { KeyValuePairs, YetAnotherCheckboxWrapper } from '../Common';
+import { KeyValuePairs } from '../Common';
 import { Context } from '..';
 import { OrFilters, AndFilters, TermFilter, term, OR, AND, TermValue } from '../../..';
+import { Checkbox } from '../../../..';
 
 export type Props = {
     options: KeyValuePairs
@@ -20,6 +21,9 @@ export type Props = {
      */
     name: string
 
+    /** Title - must either be defined at the component level or in the parent `Filters.Group` */
+    title?: string
+
     /**
      * Minimum options displayed before the clear button is also displayed.
      */
@@ -36,7 +40,7 @@ export type Props = {
  * between filter names and titles. Each filter will be set as a boolean
  * `true` value when checked, or deleted when unchecked.
  */
-const Toggles: React.FC<Props> = ({ name, options, values, minimumOptionsForClearButton = 5, operator = 'AND' }) => {
+const Toggles: React.FC<Props> = ({ name, title, options, values, minimumOptionsForClearButton = 5, operator = 'AND' }) => {
     const ctx = useContext(Context);
 
     let filter: OrFilters | AndFilters | undefined;
@@ -88,17 +92,27 @@ const Toggles: React.FC<Props> = ({ name, options, values, minimumOptionsForClea
 
     const keys = Object.keys(options);
 
+    if (!title) {
+        return <span className="text-danger">Title property not defined</span>
+    }
+
     return (
         <div className="filters-toggles">
-            {keys.map((key) =>
-                <YetAnotherCheckboxWrapper
-                    name={key}
-                    checked={activeFields.indexOf(key) >= 0}
-                    onClick={(checked) => toggleTerm(key, checked)}
-                >
-                    {options[key]}
-                </YetAnotherCheckboxWrapper>
-            )}
+            <fieldset>
+                <legend className="sr-only">{title}</legend>
+
+                {keys.map(key =>
+                    <Checkbox
+                        id={`filter-checkbox-${key}`}
+                        key={`filter-checkbox-${key}`}
+                        name={key}
+                        onChange={checked => toggleTerm(key, checked as boolean)}
+                    >
+                        <Checkbox.Input checked={activeFields.indexOf(key) >= 0} />
+                        <Checkbox.Label>{options[key]}</Checkbox.Label>
+                    </Checkbox>
+                )}
+            </fieldset>
 
             {keys.length >= minimumOptionsForClearButton &&
                 <button className="btn btn-link" onClick={onClear}>

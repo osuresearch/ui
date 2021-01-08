@@ -1,4 +1,3 @@
-
 @mixin button-reset {
     padding: 0;
     margin: 0;
@@ -77,6 +76,14 @@
 
     .btn.btn-link {
         padding: 0;
+        margin: 0.5rem 0;
+    }
+
+    .ui-form-element {
         margin: 0;
+
+        label {
+            margin-bottom: 0;
+        }
     }
 }

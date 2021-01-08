@@ -1,11 +1,16 @@
 
 import React, { useContext } from 'react';
 import { TermFilter, term } from '../../..';
-import { KeyValuePairs, YetAnotherRadioSetWrapper } from '../Common';
+import { KeyValuePairs } from '../Common';
 import { Context } from '..';
+import { Radio, FieldSet } from '../../../..';
 
 export type Props = {
     name: string
+
+    /** Title - must either be defined at the component level or in the parent `Filters.Group` */
+    title?: string
+
     options: KeyValuePairs
 };
 
@@ -14,7 +19,7 @@ export type Props = {
  *
  * Each option is represented as a `Term` filter.
  */
-const OneOf: React.FC<Props> = ({ name, options }) => {
+const OneOf: React.FC<Props> = ({ name, title, options }) => {
     const ctx = useContext(Context);
 
     // Find an active filter matching the option set
@@ -33,14 +38,31 @@ const OneOf: React.FC<Props> = ({ name, options }) => {
         }
     }
 
+    if (!title) {
+        return <span className="text-danger">Title property not defined</span>
+    }
+
     return (
         <div className="filters-one-of">
-            <YetAnotherRadioSetWrapper
-                name={name}
-                options={options}
-                value={active?.term[name] as string}
-                onChange={onChange}
-            />
+            <fieldset>
+                <legend className="sr-only">{title}</legend>
+
+                {Object.keys(options).map((key) => {
+                    const id = `${name}-${key}`;
+                    const value = active?.term[name] as string;
+
+                    return (
+                        <Radio id={id} name={name}>
+                            <Radio.Input
+                                checked={key === value}
+                                onChange={() => onChange(key, options[key])}
+                            />
+                            <Radio.Label>{options[key]}</Radio.Label>
+                        </Radio>
+                    );
+                })}
+            </fieldset>
+
             <button className="btn btn-link" onClick={() => onChange()}>
                 Clear
             </button>

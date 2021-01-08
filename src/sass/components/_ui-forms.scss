@@ -96,6 +96,12 @@
         margin-bottom: 1em;
     }
 
+    .input-group {
+        .form-control {
+            margin-bottom: 0;
+        }
+    }
+
     // readOnly print styles
     .form-control {
         &[readonly] {

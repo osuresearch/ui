@@ -1,12 +1,15 @@
 
 import React, { useContext } from 'react';
 import { AnyOfFilter, anyOf } from '../../..';
-import { YetAnotherCheckboxWrapper } from '../Common';
+import Checkbox from '../../../../form/Checkbox';
 import { Context } from '..';
 
 export type Props = {
     name: string
     options: string[]
+
+    /** Title - must either be defined at the component level or in the parent `Filters.Group` */
+    title?: string
 
     /**
      * Minimum options displayed before the clear button is also included.
@@ -21,7 +24,7 @@ export type Props = {
  *
  * Only supports strings for keys.
  */
-const AnyOf: React.FC<Props> = ({ name, options, minimumOptionsForClearButton = 5}) => {
+const AnyOf: React.FC<Props> = ({ name, options, title, minimumOptionsForClearButton = 5 }) => {
     const ctx = useContext(Context);
     const filter = ctx.getFilter<AnyOfFilter>(name);
 
@@ -48,18 +51,28 @@ const AnyOf: React.FC<Props> = ({ name, options, minimumOptionsForClearButton = 
         ctx.deleteFilter(name);
     }
 
+    if (!title) {
+        return <span className="text-danger">Title property not defined</span>
+    }
+
     return (
         <div className="filters-any-of">
-            {options.map((entry) =>
-                <YetAnotherCheckboxWrapper
-                    key={`anyOf-${name}-${entry}`} 
-                    name={`${name}-${entry}`}
-                    checked={values.indexOf(entry) >= 0}
-                    onClick={(checked: boolean) => onToggle(entry, checked)}
-                >
-                    {entry}
-                </YetAnotherCheckboxWrapper>
-            )}
+            <fieldset>
+                <legend className="sr-only">{title}</legend>
+                {options.map((entry) =>
+                    <Checkbox
+                        id={`${name}-${entry}`}
+                        name={`${name}-${entry}`}
+                        key={`anyOf-${name}-${entry}`}
+                        onChange={checked => onToggle(entry, checked as boolean)}
+                    >
+                        <Checkbox.Input checked={values.indexOf(entry) >= 0} />
+
+                        <Checkbox.Label>{entry}</Checkbox.Label>
+                    </Checkbox>
+                )}
+            </fieldset>
+
 
             {options.length >= minimumOptionsForClearButton &&
                 <button className="btn btn-link" onClick={onClear}>

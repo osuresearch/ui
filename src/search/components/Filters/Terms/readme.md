@@ -9,7 +9,7 @@ const ID = 'demo-Terms';
 
 <SearchProvider id={ID} driver={Mock()}>
     <Filters provider={ID}>
-        <Filters.Terms />
+        <Filters.Terms title="Search By Keyword" />
 
         <hr/>
         <Filters.Active />
@@ -30,7 +30,7 @@ const ID = 'demo-terms-live';
 
 <SearchProvider id={ID} driver={Mock()}>
     <Filters provider={ID}>
-        <Filters.Terms live />
+        <Filters.Terms title="Search by Keyword" live />
 
         <hr/>
         <Filters.Active />

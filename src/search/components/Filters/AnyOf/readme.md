@@ -12,7 +12,7 @@ const ID = 'demo-AnyOf';
 
 <SearchProvider id={ID} driver={Mock()}>
     <Filters provider={ID}>
-        <Filters.AnyOf name="dataClassification" options={[
+        <Filters.AnyOf name="dataClassification" title="Data Classification" options={[
             'Public (S1)',
             'Internal (S2)',
             'Private (S3)',

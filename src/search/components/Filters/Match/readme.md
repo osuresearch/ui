@@ -9,7 +9,7 @@ const ID = 'demo-Match';
 
 <SearchProvider id={ID} driver={Mock()}>
     <Filters provider={ID}>
-        <Filters.Match name="sponsor" prefix="Sponsor" />
+        <Filters.Match name="sponsor" prefix="Sponsor" title="Sponsor" />
 
         <hr/>
         <Filters.Active />

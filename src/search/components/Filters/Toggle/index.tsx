@@ -1,8 +1,8 @@
 
 import React, { useContext } from 'react';
-import { YetAnotherCheckboxWrapper } from '../Common';
 import { Context } from '..';
 import { TermFilter, term, TermValue } from '../../..';
+import { Checkbox } from '../../../..';
 
 export type Props = {
     name: string
@@ -31,13 +31,10 @@ const Toggle: React.FC<Props> = ({ name, title, value = true, children }) => {
 
     return (
         <div className="filters-toggle">
-            <YetAnotherCheckboxWrapper
-                name={name}
-                checked={filter !== undefined}
-                onClick={onToggle}
-            >
-                {children}
-            </YetAnotherCheckboxWrapper>
+            <Checkbox id={name} onChange={checked => onToggle(checked as boolean)}>
+                <Checkbox.Input checked={filter !== undefined} />
+                <Checkbox.Label>{children}</Checkbox.Label>
+            </Checkbox>
         </div>
     );
 }
