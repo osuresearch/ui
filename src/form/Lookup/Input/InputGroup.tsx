@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { JsonObject } from '..';
-import Icon from '../../../components/Icon';
+import Icon from '../../../generic/Icon';
 import { IFieldBind } from '../../../internal/FormCommon/types';
 
 type Props = {

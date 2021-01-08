@@ -51,7 +51,10 @@ function listSearchComponents() {
 
         // Component with zero or more sub-components
         sections.push({
-            name: `<${component}>`,
+            name: component,
+            hasSubcomponents: true,
+            wrapSectionNameInBrackets: true,
+            wrapComponentNamesInBrackets: true,
             usageMode: 'collapse',
             components: [
                 componentPath, // Main (composite) form component listed first
@@ -194,7 +197,6 @@ let sections = [
         components: 'src/data/**/index.?(js|tsx)',
         wrapComponentNamesInBrackets: true,
         expand: true,
-
         sectionDepth: 0
     },
     {
@@ -204,6 +206,15 @@ let sections = [
         wrapComponentNamesInBrackets: true,
         expand: true,
         sectionDepth: 0
+    },
+    {
+        name: 'Search Components',
+        content: 'src/search/readme.md',
+        // components: 'src/search/components/*.tsx',
+        sections: listSearchComponents(),
+        wrapComponentNamesInBrackets: true,
+        expand: true,
+        sectionDepth: 0,
     },
     {
         name: 'Experimental Components',

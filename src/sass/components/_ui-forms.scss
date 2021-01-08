@@ -92,8 +92,14 @@
         margin-bottom: 1em;
     }
 
-    .form-control {
+    .input-group {
         margin-bottom: 1em;
+    }
+
+    // Remove margin from .form-controls in a group as
+    // this causes alignment issues with appended buttons
+    .input-group .form-control {
+        margin-bottom: 0;
     }
 
     // readOnly print styles
