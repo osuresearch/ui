@@ -15,7 +15,7 @@ export type Props = {
 };
 
 /**
- * Radioset (or dropdown) of options where the user may only pick one.
+ * Radioset of options where the user may only pick one.
  *
  * Each option is represented as a `Term` filter.
  */
