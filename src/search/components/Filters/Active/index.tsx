@@ -190,6 +190,7 @@ const Active: React.FC<Props> = ({ includeTerms = true }) => {
                     return null;
                 })}
             </ul>
+        </div>
     );
 }
 
