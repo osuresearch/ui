@@ -1,3 +1,4 @@
+@import "../../sass";
 
 .lookup-results {
     position: relative;
@@ -6,10 +7,11 @@
     .dropdown-menu {
         margin-top: -1rem; // Force it right under the input
 
-        button {
+        .lookup-result {
             display: block;
             width: 100%;
             text-align: left;
+            cursor: pointer;
 
             background: none;
             border: 0;
@@ -19,15 +21,19 @@
             &:hover {
                 background: #f0f0f0;
             }
-       }
 
-       .dropdown-header {
-           padding: 0.5rem 1rem;
-       }
+            &.active-result {
+                background: lighten($casal, 60%);
+            }
+        }
 
-       .lookup-error {
-           color: #b00;
-       }
+        .dropdown-header {
+            padding: 0.5rem 1rem;
+        }
+
+        .lookup-error {
+            color: #b00;
+        }
     }
 }
 
@@ -36,6 +42,7 @@
     flex-direction: row;
     align-items: flex-start;
     margin-bottom: 1rem;
+    padding: 0.375rem 0;
 
     &-content {
     }
