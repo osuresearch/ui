@@ -60,12 +60,15 @@ export default class ReactComponent extends Component<ReactComponentProps, React
         }
         const showUsage = usageMode !== UsageModes.hide;
 
+        // @ts-ignore
+        const pLine = component.module?.default?.componentPathLine || pathLine;
+
         return (
             <ReactComponentRenderer
                 name={name}
                 slug={slug}
                 filepath={filepath}
-                pathLine={pathLine}
+                pathLine={pLine}
                 docs={<JsDoc {...tags} />}
                 description={description && <Markdown text={description} />}
                 heading={visibleName && // Only display heading if visibleName is defined (allows us to collapse sections when the section shares a name with the first component)

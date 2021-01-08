@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import TableOfContents from 'react-styleguidist/lib/client/rsg-components/TableOfContents';
+import TableOfContents from './TableOfContents';
 import StyleGuideRenderer from 'react-styleguidist/lib/client/rsg-components/StyleGuide/StyleGuideRenderer';
 import Sections from 'react-styleguidist/lib/client/rsg-components/Sections';
 import Welcome from 'react-styleguidist/lib/client/rsg-components/Welcome';
@@ -37,8 +37,11 @@ export type ExtendedRsgSection = Rsg.Section & {
     /** Indicates if the section includes subcomponents for Component.Subcomponent formatting */
     hasSubcomponents?: boolean;
 
-    /** Wrap the Section/Component visible names in brackets */
-    wrapNamesInBrackets?: boolean;
+    /** Wrap the Section/Component visible name in brackets */
+    wrapSectionNameInBrackets?: boolean;
+
+    /** Wrap the Section component names in brackets  */
+    wrapComponentNamesInBrackets?: boolean;
 }
 
 export interface StyleGuideProps {
@@ -114,7 +117,6 @@ export default class StyleGuide extends Component<StyleGuideProps, StyleGuideSta
         let sections = [...sec];
         let allSections = allSec ? [...allSec] : [];
 
-        FormatSubcomponents(sections);
         FormatSubcomponents(allSections);
 
         return (

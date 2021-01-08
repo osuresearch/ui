@@ -1,0 +1,234 @@
+// Based on https://raw.githubusercontent.com/primefaces/primereact/master/public/themes/bootstrap4-light-blue/theme.css
+// SCSS conversion by https://sebastianpontow.de/css2compass/
+
+.p-treetable {
+    .p-paginator-top {
+        border-width: 1px 0 0 0;
+        border-radius: 0;
+    }
+    .p-paginator-bottom {
+        border-width: 1px 0 0 0;
+        border-radius: 0;
+    }
+    .p-treetable-header {
+        background: white;
+        color: $gray-900;
+        border: solid $gray-100;
+        border-width: 1px 0 0 0;
+        padding: 1rem;
+        font-weight: 600;
+    }
+    .p-treetable-footer {
+        background: white;
+        color: $gray-900;
+        border: 1px solid $gray-100;
+        border-width: 1px 0 1px 0;
+        padding: 1rem;
+        font-weight: 600;
+    }
+    .p-sortable-column {
+        .p-sortable-column-icon {
+            color: #ccc;
+            position: absolute;
+            left: 0.25rem;
+            font-family: "FontAwesome";
+
+            &::before {
+                content: "\f0d8";
+                display: block;
+                line-height: 0.65rem;
+            }
+            &::after {
+                content: "\f0d7";
+                display: block;
+                line-height: 0.25rem;
+            }
+
+            &.pi-sort-amount-down {
+                &::before {
+                    display: none;
+                }
+                &::after {
+                    line-height: 1.25rem;
+                }
+            }
+            &.pi-sort-amount-up-alt {
+                &::before {
+                    line-height: 1.25rem;
+                }
+                &::after {
+                    display: none;
+                }
+            }
+        }
+        .p-sortable-column-badge {
+            border-radius: 50%;
+            height: 1.143rem;
+            min-width: 1.143rem;
+            line-height: 1.143rem;
+            color: white;
+            background: $gray-900;
+            margin-left: 0.5rem;
+        }
+        &.p-highlight {
+            .p-sortable-column-icon {
+                color: $gray-900;
+            }
+        }
+        &:not(.p-highlight):hover {
+            .p-sortable-column-icon {
+                color: $gray-400;
+            }
+        }
+    }
+    .p-column-resizer-helper {
+        background: $casal;
+    }
+    .p-treetable-scrollable-header {
+        background: white;
+    }
+    .p-treetable-scrollable-footer {
+        background: white;
+    }
+    .p-treetable-loading-icon {
+        font-size: 2rem;
+    }
+    &.p-treetable-gridlines {
+        .p-datatable-header {
+            border-width: 1px 1px 0 1px;
+        }
+        .p-treetable-footer {
+            border-width: 0 1px 1px 1px;
+        }
+        .p-treetable-top {
+            border-width: 0 1px 0 1px;
+        }
+        .p-treetable-bottom {
+            border-width: 0 1px 1px 1px;
+        }
+        .p-treetable-thead > tr > th {
+            border-width: 1px;
+        }
+        .p-treetable-tbody > tr > td {
+            border-width: 1px;
+        }
+        .p-treetable-tfoot > tr > td {
+            border-width: 1px;
+        }
+    }
+    &.p-treetable-sm {
+        .p-treetable-header {
+            padding: 0.875rem 0.875rem;
+        }
+        .p-treetable-footer {
+            padding: 0.5rem 0.5rem;
+        }
+        .p-treetable-thead > tr > th {
+            padding: 0.5rem 0.5rem;
+        }
+        .p-treetable-tbody > tr > td {
+            padding: 0.5rem 0.5rem;
+        }
+        .p-treetable-tfoot > tr > td {
+            padding: 0.5rem 0.5rem;
+        }
+    }
+    &.p-treetable-lg {
+        .p-treetable-header {
+            padding: 1.25rem 1.25rem;
+        }
+        .p-treetable-footer {
+            padding: 1.25rem 1.25rem;
+        }
+        .p-treetable-thead > tr > th {
+            padding: 1.25rem 1.25rem;
+        }
+        .p-treetable-tbody > tr > td {
+            padding: 1.25rem 1.25rem;
+        }
+        .p-treetable-tfoot > tr > td {
+            padding: 1.25rem 1.25rem;
+        }
+    }
+    .p-treetable-thead > tr > th {
+        text-align: left;
+        padding: $table-cell-padding;
+        border: 1px solid $table-border-color;
+        border-width: 0 0 1px 0;
+        font-weight: 500;
+        color: rgba(0, 0, 0, 0.55);
+        font-size: 0.85em;
+        position: relative;
+
+        &.p-sortable-column {
+            padding-left: 1.75rem;
+        }
+
+        &.p-filter-column {
+            background-color: $gray-100;
+        }
+    }
+    .p-treetable-tfoot > tr > td {
+        text-align: left;
+        padding: 1rem;
+        border: 1px solid $gray-100;
+        border-width: 1px 0 1px 0;
+        font-weight: 600;
+        color: $gray-900;
+        background: white;
+    }
+    .p-treetable-tbody > tr {
+        background: white;
+        color: $gray-900;
+        transition: box-shadow 0.15s;
+        outline-color: $gray-300;
+        > td {
+            text-align: left;
+            border: 1px solid $gray-100;
+            border-width: 1px 0 0 0;
+            padding: $table-cell-padding;
+            .p-treetable-toggler {
+                width: 2rem;
+                height: 2rem;
+                color: $gray-400;
+                border: 0 none;
+                background: transparent;
+                box-shadow: none;
+                margin-right: 0.5rem;
+                &:focus {
+                    outline: 0 none;
+                    outline-offset: 0;
+                }
+                &:enabled:hover {
+                    color: $gray-600;
+                    border-color: transparent;
+                    background: transparent;
+                }
+                + .p-checkbox {
+                    margin-right: 1rem;
+                    display: inline-flex;
+                    .p-indeterminate .p-checkbox-icon {
+                        color: $gray-900;
+                    }
+                }
+            }
+        }
+        &.p-highlight {
+            background: $casal;
+            color: white;
+            .p-treetable-toggler {
+                color: white;
+                &:hover {
+                    color: white;
+                }
+            }
+        }
+    }
+    &.p-treetable-hoverable-rows .p-treetable-tbody > tr:not(.p-highlight):hover {
+        background: white;
+        color: $gray-900;
+        .p-treetable-toggler {
+            color: $gray-900;
+        }
+    }
+}

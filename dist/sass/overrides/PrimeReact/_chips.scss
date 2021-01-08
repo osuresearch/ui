@@ -1,0 +1,48 @@
+// Based on https://raw.githubusercontent.com/primefaces/primereact/master/public/themes/bootstrap4-light-blue/theme.css
+
+.p-chips {
+    .p-chips-multiple-container {
+        padding: 0.375rem 0.75rem;
+        margin-bottom: 1em;
+
+        &:not(.p-disabled) {
+            &.p-focus {
+                outline: 0 none;
+                outline-offset: 0;
+                box-shadow: $input-focus-box-shadow;
+                border-color: $input-focus-border-color;
+            }
+        }
+
+        .p-chips-token {
+            padding: 0 0.5rem;
+            margin-right: 0.5rem;
+            background: $casal;
+            color: $white;
+            border-radius: 0px;
+
+            .p-chips-token-icon {
+                margin-left: 0.5rem;
+            }
+        }
+
+        .p-chips-input-token {
+            padding: 0;
+
+            input {
+                font-family: $font-family-sans-serif;
+                font-size: $font-size-base;
+                color: $gray-900;
+                padding: 0;
+                margin: 0;
+            }
+        }
+    }
+
+    &.p-error,
+    &.p-invalid {
+        > .p-inputtext {
+            border-color: $danger;
+        }
+    }
+}

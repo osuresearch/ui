@@ -1,0 +1,1 @@
+These components are part of the starter template for ORIS applications ([ORIS/template](https://code.osu.edu/ORIS/template))

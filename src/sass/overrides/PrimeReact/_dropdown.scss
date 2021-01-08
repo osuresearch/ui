@@ -1,0 +1,107 @@
+// Based on https://raw.githubusercontent.com/primefaces/primereact/master/public/themes/bootstrap4-light-blue/theme.css
+// SCSS conversion by https://sebastianpontow.de/css2compass/
+
+// Colors
+$primary: $casal;
+$danger: #db3b21;
+
+.p-dropdown {
+    background: $white;
+    border: 1px solid $input-border-color;
+    transition: $input-transition;
+    border-radius: 0;
+    display: inline-flex !important;
+
+    &.form-control {
+        .p-inputtext {
+            padding: 0;
+        }
+    }
+
+    .p-dropdown-label {
+        background: transparent;
+        border: 0 none;
+        &:enabled:focus {
+            outline: 0 none;
+            box-shadow: none;
+        }
+    }
+    .p-dropdown-trigger {
+        background: transparent;
+        color: $gray-900;
+        width: 2.357rem;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+    .p-dropdown-clear-icon {
+        color: $gray-600;
+        right: 2.357rem;
+        margin-top: -0.7rem;
+    }
+    &.p-error {
+        border-color: $danger;
+    }
+    &.p-invalid {
+        border-color: $danger;
+    }
+    &:not(.p-disabled) {
+        &.p-focus {
+            outline: 0 none;
+            outline-offset: 0;
+            box-shadow: $input-focus-box-shadow;
+            border-color: $input-focus-border-color;
+        }
+    }
+    &.p-dropdown-clearable .p-dropdown-label {
+        padding-right: 1.75rem;
+    }
+}
+.p-dropdown-panel {
+    background: $white;
+    color: $gray-900;
+    border: 1px solid $input-border-color;
+    border-radius: 0px;
+    box-shadow: none;
+    .p-dropdown-header {
+        padding: 0.75rem 1.5rem;
+        border-bottom: 1px solid $gray-200;
+        color: $gray-900;
+        background: $gray-100;
+        margin: 0;
+        border-top-right-radius: 0;
+        border-top-left-radius: 0;
+        .p-dropdown-filter {
+            padding-right: 1.75rem;
+        }
+        .p-dropdown-filter-icon {
+            right: 0.75rem;
+            margin-top: -0.75rem;
+            color: $gray-600;
+        }
+    }
+    .p-dropdown-items {
+        padding: 0.5rem 0;
+        .p-dropdown-item {
+            margin: 0;
+            padding: 0.5rem 1.5rem;
+            border: 0 none;
+            color: $gray-900;
+            background: transparent;
+            transition: box-shadow 0.15s;
+            border-radius: 0;
+            &.p-highlight {
+                background: lighten($casal, 60%);
+                color: $gray-900;
+            }
+            &:not(.p-highlight):not(.p-disabled):hover {
+                color: $gray-900;
+                background: $gray-100;
+            }
+        }
+        .p-dropdown-empty-message {
+            padding: 0.5rem 1.5rem;
+            color: $gray-900;
+            background: transparent;
+        }
+    }
+}

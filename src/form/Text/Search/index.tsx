@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import ThatOtherSearch from '../../../components/Search';
+import ThatOtherSearch from '../../../controls/Search';
 
 import { Context } from '..';
 import { Nullable } from '../../../internal/FormCommon/types';

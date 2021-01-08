@@ -11,7 +11,7 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _Search = _interopRequireDefault(require("../../../components/Search"));
+var _Search = _interopRequireDefault(require("../../../controls/Search"));
 
 var _ = require("..");
 

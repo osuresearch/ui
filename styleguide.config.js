@@ -34,12 +34,12 @@ function listHtmlComponents() {
 
 function listSearchComponents() {
     const components = glob.sync('src/search/components/*/index.tsx');
-    
+
     console.log(components);
 
     // Need to handle top level:
     // <DebugSearch>, <SearchProvider>
-    // Anything else? useSearch hook, different drivers, 
+    // Anything else? useSearch hook, different drivers,
     // Might just need a fat readme for it
 
     var sections = [];
@@ -48,7 +48,7 @@ function listSearchComponents() {
         const dirs = dirname.split('/'); // src, search, components, Checkbox
         const component = dirs[3];
         const subPaths = glob.sync(dirname + '/*/index.tsx');
-        
+
         // Component with zero or more sub-components
         sections.push({
             name: `<${component}>`,
@@ -77,14 +77,14 @@ function listSearchComponents() {
 
 /**
  * Custom aggregator for the `Form Components` section with the following rules:
- * 
+ *
  * - Each component creates a section named as the top level component
  *   - e.g. `src/form/Text/index.tsx` creates a `Text` section.
- * 
+ *
  * - A sub-section is then added for every sub-component (indicated as subfolders)
  *   to that top level component directory.
  *   - e.g. `src/form/Text/Input/index.tsx` will create an `Input` subsection.
- * 
+ *
  * - Common components in `src/internal/FormCommon/Components` will also be
  *   added *per section* UNLESS there's a local override matching the name.
  *   - e.g. Radio will get `src/internal/FormCommon/Label/index.tsx` UNLESS
@@ -100,20 +100,20 @@ function listFormComponents() {
         const component = dirs[2];
 
         // Special handling for the root Form component
-        // to ensure it's first in the list 
+        // to ensure it's first in the list
         if (component === 'Form') {
             sections = [{
                 name: component,
-                usageMode: 'hide',
                 hasSubcomponents: true,
-                wrapNamesInBrackets: true,
+                wrapSectionNameInBrackets: true,
+                wrapComponentNamesInBrackets: true,
                 components: 'src/form/Form/index.tsx'
             }, ...sections];
         } else {
             const subPaths = glob.sync(dirname + '/*/index.tsx');
 
             // Components from FormCommon that we include as subcomponents
-            // for all components by default. 
+            // for all components by default.
             let generics = glob.sync('src/internal/FormCommon/Components/*/index.tsx');
 
             // For all generics - if there's a copy locally defined to this component
@@ -130,7 +130,8 @@ function listFormComponents() {
             sections.push({
                 name: component,
                 hasSubcomponents: true,
-                wrapNamesInBrackets: true,
+                wrapSectionNameInBrackets: true,
+                wrapComponentNamesInBrackets: true,
                 components: [
                     componentPath, // Main (composite) form component listed first
                     ...((label && component !== 'FieldSet') ? [label] : []), // If label component exists, display that next (except for FieldSets - don't display it at all then)
@@ -149,53 +150,80 @@ function listFormComponents() {
 // Default sections of the styleguide
 let sections = [
     {
-        name: '',
+        name: ' ',
         content: 'docs/readme.md',
+        sectionDepth: 1
     },
     {
         name: 'Colors',
         content: 'docs/colors.md',
+        sectionDepth: 1
     },
     {
         name: 'Typography',
-        content: 'docs/Typography.md'
+        content: 'docs/Typography.md',
+        sectionDepth: 1
     },
     {
-        name: 'Components',
-        content: 'src/components/readme.md',
-        components: 'src/components/**/index.?(js|tsx)',
-        ignore: [
-            'src/components/.ignore'
-        ]
+        name: 'Core Application Components',
+        content: 'src/core-application/readme.md',
+        components: 'src/core-application/**/index.?(js|tsx)',
+        wrapComponentNamesInBrackets: true,
+        expand: true,
+        sectionDepth: 0
+    },
+    {
+        name: 'Generic Components',
+        content: 'src/generic/readme.md',
+        components: 'src/generic/**/index.?(js|tsx)',
+        wrapComponentNamesInBrackets: true,
+        expand: true,
+        sectionDepth: 0
+    },
+    {
+        name: 'Control Components',
+        content: 'src/controls/readme.md',
+        components: 'src/controls/**/index.?(js|tsx)',
+        wrapComponentNamesInBrackets: true,
+        expand: true,
+        sectionDepth: 0
+    },
+    {
+        name: 'Data Components',
+        content: 'src/data/readme.md',
+        components: 'src/data/**/index.?(js|tsx)',
+        wrapComponentNamesInBrackets: true,
+        expand: true,
+
+        sectionDepth: 0
     },
     {
         name: 'Form Components',
         content: 'src/form/readme.md',
         sections: listFormComponents(),
-        sectionDepth: 0,
-    }, 
+        wrapComponentNamesInBrackets: true,
+        expand: true,
+        sectionDepth: 0
+    },
     {
-        name: 'Search Components',
-        content: 'src/search/readme.md',
-        components: 'src/search/components/*.tsx',
-        sections: listSearchComponents(),
-        sectionDepth: 0,
+        name: 'Experimental Components',
+        content: 'src/experimental/readme.md',
+        components: 'src/experimental/**/index.?(js|tsx)',
+        ignore: [
+            'src/experimental/.ignore'
+        ],
+        wrapComponentNamesInBrackets: true,
+        expand: true,
+        sectionDepth: 0
     },
     {
         name: 'HTML Components',
         content: 'docs/html/readme.md',
         sections: listHtmlComponents(),
         sectionDepth: 0,
-    },
-    {
-        name: 'Experimental',
-        content: 'src/experimental/readme.md',
-        components: 'src/experimental/**/index.?(js|tsx)',
-        ignore: [
-            'src/experimental/.ignore'
-        ],
-        sectionDepth: 1,
+        expand: true
     }
+
 ];
 
 // If we're isolating, replace the sections with just those components.
@@ -339,6 +367,8 @@ module.exports = {
     // Override Styleguidist components
     styleguideComponents: {
         StyleGuide: path.join(__dirname, 'src/styleguide/StyleGuide'),
+        TableOfContents: path.join(__dirname, 'src/styleguide/TableOfContents'),
+        SectionRenderer: path.join(__dirname, 'src/styleguide/SectionRenderer'),
         ReactComponent: path.join(__dirname, 'src/styleguide/ReactComponent'),
         ReactComponentRenderer: path.join(__dirname, 'src/styleguide/ReactComponentRenderer'),
         ExamplesRenderer: path.join(__dirname, 'src/styleguide/ExamplesRenderer')

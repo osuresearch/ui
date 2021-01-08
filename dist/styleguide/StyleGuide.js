@@ -29,7 +29,7 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
-var _TableOfContents = _interopRequireDefault(require("react-styleguidist/lib/client/rsg-components/TableOfContents"));
+var _TableOfContents = _interopRequireDefault(require("./TableOfContents"));
 
 var _StyleGuideRenderer = _interopRequireDefault(require("react-styleguidist/lib/client/rsg-components/StyleGuide/StyleGuideRenderer"));
 
@@ -136,7 +136,6 @@ var StyleGuide = /*#__PURE__*/function (_Component) {
 
       var sections = (0, _toConsumableArray2.default)(sec);
       var allSections = allSec ? (0, _toConsumableArray2.default)(allSec) : [];
-      (0, _Utility.FormatSubcomponents)(sections);
       (0, _Utility.FormatSubcomponents)(allSections);
       return /*#__PURE__*/_react.default.createElement(_Context.default.Provider, {
         value: {

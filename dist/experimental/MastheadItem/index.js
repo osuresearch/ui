@@ -21,9 +21,9 @@ var _react = _interopRequireDefault(require("react"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
-var _ExternalLink = _interopRequireDefault(require("../../components/ExternalLink"));
+var _ExternalLink = _interopRequireDefault(require("../../controls/ExternalLink"));
 
-var _Icon = _interopRequireDefault(require("../../components/Icon"));
+var _Icon = _interopRequireDefault(require("../../generic/Icon"));
 
 require("./index.scss");
 
