@@ -7,6 +7,12 @@ Versions follow [Semantic Versioning](https://semver.org/) guidelines - given a 
 2. MINOR version when you add functionality in a backwards-compatible manner, and
 3. PATCH version when you make backwards-compatible bug fixes.
 
+# 4.3.1 (2021-02-04)
+
+__Bug Fixes:__
+
+* The Lookup form component can now be properly used as a controlled component. If the value passed into the `Lookup.Input` subcomponent is updated, the internal state will be updated to reflect the new value. An example for clearing `Lookup.Input` using this method was added to the README file for the `Lookup` component.
+
 # 4.3.0 (2021-01-11)
 
 __New Features:__
