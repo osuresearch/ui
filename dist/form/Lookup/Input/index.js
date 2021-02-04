@@ -219,6 +219,7 @@ var Input = function Input(props) {
     id: "".concat(bind.id, "-lookup-results")
   }, hits.map(function (hit, idx) {
     return /*#__PURE__*/_react.default.createElement(_Result.default, {
+      key: idx,
       id: "".concat(bind.id, "-result-").concat(idx),
       onClick: function onClick() {
         updateValue(hit); // Needs setTimeout for the effect to apply correctly in Safari

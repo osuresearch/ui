@@ -248,6 +248,7 @@ const Input: React.FC<Props> = (props) => {
                     >
                         {hits.map((hit, idx) =>
                             <Result
+                                key={idx}
                                 id={`${bind.id}-result-${idx}`}
                                 onClick={() => {
                                     updateValue(hit);
