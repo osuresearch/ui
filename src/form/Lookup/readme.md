@@ -217,6 +217,40 @@ import JsonApi from '@oris/ui/search/drivers/JsonApi';
 </Lookup>
 ```
 
+### Clear Lookup Input
+```jsx
+import { useState } from 'react';
+import JsonApi from '@oris/ui/search/drivers/JsonApi';
+import { Button } from '@oris/ui';
+
+const [value, setValue] = useState();
+
+<>
+<Lookup id="example-clear-lookup" driver={JsonApi('https://orapps.osu.edu/api/v1/person')}>
+    <Lookup.Label>
+        Search for a person
+    </Lookup.Label>
+
+    <Lookup.Input 
+        value={value}
+        onChange={v => setValue(v)}
+        resultRenderer={
+            (hit) => <span>
+                {hit.attributes.name}&nbsp;
+                <small className="text-muted">
+                    ({hit.attributes.username})
+                </small>
+            </span>
+        } 
+    />
+
+    <Lookup.Error />
+</Lookup>
+
+<Button onClick={() => setValue()}>Clear Lookup</Button>
+</>
+```
+
 ### Apollo Driver Support (GraphQL)
 
 The following is an example of how to structure your GraphQL query and types:

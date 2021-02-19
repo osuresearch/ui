@@ -86,9 +86,12 @@ const Input: React.FC<Props> = (props) => {
     const totalHits = typedResults?.hits || 0;
     const hits: JsonObject[] = typedResults?.results || [];
 
-    const [value, setValue] = useState<Nullable<JsonObject>>(() =>
-        props.defaultValue ? props.defaultValue : null
-    );
+    const [value, setValue] = useState<Nullable<JsonObject>>();
+
+    // Update the internal value state if the props change
+    useEffect(() => {
+        setValue(props.value || props.defaultValue || null);
+    }, [props]);
 
     const hasHits = terms.length > 0 && hits.length > 0;
     const hasNoHits = terms.length > 0 && !searching && totalHits < 1;
@@ -188,16 +191,12 @@ const Input: React.FC<Props> = (props) => {
         }
     }
 
-    // If this is a controlled component, we use props.value.
-    // Otherwise we use the uncontrolled local value state.
-    const renderedValue = props.value || value;
-
     // Read only 
     // TODO - Diff support
     if (bind.readOnly) {
         return (
             <SearchValue bind={bind}>
-                {renderedValue ? props.resultRenderer(renderedValue) : <span></span>}
+                {value ? props.resultRenderer(value) : <span></span>}
             </SearchValue>
         );
     }
@@ -234,7 +233,7 @@ const Input: React.FC<Props> = (props) => {
                     setTimeout(() => inputRef.current?.focus(), 100);
                 }}
             >
-                {renderedValue && props.resultRenderer(renderedValue)}
+                {value && props.resultRenderer(value)}
             </SearchValue>
 
             <div className="lookup-results">
@@ -249,6 +248,7 @@ const Input: React.FC<Props> = (props) => {
                     >
                         {hits.map((hit, idx) =>
                             <Result
+                                key={idx}
                                 id={`${bind.id}-result-${idx}`}
                                 onClick={() => {
                                     updateValue(hit);

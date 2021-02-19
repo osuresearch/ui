@@ -54,13 +54,15 @@ var Input = function Input(props) {
   var totalHits = (typedResults === null || typedResults === void 0 ? void 0 : typedResults.hits) || 0;
   var hits = (typedResults === null || typedResults === void 0 ? void 0 : typedResults.results) || [];
 
-  var _useState = (0, _react.useState)(function () {
-    return props.defaultValue ? props.defaultValue : null;
-  }),
+  var _useState = (0, _react.useState)(),
       _useState2 = (0, _slicedToArray2.default)(_useState, 2),
       value = _useState2[0],
-      setValue = _useState2[1];
+      setValue = _useState2[1]; // Update the internal value state if the props change
 
+
+  (0, _react.useEffect)(function () {
+    setValue(props.value || props.defaultValue || null);
+  }, [props]);
   var hasHits = terms.length > 0 && hits.length > 0;
   var hasNoHits = terms.length > 0 && !searching && totalHits < 1;
   var hasMoreHits = terms.length > 0 && !searching && totalHits > hits.length;
@@ -166,17 +168,14 @@ var Input = function Input(props) {
 
       (_resultsRef$current2 = resultsRef.current) === null || _resultsRef$current2 === void 0 ? void 0 : (_resultsRef$current2$ = _resultsRef$current2.querySelector("#".concat(activeDescendant))) === null || _resultsRef$current2$ === void 0 ? void 0 : _resultsRef$current2$.click();
     }
-  }; // If this is a controlled component, we use props.value.
-  // Otherwise we use the uncontrolled local value state.
-
-
-  var renderedValue = props.value || value; // Read only 
+  }; // Read only 
   // TODO - Diff support
+
 
   if (bind.readOnly) {
     return /*#__PURE__*/_react.default.createElement(_SearchValue.default, {
       bind: bind
-    }, renderedValue ? props.resultRenderer(renderedValue) : /*#__PURE__*/_react.default.createElement("span", null));
+    }, value ? props.resultRenderer(value) : /*#__PURE__*/_react.default.createElement("span", null));
   } // Edit
 
 
@@ -208,7 +207,7 @@ var Input = function Input(props) {
         return (_inputRef$current = inputRef.current) === null || _inputRef$current === void 0 ? void 0 : _inputRef$current.focus();
       }, 100);
     }
-  }, renderedValue && props.resultRenderer(renderedValue)), /*#__PURE__*/_react.default.createElement("div", {
+  }, value && props.resultRenderer(value)), /*#__PURE__*/_react.default.createElement("div", {
     className: "lookup-results"
   }, /*#__PURE__*/_react.default.createElement("div", {
     tabIndex: -1,
@@ -220,6 +219,7 @@ var Input = function Input(props) {
     id: "".concat(bind.id, "-lookup-results")
   }, hits.map(function (hit, idx) {
     return /*#__PURE__*/_react.default.createElement(_Result.default, {
+      key: idx,
       id: "".concat(bind.id, "-result-").concat(idx),
       onClick: function onClick() {
         updateValue(hit); // Needs setTimeout for the effect to apply correctly in Safari
