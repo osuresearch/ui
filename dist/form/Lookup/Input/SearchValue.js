@@ -21,6 +21,7 @@ var SearchValue = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
     tabIndex: 0,
     id: bind.id
   }, children), onClear && /*#__PURE__*/_react.default.createElement("button", {
+    type: "button",
     className: "lookup-value-clear",
     "aria-label": "Clear value",
     title: "Clear value",

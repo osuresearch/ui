@@ -26,7 +26,7 @@ const SearchValue = React.forwardRef<HTMLDivElement, Props>(({
             </div>
 
             {onClear &&
-                <button className="lookup-value-clear" aria-label="Clear value" title="Clear value" onClick={onClear}>
+                <button type="button" className="lookup-value-clear" aria-label="Clear value" title="Clear value" onClick={onClear}>
                     <span aria-hidden>&times;</span>
                 </button>
             }
