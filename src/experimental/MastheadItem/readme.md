@@ -1,6 +1,6 @@
 
 ```js
-import { Masthead } from '@oris/ui/experimental';
+import { Masthead } from '@ORIS/ui/experimental';
 
 <Masthead
     theme="protocol"

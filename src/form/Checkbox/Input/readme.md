@@ -6,7 +6,7 @@ Sub-component will inherit `id`, `onChange`, and `readOnly` props and methods fr
 ```
 
 ```js noeditor
-import { Icon } from '@oris/ui';
+import { Icon } from '@ORIS/ui';
 
 <div className="alert alert-primary">
     <Icon name="universal-access" circled={true} />

@@ -5,7 +5,7 @@ An example involving a Search transformed back and forth from a `key|name` strin
 
 ```jsx
 import { useState } from 'react';
-import { Text } from '@oris/ui';
+import { Text } from '@ORIS/ui';
 
 const [value, setValue] = useState('200275154|Chase McManning');
 

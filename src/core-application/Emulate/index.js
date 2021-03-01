@@ -8,7 +8,7 @@ import {
     Modal,
     ModalHeader,
     ModalBody
-} from '@oris/ui';
+} from '@ORIS/ui';
 
 /**
  * Modal to change emulation of users within the application.
@@ -16,8 +16,8 @@ import {
  * Renders itself as a link to open the modal. Once emulation has
  * changed, the entire application will be refreshed to load
  * under the new emulated user.
- * 
- * @deprecated Use `@oris/auth`. Will be removed in a future version of `@oris/ui`
+ *
+ * @deprecated Use `@ORIS/auth`. Will be removed in a future version of `@ORIS/ui`
  */
 class Emulate extends React.Component {
     constructor(props) {

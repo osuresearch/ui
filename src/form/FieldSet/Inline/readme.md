@@ -1,5 +1,5 @@
 ```jsx
-import { FieldSet, Radio } from '@oris/ui';
+import { FieldSet, Radio } from '@ORIS/ui';
 
 <FieldSet id="yes-no-inline">
     <FieldSet.Legend>

@@ -14,7 +14,7 @@ Check out open issues on [YouTrack](https://ordevsvc01.rf.ohio-state.edu/youtrac
 
 ## Test Isolation
 
-If you want to test certain components without running the entire styleguide, you can set the `ISOLATE_COMPONENTS` envvar to a path filter before running `npm start`. 
+If you want to test certain components without running the entire styleguide, you can set the `ISOLATE_COMPONENTS` envvar to a path filter before running `npm start`.
 
 For example, if you want to isolate a specific component:
 
@@ -32,7 +32,7 @@ npm start
 
 ## Releasing
 
-To deploy new releases of @oris/ui, you need to follow these steps **exactly**:
+To deploy new releases of @ORIS/ui, you need to follow these steps **exactly**:
 
 1. Gather your bullet list of changes that have been made since the last release
 2. Determine the release version of those changes. See the top of CHANGELOG.md for how versions work
@@ -41,4 +41,4 @@ To deploy new releases of @oris/ui, you need to follow these steps **exactly**:
 5. Run `npm build` to rebuild the `dist` folder **on master**
 6. Run `npm build:styleguide` to rebuild the `styleguide` folder **on master**
 7. Tag your new version number in the format `A.B.C` **on master**
-8. Notify people of the new release, typically via a message to the Teams General chat. 
+8. Notify people of the new release, typically via a message to the Teams General chat.

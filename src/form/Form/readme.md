@@ -2,8 +2,8 @@
 ### Example
 This example uses [React Hook Form](https://www.react-hook-form.com) for validation.
 
-```jsx noeditor 
-import { Icon } from '@oris/ui';
+```jsx noeditor
+import { Icon } from '@ORIS/ui';
 
 <div className="alert alert-primary">
     <Icon name='thumbs-o-up' circled />
@@ -15,7 +15,7 @@ import { Icon } from '@oris/ui';
 ```
 
 ```js noeditor
-import { Icon } from '@oris/ui';
+import { Icon } from '@ORIS/ui';
 
 <div className="alert alert-secondary">
     <Icon name="universal-access" circled={true} />
@@ -24,7 +24,7 @@ import { Icon } from '@oris/ui';
         It is best to validate form fields on blur. This provides screen reader users contextual error feedback while they are completing the form.
     </p>
     <p>
-        To accomplish this in React Hook Form, set the <code>mode</code> argument to <code>onBlur</code> when calling the <code>useForm</code> function (see implementation below)      
+        To accomplish this in React Hook Form, set the <code>mode</code> argument to <code>onBlur</code> when calling the <code>useForm</code> function (see implementation below)
     </p>
 </div>
 ```
@@ -42,8 +42,8 @@ import {
     Time,
     Lookup,
     Button
-} from '@oris/ui';
-import JsonApi from '@oris/ui/search/drivers/JsonApi';
+} from '@ORIS/ui';
+import JsonApi from '@ORIS/ui/search/drivers/JsonApi';
 
 const { register, errors, handleSubmit, control } = useForm({ mode: 'onBlur' });
 
@@ -52,9 +52,9 @@ const onSubmit = data => console.log('submit', data);
 <Form onSubmit={handleSubmit(onSubmit)} noValidate>
     <div className='row'>
         <div className='col'>
-            <Lookup 
-                id="search-for-person" 
-                driver={JsonApi('https://orapps.osu.edu/api/v1/person')} 
+            <Lookup
+                id="search-for-person"
+                driver={JsonApi('https://orapps.osu.edu/api/v1/person')}
                 error={errors['search-for-person'] && "Select a person"}
                 required
             >
@@ -119,7 +119,7 @@ const onSubmit = data => console.log('submit', data);
         </div>
     </div>
 
-    
+
         <Text
             id="address"
             required

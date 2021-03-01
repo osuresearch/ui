@@ -15,7 +15,7 @@ var _react = _interopRequireDefault(require("react"));
  * If you want to customize the result renderer, you need to
  * create your own variation of this component.
  *
- * @deprecated Use the `Lookup` form component. Will be removed in `@oris/ui^5.0`
+ * @deprecated Use the `Lookup` form component. Will be removed in `@ORIS/ui^5.0`
  */
 var SearchResult = function SearchResult(_ref) {
   var resource = _ref.resource,

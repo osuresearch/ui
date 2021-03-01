@@ -6,7 +6,7 @@
 Provide the same type of driver you would for `SearchProvider`. See driver support section below for what's needed by your search driver before using this component.
 
 ```jsx
-import Mock from '@oris/ui/search/drivers/Mock';
+import Mock from '@ORIS/ui/search/drivers/Mock';
 
 <Lookup id="example-lookup-basic" driver={Mock()}>
     <Lookup.Label>
@@ -35,7 +35,7 @@ import Mock from '@oris/ui/search/drivers/Mock';
 
 ```jsx
 import { useForm, Controller } from 'react-hook-form';
-import Mock from '@oris/ui/search/drivers/Mock';
+import Mock from '@ORIS/ui/search/drivers/Mock';
 
 const { control, errors, watch } = useForm({ mode: "onBlur" });
 
@@ -81,7 +81,7 @@ Value: {JSON.stringify(watch('rhf-lookup'))}
 
 #### Default Value
 ```jsx
-import Mock from '@oris/ui/search/drivers/Mock';
+import Mock from '@ORIS/ui/search/drivers/Mock';
 
 const defaultValue = {"id":89693,"name":"Sigurd Dickens","age":34,"username":"Brenden.Vandervort71","address":"Welch Island","city":"South Odessa","state":"West Virginia","zip":"83794","company":"Aufderhar, Ferry and Welch","bs":"utilize one-to-one interfaces","email":"Sage.McCullough@yahoo.com","phone":"864-230-0669 x9699","about":"Voluptates voluptatem laboriosam sequi molestias suscipit provident sint sunt. Aspernatur quis incidunt reiciendis. Vel deleniti aspernatur omnis ducimus. Dicta iusto omnis accusamus magni sit ratione vel. Eos nam atque adipisci voluptatibus id et quaerat rerum dolor.","title":"National Brand Facilitator","avatar":{"type":"div","key":null,"ref":null,"props":{"style":{"backgroundColor":"#2ecc71","width":80,"height":80,"font":"40px Arial","color":"#fff","textAlign":"center","lineHeight":"80px","borderRadius":"50%"},"children":"SD"},"_owner":null,"_store":{}}};
 
@@ -114,8 +114,8 @@ const defaultValue = {"id":89693,"name":"Sigurd Dickens","age":34,"username":"Br
 #### Change Events
 
 ```jsx
-import { SearchProvider, SearchDebugger } from '@oris/ui';
-import Mock from '@oris/ui/search/drivers/Mock';
+import { SearchProvider, SearchDebugger } from '@ORIS/ui';
+import Mock from '@ORIS/ui/search/drivers/Mock';
 
 const onChange = (newValue, oldValue) => {
     alert(`Lookup value changed from ${JSON.stringify(oldValue)} to ${JSON.stringify(newValue)}`);
@@ -152,8 +152,8 @@ const onChange = (newValue, oldValue) => {
 To support `<Filters>` and other external search tooling you can provide a `provider` prop to Lookup instead of the driver directly.
 
 ```jsx
-import { SearchProvider, Filters, SearchDebugger } from '@oris/ui';
-import Mock from '@oris/ui/search/drivers/Mock';
+import { SearchProvider, Filters, SearchDebugger } from '@ORIS/ui';
+import Mock from '@ORIS/ui/search/drivers/Mock';
 
 const PROVIDER = 'example-lookup-with-filtering';
 
@@ -197,7 +197,7 @@ const PROVIDER = 'example-lookup-with-filtering';
 The public JSON:API endpoint https://orapps.osu.edu/api/v1/person can be searched against using the `JsonApi` search driver.
 
 ```jsx
-import JsonApi from '@oris/ui/search/drivers/JsonApi';
+import JsonApi from '@ORIS/ui/search/drivers/JsonApi';
 
 <Lookup id="example-json-api-person" driver={JsonApi('https://orapps.osu.edu/api/v1/person')}>
     <Lookup.Label>
@@ -220,8 +220,8 @@ import JsonApi from '@oris/ui/search/drivers/JsonApi';
 ### Clear Lookup Input
 ```jsx
 import { useState } from 'react';
-import JsonApi from '@oris/ui/search/drivers/JsonApi';
-import { Button } from '@oris/ui';
+import JsonApi from '@ORIS/ui/search/drivers/JsonApi';
+import { Button } from '@ORIS/ui';
 
 const [value, setValue] = useState();
 
@@ -231,7 +231,7 @@ const [value, setValue] = useState();
         Search for a person
     </Lookup.Label>
 
-    <Lookup.Input 
+    <Lookup.Input
         value={value}
         onChange={v => setValue(v)}
         resultRenderer={
@@ -241,7 +241,7 @@ const [value, setValue] = useState();
                     ({hit.attributes.username})
                 </small>
             </span>
-        } 
+        }
     />
 
     <Lookup.Error />

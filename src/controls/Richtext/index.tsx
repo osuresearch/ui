@@ -16,7 +16,7 @@ export interface Props {
 
     /**
      * Change callback containing updated document data.
-     * 
+     *
      * This **must** be a memoized callback (e.g. wrapped with `useCallback`)
      */
     onChange?(newValue: string): void;
@@ -26,9 +26,9 @@ export interface Props {
      */
     className?: string;
 
-    /** External CSS file to apply style to the editor content. It should reflect the 
+    /** External CSS file to apply style to the editor content. It should reflect the
      *  CSS used in the target pages where the content is to be displayed.
-     * 
+     *
      * For more information, see [CKEditor 4 contentsCss](https://ckeditor.com/docs/ckeditor4/latest/api/CKEDITOR_config.html#cfg-contentsCss)
      */
     contentsCss?: string;
@@ -52,9 +52,9 @@ const SIMPLE_TOOLBAR_CONFIG = [
 
 /**
  * Simple preconfigured Richtext editor
- * 
- * @deprecated Use `<Text.Rich>` from `@oris/ui` Form Components. Will be removed in a future version of `@oris/ui`
- * 
+ *
+ * @deprecated Use `<Text.Rich>` from `@ORIS/ui` Form Components. Will be removed in a future version of `@ORIS/ui`
+ *
  */
 function Richtext({
     id,
@@ -70,7 +70,7 @@ function Richtext({
     const editorRef = useRef<HTMLTextAreaElement>(null);
 
     useLayoutEffect(() => {
-        // @ts-ignore 
+        // @ts-ignore
         const cke = window.CKEDITOR;
         let editor: any = undefined; // No type info exists for CKE
 
@@ -118,7 +118,7 @@ function Richtext({
         );
     }
 
-    // TODO: Toggling readOnly isn't super efficient here, since 
+    // TODO: Toggling readOnly isn't super efficient here, since
     // it'll recreate the editor from scratch. But I don't envision
     // many use cases where we'll be doing that.
 

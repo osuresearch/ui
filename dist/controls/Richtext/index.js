@@ -44,9 +44,9 @@ var SIMPLE_TOOLBAR_CONFIG = [{
 }];
 /**
  * Simple preconfigured Richtext editor
- * 
- * @deprecated Use `<Text.Rich>` from `@oris/ui` Form Components. Will be removed in a future version of `@oris/ui`
- * 
+ *
+ * @deprecated Use `<Text.Rich>` from `@ORIS/ui` Form Components. Will be removed in a future version of `@ORIS/ui`
+ *
  */
 
 function Richtext(_ref) {
@@ -74,7 +74,7 @@ function Richtext(_ref) {
 
   var editorRef = (0, _react.useRef)(null);
   (0, _react.useLayoutEffect)(function () {
-    // @ts-ignore 
+    // @ts-ignore
     var cke = window.CKEDITOR;
     var editor = undefined; // No type info exists for CKE
 
@@ -112,7 +112,7 @@ function Richtext(_ref) {
     return /*#__PURE__*/_react.default.createElement("div", {
       className: "richtext is-error"
     }, error);
-  } // TODO: Toggling readOnly isn't super efficient here, since 
+  } // TODO: Toggling readOnly isn't super efficient here, since
   // it'll recreate the editor from scratch. But I don't envision
   // many use cases where we'll be doing that.
 

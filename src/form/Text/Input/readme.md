@@ -7,7 +7,7 @@ Inlining values
 
 ```jsx
 import { useState } from 'react';
-import { Form, Button, Text } from '@oris/ui';
+import { Form, Button, Text } from '@ORIS/ui';
 
 const [readOnly, setReadOnly] = useState(false);
 const [error, setError] = useState('');
@@ -52,7 +52,7 @@ Inlining values with React Hook Form
 
 ```jsx
 import { useForm } from 'react-hook-form';
-import { Form, Button, Text } from '@oris/ui';
+import { Form, Button, Text } from '@ORIS/ui';
 
 const { register, errors, watch, handleSubmit } = useForm({ mode: "onBlur" });
 
@@ -64,7 +64,7 @@ const onSubmit = data => console.log(data);
             Label here
         </Text.Label>
 
-        <Text.Input 
+        <Text.Input
             ref={register({ required: true })}
             placeholder="Keep this field empty to trigger error on blur and form submit"
         />
@@ -87,7 +87,7 @@ const onSubmit = data => console.log(data);
 
 Providing a `bind` class instance:
 ```jsx
-import { Form, Button, Text } from '@oris/ui';
+import { Form, Button, Text } from '@ORIS/ui';
 import { MyMockStringBind } from '../../../internal/FormCommon/types';
 
 const bind = new MyMockStringBind('foo4', 'foo bar');
@@ -113,7 +113,7 @@ const bind = new MyMockStringBind('foo4', 'foo bar');
 Getting bind values on form submit:
 ```jsx
 import React, { useEffect } from 'react';
-import { Form, Button, Text } from '@oris/ui';
+import { Form, Button, Text } from '@ORIS/ui';
 import { MyMockStringBind } from '../../../internal/FormCommon/types';
 
 const bind = new MyMockStringBind('foo6', 'foo bar');
@@ -146,7 +146,7 @@ function MyComponent() {
 Update binds externally
 ```jsx
 import React, { useEffect, useState } from 'react';
-import { Form, Button, Text } from '@oris/ui';
+import { Form, Button, Text } from '@ORIS/ui';
 import { MyMockStringBind } from '../../../internal/FormCommon/types';
 
 const bind = new MyMockStringBind('foo7', 'foo bar');
@@ -170,7 +170,7 @@ Also demos another component that uses the `useFieldBind` hook to monitor a bind
 
 ```jsx
 import React, { useEffect } from 'react';
-import { Form, Button, Text } from '@oris/ui';
+import { Form, Button, Text } from '@ORIS/ui';
 import { MyMockStringBind } from '../../../internal/FormCommon/types';
 import useFieldBind from '../../../internal/FormCommon/hooks/useFieldBind';
 
@@ -209,7 +209,7 @@ function MyComponent() {
 Validation
 
 ```jsx
-import { Text } from '@oris/ui';
+import { Text } from '@ORIS/ui';
 
 const error = 'You must fill out this field';
 
@@ -229,7 +229,7 @@ const error = 'You must fill out this field';
 ```
 
 ```jsx
-import { Text } from '@oris/ui';
+import { Text } from '@ORIS/ui';
 
 const success = "This is valid!";
 
@@ -253,9 +253,9 @@ Validation with React Hook Form
 ```jsx
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { Text, Button } from '@oris/ui';
+import { Text, Button } from '@ORIS/ui';
 
-const { register, errors, trigger, setValue } = useForm({ 
+const { register, errors, trigger, setValue } = useForm({
     mode: "onBlur",
     defaultValues: {
         "rhf-input-invalid": "Hi"
@@ -272,7 +272,7 @@ useEffect(() => {
         Input with an error message trigged by React Hook Form.
     </Text.Label>
 
-    <Text.Input 
+    <Text.Input
         ref={register({
             required: true,
             pattern: /[A-Za-z]{3}/
@@ -295,9 +295,9 @@ useEffect(() => {
 ```jsx
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { Text, Button } from '@oris/ui';
+import { Text, Button } from '@ORIS/ui';
 
-const { register, trigger, setValue, formState } = useForm({ 
+const { register, trigger, setValue, formState } = useForm({
     mode: "onBlur",
     defaultValues: {
         "rhf-input-valid": "Hello"
@@ -309,7 +309,7 @@ useEffect(() => {
 }, []);
 
 <>
-<Text 
+<Text
     id="rhf-input-valid"
     success={formState.isValid && "This is valid!"}
     required
@@ -339,7 +339,7 @@ useEffect(() => {
 ```
 
 ```js noeditor
-import { Icon } from '@oris/ui';
+import { Icon } from '@ORIS/ui';
 
 <div className="alert alert-primary">
     <Icon name="universal-access" circled={true} />

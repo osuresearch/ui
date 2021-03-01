@@ -13,7 +13,7 @@ const [values, setValues] = useState([]);
 <Chips id='chips'>
     <Chips.Label>Chips</Chips.Label>
 
-    <Chips.Input 
+    <Chips.Input
         value={values}
         onChange={(e) => setValues(e.value)}
     />
@@ -33,7 +33,7 @@ const [values, setValues] = useState([]);
 <Chips id='tags'>
     <Chips.Label>Tags</Chips.Label>
 
-    <Chips.Input 
+    <Chips.Input
         value={values}
         onChange={(e) => setValues(e.value)}
         separator=","
@@ -51,7 +51,7 @@ A chip is customized using `itemTemplate` function where value is passed to retu
 
 ```jsx
 import React, { useState } from 'react';
-import { Icon } from '@oris/ui';
+import { Icon } from '@ORIS/ui';
 
 const [values, setValues] = useState([]);
 
@@ -66,7 +66,7 @@ const customChip = (item) => {
 <Chips id='users'>
     <Chips.Label>Users</Chips.Label>
 
-    <Chips.Input 
+    <Chips.Input
         value={values}
         onChange={(e) => setValues(e.value)}
         max={5}

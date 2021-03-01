@@ -15,7 +15,7 @@ var _react = _interopRequireDefault(require("react"));
  * Includes their username alongside each result for better identifying
  * the correct result when multiple people with the same name are returned.
  *
- * @deprecated Use the `Lookup` form component. Will be removed in `@oris/ui^5.0`
+ * @deprecated Use the `Lookup` form component. Will be removed in `@ORIS/ui^5.0`
  */
 var PersonSearchResult = function PersonSearchResult(_ref) {
   var resource = _ref.resource,

@@ -1,12 +1,12 @@
 
-By default, the content iframe inside the editor uses a CSS file in the Assets project. You can provide your own app-specific CSS by providing an alternative source file in `contentsCss`. 
+By default, the content iframe inside the editor uses a CSS file in the Assets project. You can provide your own app-specific CSS by providing an alternative source file in `contentsCss`.
 
 #### Examples:
 
 Provide the HTML value as a string
 
 ```jsx
-import { Text } from '@oris/ui';
+import { Text } from '@ORIS/ui';
 
 const html = "<h1>Hello World</h1><p>I am <strong>rich</strong> text!</p>";
 
@@ -19,7 +19,7 @@ const html = "<h1>Hello World</h1><p>I am <strong>rich</strong> text!</p>";
 
 Read Only
 ```jsx
-import { Text } from '@oris/ui';
+import { Text } from '@ORIS/ui';
 
 const html = "<h1>Hello World</h1><p>I am <strong>rich</strong> text!</p>";
 
@@ -33,17 +33,17 @@ const html = "<h1>Hello World</h1><p>I am <strong>rich</strong> text!</p>";
 A "simple" UI version is also available if you do not need (or want) the full range of controls in your app:
 
 ```jsx
-import { Text } from '@oris/ui';
+import { Text } from '@ORIS/ui';
 
 const html = "Hello World! <p>I am <strong>rich</strong> text!</p>";
 
 <Text id="simple-rte">
     <Text.Label>I am a simple Rich Text Editor</Text.Label>
 
-    <Text.Rich 
-        defaultValue={html} 
+    <Text.Rich
+        defaultValue={html}
         labelText='I am a simple Rich Text Editor'
-        simple 
+        simple
     />
 </Text>
 ```
@@ -52,7 +52,7 @@ Use the `defaultValue` and `onChange` props to set and extract the text from you
 
 ```jsx
 import { useState } from 'react';
-import { Form, Text } from '@oris/ui';
+import { Form, Text } from '@ORIS/ui';
 
 const [content, setContent] = useState('<p>Start typing and see it update live</p>');
 
@@ -74,9 +74,9 @@ Use `<Text.Rich>` with React Hook Form
 
 ```jsx
 import { useForm, Controller } from 'react-hook-form';
-import { Form, Text } from '@oris/ui';
+import { Form, Text } from '@ORIS/ui';
 
-const { register, errors, control, watch } = useForm({ 
+const { register, errors, control, watch } = useForm({
     mode: "onBlur",
     defaultValues: {
         "rhf-set-change-values": "<p>Start typing and see it update live</p>"
@@ -84,8 +84,8 @@ const { register, errors, control, watch } = useForm({
 });
 
 <Form>
-    <Text 
-        id="rhf-set-change-values" 
+    <Text
+        id="rhf-set-change-values"
         error={errors["rhf-set-change-values"] && "Enter Text Above"}
         required
     >
@@ -95,9 +95,9 @@ const { register, errors, control, watch } = useForm({
             control={control}
             name="rhf-set-change-values"
             rules={{ required: true }}
-            render={({ onChange, onBlur, value }) => 
-                <Text.Rich 
-                    defaultValue={value} 
+            render={({ onChange, onBlur, value }) =>
+                <Text.Rich
+                    defaultValue={value}
                     onChange={onChange}
                     onBlur={onBlur} // Notifies RHF to validate field
                 />

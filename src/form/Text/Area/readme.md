@@ -5,7 +5,7 @@ Sub-component will inherit `id`, `onChange`, and `readOnly` props from parent co
 
 Basic `<Text.Area>`
 ```jsx
-import { Text } from '@oris/ui';
+import { Text } from '@ORIS/ui';
 
 <Text id="textarea-sample" required>
     <Text.Label>Basic textarea</Text.Label>
@@ -24,12 +24,12 @@ import { Text } from '@oris/ui';
 Basic `<Text.Area>` with React Hook Form
 ```jsx
 import { useForm } from 'react-hook-form';
-import { Text } from '@oris/ui';
+import { Text } from '@ORIS/ui';
 
 const { register, errors } = useForm({ mode: "onBlur" });
 
-<Text 
-    id="rhf-textarea-sample" 
+<Text
+    id="rhf-textarea-sample"
     error={errors["rhf-textarea-sample"] && "This is required"}
     required
 >
@@ -51,7 +51,7 @@ const { register, errors } = useForm({ mode: "onBlur" });
 
 `<Text.Area>` with Not Applicable option
 ```jsx
-import { Text, FieldSet, Checkbox } from '@oris/ui';
+import { Text, FieldSet, Checkbox } from '@ORIS/ui';
 
 <FieldSet>
     <Text id="textarea-with-na">
@@ -73,7 +73,7 @@ import { Text, FieldSet, Checkbox } from '@oris/ui';
 ```
 
 ```js noeditor
-import { Icon } from '@oris/ui';
+import { Icon } from '@ORIS/ui';
 
 <div className="alert alert-primary">
     <Icon name="universal-access" circled={true} />
@@ -86,7 +86,7 @@ import { Icon } from '@oris/ui';
 
 Read Only
 ```jsx
-import { Text } from '@oris/ui';
+import { Text } from '@ORIS/ui';
 
 <Text id="textarea-sample-readOnly" required readOnly>
     <Text.Label>Basic textarea</Text.Label>
@@ -98,7 +98,7 @@ import { Text } from '@oris/ui';
 
 Maecenas molestie sodales tortor, in accumsan massa laoreet id. Ut euismod tortor quis augue sodales porta. Nunc quis mi libero. Praesent lacinia blandit mi, ut gravida neque hendrerit ut. Vivamus porttitor nisi eget tincidunt venenatis. Nunc ac consectetur velit. Morbi viverra mattis magna consequat ultricies. Fusce sit amet faucibus est. Phasellus luctus magna vitae nunc porta, a pulvinar ante ultrices. Aliquam lorem enim, tincidunt ornare laoreet vel, lobortis vitae quam. Donec in posuere tellus. Duis ac enim elit. Fusce efficitur nulla non ex blandit congue.
 
-Phasellus nec eleifend nisi. Praesent pharetra nisi in justo vehicula lobortis. Pellentesque sodales lacus sit amet tortor maximus, vitae iaculis tellus eleifend. Donec scelerisque massa ac consequat scelerisque. Maecenas nec varius odio. Nunc sem neque, sodales semper nisi in, cursus dignissim metus. Proin id vehicula mi, non feugiat sem. Donec auctor ultrices orci vel rutrum. 
+Phasellus nec eleifend nisi. Praesent pharetra nisi in justo vehicula lobortis. Pellentesque sodales lacus sit amet tortor maximus, vitae iaculis tellus eleifend. Donec scelerisque massa ac consequat scelerisque. Maecenas nec varius odio. Nunc sem neque, sodales semper nisi in, cursus dignissim metus. Proin id vehicula mi, non feugiat sem. Donec auctor ultrices orci vel rutrum.
         `}
     />
 

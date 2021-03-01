@@ -21,7 +21,7 @@ import React, { useState, useRef } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 
-import { MultiSelect, Button, Text, Icon, Badge, Dropdown, DateTime } from '@oris/ui';
+import { MultiSelect, Button, Text, Icon, Badge, Dropdown, DateTime } from '@ORIS/ui';
 
 const dt = useRef(null);
 const customers = require('./demo/customers').default;
@@ -80,7 +80,7 @@ const onRepresentativeFilterChange = (event) => {
 
 const representativeFilter =
         <MultiSelect id="representative">
-            <MultiSelect.Input 
+            <MultiSelect.Input
                 className="p-column-filter"
                 value={selectedRepresentatives}
                 options={representatives}
@@ -129,16 +129,16 @@ const onDateFilterChange = (event) => {
     setDateFilter(event.value);
 }
 
-const dateFilterElement = 
+const dateFilterElement =
     <DateTime id='date-filter-element'>
-        <DateTime.Input 
+        <DateTime.Input
             value={dateFilter}
             onChange={onDateFilterChange}
             dateFormat='yyyy-mm-dd'
             placeholderText='Registration Date'
         />
     </DateTime>
-        
+
 
 const statusTemplate = (status) => {
     let theme = '';
@@ -175,9 +175,9 @@ const onStatusFilterChange = (event) => {
     setSelectedStatus(event.value);
 }
 
-const statusFilter = 
+const statusFilter =
     <Dropdown id='status-filter'>
-        <Dropdown.Input 
+        <Dropdown.Input
             value={selectedStatus} options={statuses} onChange={onStatusFilterChange}
                     itemTemplate={statusTemplate} showClear placeholder="Select a Status" className="p-column-filter"
         />
@@ -186,14 +186,14 @@ const statusFilter =
 const activityBodyTemplate = (rowData) => {
     return (
         <div className='progress'>
-            <div 
-                className="progress-bar bg-info" 
-                role="progressbar" 
+            <div
+                className="progress-bar bg-info"
+                role="progressbar"
                 style={{ width: `${rowData.activity}%` }}
                 aria-valuenow={rowData.activity}
-                aria-valuemin="0" 
+                aria-valuemin="0"
                 aria-valuemax="100"
-            ></div>            
+            ></div>
         </div>
     );
 }
@@ -206,7 +206,7 @@ const actionBodyTemplate = () => {
     );
 }
 
-const header = 
+const header =
             <div className="table-header row">
                 <div className='col'>
                     <h3>List of Customers</h3>
@@ -218,7 +218,7 @@ const header =
                             <span className='input-group-prefix'>
                                 <Icon name='search' />
                             </span>
-                            <Text.Input 
+                            <Text.Input
                                 value={globalFilter}
                                 onChange={(e) => setGlobalFilter(e.target.value)}
                                 placeholder="Global Search"
@@ -229,85 +229,85 @@ const header =
             </div>;
 
 
-<DataTable 
-    ref={dt} 
+<DataTable
+    ref={dt}
     value={customers}
-    header={header} 
-    className="p-datatable-customers" 
-    dataKey="id" 
-    rowHover 
+    header={header}
+    className="p-datatable-customers"
+    dataKey="id"
+    rowHover
     globalFilter={globalFilter}
-    selection={selectedCustomers} 
+    selection={selectedCustomers}
     onSelectionChange={e => setSelectedCustomers(e.value)}
-    paginator 
-    rows={10} 
-    emptyMessage="No customers found" 
+    paginator
+    rows={10}
+    emptyMessage="No customers found"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-    paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown" 
+    paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
     rowsPerPageOptions={[10, 25, 50]}
     sortMode='multiple'
 >
-    <Column 
-        selectionMode="multiple" 
-        style={{ width: '3em' }} 
+    <Column
+        selectionMode="multiple"
+        style={{ width: '3em' }}
     />
-    <Column 
-        field="name" 
-        header="Name" 
-        sortable 
-        filter 
-        filterPlaceholder="Search by name" 
+    <Column
+        field="name"
+        header="Name"
+        sortable
+        filter
+        filterPlaceholder="Search by name"
     />
-    <Column 
-        sortField="country.name" 
+    <Column
+        sortField="country.name"
         filterField="country.name"
-        header="Country" 
-        body={countryBodyTemplate} 
-        sortable 
-        filter 
-        filterMatchMode="contains" 
-        filterPlaceholder="Search by country" 
+        header="Country"
+        body={countryBodyTemplate}
+        sortable
+        filter
+        filterMatchMode="contains"
+        filterPlaceholder="Search by country"
     />
-    <Column 
-        sortField="representative.name" 
-        filterField="representative.name" 
+    <Column
+        sortField="representative.name"
+        filterField="representative.name"
         header="Representative"
-        body={representativeBodyTemplate} 
-        sortable 
-        filter 
-        filterElement={representativeFilter} 
+        body={representativeBodyTemplate}
+        sortable
+        filter
+        filterElement={representativeFilter}
     />
-    <Column 
-        field="date" 
-        header="Date" 
-        body={dateBodyTemplate} 
-        sortable 
-        filter 
-        filterMatchMode="custom" 
-        filterFunction={filterDate} 
-        filterElement={dateFilterElement} 
+    <Column
+        field="date"
+        header="Date"
+        body={dateBodyTemplate}
+        sortable
+        filter
+        filterMatchMode="custom"
+        filterFunction={filterDate}
+        filterElement={dateFilterElement}
     />
-    <Column 
-        field="status" 
-        header="Status" 
-        body={(row) => statusTemplate(row.status)} 
-        sortable 
-        filter 
-        filterElement={statusFilter} 
+    <Column
+        field="status"
+        header="Status"
+        body={(row) => statusTemplate(row.status)}
+        sortable
+        filter
+        filterElement={statusFilter}
     />
-    <Column 
-        field="activity" 
-        header="Activity" 
-        body={activityBodyTemplate} 
-        sortable 
-        filter 
-        filterMatchMode="gte" 
-        filterPlaceholder="Minimum" 
+    <Column
+        field="activity"
+        header="Activity"
+        body={activityBodyTemplate}
+        sortable
+        filter
+        filterMatchMode="gte"
+        filterPlaceholder="Minimum"
     />
-    <Column 
-        body={actionBodyTemplate} 
-        headerStyle={{ width: '8em', textAlign: 'center' }} 
-        bodyStyle={{ textAlign: 'center', overflow: 'visible' }} 
+    <Column
+        body={actionBodyTemplate}
+        headerStyle={{ width: '8em', textAlign: 'center' }}
+        bodyStyle={{ textAlign: 'center', overflow: 'visible' }}
     />
 </DataTable>
 ```

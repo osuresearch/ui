@@ -6,7 +6,7 @@ export default Emulate;
  * changed, the entire application will be refreshed to load
  * under the new emulated user.
  *
- * @deprecated Use `@oris/auth`. Will be removed in a future version of `@oris/ui`
+ * @deprecated Use `@ORIS/auth`. Will be removed in a future version of `@ORIS/ui`
  */
 declare class Emulate extends React.Component<any, any, any> {
     constructor(props: any);

@@ -10,7 +10,7 @@ const cities = require('./cities').default;
 <Dropdown id="select-city">
     <Dropdown.Label>Select a City</Dropdown.Label>
 
-    <Dropdown.Input 
+    <Dropdown.Input
         value={selectedCity}
         options={cities}
         onChange={(e) => setSelectedCity(e.value)}
@@ -35,7 +35,7 @@ const cities = require('./cities').default;
 <Dropdown id="select-city-2">
     <Dropdown.Label>Select a City</Dropdown.Label>
 
-    <Dropdown.Input 
+    <Dropdown.Input
         value={selectedCity}
         options={cities}
         onChange={(e) => setSelectedCity(e.value)}
@@ -53,7 +53,7 @@ Options can be filtered using an input field in the overlay by enabling the `fil
 
 ```jsx
 import React, { useState } from 'react';
-import { Icon } from '@oris/ui';
+import { Icon } from '@ORIS/ui';
 
 const [selectedCountry, setSelectedCountry] = useState();
 
@@ -86,7 +86,7 @@ const countryOptionTemplate = (option) => {
 <Dropdown id="select-country">
     <Dropdown.Label>Select a Country</Dropdown.Label>
 
-    <Dropdown.Input 
+    <Dropdown.Input
         value={selectedCountry}
         options={countries}
         onChange={(e) => setSelectedCountry(e.value)}

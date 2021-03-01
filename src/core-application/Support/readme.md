@@ -1,5 +1,5 @@
 ```js
-import { Support } from "@oris/ui";
+import { Support } from "@ORIS/ui";
 
 <Support
     app="My App" /* Required */

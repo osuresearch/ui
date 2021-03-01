@@ -176,7 +176,7 @@ function sort(name, field) {
 } //#endregion
 //#region Public API
 // Data structures and types
-// Drivers are not exported here - import specific ones from `@oris/ui/search/drivers`
+// Drivers are not exported here - import specific ones from `@ORIS/ui/search/drivers`
 // This allows us to safely load only the drivers that are needed in a project.
 // (e.g. a non-GraphQL project doesn't need to worry about GraphQL drivers)
 //#endregion

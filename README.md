@@ -1,4 +1,4 @@
-# @oris/ui
+# @ORIS/ui
 
 Collection of React components and a rebranded [Bootstrap 4.0](https://getbootstrap.com/docs/4.0/getting-started/introduction/) build for Office of Research applications.
 
@@ -17,7 +17,7 @@ npm install git+ssh://git@code.osu.edu:ORIS/ui.git#semver:^4
 {
     ...
     "dependencies": {
-        "@oris/ui": "git+ssh://git@code.osu.edu:ORIS/ui.git#semver:^4"
+        "@ORIS/ui": "git+ssh://git@code.osu.edu:ORIS/ui.git#semver:^4"
     }
 }
 ```
@@ -25,11 +25,11 @@ npm install git+ssh://git@code.osu.edu:ORIS/ui.git#semver:^4
 
 ## Usage
 
-Each component is importable from `@oris/ui`, for example:
+Each component is importable from `@ORIS/ui`, for example:
 
 ```jsx
 import React from 'react';
-import { Icon, Button } from '@oris/ui';
+import { Icon, Button } from '@ORIS/ui';
 
 const MyPage = () =>
     <div className="my-page">
@@ -43,7 +43,7 @@ const MyPage = () =>
 To import the SASS styles into your application, import the following in whatever your primary sass file is (typically an `index.sass`):
 
 ```css
-@import "@oris/ui/dist/sass";
+@import "@ORIS/ui/dist/sass";
 ```
 
 

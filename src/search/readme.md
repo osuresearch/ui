@@ -1,7 +1,7 @@
 
 ```jsx
-import { SearchProvider, Filters, SearchDebugger, useSearchProvider } from '@oris/ui';
-import Mock from '@oris/ui/search/drivers/Mock';
+import { SearchProvider, Filters, SearchDebugger, useSearchProvider } from '@ORIS/ui';
+import Mock from '@ORIS/ui/search/drivers/Mock';
 
 function PersonSearchFilters() {
     return (
@@ -114,7 +114,7 @@ function PersonSearchResults() {
                 This is entirely up to you and your app's needs -
                 show cards, swim lanes, a table, calendar view, etc.
             */}
-            {results && 
+            {results &&
                 <ul className="list-unstyled">
                     {results.results.map(PersonResultCard)}
                 </ul>

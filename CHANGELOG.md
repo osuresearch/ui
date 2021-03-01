@@ -31,7 +31,7 @@ __New Features:__
 __Internal changes:__
 
 * The base styleguide page no longer loads all of the components in the styleguide
-* Added the ability to override the component path line; if `componentPathLine` is set in a component, it will override the default (i.e. `import { Component } from '@oris/ui'`)
+* Added the ability to override the component path line; if `componentPathLine` is set in a component, it will override the default (i.e. `import { Component } from '@ORIS/ui'`)
 * Improved the method of wrapping component names in brackets
 * Moved component files into category folders within the components folder
 * Removed (now) redundant HTML docs
@@ -122,8 +122,8 @@ __Deprecated Components:__
 
 Components marked as deprecated will be removed in a future release. They will continue to work until their removal.
 
-* `Profile` - Now part of the [@oris/auth](https://code.osu.edu/ORIS/auth/) package.
-* `Emulate` - Now part of the [@oris/auth](https://code.osu.edu/ORIS/auth/) package.
+* `Profile` - Now part of the [@ORIS/auth](https://code.osu.edu/ORIS/auth/) package.
+* `Emulate` - Now part of the [@ORIS/auth](https://code.osu.edu/ORIS/auth/) package.
 
 __Minor Breaking Changes:__
 
@@ -148,10 +148,10 @@ __UI Changes:__
 
 __Bug Fixes:__
 
-* Refactored package dependencies to no longer require specific builds of node-sass or react-scripts installed when installing @oris/ui through npm.
+* Refactored package dependencies to no longer require specific builds of node-sass or react-scripts installed when installing @ORIS/ui through npm.
     * Minimum supported React versions are defined via `peerDependencies` to issue warnings during `npm install` if these are not met.
 
-Note that with the above fix `react-dom` and `react-router-dom` will no longer be installed alongside @oris/ui. If your project was using an older version of @oris/ui, you will need to install these dependencies manually via:
+Note that with the above fix `react-dom` and `react-router-dom` will no longer be installed alongside @ORIS/ui. If your project was using an older version of @ORIS/ui, you will need to install these dependencies manually via:
 
 ```
 npm install react-dom react-router-dom --save
@@ -169,7 +169,7 @@ __Backwards Breaking Changes:__
 * All non-React components have been removed or replaced with React-equivalents
     * This does not include every Bootstrap component. Use those as you typically would.
 * Composer support has been removed. Now installable as a `npm` package
-* Component imports must now come from the `@oris/ui` package
+* Component imports must now come from the `@ORIS/ui` package
 * `Lookup` component has been replaced by `Search` - with similar arguments and less jQuery
 * `Modal` component now has additional wrapper DOM. Recommended to use new `ModalHeader` and `ModalBody` as the only children.
 * Removed `AppLoader` component

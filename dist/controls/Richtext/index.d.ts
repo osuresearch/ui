@@ -28,7 +28,7 @@ export interface Props {
 /**
  * Simple preconfigured Richtext editor
  *
- * @deprecated Use `<Text.Rich>` from `@oris/ui` Form Components. Will be removed in a future version of `@oris/ui`
+ * @deprecated Use `<Text.Rich>` from `@ORIS/ui` Form Components. Will be removed in a future version of `@ORIS/ui`
  *
  */
 declare function Richtext({ id, onChange, defaultValue, readOnly, simple, className, contentsCss }: Props): JSX.Element;

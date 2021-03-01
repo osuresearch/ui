@@ -2,7 +2,7 @@
 
 #### Basic Implementation
 ```jsx
-import { FieldSet } from '@oris/ui';
+import { FieldSet } from '@ORIS/ui';
 
 <FieldSet id="texture-format">
     <FieldSet.Legend>
@@ -38,7 +38,7 @@ import { FieldSet } from '@oris/ui';
 #### Basic Implementation with React Hook Form
 ```jsx
 import { useForm } from 'react-hook-form';
-import { FieldSet } from '@oris/ui';
+import { FieldSet } from '@ORIS/ui';
 
 const { register, watch } = useForm({ mode: "onBlur" });
 
@@ -80,7 +80,7 @@ Value: {watch("rhf-texture-format")}
 
 #### Read Only
 ```jsx
-import { FieldSet } from '@oris/ui';
+import { FieldSet } from '@ORIS/ui';
 
 <FieldSet id="output-format" readOnly={true}>
     <FieldSet.Legend>
@@ -109,7 +109,7 @@ import { FieldSet } from '@oris/ui';
 #### Change Events
 
 ```jsx
-import { FieldSet } from '@oris/ui';
+import { FieldSet } from '@ORIS/ui';
 
 const onChange = (newStrValue, oldStrValue) => {
     alert(`Selected option changed from ${oldStrValue} to ${newStrValue}`);

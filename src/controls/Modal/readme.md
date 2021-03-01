@@ -2,7 +2,7 @@
 ### Examples
 
 ```jsx
-import { Button, ModalHeader, ModalBody, ModalFooter } from '@oris/ui';
+import { Button, ModalHeader, ModalBody, ModalFooter } from '@ORIS/ui';
 
 const MyModal = (props) => {
     let modal = React.createRef();
@@ -11,7 +11,7 @@ const MyModal = (props) => {
 
     return (
         <>
-            <Modal 
+            <Modal
                 ref={modal}
                 keyboard={true}
                 backdrop="static"

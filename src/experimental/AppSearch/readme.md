@@ -18,7 +18,7 @@ An example of combining `AppSearch` and `Profile` within your primary navigation
 ```js
 import { MemoryRouter } from 'react-router';
 import { NavLink } from 'react-router-dom';
-import { Profile, Navbar } from '@oris/ui';
+import { Profile, Navbar } from '@ORIS/ui';
 
 <MemoryRouter>
     <Navbar title="My Cool App">

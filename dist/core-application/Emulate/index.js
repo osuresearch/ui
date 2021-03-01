@@ -23,7 +23,7 @@ var _react = _interopRequireDefault(require("react"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
-var _ui = require("@oris/ui");
+var _ui = require("@ORIS/ui");
 
 function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = (0, _getPrototypeOf2.default)(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = (0, _getPrototypeOf2.default)(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return (0, _possibleConstructorReturn2.default)(this, result); }; }
 
@@ -35,8 +35,8 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
  * Renders itself as a link to open the modal. Once emulation has
  * changed, the entire application will be refreshed to load
  * under the new emulated user.
- * 
- * @deprecated Use `@oris/auth`. Will be removed in a future version of `@oris/ui`
+ *
+ * @deprecated Use `@ORIS/auth`. Will be removed in a future version of `@ORIS/ui`
  */
 var Emulate = /*#__PURE__*/function (_React$Component) {
   (0, _inherits2.default)(Emulate, _React$Component);

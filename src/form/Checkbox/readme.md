@@ -43,7 +43,7 @@ Value: {watch("rhf-receive-newsletter") ? 'Yes' : 'No'}
 
 #### Read Only
 ```jsx
-import { Checkbox } from '@oris/ui';
+import { Checkbox } from '@ORIS/ui';
 
 <Checkbox id="checkbox-readonly" readOnly={true}>
     <Checkbox.Input defaultChecked={true} />
@@ -56,7 +56,7 @@ import { Checkbox } from '@oris/ui';
 #### Validation
 ```jsx
 import { useState } from 'react';
-import { Form, Button } from '@oris/ui';
+import { Form, Button } from '@ORIS/ui';
 
 const [error, setError] = useState();
 const [success, setSuccess] = useState();
@@ -88,7 +88,7 @@ const [success, setSuccess] = useState();
 #### Validation with React Hook Form
 ```jsx
 import { useForm } from 'react-hook-form';
-import { Form, Button } from '@oris/ui';
+import { Form, Button } from '@ORIS/ui';
 
 const { register, errors, formState, reset, handleSubmit } = useForm({ mode: 'onBlur' });
 
@@ -134,7 +134,7 @@ const onChange = (newBoolValue, oldBoolValue) => {
 ```
 
 ```jsx
-import { FieldSet } from '@oris/ui';
+import { FieldSet } from '@ORIS/ui';
 
 const onChange = (newArrayValue, oldArrayValue) => {
     alert(`Selected options changed from [${oldArrayValue}] to [${newArrayValue}]`);
@@ -166,7 +166,7 @@ const onChange = (newArrayValue, oldArrayValue) => {
 
 ```jsx
 import { useForm } from 'react-hook-form';
-import { FieldSet } from '@oris/ui';
+import { FieldSet } from '@ORIS/ui';
 
 const { register, watch } = useForm({
     mode: 'onBlur',

@@ -241,7 +241,7 @@ let sections = [
 if (ISOLATED_COMPONENTS) {
     sections = [{
         name: 'Isolated Components',
-        description: `Subset of @oris/ui components matching filter: \`${ISOLATED_COMPONENTS}\``,
+        description: `Subset of @ORIS/ui components matching filter: \`${ISOLATED_COMPONENTS}\``,
         components: ISOLATED_COMPONENTS
     }];
 }
@@ -312,19 +312,19 @@ module.exports = {
         // 3. Everything else (provider, debuggers, etc) are in the composite index.ts
         if (paths[1] === 'search') {
             if (paths[2] === 'drivers') {
-                return `import ${name} from '@oris/ui/dist/search/drivers/${name}'`;
+                return `import ${name} from '@ORIS/ui/dist/search/drivers/${name}'`;
             }
 
             // Some sort of subcomponent - import line is for the parent
             if (paths[2] === 'components' && paths.length > 3) {
-                return `import { ${paths[3]} } from '@oris/ui'`;
+                return `import { ${paths[3]} } from '@ORIS/ui'`;
             }
         }
 
         // TODO: Can't figure out how to deal with subcomponents that come from generics.
         // E.g. a subcomponent path is `src/form/Checkbox/Label` but a generic would
         // be `src/internal/FormCommon/Components/Error`. Both should return
-        // `import { Checkbox } from '@oris/ui'` but there's no way to identify
+        // `import { Checkbox } from '@ORIS/ui'` but there's no way to identify
         // that `Checkbox` is the right import for the generic, given the function args.
         // In either case though - we can't import the subcomponent directly, we only
         // import the parent and access it as a child to that parent component entity.
@@ -334,7 +334,7 @@ module.exports = {
 
         // The assumption is that all (public) components are exported
         // by name from the primary index of the package.
-        return `import { ${name} } from '@oris/ui'`;
+        return `import { ${name} } from '@ORIS/ui'`;
     },
     dangerouslyUpdateWebpackConfig: (webpackConfig, env) => {
         // Ignore any jQuery imports. They'll be resolved via the CDN script
@@ -360,7 +360,7 @@ module.exports = {
     ],
     moduleAliases: {
         // Aliasing so we don't have awful import '../../../..' in examples.
-        '@oris/ui': path.join(__dirname, './src')
+        '@ORIS/ui': path.join(__dirname, './src')
     },
     propsParser: (filePath, source, resolver, handlers) => {
         // Handle TypeScript prop parsing

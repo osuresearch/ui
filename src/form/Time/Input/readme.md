@@ -4,14 +4,14 @@ Sub-component will inherit `id` and `readOnly` props from parent component.
 ```jsx static
 const [time, setTime] = useState('15:30');
 
-<Time.Input 
+<Time.Input
     value={time}
     onChange={setTime}
 />
 ```
 
 ```js noeditor
-import { Icon } from '@oris/ui';
+import { Icon } from '@ORIS/ui';
 
 <div className="alert alert-primary">
     <Icon name="universal-access" circled={true} />

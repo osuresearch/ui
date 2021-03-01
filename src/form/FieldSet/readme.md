@@ -1,5 +1,5 @@
 ```js noeditor
-import { Icon } from '@oris/ui';
+import { Icon } from '@ORIS/ui';
 
 <div className="alert alert-primary">
     <Icon name="universal-access" circled={true} />
@@ -15,7 +15,7 @@ import { Icon } from '@oris/ui';
 #### Basic Implementation
 
 ```jsx
-import { Checkbox } from '@oris/ui';
+import { Checkbox } from '@ORIS/ui';
 
 <FieldSet name="colors" id="colors">
     <FieldSet.Legend>
@@ -47,7 +47,7 @@ import { Checkbox } from '@oris/ui';
 #### Basic Implementation with React Hook Form
 ```jsx
 import { useForm } from 'react-hook-form';
-import { Checkbox } from '@oris/ui';
+import { Checkbox } from '@ORIS/ui';
 
 const { register, watch } = useForm({ mode: 'onBlur' });
 
@@ -90,7 +90,7 @@ Selected:
 
 #### Radio FieldSet
 ```jsx
-import { Radio } from '@oris/ui';
+import { Radio } from '@ORIS/ui';
 
 <FieldSet name="colors" id="colors-1" required>
     <FieldSet.Legend>
@@ -121,7 +121,7 @@ import { Radio } from '@oris/ui';
 #### Radio FieldSet with React Hook Form
 ```jsx
 import { useForm } from 'react-hook-form';
-import { Radio } from '@oris/ui';
+import { Radio } from '@ORIS/ui';
 
 const { register, watch } = useForm({ mode: 'onBlur' });
 
@@ -160,7 +160,7 @@ Selected:
 #### Validation
 ```jsx
 import { useState } from 'react';
-import { Form, Radio, Button } from '@oris/ui';
+import { Form, Radio, Button } from '@ORIS/ui';
 
 const [error, setError] = useState('');
 
@@ -194,7 +194,7 @@ const [error, setError] = useState('');
 
 ```jsx
 import { useForm } from 'react-hook-form';
-import { Form, Radio, Button } from '@oris/ui';
+import { Form, Radio, Button } from '@ORIS/ui';
 
 const { register, errors, watch, handleSubmit } = useForm({ mode: 'onBlur' });
 

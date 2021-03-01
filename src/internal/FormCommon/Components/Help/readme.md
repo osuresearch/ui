@@ -2,7 +2,7 @@
 #### Example:
 
 ```jsx noeditor
-import { Text } from '@oris/ui';
+import { Text } from '@ORIS/ui';
 
 <div className="alert alert-light">
     <Text.Help>Small help text</Text.Help>

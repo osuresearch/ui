@@ -10,9 +10,9 @@ Default button with a click event handler.
 Small themed button
 
 ```jsx
-<Button 
-    className="btn-sm" 
-    theme="danger" 
+<Button
+    className="btn-sm"
+    theme="danger"
     onClick={() => alert('Deleted!')}
 >Delete</Button>
 ```
@@ -22,7 +22,7 @@ Link button (will render as a React Router Link themed to look like a button):
 ```jsx
 import { MemoryRouter } from 'react-router';
 
-{/* Memory router is used here to be able to use React Router 
+{/* Memory router is used here to be able to use React Router
     in the demo code. Do not include it in your app */}
 <MemoryRouter>
     <Button to="/home">Go Home</Button>
@@ -56,7 +56,7 @@ Outline buttons for secondary (less important / focused) actions, such as cancel
 Examples of buttons with icons.
 
 ```jsx
-import { Icon } from '@oris/ui';
+import { Icon } from '@ORIS/ui';
 
 <div>
     <Button theme="outline-secondary">
@@ -72,7 +72,7 @@ import { Icon } from '@oris/ui';
 Do not combine icons and words together in buttons, unless it is to represent some sort of active state such as saving in progress:
 
 ```jsx
-import { Icon } from '@oris/ui';
+import { Icon } from '@ORIS/ui';
 
 <Button disabled={true}>
     <Icon name="spinner" spin={true} /> Saving...

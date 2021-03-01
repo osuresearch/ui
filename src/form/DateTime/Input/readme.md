@@ -5,14 +5,14 @@ Sub-component will inherit `id` and `readOnly` props from parent component.
 import { useState } from 'react';
 const [date, setDate] = useState('2020-09-25T22:27:39+0000');
 
-<DateTime.Input 
+<DateTime.Input
     value={date}
     onChange={setDate}
 />
 ```
 
 ```js noeditor
-import { Icon } from '@oris/ui';
+import { Icon } from '@ORIS/ui';
 
 <div className="alert alert-primary">
     <Icon name="universal-access" circled={true} />

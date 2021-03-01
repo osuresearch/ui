@@ -46,11 +46,11 @@ const cities = require('./cities').default;
 <MultiSelect id="select-multiple-cities">
     <MultiSelect.Label>Select Cities</MultiSelect.Label>
 
-    <MultiSelect.Input 
+    <MultiSelect.Input
         value={selectedCities}
         options={cities}
         onChange={(e) => setSelectedCities(e.value)}
-        optionLabel="name"    
+        optionLabel="name"
     />
 
     <MultiSelect.Help>
@@ -69,7 +69,7 @@ Options can be filtered using an input field in the overlay by enabling the `fil
 
 ```jsx
 import React, { useState } from 'react';
-import { Icon } from '@oris/ui';
+import { Icon } from '@ORIS/ui';
 
 const [selectedCountries, setSelectedCountries] = useState();
 const countries = require('./countries').default;
@@ -97,7 +97,7 @@ const selectedCountriesTemplate = (option) => {
 <MultiSelect id="select-multiple-countries">
     <MultiSelect.Label>Select Countries</MultiSelect.Label>
 
-    <MultiSelect.Input 
+    <MultiSelect.Input
         value={selectedCountries}
         options={countries}
         onChange={(e) => setSelectedCountries(e.value)}

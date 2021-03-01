@@ -3,7 +3,7 @@ export default Search;
  * Search input field. Pure-React replacement of Lookup.
  * Requires a JSON:API compliant backend endpoint.
  *
- * @deprecated Use the `Lookup` form component. Will be removed in `@oris/ui^5.0`
+ * @deprecated Use the `Lookup` form component. Will be removed in `@ORIS/ui^5.0`
  */
 declare class Search extends React.Component<any, any, any> {
     constructor(props: any);
