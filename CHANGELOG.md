@@ -7,6 +7,12 @@ Versions follow [Semantic Versioning](https://semver.org/) guidelines - given a 
 2. MINOR version when you add functionality in a backwards-compatible manner, and
 3. PATCH version when you make backwards-compatible bug fixes.
 
+# 4.3.2 (2021-03-01)
+
+__Minor Backwards Breaking Changes:__
+
+* Internal imports have changed to use the uppercase package name @ORIS instead of @oris to support NPM > 6. If you have the package installed as `@oris/ui` you may encounter build errors. Reinstall as `@ORIS/ui`.
+
 # 4.3.1 (2021-02-19)
 
 __Bug Fixes:__
