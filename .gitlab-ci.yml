@@ -1,4 +1,3 @@
-
 # Add Code Quality reporting automatically (built into Gitlab)
 #include:
 #  - template: Code-Quality.gitlab-ci.yml
@@ -51,6 +50,8 @@ Build React App:
   stage: build
   dependencies:
     - install
+  script:
+    - npm run build
     
 Deploy App:
   extends: .php_job
