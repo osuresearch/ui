@@ -67,6 +67,10 @@
 import Component from '../component';
 
 class Lookup extends Component {
+    static get name() {
+        return 'Lookup';
+    }
+
     static get DEFAULTS() {
         return {
             endpoint: null,                     // Endpoint URL to request JSON data from.

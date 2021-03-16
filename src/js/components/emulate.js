@@ -2,6 +2,10 @@
 import Component from '../component';
 
 class Emulate extends Component {
+    static get name() {
+        return 'Emulate';
+    }
+
     static get VERSION() {
         return '3.2.0';
     }

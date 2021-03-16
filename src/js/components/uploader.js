@@ -7,6 +7,10 @@
 import Component from '../component';
 
 class Uploader extends Component {
+    static get name() {
+        return 'Uploader';
+    }
+
     static get DEFAULTS() {
         return {
             endpoint: null,         // Target endpoint for file interactions.

@@ -9,6 +9,10 @@ import Component from '../component';
  * see twig/support.html for the required Twig variables to configure the component.
  */
 class Support extends Component {
+    static get name() {
+        return 'Support';
+    }
+
     static get VERSION() {
         return '3.2.0';
     }
