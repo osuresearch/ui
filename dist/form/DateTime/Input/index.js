@@ -27,6 +27,8 @@ var _DatePrefix = _interopRequireDefault(require("./DatePrefix"));
 
 var _DateTimePrefix = _interopRequireDefault(require("./DateTimePrefix"));
 
+var _Portal = _interopRequireDefault(require("./Portal"));
+
 /**
  * Input and popup calendar to select a date (and optionally time).
  * 
@@ -85,9 +87,21 @@ var Input = function Input(props) {
     }
   };
 
-  var formatter = function formatter(timestamp) {
-    if (typeof timestamp === 'undefined') return undefined; // let formatted = date.toLocaleDateString("en-US");
+  var handleKeyDown = function handleKeyDown(e) {
+    var _ref$current2, _ref$current3;
 
+    // Close the Calendar popup on Tab if the user is 
+    // focused in the input - this will NOT close the 
+    // calendar when tabbing within the calendar, as 
+    // that is how keyboard users navigate it
+    // @ts-ignore
+    if (e.key === 'Tab' && (_ref$current2 = ref.current) !== null && _ref$current2 !== void 0 && _ref$current2.isCalendarOpen && (_ref$current3 = ref.current) !== null && _ref$current3 !== void 0 && _ref$current3.state.focused) {
+      ref.current.setOpen(false);
+    }
+  };
+
+  var formatter = function formatter(timestamp) {
+    if (typeof timestamp === 'undefined') return undefined;
     var formatted = (0, _dayjs.default)(timestamp).format('MM/DD/YYYY');
 
     if (props.showTimeInput) {
@@ -112,11 +126,13 @@ var Input = function Input(props) {
     ref: ref
   }, props, {
     id: bind.id,
-    selected: selected ? (0, _dayjs.default)(selected).toDate() : null,
-    value: selected && formatter(selected),
     className: 'form-control date',
+    value: undefined // Ignores the passed-in value prop, or else the user cannot directly type data into the input
+    ,
+    selected: selected ? (0, _dayjs.default)(selected).toDate() : null,
     onChange: handleChange,
     onFocus: handleFocus,
+    onKeyDown: handleKeyDown,
     shouldCloseOnSelect: !props.showTimeInput // @ts-ignore
     ,
     timeInputLabel: /*#__PURE__*/_react.default.createElement("label", {
@@ -125,8 +141,13 @@ var Input = function Input(props) {
     customTimeInput: /*#__PURE__*/_react.default.createElement(_Time.default.Input, {
       id: "".concat(bind.id, "-time")
     }),
+    popperContainer: function popperContainer(_ref) {
+      var children = _ref.children;
+      return /*#__PURE__*/_react.default.createElement(_Portal.default, null, children);
+    },
     dateFormat: dateFormat,
     readOnly: readOnly,
+    autoComplete: "off",
     "aria-disabled": readOnly,
     "aria-required": required,
     "aria-invalid": bind.error ? true : false
