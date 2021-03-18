@@ -41,6 +41,7 @@ var Portal = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
     (0, _defineProperty2.default)((0, _assertThisInitialized2.default)(_this), "el", void 0);
     _this.el = document.createElement('div');
+    _this.el.style.zIndex = "999999";
     return _this;
   }
 
@@ -58,8 +59,7 @@ var Portal = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       return /*#__PURE__*/_reactDom.default.createPortal( /*#__PURE__*/_react.default.createElement("div", {
-        className: "ui-form-datetime",
-        "z-index": "99999"
+        className: "ui-form-datetime"
       }, this.props.children), this.el);
     }
   }]);

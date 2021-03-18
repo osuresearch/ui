@@ -12,6 +12,7 @@ export default class Portal extends React.Component<PortalProps> {
         super(props);
 
         this.el = document.createElement('div');
+        this.el.style.zIndex = "999999";
     }
 
     componentDidMount() {
@@ -24,7 +25,7 @@ export default class Portal extends React.Component<PortalProps> {
 
     render() {
         return ReactDOM.createPortal(
-            <div className="ui-form-datetime" z-index="99999">{this.props.children}</div>,
+            <div className="ui-form-datetime">{this.props.children}</div>,
             this.el
         );
     }
