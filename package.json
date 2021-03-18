@@ -1,6 +1,6 @@
 {
   "name": "@ORIS/ui",
-  "version": "4.3.1",
+  "version": "4.4.0",
   "description": "React UI components for ORIS applications",
   "author": "Chase McManning <mcmanning.1@osu.edu>",
   "license": "MIT",
@@ -43,7 +43,7 @@
     "diff": "^4.0.2",
     "primereact": "^5.0.0",
     "rangy": "^1.3.0",
-    "react-datepicker": "^2.16.0",
+    "react-datepicker": "^3",
     "react-dropzone": "^10.1.8",
     "react-transition-group": "^4.4.1",
     "time-input-polyfill": "^1.0.9"

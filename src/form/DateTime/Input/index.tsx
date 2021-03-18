@@ -11,6 +11,7 @@ import Time from '../../Time';
 
 import DatePrefix from './DatePrefix';
 import DateTimePrefix from './DateTimePrefix';
+import Portal from './Portal';
 
 // The following props are disabled due to not meeting accessibility standards
 type DisabledReactDatePickerProps =
@@ -92,10 +93,20 @@ const Input: React.FC<InputProps> = (props) => {
         }
     }
 
+    const handleKeyDown = (e: React.KeyboardEvent) => {
+        // Close the Calendar popup on Tab if the user is 
+        // focused in the input - this will NOT close the 
+        // calendar when tabbing within the calendar, as 
+        // that is how keyboard users navigate it
+        // @ts-ignore
+        if (e.key === 'Tab' && ref.current?.isCalendarOpen && ref.current?.state.focused) {
+            ref.current.setOpen(false);
+        }
+    }
+
     const formatter = (timestamp: string | undefined) => {
         if (typeof (timestamp) === 'undefined') return undefined;
 
-        // let formatted = date.toLocaleDateString("en-US");
         let formatted = dayjs(timestamp).format('MM/DD/YYYY');
         if (props.showTimeInput) {
             formatted = dayjs(timestamp).format('MM/DD/YYYY hh:mm A');
@@ -114,6 +125,8 @@ const Input: React.FC<InputProps> = (props) => {
         }
     }
 
+
+
     return (
         <div className={classNames}>
             {!props.showTimeInput && <DatePrefix />}
@@ -123,19 +136,22 @@ const Input: React.FC<InputProps> = (props) => {
                 ref={ref}
                 {...props}
                 id={bind.id}
-                selected={selected ? dayjs(selected).toDate() : null}
-                value={selected && formatter(selected)}
                 className={'form-control date'}
+                value={undefined} // Ignores the passed-in value prop, or else the user cannot directly type data into the input
+                selected={selected ? dayjs(selected).toDate() : null}
                 onChange={handleChange}
                 onFocus={handleFocus}
+                onKeyDown={handleKeyDown}
                 shouldCloseOnSelect={!props.showTimeInput}
                 // @ts-ignore
                 timeInputLabel={<label htmlFor={`${bind.id}-time`}>Time</label>}
                 customTimeInput={
                     <Time.Input id={`${bind.id}-time`} />
                 }
+                popperContainer={({ children }) => <Portal>{children}</Portal>}
                 dateFormat={dateFormat}
                 readOnly={readOnly}
+                autoComplete="off"
                 aria-disabled={readOnly}
                 aria-required={required}
                 aria-invalid={bind.error ? true : false}
