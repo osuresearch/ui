@@ -7,6 +7,12 @@ Versions follow [Semantic Versioning](https://semver.org/) guidelines - given a 
 2. MINOR version when you add functionality in a backwards-compatible manner, and
 3. PATCH version when you make backwards-compatible bug fixes.
 
+# 3.3.2 (2021-03-23)
+
+__Bug Fixes:__
+* Fixed IE11 support for components that previously used [Function.name](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/name) to resolve component names.
+
+
 # 3.3.1 (2019-10-10)
 
 __Bug Fixes:__
