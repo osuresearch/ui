@@ -29,7 +29,7 @@ var SearchProvider = function SearchProvider(_ref) {
       defaultTerms = _ref$defaultTerms === void 0 ? '' : _ref$defaultTerms,
       defaultFilters = _ref.defaultFilters,
       _ref$defaultOffset = _ref.defaultOffset,
-      defaultOffset = _ref$defaultOffset === void 0 ? 20 : _ref$defaultOffset,
+      defaultOffset = _ref$defaultOffset === void 0 ? 0 : _ref$defaultOffset,
       _ref$defaultLimit = _ref.defaultLimit,
       defaultLimit = _ref$defaultLimit === void 0 ? 20 : _ref$defaultLimit,
       driver = _ref.driver,

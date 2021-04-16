@@ -70,7 +70,7 @@ const SearchProvider: React.FC<Props> = ({
     id,
     defaultTerms = '',
     defaultFilters,
-    defaultOffset = 20,
+    defaultOffset = 0,
     defaultLimit = 20,
     driver,
     children
