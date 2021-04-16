@@ -18,6 +18,14 @@ import useSearchProvider from '../../hooks/useSearchProvider';
  *  - `$sort: SearchSorting`
  *      - Sorting rules for the results.
  *      - You can omit this if you do not use sorting in your searches.
+ *  - `$offset: number`
+ *      - In combination with limit, determines which page results to display in pagination
+ *      - `offset` is 0-indexed, so with a `limit=20` then `offset=20` will point to page 2, `offset=40` will be page 3, and so on.
+ *      - You can omit this if you do not use pagination in your searches.
+ *  - `$limit: number`
+ *      - The number of results to return in the search
+ *      - In combination with offset, determines which page results to display in pagination
+ *      - You can omit this if you do not use pagination in your searches.
  *
  * The GraphQL types `SearchFilters` and `SearchSorting` are provided by the
  * [ORIS\GraphQL](https://code.osu.edu/ORIS/graphql) composer package.
@@ -44,7 +52,7 @@ export default function Apollo(
         provider
     }) => {
         const {
-            terms, filters, sort,
+            terms, filters, sort, offset, limit,
             setSearching, setError, setResults
         } = useSearchProvider(provider);
 
@@ -70,9 +78,11 @@ export default function Apollo(
                     terms,
                     filters: filters.length > 0 ? AND(filters) : null,
                     sort,
+                    limit,
+                    offset
                 }
             });
-        }, [terms, filters, sort, callable, skipSearchAndClear]);
+        }, [terms, filters, sort, limit, offset, callable, skipSearchAndClear]);
 
         // Store previous search results each time we make a query so we
         // can display these while still fetching fresh data in the background.

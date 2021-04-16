@@ -31,6 +31,14 @@ var _useSearchProvider2 = _interopRequireDefault(require("../../hooks/useSearchP
  *  - `$sort: SearchSorting`
  *      - Sorting rules for the results.
  *      - You can omit this if you do not use sorting in your searches.
+ *  - `$offset: number`
+ *      - In combination with limit, determines which page results to display in pagination
+ *      - `offset` is 0-indexed, so with a `limit=20` then `offset=20` will point to page 2, `offset=40` will be page 3, and so on.
+ *      - You can omit this if you do not use pagination in your searches.
+ *  - `$limit: number`
+ *      - The number of results to return in the search
+ *      - In combination with offset, determines which page results to display in pagination
+ *      - You can omit this if you do not use pagination in your searches.
  *
  * The GraphQL types `SearchFilters` and `SearchSorting` are provided by the
  * [ORIS\GraphQL](https://code.osu.edu/ORIS/graphql) composer package.
@@ -59,6 +67,8 @@ function Apollo(query) {
         terms = _useSearchProvider.terms,
         filters = _useSearchProvider.filters,
         sort = _useSearchProvider.sort,
+        offset = _useSearchProvider.offset,
+        limit = _useSearchProvider.limit,
         setSearching = _useSearchProvider.setSearching,
         setError = _useSearchProvider.setError,
         setResults = _useSearchProvider.setResults;
@@ -88,10 +98,12 @@ function Apollo(query) {
         variables: {
           terms: terms,
           filters: filters.length > 0 ? (0, _.AND)(filters) : null,
-          sort: sort
+          sort: sort,
+          limit: limit,
+          offset: offset
         }
       });
-    }, [terms, filters, sort, callable, skipSearchAndClear]); // Store previous search results each time we make a query so we
+    }, [terms, filters, sort, limit, offset, callable, skipSearchAndClear]); // Store previous search results each time we make a query so we
     // can display these while still fetching fresh data in the background.
 
     (0, _react.useEffect)(function () {
