@@ -76,6 +76,14 @@ export interface SortFields {
 
 //#endregion
 
+//#region Pagination interfaces
+
+export type SearchOffset = number;
+
+export type SearchLimit = number;
+
+//#endregion
+
 //#region Filter vanity functions
 
 /**

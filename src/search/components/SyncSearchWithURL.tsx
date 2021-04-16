@@ -74,7 +74,7 @@ function urlDecodeSort(encoded: string): SortFields | undefined {
 /**
  * Allows a user to bookmark or share searches for an application.
  *
- * When the search data (terms, filters, sorting) changes, the current address
+ * When the search data (terms, filters, sorting, limit, offset) changes, the current address
  * is updated via the `History.ReplaceState` API to contain a serialized copy
  * of the search data.
  *
@@ -97,14 +97,20 @@ const SyncSearchWithURL: React.FC<Props> = ({ provider, prefix = '' }) => {
         const termsKey = prefix + 'q';
         const filtersKey = prefix + 'f';
         const sortKey = prefix + 's';
+        const offsetKey = prefix + 'o';
+        const limitKey = prefix + 'l';
 
         if (!init) {
             // Update URI with current search terms/filters
             const terms = search.terms;
             const filters = urlEncodeFilters(search.filters);
             const sort = urlEncodeSort(search.sort);
+            const offset = search.offset;
+            const limit = search.limit;
 
             terms ? url.searchParams.set(termsKey, terms) : url.searchParams.delete(termsKey);
+            offset ? url.searchParams.set(offsetKey, offset.toString()) : url.searchParams.delete(offsetKey);
+            limit ? url.searchParams.set(limitKey, limit.toString()) : url.searchParams.delete(limitKey);
             filters ? url.searchParams.set(filtersKey, filters) : url.searchParams.delete(filtersKey);
             sort ? url.searchParams.set(sortKey, sort) : url.searchParams.delete(sortKey);
 
@@ -117,10 +123,14 @@ const SyncSearchWithURL: React.FC<Props> = ({ provider, prefix = '' }) => {
             const terms = url.searchParams.get(termsKey) || '';
             const filters = urlDecodeFilters(url.searchParams.get(filtersKey) || '');
             const sort = urlDecodeSort(url.searchParams.get(sortKey) || '');
+            const offset = url.searchParams.get(offsetKey);
+            const limit = url.searchParams.get(limitKey);
 
             terms && search.setTerms(terms);
             filters && search.replaceFilters(filters);
             sort && search.setSort(sort);
+            offset && search.setOffset(parseInt(offset));
+            limit && search.setOffset(parseInt(limit));
         }
 
     }, [search, init, setInit]);
