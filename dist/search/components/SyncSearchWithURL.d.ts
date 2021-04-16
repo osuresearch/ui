@@ -14,7 +14,7 @@ declare type Props = {
 /**
  * Allows a user to bookmark or share searches for an application.
  *
- * When the search data (terms, filters, sorting) changes, the current address
+ * When the search data (terms, filters, sorting, limit, offset) changes, the current address
  * is updated via the `History.ReplaceState` API to contain a serialized copy
  * of the search data.
  *

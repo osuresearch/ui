@@ -28,6 +28,10 @@ var SearchProvider = function SearchProvider(_ref) {
       _ref$defaultTerms = _ref.defaultTerms,
       defaultTerms = _ref$defaultTerms === void 0 ? '' : _ref$defaultTerms,
       defaultFilters = _ref.defaultFilters,
+      _ref$defaultOffset = _ref.defaultOffset,
+      defaultOffset = _ref$defaultOffset === void 0 ? 20 : _ref$defaultOffset,
+      _ref$defaultLimit = _ref.defaultLimit,
+      defaultLimit = _ref$defaultLimit === void 0 ? 20 : _ref$defaultLimit,
       driver = _ref.driver,
       children = _ref.children;
 
@@ -43,20 +47,30 @@ var SearchProvider = function SearchProvider(_ref) {
       filters = _useState4[0],
       setFilters = _useState4[1];
 
-  var _useState5 = (0, _react.useState)(false),
+  var _useState5 = (0, _react.useState)(defaultOffset),
       _useState6 = (0, _slicedToArray2.default)(_useState5, 2),
-      searching = _useState6[0],
-      setSearching = _useState6[1];
+      offset = _useState6[0],
+      setOffset = _useState6[1];
 
-  var _useState7 = (0, _react.useState)(),
+  var _useState7 = (0, _react.useState)(defaultLimit),
       _useState8 = (0, _slicedToArray2.default)(_useState7, 2),
-      results = _useState8[0],
-      setResults = _useState8[1];
+      limit = _useState8[0],
+      setLimit = _useState8[1];
 
-  var _useState9 = (0, _react.useState)(),
+  var _useState9 = (0, _react.useState)(false),
       _useState10 = (0, _slicedToArray2.default)(_useState9, 2),
-      error = _useState10[0],
-      setError = _useState10[1]; // Prepare for some magic.
+      searching = _useState10[0],
+      setSearching = _useState10[1];
+
+  var _useState11 = (0, _react.useState)(),
+      _useState12 = (0, _slicedToArray2.default)(_useState11, 2),
+      results = _useState12[0],
+      setResults = _useState12[1];
+
+  var _useState13 = (0, _react.useState)(),
+      _useState14 = (0, _slicedToArray2.default)(_useState13, 2),
+      error = _useState14[0],
+      setError = _useState14[1]; // Prepare for some magic.
   // The tl;dr: I'm dynamically creating named contexts stored in a
   // singleton map and providing each one mapped directly to a named (id) search provider.
   // This allows me to reuse a context structure for more than dataset, since each
@@ -70,11 +84,11 @@ var SearchProvider = function SearchProvider(_ref) {
   // That's up to the implementing developer when they use the useSearchProvider hook.
 
 
-  var _useState11 = (0, _react.useState)(function () {
+  var _useState15 = (0, _react.useState)(function () {
     return (0, _SearchContext.initDynamicContext)(id, {});
   }),
-      _useState12 = (0, _slicedToArray2.default)(_useState11, 1),
-      context = _useState12[0]; // Destroy the dynamic context on unmount.
+      _useState16 = (0, _slicedToArray2.default)(_useState15, 1),
+      context = _useState16[0]; // Destroy the dynamic context on unmount.
 
 
   (0, _react.useEffect)(function () {
@@ -88,6 +102,8 @@ var SearchProvider = function SearchProvider(_ref) {
       terms: terms,
       filters: filters.filters,
       sort: filters.sort,
+      offset: offset,
+      limit: limit,
       searching: searching,
       results: results,
       error: error,
@@ -116,11 +132,13 @@ var SearchProvider = function SearchProvider(_ref) {
       replaceFilters: function replaceFilters(filters) {
         setFilters(new _.SearchFilters(filters));
       },
+      setOffset: setOffset,
+      setLimit: setLimit,
       setSearching: setSearching,
       setResults: setResults,
       setError: setError
     };
-  }, [terms, filters, searching, results, error]);
+  }, [terms, filters, offset, limit, searching, results, error]);
   var DriverComponent = driver; // Note this can't just be value={context} because we need to be
   // able to rewrite query/filters on state change.
 

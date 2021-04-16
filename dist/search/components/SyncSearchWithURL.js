@@ -68,7 +68,7 @@ function urlDecodeSort(encoded) {
 /**
  * Allows a user to bookmark or share searches for an application.
  *
- * When the search data (terms, filters, sorting) changes, the current address
+ * When the search data (terms, filters, sorting, limit, offset) changes, the current address
  * is updated via the `History.ReplaceState` API to contain a serialized copy
  * of the search data.
  *
@@ -99,13 +99,19 @@ var SyncSearchWithURL = function SyncSearchWithURL(_ref) {
     var termsKey = prefix + 'q';
     var filtersKey = prefix + 'f';
     var sortKey = prefix + 's';
+    var offsetKey = prefix + 'o';
+    var limitKey = prefix + 'l';
 
     if (!init) {
       // Update URI with current search terms/filters
       var terms = search.terms;
       var filters = urlEncodeFilters(search.filters);
       var sort = urlEncodeSort(search.sort);
+      var offset = search.offset;
+      var limit = search.limit;
       terms ? url.searchParams.set(termsKey, terms) : url.searchParams.delete(termsKey);
+      offset ? url.searchParams.set(offsetKey, offset.toString()) : url.searchParams.delete(offsetKey);
+      limit ? url.searchParams.set(limitKey, limit.toString()) : url.searchParams.delete(limitKey);
       filters ? url.searchParams.set(filtersKey, filters) : url.searchParams.delete(filtersKey);
       sort ? url.searchParams.set(sortKey, sort) : url.searchParams.delete(sortKey); // Replace (not push) our history state without a remote refresh
 
@@ -120,9 +126,15 @@ var SyncSearchWithURL = function SyncSearchWithURL(_ref) {
 
       var _sort = urlDecodeSort(url.searchParams.get(sortKey) || '');
 
+      var _offset = url.searchParams.get(offsetKey);
+
+      var _limit = url.searchParams.get(limitKey);
+
       _terms && search.setTerms(_terms);
       _filters && search.replaceFilters(_filters);
       _sort && search.setSort(_sort);
+      _offset && search.setOffset(parseInt(_offset));
+      _limit && search.setOffset(parseInt(_limit));
     }
   }, [search, init, setInit]);
   return null;
