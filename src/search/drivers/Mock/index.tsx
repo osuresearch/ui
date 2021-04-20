@@ -66,7 +66,7 @@ export default function Mock(searchWhenEmpty: boolean = true) {
         provider
     }) => {
         const {
-            terms, filters, sort,
+            terms, filters, sort, offset, limit,
             setResults, setError, setSearching
         } = useSearchProvider(provider);
 
@@ -135,12 +135,12 @@ export default function Mock(searchWhenEmpty: boolean = true) {
             // the top 10 result objects.
             const results = {
                 hits: hits.length,
-                results: hits.slice(0, 10)
+                results: hits.slice(offset, (limit + offset))
             }
 
             setSearching(false);
             setResults(results);
-        }, [terms, filters, sort, skipSearchAndClear, setSearching, setResults]);
+        }, [terms, filters, sort, offset, limit, skipSearchAndClear, setSearching, setResults]);
 
         // Replicated from GraphQL driver - for mock testing of the same behaviour
         useEffect(() => {
