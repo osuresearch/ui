@@ -23,7 +23,7 @@ export default function NextPageButton({
 
     return (
         <li
-            className={`page-item  ${noNextPage ? 'disabled' : ''}`}
+            className={`page-item page-navigation ${noNextPage ? 'disabled' : ''}`}
         >
             <button
                 className="page-link"

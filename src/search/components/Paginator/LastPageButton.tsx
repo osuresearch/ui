@@ -21,7 +21,7 @@ export default function LastPageButton({
 
     return (
         <li
-            className={`page-item  ${noNextPage ? 'disabled' : ''}`}
+            className={`page-item page-navigation ${noNextPage ? 'disabled' : ''}`}
         >
             <button
                 className="page-link"

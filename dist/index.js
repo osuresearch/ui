@@ -245,6 +245,12 @@ Object.defineProperty(exports, "Filters", {
     return _Filters.default;
   }
 });
+Object.defineProperty(exports, "Paginator", {
+  enumerable: true,
+  get: function get() {
+    return _Paginator.default;
+  }
+});
 Object.defineProperty(exports, "useSearchProvider", {
   enumerable: true,
   get: function get() {
@@ -369,6 +375,8 @@ var _SearchDebugger = _interopRequireDefault(require("./search/components/Search
 var _SyncSearchWithURL = _interopRequireDefault(require("./search/components/SyncSearchWithURL"));
 
 var _Filters = _interopRequireDefault(require("./search/components/Filters"));
+
+var _Paginator = _interopRequireDefault(require("./search/components/Paginator"));
 
 var _useSearchProvider = _interopRequireDefault(require("./search/hooks/useSearchProvider"));
 

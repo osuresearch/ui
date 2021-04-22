@@ -1,0 +1,1 @@
+{"version":3,"file":"FirstPageButton.d.ts","sourceRoot":"","sources":["../../../../src/search/components/Paginator/FirstPageButton.tsx"],"names":[],"mappings":"AAEA,OAAO,EAAE,cAAc,EAAE,MAAM,qBAAqB,CAAC;AAErD,aAAK,KAAK,GAAG;IACT,GAAG,EAAE,cAAc,CAAC,GAAG,CAAC,CAAA;CAC3B,CAAA;AAED,MAAM,CAAC,OAAO,UAAU,eAAe,CAAC,EAAE,GAAG,EAAE,EAAE,KAAK,eAoBrD"}

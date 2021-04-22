@@ -19,7 +19,7 @@ export default function PreviousPageButton({ ctx }: Props) {
 
     return (
         <li
-            className={`page-item  ${noPreviousPage ? 'disabled' : ''}`}
+            className={`page-item page-navigation ${noPreviousPage ? 'disabled' : ''}`}
         >
             <button
                 className="page-link"
