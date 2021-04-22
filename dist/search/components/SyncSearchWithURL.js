@@ -131,7 +131,7 @@ var SyncSearchWithURL = function SyncSearchWithURL(_ref) {
       var _limit = url.searchParams.get(limitKey);
 
       _terms && search.setTerms(_terms);
-      _filters && search.replaceFilters(_filters);
+      _filters.length > 0 && search.replaceFilters(_filters);
       _sort && search.setSort(_sort);
       _offset && search.setOffset(parseInt(_offset));
       _limit && search.setOffset(parseInt(_limit));
