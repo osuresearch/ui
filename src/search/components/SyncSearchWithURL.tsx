@@ -127,7 +127,7 @@ const SyncSearchWithURL: React.FC<Props> = ({ provider, prefix = '' }) => {
             const limit = url.searchParams.get(limitKey);
 
             terms && search.setTerms(terms);
-            filters && search.replaceFilters(filters);
+            filters.length > 0 && search.replaceFilters(filters);
             sort && search.setSort(sort);
             offset && search.setOffset(parseInt(offset));
             limit && search.setOffset(parseInt(limit));
