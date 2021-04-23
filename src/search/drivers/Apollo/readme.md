@@ -5,16 +5,25 @@ Declare your GraphQL query with the required variables and pass it in as an argu
 
 ```tsx static
 const SEARCH_TOOLS = gql`
-    query SearchTools($terms: String!, $filters: SearchFilters, $sort: SearchSorting) {
-        tools(terms: $terms, filters: $filters, sort: $sort) {
-            id
-            rank
-            name
-            description
-            category
-            platform
-            screenshots {
-                thumbnail
+    query SearchTools(
+        $terms: String!,
+        $filters: SearchFilters,
+        $sort: SearchSorting,
+        $limit: Int,
+        $offset: Int
+    ) {
+        tools(terms: $terms, filters: $filters, sort: $sort, limit: $limit, offset: $offset) {
+            hits
+            results {
+                id
+                rank
+                name
+                description
+                category
+                platform
+                screenshots {
+                    thumbnail
+                }
             }
         }
     }

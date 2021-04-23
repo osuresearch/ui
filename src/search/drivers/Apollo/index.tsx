@@ -121,9 +121,9 @@ export default function Apollo(
                     Example 2:
                         query {
                             search(terms: "fizz") {
-                                totalHits
+                                hits
                                 maxRank
-                                hits {
+                                results {
                                     id
                                     rank
                                     name
@@ -131,7 +131,7 @@ export default function Apollo(
                             }
                         }
 
-                        We grab the full `{totalHits, maxRank, hits: [...]}`
+                        We grab the full `{hits, maxRank, results: [...]}`
                         payload within `data.search`.
                 */
                 if (result.data !== undefined) {
