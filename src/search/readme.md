@@ -1,6 +1,6 @@
 
 ```jsx
-import { SearchProvider, Filters, SearchDebugger, useSearchProvider } from '@ORIS/ui';
+import { SearchProvider, Filters, Paginator, SearchDebugger, useSearchProvider } from '@ORIS/ui';
 import Mock from '@ORIS/ui/search/drivers/Mock';
 
 function PersonSearchFilters() {
@@ -130,6 +130,7 @@ function PersonSearchResults() {
         </div>
         <div className="col-9">
             <PersonSearchResults />
+            <Paginator provider="demo" />
             <SearchDebugger provider="demo" />
         </div>
     </div>

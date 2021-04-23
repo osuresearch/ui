@@ -83,6 +83,8 @@ function Mock() {
         terms = _useSearchProvider.terms,
         filters = _useSearchProvider.filters,
         sort = _useSearchProvider.sort,
+        offset = _useSearchProvider.offset,
+        limit = _useSearchProvider.limit,
         setResults = _useSearchProvider.setResults,
         setError = _useSearchProvider.setError,
         setSearching = _useSearchProvider.setSearching;
@@ -141,11 +143,11 @@ function Mock() {
 
       var results = {
         hits: hits.length,
-        results: hits.slice(0, 10)
+        results: hits.slice(offset, limit + offset)
       };
       setSearching(false);
       setResults(results);
-    }, [terms, filters, sort, skipSearchAndClear, setSearching, setResults]); // Replicated from GraphQL driver - for mock testing of the same behaviour
+    }, [terms, filters, sort, offset, limit, skipSearchAndClear, setSearching, setResults]); // Replicated from GraphQL driver - for mock testing of the same behaviour
 
     (0, _react.useEffect)(function () {
       if (skipSearchAndClear) {

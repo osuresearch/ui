@@ -1,9 +1,11 @@
 
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import {
     SearchFilters,
     SearchContext,
     SearchTerms,
+    SearchOffset,
+    SearchLimit,
     SortFields,
     IFilter,
     ISearchContext,
@@ -38,6 +40,22 @@ export type Props = {
      */
     defaultFilters?: SearchFilters
 
+    /**
+     * Default search offset to use when loading up the application.
+     *
+     * If `SyncSearchWithURL` is attached to this provider, the defaults
+     * defined here will be overridden by the URL data.
+     */
+    defaultOffset?: SearchOffset
+
+    /**
+    * Default search limit to use when loading up the application.
+    *
+    * If `SyncSearchWithURL` is attached to this provider, the defaults
+    * defined here will be overridden by the URL data.
+    */
+    defaultLimit?: SearchLimit
+
     /** The API integration driver to submit search data */
     driver: SearchDriver
 }
@@ -52,6 +70,8 @@ const SearchProvider: React.FC<Props> = ({
     id,
     defaultTerms = '',
     defaultFilters,
+    defaultOffset = 0,
+    defaultLimit = 20,
     driver,
     children
 }) => {
@@ -59,9 +79,13 @@ const SearchProvider: React.FC<Props> = ({
     const [filters, setFilters] = useState<SearchFilters>(
         () => defaultFilters ? defaultFilters.clone() : new SearchFilters()
     );
+    const [offset, setOffset] = useState<SearchOffset>(defaultOffset);
+    const [limit, setLimit] = useState<SearchLimit>(defaultLimit);
     const [searching, setSearching] = useState(false);
     const [results, setResults] = useState<unknown | undefined>();
     const [error, setError] = useState<string | undefined>();
+
+    const ref = useRef<HTMLDivElement>(null);
 
     // Prepare for some magic.
 
@@ -93,9 +117,12 @@ const SearchProvider: React.FC<Props> = ({
         terms,
         filters: filters.filters,
         sort: filters.sort,
+        offset,
+        limit,
         searching,
         results,
         error,
+        ref,
         setTerms,
         setSort(sort: SortFields | undefined) {
             setFilters((prev) => prev.sortBy(sort));
@@ -115,10 +142,12 @@ const SearchProvider: React.FC<Props> = ({
         replaceFilters(filters: IFilter[]) {
             setFilters(new SearchFilters(filters));
         },
+        setOffset,
+        setLimit,
         setSearching,
         setResults,
         setError
-    }), [terms, filters, searching, results, error]);
+    }), [terms, filters, offset, limit, searching, results, error]);
 
     const DriverComponent = driver;
 
@@ -126,9 +155,11 @@ const SearchProvider: React.FC<Props> = ({
     // able to rewrite query/filters on state change.
     return (
         <context.Provider value={contextValue}>
-            <DriverComponent provider={id} />
+            <div ref={ref}>
+                <DriverComponent provider={id} />
 
-            {children}
+                {children}
+            </div>
         </context.Provider>
     );
 }

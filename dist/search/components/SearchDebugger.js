@@ -36,6 +36,8 @@ var SearchDebugger = function SearchDebugger(_ref) {
       terms = _useSearchProvider.terms,
       filters = _useSearchProvider.filters,
       sort = _useSearchProvider.sort,
+      offset = _useSearchProvider.offset,
+      limit = _useSearchProvider.limit,
       searching = _useSearchProvider.searching,
       error = _useSearchProvider.error,
       results = _useSearchProvider.results;
@@ -47,7 +49,7 @@ var SearchDebugger = function SearchDebugger(_ref) {
     onClick: function onClick() {
       return setShow(!show);
     }
-  }, "\uD83E\uDDEA Toggle Search Debugger"), show && /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("strong", null, "Searching: "), " ", searching ? 'Yes' : 'No', /*#__PURE__*/_react.default.createElement("br", null), /*#__PURE__*/_react.default.createElement("strong", null, "Error: "), " ", error, /*#__PURE__*/_react.default.createElement("br", null), /*#__PURE__*/_react.default.createElement("strong", null, "Full Text Terms"), /*#__PURE__*/_react.default.createElement("p", null, terms), /*#__PURE__*/_react.default.createElement("strong", null, "Filters"), /*#__PURE__*/_react.default.createElement("pre", null, JSON.stringify(filters, undefined, 2)), /*#__PURE__*/_react.default.createElement("strong", null, "Sort"), /*#__PURE__*/_react.default.createElement("pre", null, JSON.stringify(sort, undefined, 2)), /*#__PURE__*/_react.default.createElement("strong", null, "Results"), /*#__PURE__*/_react.default.createElement("pre", null, JSON.stringify(results, undefined, 2))));
+  }, "\uD83E\uDDEA Toggle Search Debugger"), show && /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("strong", null, "Searching: "), " ", searching ? 'Yes' : 'No', /*#__PURE__*/_react.default.createElement("br", null), /*#__PURE__*/_react.default.createElement("strong", null, "Error: "), " ", error, /*#__PURE__*/_react.default.createElement("br", null), /*#__PURE__*/_react.default.createElement("strong", null, "Full Text Terms"), /*#__PURE__*/_react.default.createElement("p", null, terms), /*#__PURE__*/_react.default.createElement("strong", null, "Filters"), /*#__PURE__*/_react.default.createElement("pre", null, JSON.stringify(filters, undefined, 2)), /*#__PURE__*/_react.default.createElement("strong", null, "Sort"), /*#__PURE__*/_react.default.createElement("pre", null, JSON.stringify(sort, undefined, 2)), /*#__PURE__*/_react.default.createElement("strong", null, "Offset:"), " ", offset, /*#__PURE__*/_react.default.createElement("br", null), /*#__PURE__*/_react.default.createElement("strong", null, "Limit:"), " ", limit, /*#__PURE__*/_react.default.createElement("br", null), /*#__PURE__*/_react.default.createElement("strong", null, "Results"), /*#__PURE__*/_react.default.createElement("pre", null, JSON.stringify(results, undefined, 2))));
 };
 
 var _default = SearchDebugger;

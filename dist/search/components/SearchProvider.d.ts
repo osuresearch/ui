@@ -1,5 +1,5 @@
 import React from 'react';
-import { SearchFilters, SearchTerms, SearchDriver } from '..';
+import { SearchFilters, SearchTerms, SearchOffset, SearchLimit, SearchDriver } from '..';
 export declare type Props = {
     /**
      * Unique identifier used by components to reference this provider.
@@ -20,6 +20,20 @@ export declare type Props = {
      * defined here will be overridden by the URL data.
      */
     defaultFilters?: SearchFilters;
+    /**
+     * Default search offset to use when loading up the application.
+     *
+     * If `SyncSearchWithURL` is attached to this provider, the defaults
+     * defined here will be overridden by the URL data.
+     */
+    defaultOffset?: SearchOffset;
+    /**
+    * Default search limit to use when loading up the application.
+    *
+    * If `SyncSearchWithURL` is attached to this provider, the defaults
+    * defined here will be overridden by the URL data.
+    */
+    defaultLimit?: SearchLimit;
     /** The API integration driver to submit search data */
     driver: SearchDriver;
 };
