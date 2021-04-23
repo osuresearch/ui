@@ -130,7 +130,7 @@ const SyncSearchWithURL: React.FC<Props> = ({ provider, prefix = '' }) => {
             filters.length > 0 && search.replaceFilters(filters);
             sort && search.setSort(sort);
             offset && search.setOffset(parseInt(offset));
-            limit && search.setOffset(parseInt(limit));
+            limit && search.setLimit(parseInt(limit));
         }
 
     }, [search, init, setInit]);

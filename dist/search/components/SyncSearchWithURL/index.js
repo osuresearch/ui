@@ -134,7 +134,7 @@ var SyncSearchWithURL = function SyncSearchWithURL(_ref) {
       _filters.length > 0 && search.replaceFilters(_filters);
       _sort && search.setSort(_sort);
       _offset && search.setOffset(parseInt(_offset));
-      _limit && search.setOffset(parseInt(_limit));
+      _limit && search.setLimit(parseInt(_limit));
     }
   }, [search, init, setInit]);
   return null;
