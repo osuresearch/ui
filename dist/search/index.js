@@ -74,6 +74,8 @@ var _useSearchProvider = _interopRequireDefault(require("./hooks/useSearchProvid
 
 /** Collection of fields to sort on */
 //#endregion
+//#region Pagination interfaces
+//#endregion
 //#region Filter vanity functions
 
 /**

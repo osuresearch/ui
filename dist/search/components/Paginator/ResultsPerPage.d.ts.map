@@ -1,0 +1,1 @@
+{"version":3,"file":"ResultsPerPage.d.ts","sourceRoot":"","sources":["../../../../src/search/components/Paginator/ResultsPerPage.tsx"],"names":[],"mappings":"AAMA,aAAK,KAAK,GAAG;IACT,QAAQ,EAAE,MAAM,CAAA;CACnB,CAAA;AAED,MAAM,CAAC,OAAO,UAAU,cAAc,CAAC,EAAE,QAAQ,EAAE,EAAE,KAAK,eAyBzD"}

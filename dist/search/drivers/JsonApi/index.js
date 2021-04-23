@@ -16,7 +16,19 @@ var _useSearchProvider2 = _interopRequireDefault(require("../../hooks/useSearchP
 /**
  * Search driver for [JSON:API](https://jsonapi.org/) compliant endpoints (e.g. https://orapps.osu.edu/api/v1/person)
  *
- * Terms are passed as the `?q=` query parameter.
+ * Terms are passed as the `?q=` query parameter. 
+ * 
+ * Additional paramaters may be passed in the second argument as an 
+ * array of key-value objects, e.g.
+ * ```ts
+ * [
+ *  {
+ *      key: 'some-key',
+ *      value: 'some value'
+ *  }
+ * ]
+ * ```
+ * which will construct a URL like `https://orapps.osu.edu/api/v1/person?q=terms&some-key=some%20value`.
  *
  * Not supported:
  * - Filters and sorting rules
@@ -36,7 +48,7 @@ var _useSearchProvider2 = _interopRequireDefault(require("../../hooks/useSearchP
  * If `meta.hits` is specified at the top level of the response JSON, then `hits` will be set to that value.
  * Otherwise, `hits` becomes the total number of objects in `results`.
  */
-function JsonApi(endpoint) {
+function JsonApi(endpoint, params) {
   var DriverComponent = function DriverComponent(_ref) {
     var provider = _ref.provider;
 
@@ -68,7 +80,11 @@ function JsonApi(endpoint) {
         }
       };
       console.debug('JSON:API Fetch', endpoint, terms, payload);
-      fetch("".concat(endpoint, "?q=").concat(terms), payload).then(function (res) {
+      var url = "".concat(endpoint, "?q=").concat(encodeURI(terms));
+      params === null || params === void 0 ? void 0 : params.forEach(function (param) {
+        url += "&".concat(param.key, "=").concat(encodeURI(param.value));
+      });
+      fetch(url, payload).then(function (res) {
         return (0, _JsonApiUtility.validateAndTransformJsonApiResponse)(res);
       }).then(function (json) {
         var _json$meta;
@@ -91,7 +107,7 @@ function JsonApi(endpoint) {
       return function () {
         abortController === null || abortController === void 0 ? void 0 : abortController.abort();
       };
-    }, [endpoint, terms, setError, setSearching, setResults]); // Driver components are renderless. It's just a stateful container
+    }, [terms, setError, setSearching, setResults]); // Driver components are renderless. It's just a stateful container
 
     return null;
   };

@@ -49,6 +49,8 @@ export interface SortFields {
     name?: string;
     sort: SortField[];
 }
+export declare type SearchOffset = number;
+export declare type SearchLimit = number;
 /**
  * Factory method to create an `AndFilters` rule
  *
