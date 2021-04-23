@@ -137,16 +137,16 @@ function Apollo(query) {
              Example 2:
                 query {
                     search(terms: "fizz") {
-                        totalHits
+                        hits
                         maxRank
-                        hits {
+                        results {
                             id
                             rank
                             name
                         }
                     }
                 }
-                 We grab the full `{totalHits, maxRank, hits: [...]}`
+                 We grab the full `{hits, maxRank, results: [...]}`
                 payload within `data.search`.
         */
 

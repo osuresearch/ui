@@ -16,7 +16,14 @@ function LastPageButton(_ref) {
   var noNextPage = hits / (ctx.offset + ctx.limit) <= 1;
 
   var goToLastPage = function goToLastPage() {
+    var _window, _ctx$ref$current;
+
     ctx.setOffset((pageCount - 1) * ctx.limit);
+    (_window = window) === null || _window === void 0 ? void 0 : _window.scrollTo({
+      top: (_ctx$ref$current = ctx.ref.current) === null || _ctx$ref$current === void 0 ? void 0 : _ctx$ref$current.offsetTop,
+      left: 0,
+      behavior: 'smooth'
+    });
   };
 
   return /*#__PURE__*/_react.default.createElement("li", {

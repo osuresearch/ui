@@ -1,12 +1,12 @@
 {
   "files": {
     "main.css": "/static/css/main.f3068103.css",
-    "main.js": "/build/bundle.c3258cb2.js",
+    "main.js": "/build/bundle.88eaa80d.js",
     "index.html": "/index.html",
     "static/media/index.scss": "/static/media/color.6441e63a.png"
   },
   "entrypoints": [
     "static/css/main.f3068103.css",
-    "build/bundle.c3258cb2.js"
+    "build/bundle.88eaa80d.js"
   ]
 }

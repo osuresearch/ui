@@ -70,7 +70,9 @@ var SearchProvider = function SearchProvider(_ref) {
   var _useState13 = (0, _react.useState)(),
       _useState14 = (0, _slicedToArray2.default)(_useState13, 2),
       error = _useState14[0],
-      setError = _useState14[1]; // Prepare for some magic.
+      setError = _useState14[1];
+
+  var ref = (0, _react.useRef)(null); // Prepare for some magic.
   // The tl;dr: I'm dynamically creating named contexts stored in a
   // singleton map and providing each one mapped directly to a named (id) search provider.
   // This allows me to reuse a context structure for more than dataset, since each
@@ -82,7 +84,6 @@ var SearchProvider = function SearchProvider(_ref) {
   // We use `unknown` for typing here because the provider doesn't care what
   // structure the search results will be in (and shouldn't touch it anyway).
   // That's up to the implementing developer when they use the useSearchProvider hook.
-
 
   var _useState15 = (0, _react.useState)(function () {
     return (0, _SearchContext.initDynamicContext)(id, {});
@@ -107,6 +108,7 @@ var SearchProvider = function SearchProvider(_ref) {
       searching: searching,
       results: results,
       error: error,
+      ref: ref,
       setTerms: setTerms,
       setSort: function setSort(sort) {
         setFilters(function (prev) {
@@ -144,9 +146,11 @@ var SearchProvider = function SearchProvider(_ref) {
 
   return /*#__PURE__*/_react.default.createElement(context.Provider, {
     value: contextValue
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    ref: ref
   }, /*#__PURE__*/_react.default.createElement(DriverComponent, {
     provider: id
-  }), children);
+  }), children));
 };
 
 var _default = SearchProvider;

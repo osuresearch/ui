@@ -14,7 +14,14 @@ function FirstPageButton(_ref) {
   var noPreviousPage = ctx.offset === 0;
 
   var goToFirstPage = function goToFirstPage() {
-    return ctx.setOffset(0);
+    var _window, _ctx$ref$current;
+
+    ctx.setOffset(0);
+    (_window = window) === null || _window === void 0 ? void 0 : _window.scrollTo({
+      top: (_ctx$ref$current = ctx.ref.current) === null || _ctx$ref$current === void 0 ? void 0 : _ctx$ref$current.offsetTop,
+      left: 0,
+      behavior: 'smooth'
+    });
   };
 
   return /*#__PURE__*/_react.default.createElement("li", {

@@ -17,7 +17,14 @@ function PreviousPageButton(_ref) {
     var previous = ctx.offset - ctx.limit;
 
     if (previous >= 0) {
+      var _window, _ctx$ref$current;
+
       ctx.setOffset(previous);
+      (_window = window) === null || _window === void 0 ? void 0 : _window.scrollTo({
+        top: (_ctx$ref$current = ctx.ref.current) === null || _ctx$ref$current === void 0 ? void 0 : _ctx$ref$current.offsetTop,
+        left: 0,
+        behavior: 'smooth'
+      });
     }
   };
 
