@@ -31,6 +31,12 @@ $danger: #db3b21;
         }
     }
 
+    &.p-multiselect-chip {
+        .p-multiselect-token-icon {
+            margin-left: 0.5rem;
+        }
+    }
+
     .p-multiselect-trigger {
         background: transparent;
         color: $gray-900;

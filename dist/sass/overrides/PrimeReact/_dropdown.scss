@@ -29,14 +29,15 @@ $danger: #db3b21;
     .p-dropdown-trigger {
         background: transparent;
         color: $gray-900;
-        width: 2.357rem;
+        width: 1rem;
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
+        margin-top: -0.12rem;
     }
     .p-dropdown-clear-icon {
         color: $gray-600;
-        right: 2.357rem;
-        margin-top: -0.7rem;
+        right: 2.25rem;
+        margin-top: -0.78rem;
     }
     &.p-error {
         border-color: $danger;

@@ -40,13 +40,27 @@ var SearchFilters = /*#__PURE__*/function () {
 
 
   (0, _createClass2.default)(SearchFilters, [{
-    key: "add",
+    key: "filters",
+    get: function get() {
+      return this.m_Filters.AND;
+    }
+    /**
+     * Get a readonly copy of the current sort fields
+     */
 
+  }, {
+    key: "sort",
+    get: function get() {
+      return this.m_Sort;
+    }
     /**
      * Add a new filter to the top level list of filters.
      *
      * If an existing filter exists with the same name, it will be replaced.
      */
+
+  }, {
+    key: "add",
     value: function add(filter) {
       var clone = this.clone(); // In-place replace if an existing filter matches the name
 
@@ -121,20 +135,6 @@ var SearchFilters = /*#__PURE__*/function () {
       // (Specifically https://github.com/kolodny/immutability-helper)
 
       return clone;
-    }
-  }, {
-    key: "filters",
-    get: function get() {
-      return this.m_Filters.AND;
-    }
-    /**
-     * Get a readonly copy of the current sort fields
-     */
-
-  }, {
-    key: "sort",
-    get: function get() {
-      return this.m_Sort;
     }
   }]);
   return SearchFilters;

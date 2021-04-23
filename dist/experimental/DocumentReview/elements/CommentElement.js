@@ -43,54 +43,20 @@ function isWithinFiveMinutes(created, updated) {
 
 
 var CommentElement = /*#__PURE__*/function () {
-  (0, _createClass2.default)(CommentElement, [{
-    key: "isReply",
+  // public get rect(): DOMRect {
+  //     if (!this.cachedRect) {
+  //         this.cachedRect = getDocumentRect(this.container);
+  //     }
+  //     return this.cachedRect;
+  // }
+  // public recalculateRect() {
+  //     this.cachedRect = getDocumentRect(this.container);
+  // }
+  // private cachedRect?: DOMRect;
 
-    /** Track the clientHeight since the last time we reflowed comments */
-    get: function get() {
-      return this.comment.parentId !== undefined;
-    }
-  }, {
-    key: "isEdited",
-    get: function get() {
-      return !isWithinFiveMinutes(this.comment.created, this.comment.updated);
-    }
-  }, {
-    key: "canDelete",
-    get: function get() {
-      return this.comment.canDelete || false;
-    }
-  }, {
-    key: "canReply",
-    get: function get() {
-      return !this.isReply;
-    }
-  }, {
-    key: "canEdit",
-    get: function get() {
-      return this.comment.canEdit || false;
-    }
-  }, {
-    key: "hasReplies",
-    get: function get() {
-      return this.replies.childNodes.length > 0;
-    } // public get rect(): DOMRect {
-    //     if (!this.cachedRect) {
-    //         this.cachedRect = getDocumentRect(this.container);
-    //     }
-    //     return this.cachedRect;
-    // }
-    // public recalculateRect() {
-    //     this.cachedRect = getDocumentRect(this.container);
-    // }
-    // private cachedRect?: DOMRect;
-
-    /**
-     * Setup internal DOM for the given Comment
-     */
-
-  }]);
-
+  /**
+   * Setup internal DOM for the given Comment
+   */
   function CommentElement(document, comment, context) {
     (0, _classCallCheck2.default)(this, CommentElement);
     (0, _defineProperty2.default)(this, "comment", void 0);
@@ -195,6 +161,38 @@ var CommentElement = /*#__PURE__*/function () {
   }
 
   (0, _createClass2.default)(CommentElement, [{
+    key: "isReply",
+    get:
+    /** Track the clientHeight since the last time we reflowed comments */
+    function get() {
+      return this.comment.parentId !== undefined;
+    }
+  }, {
+    key: "isEdited",
+    get: function get() {
+      return !isWithinFiveMinutes(this.comment.created, this.comment.updated);
+    }
+  }, {
+    key: "canDelete",
+    get: function get() {
+      return this.comment.canDelete || false;
+    }
+  }, {
+    key: "canReply",
+    get: function get() {
+      return !this.isReply;
+    }
+  }, {
+    key: "canEdit",
+    get: function get() {
+      return this.comment.canEdit || false;
+    }
+  }, {
+    key: "hasReplies",
+    get: function get() {
+      return this.replies.childNodes.length > 0;
+    }
+  }, {
     key: "onDeleteButtonClick",
     value: function onDeleteButtonClick(e) {
       if (!this.canDelete) return;

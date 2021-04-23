@@ -39,6 +39,11 @@ var Action = /*#__PURE__*/function () {
       });
     }
   }, {
+    key: "length",
+    get: function get() {
+      return this.delegates.length;
+    }
+  }, {
     key: "dispatch",
     value: function dispatch() {
       for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
@@ -48,11 +53,6 @@ var Action = /*#__PURE__*/function () {
       this.delegates.forEach(function (delegate) {
         return delegate.apply(void 0, args);
       });
-    }
-  }, {
-    key: "length",
-    get: function get() {
-      return this.delegates.length;
     }
   }]);
   return Action;

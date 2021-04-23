@@ -22,7 +22,6 @@ function Input(props) {
       bind = _useContext.bind;
 
   var value = bind.value || props.value;
-  var readOnly = bind.readOnly || props.readOnly;
   var classNames = "form-control ".concat(props.className ? props.className : '', " ").concat(bind.error && 'is-invalid', " ").concat(bind.success && 'is-valid');
   return /*#__PURE__*/_react.default.createElement(_dropdown.Dropdown, (0, _extends2.default)({}, props, {
     inputId: bind.id || props.id,

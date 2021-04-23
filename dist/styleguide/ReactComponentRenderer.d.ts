@@ -15,6 +15,6 @@ interface ReactComponentRendererProps extends JssInjectedProps {
     isolated?: boolean;
 }
 export declare const ReactComponentRenderer: React.FunctionComponent<ReactComponentRendererProps>;
-declare const _default: any;
+declare const _default: React.ComponentType<Pick<ReactComponentRendererProps, "name" | "heading" | "pathLine" | "description" | "docs" | "examples" | "tabButtons" | "tabBody" | "filepath" | "slug" | "isolated">>;
 export default _default;
 //# sourceMappingURL=ReactComponentRenderer.d.ts.map

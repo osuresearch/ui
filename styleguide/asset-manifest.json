@@ -1,12 +1,11 @@
 {
   "files": {
-    "main.css": "/static/css/main.f3068103.css",
-    "main.js": "/build/bundle.30fe1ad0.js",
-    "index.html": "/index.html",
-    "static/media/index.scss": "/static/media/color.6441e63a.png"
+    "main.css": "/static/css/main.448b33d1.css",
+    "main.js": "/build/bundle.b0a7d1a0.js",
+    "index.html": "/index.html"
   },
   "entrypoints": [
-    "static/css/main.f3068103.css",
-    "build/bundle.30fe1ad0.js"
+    "static/css/main.448b33d1.css",
+    "build/bundle.b0a7d1a0.js"
   ]
 }

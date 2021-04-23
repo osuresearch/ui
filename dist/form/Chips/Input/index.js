@@ -22,7 +22,6 @@ function Input(props) {
       bind = _useContext.bind;
 
   var value = bind.value || props.value;
-  var readOnly = bind.readOnly || props.readOnly;
   var classNames = "input-group ".concat(props.className ? props.className : '', " ").concat(bind.error && 'is-invalid', " ").concat(bind.success && 'is-valid');
   return /*#__PURE__*/_react.default.createElement(_chips.Chips, (0, _extends2.default)({}, props, {
     id: bind.id || props.id,

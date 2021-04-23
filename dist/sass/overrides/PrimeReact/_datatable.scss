@@ -30,7 +30,7 @@ $primary: $casal;
 %extend_3 {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem $primary;
+    box-shadow: $input-focus-box-shadow;
 }
 
 .p-datatable {
@@ -63,7 +63,10 @@ $primary: $casal;
         font-weight: 600;
     }
     .p-sortable-column {
-        outline-color: $primary;
+        &:focus {
+            outline: 0;
+            box-shadow: $input-focus-box-shadow;
+        }
         .p-sortable-column-icon {
             color: #ccc;
             position: absolute;

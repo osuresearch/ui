@@ -38,17 +38,10 @@ var HamburgerButtonElement = /*#__PURE__*/function () {
   }
 
   (0, _createClass2.default)(HamburgerButtonElement, [{
-    key: "onToggle",
-    value: function onToggle() {
-      this.isOpen = !this.isOpen;
-    }
-  }, {
-    key: "remove",
-    value: function remove() {
-      this.el.remove();
-    }
-  }, {
     key: "isOpen",
+    get: function get() {
+      return this.active;
+    },
     set: function set(value) {
       this.active = value;
 
@@ -59,9 +52,16 @@ var HamburgerButtonElement = /*#__PURE__*/function () {
         this.onClose && this.onClose();
         this.el.classList.remove('is-active');
       }
-    },
-    get: function get() {
-      return this.active;
+    }
+  }, {
+    key: "onToggle",
+    value: function onToggle() {
+      this.isOpen = !this.isOpen;
+    }
+  }, {
+    key: "remove",
+    value: function remove() {
+      this.el.remove();
     }
   }]);
   return HamburgerButtonElement;
