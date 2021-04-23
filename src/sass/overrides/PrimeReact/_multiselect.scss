@@ -34,9 +34,10 @@ $danger: #db3b21;
     .p-multiselect-trigger {
         background: transparent;
         color: $gray-900;
-        width: 2.357rem;
+        width: 1rem;
         border-top-right-radius: 0px;
         border-bottom-right-radius: 0px;
+        margin-top: -0.1rem;
     }
     &.p-error {
         border-color: $danger;
