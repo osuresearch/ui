@@ -106,6 +106,9 @@ function App() {
 ```
 
 #### How to use the `useToast` hook
+
+In your component, import the `useToast` hook from ORIS/ui. Once you need to display a toast message (such as after a form submission), invoke Toast's `show` method on the toast ref.
+
 ```jsx static
 import { useToast } from '@ORIS/ui';
 
