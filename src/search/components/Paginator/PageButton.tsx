@@ -18,11 +18,7 @@ export default function PageButton({
     const handlePageChange = (pageNumber: number) => {
         ctx.setOffset((pageNumber - 1) * ctx.limit);
 
-        window?.scrollTo({
-            top: ctx.ref.current?.offsetTop,
-            left: 0,
-            behavior: 'smooth'
-        });
+        window?.scrollTo(ctx.ref.current?.offsetTop ?? 0, 0);
     }
 
     return (

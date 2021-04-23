@@ -15,11 +15,7 @@ export default function PreviousPageButton({ ctx }: Props) {
         if (previous >= 0) {
             ctx.setOffset(previous);
 
-            window?.scrollTo({
-                top: ctx.ref.current?.offsetTop,
-                left: 0,
-                behavior: 'smooth'
-            });
+            window?.scrollTo(ctx.ref.current?.offsetTop ?? 0, 0);
         }
     }
 

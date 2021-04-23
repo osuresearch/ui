@@ -18,14 +18,10 @@ function NextPageButton(_ref) {
     var next = ctx.offset + ctx.limit;
 
     if (next <= hits) {
-      var _window, _ctx$ref$current;
+      var _window, _ctx$ref$current$offs, _ctx$ref$current;
 
       ctx.setOffset(next);
-      (_window = window) === null || _window === void 0 ? void 0 : _window.scrollTo({
-        top: (_ctx$ref$current = ctx.ref.current) === null || _ctx$ref$current === void 0 ? void 0 : _ctx$ref$current.offsetTop,
-        left: 0,
-        behavior: 'smooth'
-      });
+      (_window = window) === null || _window === void 0 ? void 0 : _window.scrollTo((_ctx$ref$current$offs = (_ctx$ref$current = ctx.ref.current) === null || _ctx$ref$current === void 0 ? void 0 : _ctx$ref$current.offsetTop) !== null && _ctx$ref$current$offs !== void 0 ? _ctx$ref$current$offs : 0, 0);
     }
   };
 

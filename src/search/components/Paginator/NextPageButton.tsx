@@ -19,11 +19,7 @@ export default function NextPageButton({
         if (next <= hits) {
             ctx.setOffset(next);
 
-            window?.scrollTo({
-                top: ctx.ref.current?.offsetTop,
-                left: 0,
-                behavior: 'smooth'
-            });
+            window?.scrollTo(ctx.ref.current?.offsetTop ?? 0, 0);
         }
     }
 
