@@ -9,6 +9,18 @@ Versions follow [Semantic Versioning](https://semver.org/) guidelines - given a 
 
 # 4.4.0 (In Progress)
 
+__Deprecated Components:__
+
+* `Modal` (superseded by PrimeReact `Dialog`)
+
+__Breaking Changes:__
+
+* PrimeReact updates:
+    * Change params of onEditorInit, onEditorSubmit, onEditorCancel and editorValidator callbacks on Column [\#1692](https://github.com/primefaces/primereact/issues/1692)
+    * Rename 'readonly' property with 'readOnly' on all components [\#1738](https://github.com/primefaces/primereact/issues/1738)
+    * Change the type of tabIndex property on all components [\#1566](https://github.com/primefaces/primereact/issues/1566)
+    * Improve type definitions on all components [\#1877](https://github.com/primefaces/primereact/issues/1877)
+
 __New Features:__
 
 * Pagination support for Search components (`offset` and `limit` getters/setters in Search context).
@@ -16,12 +28,79 @@ __New Features:__
 * `SyncSearchWithURL` updated to include pagination support.
 * New `Paginator` component to be used within a `SearchProvider`.
 * Support for parameters in `JsonApi` Search driver.
+* PrimeReact updated from version 5.0.0 to version 6.3.0.
+    * New PrimeReact component support in ORIS/ui: `Dialog` (replaces Modal), `Toast` (via `useToast` hook and `ToastProvider`), and `Skeleton`.
+    * Add dropdownAppendTo property to Paginator [\#1622](https://github.com/primefaces/primereact/issues/1622)
+    * Add paginatorDropdownAppendTo property to DataTable, TreeTable and DataView [\#1621](https://github.com/primefaces/primereact/issues/1621)
+    * Chips display for MultiSelect [\#1689](https://github.com/primefaces/primereact/issues/1689)
+    * Remove 'classnames' dependency from PrimeReact components [\#1653](https://github.com/primefaces/primereact/issues/1653)
+    * Add showClear property to MultiSelect [\#1627](https://github.com/primefaces/primereact/issues/1627)
+    * Add browser event param to editor callbacks on Datatable [\#1577](https://github.com/primefaces/primereact/issues/1577)
+    * Clearing Dropdown returns null instead of undefined [\#1784](https://github.com/primefaces/primereact/issues/1784)
+    * Add restoreTableState method to DataTable [\#1776](https://github.com/primefaces/primereact/issues/1776)
+    * Feature Request: DataTable hide expander when there are no children rows [\#1762](https://github.com/primefaces/primereact/issues/1762)
+    * MultiSelect implement SelectItem disabled [\#1698](https://github.com/primefaces/primereact/issues/1698)
+    * Improve rowEditor buttons on DataTable with editMode="row" [\#1788](https://github.com/primefaces/primereact/issues/1788)
+    * Add selectionOnly options to CSV export on DataTable [\#1853](https://github.com/primefaces/primereact/issues/1853)
+    * Add paginatorClassName to DataTable, TreeTable and DataView [\#1840](https://github.com/primefaces/primereact/issues/1840)
+    * Improve checkbox selection on DataTable [\#1817](https://github.com/primefaces/primereact/issues/1817)
+    * \[Multiselect\] Feature request: Configure Maximum allowed number of items selectable in Multiselect [\#1815](https://github.com/primefaces/primereact/issues/1815)
+    * DataTable/TreeTable: implement configurable filterDelay [\#1440](https://github.com/primefaces/primereact/issues/1440)
+    * TreeTable/DataTable goes to edit mode when selected \(single click\) [\#1292](https://github.com/primefaces/primereact/issues/1292)
+    * Add removableSort property on TreeTable component [\#1275](https://github.com/primefaces/primereact/issues/1275)
+    * Change row navigation structure on DataTable with selection [\#1162](https://github.com/primefaces/primereact/issues/1162)
+    * Trigger row editing on datatable programmatically [\#1135](https://github.com/primefaces/primereact/issues/1135)
+    * Add showFilterClear proprty to Dropdown [\#1081](https://github.com/primefaces/primereact/issues/1081)
+    * Accessibility of the DataTable expander cell button [\#921](https://github.com/primefaces/primereact/issues/921)
+    * Add onBeforeEditorShow and onBeforeEditorHide callbacks to Column on DataTable with cell editing [\#589](https://github.com/primefaces/primereact/issues/589)
+    * Add zIndex options to PrimeReact api [\#1878](https://github.com/primefaces/primereact/issues/1878)
+    * Add option group support to Dropdown [\#1874](https://github.com/primefaces/primereact/issues/1874)
+    * Add option group support to MultiSelect [\#1873](https://github.com/primefaces/primereact/issues/1873)
+    * Add cellSelection property to DataTable [\#1942](https://github.com/primefaces/primereact/issues/1942)
+    * Add dragSelection property to DataTable [\#1932](https://github.com/primefaces/primereact/issues/1932)
+    * Improve selectionMode property on DataTable [\#1926](https://github.com/primefaces/primereact/issues/1926)
+    * Add appendTo option to PrimeReact api [\#1964](https://github.com/primefaces/primereact/issues/1964)
+    * Add new params to filterFunction on Column [\#1956](https://github.com/primefaces/primereact/issues/1956)
+    * Add 'self' value to appendTo property on Components [\#1949](https://github.com/primefaces/primereact/issues/1949)
+    * Add sortableDisabled property to Column [\#1911](https://github.com/primefaces/primereact/issues/1911)
 
 __Bug Fixes:__
 
 * The `DateTime.Input` calendar now displays above all DOM elements. This resolves an issue where the calendar would be cut off when used in a Modal or Dialog.
 * The `DateTime.Input` field no longer ignores direct keyboard input.
 * `SyncSearchWithURL` now conditionally checks that the initial URL actually has filters prior to replacing them in the Search provider. 
+* PrimeReact update to 6.3.0:
+    * Chips is not working when the initial value sets 'null' [\#1678](https://github.com/primefaces/primereact/issues/1678)
+    * DataTable with lazy mode and multiple selection doesn't work as expected [\#1636](https://github.com/primefaces/primereact/issues/1636)
+    * DataTable Context Menu doesn't reposition [\#1574](https://github.com/primefaces/primereact/issues/1574)
+    * Multiple sort in TreeTable is not working when passing multisortmeta props [\#1442](https://github.com/primefaces/primereact/issues/1442)
+    * Chips throws a JS exception [\#1754](https://github.com/primefaces/primereact/issues/1754)
+    * Typo in tabIndex property name [\#1710](https://github.com/primefaces/primereact/issues/1710)
+    * DataTable with empty frozen column throws a JS exception [\#1703](https://github.com/primefaces/primereact/issues/1703)
+    * Datatable with stateStorage property saves filterheader as extra columnwidth [\#1697](https://github.com/primefaces/primereact/issues/1697)
+    * DataTable edit not work \(Input disappears immediately after clicking cell\) in react-dom@17.0.1 [\#1685](https://github.com/primefaces/primereact/issues/1685)
+    * DataTable with editMode="cell" doesn't work as expected [\#1752](https://github.com/primefaces/primereact/issues/1752)
+    * Datatable doesn't change page when the last element on a page is removed. [\#1792](https://github.com/primefaces/primereact/issues/1792)
+    * DataTable ContextMenu Third Reposition [\#1789](https://github.com/primefaces/primereact/issues/1789)
+    * TreeTable tabbing between editable cells not working [\#1617](https://github.com/primefaces/primereact/issues/1617)
+    * DataTable is not working with defaultSortOrder={-1} [\#1855](https://github.com/primefaces/primereact/issues/1855)
+    * Editing DataTable and TreeTable are not working as expected on React/ReactDOM ^17.0.1 [\#1828](https://github.com/primefaces/primereact/issues/1828)
+    * When the 'rows' property changes, Pagination component does not update [\#1820](https://github.com/primefaces/primereact/issues/1820)
+    * DataTable - accessibility of sorting buttons [\#1813](https://github.com/primefaces/primereact/issues/1813)
+    * DataTable csv export fails in chrome but is working in IE [\#1098](https://github.com/primefaces/primereact/issues/1098)
+    * The toggler icon of Tree/TreeTable is not displaying correctly in mobile mode [\#1859](https://github.com/primefaces/primereact/issues/1859)
+    * Datatable rows per page doesn't work [\#1870](https://github.com/primefaces/primereact/issues/1870)
+    * Cell Editing doesn't work on child nodes in TreeTable [\#1865](https://github.com/primefaces/primereact/issues/1865)
+    * Striped class is not working as expected on DataTable with expanded rows [\#1972](https://github.com/primefaces/primereact/issues/1972)
+    * MultiSelect Button disabled issue [\#1943](https://github.com/primefaces/primereact/issues/1943)
+    * Dropdown, MultiSelect, Listbox option that has disabled property is not disabled [\#1936](https://github.com/primefaces/primereact/issues/1936)
+    * MultiSelect, selecting disabled options [\#1934](https://github.com/primefaces/primereact/issues/1934)
+    * Uncaught Error: Cannot find module './images/color.png' [\#1931](https://github.com/primefaces/primereact/issues/1931)
+    * Randomly generated IDs in components throw a warning on SSR [\#1922](https://github.com/primefaces/primereact/issues/1922)
+    * Dropdown 'optionDisabled' is wrongly typed as boolean [\#1921](https://github.com/primefaces/primereact/issues/1921)
+    * DataTable and TreeTable Typing is wrong [\#1914](https://github.com/primefaces/primereact/issues/1914)
+    * Multiselect malfunction with 'optionValue' prop setted [\#1897](https://github.com/primefaces/primereact/issues/1897)
+    * TreeTable does not account for changes in scrollHeight [\#1850](https://github.com/primefaces/primereact/issues/1850)
 
 # 4.3.2 (2021-03-01)
 
