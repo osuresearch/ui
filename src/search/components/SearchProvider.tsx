@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import {
     SearchFilters,
     SearchContext,
@@ -85,6 +85,8 @@ const SearchProvider: React.FC<Props> = ({
     const [results, setResults] = useState<unknown | undefined>();
     const [error, setError] = useState<string | undefined>();
 
+    const ref = useRef<HTMLDivElement>(null);
+
     // Prepare for some magic.
 
     // The tl;dr: I'm dynamically creating named contexts stored in a
@@ -120,6 +122,7 @@ const SearchProvider: React.FC<Props> = ({
         searching,
         results,
         error,
+        ref,
         setTerms,
         setSort(sort: SortFields | undefined) {
             setFilters((prev) => prev.sortBy(sort));
@@ -152,9 +155,11 @@ const SearchProvider: React.FC<Props> = ({
     // able to rewrite query/filters on state change.
     return (
         <context.Provider value={contextValue}>
-            <DriverComponent provider={id} />
+            <div ref={ref}>
+                <DriverComponent provider={id} />
 
-            {children}
+                {children}
+            </div>
         </context.Provider>
     );
 }

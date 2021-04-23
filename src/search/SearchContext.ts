@@ -1,4 +1,4 @@
-import { Context, createContext } from 'react';
+import React, { Context, createContext } from 'react';
 import { IFilter, SearchTerms, SearchOffset, SearchLimit, SortFields } from '.';
 
 /** A set of common states shared by search components */
@@ -26,6 +26,9 @@ export interface ISearchContext<TResult> {
 
     /** Error */
     error?: string
+
+    /** Ref of the div that wraps around the children of the SearchProvider */
+    ref: React.RefObject<HTMLDivElement>
 
     /** Update search terms */
     setTerms(value: SearchTerms): void

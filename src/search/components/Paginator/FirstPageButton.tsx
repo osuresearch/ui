@@ -9,7 +9,15 @@ type Props = {
 export default function FirstPageButton({ ctx }: Props) {
     const noPreviousPage = ctx.offset === 0;
 
-    const goToFirstPage = () => ctx.setOffset(0);
+    const goToFirstPage = () => {
+        ctx.setOffset(0);
+
+        window?.scrollTo({
+            top: ctx.ref.current?.offsetTop,
+            left: 0,
+            behavior: 'smooth'
+        });
+    };
 
     return (
         <li

@@ -3,7 +3,7 @@
 
 This component will inject query parameters to the URL similar to the following:
 
-```
+```js static
 https://my.app/
     ?f=W3sibmFtZSI6Ik9TVS[...]
     &s=3JhbCBJUkIifX1d[...]
