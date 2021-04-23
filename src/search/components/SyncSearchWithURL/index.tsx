@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
-import useSearchProvider from '../hooks/useSearchProvider';
-import { IFilter, SortFields } from '..';
+import useSearchProvider from '../../hooks/useSearchProvider';
+import { IFilter, SortFields } from '../..';
 
 type Props = {
     /** SearchProvider `id` to sync the URL parameters */
