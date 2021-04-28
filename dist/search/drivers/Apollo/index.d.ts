@@ -15,6 +15,14 @@ import { DriverProps } from '../..';
  *  - `$sort: SearchSorting`
  *      - Sorting rules for the results.
  *      - You can omit this if you do not use sorting in your searches.
+ *  - `$offset: number`
+ *      - In combination with limit, determines which page results to display in pagination
+ *      - `offset` is 0-indexed, so with a `limit=20` then `offset=20` will point to page 2, `offset=40` will be page 3, and so on.
+ *      - You can omit this if you do not use pagination in your searches.
+ *  - `$limit: number`
+ *      - The number of results to return in the search
+ *      - In combination with offset, determines which page results to display in pagination
+ *      - You can omit this if you do not use pagination in your searches.
  *
  * The GraphQL types `SearchFilters` and `SearchSorting` are provided by the
  * [ORIS\GraphQL](https://code.osu.edu/ORIS/graphql) composer package.

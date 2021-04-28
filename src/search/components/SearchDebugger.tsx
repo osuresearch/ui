@@ -18,7 +18,7 @@ type Props = {
 const SearchDebugger: React.FC<Props> = ({ provider }) => {
     const [show, setShow] = useState(false);
     const {
-        terms, filters, sort,
+        terms, filters, sort, offset, limit,
         searching, error, results
     } = useSearchProvider(provider);
 
@@ -48,6 +48,10 @@ const SearchDebugger: React.FC<Props> = ({ provider }) => {
                 <pre>
                     {JSON.stringify(sort, undefined, 2)}
                 </pre>
+                <strong>Offset:</strong> {offset}
+                <br/>
+                <strong>Limit:</strong> {limit}
+                <br/>
 
                 <strong>Results</strong>
                 <pre>

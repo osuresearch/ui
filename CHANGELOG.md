@@ -7,6 +7,22 @@ Versions follow [Semantic Versioning](https://semver.org/) guidelines - given a 
 2. MINOR version when you add functionality in a backwards-compatible manner, and
 3. PATCH version when you make backwards-compatible bug fixes.
 
+# 4.4.0 (In Progress)
+
+__New Features:__
+
+* Pagination support for Search components (`offset` and `limit` getters/setters in Search context).
+* `Apollo` search driver updated to include pagination support.
+* `SyncSearchWithURL` updated to include pagination support.
+* New `Paginator` component to be used within a `SearchProvider`.
+* Support for parameters in `JsonApi` Search driver.
+
+__Bug Fixes:__
+
+* The `DateTime.Input` calendar now displays above all DOM elements. This resolves an issue where the calendar would be cut off when used in a Modal or Dialog.
+* The `DateTime.Input` field no longer ignores direct keyboard input.
+* `SyncSearchWithURL` now conditionally checks that the initial URL actually has filters prior to replacing them in the Search provider. 
+
 # 4.3.2 (2021-03-01)
 
 __Minor Backwards Breaking Changes:__

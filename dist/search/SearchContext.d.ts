@@ -1,5 +1,5 @@
-import { Context } from 'react';
-import { IFilter, SearchTerms, SortFields } from '.';
+import React, { Context } from 'react';
+import { IFilter, SearchTerms, SearchOffset, SearchLimit, SortFields } from '.';
 /** A set of common states shared by search components */
 export interface ISearchContext<TResult> {
     /** Read-only copy of the current search terms */
@@ -8,12 +8,18 @@ export interface ISearchContext<TResult> {
     filters: IFilter[];
     /** Current sort rules */
     sort: SortFields | undefined;
+    /** Current search offset */
+    offset: SearchOffset;
+    /** Current search limit */
+    limit: SearchLimit;
     /** Search is being executed */
     searching: boolean;
     /** Results from search. Structure depends on the backend. */
     results?: TResult;
     /** Error */
     error?: string;
+    /** Ref of the div that wraps around the children of the SearchProvider */
+    ref: React.RefObject<HTMLDivElement>;
     /** Update search terms */
     setTerms(value: SearchTerms): void;
     /** Update sort rules */
@@ -27,6 +33,10 @@ export interface ISearchContext<TResult> {
     deleteFilter(name: string): void;
     /** Replace the whole set of search filters with a new set */
     replaceFilters(filters: IFilter[]): void;
+    /** Update the search offset */
+    setOffset(offset: SearchOffset): void;
+    /** Update the search limit */
+    setLimit(limit: SearchLimit): void;
     /** Set searching state */
     setSearching(searching: boolean): void;
     /** Set results */
