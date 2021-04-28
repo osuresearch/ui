@@ -16,9 +16,9 @@ var _useSearchProvider2 = _interopRequireDefault(require("../../hooks/useSearchP
 /**
  * Search driver for [JSON:API](https://jsonapi.org/) compliant endpoints (e.g. https://orapps.osu.edu/api/v1/person)
  *
- * Terms are passed as the `?q=` query parameter. 
- * 
- * Additional paramaters may be passed in the second argument as an 
+ * Terms are passed as the `?q=` query parameter.
+ *
+ * Additional paramaters may be passed in the second argument as an
  * array of key-value objects, e.g.
  * ```ts
  * [
@@ -56,14 +56,14 @@ function JsonApi(endpoint, params) {
         terms = _useSearchProvider.terms,
         setError = _useSearchProvider.setError,
         setSearching = _useSearchProvider.setSearching,
-        setResults = _useSearchProvider.setResults;
+        setResponse = _useSearchProvider.setResponse;
 
     (0, _react.useEffect)(function () {
       // Clear results on clearing search terms
       if (terms.length < 1) {
         setSearching(false);
         setError(undefined);
-        setResults(undefined);
+        setResponse(undefined);
         return;
       }
 
@@ -79,7 +79,6 @@ function JsonApi(endpoint, params) {
           'Content-Type': 'application/vnd.api+json'
         }
       };
-      console.debug('JSON:API Fetch', endpoint, terms, payload);
       var url = "".concat(endpoint, "?q=").concat(encodeURI(terms));
       params === null || params === void 0 ? void 0 : params.forEach(function (param) {
         url += "&".concat(param.key, "=").concat(encodeURI(param.value));
@@ -94,7 +93,7 @@ function JsonApi(endpoint, params) {
         var results = json.data;
         var hits = ((_json$meta = json.meta) === null || _json$meta === void 0 ? void 0 : _json$meta.total) || results.length;
         setSearching(false);
-        setResults({
+        setResponse({
           hits: hits,
           results: results
         });
@@ -107,7 +106,7 @@ function JsonApi(endpoint, params) {
       return function () {
         abortController === null || abortController === void 0 ? void 0 : abortController.abort();
       };
-    }, [terms, setError, setSearching, setResults]); // Driver components are renderless. It's just a stateful container
+    }, [terms, setError, setSearching, setResponse]); // Driver components are renderless. It's just a stateful container
 
     return null;
   };

@@ -1,7 +1,7 @@
 import React, { Context } from 'react';
 import { IFilter, SearchTerms, SearchOffset, SearchLimit, SortFields } from '.';
 /** A set of common states shared by search components */
-export interface ISearchContext<TResult> {
+export interface ISearchContext<TResponse> {
     /** Read-only copy of the current search terms */
     terms: SearchTerms;
     /** Read-only copy of current search filters */
@@ -14,8 +14,8 @@ export interface ISearchContext<TResult> {
     limit: SearchLimit;
     /** Search is being executed */
     searching: boolean;
-    /** Results from search. Structure depends on the backend. */
-    results?: TResult;
+    /** Response from search. Structure depends on the backend. */
+    response?: TResponse;
     /** Error */
     error?: string;
     /** Ref of the div that wraps around the children of the SearchProvider */
@@ -39,17 +39,17 @@ export interface ISearchContext<TResult> {
     setLimit(limit: SearchLimit): void;
     /** Set searching state */
     setSearching(searching: boolean): void;
-    /** Set results */
-    setResults(results?: TResult): void;
+    /** Set response payload */
+    setResponse(results?: TResponse): void;
     /** Set error */
     setError(error?: string): void;
 }
 /** Shorthand for typing a React Context storing search data */
-export declare type SearchContext<TResult> = Context<ISearchContext<TResult>>;
+export declare type SearchContext<TResponse> = Context<ISearchContext<TResponse>>;
 /**
  * Create a new dynamic SearchContext tied to a named provider
  */
-export declare function initDynamicContext<TResult>(provider: string, data: ISearchContext<TResult>): SearchContext<TResult>;
+export declare function initDynamicContext<TResponse>(provider: string, data: ISearchContext<TResponse>): SearchContext<TResponse>;
 /**
  * Destroy a dynamic SearchContext by name
  */
@@ -59,5 +59,5 @@ export declare function destroyDynamicContext(provider: string): void;
  *
  * @throws {Error} if the provider is not yet registered through a SearchProvider component
  */
-export declare function getDynamicContext<TResult>(provider: string): SearchContext<TResult>;
+export declare function getDynamicContext<TResponse>(provider: string): SearchContext<TResponse>;
 //# sourceMappingURL=SearchContext.d.ts.map

@@ -71,7 +71,7 @@ function Apollo(query) {
         limit = _useSearchProvider.limit,
         setSearching = _useSearchProvider.setSearching,
         setError = _useSearchProvider.setError,
-        setResults = _useSearchProvider.setResults;
+        setResponse = _useSearchProvider.setResponse;
 
     var _useLazyQuery = (0, _client.useLazyQuery)(query, {
       client: client
@@ -108,8 +108,8 @@ function Apollo(query) {
 
     (0, _react.useEffect)(function () {
       setCached(function (prev) {
-        // Use previously cached results if we're still loading
-        var results = prev; // If there's an error - make it human readable.
+        // Use the previously cached response if we're still loading
+        var response = prev; // If there's an error - make it human readable.
 
         var error = undefined;
 
@@ -125,16 +125,16 @@ function Apollo(query) {
         /*
             GraphQL can come back with any named query field -
             but we only care about the value in that field.
-             Example 1:
+              Example 1:
                 query {
                     tools(terms: "foo") {
                         id
                         title
                     }
                 }
-                 We only care about the `[{ id, title }]`
+                  We only care about the `[{ id, title }]`
                 payload within `data.tools`.
-             Example 2:
+              Example 2:
                 query {
                     search(terms: "fizz") {
                         hits
@@ -146,29 +146,29 @@ function Apollo(query) {
                         }
                     }
                 }
-                 We grab the full `{hits, maxRank, results: [...]}`
+                  We grab the full `{hits, maxRank, results: [...]}`
                 payload within `data.search`.
         */
 
 
         if (result.data !== undefined) {
           var firstKey = Object.keys(result.data)[0];
-          results = result.data[firstKey];
+          response = result.data[firstKey];
         }
 
         setSearching(result.loading);
         setError(error);
-        setResults(results);
-        return results;
+        setResponse(response);
+        return response;
       });
-    }, [result, skipSearchAndClear, setSearching, setError, setResults]);
+    }, [result, skipSearchAndClear, setSearching, setError, setResponse]);
     (0, _react.useEffect)(function () {
       if (skipSearchAndClear) {
         setSearching(false);
         setError(undefined);
-        setResults(undefined);
+        setResponse(undefined);
       }
-    }, [skipSearchAndClear, setSearching, setError, setResults]); // Driver components are renderless. It's just a stateful container
+    }, [skipSearchAndClear, setSearching, setError, setResponse]); // Driver components are renderless. It's just a stateful container
 
     return null;
   };
