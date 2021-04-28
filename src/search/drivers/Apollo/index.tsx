@@ -53,7 +53,7 @@ export default function Apollo(
     }) => {
         const {
             terms, filters, sort, offset, limit,
-            setSearching, setError, setResults
+            setSearching, setError, setResponse
         } = useSearchProvider(provider);
 
         const [callable, result] = useLazyQuery<{ [field: string]: any }>(query, {
@@ -88,8 +88,8 @@ export default function Apollo(
         // can display these while still fetching fresh data in the background.
         useEffect(() => {
             setCached((prev: any) => {
-                // Use previously cached results if we're still loading
-                let results = prev;
+                // Use the previously cached response if we're still loading
+                let response = prev;
 
                 // If there's an error - make it human readable.
                 let error: string | undefined = undefined;
@@ -136,23 +136,23 @@ export default function Apollo(
                 */
                 if (result.data !== undefined) {
                     const firstKey = Object.keys(result.data)[0];
-                    results = result.data[firstKey];
+                    response = result.data[firstKey];
                 }
 
                 setSearching(result.loading);
                 setError(error);
-                setResults(results);
-                return results;
+                setResponse(response);
+                return response;
             });
-        }, [result, skipSearchAndClear, setSearching, setError, setResults]);
+        }, [result, skipSearchAndClear, setSearching, setError, setResponse]);
 
         useEffect(() => {
             if (skipSearchAndClear) {
                 setSearching(false);
                 setError(undefined);
-                setResults(undefined);
+                setResponse(undefined);
             }
-        }, [skipSearchAndClear, setSearching, setError, setResults]);
+        }, [skipSearchAndClear, setSearching, setError, setResponse]);
 
         // Driver components are renderless. It's just a stateful container
         return null;

@@ -50,7 +50,7 @@ Accept: application/vnd.api+json
 Add your search endpoint without any query parameters as the first argument to the `JsonApi` search driver:
 
 ```jsx static
-<SearchProvider id="awards" driver={JsonApi('https://my.app/api/award')}>
+<SearchProvider id="Awards" driver={JsonApi('https://my.app/api/award')}>
     {/* Your components for search terms and results here */}
 </SearchProvider>
 ```
@@ -75,17 +75,17 @@ type Award = {
     }
 }
 
-type AwardResults = {
+type AwardSearchResponse = {
     hits: number
     results: Award[]
 }
 
 function AwardResults() {
-    const { results } = useSearchProvider<AwardResults>('awards');
+    const { response } = useSearchProvider<AwardSearchResponse>('Awards');
 
     return (
         <ul>
-        {results.results.map((award) =>
+        {response.results.map((award) =>
             <li key={award.id}>
                 {award.attributes.title}
             </li>
