@@ -12,11 +12,13 @@ export { default as Support } from './core-application/Support';
 
 // Generic
 export { default as Alert } from './generic/Alert';
+export { default as Avatar } from './generic/Avatar';
 export { default as Badge } from './generic/Badge';
 export { default as Icon } from './generic/Icon';
 
 // Controls
 export { default as Button } from './controls/Button';
+export { default as EmailLink } from './controls/EmailLink';
 export { default as ExternalLink } from './controls/ExternalLink';
 export { default as DropOverlay } from './controls/DropOverlay';
 export { default as Modal } from './controls/Modal';
