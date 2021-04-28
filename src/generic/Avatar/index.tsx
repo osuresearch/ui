@@ -23,20 +23,22 @@ type Props = {
     size: number
 }
 
-
 /**
  * Fallback (pixel.gif) for when someone does not have an OPIC.
  */
-const FALLBACK_URL = 'http://localhost:8000/assets/img/pixel.gif';
-// TODO: Use to orapps/assets
+const FALLBACK_URL = 'https://orapps.osu.edu/assets/img/pixel.gif';
+
+/**
+ * Colors assigned to initials when someone does not have an OPIC or we disable OPIC
+ */
+ const THEME_COLORS = ['#586a81', '#bb0000', '#6a6f24', '#846622', '#427067', '#442369', '#851e5e'];
 
 const Avatar: React.FC<Props> = ({ name, username, useOPIC = true, size = 50 }) => {
-    const colors = ["#1abc9c", "#2ecc71", "#3498db", "#9b59b6", "#34495e", "#16a085", "#27ae60", "#2980b9", "#8e44ad", "#2c3e50", "#f1c40f", "#e67e22", "#e74c3c", "#f39c12", "#d35400", "#c0392b", "#7f8c8d"];
-    const index = (name.charCodeAt(0) - 65) % colors.length;
+    const index = (name.charCodeAt(0) - 65) % THEME_COLORS.length;
 
     return (
         <div className="avatar" aria-hidden="true" style={{
-            backgroundColor: colors[index],
+            backgroundColor: THEME_COLORS[index],
             width: size,
             height: size,
         }}>
