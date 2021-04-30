@@ -1,62 +1,61 @@
 ### Examples
 ```jsx
-import { useRef } from 'react';
-import { ToastProvider, Button } from '@ORIS/ui';
+import { useToast, ToastProvider, Button } from '@ORIS/ui';
 
-const toast = useRef();
+const toast = useToast();
 
-<ToastProvider toast={toast}>
-<Button 
-    theme="success"
-    onClick={() => {
-        toast.current.show({
-            severity: 'success',
-            summary: 'Success Message',
-            detail: 'Form submitted!'
-        })
-    }}
->
-    Success
-</Button>
+<ToastProvider>
+    <Button 
+        theme="success"
+        onClick={() => {
+            toast.show({
+                severity: 'success',
+                summary: 'Success Message',
+                detail: 'Form submitted!'
+            })
+        }}
+    >
+        Success
+    </Button>
 
-<Button
-    theme="info"
-    onClick={() => {
-        toast.current.show({
-            severity: 'info',
-            summary: 'Info Message',
-            detail: 'Message content'
-        })
-    }}
->
-    Info
-</Button>
+    <Button
+        theme="info"
+        onClick={() => {
+            toast.show({
+                severity: 'info',
+                summary: 'Info Message',
+                detail: 'Message content'
+            })
+        }}
+    >
+        Info
+    </Button>
 
-<Button
-    theme="warning"
-    onClick={() => {
-        toast.current.show({
-            severity: 'warn',
-            summary: 'Warning Message',
-            detail: 'Message content'
-        })
-    }}
->
-    Warn
-</Button>
+    <Button
+        theme="warning"
+        onClick={() => {
+            toast.show({
+                severity: 'warn',
+                summary: 'Warning Message',
+                detail: 'Message content'
+            })
+        }}
+    >
+        Warn
+    </Button>
 
-<Button
-    theme="danger"
-    onClick={() => {
-        toast.current.show({
-            severity: 'error',
-            summary: 'Error Message',
-            detail: 'Message content'
-        })
-    }}
->
-    Error
-</Button>
+    <Button
+        theme="danger"
+        onClick={() => {
+            toast.show({
+                severity: 'error',
+                summary: 'Error Message',
+                detail: 'Message content'
+            })
+        }}
+    >
+        Error
+    </Button>
 </ToastProvider>
 ```
 
@@ -67,12 +66,7 @@ To make it easier to incorporate Toasts into your app, a `useToast` hook is prov
 
 #### How to set up `ToastProvider` in `App.tsx`
 
-1 - In `App.tsx`, add `useRef` to the React import
-```jsx static
-import React, { useRef } from 'react'
-```
-
-2 - Add `ToastProvider` to the @ORIS/ui imports
+1 - In `App.tsx`, add `ToastProvider` to the @ORIS/ui imports
 ```jsx static
 import {
     OhioStateNavbar,
@@ -82,21 +76,10 @@ import {
 } from '@ORIS/ui';
 ```
 
-3 - Import `Toast` from primereact/toast
-```jsx static
-import { Toast } from 'primereact/toast';
-```
-
-4 - Create a `toast` ref at the top of the App function
-```jsx static
-function App() {
-    const toast = useRef<Toast>(null);
-```
-
-5 - Wrap the `ToastProvider` around the app's main content. The `toast` property of the `ToastProvider` is the ref you created in the last step.
+2 - Wrap the `ToastProvider` around the app's main content.
 ```jsx static
 <main id="content">
-    <ToastProvider toast={toast}>
+    <ToastProvider>
         <Switch>
             <Route exact path="/" component={Workspace} />
             <Route component={NotFound} />
@@ -112,11 +95,11 @@ In your component, import the `useToast` hook from ORIS/ui. Once you need to dis
 ```jsx static
 import { useToast } from '@ORIS/ui';
 
-const YourComponent = () => {
+const MyToastyComponent = () => {
     const toast = useToast();
 
     // Fire off a message by invoking Toast's `show` method
-    toast?.current?.show({
+    toast.show({
         severity: 'success',
         summary: 'Success Message',
         detail: 'Form submitted!'

@@ -1,17 +1,11 @@
 import React from 'react';
 import { Toast } from 'primereact/toast';
-interface IToast {
-    toast: React.RefObject<Toast>;
-}
 /**
  * Context provider for the toast at the app-level
  */
-export declare const ToastProvider: React.FC<IToast>;
+export declare const ToastProvider: React.FC;
 /**
- * Provides the ref of the toast component in App.tsx
- *
- * See https://primefaces.org/primereact/showcase/#/toast for implementation details for the Toast component
+ * Provides the current ref of the toast component
  */
-export declare function useToast(): React.RefObject<Toast> | null;
-export {};
+export declare function useToast(): Toast | null | undefined;
 //# sourceMappingURL=useToast.d.ts.map
