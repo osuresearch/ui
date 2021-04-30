@@ -67,7 +67,7 @@ export default function Mock(searchWhenEmpty: boolean = true) {
     }) => {
         const {
             terms, filters, sort, offset, limit,
-            setResults, setError, setSearching
+            setResponse, setError, setSearching
         } = useSearchProvider(provider);
 
         const isEmpty = terms.length < 1 && filters.length < 1 && sort === undefined;
@@ -133,23 +133,23 @@ export default function Mock(searchWhenEmpty: boolean = true) {
 
             // Payload is the total hit count and
             // the top 10 result objects.
-            const results = {
+            const response = {
                 hits: hits.length,
                 results: hits.slice(offset, (limit + offset))
             }
 
             setSearching(false);
-            setResults(results);
-        }, [terms, filters, sort, offset, limit, skipSearchAndClear, setSearching, setResults]);
+            setResponse(response);
+        }, [terms, filters, sort, offset, limit, skipSearchAndClear, setSearching, setResponse]);
 
         // Replicated from GraphQL driver - for mock testing of the same behaviour
         useEffect(() => {
             if (skipSearchAndClear) {
                 setSearching(false);
                 setError(undefined);
-                setResults(undefined);
+                setResponse(undefined);
             }
-        }, [skipSearchAndClear, setSearching, setError, setResults]);
+        }, [skipSearchAndClear, setSearching, setError, setResponse]);
 
         // Driver components are renderless. It's just a stateful container
         return null;

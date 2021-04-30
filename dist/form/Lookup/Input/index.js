@@ -31,9 +31,9 @@ var _ResultMessages = _interopRequireDefault(require("./ResultMessages"));
 
 /**
  * Lookup input
- * 
+ *
  * Based on W3C Combobox pattern: https://w3c.github.io/aria-practices/examples/combobox/grid-combo.html
- * 
+ *
  */
 var Input = function Input(props) {
   var _useContext = (0, _react.useContext)(_.Context),
@@ -44,13 +44,13 @@ var Input = function Input(props) {
       terms = _useSearchProvider.terms,
       searching = _useSearchProvider.searching,
       error = _useSearchProvider.error,
-      results = _useSearchProvider.results,
+      response = _useSearchProvider.response,
       setTerms = _useSearchProvider.setTerms;
 
   var classNames = "\n        form-control ".concat(props.className ? props.className : '', "\n        ").concat(bind.error && ' is-invalid', "\n        ").concat(bind.success && ' is-valid', "\n    "); // TODO: Flexible based on JSON Path.
   // Right now we assume it's always { hits: number, results: JsonObject[] }
 
-  var typedResults = results ? results : undefined;
+  var typedResults = response ? response : undefined;
   var totalHits = (typedResults === null || typedResults === void 0 ? void 0 : typedResults.hits) || 0;
   var hits = (typedResults === null || typedResults === void 0 ? void 0 : typedResults.results) || [];
 
@@ -168,7 +168,7 @@ var Input = function Input(props) {
 
       (_resultsRef$current2 = resultsRef.current) === null || _resultsRef$current2 === void 0 ? void 0 : (_resultsRef$current2$ = _resultsRef$current2.querySelector("#".concat(activeDescendant))) === null || _resultsRef$current2$ === void 0 ? void 0 : _resultsRef$current2$.click();
     }
-  }; // Read only 
+  }; // Read only
   // TODO - Diff support
 
 

@@ -53,6 +53,12 @@ Object.defineProperty(exports, "Alert", {
     return _Alert.default;
   }
 });
+Object.defineProperty(exports, "Avatar", {
+  enumerable: true,
+  get: function get() {
+    return _Avatar.default;
+  }
+});
 Object.defineProperty(exports, "Badge", {
   enumerable: true,
   get: function get() {
@@ -69,6 +75,12 @@ Object.defineProperty(exports, "Button", {
   enumerable: true,
   get: function get() {
     return _Button.default;
+  }
+});
+Object.defineProperty(exports, "EmailLink", {
+  enumerable: true,
+  get: function get() {
+    return _EmailLink.default;
   }
 });
 Object.defineProperty(exports, "ExternalLink", {
@@ -324,11 +336,15 @@ var _Support = _interopRequireDefault(require("./core-application/Support"));
 
 var _Alert = _interopRequireDefault(require("./generic/Alert"));
 
+var _Avatar = _interopRequireDefault(require("./generic/Avatar"));
+
 var _Badge = _interopRequireDefault(require("./generic/Badge"));
 
 var _Icon = _interopRequireDefault(require("./generic/Icon"));
 
 var _Button = _interopRequireDefault(require("./controls/Button"));
+
+var _EmailLink = _interopRequireDefault(require("./controls/EmailLink"));
 
 var _ExternalLink = _interopRequireDefault(require("./controls/ExternalLink"));
 

@@ -82,7 +82,7 @@ const SearchProvider: React.FC<Props> = ({
     const [offset, setOffset] = useState<SearchOffset>(defaultOffset);
     const [limit, setLimit] = useState<SearchLimit>(defaultLimit);
     const [searching, setSearching] = useState(false);
-    const [results, setResults] = useState<unknown | undefined>();
+    const [response, setResponse] = useState<unknown | undefined>();
     const [error, setError] = useState<string | undefined>();
 
     const ref = useRef<HTMLDivElement>(null);
@@ -120,7 +120,7 @@ const SearchProvider: React.FC<Props> = ({
         offset,
         limit,
         searching,
-        results,
+        response,
         error,
         ref,
         setTerms,
@@ -145,9 +145,9 @@ const SearchProvider: React.FC<Props> = ({
         setOffset,
         setLimit,
         setSearching,
-        setResults,
+        setResponse,
         setError
-    }), [terms, filters, offset, limit, searching, results, error]);
+    }), [terms, filters, offset, limit, searching, response, error]);
 
     const DriverComponent = driver;
 

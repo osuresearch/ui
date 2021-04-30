@@ -16,14 +16,17 @@ __Deprecated Components:__
 __Breaking Changes:__
 
 * Potential breaking changes in all PrimeReact components due to upgrade to version 6.3.0 (see [\#1738](https://github.com/primefaces/primereact/issues/1738), [\#1566](https://github.com/primefaces/primereact/issues/1566), and [\#1877](https://github.com/primefaces/primereact/issues/1877))
+* `useSearchProvider` - Rename `results` to `response` and `setResults` to `setResponse` in the returned object
 
 __New Features:__
 
-* Pagination support for Search components (`offset` and `limit` getters/setters in Search context).
+* Added pagination support for Search components (`offset` and `limit` getters/setters in Search context).
 * `Apollo` search driver updated to include pagination support.
 * `SyncSearchWithURL` updated to include pagination support.
-* New `Paginator` component to be used within a `SearchProvider`.
-* Support for parameters in `JsonApi` Search driver.
+* Added `Paginator` component to be used within a `SearchProvider`.
+* Added support for parameters in `JsonApi` Search driver.
+* Added `Avatar` component with https://opic.osu.edu integration.
+* Added `EmailLink` component.
 * PrimeReact updated from version 5.0.0 to version 6.3.0.
     * New PrimeReact component support in ORIS/ui: `Dialog` (replaces Modal), `Toast` (via `useToast` hook and `ToastProvider`), and `Skeleton`.
 

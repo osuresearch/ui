@@ -5,7 +5,10 @@ declare type Props = {
     justify?: 'start' | 'center' | 'end' | 'between' | 'around';
     /** Limit the number of page buttons displayed in the paginator */
     pageLimit?: number;
-    /** The path to the property that contains the number of hits in the greater search context - defaults to `results.hits` */
+    /**
+     * The path to the property in the response that contains the number
+     * of hits in the greater search context
+     */
     hitsPath?: string;
 };
 export default function Paginator({ provider, justify, pageLimit, hitsPath }: Props): JSX.Element | null;
