@@ -85,7 +85,7 @@ function Mock() {
         sort = _useSearchProvider.sort,
         offset = _useSearchProvider.offset,
         limit = _useSearchProvider.limit,
-        setResults = _useSearchProvider.setResults,
+        setResponse = _useSearchProvider.setResponse,
         setError = _useSearchProvider.setError,
         setSearching = _useSearchProvider.setSearching;
 
@@ -141,21 +141,21 @@ function Mock() {
       }); // Payload is the total hit count and
       // the top 10 result objects.
 
-      var results = {
+      var response = {
         hits: hits.length,
         results: hits.slice(offset, limit + offset)
       };
       setSearching(false);
-      setResults(results);
-    }, [terms, filters, sort, offset, limit, skipSearchAndClear, setSearching, setResults]); // Replicated from GraphQL driver - for mock testing of the same behaviour
+      setResponse(response);
+    }, [terms, filters, sort, offset, limit, skipSearchAndClear, setSearching, setResponse]); // Replicated from GraphQL driver - for mock testing of the same behaviour
 
     (0, _react.useEffect)(function () {
       if (skipSearchAndClear) {
         setSearching(false);
         setError(undefined);
-        setResults(undefined);
+        setResponse(undefined);
       }
-    }, [skipSearchAndClear, setSearching, setError, setResults]); // Driver components are renderless. It's just a stateful container
+    }, [skipSearchAndClear, setSearching, setError, setResponse]); // Driver components are renderless. It's just a stateful container
 
     return null;
   };

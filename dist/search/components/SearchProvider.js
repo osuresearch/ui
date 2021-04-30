@@ -64,8 +64,8 @@ var SearchProvider = function SearchProvider(_ref) {
 
   var _useState11 = (0, _react.useState)(),
       _useState12 = (0, _slicedToArray2.default)(_useState11, 2),
-      results = _useState12[0],
-      setResults = _useState12[1];
+      response = _useState12[0],
+      setResponse = _useState12[1];
 
   var _useState13 = (0, _react.useState)(),
       _useState14 = (0, _slicedToArray2.default)(_useState13, 2),
@@ -106,7 +106,7 @@ var SearchProvider = function SearchProvider(_ref) {
       offset: offset,
       limit: limit,
       searching: searching,
-      results: results,
+      response: response,
       error: error,
       ref: ref,
       setTerms: setTerms,
@@ -137,10 +137,10 @@ var SearchProvider = function SearchProvider(_ref) {
       setOffset: setOffset,
       setLimit: setLimit,
       setSearching: setSearching,
-      setResults: setResults,
+      setResponse: setResponse,
       setError: setError
     };
-  }, [terms, filters, offset, limit, searching, results, error]);
+  }, [terms, filters, offset, limit, searching, response, error]);
   var DriverComponent = driver; // Note this can't just be value={context} because we need to be
   // able to rewrite query/filters on state change.
 

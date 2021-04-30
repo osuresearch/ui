@@ -72,13 +72,13 @@ function PersonResultCard(result) {
 }
 
 function PersonSearchResults() {
-    const { results, searching, error } = useSearchProvider('demo');
+    const { response, searching, error } = useSearchProvider('demo');
 
     // If there are no results from the search, you will want to show a
     // helpful message to the end user. The check for "don't have results" is
     // entirely up to you - as this will depend on the shape of your data
     // coming back from the backend.
-    const hasNoHits = !searching && !error && results && results.hits === 0;
+    const hasNoHits = !searching && !error && response && response.hits === 0;
 
     return (
         <>
@@ -87,9 +87,9 @@ function PersonSearchResults() {
                 <Filters.Active />
             </Filters>
 
-            {results &&
+            {response &&
                 <div className="sr-only" role="status">
-                    {results.results.length} results found
+                    {response.results.length} results found
                 </div>
             }
 
@@ -114,9 +114,9 @@ function PersonSearchResults() {
                 This is entirely up to you and your app's needs -
                 show cards, swim lanes, a table, calendar view, etc.
             */}
-            {results &&
+            {response &&
                 <ul className="list-unstyled">
-                    {results.results.map(PersonResultCard)}
+                    {response.results.map(PersonResultCard)}
                 </ul>
             }
         </>

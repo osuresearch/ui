@@ -34,16 +34,16 @@ function Paginator(_ref) {
       _ref$pageLimit = _ref.pageLimit,
       pageLimit = _ref$pageLimit === void 0 ? 5 : _ref$pageLimit,
       _ref$hitsPath = _ref.hitsPath,
-      hitsPath = _ref$hitsPath === void 0 ? 'results.hits' : _ref$hitsPath;
+      hitsPath = _ref$hitsPath === void 0 ? 'hits' : _ref$hitsPath;
   var ctx = (0, _useSearchProvider.default)(provider);
-  var hits = (0, _get.default)(ctx, hitsPath);
+  var hits = (0, _get.default)(ctx.response, hitsPath);
   var pageCount = hits ? Math.ceil(hits / ctx.limit) : 0;
   var pages = Array.from(Array(pageCount).keys());
   var currentPage = (ctx.offset + ctx.limit) / ctx.limit;
-  /** 
+  /**
    * Limit the display of pages when the number of pages
-   * exceeds the maximum number allowed per the 
-   * pageLimit property 
+   * exceeds the maximum number allowed per the
+   * pageLimit property
    */
 
   var displayPages = pages;
@@ -52,22 +52,22 @@ function Paginator(_ref) {
     var halfOfLimit = Math.ceil(pageLimit / 2);
 
     if (currentPage < halfOfLimit) {
-      /** 
-       * Until the current page is half of the page 
-       * limit, display the pages from page 1 to 
-       * the page limit 
+      /**
+       * Until the current page is half of the page
+       * limit, display the pages from page 1 to
+       * the page limit
        */
       displayPages = displayPages.slice(0, pageLimit);
     } else if (currentPage >= halfOfLimit && currentPage < pages.length - halfOfLimit) {
       /**
-       * Once the current page reaches half of the 
+       * Once the current page reaches half of the
        * page limit, display the page number in the
        * center of the paginator
        */
       displayPages = displayPages.slice(currentPage - halfOfLimit, pageLimit + (currentPage - halfOfLimit));
     } else {
       /**
-       * Once the number of pages left equals the 
+       * Once the number of pages left equals the
        * page limit, mirror the first condition
        */
       displayPages = displayPages.slice(pages.length - pageLimit, pages.length);

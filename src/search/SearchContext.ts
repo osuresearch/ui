@@ -2,7 +2,7 @@ import React, { Context, createContext } from 'react';
 import { IFilter, SearchTerms, SearchOffset, SearchLimit, SortFields } from '.';
 
 /** A set of common states shared by search components */
-export interface ISearchContext<TResult> {
+export interface ISearchContext<TResponse> {
     /** Read-only copy of the current search terms */
     terms: SearchTerms
 
@@ -21,8 +21,8 @@ export interface ISearchContext<TResult> {
     /** Search is being executed */
     searching: boolean
 
-    /** Results from search. Structure depends on the backend. */
-    results?: TResult
+    /** Response from search. Structure depends on the backend. */
+    response?: TResponse
 
     /** Error */
     error?: string
@@ -60,15 +60,15 @@ export interface ISearchContext<TResult> {
     /** Set searching state */
     setSearching(searching: boolean): void
 
-    /** Set results */
-    setResults(results?: TResult): void
+    /** Set response payload */
+    setResponse(results?: TResponse): void
 
     /** Set error */
     setError(error?: string): void;
 }
 
 /** Shorthand for typing a React Context storing search data */
-export type SearchContext<TResult> = Context<ISearchContext<TResult>>;
+export type SearchContext<TResponse> = Context<ISearchContext<TResponse>>;
 
 /** Singleton storing all dynamic SearchContext instances during the app lifecycle */
 const __dynamicContextMap = new Map<string, SearchContext<any>>();
@@ -76,7 +76,7 @@ const __dynamicContextMap = new Map<string, SearchContext<any>>();
 /**
  * Create a new dynamic SearchContext tied to a named provider
  */
-export function initDynamicContext<TResult>(provider: string, data: ISearchContext<TResult>): SearchContext<TResult> {
+export function initDynamicContext<TResponse>(provider: string, data: ISearchContext<TResponse>): SearchContext<TResponse> {
     // TODO: This *is* an implementation error for apps, but Styleguidist examples
     // need to be able to re-instantiate a provider when an example changes.
     // if (__dynamicContextMap.has(provider)) {
@@ -87,7 +87,7 @@ export function initDynamicContext<TResult>(provider: string, data: ISearchConte
 
     console.debug(`[initDynamicContext(${provider})]`, data);
 
-    const context = createContext<ISearchContext<TResult>>(data);
+    const context = createContext<ISearchContext<TResponse>>(data);
     __dynamicContextMap.set(provider, context);
     return context;
 }
@@ -106,7 +106,7 @@ export function destroyDynamicContext(provider: string) {
  *
  * @throws {Error} if the provider is not yet registered through a SearchProvider component
  */
-export function getDynamicContext<TResult>(provider: string): SearchContext<TResult> {
+export function getDynamicContext<TResponse>(provider: string): SearchContext<TResponse> {
     const context = __dynamicContextMap.get(provider);
 
     // Ensure it exists - for type safe useContext() calls.

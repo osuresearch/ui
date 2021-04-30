@@ -21,7 +21,10 @@ type Props = {
     /** Limit the number of page buttons displayed in the paginator */
     pageLimit?: number;
 
-    /** The path to the property that contains the number of hits in the greater search context - defaults to `results.hits` */
+    /**
+     * The path to the property in the response that contains the number
+     * of hits in the greater search context
+     */
     hitsPath?: string;
 }
 
@@ -29,11 +32,11 @@ export default function Paginator({
     provider,
     justify = 'center',
     pageLimit = 5,
-    hitsPath = 'results.hits'
+    hitsPath = 'hits'
 }: Props) {
     const ctx = useSearchProvider(provider);
 
-    const hits: number | undefined = get(ctx, hitsPath);
+    const hits: number | undefined = get(ctx.response, hitsPath);
 
     const pageCount = hits ? Math.ceil(hits / ctx.limit) : 0;
 
@@ -41,10 +44,10 @@ export default function Paginator({
 
     const currentPage = (ctx.offset + ctx.limit) / ctx.limit;
 
-    /** 
+    /**
      * Limit the display of pages when the number of pages
-     * exceeds the maximum number allowed per the 
-     * pageLimit property 
+     * exceeds the maximum number allowed per the
+     * pageLimit property
      */
     let displayPages = pages;
 
@@ -52,22 +55,22 @@ export default function Paginator({
         const halfOfLimit = Math.ceil(pageLimit / 2);
 
         if (currentPage < halfOfLimit) {
-            /** 
-             * Until the current page is half of the page 
-             * limit, display the pages from page 1 to 
-             * the page limit 
+            /**
+             * Until the current page is half of the page
+             * limit, display the pages from page 1 to
+             * the page limit
              */
             displayPages = displayPages.slice(0, pageLimit);
         } else if (currentPage >= halfOfLimit && currentPage < (pages.length - halfOfLimit)) {
             /**
-             * Once the current page reaches half of the 
+             * Once the current page reaches half of the
              * page limit, display the page number in the
              * center of the paginator
              */
             displayPages = displayPages.slice(currentPage - halfOfLimit, pageLimit + (currentPage - halfOfLimit))
         } else {
             /**
-             * Once the number of pages left equals the 
+             * Once the number of pages left equals the
              * page limit, mirror the first condition
              */
             displayPages = displayPages.slice(pages.length - pageLimit, pages.length)

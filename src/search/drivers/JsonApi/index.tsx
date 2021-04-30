@@ -18,9 +18,9 @@ type JsonApiResource = {
 /**
  * Search driver for [JSON:API](https://jsonapi.org/) compliant endpoints (e.g. https://orapps.osu.edu/api/v1/person)
  *
- * Terms are passed as the `?q=` query parameter. 
- * 
- * Additional paramaters may be passed in the second argument as an 
+ * Terms are passed as the `?q=` query parameter.
+ *
+ * Additional paramaters may be passed in the second argument as an
  * array of key-value objects, e.g.
  * ```ts
  * [
@@ -56,7 +56,7 @@ export default function JsonApi(endpoint: string, params?: Array<{ key: string, 
     }) => {
         const {
             terms,
-            setError, setSearching, setResults
+            setError, setSearching, setResponse
         } = useSearchProvider(provider);
 
         useEffect(() => {
@@ -64,7 +64,7 @@ export default function JsonApi(endpoint: string, params?: Array<{ key: string, 
             if (terms.length < 1) {
                 setSearching(false);
                 setError(undefined);
-                setResults(undefined);
+                setResponse(undefined);
                 return;
             }
 
@@ -85,8 +85,6 @@ export default function JsonApi(endpoint: string, params?: Array<{ key: string, 
                 }
             };
 
-            console.debug('JSON:API Fetch', endpoint, terms, payload);
-
             let url = `${endpoint}?q=${encodeURI(terms)}`;
             params?.forEach(param => {
                 url += `&${param.key}=${encodeURI(param.value)}`
@@ -101,7 +99,7 @@ export default function JsonApi(endpoint: string, params?: Array<{ key: string, 
                     const hits = (json.meta?.total || results.length) as number;
 
                     setSearching(false);
-                    setResults({ hits, results });
+                    setResponse({ hits, results });
                 })
                 .catch((err) => {
                     if (err.name !== 'AbortError') {
@@ -113,7 +111,7 @@ export default function JsonApi(endpoint: string, params?: Array<{ key: string, 
             return () => {
                 abortController?.abort();
             }
-        }, [terms, setError, setSearching, setResults]);
+        }, [terms, setError, setSearching, setResponse]);
 
         // Driver components are renderless. It's just a stateful container
         return null;

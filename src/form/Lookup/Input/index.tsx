@@ -65,13 +65,13 @@ export type Props = {
 
 /**
  * Lookup input
- * 
+ *
  * Based on W3C Combobox pattern: https://w3c.github.io/aria-practices/examples/combobox/grid-combo.html
- * 
+ *
  */
 const Input: React.FC<Props> = (props) => {
     const { bind, provider } = useContext(Context);
-    const { terms, searching, error, results, setTerms } = useSearchProvider(provider);
+    const { terms, searching, error, response, setTerms } = useSearchProvider(provider);
 
     const classNames = `
         form-control ${props.className ? props.className : ''}
@@ -81,7 +81,7 @@ const Input: React.FC<Props> = (props) => {
 
     // TODO: Flexible based on JSON Path.
     // Right now we assume it's always { hits: number, results: JsonObject[] }
-    const typedResults = results ? results as { hits: number, results: JsonObject[] } : undefined;
+    const typedResults = response ? response as { hits: number, results: JsonObject[] } : undefined;
 
     const totalHits = typedResults?.hits || 0;
     const hits: JsonObject[] = typedResults?.results || [];
@@ -191,7 +191,7 @@ const Input: React.FC<Props> = (props) => {
         }
     }
 
-    // Read only 
+    // Read only
     // TODO - Diff support
     if (bind.readOnly) {
         return (

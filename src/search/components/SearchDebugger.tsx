@@ -19,7 +19,7 @@ const SearchDebugger: React.FC<Props> = ({ provider }) => {
     const [show, setShow] = useState(false);
     const {
         terms, filters, sort, offset, limit,
-        searching, error, results
+        searching, error, response
     } = useSearchProvider(provider);
 
     return (
@@ -55,7 +55,7 @@ const SearchDebugger: React.FC<Props> = ({ provider }) => {
 
                 <strong>Results</strong>
                 <pre>
-                    {JSON.stringify(results, undefined, 2)}
+                    {JSON.stringify(response, undefined, 2)}
                 </pre>
             </div>
             }
