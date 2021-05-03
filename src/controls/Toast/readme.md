@@ -1,10 +1,27 @@
+### Message API
+
+API for the Toast's `show()` method.
+
+| Name       | Type                  | Default | Description                                                                                            |
+|------------|-----------------------|---------|--------------------------------------------------------------------------------------------------------|
+| `severity` | string                |         | Severity of the message. One of the following:<br>   - success<br>   - info<br>   - warn<br>   - error |
+| `summary`  | JSX Element or string |         | Summary content of the message.                                                                        |
+| `detail`   | JSX Element or string |         | Detail content of the message.                                                                         |
+| `content`  | any                   |         | Custom content of the message. If enabled, summary and details properties are ignored.                 |
+| `closable` | boolean               | true    | Whether the message can be closed manually using the close icon.                                       |
+| `sticky`   | boolean               |         | When enabled, message is not removed automatically.                                                    |
+| `life`     | number                | 3000    | Delay in milliseconds to close the message automatically.                                              |
+|            |                       |         |                                                                                                        |
+
 ### Examples
+
 ```jsx
 import { useToast, ToastProvider, Button } from '@ORIS/ui';
 
 const toast = useToast();
 
 <ToastProvider>
+    <h5>Severities</h5>
     <Button 
         theme="success"
         onClick={() => {
@@ -56,12 +73,45 @@ const toast = useToast();
     >
         Error
     </Button>
+
+    <hr/>
+
+    <h5>Options</h5>
+    <Button 
+        theme="primary"
+        onClick={() => {
+            toast.show([
+                {severity:'info', summary:'Message 1', detail:'Message 1 Content', life: 3000},
+                {severity:'info', summary:'Message 2', detail:'Message 2 Content', life: 3000},
+                {severity:'info', summary:'Message 3', detail:'Message 3 Content', life: 3000}
+            ]);
+        }}
+    >
+        Multiple
+    </Button>
+
+    <Button
+        theme="info"
+        onClick={() => {
+            toast.show({
+                severity: 'info', 
+                summary: 'Sticky Message',
+                detail: 'Message Content', 
+                sticky: true
+            })
+        }}
+    >
+        Sticky
+    </Button>
+
+    <hr/>
+
+    <h5>Clear</h5>
+    <Button theme="secondary" onClick={() => toast.clear()}>Clear</Button>
 </ToastProvider>
 ```
 
 ### Set up and use Toasts in your application
-Toasts **should not** be added directly within individual components in your application. This is because any Toasts invoked within a component are destroyed whenever the component unmounts.
-
 To make it easier to incorporate Toasts into your app, a `useToast` hook is provided in ORIS/ui. To use this hook (more instructions below), a `ToastProvider` must be added to your application's `App.tsx`.
 
 #### How to set up `ToastProvider` in `App.tsx`
@@ -99,7 +149,7 @@ const MyToastyComponent = () => {
     const toast = useToast();
 
     // Fire off a message by invoking Toast's `show` method
-    toast.show({
+    toast?.show({
         severity: 'success',
         summary: 'Success Message',
         detail: 'Form submitted!'
