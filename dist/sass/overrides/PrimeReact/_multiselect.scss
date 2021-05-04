@@ -10,12 +10,11 @@ $danger: #db3b21;
     border: $input-border-width solid $input-border-color;
     transition: $input-transition;
     border-radius: 0px;
+    padding: 0.375rem 0.75rem;
     flex-wrap: nowrap;
     display: inline-flex !important;
 
     .p-multiselect-label {
-        padding: 0.375rem 0.75rem;
-
         > div {
             padding: 0.25rem 0.75rem;
             margin-right: 0.5rem;
@@ -25,18 +24,20 @@ $danger: #db3b21;
         }
     }
 
-    &.form-control {
-        .p-multiselect-label {
-            padding: 0;
+    &.p-multiselect-chip {
+        .p-multiselect-token-icon {
+            margin-left: 0.5rem;
         }
     }
 
     .p-multiselect-trigger {
         background: transparent;
         color: $gray-900;
-        width: 2.357rem;
+        width: 1rem;
         border-top-right-radius: 0px;
         border-bottom-right-radius: 0px;
+        margin-top: -0.15rem;
+        margin-left: 0.75rem;
     }
     &.p-error {
         border-color: $danger;

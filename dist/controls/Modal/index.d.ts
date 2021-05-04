@@ -14,8 +14,9 @@ export default Modal;
  * **className** prop. Note that the classes are added to the
  * '.modal-dialog' element and not the outermost '.modal' element.
  *
-
  * This more-or-less follows the pattern at https://reactjs.org/docs/portals.html
+ *
+ * @deprecated Use PrimeReact Dialog. Will be removed in a future version of `@ORIS/ui`
  */
 declare class Modal extends React.Component<any, any, any> {
     constructor(props: any);

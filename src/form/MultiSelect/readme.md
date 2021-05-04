@@ -59,6 +59,30 @@ const cities = require('./cities').default;
 </MultiSelect>
 ```
 
+#### Chips
+```jsx
+import React, { useState } from 'react';
+
+const [selectedCities, setSelectedCities] = useState();
+const cities = require('./cities').default;
+
+<MultiSelect id="select-multiple-cities-chips">
+    <MultiSelect.Label>Select Cities</MultiSelect.Label>
+
+    <MultiSelect.Input
+        value={selectedCities}
+        options={cities}
+        onChange={(e) => setSelectedCities(e.value)}
+        optionLabel="name"
+        display="chip"
+    />
+
+    <MultiSelect.Help>
+        Select one or more cities
+    </MultiSelect.Help>
+</MultiSelect>
+```
+
 #### Advanced with Templating and Filtering
 
 Label of an option is used as the display text of an item by default, for custom content support define an `itemTemplate` function that gets the option as a parameter and returns the content.

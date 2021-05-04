@@ -23,6 +23,7 @@ export { default as SearchResult } from './controls/SearchResult';
 export { default as PersonSearchResult } from './controls/PersonSearchResult';
 export { default as TabList } from './controls/TabList';
 export { default as TabItem } from './controls/TabItem';
+export { useToast, ToastProvider } from './controls/Toast/hooks/useToast';
 export { default as Richtext } from './controls/Richtext';
 export { default as Checkbox } from './form/Checkbox';
 export { default as Chips } from './form/Chips';

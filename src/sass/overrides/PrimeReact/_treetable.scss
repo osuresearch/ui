@@ -27,6 +27,10 @@
         font-weight: 600;
     }
     .p-sortable-column {
+        &:focus {
+            outline: 0;
+            box-shadow: $input-focus-box-shadow;
+        }
         .p-sortable-column-icon {
             color: #ccc;
             position: absolute;
