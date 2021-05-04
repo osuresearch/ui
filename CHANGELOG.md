@@ -7,7 +7,11 @@ Versions follow [Semantic Versioning](https://semver.org/) guidelines - given a 
 2. MINOR version when you add functionality in a backwards-compatible manner, and
 3. PATCH version when you make backwards-compatible bug fixes.
 
-# 4.4.0 (In Progress)
+# 4.4.1 (2021-05-04)
+
+Bumping version due to a version conflict on UCR's package repository
+
+# 4.4.0 (2021-05-04)
 
 __Deprecated Components:__
 
