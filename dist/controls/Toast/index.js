@@ -27,6 +27,10 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 /** 
  * Toast is used to display messages in an overlay.
+ * 
+ * Toast is part of the PrimeReact package, which is included in ORIS/UI.
+ * 
+ * Its features are too extensive to document here, so be sure to [review the documentation at the PrimeReact demo website](https://www.primefaces.org/primereact/showcase/#/toast).
  */
 var Toast = /*#__PURE__*/function (_React$Component) {
   (0, _inherits2.default)(Toast, _React$Component);

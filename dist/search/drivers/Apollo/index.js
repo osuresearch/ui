@@ -125,16 +125,16 @@ function Apollo(query) {
         /*
             GraphQL can come back with any named query field -
             but we only care about the value in that field.
-              Example 1:
+             Example 1:
                 query {
                     tools(terms: "foo") {
                         id
                         title
                     }
                 }
-                  We only care about the `[{ id, title }]`
+                 We only care about the `[{ id, title }]`
                 payload within `data.tools`.
-              Example 2:
+             Example 2:
                 query {
                     search(terms: "fizz") {
                         hits
@@ -146,7 +146,7 @@ function Apollo(query) {
                         }
                     }
                 }
-                  We grab the full `{hits, maxRank, results: [...]}`
+                 We grab the full `{hits, maxRank, results: [...]}`
                 payload within `data.search`.
         */
 

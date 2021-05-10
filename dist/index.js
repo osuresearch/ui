@@ -71,22 +71,10 @@ Object.defineProperty(exports, "Icon", {
     return _Icon.default;
   }
 });
-Object.defineProperty(exports, "Skeleton", {
-  enumerable: true,
-  get: function get() {
-    return _Skeleton.default;
-  }
-});
 Object.defineProperty(exports, "Button", {
   enumerable: true,
   get: function get() {
     return _Button.default;
-  }
-});
-Object.defineProperty(exports, "Dialog", {
-  enumerable: true,
-  get: function get() {
-    return _Dialog.default;
   }
 });
 Object.defineProperty(exports, "EmailLink", {
@@ -354,11 +342,7 @@ var _Badge = _interopRequireDefault(require("./generic/Badge"));
 
 var _Icon = _interopRequireDefault(require("./generic/Icon"));
 
-var _Skeleton = _interopRequireDefault(require("./generic/Skeleton"));
-
 var _Button = _interopRequireDefault(require("./controls/Button"));
-
-var _Dialog = _interopRequireDefault(require("./controls/Dialog"));
 
 var _EmailLink = _interopRequireDefault(require("./controls/EmailLink"));
 
