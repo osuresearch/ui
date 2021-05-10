@@ -7,9 +7,17 @@ Versions follow [Semantic Versioning](https://semver.org/) guidelines - given a 
 2. MINOR version when you add functionality in a backwards-compatible manner, and
 3. PATCH version when you make backwards-compatible bug fixes.
 
+# 4.4.2 (2021-05-10)
+
+__Bug Fixes:__
+
+* Fixes missing exports of `Skeleton` and `Dialog` components
+
 # 4.4.1 (2021-05-04)
 
-Bumping version due to a version conflict on UCR's package repository
+__Bug Fixes:__
+
+* Bumping version number due to a conflict on UCR's package repository with a mistagged release
 
 # 4.4.0 (2021-05-04)
 
