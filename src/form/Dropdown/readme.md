@@ -5,7 +5,13 @@ import React, { useState } from 'react';
 
 const [selectedCity, setSelectedCity] = useState();
 
-const cities = require('./cities').default;
+const cities = [
+    { name: 'New York', code: 'NY' },
+    { name: 'Rome', code: 'RM' },
+    { name: 'London', code: 'LDN' },
+    { name: 'Istanbul', code: 'IST' },
+    { name: 'Paris', code: 'PRS' }
+];
 
 <Dropdown id="select-city">
     <Dropdown.Label>Select a City</Dropdown.Label>
@@ -30,7 +36,13 @@ import React, { useState } from 'react';
 
 const [selectedCity, setSelectedCity] = useState();
 
-const cities = require('./cities').default;
+const cities = [
+    { name: 'New York', code: 'NY' },
+    { name: 'Rome', code: 'RM' },
+    { name: 'London', code: 'LDN' },
+    { name: 'Istanbul', code: 'IST' },
+    { name: 'Paris', code: 'PRS' }
+];
 
 <Dropdown id="select-city-2">
     <Dropdown.Label>Select a City</Dropdown.Label>
@@ -57,7 +69,18 @@ import { Icon } from '@ORIS/ui';
 
 const [selectedCountry, setSelectedCountry] = useState();
 
-const countries = require('./countries').default;
+const countries = [
+    { name: 'Australia', code: 'AU' },
+    { name: 'Brazil', code: 'BR' },
+    { name: 'China', code: 'CN' },
+    { name: 'Egypt', code: 'EG' },
+    { name: 'France', code: 'FR' },
+    { name: 'Germany', code: 'DE' },
+    { name: 'India', code: 'IN' },
+    { name: 'Japan', code: 'JP' },
+    { name: 'Spain', code: 'ES' },
+    { name: 'United States', code: 'US' }
+];
 
 const selectedCountryTemplate = (option, props) => {
         if (option) {
