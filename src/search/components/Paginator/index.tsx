@@ -36,6 +36,11 @@ export default function Paginator({
 }: Props) {
     const ctx = useSearchProvider(provider);
 
+    if (ctx.limit < 1) {
+        console.error('Paginator component requires a limit on the SearchProvider. Set the defaultLimit on the SearchProvider to a whole number greater than zero (0).');
+        return null;
+    }
+
     const hits: number | undefined = get(ctx.response, hitsPath);
 
     const pageCount = hits ? Math.ceil(hits / ctx.limit) : 0;
