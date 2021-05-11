@@ -153,6 +153,7 @@ const Active: React.FC<Props> = ({ includeTerms = true }) => {
                         const values = filter.anyOf[field] as string[];
 
                         return values.map((entry) => <Pill
+                            key={entry}
                             label={entry}
                             onDelete={() => onDeleteAnyOfEntry(filter.name as string, entry)}
                         />);
@@ -162,6 +163,7 @@ const Active: React.FC<Props> = ({ includeTerms = true }) => {
                     // Does not support recursive complex filters (e.g. spreading AnyOf sub-filters)
                     if (filter.name && isOR(filter)) {
                         return filter.OR.map((entry) => <Pill
+                            key={prettyLabel(entry)}
                             label={prettyLabel(entry)}
                             onDelete={() => onDeleteOREntry(filter.name as string, entry.name as string)}
                         />);
@@ -171,6 +173,7 @@ const Active: React.FC<Props> = ({ includeTerms = true }) => {
                     // Does not support recursive complex filters (e.g. spreading AnyOf sub-filters)
                     if (filter.name && isAND(filter)) {
                         return filter.AND.map((entry) => <Pill
+                            key={prettyLabel(entry)}
                             label={prettyLabel(entry)}
                             onDelete={() => onDeleteANDEntry(filter.name as string, entry.name as string)}
                         />);
