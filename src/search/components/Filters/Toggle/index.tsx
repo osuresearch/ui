@@ -8,6 +8,9 @@ export type Props = {
     name: string
     title: string
 
+    /** Optional id - will default to name if not provided */
+    id?: string
+
     /**
      * Value that should be set when toggled on. Defaults to boolean `true`
      */
@@ -17,7 +20,13 @@ export type Props = {
 /**
  * Single checkbox with custom formatting support
  */
-const Toggle: React.FC<Props> = ({ name, title, value = true, children }) => {
+const Toggle: React.FC<Props> = ({
+    name,
+    title,
+    id = name,
+    value = true,
+    children
+}) => {
     const ctx = useContext(Context);
     const filter = ctx.getFilter<TermFilter>(title);
 
@@ -31,7 +40,7 @@ const Toggle: React.FC<Props> = ({ name, title, value = true, children }) => {
 
     return (
         <div className="filters-toggle">
-            <Checkbox id={name} onChange={checked => onToggle(checked as boolean)}>
+            <Checkbox id={id} onChange={checked => onToggle(checked as boolean)}>
                 <Checkbox.Input checked={filter !== undefined} />
                 <Checkbox.Label>{children}</Checkbox.Label>
             </Checkbox>

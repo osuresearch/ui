@@ -7,6 +7,15 @@ Versions follow [Semantic Versioning](https://semver.org/) guidelines - given a 
 2. MINOR version when you add functionality in a backwards-compatible manner, and
 3. PATCH version when you make backwards-compatible bug fixes.
 
+# 4.4.2 (2021-05-11)
+
+__Bug Fixes:__
+
+* Data objects inlined for `MultiSelect`, `Dropdown`, `DataTable`, and `TreeTable` component examples (resolves FWK-308)
+* Added error handling for `Paginator` component for when the search limit is set to a number less than one (1) (resolves FWK-309)
+* Added missing keys to `Filters.Active` and `Filters.OneOf`
+* Added optional `id` property to `Filter.Toggle` component (resolves FWK-296)
+
 # 4.4.1 (2021-05-04)
 
 Bumping version due to a version conflict on UCR's package repository
