@@ -36,6 +36,12 @@ function Paginator(_ref) {
       _ref$hitsPath = _ref.hitsPath,
       hitsPath = _ref$hitsPath === void 0 ? 'hits' : _ref$hitsPath;
   var ctx = (0, _useSearchProvider.default)(provider);
+
+  if (ctx.limit < 1) {
+    console.error('Paginator component requires a limit on the SearchProvider. Set the defaultLimit on the SearchProvider to a whole number greater than zero (0).');
+    return null;
+  }
+
   var hits = (0, _get.default)(ctx.response, hitsPath);
   var pageCount = hits ? Math.ceil(hits / ctx.limit) : 0;
   var pages = Array.from(Array(pageCount).keys());

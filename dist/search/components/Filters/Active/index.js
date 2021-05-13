@@ -175,6 +175,7 @@ var Active = function Active(_ref2) {
       var values = filter.anyOf[field];
       return values.map(function (entry) {
         return /*#__PURE__*/_react.default.createElement(Pill, {
+          key: entry,
           label: entry,
           onDelete: function onDelete() {
             return onDeleteAnyOfEntry(filter.name, entry);
@@ -188,6 +189,7 @@ var Active = function Active(_ref2) {
     if (filter.name && isOR(filter)) {
       return filter.OR.map(function (entry) {
         return /*#__PURE__*/_react.default.createElement(Pill, {
+          key: prettyLabel(entry),
           label: prettyLabel(entry),
           onDelete: function onDelete() {
             return onDeleteOREntry(filter.name, entry.name);
@@ -201,6 +203,7 @@ var Active = function Active(_ref2) {
     if (filter.name && isAND(filter)) {
       return filter.AND.map(function (entry) {
         return /*#__PURE__*/_react.default.createElement(Pill, {
+          key: prettyLabel(entry),
           label: prettyLabel(entry),
           onDelete: function onDelete() {
             return onDeleteANDEntry(filter.name, entry.name);

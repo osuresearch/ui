@@ -56,7 +56,8 @@ var OneOf = function OneOf(_ref) {
     var value = active === null || active === void 0 ? void 0 : active.term[name];
     return /*#__PURE__*/_react.default.createElement(_3.Radio, {
       id: id,
-      name: name
+      name: name,
+      key: id
     }, /*#__PURE__*/_react.default.createElement(_3.Radio.Input, {
       checked: key === value,
       onChange: function onChange() {

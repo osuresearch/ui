@@ -21,6 +21,8 @@ var _3 = require("../../../..");
 var Toggle = function Toggle(_ref) {
   var name = _ref.name,
       title = _ref.title,
+      _ref$id = _ref.id,
+      id = _ref$id === void 0 ? name : _ref$id,
       _ref$value = _ref.value,
       value = _ref$value === void 0 ? true : _ref$value,
       children = _ref.children;
@@ -38,7 +40,7 @@ var Toggle = function Toggle(_ref) {
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "filters-toggle"
   }, /*#__PURE__*/_react.default.createElement(_3.Checkbox, {
-    id: name,
+    id: id,
     onChange: function onChange(checked) {
       return onToggle(checked);
     }
