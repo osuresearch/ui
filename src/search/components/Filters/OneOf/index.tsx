@@ -52,7 +52,7 @@ const OneOf: React.FC<Props> = ({ name, title, options }) => {
                     const value = active?.term[name] as string;
 
                     return (
-                        <Radio id={id} name={name}>
+                        <Radio id={id} name={name} key={id}>
                             <Radio.Input
                                 checked={key === value}
                                 onChange={() => onChange(key, options[key])}

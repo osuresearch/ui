@@ -41,7 +41,14 @@ When `optionValue` is not defined, value of an option refers to the option objec
 import React, { useState } from 'react';
 
 const [selectedCities, setSelectedCities] = useState();
-const cities = require('./cities').default;
+
+const cities = [
+    { name: 'New York', code: 'NY' },
+    { name: 'Rome', code: 'RM' },
+    { name: 'London', code: 'LDN' },
+    { name: 'Istanbul', code: 'IST' },
+    { name: 'Paris', code: 'PRS' }
+];
 
 <MultiSelect id="select-multiple-cities">
     <MultiSelect.Label>Select Cities</MultiSelect.Label>
@@ -64,7 +71,14 @@ const cities = require('./cities').default;
 import React, { useState } from 'react';
 
 const [selectedCities, setSelectedCities] = useState();
-const cities = require('./cities').default;
+
+const cities = [
+    { name: 'New York', code: 'NY' },
+    { name: 'Rome', code: 'RM' },
+    { name: 'London', code: 'LDN' },
+    { name: 'Istanbul', code: 'IST' },
+    { name: 'Paris', code: 'PRS' }
+];
 
 <MultiSelect id="select-multiple-cities-chips">
     <MultiSelect.Label>Select Cities</MultiSelect.Label>
@@ -96,7 +110,19 @@ import React, { useState } from 'react';
 import { Icon } from '@ORIS/ui';
 
 const [selectedCountries, setSelectedCountries] = useState();
-const countries = require('./countries').default;
+
+const countries = [
+    { name: 'Australia', code: 'AU' },
+    { name: 'Brazil', code: 'BR' },
+    { name: 'China', code: 'CN' },
+    { name: 'Egypt', code: 'EG' },
+    { name: 'France', code: 'FR' },
+    { name: 'Germany', code: 'DE' },
+    { name: 'India', code: 'IN' },
+    { name: 'Japan', code: 'JP' },
+    { name: 'Spain', code: 'ES' },
+    { name: 'United States', code: 'US' }
+];
 
 const countryTemplate = (option) => {
         return (
