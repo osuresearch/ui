@@ -132,7 +132,7 @@ var Rich = function Rich(_ref) {
       var newValue = e.editor.getData();
       bind.value = newValue;
 
-      if (onChange) {
+      if (onChange && !bind.readOnly) {
         onChange(newValue);
       }
     }),

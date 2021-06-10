@@ -68,7 +68,10 @@ var Input = /*#__PURE__*/_react.default.forwardRef(function (props, ref) {
     },
     onChange: function onChange(e) {
       bind.value = e.currentTarget.checked;
-      if (props.onChange) props.onChange(e);
+
+      if (props.onChange && !readOnly) {
+        props.onChange(e);
+      }
     },
     "aria-describedby": "".concat(bind.id, "-help"),
     readOnly: readOnly,
