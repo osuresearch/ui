@@ -118,7 +118,7 @@ const Rich: React.FC<RichProps> = ({
                 onChange={(e: any) => {
                     const newValue = e.editor.getData() as string;
                     bind.value = newValue;
-                    if (onChange) {
+                    if (onChange && !bind.readOnly) {
                         onChange(newValue);
                     }
                 }}
