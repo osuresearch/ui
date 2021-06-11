@@ -7,6 +7,12 @@ Versions follow [Semantic Versioning](https://semver.org/) guidelines - given a 
 2. MINOR version when you add functionality in a backwards-compatible manner, and
 3. PATCH version when you make backwards-compatible bug fixes.
 
+# 4.4.3 (2021-06-11)
+
+__Bug Fixes:__
+
+* `props.onChange()` is no longer invoked when `readOnly` is set to true in the `Checkbox.Input`, `Number.Input`, `Radio.Input`, `Text.Area`, `Text.Email`, `Text.Input`, and `Text.Rich` components.
+
 # 4.4.2 (2021-05-13)
 
 __Bug Fixes:__

@@ -51,7 +51,9 @@ const Area = React.forwardRef<HTMLTextAreaElement, AreaProps>((props, ref) => {
         'aria-describedby': `${bind.id}-help`,
         onChange: (e) => {
             bind.value = e.currentTarget.value;
-            if (props.onChange) props.onChange(e);
+            if (props.onChange && !readOnly) {
+                props.onChange(e);
+            }
         },
         readOnly: readOnly,
         "aria-disabled": readOnly,

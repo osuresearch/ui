@@ -46,7 +46,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         'aria-describedby': `${bind.id}-help`,
         onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
             bind.value = e.currentTarget.value;
-            if (props.onChange) props.onChange(e);
+            if (props.onChange && !readOnly) {
+                props.onChange(e);
+            }
         },
         readOnly: readOnly,
         "aria-disabled": readOnly,

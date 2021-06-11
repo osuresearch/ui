@@ -76,7 +76,10 @@ var Email = /*#__PURE__*/_react.default.forwardRef(function (props, ref) {
     'aria-describedby': "".concat(bind.id, "-help"),
     onChange: function onChange(e) {
       bind.value = e.currentTarget.value;
-      if (props.onChange) props.onChange(e);
+
+      if (props.onChange && !readOnly) {
+        props.onChange(e);
+      }
     },
     onBlur: nativeOnBlur,
     readOnly: readOnly,

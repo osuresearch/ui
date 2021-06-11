@@ -62,7 +62,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         },
         onChange: (e) => {
             bind.value = e.currentTarget.checked;
-            if (props.onChange) props.onChange(e);
+            if (props.onChange && !readOnly) {
+                props.onChange(e);
+            }
         },
         "aria-describedby": `${bind.id}-help`,
         readOnly: readOnly,
