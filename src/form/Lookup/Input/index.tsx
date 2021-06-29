@@ -101,7 +101,7 @@ const Input: React.FC<Props> = (props) => {
 
     useEffect(() => {
         setShowResultsPane(!value && (hasHits || hasNoHits || error !== undefined));
-    }, [error, hasHits, hasNoHits, value]);
+    }, [error, hasHits, hasNoHits, value, hits]);
 
     const inputRef = useRef<HTMLInputElement>(null);
     const resultsRef = useRef<HTMLDivElement>(null);
@@ -155,7 +155,7 @@ const Input: React.FC<Props> = (props) => {
                 setActiveDescendant(results[activeDescendantIndex + 1].id);
             } else {
                 // Move activeDescendant focus to the first suggested value
-                setActiveDescendant(results[0].id);
+                setActiveDescendant(results[0]?.id);
             }
         }
 
@@ -191,6 +191,20 @@ const Input: React.FC<Props> = (props) => {
         }
     }
 
+    const handleInputBlur = () => {
+        if (props.onBlur) {
+            props.onBlur();
+        }
+
+        setShowResultsPane(false);
+    }
+
+    const handleInputFocus = () => {
+        if (hasHits || hasNoHits) {
+            setShowResultsPane(true);
+        }
+    }
+
     // Read only
     // TODO - Diff support
     if (bind.readOnly) {
@@ -214,7 +228,8 @@ const Input: React.FC<Props> = (props) => {
                     onChange={(e) => {
                         setTermsThrottled(e.target.value);
                     }}
-                    onBlur={props.onBlur}
+                    onFocus={handleInputFocus}
+                    onBlur={handleInputBlur}
                     onKeyDown={handleInputKeyDown}
                     classNames={classNames}
                     showResultsPane={showResultsPane}

@@ -74,7 +74,7 @@ var Input = function Input(props) {
 
   (0, _react.useEffect)(function () {
     setShowResultsPane(!value && (hasHits || hasNoHits || error !== undefined));
-  }, [error, hasHits, hasNoHits, value]);
+  }, [error, hasHits, hasNoHits, value, hits]);
   var inputRef = (0, _react.useRef)(null);
   var resultsRef = (0, _react.useRef)(null);
   var valueRef = (0, _react.useRef)(null);
@@ -131,8 +131,10 @@ var Input = function Input(props) {
         // Move activeDescendant focus to next item
         setActiveDescendant(results[activeDescendantIndex + 1].id);
       } else {
+        var _results$;
+
         // Move activeDescendant focus to the first suggested value
-        setActiveDescendant(results[0].id);
+        setActiveDescendant((_results$ = results[0]) === null || _results$ === void 0 ? void 0 : _results$.id);
       }
     } // Up Arrow - If the listbox is displayed
 
@@ -168,6 +170,20 @@ var Input = function Input(props) {
 
       (_resultsRef$current2 = resultsRef.current) === null || _resultsRef$current2 === void 0 ? void 0 : (_resultsRef$current2$ = _resultsRef$current2.querySelector("#".concat(activeDescendant))) === null || _resultsRef$current2$ === void 0 ? void 0 : _resultsRef$current2$.click();
     }
+  };
+
+  var handleInputBlur = function handleInputBlur() {
+    if (props.onBlur) {
+      props.onBlur();
+    }
+
+    setShowResultsPane(false);
+  };
+
+  var handleInputFocus = function handleInputFocus() {
+    if (hasHits || hasNoHits) {
+      setShowResultsPane(true);
+    }
   }; // Read only
   // TODO - Diff support
 
@@ -189,7 +205,8 @@ var Input = function Input(props) {
     onChange: function onChange(e) {
       setTermsThrottled(e.target.value);
     },
-    onBlur: props.onBlur,
+    onFocus: handleInputFocus,
+    onBlur: handleInputBlur,
     onKeyDown: handleInputKeyDown,
     classNames: classNames,
     showResultsPane: showResultsPane,

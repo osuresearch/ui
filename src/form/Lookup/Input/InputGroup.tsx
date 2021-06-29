@@ -9,7 +9,8 @@ type Props = {
     searching: boolean,
     bind: IFieldBind<JsonObject>,
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
-    onBlur?: (e?: React.FocusEvent) => void
+    onFocus?: (e?: React.FocusEvent) => void,
+    onBlur?: (e?: React.FocusEvent) => void,
     onKeyDown: (e: React.KeyboardEvent) => void,
     classNames: string,
     showResultsPane: boolean,
@@ -21,6 +22,7 @@ const InputGroup = React.forwardRef<HTMLInputElement, Props>(({
     searching,
     bind,
     onChange,
+    onFocus,
     onBlur,
     onKeyDown,
     classNames,
@@ -53,6 +55,7 @@ const InputGroup = React.forwardRef<HTMLInputElement, Props>(({
             name={bind.name}
             className={classNames}
             required={bind.required}
+            onFocus={onFocus}
             onBlur={onBlur}
             onChange={onChange}
             onKeyDown={onKeyDown}
