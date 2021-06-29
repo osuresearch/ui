@@ -16,6 +16,7 @@ var InputGroup = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
       searching = _ref.searching,
       bind = _ref.bind,
       onChange = _ref.onChange,
+      onFocus = _ref.onFocus,
       onBlur = _ref.onBlur,
       onKeyDown = _ref.onKeyDown,
       classNames = _ref.classNames,
@@ -53,6 +54,7 @@ var InputGroup = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
     name: bind.name,
     className: classNames,
     required: bind.required,
+    onFocus: onFocus,
     onBlur: onBlur,
     onChange: onChange,
     onKeyDown: onKeyDown
