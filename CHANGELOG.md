@@ -7,6 +7,12 @@ Versions follow [Semantic Versioning](https://semver.org/) guidelines - given a 
 2. MINOR version when you add functionality in a backwards-compatible manner, and
 3. PATCH version when you make backwards-compatible bug fixes.
 
+# 4.4.4 (2021-06-29)
+
+__Bug Fixes:__
+
+* Improve results pane behavior on `Lookup.Input` component.
+
 # 4.4.3 (2021-06-11)
 
 __Bug Fixes:__
