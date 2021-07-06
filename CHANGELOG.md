@@ -7,6 +7,13 @@ Versions follow [Semantic Versioning](https://semver.org/) guidelines - given a 
 2. MINOR version when you add functionality in a backwards-compatible manner, and
 3. PATCH version when you make backwards-compatible bug fixes.
 
+# 4.4.5 (2021-07-06)
+
+__Bug Fixes:__
+
+* Fixes issue introduced in the previous release where `Lookup.Input` result could not be selected by mouse click.
+* Input focus event now passed to `onBlur` callback on `Lookup.Input`.
+
 # 4.4.4 (2021-06-29)
 
 __Bug Fixes:__

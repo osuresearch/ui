@@ -52,7 +52,7 @@ export type Props = {
      *
      * **Do not use this directly. This is not supported for usage outside of RHF.**
      */
-    onBlur?: () => void
+    onBlur?: (e?: React.FocusEvent) => void
 
     /**
      * Controlled value for use with React Hook Form's `<Controller>`.
@@ -191,12 +191,18 @@ const Input: React.FC<Props> = (props) => {
         }
     }
 
-    const handleInputBlur = () => {
+    const handleInputBlur = (e: React.FocusEvent) => {
         if (props.onBlur) {
-            props.onBlur();
+            props.onBlur(e);
         }
 
-        setShowResultsPane(false);
+        /** 
+         * Hide the results pane — only if the user
+         * is not clicking on an result 
+         */
+        if (e.relatedTarget !== resultsRef.current) {
+            setShowResultsPane(false);
+        }
     }
 
     const handleInputFocus = () => {
@@ -253,10 +259,10 @@ const Input: React.FC<Props> = (props) => {
 
             <div className="lookup-results">
                 <div tabIndex={-1}
+                    ref={resultsRef}
                     className={`dropdown-menu ${showResultsPane ? 'd-block' : 'd-none'}`}
                 >
                     <div
-                        ref={resultsRef}
                         aria-labelledby={bind.id}
                         role="listbox"
                         id={`${bind.id}-lookup-results`}

@@ -36,7 +36,7 @@ export declare type Props = {
      *
      * **Do not use this directly. This is not supported for usage outside of RHF.**
      */
-    onBlur?: () => void;
+    onBlur?: (e?: React.FocusEvent) => void;
     /**
      * Controlled value for use with React Hook Form's `<Controller>`.
      *

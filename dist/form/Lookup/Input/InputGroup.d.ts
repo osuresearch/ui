@@ -7,7 +7,7 @@ declare type Props = {
     bind: IFieldBind<JsonObject>;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     onFocus?: (e?: React.FocusEvent) => void;
-    onBlur?: (e?: React.FocusEvent) => void;
+    onBlur?: (e: React.FocusEvent) => void;
     onKeyDown: (e: React.KeyboardEvent) => void;
     classNames: string;
     showResultsPane: boolean;
