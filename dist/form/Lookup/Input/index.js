@@ -172,12 +172,19 @@ var Input = function Input(props) {
     }
   };
 
-  var handleInputBlur = function handleInputBlur() {
+  var handleInputBlur = function handleInputBlur(e) {
     if (props.onBlur) {
-      props.onBlur();
+      props.onBlur(e);
     }
+    /** 
+     * Hide the results pane — only if the user
+     * is not clicking on an result 
+     */
 
-    setShowResultsPane(false);
+
+    if (e.relatedTarget !== resultsRef.current) {
+      setShowResultsPane(false);
+    }
   };
 
   var handleInputFocus = function handleInputFocus() {
@@ -228,9 +235,9 @@ var Input = function Input(props) {
     className: "lookup-results"
   }, /*#__PURE__*/_react.default.createElement("div", {
     tabIndex: -1,
+    ref: resultsRef,
     className: "dropdown-menu ".concat(showResultsPane ? 'd-block' : 'd-none')
   }, /*#__PURE__*/_react.default.createElement("div", {
-    ref: resultsRef,
     "aria-labelledby": bind.id,
     role: "listbox",
     id: "".concat(bind.id, "-lookup-results")
