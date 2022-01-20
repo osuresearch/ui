@@ -1,81 +1,60 @@
-# Tests (dependency scanning, licenses, scope, etc) happen for all branches and merges. 
-# Actual package publishing only happens once the project has been tagged. 
 
-# Nice to have TODOs:
-# - Automatically do an `npm install && npm build`
-# - Automatically determine the build number from the branch and update package.json on master accordingly
-#   (e.g. your typical "chore: update package version [skip ci]" type of bot commit)
-
-# Include some template jobs that integrate with GitLab's Security & Compliance
 include:
-  - template: Dependency-Scanning.gitlab-ci.yml
-  - template: Security/License-Scanning.gitlab-ci.yml
+  - project: 'ORIS/orchestrator'
+    file: '/NPM-Package.gitlab-ci.yml'
+  - project: 'ORIS/orchestrator'
+    file: '/jobs/Deploy.gitlab-ci.yml'
 
-# Hidden job - used as a base for common settings in other jobs
-.node_job:
-  # Image locked to node:15.4 due to a bug with npm publish ignoring custom registries in node:latest (as of 12/29/2020)
-  image: node:15.4
+stages:
+  - install
+  - build
+  - test
+  - deploy
+  - clean
 
-  # Validate that the repository contains a package.json and extract a few values from it.
-  before_script:
-    - |
-      if [[ ! -f package.json ]]; then
-        echo "No package.json found! A package.json file is required to publish a package to GitLab's NPM registry."
-        echo 'For more information, see https://docs.gitlab.com/ee/user/packages/npm_registry/#creating-a-project'
-        exit 1
-      fi
-    - NPM_PACKAGE_NAME=$(node -p "require('./package.json').name")
-    - NPM_PACKAGE_VERSION=$(node -p "require('./package.json').version")
+variables:
+  COMPLIANCE: 'S2'
+  NEEDS_PAM: 'false'
+  # No tests exist yet
+  NEEDS_NPM_TEST: 'false'
 
-# Validate that the package name is properly scoped to the project's root namespace.
-# For more information, see https://docs.gitlab.com/ee/user/packages/npm_registry/#package-naming-convention
-validate_package_scope:
-  extends: .node_job
-  stage: build
+# @ORIS/ui needs to build and deploy a styleguide to the dev server upon release.
+# We replace the packaging job with the build process
+Package:
+  image: $NODE_IMAGE
+  cache:
+    key: "$CI_COMMIT_REF_SLUG-node_modules"
+    paths:
+      - node_modules
+    policy: pull
+  stage: build # Shift up onto build stage instead
+  rules:
+    - if: $CI_MERGE_REQUEST_IID
+      variables:
+        APP_NAME: "$CI_PROJECT_NAME-$CI_MERGE_REQUEST_IID"
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+      variables:
+        APP_NAME: $CI_PROJECT_NAME
+    - if: '$CI_COMMIT_TAG && $PUBLISHES_NPM_PACKAGE == "true"'
+      variables:
+        APP_NAME: $CI_PROJECT_NAME
+  needs:
+    - NPM Install
   script:
+    - PUBLIC_URL=/${APP_NAME}
+    - echo -e "\nPUBLIC_URL=\"/${APP_NAME}\"" >> $CI_PROJECT_DIR/.env
+    - echo -e "\nBUILD_TAG=\"${CI_COMMIT_REF_SLUG}/${CI_COMMIT_SHORT_SHA}\"" >> $CI_PROJECT_DIR/.env
     - |
-      if [[ ! $NPM_PACKAGE_NAME =~ ^@$CI_PROJECT_ROOT_NAMESPACE/ ]]; then
-        echo "Invalid package scope! Packages must be scoped in the root namespace of the project, e.g. \"@${CI_PROJECT_ROOT_NAMESPACE}/${CI_PROJECT_NAME}\""
-        echo 'For more information, see https://docs.gitlab.com/ee/user/packages/npm_registry/#package-naming-convention'
-        exit 1
+      if [[ $DRY_RUN == 'true' ]]; then
+        echo "DRY RUN: npm run build:styleguide";
+        exit 0;
       fi
-
-# If no .npmrc if included in the repo, generate a temporary one to use during the publish step
-# that is configured to publish to GitLab's NPM registry
-create_npmrc:
-  extends: .node_job
-  stage: build
-  only:
-    - tags
-  script:
-    - |
-      if [[ ! -f .npmrc ]]; then
-        echo 'No .npmrc found! Creating one now. Please review the following link for more information: https://docs.gitlab.com/ee/user/packages/npm_registry/index.html#authenticating-with-a-ci-job-token'
-
-        {
-          echo '@${CI_PROJECT_ROOT_NAMESPACE}:registry=${CI_SERVER_PROTOCOL}://${CI_SERVER_HOST}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/'
-          echo '//${CI_SERVER_HOST}/api/v4/packages/npm/:_authToken=${CI_JOB_TOKEN}'
-          echo '//${CI_SERVER_HOST}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken=${CI_JOB_TOKEN}'
-        } >> .npmrc
-
-      fi
+    - npm run build:styleguide
   artifacts:
     paths:
-      - .npmrc
+      - styleguide/
+    reports:
+      dotenv: ci.env
 
-# Publish the package. If the version in package.json has not yet been published, it will be
-# published to GitLab's NPM registry. If the version already exists, the publish command
-# will fail and the existing package will not be updated.
-publish_package:
-  extends: .node_job
-  stage: deploy
-  only:
-    - tags
-  script:
-    - |
-      {
-        npm publish &&
-        echo "Successfully published version ${NPM_PACKAGE_VERSION} of ${NPM_PACKAGE_NAME} to GitLab's NPM registry: ${CI_PROJECT_URL}/-/packages"
-      } || {
-        echo "No new version of ${NPM_PACKAGE_NAME} published. This is most likely because version ${NPM_PACKAGE_VERSION} already exists in GitLab's NPM registry or another error has occurred in npm publish." && exit 1
-      }
+# TODO: APP_NAME for deploy jobs *should* be refactored
+# to deploy to different paths based on UI version.
