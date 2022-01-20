@@ -78,6 +78,11 @@ const styles = {
             }
         }
     },
+    Version: {
+        version: {
+            fontSize: '12px'
+        }
+    },
     Heading: {
         heading1: {
             display: 'block',

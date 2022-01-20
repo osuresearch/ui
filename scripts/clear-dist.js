@@ -22,6 +22,6 @@ function deleteFolderRecursive(path) {
 
 console.log("Cleaning working tree...");
 
-deleteFolderRecursive(path.join(__dirname, '..', 'dist'));
+deleteFolderRecursive(path.join(__dirname, '..', 'build'));
 
 console.log("Successfully cleaned working tree!");

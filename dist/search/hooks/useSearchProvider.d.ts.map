@@ -1,1 +1,0 @@
-{"version":3,"file":"useSearchProvider.d.ts","sourceRoot":"","sources":["../../../src/search/hooks/useSearchProvider.ts"],"names":[],"mappings":"AAEA,OAAO,EAAE,cAAc,EAAE,MAAM,IAAI,CAAC;AAGpC;;;;GAIG;AACH,MAAM,CAAC,OAAO,UAAU,iBAAiB,CAAC,OAAO,GAAG,OAAO,EAAE,QAAQ,EAAE,MAAM,GAAG,cAAc,CAAC,OAAO,CAAC,CAUtG"}
