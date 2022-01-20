@@ -49,6 +49,7 @@ Package:
     - PUBLIC_URL=/${APP_NAME}
     - echo -e "\nPUBLIC_URL=\"/${APP_NAME}\"" >> $CI_PROJECT_DIR/.env
     - echo -e "\nBUILD_TAG=\"${CI_COMMIT_REF_SLUG}/${CI_COMMIT_SHORT_SHA}\"" >> $CI_PROJECT_DIR/.env
+    - echo ARTIFACTS_JOB_ID="${CI_JOB_ID}" >> $CI_PROJECT_DIR/ci.env
     - |
       if [[ $DRY_RUN == 'true' ]]; then
         echo "DRY RUN: npm run build:styleguide";
