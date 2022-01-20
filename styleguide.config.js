@@ -1,6 +1,8 @@
 
 const path = require('path');
 const glob = require('glob');
+require('dotenv').config();
+
 const { styles, theme } = require('./styleguide.styles');
 const packageManifest = require('./package.json');
 
@@ -34,8 +36,6 @@ function listHtmlComponents() {
 
 function listSearchComponents() {
     const components = glob.sync('src/search/components/*/index.tsx');
-
-    console.log(components);
 
     // Need to handle top level:
     // <DebugSearch>, <SearchProvider>
@@ -73,8 +73,6 @@ function listSearchComponents() {
         ],
     });
 
-    console.log(sections);
-    // throw new Error('');
     return sections;
 }
 
@@ -144,8 +142,6 @@ function listFormComponents() {
             });
         }
     });
-
-    // console.log(sections);
 
     return sections;
 }
@@ -271,6 +267,7 @@ const reactDocgenTypescriptOptions = {
  */
 module.exports = {
     title: 'UI Components ' + packageManifest.version,
+    version: process.env.BUILD_TAG,
     usageMode: 'expand',
     tocMode: 'collapse',
     styleguideDir: BUILD_PATH,

@@ -76,6 +76,7 @@
     "@types/react-dom": "^16.9.4",
     "@types/react-router-dom": "^5.1.5",
     "acorn": "^6.4.0",
+    "dotenv": "^14.2.0",
     "faker": "^5.1.0",
     "graphql": "^15.3.0",
     "node-sass": "^4.13.0",

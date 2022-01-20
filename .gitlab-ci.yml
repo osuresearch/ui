@@ -15,16 +15,18 @@ stages:
 
 variables:
   COMPLIANCE: 'S2'
-  NEEDS_PAM: 'false'
-  # No tests exist yet
+  # We haven't written any test automation (yet)
   NEEDS_NPM_TEST: 'false'
+  # This project will deploy a styleguide as an internal tool for devs
+  DEPLOY_TO_STAGING: 'false'
+  NEEDS_PAM: 'false'
   # Temp for quick CI iteration
   SAST_DISABLED: 'true'
   DEPENDENCY_SCANNING_DISABLED: 'true'
   CODE_QUALITY_DISABLED: 'true'
 
 # @ORIS/ui needs to build and deploy a styleguide to the dev server upon release.
-# We replace the packaging job with the build process
+# This also doubles as our packaging job for deployments.
 Build Styleguide:
   image: $NODE_IMAGE
   cache:
@@ -46,15 +48,8 @@ Build Styleguide:
   needs:
     - NPM Install
   script:
-    - PUBLIC_URL=/${APP_NAME}
-    - echo -e "\nPUBLIC_URL=\"/${APP_NAME}\"" >> $CI_PROJECT_DIR/.env
     - echo -e "\nBUILD_TAG=\"${CI_COMMIT_REF_SLUG}/${CI_COMMIT_SHORT_SHA}\"" >> $CI_PROJECT_DIR/.env
     - echo ARTIFACTS_JOB_ID="${CI_JOB_ID}" >> $CI_PROJECT_DIR/ci.env
-    - |
-      if [[ $DRY_RUN == 'true' ]]; then
-        echo "DRY RUN: npm run build:styleguide";
-        exit 0;
-      fi
     - npm run build:styleguide
   artifacts:
     paths:
@@ -63,14 +58,8 @@ Build Styleguide:
     reports:
       dotenv: ci.env
 
-# TODO: APP_NAME for deploy jobs *should* be refactored
-# to deploy to different paths based on UI version.
-
-# Current deployment process assumes we deploy a copy of the styleguide
-# (if packaging is successful) to dev *and* test on master.
-
-# Change needs for deploy jobs (we don't have a Package job here)
+# Reconfigure all deployment jobs to be dependent on the styleguide job.
+# Note that the styleguide job exposes the required artifact ID through ci.env
 .deploy:
   needs:
     - Build Styleguide
-
