@@ -4,15 +4,15 @@
   "description": "React UI components for ORIS applications",
   "author": "Chase McManning <mcmanning.1@osu.edu>",
   "license": "MIT",
-  "main": "dist/index.js",
+  "main": "build/index.js",
   "files": [
-    "dist"
+    "build"
   ],
   "scripts": {
     "start": "npx styleguidist server",
     "build:styleguide": "npx styleguidist build",
-    "build:components": "npx babel ./src --out-dir ./dist --extensions \".tsx,.ts,.js\"",
-    "build:ts-declarations": "npx tsc --declaration --outDir ./dist --emitDeclarationOnly --declarationMap || echo tsc done, possibly with ignored errors.",
+    "build:components": "npx babel ./src --out-dir ./build --extensions \".tsx,.ts,.js\"",
+    "build:ts-declarations": "npx tsc --declaration --outDir ./build --emitDeclarationOnly --declarationMap || echo tsc done, possibly with ignored errors.",
     "build:copy-sass": "node ./scripts/copy-sass.js",
     "build": "npm run clear-dist && npm-run-all --parallel build:components --serial build:ts-declarations build:copy-sass",
     "test": "react-scripts test",

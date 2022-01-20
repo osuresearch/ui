@@ -18,6 +18,10 @@ variables:
   NEEDS_PAM: 'false'
   # No tests exist yet
   NEEDS_NPM_TEST: 'false'
+  # Temp for quick CI iteration
+  SAST_DISABLED: 'true'
+  DEPENDENCY_SCANNING_DISABLED: 'true'
+  CODE_QUALITY_DISABLED: 'true'
 
 # @ORIS/ui needs to build and deploy a styleguide to the dev server upon release.
 # We replace the packaging job with the build process
@@ -59,3 +63,6 @@ Package:
 
 # TODO: APP_NAME for deploy jobs *should* be refactored
 # to deploy to different paths based on UI version.
+
+# Current deployment process assumes we deploy a copy of the styleguide
+# (if packaging is successful) to dev *and* test on master.
