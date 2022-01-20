@@ -25,7 +25,7 @@ variables:
 
 # @ORIS/ui needs to build and deploy a styleguide to the dev server upon release.
 # We replace the packaging job with the build process
-Package:
+Build Styleguide:
   image: $NODE_IMAGE
   cache:
     key: "$CI_COMMIT_REF_SLUG-node_modules"
@@ -67,3 +67,9 @@ Package:
 
 # Current deployment process assumes we deploy a copy of the styleguide
 # (if packaging is successful) to dev *and* test on master.
+
+# Change needs for deploy jobs (we don't have a Package job here)
+.deploy:
+  needs:
+    - Build Styleguide
+
