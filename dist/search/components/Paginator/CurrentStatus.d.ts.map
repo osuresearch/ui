@@ -1,1 +1,0 @@
-{"version":3,"file":"CurrentStatus.d.ts","sourceRoot":"","sources":["../../../../src/search/components/Paginator/CurrentStatus.tsx"],"names":[],"mappings":"AAEA,OAAO,EAAE,cAAc,EAAE,MAAM,qBAAqB,CAAC;AAErD,aAAK,KAAK,GAAG;IACT,GAAG,EAAE,cAAc,CAAC,GAAG,CAAC,CAAC;IACzB,IAAI,EAAE,MAAM,CAAC;CAChB,CAAA;AAED,MAAM,CAAC,OAAO,UAAU,aAAa,CAAC,EAClC,GAAG,EACH,IAAI,EACP,EAAE,KAAK,eAUP"}
