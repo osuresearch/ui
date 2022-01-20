@@ -59,6 +59,7 @@ Build Styleguide:
   artifacts:
     paths:
       - styleguide/
+      - .htaccess
     reports:
       dotenv: ci.env
 
