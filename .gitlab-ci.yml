@@ -9,6 +9,7 @@ stages:
   - install
   - build
   - test
+  - publish
   - deploy
   - clean
 
