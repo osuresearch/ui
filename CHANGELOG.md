@@ -1,18 +1,3 @@
-# 1.0.0 (2022-01-21)
-
-
-### Bug Fixes
-
-* **styleguide:** add a .htaccess so deployed styleguides can be accessed from just the project root ([7b6c3f2](https://code.osu.edu/ORIS/ui/commit/7b6c3f25cbfb1e3f64d7cde72b84c99d78007f17))
-
-# Change Log
-Current unresolved issues can be found and reported on [YouTrack](https://ordevsvc01.rf.ohio-state.edu/youtrack/issues?q=project:%20%7BFrameworks%20and%20Packages%7D%20UI%20%23Unresolved%20)
-
-Versions follow [Semantic Versioning](https://semver.org/) guidelines - given a version number MAJOR.MINOR.PATCH:
-
-1. MAJOR version when you make incompatible API changes,
-2. MINOR version when you add functionality in a backwards-compatible manner, and
-3. PATCH version when you make backwards-compatible bug fixes.
 
 # 4.4.5 (2021-07-06)
 
@@ -79,7 +64,7 @@ __Bug Fixes:__
 
 __Minor Backwards Breaking Changes:__
 
-* Internal imports have changed to use the uppercase package name @ORIS instead of @oris to support NPM > 6. If you have the package installed as `@oris/ui` you may encounter build errors. Reinstall as `@ORIS/ui`.
+* Internal imports have changed to use the uppercase package name `@ORIS` instead of `@oris` to support NPM > 6. If you have the package installed as `@oris/ui` you may encounter build errors. Reinstall as `@ORIS/ui`.
 
 # 4.3.1 (2021-02-19)
 
@@ -222,10 +207,10 @@ __UI Changes:__
 
 __Bug Fixes:__
 
-* Refactored package dependencies to no longer require specific builds of node-sass or react-scripts installed when installing @ORIS/ui through npm.
+* Refactored package dependencies to no longer require specific builds of node-sass or react-scripts installed when installing `@ORIS/ui` through npm.
     * Minimum supported React versions are defined via `peerDependencies` to issue warnings during `npm install` if these are not met.
 
-Note that with the above fix `react-dom` and `react-router-dom` will no longer be installed alongside @ORIS/ui. If your project was using an older version of @ORIS/ui, you will need to install these dependencies manually via:
+Note that with the above fix `react-dom` and `react-router-dom` will no longer be installed alongside `@ORIS/ui`. If your project was using an older version of `@ORIS/ui`, you will need to install these dependencies manually via:
 
 ```
 npm install react-dom react-router-dom --save

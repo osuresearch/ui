@@ -62,5 +62,5 @@ Build Styleguide:
 # Note that the styleguide job exposes the required artifact ID through ci.env
 .deploy:
   needs:
-    - NPM Publish
     - Build Styleguide
+    #- NPM Publish
