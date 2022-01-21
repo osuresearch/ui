@@ -1,3 +1,10 @@
+# 1.0.0 (2022-01-21)
+
+
+### Bug Fixes
+
+* **styleguide:** add a .htaccess so deployed styleguides can be accessed from just the project root ([7b6c3f2](https://code.osu.edu/ORIS/ui/commit/7b6c3f25cbfb1e3f64d7cde72b84c99d78007f17))
+
 # Change Log
 Current unresolved issues can be found and reported on [YouTrack](https://ordevsvc01.rf.ohio-state.edu/youtrack/issues?q=project:%20%7BFrameworks%20and%20Packages%7D%20UI%20%23Unresolved%20)
 
