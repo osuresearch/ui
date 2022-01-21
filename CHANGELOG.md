@@ -1,3 +1,9 @@
+## [4.4.6](https://code.osu.edu/ORIS/ui/compare/4.4.5...4.4.6) (2022-01-21)
+
+
+### Bug Fixes
+
+* **styleguide:** add a .htaccess so deployed styleguides can be accessed from just the project root ([7b6c3f2](https://code.osu.edu/ORIS/ui/commit/7b6c3f25cbfb1e3f64d7cde72b84c99d78007f17))
 
 # 4.4.5 (2021-07-06)
 
