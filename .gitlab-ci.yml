@@ -58,8 +58,9 @@ Build Styleguide:
     reports:
       dotenv: ci.env
 
-# Reconfigure all deployment jobs to be dependent on the styleguide job.
+# Reconfigure all deployment jobs to be dependent on the styleguide and publish jobs.
 # Note that the styleguide job exposes the required artifact ID through ci.env
 .deploy:
   needs:
+    - NPM Publish
     - Build Styleguide
