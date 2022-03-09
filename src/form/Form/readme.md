@@ -1,6 +1,6 @@
 
 ### Example
-This example uses [React Hook Form](https://www.react-hook-form.com) for validation.
+This example uses [React Hook Form version 7](https://www.react-hook-form.com) for form handling and validation.
 
 ```jsx noeditor
 import { Icon } from '@ORIS/ui';
@@ -45,13 +45,13 @@ import {
 } from '@ORIS/ui';
 import JsonApi from '@ORIS/ui/search/drivers/JsonApi';
 
-const { register, errors, handleSubmit, control } = useForm({ mode: 'onBlur' });
+const { register, handleSubmit, control, formState: { errors } } = useForm({ mode: 'onBlur' });
 
 const onSubmit = data => console.log('submit', data);
 
 <Form onSubmit={handleSubmit(onSubmit)} noValidate>
-    <div className='row'>
-        <div className='col'>
+    <div className="row">
+        <div className="col">
             <Lookup
                 id="search-for-person"
                 driver={JsonApi('https://orapps.osu.edu/api/v1/person')}
@@ -66,8 +66,17 @@ const onSubmit = data => console.log('submit', data);
                     name="search-for-person"
                     control={control}
                     rules={{ required: true }}
-                    render={props =>
-                        <Lookup.Input {...props} resultRenderer={
+                    render={({
+                        field: { onChange, onBlur, value, name, ref },
+                        fieldState: { invalid, isTouched, isDirty, error },
+                        formState,
+                    }) =>
+                        <Lookup.Input 
+                        onBlur={onBlur}
+                        onChange={onChange}
+                        value={value}
+                        ref={ref}
+                        resultRenderer={
                             (hit) => <span>
                                 {hit.attributes.name}&nbsp;
                                 <small className="text-muted">
@@ -81,7 +90,7 @@ const onSubmit = data => console.log('submit', data);
                 <Lookup.Error />
             </Lookup>
         </div>
-        <div className='col'>
+        <div className="col">
             <Text
                 id="email"
                 required
@@ -89,16 +98,16 @@ const onSubmit = data => console.log('submit', data);
             >
                 <Text.Label>Email</Text.Label>
                 <Text.Email
-                    placeholder='me.9876@osu.edu'
-                    ref={register({
-                        required: 'Input a valid email address'
+                    placeholder="me.9876@osu.edu"
+                    {...register('email', {
+                        required:'Input a valid email address' 
                     })}
                 />
                 <Text.Error />
             </Text>
         </div>
 
-        <div className='col'>
+        <div className="col">
             <DateTime
                 id="birthdate"
                 required
@@ -109,16 +118,26 @@ const onSubmit = data => console.log('submit', data);
                 </DateTime.Label>
 
                 <Controller
-                    name='birthdate'
+                    name="birthdate"
                     control={control}
                     rules={{ required: 'Input your birthdate' }}
-                    render={props => <DateTime.Input {...props} />}
+                    render={({
+                        field: { onChange, onBlur, value, name, ref },
+                        fieldState: { invalid, isTouched, isDirty, error },
+                        formState,
+                    }) => (
+                        <DateTime.Input 
+                            onBlur={onBlur}
+                            onChange={onChange}
+                            value={value}
+                            ref={ref} 
+                        />
+                    )}
                 />
                 <DateTime.Error />
             </DateTime>
         </div>
     </div>
-
 
         <Text
             id="address"
@@ -127,48 +146,51 @@ const onSubmit = data => console.log('submit', data);
         >
             <Text.Label>Address</Text.Label>
             <Text.Input
-                placeholder='1234 Main St'
-                ref={register({
+                placeholder="1234 Main St"
+                defaultValue="5678 Water St"
+                {...register('address', {
                     required: 'Input your street address'
-                })}
-                defaultValue='5678 Water St'
+                })}                
             />
             <Text.Error />
         </Text>
 
-
-
         <Text id="address2">
             <Text.Label>Address 2</Text.Label>
             <Text.Input
-                placeholder='Apartment, studio, or floor'
-                ref={register}
+                placeholder="Apartment, studio, or floor"
+                {...register('address2')}
             />
         </Text>
 
-
-    <div className='row'>
-        <div className='col-md-6'>
+    <div className="row">
+        <div className="col-md-6">
             <Text
                 id="city"
                 required
                 error={errors.city && errors.city.message}
             >
                 <Text.Label>City</Text.Label>
-                <Text.Input ref={register({
-                    required: 'Input your city'
-                })} />
+                <Text.Input 
+                    {...register('city', {
+                        required: 'Input your city'
+                    })}
+                />
                 <Text.Error />
             </Text>
         </div>
-        <div className='col-md-4'>
+        <div className="col-md-4">
             <Select
                 id="state"
                 required
                 error={errors.state && errors.state.message}
             >
                 <Select.Label>State</Select.Label>
-                <Select.Control ref={register({ required: 'Select your state' })}>
+                <Select.Control 
+                    {...register('state', {
+                        required: 'Select your state'
+                    })}
+                >
                     <Select.Option value=''>Choose...</Select.Option>
                     <Select.Option value='CA'>California</Select.Option>
                     <Select.Option value='OH'>Ohio</Select.Option>
@@ -178,41 +200,56 @@ const onSubmit = data => console.log('submit', data);
                 <Select.Error />
             </Select>
         </div>
-        <div className='col-md-2'>
+        <div className="col-md-2">
             <Text
                 id="zip"
                 required
                 error={errors.zip && errors.zip.message}
             >
                 <Text.Label>ZIP</Text.Label>
-                <Text.Input ref={register({ required: 'Input your ZIP Code' })} />
+                <Text.Input 
+                    {...register('zip', {
+                        required: 'Input your ZIP code'
+                    })}
+                />
                 <Text.Error />
             </Text>
         </div>
     </div>
 
         <FieldSet
-            id='favorite-food'
-            error={errors["favorite-food"] && 'Choose your favorite food'}
+            id="favorite-food"
+            error={errors['favorite-food'] && 'Choose your favorite food'}
             required
         >
             <FieldSet.Legend>
                 Favorite Food
             </FieldSet.Legend>
             <FieldSet.Inline>
-                <Radio id='pizza'>
-                    <Radio.Input ref={register({ required: true })} />
+                <Radio id="pizza">
+                    <Radio.Input
+                        value="pizza" 
+                        {...register('favorite-food', {
+                            required: true
+                        })}
+                    />
                     <Radio.Label>Pizza</Radio.Label>
                 </Radio>
-                <Radio id='mac-n-cheese'>
-                    <Radio.Input ref={register({ required: true })} />
+                <Radio id="mac-n-cheese">
+                    <Radio.Input 
+                        value="mac-n-cheese"
+                        {...register('favorite-food', {
+                            required: true
+                        })}
+                    />
                     <Radio.Label>Mac 'N Cheese</Radio.Label>
                 </Radio>
-                <Radio
-                    id='sushi'
-                >
-                    <Radio.Input
-                        ref={register({ required: true })}
+                <Radio id="sushi">
+                    <Radio.Input 
+                        value="sushi"
+                        {...register('favorite-food', {
+                            required: true
+                        })}
                     />
                     <Radio.Label>Sushi</Radio.Label>
                 </Radio>
@@ -220,24 +257,33 @@ const onSubmit = data => console.log('submit', data);
             <FieldSet.Error />
         </FieldSet>
 
-        <FieldSet id='opt-in'>
+        <FieldSet id="opt-in">
             <FieldSet.Legend>
                 I want to receive
             </FieldSet.Legend>
-            <Checkbox id='newsletter'>
-                <Checkbox.Input ref={register} />
+            <Checkbox id="newsletter">
+                <Checkbox.Input
+                    value="newsletter"
+                    {...register('opt-in')} 
+                />
                 <Checkbox.Label>
                     The weekly newsletter
                 </Checkbox.Label>
             </Checkbox>
-            <Checkbox id='company-offers'>
-                <Checkbox.Input ref={register} />
+            <Checkbox id="company-offers">
+                <Checkbox.Input
+                    value="company-offers" 
+                    {...register('opt-in')} 
+                />
                 <Checkbox.Label>
                     Offers from the company
                 </Checkbox.Label>
             </Checkbox>
-            <Checkbox id='assoc-company-offers'>
-                <Checkbox.Input ref={register} />
+            <Checkbox id="assoc-company-offers">
+                <Checkbox.Input 
+                    value="assoc-company-offers"
+                    {...register('opt-in')} 
+                />
                 <Checkbox.Label>
                     Offers from associated companies
                 </Checkbox.Label>
@@ -250,17 +296,28 @@ const onSubmit = data => console.log('submit', data);
 
         <Time
             id="pick-up"
-            error={errors["pick-up"] && 'Enter the time you will pick up your drycleaning'}
+            error={errors['pick-up'] && 'Enter the time you will pick up your drycleaning'}
             required
         >
             <Time.Label>
                 Time to Pick Up Drycleaning
             </Time.Label>
             <Controller
-                name='pick-up'
+                name="pick-up"
                 control={control}
                 rules={{ required: true }}
-                render={props => <Time.Input {...props} />}
+                render={({
+                    field: { onChange, onBlur, value, name, ref },
+                    fieldState: { invalid, isTouched, isDirty, error },
+                    formState,
+                }) => (
+                    <Time.Input 
+                        onBlur={onBlur}
+                        onChange={onChange}
+                        value={value}
+                        ref={ref}
+                    />
+                )}
             />
             <Time.Error />
         </Time>
@@ -270,11 +327,15 @@ const onSubmit = data => console.log('submit', data);
             required
             error={errors.check && errors.check.message}
         >
-            <Checkbox.Input ref={register({ required: 'Check this box' })} />
+            <Checkbox.Input
+                {...register('check', {
+                    required: 'Check this box'
+                })}
+            />
             <Checkbox.Label>Check me out</Checkbox.Label>
             <Checkbox.Error />
         </Checkbox>
 
-    <Button type='submit' theme='primary'>Sign in</Button>
+    <Button type="submit" theme="primary">Sign in</Button>
 </Form>
 ```

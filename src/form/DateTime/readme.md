@@ -19,7 +19,7 @@ const [date, setDate] = useState('2011-07-09');
 </DateTime>
 ```
 
-#### Basic Implementation with React Hook Form
+#### Basic Implementation with React Hook Form (v7)
 
 Since `<DateTime>` is a controlled component, `<DateTime.Input>` must be wrapped in a React Hook Form `<Controller>` component.
 
@@ -39,10 +39,14 @@ const { control, watch } = useForm({
     <Controller
         control={control}
         name="rhf-choose-date"
-        render={({ onChange, value }) => (
+        render={({
+            field: { onChange, onBlur, value, name },
+        }) => (
             <DateTime.Input
                 value={value}
                 onChange={onChange}
+                onBlur={onBlur}
+                name={name}
             />
         )}
     />

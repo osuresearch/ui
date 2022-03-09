@@ -31,13 +31,13 @@ import Mock from '@ORIS/ui/search/drivers/Mock';
 </Lookup>
 ```
 
-#### Basic Implementation with React Hook Form
+#### Basic Implementation with React Hook Form (v7)
 
 ```jsx
 import { useForm, Controller } from 'react-hook-form';
 import Mock from '@ORIS/ui/search/drivers/Mock';
 
-const { control, errors, watch } = useForm({ mode: "onBlur" });
+const { control, watch, formState: { errors } } = useForm({ mode: 'onBlur' });
 
 <>
 <Lookup
@@ -54,15 +54,25 @@ const { control, errors, watch } = useForm({ mode: "onBlur" });
         name="rhf-lookup"
         control={control}
         rules={{ required: true }}
-        render={props =>
-            <Lookup.Input {...props} resultRenderer={
-                (hit) => <span>
-                    {hit.name}&nbsp;
-                    <small className="text-muted">
-                        ({hit.username})
-                    </small>
-                </span>
-            } />
+        render={({
+            field: { onChange, onBlur, value, name }
+        }) => (
+                <Lookup.Input 
+                    value={value}
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    name={name}resultRenderer={
+                    (hit) => (
+                        <span>
+                        {hit.name}&nbsp;
+                            <small className="text-muted">
+                                ({hit.username})
+                            </small>
+                        </span>
+                        )
+                    }
+                />
+            )
         }
     />
 

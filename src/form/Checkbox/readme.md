@@ -16,7 +16,7 @@
 </Checkbox>
 ```
 
-#### Basic Implementation with React Hook Form
+#### Basic Implementation with React Hook Form (v7)
 
 ```jsx
 import { useForm } from 'react-hook-form';
@@ -25,7 +25,7 @@ const { register, watch } = useForm({ mode: 'onBlur' });
 
 <>
 <Checkbox id="rhf-receive-newsletter">
-    <Checkbox.Input ref={register} />
+    <Checkbox.Input {...register('rhf-receive-newsletter')} />
 
     <Checkbox.Label>
         Yes! I would like to receive your newsletter
@@ -37,7 +37,7 @@ const { register, watch } = useForm({ mode: 'onBlur' });
 </Checkbox>
 
 <hr/>
-Value: {watch("rhf-receive-newsletter") ? 'Yes' : 'No'}
+Value: {watch('rhf-receive-newsletter') ? 'Yes' : 'No'}
 </>
 ```
 
@@ -85,12 +85,12 @@ const [success, setSuccess] = useState();
 </Form>
 ```
 
-#### Validation with React Hook Form
+#### Validation with React Hook Form (v7)
 ```jsx
 import { useForm } from 'react-hook-form';
 import { Form, Button } from '@ORIS/ui';
 
-const { register, errors, formState, reset, handleSubmit } = useForm({ mode: 'onBlur' });
+const { register, formState: { isValid, errors }, reset, handleSubmit } = useForm({ mode: 'onBlur' });
 
 const onSubmit = data => console.log(data);
 
@@ -98,10 +98,10 @@ const onSubmit = data => console.log(data);
     <Checkbox
         id="rhf-terms"
         error={errors["rhf-terms"] && "You must accept the terms and services"}
-        success={formState.isValid && "Thank you for accepting the terms and services"}
+        success={isValid && "Thank you for accepting the terms and services"}
         required
     >
-        <Checkbox.Input ref={register({ required: true })} />
+        <Checkbox.Input {...register('rhf-terms', { required: true })} />
 
         <Checkbox.Label>
             I agree to the terms and services
@@ -162,7 +162,7 @@ const onChange = (newArrayValue, oldArrayValue) => {
 </FieldSet>
 ```
 
-#### Checkbox FieldSet with React Hook Form
+#### Checkbox FieldSet with React Hook Form (v7)
 
 ```jsx
 import { useForm } from 'react-hook-form';
@@ -184,17 +184,26 @@ const selectedLightTypes = watch('light-types');
     </FieldSet.Legend>
 
     <Checkbox id="spot">
-        <Checkbox.Input ref={register} value="spot" />
+        <Checkbox.Input 
+            value="spot"
+            {...register('light-types')} 
+        />
         <Checkbox.Label>Spot light</Checkbox.Label>
     </Checkbox>
 
     <Checkbox id="directional">
-        <Checkbox.Input ref={register} value="directional" />
+        <Checkbox.Input 
+            value="directional"
+            {...register('light-types')} 
+        />
         <Checkbox.Label>Directional Light</Checkbox.Label>
     </Checkbox>
 
     <Checkbox id="point">
-        <Checkbox.Input ref={register} value="point" />
+        <Checkbox.Input 
+            value="point"
+            {...register('light-types')} 
+        />
         <Checkbox.Label>Point Light</Checkbox.Label>
     </Checkbox>
 </FieldSet>

@@ -21,16 +21,16 @@ import { Text } from '@ORIS/ui';
 </Text>
 ```
 
-Basic `<Text.Area>` with React Hook Form
+Basic `<Text.Area>` with React Hook Form (v7)
 ```jsx
 import { useForm } from 'react-hook-form';
 import { Text } from '@ORIS/ui';
 
-const { register, errors } = useForm({ mode: "onBlur" });
+const { register, formState: { errors } } = useForm({ mode: "onBlur" });
 
 <Text
     id="rhf-textarea-sample"
-    error={errors["rhf-textarea-sample"] && "This is required"}
+    error={errors['rhf-textarea-sample'] && 'This is required'}
     required
 >
     <Text.Label>Basic textarea</Text.Label>
@@ -38,7 +38,9 @@ const { register, errors } = useForm({ mode: "onBlur" });
     <Text.Area
         placeholder="You may include a placeholder, but it must not contain important information."
         rows={3}
-        ref={register({ required: true })}
+        {...register('rhf-textarea-sample', {
+            required: true
+        })}
     />
 
     <Text.Error />

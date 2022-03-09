@@ -9,11 +9,11 @@
 </Number>
 ```
 
-#### Basic Implementation with React Hook Form
+#### Basic Implementation with React Hook Form (v7)
 ```jsx
 import { useForm } from 'react-hook-form';
 
-const { register, errors, watch } = useForm({ mode: "onBlur" });
+const { register, watch, formState: { errors } } = useForm({ mode: "onBlur" });
 
 <>
 <Number 
@@ -22,7 +22,7 @@ const { register, errors, watch } = useForm({ mode: "onBlur" });
     required
 >
     <Number.Label>Provide your age</Number.Label>
-    <Number.Input ref={register({ required: true })} />
+    <Number.Input {...register('rhf-age', { required: true })} />
     <Number.Error />
 </Number>
 
@@ -33,7 +33,7 @@ Value: {watch("rhf-age")}
 
 #### Minimum and Maximum Numbers
 ```jsx
-<Number id='one-and-ten'>
+<Number id="one-and-ten">
     <Number.Label>Pick a number between one (1) and ten (10)</Number.Label>
     <Number.Input 
         min={1}

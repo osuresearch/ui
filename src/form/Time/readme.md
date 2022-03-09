@@ -20,18 +20,18 @@ const [time, setTime] = useState();
 </Time>
 ```
 
-#### Blank Input with React Hook Form
+#### Blank Input with React Hook Form (v7)
 
 Since `<Time>` is a controlled component, `<Time.Input>` must be wrapped in a React Hook Form `<Controller>` component.
 
 ```jsx
 import { useForm, Controller } from 'react-hook-form';
 
-const { register, errors, control } = useForm({ mode: "onBlur" });
+const { control, formState: { errors } } = useForm({ mode: "onBlur" });
 
 <Time 
     id="rhf-start-time" 
-    error={errors["rhf-start-time"] && "Enter a time"}
+    error={errors['rhf-start-time'] && 'Enter a time'}
     required
 >
     <Time.Label>Start Time</Time.Label>
@@ -40,8 +40,11 @@ const { register, errors, control } = useForm({ mode: "onBlur" });
         control={control}
         name="rhf-start-time"
         rules={{ required: true }}
-        render={({ onChange, onBlur, value }) => 
+        render={({
+            field: { onChange, onBlur, value, name }
+        }) => 
             <Time.Input
+                name={name}
                 value={value}
                 onChange={onChange}
                 onBlur={onBlur}
@@ -74,7 +77,7 @@ const defaultValue = now.toLocaleTimeString('en-GB').substring(0, 5); // Convert
 </Time>
 ```
 
-#### Input with Default Value in React Hook Form
+#### Input with Default Value in React Hook Form (v7)
 
 Since `<Time>` is a controlled component, `<Time.Input>` must be wrapped in a React Hook Form `<Controller>` component.
 
@@ -84,21 +87,24 @@ import { useForm, Controller } from 'react-hook-form';
 const now = new Date();
 const defaultValue = now.toLocaleTimeString('en-GB').substring(0, 5); // Convert date to 24h time string, then use substring to remove the seconds from the string
 
-const { register, control } = useForm({ 
-    mode: "onBlur",
+const { control } = useForm({ 
+    mode: 'onBlur',
     defaultValues: {
-        "rhf-signature-time": defaultValue
+        'rhf-signature-time': defaultValue
     }
 });
 
-<Time id='rhf-signature-time'>
+<Time id="rhf-signature-time">
     <Time.Label>Signature Time</Time.Label>
 
     <Controller 
         control={control}
         name="rhf-signature-time"
-        render={({ onChange, onBlur, value }) => 
+        render={({
+            field: { onChange, onBlur, value, name }
+        }) => 
             <Time.Input
+                name={name}
                 value={value}
                 onChange={onChange}
                 onBlur={onBlur}

@@ -1,5 +1,5 @@
 
-Sub-component will inherit `id`, `onChange`, and `readOnly` props and methods from parent component. Typically, no props need to be set on this sub-component.
+Sub-component will inherit `id`, `onChange`, and `readOnly` props and methods from parent component. Typically, no props need to be set on this sub-component, unless it is being used with React Hook Form.
 
 ```jsx static
 <Checkbox.Input />
