@@ -8,7 +8,7 @@ export type LabelProps = React.LabelHTMLAttributes<HTMLLabelElement> & {
      */
     context?: React.Context<IFormFieldContext<any>>;
 
-    children: string;
+    children?: string;
 }
 
 /**
@@ -24,16 +24,15 @@ export function Label(props: LabelProps) {
     const { bind } = useContext(context!);
 
     const label = props.children || bind.instructions || '';
+    const className = `${bind.required ? 'is-required' : ''} ${props.className ? props.className : ''}`;
+
+    // React will only allow either dangerouslySetInnerHTML or a child
+    if (props.dangerouslySetInnerHTML) {
+        return <label {...otherProps} htmlFor={bind.id} className={className} />;
+    }
 
     return (
-        <label
-            {...otherProps}
-            htmlFor={bind.id}
-            className={
-                (bind.required ? 'is-required' : '') +
-                (props.className ? ' ' + props.className : '')
-            }
-        >
+        <label {...otherProps} htmlFor={bind.id} className={className}>
             {label}
         </label>
     );
