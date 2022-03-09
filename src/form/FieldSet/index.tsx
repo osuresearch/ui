@@ -45,11 +45,13 @@ interface IFieldSetComposition {
 
 type Props = FormFieldProps<string | string[]> & {
     /**
-     * REQUIRED - The value of the `name` prop will cascade down 
+     * The value of the `name` prop will cascade down 
      * to be the `name` in each child component in the 
-     * `<FieldSet>`.
+     * `<FieldSet>`. If no name is 
+     * supplied, the id will act as
+     * the name
      */
-    name: string;
+    name?: string;
 }
 
 export const Context = React.createContext<IFormFieldContext<string | string[]>>({
@@ -73,6 +75,8 @@ const FieldSet: React.FC<Props> & IFieldSetComposition = ({
     ...props // everything else is of FormFieldProps<string>
 }) => {
     const { bind } = useFieldBindOrProps(props);
+
+    const name = bind.name || bind.id;
 
     let className = `
         ui-form-element
@@ -104,7 +108,7 @@ const FieldSet: React.FC<Props> & IFieldSetComposition = ({
             <fieldset
                 id={bind.id}
                 className={className}
-                name={bind.name}
+                name={name}
                 aria-describedby={`${bind.id}-help`}
             >
                 {React.Children.map<React.ReactNode, React.ReactNode>(children, node => {
@@ -113,7 +117,7 @@ const FieldSet: React.FC<Props> & IFieldSetComposition = ({
                             // Add the FieldSet props to the
                             // inputs (if the inputs have not
                             // already defined them)
-                            name: node.props.name || bind.name,
+                            name: node.props.name || name,
                             error: node.props.error || bind.error,
                             success: node.props.success || bind.success,
                             readOnly: node.props.readOnly || bind.readOnly,
