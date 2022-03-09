@@ -102,6 +102,7 @@ const FieldSet: React.FC<Props> & IFieldSetComposition = ({
     return (
         <Context.Provider value={{ bind }}>
             <fieldset
+                id={bind.id}
                 className={className}
                 name={bind.name}
                 aria-describedby={`${bind.id}-help`}
