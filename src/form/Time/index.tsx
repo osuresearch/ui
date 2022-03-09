@@ -42,10 +42,19 @@ const Time: React.FC<Props> & ITimeComposition = ({
 }) => {
     const { bind } = useFieldBindOrProps(props);
 
+    let className = `
+        ui-form-element ui-form-time
+        ${bind.className ? bind.className : ''}
+        ${bind.required ? 'is-required' : ''}
+        ${bind.error ? 'is-invalid' : ''}
+        ${bind.success ? 'is-valid' : ''}
+    `;
+    // Remove new lines and trim
+    className = className.replace(/\n/g, ' ').trim();
+
     return (
         <Context.Provider value={{ bind }}>
-            <div className={`ui-form-element ui-form-time ${bind.required ? 'is-required' : ''} ${bind.error && 'is-invalid'} ${bind.success && 'is-valid'}`}
-            >
+            <div className={className}>
                 {children}
             </div>
         </Context.Provider>

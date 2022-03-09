@@ -74,6 +74,16 @@ const FieldSet: React.FC<Props> & IFieldSetComposition = ({
 }) => {
     const { bind } = useFieldBindOrProps(props);
 
+    let className = `
+        ui-form-element
+        ${bind.className ? bind.className : ''}
+        ${bind.required ? 'is-required' : ''}
+        ${bind.error ? 'is-invalid' : ''}
+        ${bind.success ? 'is-valid' : ''}
+    `;
+    // Remove new lines and trim
+    className = className.replace(/\n/g, ' ').trim();
+
     const handleCheckboxChange = useCallback((value: boolean, id: string) => {
         if (!bind.readOnly) {
             // Store the checked (i.e. true) Checkbox names in an array
@@ -92,7 +102,7 @@ const FieldSet: React.FC<Props> & IFieldSetComposition = ({
     return (
         <Context.Provider value={{ bind }}>
             <fieldset
-                className={`ui-form-element ${bind.required ? 'is-required' : ''} ${bind.error && 'is-invalid'} ${bind.success && 'is-valid'}`}
+                className={className}
                 name={bind.name}
                 aria-describedby={`${bind.id}-help`}
             >

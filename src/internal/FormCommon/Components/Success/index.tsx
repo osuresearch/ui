@@ -20,11 +20,12 @@ export type SuccessProps = React.HTMLAttributes<HTMLDivElement> & {
  */
 export function Success(props: SuccessProps) {
     // Separate context from the other props (or else they are added as props to the component itself)
-    const { context, ...otherProps } = props;
+    const { context, className, ...otherProps } = props;
     const { bind } = useContext(context!);
 
+
     return (
-        <div {...otherProps} className='valid-feedback'>
+        <div {...otherProps} className={'valid-feedback ' + className}>
             {props.children ?? bind.success}
         </div>
     );
