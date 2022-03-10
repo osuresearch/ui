@@ -2,7 +2,7 @@
 Sub-component will inherit `id`, `onChange`, and `readOnly` props and methods from parent component.
 
 ```jsx static
-<Radio.Input value='pork' />
+<Radio.Input value="pork" />
 ```
 
 ```js noeditor

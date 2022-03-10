@@ -63,7 +63,18 @@ const Lookup: React.FC<Props> & ILookupComposition = ({
     ...props
 }) => {
     const { bind } = useFieldBindOrProps(props);
-    const [provider, ] = useState(() => {
+
+    let className = `
+        ui-form-element
+        ${bind.className ? bind.className : ''}
+        ${bind.required ? 'is-required' : ''}
+        ${bind.error ? 'is-invalid' : ''}
+        ${bind.success ? 'is-valid' : ''}
+    `;
+    // Remove new lines and trim
+    className = className.replace(/\n/g, ' ').trim();
+
+    const [provider,] = useState(() => {
         // If we provide a driver directly, we need to generate a unique provider ID *once*
         return props.provider ?? 'local-provider-' + uniqueId();
     });
@@ -79,11 +90,7 @@ const Lookup: React.FC<Props> & ILookupComposition = ({
 
     const contextWrappedDOM = (
         <Context.Provider value={{ bind, provider }}>
-            <div className={`
-                ui-form-element ${bind.required ? 'is-required' : ''}
-                ${bind.error && ' is-invalid'}
-                ${bind.success && 'is-valid'}
-            `}>
+            <div className={className}>
                 {children}
             </div>
         </Context.Provider>

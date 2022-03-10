@@ -25,6 +25,7 @@ function fillFieldBindFromProps<T>(bind: FieldBind<T>, props: FormFieldSpreadPro
     bind.success = props.success || '';
     bind.name = props.name || props.id; // TODO: Same as above
     bind.id = props.id;
+    bind.className = props.className;
     bind.readOnly = props.readOnly || false;
     bind.required = props.required || false;
 }

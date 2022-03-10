@@ -35,7 +35,7 @@ import { FieldSet } from '@ORIS/ui';
 </FieldSet>
 ```
 
-#### Basic Implementation with React Hook Form
+#### Basic Implementation with React Hook Form (v7)
 ```jsx
 import { useForm } from 'react-hook-form';
 import { FieldSet } from '@ORIS/ui';
@@ -49,25 +49,37 @@ const { register, watch } = useForm({ mode: "onBlur" });
     </FieldSet.Legend>
 
     <Radio id="rhf-texture-format-RGB24">
-        <Radio.Input value="RGB24" ref={register} />
+        <Radio.Input 
+            value="RGB24" 
+            {...register('rhf-texture-format')}
+        />
         <Radio.Label>RGB24</Radio.Label>
         <Radio.Help>Color texture format, 8-bits per channel.</Radio.Help>
     </Radio>
 
     <Radio id="rhf-texture-format-RGBA32">
-        <Radio.Input value="RGBA32" ref={register} />
+        <Radio.Input 
+            value="RGBA32"
+            {...register('rhf-texture-format')}
+        />
         <Radio.Label>RGBA32</Radio.Label>
         <Radio.Help>Color with alpha texture format, 8-bits per channel.</Radio.Help>
     </Radio>
 
     <Radio id="rhf-texture-format-RGB9e5Float">
-        <Radio.Input value="RGB9e5Float" ref={register} />
+        <Radio.Input 
+            value="RGB9e5Float" 
+            {...register('rhf-texture-format')}
+        />
         <Radio.Label>RGB9e5Float</Radio.Label>
         <Radio.Help>RGB HDR format, with 9 bit mantissa per channel and a 5 bit shared exponent.</Radio.Help>
     </Radio>
 
     <Radio id="rhf-texture-format-DXT1">
-        <Radio.Input value="DXT1" ref={register} />
+        <Radio.Input 
+            value="DXT1" 
+            {...register('rhf-texture-format')}
+        />
         <Radio.Label>DXT1</Radio.Label>
         <Radio.Help>Compressed color texture format.</Radio.Help>
     </Radio>
@@ -103,8 +115,6 @@ import { FieldSet } from '@ORIS/ui';
     </Radio>
 </FieldSet>
 ```
-
-
 
 #### Change Events
 

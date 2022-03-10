@@ -48,24 +48,31 @@ const onChange = (currentValue, prevValue) => {
 </Form>
 ```
 
-Inlining values with React Hook Form
+Inlining values with React Hook Form (v7)
 
 ```jsx
 import { useForm } from 'react-hook-form';
 import { Form, Button, Text } from '@ORIS/ui';
 
-const { register, errors, watch, handleSubmit } = useForm({ mode: "onBlur" });
+const { register, watch, handleSubmit, formState: { errors } } = useForm({ mode: "onBlur" });
 
 const onSubmit = data => console.log(data);
 
 <Form onSubmit={handleSubmit(onSubmit)}>
-    <Text id="rhf-foo" name="foo" error={errors["foo"] && "Do better"} required>
+    <Text 
+        id="rhf-foo" 
+        name="foo" 
+        error={errors['foo'] && 'Do better'} 
+        required
+    >
         <Text.Label>
             Label here
         </Text.Label>
 
         <Text.Input
-            ref={register({ required: true })}
+            {...register('foo', {
+                required: true
+            })}
             placeholder="Keep this field empty to trigger error on blur and form submit"
         />
 
@@ -248,14 +255,14 @@ const success = "This is valid!";
 </Text>
 ```
 
-Validation with React Hook Form
+Validation with React Hook Form (v7)
 
 ```jsx
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Text, Button } from '@ORIS/ui';
 
-const { register, errors, trigger, setValue } = useForm({
+const { register, trigger, setValue, formState: { errors } } = useForm({
     mode: "onBlur",
     defaultValues: {
         "rhf-input-invalid": "Hi"
@@ -267,13 +274,17 @@ useEffect(() => {
 }, []);
 
 <>
-<Text id="rhf-input-invalid" error={errors["rhf-input-invalid"] && "Enter at least three (3) letters"} required>
+<Text 
+    id="rhf-input-invalid"
+    error={errors['rhf-input-invalid'] && 'Enter at least three (3) letters'} 
+    required
+>
     <Text.Label>
         Input with an error message trigged by React Hook Form.
     </Text.Label>
 
     <Text.Input
-        ref={register({
+        {...register('rhf-input-invalid', {
             required: true,
             pattern: /[A-Za-z]{3}/
         })}
@@ -286,7 +297,7 @@ useEffect(() => {
     </Text.Help>
 </Text>
 
-<Button onClick={() => setValue("rhf-input-invalid", "Hello", { shouldValidate: true })}>
+<Button onClick={() => setValue('rhf-input-invalid', 'Hello', { shouldValidate: true })}>
     Change input to a valid value
 </Button>
 </>
@@ -297,7 +308,7 @@ import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Text, Button } from '@ORIS/ui';
 
-const { register, trigger, setValue, formState } = useForm({
+const { register, trigger, setValue, formState: { isValid } } = useForm({
     mode: "onBlur",
     defaultValues: {
         "rhf-input-valid": "Hello"
@@ -311,7 +322,7 @@ useEffect(() => {
 <>
 <Text
     id="rhf-input-valid"
-    success={formState.isValid && "This is valid!"}
+    success={isValid && 'This is valid!'}
     required
 >
     <Text.Label>
@@ -319,7 +330,7 @@ useEffect(() => {
     </Text.Label>
 
     <Text.Input
-        ref={register({
+        {...register('rhf-input-valid', {
             required: true,
             pattern: /[A-Za-z]{3}/
         })}
@@ -332,7 +343,7 @@ useEffect(() => {
     </Text.Help>
 </Text>
 
-<Button onClick={() => setValue("rhf-input-valid", "Hi", { shouldValidate: true })}>
+<Button onClick={() => setValue('rhf-input-valid', 'Hi', { shouldValidate: true })}>
     Change input to an invalid value
 </Button>
 </>

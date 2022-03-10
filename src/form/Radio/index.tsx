@@ -45,10 +45,19 @@ export const Context = React.createContext<IFormFieldContext<string>>({
 const Radio: React.FC<Props> & IRadioComposition = (props) => {
     const { bind } = useFieldBindOrProps(props);
 
+    let className = `
+        ui-form-element custom-control custom-radio
+        ${bind.className ? bind.className : ''}
+        ${bind.required ? 'is-required' : ''}
+        ${bind.error ? 'is-invalid' : ''}
+        ${bind.success ? 'is-valid' : ''}
+    `;
+    // Remove new lines and trim
+    className = className.replace(/\n/g, ' ').trim();
+
     return (
         <Context.Provider value={{ bind }}>
-            <div className={`ui-form-element custom-control custom-radio ${bind.required ? 'is-required' : ''} ${bind.error && 'is-invalid'} ${bind.success && 'is-valid'}`}
-            >
+            <div className={className}>
                 {props.children}
             </div>
         </Context.Provider>

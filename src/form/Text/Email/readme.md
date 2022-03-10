@@ -15,7 +15,7 @@ import { Text } from '@ORIS/ui';
 </Text>
 ```
 
-Basic Implementation with React Hook Form
+Basic Implementation with React Hook Form (v7)
 
 ```jsx
 import { useForm } from 'react-hook-form';
@@ -25,7 +25,7 @@ const { register } = useForm({ mode: "onBlur" });
 
 <Text id="rhf-email">
     <Text.Label>Provide your email address</Text.Label>
-    <Text.Email ref={register} />
+    <Text.Email {...register('rhf-email')} />
     <Text.Error />
 </Text>
 ```

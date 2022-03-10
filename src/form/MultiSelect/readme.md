@@ -14,7 +14,11 @@ const citySelectItems = [
 ];
 
 
-<MultiSelect.Input value={cities} options={citySelectItems} onChange={(e) => setCities(e.value)} />
+<MultiSelect.Input 
+    value={cities} 
+    options={citySelectItems} 
+    onChange={(e) => setCities(e.value)} 
+/>
 ```
 
 #### Options as any type
@@ -28,9 +32,20 @@ const cityList = [
     {name: 'Paris', code: 'PRS'}
 ];
 
-<MultiSelect.Input optionLabel="name" value={cities} options={cityList} onChange={(e) => setCities(e.value)} />
+<MultiSelect.Input 
+    optionLabel="name" 
+    value={cities}
+    options={cityList}
+    onChange={(e) => setCities(e.value)}
+/>
 
-<MultiSelect.Input optionLabel="name" optionValue="code" value={cities} options={cityList} onChange={(e) => setCities(e.value)} />
+<MultiSelect.Input 
+    optionLabel="name" 
+    optionValue="code" 
+    value={cities} 
+    options={cityList} 
+    onChange={(e) => setCities(e.value)} 
+/>
 ```
 
 When `optionValue` is not defined, value of an option refers to the option object itself.

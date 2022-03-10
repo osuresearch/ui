@@ -44,9 +44,19 @@ export const Context = React.createContext<IFormFieldContext<boolean>>({
 const Checkbox: React.FC<Props> & ICheckboxComposition = (props) => {
     const { bind } = useFieldBindOrProps(props);
 
+    let className = `
+        ui-form-element custom-control custom-checkbox
+        ${bind.className ? bind.className : ''}
+        ${bind.required ? 'is-required' : ''}
+        ${bind.error ? 'is-invalid' : ''}
+        ${bind.success ? 'is-valid' : ''}
+    `;
+    // Remove new lines and trim
+    className = className.replace(/\n/g, ' ').trim();
+
     return (
         <Context.Provider value={{ bind }}>
-            <div className={`ui-form-element custom-control custom-checkbox ${bind.required ? 'is-required' : ''} ${bind.error && 'is-invalid'} ${bind.success && 'is-valid'}`}>
+            <div className={className}>
                 {props.children}
             </div>
         </Context.Provider>

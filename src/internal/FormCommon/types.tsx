@@ -17,6 +17,9 @@ export interface IFieldBind<T> {
     /** Name of the form field, for retrieval through FormData */
     name?: string
 
+    /** Additional classes to add to the field wrapper */
+    className?: string
+
     /** Instructional labeling for the field */
     instructions?: string
 
@@ -129,6 +132,9 @@ export class FieldBind<T> implements IFieldBind<T> {
 
     /** Name of the form field, for retrieval through FormData */
     public name?: string
+
+    /** Additional classes to add to the field wrapper */
+    className?: string
 
     /** Instructional labeling for the field */
     public instructions?: string

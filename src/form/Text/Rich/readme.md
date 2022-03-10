@@ -68,7 +68,7 @@ const [content, setContent] = useState('<p>Start typing and see it update live</
 </Form>
 ```
 
-Use `<Text.Rich>` with React Hook Form
+Use `<Text.Rich>` with React Hook Form (v7)
 
 *Since `<Text.Rich>` is a controlled component, it must be wrapped in a React Hook Form `<Controller>` component.*
 
@@ -76,7 +76,7 @@ Use `<Text.Rich>` with React Hook Form
 import { useForm, Controller } from 'react-hook-form';
 import { Form, Text } from '@ORIS/ui';
 
-const { register, errors, control, watch } = useForm({
+const { control, watch, formState: { errors } } = useForm({
     mode: "onBlur",
     defaultValues: {
         "rhf-set-change-values": "<p>Start typing and see it update live</p>"
@@ -86,7 +86,7 @@ const { register, errors, control, watch } = useForm({
 <Form>
     <Text
         id="rhf-set-change-values"
-        error={errors["rhf-set-change-values"] && "Enter Text Above"}
+        error={errors['rhf-set-change-values'] && 'Enter Text Above'}
         required
     >
         <Text.Label>Live Update in React Hook Form with <code>watch()</code></Text.Label>
@@ -95,8 +95,11 @@ const { register, errors, control, watch } = useForm({
             control={control}
             name="rhf-set-change-values"
             rules={{ required: true }}
-            render={({ onChange, onBlur, value }) =>
+            render={({
+                field: { onChange, onBlur, value, name}
+            }) =>
                 <Text.Rich
+                    name={name}
                     defaultValue={value}
                     onChange={onChange}
                     onBlur={onBlur} // Notifies RHF to validate field

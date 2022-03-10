@@ -10,7 +10,7 @@ import React, { useState } from 'react';
 
 const [values, setValues] = useState([]);
 
-<Chips id='chips'>
+<Chips id="chips">
     <Chips.Label>Chips</Chips.Label>
 
     <Chips.Input
@@ -30,7 +30,7 @@ import React, { useState } from 'react';
 
 const [values, setValues] = useState([]);
 
-<Chips id='tags'>
+<Chips id="tags">
     <Chips.Label>Tags</Chips.Label>
 
     <Chips.Input
@@ -63,7 +63,7 @@ const customChip = (item) => {
     )
 }
 
-<Chips id='users'>
+<Chips id="users">
     <Chips.Label>Users</Chips.Label>
 
     <Chips.Input
