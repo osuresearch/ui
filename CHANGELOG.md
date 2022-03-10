@@ -1,3 +1,13 @@
+## [4.4.7](https://code.osu.edu/ORIS/ui/compare/4.4.6...4.4.7) (2022-03-10)
+
+
+### Bug Fixes
+
+* className gnored on all top level form components (resolves FWK-373) ([5df45b4](https://code.osu.edu/ORIS/ui/commit/5df45b439e0985164219886dbffcb3899aa49988))
+* FeldSet does not use `id` attribute (resolves FWK-365) ([1b68d26](https://code.osu.edu/ORIS/ui/commit/1b68d2610682a720c15cc91bb9f16055940c9d32))
+* Labels do not support HTML content (resolves FWK-374) ([f670f9c](https://code.osu.edu/ORIS/ui/commit/f670f9c51e27167124a73a8cb0925f7bbd92bbc3))
+* Update FieldSet to not require a `name` and to inherit the `id` as the `name` if no name is set (follows the pattern of the rest of the components) ([bb6ce81](https://code.osu.edu/ORIS/ui/commit/bb6ce81185acac6854ef026be1b1426415cf843a))
+
 ## [4.4.6](https://code.osu.edu/ORIS/ui/compare/4.4.5...4.4.6) (2022-01-21)
 
 
