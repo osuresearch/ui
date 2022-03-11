@@ -1,3 +1,10 @@
+## [4.4.8](https://code.osu.edu/ORIS/ui/compare/4.4.7...4.4.8) (2022-03-11)
+
+
+### Bug Fixes
+
+* Update type of children prop for <FieldSet.Legend> to ReactChild, allowing both JSX elements and strings ([9b808b8](https://code.osu.edu/ORIS/ui/commit/9b808b8f863caa82d4be6ec1b4abb6c6edff94fe))
+
 ## [4.4.7](https://code.osu.edu/ORIS/ui/compare/4.4.6...4.4.7) (2022-03-10)
 
 
