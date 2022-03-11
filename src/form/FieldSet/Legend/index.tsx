@@ -8,7 +8,7 @@ export type LegendProps = React.HTMLAttributes<HTMLElement> & {
      */
     context?: React.Context<IFormFieldContext<any>>;
 
-    children: string;
+    children: React.ReactChild;
 }
 
 export function Legend(props: LegendProps) {
