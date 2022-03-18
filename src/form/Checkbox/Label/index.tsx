@@ -24,7 +24,9 @@ const Label: React.FC<LabelProps> = (props) => {
                 (props.className ? ' ' + props.className : '')
             }
         >
-            {props.children ?? bind.instructions}
+            <span className="label-inner">
+                {props.children ?? bind.instructions}
+            </span>
         </label>
     );
 }

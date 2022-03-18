@@ -17,6 +17,7 @@
     // Required star for labels and legends
     &.is-required label:first-child::after,
     &.is-required legend:first-child::after,
+    &.is-required.custom-checkbox .label-inner::after,
     label.is-required::after,
     legend.is-required::after {
         color: $scarlet;
@@ -152,6 +153,11 @@ fieldset.ui-form-element {
     // Remove margins from form elements within a fieldset
     .ui-form-element {
         margin-bottom: 0;
+
+        // Remove required star from checkboxes inside of fieldsets
+        &.custom-checkbox.is-required .label-inner::after {
+            content: "";
+        }
     }
 
     // Inline styling
