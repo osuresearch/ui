@@ -11,6 +11,9 @@ export interface RichProps {
     /** Initial content for the component as a raw HTML string. */
     defaultValue?: string;
 
+    /** Name of the form control */
+    name?: string;
+
     /** Display the simplified version of the editor */
     simple?: boolean;
 
@@ -63,6 +66,7 @@ const SIMPLE_TOOLBAR_CONFIG = [
 const Rich: React.FC<RichProps> = ({
     onChange,
     onBlur,
+    name,
     defaultValue = '',
     simple = false,
     className = '',
@@ -102,9 +106,13 @@ const Rich: React.FC<RichProps> = ({
     }
 
     return (
-        <div className={`richtext ${className} ${bind.readOnly ? 'readonly' : ''}`}>
+        <div
+            id={bind.id}
+            className={`richtext ${className} ${bind.readOnly ? 'readonly' : ''}`}
+        >
             <CKEditor
                 data={value}
+                name={name}
                 config={{
                     toolbar: (simple ? SIMPLE_TOOLBAR_CONFIG : FULL_TOOLBAR_CONFIG),
                     // TODO: Prop to provide extra plugins (e.g. Signet signature captures)
