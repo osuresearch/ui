@@ -1,8 +1,8 @@
 
 include:
-  - project: 'ORIS/orchestrator'
+  - project: 'ORIS/devops/orchestrator'
     file: '/NPM-Package.gitlab-ci.yml'
-  - project: 'ORIS/orchestrator'
+  - project: 'ORIS/devops/orchestrator'
     file: '/jobs/Deploy.gitlab-ci.yml'
 
 stages:
