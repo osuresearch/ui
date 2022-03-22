@@ -1,3 +1,11 @@
+## [4.4.9](https://code.osu.edu/ORIS/ui/compare/4.4.8...4.4.9) (2022-03-22)
+
+
+### Bug Fixes
+
+* Add `name` and `id` props to Text.Rich component (resolves FWK-375 and FWK-377) ([d764f13](https://code.osu.edu/ORIS/ui/commit/d764f1341728412e1381259348fcbcdd74d47660))
+* Show asterisk for required single checkboxes (resolves FWK-376) ([f856c5a](https://code.osu.edu/ORIS/ui/commit/f856c5a356a057789d56879248f55e957c3d0717))
+
 ## [4.4.8](https://code.osu.edu/ORIS/ui/compare/4.4.7...4.4.8) (2022-03-11)
 
 
