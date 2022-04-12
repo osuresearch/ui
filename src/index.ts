@@ -62,7 +62,6 @@ export { default as useSearchProvider } from './search/hooks/useSearchProvider';
 export type {
     SearchDriver,
     SearchTerms,
-    SearchFilters,
     TermValue,
     TermFilter,
     AnyOfFilter,
@@ -76,6 +75,7 @@ export type {
 
 // Search functions
 export {
+    SearchFilters,
     AND,
     OR,
     term,
