@@ -58,11 +58,17 @@ export { default as Paginator } from './search/components/Paginator';
 // Search hooks
 export { default as useSearchProvider } from './search/hooks/useSearchProvider';
 
+// Search drivers
+export { default as ApolloDriver } from './search/drivers/Apollo';
+export { default as JsonApiDriver } from './search/drivers/JsonApi';
+export { default as MockDriver } from './search/drivers/Mock';
+
 // Search data types
 export type {
     SearchDriver,
     SearchTerms,
     TermValue,
+    IFilter,
     TermFilter,
     AnyOfFilter,
     BetweenFilter,
