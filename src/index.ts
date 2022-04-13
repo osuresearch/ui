@@ -58,10 +58,10 @@ export { default as Paginator } from './search/components/Paginator';
 // Search hooks
 export { default as useSearchProvider } from './search/hooks/useSearchProvider';
 
-// Search drivers
-export { default as ApolloDriver } from './search/drivers/Apollo';
-export { default as JsonApiDriver } from './search/drivers/JsonApi';
-export { default as MockDriver } from './search/drivers/Mock';
+// Note that /search/drivers/* are intentionally not exported.
+// Drivers contain hard dependencies on external libraries (such as Apollo GraphQL)
+// that are not required for every application using @ORIS/ui. To include a 
+// specific driver, the developer must import the one they need directly. 
 
 // Search data types
 export type {
