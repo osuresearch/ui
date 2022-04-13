@@ -1,3 +1,11 @@
+## [4.4.10](https://code.osu.edu/ORIS/ui/compare/4.4.9...4.4.10) (2022-04-13)
+
+
+### Bug Fixes
+
+* incorrect export of `SearchFilters` as a type (resolves FWK-384) ([418655e](https://code.osu.edu/ORIS/ui/commit/418655e0f15f4e0e4a947d3422d5a685a26be488))
+* missing search drivers and interfaces to package export (resolves FWK-385) ([8ae10e9](https://code.osu.edu/ORIS/ui/commit/8ae10e9a8b8a19a2a2c1f13d0ca8a7b07f699968))
+
 ## [4.4.9](https://code.osu.edu/ORIS/ui/compare/4.4.8...4.4.9) (2022-03-22)
 
 
