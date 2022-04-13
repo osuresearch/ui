@@ -1,3 +1,10 @@
+## [4.4.11](https://code.osu.edu/ORIS/ui/compare/4.4.10...4.4.11) (2022-04-13)
+
+
+### Bug Fixes
+
+* remove package-level exports of search drivers introduced in 4.4.10 ([c047162](https://code.osu.edu/ORIS/ui/commit/c0471625c4f0b0914c3dfb1b582310759ec82f81))
+
 ## [4.4.10](https://code.osu.edu/ORIS/ui/compare/4.4.9...4.4.10) (2022-04-13)
 
 
