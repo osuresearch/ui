@@ -8,19 +8,10 @@ Collection of React components and a rebranded [Bootstrap 4.0](https://getbootst
 These components are available as a private npm package. Simply run:
 
 ```
-npm install git+ssh://git@code.osu.edu:ORIS/ui.git#semver:^4
+npm i --save @ORIS/ui
 ```
 
-**- Or -** add the following to your `package.json` and run `npm install`:
-
-```json
-{
-    ...
-    "dependencies": {
-        "@ORIS/ui": "git+ssh://git@code.osu.edu:ORIS/ui.git#semver:^4"
-    }
-}
-```
+Note that you will need to add UCR as a private registry to NPM before running the above command.
 
 
 ## Usage
@@ -43,7 +34,7 @@ const MyPage = () =>
 To import the SASS styles into your application, import the following in whatever your primary sass file is (typically an `index.sass`):
 
 ```css
-@import "@ORIS/ui/dist/sass";
+@import "@ORIS/ui/build/sass";
 ```
 
 
@@ -51,8 +42,10 @@ To import the SASS styles into your application, import the following in whateve
 
 This project uses [React Styleguidist](https://react-styleguidist.js.org/) to provide a styleguide with interactive examples.
 
-To view the styleguide, `git clone` this project and run `npm install && npm start`.
+A copy of the styleguide for the *latest* version of UI [is available on our development server](https://orwebdev02.rf.ohio-state.edu/ui/styleguide).
 
+
+To view the styleguide of any other version, `git clone` the tag for the version you are using and and run `npm install && npm start`.
 
 ## Contributing
 
