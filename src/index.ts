@@ -7,6 +7,7 @@ export { default as Emulate } from './core-application/Emulate';
 export { default as Footer } from './core-application/Footer';
 export { default as Navbar } from './core-application/Navbar';
 export { default as OhioStateNavbar } from './core-application/OhioStateNavbar';
+export { default as Page } from './core-application/Page';
 export { default as Profile } from './core-application/Profile';
 export { default as Support } from './core-application/Support';
 
