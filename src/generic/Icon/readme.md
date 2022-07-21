@@ -21,8 +21,8 @@ For a full list of available icon names, see [Font Awesome 4.7.0 Icons](https://
 
 ### Accessibility
 
-By default, an icon is hidden to screen readers. To add screen reader text, simply add a string as a child element.
+By default, an icon is hidden to screen readers. To add screen reader text, add it using the `label` prop.
 
 ```jsx
-<Icon name="external-link">Link to an external website</Icon>
+<Icon name="external-link" label="Link to an external website" />
 ```
