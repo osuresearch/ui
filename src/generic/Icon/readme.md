@@ -26,3 +26,16 @@ By default, an icon is hidden to screen readers. To add screen reader text, add 
 ```jsx
 <Icon name="external-link" label="Link to an external website" />
 ```
+
+When using an icon to indicate the loading state of content, wrap it in a `<LazyLoaded>`.
+
+```jsx
+import { LazyLoaded } from '@ORIS/ui';
+
+<LazyLoaded 
+    loading={true}
+    placeholder={<Icon name="spinner" spin={true} />}
+>
+    Content to display when loading is complete.
+</LazyLoaded>
+```
