@@ -24,6 +24,25 @@
     font-size: 0.8rem;
 }
 
+// Add icon to form feedback for accessibility
+.invalid-feedback {
+    &:before {
+        content: "\f071"; // fa-warning icon
+        font-style: normal;
+        font-family: "FontAwesome";
+        margin-right: 0.35rem;
+    }
+}
+
+.valid-feedback {
+    &:before {
+        content: "\f058"; // fa-check-circle icon
+        font-style: normal;
+        font-family: "FontAwesome";
+        margin-right: 0.35rem;
+    }
+}
+
 .form-check,
 .form-check-inline {
     // Bootstrap does not support adding an .is-invalid
