@@ -42,6 +42,7 @@
     "diff": "^4.0.2",
     "primereact": "^6.3.0",
     "rangy": "^1.3.0",
+    "react-children-utilities": "^2.8.0",
     "react-datepicker": "^3",
     "react-dropzone": "^10.1.8",
     "react-transition-group": "^4.4.1",

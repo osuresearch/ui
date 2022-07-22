@@ -37,6 +37,7 @@ export { default as Richtext } from './controls/Richtext';
 
 // Form
 export { default as Checkbox } from './form/Checkbox';
+export { default as CheckboxSet } from './form/CheckboxSet'
 export { default as Chips } from './form/Chips';
 export { default as DateTime } from './form/DateTime';
 export { default as Dropdown } from './form/Dropdown';
