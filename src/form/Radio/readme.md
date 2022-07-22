@@ -147,4 +147,32 @@ const onChange = (newStrValue, oldStrValue) => {
 </RadioSet>
 ```
 
+#### dangerouslySetInnerHTML
+
+Do not set `dangerouslySetInnerHTML` on the label unless you understand the risks involved and have a good usecase. This is almost never a good idea!
+
+```jsx
+import { RadioSet } from '@ORIS/ui';
+
+const options = [
+    {value: 'RBG24', label: '<strong>RGB24</strong>', help: 'Color texture format, 8-bits per channel.'},
+    {value: 'RGBA32', label: '<strong>RGBA32</strong>', help: 'Color with alpha texture format, 8-bits per channel.'},
+    {value: 'DXT1', label: '<strong>DXT1</strong>', help: 'Compressed color texture format.'}
+];
+
+<RadioSet id="texture-format-dsih">
+    <RadioSet.Legend>
+        Select your texture format
+    </RadioSet.Legend>
+
+    {options.map(option => 
+        <Radio id={`texture-format-${option.value}-dsih`}>
+            <Radio.Input value={option.value} />
+            <Radio.Label dangerouslySetInnerHTML={{__html: option.label}} />
+            <Radio.Help>{option.help}</Radio.Help>
+        </Radio>
+    )}
+</RadioSet>
+```
+
 ### Subcomponents
