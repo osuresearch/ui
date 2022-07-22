@@ -40,7 +40,7 @@ export const Context = React.createContext<IFormFieldContext<string>>({
 /**
  * Radio input and label
  * 
- * `<Radio>` components **must** always be contained within a `<FieldSet>`
+ * `<Radio>` components **must** always be contained within a `<RadioSet>`
  */
 const Radio: React.FC<Props> & IRadioComposition = (props) => {
     const { bind } = useFieldBindOrProps(props);

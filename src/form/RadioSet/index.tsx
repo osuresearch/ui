@@ -103,7 +103,8 @@ const RadioSet: React.FC<Props> & IRadioSetComposition = ({
                             error: child.props.error || bind.error,
                             success: child.props.success || bind.success,
                             readOnly: child.props.readOnly || bind.readOnly,
-                            required: child.props.required || bind.required
+                            required: child.props.required || bind.required,
+                            onChange: child.props.onChange || props.onChange
                         }
 
                         return React.cloneElement(child as ReactElement, {

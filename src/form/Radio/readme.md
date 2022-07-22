@@ -2,12 +2,12 @@
 
 #### Basic Implementation
 ```jsx
-import { FieldSet } from '@ORIS/ui';
+import { RadioSet } from '@ORIS/ui';
 
-<FieldSet id="texture-format">
-    <FieldSet.Legend>
+<RadioSet id="texture-format">
+    <RadioSet.Legend>
         Select your texture format
-    </FieldSet.Legend>
+    </RadioSet.Legend>
 
     <Radio id="texture-format-RGB24">
         <Radio.Input value="RGB24" />
@@ -32,21 +32,21 @@ import { FieldSet } from '@ORIS/ui';
         <Radio.Label>DXT1</Radio.Label>
         <Radio.Help>Compressed color texture format.</Radio.Help>
     </Radio>
-</FieldSet>
+</RadioSet>
 ```
 
 #### Basic Implementation with React Hook Form (v7)
 ```jsx
 import { useForm } from 'react-hook-form';
-import { FieldSet } from '@ORIS/ui';
+import { RadioSet } from '@ORIS/ui';
 
 const { register, watch } = useForm({ mode: "onBlur" });
 
 <>
-<FieldSet id="rhf-texture-format">
-    <FieldSet.Legend>
+<RadioSet id="rhf-texture-format">
+    <RadioSet.Legend>
         Select your texture format
-    </FieldSet.Legend>
+    </RadioSet.Legend>
 
     <Radio id="rhf-texture-format-RGB24">
         <Radio.Input 
@@ -83,7 +83,7 @@ const { register, watch } = useForm({ mode: "onBlur" });
         <Radio.Label>DXT1</Radio.Label>
         <Radio.Help>Compressed color texture format.</Radio.Help>
     </Radio>
-</FieldSet>
+</RadioSet>
 
 <hr/>
 Value: {watch("rhf-texture-format")}
@@ -92,12 +92,12 @@ Value: {watch("rhf-texture-format")}
 
 #### Read Only
 ```jsx
-import { FieldSet } from '@ORIS/ui';
+import { RadioSet } from '@ORIS/ui';
 
-<FieldSet id="output-format" readOnly={true}>
-    <FieldSet.Legend>
+<RadioSet id="output-format" readOnly={true}>
+    <RadioSet.Legend>
         Output format
-    </FieldSet.Legend>
+    </RadioSet.Legend>
 
     <Radio id="text-file">
         <Radio.Input value="text" defaultChecked={true} />
@@ -113,22 +113,22 @@ import { FieldSet } from '@ORIS/ui';
         <Radio.Input value="html" />
         <Radio.Label>HTML File</Radio.Label>
     </Radio>
-</FieldSet>
+</RadioSet>
 ```
 
 #### Change Events
 
 ```jsx
-import { FieldSet } from '@ORIS/ui';
+import { RadioSet } from '@ORIS/ui';
 
 const onChange = (newStrValue, oldStrValue) => {
     alert(`Selected option changed from ${oldStrValue} to ${newStrValue}`);
 }
 
-<FieldSet id="light-type" onChange={onChange}>
-    <FieldSet.Legend>
+<RadioSet id="light-type" onChange={onChange}>
+    <RadioSet.Legend>
         Select your light type
-    </FieldSet.Legend>
+    </RadioSet.Legend>
 
     <Radio id="light-type-spot">
         <Radio.Input value="Spot" />
@@ -144,7 +144,7 @@ const onChange = (newStrValue, oldStrValue) => {
         <Radio.Input value="Point" />
         <Radio.Label>Point Light</Radio.Label>
     </Radio>
-</FieldSet>
+</RadioSet>
 ```
 
 ### Subcomponents

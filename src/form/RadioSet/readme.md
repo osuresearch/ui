@@ -1,3 +1,15 @@
+```js noeditor
+import { Icon } from '@ORIS/ui';
+
+<div className="alert alert-primary">
+    <Icon name="universal-access" circled={true} />
+    <p><strong>Accessibility</strong></p>
+    <p>
+        <code>&#10094;Radio&#10095;</code> buttons must be wrapped in a <code>&#10094;RadioSet&#10095;</code> and include a <code>&#10094;RadioSet.Legend&#10095;</code> element as the first child for screen readers. The legend is your primary fieldset description.
+    </p>
+</div>
+```
+
 ### Examples
 
 #### Basic Implementation

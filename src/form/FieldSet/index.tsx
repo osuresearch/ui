@@ -68,6 +68,14 @@ const IsCheckbox = (element: React.ReactElement) => element.type.name === 'Check
 const IsRadio = (element: React.ReactElement) => element.type.name === 'Radio';
 
 /**
+ * **This component is deprecated**. For 
+ * fieldsets of radio buttons, use 
+ * `<RadioSet>`. For fieldsets of 
+ * checkboxes, use `<CheckboxSet>`. For 
+ * other fieldsets, use the `<fieldset>` 
+ * element and give it a `className` of 
+ * 'ui-form-element'.
+ * 
  * A set of related form components.
  */
 const FieldSet: React.FC<Props> & IFieldSetComposition = ({
