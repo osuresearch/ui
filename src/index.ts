@@ -46,6 +46,7 @@ export { default as Form } from './form/Form';
 export { default as MultiSelect } from './form/MultiSelect';
 export { default as Number } from './form/Number';
 export { default as Radio } from './form/Radio';
+export { default as RadioSet } from './form/RadioSet';
 export { default as Select } from './form/Select';
 export { default as Text } from './form/Text';
 export { default as Time } from './form/Time';
