@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 type Props = {
     theme: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark';
@@ -12,6 +12,12 @@ const Alert: React.FC<Props> = ({
     banner,
     children
 }) => {
+    const [visible, setVisible] = useState(true);
+
+    if (!visible) {
+        return null;
+    }
+
     return (
         <div className={`alert alert-${theme} ${dismissible && 'alert-dismissible fade show'} ${banner && 'alert-banner'}`} role="alert">
             {children}
@@ -20,7 +26,7 @@ const Alert: React.FC<Props> = ({
                 <button
                     type="button"
                     className="close"
-                    data-dismiss="alert"
+                    onClick={() => setVisible(false)}
                     aria-label="Close"
                 >
                     <span aria-hidden="true">&times;</span>
