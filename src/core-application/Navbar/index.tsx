@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Link } from 'react-router-dom'; 
+import { Link } from 'react-router-dom';
 
 export interface Props {
     /** Application title displayed to the end user */
@@ -14,7 +14,10 @@ export interface Props {
  * Requires react-router to be running.
  */
 const Navbar: React.FC<Props> = ({ children, title }) => (
-    <nav className="navbar navbar-main">
+    <nav
+        className="navbar navbar-main"
+        aria-label={`${title} navigation`}
+    >
         <Link to="/" className="navbar-brand">
             <div className="navbar-org">Office of Research</div>
             {title}
