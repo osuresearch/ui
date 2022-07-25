@@ -4,8 +4,6 @@ import { IFieldBind } from '../../../internal/FormCommon/types';
 
 import { Diff } from '../../../internal/FormCommon/Utility/Diff';
 
-import '../../../internal/FormCommon/style.scss';
-
 // TODO: Move elsewhere. Maybe as a standard enum type?
 export interface OptionKeyValuePair {
     [key: string]: string;

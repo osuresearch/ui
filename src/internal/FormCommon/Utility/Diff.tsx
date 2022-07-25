@@ -1,7 +1,5 @@
 import React from 'react';
 
-import '../style.scss';
-
 export interface DiffProps {
     removed?: string | JSX.Element | null;
     added?: string | JSX.Element | null;
