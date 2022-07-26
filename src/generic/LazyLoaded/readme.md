@@ -41,5 +41,6 @@ const Loading = () => (
 >
     Toggle Loading State
 </Button>
+<p>(The 1 second delay when loading is complete is by design)</p>
 </>
 ```

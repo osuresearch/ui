@@ -60,10 +60,16 @@ const LazyLoaded: React.FC<Props> = ({
     const [showLoader, setShowLoader] = useState(true);
 
     useEffect(() => {
+        if (loading) {
+            setShowLoader(true);
+        }
+    }, [loading]);
+
+    useEffect(() => {
         let hideLoaderTimer = 0;
 
         /**
-         * Wait one second to remove the 
+         * Wait 1 second to remove the 
          * loader from the DOM to ensure 
          * that the loaded message is read
          */
@@ -99,30 +105,28 @@ const LazyLoaded: React.FC<Props> = ({
         }
     }, [loading]);
 
-    return (
-        <>
-            {showLoader &&
-                <div
-                    ref={loader}
-                    tabIndex={-1} // Needs a negative tab index to be recognized as the document.activeElement
-                    className="lazy-loader"
-                    role="status"
-                    aria-live={ariaLive}
-                    aria-label={message}
-                >
-                    <span id="message" className="sr-only">
-                        {loading && message
-                            // This is kind of stupid, but the screen reader will not announce the initial message from the aria-label unless it is a child, but will read the finished message twice if it is not removed
-                        }
-                    </span>
+    if (showLoader) {
+        return (
+            <div
+                ref={loader}
+                tabIndex={-1} // Needs a negative tab index to be recognized as the document.activeElement
+                className="lazy-loader"
+                role="status"
+                aria-live={ariaLive}
+                aria-label={message}
+            >
+                <span id="message" className="sr-only">
+                    {loading && message
+                        // This is kind of stupid, but the screen reader will not announce the initial message from the aria-label unless it is a child, but will read the finished message twice if it is not removed
+                    }
+                </span>
 
-                    {loading && placeholder}
-                </div>
-            }
+                {placeholder}
+            </div>
+        );
+    }
 
-            {!loading && children}
-        </>
-    );
+    return (<>{children}</>);
 }
 
 export default LazyLoaded;
