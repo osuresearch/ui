@@ -1,3 +1,32 @@
+# [4.5.0](https://code.osu.edu/ORIS/ui/compare/4.4.11...4.5.0) (2022-07-26)
+
+
+### Bug Fixes
+
+* Added icons to invalid and valid form feedback text so they can pass WCAG 1.4.1 ([8763d2a](https://code.osu.edu/ORIS/ui/commit/8763d2a2a72c18d8884d763f9ef407dc8eb5cd25))
+* Alert close button position style ([e4636f3](https://code.osu.edu/ORIS/ui/commit/e4636f380b8e46896e98ce29574c6c1d27ec7627))
+* ARIA issue with Alert - allow users to choose the role, since role='alert' should be used sparingly and is rather inaccessible if not used properly. Keeping the default role as alert to prevent a breaking change. ([4873183](https://code.osu.edu/ORIS/ui/commit/48731839d65a3b929b750d9de0a9b1e4f1053ae6))
+* Change default Alert role to status ([8441a69](https://code.osu.edu/ORIS/ui/commit/8441a698e5341d554115b9b3b2bd83964e533ab1))
+* Correct documentation for adding accessible text to an `<Icon>` ([23e6c94](https://code.osu.edu/ORIS/ui/commit/23e6c94e156218c03a421942a44b8a2352ce9c16))
+* dangerouslySetInnerHTML for Checkbox and Radio labels (resolves FWK-374) ([81814bf](https://code.osu.edu/ORIS/ui/commit/81814bf8003cd02d943fcc4a18d6cc5b56793586))
+* Give `Navbar` a unique label (resolves FWK-401) ([bc3aae6](https://code.osu.edu/ORIS/ui/commit/bc3aae6ba0dc14c7d76dbcf753e877af3521a45c))
+* Handle Dropdown.readOnly and MultiSelect.readOnly props (resolves FWK-378) ([eea9f50](https://code.osu.edu/ORIS/ui/commit/eea9f506f2e8152d9511125340866d0085fc9981))
+* Increase contrast ratio between navigation item and NavBar (resolves FWK-399) ([e24ad8d](https://code.osu.edu/ORIS/ui/commit/e24ad8d090b6f6a3abf452315a99d4c71bd4230a))
+* LazyLoaded display logic where toggling back to loading would not show the placeholder ([b814f9a](https://code.osu.edu/ORIS/ui/commit/b814f9a5f989e9706ad18b3cb23db71fbf8e322f))
+* Properly handle onBlur for DateTime component (partially resolves FWK-379) ([974596e](https://code.osu.edu/ORIS/ui/commit/974596e12e852ee3c12821740f6e3ab48c1b2471))
+* Remove experimental `AppSearch` and `DocumentReview` components ([6e39829](https://code.osu.edu/ORIS/ui/commit/6e398292ba03cfd747b1d59f37adbd720dcfadb8))
+* Resolve CSS validation errors, excluding SVG false positive errors (resolves FWK-400) ([f730ff5](https://code.osu.edu/ORIS/ui/commit/f730ff580f6c1c4212ffe04fa027db2cd96c8ea3))
+* Set document title to Page title prop every time that prop changes ([3d7aacb](https://code.osu.edu/ORIS/ui/commit/3d7aacbcf4b26822ecf78d3843eff6fe602779fa))
+* Use state to control the visibility of Alerts, instead of the Bootstrap data-dismiss attribute (resolves FWK-383) ([3f3c9ed](https://code.osu.edu/ORIS/ui/commit/3f3c9edf310722dfa6c02ab60ad5ea5741b02010))
+
+
+### Features
+
+* Add `<Page>` component to improve application accessibility ([4fab2f8](https://code.osu.edu/ORIS/ui/commit/4fab2f8cd735dbaf0623977129ba3452b0e038dd))
+* CheckboxSet component for Checkbox fieldsets ([2c22118](https://code.osu.edu/ORIS/ui/commit/2c2211858e4fac16eb33e08b14470d810ef5d2d3))
+* LazyLoaded component for better lazy loaded content accessibility ([f2aa02b](https://code.osu.edu/ORIS/ui/commit/f2aa02b9a7f4cc1ec1ed52d25afd22ceb428a7ad))
+* RadioSet component for Radios in fieldsets ([3c41d3e](https://code.osu.edu/ORIS/ui/commit/3c41d3eaf6288d650b41e65c97b8719e426850b7))
+
 ## [4.4.11](https://code.osu.edu/ORIS/ui/compare/4.4.10...4.4.11) (2022-04-13)
 
 
