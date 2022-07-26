@@ -55,9 +55,6 @@ const Page: React.FC<Props> = ({
     children
 }) => {
     useEffect(() => {
-        /** Update the document title on page mount */
-        document.title = title;
-
         let moveFocusTimer = 0;
 
         if (focusRef?.current) {
@@ -110,6 +107,11 @@ const Page: React.FC<Props> = ({
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    useEffect(() => {
+        // Set/update the document title every time it changes
+        document.title = title;
+    }, [title]);
 
     return (
         <div className={className} id={id}>
