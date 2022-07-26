@@ -216,4 +216,20 @@ Selected:
 </>
 ```
 
+#### dangerouslySetInnerHTML
+
+Do not set `dangerouslySetInnerHTML` on the label unless you understand the risks involved and have a good usecase. This is almost never a good idea!
+
+```jsx
+<Checkbox id="receive-newsletter-dsih">
+    <Checkbox.Input />
+
+    <Checkbox.Label dangerouslySetInnerHTML={{__html: 'My label'}}/>
+
+    <Checkbox.Help>
+        We will not spam your inbox
+    </Checkbox.Help>
+</Checkbox>
+```
+
 ### Subcomponents

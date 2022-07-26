@@ -36,9 +36,10 @@ import {
     Text,
     Select,
     Checkbox,
+    CheckboxSet,
     DateTime,
-    FieldSet,
     Radio,
+    RadioSet,
     Time,
     Lookup,
     Button
@@ -217,15 +218,15 @@ const onSubmit = data => console.log('submit', data);
         </div>
     </div>
 
-        <FieldSet
+        <RadioSet
             id="favorite-food"
             error={errors['favorite-food'] && 'Choose your favorite food'}
             required
         >
-            <FieldSet.Legend>
+            <RadioSet.Legend>
                 Favorite Food
-            </FieldSet.Legend>
-            <FieldSet.Inline>
+            </RadioSet.Legend>
+            <RadioSet.Inline>
                 <Radio id="pizza">
                     <Radio.Input
                         value="pizza" 
@@ -253,14 +254,14 @@ const onSubmit = data => console.log('submit', data);
                     />
                     <Radio.Label>Sushi</Radio.Label>
                 </Radio>
-            </FieldSet.Inline>
-            <FieldSet.Error />
-        </FieldSet>
+            </RadioSet.Inline>
+            <RadioSet.Error />
+        </RadioSet>
 
-        <FieldSet id="opt-in">
-            <FieldSet.Legend>
+        <CheckboxSet id="opt-in">
+            <CheckboxSet.Legend>
                 I want to receive
-            </FieldSet.Legend>
+            </CheckboxSet.Legend>
             <Checkbox id="newsletter">
                 <Checkbox.Input
                     value="newsletter"
@@ -288,11 +289,11 @@ const onSubmit = data => console.log('submit', data);
                     Offers from associated companies
                 </Checkbox.Label>
             </Checkbox>
-            <FieldSet.Help>
+            <CheckboxSet.Help>
                 Choose all that apply
-            </FieldSet.Help>
-            <FieldSet.Error />
-        </FieldSet>
+            </CheckboxSet.Help>
+            <CheckboxSet.Error />
+        </CheckboxSet>
 
         <Time
             id="pick-up"

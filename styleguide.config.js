@@ -17,23 +17,6 @@ const ASSETS_HOST = 'https://orapps.osu.edu';
 
 const ISOLATED_COMPONENTS = process.env.ISOLATE_COMPONENTS || undefined;
 
-/**
- * Custom aggregator for the `HTML Components` section
- */
-function listHtmlComponents() {
-    const files = glob.sync('docs/html/**/!(readme).md');
-
-    var sections = [];
-    files.forEach((filename) => {
-        sections.push({
-            name: path.basename(filename, '.md'),
-            content: filename
-        });
-    });
-
-    return sections;
-}
-
 function listSearchComponents() {
     const components = glob.sync('src/search/components/*/index.tsx');
 
@@ -222,15 +205,7 @@ let sections = [
         wrapComponentNamesInBrackets: true,
         expand: true,
         sectionDepth: 0
-    },
-    {
-        name: 'HTML Components',
-        content: 'docs/html/readme.md',
-        sections: listHtmlComponents(),
-        sectionDepth: 0,
-        expand: true
     }
-
 ];
 
 // If we're isolating, replace the sections with just those components.

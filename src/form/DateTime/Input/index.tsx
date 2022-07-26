@@ -78,6 +78,11 @@ const Input: React.FC<InputProps> = (props) => {
         } else {
             bind.value = newSelected;
         }
+
+        // Fire the blur event when a date is selected in the calendar and the calendar closes
+        if (ref.current?.isCalendarOpen) {
+            ref.current.setFocus();
+        }
     };
 
     const ref = useRef<DatePicker>(null);
@@ -142,6 +147,7 @@ const Input: React.FC<InputProps> = (props) => {
                 onChange={handleChange}
                 onFocus={handleFocus}
                 onKeyDown={handleKeyDown}
+                onBlur={props.onBlur}
                 shouldCloseOnSelect={!props.showTimeInput}
                 // @ts-ignore
                 timeInputLabel={<label htmlFor={`${bind.id}-time`}>Time</label>}

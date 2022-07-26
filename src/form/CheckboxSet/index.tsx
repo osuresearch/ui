@@ -1,4 +1,5 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, ReactNode, ReactElement } from 'react';
+import { deepMap } from 'react-children-utilities';
 import { NullFieldBind, FormFieldProps, IFormFieldContext } from '../../internal/FormCommon/types';
 import useFieldBindOrProps from '../../internal/FormCommon/hooks/useFieldBindOrProps';
 
@@ -14,30 +15,32 @@ import { Legend, LegendProps } from './Legend';
 
 import Inline from './Inline';
 
-interface IFieldSetComposition {
+import Checkbox from '../Checkbox';
+
+interface ICheckboxSetComposition {
     /**
      * Serves as a label for all of the components in the 
-     * `FieldSet`
+     * `CheckboxSet`
      */
     Legend: React.FC<LegendProps>
 
     /** Display the form components inline */
     Inline: React.FC
 
-    /** Help text for the `<FieldSet>` */
+    /** Help text for the `<CheckboxSet>` */
     Help: React.FC<HelpProps>
 
     /** 
-     * (required if `<FieldSet>` requires validation)
+     * (required if `<CheckboxSet>` requires validation)
      * 
      * Provides instructions on how to resolve the validation 
-     * error; will display when `error` is set in `<FieldSet>`
+     * error; will display when `error` is set in `<CheckboxSet>`
     */
     Error: React.FC<ErrorProps>
 
     /**
      * Feedback for when the set meets the validation rules; 
-     * will display when `success` is set in `<FieldSet>`
+     * will display when `success` is set in `<CheckboxSet>`
      */
     Success: React.FC<SuccessProps>
 }
@@ -47,7 +50,7 @@ type Props = FormFieldProps<string | string[]> & {
     /**
      * The value of the `name` prop will cascade down 
      * to be the `name` in each child component in the 
-     * `<FieldSet>`. If no name is 
+     * `<CheckboxSet>`. If no name is 
      * supplied, the id will act as
      * the name
      */
@@ -61,24 +64,10 @@ export const Context = React.createContext<IFormFieldContext<string | string[]>>
     // foo: 1
 });
 
-// @ts-ignore
-const IsCheckbox = (element: React.ReactElement) => element.type.name === 'Checkbox';
-
-// @ts-ignore
-const IsRadio = (element: React.ReactElement) => element.type.name === 'Radio';
-
 /**
- * **This component is deprecated**. For 
- * fieldsets of radio buttons, use 
- * `<RadioSet>`. For fieldsets of 
- * checkboxes, use `<CheckboxSet>`. For 
- * other fieldsets, use the `<fieldset>` 
- * element and give it a `className` of 
- * 'ui-form-element'.
- * 
- * A set of related form components.
+ * A set of checkbox form components.
  */
-const FieldSet: React.FC<Props> & IFieldSetComposition = ({
+const CheckboxSet: React.FC<Props> & ICheckboxSetComposition = ({
     children,
     ...props // everything else is of FormFieldProps<string>
 }) => {
@@ -119,47 +108,36 @@ const FieldSet: React.FC<Props> & IFieldSetComposition = ({
                 name={name}
                 aria-describedby={`${bind.id}-help`}
             >
-                {React.Children.map<React.ReactNode, React.ReactNode>(children, node => {
-                    if (React.isValidElement(node)) {
+                {deepMap(children, (child: ReactNode) => {
+                    if (child && React.isValidElement(child) && child.type === Checkbox) {
                         const cloneProps = {
-                            // Add the FieldSet props to the
+                            // Add the CheckboxSet props to the
                             // inputs (if the inputs have not
                             // already defined them)
-                            name: node.props.name || name,
-                            error: node.props.error || bind.error,
-                            success: node.props.success || bind.success,
-                            readOnly: node.props.readOnly || bind.readOnly,
-                            required: node.props.required || bind.required
+                            name: child.props.name || name,
+                            error: child.props.error || bind.error,
+                            success: child.props.success || bind.success,
+                            readOnly: child.props.readOnly || bind.readOnly,
+                            required: child.props.required || bind.required,
+                            onChange: (value: boolean) => handleCheckboxChange(value, child.props.id)
                         }
 
-                        if (IsCheckbox(node)) {
-                            return React.cloneElement(node, {
-                                ...cloneProps,
-                                onChange: (value: boolean) => handleCheckboxChange(value, node.props.id)
-                            })
-                        }
-
-                        if (IsRadio(node)) {
-                            return React.cloneElement(node, {
-                                ...cloneProps,
-                                onChange: (value: string) => bind.value = value
-                            })
-                        } else { // Else, clone it as-is
-                            return React.cloneElement(node)
-                        }
-                    } else {
-                        return node
+                        return React.cloneElement(child as ReactElement, {
+                            ...(child as ReactElement).props,
+                            ...cloneProps
+                        });
                     }
+                    return child;
                 })}
             </fieldset>
         </Context.Provider>
     )
 }
 
-FieldSet.Inline = Inline;
-FieldSet.Legend = withFormContext<LegendProps>(Legend, Context);
-FieldSet.Help = withFormContext<HelpProps>(Help, Context);
-FieldSet.Error = withFormContext<ErrorProps>(Error, Context);
-FieldSet.Success = withFormContext<SuccessProps>(Success, Context);
+CheckboxSet.Inline = Inline;
+CheckboxSet.Legend = withFormContext<LegendProps>(Legend, Context);
+CheckboxSet.Help = withFormContext<HelpProps>(Help, Context);
+CheckboxSet.Error = withFormContext<ErrorProps>(Error, Context);
+CheckboxSet.Success = withFormContext<SuccessProps>(Success, Context);
 
-export default FieldSet;
+export default CheckboxSet;

@@ -26,7 +26,7 @@ Since `<DateTime>` is a controlled component, `<DateTime.Input>` must be wrapped
 ```jsx
 import { useForm, Controller } from 'react-hook-form';
 
-const { control, watch } = useForm({ 
+const { control, watch, formState: { touchedFields } } = useForm({ 
     mode: 'onBlur',
     defaultValues: {
         "rhf-choose-date": "2011-07-09"
@@ -57,8 +57,8 @@ const { control, watch } = useForm({
 </DateTime>
 
 <hr/>
-Value:
-{watch("rhf-choose-date")}
+<p>Value: {watch("rhf-choose-date")}</p>
+<p>Touched fields: {JSON.stringify(touchedFields)}</p>
 </>
 ```
 
@@ -87,6 +87,9 @@ const isWeekday = (date) => {
 ```
 
 #### Include a `<Time>` field with the calendar
+
+**Important**: This is not supported by React Hook Form at this time.
+
 ```jsx
 import { useState } from 'react';
 const [date, setDate] = useState('2025-12-31T08:00:00-05:00');

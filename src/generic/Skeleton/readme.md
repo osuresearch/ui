@@ -7,12 +7,21 @@ Skeleton displays a rectangle in its simplest form.
 <Skeleton />
 ```
 
-#### Circle
-
 The other option is the circle by setting `shape` property as "circle".
 
 ```jsx static
 <Skeleton shape="circle" />
+```
+
+Because Skeletons are used as loading placeholders, they should always be contained within a `<LazyLoaded>`.
+
+```html
+<LazyLoaded 
+    loading={true}
+    placeholder={<Skeleton />}
+>
+    Content to display once loading is complete.
+</LazyLoaded>
 ```
 
 #### Size

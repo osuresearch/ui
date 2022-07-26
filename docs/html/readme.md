@@ -1,2 +1,0 @@
-
-These are references and examples of components that use pure HTML and are not encapsulated by React. They are provided to give you example of common DOM structures so that you can create your own application-specific components.

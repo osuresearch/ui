@@ -1,12 +1,12 @@
 ```jsx
-import { FieldSet, Radio } from '@ORIS/ui';
+import { RadioSet, Radio } from '@ORIS/ui';
 
-<FieldSet id="yes-no-inline">
-    <FieldSet.Legend>
+<RadioSet id="yes-no-inline">
+    <RadioSet.Legend>
         A common yes/no radio pattern
-    </FieldSet.Legend>
+    </RadioSet.Legend>
 
-    <FieldSet.Inline>
+    <RadioSet.Inline>
         <Radio id="yes-inline">
             <Radio.Input />
             <Radio.Label>Yes</Radio.Label>
@@ -16,10 +16,10 @@ import { FieldSet, Radio } from '@ORIS/ui';
             <Radio.Input />
             <Radio.Label>No</Radio.Label>
         </Radio>
-    </FieldSet.Inline>
+    </RadioSet.Inline>
 
-    <FieldSet.Help>
+    <RadioSet.Help>
         A short list of options (e.g. yes/no) may be horizontally aligned with <strong>2em</strong> padding between options
-    </FieldSet.Help>
-</FieldSet>
+    </RadioSet.Help>
+</RadioSet>
 ```

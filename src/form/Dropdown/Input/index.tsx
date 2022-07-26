@@ -186,6 +186,9 @@ export default function Input(props: InputProps) {
 
     const value = bind.value || props.value;
 
+    // Dropdown does not have a readOnly prop, so set the input to disabled
+    const disabled = bind.readOnly || props.disabled;
+
     const classNames = `form-control ${props.className ? props.className : ''} ${bind.error && 'is-invalid'} ${bind.success && 'is-valid'}`;
 
     return (
@@ -195,6 +198,7 @@ export default function Input(props: InputProps) {
             name={bind.name || props.name}
             className={classNames}
             value={value}
+            disabled={disabled}
         />
     )
 }

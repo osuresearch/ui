@@ -174,3 +174,36 @@ const selectedCountriesTemplate = (option) => {
     />
 </MultiSelect>
 ```
+
+#### Read only
+```jsx
+import React, { useState } from 'react';
+
+const [selectedCities, setSelectedCities] = useState([{ name: 'Istanbul', code: 'IST' }, { name: 'Paris', code: 'PRS' }]);
+
+const cities = [
+    { name: 'New York', code: 'NY' },
+    { name: 'Rome', code: 'RM' },
+    { name: 'London', code: 'LDN' },
+    { name: 'Istanbul', code: 'IST' },
+    { name: 'Paris', code: 'PRS' }
+];
+
+<MultiSelect 
+    id="select-multiple-cities-readonly"
+    readOnly={true}
+>
+    <MultiSelect.Label>Select Cities</MultiSelect.Label>
+
+    <MultiSelect.Input
+        value={selectedCities}
+        options={cities}
+        onChange={(e) => setSelectedCities(e.value)}
+        optionLabel="name"
+    />
+
+    <MultiSelect.Help>
+        Select one or more cities
+    </MultiSelect.Help>
+</MultiSelect>
+```

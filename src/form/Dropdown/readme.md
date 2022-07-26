@@ -122,3 +122,34 @@ const countryOptionTemplate = (option) => {
     />
 </Dropdown>
 ```
+
+#### Read only
+
+```jsx
+import React, { useState } from 'react';
+
+const [selectedCity, setSelectedCity] = useState({ name: 'New York', code: 'NY' });
+
+const cities = [
+    { name: 'New York', code: 'NY' },
+    { name: 'Rome', code: 'RM' },
+    { name: 'London', code: 'LDN' },
+    { name: 'Istanbul', code: 'IST' },
+    { name: 'Paris', code: 'PRS' }
+];
+
+<Dropdown id="select-city-readonly" readOnly={true}>
+    <Dropdown.Label>Select a City</Dropdown.Label>
+
+    <Dropdown.Input
+        value={selectedCity}
+        options={cities}
+        onChange={(e) => setSelectedCity(e.value)}
+        optionLabel="name"
+    />
+
+    <Dropdown.Help>
+        Dropdowns are similar to Selects
+    </Dropdown.Help>
+</Dropdown>
+```

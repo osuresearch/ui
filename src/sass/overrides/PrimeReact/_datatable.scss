@@ -157,7 +157,7 @@ $primary: $casal;
 
         > tr > th {
             text-align: left;
-            padding: $table-cell-padding;
+            padding: $table-cell-padding-x $table-cell-padding-y;
 
             border-width: 0;
             font-weight: 500;
@@ -180,7 +180,7 @@ $primary: $casal;
     }
     .p-datatable-tfoot > tr > td {
         text-align: left;
-        padding: $table-cell-padding;
+        padding: $table-cell-padding-x $table-cell-padding-y;
         border-width: 0;
         font-weight: 600;
         color: $gray-900;
@@ -193,7 +193,7 @@ $primary: $casal;
         > td {
             text-align: left;
             border: 0;
-            padding: $table-cell-padding;
+            padding: $table-cell-padding-x $table-cell-padding-y;
             .p-row-toggler {
                 @extend %extend_1;
                 &:focus {

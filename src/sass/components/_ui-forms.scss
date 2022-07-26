@@ -401,3 +401,38 @@ fieldset.ui-form-element {
         background: transparent;
     }
 }
+
+// The colors were randomly chosen to be "good enough".
+// TODO: Should probably better align with brand colors, or something like that.
+.text-diff {
+    .is-added {
+        background: #d2e9b3;
+    }
+
+    .is-removed {
+        background: #e9c3c3;
+        text-decoration: line-through;
+    }
+}
+
+// Print style to mimic layout of the input boxes,
+// but without actual input boxes.
+.text-print {
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #525252;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #a3a3a3;
+}
+
+.text-counter {
+    //font-size: $small-font-size;
+    //color: $text-muted;
+    margin-left: 2em;
+}
+
+.is-invalid + .text-counter {
+    color: theme-color('danger');
+}

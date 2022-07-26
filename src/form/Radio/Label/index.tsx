@@ -14,16 +14,21 @@ export default function Label(props: LabelProps) {
     const { context, ...otherProps } = props;
     const { bind } = useContext(context!);
 
+    const label = props.children || bind.instructions || '';
+    const className = 'custom-control-label' + (props.className ? ' ' + props.className : '');
+
+    // React will only allow either dangerouslySetInnerHTML or a child
+    if (props.dangerouslySetInnerHTML) {
+        return <label {...otherProps} htmlFor={bind.id} className={className} />;
+    }
+
     return (
         <label
             {...otherProps}
             htmlFor={bind.id}
-            className={
-                'custom-control-label' +
-                (props.className ? ' ' + props.className : '')
-            }
+            className={className}
         >
-            {props.children ?? bind.instructions}
+            {label}
         </label>
     );
 }

@@ -7,6 +7,7 @@ export { default as Emulate } from './core-application/Emulate';
 export { default as Footer } from './core-application/Footer';
 export { default as Navbar } from './core-application/Navbar';
 export { default as OhioStateNavbar } from './core-application/OhioStateNavbar';
+export { default as Page } from './core-application/Page';
 export { default as Profile } from './core-application/Profile';
 export { default as Support } from './core-application/Support';
 
@@ -15,6 +16,7 @@ export { default as Alert } from './generic/Alert';
 export { default as Avatar } from './generic/Avatar';
 export { default as Badge } from './generic/Badge';
 export { default as Icon } from './generic/Icon';
+export { default as LazyLoaded } from './generic/LazyLoaded';
 
 // Controls
 export { default as Button } from './controls/Button';
@@ -35,6 +37,7 @@ export { default as Richtext } from './controls/Richtext';
 
 // Form
 export { default as Checkbox } from './form/Checkbox';
+export { default as CheckboxSet } from './form/CheckboxSet'
 export { default as Chips } from './form/Chips';
 export { default as DateTime } from './form/DateTime';
 export { default as Dropdown } from './form/Dropdown';
@@ -43,6 +46,7 @@ export { default as Form } from './form/Form';
 export { default as MultiSelect } from './form/MultiSelect';
 export { default as Number } from './form/Number';
 export { default as Radio } from './form/Radio';
+export { default as RadioSet } from './form/RadioSet';
 export { default as Select } from './form/Select';
 export { default as Text } from './form/Text';
 export { default as Time } from './form/Time';
