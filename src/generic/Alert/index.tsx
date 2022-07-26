@@ -7,17 +7,6 @@ type Props = {
     /**
      * ARIA role of the Alert
      * 
-     * The `alert` role is used to convey 
-     * messages that may be immediately 
-     * important to users. This message 
-     * will immediately be communicated to 
-     * assistive technology users upon 
-     * component mount. Thus, while 
-     * `alert` is the default value of 
-     * this component, it should be used 
-     * very sparingly (changing this 
-     * default would be a breaking change).
-     * 
      * The `status` role is used to convey 
      * advisory information to the user 
      * that is not important enough to 
@@ -27,6 +16,14 @@ type Props = {
      * will not interupt other messages. 
      * Most Alert instances will use this 
      * role.
+     * 
+     * The `alert` role is used to convey 
+     * messages that may be immediately 
+     * important to users. This message 
+     * will immediately be communicated to 
+     * assistive technology users upon 
+     * component mount, thus it should be used 
+     * very sparingly.
      * 
      * The `presentation` role is used 
      * when the component should take on 
@@ -46,7 +43,7 @@ const Alert: React.FC<Props> = ({
     theme,
     dismissible,
     banner,
-    role = 'alert',
+    role = 'status',
     children
 }) => {
     const [visible, setVisible] = useState(true);
