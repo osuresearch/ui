@@ -57,30 +57,31 @@ const LazyLoaded: React.FC<Props> = ({
 
     const loader = useRef<HTMLDivElement>(null);
 
-    const [showLoader, setShowLoader] = useState(true);
+    const [loaderActive, setLoaderActive] = useState(true);
 
     useEffect(() => {
         if (loading) {
-            setShowLoader(true);
+            setLoaderActive(true);
         }
     }, [loading]);
 
     useEffect(() => {
-        let hideLoaderTimer = 0;
+        let inactivateLoaderTimer = 0;
 
         /**
          * Wait 1 second to remove the 
-         * loader from the DOM to ensure 
-         * that the loaded message is read
+         * loader container from the DOM 
+         * to ensure that the loaded 
+         * message is read
          */
         if (!loading) {
-            hideLoaderTimer = window.setTimeout(() => {
-                setShowLoader(false);
+            inactivateLoaderTimer = window.setTimeout(() => {
+                setLoaderActive(false);
             }, 1000);
         }
 
         /** Clear timeout */
-        return () => window.clearTimeout(hideLoaderTimer);
+        return () => window.clearTimeout(inactivateLoaderTimer);
     }, [loading]);
 
     const [ariaLive, setAriaLive] = useState<"off" | "polite" | "assertive">('off');
@@ -90,12 +91,12 @@ const LazyLoaded: React.FC<Props> = ({
             /**
              * Change aria-live status to
              * polite if screen reader user
-             * is focused on component. This
+             * is focused on loader. This
              * will ensure that the user
              * is notified once the loading
-             * is complete, but only when
+             * is complete, but only if
              * they are engaging with the
-             * component.
+             * loader.
              */
             if (document.activeElement === loader.current) {
                 setAriaLive('polite')
@@ -105,8 +106,8 @@ const LazyLoaded: React.FC<Props> = ({
         }
     }, [loading]);
 
-    if (showLoader) {
-        return (
+    return (<>
+        {loaderActive &&
             <div
                 ref={loader}
                 tabIndex={-1} // Needs a negative tab index to be recognized as the document.activeElement
@@ -121,12 +122,12 @@ const LazyLoaded: React.FC<Props> = ({
                     }
                 </span>
 
-                {placeholder}
+                {loading && placeholder}
             </div>
-        );
-    }
+        }
 
-    return (<>{children}</>);
+        {!loading && children}
+    </>);
 }
 
 export default LazyLoaded;
