@@ -1,3 +1,10 @@
+## [4.5.1](https://code.osu.edu/ORIS/ui/compare/4.5.0...4.5.1) (2022-07-29)
+
+
+### Bug Fixes
+
+* LazyLoaded content now displays as soon as loading is complete without delay. Screen reader enhancements no longer affect visual display ([cc1de76](https://code.osu.edu/ORIS/ui/commit/cc1de76cecad7f11faa136ac2fb8d732f5279c34))
+
 # [4.5.0](https://code.osu.edu/ORIS/ui/compare/4.4.11...4.5.0) (2022-07-26)
 
 
