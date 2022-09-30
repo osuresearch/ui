@@ -15,6 +15,7 @@ type Props = {
     classNames: string,
     showResultsPane: boolean,
     activeDescendant?: string
+    placeholder?: string
 }
 
 const InputGroup = React.forwardRef<HTMLInputElement, Props>(({
@@ -27,7 +28,8 @@ const InputGroup = React.forwardRef<HTMLInputElement, Props>(({
     onKeyDown,
     classNames,
     showResultsPane,
-    activeDescendant
+    activeDescendant,
+    placeholder = ''
 }, ref) => {
     let iconProps = { name: 'search', spin: false };
     if (searching) {
@@ -59,6 +61,7 @@ const InputGroup = React.forwardRef<HTMLInputElement, Props>(({
             onBlur={onBlur}
             onChange={onChange}
             onKeyDown={onKeyDown}
+            placeholder={placeholder}
         />
 
         {searching &&
