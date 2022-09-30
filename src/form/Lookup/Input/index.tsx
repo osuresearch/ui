@@ -1,9 +1,10 @@
 import throttle from 'lodash/throttle';
 import findIndex from 'lodash/findIndex';
 import React, { useCallback, useContext, useEffect, useRef, useState } from 'react';
-import { Context, JsonObject } from '..';
+import { Context } from '..';
 import { Nullable } from '../../../internal/FormCommon/types';
 import { useSearchProvider } from '../../../search';
+import { JsonObject } from '../../../types';
 
 import InputGroup from './InputGroup';
 import SearchValue from './SearchValue';
