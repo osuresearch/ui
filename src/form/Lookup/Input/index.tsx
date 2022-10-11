@@ -1,9 +1,10 @@
 import throttle from 'lodash/throttle';
 import findIndex from 'lodash/findIndex';
 import React, { useCallback, useContext, useEffect, useRef, useState } from 'react';
-import { Context, JsonObject } from '..';
+import { Context } from '..';
 import { Nullable } from '../../../internal/FormCommon/types';
 import { useSearchProvider } from '../../../search';
+import { JsonObject } from '../../../types';
 
 import InputGroup from './InputGroup';
 import SearchValue from './SearchValue';
@@ -61,6 +62,11 @@ export type Props = {
      * **Use a combination of defaultValue and the `onChange` prop in `<Lookup>` instead.**
      */
     value?: Nullable<JsonObject>
+
+    /**
+     * Input placeholder text
+     */
+    placeholder?: string
 }
 
 /**
@@ -108,7 +114,7 @@ const Input: React.FC<Props> = (props) => {
     const valueRef = useRef<HTMLDivElement>(null);
 
     const setTermsThrottled = useCallback(
-        throttle(terms => setTerms(terms), 750),
+        throttle((terms: string) => setTerms(terms), 750),
         [throttle]
     );
 
@@ -196,9 +202,9 @@ const Input: React.FC<Props> = (props) => {
             props.onBlur(e);
         }
 
-        /** 
+        /**
          * Hide the results pane — only if the user
-         * is not clicking on an result 
+         * is not clicking on an result
          */
         if (e.relatedTarget !== resultsRef.current) {
             setShowResultsPane(false);
@@ -228,6 +234,7 @@ const Input: React.FC<Props> = (props) => {
             {!value &&
                 <InputGroup
                     ref={inputRef}
+                    placeholder={props.placeholder}
                     error={error}
                     searching={searching}
                     bind={bind}

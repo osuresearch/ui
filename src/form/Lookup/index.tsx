@@ -6,6 +6,7 @@ import useFieldBindOrProps from '../../internal/FormCommon/hooks/useFieldBindOrP
 import { withFormContext } from '../../internal/FormCommon/HOC/withFormContext';
 
 import Input, { Props as InputProps } from './Input';
+import { JsonObject } from '../../types';
 
 import {
     ICommonComposition,
@@ -17,13 +18,6 @@ import {
 import { SearchDriver, SearchProvider } from '../../search';
 
 import './index.scss';
-
-/**
- * Arbitrary string-keyed JSON object
- */
-export type JsonObject = {
-    [key: string]: unknown
-}
 
 type Props = FormFieldProps<JsonObject> & {
     /**

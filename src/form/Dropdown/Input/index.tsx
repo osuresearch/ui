@@ -11,13 +11,13 @@ type ItemTemplateType = React.ReactNode | ((option: any) => React.ReactNode);
 
 type EmptyFilterMessageType = React.ReactNode | ((props: InputProps) => React.ReactNode);
 
-interface ChangeTargetOptions {
+export interface ChangeTargetOptions {
     name: string;
     id: string;
     value: any;
 }
 
-interface ChangeParams {
+export interface ChangeParams {
     originalEvent: React.SyntheticEvent;
     value: any;
     stopPropagation(): void;

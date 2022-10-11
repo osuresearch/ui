@@ -13,7 +13,7 @@ import Mock from '@ORIS/ui/search/drivers/Mock';
         Search for a person
     </Lookup.Label>
 
-    <Lookup.Input resultRenderer={
+    <Lookup.Input placeholder="Start typing..." resultRenderer={
         (hit) => <span>
             {hit.name}&nbsp;
             <small className="text-muted">
@@ -57,7 +57,7 @@ const { control, watch, formState: { errors } } = useForm({ mode: 'onBlur' });
         render={({
             field: { onChange, onBlur, value, name }
         }) => (
-                <Lookup.Input 
+                <Lookup.Input
                     value={value}
                     onChange={onChange}
                     onBlur={onBlur}

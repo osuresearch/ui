@@ -5,7 +5,7 @@ import useFieldBindOrProps from '../../internal/FormCommon/hooks/useFieldBindOrP
 import { withFormContext } from '../../internal/FormCommon/HOC/withFormContext';
 
 import Input, { InputProps } from './Input';
-import Search, { SearchProps } from './Search';
+import Autocomplete, { AutocompleteProps } from './Autocomplete';
 import Email, { EmailProps } from './Email';
 import Rich, { RichProps } from './Rich';
 import Area, { AreaProps } from './Area'
@@ -26,15 +26,12 @@ interface ITextComposition extends ICommonComposition {
     /** Equivalent of `<input type='text'>` */
     Input: React.ForwardRefExoticComponent<InputProps & React.RefAttributes<HTMLInputElement>>
 
-    /** 
-     * Jams a standard ORIS/UI search result pair into 
-     * a single string value bind in the form `key|name`
-     */
-    Search: React.FC<SearchProps>
+    /** TODO: Notes */
+    Autocomplete: React.ForwardRefExoticComponent<AutocompleteProps & React.RefAttributes<HTMLInputElement>>
 
-    /** 
-     * Email input field with automatic validation for invalid 
-     * email addresses 
+    /**
+     * Email input field with automatic validation for invalid
+     * email addresses
      */
     Email: React.ForwardRefExoticComponent<EmailProps & React.RefAttributes<HTMLInputElement>>
 
@@ -78,7 +75,7 @@ const Text: React.FC<Props> & ITextComposition = ({
 }
 
 Text.Input = Input;
-Text.Search = Search;
+Text.Autocomplete = Autocomplete;
 Text.Email = Email;
 Text.Area = Area;
 Text.Rich = Rich;

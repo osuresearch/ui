@@ -1,8 +1,14 @@
 @import "../../sass";
 
+$lookup-minimum-dropdown-width: 20rem;
+
 .lookup-results {
     position: relative;
     flex: 0 0 100%;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
 
     .dropdown-menu {
         margin: 0;
@@ -33,6 +39,40 @@
 
         .lookup-error {
             color: #b00;
+        }
+    }
+
+    // Container for an invisible copy of the input text
+    // used to calculate flexbox dimensions.
+    &__offset {
+        max-width: fit-content;
+        max-height: 0;
+        overflow-y: clip;
+
+        padding-left: 0.75rem;
+
+        width: calc(100% - $lookup-minimum-dropdown-width);
+    }
+
+    // Flexbox container for the dropdown to offset it
+    // based on the text. In this setup, we *must*
+    // have a minimum width on the dropdown to ensure
+    // it doesn't overflow out of the container.
+    &__dropdown {
+        flex: 1 auto;
+        position: relative;
+
+        .dropdown-menu {
+            min-width: $lookup-minimum-dropdown-width;
+
+            // Highlight emphasis style for result items.
+            // A bold style is used instead of italics to avoid
+            // characters overlapping when we have an emphasis
+            // end in the middle of a string. (e.g. "<em>Fo</em>o")
+            em {
+                font-style: normal;
+                font-weight: 500;
+            }
         }
     }
 }
