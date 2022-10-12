@@ -25,7 +25,7 @@ import { MemoryRouter } from 'react-router';
 {/* Memory router is used here to be able to use React Router
     in the demo code. Do not include it in your app */}
 <MemoryRouter>
-    <Button to="/home">Go Home</Button>
+    <Button theme="link">Go Home</Button>
 </MemoryRouter>
 ```
 
