@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { JsonObject } from '..';
+import { JsonObject } from '../../../types';
 import Icon from '../../../generic/Icon';
 import { IFieldBind } from '../../../internal/FormCommon/types';
 
