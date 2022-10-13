@@ -1,3 +1,18 @@
+# [4.6.0](https://code.osu.edu/ORIS/ui/compare/4.5.1...4.6.0) (2022-10-13)
+
+
+### Bug Fixes
+
+* **a11y:** link themed buttons will now correctly show a focus ring (resolves [#20](https://code.osu.edu/ORIS/ui/issues/20)) ([0c2e9fa](https://code.osu.edu/ORIS/ui/commit/0c2e9fa888b7b6c22541311bbf52babf3b241390))
+* ChangeParams and ChangeTargetOptions missing from exports (resolves [#8](https://code.osu.edu/ORIS/ui/issues/8)) ([67f62fc](https://code.osu.edu/ORIS/ui/commit/67f62fc7307d3e79a65673f80bbee37195a98c0f))
+* invalid import paths to JsonObject ([5c5b52b](https://code.osu.edu/ORIS/ui/commit/5c5b52bbf63290806089fd6bb1b723265060f5be))
+
+
+### Features
+
+* add `Text.Autocomplete` component ([a531b03](https://code.osu.edu/ORIS/ui/commit/a531b03a0c46ba9d8f9957cc9a5b89907b66ee8a))
+* add optional placeholder prop to `Lookup.Input` ([06dedd5](https://code.osu.edu/ORIS/ui/commit/06dedd5874b1ee9d4b11d9752b02b4083c803dbc))
+
 ## [4.5.1](https://code.osu.edu/ORIS/ui/compare/4.5.0...4.5.1) (2022-07-29)
 
 
