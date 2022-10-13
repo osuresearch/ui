@@ -91,18 +91,16 @@ fieldset:disabled a.btn {
   }
 
   &:focus,
-  &.focus {
+  &.focus,
+  &:active {
     text-decoration: $link-hover-decoration;
     border-color: transparent;
-    box-shadow: none;
   }
 
   &:disabled,
   &.disabled {
     color: $btn-link-disabled-color;
   }
-
-  // No need for an active state here
 }
 
 

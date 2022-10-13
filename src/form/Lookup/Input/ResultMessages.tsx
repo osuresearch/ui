@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { JsonObject } from '..';
+import { JsonObject } from '../../../types';
 
 type Props = {
     hits: JsonObject[],
