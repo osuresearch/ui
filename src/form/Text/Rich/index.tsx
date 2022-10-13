@@ -120,7 +120,18 @@ const Rich: React.FC<RichProps> = ({
                     // Disable the body > blockquote > p ... path in the editor footer
                     removePlugins: 'elementspath',
                     contentsCss,
-                    title: label
+                    title: label,
+                    
+                    format_tags: 'p;h1;h2;h3;pre',
+                    // Custom DOM elements for header levels to prevent accessibility 
+                    // issues while embedding in existing page headers (see issue#17)
+                    format_h1: { element: 'div', attributes: { 'class': 'h1' } },
+                    format_h2: { element: 'div', attributes: { 'class': 'h2' } },
+                    format_h3: { element: 'div', attributes: { 'class': 'h3' } },
+                    // Workaround for CKE4: classes don't remove themselves unless
+                    // formats are explicit (see https://stackoverflow.com/a/65324448)
+                    format_p: { element: 'p', attributes: { 'class' : ' '} },
+                    format_pre: { element: 'pre', attributes: { 'class' : ' '} },
                 }}
                 readOnly={bind.readOnly}
                 onChange={(e: any) => {
