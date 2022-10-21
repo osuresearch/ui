@@ -1,3 +1,11 @@
+## [4.6.1](https://code.osu.edu/ORIS/ui/compare/4.6.0...4.6.1) (2022-10-21)
+
+
+### Bug Fixes
+
+* **a11y:** `Text.Rich` no longer uses h1-h3 DOM elements to avoid conflicts with existing page layout (resolves [#17](https://code.osu.edu/ORIS/ui/issues/17)) ([c7aaf87](https://code.osu.edu/ORIS/ui/commit/c7aaf871ea3c8d3076f0ced6eac0568dec5c581e))
+* division symbol deprecation warnings in sass files ([7364811](https://code.osu.edu/ORIS/ui/commit/73648114187677e1b5d4e79f72514e8a7f090301))
+
 # [4.6.0](https://code.osu.edu/ORIS/ui/compare/4.5.1...4.6.0) (2022-10-13)
 
 
