@@ -34,7 +34,7 @@ $avatar-size: 50px;
 
         text-align: center;
         font-weight: 800;
-        font-size: $avatar-size / 2.25;
+        font-size: math.div($avatar-size, 2.25);
         line-height: $avatar-size;
 
         color: #fff;
