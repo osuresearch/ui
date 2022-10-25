@@ -1,3 +1,10 @@
+## [4.7.1](https://code.osu.edu/ORIS/ui/compare/4.7.0...4.7.1) (2022-10-25)
+
+
+### Bug Fixes
+
+* missing type information for DropOverlay.Menu props ([80707ce](https://code.osu.edu/ORIS/ui/commit/80707cef4a536c1c1fdd9b2028860f73b990fa30))
+
 # [4.7.0](https://code.osu.edu/ORIS/ui/compare/4.6.1...4.7.0) (2022-10-25)
 
 
