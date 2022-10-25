@@ -1,11 +1,11 @@
 import React from 'react';
 import Button, { Props as ButtonProps } from './Button';
-import Menu, { IMenuComposition } from './Menu';
+import Menu, { Props as MenuProps, IMenuComposition } from './Menu';
 import Item from './Menu/Item';
 
 interface IDropOverlayComposition {
     Button: React.FC<ButtonProps>;
-    Menu: React.FC & IMenuComposition;
+    Menu: React.FC<MenuProps> & IMenuComposition;
 }
 
 type Props = {

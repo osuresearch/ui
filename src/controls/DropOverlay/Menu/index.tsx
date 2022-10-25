@@ -6,7 +6,7 @@ export interface IMenuComposition {
     Item: React.FC<ItemProps>;
 }
 
-type Props = {
+export type Props = {
     positionRight?: boolean
     className?: string
 }
