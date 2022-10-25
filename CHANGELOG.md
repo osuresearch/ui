@@ -1,3 +1,10 @@
+# [4.7.0](https://code.osu.edu/ORIS/ui/compare/4.6.1...4.7.0) (2022-10-25)
+
+
+### Features
+
+* add optional `className` prop to `DropOverlay.Menu` and `DropOverlay.Menu.Item` ([d2b1217](https://code.osu.edu/ORIS/ui/commit/d2b1217f72d4631632b66f7030fe8a800ca6b3fd))
+
 ## [4.6.1](https://code.osu.edu/ORIS/ui/compare/4.6.0...4.6.1) (2022-10-21)
 
 
