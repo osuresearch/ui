@@ -14,7 +14,7 @@ export { default as Support } from './core-application/Support';
 // Generic
 export { default as Alert } from './generic/Alert';
 export { default as Avatar } from './generic/Avatar';
-export { default as Badge } from './generic/Badge';
+export { default as Badge } from './atoms/Badge';
 export { default as Icon } from './generic/Icon';
 export { default as LazyLoaded } from './generic/LazyLoaded';
 

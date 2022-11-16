@@ -16,7 +16,9 @@
     "build:copy-sass": "node ./scripts/copy-sass.js",
     "build": "npm run clear-dist && npm-run-all --parallel build:components --serial build:ts-declarations build:copy-sass",
     "test": "react-scripts test",
-    "clear-dist": "node ./scripts/clear-dist"
+    "clear-dist": "node ./scripts/clear-dist",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -34,10 +36,13 @@
     ]
   },
   "dependencies": {
+    "@storybook/preset-scss": "^1.0.3",
     "@types/diff": "^4.0.2",
     "@types/lodash": "^4.14.162",
     "@types/react-datepicker": "^3.1.1",
+    "bootstrap": "^5.2.2",
     "ckeditor4-react": "^1.2.0",
+    "css-loader": "^5.2.6",
     "dayjs": "^1.9.1",
     "diff": "^4.0.2",
     "primereact": "^6.3.0",
@@ -46,6 +51,8 @@
     "react-datepicker": "^3",
     "react-dropzone": "^10.1.8",
     "react-transition-group": "^4.4.1",
+    "sass-loader": "^10.1.1",
+    "style-loader": "^2.0.0",
     "time-input-polyfill": "^1.0.9"
   },
   "//dependencies": {
@@ -67,6 +74,14 @@
     "@babel/preset-react": "^7.7.4",
     "@babel/preset-typescript": "^7.7.7",
     "@babel/register": "^7.7.7",
+    "@storybook/addon-actions": "^6.5.13",
+    "@storybook/addon-essentials": "^6.5.13",
+    "@storybook/addon-interactions": "^6.5.13",
+    "@storybook/addon-links": "^6.5.13",
+    "@storybook/builder-webpack4": "^6.5.13",
+    "@storybook/manager-webpack4": "^6.5.13",
+    "@storybook/react": "^6.5.13",
+    "@storybook/testing-library": "0.0.13",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.4.0",
     "@testing-library/user-event": "^7.2.1",
@@ -77,6 +92,7 @@
     "@types/react-dom": "^16.9.4",
     "@types/react-router-dom": "^5.1.5",
     "acorn": "^6.4.0",
+    "babel-loader": "^8.3.0",
     "dotenv": "^14.2.0",
     "faker": "^5.1.0",
     "graphql": "^15.3.0",
@@ -88,7 +104,8 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "^4.0.3",
     "react-styleguidist": "^11.1.0",
-    "sass": "^1.50.0",
+    "sass": "^1.56.1",
+    "storybook-dark-mode": "^1.1.2",
     "typescript": "^3.7.4"
   }
 }

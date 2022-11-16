@@ -1,0 +1,62 @@
+
+@charset 'UTF-8';
+@use 'sass:math';
+
+// CDN(like) asset locations
+$vendor-images: 'https://orapps.osu.edu/assets/img/vendor';
+$vendor-fonts: 'https://orapps.osu.edu/assets/fonts/vendor';
+
+$prefix: 'rui-';
+
+// Lazy dark mode until https://github.com/twbs/bootstrap/pull/35857
+
+:root {
+    --rui-body-bg: #fff;
+}
+
+// @media (prefers-color-scheme: dark) {
+.dark {
+    --rui-body-bg: #000;
+    --rui-body-color: #fff;
+    --rui-primary: #b00;
+}
+
+// Except this doesn't work for 
+// things like badges that need text-bg-primary
+// which is compile-time generated colors.
+
+// .light {
+//     $primary: blue;
+//     @import "bootstrap";
+// }
+
+// .dark {
+//     $primary: green;
+//     @import "bootstrap";
+// }
+
+
+@import "bootstrap";
+
+// Docs container uses the app theme...
+
+@import "../sass/vendor/font-awesome";
+
+.bd-example-row [class^="col"] {
+ padding-top:.75rem;
+ padding-bottom:.75rem;
+ background-color:rgba(var(--bd-violet-rgb), 0.1);
+ border:1px solid rgba(var(--bd-violet-rgb), 0.25)
+}
+.bd-example-row .row+.row,
+.bd-example-cssgrid .grid+.grid {
+ margin-top:1rem
+}
+.bd-example-row-flex-cols .row {
+ min-height:10rem;
+ background-color:rgba(255,0,0,0.1)
+}
+.bd-example-flex div {
+ background-color:rgba(76,11,206,0.15);
+ border:1px solid rgba(76,11,206,0.15)
+}

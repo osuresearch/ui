@@ -1,0 +1,60 @@
+
+import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
+
+import { Badge } from '.';
+
+<Meta title="Atoms/Badge" component={Badge} />
+
+export const Template = (args) => <Badge {...args}>{args.label}</Badge>;
+
+# Badge
+
+<ArgsTable of={Badge} />
+
+Let's define a story for our `Badge` component:
+
+<Story
+  name="default"
+  args={{
+    label: 'default badge',
+  }}
+  argTypes={{
+    theme: {
+      control: 'radio',
+      options: [
+        'primary',
+        'secondary',
+        'info',
+        'success',
+        'warning',
+        'danger'
+      ],
+    }
+  }}
+>
+  {Template.bind({})}
+</Story>
+
+We can even preview multiple stories in a block. This
+gets rendered as a group, but defines individual stories
+with unique URLs and isolated snapshot tests.
+
+<Canvas>
+  <Story name="primary">
+    <Badge theme="primary">primary</Badge>
+  </Story>
+  <Story name="secondary">
+    <Badge theme="secondary">secondary</Badge>
+  </Story>
+  <Story name="success">
+    <Badge theme="success">success</Badge>
+  </Story>
+  <Story name="warning">
+    <Badge theme="warning">warning</Badge>
+  </Story>
+  <Story name="danger">
+    <Badge theme="danger">danger</Badge>
+  </Story>
+</Canvas>
+
+

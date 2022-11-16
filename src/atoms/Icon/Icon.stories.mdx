@@ -1,0 +1,29 @@
+
+import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
+import { Icon } from '.';
+
+<Meta title="Atoms/Icon" component={Icon} />
+
+export const Template = (args) => <Icon {...args} />;
+
+# Icon
+
+<ArgsTable of={Icon} />
+
+For a full list of available icon names, see [Font Awesome 4.7.0 Icons](https://fontawesome.com/v4.7.0/icons/)
+
+<Canvas>
+  <Story 
+    name="basic"
+    args={{
+      name: 'user',
+    }}
+  >{Template.bind({})}</Story>
+  <Story 
+    name="spinning loader"
+    args={{
+      name: 'spinner',
+      spin: true,
+    }}
+  >{Template.bind({})}</Story>
+</Canvas>
