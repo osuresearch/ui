@@ -1,16 +1,19 @@
 import React from 'react';
+import classNames from 'classnames';
 
 export type Props = {
     children: React.ReactNode
+    className?: string
 }
 
 /**
  * Docs about row!
  */
-export const Row = ({ children }: Props) => {
+export const Row = ({ className, children }: Props) => {
     return (
-        <div className="row">
-            {children}
-        </div>
+        <div className={classNames(
+            'row',
+            className
+        )}>{children}</div>
     )
 }

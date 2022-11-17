@@ -21,7 +21,7 @@ $prefix: 'rui-';
     --rui-primary: #b00;
 }
 
-// Except this doesn't work for 
+// Except this doesn't work for
 // things like badges that need text-bg-primary
 // which is compile-time generated colors.
 
@@ -42,21 +42,23 @@ $prefix: 'rui-';
 
 @import "../sass/vendor/font-awesome";
 
-.bd-example-row [class^="col"] {
- padding-top:.75rem;
- padding-bottom:.75rem;
- background-color:rgba(var(--bd-violet-rgb), 0.1);
- border:1px solid rgba(var(--bd-violet-rgb), 0.25)
-}
-.bd-example-row .row+.row,
-.bd-example-cssgrid .grid+.grid {
- margin-top:1rem
-}
-.bd-example-row-flex-cols .row {
- min-height:10rem;
- background-color:rgba(255,0,0,0.1)
-}
-.bd-example-flex div {
- background-color:rgba(76,11,206,0.15);
- border:1px solid rgba(76,11,206,0.15)
+
+.grid-demo {
+    .row [class^="col"] {
+        padding-top:.75rem;
+        padding-bottom:.75rem;
+        background-color:rgba(var(--rui-primary-rgb), 0.1);
+        border:1px solid rgba(var(--rui-primary-rgb), 0.25)
+    }
+    .row .row+.row {
+        margin-top:1rem
+    }
+    .row-flex-cols .row {
+        min-height:10rem;
+        background-color:rgba(255,0,0,0.1)
+    }
+    .flex div {
+        background-color:rgba(76,11,206,0.15);
+        border:1px solid rgba(76,11,206,0.15)
+    }
 }

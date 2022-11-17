@@ -1,0 +1,260 @@
+import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
+import { Grid } from './Grid';
+
+<Meta
+  title="Layout/Grid System"
+  component={Grid}
+  decorators={[
+    (Story) => (
+      <div className="grid-demo">
+        <Story />
+      </div>
+    )
+  ]}
+/>
+
+# Grid System
+
+## How it works
+
+The grid system uses a series of containers, rows, and columns to layout and align content.
+It's built with [flexbox](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Using_CSS_flexible_boxes)
+and is fully responsive.
+
+We use a 12 column grid system driven by [Bootstrap 5.2](https://getbootstrap.com/docs/5.2/layout/grid/) under the hood.
+
+Here's how the grid changes across breakpoints:
+
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Breakpoint</th>
+        <th>Prop</th>
+        <th>Dimensions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Extra small</td>
+        <td>
+          <code>xs</code>
+        </td>
+        <td>&lt;576px</td>
+      </tr>
+      <tr>
+        <td>Small</td>
+        <td>
+          <code>sm</code>
+        </td>
+        <td>≥576px</td>
+      </tr>
+      <tr>
+        <td>Medium</td>
+        <td>
+          <code>md</code>
+        </td>
+        <td>≥768px</td>
+      </tr>
+      <tr>
+        <td>Large</td>
+        <td>
+          <code>lg</code>
+        </td>
+        <td>≥992px</td>
+      </tr>
+      <tr>
+        <td>Extra large</td>
+        <td>
+          <code>xl</code>
+        </td>
+        <td>≥1200px</td>
+      </tr>
+      <tr>
+        <td>Extra extra large</td>
+        <td>
+          <code>xxl</code>
+        </td>
+        <td>≥1400px</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+## Auto Layout Columns
+
+Utilize breakpoint-specific columns for easy column sizing without an explicit size.
+
+### Equal-width
+
+Here are two grid layouts that apply to every device and viewport, from `xs` to `xl`.
+Add any number of unit-less columns for each breakpoint you need and every column
+will be the same width.
+
+
+
+<Canvas>
+  <Story name="Equal-width">
+    <Grid>
+      <Grid.Row>
+        <Grid.Col>
+          1 of 2
+        </Grid.Col>
+        <Grid.Col>
+          2 of 2
+        </Grid.Col>
+      </Grid.Row>
+      <Grid.Row>
+        <Grid.Col>
+          1 of 3
+        </Grid.Col>
+        <Grid.Col>
+          2 of 3
+        </Grid.Col>
+        <Grid.Col>
+          3 of 3
+        </Grid.Col>
+      </Grid.Row>
+    </Grid>
+  </Story>
+</Canvas>
+
+### Setting one column width
+
+Auto-layout for flexbox grid columns also means you can set the width of one
+column and have the sibling columns automatically resize around it.
+
+Note that the other columns will resize no matter the width of the center column.
+
+<Canvas>
+  <Story name="Setting one column width">
+    <Grid>
+      <Grid.Row>
+        <Grid.Col>
+          1 of 3
+        </Grid.Col>
+        <Grid.Col size={6}>
+          2 of 3 (wider)
+        </Grid.Col>
+        <Grid.Col>
+          3 of 3
+        </Grid.Col>
+      </Grid.Row>
+      <Grid.Row>
+        <Grid.Col>
+          1 of 3
+        </Grid.Col>
+        <Grid.Col size={5}>
+          2 of 3 (wider)
+        </Grid.Col>
+        <Grid.Col>
+          3 of 3
+        </Grid.Col>
+      </Grid.Row>
+    </Grid>
+  </Story>
+</Canvas>
+
+### Variable width content
+
+Use `auto` to size columns based on the natural width of their content.
+
+<Canvas>
+  <Story name="Variable width content">
+    <Grid>
+      <Grid.Row className="justify-content-md-center">
+        <Grid.Col lg={2}>
+          1 of 3
+        </Grid.Col>
+        <Grid.Col md="auto">
+          Variable width content
+        </Grid.Col>
+        <Grid.Col lg={2}>
+          3 of 3
+        </Grid.Col>
+      </Grid.Row>
+      <Grid.Row>
+        <Grid.Col>
+          1 of 3
+        </Grid.Col>
+        <Grid.Col md="auto">
+          Variable width content
+        </Grid.Col>
+        <Grid.Col lg={2}>
+          3 of 3
+        </Grid.Col>
+      </Grid.Row>
+    </Grid>
+  </Story>
+</Canvas>
+
+### Mix and match
+
+Don't want your columns to simply stack in some grid tiers?
+Use a combination of different classes for each tier as needed.
+
+<Canvas>
+  <Story name="Mix and match">
+    <Grid>
+      {/* Stack the columns on mobile by making one full-width and the other half-width */}
+      <Grid.Row>
+        <Grid.Col md={8}>md=8</Grid.Col>
+        <Grid.Col size={6} md={4}>size=6 md=4</Grid.Col>
+      </Grid.Row>
+      {/* Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop */}
+      <Grid.Row>
+        <Grid.Col size={6} md={4}>size=6 md=4</Grid.Col>
+        <Grid.Col size={6} md={4}>size=6 md=4</Grid.Col>
+        <Grid.Col size={6} md={4}>size=6 md=4</Grid.Col>
+      </Grid.Row>
+      {/* Columns are always 50% wide, on mobile and desktop */}
+      <Grid.Row>
+        <Grid.Col size={6}>size=6</Grid.Col>
+        <Grid.Col size={6}>size=6</Grid.Col>
+      </Grid.Row>
+    </Grid>
+  </Story>
+</Canvas>
+
+
+
+### Nesting
+
+<Canvas>
+  <Story name="Nesting">
+    <Grid>
+      <Grid.Row>
+        <Grid.Col sm={3}>
+          Level 1: sm=3
+        </Grid.Col>
+        <Grid.Col sm={9}>
+          <Grid.Row>
+            <Grid.Col size={8} sm={6}>
+              Level 2: size=8 sm=6
+            </Grid.Col>
+            <Grid.Col size={4} sm={6}>
+              Level 2: size=4 sm=6
+            </Grid.Col>
+          </Grid.Row>
+        </Grid.Col>
+      </Grid.Row>
+    </Grid>
+  </Story>
+</Canvas>
+
+
+# Properties
+
+## Grid
+
+<ArgsTable of={Grid} />
+
+## Grid.Row
+
+<ArgsTable of={Grid.Row} />
+
+## Grid.Col
+
+<ArgsTable of={Grid.Col} />
+
