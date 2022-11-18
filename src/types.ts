@@ -9,6 +9,15 @@ export interface Enum {
 /**
  * Arbitrary string-keyed JSON object
  */
- export type JsonObject = {
+export type JsonObject = {
     [key: string]: unknown
+}
+
+export enum Theme {
+    Primary = 'primary',
+    Secondary = 'secondary',
+    Info = 'info',
+    Success = 'success',
+    Warning = 'warning',
+    Danger = 'danger',
 }

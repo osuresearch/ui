@@ -1,0 +1,57 @@
+
+import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
+import { MemoryRouter } from 'react-router';
+import { NavLink } from 'react-router-dom';
+import { Skeleton } from '../../atoms/Skeleton';
+import { Avatar } from '../../atoms/Avatar';
+import { LazyLoaded } from '.';
+
+<Meta title="Layout/LazyLoaded" component={LazyLoaded} />
+
+export const Template = (args) => {
+    const Placeholder = () => (
+        <div className="d-flex align-items-center">
+            <div style={{ marginRight: '0.5em' }}>
+                <Skeleton shape="circle" size="4rem" />
+            </div>
+            <div style={{ flex: '1' }}>
+                <Skeleton width="15rem" className="mb-2" />
+                <Skeleton width="10rem" />
+            </div>
+        </div>
+    )
+    return <LazyLoaded {...args} placeholder={<Placeholder />}>
+        <div className="d-flex align-items-center">
+            <div style={{ marginRight: '0.5em' }}>
+                <Avatar name="Chase" username="mcmanning.1" size={64} />
+            </div>
+            <div style={{ flex: '1' }}>
+                <div><strong>Chase McManning</strong></div>
+                <div>Senior Enterprise Applications Developer</div>
+            </div>
+        </div>
+    </LazyLoaded>
+}
+
+# LazyLoaded
+
+<Description of={LazyLoaded} />
+
+<Canvas>
+    <Story name="Basic">
+        <LazyLoaded loading={true} placeholder={<div>Loading...</div>}>
+            I am content!
+        </LazyLoaded>
+    </Story>
+</Canvas>
+
+<ArgsTable of={LazyLoaded} />
+
+<Canvas>
+    <Story
+        name="Profile"
+        args={{
+            loading: true,
+        }}
+    >{Template.bind({})}</Story>
+</Canvas>

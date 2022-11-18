@@ -1,0 +1,47 @@
+
+// Remap Bootstrap to brand colors
+@import "bux/colors";
+
+$body-bg:               $gray-dark-80;
+$body-color:            $white;
+
+// Map system colors to the brand
+$primary:       $scarlet;
+$secondary:     $gray;
+$success:       $success-dark;
+$info:          $info-dark;
+$warning:       $warning-dark;
+$danger:        $error;
+$light:         $gray-light-60;
+$dark:          $gray-dark-60;
+
+$brand-colors: (
+    // Primary
+    "scarlet":  $scarlet,
+    "gray":     $gray,
+
+    // Secondary
+    "blue":     $blue,
+    "orange":   $orange,
+    "green":    $green,
+    "brown":    $brown,
+    "pink":     $pink,
+    "violet":   $violet,
+    "aqua":     $aqua,
+    "teal":     $teal,
+    "gold":     $gold,
+);
+
+// Variables for our components
+$btn-disabled-bg: #eff1f2;
+$btn-disabled-fg: #868e92;
+// $btn-hover-bg: #3f4443;
+// $btn-hover-fg: $white;
+
+// Link border-bottom: 1px solid #ba0c2f
+/* Hover:
+color: #212325;
+border-bottom-color: #212325;
+background-color: #eff1f2;
+
+*/

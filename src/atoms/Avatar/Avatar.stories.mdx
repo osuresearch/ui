@@ -1,0 +1,39 @@
+
+import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
+import { Avatar } from '.';
+
+<Meta title="Atoms/Avatar" component={Avatar} />
+
+export const Template = (args) => 
+  <Avatar {...args} />
+
+# Avatar
+
+<Description of={Avatar} />
+
+<Canvas>
+  <Story
+    name="Avatar"
+    args={{
+        name: 'Chase',
+        username: 'mcmanning.1',
+    }}
+  >{Template.bind({})}</Story>
+</Canvas>
+
+<ArgsTable of={Avatar} />
+
+<Canvas>
+    <Avatar name="Chase" username="mcmanning.1" size={30} />
+    <Avatar name="Chase" username="mcmanning.1" size={50} />
+    <Avatar name="Chase" username="mcmanning.1" size={100} />
+</Canvas>
+
+<Canvas>
+    <Avatar name="Chase" username="mcmanning.1" />
+    <Avatar name="Neil Coplin" username="coplin.7" />
+    <Avatar name="Deepak" username="chanda.4" />
+    <Avatar name="John Ray" username="ray.30" />
+    <Avatar name="Corey" username="moore.4521" />
+    <Avatar name="Nobody" username="unknown.1" />
+</Canvas>

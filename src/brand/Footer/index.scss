@@ -1,0 +1,80 @@
+
+.footer {
+    display: flex;
+    flex-direction: row;
+
+    @include media-breakpoint-down(md) {
+        flex-direction: column;
+    }
+
+    width: 100%;
+    min-height: 200px;
+    background: #f6f7f8;
+    padding: 2rem;
+
+    // Note these are resets to override UI4 footers.
+    color: #212325;
+    font-weight: normal;
+    font-size: 0.8rem;
+
+    a {
+        color: #212325;
+        font-weight: normal;
+        text-shadow: none;
+        text-decoration-color: #212325;
+
+        &:hover {
+            color: #212325;
+        }
+    }
+
+    &__left {
+        flex: 1 auto;
+    }
+
+    &__right {
+        text-align: right;
+
+        @include media-breakpoint-down(md) {
+            text-align: left;
+        }
+    }
+
+    &__logo {
+        img {
+            max-height: 45px;
+        }
+    }
+
+    &__unit {
+        margin-top: 1rem;
+        font-weight: 500;
+    }
+
+    &__address {
+
+    }
+
+    &__accessibility {
+        max-width: 400px;
+        margin: 1rem 0;
+    }
+
+    &__links {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 1rem;
+
+        a {
+            // Disable external link icons, it's noise.
+            .fa {
+                display: none;
+            }
+        }
+    }
+
+    // Reduce footprint for mobile
+    @include media-breakpoint-down(sm) {
+        padding: 1rem;
+    }
+}

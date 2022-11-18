@@ -1,0 +1,14 @@
+
+// Vendor configurations for paths to assets.
+// Vendor static assets (fonts, images) are stored separate
+// from the application that may include vendor CSS.
+// These point to the production server by default to be compatible 
+// with local development on Webpack servers
+$vendor-images: 'https://orapps.osu.edu/assets/img/vendor' !default;
+$vendor-fonts: 'https://orapps.osu.edu/assets/fonts/vendor' !default;
+
+@import "../sass/vendor/font-awesome";
+
+@import "fonts";
+
+@import "bootstrap/scss/functions";

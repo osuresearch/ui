@@ -1,0 +1,147 @@
+import { Meta, Typeset } from '@storybook/addon-docs/blocks';
+
+<Meta title="Brand/Typography" />
+
+export const SampleText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
+
+# Typography
+
+## ProximaNova (Legacy)
+
+**Font:** ProximaNova, sans-serif
+
+**Weights:** 400(regular), 700(bold), 800(extrabold), 900(black)
+
+export const proxima = {
+  type: {
+    primary: '"ProximaNova", sans-serif',
+  },
+  weight: {
+    regular: '400',
+    bold: '700',
+    extrabold: '800',
+    black: '900',
+  },
+  size: {
+    s1: 12,
+    s2: 14,
+    s3: 16,
+    m1: 20,
+    m2: 24,
+    m3: 28,
+    l1: 32,
+    l2: 40,
+    l3: 48,
+  },
+};
+
+<Typeset
+  fontSizes={[
+    Number(proxima.size.s1),
+    Number(proxima.size.s2),
+    Number(proxima.size.s3),
+    Number(proxima.size.m1),
+    Number(proxima.size.m2),
+    Number(proxima.size.m3),
+    Number(proxima.size.l1),
+    Number(proxima.size.l2),
+    Number(proxima.size.l3),
+  ]}
+  fontWeight={proxima.weight.black}
+  sampleText={SampleText}
+  fontFamily={proxima.type.primary}
+/>
+
+## Buckeye Serif 
+
+**Font Stack:** "BuckeyeSerif", "Georgia", serif
+
+**Weights:** 400 (regular), 600 (semibold), 700 (bold), 900 (black)
+
+export const serif = {
+  type: {
+    primary: '"BuckeyeSerif", "Georgia", serif',
+  },
+  weight: {
+    regular: '400',
+    semibold: '600',
+    bold: '700',
+    black: '900',
+  },
+  size: {
+    s1: 12,
+    s2: 14,
+    s3: 16,
+    m1: 20,
+    m2: 24,
+    m3: 28,
+    l1: 32,
+    l2: 40,
+    l3: 48,
+  },
+};
+
+<Typeset
+  fontSizes={[
+    Number(serif.size.s1),
+    Number(serif.size.s2),
+    Number(serif.size.s3),
+    Number(serif.size.m1),
+    Number(serif.size.m2),
+    Number(serif.size.m3),
+    Number(serif.size.l1),
+    Number(serif.size.l2),
+    Number(serif.size.l3),
+  ]}
+  fontWeight={serif.weight.black}
+  sampleText={SampleText}
+  fontFamily={serif.type.primary}
+/>
+
+## Buckeye Sans 
+
+**Font Stack:** "BuckeyeSans", "HelveticaNeue", "Helvetica", "Arial", sans-serif
+
+**Weights:** 400 (regular), 600 (semibold), 700 (bold), 800 (extrabold), 900 (black)
+
+export const sans = {
+  type: {
+    primary: '"BuckeyeSans", "HelveticaNeue", "Helvetica", "Arial", sans-serif',
+  },
+  weight: {
+    regular: '400',
+    semibold: '600',
+    bold: '700',
+    extrabold: '800',
+    black: '900',
+  },
+  size: {
+    s1: 12,
+    s2: 14,
+    s3: 16,
+    m1: 20,
+    m2: 24,
+    m3: 28,
+    l1: 32,
+    l2: 40,
+    l3: 48,
+  },
+};
+
+<Typeset
+  fontSizes={[
+    Number(sans.size.s1),
+    Number(sans.size.s2),
+    Number(sans.size.s3),
+    Number(sans.size.m1),
+    Number(sans.size.m2),
+    Number(sans.size.m3),
+    Number(sans.size.l1),
+    Number(sans.size.l2),
+    Number(sans.size.l3),
+  ]}
+  fontWeight={sans.weight.black}
+  sampleText={SampleText}
+  fontFamily={sans.type.primary}
+/>
+

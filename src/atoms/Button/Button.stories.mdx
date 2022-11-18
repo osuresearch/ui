@@ -1,0 +1,53 @@
+
+import { Canvas, Meta, Story, Description, ArgsTable } from '@storybook/addon-docs';
+import { Button } from '.';
+import { Icon } from '../Icon';
+
+<Meta title="Atoms/Button" component={Button} />
+
+export const Template = (args) => <Button {...args} />
+
+# Button
+
+<Description of={Button} />
+
+<Canvas>
+  <Story
+    name="Basic"
+    args={{
+      children: 'Button',
+    }}
+    argTypes={{
+      theme: {
+        control: 'radio'
+      }
+    }}
+  >{Template.bind({})}</Story>
+</Canvas>
+
+<ArgsTable of={Button} />
+
+## Confirm Delete 
+
+Always add an additional confirmation step before allowing the user to delete data.
+
+<Canvas>
+  <Story name="Confirm Delete">
+    <Button small theme="danger" onClick={() => confirm('Are you sure?')}>
+      Delete
+    </Button>
+  </Story>
+</Canvas>
+
+## Saving a Form
+
+Do not combine icons and words together in buttons, unless it is to represent 
+some sort of active state such as saving in progress.
+
+<Canvas>
+  <Story name="Saving a Form">
+    <Button theme="success" disabled>
+      <Icon name="spinner" spin /> Saving...
+    </Button>
+  </Story>
+</Canvas>

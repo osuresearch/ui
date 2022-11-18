@@ -1,0 +1,15 @@
+
+@import "primereact/skeleton/skeleton.min.css";
+
+// Overrides to PrimeReact's skeleton implementation
+.p-skeleton {
+    background-color: #e9ecef;
+}
+.p-skeleton:after {
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0));
+}
+@media (prefers-reduced-motion) {
+    .p-skeleton:after {
+        animation: none;
+    }
+}

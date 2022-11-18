@@ -1,0 +1,64 @@
+// Font variables.
+$serif: "BuckeyeSerif", "Georgia", serif;
+$sans: "BuckeyeSans", "HelveticaNeue", "Helvetica", "Arial", sans-serif;
+$code: "Source Code Pro", monospace;
+$icon: "bux-icons";
+
+// Type sizes.
+$type-sizes: (
+	"xs": 0.75rem,
+	"sm": 0.875rem,
+	"base": 1rem,
+	"18": 1.125rem,
+	"md": 1.5rem,
+	"lg": 2rem,
+	"36": 2.25rem,
+	"xl": 2.5rem,
+	"xxl": 3rem,
+	"60": 3.75rem,
+) !default;
+
+// Size variables.
+$ts-xs: map-get($type-sizes, xs) !default;
+$ts-sm: map-get($type-sizes, sm) !default;
+$ts-base: map-get($type-sizes, base) !default;
+$ts-18: map-get($type-sizes, "18") !default;
+$ts-md: map-get($type-sizes, md) !default;
+$ts-lg: map-get($type-sizes, lg) !default;
+$ts-36: map-get($type-sizes, "36") !default;
+$ts-xl: map-get($type-sizes, xl) !default;
+$ts-xxl: map-get($type-sizes, xxl) !default;
+$ts-60: map-get($type-sizes, 60) !default;
+
+// Size classes.
+@each $ts-name, $ts-size in $type-sizes {
+	.bux-ts-#{$ts-name} {
+		font-size: $ts-size !important;
+	}
+}
+
+// Base typography styles.
+p {
+	@extend .bux-paragraph;
+}
+
+.bux-small {
+	font-family: $sans;
+	font-weight: 400;
+	font-size: $ts-sm;
+	margin-bottom: $sp-16;
+}
+
+.bux-pipe {
+	display: inline-block;
+	padding: 0 $sp-4;
+}
+
+html {
+	font-family: $sans;
+	font-weight: 400;
+	font-size: $ts-base;
+	line-height: 1.5;
+	color: $gray-dark-80;
+}
+

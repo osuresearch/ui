@@ -2,63 +2,40 @@
 @charset 'UTF-8';
 @use 'sass:math';
 
-// CDN(like) asset locations
-$vendor-images: 'https://orapps.osu.edu/assets/img/vendor';
-$vendor-fonts: 'https://orapps.osu.edu/assets/fonts/vendor';
+$vendor-images: 'https://orapps.osu.edu/assets/img/vendor' !default;
+$vendor-fonts: 'https://orapps.osu.edu/assets/fonts/vendor' !default;
+
+/*
+    Order of imports MUST be:
+
+    1. BS5 functions and external asset references
+    2. Theme variables
+    3. BS5 variable defaults
+    4. Theme maps
+    5. BS5 systems (maps, mixins, root, util)
+    6. Everything else
+*/
+
+@import "bootstrap/scss/functions";
+@import "../sass/vendor/font-awesome";
+@import "fonts";
 
 $prefix: 'rui-';
 
-// Lazy dark mode until https://github.com/twbs/bootstrap/pull/35857
+.light {
+    
+@import "light";
 
-:root {
-    --rui-body-bg: #fff;
-}
+@import "bootstrap/scss/variables";
+// @import "bootstrap/scss/variables";
 
-// @media (prefers-color-scheme: dark) {
-.dark {
-    --rui-body-bg: #000;
-    --rui-body-color: #fff;
-    --rui-primary: #b00;
-}
+// Map overrides 
+$theme-colors: map-merge(
+    $theme-colors, 
+    $brand-colors
+);
 
-// Except this doesn't work for
-// things like badges that need text-bg-primary
-// which is compile-time generated colors.
+@import "vendor";
+@import "components";
 
-// .light {
-//     $primary: blue;
-//     @import "bootstrap";
-// }
-
-// .dark {
-//     $primary: green;
-//     @import "bootstrap";
-// }
-
-
-@import "bootstrap";
-
-// Docs container uses the app theme...
-
-@import "../sass/vendor/font-awesome";
-
-
-.grid-demo {
-    .row [class^="col"] {
-        padding-top:.75rem;
-        padding-bottom:.75rem;
-        background-color:rgba(var(--rui-primary-rgb), 0.1);
-        border:1px solid rgba(var(--rui-primary-rgb), 0.25)
-    }
-    .row .row+.row {
-        margin-top:1rem
-    }
-    .row-flex-cols .row {
-        min-height:10rem;
-        background-color:rgba(255,0,0,0.1)
-    }
-    .flex div {
-        background-color:rgba(76,11,206,0.15);
-        border:1px solid rgba(76,11,206,0.15)
-    }
 }

@@ -1,0 +1,42 @@
+
+// Default size - will be overridden by <Avatar> component.
+$avatar-size: 50px;
+
+.avatar {
+    width: $avatar-size;
+    height: $avatar-size;
+    position: relative;
+    display: inline-block;
+
+    overflow: hidden;
+
+    box-shadow: inset 0px 0px 0px 1px rgba(0,0,0,0.25);
+    border-radius: 50%;
+
+    // Will be overridden by the <Avatar> component
+    background-color: #666;
+
+    img, div {
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        width: 100%;
+        height: 100%;
+    }
+
+    &-opic {
+        z-index: 2;
+    }
+
+    &-initials {
+        z-index: 1;
+
+        text-align: center;
+        font-weight: 800;
+        font-size: math.div($avatar-size, 2.25);
+        line-height: $avatar-size;
+
+        color: #fff;
+    }
+}

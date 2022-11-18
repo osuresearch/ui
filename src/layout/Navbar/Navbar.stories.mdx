@@ -1,0 +1,27 @@
+
+import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
+import { MemoryRouter } from 'react-router';
+import { NavLink } from 'react-router-dom';
+import { Navbar } from '.';
+
+<Meta title="Layout/Navbar" component={Navbar} />
+
+export const Template = (args) => 
+  <Navbar {...args} />
+
+# Navbar
+
+<Description of={Navbar} />
+
+<Canvas>
+    <Story name="Navbar">
+        <MemoryRouter>
+            <Navbar title="My Cool App">
+                <NavLink to="/foo">Foo</NavLink>
+                <NavLink to="/bar">Bar</NavLink>
+            </Navbar>
+        </MemoryRouter>
+    </Story>
+</Canvas>
+
+<ArgsTable of={Navbar} />

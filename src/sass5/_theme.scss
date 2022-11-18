@@ -1,0 +1,28 @@
+// Universal theme settings
+
+$font-family-sans-serif: "BuckeyeSans", "HelveticaNeue", "Helvetica", "Arial", sans-serif;
+$small-font-size:       .8em;
+
+$btn-border-width:      2px;
+$btn-font-weight:       600;
+$btn-padding-y:         .625rem;
+$btn-padding-x:         1.25rem;
+$btn-padding-y-sm:      .375rem;
+$btn-padding-x-sm:      .75rem;
+$btn-disabled-opacity:  1;
+
+// Global style overrides
+$enable-rounded: false;
+
+// Convert BUX grid system to BS5
+$grid-breakpoints: (
+    sm: 0,
+    md: 640px,
+    lg: 960px,
+    xl: 1280px,
+    xxl: 1440px
+);
+
+$alert-border-width: 0;
+$alert-color-scale: 0;
+$alert-bg-scale: 0;

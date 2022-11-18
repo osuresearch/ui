@@ -1,29 +1,145 @@
 
-import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
-import { Icon } from '.';
+import { Canvas, Meta, Story, ArgsTable, Description, IconGallery, IconItem } from '@storybook/addon-docs';
+import { Icon as IconComponent } from '.';
 
-<Meta title="Atoms/Icon" component={Icon} />
-
-export const Template = (args) => <Icon {...args} />;
+<Meta title="Atoms/Icon" component={IconComponent} />
 
 # Icon
 
-<ArgsTable of={Icon} />
+export const Icon = (args) => <IconComponent {...args} />;
 
-For a full list of available icon names, see [Font Awesome 4.7.0 Icons](https://fontawesome.com/v4.7.0/icons/)
+<Description of={IconComponent} />
 
 <Canvas>
   <Story
-    name="Auto Whatever"
+    name="Icon"
     args={{
-      name: 'user',
+      name: 'heart',
     }}
-  >{Template.bind({})}</Story>
-  <Story
-    name="spinning loader"
-    args={{
-      name: 'spinner',
-      spin: true,
-    }}
-  >{Template.bind({})}</Story>
+  >{Icon.bind({})}</Story>
 </Canvas>
+
+<ArgsTable of={IconComponent} />
+
+## Common Icons 
+
+These icons are used the most often across applications and are typically understood by most users.
+
+<IconGallery>
+  <IconItem name="user">
+    <IconComponent name="user" />
+  </IconItem>
+  <IconItem name="spinner">
+    <IconComponent name="spinner" spin />
+  </IconItem>
+  <IconItem name="info-circle">
+    <IconComponent name="info-circle" />
+  </IconItem>
+  <IconItem name="question-circle">
+    <IconComponent name="question-circle" />
+  </IconItem>
+  <IconItem name="exclamation-circle">
+    <IconComponent name="exclamation-circle" />
+  </IconItem>
+   <IconItem name="caret-down">
+    <IconComponent name="caret-down" />
+  </IconItem>
+   <IconItem name="chevron-down">
+    <IconComponent name="chevron-down" />
+  </IconItem>
+   <IconItem name="sort">
+    <IconComponent name="sort" />
+  </IconItem>
+   <IconItem name="search">
+    <IconComponent name="search" />
+  </IconItem>
+   <IconItem name="filter">
+    <IconComponent name="filter" />
+  </IconItem>
+  <IconItem name="times">
+    <IconComponent name="times" />
+  </IconItem>
+  <IconItem name="undo">
+    <IconComponent name="undo" />
+  </IconItem>
+  <IconItem name="cog">
+    <IconComponent name="cog" />
+  </IconItem>
+  <IconItem name="envelope-o">
+    <IconComponent name="envelope-o" />
+  </IconItem>
+   <IconItem name="share">
+    <IconComponent name="share" />
+  </IconItem>
+   <IconItem name="reply">
+    <IconComponent name="reply" />
+  </IconItem>
+  <IconItem name="bug">
+    <IconComponent name="bug" />
+  </IconItem>
+   <IconItem name="asterisk">
+    <IconComponent name="asterisk" />
+  </IconItem>
+  <IconItem name="comment">
+    <IconComponent name="comment" />
+  </IconItem>
+  <IconItem name="external-link">
+    <IconComponent name="external-link" />
+  </IconItem>
+  <IconItem name="ellipsis-h">
+    <IconComponent name="ellipsis-h" />
+  </IconItem>
+  <IconItem name="ellipsis-v">
+    <IconComponent name="ellipsis-v" />
+  </IconItem>
+</IconGallery>
+
+## File Icons 
+
+These icons help inform the user what they're downloading when the file extension is not immediately visible.
+
+<IconGallery>
+  <IconItem name="file-archive-o">
+    <IconComponent name="file-archive-o" />
+  </IconItem>
+  <IconItem name="file-audio-o">
+    <IconComponent name="file-audio-o" />
+  </IconItem>
+  <IconItem name="file-code-o">
+    <IconComponent name="file-code-o" />
+  </IconItem>
+  <IconItem name="file-excel-o">
+    <IconComponent name="file-excel-o" />
+  </IconItem>
+  <IconItem name="file-image-o">
+    <IconComponent name="file-image-o" />
+  </IconItem>
+  <IconItem name="file-movie-o">
+    <IconComponent name="file-movie-o" />
+  </IconItem>
+  <IconItem name="file-pdf-o">
+    <IconComponent name="file-pdf-o" />
+  </IconItem>
+  <IconItem name="file-photo-o">
+    <IconComponent name="file-photo-o" />
+  </IconItem>
+  <IconItem name="file-picture-o">
+    <IconComponent name="file-picture-o" />
+  </IconItem>
+  <IconItem name="file-powerpoint-o">
+    <IconComponent name="file-powerpoint-o" />
+  </IconItem>
+  <IconItem name="file-sound-o">
+    <IconComponent name="file-sound-o" />
+  </IconItem>
+  <IconItem name="file-video-o">
+    <IconComponent name="file-video-o" />
+  </IconItem>
+  <IconItem name="file-word-o">
+    <IconComponent name="file-word-o" />
+  </IconItem>
+</IconGallery>
+
+
+
+For a full list of available icon names, see [Font Awesome 4.7.0 Icons](https://fontawesome.com/v4.7.0/icons/)
