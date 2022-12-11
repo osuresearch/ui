@@ -1,5 +1,7 @@
 import { themes } from '@storybook/theming';
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
+import { DocsContainer } from './DocsContainer';
+
 import  "../src/sass5/index.scss";
 
 export const parameters = {
@@ -13,6 +15,11 @@ export const parameters = {
   viewport: {
     viewports: INITIAL_VIEWPORTS,
   },
+  viewMode: 'docs',
+  docs: {
+    // theme: themes.dark,
+    container: DocsContainer,
+  },
   darkMode: {
     stylePreview: true,
     // Override the default dark theme
@@ -22,6 +29,13 @@ export const parameters = {
   }
 }
 
+// export const decorators = [
+//   (Story) => (
+//     <div className={useDarkMode() ? "dark" : "light"}>
+//       <Story />
+//     </div>
+//   ),
+// ];
 // addParameters({
 //   options: {
 //     theme: themes.dark,

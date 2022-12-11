@@ -1,1 +1,9 @@
 
+.alert {
+    &__icon {
+        display: inline-block;
+        height: 100%;
+        width: 45px;
+        opacity: 0.8;
+    }
+}

@@ -10,7 +10,7 @@ $body-color:            $gray-dark-80;
 // Map system colors to the brand
 $primary:       $scarlet;
 $secondary:     $gray;
-$success:       $success-dark;
+$success:       $success-light;
 $info:          $info-dark;
 $warning:       $warning-dark;
 $danger:        $error;
@@ -35,15 +35,8 @@ $brand-colors: (
 );
 
 // Variables for our components
-$btn-disabled-bg: #eff1f2;
-$btn-disabled-fg: #868e92;
-// $btn-hover-bg: #3f4443;
-// $btn-hover-fg: $white;
+// *should* be CSS variables though.
+$btn-disabled-bg:   #eff1f2;
+$btn-disabled-fg:   #868e92;
 
-// Link border-bottom: 1px solid #ba0c2f
-/* Hover:
-color: #212325;
-border-bottom-color: #212325;
-background-color: #eff1f2;
-
-*/
+$link-color:        #2f7aba;

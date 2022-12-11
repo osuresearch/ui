@@ -22,8 +22,6 @@ $vendor-fonts: 'https://orapps.osu.edu/assets/fonts/vendor' !default;
 
 $prefix: 'rui-';
 
-.light {
-    
 @import "light";
 
 @import "bootstrap/scss/variables";
@@ -38,4 +36,32 @@ $theme-colors: map-merge(
 @import "vendor";
 @import "components";
 
+:root {
+    --rui-link-decoration-color: rgba(47, 122, 186, 0.5); // NEW
+}
+// $link-hover-color:                        shift-color($link-color, $link-shade-percentage);
+
+body.dark {
+    --rui-body-bg: #333333;
+    --rui-body-bg-rgb: 51, 51, 51;
+    
+    --rui-body-color: #ffffff;
+    --rui-body-color-rgb: 255, 255, 255;
+    
+    --rui-link-color: #41b6e6;
+    --rui-link-hover-color: #75caeb;
+    --rui-link-decoration-color: rgba(117, 202, 235, 0.5); // NEW
+
+    --rui-primary:  #ba0c2f;
+    --rui-secondary:#a7b1b7;
+    --rui-success:  #80c75b;
+    --rui-info:     #41b6e6;
+    --rui-warning:  #ffb600;
+    --rui-danger:   #ba0c2f;
+    --rui-light:    #dfe3e5;
+    --rui-dark:     #3f4443;
+}
+
+body.dark {
+    background: var(--rui-body-bg);
 }

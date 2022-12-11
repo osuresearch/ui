@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import React, { useState } from 'react';
+import { Icon } from '../Icon';
 
 export type Props = {
     theme: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark';
@@ -39,14 +40,20 @@ export type Props = {
      */
     role?: 'alert' | 'status' | 'presentation';
 
+    /**
+     * Optional icon name
+     */
+    icon?: string
+
     children: React.ReactNode
 }
 
 export const Alert = ({
-    theme,
+    theme = 'info',
     dismissible,
     banner,
     role = 'status',
+    icon,
     children
 }: Props) => {
     const [visible, setVisible] = useState(true);
@@ -62,6 +69,11 @@ export const Alert = ({
             dismissible && 'alert-dismissible fade show',
             banner && 'alert-banner'
         )} role={role}>
+            {icon && 
+                <div className="alert__icon">
+                    <Icon circled name={icon} />
+                </div>
+            }
             {children}
 
             {dismissible &&
