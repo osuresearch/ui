@@ -1,3 +1,10 @@
+# [4.8.0](https://code.osu.edu/ORIS/ui/compare/4.7.1...4.8.0) (2022-12-20)
+
+
+### Features
+
+* add Upload form component ([f11c819](https://code.osu.edu/ORIS/ui/commit/f11c819dbc4aaf30ca933d4f6bae08f25ee252f3))
+
 ## [4.7.1](https://code.osu.edu/ORIS/ui/compare/4.7.0...4.7.1) (2022-10-25)
 
 
