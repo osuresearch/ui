@@ -52,6 +52,12 @@ export { default as Text } from './form/Text';
 export { default as Time } from './form/Time';
 export { default as Lookup } from './form/Lookup';
 
+// Hooks
+export { default as useMockFileUploader } from './hooks/useMockFileUploader';
+export { default as useRESTFileUploader } from './hooks/useRESTFileUploader';
+export { default as useGraphQLFileUploader } from './hooks/useGraphQLFileUploader';
+
+
 // Search components
 export { default as SearchProvider } from './search/components/SearchProvider';
 export { default as SearchDebugger } from './search/components/SearchDebugger';
