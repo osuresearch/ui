@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
 import { Context } from '..';
-import { MultiSelect } from 'primereact/multiselect';
-import TooltipOptions from 'primereact/components/tooltip/TooltipOptions';
+import { MultiSelect, MultiSelectOptionDisabledType } from 'primereact/multiselect/multiselect';
+import TooltipOptions from 'primereact/tooltip/tooltipoptions';
+
 
 type OptionGroupTemplateType = React.ReactNode | ((option: any, index: number) => React.ReactNode);
 
@@ -70,7 +71,7 @@ export type InputProps = {
     optionValue?: string;
 
     /** Property name or getter function to use as the disabled flag of an option, defaults to false when not defined. */
-    optionDisabled?: boolean;
+    optionDisabled?: MultiSelectOptionDisabledType;
 
     /** Property name or getter function to use as the label of an option group. */
     optionGroupLabel?: string;

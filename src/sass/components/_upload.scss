@@ -1,0 +1,175 @@
+// Stick to BEM conventions for any new classes.
+
+.form-upload {
+    &__wrapper {
+        display: flex;
+        align-items: flex-start;
+    }
+
+    .p-fileupload-choose {
+        position: absolute;
+        background-color: transparent;
+        color: #2F7ABA;
+        border: 0;
+        font-size: 1.125rem;
+        top: 6.5rem;
+        left: 2.2rem;
+        text-decoration: underline;
+        z-index: 2;
+        padding: 0;
+    }
+
+    .p-fileupload-highlight .form-upload__dropzone {
+        background-color: #FFEAAE;
+    }
+
+    width: 45%;
+
+    &__dropzone {
+        //border
+        background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%23999999FF' stroke-width='4' stroke-dasharray='6%2c 14' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+        padding: 3rem;
+        display: flex;
+        flex-direction: column;
+        color: shade($gray, 30%);
+        align-items: center;
+
+        >i {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+    }
+
+    &__instruction {
+        font-size: 1.125rem;
+        display: inline-block;
+        width: 15.7rem;
+        text-align: right;
+    }
+
+    &__size-limit {
+        font-size: 0.875rem;
+    }
+
+
+    &__right-col {
+        width: 55%;
+        padding-left: 2rem;
+    }
+
+    &__block-title {
+        display: inline-block;
+        margin-bottom: 0.625rem;
+    }
+
+    &__block--uploading {
+        margin-top: 1.875rem;
+        display: flex;
+        flex-direction: column;
+
+        >progress {
+            width: 100%;
+            margin-bottom: 0.625rem;
+            height: 0.8rem;
+        }
+    }
+
+    &__uploading-block-title-wrap {
+        margin-bottom: 0;
+        display: flex;
+        justify-content: space-between;
+
+        >span {
+            margin-bottom: 0;
+        }
+    }
+
+    &__block--error {
+        >span {
+            margin-top: 1.875rem;
+            color: #DB3B21;
+        }
+    }
+
+    &__item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.625rem;
+        width: 100%;
+
+        // File upload that it's in progress
+        &--uploading {}
+
+        // File upload that has completed
+        &--uploaded {}
+
+        &--error {}
+    }
+
+    &__item-line-left {
+        display: flex;
+        align-items: baseline;
+        width: calc(100% - 60px);
+    }
+
+    &__file-title {
+        display: flex;
+        align-items: baseline;
+        margin-left: 0.625rem;
+
+        &--two-lines {
+            display: flex;
+            flex-direction: column;
+            align-items: baseline;
+            margin-left: 0.625rem;
+            width: 100%;
+        }
+
+        &__top-line {
+            display: flex;
+            align-items: baseline;
+            width: 100%;
+        }
+    }
+
+    &__file-name {
+        margin-right: 0.5rem;
+        max-width: 85%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    &__file-size {
+        font-size: 0.75rem;
+        color: #637892;
+        font-weight: bold;
+        white-space: nowrap;
+    }
+
+    &__file-notes {
+        font-size: 0.75rem;
+    }
+
+    &__file-error {
+        font-size: 0.75rem;
+        color: #DB3B21;
+    }
+
+    &__delete,
+    &__cancel {
+        margin: 0 !important;
+        padding: 0;
+        color: shade($gray, 30%);
+        font-size: 1.25rem;
+    }
+}
+
+@media (max-width: 1080px) {
+    .form-upload {
+        &__wrapper {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+}
