@@ -14,10 +14,10 @@ const citySelectItems = [
 ];
 
 
-<MultiSelect.Input 
-    value={cities} 
-    options={citySelectItems} 
-    onChange={(e) => setCities(e.value)} 
+<MultiSelect.Input
+    value={cities}
+    options={citySelectItems}
+    onChange={(e) => setCities(e.value)}
 />
 ```
 
@@ -32,19 +32,19 @@ const cityList = [
     {name: 'Paris', code: 'PRS'}
 ];
 
-<MultiSelect.Input 
-    optionLabel="name" 
+<MultiSelect.Input
+    optionLabel="name"
     value={cities}
     options={cityList}
     onChange={(e) => setCities(e.value)}
 />
 
-<MultiSelect.Input 
-    optionLabel="name" 
-    optionValue="code" 
-    value={cities} 
-    options={cityList} 
-    onChange={(e) => setCities(e.value)} 
+<MultiSelect.Input
+    optionLabel="name"
+    optionValue="code"
+    value={cities}
+    options={cityList}
+    onChange={(e) => setCities(e.value)}
 />
 ```
 
@@ -122,7 +122,7 @@ Options can be filtered using an input field in the overlay by enabling the `fil
 
 ```jsx
 import React, { useState } from 'react';
-import { Icon } from '@ORIS/ui';
+import { Icon } from '@osuresearch/ui';
 
 const [selectedCountries, setSelectedCountries] = useState();
 
@@ -189,7 +189,7 @@ const cities = [
     { name: 'Paris', code: 'PRS' }
 ];
 
-<MultiSelect 
+<MultiSelect
     id="select-multiple-cities-readonly"
     readOnly={true}
 >

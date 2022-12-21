@@ -43,7 +43,7 @@ Value: {watch('rhf-receive-newsletter') ? 'Yes' : 'No'}
 
 #### Read Only
 ```jsx
-import { Checkbox } from '@ORIS/ui';
+import { Checkbox } from '@osuresearch/ui';
 
 <Checkbox id="checkbox-readonly" readOnly={true}>
     <Checkbox.Input defaultChecked={true} />
@@ -56,7 +56,7 @@ import { Checkbox } from '@ORIS/ui';
 #### Validation
 ```jsx
 import { useState } from 'react';
-import { Form, Button } from '@ORIS/ui';
+import { Form, Button } from '@osuresearch/ui';
 
 const [error, setError] = useState();
 const [success, setSuccess] = useState();
@@ -88,7 +88,7 @@ const [success, setSuccess] = useState();
 #### Validation with React Hook Form (v7)
 ```jsx
 import { useForm } from 'react-hook-form';
-import { Form, Button } from '@ORIS/ui';
+import { Form, Button } from '@osuresearch/ui';
 
 const { register, formState: { isValid, errors }, reset, handleSubmit } = useForm({ mode: 'onBlur' });
 
@@ -134,7 +134,7 @@ const onChange = (newBoolValue, oldBoolValue) => {
 ```
 
 ```jsx
-import { FieldSet } from '@ORIS/ui';
+import { FieldSet } from '@osuresearch/ui';
 
 const onChange = (newArrayValue, oldArrayValue) => {
     alert(`Selected options changed from [${oldArrayValue}] to [${newArrayValue}]`);
@@ -166,7 +166,7 @@ const onChange = (newArrayValue, oldArrayValue) => {
 
 ```jsx
 import { useForm } from 'react-hook-form';
-import { FieldSet } from '@ORIS/ui';
+import { FieldSet } from '@osuresearch/ui';
 
 const { register, watch } = useForm({
     mode: 'onBlur',
@@ -184,25 +184,25 @@ const selectedLightTypes = watch('light-types');
     </FieldSet.Legend>
 
     <Checkbox id="spot">
-        <Checkbox.Input 
+        <Checkbox.Input
             value="spot"
-            {...register('light-types')} 
+            {...register('light-types')}
         />
         <Checkbox.Label>Spot light</Checkbox.Label>
     </Checkbox>
 
     <Checkbox id="directional">
-        <Checkbox.Input 
+        <Checkbox.Input
             value="directional"
-            {...register('light-types')} 
+            {...register('light-types')}
         />
         <Checkbox.Label>Directional Light</Checkbox.Label>
     </Checkbox>
 
     <Checkbox id="point">
-        <Checkbox.Input 
+        <Checkbox.Input
             value="point"
-            {...register('light-types')} 
+            {...register('light-types')}
         />
         <Checkbox.Label>Point Light</Checkbox.Label>
     </Checkbox>

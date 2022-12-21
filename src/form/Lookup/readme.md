@@ -6,7 +6,7 @@
 Provide the same type of driver you would for `SearchProvider`. See driver support section below for what's needed by your search driver before using this component.
 
 ```jsx
-import Mock from '@ORIS/ui/search/drivers/Mock';
+import Mock from '@osuresearch/ui/search/drivers/Mock';
 
 <Lookup id="example-lookup-basic" driver={Mock()}>
     <Lookup.Label>
@@ -35,7 +35,7 @@ import Mock from '@ORIS/ui/search/drivers/Mock';
 
 ```jsx
 import { useForm, Controller } from 'react-hook-form';
-import Mock from '@ORIS/ui/search/drivers/Mock';
+import Mock from '@osuresearch/ui/search/drivers/Mock';
 
 const { control, watch, formState: { errors } } = useForm({ mode: 'onBlur' });
 
@@ -92,7 +92,7 @@ Value: {JSON.stringify(watch('rhf-lookup'))}
 #### Default Value
 
 ```jsx
-import Mock from '@ORIS/ui/search/drivers/Mock';
+import Mock from '@osuresearch/ui/search/drivers/Mock';
 
 // Your default value must match the shape of your search results from the backend.
 // Or, at the least, the fields that are needed by `resultRenderer` as this object
@@ -132,8 +132,8 @@ const defaultValue = {
 #### Change Events
 
 ```jsx
-import { SearchProvider, SearchDebugger } from '@ORIS/ui';
-import Mock from '@ORIS/ui/search/drivers/Mock';
+import { SearchProvider, SearchDebugger } from '@osuresearch/ui';
+import Mock from '@osuresearch/ui/search/drivers/Mock';
 
 const onChange = (newValue, oldValue) => {
     alert(`Lookup value changed from ${JSON.stringify(oldValue)} to ${JSON.stringify(newValue)}`);
@@ -170,8 +170,8 @@ const onChange = (newValue, oldValue) => {
 To support `<Filters>` and other external search tooling you can provide a `provider` prop to Lookup instead of the driver directly.
 
 ```jsx
-import { SearchProvider, Filters, SearchDebugger } from '@ORIS/ui';
-import Mock from '@ORIS/ui/search/drivers/Mock';
+import { SearchProvider, Filters, SearchDebugger } from '@osuresearch/ui';
+import Mock from '@osuresearch/ui/search/drivers/Mock';
 
 const PROVIDER = 'example-lookup-with-filtering';
 
@@ -215,7 +215,7 @@ const PROVIDER = 'example-lookup-with-filtering';
 The public JSON:API endpoint https://orapps.osu.edu/api/v1/person can be searched against using the `JsonApi` search driver.
 
 ```jsx
-import JsonApi from '@ORIS/ui/search/drivers/JsonApi';
+import JsonApi from '@osuresearch/ui/search/drivers/JsonApi';
 
 <Lookup id="example-json-api-person" driver={JsonApi('https://orapps.osu.edu/api/v1/person')}>
     <Lookup.Label>
@@ -238,8 +238,8 @@ import JsonApi from '@ORIS/ui/search/drivers/JsonApi';
 ### Clear Lookup Input
 ```jsx
 import { useState } from 'react';
-import JsonApi from '@ORIS/ui/search/drivers/JsonApi';
-import { Button } from '@ORIS/ui';
+import JsonApi from '@osuresearch/ui/search/drivers/JsonApi';
+import { Button } from '@osuresearch/ui';
 
 const [value, setValue] = useState();
 

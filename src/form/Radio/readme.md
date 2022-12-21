@@ -2,7 +2,7 @@
 
 #### Basic Implementation
 ```jsx
-import { RadioSet } from '@ORIS/ui';
+import { RadioSet } from '@osuresearch/ui';
 
 <RadioSet id="texture-format">
     <RadioSet.Legend>
@@ -38,7 +38,7 @@ import { RadioSet } from '@ORIS/ui';
 #### Basic Implementation with React Hook Form (v7)
 ```jsx
 import { useForm } from 'react-hook-form';
-import { RadioSet } from '@ORIS/ui';
+import { RadioSet } from '@osuresearch/ui';
 
 const { register, watch } = useForm({ mode: "onBlur" });
 
@@ -49,8 +49,8 @@ const { register, watch } = useForm({ mode: "onBlur" });
     </RadioSet.Legend>
 
     <Radio id="rhf-texture-format-RGB24">
-        <Radio.Input 
-            value="RGB24" 
+        <Radio.Input
+            value="RGB24"
             {...register('rhf-texture-format')}
         />
         <Radio.Label>RGB24</Radio.Label>
@@ -58,7 +58,7 @@ const { register, watch } = useForm({ mode: "onBlur" });
     </Radio>
 
     <Radio id="rhf-texture-format-RGBA32">
-        <Radio.Input 
+        <Radio.Input
             value="RGBA32"
             {...register('rhf-texture-format')}
         />
@@ -67,8 +67,8 @@ const { register, watch } = useForm({ mode: "onBlur" });
     </Radio>
 
     <Radio id="rhf-texture-format-RGB9e5Float">
-        <Radio.Input 
-            value="RGB9e5Float" 
+        <Radio.Input
+            value="RGB9e5Float"
             {...register('rhf-texture-format')}
         />
         <Radio.Label>RGB9e5Float</Radio.Label>
@@ -76,8 +76,8 @@ const { register, watch } = useForm({ mode: "onBlur" });
     </Radio>
 
     <Radio id="rhf-texture-format-DXT1">
-        <Radio.Input 
-            value="DXT1" 
+        <Radio.Input
+            value="DXT1"
             {...register('rhf-texture-format')}
         />
         <Radio.Label>DXT1</Radio.Label>
@@ -92,7 +92,7 @@ Value: {watch("rhf-texture-format")}
 
 #### Read Only
 ```jsx
-import { RadioSet } from '@ORIS/ui';
+import { RadioSet } from '@osuresearch/ui';
 
 <RadioSet id="output-format" readOnly={true}>
     <RadioSet.Legend>
@@ -119,7 +119,7 @@ import { RadioSet } from '@ORIS/ui';
 #### Change Events
 
 ```jsx
-import { RadioSet } from '@ORIS/ui';
+import { RadioSet } from '@osuresearch/ui';
 
 const onChange = (newStrValue, oldStrValue) => {
     alert(`Selected option changed from ${oldStrValue} to ${newStrValue}`);
@@ -152,7 +152,7 @@ const onChange = (newStrValue, oldStrValue) => {
 Do not set `dangerouslySetInnerHTML` on the label unless you understand the risks involved and have a good usecase. This is almost never a good idea!
 
 ```jsx
-import { RadioSet } from '@ORIS/ui';
+import { RadioSet } from '@osuresearch/ui';
 
 const options = [
     {value: 'RBG24', label: '<strong>RGB24</strong>', help: 'Color texture format, 8-bits per channel.'},
@@ -165,7 +165,7 @@ const options = [
         Select your texture format
     </RadioSet.Legend>
 
-    {options.map(option => 
+    {options.map(option =>
         <Radio id={`texture-format-${option.value}-dsih`}>
             <Radio.Input value={option.value} />
             <Radio.Label dangerouslySetInnerHTML={{__html: option.label}} />

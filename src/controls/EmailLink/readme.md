@@ -11,14 +11,14 @@
 const body = `
 Hello ORIS Developers,
 
-I have question about the @ORIS/UI styleguide:
+I have question about the @osuresearch/ui styleguide:
 `;
 
 <EmailLink
     to={['mcmanning.1@osu.edu', 'coplin.7@osu.edu']}
     cc={['moore.4521@osu.edu', 'santos.134@osu.edu', 'mayo.162@osu.edu']}
     bcc="ray.30@osu.edu"
-    subject="@ORIS/UI Styleguide Question"
+    subject="@osuresearch/ui Styleguide Question"
     body={body}
 >
     Ask the developers a question

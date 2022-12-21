@@ -11,15 +11,15 @@ import PropTypes from 'prop-types';
  *
  * Bootstrap's modal jQuery options can be passed in as React props.
  * For the complete list see https://getbootstrap.com/docs/4.0/components/modal/#options
- * 
- * Bootstrap modal modifier classes (such as .modal-dialog-centered and 
- * .modal-sm) and custom wrapping classes can also be passed in using the 
+ *
+ * Bootstrap modal modifier classes (such as .modal-dialog-centered and
+ * .modal-sm) and custom wrapping classes can also be passed in using the
  * **className** prop. Note that the classes are added to the
  * '.modal-dialog' element and not the outermost '.modal' element.
- * 
+ *
  * This more-or-less follows the pattern at https://reactjs.org/docs/portals.html
  *
- * @deprecated Use PrimeReact Dialog. Will be removed in a future version of `@ORIS/ui`
+ * @deprecated Use PrimeReact Dialog. Will be removed in a future version of `@osuresearch/ui`
  */
 class Modal extends React.Component {
     constructor(props) {

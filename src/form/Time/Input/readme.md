@@ -11,7 +11,7 @@ const [time, setTime] = useState('15:30');
 ```
 
 ```js noeditor
-import { Icon } from '@ORIS/ui';
+import { Icon } from '@osuresearch/ui';
 
 <div className="alert alert-primary">
     <Icon name="universal-access" circled={true} />

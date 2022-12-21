@@ -75,7 +75,7 @@ const dropdownOptions = {
 #### Validation
 ```jsx
 import { useState } from 'react';
-import { Form, Button } from '@ORIS/ui';
+import { Form, Button } from '@osuresearch/ui';
 
 const [error, setError] = useState('');
 const [success, setSuccess] = useState('');
@@ -117,7 +117,7 @@ const [success, setSuccess] = useState('');
 #### Validation with React Hook Form
 ```jsx
 import { useForm } from 'react-hook-form';
-import { Form, Button } from '@ORIS/ui';
+import { Form, Button } from '@osuresearch/ui';
 
 const { register, formState: { isValid, errors }, handleSubmit } = useForm({ mode: "onBlur" });
 
@@ -132,9 +132,9 @@ const onSubmit = data => console.log(data);
     >
         <Select.Label>Which color model is used for print?</Select.Label>
 
-        <Select.Control 
-            {...register('rhf-error-example', { 
-                required: true 
+        <Select.Control
+            {...register('rhf-error-example', {
+                required: true
             })}
         >
             <Select.Option value="">

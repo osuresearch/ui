@@ -8,7 +8,7 @@ import {
     Modal,
     ModalHeader,
     ModalBody
-} from '@ORIS/ui';
+} from '@osuresearch/ui';
 
 /**
  * Modal to change emulation of users within the application.
@@ -17,7 +17,7 @@ import {
  * changed, the entire application will be refreshed to load
  * under the new emulated user.
  *
- * @deprecated Use `@ORIS/auth`. Will be removed in a future version of `@ORIS/ui`
+ * @deprecated Use `@ORIS/auth`. Will be removed in a future version of `@osuresearch/ui`
  */
 class Emulate extends React.Component {
     constructor(props) {

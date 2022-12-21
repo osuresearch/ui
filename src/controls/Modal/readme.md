@@ -2,7 +2,7 @@
 ### Examples
 
 ```jsx
-import { Button, ModalHeader, ModalBody, ModalFooter } from '@ORIS/ui';
+import { Button, ModalHeader, ModalBody, ModalFooter } from '@osuresearch/ui';
 
 const MyModal = (props) => {
     let modal = React.createRef();

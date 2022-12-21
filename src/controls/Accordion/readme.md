@@ -42,7 +42,7 @@ import { Accordion, AccordionTab } from 'primereact/accordion';
 
 ```jsx
 import { Accordion, AccordionTab } from 'primereact/accordion';
-import { Icon } from '@ORIS/ui';
+import { Icon } from '@osuresearch/ui';
 
 <Accordion className="accordion-custom" activeIndex={0}>
     <AccordionTab

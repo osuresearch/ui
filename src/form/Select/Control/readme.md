@@ -10,7 +10,7 @@ Sub-component will inherit `id`, `onChange`, and `readOnly` props from parent co
 ```
 
 ```js noeditor
-import { Icon } from '@ORIS/ui';
+import { Icon } from '@osuresearch/ui';
 
 <div className="alert alert-primary">
     <Icon name="universal-access" circled={true} />

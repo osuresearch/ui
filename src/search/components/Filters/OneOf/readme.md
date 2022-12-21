@@ -4,8 +4,8 @@ The enum `key` will be used in the filter and each radio will be labeled with th
 ### Examples
 
 ```jsx
-import { SearchProvider, Filters, SearchDebugger } from '@ORIS/ui';
-import Mock from '@ORIS/ui/search/drivers/Mock';
+import { SearchProvider, Filters, SearchDebugger } from '@osuresearch/ui';
+import Mock from '@osuresearch/ui/search/drivers/Mock';
 
 const ID = 'demo-OneOf';
 

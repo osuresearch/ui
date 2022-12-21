@@ -1,32 +1,30 @@
 
 # Contributing
 
-[[_TOC_]]
+## How can I contribute?
 
-# How can I contribute?
-
-Check out open tickets on [YouTrack](https://ordevsvc01.rf.ohio-state.edu/youtrack/issues?q=project%3A+%7BPHP+Framework%7D+component%3A+ORIS%5CUI+%23Unresolved+) and get in contact with an existing maintainer of the project. 
+Check out open issues on [GitHub](https://github.com/osuresearch/ui/issues) and get in contact with an existing maintainer of the project.
 
 
-# Submitting a Merge Request
+## Submitting a Pull Request
 
-Good merge requests, whether patches, improvements, or new features, are a fantastic help. They should remain focused in scope and avoid containing unrelated commits.
+Good pull requests, whether patches, improvements, or new features, are a fantastic help. They should remain focused in scope and avoid containing unrelated commits.
 
-Please ask first before embarking on any significant merge requests (e.g. implementing features, refactoring code), otherwise you risk spending a lot of time working on something that the project's maintainers might not want to merge into the project.
+Please ask first before embarking on any significant pull requests (e.g. implementing features, refactoring code), otherwise you risk spending a lot of time working on something that the project's maintainers might not want to merge into the project.
 
-For ambitious tasks, open a Merge Request as soon as possible with the `WIP: ` prefix in the title, in order to get feedback early. 
+For ambitious tasks, open a Pull Request as soon as possible with the `WIP: ` prefix in the title, in order to get feedback early.
 
 Here is a summary of the steps to follow:
 
 1. Clone the project from the upstream and install dependencies:
 
 ```sh
-$ git clone git@code.osu.edu:ORIS/ui.git
+$ git clone git@github.com:osuresearch/ui.git
 $ cd ui
 $ npm install
 ```
 
-2. Create a new topic branch off the `master` branch to contain your feature, change, or fix:
+2. Create a new topic branch off the `main` branch to contain your feature, change, or fix:
 
 ```sh
 $ git checkout -b <topic-branch-name>
@@ -39,14 +37,14 @@ $ npm start
 ```
 
 4. Make your code changes and preview in Styleguidist
-5. Merge any recent changes from the `master` branch and resolve any merge conflicts.
+5. Merge any recent changes from the `main` branch and resolve any merge conflicts.
 6. Push your topic branch up to the repository:
 
 ```sh
 $ git push origin <topic-branch-name>
 ```
 
-7. Open a Merge Request with a clear title and description. 
+7. Open a Pull Request with a clear title and description.
 8. After the CI pipeline has completed, review your changes in the deployed copy of Styleguidist on our development server
 9. Assign a current maintainer to review and approve your changes
 
@@ -64,7 +62,7 @@ To ensure consistency and quality throughout the source code, all code modificat
 
 ## Accessibility guidelines
 
-Components must meet [WCAG 2.1 AA guidelines](https://www.w3.org/WAI/WCAG21/quickref/?currentsidebar=%23col_overview&levels=aaa). 
+Components must meet [WCAG 2.1 AA guidelines](https://www.w3.org/WAI/WCAG21/quickref/?currentsidebar=%23col_overview&levels=aaa).
 
 For assistance, reach out to another maintainer or our Accessibility Coordinator at oraccessibility@osu.edu.
 
@@ -83,7 +81,7 @@ A complex feature can be broken down into multiple commits as long as each one m
 
 ### Commit message format
 
-This library uses [Semantic Release Bot](https://semantic-release.gitbook.io/semantic-release/) to automate the release of new versions by analyzing commit messages. 
+This library uses [Semantic Release Bot](https://semantic-release.gitbook.io/semantic-release/) to automate the release of new versions by analyzing commit messages.
 
 Each commit message consists of a **header**, a **body** and a **footer**. The header has a special format that includes a **type**, a **scope** and a **subject**:
 

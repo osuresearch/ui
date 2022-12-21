@@ -3,8 +3,8 @@
 
 ```jsx
 import { useState } from 'react';
-import { Form, Button, Text } from '@ORIS/ui';
-import MockAutocomplete from '@ORIS/ui/search/drivers/MockAutocomplete';
+import { Form, Button, Text } from '@osuresearch/ui';
+import MockAutocomplete from '@osuresearch/ui/search/drivers/MockAutocomplete';
 
 const [readOnly, setReadOnly] = useState(false);
 const [error, setError] = useState('');

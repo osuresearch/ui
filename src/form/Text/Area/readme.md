@@ -5,7 +5,7 @@ Sub-component will inherit `id`, `onChange`, and `readOnly` props from parent co
 
 Basic `<Text.Area>`
 ```jsx
-import { Text } from '@ORIS/ui';
+import { Text } from '@osuresearch/ui';
 
 <Text id="textarea-sample" required>
     <Text.Label>Basic textarea</Text.Label>
@@ -24,7 +24,7 @@ import { Text } from '@ORIS/ui';
 Basic `<Text.Area>` with React Hook Form (v7)
 ```jsx
 import { useForm } from 'react-hook-form';
-import { Text } from '@ORIS/ui';
+import { Text } from '@osuresearch/ui';
 
 const { register, formState: { errors } } = useForm({ mode: "onBlur" });
 
@@ -53,7 +53,7 @@ const { register, formState: { errors } } = useForm({ mode: "onBlur" });
 
 `<Text.Area>` with Not Applicable option
 ```jsx
-import { Text, FieldSet, Checkbox } from '@ORIS/ui';
+import { Text, FieldSet, Checkbox } from '@osuresearch/ui';
 
 <FieldSet>
     <Text id="textarea-with-na">
@@ -75,7 +75,7 @@ import { Text, FieldSet, Checkbox } from '@ORIS/ui';
 ```
 
 ```js noeditor
-import { Icon } from '@ORIS/ui';
+import { Icon } from '@osuresearch/ui';
 
 <div className="alert alert-primary">
     <Icon name="universal-access" circled={true} />
@@ -88,7 +88,7 @@ import { Icon } from '@ORIS/ui';
 
 Read Only
 ```jsx
-import { Text } from '@ORIS/ui';
+import { Text } from '@osuresearch/ui';
 
 <Text id="textarea-sample-readOnly" required readOnly>
     <Text.Label>Basic textarea</Text.Label>

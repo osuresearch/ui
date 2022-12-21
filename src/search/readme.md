@@ -1,7 +1,7 @@
 
 ```jsx
-import { SearchProvider, Filters, Paginator, SearchDebugger, useSearchProvider } from '@ORIS/ui';
-import Mock from '@ORIS/ui/search/drivers/Mock';
+import { SearchProvider, Filters, Paginator, SearchDebugger, useSearchProvider } from '@osuresearch/ui';
+import Mock from '@osuresearch/ui/search/drivers/Mock';
 
 function PersonSearchFilters() {
     return (

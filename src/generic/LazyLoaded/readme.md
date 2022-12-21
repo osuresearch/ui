@@ -3,7 +3,7 @@
 #### Basic Usage
 ```jsx
 import { useState } from 'react';
-import { Avatar, Button } from '@ORIS/ui';
+import { Avatar, Button } from '@osuresearch/ui';
 import { Skeleton } from 'primereact/skeleton';
 
 const [loading, setLoading] = useState(true);
@@ -19,7 +19,7 @@ const Loading = () => (
 );
 
 <>
-<LazyLoaded 
+<LazyLoaded
     loading={loading}
     placeholder={<Loading />}
 >
@@ -27,7 +27,7 @@ const Loading = () => (
         <div className="mr-2">
             <Avatar name="Chase" username="mcmanning.1" size={64} />
         </div>
-        
+
         <div style={{ flex: '1' }}>
             <div><strong>Chase McManning</strong></div>
             <div>Fun guy</div>
@@ -35,7 +35,7 @@ const Loading = () => (
     </div>
 </LazyLoaded>
 
-<Button 
+<Button
     type="button"
     onClick={() => setLoading(!loading)}
 >

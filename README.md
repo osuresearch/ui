@@ -1,26 +1,22 @@
-# @ORIS/ui
+# OSU Research UI 4
 
-Collection of React components and a rebranded [Bootstrap 4.0](https://getbootstrap.com/docs/4.0/getting-started/introduction/) build for Office of Research applications.
+Collection of React components and a rebranded [Bootstrap 4.0](https://getbootstrap.com/docs/4.0/getting-started/introduction/) for Office of Research applications.
 
 
 ## Installation
 
-These components are available as a private npm package. Simply run:
-
 ```
-npm i --save @ORIS/ui
+npm i --save @osuresearch/ui
 ```
-
-Note that you will need to add UCR as a private registry to NPM before running the above command.
 
 
 ## Usage
 
-Each component is importable from `@ORIS/ui`, for example:
+Each component is importable from `@osuresearch/ui`, for example:
 
 ```jsx
 import React from 'react';
-import { Icon, Button } from '@ORIS/ui';
+import { Icon, Button } from '@osuresearch/ui';
 
 const MyPage = () =>
     <div className="my-page">
@@ -34,7 +30,7 @@ const MyPage = () =>
 To import the SASS styles into your application, import the following in whatever your primary sass file is (typically an `index.sass`):
 
 ```css
-@import "@ORIS/ui/build/sass";
+@import "@osuresearch/ui/dist/sass";
 ```
 
 
@@ -42,10 +38,7 @@ To import the SASS styles into your application, import the following in whateve
 
 This project uses [React Styleguidist](https://react-styleguidist.js.org/) to provide a styleguide with interactive examples.
 
-A copy of the styleguide for the *latest* version of UI [is available on our development server](https://orwebdev02.rf.ohio-state.edu/ui/styleguide).
-
-
-To view the styleguide of any other version, `git clone` the tag for the version you are using and and run `npm install && npm start`.
+To view the styleguide of any version, `git clone` the tag for the version you are using and and run `npm install && npm start`.
 
 ## Contributing
 

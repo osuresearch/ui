@@ -1,5 +1,5 @@
 ```js noeditor
-import { Icon } from '@ORIS/ui';
+import { Icon } from '@osuresearch/ui';
 
 <div className="alert alert-primary">
     <Icon name="universal-access" circled={true} />
@@ -15,7 +15,7 @@ import { Icon } from '@ORIS/ui';
 #### Basic Implementation
 
 ```jsx
-import { Radio } from '@ORIS/ui';
+import { Radio } from '@osuresearch/ui';
 
 <RadioSet name="colors" id="colors-1" required>
     <RadioSet.Legend>
@@ -46,7 +46,7 @@ import { Radio } from '@ORIS/ui';
 #### RadioSet with React Hook Form (v7)
 ```jsx
 import { useForm } from 'react-hook-form';
-import { Radio } from '@ORIS/ui';
+import { Radio } from '@osuresearch/ui';
 
 const { register, watch } = useForm({ mode: 'onBlur' });
 
@@ -57,30 +57,30 @@ const { register, watch } = useForm({ mode: 'onBlur' });
     </RadioSet.Legend>
 
     <Radio id="rhf-radio-rgb">
-        <Radio.Input 
-            value="rgb" 
-            {...register('rhf-radio-colors', { 
-                required: true 
+        <Radio.Input
+            value="rgb"
+            {...register('rhf-radio-colors', {
+                required: true
             })}
         />
         <Radio.Label>RGB</Radio.Label>
     </Radio>
 
     <Radio id="rhf-radio-cmyk">
-        <Radio.Input 
-            value="cmyk" 
-            {...register('rhf-radio-colors', { 
-                required: true 
+        <Radio.Input
+            value="cmyk"
+            {...register('rhf-radio-colors', {
+                required: true
             })}
         />
         <Radio.Label>CMYK</Radio.Label>
     </Radio>
 
     <Radio id="rhf-radio-hsl">
-        <Radio.Input 
+        <Radio.Input
             value="hsl"
-            {...register('rhf-radio-colors', { 
-                required: true 
+            {...register('rhf-radio-colors', {
+                required: true
             })}
         />
         <Radio.Label>HSL</Radio.Label>
@@ -100,7 +100,7 @@ Selected:
 #### Validation
 ```jsx
 import { useState } from 'react';
-import { Form, Radio, Button } from '@ORIS/ui';
+import { Form, Radio, Button } from '@osuresearch/ui';
 
 const [error, setError] = useState('');
 
@@ -134,25 +134,25 @@ const [error, setError] = useState('');
 
 ```jsx
 import { useForm } from 'react-hook-form';
-import { Form, Radio, Button } from '@ORIS/ui';
+import { Form, Radio, Button } from '@osuresearch/ui';
 
 const { register, formState: { errors }, watch, handleSubmit } = useForm({ mode: 'onBlur' });
 
 const onSubmit = data => console.log(data);
 
 <Form onSubmit={handleSubmit(onSubmit)}>
-    <RadioSet 
-        name="yes-no-456" 
-        id="yes-no-456" 
-        error={errors['yes-no-456'] && "You must select an option"} 
+    <RadioSet
+        name="yes-no-456"
+        id="yes-no-456"
+        error={errors['yes-no-456'] && "You must select an option"}
         required
     >
         <RadioSet.Legend>RadioSet with an error</RadioSet.Legend>
 
         <Radio id="yes-456">
-            <Radio.Input 
+            <Radio.Input
                 value="yes"
-                {...register('yes-no-456', { 
+                {...register('yes-no-456', {
                     required: true
                 })}
             />
@@ -160,9 +160,9 @@ const onSubmit = data => console.log(data);
         </Radio>
 
         <Radio id="no-456">
-            <Radio.Input 
-                value="no" 
-                {...register('yes-no-456', { 
+            <Radio.Input
+                value="no"
+                {...register('yes-no-456', {
                     required: true
                 })}
             />

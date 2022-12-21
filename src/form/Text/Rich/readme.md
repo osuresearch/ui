@@ -6,7 +6,7 @@ By default, the content iframe inside the editor uses a CSS file in the Assets p
 Provide the HTML value as a string
 
 ```jsx
-import { Text } from '@ORIS/ui';
+import { Text } from '@osuresearch/ui';
 
 const html = "<h1>Hello World</h1><p>I am <strong>rich</strong> text!</p>";
 
@@ -19,7 +19,7 @@ const html = "<h1>Hello World</h1><p>I am <strong>rich</strong> text!</p>";
 
 Read Only
 ```jsx
-import { Text } from '@ORIS/ui';
+import { Text } from '@osuresearch/ui';
 
 const html = "<h1>Hello World</h1><p>I am <strong>rich</strong> text!</p>";
 
@@ -33,7 +33,7 @@ const html = "<h1>Hello World</h1><p>I am <strong>rich</strong> text!</p>";
 A "simple" UI version is also available if you do not need (or want) the full range of controls in your app:
 
 ```jsx
-import { Text } from '@ORIS/ui';
+import { Text } from '@osuresearch/ui';
 
 const html = "Hello World! <p>I am <strong>rich</strong> text!</p>";
 
@@ -52,7 +52,7 @@ Use the `defaultValue` and `onChange` props to set and extract the text from you
 
 ```jsx
 import { useState } from 'react';
-import { Form, Text } from '@ORIS/ui';
+import { Form, Text } from '@osuresearch/ui';
 
 const [content, setContent] = useState('<p>Start typing and see it update live</p>');
 
@@ -74,7 +74,7 @@ Use `<Text.Rich>` with React Hook Form (v7)
 
 ```jsx
 import { useForm, Controller } from 'react-hook-form';
-import { Form, Text } from '@ORIS/ui';
+import { Form, Text } from '@osuresearch/ui';
 
 const { control, watch, formState: { errors } } = useForm({
     mode: "onBlur",
@@ -119,7 +119,7 @@ Full example of supported DOM elements:
 
 ```jsx
 import { useState } from 'react';
-import { Form, Text } from '@ORIS/ui';
+import { Form, Text } from '@osuresearch/ui';
 
 const [content, setContent] = useState('<div class="h1">header 1</div> <p>this is <strong>rich</strong> <em>content</em> under header 1</p> <div class="h2">header 2</div> <pre> this is formatted content under header 2!</pre> <div class="h3">header 3</div> <p>this is content under header 3</p> <ol> <li>A numbered list</li> <li>can be included here</li> </ol> <p><s>There is no header 4 through 6</s></p> <ul> <li>And this</li> <li>is a</li> <li>bulleted</li> <li>list</li> </ul> <blockquote> <p>This is a block quote</p> <p>- Chase</p> </blockquote> <p><a href="https://research.osu.edu">OR Homepage</a> link</p> <table border="1" cellpadding="1" cellspacing="1" style="width:500px" summary="Summary of my table"> <caption>This is a table caption</caption> <thead> <tr> <th scope="col">left column</th> <th scope="col">right column</th> </tr> </thead> <tbody> <tr> <td>this is content 1</td> <td>content 2</td> </tr> <tr> <td>and some third content</td> <td>and some fourth</td> </tr> </tbody> </table> <p>&nbsp;</p>');
 

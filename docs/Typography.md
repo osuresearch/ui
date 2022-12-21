@@ -46,7 +46,7 @@ For accessibility, use a `.btn-link` button for links with no target (e.g. `href
 For external links, use the `<ExternalLink />` component to ensure accessibility and security standards are met:
 
 ```js
-import { ExternalLink } from '@ORIS/ui';
+import { ExternalLink } from '@osuresearch/ui';
 
 <ExternalLink href="https://research.osu.edu">Office of Research</ExternalLink>
 ```

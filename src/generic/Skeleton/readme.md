@@ -16,7 +16,7 @@ The other option is the circle by setting `shape` property as "circle".
 Because Skeletons are used as loading placeholders, they should always be contained within a `<LazyLoaded>`.
 
 ```html
-<LazyLoaded 
+<LazyLoaded
     loading={true}
     placeholder={<Skeleton />}
 >
@@ -50,7 +50,7 @@ Animation can be turned of by setting `animation` to "none".
 ```
 
 ```js noeditor
-import { Icon } from '@ORIS/ui';
+import { Icon } from '@osuresearch/ui';
 
 <div className="alert alert-secondary">
     <Icon name="universal-access" circled={true} />
@@ -186,7 +186,7 @@ import { useState } from 'react';
 import { Skeleton } from 'primereact/skeleton';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { Button } from '@ORIS/ui';
+import { Button } from '@osuresearch/ui';
 
 const [loading, setLoading] = useState(true);
 
@@ -196,7 +196,7 @@ const loadingBody = () => <Skeleton />;
 
 <>
 {loading &&
-    <DataTable 
+    <DataTable
         value={new Array(5)}
         className="p-datatable-striped"
         style={{ marginBottom: '1rem' }}
@@ -209,7 +209,7 @@ const loadingBody = () => <Skeleton />;
 }
 
 {!loading &&
-    <DataTable 
+    <DataTable
         value={products}
         className="p-datatable-striped"
         style={{ marginBottom: '1rem' }}

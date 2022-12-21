@@ -6,7 +6,7 @@ Dialog is used as a container and visibility is managed with `visible` property 
 ```jsx
 import React, { useState } from 'react';
 import { Dialog } from 'primereact/dialog';
-import { Button } from '@ORIS/ui';
+import { Button } from '@osuresearch/ui';
 
 const [showDialog, setShowDialog] = useState(false);
 
@@ -15,7 +15,7 @@ const [showDialog, setShowDialog] = useState(false);
     Show Dialog
 </Button>
 
-<Dialog 
+<Dialog
     header={<h5>Modal Title</h5>}
     footer={<>Your footer content here</>}
     visible={showDialog}
@@ -33,7 +33,7 @@ const [showDialog, setShowDialog] = useState(false);
 ```jsx
 import React, { useState } from 'react';
 import { Dialog } from 'primereact/dialog';
-import { Button, Icon } from '@ORIS/ui';
+import { Button, Icon } from '@osuresearch/ui';
 
 const [showDialog, setShowDialog] = useState(false);
 
@@ -42,7 +42,7 @@ const [showDialog, setShowDialog] = useState(false);
     Show Long Content
 </Button>
 
-<Dialog 
+<Dialog
     header={<h5>Header</h5>}
     footer={<>
         <Button theme="outline-secondary"><Icon name="times" /> No</Button>
@@ -72,7 +72,7 @@ Dialog width can be adjusted per screen size with the `breakpoints` option. In e
 ```jsx
 import React, { useState } from 'react';
 import { Dialog } from 'primereact/dialog';
-import { Button } from '@ORIS/ui';
+import { Button } from '@osuresearch/ui';
 
 const [showDialog, setShowDialog] = useState(false);
 
@@ -81,7 +81,7 @@ const [showDialog, setShowDialog] = useState(false);
     Show Responsive Dialog
 </Button>
 
-<Dialog 
+<Dialog
     header={<h5>Modal Title</h5>}
     footer={<>Your footer content here</>}
     visible={showDialog}

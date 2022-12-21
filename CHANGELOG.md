@@ -190,7 +190,7 @@ __Bug Fixes:__
 
 __Minor Backwards Breaking Changes:__
 
-* Internal imports have changed to use the uppercase package name `@ORIS` instead of `@oris` to support NPM > 6. If you have the package installed as `@oris/ui` you may encounter build errors. Reinstall as `@ORIS/ui`.
+* Internal imports have changed to use the uppercase package name `@ORIS` instead of `@oris` to support NPM > 6. If you have the package installed as `@osuresearch/ui` you may encounter build errors. Reinstall as `@osuresearch/ui`.
 
 # 4.3.1 (2021-02-19)
 
@@ -216,7 +216,7 @@ __New Features:__
 __Internal changes:__
 
 * The base styleguide page no longer loads all of the components in the styleguide
-* Added the ability to override the component path line; if `componentPathLine` is set in a component, it will override the default (i.e. `import { Component } from '@ORIS/ui'`)
+* Added the ability to override the component path line; if `componentPathLine` is set in a component, it will override the default (i.e. `import { Component } from '@osuresearch/ui'`)
 * Improved the method of wrapping component names in brackets
 * Moved component files into category folders within the components folder
 * Removed (now) redundant HTML docs
@@ -333,10 +333,10 @@ __UI Changes:__
 
 __Bug Fixes:__
 
-* Refactored package dependencies to no longer require specific builds of node-sass or react-scripts installed when installing `@ORIS/ui` through npm.
+* Refactored package dependencies to no longer require specific builds of node-sass or react-scripts installed when installing `@osuresearch/ui` through npm.
     * Minimum supported React versions are defined via `peerDependencies` to issue warnings during `npm install` if these are not met.
 
-Note that with the above fix `react-dom` and `react-router-dom` will no longer be installed alongside `@ORIS/ui`. If your project was using an older version of `@ORIS/ui`, you will need to install these dependencies manually via:
+Note that with the above fix `react-dom` and `react-router-dom` will no longer be installed alongside `@osuresearch/ui`. If your project was using an older version of `@osuresearch/ui`, you will need to install these dependencies manually via:
 
 ```
 npm install react-dom react-router-dom --save
@@ -354,7 +354,7 @@ __Backwards Breaking Changes:__
 * All non-React components have been removed or replaced with React-equivalents
     * This does not include every Bootstrap component. Use those as you typically would.
 * Composer support has been removed. Now installable as a `npm` package
-* Component imports must now come from the `@ORIS/ui` package
+* Component imports must now come from the `@osuresearch/ui` package
 * `Lookup` component has been replaced by `Search` - with similar arguments and less jQuery
 * `Modal` component now has additional wrapper DOM. Recommended to use new `ModalHeader` and `ModalBody` as the only children.
 * Removed `AppLoader` component

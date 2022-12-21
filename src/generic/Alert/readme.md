@@ -1,7 +1,7 @@
 #### Examples
 
 ```js
-import { Icon } from '@ORIS/ui';
+import { Icon } from '@osuresearch/ui';
 
 <Alert theme="primary" role="presentation">
     <Icon name="question" circled={true} />
@@ -12,7 +12,7 @@ import { Icon } from '@ORIS/ui';
 ```
 
 ```js
-import { Icon } from '@ORIS/ui';
+import { Icon } from '@osuresearch/ui';
 
 <Alert theme="secondary" role="presentation">
     <Icon name="info" circled={true} />
@@ -25,7 +25,7 @@ import { Icon } from '@ORIS/ui';
 Other alert themes:
 
 ```js
-import { Icon } from '@ORIS/ui';
+import { Icon } from '@osuresearch/ui';
 
 <>
 <Alert theme="dark" role="presentation">

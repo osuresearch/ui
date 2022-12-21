@@ -3,7 +3,7 @@
 This example uses [React Hook Form version 7](https://www.react-hook-form.com) for form handling and validation.
 
 ```jsx noeditor
-import { Icon } from '@ORIS/ui';
+import { Icon } from '@osuresearch/ui';
 
 <div className="alert alert-primary">
     <Icon name='thumbs-o-up' circled />
@@ -15,7 +15,7 @@ import { Icon } from '@ORIS/ui';
 ```
 
 ```js noeditor
-import { Icon } from '@ORIS/ui';
+import { Icon } from '@osuresearch/ui';
 
 <div className="alert alert-secondary">
     <Icon name="universal-access" circled={true} />
@@ -43,8 +43,8 @@ import {
     Time,
     Lookup,
     Button
-} from '@ORIS/ui';
-import JsonApi from '@ORIS/ui/search/drivers/JsonApi';
+} from '@osuresearch/ui';
+import JsonApi from '@osuresearch/ui/search/drivers/JsonApi';
 
 const { register, handleSubmit, control, formState: { errors } } = useForm({ mode: 'onBlur' });
 
@@ -72,7 +72,7 @@ const onSubmit = data => console.log('submit', data);
                         fieldState: { invalid, isTouched, isDirty, error },
                         formState,
                     }) =>
-                        <Lookup.Input 
+                        <Lookup.Input
                         onBlur={onBlur}
                         onChange={onChange}
                         value={value}
@@ -101,7 +101,7 @@ const onSubmit = data => console.log('submit', data);
                 <Text.Email
                     placeholder="me.9876@osu.edu"
                     {...register('email', {
-                        required:'Input a valid email address' 
+                        required:'Input a valid email address'
                     })}
                 />
                 <Text.Error />
@@ -127,11 +127,11 @@ const onSubmit = data => console.log('submit', data);
                         fieldState: { invalid, isTouched, isDirty, error },
                         formState,
                     }) => (
-                        <DateTime.Input 
+                        <DateTime.Input
                             onBlur={onBlur}
                             onChange={onChange}
                             value={value}
-                            ref={ref} 
+                            ref={ref}
                         />
                     )}
                 />
@@ -151,7 +151,7 @@ const onSubmit = data => console.log('submit', data);
                 defaultValue="5678 Water St"
                 {...register('address', {
                     required: 'Input your street address'
-                })}                
+                })}
             />
             <Text.Error />
         </Text>
@@ -172,7 +172,7 @@ const onSubmit = data => console.log('submit', data);
                 error={errors.city && errors.city.message}
             >
                 <Text.Label>City</Text.Label>
-                <Text.Input 
+                <Text.Input
                     {...register('city', {
                         required: 'Input your city'
                     })}
@@ -187,7 +187,7 @@ const onSubmit = data => console.log('submit', data);
                 error={errors.state && errors.state.message}
             >
                 <Select.Label>State</Select.Label>
-                <Select.Control 
+                <Select.Control
                     {...register('state', {
                         required: 'Select your state'
                     })}
@@ -208,7 +208,7 @@ const onSubmit = data => console.log('submit', data);
                 error={errors.zip && errors.zip.message}
             >
                 <Text.Label>ZIP</Text.Label>
-                <Text.Input 
+                <Text.Input
                     {...register('zip', {
                         required: 'Input your ZIP code'
                     })}
@@ -229,7 +229,7 @@ const onSubmit = data => console.log('submit', data);
             <RadioSet.Inline>
                 <Radio id="pizza">
                     <Radio.Input
-                        value="pizza" 
+                        value="pizza"
                         {...register('favorite-food', {
                             required: true
                         })}
@@ -237,7 +237,7 @@ const onSubmit = data => console.log('submit', data);
                     <Radio.Label>Pizza</Radio.Label>
                 </Radio>
                 <Radio id="mac-n-cheese">
-                    <Radio.Input 
+                    <Radio.Input
                         value="mac-n-cheese"
                         {...register('favorite-food', {
                             required: true
@@ -246,7 +246,7 @@ const onSubmit = data => console.log('submit', data);
                     <Radio.Label>Mac 'N Cheese</Radio.Label>
                 </Radio>
                 <Radio id="sushi">
-                    <Radio.Input 
+                    <Radio.Input
                         value="sushi"
                         {...register('favorite-food', {
                             required: true
@@ -265,7 +265,7 @@ const onSubmit = data => console.log('submit', data);
             <Checkbox id="newsletter">
                 <Checkbox.Input
                     value="newsletter"
-                    {...register('opt-in')} 
+                    {...register('opt-in')}
                 />
                 <Checkbox.Label>
                     The weekly newsletter
@@ -273,17 +273,17 @@ const onSubmit = data => console.log('submit', data);
             </Checkbox>
             <Checkbox id="company-offers">
                 <Checkbox.Input
-                    value="company-offers" 
-                    {...register('opt-in')} 
+                    value="company-offers"
+                    {...register('opt-in')}
                 />
                 <Checkbox.Label>
                     Offers from the company
                 </Checkbox.Label>
             </Checkbox>
             <Checkbox id="assoc-company-offers">
-                <Checkbox.Input 
+                <Checkbox.Input
                     value="assoc-company-offers"
-                    {...register('opt-in')} 
+                    {...register('opt-in')}
                 />
                 <Checkbox.Label>
                     Offers from associated companies
@@ -312,7 +312,7 @@ const onSubmit = data => console.log('submit', data);
                     fieldState: { invalid, isTouched, isDirty, error },
                     formState,
                 }) => (
-                    <Time.Input 
+                    <Time.Input
                         onBlur={onBlur}
                         onChange={onChange}
                         value={value}

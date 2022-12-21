@@ -44,7 +44,7 @@ const defaultValue = {
 The following search uses a custom renderer for displaying usernames alongside each result. This is recommended whenever you are dealing with looking up people, as multiple people in the university can have the same name.
 
 ```jsx
-import { PersonSearchResult } from '@ORIS/ui';
+import { PersonSearchResult } from '@osuresearch/ui';
 
 <Search
     name="example-3"

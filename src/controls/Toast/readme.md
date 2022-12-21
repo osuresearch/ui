@@ -16,13 +16,13 @@ API for the Toast's `show()` method.
 ### Examples
 
 ```jsx
-import { useToast, ToastProvider, Button } from '@ORIS/ui';
+import { useToast, ToastProvider, Button } from '@osuresearch/ui';
 
 const toast = useToast();
 
 <ToastProvider>
     <h5>Severities</h5>
-    <Button 
+    <Button
         theme="success"
         onClick={() => {
             toast.show({
@@ -77,7 +77,7 @@ const toast = useToast();
     <hr/>
 
     <h5>Options</h5>
-    <Button 
+    <Button
         theme="primary"
         onClick={() => {
             toast.show([
@@ -94,9 +94,9 @@ const toast = useToast();
         theme="info"
         onClick={() => {
             toast.show({
-                severity: 'info', 
+                severity: 'info',
                 summary: 'Sticky Message',
-                detail: 'Message Content', 
+                detail: 'Message Content',
                 sticky: true
             })
         }}
@@ -116,14 +116,14 @@ To make it easier to incorporate Toasts into your app, a `useToast` hook is prov
 
 #### How to set up `ToastProvider` in `App.tsx`
 
-1 - In `App.tsx`, add `ToastProvider` to the @ORIS/ui imports
+1 - In `App.tsx`, add `ToastProvider` to the @osuresearch/ui imports
 ```jsx static
 import {
     OhioStateNavbar,
     Navbar,
     Footer,
     ToastProvider
-} from '@ORIS/ui';
+} from '@osuresearch/ui';
 ```
 
 2 - Wrap the `ToastProvider` around the app's main content.
@@ -143,7 +143,7 @@ import {
 In your component, import the `useToast` hook from ORIS/ui. Once you need to display a toast message (such as after a form submission), invoke Toast's `show` method on the toast ref.
 
 ```jsx static
-import { useToast } from '@ORIS/ui';
+import { useToast } from '@osuresearch/ui';
 
 const MyToastyComponent = () => {
     const toast = useToast();

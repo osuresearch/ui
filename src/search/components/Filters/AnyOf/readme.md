@@ -5,8 +5,8 @@ The enum `value` will be added to the filter and used for the checkbox labeling.
 ### Examples
 
 ```jsx
-import { SearchProvider, Filters, SearchDebugger } from '@ORIS/ui';
-import Mock from '@ORIS/ui/search/drivers/Mock';
+import { SearchProvider, Filters, SearchDebugger } from '@osuresearch/ui';
+import Mock from '@osuresearch/ui/search/drivers/Mock';
 
 const ID = 'demo-AnyOf';
 

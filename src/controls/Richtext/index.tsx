@@ -53,7 +53,7 @@ const SIMPLE_TOOLBAR_CONFIG = [
 /**
  * Simple preconfigured Richtext editor
  *
- * @deprecated Use `<Text.Rich>` from `@ORIS/ui` Form Components. Will be removed in a future version of `@ORIS/ui`
+ * @deprecated Use `<Text.Rich>` from `@osuresearch/ui` Form Components. Will be removed in a future version of `@osuresearch/ui`
  *
  */
 function Richtext({

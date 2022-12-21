@@ -2,7 +2,7 @@
 ### Examples
 
 ```jsx
-import { Badge, TabItem } from '@ORIS/ui';
+import { Badge, TabItem } from '@osuresearch/ui';
 
 <TabList>
     <TabItem onClick={() => alert('One')}>One</TabItem>
@@ -14,7 +14,7 @@ import { Badge, TabItem } from '@ORIS/ui';
 Example of handling large tab lists
 
 ```jsx
-import { TabItem } from '@ORIS/ui';
+import { TabItem } from '@osuresearch/ui';
 
 // This example will activate any clicked item, so you can
 // see what the active state looks like while overflowing

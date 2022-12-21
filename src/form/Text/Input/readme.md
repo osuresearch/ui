@@ -7,7 +7,7 @@ Inlining values
 
 ```jsx
 import { useState } from 'react';
-import { Form, Button, Text } from '@ORIS/ui';
+import { Form, Button, Text } from '@osuresearch/ui';
 
 const [readOnly, setReadOnly] = useState(false);
 const [error, setError] = useState('');
@@ -52,17 +52,17 @@ Inlining values with React Hook Form (v7)
 
 ```jsx
 import { useForm } from 'react-hook-form';
-import { Form, Button, Text } from '@ORIS/ui';
+import { Form, Button, Text } from '@osuresearch/ui';
 
 const { register, watch, handleSubmit, formState: { errors } } = useForm({ mode: "onBlur" });
 
 const onSubmit = data => console.log(data);
 
 <Form onSubmit={handleSubmit(onSubmit)}>
-    <Text 
-        id="rhf-foo" 
-        name="foo" 
-        error={errors['foo'] && 'Do better'} 
+    <Text
+        id="rhf-foo"
+        name="foo"
+        error={errors['foo'] && 'Do better'}
         required
     >
         <Text.Label>
@@ -94,7 +94,7 @@ const onSubmit = data => console.log(data);
 
 Providing a `bind` class instance:
 ```jsx
-import { Form, Button, Text } from '@ORIS/ui';
+import { Form, Button, Text } from '@osuresearch/ui';
 import { MyMockStringBind } from '../../../internal/FormCommon/types';
 
 const bind = new MyMockStringBind('foo4', 'foo bar');
@@ -120,7 +120,7 @@ const bind = new MyMockStringBind('foo4', 'foo bar');
 Getting bind values on form submit:
 ```jsx
 import React, { useEffect } from 'react';
-import { Form, Button, Text } from '@ORIS/ui';
+import { Form, Button, Text } from '@osuresearch/ui';
 import { MyMockStringBind } from '../../../internal/FormCommon/types';
 
 const bind = new MyMockStringBind('foo6', 'foo bar');
@@ -153,7 +153,7 @@ function MyComponent() {
 Update binds externally
 ```jsx
 import React, { useEffect, useState } from 'react';
-import { Form, Button, Text } from '@ORIS/ui';
+import { Form, Button, Text } from '@osuresearch/ui';
 import { MyMockStringBind } from '../../../internal/FormCommon/types';
 
 const bind = new MyMockStringBind('foo7', 'foo bar');
@@ -177,7 +177,7 @@ Also demos another component that uses the `useFieldBind` hook to monitor a bind
 
 ```jsx
 import React, { useEffect } from 'react';
-import { Form, Button, Text } from '@ORIS/ui';
+import { Form, Button, Text } from '@osuresearch/ui';
 import { MyMockStringBind } from '../../../internal/FormCommon/types';
 import useFieldBind from '../../../internal/FormCommon/hooks/useFieldBind';
 
@@ -216,7 +216,7 @@ function MyComponent() {
 Validation
 
 ```jsx
-import { Text } from '@ORIS/ui';
+import { Text } from '@osuresearch/ui';
 
 const error = 'You must fill out this field';
 
@@ -236,7 +236,7 @@ const error = 'You must fill out this field';
 ```
 
 ```jsx
-import { Text } from '@ORIS/ui';
+import { Text } from '@osuresearch/ui';
 
 const success = "This is valid!";
 
@@ -260,7 +260,7 @@ Validation with React Hook Form (v7)
 ```jsx
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { Text, Button } from '@ORIS/ui';
+import { Text, Button } from '@osuresearch/ui';
 
 const { register, trigger, setValue, formState: { errors } } = useForm({
     mode: "onBlur",
@@ -274,9 +274,9 @@ useEffect(() => {
 }, []);
 
 <>
-<Text 
+<Text
     id="rhf-input-invalid"
-    error={errors['rhf-input-invalid'] && 'Enter at least three (3) letters'} 
+    error={errors['rhf-input-invalid'] && 'Enter at least three (3) letters'}
     required
 >
     <Text.Label>
@@ -306,7 +306,7 @@ useEffect(() => {
 ```jsx
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { Text, Button } from '@ORIS/ui';
+import { Text, Button } from '@osuresearch/ui';
 
 const { register, trigger, setValue, formState: { isValid } } = useForm({
     mode: "onBlur",
@@ -350,7 +350,7 @@ useEffect(() => {
 ```
 
 ```js noeditor
-import { Icon } from '@ORIS/ui';
+import { Icon } from '@osuresearch/ui';
 
 <div className="alert alert-primary">
     <Icon name="universal-access" circled={true} />

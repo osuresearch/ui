@@ -25,7 +25,7 @@ variables:
   DEPENDENCY_SCANNING_DISABLED: 'true'
   CODE_QUALITY_DISABLED: 'true'
 
-# @ORIS/ui needs to build and deploy a styleguide to the dev server upon release.
+# @osuresearch/ui needs to build and deploy a styleguide to the dev server upon release.
 # This also doubles as our packaging job for deployments.
 Build Styleguide:
   image: $NODE_IMAGE

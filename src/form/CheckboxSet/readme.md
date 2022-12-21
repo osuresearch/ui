@@ -3,7 +3,7 @@
 #### Basic Implementation
 
 ```jsx
-import { Checkbox } from '@ORIS/ui';
+import { Checkbox } from '@osuresearch/ui';
 
 <CheckboxSet name="colors" id="colors">
     <CheckboxSet.Legend>
@@ -35,7 +35,7 @@ import { Checkbox } from '@ORIS/ui';
 #### Basic Implementation with React Hook Form
 ```jsx
 import { useForm } from 'react-hook-form';
-import { Checkbox } from '@ORIS/ui';
+import { Checkbox } from '@osuresearch/ui';
 
 const { register, watch } = useForm({ mode: 'onBlur' });
 
@@ -48,26 +48,26 @@ const selections = watch("rhf-colors");
     </CheckboxSet.Legend>
 
     <Checkbox id="rhf-rgb">
-        <Checkbox.Input 
+        <Checkbox.Input
             value="rgb"
-            {...register('rhf-colors')} 
+            {...register('rhf-colors')}
         />
         <Checkbox.Label>RGB</Checkbox.Label>
     </Checkbox>
 
     <Checkbox id="rhf-cmyk">
-        <Checkbox.Input 
+        <Checkbox.Input
             value="cmyk"
-            {...register('rhf-colors')} 
+            {...register('rhf-colors')}
         />
         <Checkbox.Label>CMYK</Checkbox.Label>
     </Checkbox>
 
     <Checkbox id="rhf-hsl">
-        <Checkbox.Input 
+        <Checkbox.Input
             value="hsl"
-            {...register('rhf-colors')} 
-            disabled 
+            {...register('rhf-colors')}
+            disabled
         />
         <Checkbox.Label>HSL</Checkbox.Label>
     </Checkbox>
@@ -89,7 +89,7 @@ Selected:
 #### Validation
 ```jsx
 import { useState } from 'react';
-import { Form, Checkbox, Button } from '@ORIS/ui';
+import { Form, Checkbox, Button } from '@osuresearch/ui';
 
 const [error, setError] = useState('');
 
@@ -123,7 +123,7 @@ const [error, setError] = useState('');
 
 ```jsx
 import { useForm } from 'react-hook-form';
-import { Form, Checkbox, Button } from '@ORIS/ui';
+import { Form, Checkbox, Button } from '@osuresearch/ui';
 
 const { register, formState: { errors }, watch, handleSubmit } = useForm({ mode: 'onBlur' });
 
@@ -132,18 +132,18 @@ const onSubmit = data => console.log(data);
 const name = "favorite-food-set-rhf";
 
 <Form onSubmit={handleSubmit(onSubmit)}>
-    <CheckboxSet 
+    <CheckboxSet
         name={name}
         id={name}
-        error={errors[name] && "You must select an option"} 
+        error={errors[name] && "You must select an option"}
         required
     >
         <CheckboxSet.Legend>CheckboxSet with an error</CheckboxSet.Legend>
 
         <Checkbox id="favorite-food-rhf-pizza">
-            <Checkbox.Input 
+            <Checkbox.Input
                 value="Pizza"
-                {...register(name, { 
+                {...register(name, {
                     required: true
                 })}
             />
@@ -151,9 +151,9 @@ const name = "favorite-food-set-rhf";
         </Checkbox>
 
         <Checkbox id="favorite-food-rhf-sushi">
-            <Checkbox.Input 
-                value="Sushi" 
-                {...register(name, { 
+            <Checkbox.Input
+                value="Sushi"
+                {...register(name, {
                     required: true
                 })}
             />

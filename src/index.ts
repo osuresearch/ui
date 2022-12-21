@@ -70,8 +70,8 @@ export { default as useSearchProvider } from './search/hooks/useSearchProvider';
 
 // Note that /search/drivers/* are intentionally not exported.
 // Drivers contain hard dependencies on external libraries (such as Apollo GraphQL)
-// that are not required for every application using @ORIS/ui. To include a 
-// specific driver, the developer must import the one they need directly. 
+// that are not required for every application using @osuresearch/ui. To include a
+// specific driver, the developer must import the one they need directly.
 
 // Search data types
 export type {

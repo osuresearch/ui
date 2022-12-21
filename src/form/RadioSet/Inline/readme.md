@@ -1,5 +1,5 @@
 ```jsx
-import { RadioSet, Radio } from '@ORIS/ui';
+import { RadioSet, Radio } from '@osuresearch/ui';
 
 <RadioSet id="yes-no-inline">
     <RadioSet.Legend>

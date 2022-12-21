@@ -2,8 +2,8 @@
 ### Examples
 
 ```jsx
-import { SearchProvider, Filters, SearchDebugger, sort } from '@ORIS/ui';
-import Mock from '@ORIS/ui/search/drivers/Mock';
+import { SearchProvider, Filters, SearchDebugger, sort } from '@osuresearch/ui';
+import Mock from '@osuresearch/ui/search/drivers/Mock';
 
 const ID = 'demo-SortBy';
 

@@ -12,7 +12,7 @@ const [date, setDate] = useState('2020-09-25T22:27:39+0000');
 ```
 
 ```js noeditor
-import { Icon } from '@ORIS/ui';
+import { Icon } from '@osuresearch/ui';
 
 <div className="alert alert-primary">
     <Icon name="universal-access" circled={true} />

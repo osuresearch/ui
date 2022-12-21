@@ -4,7 +4,7 @@
 #### Existing Files
 ```jsx
 import React, { useState } from 'react';
-import { useMockFileUploader, useRESTFileUploader } from '@ORIS/ui';
+import { useMockFileUploader, useRESTFileUploader } from '@osuresearch/ui';
 
 //const { register } = useMockFileUploader();
 const { register } = useRESTFileUploader('http://localhost:8000/upload-rest-mock.php');
@@ -66,7 +66,7 @@ const maxFileSize = 10 * 1024 * 1024;
 
 ```jsx
 import { useForm, Controller } from 'react-hook-form';
-import { useMockFileUploader } from '@ORIS/ui';
+import { useMockFileUploader } from '@osuresearch/ui';
 
 const { register } = useMockFileUploader();
 const { control, watch, formState: { errors } } = useForm({

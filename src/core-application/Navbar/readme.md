@@ -6,7 +6,7 @@
 ```js
 import { MemoryRouter } from 'react-router';
 import { NavLink } from 'react-router-dom';
-import { Profile } from '@ORIS/ui';
+import { Profile } from '@osuresearch/ui';
 
 <MemoryRouter>
     <Navbar title="My Cool App">

@@ -6,7 +6,7 @@ Sub-component will inherit `id`, `onChange`, and `readOnly` props from parent co
 Basic Implementation
 
 ```jsx
-import { Text } from '@ORIS/ui';
+import { Text } from '@osuresearch/ui';
 
 <Text id="foo-email">
     <Text.Label>Provide your email address</Text.Label>
@@ -19,7 +19,7 @@ Basic Implementation with React Hook Form (v7)
 
 ```jsx
 import { useForm } from 'react-hook-form';
-import { Text } from '@ORIS/ui';
+import { Text } from '@osuresearch/ui';
 
 const { register } = useForm({ mode: "onBlur" });
 
@@ -31,7 +31,7 @@ const { register } = useForm({ mode: "onBlur" });
 ```
 
 ```js noeditor
-import { Icon } from '@ORIS/ui';
+import { Icon } from '@osuresearch/ui';
 
 <div className="alert alert-primary">
     <Icon name="universal-access" circled={true} />

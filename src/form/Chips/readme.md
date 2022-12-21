@@ -51,7 +51,7 @@ A chip is customized using `itemTemplate` function where value is passed to retu
 
 ```jsx
 import React, { useState } from 'react';
-import { Icon } from '@ORIS/ui';
+import { Icon } from '@osuresearch/ui';
 
 const [values, setValues] = useState([]);
 

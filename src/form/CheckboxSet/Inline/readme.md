@@ -1,5 +1,5 @@
 ```jsx
-import { CheckboxSet, Checkbox } from '@ORIS/ui';
+import { CheckboxSet, Checkbox } from '@osuresearch/ui';
 
 <CheckboxSet id="favorite-food-inline">
     <CheckboxSet.Legend>

@@ -204,7 +204,7 @@ export { default as Filters } from './components/Filters';
 // Hooks
 export { default as useSearchProvider } from './hooks/useSearchProvider';
 
-// Drivers are not exported here - import specific ones from `@ORIS/ui/search/drivers`
+// Drivers are not exported here - import specific ones from `@osuresearch/ui/search/drivers`
 // This allows us to safely load only the drivers that are needed in a project.
 // (e.g. a non-GraphQL project doesn't need to worry about GraphQL drivers)
 

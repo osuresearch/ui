@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
  *
  * Typically rendered within the `Navbar` of an application.
  *
- * @deprecated Use `@ORIS/auth`. Will be removed in `@ORIS/ui^5.0`
+ * @deprecated Use `@ORIS/auth`. Will be removed in `@osuresearch/ui^5.0`
  */
 const Profile = (props) => (
     <div className="profile dropdown">

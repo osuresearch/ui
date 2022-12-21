@@ -142,7 +142,7 @@ import React, { useState, useRef } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 
-import { MultiSelect, Button, Text, Icon, Badge, Dropdown, DateTime } from '@ORIS/ui';
+import { MultiSelect, Button, Text, Icon, Badge, Dropdown, DateTime } from '@osuresearch/ui';
 
 const dt = useRef(null);
 const customers = require('./demo/customers').default;

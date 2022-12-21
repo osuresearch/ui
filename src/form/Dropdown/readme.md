@@ -65,7 +65,7 @@ Options can be filtered using an input field in the overlay by enabling the `fil
 
 ```jsx
 import React, { useState } from 'react';
-import { Icon } from '@ORIS/ui';
+import { Icon } from '@osuresearch/ui';
 
 const [selectedCountry, setSelectedCountry] = useState();
 
