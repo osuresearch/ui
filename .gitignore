@@ -2,4 +2,4 @@
 .notes
 /node_modules
 /styleguide
-/build
+/dist
