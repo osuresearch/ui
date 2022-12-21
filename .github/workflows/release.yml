@@ -1,33 +1,19 @@
-name: Release
-on:
-  push:
-    branches:
-      - main
-      - next
-      - alpha
-      - beta
-      - "*.x"
+name: Semantic Release
 jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
         with:
-          fetch-depth: 0
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          # UI 4 and below are built for legacy Node 14 applications
-          cache: npm
-          node-version: 14
-      - name: Install dependencies
-        run: npm ci
-      - name: Build
-        run: npm run build
-      - name: Release
-        env:
+          node-version: lts/*
+      - run: npm ci
+      - env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
+on:
+  push:
+    branches:
+      - main

@@ -1,0 +1,42 @@
+<!-- Typography.stories.mdx -->
+
+import { Meta, Typeset } from '@storybook/addon-docs/blocks';
+
+import tw from '../tailwind.config.js';
+
+<Meta title="Typography" />
+
+export const typography = {
+  type: {
+    primary: '"Nunito Sans", "Helvetica Neue", Helvetica, Arial, sans-serif',
+  },
+  weight: tw.theme.fontWeight,
+  size: {
+    xs: tw.theme.fontSize.xs[0],
+    sm: tw.theme.fontSize.sm[0],
+    base: tw.theme.fontSize.base[0],
+    md: tw.theme.fontSize.md[0],
+    lg: tw.theme.fontSize.lg[0],
+    xl: tw.theme.fontSize.xl[0],
+    xxl: tw.theme.fontSize.xxl[0],
+  },
+};
+
+export const SampleText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
+
+# Typography
+
+<Typeset
+  fontSizes={[
+    typography.size.xs,
+    typography.size.sm,
+    typography.size.base,
+    typography.size.md,
+    typography.size.lg,
+    typography.size.xl,
+    typography.size.xxl,
+  ]}
+  fontWeight={typography.weight.normal}
+  sampleText={SampleText}
+  fontFamily={typography.type.primary}
+/>

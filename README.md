@@ -1,45 +1,15 @@
-# OSU Research UI 4
+# @osuresearch/ui
 
-Collection of React components and a rebranded [Bootstrap 4.0](https://getbootstrap.com/docs/4.0/getting-started/introduction/) for Office of Research applications.
+[![npm](https://img.shields.io/npm/v/@osuresearch/ui.svg)](https://www.npmjs.com/package/@osuresearch/ui)
 
+...
 
-## Installation
+## Changelog
 
-```
-npm i --save @osuresearch/ui
-```
+The changelog can be found on the [Releases page](https://github.com/osuresearch/ui/releases).
 
+## Authors and license
 
-## Usage
+[Chase McManning](https://github.com/McManning) and [contributors](https://github.com/osuresearch/ui/graphs/contributors).
 
-Each component is importable from `@osuresearch/ui`, for example:
-
-```jsx
-import React from 'react';
-import { Icon, Button } from '@osuresearch/ui';
-
-const MyPage = () =>
-    <div className="my-page">
-        ...
-        <Button theme="danger" onClick={onDelete}>
-            <Icon name="trash">Delete</Icon>
-        </Button>
-    </div>
-```
-
-To import the SASS styles into your application, import the following in whatever your primary sass file is (typically an `index.sass`):
-
-```css
-@import "@osuresearch/ui/dist/sass";
-```
-
-
-## Styleguide and Examples
-
-This project uses [React Styleguidist](https://react-styleguidist.js.org/) to provide a styleguide with interactive examples.
-
-To view the styleguide of any version, `git clone` the tag for the version you are using and and run `npm install && npm start`.
-
-## Contributing
-
-Check out [CONTRIBUTING](CONTRIBUTING.md)
+MIT License, see the included [LICENSE](LICENSE.md) file.

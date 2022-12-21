@@ -1,5 +1,10 @@
-.DS_Store
-.notes
-/node_modules
-/styleguide
-/dist
+node_modules
+coverage
+.DS_STORE
+.idea
+.eslintcache
+.vscode/
+*.log
+build/
+dist/
+coverage/

@@ -1,0 +1,100 @@
+
+<Meta title="Contributing / New components" />
+
+# Creating new components
+
+We include a scaffolding tool to help you create a new component. It will scaffold the following:
+
+- Component folder
+- Component story
+- Component test
+
+To create a new component, invoke `npm run generate:component` and follow the instructions.
+
+## Common component architecture
+
+Components typically implement the polymorphic `Box` component at the root level.
+
+Box allows us to define a root semantic element via `<Box component="a" ...>` for our new component and handles the box model props that are usable throughout this framework.
+
+You define your props as the union of `DefaultProps` - containing box model and common style props - and your own suite of props unique to that component:
+
+For React 18+ support, you will need to explicitly define whether or not your component supports children.
+
+```tsx
+export type DemoProps = DefaultProps & {
+  /* Your props */
+
+  children?: React.ReactNode
+};
+
+export const Demo = forwardRef<HTMLDivElement, DemoProps>(({
+  /* Your props and defaults */
+
+  children, // If it supports children
+  ...props
+}, ref) => {
+
+  return (
+    <Box
+      ref={ref}
+      {...props} // Pass down box model and styles
+    >
+      {/* Your DOM */}
+      {children}
+    </Box>
+  );
+});
+```
+
+We typically want to provide our new component as a `forwardRef` to support more complex use cases later down the road.
+
+## Making polymorphic components
+
+If you're building a component that you know needs to expose a polymorphic root element - such as a button that could also be an anchor - you will want to follow the below pattern:
+
+
+```tsx
+export type PolymorphicDemoProps = DefaultProps & {
+  /* Your props */
+
+  children?: React.ReactNode
+};
+
+export const _PolymorphicDemo = forwardRef<HTMLButtonElement, PolymorphicDemoProps & { component: any }>(({
+  /* Your props and defaults */
+
+  children, // If it supports children
+  component = 'button',
+  ...props
+}, ref) => (
+  <Box
+    component={component}
+    ref={ref}
+    {...props} // Pass down box model and styles
+  >
+    {/* Your DOM */}
+    {children}
+  </Box>
+));
+
+/**
+ * Documentation about your component goes *here* for Storybook to parse it
+ */
+export const PolymorphicDemo = createPolymorphicComponent<'button', PolymorphicDemoProps>(
+  _PolymorphicDemo
+);
+```
+
+Tips:
+
+- Always provide a default for the `component` prop
+- In the `forwardRef` template arguments, you will need to union `{ component: any }` into your prop types.
+
+## Writing stories
+
+TODO
+
+## Writing tests
+
+TODO

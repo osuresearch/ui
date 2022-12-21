@@ -1,6 +1,0 @@
-
-# This .htaccess file is specific to the deployed styleguide.
-# Any requests to the deployed project path should route into the
-# styleguide directory that gets built during the CI pipeline.
-RewriteEngine On
-RewriteRule ^(?!styleguide/)(.*)$   styleguide/$1  [L,QSA]
