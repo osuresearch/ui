@@ -1,6 +1,6 @@
 {
   "name": "@osuresearch/ui",
-  "version": "4.8.0",
+  "version": "4.8.1",
   "description": "React UI components for ORIS applications",
   "author": "Chase McManning <mcmanning.1@osu.edu>",
   "license": "MIT",

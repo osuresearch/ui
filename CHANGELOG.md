@@ -1,3 +1,10 @@
+## [4.8.1](https://github.com/osuresearch/ui/compare/v4.8.0...v4.8.1) (2022-12-21)
+
+
+### Bug Fixes
+
+* **ci:** add missing publishConfig key ([44d19ea](https://github.com/osuresearch/ui/commit/44d19ea60a26f508cac102a35a0b85e1262666c0))
+
 # [4.8.0](https://code.osu.edu/ORIS/ui/compare/4.7.1...4.8.0) (2022-12-20)
 
 
