@@ -43,7 +43,7 @@ export function tc(color: ThemeColor): string {
     'error-light': 'text-error-light',
 
     'dimmed': 'text-gray-shade-40 dark:text-gray'
-  } as Record<ThemeColor, string>;
+  } as Partial<Record<ThemeColor, string>>;
 
   return className[color] ?? '';
 }
@@ -76,7 +76,7 @@ export function bg(color: ThemeColor): string {
     'warning-light': 'bg-warning-light',
     'error': 'bg-error',
     'error-light': 'bg-error-light'
-  } as Record<ThemeColor, string>;
+  } as Partial<Record<ThemeColor, string>>;
 
   return bgClasses[color] ?? '';
 }
@@ -109,7 +109,7 @@ export function bc(color: ThemeColor): string {
     'warning-light': 'border-warning-light',
     'error': 'border-error',
     'error-light': 'border-error-light'
-  } as Record<ThemeColor, string>;
+  } as Partial<Record<ThemeColor, string>>;
 
   return className[color] ?? '';
 }

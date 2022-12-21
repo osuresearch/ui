@@ -24,6 +24,10 @@
       "version": "detect"
     }
   },
+  "ignorePatterns": [
+    "/node_modules",
+    "/dist"
+  ],
   "rules": {
     "@typescript-eslint/ban-ts-comment": "warn",
     "@typescript-eslint/camelcase": "off",

@@ -106,7 +106,7 @@
     "testEnvironment": "jest-environment-jsdom",
     "testPathIgnorePatterns": [
       "/node_modules/",
-      "<rootDir>/lib/"
+      "<rootDir>/dist/"
     ],
     "transform": {
       "^.+\\.tsx?$": "<rootDir>/node_modules/ts-jest/preprocessor.js"

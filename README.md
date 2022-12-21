@@ -1,6 +1,7 @@
 # @osuresearch/ui
 
-[![npm](https://img.shields.io/npm/v/@osuresearch/ui.svg)](https://www.npmjs.com/package/@osuresearch/ui)
+![npm@latest](https://img.shields.io/npm/v/@osuresearch/ui/latest)
+![npm@alpha](https://img.shields.io/npm/v/@osuresearch/ui/alpha)
 
 ...
 
