@@ -1,69 +1,159 @@
-import type { CSSProperties } from 'react';
+import type { CSSProperties, ForwardRefExoticComponent } from 'react';
 
-export const themeSizeNames = [
+export const spacing = [
+  0,
+  1,
+  'xxs',
   'xs',
   'sm',
   'md',
   'lg',
   'xl',
-  'xxl',
-  '-xs',
-  '-sm',
-  '-md',
-  '-lg',
-  '-xl',
-  '-xxl',
-  'base'
-  // TODO: Specials? (auto, full, zero, etc)
+  'xxl'
+  // TODO: Specials? (auto, full, etc)
 ] as const;
 
-export type ThemeSize = typeof themeSizeNames[number];
+export const negativeSpacing = ['-xxs', '-xs', '-sm', '-md', '-lg', '-xl', '-xxl'] as const;
 
-export type Align = 'start' | 'end' | 'stretch' | 'center';
+export type Spacing = typeof spacing[number] | typeof negativeSpacing[number];
+export type PositiveSpacing = typeof spacing[number];
 
-export type Justify = 'start' | 'end' | 'center' | 'apart';
+export const size = ['xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'] as const;
+
+export type ThemeSize = typeof size[number];
+
+export const fontSize = ['xs', 'sm', 'base', 'md', 'lg', 'xl', 'xxl'] as const;
+
+export type FontSize = typeof fontSize[number];
+
+export const fontWeight = ['normal', 'semibold', 'bold', 'extrabold', 'black'] as const;
+
+export type FontWeight = typeof fontWeight[number];
+
+export const fontFamily = ['sans', 'serif', 'mono'] as const;
+
+export type FontFamily = typeof fontFamily[number];
+
+export const screenSize = ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'] as const;
+
+export type ScreenSize = typeof screenSize[number];
+
+export const align = ['start', 'end', 'stretch', 'center'] as const;
+
+export type Align = typeof align[number];
+
+export const justify = ['start', 'end', 'center', 'apart'] as const;
+
+export type Justify = typeof justify[number];
 
 // export type NumberSize = ThemeSize | number;
 // export type ThemeSizes = Record<ThemeSize, number>;
 
 // Prop that can either be a single value or an object mapping
 // theme sizes to values for responsive changes
-export type SpacingProp<Value> = Value | Partial<Record<ThemeSize, Value>>;
+
+/**
+ * A type of prop that can either be the given type OR
+ * an object containing values per breakpoint.
+ *
+ * Example:
+ *
+ * <Box m="lg">
+ * <Box m={{ xl: "lg", sm: "sm" xs: 0 }} />
+ */
+export type ResponsiveProp<Value> = Value | Partial<Record<ScreenSize, Value>>;
 
 // export type SpacingValue = NumberSize | (string & {});
+
+export const brandColors = [
+  'scarlet',
+  'grey',
+
+  'scarlet-dark-40',
+  'scarlet-dark-60'
+
+  // and so forth
+] as const;
+
+export const systemColors = [
+  'primary',
+  'secondary',
+  'tertiary',
+  'dimmed',
+
+  // Neutrals
+  'white',
+  'black',
+  'neutral-0',
+  'neutral-20',
+  'neutral-40',
+  'neutral-60',
+  'neutral-80',
+  'neutral-90',
+  'neutral-100',
+
+  // Utilities
+  'info',
+  'info-light',
+  'success',
+  'success-light',
+  'warning',
+  'warning-light',
+  'error',
+  'error-light',
+  'focus',
+  'link',
+  'link-light',
+  'visited',
+  'visited-light'
+] as const;
 
 /**
  * Color palettes for components
  */
-export type ThemeColor = 'foreground' | 'background' | 'normal' | 'dimmed' | 'scarlet';
+export type ThemeColor = typeof brandColors[number] | typeof systemColors[number];
+
 // TODO: I want support for all the tailwind palette colors
 // but without having to manually map them all...
 
 export interface StyleSystemProps {
   // Margin
-  m?: SpacingProp<ThemeSize>;
-  my?: SpacingProp<ThemeSize>;
-  mx?: SpacingProp<ThemeSize>;
-  mt?: SpacingProp<ThemeSize>;
-  mb?: SpacingProp<ThemeSize>;
-  ml?: SpacingProp<ThemeSize>;
-  mr?: SpacingProp<ThemeSize>;
+  m?: ResponsiveProp<Spacing>;
+  my?: ResponsiveProp<Spacing>;
+  mx?: ResponsiveProp<Spacing>;
+  mt?: ResponsiveProp<Spacing>;
+  mb?: ResponsiveProp<Spacing>;
+  ml?: ResponsiveProp<Spacing>;
+  mr?: ResponsiveProp<Spacing>;
 
   // Padding
-  p?: SpacingProp<ThemeSize>;
-  py?: SpacingProp<ThemeSize>;
-  px?: SpacingProp<ThemeSize>;
-  pt?: SpacingProp<ThemeSize>;
-  pb?: SpacingProp<ThemeSize>;
-  pl?: SpacingProp<ThemeSize>;
-  pr?: SpacingProp<ThemeSize>;
+  p?: ResponsiveProp<Spacing>;
+  py?: ResponsiveProp<Spacing>;
+  px?: ResponsiveProp<Spacing>;
+  pt?: ResponsiveProp<Spacing>;
+  pb?: ResponsiveProp<Spacing>;
+  pl?: ResponsiveProp<Spacing>;
+  pr?: ResponsiveProp<Spacing>;
+
+  // Width / Height
+  w?: ResponsiveProp<CSSProperties['width']>;
+  miw?: ResponsiveProp<CSSProperties['minWidth']>;
+  maw?: ResponsiveProp<CSSProperties['maxWidth']>;
+  h?: ResponsiveProp<CSSProperties['height']>;
+  mih?: ResponsiveProp<CSSProperties['minHeight']>;
+  mah?: ResponsiveProp<CSSProperties['maxHeight']>;
 
   c?: ThemeColor;
+
+  // Fonts
+  ff?: FontFamily;
+  fs?: FontSize;
+  fw?: FontWeight;
 
   // opacity?: SystemProp<CSSProperties['opacity']>;
 
   // ff?: SystemProp<CSSProperties['fontFamily']>;
-  fz?: SpacingProp<ThemeSize>;
+  // fz?: ResponsiveProp<ThemeSize>;
   // fw?: SystemProp<CSSProperties['fontWeight']>;
   // lts?: SystemProp<CSSProperties['letterSpacing']>;
   // ta?: SystemProp<CSSProperties['textAlign']>;
@@ -72,24 +162,17 @@ export interface StyleSystemProps {
   // tt?: SystemProp<CSSProperties['textTransform']>;
   // td?: SystemProp<CSSProperties['textDecoration']>;
 
-  w?: SpacingProp<CSSProperties['width']>;
-  miw?: SpacingProp<CSSProperties['minWidth']>;
-  maw?: SpacingProp<CSSProperties['maxWidth']>;
-  h?: SpacingProp<CSSProperties['height']>;
-  mih?: SpacingProp<CSSProperties['minHeight']>;
-  mah?: SpacingProp<CSSProperties['maxHeight']>;
-
   // bgsz?: SystemProp<CSSProperties['backgroundSize']>;
   // bgp?: SystemProp<CSSProperties['backgroundPosition']>;
   // bgr?: SystemProp<CSSProperties['backgroundRepeat']>;
   // bga?: SystemProp<CSSProperties['backgroundAttachment']>;
 
   // pos?: SystemProp<CSSProperties['position']>;
-  // top?: SpacingProp<CSSProperties['top']>;
-  // left?: SpacingProp<CSSProperties['left']>;
-  // bottom?: SpacingProp<CSSProperties['bottom']>;
-  // right?: SpacingProp<CSSProperties['right']>;
-  // inset?: SpacingProp<CSSProperties['inset']>;
+  // top?: ResponsiveProp<CSSProperties['top']>;
+  // left?: ResponsiveProp<CSSProperties['left']>;
+  // bottom?: ResponsiveProp<CSSProperties['bottom']>;
+  // right?: ResponsiveProp<CSSProperties['right']>;
+  // inset?: ResponsiveProp<CSSProperties['inset']>;
 
   // display?: SystemProp<CSSProperties['display']>;
 }
@@ -101,3 +184,18 @@ export interface DefaultProps<StylesNames extends string = never> extends StyleS
   style?: CSSProperties;
   // classNames?: ClassNames<StylesNames>;
 }
+
+/**
+ * Wrap a component to support a polymorphic DOM element
+ *
+ * @author Mantine.dev <https://github.com/mantinedev/mantine>
+ */
+export type xForwardRefWithStaticComponents<
+  Props extends Record<string, any>,
+  Static extends Record<string, any>
+> = ((props: Props) => React.ReactElement) & Static;
+
+export type ForwardRefWithStaticComponents<
+  Props extends Record<string, any>,
+  Static extends Record<string, any>
+> = ForwardRefExoticComponent<Props> & Static;

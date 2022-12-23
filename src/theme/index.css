@@ -1,0 +1,189 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@tailwind forms;
+
+/* .root,
+#root,
+#docs-root {
+  --primary-color: #fff;
+  --secondary-color: #000;
+} */
+
+/*
+  Design tokens exposed as CSS variables.
+
+  This is the light theme, by default.
+*/
+:root {
+  /*
+    Brand tokens
+    Ref: https://bux.osu.edu/color/primary-colors
+  */
+  --rui-scarlet: #ba0c2f;
+  --rui-gray: #a7b1b7;
+
+  /* Scarlet shades */
+  --rui-scarlet-dark-60: #4a0513;
+  --rui-scarlet-dark-40: #70071c;
+
+  /* Gray tints */
+  --rui-gray-tint-20: #bfc6cb;
+  --rui-gray-tint-40: #cfd4d8;
+  --rui-gray-tint-60: #dfe3e5;
+  --rui-gray-tint-80: #eff1f2;
+  --rui-gray-tint-90: #f6f7f8;
+
+  /* Gray shades */
+  --rui-gray-shade-20: #868e92;
+  --rui-gray-shade-40: #646a6e;
+  --rui-gray-shade-60: #3f4443;
+  --rui-gray-shade-80: #212325;
+
+  /*
+    Accents
+    Ref: https://bux.osu.edu/color/accent-colors
+  */
+  --rui-blue: #41b6e6;
+  --rui-orange: #ff6a39;
+  --rui-green: #8edd65;
+  --rui-brown: #946037;
+  --rui-pink: #fb637e;
+  --rui-violet: #830065;
+  --rui-aqua: #6bbbab;
+  --rui-teal: #26686d;
+  --rui-gold: #ffb600;
+
+  /* Neutrals */
+  --rui-black: #141517;
+  --rui-white: #ffffff;
+
+  /*
+    Utility / Theme tokens
+    Ref: https://bux.osu.edu/color/utility-colors
+  */
+  --rui-primary: var(--rui-scarlet);
+  --rui-secondary: var(--rui-teal);
+  --rui-tertiary: var(--rui-blue); /* TODO: Idk about tertiary */
+  /* TODO: Might want a background to primary? E.g. button state swaps.
+    Would secondary fit the bill there or something else? */
+
+  /* Neutrals */
+  --rui-neutral-0: var(--rui-white);
+  --rui-neutral-20: var(--rui-gray-tint-90);
+  --rui-neutral-40: var(--rui-gray-tint-80);
+  --rui-neutral-60: var(--rui-gray-tint-60);
+  --rui-neutral-80: var(--rui-gray-shade-20);
+  --rui-neutral-90: var(--rui-gray-shade-40); /* TODO: I don't like this setup, but I need a closer neutral 90 to 100 for dimmed text */
+  --rui-neutral-100: var(--rui-black);
+  /*  TODO: I need something between 90 and 100 for hover on buttons.
+      Rethink this scale.
+  */
+
+  /* TODO: Rename? */
+  --rui-text-color: var(--rui-neutral-100);
+
+  --rui-info: #41b6e6;
+  --rui-info-light: #c6e9f8;
+
+  --rui-success: #80c75b;
+  --rui-success-light: #dcf5d0;
+
+  --rui-warning: #ffb600;
+  --rui-warning-light: #fff0cc;
+
+  --rui-error: #ba0c2f;
+  --rui-error-light: #ffffff;
+
+  --rui-focus: #41b6e6;
+
+  --rui-link: var(--rui-scarlet);
+  --rui-link-light: var(--rui-link-white);
+
+  --rui-visited: #660099;
+  --rui-visited-light: #e5c9f3;
+
+  /*
+    Typography tokens
+  */
+  --rui-font-sans: BuckeyeSans, HelveticaNeue, Helvetica, Arial, serif;
+  --rui-font-serif: BuckeyeSerif, Georgia, sans-serif;
+  --rui-font-mono: Menlo, Monaco, 'Courier New', monospace;
+
+  --rui-text-xs: 0.75rem;
+  --rui-text-sm: 0.875rem;
+  --rui-text-base: 1rem;
+  --rui-text-md: 1.5rem;
+  --rui-text-lg: 2rem;
+  --rui-text-xl: 2.5rem;
+  --rui-text-xxl: 3rem;
+
+  --rui-title-1: 2.625rem;
+  --rui-title-2: 1.75rem;
+  --rui-title-3: 1.375rem;
+  --rui-title-4: 1.125rem;
+
+  --rui-font-normal: 400;
+  --rui-font-semibold: 600;
+  --rui-font-bold: 700;
+  --rui-font-extrabold: 800;
+  --rui-font-black: 900;
+
+  /*
+    Spacing tokens
+  */
+  --rui-spacing-xxs: 4px;
+  --rui-spacing-xs: 8px;
+  --rui-spacing-sm: 12px;
+  --rui-spacing-md: 16px;
+  --rui-spacing-lg: 24px;
+  --rui-spacing-xl: 32px;
+  --rui-spacing-xxl: 48px;
+  --rui-spacing-xxxl: 64px;
+
+  /*
+    Breakpoint tokens
+  */
+  --rui-screen-sm: 0;
+  --rui-screen-md: 640px;
+  --rui-screen-lg: 960px;
+  --rui-screen-xl: 1280px;
+  --rui-screen-xxl: 1440px;
+}
+
+/*
+  Design token reconfigurations based on current theme
+*/
+@layer base {
+  [data-theme="light"] {
+    /* :root defines defaults for the light theme */
+  }
+
+  [data-theme="dark"] {
+    --rui-neutral-0: var(--rui-black);
+    --rui-neutral-20: var(--rui-gray-shade-80);
+    --rui-neutral-40: var(--rui-gray-shade-60);
+    --rui-neutral-60: var(--rui-gray-shade-40);
+    --rui-neutral-80: var(--rui-gray-shade-20);
+    --rui-neutral-90: var(--rui-gray);
+    --rui-neutral-100: var(--rui-white);
+
+    --rui-link: var(--rui-white);
+    --rui-link-light: var(--rui-link-light);
+
+    --rui-visited: #e5c9f3;
+    --rui-visited-light: #e5c9f3;
+  }
+}
+
+.THEME_ERROR {
+  border: 2px dashed #ff00ff;
+}
+
+.THEME_ERROR:before {
+  content: '⚠ Theme error: check class for details ⚠';
+  color: #ff00ff;
+  background: #000;
+  padding: 2px;
+}

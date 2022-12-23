@@ -1,6 +1,6 @@
 import { ThemeColor } from '../types';
 
-import { cx } from '../styles';
+import { cx } from '.';
 
 function pxxxxx() {
   // Matrix of Tailwind padding classes that can be

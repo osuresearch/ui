@@ -39,7 +39,7 @@ export const parameters = {
 
 export const decorators = [
   (Story) => (
-    <div className={useDarkMode() ? 'dark' : 'light'}>
+    <div data-theme={useDarkMode() ? 'dark' : 'light'} data-decorator="true">
       <Story />
     </div>
   ),

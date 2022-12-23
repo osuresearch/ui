@@ -28,7 +28,7 @@ export const DocsContainer = ({ children, context }) => {
         },
       }}
     >
-      <div className={useDarkMode() ? 'dark' : 'light'}>
+      <div data-theme={useDarkMode() ? 'dark' : 'light'}>
         {children}
       </div>
     </BaseContainer>
