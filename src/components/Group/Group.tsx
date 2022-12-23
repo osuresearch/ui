@@ -1,16 +1,16 @@
 import React, { forwardRef } from 'react';
-import { cx } from '../../styles';
-import { Align, DefaultProps, Justify, ThemeSize } from '../../types';
-import { Box } from '../Box';
-import * as styles from '../../styles';
-import { createPolymorphicComponent } from '../../utils/createPolymorphicComponent';
+
+import { Box } from '@osuresearch/ui';
+import * as styles from '@osuresearch/ui/theme';
+import { createPolymorphicComponent } from '@osuresearch/ui/utils';
+import { Align, DefaultProps, Justify, PositiveSpacing } from '@osuresearch/ui/types';
 
 export type GroupProps = DefaultProps & {
+  /** Define the spacing between elements */
+  gap?: PositiveSpacing;
+
   /** Define the `justify-content` property */
   justify?: Justify;
-
-  /** Define the `gap` between elements */
-  gap?: ThemeSize;
 
   /** Define the `align-items` property */
   align?: Align;
@@ -22,23 +22,12 @@ export type GroupProps = DefaultProps & {
 
 export const _Group = forwardRef<HTMLDivElement, GroupProps & { component: any }>(
   (
-    {
-      className,
-
-      justify = 'start',
-      gap = 'sm',
-      align = 'start',
-      grow = false,
-
-      children,
-      ...props
-    },
+    { className, justify = 'start', gap = 'sm', align = 'start', grow = false, children, ...props },
     ref
   ) => (
     <Box
       ref={ref}
-      className={cx(
-        className,
+      className={styles.cx(
         'flex',
         styles.justify(justify),
         styles.gap(gap),
@@ -47,7 +36,8 @@ export const _Group = forwardRef<HTMLDivElement, GroupProps & { component: any }
           // Grow - targets all direct children
           '[&>_*]:flex-grow-0': !grow,
           '[&>_*]:flex-grow': grow
-        }
+        },
+        className
       )}
       {...props}
     >

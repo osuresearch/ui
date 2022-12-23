@@ -1,7 +1,7 @@
 import React from 'react';
-import { cx } from '../../styles';
+import { cx } from '../../theme';
 import { ThemeColor, ThemeSize } from '../../types';
-import { bg, bc as _bc, hw } from '../../styles';
+import { bg, bc as _bc, hw } from '../../theme';
 
 export type IndicatorProps = {
   size?: ThemeSize;

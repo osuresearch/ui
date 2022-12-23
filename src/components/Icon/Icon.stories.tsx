@@ -1,33 +1,16 @@
 import React from 'react';
-import { Story, Meta } from '@storybook/react';
+import { Story } from '@storybook/react';
+import { Icon as Component, IconProps } from '@osuresearch/ui';
+import { RUIComponentMeta } from '~/.storybook/utils';
 
-import { themeSizeNames } from '../../types';
-import { Icon, IconProps } from './index';
+export default RUIComponentMeta<IconProps>('Components', Component)
+  .withStyleSystemProps()
+  .withBadge('stable');
 
-export default {
-  title: 'atoms/Icon',
-  component: Icon,
-  parameters: {
-    controls: {
-      include: /^(name|size|inline|m|p)$/g
-      // exclude: /^(m.?|p.?)$/g
-    }
-  },
-  argTypes: {
-    color: { control: { type: 'select', options: ['primary', 'secondary'] } },
-    m: {
-      options: themeSizeNames
-    },
-    p: {
-      options: themeSizeNames
-    }
-  }
-} as Meta<typeof Icon>;
+const Template: Story<IconProps> = (args: IconProps) => <Component {...args} />;
 
-const Template: Story<IconProps> = (args: IconProps) => <Icon {...args} />;
-
-export const Default = Template.bind({});
-Default.args = {
-  name: 'home',
-  size: 32
+export const Icon = Template.bind({});
+Icon.args = {
+  name: 'thumbs',
+  size: 100
 };

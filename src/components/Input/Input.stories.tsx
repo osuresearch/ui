@@ -6,7 +6,7 @@ import { Text } from '../Text/Text';
 import { Input, InputProps } from './index';
 
 export default {
-  title: 'utilities/Input',
+  title: 'Utilities/Input',
   component: Input,
   argTypes: {}
 } as Meta<typeof Input>;

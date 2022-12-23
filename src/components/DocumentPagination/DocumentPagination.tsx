@@ -1,7 +1,6 @@
 import React from 'react';
-import { cx } from '../../styles';
-import { UnstyledButton } from '../UnstyledButton';
-import { Icon } from '../Icon';
+import { cx } from '@osuresearch/ui/theme';
+import { Icon, UnstyledButton, Text } from '@osuresearch/ui';
 
 export type DocumentPaginationProps = {
   direction: 'previous' | 'next';
@@ -17,29 +16,35 @@ export type DocumentPaginationProps = {
  *
  * ## Accessibility
  *
- * * Each button receives either "Go to previous page" or "Go to next page" as an automatic `aria-label`
+ * -  Each button receives either "Go to previous page" or "Go to next page"
+ *    as an automatic `aria-label`
  *
  */
 export function DocumentPagination({ direction, children }: DocumentPaginationProps) {
   return (
     <UnstyledButton
+      c="primary"
+      fw="semibold"
+      py="lg"
+      px="md"
       className={cx(
+        'focus:ring',
         'flex',
         'w-full',
-        'p-xl',
 
         'border-2',
-        'font-semibold',
-        'border-gray-tint-90',
-        'text-scarlet',
+        'border-neutral-20',
 
-        // Hover styles
+        // 'border-gray-tint-90',
+        // 'text-scarlet',
+
+        // // Hover styles
         'hover:bg-gray-shade-60',
         'hover:text-white',
 
-        // Dark mode assumes dark background
-        'dark:border-gray-shade-80',
-        'dark:text-white',
+        // // Dark mode assumes dark background
+        // 'dark:border-gray-shade-80',
+        // 'dark:text-white',
 
         // Reverse layout for next vs previous button
         { 'flex-row-reverse': direction === 'next' }
@@ -51,7 +56,7 @@ export function DocumentPagination({ direction, children }: DocumentPaginationPr
           'rotate-180': direction === 'previous'
         })}
         name="chevron"
-        size={24}
+        size={26}
         px="sm"
       />
       {children}

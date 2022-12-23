@@ -1,7 +1,7 @@
 import React from 'react';
 import { ThemeColor } from '../../types';
-import { contrast } from '../../utils/theme';
-import { bc, bg, tc, cx } from '../../styles';
+import { contrast } from '../../theme/_donotuse';
+import { bc, bg, tc, cx } from '../../theme';
 import { Indicator } from '../Indicator';
 
 export type BadgeProps = {

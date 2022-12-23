@@ -1,16 +1,8 @@
-import React, {
-  Children,
-  cloneElement,
-  createContext,
-  forwardRef,
-  isValidElement,
-  ReactElement,
-  ReactNode
-} from 'react';
-import { cx } from '../../styles';
-import { Box } from '../Box';
-import { DefaultProps } from '../../types';
-import { ForwardRefWithStaticComponents } from '../../utils/ForwardRefWithStaticComponents';
+import React, { Children, cloneElement, forwardRef, isValidElement, ReactNode } from 'react';
+import { Box } from '@osuresearch/ui';
+import { cx } from '@osuresearch/ui/theme';
+import { DefaultProps, ForwardRefWithStaticComponents } from '@osuresearch/ui/types';
+
 import { Question, QuestionProps } from './Question/Question';
 
 export type InterviewVariant = 'default' | 'storytelling';
@@ -18,7 +10,7 @@ export type InterviewVariant = 'default' | 'storytelling';
 export type InterviewProps = DefaultProps & {
   variant?: InterviewVariant;
 
-  /** <Interview.Question /> components only */
+  /** `<Interview.Question>` components only */
   children: ReactNode;
 };
 
@@ -71,4 +63,20 @@ export const Interview: InterviewComponent = forwardRef<HTMLDListElement, Interv
   }
 ) as any;
 
+// Order matters! Subcomponent display names need to be declared
+// in the parent and *after* the parent's display name, otherwise
+// Storybook can't map them correctly for ArgsTables.
+Interview.displayName = 'Interview';
+Question.displayName = 'Interview.Question';
+
 Interview.Question = Question;
+
+// _Interview.displayName = 'Interview';
+
+// export const Interview = _Interview as typeof _Interview & {
+//   Question: typeof Question;
+// }
+
+// Interview.Question = Question;
+
+// Question.displayName = 'Interview.Question';

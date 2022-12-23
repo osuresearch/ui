@@ -1,5 +1,5 @@
 import React, { CSSProperties, forwardRef, ReactNode } from 'react';
-import { cx } from '../../styles';
+import { cx } from '../../theme';
 import { createPolymorphicComponent } from '../../utils/createPolymorphicComponent';
 import { DefaultProps, ThemeSize } from '../../types';
 import { Box } from '../Box';

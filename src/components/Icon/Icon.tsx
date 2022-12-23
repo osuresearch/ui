@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
-import { Icon as Iconify } from '@iconify/react/dist/offline';
-import { cx } from '../../styles';
+import { Icon as Iconify, InlineIcon } from '@iconify/react/dist/offline';
+import { cx } from '../../theme';
 
 // Note that we use the offline version of iconify
 // for apps that can't call out to a public CDN
@@ -16,15 +16,25 @@ export type IconProps = DefaultProps & {
   size?: number;
 };
 
-export const _Icon = forwardRef<HTMLElement, IconProps>(
-  ({ className, name, size = 16, ...props }, ref) => (
-    <Box component="i" className={cx('inline-block', className)} {...props}>
-      <Iconify icon={name} fontSize={size} onLoad={() => console.log('loaded', name)} />
+export const _Icon = forwardRef<HTMLElement, IconProps & { component: any }>(
+  ({ component = 'i', name, size = 16, ...props }, ref) => (
+    <Box component={component} {...props}>
+      <InlineIcon
+        icon={name}
+        className="m-auto"
+        alignmentBaseline="middle"
+        fontSize={size}
+        inline
+      />
     </Box>
   )
 );
 
 /**
  * Icon documentation
+ *
+ * ## Accessibility
+ *
+ * TODO: Notes about purpose / meaning / understandability / etc
  */
 export const Icon = createPolymorphicComponent<'span', IconProps>(_Icon);

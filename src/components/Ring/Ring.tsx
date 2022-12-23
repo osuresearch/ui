@@ -1,21 +1,22 @@
 import React, { forwardRef } from 'react';
-import { cx } from '../../styles';
-import { Box } from '../Box';
-import { DefaultProps } from '../../types';
 
-export type DemoProps = DefaultProps & {
+import { Box } from '@osuresearch/ui';
+import { DefaultProps } from '@osuresearch/ui/types';
+import { cx } from '@osuresearch/ui/theme';
+
+export type RingProps = DefaultProps & {
   /* Your props */
 
   children?: React.ReactNode;
 };
 
 /**
- * Demo documentation
+ * Ring documentation
  *
  * ### Accessibility
  * - a11y info (used aria tags, keyboard behaviour, etc)
  */
-export const Demo = forwardRef<HTMLDivElement, DemoProps>(
+export const Ring = forwardRef<HTMLDivElement, RingProps>(
   (
     {
       className,

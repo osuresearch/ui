@@ -1,14 +1,14 @@
 import React from 'react';
-import { Story, Meta } from '@storybook/react';
+import { Story } from '@storybook/react';
 
 import { Interview, InterviewProps } from './Interview';
+import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
-export default {
-  title: 'BUX Stuff/Interview',
-  component: Interview,
-  argTypes: {}
-} as Meta<typeof Interview>;
+export default RUIComponentMeta<InterviewProps>('BUX Stuff', Interview, ['Question']);
 
+/**
+ * Can I write a doc here?
+ */
 const Template: Story<InterviewProps> = (args) => (
   <Interview {...args}>
     <Interview.Question title="What makes you the happiest?">
@@ -48,7 +48,10 @@ const Template: Story<InterviewProps> = (args) => (
   </Interview>
 );
 
-export const Default = Template.bind({});
-Default.args = {
+export const Overview = RUIComponentStory(Template, {
   variant: 'default'
-};
+});
+
+export const Storytelling = RUIComponentStory(Template, {
+  variant: 'storytelling'
+});

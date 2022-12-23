@@ -1,31 +1,18 @@
 import React from 'react';
-import { cx } from '../../styles';
-import { ThemeSize } from '../../types';
+import { spacingValueToClass } from '@osuresearch/ui';
+import { cx } from '../../theme';
+import { PositiveSpacing, Spacing } from '../../types';
 
 export type SpaceProps = {
-  h?: ThemeSize;
-  w?: ThemeSize;
+  h?: PositiveSpacing;
+  w?: PositiveSpacing;
 };
 
 /**
  * Add horizontal or vertical spacing between elements
  */
 export function Space({ h = 'sm', w = 'sm' }: SpaceProps) {
-  return (
-    <div
-      className={cx({
-        // Vertical spacing
-        'h-sm': h === 'sm',
-        'h-md': h === 'md',
-        'h-lg': h === 'lg',
-        'h-xl': h === 'xl',
+  const className = cx(spacingValueToClass('h', h), spacingValueToClass('w', w));
 
-        // Horizontal spacing
-        'w-sm': w === 'sm',
-        'w-md': w === 'md',
-        'w-lg': w === 'lg',
-        'w-xl': w === 'xl'
-      })}
-    />
-  );
+  return <div className={className} />;
 }

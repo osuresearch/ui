@@ -2,11 +2,11 @@ import React from 'react';
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 
-import { Demo } from './Demo';
+import { Table } from './Table';
 
-describe('Tests for Demo component', () => {
+describe('Tests for Table component', () => {
   it('renders content', () => {
-    const { container } = render(<Demo>Foo bar</Demo>);
+    const { container } = render(<Table>Foo bar</Table>);
     expect(container.firstChild).toMatchSnapshot();
   });
 });

@@ -1,33 +1,27 @@
 import React from 'react';
-import { Story, Meta } from '@storybook/react';
+import { Text, Group, Stack, Space, SpaceProps } from '@osuresearch/ui';
+import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
-import { Text } from '../Text/Text';
-import { Space, SpaceProps } from './index';
+export default RUIComponentMeta<SpaceProps>('Layout', Space).withBadge('stable');
 
-export default {
-  title: 'layout/Space',
-  component: Space,
-  argTypes: {}
-} as Meta<typeof Space>;
-
-export const Vertical = (args: SpaceProps) => (
-  <>
-    <Text>First line</Text>
-    <Space {...args} />
-    <Text>Second line</Text>
-  </>
+export const Vertical = RUIComponentStory(
+  (args: SpaceProps) => (
+    <Stack gap={0}>
+      <Text>First line</Text>
+      <Space {...args} />
+      <Text>Second line</Text>
+    </Stack>
+  ),
+  { h: 'md' }
 );
-Vertical.args = {
-  h: 'md'
-};
 
-export const Horizontal = (args: SpaceProps) => (
-  <div style={{ display: 'flex' }}>
-    <Text>First part</Text>
-    <Space {...args} />
-    <Text>Second part</Text>
-  </div>
+export const Horizontal = RUIComponentStory(
+  (args: SpaceProps) => (
+    <Group gap={0}>
+      <Text>First line</Text>
+      <Space {...args} />
+      <Text>Second line</Text>
+    </Group>
+  ),
+  { w: 'md' }
 );
-Horizontal.args = {
-  w: 'md'
-};

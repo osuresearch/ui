@@ -1,22 +1,15 @@
 import React from 'react';
-import { Story, Meta } from '@storybook/react';
+import { Button, Group as GroupComponent, GroupProps } from '@osuresearch/ui';
+import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
-import { Button } from '../Button';
-import { Group, GroupProps } from './index';
+export default RUIComponentMeta<GroupProps>('Layout', GroupComponent)
+  .withStyleSystemProps()
+  .withBadge('stable');
 
-export default {
-  title: 'layout/Group',
-  component: Group,
-  argTypes: {}
-} as Meta<typeof Group>;
-
-const Template: Story<GroupProps> = (args: GroupProps) => (
-  <Group {...args}>
+export const Group = RUIComponentStory((args: GroupProps) => (
+  <GroupComponent {...args}>
     <Button>1</Button>
     <Button>2</Button>
     <Button>3</Button>
-  </Group>
-);
-
-export const Example = Template.bind({});
-Example.args = {};
+  </GroupComponent>
+));

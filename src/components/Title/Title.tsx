@@ -1,11 +1,11 @@
 import React from 'react';
-import { cx } from '../../styles';
+import { cx } from '../../theme';
 
 export type TitleProps = {
   /**
-   * Heading order. We support H1 through H3
+   * Heading level. We support H1 through H3
    */
-  order: 1 | 2 | 3;
+  level: 1 | 2 | 3;
 
   /**
    * The `sans` variant overrides sansSerif for H1.
@@ -21,8 +21,14 @@ export type TitleProps = {
 
 /**
  * H1 through H3 heading levels.
+ *
+ * TODO: Responsive sizes. See:
+ *  https://bux.osu.edu/typography/headings
+ *
+ * TODO: A11Y notes
+ *
  */
-export function Title({ order, variant = 'default', children }: TitleProps) {
+export function Title({ level, variant = 'default', children }: TitleProps) {
   // Standard H1 - H3 styles
   const className = [
     'text-h1 font-black font-serif',
@@ -31,19 +37,21 @@ export function Title({ order, variant = 'default', children }: TitleProps) {
   ];
 
   return React.createElement(
-    `h${order}`,
+    `h${level}`,
     {
       className: cx({
         // Size / weight rules
-        [className[order - 1]]: variant !== 'section',
+        [className[level - 1]]: variant !== 'section',
         'font-sans': variant === 'sans',
 
         // Theme mods
-        'text-black dark:text-white': variant !== 'section',
+        'text-neutral-100': variant !== 'section',
 
-        // Section styles. Same size regardless of H1-H3 level
-        'text-h2 text-gray-shade-40 dark:text-gray-tint-60 font-sans uppercase font-normal':
-          variant === 'section'
+        'pb-24': level === 1,
+        'pb-8': level > 1,
+
+        // Section styles. Same size regardless of H-level
+        'text-h2 text-dimmed font-sans uppercase font-normal': variant === 'section'
       })
     },
     children

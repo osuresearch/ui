@@ -1,13 +1,12 @@
 import React from 'react';
-import { Story, Meta } from '@storybook/react';
+import { Story } from '@storybook/react';
 
 import { Card, CardProps } from './Card';
+import { RUIComponentMeta } from '~/.storybook/utils';
 
-export default {
-  title: 'components/Card',
-  component: Card,
-  argTypes: {}
-} as Meta<typeof Card>;
+export default RUIComponentMeta<CardProps>('Components', Card)
+  .withStyleSystemProps()
+  .withBadge('beta');
 
 const Template: Story<CardProps> = (args: CardProps) => (
   <Card {...args} href="https://example.com">

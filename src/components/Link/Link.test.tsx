@@ -2,11 +2,11 @@ import React from 'react';
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 
-import { Anchor } from './index';
+import { Link } from './index';
 
-describe('Tests for Anchor component', () => {
+describe('Tests for Link component', () => {
   it('renders content', () => {
-    const { container } = render(<Anchor>Foo bar</Anchor>);
+    const { container } = render(<Link href="https://research.osu.edu">research.osu.edu</Link>);
     expect(container.firstChild).toMatchSnapshot();
   });
 });

@@ -1,17 +1,13 @@
 import React from 'react';
-import { Story, Meta } from '@storybook/react';
+import { Story } from '@storybook/react';
+import { CloseButton as Component, CloseButtonProps } from './CloseButton';
+import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
-import { CloseButton, CloseButtonProps } from './CloseButton';
+export default RUIComponentMeta<CloseButtonProps>('Components', Component)
+  .withStyleSystemProps()
+  .withBadge('stable');
 
-export default {
-  title: 'components/CloseButton',
-  component: CloseButton,
-  argTypes: {}
-} as Meta<typeof CloseButton>;
+const Template: Story<CloseButtonProps> = (args) => <Component {...args} />;
 
-const Template: Story<CloseButtonProps> = (args: CloseButtonProps) => (
-  <CloseButton {...args}>CloseButton - created through newComponent</CloseButton>
-);
-
-export const Default = Template.bind({});
-Default.args = {};
+export const CloseButton = Template.bind({});
+CloseButton.args = {};

@@ -1,10 +1,13 @@
 import React, { forwardRef, MouseEventHandler } from 'react';
-import { cx } from '../../styles';
+import { cx } from '../../theme';
 
 import { Box } from '../Box';
 import { createPolymorphicComponent } from '../../utils/createPolymorphicComponent';
 
 export type ButtonProps = {
+  /** Alternate rendering styles */
+  variant?: 'default' | 'outline';
+
   /**
    * Optional handler for when the button is clicked
    */
@@ -21,18 +24,13 @@ export type ButtonProps = {
   small?: boolean;
 
   /**
-   * Bordered variant with an empty background
-   */
-  alternate?: boolean;
-
-  /**
    * Button content
    */
   children: React.ReactNode;
 };
 
 export const _Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ disabled, onClick, small, alternate, children }, ref) => (
+  ({ disabled, onClick, small, variant = 'default', children }, ref) => (
     <Box
       component="button"
       ref={ref}
@@ -40,29 +38,36 @@ export const _Button = forwardRef<HTMLButtonElement, ButtonProps>(
       onClick={onClick}
       disabled={disabled}
       className={cx({
+        'focus:ring': true,
         'text-center': true,
         'font-semibold': true,
         'px-24 py-12': !small, // 20/10
 
         // Primary theme
-        'bg-scarlet': !alternate,
-        'border-scarlet': true,
-        'text-white': !alternate && !disabled,
-        'text-scarlet': alternate && !disabled,
+        'bg-primary': variant === 'default' && !disabled,
+        'border-primary': !disabled,
+        'text-white': variant === 'default' && !disabled,
+        'text-primary': variant === 'outline' && !disabled,
         'border-2': true,
 
+        // outline variant against a dark theme
+        'dark:text-neutral-100': variant === 'outline' && !disabled,
+        'dark:border-neutral-40': variant === 'outline' && !disabled,
+
         // Hover state
+        // TODO: I want to use a neutral here but
+        // I don't have a good one between neutral-90 and neutral-100
         'hover:bg-gray-shade-60': !disabled,
         'hover:border-gray-shade-60': !disabled,
         'hover:text-white': !disabled,
 
         // Disabled state
-        'bg-gray-tint-80': disabled,
-        'border-gray-tint-80': disabled,
-        'text-gray-shade-20': disabled,
+        'bg-neutral-40': disabled,
+        'border-neutral-40': disabled,
+        'text-neutral-80': disabled,
         'cursor-not-allowed': disabled,
 
-        // Small variant
+        // Small modifier
         'px-12 py-8': small, // 12/6
         'text-sm': small
       })}

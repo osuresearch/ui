@@ -1,40 +1,39 @@
 import React from 'react';
-import { Story, Meta } from '@storybook/react';
+import { Story } from '@storybook/react';
+import { Group, Avatar, Text, UnstyledButton, UnstyledButtonProps, Stack } from '@osuresearch/ui';
+import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
-import { Group } from '../Group';
-import { Avatar } from '../Avatar';
-import { Text } from '../Text';
-import { UnstyledButton, UnstyledButtonProps } from './index';
-
-export default {
-  title: 'atoms/UnstyledButton',
-  component: UnstyledButton,
-  argTypes: {}
-} as Meta<typeof UnstyledButton>;
+export default RUIComponentMeta<UnstyledButtonProps>('Utilities', UnstyledButton)
+  .withStyleSystemProps()
+  .withBadge('stable');
 
 const Template: Story<UnstyledButtonProps> = (args) => (
   <UnstyledButton {...args}>Button</UnstyledButton>
 );
 
-export const Default = Template.bind({});
-Default.args = {};
+export const Overview = Template.bind({});
 
-export const ContactCard: Story<UnstyledButtonProps> = () => (
+export const ContactCard = RUIComponentStory(() => (
   <UnstyledButton>
     <Group>
       <Avatar size={40} name="Chase McManning" username="mcmanning.1" />
-      <div>
+      <Stack gap={0}>
         <Text>Chase McManning</Text>
         <Text c="dimmed" fs="sm">
           mcmanning.1@osu.edu
         </Text>
-      </div>
+      </Stack>
     </Group>
   </UnstyledButton>
-);
+));
 
-export const PolymorphAsAnchor: Story<UnstyledButtonProps> = () => (
+export const PolymorphAsAnchor = RUIComponentStory(() => (
   <UnstyledButton component="a" href="https://example.com">
     Polymorphic button
   </UnstyledButton>
-);
+)).withDescription(`
+  >This example is for demonstrative purposes of polymorphism.
+
+  >**Do not** use this as-is in an application as it does not pass
+  accessibility guidelines
+`);

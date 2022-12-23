@@ -1,17 +1,11 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react';
+import { Title, Text, Button, Space, Paper, PaperProps } from '@osuresearch/ui';
+import { RUIComponentMeta } from '~/.storybook/utils';
 
-import { Title } from '../Title';
-import { Text } from '../Text/Text';
-import { Button } from '../Button';
-import { Space } from '../Space';
-import { Paper, PaperProps } from './index';
-
-export default {
-  title: 'atoms/Paper',
-  component: Paper,
-  argTypes: {}
-} as Meta<typeof Paper>;
+export default RUIComponentMeta<PaperProps>('Layout', Paper)
+  .withStyleSystemProps()
+  .withBadge('stable');
 
 const Template: Story<PaperProps> = (args: PaperProps) => (
   <Paper {...args}>
@@ -22,12 +16,11 @@ const Template: Story<PaperProps> = (args: PaperProps) => (
   </Paper>
 );
 
-export const Default = Template.bind({});
-Default.args = {};
+export const Overview = Template.bind({});
 
 export const PanelWithContent: Story<PaperProps> = (args) => (
   <Paper variant="panel" p="xl" {...args}>
-    <Title order={3}>Take your next step toward becoming a Buckeye</Title>
+    <Title level={3}>Take your next step toward becoming a Buckeye</Title>
     <Space h="lg" />
     <Text>
       Columbus our strengths are an authentic and distinctive combination of qualities reflective of

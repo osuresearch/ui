@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react';
-import { cx } from '../../styles';
+import { cx } from '../../theme';
 import { ThemeSize, ThemeColor } from '../../types';
 import { createPolymorphicComponent } from '../../utils/createPolymorphicComponent';
 import { Text } from '../Text/Text';

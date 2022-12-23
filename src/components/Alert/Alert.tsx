@@ -1,12 +1,9 @@
 import React, { forwardRef, useState } from 'react';
-import { cx } from '../../styles';
-import { Icon } from '../Icon';
-import { Group } from '../Group';
-import { Stack } from '../Stack';
-import { CloseButton } from '../CloseButton';
+import { Icon, Group, Stack, CloseButton, Text } from '@osuresearch/ui';
+import { ThemeColor } from '@osuresearch/ui/types';
 
 export type AlertProps = {
-  c: 'success' | 'info' | 'warning' | 'error';
+  variant: 'success' | 'info' | 'warning' | 'error';
 
   title?: string;
   dismissible?: boolean;
@@ -16,23 +13,27 @@ export type AlertProps = {
 // Class map for alert colors
 const className = {
   success: {
-    color: 'text-black bg-success-light',
-    iconColor: 'text-success',
+    bg: 'bg-success-light',
+    fg: 'black',
+    iconColor: 'success',
     iconName: 'checkCircle'
   },
   info: {
-    color: 'text-black bg-info-light',
-    iconColor: 'text-info',
+    bg: 'bg-info-light',
+    fg: 'black',
+    iconColor: 'info',
     iconName: 'infoCircle'
   },
   warning: {
-    color: 'text-black bg-warning-light',
-    iconColor: 'text-warning',
+    bg: 'bg-warning-light',
+    fg: 'black',
+    iconColor: 'warning',
     iconName: 'infoCircle'
   },
   error: {
-    color: 'text-white bg-error',
-    iconColor: 'text-white',
+    bg: 'bg-error',
+    fg: 'white',
+    iconColor: 'white',
     iconName: 'xmarkCircle'
   }
 };
@@ -41,28 +42,37 @@ const className = {
  * Attract user attention with important static message
  *
  * ### Accessibility
- * - Root element role is set to `alert`
+ * - Root element is `role="alert"`
+ * - Dismiss button is labeled with "Dismiss this alert"
  */
 export const Alert = forwardRef<HTMLDivElement, AlertProps>(
-  ({ c, title, dismissible = false, children }, ref) => {
+  ({ variant = 'info', title, dismissible = false, children }, ref) => {
     const [open, setOpen] = useState(true);
-    const { color, iconColor, iconName } = className[c];
+    const { bg, fg, iconColor, iconName } = className[variant];
 
     if (!open) {
       return null;
     }
 
     return (
-      <div ref={ref} className={color} role="alert">
+      <div ref={ref} className={bg} role="alert">
         <Group justify="apart">
-          <Group align="stretch" p="lg">
-            <Icon className={cx(iconColor, 'pr-sm')} name={iconName} size={24} />
-            <Stack>
-              <div className="font-bold">{title}</div>
+          <Group align="stretch" p="md">
+            <Icon c={iconColor as ThemeColor} name={iconName} size={24} />
+            <Stack c={fg as ThemeColor}>
+              <Text c={fg as ThemeColor} fw="bold">
+                {title}
+              </Text>
               {children}
             </Stack>
           </Group>
-          {dismissible && <CloseButton label="Dismiss this alert" onClick={() => setOpen(false)} />}
+          {dismissible && (
+            <CloseButton
+              c={fg as ThemeColor}
+              label="Dismiss this alert"
+              onClick={() => setOpen(false)}
+            />
+          )}
         </Group>
       </div>
     );

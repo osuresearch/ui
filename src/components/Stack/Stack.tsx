@@ -1,24 +1,34 @@
 import React, { forwardRef } from 'react';
-import { cx } from '../../styles';
-import { Align, DefaultProps, Justify, ThemeSize } from '../../types';
-import * as styles from '../../styles';
-import { Box } from '../Box';
-import { createPolymorphicComponent } from '../../utils/createPolymorphicComponent';
+
+import { Box } from '@osuresearch/ui';
+import * as styles from '@osuresearch/ui/theme';
+import { createPolymorphicComponent } from '@osuresearch/ui/utils';
+import { Align, DefaultProps, Justify, PositiveSpacing } from '@osuresearch/ui/types';
 
 export type StackProps = DefaultProps & {
-  gap?: ThemeSize;
+  /** Define the spacing between elements */
+  gap?: PositiveSpacing;
 
-  align?: Align;
+  /** Define the `justify-content` property */
   justify?: Justify;
+
+  /** Define the `align-items` property */
+  align?: Align;
 
   children: React.ReactNode;
 };
 
 export const _Stack = forwardRef<HTMLDivElement, StackProps & { component: any }>(
-  ({ gap = 'sm', align = 'stretch', justify = 'center', children, ...props }, ref) => (
+  ({ className, gap = 'sm', align = 'stretch', justify = 'center', children, ...props }, ref) => (
     <Box
       ref={ref}
-      className={cx('flex flex-col', styles.justify(justify), styles.gap(gap), styles.align(align))}
+      className={styles.cx(
+        'flex flex-col',
+        styles.justify(justify),
+        styles.gap(gap),
+        styles.align(align),
+        className
+      )}
       {...props}
     >
       {children}

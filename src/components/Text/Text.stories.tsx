@@ -1,15 +1,23 @@
 import React from 'react';
-import { Story, Meta } from '@storybook/react';
+import { Story } from '@storybook/react';
 
 import { Text, TextProps } from './Text';
+import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
-export default {
-  title: 'atoms/Text',
-  component: Text,
-  argTypes: {}
-} as Meta<typeof Text>;
+export default RUIComponentMeta<TextProps>('Components', Text)
+  .withStyleSystemProps()
+  .withBadge('stable');
 
-const Template: Story<TextProps> = (args) => <Text {...args}>Text</Text>;
+const Template: Story<TextProps> = (args) => (
+  <Text {...args}>The quick brown fox jumped over the lazy dog.</Text>
+);
 
-export const Default = Template.bind({});
-Default.args = {};
+export const Overview = RUIComponentStory(Template);
+
+export const HelpText = RUIComponentStory(Template, {
+  c: 'dimmed',
+  fs: 'sm'
+}).withDescription(`
+  Additional help text is typically shown smaller and slightly
+  dimmed to de-emphasize the content
+`);

@@ -1,22 +1,13 @@
 import React, { forwardRef } from 'react';
-import { cx } from '../../styles';
-import { ThemeSize, ThemeColor, DefaultProps } from '../../types';
+import { cx } from '../../theme';
+import { DefaultProps, ThemeColor } from '../../types';
 import { Box } from '../Box';
 import { createPolymorphicComponent } from '../../utils/createPolymorphicComponent';
-import { tc } from '../../styles';
+import { tc, fs as _fs, fw as _fw } from '../../theme';
 
 export type TextProps = DefaultProps & {
-  /** Font size */
-  fs?: ThemeSize;
-
-  /** Color */
-  c?: ThemeColor;
-
   /** Text alignment */
   ta?: 'left' | 'right' | 'center';
-
-  /** Render bolded */
-  bold?: boolean;
 
   /** Render as a `span` element */
   span?: boolean;
@@ -26,39 +17,20 @@ export type TextProps = DefaultProps & {
 
 const _Text = forwardRef<HTMLDivElement, TextProps>(
   (
-    {
-      style,
-      className,
-      children,
-      c = 'normal',
-      ta = 'left',
-      fs,
-      bold = false,
-      span = false,
-      ...others
-    },
+    { style, className, children, ta = 'left', c = 'neutral-100', span = false, ...others },
     ref
   ) => (
     <Box
       style={style}
       component={span ? 'span' : 'div'}
       ref={ref}
+      c={c}
       className={cx(
         {
-          [tc(c)]: true,
-
-          'font-bold': bold,
-
           // Alignment
           'text-left': ta === 'left',
           'text-right': ta === 'right',
-          'text-center': ta === 'center',
-
-          // Font size
-          'text-sm': fs === 'sm',
-          'text-md': fs === 'md',
-          'text-lg': fs === 'lg',
-          'text-xl': fs === 'xl'
+          'text-center': ta === 'center'
         },
         className
       )}

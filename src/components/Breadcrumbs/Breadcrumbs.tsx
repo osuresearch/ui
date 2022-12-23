@@ -1,9 +1,5 @@
 import React, { Children, forwardRef } from 'react';
-import { cx } from '../../styles';
-import { Box } from '../Box';
-import { DefaultProps } from '../../types';
-import { Icon } from '../Icon';
-import { Group } from '../Group';
+import { Group, Icon, Text, DefaultProps } from '@osuresearch/ui';
 
 export type BreadcrumbsProps = DefaultProps & {
   /**
@@ -23,16 +19,16 @@ export const Breadcrumbs = forwardRef<HTMLDivElement, BreadcrumbsProps>(
   ({ className, children, ...props }, ref) => (
     <Group
       ref={ref}
-      className="text-sm"
+      fs="sm"
       align="center"
-      gap="xs"
+      gap="xxs"
       c="dimmed"
       aria-label="Breadcrumbs"
       {...props}
     >
       {Children.map(children, (child, idx) => (
         <React.Fragment key={idx}>
-          {idx > 0 && <Icon name="chevron" />}
+          {idx > 0 && <Icon c="dimmed" name="chevron" />}
           {child}
         </React.Fragment>
       ))}

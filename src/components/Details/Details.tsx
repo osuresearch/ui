@@ -1,5 +1,5 @@
 import React from 'react';
-import { cx } from '../../styles';
+import { cx } from '../../theme';
 import { Icon } from '../Icon';
 import { Text } from '../Text/Text';
 
@@ -41,13 +41,13 @@ export function Details({ summary, children }: DetailsProps) {
         )}
       >
         <Icon
-          className="group-open:hidden text-scarlet dark:text-white"
+          className="group-open:hidden text-primary dark:text-white"
           name="chevron"
           size={24}
           mr="sm"
         />
         <Icon
-          className="hidden group-open:inline rotate-90 text-scarlet dark:text-white"
+          className="hidden group-open:inline rotate-90 text-primary dark:text-white"
           name="chevron"
           size={24}
           mr="sm"

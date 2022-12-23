@@ -1,25 +1,19 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react';
+import { DocumentPagination as Component, DocumentPaginationProps, Group } from '@osuresearch/ui';
+import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
-import { Group } from '../Group';
-import { DocumentPagination, DocumentPaginationProps } from './index';
+export default RUIComponentMeta<DocumentPaginationProps>('Components', Component).withBadge('beta');
 
-export default {
-  title: 'atoms/DocumentPagination',
-  component: DocumentPagination,
-  argTypes: {}
-} as Meta<typeof DocumentPagination>;
-
-const Template: Story<DocumentPaginationProps> = (args: DocumentPaginationProps) => (
+const Template: Story<DocumentPaginationProps> = (args) => (
   <Group gap="lg">
-    <DocumentPagination {...args} direction="previous">
+    <Component {...args} direction="previous">
       Title of previous page
-    </DocumentPagination>
-    <DocumentPagination {...args} direction="next">
+    </Component>
+    <Component {...args} direction="next">
       Title of next page
-    </DocumentPagination>
+    </Component>
   </Group>
 );
 
-export const Default = Template.bind({});
-Default.args = {};
+export const DocumentPagination = Template.bind({});

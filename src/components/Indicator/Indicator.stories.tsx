@@ -4,7 +4,7 @@ import { Story, Meta } from '@storybook/react';
 import { Indicator, IndicatorProps } from './index';
 
 export default {
-  title: 'atoms/Indicator',
+  title: 'Components/Indicator',
   component: Indicator,
   argTypes: {}
 } as Meta<typeof Indicator>;

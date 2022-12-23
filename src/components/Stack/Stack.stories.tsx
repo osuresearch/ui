@@ -1,22 +1,15 @@
 import React from 'react';
-import { Story, Meta } from '@storybook/react';
+import { Button, Stack as StackComponent, StackProps } from '@osuresearch/ui';
+import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
-import { Button } from '../Button';
-import { Stack, StackProps } from './index';
+export default RUIComponentMeta<StackProps>('Layout', StackComponent)
+  .withStyleSystemProps()
+  .withBadge('stable');
 
-export default {
-  title: 'layout/Stack',
-  component: Stack,
-  argTypes: {}
-} as Meta<typeof Stack>;
-
-const Template: Story<StackProps> = (args: StackProps) => (
-  <Stack {...args}>
+export const Stack = RUIComponentStory((args: StackProps) => (
+  <StackComponent {...args}>
     <Button>1</Button>
     <Button>2</Button>
     <Button>3</Button>
-  </Stack>
-);
-
-export const Example = Template.bind({});
-Example.args = {};
+  </StackComponent>
+));

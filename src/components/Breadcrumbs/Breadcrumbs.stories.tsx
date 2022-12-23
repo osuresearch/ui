@@ -1,25 +1,16 @@
 import React from 'react';
-import { Story, Meta } from '@storybook/react';
+import { Link, Breadcrumbs as Component, BreadcrumbsProps } from '@osuresearch/ui';
+import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
-import { Anchor } from '../Anchor';
-import { Text } from '../Text';
-import { Breadcrumbs, BreadcrumbsProps } from './Breadcrumbs';
+export default RUIComponentMeta<BreadcrumbsProps>('Components', Component)
+  .withStyleSystemProps()
+  .withBadge('stable');
 
-export default {
-  title: 'components/Breadcrumbs',
-  component: Breadcrumbs,
-  argTypes: {}
-} as Meta<typeof Breadcrumbs>;
-
-const Template: Story<BreadcrumbsProps> = (args: BreadcrumbsProps) => (
-  <Breadcrumbs {...args}>Breadcrumbs - created through newComponent</Breadcrumbs>
-);
-
-export const Default = () => (
-  <Breadcrumbs>
-    <Anchor href="#">Home</Anchor>
-    <Anchor href="#">Level 1</Anchor>
-    <Anchor href="#">Level 2</Anchor>
-    <Text>Level 3</Text>
-  </Breadcrumbs>
-);
+export const Breadcrumbs = RUIComponentStory<BreadcrumbsProps>((args) => (
+  <Component>
+    <Link href="#">Home</Link>
+    <Link href="#">Level 1</Link>
+    <Link href="#">Level 2</Link>
+    <Link>Level 3</Link>
+  </Component>
+));

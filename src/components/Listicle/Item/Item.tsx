@@ -1,5 +1,5 @@
 import React, { forwardRef, ReactNode, useContext } from 'react';
-import { cx } from '../../../styles';
+import { cx } from '../../../theme';
 import { Text } from '../../Text';
 import { ListicleVariant } from '../Listicle';
 

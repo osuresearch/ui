@@ -1,12 +1,7 @@
 import React from 'react';
-import { Story, Meta } from '@storybook/react';
+import { VisuallyHidden as Component } from './VisuallyHidden';
+import { RUIComponentMeta } from '~/.storybook/utils';
 
-import { VisuallyHidden } from './VisuallyHidden';
+export default RUIComponentMeta('Utilities', Component).withBadge('stable');
 
-export default {
-  title: 'utilities/VisuallyHidden',
-  component: VisuallyHidden,
-  argTypes: {}
-} as Meta<typeof VisuallyHidden>;
-
-export const Default = () => <VisuallyHidden>Hello screen readers!</VisuallyHidden>;
+export const VisuallyHidden = () => <Component>Hello screen readers!</Component>;

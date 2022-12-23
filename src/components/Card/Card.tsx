@@ -1,13 +1,6 @@
 import React, { forwardRef } from 'react';
-import { cx } from '../../styles';
-import { DefaultProps } from '../../types';
-import { Box } from '../Box';
-import { Button } from '../Button';
-import { CallToAction } from '../CallToAction';
-import { Icon } from '../Icon';
-import { Paper } from '../Paper';
-import { Stack } from '../Stack';
-import { Text } from '../Text';
+import { Paper, Stack, Group, Text, Icon, LinkButton, Box, DefaultProps } from '@osuresearch/ui';
+import { cx } from '@osuresearch/ui/theme';
 
 export type CardProps = DefaultProps & {
   variant: 'default' | 'panel' | 'storytelling';
@@ -91,52 +84,42 @@ export const Card = forwardRef<HTMLAnchorElement, CardProps>(
     <Box
       component="a"
       ref={ref}
-      className={cx('block group max-w-[420px]', className)}
+      maw={420}
+      className={cx('block group', className)}
       href={href}
       target="_blank"
       rel="noopener noreferrer"
       {...props}
     >
       <Paper variant={variant === 'panel' ? 'panel' : 'default'} withBorder={withBorder}>
-        {/* <a href="http://example.com" target="_blank" rel="noopener noreferrer" class="bux-card__link" aria-hidden="true" tabindex="-1"></a> */}
-        {/* Bux overlays an anchor to the target, hidden from sr's. But it also supports CTA clicks / header clicks
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1; */}
-
-        <div className="bg-scarlet h-4" />
+        <div className="bg-primary h-4" />
         <img className="w-full" src={image} alt={alt} />
 
-        <Stack p="xl">
+        <Stack p="lg">
           {taxonomy && (
-            <Text className="uppercase" c="scarlet" fs="sm">
+            <Text className="uppercase" c="primary" fs="sm">
               {taxonomy}
             </Text>
           )}
 
           {linkedHeadline && (
-            <CallToAction
+            <LinkButton
               component="a"
               href={href}
-              mt="md"
-              className={cx({
-                'font-bold': true,
-                'text-h3': true,
-                'font-serif': variant === 'storytelling'
-              })}
+              mt="sm"
+              fw="bold"
+              ff={variant === 'storytelling' ? 'serif' : 'sans'}
+              className="text-h3"
             >
               {headline}
-            </CallToAction>
+            </LinkButton>
           )}
           {!linkedHeadline && (
             <Text
-              bold
+              fw="bold"
+              ff={variant === 'storytelling' ? 'serif' : 'sans'}
               className={cx({
                 'text-h3': true,
-                'font-serif': variant === 'storytelling',
                 'group-hover:underline': variant === 'storytelling'
               })}
             >
@@ -147,15 +130,16 @@ export const Card = forwardRef<HTMLAnchorElement, CardProps>(
           <Text className="text-h4">{children}</Text>
 
           {!linkedHeadline && callToAction && (
-            <CallToAction component="a" href={href} mt="md">
+            <LinkButton component="a" href={href}>
               {callToAction}
-            </CallToAction>
+            </LinkButton>
           )}
 
           {minutes && (
-            <Text c="dimmed">
-              <Icon name="clock" /> {minutes}-minute read
-            </Text>
+            <Group c="dimmed" align="center">
+              <Icon name="clock" />
+              {minutes}-minute read
+            </Group>
           )}
         </Stack>
       </Paper>

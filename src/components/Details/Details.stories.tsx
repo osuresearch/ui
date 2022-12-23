@@ -1,19 +1,17 @@
 import React from 'react';
-import { Story, Meta } from '@storybook/react';
+import { Story } from '@storybook/react';
+import { Details as Component, DetailsProps } from './index';
+import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
-import { Details, DetailsProps } from './index';
-
-export default {
-  title: 'atoms/Details',
-  component: Details,
-  argTypes: {}
-} as Meta<typeof Details>;
+export default RUIComponentMeta<DetailsProps>('Components', Component)
+  .withStyleSystemProps()
+  .withBadge('beta');
 
 const Template: Story<DetailsProps> = (args: DetailsProps) => (
-  <Details {...args}>Content to be revealed.</Details>
+  <Component {...args}>Content to be revealed.</Component>
 );
 
-export const Default = Template.bind({});
-Default.args = {
+export const Details = Template.bind({});
+Details.args = {
   summary: 'This is a Details disclosure element'
 };

@@ -4,7 +4,7 @@ import { Story, Meta } from '@storybook/react';
 import { List, ListProps } from './List';
 
 export default {
-  title: 'components/List',
+  title: 'Components/List',
   component: List,
   argTypes: {}
 } as Meta<typeof List>;

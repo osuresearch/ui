@@ -1,18 +1,16 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react';
-
 import { Button, ButtonProps } from './index';
+import { RUIComponentMeta } from '~/.storybook/utils';
 
-export default {
-  title: 'atoms/Button',
-  component: Button,
-  argTypes: {}
-} as Meta<typeof Button>;
+export default RUIComponentMeta<ButtonProps>('Components', Button)
+  .withStyleSystemProps()
+  .withBadge('stable');
 
-const Template: Story<ButtonProps> = (args: ButtonProps) => <Button {...args}>Button</Button>;
+const Template: Story<ButtonProps> = (args: ButtonProps) => <Button {...args}>Click me!</Button>;
 
-export const Default = Template.bind({});
-Default.args = {};
+export const Overview = Template.bind({});
+Overview.args = {};
 
 export const Disabled = Template.bind({});
 Disabled.args = {
@@ -26,5 +24,5 @@ Small.args = {
 
 export const Alternate = Template.bind({});
 Alternate.args = {
-  alternate: true
+  variant: 'outline'
 };

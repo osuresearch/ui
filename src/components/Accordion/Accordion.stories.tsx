@@ -4,7 +4,7 @@ import { Story, Meta } from '@storybook/react';
 import { Accordion, AccordionProps } from './Accordion';
 
 export default {
-  title: 'components/Accordion',
+  title: 'Components/Accordion',
   component: Accordion,
   argTypes: {}
 } as Meta<typeof Accordion>;

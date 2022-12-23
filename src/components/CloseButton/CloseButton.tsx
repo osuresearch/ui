@@ -1,16 +1,13 @@
 import React, { forwardRef, MouseEventHandler } from 'react';
-import { cx } from '../../styles';
-import { Box } from '../Box';
+import { IconButton } from '@osuresearch/ui';
+import { cx } from '../../theme';
 import { DefaultProps } from '../../types';
-import { UnstyledButton } from '../UnstyledButton';
-import { Icon } from '../Icon';
-import { createPolymorphicComponent } from '../../utils/createPolymorphicComponent';
 
 export type CloseButtonProps = DefaultProps & {
   /**
-   * Optional handler for when the button is clicked
+   * Handler for when the button is clicked
    */
-  onClick?: MouseEventHandler<HTMLButtonElement>;
+  onClick: MouseEventHandler<HTMLButtonElement>;
 
   label?: string;
 };
@@ -22,16 +19,18 @@ export type CloseButtonProps = DefaultProps & {
  *
  * * `aria-label` will always be set on the button by either the user supplied `label`
  *  prop or the default message of "Close"
+ * - Minimum touch target of 44px meets Success Criterion [2.5.5 Target Size (Level AAA)](https://www.w3.org/WAI/WCAG21/Understanding/target-size)
  */
 export const CloseButton = forwardRef<HTMLButtonElement, CloseButtonProps>(
-  ({ className, label = 'Close', ...props }, ref) => (
-    <UnstyledButton
+  ({ label = 'Close', ...props }, ref) => (
+    <IconButton
       ref={ref}
-      aria-label={label}
-      className={cx('flex', 'hover:opacity-70', className)}
+      className="hover:ring hover:opacity-70"
+      label={label}
+      name="xmark"
+      size={44}
+      iconSize={16}
       {...props}
-    >
-      <Icon name="xmark" size={22} p="md" />
-    </UnstyledButton>
+    />
   )
 );

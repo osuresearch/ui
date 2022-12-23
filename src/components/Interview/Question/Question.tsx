@@ -1,5 +1,5 @@
 import React, { forwardRef, ReactNode, useContext } from 'react';
-import { cx } from '../../../styles';
+import { cx } from '../../../theme';
 import { Group } from '../../Group';
 import { Stack } from '../../Stack';
 import { Text } from '../../Text';

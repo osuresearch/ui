@@ -7,7 +7,7 @@ import React, {
   ReactElement,
   ReactNode
 } from 'react';
-import { cx } from '../../styles';
+import { cx } from '../../theme';
 import { Box } from '../Box';
 import { DefaultProps } from '../../types';
 import { ForwardRefWithStaticComponents } from '../../utils/ForwardRefWithStaticComponents';
