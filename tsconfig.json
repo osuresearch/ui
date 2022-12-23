@@ -13,11 +13,21 @@
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
 
-    // Path aliases
-    // "paths": {
-    //   "@utils": ["./src/utils"],
-    //   "@components": ["./src/components"]
-    // }
+    "baseUrl": ".",
+    "paths": {
+      "@osuresearch/ui": [
+        "./src"
+      ],
+      "@osuresearch/ui/*": [
+        "./src/*"
+      ],
+      "*": [
+        "@types/*"
+      ],
+      "~/*": [
+        "./*"
+      ]
+    },
   },
   "include": [
     "src"

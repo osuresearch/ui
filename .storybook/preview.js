@@ -6,7 +6,10 @@ import { DocsContainer } from './DocsContainer';
 import light from './Theme.light';
 import dark from './Theme.dark';
 
-import '../src/styles/globals.css';
+import { SpacingSample } from './components/SpacingSample';
+import { FontSizeTable } from './components/FontSizeTable';
+
+import '../src/theme/index.css';
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -20,6 +23,10 @@ export const parameters = {
   docs: {
     // theme: themes.dark,
     container: DocsContainer,
+    components: {
+      SpacingSample,
+      FontSizeTable,
+    }
   },
   // Don't add a second background color button.
   // We have a global dark mode toggle
@@ -35,6 +42,20 @@ export const parameters = {
     dark,
     light,
   },
+  options: {
+    storySort: {
+      order: [
+        'Getting Started',
+        ['Overview', 'Installation', 'Usage', 'Contributing'],
+        'Design Tokens',
+        ['Typography', 'Iconography', 'Color', 'Spacing'],
+        'Layout',
+        'Components',
+        'Utilities',
+        'Tutorials',
+      ]
+    }
+  }
 };
 
 export const decorators = [
