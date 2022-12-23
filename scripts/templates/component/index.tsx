@@ -1,7 +1,8 @@
 import React, { forwardRef } from 'react';
-import { cx } from '../../styles';
-import { Box } from '../Box';
-import { DefaultProps } from '../../types';
+
+import { Box } from '@osuresearch/ui';
+import { DefaultProps } from '@osuresearch/ui/types';
+import { cx } from '@osuresearch/ui/theme';
 
 export type __TEMPLATE__Props = DefaultProps & {
   /* Your props */

@@ -14,7 +14,7 @@ const __dirname = dirname(__filename);
  * @param {string[]} src  File path within `src/` to write
  * @param {Array} replacements Mapping search regex (key) to replacement (value)
  */
-  function copyTemplate(template, src, ...args) {
+function copyTemplate(template, src, ...args) {
   let contents = fs
     .readFileSync(
       join(__dirname, 'templates', ...template),
@@ -37,24 +37,15 @@ const __dirname = dirname(__filename);
  */
 async function builder() {
   const answers = await inquirer.prompt([
-    // {
-    //   name: 'action',
-    //   type: 'list',
-    //   message: 'What do you want to do?',
-    //   choices: [
-    //     'Add a new component',
-    //     'TODO',
-    //   ]
-    // },
     {
       name: 'name',
       type: 'input',
-      message: 'Name of the new component?',
+      message: 'Name of the new component? (e.g. FooBar)',
     },
     {
       name: 'group',
       type: 'input',
-      message: 'Group for the new component? (e.g. components, layout, brand, etc)',
+      message: 'Group for the new component? (e.g. Layout, Components, etc)',
     }
   ]);
 
@@ -66,28 +57,28 @@ async function builder() {
   // Component
   copyTemplate(
     ['component', 'index.tsx'],
-    [answers.group, answers.name, answers.name + '.tsx'],
+    ['components', answers.name, answers.name + '.tsx'],
     ...replacements
   );
 
   // Storybook stories
   copyTemplate(
     ['component', 'index.stories.tsx'],
-    [answers.group, answers.name, answers.name + '.stories.tsx'],
+    ['components', answers.name, answers.name + '.stories.tsx'],
     ...replacements
   );
 
   // Jest tests
   copyTemplate(
     ['component', 'index.test.tsx'],
-    [answers.group, answers.name, answers.name + '.test.tsx'],
+    ['components', answers.name, answers.name + '.test.tsx'],
     ...replacements
   );
 
   // Main export
   copyTemplate(
     ['component', 'index.ts'],
-    [answers.group, answers.name, 'index.ts'],
+    ['components', answers.name, 'index.ts'],
     ...replacements
   );
 }
