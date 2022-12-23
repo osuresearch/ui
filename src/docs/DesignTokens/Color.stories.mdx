@@ -1,13 +1,17 @@
 import { Meta, ColorPalette, ColorItem } from '@storybook/addon-docs';
 
-<Meta title="Colors" />
+<Meta title="Design Tokens / Color" />
 
 # Colors
 
-Notes here about colors. Something about CSS variables (once we actually support them), etc.
+Blah blah blah color UX things.
 
+# Brand
 
-# Primary
+Scarlet and Gray have been Ohio State's official colors since
+the university's earliest days.
+
+## Primary
 
 <ColorPalette>
   <ColorItem
@@ -76,7 +80,7 @@ Notes here about colors. Something about CSS variables (once we actually support
 </ColorPalette>
 
 
-# Accents
+## Accents
 
 <ColorPalette>
   <ColorItem
@@ -144,9 +148,29 @@ Notes here about colors. Something about CSS variables (once we actually support
   />
 </ColorPalette>
 
-# Utility Colors
+# Utilities
+
+Utility colors change to better adapt to light, dark, and high contrast themes.
 
 <ColorPalette>
+  <ColorItem
+    title="Text Color"
+    colors={{
+      'Text Color': 'var(--rui-text-color)',
+    }}
+  />
+  <ColorItem
+    title="Neutrals"
+    colors={{
+      '0%':  'var(--rui-neutral-0)',
+      '20%': 'var(--rui-neutral-20)',
+      '40%': 'var(--rui-neutral-40)',
+      '60%': 'var(--rui-neutral-60)',
+      '80%': 'var(--rui-neutral-80)',
+      '90%': 'var(--rui-neutral-90)',
+      '100%': 'var(--rui-neutral-100)',
+    }}
+  />
   <ColorItem
     title="Info"
     colors={{
