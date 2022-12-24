@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react';
-import { cx, ff, fs, fw, tc } from '@osuresearch/ui/theme';
+import { bgc, cx, ff, fs, fw, tc } from '@osuresearch/ui/theme/utils';
 import {
   DefaultProps,
   ScreenSize,
@@ -73,7 +73,11 @@ export function useBoxModel(props: Record<string, any>) {
 }
 
 export function fontPropsToClasses(props: Record<string, any>) {
-  return [tc(props.c), fs(props.fs), fw(props.fw), ff(props.ff)];
+  return [fs(props.fs), fw(props.fw), ff(props.ff)];
+}
+
+export function colorPropsToClasses(props: Record<string, any>) {
+  return [tc(props.c), bgc(props.bgc)];
 }
 
 export const _Box = forwardRef<HTMLElement, BoxProps & { component: any }>(
@@ -83,6 +87,7 @@ export const _Box = forwardRef<HTMLElement, BoxProps & { component: any }>(
     // Resolve classes from props
     const boxModelClassNames = useBoxModel(others);
     const fontClassNames = fontPropsToClasses(others);
+    const colorClassNames = colorPropsToClasses(others);
 
     // TODO: Need to omit box model props so that they aren't
     // injected as invalid attributes into the underlying element
@@ -95,7 +100,7 @@ export const _Box = forwardRef<HTMLElement, BoxProps & { component: any }>(
     return (
       <Element
         ref={ref}
-        className={cx(boxModelClassNames, fontClassNames, className)}
+        className={cx(boxModelClassNames, fontClassNames, colorClassNames, className)}
         style={{
           // TODO: Don't use style props here if we don't have to
           width: w,
