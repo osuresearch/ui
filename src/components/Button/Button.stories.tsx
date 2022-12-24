@@ -1,6 +1,6 @@
 import React from 'react';
-import { Story, Meta } from '@storybook/react';
-import { Button, ButtonProps } from './index';
+import { Story } from '@storybook/react';
+import { Icon, Button, ButtonProps } from '@osuresearch/ui';
 import { RUIComponentMeta } from '~/.storybook/utils';
 
 export default RUIComponentMeta<ButtonProps>('Components', Button)
@@ -25,4 +25,17 @@ Small.args = {
 export const Alternate = Template.bind({});
 Alternate.args = {
   variant: 'outline'
+};
+
+export const WithLeftIcon = Template.bind({});
+WithLeftIcon.args = {
+  variant: 'outline',
+  leftSlot: <Icon name="envelope" size={24} />
+};
+
+export const WithRightIcon = Template.bind({});
+WithRightIcon.args = {
+  variant: 'default',
+  small: true,
+  rightSlot: <Icon name="caret" size={24} />
 };
