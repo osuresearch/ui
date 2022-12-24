@@ -1,9 +1,8 @@
 
 import React from 'react';
-import { Meta, Title, IconGallery, IconItem } from '@storybook/addon-docs';
-import { Icon } from '../src/components/Icon';
-import { Text } from '../src/components/Text';
-import { groups } from '../src/icons';
+import { IconGallery, IconItem } from '@storybook/addon-docs';
+import { Icon, Text } from '@osuresearch/ui';
+import { groups } from '@osuresearch/ui/icons';
 
 /**
  * Custom icon gallery component for Storybook to

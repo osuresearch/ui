@@ -1,5 +1,5 @@
 import React from 'react';
-import { cx } from '../../theme';
+import { cx } from '../../theme/utils';
 
 export type TitleProps = {
   /**
@@ -45,13 +45,13 @@ export function Title({ level, variant = 'default', children }: TitleProps) {
         'font-sans': variant === 'sans',
 
         // Theme mods
-        'text-neutral-100': variant !== 'section',
+        'text-light-contrast': variant !== 'section',
 
         'pb-24': level === 1,
         'pb-8': level > 1,
 
         // Section styles. Same size regardless of H-level
-        'text-h2 text-dimmed font-sans uppercase font-normal': variant === 'section'
+        'text-h2 text-dark font-sans uppercase font-normal': variant === 'section'
       })
     },
     children

@@ -1,5 +1,5 @@
 import React from 'react';
-import { cx } from '@osuresearch/ui/theme';
+import { cx } from '@osuresearch/ui/theme/utils';
 import { Icon, UnstyledButton, Text } from '@osuresearch/ui';
 
 export type DocumentPaginationProps = {
@@ -33,18 +33,12 @@ export function DocumentPagination({ direction, children }: DocumentPaginationPr
         'w-full',
 
         'border-2',
-        'border-neutral-20',
+        'border-light',
 
-        // 'border-gray-tint-90',
-        // 'text-scarlet',
-
-        // // Hover styles
-        'hover:bg-gray-shade-60',
-        'hover:text-white',
-
-        // // Dark mode assumes dark background
-        // 'dark:border-gray-shade-80',
-        // 'dark:text-white',
+        // Hover styles
+        'hover:bg-dark-shade',
+        'hover:border-dark-shade',
+        'hover:text-dark-contrast',
 
         // Reverse layout for next vs previous button
         { 'flex-row-reverse': direction === 'next' }

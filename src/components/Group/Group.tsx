@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 
 import { Box } from '@osuresearch/ui';
-import * as styles from '@osuresearch/ui/theme';
+import * as styles from '@osuresearch/ui/theme/utils';
 import { createPolymorphicComponent } from '@osuresearch/ui/utils';
 import { Align, DefaultProps, Justify, PositiveSpacing } from '@osuresearch/ui/types';
 

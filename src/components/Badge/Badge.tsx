@@ -1,7 +1,6 @@
 import React from 'react';
-import { ThemeColor } from '../../types';
-import { contrast } from '../../theme/_donotuse';
-import { bc, bg, tc, cx } from '../../theme';
+import { ThemeColor } from '@osuresearch/ui/theme';
+import { bc, bgc, tc, cx } from '../../theme/utils';
 import { Indicator } from '../Indicator';
 
 export type BadgeProps = {
@@ -27,8 +26,8 @@ export function Badge({ c = 'gray', variant = 'solid', children }: BadgeProps) {
         'px-8': true,
 
         // Solid: solid bg + contrasting fg
-        [bg(c)]: variant === 'solid',
-        [tc(contrast(c))]: variant === 'solid',
+        [bgc(c)]: variant === 'solid',
+        [tc(c)]: variant === 'solid',
         [bc(c)]: variant === 'solid',
 
         // Outline: transparent bg, bc and fg are the theme

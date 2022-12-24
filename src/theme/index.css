@@ -64,45 +64,61 @@
     Ref: https://bux.osu.edu/color/utility-colors
   */
   --rui-primary: var(--rui-scarlet);
+  --rui-primary-contrast: var(--rui-white);
+  --rui-primary-shade: var(--rui-scarlet-dark-40);
+  --rui-primary-tint: var(--rui-scarlet);
+
   --rui-secondary: var(--rui-teal);
+  --rui-secondary-contrast: var(--rui-white);
+
   --rui-tertiary: var(--rui-blue); /* TODO: Idk about tertiary */
-  /* TODO: Might want a background to primary? E.g. button state swaps.
-    Would secondary fit the bill there or something else? */
+  --rui-tertiary-contrast: var(--rui-white);
 
   /* Neutrals */
-  --rui-neutral-0: var(--rui-white);
-  --rui-neutral-20: var(--rui-gray-tint-90);
-  --rui-neutral-40: var(--rui-gray-tint-80);
-  --rui-neutral-60: var(--rui-gray-tint-60);
-  --rui-neutral-80: var(--rui-gray-shade-20);
-  --rui-neutral-90: var(--rui-gray-shade-40); /* TODO: I don't like this setup, but I need a closer neutral 90 to 100 for dimmed text */
-  --rui-neutral-100: var(--rui-black);
-  /*  TODO: I need something between 90 and 100 for hover on buttons.
-      Rethink this scale.
-  */
+  --rui-light-tint: var(--rui-white);
+  --rui-light: var(--rui-gray-tint-90);
+  --rui-light-shade: var(--rui-gray-tint-80);
+  --rui-light-contrast: var(--rui-black);
 
-  /* TODO: Rename? */
-  --rui-text-color: var(--rui-neutral-100);
+  --rui-dimmed-tint: var(--rui-gray-tint-60);
+  --rui-dimmed: var(--rui-gray-tint-40);
+  --rui-dimmed-shade: var(--rui-gray-tint-20);
+  --rui-dimmed-contrast: var(--rui-black);
 
+  /* Unused: gray-shade-80 */
+
+  --rui-dark-tint: var(--rui-gray-shade-20);
+  --rui-dark: var(--rui-gray-shade-40);
+  --rui-dark-shade: var(--rui-gray-shade-60);
+  --rui-dark-contrast: var(--rui-white);
+
+  --rui-info-tint: #c6e9f8;
   --rui-info: #41b6e6;
-  --rui-info-light: #c6e9f8;
+  --rui-info-shade: #41b6e6;
+  --rui-info-contrast: var(--rui-black);
 
+  --rui-success-tint: #dcf5d0;
   --rui-success: #80c75b;
-  --rui-success-light: #dcf5d0;
+  --rui-success-shade: #80c75b;
+  --rui-success-contrast: var(--rui-black);
 
+  --rui-warning-tint: #fff0cc;
   --rui-warning: #ffb600;
-  --rui-warning-light: #fff0cc;
+  --rui-warning-shade: #ffb600;
+  --rui-warning-contrast: var(--rui-black);
 
+  --rui-error-tint: #ba0c2f;
   --rui-error: #ba0c2f;
-  --rui-error-light: #ffffff;
+  --rui-error-shade: var(--rui-white);
+  --rui-error-contrast: var(--rui-white);
 
   --rui-focus: #41b6e6;
 
   --rui-link: var(--rui-scarlet);
-  --rui-link-light: var(--rui-link-white);
+  --rui-link-tint: var(--rui-white);
 
   --rui-visited: #660099;
-  --rui-visited-light: #e5c9f3;
+  --rui-visited-tint: #e5c9f3;
 
   /*
     Typography tokens
@@ -161,19 +177,26 @@
   }
 
   [data-theme="dark"] {
-    --rui-neutral-0: var(--rui-black);
-    --rui-neutral-20: var(--rui-gray-shade-80);
-    --rui-neutral-40: var(--rui-gray-shade-60);
-    --rui-neutral-60: var(--rui-gray-shade-40);
-    --rui-neutral-80: var(--rui-gray-shade-20);
-    --rui-neutral-90: var(--rui-gray);
-    --rui-neutral-100: var(--rui-white);
+    --rui-light-tint: var(--rui-black);
+    --rui-light: var(--rui-gray-shade-80);
+    --rui-light-shade: var(--rui-gray-shade-60);
+    --rui-light-contrast: var(--rui-white);
+
+    --rui-dimmed-tint: var(--rui-gray-shade-40);
+    --rui-dimmed: var(--rui-gray-shade-20);
+    --rui-dimmed-shade: var(--rui-gray);
+    --rui-dimmed-contrast: var(--rui-white);
+
+    --rui-dark-tint: var(--rui-gray-tint-20);
+    --rui-dark: var(--rui-gray-tint-40);
+    --rui-dark-shade: var(--rui-gray-tint-60);
+    --rui-dark-contrast: var(--rui-black);
 
     --rui-link: var(--rui-white);
-    --rui-link-light: var(--rui-link-light);
+    --rui-link-tint: var(--rui-link-tint);
 
     --rui-visited: #e5c9f3;
-    --rui-visited-light: #e5c9f3;
+    --rui-visited-tint: #e5c9f3;
   }
 }
 

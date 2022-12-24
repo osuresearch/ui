@@ -1,6 +1,6 @@
 import React, { forwardRef, MouseEventHandler } from 'react';
 import { IconButton } from '@osuresearch/ui';
-import { cx } from '../../theme';
+import { cx } from '../../theme/utils';
 import { DefaultProps } from '../../types';
 
 export type CloseButtonProps = DefaultProps & {
@@ -22,10 +22,10 @@ export type CloseButtonProps = DefaultProps & {
  * - Minimum touch target of 44px meets Success Criterion [2.5.5 Target Size (Level AAA)](https://www.w3.org/WAI/WCAG21/Understanding/target-size)
  */
 export const CloseButton = forwardRef<HTMLButtonElement, CloseButtonProps>(
-  ({ label = 'Close', ...props }, ref) => (
+  ({ label = 'Close', className, ...props }, ref) => (
     <IconButton
       ref={ref}
-      className="hover:ring hover:opacity-70"
+      className={cx('hover:ring hover:opacity-70 text-light-contrast', className)}
       label={label}
       name="xmark"
       size={44}

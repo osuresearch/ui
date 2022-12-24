@@ -1,4 +1,5 @@
 import type { CSSProperties, ForwardRefExoticComponent } from 'react';
+import { Color } from '../theme';
 
 export const spacing = [
   0,
@@ -56,62 +57,34 @@ export type Justify = typeof justify[number];
  * A type of prop that can either be the given type OR
  * an object containing values per breakpoint.
  *
- * Example:
+ * Examples:
  *
+ * ```
  * <Box m="lg">
- * <Box m={{ xl: "lg", sm: "sm" xs: 0 }} />
+ * <Box m={{ xl: "lg", sm: "sm" xs: 0 }}>
+ * ```
  */
 export type ResponsiveProp<Value> = Value | Partial<Record<ScreenSize, Value>>;
 
-// export type SpacingValue = NumberSize | (string & {});
-
-export const brandColors = [
-  'scarlet',
-  'grey',
-
-  'scarlet-dark-40',
-  'scarlet-dark-60'
-
-  // and so forth
-] as const;
-
-export const systemColors = [
-  'primary',
-  'secondary',
-  'tertiary',
-  'dimmed',
-
-  // Neutrals
-  'white',
-  'black',
-  'neutral-0',
-  'neutral-20',
-  'neutral-40',
-  'neutral-60',
-  'neutral-80',
-  'neutral-90',
-  'neutral-100',
-
-  // Utilities
-  'info',
-  'info-light',
-  'success',
-  'success-light',
-  'warning',
-  'warning-light',
-  'error',
-  'error-light',
-  'focus',
-  'link',
-  'link-light',
-  'visited',
-  'visited-light'
-] as const;
-
 /**
- * Color palettes for components
+ * A type of prop that can either be the given color OR
+ * an object defining the color per theme.
+ *
+ * Examples:
+ *
+ * ```
+ * <Box bgc="scarlet">
+ * <Box bgc={{ light: "scarlet", dark: "white" }}
+ * ```
  */
-export type ThemeColor = typeof brandColors[number] | typeof systemColors[number];
+export type ColorProp =
+  | Color
+  | {
+      light?: Color;
+      dark?: Color;
+    };
+
+// export type SpacingValue = NumberSize | (string & {});
 
 // TODO: I want support for all the tailwind palette colors
 // but without having to manually map them all...
@@ -143,7 +116,8 @@ export interface StyleSystemProps {
   mih?: ResponsiveProp<CSSProperties['minHeight']>;
   mah?: ResponsiveProp<CSSProperties['maxHeight']>;
 
-  c?: ThemeColor;
+  c?: ColorProp;
+  bgc?: ColorProp;
 
   // Fonts
   ff?: FontFamily;
@@ -180,6 +154,7 @@ export interface StyleSystemProps {
 // export type ClassNames<StylesNames extends string> = Partial<Record<StylesNames, string>>;
 
 export interface DefaultProps<StylesNames extends string = never> extends StyleSystemProps {
+  id?: string;
   className?: string;
   style?: CSSProperties;
   // classNames?: ClassNames<StylesNames>;

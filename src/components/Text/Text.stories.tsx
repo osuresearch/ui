@@ -15,9 +15,9 @@ const Template: Story<TextProps> = (args) => (
 export const Overview = RUIComponentStory(Template);
 
 export const HelpText = RUIComponentStory(Template, {
-  c: 'dimmed',
+  c: 'dark',
   fs: 'sm'
 }).withDescription(`
   Additional help text is typically shown smaller and slightly
-  dimmed to de-emphasize the content
+  lighter than the base color to de-emphasize the content
 `);

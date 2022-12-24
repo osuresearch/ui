@@ -1,12 +1,11 @@
+import { ThemeSize } from '@osuresearch/ui';
+import { bgc, Color, cx, hw, bc as _bc } from '@osuresearch/ui/theme';
 import React from 'react';
-import { cx } from '../../theme';
-import { ThemeColor, ThemeSize } from '../../types';
-import { bg, bc as _bc, hw } from '../../theme';
 
 export type IndicatorProps = {
   size?: ThemeSize;
-  c?: ThemeColor;
-  bc?: ThemeColor;
+  c?: Color;
+  bc?: Color;
 
   /** Apply a ripple effect. Useful for notifications */
   ping?: boolean;
@@ -24,7 +23,7 @@ export function Indicator({ size = 'lg', c = 'blue', bc = 'white', ping }: Indic
             className={cx(
               'animate-ping absolute inline-flex rounded-full opacity-75',
               'h-full w-full',
-              bg(c)
+              bgc(c)
             )}
           />
         )}
@@ -33,7 +32,7 @@ export function Indicator({ size = 'lg', c = 'blue', bc = 'white', ping }: Indic
             // Solid dot
             'relative inline-flex rounded-full',
             hw(size),
-            bg(c),
+            bgc(c),
 
             // Border
             'border-2',

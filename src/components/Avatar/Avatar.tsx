@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
-import { cx } from '../../theme';
-import { ThemeSize, ThemeColor } from '../../types';
+import { cx } from '../../theme/utils';
+import { ThemeSize } from '../../types';
 import { createPolymorphicComponent } from '../../utils/createPolymorphicComponent';
 import { Text } from '../Text/Text';
 
@@ -17,7 +17,7 @@ export type AvatarProps = {
   size: number;
 
   /** Color used for letter and icon placeholders */
-  color?: ThemeColor;
+  color?: Color;
 
   /** Image url. If not supplied, opic.osu.edu will be used */
   src?: string;

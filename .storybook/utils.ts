@@ -1,6 +1,7 @@
 
+import { colors } from '@osuresearch/ui/theme';
 import { ArgTypes, Meta, Story } from '@storybook/react';
-import { brandColors, fontFamily, fontSize, fontWeight, spacing, systemColors } from '../src/types';
+import { fontFamily, fontSize, fontWeight, spacing } from '../src/types';
 
 export type RUIBadge = 'beta' | 'stable' | 'deprecated' | 'experimental';
 
@@ -133,8 +134,8 @@ export function styleSystemArgTypes() {
     }
   }
 
-  const themeColor = {
-    options: [...systemColors, ...brandColors],
+  const color = {
+    options: colors,
     control: 'select',
     table: {
       category: 'Style System',
@@ -176,7 +177,9 @@ export function styleSystemArgTypes() {
     mih: size,
     mah: size,
 
-    c: themeColor,
+    c: color,
+    bgc: color,
+
     ff: font(fontFamily),
     fw: font(fontWeight),
     fs: font(fontSize),

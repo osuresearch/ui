@@ -1,7 +1,9 @@
 import React, { MouseEventHandler } from 'react';
-import { cx } from '../../theme';
+import { Box } from '@osuresearch/ui';
+import { DefaultProps } from '@osuresearch/ui/types';
+import { cx } from '@osuresearch/ui/theme';
 
-export type LinkProps = {
+export type LinkProps = DefaultProps & {
   href?: string;
 
   /**
@@ -28,32 +30,42 @@ export type LinkProps = {
  * Links must have at least 4.5:1 contrast with the background (3:1 for large text)
  * to meet WCAG 2 Level AA.
  */
-export function Link({ href, onClick, variant = 'default', children }: LinkProps) {
+export function Link({
+  href,
+  onClick,
+  variant = 'default',
+  className,
+  children,
+  ...props
+}: LinkProps) {
   return (
-    <a
+    <Box
+      component="a"
       href={href}
       onClick={onClick}
-      className={
+      className={cx(
         href
-          ? cx({
+          ? {
               'cursor-pointer': true,
               'border-b': true,
 
               // Default theme
               'text-link border-link': variant === 'default',
-              'hover:text-neutral-100 hover:border-neutral-100': variant === 'default',
-              'hover:bg-neutral-40': variant === 'default',
+              'hover:text-light-contrast': variant === 'default',
+              'hover:bg-light-shade hover:border-light-contrast':
+                variant === 'default' || variant === 'white',
               'visited:text-visited visited:border-visited': variant === 'default',
 
               // White theme
               'text-white border-white': variant === 'white',
-              'hover:text-black hover:border-black': variant === 'white',
-              'hover:bg-white': variant === 'white'
-            })
-          : ''
-      }
+              'hover:text-black hover:border-white hover:bg-white': variant === 'white'
+            }
+          : '',
+        className
+      )}
+      {...props}
     >
       {children}
-    </a>
+    </Box>
   );
 }

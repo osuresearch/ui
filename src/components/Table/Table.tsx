@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react';
-import { cx } from '../../theme';
+import { cx } from '../../theme/utils';
 import { Box } from '../Box';
 import { DefaultProps } from '../../types';
 

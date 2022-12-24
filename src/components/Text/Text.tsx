@@ -1,9 +1,8 @@
 import React, { forwardRef } from 'react';
-import { cx } from '../../theme';
-import { DefaultProps, ThemeColor } from '../../types';
+import { cx } from '../../theme/utils';
+import { DefaultProps } from '../../types';
 import { Box } from '../Box';
 import { createPolymorphicComponent } from '../../utils/createPolymorphicComponent';
-import { tc, fs as _fs, fw as _fw } from '../../theme';
 
 export type TextProps = DefaultProps & {
   /** Text alignment */
@@ -17,7 +16,7 @@ export type TextProps = DefaultProps & {
 
 const _Text = forwardRef<HTMLDivElement, TextProps>(
   (
-    { style, className, children, ta = 'left', c = 'neutral-100', span = false, ...others },
+    { style, className, children, ta = 'left', c = 'light-contrast', span = false, ...others },
     ref
   ) => (
     <Box

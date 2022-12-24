@@ -1,6 +1,6 @@
 import React, { forwardRef, useState } from 'react';
 import { Icon, Group, Stack, CloseButton, Text } from '@osuresearch/ui';
-import { ThemeColor } from '@osuresearch/ui/types';
+import { Color } from '@osuresearch/ui/theme';
 
 export type AlertProps = {
   variant: 'success' | 'info' | 'warning' | 'error';
@@ -8,34 +8,6 @@ export type AlertProps = {
   title?: string;
   dismissible?: boolean;
   children?: React.ReactNode;
-};
-
-// Class map for alert colors
-const className = {
-  success: {
-    bg: 'bg-success-light',
-    fg: 'black',
-    iconColor: 'success',
-    iconName: 'checkCircle'
-  },
-  info: {
-    bg: 'bg-info-light',
-    fg: 'black',
-    iconColor: 'info',
-    iconName: 'infoCircle'
-  },
-  warning: {
-    bg: 'bg-warning-light',
-    fg: 'black',
-    iconColor: 'warning',
-    iconName: 'infoCircle'
-  },
-  error: {
-    bg: 'bg-error',
-    fg: 'white',
-    iconColor: 'white',
-    iconName: 'xmarkCircle'
-  }
 };
 
 /**
@@ -48,33 +20,37 @@ const className = {
 export const Alert = forwardRef<HTMLDivElement, AlertProps>(
   ({ variant = 'info', title, dismissible = false, children }, ref) => {
     const [open, setOpen] = useState(true);
-    const { bg, fg, iconColor, iconName } = className[variant];
+
+    const iconName = {
+      success: 'checkCircle',
+      info: 'infoCircle',
+      warning: 'infoCircle',
+      error: 'xmarkCircle'
+    }[variant];
 
     if (!open) {
       return null;
     }
 
+    const tint: Color = `${variant}-tint`;
+    const shade: Color = `${variant}-shade`;
+    const contrast: Color = `${variant}-contrast`;
+
     return (
-      <div ref={ref} className={bg} role="alert">
-        <Group justify="apart">
-          <Group align="stretch" p="md">
-            <Icon c={iconColor as ThemeColor} name={iconName} size={24} />
-            <Stack c={fg as ThemeColor}>
-              <Text c={fg as ThemeColor} fw="bold">
-                {title}
-              </Text>
-              {children}
-            </Stack>
-          </Group>
-          {dismissible && (
-            <CloseButton
-              c={fg as ThemeColor}
-              label="Dismiss this alert"
-              onClick={() => setOpen(false)}
-            />
-          )}
+      <Group justify="apart" ref={ref} role="alert" bgc={tint}>
+        <Group align="stretch" p="md">
+          <Icon c={shade} name={iconName} size={24} />
+          <Stack c={contrast}>
+            <Text fw="bold" c={contrast}>
+              {title}
+            </Text>
+            {children}
+          </Stack>
         </Group>
-      </div>
+        {dismissible && (
+          <CloseButton c={contrast} label="Dismiss this alert" onClick={() => setOpen(false)} />
+        )}
+      </Group>
     );
   }
 );

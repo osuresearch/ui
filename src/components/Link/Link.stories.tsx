@@ -1,6 +1,6 @@
 import React from 'react';
 import { Story } from '@storybook/react';
-import { Link, LinkProps, Paper } from '@osuresearch/ui';
+import { Link, LinkProps, Box } from '@osuresearch/ui';
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
 export default RUIComponentMeta<LinkProps>('Components', Link)
@@ -16,9 +16,10 @@ export const Default = RUIComponentStory(Template, {
 
 export const White = RUIComponentStory<LinkProps>(
   (args) => (
-    <Paper c="black" p="lg">
-      <Link {...args}>research.osu.edu</Link>
-    </Paper>
+    <Box bgc="primary" c="primary-contrast" p="lg">
+      Here is an example of an <Link {...args}>inline link</Link> within a paragraph on a scarlet
+      background.
+    </Box>
   ),
   {
     href: 'https://research.osu.edu',

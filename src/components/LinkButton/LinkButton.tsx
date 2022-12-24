@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react';
 
 import { Box, Icon, UnstyledButton } from '@osuresearch/ui';
 import { DefaultProps } from '@osuresearch/ui/types';
-import { cx } from '@osuresearch/ui/theme';
+import { cx } from '@osuresearch/ui/theme/utils';
 import { createPolymorphicComponent } from '@osuresearch/ui/utils';
 
 export type LinkButtonProps = DefaultProps & {
@@ -19,10 +19,10 @@ export const _LinkButton = forwardRef<HTMLButtonElement, LinkButtonProps & { com
   ({ className, children, ...props }, ref) => (
     <UnstyledButton
       ref={ref}
+      c="light-contrast"
       className={cx(
         'flex',
-        'text-neutral-100',
-        'hover:text-primary dark:hover:text-neutral-80',
+        'hover:text-primary dark:hover:text-primary-contrast',
         'group-hover:text-primary dark:group-hover:text-neutral-80', // Support for .group parenting
         '[&>i]:hover:translate-x-sm [&>i]:group-hover:translate-x-sm',
         className

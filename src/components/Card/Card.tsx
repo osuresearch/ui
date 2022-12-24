@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 import { Paper, Stack, Group, Text, Icon, LinkButton, Box, DefaultProps } from '@osuresearch/ui';
-import { cx } from '@osuresearch/ui/theme';
+import { cx } from '@osuresearch/ui/theme/utils';
 
 export type CardProps = DefaultProps & {
   variant: 'default' | 'panel' | 'storytelling';

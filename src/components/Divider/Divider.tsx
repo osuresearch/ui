@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 
 import { Box } from '@osuresearch/ui';
-import { cx } from '@osuresearch/ui/theme';
+import { cx } from '@osuresearch/ui/theme/utils';
 import { PositiveSpacing } from '@osuresearch/ui/types';
 
 export type DividerProps = {
@@ -22,8 +22,8 @@ export const Divider = forwardRef<HTMLHRElement, DividerProps>(
       my={orientation === 'horizontal' ? gap : 0}
       mx={orientation === 'vertical' ? gap : 0}
       className={cx({
-        'border-t border-t-neutral-80': orientation === 'horizontal',
-        'border-l border-l-neutral-80 self-stretch h-auto': orientation === 'vertical'
+        'border-t border-dimmed': orientation === 'horizontal',
+        'border-l border-dimmed self-stretch h-auto': orientation === 'vertical'
       })}
       role="separator"
     />

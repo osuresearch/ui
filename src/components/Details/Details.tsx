@@ -1,5 +1,5 @@
 import React from 'react';
-import { cx } from '../../theme';
+import { cx } from '../../theme/utils';
 import { Icon } from '../Icon';
 import { Text } from '../Text/Text';
 

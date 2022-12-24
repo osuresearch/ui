@@ -1,6 +1,6 @@
 import React, { Children, cloneElement, forwardRef, isValidElement, ReactNode } from 'react';
 import { Box } from '@osuresearch/ui';
-import { cx } from '@osuresearch/ui/theme';
+import { cx } from '@osuresearch/ui/theme/utils';
 import { DefaultProps, ForwardRefWithStaticComponents } from '@osuresearch/ui/types';
 
 import { Question, QuestionProps } from './Question/Question';
