@@ -3,7 +3,9 @@ import { Group, Stack, Text } from '@osuresearch/ui';
 import { Divider, DividerProps } from './Divider';
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
-export default RUIComponentMeta<DividerProps>('Layout', Divider).withBadge('stable');
+export default RUIComponentMeta<DividerProps>('Layout', Divider)
+  .withBadge('atom')
+  .withBadge('stable');
 
 export const Horizontal = RUIComponentStory<DividerProps>(
   (args) => (

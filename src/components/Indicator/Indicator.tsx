@@ -2,8 +2,10 @@ import { Box, DefaultProps, ThemeSize } from '@osuresearch/ui';
 import { bgc, Color, cx, hw, bc as _bc } from '@osuresearch/ui/theme';
 import React from 'react';
 
-export type IndicatorProps = DefaultProps & {
+export type IndicatorProps = {
   size?: ThemeSize;
+
+  c?: Color;
 
   /** Apply a ripple effect. Useful for notifications */
   ping?: boolean;
@@ -14,14 +16,17 @@ export type IndicatorProps = DefaultProps & {
  */
 export function Indicator({ size = 'sm', c = 'primary', ping, ...props }: IndicatorProps) {
   return (
-    <Box className="relative inline-flex align-middle" {...props}>
-      <Box className={cx('flex absolute -mt-4 -mr-4', hw(size))}>
+    <Box className="rui-relative rui-inline-flex rui-align-middle" {...props}>
+      <Box mt="-xxs" mr="-xxs" className={cx('rui-flex rui-absolute')} w={size} h={size}>
         {ping && (
           <Box
             bgc={c}
-            h="full"
-            w="full"
-            className={cx('animate-ping absolute inline-flex rounded-full opacity-75')}
+            h={size}
+            w={size}
+            className={cx(
+              // Surrounding animation
+              'rui-animate-ping rui-absolute rui-inline-flex rui-rounded-full rui-opacity-75'
+            )}
           />
         )}
         <Box
@@ -30,11 +35,11 @@ export function Indicator({ size = 'sm', c = 'primary', ping, ...props }: Indica
           w={size}
           className={cx(
             // Solid dot
-            'relative inline-flex rounded-full',
+            'rui-relative rui-inline-flex rui-rounded-full',
 
             // Border
-            'border-2',
-            'border-light'
+            'rui-border-2',
+            'rui-border-light-tint'
           )}
         />
       </Box>

@@ -1,5 +1,15 @@
 import React, { forwardRef } from 'react';
-import { Paper, Stack, Group, Text, Icon, LinkButton, Box, DefaultProps } from '@osuresearch/ui';
+import {
+  Paper,
+  Stack,
+  Group,
+  Text,
+  Icon,
+  LinkButton,
+  Box,
+  DefaultProps,
+  Title
+} from '@osuresearch/ui';
 import { cx } from '@osuresearch/ui/theme/utils';
 
 export type CardProps = DefaultProps & {
@@ -95,7 +105,7 @@ export const Card = forwardRef<HTMLAnchorElement, CardProps>(
         <div className="rui-bg-primary rui-h-4" />
         <img className="rui-w-full" src={image} alt={alt} />
 
-        <Stack p="lg" gap="sm">
+        <Stack p="lg" gap="xs">
           {taxonomy && (
             <Text className="rui-uppercase" c="primary" fs="sm">
               {taxonomy}
@@ -130,13 +140,13 @@ export const Card = forwardRef<HTMLAnchorElement, CardProps>(
           <Text className="rui-text-h4">{children}</Text>
 
           {!linkedHeadline && callToAction && (
-            <LinkButton component="a" href={href}>
+            <LinkButton component="a" href={href} mt="sm">
               {callToAction}
             </LinkButton>
           )}
 
           {minutes && (
-            <Group c="dark" align="center">
+            <Group c="dark" align="center" gap="xxs">
               <Icon name="clock" />
               {minutes}-minute read
             </Group>

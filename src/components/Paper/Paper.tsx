@@ -34,7 +34,7 @@ const _Paper = forwardRef<HTMLDivElement, PaperProps>(
         {
           // Border style
           'rui-border-2': withBorder,
-          'rui-border-gray-tint-90 dark:rui-border-gray-shade-80': withBorder,
+          'rui-border-light': withBorder,
 
           // Shadow
           // 'shadow-xs': shadow === 'xs',
@@ -51,13 +51,13 @@ const _Paper = forwardRef<HTMLDivElement, PaperProps>(
           'rui-rounded-xl': rounded === 'xl',
 
           // Foreground style
-          'rui-text-black dark:rui-text-gray-tint-80': true,
+          'rui-text-light-contrast': true,
 
           // Default variant
-          'rui-bg-white dark:rui-bg-black': variant === 'default',
+          'rui-bg-light-tint': variant === 'default',
 
           // Panel variant
-          'rui-bg-gray-tint-90 dark:rui-bg-gray-shade-80': variant === 'panel'
+          'rui-bg-light': variant === 'panel'
         },
         className
       )}
