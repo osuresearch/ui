@@ -1,11 +1,9 @@
-import React from 'react';
-import { cx } from '../../theme/utils';
-import { Box } from '../Box';
-import { Group } from '../Group';
-import { Icon } from '../Icon';
-import { Text } from '../Text/Text';
+import React, { forwardRef } from 'react';
+import { DefaultProps } from '@osuresearch/ui/types';
+import { Box, Group, Icon, Text } from '@osuresearch/ui';
+import { cx } from '@osuresearch/ui/theme';
 
-export type DetailsProps = {
+export type DetailsProps = DefaultProps & {
   summary: React.ReactNode;
   children: React.ReactNode;
 };
@@ -13,15 +11,20 @@ export type DetailsProps = {
 /**
  * A native HTML disclosure widget in which information is visible only
  * when the widget is toggled into an open state.
+ *
+ * ### Accessibility
+ *
+ * - Root is the semantic `<details>` element with the summary wrapped with `<summary>`
  */
-export function Details({ summary, children }: DetailsProps) {
-  return (
-    <details
+export const Details = forwardRef<HTMLHeadingElement, DetailsProps & { component: any }>(
+  ({ summary, children, ...props }, ref) => (
+    <Box
+      component="details"
       className={cx(
         'rui-group',
         // 'open:ring',
         'rui-border-b-2',
-        'rui-border-gray-tint-80 dark:rui-border-gray-shade-80'
+        'rui-border-light-shade'
       )}
     >
       <Group
@@ -30,34 +33,25 @@ export function Details({ summary, children }: DetailsProps) {
         p="md"
         gap="xs"
         className={cx(
-          'rui-list-none',
-          'rui-items-center',
-          'rui-border-t',
-
-          // Light mode
-          'hover:rui-bg-gray-tint-90 focus:rui-bg-gray-tint-90 group-open:rui-bg-gray-tint-90',
-          'rui-border-gray-tint-80',
-
-          // Dark mode
-          'dark:rui-hover:bg-gray-shade-80 dark:focus:rui-bg-gray-shade-80 dark:group-open:rui-bg-gray-shade-80',
-          'dark:rui-border-gray-shade-80'
+          'rui-border-t-2',
+          'rui-border-light-shade',
+          'hover:rui-bg-light focus:rui-bg-light group-open:rui-bg-light'
         )}
       >
         <Icon
-          className="group-open:rui-hidden rui-text-primary dark:rui-text-white"
           name="chevron"
-          size={24} // TODO: Replace these two with some kind of toggle icon
-        />
-        <Icon
-          className="rui-hidden group-open:rui-inline rui-rotate-90 rui-text-primary dark:rui-text-white"
-          name="chevron"
+          c={{
+            light: 'primary',
+            dark: 'white'
+          }}
+          className="group-open:rui-rotate-90 rui-transition-transform"
           size={24}
         />
         <Text>{summary}</Text>
       </Group>
-      <Text p="sm" pl="xxl">
+      <Box p="sm" pl="xxl">
         {children}
-      </Text>
-    </details>
-  );
-}
+      </Box>
+    </Box>
+  )
+);

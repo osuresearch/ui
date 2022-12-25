@@ -1,14 +1,17 @@
 import React from 'react';
 import { Story } from '@storybook/react';
-import { Details as Component, DetailsProps } from './index';
+import { Details as Component, DetailsProps, Text } from '@osuresearch/ui';
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
 export default RUIComponentMeta<DetailsProps>('Components', Component)
   .withStyleSystemProps()
-  .withBadge('beta');
+  .withBadge('atom')
+  .withBadge('stable');
 
 const Template: Story<DetailsProps> = (args: DetailsProps) => (
-  <Component {...args}>Content to be revealed.</Component>
+  <Component {...args}>
+    <Text>Content to be revealed.</Text>
+  </Component>
 );
 
 export const Details = Template.bind({});
