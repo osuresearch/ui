@@ -3,6 +3,7 @@ import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import fs from 'fs';
 import inquirer from 'inquirer';
+import { buildComponentsIndex } from './utils.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -46,6 +47,7 @@ async function builder() {
       name: 'group',
       type: 'input',
       message: 'Group for the new component? (e.g. Layout, Components, etc)',
+      default: 'Components',
     }
   ]);
 
@@ -81,6 +83,9 @@ async function builder() {
     ['components', answers.name, 'index.ts'],
     ...replacements
   );
+
+  // Rebuild indices to add to exports
+  buildComponentsIndex();
 }
 
 builder();
