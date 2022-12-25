@@ -23,13 +23,13 @@ export const _Icon = forwardRef<HTMLElement, IconProps & { component: any }>(
       component={component}
       className={cx(
         {
-          'inline-block': inline
+          'rui-inline-block': inline
         },
         className
       )}
       {...props}
     >
-      <InlineIcon icon={name} className="m-auto" alignmentBaseline="middle" fontSize={size} />
+      <InlineIcon icon={name} className="rui-m-auto" alignmentBaseline="middle" fontSize={size} />
     </Box>
   )
 );

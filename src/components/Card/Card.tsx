@@ -85,19 +85,19 @@ export const Card = forwardRef<HTMLAnchorElement, CardProps>(
       component="a"
       ref={ref}
       maw={420}
-      className={cx('block group', className)}
+      className={cx('rui-block rui-group', className)}
       href={href}
       target="_blank"
       rel="noopener noreferrer"
       {...props}
     >
       <Paper variant={variant === 'panel' ? 'panel' : 'default'} withBorder={withBorder}>
-        <div className="bg-primary h-4" />
-        <img className="w-full" src={image} alt={alt} />
+        <div className="rui-bg-primary rui-h-4" />
+        <img className="rui-w-full" src={image} alt={alt} />
 
-        <Stack p="lg">
+        <Stack p="lg" gap="sm">
           {taxonomy && (
-            <Text className="uppercase" c="primary" fs="sm">
+            <Text className="rui-uppercase" c="primary" fs="sm">
               {taxonomy}
             </Text>
           )}
@@ -109,7 +109,7 @@ export const Card = forwardRef<HTMLAnchorElement, CardProps>(
               mt="sm"
               fw="bold"
               ff={variant === 'storytelling' ? 'serif' : 'sans'}
-              className="text-h3"
+              className="rui-text-h3"
             >
               {headline}
             </LinkButton>
@@ -119,15 +119,15 @@ export const Card = forwardRef<HTMLAnchorElement, CardProps>(
               fw="bold"
               ff={variant === 'storytelling' ? 'serif' : 'sans'}
               className={cx({
-                'text-h3': true,
-                'group-hover:underline': variant === 'storytelling'
+                'rui-text-h3': true,
+                'group-hover:rui-underline': variant === 'storytelling'
               })}
             >
               {headline}
             </Text>
           )}
 
-          <Text className="text-h4">{children}</Text>
+          <Text className="rui-text-h4">{children}</Text>
 
           {!linkedHeadline && callToAction && (
             <LinkButton component="a" href={href}>
@@ -136,7 +136,7 @@ export const Card = forwardRef<HTMLAnchorElement, CardProps>(
           )}
 
           {minutes && (
-            <Group c="dimmed" align="center">
+            <Group c="dark" align="center">
               <Icon name="clock" />
               {minutes}-minute read
             </Group>

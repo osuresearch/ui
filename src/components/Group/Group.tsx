@@ -28,14 +28,14 @@ export const _Group = forwardRef<HTMLDivElement, GroupProps & { component: any }
     <Box
       ref={ref}
       className={styles.cx(
-        'flex',
+        'rui-flex',
         styles.justify(justify),
         styles.gap(gap),
         styles.align(align),
         {
           // Grow - targets all direct children
-          '[&>_*]:flex-grow-0': !grow,
-          '[&>_*]:flex-grow': grow
+          '[&>_*]:rui-flex-grow-0': !grow,
+          '[&>_*]:rui-flex-grow': grow
         },
         className
       )}

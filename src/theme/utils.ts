@@ -18,27 +18,27 @@ import { backgroundColorClasses, borderColorClasses, Color, textColorClasses } f
 // from tailwind config so we don't need to define them all here.
 
 const fontSizeClasses = {
-  xs: 'text-xs',
-  sm: 'text-sm',
-  base: 'text-base',
-  md: 'text-md',
-  lg: 'text-lg',
-  xl: 'text-xl',
-  xxl: 'text-xxl'
+  xs: 'rui-text-xs',
+  sm: 'rui-text-sm',
+  base: 'rui-text-base',
+  md: 'rui-text-md',
+  lg: 'rui-text-lg',
+  xl: 'rui-text-xl',
+  xxl: 'rui-text-xxl'
 } as Record<FontSize, string>;
 
 const fontFamilyClasses = {
-  sans: 'font-sans',
-  serif: 'font-serif',
-  mono: 'font-mono'
+  sans: 'rui-font-sans',
+  serif: 'rui-font-serif',
+  mono: 'rui-font-mono'
 } as Record<FontFamily, string>;
 
 const fontWeightClasses = {
-  normal: 'font-normal',
-  semibold: 'font-semibold',
-  bold: 'font-bold',
-  extrabold: 'font-extrabold',
-  black: 'font-black'
+  normal: 'rui-font-normal',
+  semibold: 'rui-font-semibold',
+  bold: 'rui-font-bold',
+  extrabold: 'rui-font-extrabold',
+  black: 'rui-font-black'
 } as Record<FontWeight, string>;
 
 // Theme utilities
@@ -79,11 +79,13 @@ export function bc(color: Color): string {
 
 export function hw(size: ThemeSize): string {
   const className = {
-    xs: 'h-xs w-xs',
-    sm: 'h-sm w-sm',
-    md: 'h-md w-md',
-    lg: 'h-lg w-lg',
-    xl: 'h-xl w-xl'
+    xxs: 'rui-h-xxs rui-w-xxs',
+    xs: 'rui-h-xs rui-w-xs',
+    sm: 'rui-h-sm rui-w-sm',
+    md: 'rui-h-md rui-w-md',
+    lg: 'rui-h-lg rui-w-lg',
+    xl: 'rui-h-xl rui-w-xl',
+    xxl: 'rui-h-xxl rui-w-xxl'
   } as Record<ThemeSize, string>;
 
   // Note that we exclude negatives on purpose.
@@ -92,10 +94,10 @@ export function hw(size: ThemeSize): string {
 
 export function align(value: Align): string {
   const className = {
-    stretch: 'items-stretch',
-    center: 'items-center',
-    start: 'items-start',
-    end: 'items-end'
+    stretch: 'rui-items-stretch',
+    center: 'rui-items-center',
+    start: 'rui-items-start',
+    end: 'rui-items-end'
   };
 
   return className[value];
@@ -103,15 +105,15 @@ export function align(value: Align): string {
 
 export function gap(spacing: PositiveSpacing): string {
   const className = {
-    0: 'gap-0',
-    1: 'gap-1',
-    xxs: 'gap-xxs',
-    xs: 'gap-xs',
-    sm: 'gap-sm',
-    md: 'gap-md',
-    lg: 'gap-lg',
-    xl: 'gap-xl',
-    xxl: 'gap-xxl'
+    0: 'rui-gap-0',
+    1: 'rui-gap-1',
+    xxs: 'rui-gap-xxs',
+    xs: 'rui-gap-xs',
+    sm: 'rui-gap-sm',
+    md: 'rui-gap-md',
+    lg: 'rui-gap-lg',
+    xl: 'rui-gap-xl',
+    xxl: 'rui-gap-xxl'
   } as Record<PositiveSpacing, string>;
 
   return className[spacing] ?? '';
@@ -119,10 +121,10 @@ export function gap(spacing: PositiveSpacing): string {
 
 export function justify(value: Justify): string {
   const className = {
-    start: 'justify-start',
-    end: 'justify-end',
-    center: 'justify-center',
-    apart: 'justify-between'
+    start: 'rui-justify-start',
+    end: 'rui-justify-end',
+    center: 'rui-justify-center',
+    apart: 'rui-justify-between'
   } as Record<Justify, string>;
 
   return className[value] ?? '';

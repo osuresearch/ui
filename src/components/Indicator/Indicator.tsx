@@ -1,11 +1,9 @@
-import { ThemeSize } from '@osuresearch/ui';
+import { Box, DefaultProps, ThemeSize } from '@osuresearch/ui';
 import { bgc, Color, cx, hw, bc as _bc } from '@osuresearch/ui/theme';
 import React from 'react';
 
-export type IndicatorProps = {
+export type IndicatorProps = DefaultProps & {
   size?: ThemeSize;
-  c?: Color;
-  bc?: Color;
 
   /** Apply a ripple effect. Useful for notifications */
   ping?: boolean;
@@ -14,32 +12,32 @@ export type IndicatorProps = {
 /**
  * A dot that can be used as an indicator to grab the user's attention
  */
-export function Indicator({ size = 'lg', c = 'blue', bc = 'white', ping }: IndicatorProps) {
+export function Indicator({ size = 'sm', c = 'primary', ping, ...props }: IndicatorProps) {
   return (
-    <span className="relative inline-flex align-middle">
-      <span className={cx('flex absolute -mt-4 -mr-4', hw(size))}>
+    <Box className="relative inline-flex align-middle" {...props}>
+      <Box className={cx('flex absolute -mt-4 -mr-4', hw(size))}>
         {ping && (
-          <span
-            className={cx(
-              'animate-ping absolute inline-flex rounded-full opacity-75',
-              'h-full w-full',
-              bgc(c)
-            )}
+          <Box
+            bgc={c}
+            h="full"
+            w="full"
+            className={cx('animate-ping absolute inline-flex rounded-full opacity-75')}
           />
         )}
-        <span
+        <Box
+          bgc={c}
+          h={size}
+          w={size}
           className={cx(
             // Solid dot
             'relative inline-flex rounded-full',
-            hw(size),
-            bgc(c),
 
             // Border
             'border-2',
-            _bc(bc)
+            'border-light'
           )}
         />
-      </span>
-    </span>
+      </Box>
+    </Box>
   );
 }

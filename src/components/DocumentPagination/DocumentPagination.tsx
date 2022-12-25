@@ -23,31 +23,34 @@ export type DocumentPaginationProps = {
 export function DocumentPagination({ direction, children }: DocumentPaginationProps) {
   return (
     <UnstyledButton
-      c="primary"
+      c={{
+        light: 'primary',
+        dark: 'light-contrast'
+      }}
       fw="semibold"
       py="lg"
       px="md"
       className={cx(
-        'focus:ring',
-        'flex',
-        'w-full',
+        'focus:rui-ring',
+        'rui-flex',
+        'rui-w-full',
 
-        'border-2',
-        'border-light',
+        'rui-border-2',
+        'rui-border-light',
 
         // Hover styles
-        'hover:bg-dark-shade',
-        'hover:border-dark-shade',
-        'hover:text-dark-contrast',
+        'hover:rui-bg-dark-shade',
+        'hover:rui-border-dark-shade',
+        'hover:rui-text-dark-contrast',
 
         // Reverse layout for next vs previous button
-        { 'flex-row-reverse': direction === 'next' }
+        { 'rui-flex-row-reverse': direction === 'next' }
       )}
       aria-label={`Go to ${direction} page`}
     >
       <Icon
         className={cx({
-          'rotate-180': direction === 'previous'
+          'rui-rotate-180': direction === 'previous'
         })}
         name="chevron"
         size={26}

@@ -19,6 +19,9 @@ export const negativeSpacing = ['-xxs', '-xs', '-sm', '-md', '-lg', '-xl', '-xxl
 export type Spacing = typeof spacing[number] | typeof negativeSpacing[number];
 export type PositiveSpacing = typeof spacing[number];
 
+export const theme = ['light', 'dark'] as const;
+export type Theme = typeof theme[number];
+
 export const size = ['xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'] as const;
 
 export type ThemeSize = typeof size[number];
@@ -80,8 +83,7 @@ export type ResponsiveProp<Value> = Value | Partial<Record<ScreenSize, Value>>;
 export type ColorProp =
   | Color
   | {
-      light?: Color;
-      dark?: Color;
+      [theme: string]: Color;
     };
 
 // export type SpacingValue = NumberSize | (string & {});

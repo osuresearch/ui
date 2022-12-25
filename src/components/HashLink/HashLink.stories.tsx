@@ -2,7 +2,9 @@ import React from 'react';
 import { HashLink as Component, HashLinkProps, Title } from '@osuresearch/ui';
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
-export default RUIComponentMeta<HashLinkProps>('Components', Component).withBadge('experimental');
+export default RUIComponentMeta<HashLinkProps>('Components', Component)
+  .withBadge('atom')
+  .withBadge('stable');
 
 export const HashLink = RUIComponentStory<HashLinkProps>(
   (args) => (

@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react';
-import { cx } from '../../theme';
+import { cx } from '../../theme/utils';
 import { DefaultProps, ThemeSize } from '../../types';
 import { Box } from '../Box';
 import { createPolymorphicComponent } from '../../utils/createPolymorphicComponent';
@@ -33,31 +33,31 @@ const _Paper = forwardRef<HTMLDivElement, PaperProps>(
       className={cx(
         {
           // Border style
-          'border-2': withBorder,
-          'border-gray-tint-90 dark:border-gray-shade-80': withBorder,
+          'rui-border-2': withBorder,
+          'rui-border-gray-tint-90 dark:rui-border-gray-shade-80': withBorder,
 
           // Shadow
           // 'shadow-xs': shadow === 'xs',
-          'shadow-sm': shadow === 'sm',
-          'shadow-md': shadow === 'md',
-          'shadow-lg': shadow === 'lg',
-          'shadow-xl': shadow === 'xl',
+          'rui-shadow-sm': shadow === 'sm',
+          'rui-shadow-md': shadow === 'md',
+          'rui-shadow-lg': shadow === 'lg',
+          'rui-shadow-xl': shadow === 'xl',
 
           // Radius
-          'rounded-xs': rounded === 'xs',
-          'rounded-sm': rounded === 'sm',
-          'rounded-md': rounded === 'md',
-          'rounded-lg': rounded === 'lg',
-          'rounded-xl': rounded === 'xl',
+          'rui-rounded-xs': rounded === 'xs',
+          'rui-rounded-sm': rounded === 'sm',
+          'rui-rounded-md': rounded === 'md',
+          'rui-rounded-lg': rounded === 'lg',
+          'rui-rounded-xl': rounded === 'xl',
 
           // Foreground style
-          'text-black dark:text-gray-tint-80': true,
+          'rui-text-black dark:rui-text-gray-tint-80': true,
 
           // Default variant
-          'bg-white dark:bg-black': variant === 'default',
+          'rui-bg-white dark:rui-bg-black': variant === 'default',
 
           // Panel variant
-          'bg-gray-tint-90 dark:bg-gray-shade-80': variant === 'panel'
+          'rui-bg-gray-tint-90 dark:rui-bg-gray-shade-80': variant === 'panel'
         },
         className
       )}

@@ -31,9 +31,9 @@ export type TitleProps = {
 export function Title({ level, variant = 'default', children }: TitleProps) {
   // Standard H1 - H3 styles
   const className = [
-    'text-h1 font-black font-serif',
-    'text-h2 font-extrabold',
-    'text-h3 font-semibold'
+    'rui-text-h1 rui-font-black rui-font-serif',
+    'rui-text-h2 rui-font-extrabold',
+    'rui-text-h3 rui-font-semibold'
   ];
 
   return React.createElement(
@@ -42,16 +42,17 @@ export function Title({ level, variant = 'default', children }: TitleProps) {
       className: cx({
         // Size / weight rules
         [className[level - 1]]: variant !== 'section',
-        'font-sans': variant === 'sans',
+        'rui-font-sans': variant === 'sans',
 
         // Theme mods
-        'text-light-contrast': variant !== 'section',
+        'rui-text-light-contrast': variant !== 'section',
 
-        'pb-24': level === 1,
-        'pb-8': level > 1,
+        'rui-pb-24': level === 1,
+        'rui-pb-8': level > 1,
 
         // Section styles. Same size regardless of H-level
-        'text-h2 text-dark font-sans uppercase font-normal': variant === 'section'
+        'rui-text-h2 rui-text-dark rui-font-sans rui-uppercase rui-font-normal':
+          variant === 'section'
       })
     },
     children

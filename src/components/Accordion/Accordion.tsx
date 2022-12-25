@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 import { Box } from '@osuresearch/ui';
-import { cx } from '../../theme';
+import { cx } from '../../theme/utils';
 import { DefaultProps } from '../../types';
 
 export type AccordionProps = DefaultProps & {

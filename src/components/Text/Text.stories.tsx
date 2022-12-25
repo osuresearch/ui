@@ -6,6 +6,7 @@ import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
 export default RUIComponentMeta<TextProps>('Components', Text)
   .withStyleSystemProps()
+  .withBadge('atom')
   .withBadge('stable');
 
 const Template: Story<TextProps> = (args) => (

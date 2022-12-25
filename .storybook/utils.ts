@@ -3,7 +3,7 @@ import { colors } from '@osuresearch/ui/theme';
 import { ArgTypes, Meta, Story } from '@storybook/react';
 import { fontFamily, fontSize, fontWeight, spacing } from '../src/types';
 
-export type RUIBadge = 'beta' | 'stable' | 'deprecated' | 'experimental';
+export type RUIBadge = 'beta' | 'stable' | 'deprecated' | 'experimental' | 'atom' | 'molecule';
 
 export type RUIMeta<T> = Meta<T> & {
   withStyleSystemProps(): RUIMeta<T>;

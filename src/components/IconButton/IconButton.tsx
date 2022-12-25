@@ -26,7 +26,7 @@ export type IconButtonProps = DefaultProps & {
 export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
   ({ name, label, iconSize, size = 44, ...props }, ref) => (
     <Icon
-      className="focus:ring"
+      className="focus:rui-ring"
       miw={size}
       mih={size}
       name={name}

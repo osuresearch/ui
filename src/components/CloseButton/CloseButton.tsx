@@ -25,7 +25,7 @@ export const CloseButton = forwardRef<HTMLButtonElement, CloseButtonProps>(
   ({ label = 'Close', className, ...props }, ref) => (
     <IconButton
       ref={ref}
-      className={cx('hover:ring hover:opacity-70 text-light-contrast', className)}
+      className={cx('hover:rui-ring hover:rui-opacity-70 rui-text-light-contrast', className)}
       label={label}
       name="xmark"
       size={44}

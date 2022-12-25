@@ -3,7 +3,9 @@ import { Story, Meta } from '@storybook/react';
 import { DocumentPagination as Component, DocumentPaginationProps, Group } from '@osuresearch/ui';
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
-export default RUIComponentMeta<DocumentPaginationProps>('Components', Component).withBadge('beta');
+export default RUIComponentMeta<DocumentPaginationProps>('Components', Component)
+  .withBadge('atom')
+  .withBadge('beta');
 
 const Template: Story<DocumentPaginationProps> = (args) => (
   <Group gap="lg">

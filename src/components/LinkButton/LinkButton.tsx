@@ -21,16 +21,16 @@ export const _LinkButton = forwardRef<HTMLButtonElement, LinkButtonProps & { com
       ref={ref}
       c="light-contrast"
       className={cx(
-        'flex',
-        'hover:text-primary dark:hover:text-primary-contrast',
-        'group-hover:text-primary dark:group-hover:text-neutral-80', // Support for .group parenting
-        '[&>i]:hover:translate-x-sm [&>i]:group-hover:translate-x-sm',
+        'rui-flex',
+        'hover:rui-text-primary dark:hover:rui-text-primary-contrast',
+        'group-hover:rui-text-primary dark:group-hover:rui-text-primary-contrast', // Support for .group parenting
+        '[&>i]:hover:rui-translate-x-sm [&>i]:group-hover:rui-translate-x-sm',
         className
       )}
       {...props}
     >
       {children}
-      <Icon className="transition-transform" name="chevron" c="primary" ml="sm" size={24} />
+      <Icon className="rui-transition-transform" name="chevron" c="primary" ml="sm" size={24} />
     </UnstyledButton>
   )
 );

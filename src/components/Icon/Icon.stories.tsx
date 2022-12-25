@@ -5,6 +5,7 @@ import { RUIComponentMeta } from '~/.storybook/utils';
 
 export default RUIComponentMeta<IconProps>('Components', Component)
   .withStyleSystemProps()
+  .withBadge('atom')
   .withBadge('stable');
 
 const Template: Story<IconProps> = (args: IconProps) => <Component {...args} />;

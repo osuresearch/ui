@@ -11,8 +11,8 @@ export type ItemProps = {
 };
 
 const itemClasses = {
-  root: 'flex text-h3 font-semibold mb-sm items-center',
-  counter: 'bg-gray-tint-60 dark:bg-gray-shade-60 py-4 w-32 mr-16 text-center'
+  root: 'rui-flex text-h3 rui-items-center',
+  counter: 'rui-bg-dimmed-tint rui-py-4 rui-w-32 rui-mr-16 rui-text-center'
 };
 
 export const Item = forwardRef<HTMLElement, ItemProps>(
@@ -21,11 +21,13 @@ export const Item = forwardRef<HTMLElement, ItemProps>(
     // It's inconsistent with the rest of the font steps elsewhere in the app.
 
     <div>
-      <Text className={itemClasses.root}>
+      <Text fw="semibold" mb="sm" className={itemClasses.root}>
         {variant === 'ordered' && <div className={itemClasses.counter}>{index}</div>}
         {title}
       </Text>
-      <Text className={cx('mb-xxl', { 'ml-48': variant === 'ordered' })}>{children}</Text>
+      <Text mb="xxl" ml={variant === 'ordered' ? 'xxl' : undefined}>
+        {children}
+      </Text>
     </div>
   )
 );

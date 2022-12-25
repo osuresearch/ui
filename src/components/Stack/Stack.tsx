@@ -23,7 +23,7 @@ export const _Stack = forwardRef<HTMLDivElement, StackProps & { component: any }
     <Box
       ref={ref}
       className={styles.cx(
-        'flex flex-col',
+        'rui-flex rui-flex-col',
         styles.justify(justify),
         styles.gap(gap),
         styles.align(align),

@@ -4,6 +4,7 @@ import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
 export default RUIComponentMeta<BreadcrumbsProps>('Components', Component)
   .withStyleSystemProps()
+  .withBadge('molecule')
   .withBadge('stable');
 
 export const Breadcrumbs = RUIComponentStory<BreadcrumbsProps>((args) => (

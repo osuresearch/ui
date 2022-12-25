@@ -17,7 +17,7 @@ export type QuestionProps = {
 // TODO: Variants.
 
 const questionClasses = {
-  label: 'text-h3 bg-gray-tint-60 dark:bg-gray-shade-60 text-center px-8 py-4 w-32'
+  label: 'rui-text-h3 rui-bg-gray-tint-60 dark:rui-bg-gray-shade-60 rui-text-center'
 };
 
 export const Question = forwardRef<HTMLDivElement, QuestionProps>(
@@ -26,16 +26,16 @@ export const Question = forwardRef<HTMLDivElement, QuestionProps>(
       <Group align="center">
         <VisuallyHidden>Question</VisuallyHidden>
         {variant === 'default' && (
-          <Text className={questionClasses.label} aria-hidden>
+          <Text className={questionClasses.label} w={30} h={30} aria-hidden>
             Q
           </Text>
         )}
-        <Text className="text-h3">{title}</Text>
+        <Text className="rui-text-h3">{title}</Text>
       </Group>
       <Group align="start" pb="xl">
         <VisuallyHidden>Answer</VisuallyHidden>
         {variant === 'default' && (
-          <Text className={questionClasses.label} aria-hidden>
+          <Text className={questionClasses.label} w={30} h={30} px="xs" py="xxs" aria-hidden>
             A
           </Text>
         )}

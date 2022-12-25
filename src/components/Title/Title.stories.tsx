@@ -4,7 +4,9 @@ import { Story, Meta } from '@storybook/react';
 import { Title, TitleProps } from '@osuresearch/ui';
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
-export default RUIComponentMeta<TitleProps>('Components', Title).withBadge('stable');
+export default RUIComponentMeta<TitleProps>('Components', Title)
+  .withBadge('atom')
+  .withBadge('stable');
 
 const Template: Story<TitleProps> = (args: TitleProps) => (
   <Title {...args}>This is a title example</Title>

@@ -5,6 +5,7 @@ import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
 export default RUIComponentMeta<LinkProps>('Components', Link)
   .withStyleSystemProps()
+  .withBadge('atom')
   .withBadge('stable');
 
 const Template: Story<LinkProps> = (args) => <Link {...args}>research.osu.edu</Link>;

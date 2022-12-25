@@ -14,9 +14,9 @@ export type HashLinkProps = {
  * Append clickable hash links to content
  */
 export const HashLink = forwardRef<HTMLDivElement, HashLinkProps>(({ id, children }, ref) => (
-  <span ref={ref} className="[&>a]:hover:opacity-100">
+  <span ref={ref} className="[&>a]:hover:rui-opacity-100">
     {children}
-    <Link id={id} ml="sm" className="transition-opacity opacity-0" href={`#${id}`}>
+    <Link id={id} ml="sm" className="rui-transition-opacity rui-opacity-0" href={`#${id}`}>
       #
     </Link>
   </span>

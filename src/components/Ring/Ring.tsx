@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react';
 
 import { Box } from '@osuresearch/ui';
 import { DefaultProps } from '@osuresearch/ui/types';
-import { cx } from '@osuresearch/ui/theme';
+import { cx } from '@osuresearch/ui/theme/utils';
 
 export type RingProps = DefaultProps & {
   /* Your props */

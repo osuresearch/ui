@@ -5,9 +5,14 @@ import {
   ScreenSize,
   Spacing,
   ResponsiveProp,
-  ThemeSize
+  ThemeSize,
+  ColorProp,
+  Theme
 } from '@osuresearch/ui/types';
 import { createPolymorphicComponent } from '@osuresearch/ui/utils/createPolymorphicComponent';
+import { Color } from '@osuresearch/ui/theme';
+import { useMediaQuery } from '@osuresearch/ui/hooks/useMediaQuery';
+import { useTheme } from '@osuresearch/ui/hooks/useTheme';
 
 export interface BoxProps extends DefaultProps {
   children?: React.ReactNode;
@@ -31,14 +36,10 @@ export function spacingValueToClass(
 
   // Handle negatives by transforming -sm to -p-sm
   if (suffix[0] === '-') {
-    return `-${prefix}${suffix}`;
+    return `-rui-${prefix}${suffix}`;
   }
 
-  return `${prefix}-${suffix}`;
-}
-
-export function useMediaQuery(query: string): ScreenSize {
-  return 'xxl';
+  return `rui-${prefix}-${suffix}`;
 }
 
 // type PaddingProps = PropGroup<BoxPadding>;
@@ -51,7 +52,7 @@ const marginProps = ['m', 'mx', 'my', 'ml', 'mt', 'mr', 'mb'] as const;
 type MarginProp = typeof marginProps[number];
 type MarginPropSet = Record<MarginProp, ResponsiveProp<Spacing>>;
 
-export function spacingPropsToClassNames<TPropSet extends { [K: string]: ResponsiveProp<Spacing> }>(
+function spacingPropsToClassNames<TPropSet extends { [K: string]: ResponsiveProp<Spacing> }>(
   propNames: readonly string[],
   props: TPropSet,
   screen: ScreenSize
@@ -61,10 +62,8 @@ export function spacingPropsToClassNames<TPropSet extends { [K: string]: Respons
     .map((k) => spacingValueToClass(k, props[k], screen));
 }
 
-export function useBoxModel(props: Record<string, any>) {
+function useBoxModel(props: Record<string, any>) {
   const width = useMediaQuery('...'); // TODO
-
-  // TODO: w/h, miw/mih, maw/mah
 
   return [
     ...spacingPropsToClassNames(paddingProps, props, width),
@@ -72,12 +71,34 @@ export function useBoxModel(props: Record<string, any>) {
   ];
 }
 
-export function fontPropsToClasses(props: Record<string, any>) {
-  return [fs(props.fs), fw(props.fw), ff(props.ff)];
+/**
+ * Extract the current `Color` from the `ColorProp` based on
+ * the current active theme.
+ */
+function colorPropForTheme(color: ColorProp | undefined, theme: Theme): Color | undefined {
+  if (!color) {
+    return;
+  }
+
+  if (typeof color === 'string') {
+    return color;
+  }
+
+  if (color[theme]) {
+    return color[theme];
+  }
+
+  return color[Object.keys(color)[0]];
 }
 
-export function colorPropsToClasses(props: Record<string, any>) {
-  return [tc(props.c), bgc(props.bgc)];
+function useThemeColors(props: Record<string, any>) {
+  const theme = useTheme();
+
+  return [tc(colorPropForTheme(props.c, theme)), bgc(colorPropForTheme(props.bgc, theme))];
+}
+
+function useFonts(props: Record<string, any>) {
+  return [fs(props.fs), fw(props.fw), ff(props.ff)];
 }
 
 export const _Box = forwardRef<HTMLElement, BoxProps & { component: any }>(
@@ -86,8 +107,8 @@ export const _Box = forwardRef<HTMLElement, BoxProps & { component: any }>(
 
     // Resolve classes from props
     const boxModelClassNames = useBoxModel(others);
-    const fontClassNames = fontPropsToClasses(others);
-    const colorClassNames = colorPropsToClasses(others);
+    const colorClassNames = useThemeColors(others);
+    const fontClassNames = useFonts(others);
 
     // TODO: Need to omit box model props so that they aren't
     // injected as invalid attributes into the underlying element

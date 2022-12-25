@@ -1,5 +1,6 @@
 
 import React from "react";
+import { addParameters } from '@storybook/react';
 import { useDarkMode } from "storybook-dark-mode";
 import { themes } from "@storybook/theming";
 import { DocsContainer } from './DocsContainer';
@@ -66,3 +67,24 @@ export const decorators = [
   ),
 ];
 
+// Additional badges for https://storybook.js.org/addons/@geometricpanda/storybook-addon-badges
+addParameters({
+  badgesConfig: {
+    atom: {
+      title: 'Atom',
+      styles: {
+        backgroundColor: '#FFF',
+        borderColor: '#018786',
+        color: '#018786',
+      }
+    },
+    molecule: {
+      title: 'Molecule',
+      styles: {
+        backgroundColor: '#FFF',
+        borderColor: '#018786',
+        color: '#018786',
+      }
+    }
+  }
+})

@@ -1,15 +1,13 @@
 import React from 'react';
-import { Story, Meta } from '@storybook/react';
-
+import { Story } from '@storybook/react';
 import { Indicator, IndicatorProps } from './index';
+import { RUIComponentMeta } from '~/.storybook/utils';
 
-export default {
-  title: 'Components/Indicator',
-  component: Indicator,
-  argTypes: {}
-} as Meta<typeof Indicator>;
+export default RUIComponentMeta<IndicatorProps>('Components', Indicator)
+  .withStyleSystemProps()
+  .withBadge('stable');
 
 const Template: Story<IndicatorProps> = (args) => <Indicator {...args} />;
 
-export const Default = Template.bind({});
-Default.args = {};
+export const Overview = Template.bind({});
+Overview.args = {};

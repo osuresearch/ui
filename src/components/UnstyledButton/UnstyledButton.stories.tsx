@@ -5,6 +5,7 @@ import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
 export default RUIComponentMeta<UnstyledButtonProps>('Utilities', UnstyledButton)
   .withStyleSystemProps()
+  .withBadge('atom')
   .withBadge('stable');
 
 const Template: Story<UnstyledButtonProps> = (args) => (
@@ -19,7 +20,7 @@ export const ContactCard = RUIComponentStory(() => (
       <Avatar size={40} name="Chase McManning" username="mcmanning.1" />
       <Stack gap={0}>
         <Text>Chase McManning</Text>
-        <Text c="dimmed" fs="sm">
+        <Text c="dark" fs="sm">
           mcmanning.1@osu.edu
         </Text>
       </Stack>

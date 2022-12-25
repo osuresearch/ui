@@ -18,12 +18,12 @@ export function Badge({ c = 'gray', variant = 'solid', children }: BadgeProps) {
   return (
     <div
       className={cx({
-        'border': true,
-        'rounded-full': true,
-        'inline-block': true,
-        'text-xs': true,
-        'font-bold': true,
-        'px-8': true,
+        'rui-border': true,
+        'rui-rounded-full': true,
+        'rui-inline-block': true,
+        'rui-text-xs': true,
+        'rui-font-bold': true,
+        'rui-px-8': true,
 
         // Solid: solid bg + contrasting fg
         [bgc(c)]: variant === 'solid',
@@ -34,8 +34,8 @@ export function Badge({ c = 'gray', variant = 'solid', children }: BadgeProps) {
         [tc(c)]: variant === 'outline',
 
         // Dot: Gray. But there will be an added dot icon prefix
-        'border-gray ': variant === 'dot',
-        'text-gray-shade-40 dark:text-gray': variant === 'dot'
+        'rui-border-gray ': variant === 'dot',
+        'rui-text-gray-shade-40 rui-dark:text-gray': variant === 'dot'
       })}
     >
       {variant === 'dot' && (

@@ -46,19 +46,19 @@ export function Link({
       className={cx(
         href
           ? {
-              'cursor-pointer': true,
-              'border-b': true,
+              'rui-cursor-pointer': true,
+              'rui-border-b': true,
 
               // Default theme
-              'text-link border-link': variant === 'default',
-              'hover:text-light-contrast': variant === 'default',
-              'hover:bg-light-shade hover:border-light-contrast':
+              'rui-text-link rui-border-link': variant === 'default',
+              'hover:rui-text-light-contrast': variant === 'default',
+              'hover:rui-bg-light-shade hover:rui-border-light-contrast':
                 variant === 'default' || variant === 'white',
-              'visited:text-visited visited:border-visited': variant === 'default',
+              'visited:rui-text-visited visited:rui-border-visited': variant === 'default',
 
               // White theme
-              'text-white border-white': variant === 'white',
-              'hover:text-black hover:border-white hover:bg-white': variant === 'white'
+              'rui-text-white rui-border-white': variant === 'white',
+              'hover:rui-text-black hover:rui-border-white hover:rui-bg-white': variant === 'white'
             }
           : '',
         className

@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  prefix: 'rui-',
   content: [
     './src/**/*.{tsx,ts}'
   ],
@@ -200,25 +201,25 @@ module.exports = {
 
     // (m)argin, (p)adding
     // Examples: px-sm, p-2xl, m-xs, -m-xs
-    { pattern: /^-?(m|p)(x|y|l|r|t|b)?-(xs|sm|md|lg|xl|xxl|0|1|auto|px)$/ }, // +6 KB
+    { pattern: /^-?rui-(m|p)(x|y|l|r|t|b)?-(xs|sm|md|lg|xl|xxl|0|1|auto|px)$/ }, // +6 KB
 
     // // inset
     // // Examples: inset-full, -inset-x-md, inset-y-full
-    { pattern: /^-?(inset)(x|y)?-(xs|sm|md|lg|xl|xxl|xxxl|full|auto|px)$/ }, // +2 KB
+    { pattern: /^-?rui-(inset)(x|y)?-(xs|sm|md|lg|xl|xxl|xxxl|full|auto|px)$/ }, // +2 KB
 
     // // top/left/bottom/right
     // // Examples: top-xs, -right-sm, right-auto
-    { pattern: /^-?(top|left|bottom|right)(x|y)?-(xs|sm|md|lg|xl|xxl|xxxl|full|auto)$/ }, // +2 KB
+    { pattern: /^-?rui-(top|left|bottom|right)(x|y)?-(xs|sm|md|lg|xl|xxl|xxxl|full|auto)$/ }, // +2 KB
 
     // // TODO: Space between? It's heavy CSS
 
     // // fz(fontSize)
-    { pattern: /^text-(xs|sm|md|lg|xl|xxl|0|full)$/ }, // +1 KB
+    { pattern: /^rui-text-(xs|sm|md|lg|xl|xxl|0|full)$/ }, // +1 KB
 
     // +1 KB
     // (h)eight, (w)idth, (miw)in width, (maw)x idth, (mih)in height, (mah)x height,
     // Examples: max-h-screen, min-h-0, max-w-sm, w-full, h-2xl
     // Note that tailwind only define min-h 0, full, screen.
-    { pattern: /^(max|min)?-(h|w)-(xs|sm|md|lg|xl|xxl|xxxl|0|1|full|screen)$/ }, // +1 KB
+    { pattern: /^rui-(max|min)?-(h|w)-(xs|sm|md|lg|xl|xxl|xxxl|0|1|full|screen)$/ }, // +1 KB
   ],
 }

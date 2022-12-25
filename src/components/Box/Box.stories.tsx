@@ -2,7 +2,7 @@ import React from 'react';
 import { Box as BoxComponent, BoxProps } from '@osuresearch/ui';
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
-export default RUIComponentMeta<BoxProps>('Layout', BoxComponent)
+export default RUIComponentMeta<BoxProps>('Utilities', BoxComponent)
   .withStyleSystemProps()
   .withBadge('stable');
 

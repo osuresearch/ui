@@ -46,17 +46,7 @@ export const Interview: InterviewComponent = forwardRef<HTMLDListElement, Interv
     });
 
     return (
-      <Box
-        ref={ref}
-        component="dl"
-        className={cx(
-          {
-            // your additional classes
-          },
-          props.className
-        )}
-        {...props}
-      >
+      <Box ref={ref} component="dl" {...props}>
         {items}
       </Box>
     );
