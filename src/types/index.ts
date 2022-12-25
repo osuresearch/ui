@@ -107,12 +107,12 @@ export interface StyleSystemProps {
   pr?: ResponsiveProp<Spacing>;
 
   // Width / Height
-  w?: ResponsiveProp<Spacing | CSSProperties['width']>;
-  miw?: ResponsiveProp<Spacing | CSSProperties['minWidth']>;
-  maw?: ResponsiveProp<Spacing | CSSProperties['maxWidth']>;
-  h?: ResponsiveProp<Spacing | CSSProperties['height']>;
-  mih?: ResponsiveProp<Spacing | CSSProperties['minHeight']>;
-  mah?: ResponsiveProp<Spacing | CSSProperties['maxHeight']>;
+  w?: ResponsiveProp<Spacing>; // | CSSProperties['width']>;
+  miw?: ResponsiveProp<Spacing>; // | CSSProperties['minWidth']>;
+  maw?: ResponsiveProp<Spacing>; // | CSSProperties['maxWidth']>;
+  h?: ResponsiveProp<Spacing>; // | CSSProperties['height']>;
+  mih?: ResponsiveProp<Spacing>; // | CSSProperties['minHeight']>;
+  mah?: ResponsiveProp<Spacing>; // | CSSProperties['maxHeight']>;
 
   c?: ColorProp;
   bgc?: ColorProp;

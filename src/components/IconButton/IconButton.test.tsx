@@ -6,7 +6,7 @@ import { IconButton } from './IconButton';
 
 describe('Tests for IconButton component', () => {
   it('renders content', () => {
-    const { container } = render(<IconButton>Foo bar</IconButton>);
+    const { container } = render(<IconButton name="xmark" label="Close" />);
     expect(container.firstChild).toMatchSnapshot();
   });
 });

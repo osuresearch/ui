@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 
 import { Icon } from '@osuresearch/ui';
-import { DefaultProps } from '@osuresearch/ui/types';
+import { DefaultProps, ResponsiveProp, Spacing } from '@osuresearch/ui/types';
 
 export type IconButtonProps = DefaultProps & {
   label: string;
@@ -10,7 +10,7 @@ export type IconButtonProps = DefaultProps & {
   name: string;
 
   /** Minimum size of the button */
-  size?: number;
+  size?: ResponsiveProp<Spacing>;
 
   /** Size of the icon within the button. If omitted, the icon font size will match `size` */
   iconSize?: number;
@@ -24,16 +24,16 @@ export type IconButtonProps = DefaultProps & {
  * - Minimum touch target of 44px meets Success Criterion [2.5.5 Target Size (Level AAA)](https://www.w3.org/WAI/WCAG21/Understanding/target-size)
  */
 export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
-  ({ name, label, iconSize, size = 44, ...props }, ref) => (
+  ({ name, label, iconSize = 32, size = 'xxl', ...props }, ref) => (
     <Icon
       className="focus:rui-ring"
-      miw={size}
-      mih={size}
+      w={size}
+      h={size}
       name={name}
       component="button"
       ref={ref}
       aria-label={label}
-      size={iconSize ?? size}
+      size={iconSize}
       {...props}
     />
   )
