@@ -16,9 +16,10 @@ export type DetailsProps = DefaultProps & {
  *
  * - Root is the semantic `<details>` element with the summary wrapped with `<summary>`
  */
-export const Details = forwardRef<HTMLHeadingElement, DetailsProps & { component: any }>(
+export const Details = forwardRef<HTMLDetailsElement, DetailsProps>(
   ({ summary, children, ...props }, ref) => (
     <Box
+      ref={ref}
       component="details"
       className={cx(
         'rui-group',
@@ -26,6 +27,7 @@ export const Details = forwardRef<HTMLHeadingElement, DetailsProps & { component
         'rui-border-b-2',
         'rui-border-light-shade'
       )}
+      {...props}
     >
       <Group
         component="summary"
