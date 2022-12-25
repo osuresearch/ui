@@ -1,23 +1,47 @@
-import React from 'react';
-import { cx } from '../../theme/utils';
+import React, { forwardRef } from 'react';
+import { Box, FontFamily, FontWeight } from '@osuresearch/ui';
+import { createPolymorphicComponent } from '@osuresearch/ui/utils';
+import { cx } from '@osuresearch/ui/theme';
 
 export type TitleProps = {
   /**
-   * Heading level. We support H1 through H3
+   * Heading level. We support H1 through H4
    */
-  level: 1 | 2 | 3;
+  level: 1 | 2 | 3 | 4;
 
   /**
-   * The `sans` variant overrides sansSerif for H1.
-   *
-   * The `section` variant can be used to divide content into sections.
-   * All heading levels will look the same, so choose the one that is
-   * appropriate for a11y.
+   * The `sans` variant overrides serif for all heading levels.
    */
-  variant?: 'default' | 'sans' | 'section';
+  variant?: 'default' | 'sans';
 
   children: React.ReactNode;
 };
+
+// Font classes per heading level
+const className = ['rui-text-h1', 'rui-text-h2', 'rui-text-h3', 'rui-text-h4'];
+
+// Font weight per heading level
+const fw: FontWeight[] = ['black', 'extrabold', 'semibold', 'semibold'];
+
+// Font family per heading level
+const ff: FontFamily[] = ['serif', 'sans', 'sans', 'sans'];
+
+const _Title = forwardRef<HTMLHeadingElement, TitleProps & { component: any }>(
+  ({ component, level, variant, children }, ref) => (
+    <Box
+      component={component ? component : `h${level}`}
+      c="light-contrast"
+      // Sans variant forces sans for all levels.
+      ff={variant === 'sans' ? 'sans' : ff[level - 1]}
+      fw={fw[level - 1]}
+      // H1 has additional padding at the bottom
+      pb={level === 1 ? 'lg' : 'xs'}
+      className={className[level - 1]}
+    >
+      {children}
+    </Box>
+  )
+);
 
 /**
  * H1 through H3 heading levels.
@@ -25,36 +49,17 @@ export type TitleProps = {
  * TODO: Responsive sizes. See:
  *  https://bux.osu.edu/typography/headings
  *
- * TODO: A11Y notes
+ * ### Accessibility
  *
+ * - TODO
+ *
+ * ### Polymorphic Component
+ *
+ * You can use `component` prop to change the root element for this component.
+ * If omitted, the root element will use `h1` through `h3` depending on the
+ * specified `level`.
+ *
+ * Use polymorphics when you need to display content as a header, but without
+ * using the semantic header elements that may cause problems for screen readers.
  */
-export function Title({ level, variant = 'default', children }: TitleProps) {
-  // Standard H1 - H3 styles
-  const className = [
-    'rui-text-h1 rui-font-black rui-font-serif',
-    'rui-text-h2 rui-font-extrabold',
-    'rui-text-h3 rui-font-semibold'
-  ];
-
-  return React.createElement(
-    `h${level}`,
-    {
-      className: cx({
-        // Size / weight rules
-        [className[level - 1]]: variant !== 'section',
-        'rui-font-sans': variant === 'sans',
-
-        // Theme mods
-        'rui-text-light-contrast': variant !== 'section',
-
-        'rui-pb-24': level === 1,
-        'rui-pb-8': level > 1,
-
-        // Section styles. Same size regardless of H-level
-        'rui-text-h2 rui-text-dark rui-font-sans rui-uppercase rui-font-normal':
-          variant === 'section'
-      })
-    },
-    children
-  );
-}
+export const Title = createPolymorphicComponent<'h1', TitleProps>(_Title);

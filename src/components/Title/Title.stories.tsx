@@ -12,29 +12,27 @@ const Template: Story<TitleProps> = (args: TitleProps) => (
   <Title {...args}>This is a title example</Title>
 );
 
-export const Overview = Template.bind({});
-Overview.args = {
+export const Overview = RUIComponentStory(Template, {
   level: 1
-};
+});
 
-export const Examples: Story<TitleProps> = () => (
+export const Levels = RUIComponentStory((args) => (
   <>
     <Title level={1}>This is a Heading 1 example</Title>
     <Title level={2}>This is a Heading 2 example</Title>
     <Title level={3}>This is a Heading 3 example</Title>
+    <Title level={4}>This is a Heading 4 example</Title>
   </>
-);
+));
 
-export const Variants: Story<TitleProps> = () => (
-  <>
-    <Title level={1} variant="sans">
-      This is a Heading 1 sans example
-    </Title>
-    <Title level={2} variant="section">
-      This is an Heading 2 section example
-    </Title>
-    <Title level={3} variant="section">
-      This is an Heading 3 section example
-    </Title>
-  </>
-);
+export const SansVariant = RUIComponentStory((args) => (
+  <Title level={1} variant="sans">
+    This is a Heading 1 sans example
+  </Title>
+));
+
+export const Polymorphic = RUIComponentStory((args) => (
+  <Title component="div" level={1}>
+    This is a div styled as Heading 1
+  </Title>
+));

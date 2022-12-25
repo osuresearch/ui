@@ -24,7 +24,7 @@ export * from './List';
 export * from './Listicle';
 export * from './Paper';
 export * from './Ring';
-export * from './Section';
+export * from './SectionTitle';
 export * from './Space';
 export * from './Stack';
 export * from './Table';
