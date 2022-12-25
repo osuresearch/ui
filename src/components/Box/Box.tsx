@@ -74,6 +74,10 @@ export function spacingValueToClass(
 ) {
   const value = resolveResponsiveProp(size, screen) as string;
 
+  // HACK: maw/mah need to be converted to tailwind's naming scheme
+  if (prefix === 'maw') prefix = 'max-w';
+  else if (prefix === 'mah') prefix = 'max-h';
+
   // Handle negatives by transforming -sm to -p-sm
   if (value[0] === '-') {
     return `-rui-${prefix}${value}`;
