@@ -80,11 +80,7 @@ export type ResponsiveProp<Value> = Value | Partial<Record<ScreenSize, Value>>;
  * <Box bgc={{ light: "scarlet", dark: "white" }}
  * ```
  */
-export type ColorProp =
-  | Color
-  | {
-      [theme: string]: Color;
-    };
+export type ColorProp = Color | Partial<Record<Theme, Color>>;
 
 // export type SpacingValue = NumberSize | (string & {});
 
@@ -111,12 +107,12 @@ export interface StyleSystemProps {
   pr?: ResponsiveProp<Spacing>;
 
   // Width / Height
-  w?: ResponsiveProp<CSSProperties['width']>;
-  miw?: ResponsiveProp<CSSProperties['minWidth']>;
-  maw?: ResponsiveProp<CSSProperties['maxWidth']>;
-  h?: ResponsiveProp<CSSProperties['height']>;
-  mih?: ResponsiveProp<CSSProperties['minHeight']>;
-  mah?: ResponsiveProp<CSSProperties['maxHeight']>;
+  w?: ResponsiveProp<Spacing | CSSProperties['width']>;
+  miw?: ResponsiveProp<Spacing | CSSProperties['minWidth']>;
+  maw?: ResponsiveProp<Spacing | CSSProperties['maxWidth']>;
+  h?: ResponsiveProp<Spacing | CSSProperties['height']>;
+  mih?: ResponsiveProp<Spacing | CSSProperties['minHeight']>;
+  mah?: ResponsiveProp<Spacing | CSSProperties['maxHeight']>;
 
   c?: ColorProp;
   bgc?: ColorProp;
