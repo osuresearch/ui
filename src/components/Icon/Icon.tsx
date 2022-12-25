@@ -13,12 +13,14 @@ loadAllIcons();
 
 export type IconProps = DefaultProps & {
   name: string; // TODO: keyof loaded icons somehow?
+  rotate?: 0 | 90 | 180 | 270;
+  flip?: 'horizontal' | 'vertical';
   size?: number;
   inline?: boolean;
 };
 
 export const _Icon = forwardRef<HTMLElement, IconProps & { component: any }>(
-  ({ className, component = 'i', name, inline, size = 16, ...props }, ref) => (
+  ({ className, component = 'i', name, inline, flip, rotate = 0, size = 16, ...props }, ref) => (
     <Box
       component={component}
       className={cx(
@@ -29,7 +31,14 @@ export const _Icon = forwardRef<HTMLElement, IconProps & { component: any }>(
       )}
       {...props}
     >
-      <InlineIcon icon={name} className="rui-m-auto" alignmentBaseline="middle" fontSize={size} />
+      <InlineIcon
+        icon={name}
+        rotate={rotate + 'deg'}
+        flip={flip}
+        className="rui-m-auto"
+        alignmentBaseline="middle"
+        fontSize={size}
+      />
     </Box>
   )
 );
