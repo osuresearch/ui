@@ -4,40 +4,56 @@ import { Box } from '../Box';
 import { DefaultProps } from '../../types';
 
 export type TableProps = DefaultProps & {
+  variant?: 'default' | 'compact';
+
+  striped?: boolean;
   children?: React.ReactNode;
 };
 
 /**
- * Table documentation
+ * Tables are used to display tabular data in rows and columns.
  *
  * ### Accessibility
- * - a11y info (used aria tags, keyboard behaviour, etc)
+ * - TODO: Wire up captions
  */
 export const Table = forwardRef<HTMLTableElement, TableProps>(
-  (
-    {
-      className,
-
-      /* Your props and defaults */
-
-      children, // If it supports children
-      ...props
-    },
-    ref
-  ) => (
+  ({ className, variant = 'default', striped = false, children, ...props }, ref) => (
     <Box
       component="table"
       ref={ref}
+      w="full"
+      c="light-contrast"
+      fs={variant === 'compact' ? 'sm' : 'base'}
       className={cx(
+        // <th> styles
+        '[&_th]:rui-text-left',
+        '[&_th]:rui-border-b-2 [&_th]:rui-border-b-dark',
+
+        // <th scope="row">
+        '[&_th[scope="row"]]:rui-border-b-0',
+        '[&_th[scope="row"]]:rui-border-r-2 [&_th[scope="row"]]:rui-border-r-dark',
+
+        // <tr> styles
+        '[&_tr]:rui-border-b-2 [&_tr]:rui-border-b-light-shade',
+
         {
-          // Your custom styles
-          'text-scarlet': true
+          // <tr> for striped rows
+          '[&_tr:nth-child(2n)]:rui-bg-light': striped,
+
+          // `default` variant
+          '[&_th]:rui-py-xs [&_th]:rui-px-md': variant === 'default',
+          '[&_td]:rui-p-md': variant === 'default',
+
+          // `compact` variant
+          '[&_th]:rui-p-xs': variant == 'compact',
+          '[&_td]:rui-p-xs': variant == 'compact'
         },
-        className // User-supplied styles
+
+        // User-supplied styles
+        className
       )}
-      {...props} // Rest of the box model props
+      {...props}
     >
-      {/* Your DOM */}
       {children}
     </Box>
   )
