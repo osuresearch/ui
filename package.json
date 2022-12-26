@@ -1,6 +1,6 @@
 {
   "name": "@osuresearch/ui",
-  "version": "5.0.0-alpha.2",
+  "version": "5.0.0-alpha.3",
   "license": "MIT",
   "private": false,
   "description": "React UI components for OSU Office of Research applications",

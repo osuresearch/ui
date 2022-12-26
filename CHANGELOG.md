@@ -1,3 +1,19 @@
+# [5.0.0-alpha.3](https://github.com/osuresearch/ui/compare/v5.0.0-alpha.2...v5.0.0-alpha.3) (2022-12-26)
+
+
+### Bug Fixes
+
+* **Badge:** vertically center content ([fdd59f8](https://github.com/osuresearch/ui/commit/fdd59f8829e1c63e637afecd66692d183ca28fdb))
+
+
+### Features
+
+* add Item component based on Adobe's React Stately ([4c5ad9e](https://github.com/osuresearch/ui/commit/4c5ad9e81f926a22325040a2c65449b37ed19051))
+* add support for `full` and `auto` spacing values ([03a099c](https://github.com/osuresearch/ui/commit/03a099c5ef099feea44f5f556a94321690f0d6cb))
+* add TabPanel component ([df81faf](https://github.com/osuresearch/ui/commit/df81fafbd3fda069569a0ebacbf81b2984989980))
+* **Table:** add variants and striped flag ([e8abe86](https://github.com/osuresearch/ui/commit/e8abe8680e895230b625a654d1511c11589c8da0))
+* **tailwind:** add box shadow underline variants ([957c8ca](https://github.com/osuresearch/ui/commit/957c8ca53062bf430d1a660eb0b83f5a7ff5f1d2))
+
 # [5.0.0-alpha.2](https://github.com/osuresearch/ui/compare/v5.0.0-alpha.1...v5.0.0-alpha.2) (2022-12-26)
 
 
