@@ -183,7 +183,17 @@ module.exports = {
       extrabold: 'var(--rui-font-extrabold)',
       black: 'var(--rui-font-black)',
     },
-    extend: {},
+    extend: {
+      boxShadow: {
+        // It's typical that we use a thick line under certain
+        // content that match either the primary color or some
+        // dark variant.
+        // TODO: Make these a standard token for underline
+        // styling on interactive components
+        'underline-primary': '0 4px 0 0 var(--rui-primary)',
+        'underline-dark': '0 4px 0 0 var(--rui-dark)',
+      }
+    },
   },
   safelist: [
     // I expose a number of props for controlling the box model via specific spacing units.
