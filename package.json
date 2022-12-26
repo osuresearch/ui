@@ -34,7 +34,7 @@
     "prepare": "husky install",
     "lint": "eslint . --cache --ext ts,tsx --fix",
     "storybook": "start-storybook -p 6006",
-    "build:storybook": "build-storybook",
+    "build:storybook": "build-storybook -o docs-build",
     "build:tailwind": "npx tailwindcss -o ./dist/tailwind.css",
     "generate:component": "node ./scripts/newComponent.mjs"
   },

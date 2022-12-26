@@ -5,6 +5,6 @@ coverage
 .eslintcache
 .vscode/
 *.log
-build/
+docs-build/
 dist/
 coverage/
