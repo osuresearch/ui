@@ -201,15 +201,15 @@ module.exports = {
 
     // (m)argin, (p)adding
     // Examples: px-sm, p-2xl, m-xs, -m-xs
-    { pattern: /^-?rui-(m|p)(x|y|l|r|t|b)?-(xs|sm|md|lg|xl|xxl|0|1|auto|px)$/ }, // +6 KB
+    { pattern: /^-?rui-(m|p)(x|y|l|r|t|b)?-(xxs|xs|sm|md|lg|xl|xxl|0|1|auto|px)$/ }, // +6 KB
 
     // // inset
     // // Examples: inset-full, -inset-x-md, inset-y-full
-    { pattern: /^-?rui-(inset)(x|y)?-(xs|sm|md|lg|xl|xxl|xxxl|full|auto|px)$/ }, // +2 KB
+    { pattern: /^-?rui-(inset)(x|y)?-(xxs|xs|sm|md|lg|xl|xxl|xxxl|full|auto|px)$/ }, // +2 KB
 
     // // top/left/bottom/right
     // // Examples: top-xs, -right-sm, right-auto
-    { pattern: /^-?rui-(top|left|bottom|right)(x|y)?-(xs|sm|md|lg|xl|xxl|xxxl|full|auto)$/ }, // +2 KB
+    { pattern: /^-?rui-(top|left|bottom|right)(x|y)?-(xxs|xs|sm|md|lg|xl|xxl|xxxl|full|auto)$/ }, // +2 KB
 
     // // TODO: Space between? It's heavy CSS
 
