@@ -1,9 +1,10 @@
-import React from 'react';
-import { Story } from '@storybook/react';
-
 import { Paper } from '@osuresearch/ui';
-import { Text, TextProps } from './Text';
+import { Story } from '@storybook/react';
+import React from 'react';
+
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
+
+import { Text, TextProps } from './Text';
 
 export default RUIComponentMeta<TextProps>('Components', Text)
   .withStyleSystemProps()

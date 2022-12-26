@@ -1,7 +1,9 @@
-import React from 'react';
 import { Story } from '@storybook/react';
-import { CloseButton as Component, CloseButtonProps } from './CloseButton';
+import React from 'react';
+
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
+
+import { CloseButtonProps, CloseButton as Component } from './CloseButton';
 
 export default RUIComponentMeta<CloseButtonProps>('Components', Component)
   .withStyleSystemProps()

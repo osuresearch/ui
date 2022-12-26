@@ -1,10 +1,11 @@
-import React, { CSSProperties, forwardRef, ReactNode } from 'react';
+import React, { CSSProperties, ReactNode, forwardRef } from 'react';
+
 import { cx } from '../../theme/utils';
-import { createPolymorphicComponent } from '../../utils/createPolymorphicComponent';
 import { DefaultProps, ThemeSize } from '../../types';
+import { createPolymorphicComponent } from '../../utils/createPolymorphicComponent';
 import { Box } from '../Box';
-import { Stack } from '../Stack';
 import { Icon } from '../Icon';
+import { Stack } from '../Stack';
 import { Text } from '../Text/Text';
 
 export interface InputVisualProps {

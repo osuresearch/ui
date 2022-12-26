@@ -1,12 +1,11 @@
 // Iconify icon bundle configuration for all icons we support
 // Ref: https://docs.iconify.design/icon-components/bundles/
-
 import { addIcon } from '@iconify/react/dist/offline';
 
 import * as brand from './brand';
+import * as navigation from './navigation';
 import * as social from './social';
 import * as system from './system';
-import * as navigation from './navigation';
 
 export const groups: Record<string, any> = {
   brand: { ...brand },

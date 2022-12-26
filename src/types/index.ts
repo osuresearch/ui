@@ -1,4 +1,5 @@
 import type { CSSProperties, ForwardRefExoticComponent } from 'react';
+
 import { Color } from '../theme';
 
 export const spacing = [

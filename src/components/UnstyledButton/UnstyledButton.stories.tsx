@@ -1,6 +1,7 @@
-import React from 'react';
+import { Avatar, Group, Stack, Text, UnstyledButton, UnstyledButtonProps } from '@osuresearch/ui';
 import { Story } from '@storybook/react';
-import { Group, Avatar, Text, UnstyledButton, UnstyledButtonProps, Stack } from '@osuresearch/ui';
+import React from 'react';
+
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
 export default RUIComponentMeta<UnstyledButtonProps>('Utilities', UnstyledButton)

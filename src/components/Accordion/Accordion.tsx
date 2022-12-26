@@ -1,5 +1,6 @@
-import React, { forwardRef } from 'react';
 import { Box } from '@osuresearch/ui';
+import React, { forwardRef } from 'react';
+
 import { cx } from '../../theme/utils';
 import { DefaultProps } from '../../types';
 

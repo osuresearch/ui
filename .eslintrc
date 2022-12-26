@@ -13,7 +13,8 @@
     "@typescript-eslint",
     "jest",
     "prettier",
-    "react"
+    "react",
+    "simple-import-sort"
   ],
   "env": {
     "node": true,
@@ -48,18 +49,19 @@
     "dot-notation":"error",
     "import/namespace": "off",
     "import/no-cycle": "off",
-    "import/order": [
-      "error",
-      {
-        "groups": [
-          "builtin",
-          "external",
-          "parent",
-          "sibling",
-          "index"
-        ]
-      }
-    ],
+    // "import/order": [
+    //   "error",
+    //   {
+    //     "groups": [
+    //       "builtin",
+    //       "external",
+    //       "parent",
+    //       "sibling",
+    //       "index"
+    //     ]
+    //   }
+    // ],
+    "import/order": "off", // Handled via prettier
     "import/no-unresolved": "off",
     "jest/no-disabled-tests": "warn",
     "jest/no-focused-tests": "error",

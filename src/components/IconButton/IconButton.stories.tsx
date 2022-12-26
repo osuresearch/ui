@@ -1,6 +1,8 @@
 import React from 'react';
-import { IconButton as Component, IconButtonProps } from './IconButton';
+
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
+
+import { IconButton as Component, IconButtonProps } from './IconButton';
 
 export default RUIComponentMeta<IconButtonProps>('Components', Component)
   .withStyleSystemProps()

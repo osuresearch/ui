@@ -1,6 +1,7 @@
-import React from 'react';
+import { Button, ButtonProps, Icon } from '@osuresearch/ui';
 import { Story } from '@storybook/react';
-import { Icon, Button, ButtonProps } from '@osuresearch/ui';
+import React from 'react';
+
 import { RUIComponentMeta } from '~/.storybook/utils';
 
 export default RUIComponentMeta<ButtonProps>('Components', Button)

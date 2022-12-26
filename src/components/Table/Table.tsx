@@ -1,7 +1,8 @@
 import React, { forwardRef } from 'react';
+
 import { cx } from '../../theme/utils';
-import { Box } from '../Box';
 import { DefaultProps } from '../../types';
+import { Box } from '../Box';
 
 export type TableProps = DefaultProps & {
   variant?: 'default' | 'compact';

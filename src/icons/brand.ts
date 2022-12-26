@@ -28,28 +28,20 @@ export const osuResearch = {
 
 // ----------------
 
+export * as asterisk from '@iconify/icons-bi/asterisk';
+export * as sun from '@iconify/icons-bi/brightness-high';
+export * as cloudDownload from '@iconify/icons-bi/cloud-download';
+export * as code from '@iconify/icons-bi/code-slash';
+export * as github from '@iconify/icons-bi/github';
+export * as heart from '@iconify/icons-bi/heart';
+export * as heartFill from '@iconify/icons-bi/heart-fill';
+export * as image from '@iconify/icons-bi/image';
+export * as moon from '@iconify/icons-bi/moon';
 export * as plus from '@iconify/icons-bi/plus';
 export * as quote from '@iconify/icons-bi/quote';
-
 export * as shield from '@iconify/icons-bi/shield';
 export * as checkShield from '@iconify/icons-bi/shield-check';
 export * as exclamationShield from '@iconify/icons-bi/shield-exclamation';
 export * as lockShield from '@iconify/icons-bi/shield-lock';
 export * as minusShield from '@iconify/icons-bi/shield-minus';
 export * as plusShield from '@iconify/icons-bi/shield-plus';
-
-export * as image from '@iconify/icons-bi/image';
-
-export * as heart from '@iconify/icons-bi/heart';
-export * as heartFill from '@iconify/icons-bi/heart-fill';
-
-export * as cloudDownload from '@iconify/icons-bi/cloud-download';
-
-export * as code from '@iconify/icons-bi/code-slash';
-
-export * as asterisk from '@iconify/icons-bi/asterisk';
-
-export * as github from '@iconify/icons-bi/github';
-
-export * as sun from '@iconify/icons-bi/brightness-high';
-export * as moon from '@iconify/icons-bi/moon';

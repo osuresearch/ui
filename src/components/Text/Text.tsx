@@ -1,8 +1,9 @@
 import React, { forwardRef } from 'react';
+
 import { cx } from '../../theme/utils';
 import { DefaultProps } from '../../types';
-import { Box } from '../Box';
 import { createPolymorphicComponent } from '../../utils/createPolymorphicComponent';
+import { Box } from '../Box';
 
 export type TextProps = DefaultProps & {
   /** Text alignment */

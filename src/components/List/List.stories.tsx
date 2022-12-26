@@ -1,8 +1,9 @@
+import { Meta, Story } from '@storybook/react';
 import React from 'react';
-import { Story, Meta } from '@storybook/react';
+
+import { RUIComponentStory } from '~/.storybook/utils';
 
 import { List, ListProps } from './List';
-import { RUIComponentStory } from '~/.storybook/utils';
 
 export default {
   title: 'Components/List',

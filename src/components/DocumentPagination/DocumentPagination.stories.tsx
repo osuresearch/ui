@@ -1,6 +1,7 @@
-import React from 'react';
-import { Story, Meta } from '@storybook/react';
 import { DocumentPagination as Component, DocumentPaginationProps, Group } from '@osuresearch/ui';
+import { Meta, Story } from '@storybook/react';
+import React from 'react';
+
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
 export default RUIComponentMeta<DocumentPaginationProps>('Components', Component)

@@ -1,5 +1,6 @@
-import React from 'react';
 import { Box as BoxComponent, BoxProps } from '@osuresearch/ui';
+import React from 'react';
+
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
 export default RUIComponentMeta<BoxProps>('Utilities', BoxComponent)

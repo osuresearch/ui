@@ -1,6 +1,7 @@
-import React from 'react';
-import { Story } from '@storybook/react';
 import { Details as Component, DetailsProps, Text } from '@osuresearch/ui';
+import { Story } from '@storybook/react';
+import React from 'react';
+
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
 export default RUIComponentMeta<DetailsProps>('Components', Component)

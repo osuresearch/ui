@@ -1,6 +1,6 @@
+import { Icon } from '@osuresearch/ui';
 import React, { forwardRef } from 'react';
 
-import { Icon } from '@osuresearch/ui';
 import { DefaultProps, ResponsiveProp, Spacing } from '@osuresearch/ui/types';
 
 export type IconButtonProps = DefaultProps & {

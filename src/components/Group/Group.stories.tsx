@@ -1,5 +1,6 @@
-import React from 'react';
 import { Button, Group as GroupComponent, GroupProps } from '@osuresearch/ui';
+import React from 'react';
+
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
 export default RUIComponentMeta<GroupProps>('Layout', GroupComponent)

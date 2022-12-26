@@ -1,8 +1,9 @@
-import React from 'react';
 import { Story } from '@storybook/react';
+import React from 'react';
+
+import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
 import { Interview, InterviewProps } from './Interview';
-import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
 export default RUIComponentMeta<InterviewProps>('BUX Stuff', Interview, ['Question']);
 

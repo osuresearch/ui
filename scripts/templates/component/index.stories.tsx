@@ -1,5 +1,6 @@
-import React from 'react';
 import { __TEMPLATE__ as Component, __TEMPLATE__Props } from '@osuresearch/ui';
+import React from 'react';
+
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
 export default RUIComponentMeta<__TEMPLATE__Props>('__GROUP__', Component)

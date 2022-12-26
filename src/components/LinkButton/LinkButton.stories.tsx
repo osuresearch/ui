@@ -1,6 +1,8 @@
 import React from 'react';
-import { LinkButton, LinkButtonProps } from './LinkButton';
+
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
+
+import { LinkButton, LinkButtonProps } from './LinkButton';
 
 export default RUIComponentMeta<LinkButtonProps>('Components', LinkButton)
   .withStyleSystemProps()

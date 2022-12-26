@@ -1,15 +1,16 @@
-import React, { forwardRef } from 'react';
 import {
-  Paper,
-  Stack,
-  Group,
-  Text,
-  Icon,
-  LinkButton,
   Box,
   DefaultProps,
+  Group,
+  Icon,
+  LinkButton,
+  Paper,
+  Stack,
+  Text,
   Title
 } from '@osuresearch/ui';
+import React, { forwardRef } from 'react';
+
 import { cx } from '@osuresearch/ui/theme/utils';
 
 export type CardProps = DefaultProps & {

@@ -1,46 +1,21 @@
+import { Box } from '@osuresearch/ui';
 import React, { forwardRef } from 'react';
 
-import { Box } from '@osuresearch/ui';
-import { DefaultProps } from '@osuresearch/ui/types';
 import { cx } from '@osuresearch/ui/theme/utils';
+import { DefaultProps } from '@osuresearch/ui/types';
 
-export type RingProps = DefaultProps & {
-  /* Your props */
-
+export type RingProps = {
   children?: React.ReactNode;
 };
 
 /**
- * Ring documentation
+ * Applies a standard focus ring to all children.
  *
  * ### Accessibility
  * - a11y info (used aria tags, keyboard behaviour, etc)
  */
-export const Ring = forwardRef<HTMLDivElement, RingProps>(
-  (
-    {
-      className,
-
-      /* Your props and defaults */
-
-      children, // If it supports children
-      ...props
-    },
-    ref
-  ) => (
-    <Box
-      ref={ref}
-      className={cx(
-        {
-          // Your custom styles
-          'text-scarlet': true
-        },
-        className // User-supplied styles
-      )}
-      {...props} // Rest of the box model props
-    >
-      {/* Your DOM */}
-      {children}
-    </Box>
-  )
-);
+export const Ring = forwardRef<HTMLDivElement, RingProps>(({ children }, ref) => (
+  <div className="rui-outline-none focus:rui-ring" ref={ref}>
+    {children}
+  </div>
+));

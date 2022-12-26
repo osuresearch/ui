@@ -1,6 +1,6 @@
+import { Box } from '@osuresearch/ui';
 import React, { forwardRef } from 'react';
 
-import { Box } from '@osuresearch/ui';
 import { cx } from '@osuresearch/ui/theme';
 
 export type CenterProps = {

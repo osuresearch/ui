@@ -1,6 +1,7 @@
+import { Icon, Text, UnstyledButton } from '@osuresearch/ui';
 import React from 'react';
+
 import { cx } from '@osuresearch/ui/theme/utils';
-import { Icon, UnstyledButton, Text } from '@osuresearch/ui';
 
 export type DocumentPaginationProps = {
   direction: 'previous' | 'next';

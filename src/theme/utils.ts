@@ -1,18 +1,17 @@
-import classNames from 'classnames'; // TODO: Swap to clsx
+import classNames from 'classnames';
 
+// TODO: Swap to clsx
 // Utilities for handling styles
-
 import {
   Align,
+  FontFamily,
+  FontSize,
   FontWeight,
   Justify,
-  FontSize,
-  ThemeSize,
-  FontFamily,
-  PositiveSpacing
+  PositiveSpacing,
+  ThemeSize
 } from '../types';
-
-import { backgroundColorClasses, borderColorClasses, Color, textColorClasses } from './colors';
+import { Color, backgroundColorClasses, borderColorClasses, textColorClasses } from './colors';
 
 // TODO: Somehow automate loading in all the color palettes
 // from tailwind config so we don't need to define them all here.

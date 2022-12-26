@@ -1,7 +1,8 @@
+import { Box, DefaultProps, Group, Indicator } from '@osuresearch/ui';
 import React, { forwardRef } from 'react';
-import { Group, DefaultProps, Indicator, Box } from '@osuresearch/ui';
+
+import { Color, bc, cx } from '@osuresearch/ui/theme';
 import { createPolymorphicComponent } from '@osuresearch/ui/utils';
-import { cx, bc, Color } from '@osuresearch/ui/theme';
 
 export type BadgeProps = DefaultProps & {
   variant?: 'solid' | 'indicator';

@@ -1,8 +1,10 @@
-import React, { forwardRef, MouseEventHandler } from 'react';
+import React, { MouseEventHandler, forwardRef } from 'react';
+
 import { cx } from '@osuresearch/ui/theme/utils';
-import { Box } from '../Box';
-import { createPolymorphicComponent } from '../../utils/createPolymorphicComponent';
+
 import { DefaultProps } from '../../types';
+import { createPolymorphicComponent } from '../../utils/createPolymorphicComponent';
+import { Box } from '../Box';
 
 export type UnstyledButtonProps = DefaultProps & {
   /**

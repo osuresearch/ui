@@ -1,7 +1,8 @@
-import React, { MouseEventHandler } from 'react';
 import { Box } from '@osuresearch/ui';
-import { DefaultProps } from '@osuresearch/ui/types';
+import React, { MouseEventHandler } from 'react';
+
 import { cx } from '@osuresearch/ui/theme';
+import { DefaultProps } from '@osuresearch/ui/types';
 
 export type LinkProps = DefaultProps & {
   href?: string;

@@ -1,5 +1,6 @@
-import React from 'react';
 import { SectionTitle as Component, SectionTitleProps } from '@osuresearch/ui';
+import React from 'react';
+
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
 export default RUIComponentMeta<SectionTitleProps>('Components', Component)

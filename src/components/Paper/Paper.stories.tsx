@@ -1,6 +1,7 @@
+import { Button, Paper, PaperProps, Space, Text, Title } from '@osuresearch/ui';
+import { Meta, Story } from '@storybook/react';
 import React from 'react';
-import { Story, Meta } from '@storybook/react';
-import { Title, Text, Button, Space, Paper, PaperProps } from '@osuresearch/ui';
+
 import { RUIComponentMeta } from '~/.storybook/utils';
 
 export default RUIComponentMeta<PaperProps>('Layout', Paper)

@@ -1,5 +1,6 @@
-import React from 'react';
 import { Button, Stack as StackComponent, StackProps } from '@osuresearch/ui';
+import React from 'react';
+
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
 export default RUIComponentMeta<StackProps>('Layout', StackComponent)

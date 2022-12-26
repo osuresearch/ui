@@ -1,6 +1,5 @@
-import React, { forwardRef } from 'react';
-
 import { Link } from '@osuresearch/ui';
+import React, { forwardRef } from 'react';
 
 export type HashLinkProps = {
   /**

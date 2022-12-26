@@ -1,7 +1,8 @@
-import React, { forwardRef, MouseEventHandler } from 'react';
-import { Center, Group, Box } from '@osuresearch/ui';
-import { createPolymorphicComponent } from '@osuresearch/ui/utils';
+import { Box, Center, Group } from '@osuresearch/ui';
+import React, { MouseEventHandler, forwardRef } from 'react';
+
 import { cx } from '@osuresearch/ui/theme';
+import { createPolymorphicComponent } from '@osuresearch/ui/utils';
 
 export type ButtonProps = {
   /** Alternate rendering styles */

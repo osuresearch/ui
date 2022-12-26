@@ -1,6 +1,8 @@
 import React from 'react';
-import { Ring, RingProps } from './Ring';
+
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
+
+import { Ring, RingProps } from './Ring';
 
 export default RUIComponentMeta<RingProps>('Utilities', Ring)
   .withStyleSystemProps()

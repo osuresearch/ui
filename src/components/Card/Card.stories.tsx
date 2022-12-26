@@ -1,8 +1,9 @@
-import React from 'react';
 import { Story } from '@storybook/react';
+import React from 'react';
+
+import { RUIComponentMeta } from '~/.storybook/utils';
 
 import { Card, CardProps } from './Card';
-import { RUIComponentMeta } from '~/.storybook/utils';
 
 export default RUIComponentMeta<CardProps>('Components', Card)
   .withStyleSystemProps()

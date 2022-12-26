@@ -1,8 +1,9 @@
 import React, { forwardRef } from 'react';
+
 import { cx } from '../../theme/utils';
 import { DefaultProps, ThemeSize } from '../../types';
-import { Box } from '../Box';
 import { createPolymorphicComponent } from '../../utils/createPolymorphicComponent';
+import { Box } from '../Box';
 
 export type PaperProps = DefaultProps & {
   variant?: 'default' | 'panel';

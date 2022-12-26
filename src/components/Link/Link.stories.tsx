@@ -1,6 +1,7 @@
-import React from 'react';
+import { Box, Link, LinkProps } from '@osuresearch/ui';
 import { Story } from '@storybook/react';
-import { Link, LinkProps, Box } from '@osuresearch/ui';
+import React from 'react';
+
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
 export default RUIComponentMeta<LinkProps>('Components', Link)

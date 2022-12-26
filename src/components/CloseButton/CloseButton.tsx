@@ -1,5 +1,6 @@
-import React, { forwardRef, MouseEventHandler } from 'react';
 import { IconButton } from '@osuresearch/ui';
+import React, { MouseEventHandler, forwardRef } from 'react';
+
 import { cx } from '../../theme/utils';
 import { DefaultProps } from '../../types';
 

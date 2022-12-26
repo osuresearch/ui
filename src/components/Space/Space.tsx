@@ -1,5 +1,6 @@
-import React from 'react';
 import { spacingValueToClass } from '@osuresearch/ui';
+import React from 'react';
+
 import { cx } from '../../theme/utils';
 import { PositiveSpacing, Spacing } from '../../types';
 

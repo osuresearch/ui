@@ -1,5 +1,5 @@
+import { DefaultProps, Group, Icon, Text } from '@osuresearch/ui';
 import React, { Children, forwardRef } from 'react';
-import { Group, Icon, Text, DefaultProps } from '@osuresearch/ui';
 
 export type BreadcrumbsProps = DefaultProps & {
   /**

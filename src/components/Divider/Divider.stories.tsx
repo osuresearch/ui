@@ -1,7 +1,9 @@
-import React from 'react';
 import { Group, Stack, Text } from '@osuresearch/ui';
-import { Divider, DividerProps } from './Divider';
+import React from 'react';
+
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
+
+import { Divider, DividerProps } from './Divider';
 
 export default RUIComponentMeta<DividerProps>('Layout', Divider)
   .withBadge('atom')

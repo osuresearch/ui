@@ -1,7 +1,8 @@
-import React, { forwardRef } from 'react';
-import { DefaultProps } from '@osuresearch/ui/types';
 import { Box, Group, Icon, Text } from '@osuresearch/ui';
+import React, { forwardRef } from 'react';
+
 import { cx } from '@osuresearch/ui/theme';
+import { DefaultProps } from '@osuresearch/ui/types';
 
 export type DetailsProps = DefaultProps & {
   summary: React.ReactNode;

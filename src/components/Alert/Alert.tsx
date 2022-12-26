@@ -1,5 +1,6 @@
+import { CloseButton, Group, Icon, Stack, Text } from '@osuresearch/ui';
 import React, { forwardRef, useState } from 'react';
-import { Icon, Group, Stack, CloseButton, Text } from '@osuresearch/ui';
+
 import { Color } from '@osuresearch/ui/theme';
 
 export type AlertProps = {

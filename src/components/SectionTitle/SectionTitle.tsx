@@ -1,5 +1,5 @@
-import React, { forwardRef } from 'react';
 import { Box } from '@osuresearch/ui';
+import React, { forwardRef } from 'react';
 
 export type SectionTitleProps = {
   level?: 2 | 3 | 4;
@@ -18,13 +18,7 @@ export type SectionTitleProps = {
  */
 export const SectionTitle = forwardRef<HTMLDivElement, SectionTitleProps>(
   ({ children, level = 2 }, ref) => (
-    <Box
-      component={`h${level}`}
-      ref={ref}
-      className="rui-text-h2 rui-uppercase" // TODO: Responsive 1.35rem for small, 640px+ 1.75rem
-      // 640 is --rui-screen-md
-      c="dark"
-    >
+    <Box component={`h${level}`} ref={ref} className="rui-text-h2 rui-uppercase" c="dark">
       {children}
     </Box>
   )

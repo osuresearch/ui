@@ -1,5 +1,6 @@
+import { BreadcrumbsProps, Breadcrumbs as Component, Link } from '@osuresearch/ui';
 import React from 'react';
-import { Link, Breadcrumbs as Component, BreadcrumbsProps } from '@osuresearch/ui';
+
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
 export default RUIComponentMeta<BreadcrumbsProps>('Components', Component)

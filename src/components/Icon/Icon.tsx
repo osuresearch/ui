@@ -1,14 +1,14 @@
-import React, { forwardRef } from 'react';
 import { Icon as Iconify } from '@iconify/react/dist/offline';
-import { cx } from '../../theme/utils';
+import React, { forwardRef } from 'react';
 
 // Note that we use the offline version of iconify
 // for apps that can't call out to a public CDN
-
 import { loadAllIcons } from '../../icons';
+import { cx } from '../../theme/utils';
+import { DefaultProps } from '../../types';
 import { createPolymorphicComponent } from '../../utils/createPolymorphicComponent';
 import { Box } from '../Box';
-import { DefaultProps } from '../../types';
+
 loadAllIcons();
 
 export type IconProps = DefaultProps & {

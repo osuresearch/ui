@@ -1,6 +1,7 @@
-import React from 'react';
-import { Story } from '@storybook/react';
 import { Alert, AlertProps } from '@osuresearch/ui';
+import { Story } from '@storybook/react';
+import React from 'react';
+
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
 export default RUIComponentMeta<AlertProps>('Components', Alert).withBadge('stable');

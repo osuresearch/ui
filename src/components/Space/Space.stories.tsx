@@ -1,5 +1,6 @@
+import { Group, Space, SpaceProps, Stack, Text } from '@osuresearch/ui';
 import React from 'react';
-import { Text, Group, Stack, Space, SpaceProps } from '@osuresearch/ui';
+
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
 export default RUIComponentMeta<SpaceProps>('Layout', Space).withBadge('stable');

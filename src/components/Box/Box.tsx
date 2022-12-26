@@ -1,20 +1,21 @@
 import React, { forwardRef } from 'react';
-import { bgc, cx, ff, fs, fw, tc } from '@osuresearch/ui/theme/utils';
-import {
-  DefaultProps,
-  ScreenSize,
-  Spacing,
-  ResponsiveProp,
-  ColorProp,
-  Theme,
-  spacing,
-  negativeSpacing,
-  screenSize
-} from '@osuresearch/ui/types';
-import { createPolymorphicComponent } from '@osuresearch/ui/utils/createPolymorphicComponent';
-import { Color } from '@osuresearch/ui/theme';
+
 import { useMediaQuery } from '@osuresearch/ui/hooks/useMediaQuery';
 import { useTheme } from '@osuresearch/ui/hooks/useTheme';
+import { Color } from '@osuresearch/ui/theme';
+import { bgc, cx, ff, fs, fw, tc } from '@osuresearch/ui/theme/utils';
+import {
+  ColorProp,
+  DefaultProps,
+  ResponsiveProp,
+  ScreenSize,
+  Spacing,
+  Theme,
+  negativeSpacing,
+  screenSize,
+  spacing
+} from '@osuresearch/ui/types';
+import { createPolymorphicComponent } from '@osuresearch/ui/utils/createPolymorphicComponent';
 
 export interface BoxProps extends DefaultProps {
   children?: React.ReactNode;
@@ -199,6 +200,7 @@ function isSpacing(value: any): value is Spacing {
 // }
 
 function omitDefaultProps(props: Record<string, any>): Record<string, any> {
+  // @ts-ignore I know they're unused.
   const {
     // TODO: Less dumb way of doing this.
     // Should each hook return a props copy with the omissions?

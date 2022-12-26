@@ -1,5 +1,6 @@
+import { CenterProps, Center as Component, Icon, Text } from '@osuresearch/ui';
 import React from 'react';
-import { Center as Component, CenterProps, Icon, Text } from '@osuresearch/ui';
+
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
 export default RUIComponentMeta<CenterProps>('Layout', Component)
