@@ -1,64 +1,43 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react';
+import { Badge, BadgeProps } from '@osuresearch/ui';
+import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
-import { Badge, BadgeProps } from './index';
+export default RUIComponentMeta<BadgeProps>('Components', Badge)
+  .withStyleSystemProps()
+  .withBadge('atom')
+  .withBadge('stable');
 
-export default {
-  title: 'Components/Badge',
-  component: Badge,
-  argTypes: {}
-} as Meta<typeof Badge>;
+const Template: Story<BadgeProps> = (args: BadgeProps) => <Badge {...args}>Beta</Badge>;
 
-const Template: Story<BadgeProps> = (args: BadgeProps) => <Badge {...args}>BADGE</Badge>;
+export const Overview = RUIComponentStory(Template);
 
-export const Default = Template.bind({});
-Default.args = {};
-
-const Colors: Story<BadgeProps> = (args: BadgeProps) => (
+const Colors: Story<BadgeProps> = (args) => (
   <>
-    <Badge {...args} c="scarlet">
-      scarlet
+    <Badge {...args} c="primary">
+      primary
     </Badge>
-    <Badge {...args} c="gray">
-      gray
+    <Badge {...args} c="secondary">
+      secondary
     </Badge>
-    <Badge {...args} c="black">
-      black
-    </Badge>
-    <Badge {...args} c="white">
-      white
+    <Badge {...args} c="tertiary">
+      tertiary
     </Badge>
 
     <br />
-    <Badge {...args} c="blue">
-      blue
+
+    <Badge {...args} c="light">
+      light
     </Badge>
-    <Badge {...args} c="orange">
-      orange
+    <Badge {...args} c="dimmed">
+      dimmed
     </Badge>
-    <Badge {...args} c="green">
-      green
-    </Badge>
-    <Badge {...args} c="brown">
-      brown
-    </Badge>
-    <Badge {...args} c="pink">
-      pink
-    </Badge>
-    <Badge {...args} c="violet">
-      violet
-    </Badge>
-    <Badge {...args} c="aqua">
-      aqua
-    </Badge>
-    <Badge {...args} c="teal">
-      teal
-    </Badge>
-    <Badge {...args} c="gold">
-      gold
+    <Badge {...args} c="dark">
+      dark
     </Badge>
 
     <br />
+
     <Badge {...args} c="info">
       info
     </Badge>
@@ -74,17 +53,14 @@ const Colors: Story<BadgeProps> = (args: BadgeProps) => (
   </>
 );
 
-export const Solid = Colors.bind({});
-Solid.args = {
+export const Solid = RUIComponentStory(Colors, {
   variant: 'solid'
-};
+});
 
-export const Outline = Colors.bind({});
-Outline.args = {
-  variant: 'outline'
-};
+// export const Outline = RUIComponentStory(Colors, {
+//   variant: 'outline'
+// });
 
-export const WithIndicator = Colors.bind({});
-WithIndicator.args = {
-  variant: 'dot'
-};
+export const WithIndicator = RUIComponentStory(Colors, {
+  variant: 'indicator'
+});

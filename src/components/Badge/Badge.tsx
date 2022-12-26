@@ -1,49 +1,37 @@
-import React from 'react';
-import { ThemeColor } from '@osuresearch/ui/theme';
-import { bc, bgc, tc, cx } from '../../theme/utils';
-import { Indicator } from '../Indicator';
+import React, { forwardRef } from 'react';
+import { Group, DefaultProps, Indicator, Box } from '@osuresearch/ui';
+import { createPolymorphicComponent } from '@osuresearch/ui/utils';
+import { cx, bc, Color } from '@osuresearch/ui/theme';
 
-export type BadgeProps = {
-  c?: ThemeColor;
-
-  variant?: 'solid' | 'outline' | 'dot';
+export type BadgeProps = DefaultProps & {
+  variant?: 'solid' | 'indicator';
 
   children?: React.ReactNode;
 };
 
-/**
- * Display badge, pill or tag
- */
-export function Badge({ c = 'gray', variant = 'solid', children }: BadgeProps) {
-  return (
-    <div
-      className={cx({
-        'rui-border': true,
-        'rui-rounded-full': true,
-        'rui-inline-block': true,
-        'rui-text-xs': true,
-        'rui-font-bold': true,
-        'rui-px-8': true,
-
-        // Solid: solid bg + contrasting fg
-        [bgc(c)]: variant === 'solid',
-        [tc(c)]: variant === 'solid',
-        [bc(c)]: variant === 'solid',
-
-        // Outline: transparent bg, bc and fg are the theme
-        [tc(c)]: variant === 'outline',
-
-        // Dot: Gray. But there will be an added dot icon prefix
-        'rui-border-gray ': variant === 'dot',
-        'rui-text-gray-shade-40 rui-dark:text-gray': variant === 'dot'
+const _Badge = forwardRef<HTMLDivElement, BadgeProps & { component: any }>(
+  ({ component = 'div', c = 'info', variant = 'solid', children, ...props }, ref) => (
+    <Box
+      component={component}
+      // Solid variant uses c as the background color.
+      // Outline/dot use c as the border and
+      bgc={variant === 'solid' ? `${c}-tint` : undefined}
+      c={variant === 'solid' ? `${c}-contrast` : 'light-contrast'}
+      fs="sm"
+      fw="semibold"
+      h="lg"
+      align="top"
+      className={cx('rui-border rui-rounded-full rui-inline-block', {
+        [bc(c as Color)]: variant === 'solid'
       })}
+      {...props}
     >
-      {variant === 'dot' && (
-        <span className="pr-md">
-          <Indicator size="sm" c={c} bc={c} />
-        </span>
-      )}
-      {children}
-    </div>
-  );
-}
+      <Group align="center" px="sm" py="xxs">
+        {variant === 'indicator' && <Indicator size="sm" mt="-sm" mr="xxs" c={c} />}
+        {children}
+      </Group>
+    </Box>
+  )
+);
+
+export const Badge = createPolymorphicComponent<'div', BadgeProps>(_Badge);

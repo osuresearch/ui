@@ -2,6 +2,7 @@ import React from 'react';
 import { Story, Meta } from '@storybook/react';
 
 import { List, ListProps } from './List';
+import { RUIComponentStory } from '~/.storybook/utils';
 
 export default {
   title: 'Components/List',
@@ -13,27 +14,30 @@ const Template: Story<ListProps> = (args: ListProps) => (
   <List {...args}>
     <li>
       List item 1
-      <ul>
+      <List {...args}>
         <li>List item 1A</li>
         <li>List item 1B</li>
-      </ul>
+      </List>
     </li>
     <li>List item 2</li>
     <li>
       List item 3
-      <ul>
+      <List {...args}>
         <li>
           List item 3A
-          <ul>
+          <List {...args}>
             <li>List item 3Ai</li>
             <li>List item 3Aii</li>
-          </ul>
+          </List>
         </li>
         <li>List item 3B</li>
-      </ul>
+      </List>
     </li>
   </List>
 );
 
-export const Default = Template.bind({});
-Default.args = {};
+export const UnorderedList = RUIComponentStory(Template);
+
+export const OrderedList = RUIComponentStory(Template, {
+  ordered: true
+});

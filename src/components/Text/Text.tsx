@@ -20,7 +20,6 @@ const _Text = forwardRef<HTMLSpanElement, TextProps & { component: any }>(
       children,
       ta = 'left',
       c = 'light-contrast',
-      span = false,
       ...others
     },
     ref

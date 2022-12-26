@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 import { cx } from '../../theme/utils';
-import { ThemeSize } from '../../types';
+import { ColorProp, ThemeSize } from '../../types';
 import { createPolymorphicComponent } from '../../utils/createPolymorphicComponent';
 import { Text } from '../Text/Text';
 
@@ -17,7 +17,7 @@ export type AvatarProps = {
   size: number;
 
   /** Color used for letter and icon placeholders */
-  color?: Color;
+  c?: ColorProp;
 
   /** Image url. If not supplied, opic.osu.edu will be used */
   src?: string;
@@ -58,9 +58,9 @@ export const _Avatar = forwardRef<HTMLDivElement, AvatarProps>(
       <div
         aria-hidden="true"
         className={cx({
-          'relative': true,
-          'rounded-full': true,
-          'overflow-hidden': true
+          'rui-relative': true,
+          'rui-rounded-full': true,
+          'rui-overflow-hidden': true
         })}
         style={{
           backgroundColor: THEME_COLORS[index],
@@ -79,9 +79,9 @@ export const _Avatar = forwardRef<HTMLDivElement, AvatarProps>(
 
         <div
           className={cx({
-            'absolute': true,
-            'w-full': true,
-            'text-center': true
+            'rui-absolute': true,
+            'rui-w-full': true,
+            'rui-text-center': true
           })}
           style={{
             fontSize: size / 2.25 + 'px',

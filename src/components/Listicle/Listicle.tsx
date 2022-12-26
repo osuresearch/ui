@@ -1,16 +1,7 @@
-import React, {
-  Children,
-  cloneElement,
-  createContext,
-  forwardRef,
-  isValidElement,
-  ReactElement,
-  ReactNode
-} from 'react';
+import React, { Children, cloneElement, forwardRef, isValidElement, ReactNode } from 'react';
 import { cx } from '../../theme/utils';
 import { Box } from '../Box';
-import { DefaultProps } from '../../types';
-import { ForwardRefWithStaticComponents } from '../../utils/ForwardRefWithStaticComponents';
+import { DefaultProps, ForwardRefWithStaticComponents } from '../../types';
 import { Item, ItemProps } from './Item/Item';
 
 export type ListicleVariant = 'ordered' | 'unordered';

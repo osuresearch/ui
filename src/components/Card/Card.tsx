@@ -77,6 +77,7 @@ export const Card = forwardRef<HTMLAnchorElement, CardProps>(
     {
       variant = 'default',
       className,
+      style,
       taxonomy,
       headline,
       image,
@@ -94,7 +95,7 @@ export const Card = forwardRef<HTMLAnchorElement, CardProps>(
     <Box
       component="a"
       ref={ref}
-      maw={420}
+      style={{ maxWidth: 420, ...style }}
       className={cx('rui-block rui-group', className)}
       href={href}
       target="_blank"

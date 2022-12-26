@@ -69,11 +69,15 @@
   --rui-primary-shade: var(--rui-scarlet-dark-40);
   --rui-primary-tint: var(--rui-scarlet);
 
-  --rui-secondary: var(--rui-teal);
-  --rui-secondary-contrast: var(--rui-white);
+  --rui-secondary: var(--rui-gray);
+  --rui-secondary-contrast: var(--rui-black);
+  --rui-secondary-shade: var(--rui-gray);
+  --rui-secondary-tint: var(--rui-gray);
 
-  --rui-tertiary: var(--rui-blue); /* TODO: Idk about tertiary */
+  --rui-tertiary: var(--rui-teal);
   --rui-tertiary-contrast: var(--rui-white);
+  --rui-tertiary-shade: var(--rui-teal);
+  --rui-tertiary-tint: var(--rui-teal);
 
   /* Neutrals */
   --rui-light-tint: var(--rui-white);

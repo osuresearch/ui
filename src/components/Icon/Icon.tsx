@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react';
-import { Icon as Iconify, InlineIcon } from '@iconify/react/dist/offline';
+import { Icon as Iconify } from '@iconify/react/dist/offline';
 import { cx } from '../../theme/utils';
 
 // Note that we use the offline version of iconify
@@ -31,9 +31,12 @@ export const _Icon = forwardRef<HTMLElement, IconProps & { component: any }>(
       )}
       {...props}
     >
-      <InlineIcon
+      <Iconify
         icon={name}
-        rotate={rotate + 'deg'}
+        // Note this `any` cast is because they include the SVGAttribute.rotate
+        // that overrides their own rotate attribute that's supposed to
+        // support a string for degrees.
+        rotate={`${rotate}deg` as any}
         flip={flip}
         className="rui-m-auto"
         alignmentBaseline="middle"
