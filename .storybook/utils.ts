@@ -37,6 +37,7 @@ export function RUIComponentMeta<T>(
 
   return {
     title: category + '/' + component.displayName,
+    id: category + '/' + component.displayName,
     component,
     subcomponents: {},
     argTypes: {},
@@ -60,6 +61,19 @@ export function RUIComponentMeta<T>(
         ...this.parameters.badges,
         badge
       ]
+
+      // Encode the badge onto the `title` prop for the Sidebar
+      // if (badge === 'beta')
+      //   this.title += ' 🔨';
+      // else if (badge === 'experimental')
+      //   this.title += ' 🧪';
+      // else if (badge === 'atom')
+      //   this.title += ' 🤏';
+
+      // TODO: The above breaks components where
+      // the export name is the same as the component
+      // to collapse it down to a single page.
+
       return this;
     },
     withSubcomponent: function (name: string) {

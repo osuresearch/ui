@@ -23,8 +23,8 @@ export default RUIComponentMeta<DemoProps>(
     Demo, // Component
   )
   .withStyleSystemProps() // Show the style system props (m, mx, my, c, ...)
-  .withBadge('beta')
-  .withBadge('deprecated'); // Add one or more badges
+  .withBadge('atom') // Add one or more badges
+  .withBadge('beta');
 
 // Make a template
 const Template: Story<DemoProps> = (args) => (
@@ -39,23 +39,22 @@ const Template: Story<DemoProps> = (args) => (
 // This'll be the story demoed alongside your doc block.
 // If you don't have any other stories to add, export this
 // story with the same name as your component
-export const Overview = RUIComponentStory(Template, {
+export const Overview = RUIComponentStory<DemoProps>(Template, {
   variant: 'default',
 });
 
-// Add additional stories. Each one can take an optional
-// third argument with markdown for the story description.
-
-export const Storytelling = RUIComponentStory(Template, {
-    variant: 'storytelling',
-  })
-  .withDescription(`
-    Your markdown goes **here**!
-  `);
+// Add additional stories. You can add per-story documentation
+// in markdown by calling `withDescription` as part of the factory method
+export const Storytelling = RUIComponentStory<DemoProps>(Template, {
+  variant: 'storytelling',
+})
+.withDescription(`
+  Your markdown goes **here**!
+`);
 
 // You can also just write the DOM directly
-// instead of referring to a template
-export const NotConfigurable = RUIComponentStory(() =>
+// instead of referring to a template.
+export const NotConfigurable = RUIComponentStory<DemoProps>((args) =>
   <Demo>
     not configurable!
   </Demo>
@@ -64,7 +63,7 @@ export const NotConfigurable = RUIComponentStory(() =>
 // Prefix with an underscore to hide the story.
 // This allows us to create stories that other stories
 // can reference as dependencies.
-export const _NotVisible = RUIComponentStory(() =>
+export const _NotVisible = RUIComponentStory<DemoProps>((args) =>
   <Demo>
     not visible!
   </Demo>
@@ -75,3 +74,4 @@ More tips
 
 - **DO** use as many of our atoms as possible for demos. We want these to be as copy/paste easy as possible.
   - E.g. don't do a `<div className="flex">` use a `<Group>`
+- **DO** include the `args` argument into every story template method so that storybook can generate the correct sample code.

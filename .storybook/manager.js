@@ -12,12 +12,25 @@ addons.setConfig({
   // selectedPanel: undefined,
   // initialActive: 'sidebar',
   sidebar: {
-    showRoots: false,
-    collapsedRoots: ['other'],
+    // showRoots: false,
+    collapsedRoots: [
+      'components',
+      'utilities',
+      'bux-stuff',
+      'contributing'
+    ],
     renderLabel: (item) => {
-      // console.debug(item);
+      console.debug(item);
       // not super useful info. I want the meta...
-      return <abbr style={{fontSize: '16px' }} title="...">{item.name}</abbr>
+      // TODO: No inline hacking
+      // type: story, root, component
+      // parent: components, depth: 1
+      // isLeaf, isRoot, isComponent, renderLabel
+      return (
+        <div className={`rui-link--${item.type}`}>
+          {item.name}
+        </div>
+      )
     },
   },
   // toolbar: {

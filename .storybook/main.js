@@ -22,6 +22,9 @@ module.exports = {
     '@geometricpanda/storybook-addon-badges'
   ],
   framework: '@storybook/react',
+  // features: {
+  //   storyStoreV7: true
+  // },
   webpackFinal: async (config, { configType }) => {
     config.resolve.plugins = [new TsconfigPathsPlugin()];
     return config;

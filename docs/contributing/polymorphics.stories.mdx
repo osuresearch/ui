@@ -44,3 +44,4 @@ export const PolymorphicDemo = createPolymorphicComponent<'button', PolymorphicD
 - In the `forwardRef` template arguments, you **must** union `{ component: any }` into your prop types.
 - Components with semantic a11y meaning **must not** be polymorphic.
   - Example: The `<Title>` component must semantically be an `<h1>` through `<h4>` element.
+- **DO** document that your component is polymorphic in the source file docs and add examples of why someone would use it as a polymorph. See the `Title` component for an example.
