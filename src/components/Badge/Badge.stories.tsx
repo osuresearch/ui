@@ -6,9 +6,9 @@ import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 export default RUIComponentMeta<BadgeProps>('Components', Badge)
   .withStyleSystemProps()
   .withBadge('atom')
-  .withBadge('stable');
+  .withBadge('beta');
 
-const Template: Story<BadgeProps> = (args: BadgeProps) => <Badge {...args}>Beta</Badge>;
+const Template: Story<BadgeProps> = (args) => <Badge {...args}>Beta</Badge>;
 
 export const Overview = RUIComponentStory(Template);
 

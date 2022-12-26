@@ -26,7 +26,7 @@ const _Badge = forwardRef<HTMLDivElement, BadgeProps & { component: any }>(
       })}
       {...props}
     >
-      <Group align="center" px="sm" py="xxs">
+      <Group align="center" px="sm">
         {variant === 'indicator' && <Indicator size="sm" mt="-sm" mr="xxs" c={c} />}
         {children}
       </Group>
