@@ -1,3 +1,26 @@
+# [5.0.0-alpha.2](https://github.com/osuresearch/ui/compare/v5.0.0-alpha.1...v5.0.0-alpha.2) (2022-12-26)
+
+
+### Bug Fixes
+
+* **Details:** add missing ref and prop spread ([6c45531](https://github.com/osuresearch/ui/commit/6c4553173af489bbc42a01e4ea932290ffeca627))
+* **IconButton:** use theme breaks instead of exact pixel values ([4927c05](https://github.com/osuresearch/ui/commit/4927c05a056800d88475f755cbce24ce81e9fbe8))
+* **tailwind:** add missing patterns for xxs spacing ([8dd413e](https://github.com/osuresearch/ui/commit/8dd413e065a4e29a61b155fa712806c2b6f68bc2))
+
+
+### Features
+
+* add a11y and badge addons to Storybook and wrap redundant story code with factories ([4a3c1e5](https://github.com/osuresearch/ui/commit/4a3c1e534638752b4d03a2f88c9889b68f67cdd4))
+* add HashLink component ([f5c900c](https://github.com/osuresearch/ui/commit/f5c900c321d374ca500b8d863073d9bdd4154ace))
+* add new Section Title component to replace the Title variant ([a8c1649](https://github.com/osuresearch/ui/commit/a8c1649f80446209d55cf111ffc6c805e4016d1a))
+* **Box:** add bgc prop ([9ae46f0](https://github.com/osuresearch/ui/commit/9ae46f03119fe304152e1b6b4fb51a890a76f65e))
+* **Button:** add leftSlot and rightSlot props ([54976af](https://github.com/osuresearch/ui/commit/54976af39a9c8cd489ef9854a94068d6fd5b2e40))
+* **Icon:** add inline support ([56abecb](https://github.com/osuresearch/ui/commit/56abecb7d52cd95f6c59671e7cfca2ff618190e7))
+* **Icon:** add rotate and flip props ([3eed6a9](https://github.com/osuresearch/ui/commit/3eed6a9b167cab84daa772d2746fac0b55ec5792))
+* **Indicator:** add style system support ([0d9c1fc](https://github.com/osuresearch/ui/commit/0d9c1fcea3d024ed6bac502c64969a70baf3807b))
+* **scripts:** add index rebuilding as part of the new component script ([9e9fb5b](https://github.com/osuresearch/ui/commit/9e9fb5b3d9a12da117d3c708b1d2ac3cdbd1d923))
+* **Title:** add BUX's responsive font sizes ([ba48854](https://github.com/osuresearch/ui/commit/ba48854ba2cf2df288da9fcba02c94a531c6b936))
+
 # [5.0.0-alpha.1](https://github.com/osuresearch/ui/compare/v4.8.1...v5.0.0-alpha.1) (2022-12-21)
 
 
