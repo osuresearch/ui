@@ -10,8 +10,11 @@ export const spacing = [
   'md',
   'lg',
   'xl',
-  'xxl'
+  'xxl',
   // TODO: Specials? (auto, full, etc)
+
+  'auto',
+  'full'
 ] as const;
 
 export const negativeSpacing = ['-xxs', '-xs', '-sm', '-md', '-lg', '-xl', '-xxl'] as const;
