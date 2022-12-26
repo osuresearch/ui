@@ -4,6 +4,7 @@ import { Indicator, IndicatorProps } from '@osuresearch/ui';
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
 export default RUIComponentMeta<IndicatorProps>('Components', Indicator)
+  .withStyleSystemProps()
   .withBadge('atom')
   .withBadge('stable');
 

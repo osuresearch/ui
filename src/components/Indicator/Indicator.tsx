@@ -1,11 +1,11 @@
-import { Box, DefaultProps, ThemeSize } from '@osuresearch/ui';
+import { Box, ColorProp, DefaultProps, ThemeSize } from '@osuresearch/ui';
 import { bgc, Color, cx, hw, bc as _bc } from '@osuresearch/ui/theme';
 import React from 'react';
 
-export type IndicatorProps = {
+export type IndicatorProps = DefaultProps & {
   size?: ThemeSize;
 
-  c?: Color;
+  c?: ColorProp;
 
   /** Apply a ripple effect. Useful for notifications */
   ping?: boolean;
@@ -17,7 +17,7 @@ export type IndicatorProps = {
 export function Indicator({ size = 'sm', c = 'primary', ping, ...props }: IndicatorProps) {
   return (
     <Box className="rui-relative rui-inline-flex rui-align-middle" {...props}>
-      <Box mt="-xxs" mr="-xxs" className={cx('rui-flex rui-absolute')} w={size} h={size}>
+      <Box className={cx('rui-flex rui-absolute rui-left-0 rui-top-0')} w={size} h={size}>
         {ping && (
           <Box
             bgc={c}
