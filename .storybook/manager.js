@@ -20,7 +20,6 @@ addons.setConfig({
       'contributing'
     ],
     renderLabel: (item) => {
-      console.debug(item);
       // not super useful info. I want the meta...
       // TODO: No inline hacking
       // type: story, root, component

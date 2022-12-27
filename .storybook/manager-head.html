@@ -190,6 +190,14 @@
   max-width: 70%;
 }
 
+.rui-footer__contributors:before {
+  content: '💖';
+}
+
+.dark .rui-footer__contributors:before {
+  content: '✨';
+}
+
 @media screen and (max-width: 970px) {
   .rui-footer {
     font-size: 12px;
@@ -213,7 +221,7 @@
 
 <script id="rui-footer-template" type="text/html">
   <div class="rui-footer__contributors">
-    💖 <a href="https://github.com/McManning" target="_blank">Chase McManning</a>
+    <a href="https://github.com/McManning" target="_blank">Chase McManning</a>
     and <a href="https://github.com/osuresearch/ui/graphs/contributors" target="_blank">contributors</a>.
   </div>
 

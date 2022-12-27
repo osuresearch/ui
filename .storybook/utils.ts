@@ -1,6 +1,6 @@
 
 import { colors } from '@osuresearch/ui/theme';
-import { ArgTypes, Meta, Story } from '@storybook/react';
+import { ArgTypes, Meta, Story, StoryContext } from '@storybook/react';
 import { fontFamily, fontSize, fontWeight, spacing } from '../src/types';
 
 export type RUIBadge = 'beta' | 'stable' | 'deprecated' | 'experimental' | 'atom' | 'molecule';
@@ -104,14 +104,30 @@ export function RUIComponentStory<T>(
 ): RUIStory<T> {
   const instance = template.bind({}) as RUIStory<T>;
   instance.args = args;
-  instance.parameters = {};
+  instance.parameters = {
+    docs: {
+      // Pull raw source to get story hooks/states
+      // source: {
+      //   type: 'code',
+      // },
+      // // Custom transformer to strip out RUIComponent factories from sample code.
+      // transformSource(snippet: string, context: StoryContext) {
+      //   console.log(context);
+      //   return snippet;
+      // },
+
+      // TODO: the above doesn't work. Some stories are just RUIComponentStory(Template).
+      // Figure out something else.
+    },
+  };
+
   instance.withDescription = (markdown: string) => {
     instance.parameters = {
       ...instance.parameters,
       docs: {
         description: {
           story: markdown
-        }
+        },
       }
     };
 
