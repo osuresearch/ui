@@ -155,7 +155,7 @@
 
 ### Bug Fixes
 
-* Update type of children prop for <FieldSet.Legend> to ReactChild, allowing both JSX elements and strings ([9b808b8](https://code.osu.edu/ORIS/ui/commit/9b808b8f863caa82d4be6ec1b4abb6c6edff94fe))
+* Update type of children prop for `<FieldSet.Legend>` to ReactChild, allowing both JSX elements and strings ([9b808b8](https://code.osu.edu/ORIS/ui/commit/9b808b8f863caa82d4be6ec1b4abb6c6edff94fe))
 
 ## [4.4.7](https://code.osu.edu/ORIS/ui/compare/4.4.6...4.4.7) (2022-03-10)
 
@@ -509,7 +509,7 @@ __Backwards Breaking Changes:__
 
 __Bug Fixes:__
 * Fixed Lookup incorrectly forcing focus to the input when `set()` or `clear()` methods are called via Javascript
-* Fixed Lookup not automatically setting itself to <code>readonly</code> if prepopulated with a value
+* Fixed Lookup not automatically setting itself to `readonly` if prepopulated with a value
 * Fixed margins for checks/radios inside a `.form-check-inline` group
 
 __Implemented Enhancements:__

@@ -1,8 +1,7 @@
 
 import React from "react";
 import { addParameters } from '@storybook/react';
-import { useDarkMode } from "storybook-dark-mode";
-import { themes } from "@storybook/theming";
+import { useDarkMode } from 'storybook-dark-mode';
 import { DocsContainer } from './DocsContainer';
 import light from './Theme.light';
 import dark from './Theme.dark';

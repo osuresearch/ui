@@ -2,11 +2,6 @@
 
 <style>
 
-/*
-  Going old school with this CSS.
-  Stick to BEM for components that aren't StorybookJS
-*/
-
 #root {
   height: calc(100vh - 48px - 38px);
 }
@@ -23,6 +18,30 @@
 
 .sidebar-header {
   display: none;
+}
+
+.container.sidebar-container::after {
+  content: '';
+  position: absolute;
+  top: -200px;
+  left: -200px;
+  width: 400px;
+  height: 400px;
+  background: #a7b1b7;
+  opacity: 0.4;
+  filter: blur(150px);
+}
+
+.dark .container.sidebar-container::after {
+  content: '';
+  position: absolute;
+  top: -200px;
+  left: -200px;
+  width: 400px;
+  height: 400px;
+  background: #212325;
+  opacity: 0.4;
+  filter: blur(150px);
 }
 
 .sidebar-subheading > button > span:first-of-type,
@@ -79,6 +98,19 @@
   font-size: 16px;
   padding: 6px;
   padding-left: 10px;
+}
+
+.dark .rui-link--root {
+  color: #f6f7f8;
+}
+
+.dark .rui-link--story,
+.dark .rui-link--component {
+  color: #dfe3e5;
+}
+
+.dark .os-content button {
+  color: #f6f7f8;
 }
 
 .sidebar-item svg {
@@ -139,11 +171,15 @@
   justify-content: space-between;
   align-items: center;
 
-  background: #0e1115;
+  background: #4a0513;
   color: #afb2b5;
   font-size: 14px;
   padding: 8px 20px;
   height: 48px;
+}
+
+.dark .rui-footer {
+  background: #0e1115;
 }
 
 .rui-footer a {
@@ -159,7 +195,6 @@
     font-size: 12px;
   }
 }
-
 
 </style>
 

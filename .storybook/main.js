@@ -11,6 +11,12 @@ module.exports = {
     '@storybook/addon-interactions',
     '@storybook/addon-a11y',
     {
+      name: '@storybook/addon-docs',
+      options: {
+        transcludeMarkdown: true,
+      },
+    },
+    {
       name: '@storybook/addon-postcss',
       options: {
         postcssLoaderOptions: {

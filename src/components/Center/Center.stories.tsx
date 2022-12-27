@@ -4,7 +4,6 @@ import React from 'react';
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
 export default RUIComponentMeta<CenterProps>('Layout', Component)
-  .withStyleSystemProps()
   .withBadge('experimental')
   .withBadge('atom');
 

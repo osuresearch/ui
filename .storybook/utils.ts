@@ -44,7 +44,7 @@ export function RUIComponentMeta<T>(
     parameters: {
       badges: []
     },
-    excludeStories: /_.*/,
+    excludeStories: /(_.*)/,
 
     withStyleSystemProps: function () {
       this.argTypes = {

@@ -1,0 +1,108 @@
+
+<style>
+
+.sbdocs.sbdocs-wrapper {
+  padding: 24px 32px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.sbdocs-wrapper::before {
+  content: '';
+  position: absolute;
+  top: -200px;
+  right: -200px;
+  width: 400px;
+  height: 400px;
+  background: #ba0c2f;
+  opacity: 0.025;
+  filter: blur(150px);
+}
+
+/* Doesn't work - sometimes the iframe doesn't get a 'dark' class update
+  since it relies on Emotion, so we can't rely on it to be consistent.
+*/
+[data-theme="dark"]
+.sbdocs.sbdocs-wrapper::before {
+  background: #26686d;
+  opacity: 0.15;
+}
+
+/* Extra margin to fit the right hand table of contents */
+.sbdocs.sbdocs-content {
+  margin-right: 200px;
+}
+
+/* Right hand table of contents */
+.sbdocs.rui-toc {
+  --toc-color: var(--rui-dark-shade);
+  --toc-indicator-color: #efefef;
+  --toc-indicator-color--active: var(--rui-primary);
+
+  left: initial;
+  right: 0;
+  width: 200px;
+  padding-top: 0;
+}
+
+/* Back to top button */
+.sbdocs.rui-top {
+  --toc-button-color: var(--rui-primary);
+  --toc-button-color--hover: #ffffff;
+  --toc-button-color--active: #ffffff;
+  --toc-button-background: #ffffff;
+  --toc-button-background--hover: var(--rui-dark-shade);
+  --toc-button-background--active: var(--rui-dark-shade);
+
+  left: initial;
+  right: 20px;
+  bottom: 20px;
+  border: 2px solid var(--rui-primary);
+  background: white;
+}
+
+.sbdocs.rui-top:hover {
+  border-color: var(--rui-dark-shade);
+}
+
+.sbdocs.sbdocs-a {
+  text-decoration: underline;
+}
+
+.sbdocs.sbdocs-a:hover {
+  background-color: var(--rui-light-shade);
+}
+
+[data-theme="dark"]
+.sbdocs.sbdocs-a {
+  color: var(--rui-link);
+}
+
+.sbdocs.sbdocs-table tr:nth-of-type(2n) {
+  background-color: var(--rui-light);
+}
+
+.sbdocs.rui-toc {
+  --toc-color: var(--rui-light-contrast);
+  --toc-indicator-color: var(--rui-dimmed);
+  --toc-indicator-color--active: var(--rui-primary);
+}
+
+.sbdocs.sbdocs-toc__header {
+  color: var(--rui-light-contrast);
+}
+
+.sbdocs.rui-toc a {
+  color: var(--rui-light-contrast) !important;
+}
+
+/* Import line at the top of doc pages */
+.rui-import {
+  display: inline-block;
+  color: var(--rui-dark);
+
+  font-size: var(--rui-text-sm);
+  margin-bottom: var(--rui-spacing-md);
+}
+
+</style>
