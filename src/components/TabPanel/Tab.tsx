@@ -27,10 +27,10 @@ export function Tab({ item, state, orientation }: TabProps) {
         // Base styles
         'rui-border-2 rui-border-b-0 rui-border-clear',
         'rui-cursor-pointer',
-        'focus:rui-ring rui-outline-none',
+        // 'focus:rui-ring rui-outline-none',
 
         // aria-selected style
-        'aria-selected:rui-border-light-shade aria-selected:rui-shadow-underline-primary',
+        'aria-selected:rui-border-light-shade',
 
         // hover style (bg matches the Panel bars)
         'hover:rui-bg-light-shade',
