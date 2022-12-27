@@ -1,6 +1,6 @@
-import { Icon, Text, UnstyledButton } from '@osuresearch/ui';
 import React from 'react';
 
+import { Icon, Text, UnstyledButton } from '@osuresearch/ui';
 import { cx } from '@osuresearch/ui/theme/utils';
 
 export type DocumentPaginationProps = {

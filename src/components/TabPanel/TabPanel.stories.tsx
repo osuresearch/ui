@@ -1,5 +1,6 @@
-import { TabPanel as Component, Item, TabPanelProps, Text } from '@osuresearch/ui';
 import React, { Key, useState } from 'react';
+
+import { TabPanel as Component, Item, TabPanelProps, Text } from '@osuresearch/ui';
 
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 

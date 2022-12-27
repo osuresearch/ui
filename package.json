@@ -144,7 +144,7 @@
     "trailingComma": "none",
     "useTabs": false,
     "importOrder": [
-      "^@osuresearch/ui/(.*)$",
+      "^@osuresearch/ui(.*)$",
       "^[~/]",
       "^[./]"
     ],

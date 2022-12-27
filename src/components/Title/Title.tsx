@@ -1,6 +1,6 @@
-import { Box, FontFamily, FontWeight } from '@osuresearch/ui';
 import React, { forwardRef } from 'react';
 
+import { Box, FontFamily, FontWeight } from '@osuresearch/ui';
 import { cx } from '@osuresearch/ui/theme';
 import { createPolymorphicComponent } from '@osuresearch/ui/utils';
 

@@ -1,6 +1,7 @@
-import { Table, TableProps } from '@osuresearch/ui';
 import { Meta, Story } from '@storybook/react';
 import React from 'react';
+
+import { Table, TableProps } from '@osuresearch/ui';
 
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 

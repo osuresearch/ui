@@ -1,6 +1,6 @@
-import { Box, DefaultProps, Group, Indicator } from '@osuresearch/ui';
 import React, { forwardRef } from 'react';
 
+import { Box, DefaultProps, Group, Indicator } from '@osuresearch/ui';
 import { Color, bc, cx } from '@osuresearch/ui/theme';
 import { createPolymorphicComponent } from '@osuresearch/ui/utils';
 

@@ -1,6 +1,6 @@
-import { Box, Center, Group } from '@osuresearch/ui';
 import React, { MouseEventHandler, forwardRef } from 'react';
 
+import { Box, Center, Group } from '@osuresearch/ui';
 import { cx } from '@osuresearch/ui/theme';
 import { createPolymorphicComponent } from '@osuresearch/ui/utils';
 

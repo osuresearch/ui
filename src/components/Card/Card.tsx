@@ -1,3 +1,5 @@
+import React, { forwardRef } from 'react';
+
 import {
   Box,
   DefaultProps,
@@ -9,8 +11,6 @@ import {
   Text,
   Title
 } from '@osuresearch/ui';
-import React, { forwardRef } from 'react';
-
 import { cx } from '@osuresearch/ui/theme/utils';
 
 export type CardProps = DefaultProps & {

@@ -1,6 +1,7 @@
-import { Details as Component, DetailsProps, Text } from '@osuresearch/ui';
 import { Story } from '@storybook/react';
 import React from 'react';
+
+import { Details as Component, DetailsProps, Text } from '@osuresearch/ui';
 
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 

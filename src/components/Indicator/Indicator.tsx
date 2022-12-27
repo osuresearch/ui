@@ -1,6 +1,6 @@
-import { Box, ColorProp, DefaultProps, ThemeSize } from '@osuresearch/ui';
 import React from 'react';
 
+import { Box, ColorProp, DefaultProps, ThemeSize } from '@osuresearch/ui';
 import { Color, bc as _bc, bgc, cx, hw } from '@osuresearch/ui/theme';
 
 export type IndicatorProps = DefaultProps & {

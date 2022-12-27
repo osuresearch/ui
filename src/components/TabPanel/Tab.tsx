@@ -1,9 +1,9 @@
-import { Box, Ring } from '@osuresearch/ui';
 import { Node, Orientation } from '@react-types/shared';
 import React, { useRef } from 'react';
 import { useTab } from 'react-aria';
 import { TabListState } from 'react-stately';
 
+import { Box, Ring } from '@osuresearch/ui';
 import { cx } from '@osuresearch/ui/theme';
 
 export type TabProps = {

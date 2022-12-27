@@ -1,6 +1,7 @@
-import { Title, TitleProps } from '@osuresearch/ui';
 import { Meta, Story } from '@storybook/react';
 import React from 'react';
+
+import { Title, TitleProps } from '@osuresearch/ui';
 
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 

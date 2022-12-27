@@ -1,9 +1,9 @@
-import { Box, Group, Stack, StackProps } from '@osuresearch/ui';
 import { CollectionChildren, Orientation } from '@react-types/shared';
 import React, { Key, forwardRef, useEffect, useRef, useState } from 'react';
 import { AriaTabListProps, useTabList } from 'react-aria';
 import { useTabListState } from 'react-stately';
 
+import { Box, Group, Stack, StackProps } from '@osuresearch/ui';
 import { cx } from '@osuresearch/ui/theme';
 import { DefaultProps } from '@osuresearch/ui/types';
 

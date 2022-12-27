@@ -1,6 +1,7 @@
-import { Paper } from '@osuresearch/ui';
 import { Story } from '@storybook/react';
 import React from 'react';
+
+import { Paper } from '@osuresearch/ui';
 
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
