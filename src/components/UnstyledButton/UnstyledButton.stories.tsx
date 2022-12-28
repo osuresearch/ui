@@ -1,6 +1,7 @@
-import { Avatar, Group, Stack, Text, UnstyledButton, UnstyledButtonProps } from '@osuresearch/ui';
 import { Story } from '@storybook/react';
 import React from 'react';
+
+import { Avatar, Group, Stack, Text, UnstyledButton, UnstyledButtonProps } from '@osuresearch/ui';
 
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
@@ -15,7 +16,7 @@ const Template: Story<UnstyledButtonProps> = (args) => (
 
 export const Overview = Template.bind({});
 
-export const ContactCard = RUIComponentStory(() => (
+export const ContactCard = RUIComponentStory((args) => (
   <UnstyledButton>
     <Group>
       <Avatar size={40} name="Chase McManning" username="mcmanning.1" />
@@ -29,7 +30,7 @@ export const ContactCard = RUIComponentStory(() => (
   </UnstyledButton>
 ));
 
-export const PolymorphAsAnchor = RUIComponentStory(() => (
+export const PolymorphAsAnchor = RUIComponentStory((args) => (
   <UnstyledButton component="a" href="https://example.com">
     Polymorphic button
   </UnstyledButton>
