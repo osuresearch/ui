@@ -2,21 +2,7 @@ import type { CSSProperties, ForwardRefExoticComponent } from 'react';
 
 import { Color } from '../theme';
 
-export const spacing = [
-  0,
-  1,
-  'xxs',
-  'xs',
-  'sm',
-  'md',
-  'lg',
-  'xl',
-  'xxl',
-  // TODO: Specials? (auto, full, etc)
-
-  'auto',
-  'full'
-] as const;
+export const spacing = [0, 1, 'xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl', 'auto', 'full'] as const;
 
 export const negativeSpacing = ['-xxs', '-xs', '-sm', '-md', '-lg', '-xl', '-xxl'] as const;
 
@@ -60,6 +46,28 @@ export type Justify = typeof justify[number];
 // Prop that can either be a single value or an object mapping
 // theme sizes to values for responsive changes
 
+export const fontProps = ['fs', 'fw', 'ff'] as const;
+export const colorProps = ['c', 'bgc'] as const;
+export const sizeProps = ['w', 'h', 'miw', 'mih', 'maw', 'mah'] as const;
+export const paddingProps = ['p', 'px', 'py', 'pl', 'pt', 'pr', 'pb'] as const;
+export const marginProps = ['m', 'mx', 'my', 'ml', 'mt', 'mr', 'mb'] as const;
+
+export type FontPropName = typeof fontProps[number];
+export type ColorPropName = typeof colorProps[number];
+export type SizePropName = typeof sizeProps[number];
+export type PaddingPropName = typeof paddingProps[number];
+export type MarginPropName = typeof marginProps[number];
+
+export const styleSystemPropNames = [
+  ...fontProps,
+  ...colorProps,
+  ...sizeProps,
+  ...paddingProps,
+  ...marginProps
+] as const;
+
+export type StyleSystemPropName = typeof styleSystemPropNames[number];
+
 /**
  * A type of prop that can either be the given type OR
  * an object containing values per breakpoint.
@@ -92,6 +100,11 @@ export type ColorProp = Color | Partial<Record<Theme, Color>>;
 // but without having to manually map them all...
 
 export interface StyleSystemProps {
+  // Common overrides
+  id?: string;
+  className?: string;
+  style?: CSSProperties;
+
   // Margin
   m?: ResponsiveProp<Spacing>;
   my?: ResponsiveProp<Spacing>;
@@ -155,12 +168,10 @@ export interface StyleSystemProps {
 
 // export type ClassNames<StylesNames extends string> = Partial<Record<StylesNames, string>>;
 
-export interface DefaultProps<StylesNames extends string = never> extends StyleSystemProps {
-  id?: string;
-  className?: string;
-  style?: CSSProperties;
-  // classNames?: ClassNames<StylesNames>;
-}
+/**
+ * Component props that define both an implementation of the Style System
+ */
+export type DefaultProps = StyleSystemProps;
 
 /**
  * Wrap a component to support a polymorphic DOM element
