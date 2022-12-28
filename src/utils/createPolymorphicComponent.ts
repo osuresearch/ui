@@ -20,14 +20,13 @@ type InheritedProps<C extends ElementType, Props = Record<string, never>> = Exte
   Props
 >;
 
-export type PolymorphicRef<C> = C extends React.ElementType
+type PolymorphicRef<C> = C extends React.ElementType
   ? React.ComponentPropsWithRef<C>['ref']
   : never;
 
-export type PolymorphicComponentProps<C, Props = Record<string, never>> =
-  C extends React.ElementType
-    ? InheritedProps<C, Props & ComponentProp<C>> & { ref?: PolymorphicRef<C> }
-    : Props & { component: React.ElementType };
+type PolymorphicComponentProps<C, Props = Record<string, never>> = C extends React.ElementType
+  ? InheritedProps<C, Props & ComponentProp<C>> & { ref?: PolymorphicRef<C> }
+  : Props & { component: React.ElementType };
 
 /**
  * Wrap a component to support a polymorphic DOM element
