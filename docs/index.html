@@ -37,12 +37,7 @@
         /* eslint-enable object-shorthand */
       })
     );
-  };</script><style>/*
-  Going old school with this CSS.
-  Stick to BEM for components that aren't StorybookJS
-*/
-
-#root {
+  };</script><style>#root {
   height: calc(100vh - 48px - 38px);
 }
 #root > div {
@@ -58,6 +53,30 @@
 
 .sidebar-header {
   display: none;
+}
+
+.container.sidebar-container::after {
+  content: '';
+  position: absolute;
+  top: -200px;
+  left: -200px;
+  width: 400px;
+  height: 400px;
+  background: #a7b1b7;
+  opacity: 0.4;
+  filter: blur(150px);
+}
+
+.dark .container.sidebar-container::after {
+  content: '';
+  position: absolute;
+  top: -200px;
+  left: -200px;
+  width: 400px;
+  height: 400px;
+  background: #212325;
+  opacity: 0.4;
+  filter: blur(150px);
 }
 
 .sidebar-subheading > button > span:first-of-type,
@@ -114,6 +133,19 @@
   font-size: 16px;
   padding: 6px;
   padding-left: 10px;
+}
+
+.dark .rui-link--root {
+  color: #f6f7f8;
+}
+
+.dark .rui-link--story,
+.dark .rui-link--component {
+  color: #dfe3e5;
+}
+
+.dark .os-content button {
+  color: #f6f7f8;
 }
 
 .sidebar-item svg {
@@ -174,11 +206,15 @@
   justify-content: space-between;
   align-items: center;
 
-  background: #0e1115;
+  background: #4a0513;
   color: #afb2b5;
   font-size: 14px;
   padding: 8px 20px;
   height: 48px;
+}
+
+.dark .rui-footer {
+  background: #0e1115;
 }
 
 .rui-footer a {
@@ -187,6 +223,14 @@
 
 .rui-footer__a11y {
   max-width: 70%;
+}
+
+.rui-footer__contributors:before {
+  content: '💖';
+}
+
+.dark .rui-footer__contributors:before {
+  content: '✨';
 }
 
 @media screen and (max-width: 970px) {
@@ -203,7 +247,7 @@
       </svg>Check us out on GitHub
     </a>
   </div></script><script id="rui-footer-template" type="text/html"><div class="rui-footer__contributors">
-    💖 <a href="https://github.com/McManning" target="_blank">Chase McManning</a>
+    <a href="https://github.com/McManning" target="_blank">Chase McManning</a>
     and <a href="https://github.com/osuresearch/ui/graphs/contributors" target="_blank">contributors</a>.
   </div>
 
@@ -239,4 +283,4 @@
           
       
           
-            window['DOCS_MODE'] = false;</script><script src="runtime~main.c7b6fd0295ac1531607b.manager.bundle.js"></script><script src="vendors~main.c2c75095e4060b3b698b.manager.bundle.js"></script><script src="main.2fc2b11b024a9ccd472d.manager.bundle.js"></script></body></html>
+            window['DOCS_MODE'] = false;</script><script src="runtime~main.c7b6fd0295ac1531607b.manager.bundle.js"></script><script src="vendors~main.c2c75095e4060b3b698b.manager.bundle.js"></script><script src="main.d581a122235da78b5dee.manager.bundle.js"></script></body></html>

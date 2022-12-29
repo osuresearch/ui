@@ -338,7 +338,109 @@
         /* eslint-enable object-shorthand */
       })
     );
-  };</script><style>#root[hidden],
+  };</script><style>.sbdocs.sbdocs-wrapper {
+  padding: 24px 32px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.sbdocs-wrapper::before {
+  content: '';
+  position: absolute;
+  top: -200px;
+  right: -200px;
+  width: 400px;
+  height: 400px;
+  background: #ba0c2f;
+  opacity: 0.025;
+  filter: blur(150px);
+}
+
+/* Doesn't work - sometimes the iframe doesn't get a 'dark' class update
+  since it relies on Emotion, so we can't rely on it to be consistent.
+*/
+[data-theme="dark"]
+.sbdocs.sbdocs-wrapper::before {
+  background: #26686d;
+  opacity: 0.15;
+}
+
+/* Extra margin to fit the right hand table of contents */
+.sbdocs.sbdocs-content {
+  margin-right: 200px;
+}
+
+/* Right hand table of contents */
+.sbdocs.rui-toc {
+  --toc-color: var(--rui-dark-shade);
+  --toc-indicator-color: #efefef;
+  --toc-indicator-color--active: var(--rui-primary);
+
+  left: initial;
+  right: 0;
+  width: 200px;
+  padding-top: 0;
+}
+
+/* Back to top button */
+.sbdocs.rui-top {
+  --toc-button-color: var(--rui-primary);
+  --toc-button-color--hover: #ffffff;
+  --toc-button-color--active: #ffffff;
+  --toc-button-background: #ffffff;
+  --toc-button-background--hover: var(--rui-dark-shade);
+  --toc-button-background--active: var(--rui-dark-shade);
+
+  left: initial;
+  right: 20px;
+  bottom: 20px;
+  border: 2px solid var(--rui-primary);
+  background: white;
+}
+
+.sbdocs.rui-top:hover {
+  border-color: var(--rui-dark-shade);
+}
+
+.sbdocs.sbdocs-a {
+  text-decoration: underline;
+}
+
+.sbdocs.sbdocs-a:hover {
+  background-color: var(--rui-light-shade);
+}
+
+[data-theme="dark"]
+.sbdocs.sbdocs-a {
+  color: var(--rui-link);
+}
+
+.sbdocs.sbdocs-table tr:nth-of-type(2n) {
+  background-color: var(--rui-light);
+}
+
+.sbdocs.rui-toc {
+  --toc-color: var(--rui-light-contrast);
+  --toc-indicator-color: var(--rui-dimmed);
+  --toc-indicator-color--active: var(--rui-primary);
+}
+
+.sbdocs.sbdocs-toc__header {
+  color: var(--rui-light-contrast);
+}
+
+.sbdocs.rui-toc a {
+  color: var(--rui-light-contrast) !important;
+}
+
+/* Import line at the top of doc pages */
+.rui-import {
+  display: inline-block;
+  color: var(--rui-dark);
+
+  font-size: var(--rui-text-sm);
+  margin-bottom: var(--rui-spacing-md);
+}</style><style>#root[hidden],
       #docs-root[hidden] {
         display: none !important;
       }</style></head><body><div class="sb-preparing-story sb-wrapper"><div class="sb-loader"></div></div><div class="sb-preparing-docs sb-wrapper"><div class="sb-previewBlock"><div class="sb-previewBlock_header"><div class="sb-previewBlock_icon"></div><div class="sb-previewBlock_icon"></div><div class="sb-previewBlock_icon"></div><div class="sb-previewBlock_icon"></div></div><div class="sb-previewBlock_body"><div class="sb-loader"></div></div></div><table aria-hidden="true" class="sb-argstableBlock"><thead class="sb-argstableBlock-head"><tr><th><span>Name</span></th><th><span>Description</span></th><th><span>Default</span></th><th><span>Control</span></th></tr></thead><tbody class="sb-argstableBlock-body"><tr><td><span>propertyName</span><span title="Required">*</span></td><td><div><span>This is a short description</span></div><div class="sb-argstableBlock-summary"><div><span class="sb-argstableBlock-code">summary</span></div></div></td><td><div><span class="sb-argstableBlock-code">defaultValue</span></div></td><td><button>Set string</button></td></tr><tr><td><span>propertyName</span><span>*</span></td><td><div><span>This is a short description</span></div><div class="sb-argstableBlock-summary"><div><span class="sb-argstableBlock-code">summary</span></div></div></td><td><div><span class="sb-argstableBlock-code">defaultValue</span></div></td><td><button>Set string</button></td></tr><tr><td><span>propertyName</span><span>*</span></td><td><div><span>This is a short description</span></div><div class="sb-argstableBlock-summary"><div><span class="sb-argstableBlock-code">summary</span></div></div></td><td><div><span class="sb-argstableBlock-code">defaultValue</span></div></td><td><button>Set string</button></td></tr></tbody></table></div><div class="sb-nopreview sb-wrapper"><div class="sb-nopreview_main"><h1 class="sb-nopreview_heading sb-heading">No Preview</h1><p>Sorry, but you either have no stories or none are selected somehow.</p><ul><li>Please check the Storybook config.</li><li>Try reloading the page.</li></ul><p>If the problem persists, check the browser console, or the terminal you've run Storybook from.</p></div></div><div class="sb-errordisplay sb-wrapper"><pre id="error-message" class="sb-heading"></pre><pre class="sb-errordisplay_code"><code id="error-stack"></code></pre></div><div id="root"></div><div id="docs-root"></div><script>window['CONFIG_TYPE'] = "PRODUCTION";
@@ -361,4 +463,4 @@
           
       
           
-            window['STORIES'] = [{"titlePrefix":"","directory":".","files":"@(src|docs)/**/*.stories.mdx","importPathMatcher":"^\\.[\\\\/](?:(src|docs)(?:\\/(?!\\.)(?:(?:(?!(?:^|\\/)\\.).)*?)\\/|\\/|$)(?!\\.)(?=.)[^/]*?\\.stories\\.mdx)$"},{"titlePrefix":"","directory":".","files":"@(src|docs)/**/*.stories.@(js|jsx|ts|tsx)","importPathMatcher":"^\\.[\\\\/](?:(src|docs)(?:\\/(?!\\.)(?:(?:(?!(?:^|\\/)\\.).)*?)\\/|\\/|$)(?!\\.)(?=.)[^/]*?\\.stories\\.(js|jsx|ts|tsx))$"}];</script><script src="runtime~main.bb69daa8.iframe.bundle.js"></script><script src="vendors~main.7fd2c215.iframe.bundle.js"></script><script src="main.79c9d27e.iframe.bundle.js"></script></body></html>
+            window['STORIES'] = [{"titlePrefix":"","directory":".","files":"@(src|docs)/**/*.stories.mdx","importPathMatcher":"^\\.[\\\\/](?:(src|docs)(?:\\/(?!\\.)(?:(?:(?!(?:^|\\/)\\.).)*?)\\/|\\/|$)(?!\\.)(?=.)[^/]*?\\.stories\\.mdx)$"},{"titlePrefix":"","directory":".","files":"@(src|docs)/**/*.stories.@(js|jsx|ts|tsx)","importPathMatcher":"^\\.[\\\\/](?:(src|docs)(?:\\/(?!\\.)(?:(?:(?!(?:^|\\/)\\.).)*?)\\/|\\/|$)(?!\\.)(?=.)[^/]*?\\.stories\\.(js|jsx|ts|tsx))$"}];</script><script src="runtime~main.2874179a.iframe.bundle.js"></script><script src="vendors~main.eb0a7478.iframe.bundle.js"></script><script src="main.a87cbc1d.iframe.bundle.js"></script></body></html>
