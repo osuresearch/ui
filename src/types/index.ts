@@ -3,41 +3,33 @@ import type { CSSProperties, ForwardRefExoticComponent } from 'react';
 import { Color } from '../theme';
 
 export const spacing = [0, 1, 'xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl', 'auto', 'full'] as const;
+export type PositiveSpacing = typeof spacing[number];
 
 export const negativeSpacing = ['-xxs', '-xs', '-sm', '-md', '-lg', '-xl', '-xxl'] as const;
-
 export type Spacing = typeof spacing[number] | typeof negativeSpacing[number];
-export type PositiveSpacing = typeof spacing[number];
 
 export const theme = ['light', 'dark'] as const;
 export type Theme = typeof theme[number];
 
 export const size = ['xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'] as const;
-
 export type ThemeSize = typeof size[number];
 
 export const fontSize = ['xs', 'sm', 'base', 'md', 'lg', 'xl', 'xxl'] as const;
-
 export type FontSize = typeof fontSize[number];
 
 export const fontWeight = ['normal', 'semibold', 'bold', 'extrabold', 'black'] as const;
-
 export type FontWeight = typeof fontWeight[number];
 
 export const fontFamily = ['sans', 'serif', 'mono'] as const;
-
 export type FontFamily = typeof fontFamily[number];
 
 export const screenSize = ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'] as const;
-
 export type ScreenSize = typeof screenSize[number];
 
 export const align = ['start', 'end', 'stretch', 'center'] as const;
-
 export type Align = typeof align[number];
 
 export const justify = ['start', 'end', 'center', 'apart'] as const;
-
 export type Justify = typeof justify[number];
 
 // export type NumberSize = ThemeSize | number;
@@ -98,6 +90,16 @@ export type ColorProp = Color | Partial<Record<Theme, Color>>;
 
 // TODO: I want support for all the tailwind palette colors
 // but without having to manually map them all...
+
+/**
+ * Object that maps values to responsive breakpoints
+ */
+export type ResponsiveMap<T> = Record<ScreenSize, T>;
+
+/**
+ * Object that maps values to themes
+ */
+export type ThemeMap<T> = Record<Theme, T>;
 
 export interface StyleSystemProps {
   // Common overrides
