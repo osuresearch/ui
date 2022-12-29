@@ -1,0 +1,92 @@
+
+<Meta title="Getting Started / Polymorphic Components" />
+
+# Polymorphic Components
+
+Some of our components (Button, Text, etc) accept special `as` prop that lets you
+change the root element. This guide will explain how to correctly use them
+with HTML elements, custom components, and TypeScript.
+
+If you are not familiar with the concept of polymorphic components, check out this tutorial from freeCodeCamp:
+
+[Intermediate TypeScript and React Handbook - How to Build Strongly Typed Polymorphic Components](https://www.freecodecamp.org/news/build-strongly-typed-polymorphic-components-with-react-and-typescript/)
+
+## As HTML elements
+
+You can use any HTML element in the `as` prop, for example the `a` tag will render an anchor:
+
+```tsx
+import { Button } from '@osuresearch/ui';
+
+function Demo() {
+  return (
+    <Button as="a" href="https://research.osu.edu">
+      Go to research.osu.edu
+    </Button>
+  );
+}
+```
+
+## As other components
+
+You can also polymorph into any other component. For example, with the `react-router-dom` Link:
+
+```tsx
+import { Link } from 'react-router-dom';
+import { Button } from '@osuresearch/ui';
+
+function Demo() {
+  return (
+    <Button component={Link} to="/react-router">
+      React router link
+    </Button>
+  );
+}
+```
+
+## TypeScript edge cases
+
+In some cases, polymorphic components cannot infer ref and events correctly. When this happens, specify the component type in the generic form:
+
+```tsx
+<Box<'button'>
+  as="button"
+  onClick={(event) => console.log(event)}
+  ref={(node) => console.log(node)}
+  {...args}
+>
+  button element
+</Box>
+```
+
+## Create your own polymorphic components
+
+TODO!
+
+The tl;dr is:
+
+```tsx
+type ButtonProps = {
+  children: React.ReactNode;
+}
+
+export const Button = polymorphicForwardRef<ButtonProps>(({ as, children, ...props }, ref) => {
+  const state = useListState({
+    ...props,
+    selectionMode: 'multiple'
+  });
+
+  const listRef = useRef<HTMLElement>(null);
+  const { gridProps } = useGridList(props, state, listRef);
+
+  const { styleSystemProps, otherProps } = useStyleSystem(props);
+
+  const Component = as || 'ul';
+
+  return (
+    <Component ref={ref} {...props}>
+      {children}
+    </Component>
+  );
+});
+```
