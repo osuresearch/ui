@@ -5,35 +5,42 @@ import { AltBoxProps, AltBox as Component } from '@osuresearch/ui';
 
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
-export default RUIComponentMeta<AltBoxProps>('Utilities', Component)
+export default RUIComponentMeta<AltBoxProps<'div'>>('Utilities', Component)
   .withStyleSystemProps()
   .withBadge('experimental');
 
-export const Overview = RUIComponentStory<AltBoxProps>((args) => (
+export const Overview = RUIComponentStory<AltBoxProps<'div'>>((args) => (
   <Component {...args}>Lorem ipsum blah blah blah</Component>
 ));
 
-export const AsParagraph = RUIComponentStory<AltBoxProps>((args) => (
+export const AsParagraph = RUIComponentStory<AltBoxProps<'p'>>((args) => (
   <Component as="p" {...args}>
     Lorem ipsum blah blah blah
   </Component>
 ));
 
-export const AsAnchor = RUIComponentStory<AltBoxProps>((args) => (
+export const AsAnchor = RUIComponentStory<AltBoxProps<'a'>>((args) => (
   <Component as="a" href="https://research.osu.edu" {...args}>
     research.osu.edu
   </Component>
 ));
 
-export const WithRef = RUIComponentStory<AltBoxProps>((args) => {
+export const WithRef = RUIComponentStory<AltBoxProps<'a'>>((args) => {
   const ref = useRef<HTMLAnchorElement>(null);
 
   return (
-    <Component ref={ref} as="a" href="https://research.osu.edu" {...args}>
+    <Component ref={ref} as="a" href="https://research.osu.edu" referrerPolicy="" {...args}>
       research.osu.edu
     </Component>
   );
 });
+
+export const WithMultipleChildren = RUIComponentStory<AltBoxProps<'a'>>((args) => (
+  <Component as="a" href="https://research.osu.edu" {...args}>
+    <div>Foo</div>
+    <div>Bar</div>
+  </Component>
+));
 
 function useFocusableElementRef(ref: React.RefObject<FocusableElement>) {
   // noop
@@ -46,7 +53,7 @@ type MyComponentProps = {
 
 const MyComponent = ({ children }: MyComponentProps) => <div>{children}</div>;
 
-export const AsCustom = RUIComponentStory<AltBoxProps>((args) => (
+export const AsCustom = RUIComponentStory<AltBoxProps<typeof MyComponent>>((args) => (
   <Component as={MyComponent} {...args}>
     research.osu.edu
   </Component>
@@ -56,7 +63,7 @@ const MyComponentWithRef = forwardRef<HTMLTableElement, MyComponentProps>(({ chi
   <table ref={ref}>{children}</table>
 ));
 
-export const AsCustomWithRef = RUIComponentStory<AltBoxProps>((args) => {
+export const AsCustomWithRef = RUIComponentStory<AltBoxProps<typeof MyComponentWithRef>>((args) => {
   const ref = useRef<HTMLTableElement>(null);
 
   return (
@@ -66,7 +73,7 @@ export const AsCustomWithRef = RUIComponentStory<AltBoxProps>((args) => {
   );
 });
 
-export const WithSlot = RUIComponentStory<AltBoxProps>((args) => {
+export const WithSlot = RUIComponentStory<AltBoxProps<'a'>>((args) => {
   const ref = useRef<HTMLDivElement>(null);
 
   useFocusableElementRef(ref);
@@ -78,7 +85,17 @@ export const WithSlot = RUIComponentStory<AltBoxProps>((args) => {
   );
 });
 
-export const WithFocusableRef = RUIComponentStory<AltBoxProps>((args) => {
+export const WithInvalidRef = RUIComponentStory<AltBoxProps<'a'>>((args) => {
+  const ref = useRef<HTMLButtonElement>(null);
+
+  return (
+    <Component ref={ref} as="a" href="https://research.osu.edu" {...args}>
+      research.osu.edu
+    </Component>
+  );
+});
+
+export const WithFocusableRef = RUIComponentStory<AltBoxProps<'a'>>((args) => {
   const ref = useRef<FocusableElement>(null);
   const ref2 = useRef<React.ElementType<FocusableElement>>(null);
   const ref3 = useRef<HTMLAnchorElement>(null);
@@ -100,7 +117,7 @@ export const WithFocusableRef = RUIComponentStory<AltBoxProps>((args) => {
   );
 });
 
-export const WithSlotToFunc = RUIComponentStory<AltBoxProps>((args) => {
+export const WithSlotToFunc = RUIComponentStory<AltBoxProps<'a'>>((args) => {
   const ref = useRef<HTMLDivElement>(null);
 
   useFocusableElementRef(ref);
@@ -115,11 +132,12 @@ export const WithSlotToFunc = RUIComponentStory<AltBoxProps>((args) => {
 // Test case that shows my implementation still needs the same
 // Typescript workaround that Mantine has implemented
 // Ref: https://mantine.dev/guides/polymorphic/#with-typescript
-export const WithOnClick = RUIComponentStory<AltBoxProps>((args) => (
+export const WithOnClick = RUIComponentStory<AltBoxProps<'button'>>((args) => (
   <Component<'button'>
     as="button"
     onClick={(event) => console.log(event)}
     ref={(node) => console.log(node)}
+    {...args}
   >
     button element
   </Component>
