@@ -1,45 +1,38 @@
 import { forwardRef } from 'react';
 
-// Part of this implementation was built off of:
-// https://www.freecodecamp.org/news/build-strongly-typed-polymorphic-components-with-react-and-typescript/
-
-/**
- * An element that can be the `as` prop of a polymorphic component.
- *
- * This supports all intrinsic elements, class components, and function components.
- */
-type AllowableElementType = React.ElementType;
-
-type AsProp<C extends AllowableElementType> = {
-  /**
-   * An element that can be the target of a polymorphic component.
-   *
-   * This supports all intrinsic elements, class components, and functional components.
-   */
+export type AsProp<C extends React.ElementType> = {
   as?: C;
 };
 
-type PolymorphicComponentProp<C extends AllowableElementType, Props = Record<string, never>> =
-  React.PropsWithChildren<Props & AsProp<C>> &
-    Omit<React.ComponentPropsWithoutRef<C>, keyof (AsProp<C> & Props)>;
+export type PropsToOmit<C extends React.ElementType, P> = keyof (AsProp<C> & P);
 
-type PolymorphicComponentPropWithRef<
-  C extends AllowableElementType,
+export type PolymorphicComponentProp<C extends React.ElementType, Props = Record<string, never>> =
+  Props &
+    AsProp<C> & { children?: any } & Omit<React.ComponentPropsWithoutRef<C>, PropsToOmit<C, Props>>;
+// TODO: Extract children proptype from Props instead of using 'any' above.
+// Some components, such as Unstyled List, use a narrower type for children.
+
+export type PolymorphicComponentPropWithRef<
+  C extends React.ElementType,
   Props = Record<string, never>
 > = PolymorphicComponentProp<C, Props> & { ref?: PolymorphicRef<C> };
 
-export type PolymorphicRef<C extends AllowableElementType> = React.ComponentPropsWithRef<C>['ref'];
+export type PolymorphicRef<C extends React.ElementType> = React.ComponentPropsWithRef<C>['ref'];
+
+export type PolymorphicForwardRefRenderFunction<P> = <C extends React.ElementType, R extends P>(
+  props: PolymorphicComponentPropWithRef<C, R>,
+  ref?: PolymorphicRef<C>
+) => React.ReactElement | null;
 
 /**
- * Factory to build a component with polymorph props and ref forwarding.
+ * Construct a forward ref component that can be used as a polymorphic.
+ *
+ * This ensures type safety when matching the `as` prop against the polymorphic element
  */
-export function createPolymorphicComponentV2<DefaultType extends AllowableElementType, Props>(
-  component: <ElementType extends AllowableElementType>(
-    props: PolymorphicComponentProp<ElementType, Props>,
-    ref: PolymorphicRef<ElementType>
-  ) => React.ReactNode
+export function polymorphicForwardRef<P = Record<string, never>>(
+  render: PolymorphicForwardRefRenderFunction<P>
 ) {
-  return forwardRef(component as any) as <ElementType extends AllowableElementType = DefaultType>(
-    props: PolymorphicComponentPropWithRef<ElementType, Props>
+  return forwardRef(render) as <C extends React.ElementType = 'div'>(
+    props: PolymorphicComponentPropWithRef<C, P>
   ) => React.ReactElement | null;
 }
