@@ -1,73 +1,97 @@
+import { CollectionChildren, Node } from '@react-types/shared';
 import React, { Children, ReactNode, cloneElement, forwardRef, isValidElement } from 'react';
 
-import { Box } from '@osuresearch/ui';
-import { cx } from '@osuresearch/ui/theme/utils';
-import { DefaultProps, ForwardRefWithStaticComponents } from '@osuresearch/ui/types';
+import { StyleSystemProps } from '../../types';
+import { Box } from '../Box';
+import { Group } from '../Group';
+import { Text } from '../Text';
+import { Title } from '../Title';
+import { RowSlotProps, UnstyledList } from '../UnstyledList';
+import { VisuallyHidden } from '../VisuallyHidden';
 
-import { Question, QuestionProps } from './Question/Question';
+export type InterviewVariant = 'qa' | 'storytelling';
 
-export type InterviewVariant = 'default' | 'storytelling';
-
-export type InterviewProps = DefaultProps & {
+export type InterviewProps = StyleSystemProps & {
   variant?: InterviewVariant;
 
-  /** `<Interview.Question>` components only */
-  children: ReactNode;
+  /** <Item /> components only */
+  children: CollectionChildren<any>;
 };
 
-type InterviewComponent = ForwardRefWithStaticComponents<
-  InterviewProps,
-  {
-    Question: typeof Question;
-  }
->;
+type InterviewItemProps = RowSlotProps & {
+  variant: InterviewVariant;
+};
 
-// ForwardRefExoticComponent<DefaultProps<never> & { variant?: InterviewVariant | undefined; children: ReactNode; } & RefAttributes<HTMLDivElement>>
-//
+function InterviewItem({ item, checkboxProps, variant, ...rowProps }: InterviewItemProps) {
+  // boxes should be 32x32, 1.25rem 400 weight
+  // Except 1.25rem isn't in their font scale.
+
+  // TODO: Using min-w-[32px] because there's no matching min-w tailwind class.
+  // Need to add them for each breakpoint manually for now... :\
+  return (
+    <div {...rowProps}>
+      <Group gap={0} mb="md">
+        {variant === 'qa' && (
+          <Text component="div" fs="md" bgc="dimmed-tint" mr="md" miw="xl" ta="center">
+            Q
+          </Text>
+        )}
+
+        <VisuallyHidden>Question</VisuallyHidden>
+        <Text component="div" fs={variant === 'qa' ? 'md' : 'base'} fw="bold">
+          {item.textValue}
+        </Text>
+      </Group>
+      <Group gap={0}>
+        {variant === 'qa' && (
+          <Text component="div" fs="md" bgc="dimmed-tint" mr="md" miw="xl" ta="center">
+            A
+          </Text>
+        )}
+        <VisuallyHidden>Answer</VisuallyHidden>
+        <Text component="div" mb="xxl">
+          {item.rendered}
+        </Text>
+      </Group>
+    </div>
+  );
+}
 
 /**
+ * An article written in list format.
+ *
  * A transcript of an interview that includes both the interviewer’s direct
  * questions and the interviewee’s response in written format.
  *
- * ### Accessibility
+ * ## Accessibility
  *
  * - "Q" and "A" labels are expanded to "Question" and "Answer" for screen readers
+ *
+ * ## Differences from BUX
+ *
+ * - Bux uses a semantic H2 element but with a style that is not
+ * documented in their headings guide. It uses `var(--ifm-h2-font-size)`
+ * with a 1.5rem versus their `.bux-h2` class that uses a 1.75rem. I've
+ * decided to go with the visual representation of the H3 while not
+ * using any header element semantically, as there's no guarantee where
+ * a Interview would live within the DOM.
+ * - Bux also uses 1.25rem for the Q & A label font, but that is not
+ * in their list of font size tokens. So we changed it to the nearest match.
+ * - We went with `ul` semantics instead of `dl` to use the unstyled list component.
+ * This may change if we are required to use `dl`, but it seems in their use case
+ * and sample code, there is no semantic difference.
  */
-export const Interview: InterviewComponent = forwardRef<HTMLDListElement, InterviewProps>(
-  ({ variant = 'default', children, ...props }, ref) => {
-    const items = Children.map(children, (child, index) => {
-      if (!isValidElement<QuestionProps>(child)) {
-        return child;
-      }
-
-      return cloneElement(child, {
-        variant,
-        index
-      });
-    });
-
-    return (
-      <Box ref={ref} component="dl" {...props}>
-        {items}
-      </Box>
-    );
-  }
-) as any;
-
-// Order matters! Subcomponent display names need to be declared
-// in the parent and *after* the parent's display name, otherwise
-// Storybook can't map them correctly for ArgsTables.
-Interview.displayName = 'Interview';
-Question.displayName = 'Interview.Question';
-
-Interview.Question = Question;
-
-// _Interview.displayName = 'Interview';
-
-// export const Interview = _Interview as typeof _Interview & {
-//   Question: typeof Question;
-// }
-
-// Interview.Question = Question;
-
-// Question.displayName = 'Interview.Question';
+export const Interview = forwardRef<HTMLOListElement, InterviewProps>(
+  ({ variant = 'qa', children, ...props }, ref) => (
+    <UnstyledList
+      as="ul"
+      ref={ref}
+      {...props}
+      selectionMode="none" // Interviews are not interactive
+      disabledBehavior="all"
+      rowSlot={(props) => <InterviewItem variant={variant} {...props} />}
+    >
+      {children}
+    </UnstyledList>
+  )
+);
