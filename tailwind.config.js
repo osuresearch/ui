@@ -184,6 +184,16 @@ module.exports = {
       black: 'var(--rui-font-black)',
     },
     extend: {
+      minWidth: {
+        // Tailwind doesn't come with spacing breakpoint min-width values
+        'xxs': 'var(--rui-spacing-xxs)',
+        'xs': 'var(--rui-spacing-xs)',
+        'sm': 'var(--rui-spacing-sm)',
+        'md': 'var(--rui-spacing-md)',
+        'lg': 'var(--rui-spacing-lg)',
+        'xl': 'var(--rui-spacing-xl)',
+        'xxl': 'var(--rui-spacing-xxl)',
+      },
       boxShadow: {
         // It's typical that we use a thick line under certain
         // content that match either the primary color or some
