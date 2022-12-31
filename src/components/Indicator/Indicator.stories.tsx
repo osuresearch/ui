@@ -1,6 +1,7 @@
-import { Indicator, IndicatorProps } from '@osuresearch/ui';
 import { Story } from '@storybook/react';
 import React from 'react';
+
+import { Indicator, IndicatorProps } from '@osuresearch/ui';
 
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 

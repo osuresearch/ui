@@ -16,17 +16,17 @@
     "baseUrl": ".",
     "paths": {
       "@osuresearch/ui": [
-        "./src"
+        "./src/*"
       ],
-      "@osuresearch/ui/*": [
+      "~/.storybook/*": [
+        "./.storybook/*",
+      ],
+      "~/*": [
         "./src/*"
       ],
       "*": [
         "@types/*"
       ],
-      "~/*": [
-        "./*"
-      ]
     },
   },
   "include": [

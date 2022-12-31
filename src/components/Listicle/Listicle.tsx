@@ -1,8 +1,7 @@
-import { CollectionChildren, Node } from '@react-types/shared';
-import React, { Children, ReactNode, cloneElement, forwardRef, isValidElement } from 'react';
+import { CollectionChildren } from '@react-types/shared';
+import React, { forwardRef } from 'react';
 
 import { StyleSystemProps } from '../../types';
-import { Box } from '../Box';
 import { Group } from '../Group';
 import { Text } from '../Text';
 import { Title } from '../Title';
@@ -21,15 +20,10 @@ type ListicleItemProps = RowSlotProps & {
   variant: ListicleVariant;
 };
 
-const itemClasses = {
-  root: 'rui-flex text-h3 rui-items-center',
-  counter: 'rui-bg-dimmed-tint rui-py-4 rui-w-32 rui-mr-16 rui-text-center'
-};
-
 function ListicleItem({ item, checkboxProps, variant, ...rowProps }: ListicleItemProps) {
   return (
     <div {...rowProps}>
-      <Title component="div" level={3}>
+      <Title as="div" level={3}>
         <Group gap={0}>
           {variant === 'ordered' && (
             <Text bgc="dimmed-tint" py="xxs" mr="md" w="xl" ta="center">
@@ -39,7 +33,7 @@ function ListicleItem({ item, checkboxProps, variant, ...rowProps }: ListicleIte
           {item.textValue}
         </Group>
       </Title>
-      <Text component="div" mb="xxl" ml={variant === 'ordered' ? 'xxl' : 0}>
+      <Text as="div" mb="xxl" ml={variant === 'ordered' ? 'xxl' : 0}>
         {item.rendered}
       </Text>
     </div>
@@ -68,7 +62,7 @@ export const Listicle = forwardRef<HTMLOListElement, ListicleProps>(
       disabledBehavior="all"
       rowSlot={(props) => <ListicleItem variant={variant} {...props} />}
     >
-      {children}
+      {children as any}
     </UnstyledList>
   )
 );

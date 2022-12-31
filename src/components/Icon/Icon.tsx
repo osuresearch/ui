@@ -3,15 +3,15 @@ import React, { forwardRef } from 'react';
 
 // Note that we use the offline version of iconify
 // for apps that can't call out to a public CDN
-import { loadAllIcons } from '../../icons';
-import { cx } from '../../theme/utils';
-import { DefaultProps } from '../../types';
-import { createPolymorphicComponent } from '../../utils/createPolymorphicComponent';
+import { loadAllIcons } from '~/icons';
+import { StyleSystemProps } from '~/types';
+import { cx, polymorphicForwardRef } from '~/utils';
+
 import { Box } from '../Box';
 
 loadAllIcons();
 
-export type IconProps = DefaultProps & {
+export type IconProps = StyleSystemProps & {
   name: string; // TODO: keyof loaded icons somehow?
   rotate?: 0 | 90 | 180 | 270;
   flip?: 'horizontal' | 'vertical';
@@ -19,10 +19,17 @@ export type IconProps = DefaultProps & {
   inline?: boolean;
 };
 
-export const _Icon = forwardRef<HTMLElement, IconProps & { component: any }>(
-  ({ className, component = 'i', name, inline, flip, rotate = 0, size = 16, ...props }, ref) => (
+/**
+ * Icon documentation
+ *
+ * ## Accessibility
+ *
+ * TODO: Notes about purpose / meaning / understandability / etc
+ */
+export const Icon = polymorphicForwardRef<'i', IconProps>(
+  ({ as, className, name, inline, flip, rotate = 0, size = 16, ...props }, ref) => (
     <Box
-      component={component}
+      as={as || 'i'}
       className={cx(
         {
           'rui-inline-block': inline
@@ -45,12 +52,3 @@ export const _Icon = forwardRef<HTMLElement, IconProps & { component: any }>(
     </Box>
   )
 );
-
-/**
- * Icon documentation
- *
- * ## Accessibility
- *
- * TODO: Notes about purpose / meaning / understandability / etc
- */
-export const Icon = createPolymorphicComponent<'span', IconProps>(_Icon);

@@ -1,11 +1,12 @@
-import { Box } from '@osuresearch/ui';
-import React, { forwardRef } from 'react';
+import React from 'react';
 
-import * as styles from '@osuresearch/ui/theme/utils';
-import { Align, DefaultProps, Justify, PositiveSpacing } from '@osuresearch/ui/types';
-import { createPolymorphicComponent } from '@osuresearch/ui/utils';
+import * as styles from '~/theme';
+import { Align, Justify, PositiveSpacing, StyleSystemProps } from '~/types';
+import { cx, polymorphicForwardRef } from '~/utils';
 
-export type GroupProps = DefaultProps & {
+import { Box } from '../Box';
+
+export type GroupProps = StyleSystemProps & {
   /** Define the spacing between elements */
   gap?: PositiveSpacing;
 
@@ -20,14 +21,30 @@ export type GroupProps = DefaultProps & {
   children: React.ReactNode;
 };
 
-export const _Group = forwardRef<HTMLDivElement, GroupProps & { component: any }>(
+/**
+ * Compose elements and components in a horizontal flex container
+ *
+ * ## Polymorphic Component
+ *  - You can use the `as` prop to change the root element for this component.
+ */
+export const Group = polymorphicForwardRef<'div', GroupProps>(
   (
-    { className, justify = 'start', gap = 'sm', align = 'start', grow = false, children, ...props },
+    {
+      as,
+      className,
+      justify = 'start',
+      gap = 'sm',
+      align = 'start',
+      grow = false,
+      children,
+      ...props
+    },
     ref
   ) => (
     <Box
+      as={as || 'div'}
       ref={ref}
-      className={styles.cx(
+      className={cx(
         'rui-flex',
         styles.justify(justify),
         styles.gap(gap),
@@ -45,8 +62,3 @@ export const _Group = forwardRef<HTMLDivElement, GroupProps & { component: any }
     </Box>
   )
 );
-
-/**
- * Compose elements and components in a horizontal flex container
- */
-export const Group = createPolymorphicComponent<'div', GroupProps>(_Group);

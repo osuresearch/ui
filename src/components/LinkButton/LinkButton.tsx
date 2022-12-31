@@ -1,23 +1,28 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 
-import { Box, Icon, UnstyledButton } from '@osuresearch/ui';
-import { cx } from '@osuresearch/ui/theme/utils';
-import { DefaultProps } from '@osuresearch/ui/types';
-import { createPolymorphicComponent } from '@osuresearch/ui/utils';
+import { StyleSystemProps } from '~/types';
+import { cx, polymorphicForwardRef } from '~/utils';
 
-export type LinkButtonProps = DefaultProps & {
+import { Icon } from '../Icon';
+import { UnstyledButton } from '../UnstyledButton';
+
+export type LinkButtonProps = StyleSystemProps & {
   children?: React.ReactNode;
 };
 
 /**
- * LinkButton documentation
+ * Link button / call to action button
  *
- * ### Accessibility
- * - a11y info (used aria tags, keyboard behaviour, etc)
+ * Wrap this within a `.group` parent to capture hover events on the parent.
+ *
+ * ### Polymorphic Component
+ *
+ * You can use the `as` prop to change the root element for this component.
  */
-export const _LinkButton = forwardRef<HTMLButtonElement, LinkButtonProps & { component: any }>(
-  ({ className, children, ...props }, ref) => (
+export const LinkButton = polymorphicForwardRef<'button', LinkButtonProps>(
+  ({ as, className, children, ...props }, ref) => (
     <UnstyledButton
+      as={as || 'button'}
       ref={ref}
       c="light-contrast"
       className={cx(
@@ -34,14 +39,3 @@ export const _LinkButton = forwardRef<HTMLButtonElement, LinkButtonProps & { com
     </UnstyledButton>
   )
 );
-
-/**
- * Link button / call to action button
- *
- * Wrap this within a `.group` parent to capture hover events on the parent.
- *
- * ### Polymorphic Component
- *
- * You can use `component` prop to change the root element for this component.
- */
-export const LinkButton = createPolymorphicComponent<'button', LinkButtonProps>(_LinkButton);

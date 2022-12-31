@@ -1,17 +1,11 @@
-import { Box } from '@osuresearch/ui';
-import React, { MouseEventHandler } from 'react';
+import React from 'react';
 
-import { cx } from '@osuresearch/ui/theme';
-import { DefaultProps } from '@osuresearch/ui/types';
+import { StyleSystemProps } from '~/types';
+import { cx, polymorphicForwardRef } from '~/utils';
 
-export type LinkProps = DefaultProps & {
-  href?: string;
+import { Box } from '../Box';
 
-  /**
-   * Optional handler for when the button is clicked
-   */
-  onClick?: MouseEventHandler<HTMLAnchorElement>;
-
+export type LinkProps = StyleSystemProps & {
   variant?: 'default' | 'white';
 
   children?: React.ReactNode;
@@ -20,7 +14,7 @@ export type LinkProps = DefaultProps & {
 /**
  * Display links with theme styles
  *
- * ### Accessibility
+ * ## Accessibility
  *
  * Your link should always describe where it will take users. Users tend to scan text
  * online, and elements that stand out (like links) grab attention.
@@ -31,42 +25,31 @@ export type LinkProps = DefaultProps & {
  * Links must have at least 4.5:1 contrast with the background (3:1 for large text)
  * to meet WCAG 2 Level AA.
  */
-export function Link({
-  href,
-  onClick,
-  variant = 'default',
-  className,
-  children,
-  ...props
-}: LinkProps) {
-  return (
+export const Link = polymorphicForwardRef<'a', LinkProps>(
+  ({ as, variant = 'default', className, children, ...props }) => (
     <Box
-      component="a"
-      href={href}
-      onClick={onClick}
+      as={as || 'a'}
       className={cx(
-        href
-          ? {
-              'rui-cursor-pointer': true,
-              'rui-border-b': true,
+        {
+          'rui-cursor-pointer': true,
+          'rui-border-b': true,
 
-              // Default theme
-              'rui-text-link rui-border-link': variant === 'default',
-              'hover:rui-text-light-contrast': variant === 'default',
-              'hover:rui-bg-light-shade hover:rui-border-light-contrast':
-                variant === 'default' || variant === 'white',
-              'visited:rui-text-visited visited:rui-border-visited': variant === 'default',
+          // Default theme
+          'rui-text-link rui-border-link': variant === 'default',
+          'hover:rui-text-light-contrast': variant === 'default',
+          'hover:rui-bg-light-shade hover:rui-border-light-contrast':
+            variant === 'default' || variant === 'white',
+          'visited:rui-text-visited visited:rui-border-visited': variant === 'default',
 
-              // White theme
-              'rui-text-white rui-border-white': variant === 'white',
-              'hover:rui-text-black hover:rui-border-white hover:rui-bg-white': variant === 'white'
-            }
-          : '',
+          // White theme
+          'rui-text-white rui-border-white': variant === 'white',
+          'hover:rui-text-black hover:rui-border-white hover:rui-bg-white': variant === 'white'
+        },
         className
       )}
       {...props}
     >
       {children}
     </Box>
-  );
-}
+  )
+);

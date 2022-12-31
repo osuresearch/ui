@@ -1,33 +1,28 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 
-import { cx } from '../../theme/utils';
-import { DefaultProps } from '../../types';
-import { createPolymorphicComponent } from '../../utils/createPolymorphicComponent';
-import { Box } from '../Box';
+import { StyleSystemProps } from '~/types';
+import { cx, polymorphicForwardRef } from '~/utils';
 
-export type TextProps = DefaultProps & {
+import { Box } from '..';
+
+export type TextProps = StyleSystemProps & {
   /** Text alignment */
   ta?: 'left' | 'right' | 'center';
 
   children: React.ReactNode;
 };
 
-const _Text = forwardRef<HTMLSpanElement, TextProps & { component: any }>(
-  (
-    {
-      component = 'span',
-      style,
-      className,
-      children,
-      ta = 'left',
-      c = 'light-contrast',
-      ...others
-    },
-    ref
-  ) => (
+/**
+ * Use the Text component to display text content while maintaining theme styles
+ *
+ * ## Polymorphic Component
+ *
+ * You can use `component` prop to change the root element for this component.
+ */
+export const Text = polymorphicForwardRef<'span', TextProps>(
+  ({ as, className, ta = 'left', c = 'light-contrast', children, ...props }, ref) => (
     <Box
-      style={style}
-      component={component}
+      as={as || 'span'}
       ref={ref}
       c={c}
       className={cx(
@@ -40,14 +35,9 @@ const _Text = forwardRef<HTMLSpanElement, TextProps & { component: any }>(
         },
         className
       )}
-      {...others}
+      {...props}
     >
       {children}
     </Box>
   )
 );
-
-/**
- * Use the Text component to display text content while maintaining theme styles
- */
-export const Text = createPolymorphicComponent<'span', TextProps>(_Text);

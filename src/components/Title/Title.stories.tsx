@@ -1,9 +1,9 @@
-import { Meta, Story } from '@storybook/react';
+import { Story } from '@storybook/react';
 import React from 'react';
 
-import { Title, TitleProps } from '@osuresearch/ui';
-
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
+
+import { Title, TitleProps } from './Title';
 
 export default RUIComponentMeta<TitleProps>('Components', Title)
   .withBadge('atom')
@@ -33,7 +33,7 @@ export const SansVariant = RUIComponentStory((args) => (
 ));
 
 export const Polymorphic = RUIComponentStory((args) => (
-  <Title component="div" level={1}>
+  <Title as="div" level={1}>
     This is a div styled as Heading 1
   </Title>
 ));

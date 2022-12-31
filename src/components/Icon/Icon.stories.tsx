@@ -1,6 +1,7 @@
-import { Icon as Component, IconProps } from '@osuresearch/ui';
 import { Story } from '@storybook/react';
 import React from 'react';
+
+import { Icon as Component, IconProps } from '@osuresearch/ui';
 
 import { RUIComponentMeta } from '~/.storybook/utils';
 

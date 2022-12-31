@@ -1,10 +1,11 @@
 import React, { CSSProperties, ReactNode, forwardRef } from 'react';
 
-import { cx } from '../../theme/utils';
+import { cx } from '~/utils';
+
 import { DefaultProps, ThemeSize } from '../../types';
 import { createPolymorphicComponent } from '../../utils/createPolymorphicComponent';
-import { Box } from '../Box';
 import { Icon } from '../Icon';
+import { LegacyBox } from '../LegacyBox';
 import { Stack } from '../Stack';
 import { Text } from '../Text/Text';
 
@@ -158,11 +159,11 @@ export const _Input = forwardRef<HTMLInputElement, InputProps>(
     }
 
     return (
-      <Box component={Stack} style={style} className={cx(className)}>
-        <Box component={labelElement} htmlFor={id} className={cx('flex', 'flex-row')}>
+      <LegacyBox component={Stack} style={style} className={cx(className)}>
+        <LegacyBox component={labelElement} htmlFor={id} className={cx('flex', 'flex-row')}>
           {label}
           {renderAsterisk && <Icon className="text-error pl-4" name="asterisk" size={8} />}
-        </Box>
+        </LegacyBox>
 
         {help && (
           <Text id={describedBy} c="dimmed" fs="sm">
@@ -170,7 +171,7 @@ export const _Input = forwardRef<HTMLInputElement, InputProps>(
           </Text>
         )}
 
-        <Box
+        <LegacyBox
           className={cx({
             'cursor-pointer': pointer,
             'border-2': variant === 'default',
@@ -180,7 +181,7 @@ export const _Input = forwardRef<HTMLInputElement, InputProps>(
         >
           {leftContent && <div className="absolute left-0 top-0">{leftContent}</div>}
 
-          <Box
+          <LegacyBox
             component="input"
             {...inputProps}
             ref={ref}
@@ -199,7 +200,7 @@ export const _Input = forwardRef<HTMLInputElement, InputProps>(
           />
 
           {rightContent && <div className="absolute right-0 top-0">{rightContent}</div>}
-        </Box>
+        </LegacyBox>
 
         {error && (
           <Text fs="sm" className={cx('flex', 'flex-row')}>
@@ -207,7 +208,7 @@ export const _Input = forwardRef<HTMLInputElement, InputProps>(
             {error}
           </Text>
         )}
-      </Box>
+      </LegacyBox>
     );
   }
 );

@@ -1,9 +1,13 @@
 import { Story } from '@storybook/react';
 import React from 'react';
 
-import { Avatar, Group, Stack, Text, UnstyledButton, UnstyledButtonProps } from '@osuresearch/ui';
-
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
+
+import { Avatar } from '../Avatar';
+import { Group } from '../Group';
+import { Stack } from '../Stack';
+import { Text } from '../Text';
+import { UnstyledButton, UnstyledButtonProps } from './UnstyledButton';
 
 export default RUIComponentMeta<UnstyledButtonProps>('Utilities', UnstyledButton)
   .withStyleSystemProps()
@@ -31,7 +35,7 @@ export const ContactCard = RUIComponentStory((args) => (
 ));
 
 export const PolymorphAsAnchor = RUIComponentStory((args) => (
-  <UnstyledButton component="a" href="https://example.com">
+  <UnstyledButton as="a" href="https://example.com">
     Polymorphic button
   </UnstyledButton>
 )).withDescription(`

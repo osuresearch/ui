@@ -1,17 +1,13 @@
-import React, { MouseEventHandler, forwardRef } from 'react';
+import React, { MouseEventHandler } from 'react';
 
-import { Box, Center, Group } from '@osuresearch/ui';
-import { cx } from '@osuresearch/ui/theme';
-import { createPolymorphicComponent } from '@osuresearch/ui/utils';
+import { cx } from '~/utils';
+import { polymorphicForwardRef } from '~/utils';
+
+import { Group } from '../Group';
 
 export type ButtonProps = {
   /** Alternate rendering styles */
   variant?: 'default' | 'outline';
-
-  /**
-   * Optional handler for when the button is clicked
-   */
-  onClick?: MouseEventHandler<HTMLButtonElement>;
 
   /**
    * Should the button listen to click events
@@ -33,13 +29,32 @@ export type ButtonProps = {
   rightSlot?: React.ReactNode;
 };
 
-export const _Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ disabled, onClick, small, variant = 'default', leftSlot, rightSlot, children }, ref) => (
+/**
+ * Buttons are used to initialize an action.
+ *
+ * The actions that buttons describe should be informative and concise.
+ * With few exceptions, button text should not wrap onto multiple lines.
+ *
+ * ### When to use a Button
+ *
+ * - Opening or closing a modal or dialog
+ * - Submitting data to the server
+ *
+ * ### When to consider something else
+ *
+ * - Navigating to a new page or view in your application
+ * - Navigating to different web page, e.g. external documentation
+ *
+ * ## Accessibility
+ *
+ * - Small buttons meet the minimum touch target of 44px for Success Criterion [2.5.5 Target Size (Level AAA)](https://www.w3.org/WAI/WCAG21/Understanding/target-size)
+ */
+export const Button = polymorphicForwardRef<'button', ButtonProps>(
+  ({ as, disabled, small, variant = 'default', leftSlot, rightSlot, children }, ref) => (
     <Group
-      component="button"
+      as={as || 'button'}
       ref={ref}
       type="button"
-      onClick={onClick}
       disabled={disabled}
       fw="semibold"
       justify="center"
@@ -80,25 +95,3 @@ export const _Button = forwardRef<HTMLButtonElement, ButtonProps>(
     </Group>
   )
 );
-
-/**
- * Buttons are used to initialize an action.
- *
- * The actions that buttons describe should be informative and concise.
- * With few exceptions, button text should not wrap onto multiple lines.
- *
- * ### When to use a Button
- *
- * - Opening or closing a modal or dialog
- * - Submitting data to the server
- *
- * ### When to consider something else
- *
- * - Navigating to a new page or view in your application
- * - Navigating to different web page, e.g. external documentation
- *
- * ### Accessibility
- *
- * - Small buttons meet the minimum touch target of 44px for Success Criterion [2.5.5 Target Size (Level AAA)](https://www.w3.org/WAI/WCAG21/Understanding/target-size)
- */
-export const Button = createPolymorphicComponent<'button', ButtonProps>(_Button);

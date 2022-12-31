@@ -1,11 +1,11 @@
 import React, { forwardRef } from 'react';
 
-import { cx } from '../../theme/utils';
-import { DefaultProps, ThemeSize } from '../../types';
-import { createPolymorphicComponent } from '../../utils/createPolymorphicComponent';
+import { StyleSystemProps, ThemeSize } from '~/types';
+import { cx, polymorphicForwardRef } from '~/utils';
+
 import { Box } from '../Box';
 
-export type PaperProps = DefaultProps & {
+export type PaperProps = StyleSystemProps & {
   variant?: 'default' | 'panel';
 
   shadow?: ThemeSize;
@@ -15,21 +15,25 @@ export type PaperProps = DefaultProps & {
   children: React.ReactNode;
 };
 
-const _Paper = forwardRef<HTMLDivElement, PaperProps>(
+/**
+ * Paper component renders white (or dark) backgrounds with shadow, border-radius and padding
+ */
+export const Paper = polymorphicForwardRef<'div', PaperProps>(
   (
     {
+      as,
       className,
       children,
       variant = 'default',
       shadow,
       rounded = 'sm',
       withBorder = false,
-      ...others
+      ...props
     },
     ref
   ) => (
     <Box
-      component="div"
+      as={as || 'div'}
       ref={ref}
       className={cx(
         {
@@ -62,14 +66,9 @@ const _Paper = forwardRef<HTMLDivElement, PaperProps>(
         },
         className
       )}
-      {...others}
+      {...props}
     >
       {children}
     </Box>
   )
 );
-
-/**
- * Paper component renders white (or dark) backgrounds with shadow, border-radius and padding
- */
-export const Paper = createPolymorphicComponent<'div', PaperProps>(_Paper);

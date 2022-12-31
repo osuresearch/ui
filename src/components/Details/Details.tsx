@@ -1,10 +1,14 @@
-import { Box, Group, Icon, Text } from '@osuresearch/ui';
 import React, { forwardRef } from 'react';
 
-import { cx } from '@osuresearch/ui/theme';
-import { DefaultProps } from '@osuresearch/ui/types';
+import { StyleSystemProps } from '~/types';
+import { cx } from '~/utils';
 
-export type DetailsProps = DefaultProps & {
+import { Box } from '../Box';
+import { Group } from '../Group';
+import { Icon } from '../Icon';
+import { Text } from '../Text';
+
+export type DetailsProps = StyleSystemProps & {
   summary: React.ReactNode;
   children: React.ReactNode;
 };
@@ -13,15 +17,15 @@ export type DetailsProps = DefaultProps & {
  * A native HTML disclosure widget in which information is visible only
  * when the widget is toggled into an open state.
  *
- * ### Accessibility
+ * ## Accessibility
  *
  * - Root is the semantic `<details>` element with the summary wrapped with `<summary>`
  */
 export const Details = forwardRef<HTMLDetailsElement, DetailsProps>(
   ({ summary, children, ...props }, ref) => (
     <Box
+      as="details"
       ref={ref}
-      component="details"
       className={cx(
         'rui-group',
         // 'open:ring',
@@ -31,7 +35,7 @@ export const Details = forwardRef<HTMLDetailsElement, DetailsProps>(
       {...props}
     >
       <Group
-        component="summary"
+        as="summary"
         fw="bold"
         p="md"
         gap="xs"

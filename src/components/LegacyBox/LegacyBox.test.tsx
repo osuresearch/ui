@@ -2,11 +2,11 @@ import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
-import { List } from './List';
+import { LegacyBox } from './index';
 
-describe('Tests for List component', () => {
+describe('Tests for Box component', () => {
   it('renders content', () => {
-    const { container } = render(<List>Foo bar</List>);
+    const { container } = render(<LegacyBox>Foo bar</LegacyBox>);
     expect(container.firstChild).toMatchSnapshot();
   });
 });

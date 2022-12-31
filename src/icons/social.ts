@@ -10,3 +10,4 @@ export * as tiktok from '@iconify/icons-bi/tiktok';
 export * as twitter from '@iconify/icons-bi/twitter';
 export * as vimeo from '@iconify/icons-bi/vimeo';
 export * as youtube from '@iconify/icons-bi/youtube';
+export * as github from '@iconify/icons-bi/github';

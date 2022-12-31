@@ -1,14 +1,22 @@
 import { forwardRef } from 'react';
 
 export type AsProp<C extends React.ElementType> = {
+  /**
+   * Change the root element of this component to either
+   * an intrinsic element or React component.
+   */
   as?: C;
 };
 
-export type PropsToOmit<C extends React.ElementType, P> = keyof (AsProp<C> & P);
+type PropsToOmit<C extends React.ElementType, P> = keyof (AsProp<C> & P);
 
 export type PolymorphicComponentProp<C extends React.ElementType, Props = Record<string, never>> =
-  Props &
-    AsProp<C> & { children?: any } & Omit<React.ComponentPropsWithoutRef<C>, PropsToOmit<C, Props>>;
+  Props & AsProp<C> & { children?: any } & React.ComponentPropsWithoutRef<C>;
+
+//    Omit<React.ComponentPropsWithoutRef<C>, PropsToOmit<C, Props>> &
+
+// omit is necessary to specify the lower level component..
+
 // TODO: Extract children proptype from Props instead of using 'any' above.
 // Some components, such as Unstyled List, use a narrower type for children.
 
@@ -27,12 +35,17 @@ export type PolymorphicForwardRefRenderFunction<P> = <C extends React.ElementTyp
 /**
  * Construct a forward ref component that can be used as a polymorphic.
  *
- * This ensures type safety when matching the `as` prop against the polymorphic element
+ * This ensures type safety when matching the `as` prop against the polymorphic element.
+ *
+ * The template parameter `T` ensures that TypeScript understands the default type when
+ * one is not specified - in order to validate properties on the underlying element.
+ *
+ * Your implementation MUST fallback to the same type as `T` when an `as` prop is not specified.
  */
-export function polymorphicForwardRef<P = Record<string, never>>(
+export function polymorphicForwardRef<T extends React.ElementType, P = Record<string, never>>(
   render: PolymorphicForwardRefRenderFunction<P>
 ) {
-  return forwardRef(render) as <C extends React.ElementType = 'div'>(
+  return forwardRef(render) as <C extends React.ElementType = T>(
     props: PolymorphicComponentPropWithRef<C, P>
   ) => React.ReactElement | null;
 }

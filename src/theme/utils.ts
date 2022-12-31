@@ -1,5 +1,3 @@
-import classNames from 'classnames';
-
 // TODO: Swap to clsx
 // Utilities for handling styles
 import {
@@ -41,10 +39,6 @@ const fontWeightClasses = {
 } as Record<FontWeight, string>;
 
 // Theme utilities
-
-export function cx(...args: classNames.ArgumentArray): string {
-  return classNames(args);
-}
 
 export function fs(size?: FontSize): string {
   if (!size) return '';

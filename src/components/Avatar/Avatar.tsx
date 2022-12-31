@@ -1,9 +1,9 @@
 import React, { forwardRef } from 'react';
 
-import { cx } from '../../theme/utils';
+import { cx } from '~/utils';
+
 import { ColorProp, ThemeSize } from '../../types';
 import { createPolymorphicComponent } from '../../utils/createPolymorphicComponent';
-import { Text } from '../Text/Text';
 
 export type AvatarProps = {
   /**

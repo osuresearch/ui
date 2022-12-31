@@ -1,19 +1,24 @@
 import React, { forwardRef } from 'react';
 
-import { Box, DefaultProps, Group, Indicator } from '@osuresearch/ui';
-import { Color, bc, cx } from '@osuresearch/ui/theme';
-import { createPolymorphicComponent } from '@osuresearch/ui/utils';
+import { Color, bc } from '~/theme';
+import { StyleSystemProps } from '~/types';
+import { cx } from '~/utils';
+import { polymorphicForwardRef } from '~/utils';
 
-export type BadgeProps = DefaultProps & {
+import { Box } from '../Box';
+import { Group } from '../Group';
+import { Indicator } from '../Indicator';
+
+export type BadgeProps = StyleSystemProps & {
   variant?: 'solid' | 'indicator';
 
   children?: React.ReactNode;
 };
 
-const _Badge = forwardRef<HTMLDivElement, BadgeProps & { component: any }>(
-  ({ component = 'div', c = 'info', variant = 'solid', children, ...props }, ref) => (
+export const Badge = polymorphicForwardRef<'div', BadgeProps>(
+  ({ as, c = 'info', variant = 'solid', children, ...props }, ref) => (
     <Box
-      component={component}
+      as={as || 'div'}
       // Solid variant uses c as the background color.
       // Outline/dot use c as the border and
       bgc={variant === 'solid' ? `${c}-tint` : undefined}
@@ -21,7 +26,7 @@ const _Badge = forwardRef<HTMLDivElement, BadgeProps & { component: any }>(
       fs="sm"
       fw="semibold"
       h="lg"
-      align="top"
+      // align="top"
       className={cx('rui-border rui-rounded-full rui-inline-block', {
         [bc(c as Color)]: variant === 'solid'
       })}
@@ -34,5 +39,3 @@ const _Badge = forwardRef<HTMLDivElement, BadgeProps & { component: any }>(
     </Box>
   )
 );
-
-export const Badge = createPolymorphicComponent<'div', BadgeProps>(_Badge);

@@ -1,8 +1,11 @@
 import React, { Children, forwardRef } from 'react';
 
-import { DefaultProps, Group, Icon, Text } from '@osuresearch/ui';
+import { StyleSystemProps } from '~/types';
 
-export type BreadcrumbsProps = DefaultProps & {
+import { Group } from '../Group';
+import { Icon } from '../Icon';
+
+export type BreadcrumbsProps = StyleSystemProps & {
   /**
    * Children to separate with breadcrumb levels
    */
@@ -13,7 +16,7 @@ export type BreadcrumbsProps = DefaultProps & {
  * A navigation component that indicates the user's current location
  * within the site navigation hierarchy.
  *
- * ### Accessibility
+ * ## Accessibility
  * - Applies `aria-label="Breadcrumbs"` to the root element
  */
 export const Breadcrumbs = forwardRef<HTMLDivElement, BreadcrumbsProps>(

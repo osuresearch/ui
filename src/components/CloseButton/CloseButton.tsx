@@ -1,10 +1,11 @@
-import { IconButton } from '@osuresearch/ui';
 import React, { MouseEventHandler, forwardRef } from 'react';
 
-import { cx } from '../../theme/utils';
-import { DefaultProps } from '../../types';
+import { StyleSystemProps } from '~/types';
+import { cx } from '~/utils';
 
-export type CloseButtonProps = DefaultProps & {
+import { IconButton } from '../IconButton';
+
+export type CloseButtonProps = StyleSystemProps & {
   /**
    * Handler for when the button is clicked
    */
@@ -16,7 +17,7 @@ export type CloseButtonProps = DefaultProps & {
 /**
  * Button to close or dismiss another component.
  *
- * ### Accessibility
+ * ## Accessibility
  *
  * * `aria-label` will always be set on the button by either the user supplied `label`
  *  prop or the default message of "Close"

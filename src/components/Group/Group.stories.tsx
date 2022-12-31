@@ -1,7 +1,9 @@
-import { Button, Group as GroupComponent, GroupProps } from '@osuresearch/ui';
 import React from 'react';
 
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
+
+import { Button } from '../Button';
+import { Group as GroupComponent, GroupProps } from './Group';
 
 export default RUIComponentMeta<GroupProps>('Layout', GroupComponent)
   .withStyleSystemProps()

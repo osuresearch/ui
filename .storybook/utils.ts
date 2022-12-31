@@ -1,7 +1,8 @@
 
-import { colors } from '@osuresearch/ui/theme';
-import { ArgTypes, Meta, Story, StoryContext } from '@storybook/react';
+import { ArgTypes, Meta, Story } from '@storybook/react';
 import { fontFamily, fontSize, fontWeight, spacing } from '../src/types';
+import React from 'react';
+import { colors } from '../src/theme';
 
 export type RUIBadge = 'beta' | 'stable' | 'deprecated' | 'experimental' | 'atom' | 'molecule';
 
@@ -32,7 +33,7 @@ export type RUIMeta<T> = Meta<T> & {
  */
 export function RUIComponentMeta<T>(
   category: string,
-  component: React.FunctionComponent<T>
+  component: React.ComponentType<T>
 ): RUIMeta<T> {
 
   return {

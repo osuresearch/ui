@@ -3,8 +3,9 @@ import React, { useRef } from 'react';
 import { useTab } from 'react-aria';
 import { TabListState } from 'react-stately';
 
-import { Box, Ring } from '@osuresearch/ui';
-import { cx } from '@osuresearch/ui/theme';
+import { cx } from '~/utils';
+
+import { Box } from '../Box';
 
 export type TabProps = {
   item: Node<HTMLDivElement>;

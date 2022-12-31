@@ -1,7 +1,6 @@
-import { Box } from '@osuresearch/ui';
 import React, { forwardRef } from 'react';
 
-import { cx } from '@osuresearch/ui/theme';
+import { Box } from '../Box';
 
 export type CenterProps = {
   children: React.ReactNode;
@@ -11,7 +10,7 @@ export type CenterProps = {
  * Vertically center content
  */
 export const Center = forwardRef<HTMLDivElement, CenterProps>(({ children }, ref) => (
-  <Box ref={ref} className={cx('rui-inline-flex', 'rui-items-center', 'rui-justify-center')}>
+  <Box ref={ref} className="rui-inline-flex rui-items-center rui-justify-center">
     {children}
   </Box>
 ));

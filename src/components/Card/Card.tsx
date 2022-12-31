@@ -1,19 +1,18 @@
 import React, { forwardRef } from 'react';
 
-import {
-  Box,
-  DefaultProps,
-  Group,
-  Icon,
-  LinkButton,
-  Paper,
-  Stack,
-  Text,
-  Title
-} from '@osuresearch/ui';
-import { cx } from '@osuresearch/ui/theme/utils';
+import { StyleSystemProps } from '~/types';
+import { cx } from '~/utils';
 
-export type CardProps = DefaultProps & {
+import { Box } from '../Box';
+import { Group } from '../Group';
+import { Icon } from '../Icon';
+import { LinkButton } from '../LinkButton';
+import { Paper } from '../Paper';
+import { Stack } from '../Stack';
+import { Text } from '../Text';
+import { Title } from '../Title';
+
+export type CardProps = StyleSystemProps & {
   variant: 'default' | 'panel' | 'storytelling';
 
   /** Taxonomy text above the title */
@@ -67,7 +66,7 @@ export type CardProps = DefaultProps & {
  * - Cards resemble physical cards.
  * - Cards allow for a flexible layout.
  *
- * ### Accessibility
+ * ## Accessibility
  *
  * Determine whether or not your image is decorative or informative.
  * If informative, provide alternative text that conveys its purpose or meaning
@@ -94,7 +93,7 @@ export const Card = forwardRef<HTMLAnchorElement, CardProps>(
     ref
   ) => (
     <Box
-      component="a"
+      as="a"
       ref={ref}
       style={{ maxWidth: 420, ...style }}
       className={cx('rui-block rui-group', className)}
@@ -116,7 +115,7 @@ export const Card = forwardRef<HTMLAnchorElement, CardProps>(
 
           {linkedHeadline && (
             <LinkButton
-              component="a"
+              as="a"
               href={href}
               mt="sm"
               fw="bold"
@@ -142,7 +141,7 @@ export const Card = forwardRef<HTMLAnchorElement, CardProps>(
           <Text className="rui-text-h4">{children}</Text>
 
           {!linkedHeadline && callToAction && (
-            <LinkButton component="a" href={href} mt="sm">
+            <LinkButton as="a" href={href} mt="sm">
               {callToAction}
             </LinkButton>
           )}

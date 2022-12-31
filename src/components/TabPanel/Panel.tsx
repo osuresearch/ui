@@ -1,7 +1,8 @@
-import { Paper } from '@osuresearch/ui';
 import React, { useRef } from 'react';
 import { AriaTabPanelProps, useTabPanel } from 'react-aria';
 import { TabListState } from 'react-stately';
+
+import { Paper } from '~/components/Paper';
 
 export type PanelProps = AriaTabPanelProps & {
   state: TabListState<HTMLDivElement>;

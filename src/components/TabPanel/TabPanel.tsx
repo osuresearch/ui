@@ -3,14 +3,16 @@ import React, { Key, forwardRef, useEffect, useRef, useState } from 'react';
 import { AriaTabListProps, useTabList } from 'react-aria';
 import { useTabListState } from 'react-stately';
 
-import { Box, Group, Stack, StackProps } from '@osuresearch/ui';
-import { cx } from '@osuresearch/ui/theme';
-import { DefaultProps } from '@osuresearch/ui/types';
+import { StyleSystemProps } from '~/types';
+import { cx } from '~/utils';
 
+import { Box } from '../Box';
+import { Group } from '../Group';
+import { Stack } from '../Stack';
 import { Panel } from './Panel';
 import { Tab } from './Tab';
 
-export type TabPanelProps = DefaultProps & {
+export type TabPanelProps = StyleSystemProps & {
   // AriaTabListProps re-declared to load into Storybook
   // TODO: Don't do this.
   // See: https://storybook.js.org/docs/react/configure/typescript#mainjs-configuration
@@ -105,7 +107,7 @@ function TabPanelImpl(props: AriaTabListProps<HTMLDivElement>) {
  * A TabPanel is a tabbed interface component where each tab is associated
  * with a panel containing information related to that tab.
  *
- * ### Accessibility
+ * ## Accessibility
  * - Pressing the arrow keys while focus is on a tab will switch selection to the adjacent tab in that direction
  * - Pressing `Space` or `Enter` will activate the selected tab
  * - `Home` will move focus to the first tab

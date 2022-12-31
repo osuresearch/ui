@@ -1,5 +1,6 @@
-import { HashLink as Component, HashLinkProps, Title } from '@osuresearch/ui';
 import React from 'react';
+
+import { HashLink as Component, HashLinkProps, Title } from '@osuresearch/ui';
 
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 

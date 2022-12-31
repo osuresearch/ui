@@ -172,6 +172,8 @@ export interface StyleSystemProps {
 
 /**
  * Component props that define both an implementation of the Style System
+ *
+ * @deprecated - Replace with StyleSystemProps
  */
 export type DefaultProps = StyleSystemProps;
 

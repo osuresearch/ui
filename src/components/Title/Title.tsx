@@ -1,8 +1,9 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 
-import { Box, FontFamily, FontWeight } from '@osuresearch/ui';
-import { cx } from '@osuresearch/ui/theme';
-import { createPolymorphicComponent } from '@osuresearch/ui/utils';
+import { FontFamily, FontWeight } from '~/types';
+import { polymorphicForwardRef } from '~/utils';
+
+import { Box } from '../Box';
 
 export type TitleProps = {
   /**
@@ -27,10 +28,31 @@ const fw: FontWeight[] = ['black', 'extrabold', 'semibold', 'semibold'];
 // Font family per heading level
 const ff: FontFamily[] = ['serif', 'sans', 'sans', 'sans'];
 
-const _Title = forwardRef<HTMLHeadingElement, TitleProps & { component: any }>(
-  ({ component, level, variant, children }, ref) => (
+/**
+ * H1 through H4 heading levels.
+ *
+ * ## Accessibility
+ *
+ * - TODO
+ *
+ * ## Polymorphic Component
+ *
+ * You can use the `as` prop to change the root element for this component.
+ * If omitted, the root element will use `h1` through `h4` depending on the
+ * specified `level`.
+ *
+ * Use polymorphics when you need to display content as a header, but without
+ * using the semantic header elements that may cause problems for screen readers.
+ *
+ * ## Responsive
+ *
+ * - Title font sizes will shrink for smaller screens
+ */
+export const Title = polymorphicForwardRef<'h1', TitleProps>(
+  ({ as, level, variant, children }, ref) => (
     <Box
-      component={component ? component : `h${level}`}
+      ref={ref}
+      as={as ? as : `h${level}`}
       c="light-contrast"
       // Sans variant forces sans for all levels.
       ff={variant === 'sans' ? 'sans' : ff[level - 1]}
@@ -43,24 +65,3 @@ const _Title = forwardRef<HTMLHeadingElement, TitleProps & { component: any }>(
     </Box>
   )
 );
-
-/**
- * H1 through H3 heading levels.
- *
- * TODO: Responsive sizes. See:
- *  https://bux.osu.edu/typography/headings
- *
- * ### Accessibility
- *
- * - TODO
- *
- * ### Polymorphic Component
- *
- * You can use `component` prop to change the root element for this component.
- * If omitted, the root element will use `h1` through `h3` depending on the
- * specified `level`.
- *
- * Use polymorphics when you need to display content as a header, but without
- * using the semantic header elements that may cause problems for screen readers.
- */
-export const Title = createPolymorphicComponent<'h1', TitleProps>(_Title);

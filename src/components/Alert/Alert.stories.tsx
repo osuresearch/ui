@@ -1,6 +1,7 @@
-import { Alert, AlertProps } from '@osuresearch/ui';
 import { Story } from '@storybook/react';
 import React from 'react';
+
+import { Alert, AlertProps } from '@osuresearch/ui';
 
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 

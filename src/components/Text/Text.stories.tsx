@@ -1,10 +1,9 @@
 import { Story } from '@storybook/react';
 import React from 'react';
 
-import { Paper } from '@osuresearch/ui';
-
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
+import { Paper } from '../Paper';
 import { Text, TextProps } from './Text';
 
 export default RUIComponentMeta<TextProps>('Components', Text)

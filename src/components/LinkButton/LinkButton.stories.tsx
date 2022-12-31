@@ -13,8 +13,8 @@ export const Overview = RUIComponentStory<LinkButtonProps>((args) => (
   <LinkButton {...args}>Call to Action</LinkButton>
 ));
 
-export const PolymorphicAnchor = RUIComponentStory<LinkButtonProps>((args) => (
-  <LinkButton component="a" href="https://example.com">
+export const Polymorphic = RUIComponentStory<LinkButtonProps>((args) => (
+  <LinkButton as="a" href="https://example.com">
     Go to Example
   </LinkButton>
 ));

@@ -1,5 +1,6 @@
-import { Group, Stack, Text } from '@osuresearch/ui';
 import React from 'react';
+
+import { Group, Stack, Text } from '@osuresearch/ui';
 
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 

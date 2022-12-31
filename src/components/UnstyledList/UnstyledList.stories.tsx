@@ -3,25 +3,36 @@ import React, { Key, useRef, useState } from 'react';
 import { useCheckbox } from 'react-aria';
 import { useToggleState } from 'react-stately';
 
-import {
-  Box,
-  CheckboxSlotProps,
-  UnstyledList as Component,
-  Group,
-  Item,
-  RowSlotProps,
-  Text,
-  UnstyledListProps
-} from '@osuresearch/ui';
-
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
+
+import { Box } from '../Box';
+import { Group } from '../Group';
+import { Item } from '../Item';
+import { Text } from '../Text';
+import { UnstyledList as Component, RowSlotProps, UnstyledListProps } from './UnstyledList';
 
 export default RUIComponentMeta<UnstyledListProps>('Utilities', Component).withBadge(
   'experimental'
 );
 
+const SimpleRowSlot = ({ item, checkboxProps, ...rowProps }: RowSlotProps) => {
+  const ref = useRef<HTMLInputElement>(null);
+  const state = useToggleState(checkboxProps);
+
+  const { inputProps } = useCheckbox(checkboxProps, state, ref);
+
+  return (
+    <Box p="xs" {...rowProps}>
+      <Group align="center">
+        <input {...inputProps} ref={ref} />
+        <Text>{item.rendered}</Text>
+      </Group>
+    </Box>
+  );
+};
+
 export const Overview = RUIComponentStory<UnstyledListProps>((args) => (
-  <Component {...args} aria-label="List with selection" selectionMode="multiple">
+  <Component {...args} aria-label="Simple list" selectionMode="none">
     <Item title="Take your next step toward becoming a Buckeye">
       Fisher first day of classes Brutus home to world-class faculty prepare our students to enter
       their careers as thought leaders flow of ideas Marion reflecting our world&apos;s medley of
@@ -67,24 +78,28 @@ const Template = RUIComponentStory<UnstyledListProps>((args) => (
 export const SingleSelection = RUIComponentStory(Template, {
   selectionMode: 'single',
   selectionBehavior: 'replace',
-  defaultSelectedKeys: ['vk']
+  defaultSelectedKeys: ['vk'],
+  rowSlot: SimpleRowSlot
 });
 
 export const MultipleSelection = RUIComponentStory(Template, {
   selectionMode: 'multiple',
-  defaultSelectedKeys: ['dx11', 'dx12']
+  defaultSelectedKeys: ['dx11', 'dx12'],
+  rowSlot: SimpleRowSlot
 });
 
 export const DisallowEmptySelection = RUIComponentStory(Template, {
   selectionMode: 'multiple',
   defaultSelectedKeys: ['vk'],
-  disallowEmptySelection: true
+  disallowEmptySelection: true,
+  rowSlot: SimpleRowSlot
 });
 
 export const DisabledRows = RUIComponentStory(Template, {
   selectionMode: 'single',
   selectionBehavior: 'replace',
-  disabledKeys: ['ogl', 'dx11']
+  disabledKeys: ['ogl', 'dx11'],
+  rowSlot: SimpleRowSlot
 });
 
 export const Controlled = RUIComponentStory<UnstyledListProps>((args) => {
@@ -115,6 +130,7 @@ export const Controlled = RUIComponentStory<UnstyledListProps>((args) => {
         items={rows}
         selectedKeys={selectedKeys}
         onSelectionChange={setSelectedKeys}
+        rowSlot={SimpleRowSlot}
         {...args}
       >
         {(item: Row) => <Item>{item.name}</Item>}
@@ -136,18 +152,9 @@ const [selectedKeys, setSelectedKeys] = useState<'all' | Set<Key>>(
 \`\`\`
 `);
 
-export const CheckboxSlot = RUIComponentStory<UnstyledListProps>((args) => {
-  const SimpleCheckboxSlot = (props: CheckboxSlotProps) => {
-    const ref = useRef<HTMLInputElement>(null);
-    const state = useToggleState(props.ariaCheckboxProps);
-
-    const { inputProps } = useCheckbox(props.ariaCheckboxProps, state, ref);
-
-    return <input {...inputProps} ref={ref} />;
-  };
-
-  return (
-    <Component aria-label="Graphics API" {...args} checkboxSlot={SimpleCheckboxSlot}>
+export const RowSlot = RUIComponentStory<UnstyledListProps>(
+  (args) => (
+    <Component aria-label="Graphics API" {...args} rowSlot={SimpleRowSlot}>
       <Item key="dx11">DirectX 11</Item>
       <Item key="dx12">DirectX 12</Item>
       <Item key="ogl">OpenGL</Item>
@@ -155,37 +162,11 @@ export const CheckboxSlot = RUIComponentStory<UnstyledListProps>((args) => {
       <Item key="metal">Metal</Item>
       <Item key="vk">Vulkan</Item>
     </Component>
-  );
-});
+  ),
+  { selectionMode: 'multiple' }
+).withDescription(`
 
-const SimpleRowSlot = ({ item, checkboxProps, ...rowProps }: RowSlotProps) => {
-  const ref = useRef<HTMLInputElement>(null);
-  const state = useToggleState(checkboxProps);
-
-  const { inputProps } = useCheckbox(checkboxProps, state, ref);
-
-  return (
-    <Box p="sm" {...rowProps}>
-      <Group align="center">
-        <input {...inputProps} ref={ref} />
-        <Text>{item.rendered}</Text>
-      </Group>
-    </Box>
-  );
-};
-
-export const RowSlot = RUIComponentStory<UnstyledListProps>((args) => (
-  <Component aria-label="Graphics API" {...args} rowSlot={SimpleRowSlot}>
-    <Item key="dx11">DirectX 11</Item>
-    <Item key="dx12">DirectX 12</Item>
-    <Item key="ogl">OpenGL</Item>
-    <Item key="ogles">OpenGL ES</Item>
-    <Item key="metal">Metal</Item>
-    <Item key="vk">Vulkan</Item>
-  </Component>
-)).withDescription(`
-
-The following simple slot component is used for rendering each row:
+The following simple slot component is used for rendering interactive rows for these stories:
 
 \`\`\`tsx
 const SimpleRowSlot = ({ item, checkboxProps, ...rowProps }: RowSlotProps) => {
@@ -195,7 +176,7 @@ const SimpleRowSlot = ({ item, checkboxProps, ...rowProps }: RowSlotProps) => {
   const { inputProps } = useCheckbox(checkboxProps, state, ref);
 
   return (
-    <Box p="sm" {...rowProps}>
+    <Box p="xs" {...rowProps}>
       <Group align="center">
         <input {...inputProps} ref={ref} />
         <Text>{item.rendered}</Text>

@@ -1,9 +1,7 @@
 import React from 'react';
 
-import { spacingValueToClass } from '@osuresearch/ui';
-
-import { cx } from '../../theme/utils';
-import { PositiveSpacing, Spacing } from '../../types';
+import { PositiveSpacing } from '~/types';
+import { cx, spacingValueToClass } from '~/utils';
 
 export type SpaceProps = {
   h?: PositiveSpacing;

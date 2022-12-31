@@ -1,15 +1,17 @@
-import React, { Key, useState } from 'react';
-
-import { TabPanel as Component, Item, TabPanelProps, Text } from '@osuresearch/ui';
+import React, { useState } from 'react';
 
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
-export default RUIComponentMeta<TabPanelProps>('Components', Component)
+import { Item } from '../Item';
+import { Text } from '../Text';
+import { TabPanel, TabPanelProps } from './TabPanel';
+
+export default RUIComponentMeta<TabPanelProps>('Components', TabPanel)
   .withStyleSystemProps()
   .withBadge('experimental');
 
 export const Overview = RUIComponentStory<TabPanelProps>((args) => (
-  <Component aria-label="Profiles of blah blah blah">
+  <TabPanel aria-label="Profiles of blah blah blah">
     <Item key="Glenn" title="John Glenn">
       Tbdbitl land grant institution bringing together ideas and disciplines to create bold, new
       connections our strengths are an authentic and distinctive combination of qualities reflective
@@ -29,12 +31,12 @@ export const Overview = RUIComponentStory<TabPanelProps>((args) => (
       Research Center THE Byrd Polar and Climate Research Center founded in 1870 passionate students
       innovative researchers.
     </Item>
-  </Component>
+  </TabPanel>
 ));
 
 export const Disabled = RUIComponentStory<TabPanelProps>(
   (args) => (
-    <Component aria-label="Profiles of blah blah blah">
+    <TabPanel aria-label="Profiles of blah blah blah">
       <Item key="Glenn" title="John Glenn">
         Tbdbitl land grant institution bringing
       </Item>
@@ -44,7 +46,7 @@ export const Disabled = RUIComponentStory<TabPanelProps>(
       <Item key="Griffin" title="Archie Griffin">
         The Ohio State University bringing together ideas and disciplines
       </Item>
-    </Component>
+    </TabPanel>
   ),
   {
     isDisabled: true
@@ -57,7 +59,7 @@ export const Controlled = RUIComponentStory<TabPanelProps>((args) => {
   return (
     <>
       <Text>Selected time period: {timePeriod}</Text>
-      <Component
+      <TabPanel
         aria-label="Mesozoic time periods"
         selectedKey={timePeriod}
         onSelectionChange={setTimePeriod}
@@ -73,7 +75,7 @@ export const Controlled = RUIComponentStory<TabPanelProps>((args) => {
           The Cretaceous is the longest period of the Mesozoic, spanning from 145 million to 66
           years ago.
         </Item>
-      </Component>
+      </TabPanel>
     </>
   );
 }).withDescription(`

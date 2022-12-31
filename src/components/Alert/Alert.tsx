@@ -1,7 +1,12 @@
-import { CloseButton, Group, Icon, Stack, Text } from '@osuresearch/ui';
 import React, { forwardRef, useState } from 'react';
 
-import { Color } from '@osuresearch/ui/theme';
+import { Color } from '~/theme';
+
+import { CloseButton } from '../CloseButton';
+import { Group } from '../Group';
+import { Icon } from '../Icon';
+import { Stack } from '../Stack';
+import { Text } from '../Text';
 
 export type AlertProps = {
   variant: 'success' | 'info' | 'warning' | 'error';
@@ -14,7 +19,7 @@ export type AlertProps = {
 /**
  * Attract user attention with important static message
  *
- * ### Accessibility
+ * ## Accessibility
  * - Root element is `role="alert"`
  * - Dismiss button is labeled with "Dismiss this alert"
  */

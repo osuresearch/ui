@@ -1,11 +1,9 @@
-import { CollectionChildren, Node } from '@react-types/shared';
-import React, { Children, ReactNode, cloneElement, forwardRef, isValidElement } from 'react';
+import { CollectionChildren } from '@react-types/shared';
+import React, { forwardRef } from 'react';
 
 import { StyleSystemProps } from '../../types';
-import { Box } from '../Box';
 import { Group } from '../Group';
 import { Text } from '../Text';
-import { Title } from '../Title';
 import { RowSlotProps, UnstyledList } from '../UnstyledList';
 import { VisuallyHidden } from '../VisuallyHidden';
 
@@ -32,24 +30,24 @@ function InterviewItem({ item, checkboxProps, variant, ...rowProps }: InterviewI
     <div {...rowProps}>
       <Group gap={0} mb="md">
         {variant === 'qa' && (
-          <Text component="div" fs="md" bgc="dimmed-tint" mr="md" miw="xl" ta="center">
+          <Text as="div" fs="md" bgc="dimmed-tint" mr="md" miw="xl" ta="center">
             Q
           </Text>
         )}
 
         <VisuallyHidden>Question</VisuallyHidden>
-        <Text component="div" fs={variant === 'qa' ? 'md' : 'base'} fw="bold">
+        <Text as="div" fs={variant === 'qa' ? 'md' : 'base'} fw="bold">
           {item.textValue}
         </Text>
       </Group>
       <Group gap={0}>
         {variant === 'qa' && (
-          <Text component="div" fs="md" bgc="dimmed-tint" mr="md" miw="xl" ta="center">
+          <Text as="div" fs="md" bgc="dimmed-tint" mr="md" miw="xl" ta="center">
             A
           </Text>
         )}
         <VisuallyHidden>Answer</VisuallyHidden>
-        <Text component="div" mb="xxl">
+        <Text as="div" mb="xxl">
           {item.rendered}
         </Text>
       </Group>
@@ -81,17 +79,16 @@ function InterviewItem({ item, checkboxProps, variant, ...rowProps }: InterviewI
  * This may change if we are required to use `dl`, but it seems in their use case
  * and sample code, there is no semantic difference.
  */
-export const Interview = forwardRef<HTMLOListElement, InterviewProps>(
+export const Interview = forwardRef<HTMLUListElement, InterviewProps>(
   ({ variant = 'qa', children, ...props }, ref) => (
     <UnstyledList
-      as="ul"
       ref={ref}
-      {...props}
       selectionMode="none" // Interviews are not interactive
       disabledBehavior="all"
       rowSlot={(props) => <InterviewItem variant={variant} {...props} />}
+      {...props}
     >
-      {children}
+      {children as any /* TODO: Make this work without a cast */}
     </UnstyledList>
   )
 );

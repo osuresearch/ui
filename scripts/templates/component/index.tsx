@@ -1,8 +1,9 @@
-import { Box } from '@osuresearch/ui';
 import React, { forwardRef } from 'react';
 
-import { cx } from '@osuresearch/ui/theme';
-import { DefaultProps } from '@osuresearch/ui/types';
+import { Box } from '@osuresearch/ui';
+
+import { DefaultProps } from '~/types';
+import { cx } from '~/utils';
 
 export type __TEMPLATE__Props = DefaultProps & {
   /* Your props */
@@ -13,7 +14,7 @@ export type __TEMPLATE__Props = DefaultProps & {
 /**
  * __TEMPLATE__ documentation
  *
- * ### Accessibility
+ * ## Accessibility
  * - a11y info (used aria tags, keyboard behaviour, etc)
  */
 export const __TEMPLATE__ = forwardRef<HTMLDivElement, __TEMPLATE__Props>(

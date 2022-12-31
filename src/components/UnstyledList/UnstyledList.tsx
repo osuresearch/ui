@@ -10,12 +10,10 @@ import {
 } from 'react-aria';
 import { ListProps, ListState, ToggleProps, useListState, useToggleState } from 'react-stately';
 
-import { useStyleSystem } from '@osuresearch/ui/hooks/useStyleSystem';
-import { StyleSystemProps } from '@osuresearch/ui/types';
-import { mergeRefs, polymorphicForwardRef } from '@osuresearch/ui/utils';
+import { SlotProp, useSlots } from '~/hooks/useSlots';
+import { mergeRefs, polymorphicForwardRef } from '~/utils';
 
-import { SlotProp, useSlots } from '../../hooks/useSlots';
-import { AltBox } from '../AltBox';
+import { Box } from '../Box';
 
 /**
  * @private
@@ -42,17 +40,15 @@ export type RowSlotProps = DOMAttributes<FocusableElement> & {
 
 export type UnstyledListSlots = {
   /**
-   * Slot for rendering a checkbox that updates along with the item state
-   */
-  checkboxSlot?: SlotProp<CheckboxSlotProps>;
-
-  /**
    * Slot for rendering each row in the list.
    *
    * Receives props to create a checkbox associated with the cell,
    * the item node with the metadata for rendering the row, and
    * then all the React ARIA props that need to be present in the
    * returned root of the row.
+   *
+   * If not defined, only the content of each `<Item>` will
+   * be rendered for each list item.
    */
   rowSlot?: SlotProp<RowSlotProps>;
 };
@@ -61,6 +57,9 @@ export type UnstyledListProps = ListProps<any> &
   UnstyledListSlots & {
     /** Test label */
     label?: string;
+
+    /** <Item /> components only */
+    children: CollectionChildren<any>;
   };
 
 type ItemProps = UnstyledListSlots & {
@@ -68,26 +67,31 @@ type ItemProps = UnstyledListSlots & {
   state: ListState<any>;
 };
 
+function DefaultRowSlot({ item, checkboxProps, ...gridCellProps }: RowSlotProps) {
+  return <div {...gridCellProps}>{item.rendered}</div>;
+}
+
 function Item({ node, state, ...props }: ItemProps) {
   const ref = useRef<HTMLLIElement>(null);
   const { rowProps, gridCellProps } = useGridListItem({ node }, state, ref);
   const { checkboxProps } = useGridListSelectionCheckbox({ key: node.key }, state);
 
-  const { checkboxSlot: CheckboxSlot, rowSlot: RowSlot } = useSlots(props);
+  const { rowSlot: RowSlot } = useSlots(props);
 
-  const showCheckbox = state.selectionManager.selectionMode !== 'none';
+  const isInteractive = state.selectionManager.selectionMode !== 'none';
+  // Quick check: if it's interactive and they didn't provide a slot renderer,
+  // then throw an error. Our fallback implementation doesn't support interactive mode.
+  if (isInteractive && !RowSlot) {
+    throw new Error(
+      'You must specify a `rowSlot` when using an UnstyledList in interactive selection mode'
+    );
+  }
 
   // We assume semantic LI for all list items
   return (
     <li {...rowProps} ref={ref}>
       {RowSlot && <RowSlot item={node} checkboxProps={checkboxProps} {...gridCellProps} />}
-
-      {!RowSlot && (
-        <div {...gridCellProps}>
-          {showCheckbox && CheckboxSlot && <CheckboxSlot ariaCheckboxProps={checkboxProps} />}
-          {node.rendered}
-        </div>
-      )}
+      {!RowSlot && <DefaultRowSlot item={node} checkboxProps={checkboxProps} {...gridCellProps} />}
     </li>
   );
 }
@@ -108,30 +112,26 @@ function Item({ node, state, ...props }: ItemProps) {
  * ## Slots
  *
  * **Checkbox**: A slot for the rendering of a checkbox on each item when
- * the list has a `selectionMode` of `multiple` or `single`.
+ * the list has a `selectionMode` of `multiple` or `single`. You **MUST**
+ * define a checkbox slot renderer for an interactive list, as one will not
+ * be provided by default.
  */
-export const UnstyledList = polymorphicForwardRef<UnstyledListProps>(({ as, ...props }, ref) => {
-  const state = useListState({
-    ...props,
-    selectionMode: 'multiple'
-  });
+export const UnstyledList = polymorphicForwardRef<'ul', UnstyledListProps>((props, ref) => {
+  const state = useListState(props);
 
   const listRef = useRef<HTMLElement>(null);
   const { gridProps } = useGridList(props, state, listRef);
 
-  const { styleSystemProps, otherProps } = useStyleSystem(props);
-
-  const Component = as || 'ul';
-
   return (
-    <Component
+    <Box
+      as={props.as || 'ul'}
       aria-label={props.label}
-      {...mergeProps(styleSystemProps, otherProps, gridProps)}
+      {...mergeProps(gridProps, props as object)}
       ref={mergeRefs(listRef, ref)}
     >
       {[...state.collection].map((item) => (
         <Item key={item.key} node={item} state={state} {...props} />
       ))}
-    </Component>
+    </Box>
   );
 });

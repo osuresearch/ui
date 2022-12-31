@@ -1,11 +1,12 @@
-import { Box } from '@osuresearch/ui';
-import React, { forwardRef } from 'react';
+import React from 'react';
 
-import * as styles from '@osuresearch/ui/theme/utils';
-import { Align, DefaultProps, Justify, PositiveSpacing } from '@osuresearch/ui/types';
-import { createPolymorphicComponent } from '@osuresearch/ui/utils';
+import * as styles from '~/theme';
+import { Align, Justify, PositiveSpacing, StyleSystemProps } from '~/types';
+import { cx, polymorphicForwardRef } from '~/utils';
 
-export type StackProps = DefaultProps & {
+import { Box } from '../Box';
+
+export type StackProps = StyleSystemProps & {
   /** Define the spacing between elements */
   gap?: PositiveSpacing;
 
@@ -18,11 +19,17 @@ export type StackProps = DefaultProps & {
   children: React.ReactNode;
 };
 
-export const _Stack = forwardRef<HTMLDivElement, StackProps & { component: any }>(
+/**
+ * Compose elements and components in a vertical flex container
+ *
+ * ## Polymorphic Component
+ *  - You can use the `as` prop to change the root element for this component.
+ */
+export const Stack = polymorphicForwardRef<'div', StackProps>(
   ({ className, gap = 'sm', align = 'stretch', justify = 'center', children, ...props }, ref) => (
     <Box
       ref={ref}
-      className={styles.cx(
+      className={cx(
         'rui-flex rui-flex-col',
         styles.justify(justify),
         styles.gap(gap),
@@ -35,8 +42,3 @@ export const _Stack = forwardRef<HTMLDivElement, StackProps & { component: any }
     </Box>
   )
 );
-
-/**
- * Compose elements and components in a vertical flex container
- */
-export const Stack = createPolymorphicComponent<'div', StackProps>(_Stack);

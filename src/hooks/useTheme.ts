@@ -1,6 +1,6 @@
 import { useLayoutEffect, useState } from 'react';
 
-import { Theme } from '@osuresearch/ui/types';
+import { Theme } from '~/types';
 
 export function useTheme(): Theme {
   const [theme, setTheme] = useState<Theme>('light');

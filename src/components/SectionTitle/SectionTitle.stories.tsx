@@ -1,7 +1,8 @@
-import { SectionTitle as Component, SectionTitleProps } from '@osuresearch/ui';
 import React from 'react';
 
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
+
+import { SectionTitle as Component, SectionTitleProps } from './SectionTitle';
 
 export default RUIComponentMeta<SectionTitleProps>('Components', Component)
   .withBadge('atom')

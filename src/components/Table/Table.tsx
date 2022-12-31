@@ -1,10 +1,11 @@
 import React, { forwardRef } from 'react';
 
-import { cx } from '../../theme/utils';
-import { DefaultProps } from '../../types';
+import { StyleSystemProps } from '~/types';
+import { cx } from '~/utils';
+
 import { Box } from '../Box';
 
-export type TableProps = DefaultProps & {
+export type TableProps = StyleSystemProps & {
   variant?: 'default' | 'compact';
 
   striped?: boolean;
@@ -14,13 +15,13 @@ export type TableProps = DefaultProps & {
 /**
  * Tables are used to display tabular data in rows and columns.
  *
- * ### Accessibility
+ * ## Accessibility
  * - TODO: Wire up captions
  */
 export const Table = forwardRef<HTMLTableElement, TableProps>(
   ({ className, variant = 'default', striped = false, children, ...props }, ref) => (
     <Box
-      component="table"
+      as="table"
       ref={ref}
       w="full"
       c="light-contrast"

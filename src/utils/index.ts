@@ -1,6 +1,12 @@
+import classNames from 'classnames';
+
 export * from './polymorphics';
 export * from './createPolymorphicComponent';
 export * from './theme';
+
+export function cx(...args: classNames.ArgumentArray): string {
+  return classNames(args);
+}
 
 /**
  * Your typical ref merge. This version supports our polymorphic refs.
@@ -17,4 +23,19 @@ export function mergeRefs<T = any>(
       }
     });
   };
+}
+
+// TODO: Support var args. I'd like a single
+// const [margin, padding, ...rest] = splitProps(props, marginProps, paddingProps, ...)
+export function splitProps<P extends { [K: string]: any }>(propNames: readonly string[], props: P) {
+  const names = Object.keys(props);
+  const matched = names
+    .filter((k) => propNames.indexOf(k) >= 0)
+    .reduce((a, k) => ((a[k] = props[k]), a), {} as { [K: string]: any });
+
+  const unmatched = names
+    .filter((k) => propNames.indexOf(k) < 0)
+    .reduce((a, k) => ((a[k] = props[k]), a), {} as { [K: string]: any });
+
+  return [matched, unmatched];
 }

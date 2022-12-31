@@ -1,9 +1,9 @@
 import { Meta, Story } from '@storybook/react';
 import React from 'react';
 
-import { Badge, BadgeProps } from '@osuresearch/ui';
-
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
+
+import { Badge, BadgeProps } from './Badge';
 
 export default RUIComponentMeta<BadgeProps>('Components', Badge)
   .withStyleSystemProps()

@@ -1,9 +1,12 @@
 import React from 'react';
 
-import { Box, ColorProp, DefaultProps, ThemeSize } from '@osuresearch/ui';
-import { Color, bc as _bc, bgc, cx, hw } from '@osuresearch/ui/theme';
+import { bc as _bc } from '~/theme';
+import { ColorProp, StyleSystemProps, ThemeSize } from '~/types';
+import { cx } from '~/utils';
 
-export type IndicatorProps = DefaultProps & {
+import { Box } from '../Box';
+
+export type IndicatorProps = StyleSystemProps & {
   size?: ThemeSize;
 
   c?: ColorProp;
