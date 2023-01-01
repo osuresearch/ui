@@ -1,5 +1,5 @@
 import { Icon as Iconify } from '@iconify/react/dist/offline';
-import React, { forwardRef } from 'react';
+import React from 'react';
 
 // Note that we use the offline version of iconify
 // for apps that can't call out to a public CDN
@@ -30,6 +30,7 @@ export const Icon = polymorphicForwardRef<'i', IconProps>(
   ({ as, className, name, inline, flip, rotate = 0, size = 16, ...props }, ref) => (
     <Box
       as={as || 'i'}
+      ref={ref}
       className={cx(
         {
           'rui-inline-block': inline
