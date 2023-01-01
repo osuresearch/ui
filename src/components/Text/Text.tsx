@@ -15,7 +15,7 @@ export type TextProps = StyleSystemProps & {
 /**
  * Use the Text component to display text content while maintaining theme styles
  *
- * ## Polymorphic Component
+ * ## Polymorphic
  *
  * You can use `component` prop to change the root element for this component.
  */

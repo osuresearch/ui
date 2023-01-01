@@ -1,9 +1,9 @@
-import { Meta, Story } from '@storybook/react';
+import { Story } from '@storybook/react';
 import React from 'react';
 
-import { Table, TableProps } from '@osuresearch/ui';
-
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
+
+import { Table, TableProps } from './Table';
 
 export default RUIComponentMeta<TableProps>('Components', Table)
   .withStyleSystemProps()

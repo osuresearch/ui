@@ -3,28 +3,16 @@ import React, { DOMAttributes, useRef } from 'react';
 import {
   AriaCheckboxProps,
   mergeProps,
-  useCheckbox,
   useGridList,
   useGridListItem,
   useGridListSelectionCheckbox
 } from 'react-aria';
-import { ListProps, ListState, ToggleProps, useListState, useToggleState } from 'react-stately';
+import { ListProps, ListState, useListState } from 'react-stately';
 
 import { SlotProp, useSlots } from '~/hooks/useSlots';
 import { mergeRefs, polymorphicForwardRef } from '~/utils';
 
 import { Box } from '../Box';
-
-/**
- * @private
- */
-function Checkbox({ children, ...props }: ToggleProps) {
-  const ref = useRef<HTMLInputElement>(null);
-  const state = useToggleState(props);
-  const { inputProps } = useCheckbox(props, state, ref);
-
-  return <input {...inputProps} ref={ref} />;
-}
 
 export type CheckboxSlotProps = {
   /**
@@ -58,7 +46,7 @@ export type UnstyledListProps = ListProps<any> &
     /** Test label */
     label?: string;
 
-    /** <Item /> components only */
+    /** `Item` components only */
     children: CollectionChildren<any>;
   };
 
@@ -101,7 +89,7 @@ function Item({ node, state, ...props }: ItemProps) {
  *
  * This handles the heavy lifting of a11y compliance and interactions.
  *
- * ## Polymorphic Component
+ * ## Polymorphic
  *  - You can use the `as` prop to change the root element for this component.
  *  - Only polymorph to either an `ul` or `ol`, as each item will be a semantic `li`.
  *

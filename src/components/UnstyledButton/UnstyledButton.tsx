@@ -20,7 +20,7 @@ export type UnstyledButtonProps = StyleSystemProps & {
 /**
  * Unstyled polymorphic button
  *
- * ## Polymorphic Component
+ * ## Polymorphic
  *  - You can use the `as` prop to change the root element for this component.
  */
 export const UnstyledButton = polymorphicForwardRef<'button', UnstyledButtonProps>(

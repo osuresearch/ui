@@ -7,7 +7,8 @@ import { Box, BoxProps } from './Box';
 
 export default RUIComponentMeta<BoxProps>('Utilities', Box)
   .withStyleSystemProps()
-  .withBadge('experimental');
+  .withBadge('atom')
+  .withBadge('stable');
 
 export const Overview = RUIComponentStory<BoxProps>((args) => (
   <Box {...args}>Lorem ipsum blah blah blah</Box>

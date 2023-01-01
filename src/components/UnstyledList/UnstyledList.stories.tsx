@@ -1,4 +1,3 @@
-import { Story } from '@storybook/react';
 import React, { Key, useRef, useState } from 'react';
 import { useCheckbox } from 'react-aria';
 import { useToggleState } from 'react-stately';

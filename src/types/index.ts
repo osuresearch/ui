@@ -23,7 +23,7 @@ export type FontWeight = typeof fontWeight[number];
 export const fontFamily = ['sans', 'serif', 'mono'] as const;
 export type FontFamily = typeof fontFamily[number];
 
-export const screenSize = ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'] as const;
+export const screenSize = ['sm', 'md', 'lg', 'xl', 'xxl'] as const;
 export type ScreenSize = typeof screenSize[number];
 
 export const align = ['start', 'end', 'stretch', 'center'] as const;

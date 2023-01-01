@@ -10,7 +10,6 @@ import { LinkButton } from '../LinkButton';
 import { Paper } from '../Paper';
 import { Stack } from '../Stack';
 import { Text } from '../Text';
-import { Title } from '../Title';
 
 export type CardProps = StyleSystemProps & {
   variant: 'default' | 'panel' | 'storytelling';

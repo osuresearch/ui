@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { bc as _bc } from '~/theme';
 import { ColorProp, StyleSystemProps, ThemeSize } from '~/types';
 import { cx } from '~/utils';
 

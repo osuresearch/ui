@@ -7,7 +7,7 @@ import { Card, CardProps } from './Card';
 
 export default RUIComponentMeta<CardProps>('BUX Stuff', Card)
   .withStyleSystemProps()
-  .withBadge('beta');
+  .withBadge('stable');
 
 const Template: Story<CardProps> = (args: CardProps) => (
   <Card {...args} href="https://example.com">

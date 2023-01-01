@@ -1,4 +1,4 @@
-import React, { MouseEventHandler } from 'react';
+import React from 'react';
 
 import { cx } from '~/utils';
 import { polymorphicForwardRef } from '~/utils';

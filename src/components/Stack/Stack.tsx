@@ -22,7 +22,7 @@ export type StackProps = StyleSystemProps & {
 /**
  * Compose elements and components in a vertical flex container
  *
- * ## Polymorphic Component
+ * ## Polymorphic
  *  - You can use the `as` prop to change the root element for this component.
  */
 export const Stack = polymorphicForwardRef<'div', StackProps>(

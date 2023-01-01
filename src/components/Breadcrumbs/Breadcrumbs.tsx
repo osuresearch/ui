@@ -20,7 +20,7 @@ export type BreadcrumbsProps = StyleSystemProps & {
  * - Applies `aria-label="Breadcrumbs"` to the root element
  */
 export const Breadcrumbs = forwardRef<HTMLDivElement, BreadcrumbsProps>(
-  ({ className, children, ...props }, ref) => (
+  ({ children, ...props }, ref) => (
     <Group ref={ref} fs="sm" align="center" gap="xxs" c="dark" aria-label="Breadcrumbs" {...props}>
       {Children.map(children, (child, idx) => (
         <React.Fragment key={idx}>

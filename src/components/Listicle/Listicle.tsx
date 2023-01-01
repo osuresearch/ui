@@ -12,7 +12,7 @@ export type ListicleVariant = 'ordered' | 'unordered';
 export type ListicleProps = StyleSystemProps & {
   variant?: ListicleVariant;
 
-  /** <Item /> components only */
+  /** `Item` components only */
   children: CollectionChildren<any>;
 };
 

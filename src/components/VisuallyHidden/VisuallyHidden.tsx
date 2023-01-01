@@ -9,6 +9,7 @@ export type VisuallyHiddenProps = {
  *
  * ## Accessibility
  * - Content within this component are only visible to screen readers
+ * - To make content **NOT** visible to screen readers, use the `aria-hidden` attribute
  */
 export const VisuallyHidden = forwardRef<HTMLDivElement, VisuallyHiddenProps>(
   ({ children }, ref) => (

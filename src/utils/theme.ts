@@ -28,10 +28,10 @@ export function isThemeMap<T>(value: any): value is ThemeMap<T> {
   );
 }
 
-function isResponsiveObject<T>(value: any): value is Partial<Record<ScreenSize, T>> {
+export function isResponsiveObject<T>(value: any): value is Partial<Record<ScreenSize, T>> {
   return (
     typeof value === 'object' &&
-    (value.xs !== undefined ||
+    (value.sm !== undefined ||
       value.md !== undefined ||
       value.lg !== undefined ||
       value.xl !== undefined ||
@@ -39,7 +39,7 @@ function isResponsiveObject<T>(value: any): value is Partial<Record<ScreenSize, 
   );
 }
 
-function resolveResponsiveProp<T>(prop: ResponsiveProp<T>, screen: ScreenSize): T {
+export function resolveResponsiveProp<T>(prop: ResponsiveProp<T>, screen: ScreenSize): T {
   // The rough algorithm is:
   // use the closest break that is equal to or less than the input screen size.
   // If screen size is smaller than all of them, used the smallest possible.

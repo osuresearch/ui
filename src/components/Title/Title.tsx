@@ -35,7 +35,7 @@ const ff: FontFamily[] = ['serif', 'sans', 'sans', 'sans'];
  *
  * - TODO
  *
- * ## Polymorphic Component
+ * ## Polymorphic
  *
  * You can use the `as` prop to change the root element for this component.
  * If omitted, the root element will use `h1` through `h4` depending on the

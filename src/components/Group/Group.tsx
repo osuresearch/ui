@@ -24,7 +24,7 @@ export type GroupProps = StyleSystemProps & {
 /**
  * Compose elements and components in a horizontal flex container
  *
- * ## Polymorphic Component
+ * ## Polymorphic
  *  - You can use the `as` prop to change the root element for this component.
  */
 export const Group = polymorphicForwardRef<'div', GroupProps>(
