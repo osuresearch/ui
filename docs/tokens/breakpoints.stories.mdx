@@ -1,15 +1,16 @@
 
+import { BreakpointTable } from '~/.storybook/components/BreakpointTable';
+
 <Meta title="Design Tokens / Breakpoints" />
 
 # Breakpoint Tokens
 
 Standardized values for media queries.
 
-| Token | Value | Example
+| Token | Dimensions | Active
 | ---- | ---- | -----------
-| `--rui-screen-sm` | 0 | TODO
-| `--rui-screen-md` | 640px | TODO
-| `--rui-screen-lg` | 960px | TODO
-| `--rui-screen-xl` | 1280px | TODO
-| `--rui-screen-xxl` | 1440px | TODO
-
+| `--rui-screen-sm` | ≥0 | <BreakpointTable size="sm" />
+| `--rui-screen-md` | ≥640px | <BreakpointTable size="md" />
+| `--rui-screen-lg` | ≥960px | <BreakpointTable size="lg" />
+| `--rui-screen-xl` | ≥1280px | <BreakpointTable size="xl" />
+| `--rui-screen-xxl` | ≥1440px | <BreakpointTable size="xxl" />
