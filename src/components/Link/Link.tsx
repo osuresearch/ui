@@ -26,8 +26,9 @@ export type LinkProps = StyleSystemProps & {
  * to meet WCAG 2 Level AA.
  */
 export const Link = polymorphicForwardRef<'a', LinkProps>(
-  ({ as, variant = 'default', className, children, ...props }) => (
+  ({ as, variant = 'default', className, children, ...props }, ref) => (
     <Box
+      ref={ref}
       as={as || 'a'}
       className={cx(
         {
