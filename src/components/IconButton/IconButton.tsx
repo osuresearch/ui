@@ -28,7 +28,7 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
   ({ name, label, iconSize = 32, size = 'xxl', ...props }, ref) => (
     <Icon
       as="button"
-      className="focus:rui-ring"
+      className="focus:rui-ring hover:rui-bg-light-shade"
       w={size}
       h={size}
       name={name}
