@@ -15,8 +15,9 @@ export type DocumentPaginationProps = {
 export const _DocumentPagination = forwardRef<
   HTMLButtonElement,
   DocumentPaginationProps & { component: any }
->(({ direction, children, ...props }, ref) => (
+>(({ direction, children }, ref) => (
   <UnstyledButton
+    ref={ref}
     c={{
       light: 'primary',
       dark: 'light-contrast'
@@ -53,7 +54,7 @@ export const _DocumentPagination = forwardRef<
  *
  * It is often used for content such as books, manuals, or courses.
  *
- * ## Polymorphic Component
+ * ## Polymorphic
  *
  * You can use `component` prop to change the root element for this component.
  *
