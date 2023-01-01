@@ -2,22 +2,25 @@
 // Ref: https://docs.iconify.design/icon-components/bundles/
 import { addIcon } from '@iconify/react/dist/offline';
 
-import * as brand from './brand';
+import * as data from './data';
+import * as misc from './misc';
 import * as navigation from './navigation';
 import * as social from './social';
 import * as system from './system';
 
 export const groups: Record<string, any> = {
-  brand: { ...brand },
+  misc: { ...misc },
   social: { ...social },
   system: { ...system },
+  data: { ...data },
   navigation: { ...navigation }
 };
 
 export const all: Record<string, any> = {
-  ...brand,
+  ...misc,
   ...social,
   ...system,
+  ...data,
   ...navigation
 };
 

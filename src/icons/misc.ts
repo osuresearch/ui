@@ -28,15 +28,8 @@ export const osuResearch = {
 
 // ----------------
 
-export * as asterisk from '@iconify/icons-bi/asterisk';
-export * as sun from '@iconify/icons-bi/brightness-high';
-export * as cloudDownload from '@iconify/icons-bi/cloud-download';
-export * as code from '@iconify/icons-bi/code-slash';
 export * as heart from '@iconify/icons-bi/heart';
 export * as heartFill from '@iconify/icons-bi/heart-fill';
-export * as image from '@iconify/icons-bi/image';
-export * as moon from '@iconify/icons-bi/moon';
-export * as plus from '@iconify/icons-bi/plus';
 export * as quote from '@iconify/icons-bi/quote';
 export * as shield from '@iconify/icons-bi/shield';
 export * as checkShield from '@iconify/icons-bi/shield-check';
@@ -44,3 +37,9 @@ export * as exclamationShield from '@iconify/icons-bi/shield-exclamation';
 export * as lockShield from '@iconify/icons-bi/shield-lock';
 export * as minusShield from '@iconify/icons-bi/shield-minus';
 export * as plusShield from '@iconify/icons-bi/shield-plus';
+export * as ban from '@iconify/icons-bi/slash-circle';
+export * as thumbs from '@iconify/icons-bi/hand-thumbs-up';
+export * as eye from '@iconify/icons-bi/eye';
+export * as eyeSlash from '@iconify/icons-bi/eye-slash';
+export * as lock from '@iconify/icons-bi/lock';
+export * as lockFill from '@iconify/icons-bi/lock-fill';

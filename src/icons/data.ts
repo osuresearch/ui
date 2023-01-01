@@ -1,0 +1,12 @@
+export * as graphBar from '@iconify/icons-bi/bar-chart';
+export * as graphPie from '@iconify/icons-bi/pie-chart';
+export * as search from '@iconify/icons-bi/search';
+export * as sortAlphaDown from '@iconify/icons-bi/sort-alpha-down';
+export * as sortAlphaUp from '@iconify/icons-bi/sort-alpha-up-alt';
+export * as sortDown from '@iconify/icons-bi/sort-down';
+export * as sortUp from '@iconify/icons-bi/sort-up';
+export * as download from '@iconify/icons-bi/download';
+export * as upload from '@iconify/icons-bi/upload';
+export * as cloudDownload from '@iconify/icons-bi/cloud-arrow-down';
+export * as cloudUpload from '@iconify/icons-bi/cloud-arrow-up';
+export * as rotate from '@iconify/icons-bi/arrow-clockwise';
