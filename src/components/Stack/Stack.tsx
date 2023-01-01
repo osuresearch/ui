@@ -26,8 +26,12 @@ export type StackProps = StyleSystemProps & {
  *  - You can use the `as` prop to change the root element for this component.
  */
 export const Stack = polymorphicForwardRef<'div', StackProps>(
-  ({ className, gap = 'sm', align = 'stretch', justify = 'center', children, ...props }, ref) => (
+  (
+    { as, className, gap = 'sm', align = 'stretch', justify = 'center', children, ...props },
+    ref
+  ) => (
     <Box
+      as={as || 'div'}
       ref={ref}
       className={cx(
         'rui-flex rui-flex-col',

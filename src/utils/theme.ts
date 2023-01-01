@@ -100,7 +100,7 @@ export function resolveColorProp(color: ColorProp | undefined, theme: Theme): Co
 export function spacingValueToClass(
   prefix: string,
   size: ResponsiveProp<Spacing>,
-  screen: ScreenSize = 'xs'
+  screen: ScreenSize = 'sm'
 ) {
   const value = resolveResponsiveProp(size, screen) as string;
 

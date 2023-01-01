@@ -3,7 +3,7 @@ import React from 'react';
 import { StyleSystemProps } from '~/types';
 import { cx, polymorphicForwardRef } from '~/utils';
 
-import { Box } from '..';
+import { Box } from '../Box';
 
 export type TextProps = StyleSystemProps & {
   /** Text alignment */

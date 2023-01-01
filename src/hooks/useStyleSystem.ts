@@ -38,7 +38,7 @@ export function useStyleSystem(props: Record<string, any>) {
  * Convert style system props into classNames and styles
  */
 export function useStyleSystemV2<P>(props: P): [string[], CSSProperties, P] {
-  const width = useScreenSize();
+  const [screen] = useScreenSize();
   const theme = useTheme();
 
   // TODO: Condense into one vararg call so we don't have all these temp objects.
@@ -53,9 +53,9 @@ export function useStyleSystemV2<P>(props: P): [string[], CSSProperties, P] {
     // Construct an array of Tailwind class names
     // resolved from the style system props
     [
-      ...spacingPropsToClassNames(paddingProps, padding, width),
-      ...spacingPropsToClassNames(marginProps, margin, width),
-      ...spacingPropsToClassNames(sizeProps, size, width),
+      ...spacingPropsToClassNames(paddingProps, padding, screen),
+      ...spacingPropsToClassNames(marginProps, margin, screen),
+      ...spacingPropsToClassNames(sizeProps, size, screen),
 
       tc(resolveColorProp(color.c, theme)),
       bgc(resolveColorProp(color.bgc, theme)),
