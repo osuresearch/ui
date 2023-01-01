@@ -23,7 +23,12 @@ export const Overview = Template.bind({});
 export const ContactCard = RUIComponentStory((args) => (
   <UnstyledButton>
     <Group>
-      <Avatar size={40} name="Chase McManning" username="mcmanning.1" />
+      <Avatar
+        alt="Chase McManning contact"
+        size={40}
+        name="Chase McManning"
+        opicUsername="mcmanning.1"
+      />
       <Stack gap={0}>
         <Text>Chase McManning</Text>
         <Text c="dark" fs="sm">

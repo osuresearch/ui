@@ -1,33 +1,54 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 
-import { cx } from '~/utils';
+import { Color } from '~/theme';
+import { StyleSystemProps } from '~/types';
+import { cx, polymorphicForwardRef } from '~/utils';
 
-import { ColorProp, ThemeSize } from '../../types';
-import { createPolymorphicComponent } from '../../utils/createPolymorphicComponent';
+import { Box } from '../Box';
+import { Image } from '../Image';
+import { Text } from '../Text';
 
-export type AvatarProps = {
-  /**
-   * Users name, starting with their preferred first name.
-   */
-  name: string;
-
-  /** User's name.# */
-  username: string;
-
+export type AvatarProps = StyleSystemProps & {
   /** Avatar width and height in pixels */
-  size: number;
+  size?: number;
 
-  /** Color used for letter and icon placeholders */
-  c?: ColorProp;
-
-  /** Image url. If not supplied, opic.osu.edu will be used */
+  /**
+   * Image source URL
+   */
   src?: string;
 
-  /** Image alt text. Will default to `name` if not supplied */
-  alt?: string;
+  /**
+   * Attempt to use OPIC to resolve the avatar.
+   *
+   * Only enable if the avatar is for someone at Ohio State.
+   * Provide the user's name.# to retrieve their OPIC.
+   */
+  opicUsername?: string;
 
-  /** Custom placeholder */
-  children?: React.ReactNode;
+  /**
+   * Image alt text
+   */
+  alt: string;
+
+  /**
+   * Users preferred name, starting with their first name.
+   */
+  name?: string;
+
+  /**
+   * Fallback text to display when the image cannot be loaded.
+   *
+   * If omitted, this will attempt to fallback to using the user's initials
+   * as determined by combining the `name` and `opicUsername` props.
+   */
+  label?: string;
+
+  /**
+   * Pool of available background colors to pick from.
+   *
+   * The chosen color will be based on the `name` prop.
+   */
+  colors?: Color[];
 };
 
 /**
@@ -35,69 +56,114 @@ export type AvatarProps = {
  */
 const FALLBACK_URL = 'https://orapps.osu.edu/assets/img/pixel.gif';
 
-/**
- * Colors assigned to initials when someone does not have an OPIC or we disable OPIC
- */
-const THEME_COLORS = ['#586a81', '#bb0000', '#6a6f24', '#846622', '#427067', '#442369', '#851e5e'];
+const DEFAULT_COLORS: Color[] = [
+  'blue',
+  'orange',
+  'green',
+  'pink',
+  'violet',
+  'aqua',
+  'teal',
+  'gold'
+];
 
 /**
- * Avatar documentation
+ * Avatar / profile picture automatically integrated with https://opic.osu.edu.
+ *
+ * ## Polymorphic
+ *  - You can use the `as` prop to change the root element for this component.
+ *
+ * ## Accessibility
+ * - Image alt text is a required property
  */
-export const _Avatar = forwardRef<HTMLDivElement, AvatarProps>(
-  ({ name, username, src, size, alt, children }, ref) => {
-    const index = (name.charCodeAt(0) - 65) % THEME_COLORS.length;
+export const Avatar = polymorphicForwardRef<'div', AvatarProps>(
+  (
+    {
+      as,
+      className,
+      label,
+      name,
+      colors = DEFAULT_COLORS,
+      opicUsername,
+      src,
+      size = 38,
+      alt,
+      children,
+      ...props
+    },
+    ref
+  ) => {
+    const index = ((name || 'a').charCodeAt(0) - 65) % colors.length;
 
-    if (!src) {
-      src = `https://opic.osu.edu/${username}?width=${size}&default=${FALLBACK_URL}`;
+    if (!src && opicUsername) {
+      src = `https://opic.osu.edu/${opicUsername}?width=${size}&default=${FALLBACK_URL}`;
     }
 
-    if (!alt) {
-      alt = name;
+    // Fallback label to initials
+    if (!label && name) {
+      label = name[0].toUpperCase();
+
+      if (opicUsername) {
+        label += opicUsername[0].toUpperCase();
+      }
     }
 
     return (
-      <div
-        aria-hidden="true"
-        className={cx({
-          'rui-relative': true,
-          'rui-rounded-full': true,
-          'rui-overflow-hidden': true
-        })}
+      <Box
+        as={as || 'div'}
+        className={cx('rui-block', 'rui-relative', className)}
         style={{
-          backgroundColor: THEME_COLORS[index],
           width: size,
           height: size
         }}
+        {...props}
       >
-        <img alt={alt} src={src} />
-        {/* <div
-        className={cx({
-          'absolute': true,
-          'top-1': true,
-          'left-1': true,
-        })}
-      >CM</div> */}
+        <Box
+          bgc={colors[index]}
+          className={cx(
+            'rui-absolute',
+            'rui-top-0',
+            'rui-rounded-full',
+            'rui-overflow-hidden',
+            'rui-text-center',
 
-        <div
-          className={cx({
-            'rui-absolute': true,
-            'rui-w-full': true,
-            'rui-text-center': true
-          })}
+            'rui-outline',
+            'rui-outline-2',
+            '-rui-outline-offset-1',
+            'rui-outline-light-tint'
+          )}
           style={{
-            fontSize: size / 2.25 + 'px',
-            lineHeight: size + 'px'
+            fontSize: size / 2.75 + 'px',
+            lineHeight: size + 'px',
+            width: size + 'px',
+            height: size + 'px'
           }}
         >
-          {name[0].toUpperCase()}
-          {username[0].toUpperCase()}
-        </div>
-      </div>
+          <Text
+            fw="bold"
+            c={colors[index]}
+            style={{
+              filter: 'brightness(30%)'
+            }}
+          >
+            {label}
+          </Text>
+        </Box>
+        <Image
+          width={size}
+          height={size}
+          className={cx(
+            'rui-rounded-full rui-overflow-hidden',
+
+            'rui-outline',
+            'rui-outline-2',
+            '-rui-outline-offset-1',
+            'rui-outline-light-tint'
+          )}
+          src={src}
+          alt={alt}
+        />
+      </Box>
     );
   }
 );
-
-/**
- * Avatar things
- */
-export const Avatar = createPolymorphicComponent<'div', AvatarProps>(_Avatar);
