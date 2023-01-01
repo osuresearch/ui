@@ -1,11 +1,8 @@
 import { useMediaQuery } from 'react-responsive';
-import resolveConfig from 'tailwindcss/resolveConfig';
 
 import { ScreenSize, screenSize } from '~/types';
 
-import tailwindConfig from '../../tailwind.config.js';
-
-const tailwind = resolveConfig(tailwindConfig);
+import * as tailwind from '../../tailwind.config';
 
 export function useScreenSize(): [ScreenSize, Record<ScreenSize, boolean>] {
   const screens = tailwind.theme?.screens as Record<ScreenSize, string>;
