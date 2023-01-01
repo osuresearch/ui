@@ -10,6 +10,7 @@
     "outDir": "dist",
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
+    "allowJs": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
 
@@ -23,10 +24,7 @@
       ],
       "~/*": [
         "./src/*"
-      ],
-      "*": [
-        "@types/*"
-      ],
+      ]
     },
   },
   "include": [

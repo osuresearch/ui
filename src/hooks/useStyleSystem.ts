@@ -11,7 +11,7 @@ import {
   styleSystemPropNames
 } from '../types';
 import { resolveColorProp, spacingPropsToClassNames, splitProps } from '../utils';
-import { useMediaQuery } from './useMediaQuery';
+import { useScreenSize } from './useScreenSize';
 import { useTheme } from './useTheme';
 
 /**
@@ -38,7 +38,7 @@ export function useStyleSystem(props: Record<string, any>) {
  * Convert style system props into classNames and styles
  */
 export function useStyleSystemV2<P>(props: P): [string[], CSSProperties, P] {
-  const width = useMediaQuery('...'); // TODO
+  const width = useScreenSize();
   const theme = useTheme();
 
   // TODO: Condense into one vararg call so we don't have all these temp objects.
