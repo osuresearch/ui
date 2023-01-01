@@ -1,3 +1,26 @@
+# [5.0.0-alpha.5](https://github.com/osuresearch/ui/compare/v5.0.0-alpha.4...v5.0.0-alpha.5) (2023-01-01)
+
+
+### Bug Fixes
+
+* **deps:** drop unecessary import of tailwind utilities to cut build size in half ([aebe361](https://github.com/osuresearch/ui/commit/aebe36182689c7134770e175bb125497c147010f))
+* **DocumentPagination:** add missing forwarded ref ([c4acdb1](https://github.com/osuresearch/ui/commit/c4acdb1cf531360ed0007f8437235f207f6808ac))
+* **eslint:** no longer creates false reports of unused variables on typescript types ([05d1268](https://github.com/osuresearch/ui/commit/05d1268fbbf6ea47bda2be6b854e7e1dff776044))
+* **Icon:** add missing forwarded ref ([ce00264](https://github.com/osuresearch/ui/commit/ce00264e586e9a10bf96eee983c2c77331a25f93))
+* **Interview:** hide Q+A labels from screen readers ([e455b76](https://github.com/osuresearch/ui/commit/e455b761a3697982f3130558d96c0257b716b07b))
+* remove cyclic dependencies that slow down builds ([745d639](https://github.com/osuresearch/ui/commit/745d639437d062d30c048aa2efafd7b407cb7cb2))
+* **tailwind:** add missing min-width and min-height spacing tokens ([29fa6e7](https://github.com/osuresearch/ui/commit/29fa6e762bef7c3dba5d59856eb429b1f70395ab))
+
+
+### Features
+
+* add AvatarGroup component ([e491057](https://github.com/osuresearch/ui/commit/e491057aaaffd9f1e1b8c79a65851b4178eaad31))
+* add Image component ([98a0ba7](https://github.com/osuresearch/ui/commit/98a0ba7fbdfa450ffe396475ed3f9b6e640f5a70))
+* add useScreenSize hook ([ab1326a](https://github.com/osuresearch/ui/commit/ab1326acc06556f6550a7f0e70fe92b6a6b9bb87))
+* **Avatar:** improve edge anti-aliasing and add polymorphism ([f9d7dd3](https://github.com/osuresearch/ui/commit/f9d7dd3d1f9974a992189be81d3ba86ae5aa0b70))
+* **IconButton:** add background shade on hover ([0490585](https://github.com/osuresearch/ui/commit/0490585456a35a3461cc50ad3c032707ad301876))
+* **storybook:** add live demo for each breakpoint ([148412d](https://github.com/osuresearch/ui/commit/148412ddfeef800031ee51aa858ecaf0170bebb8))
+
 # [5.0.0-alpha.4](https://github.com/osuresearch/ui/compare/v5.0.0-alpha.3...v5.0.0-alpha.4) (2022-12-29)
 
 
