@@ -47,14 +47,31 @@
     Ref: https://bux.osu.edu/color/accent-colors
   */
   --rui-blue: #41b6e6;
+  --rui-blue-contrast: #133745;
+
   --rui-orange: #ff6a39;
+  --rui-orange-contrast: #33150b;
+
   --rui-green: #8edd65;
+  --rui-green-contrast: #1c2c14;
+
   --rui-brown: #946037;
+  --rui-brown-contrast: #f4efeb;
+
   --rui-pink: #fb637e;
+  --rui-pink-contrast: #4b1e26;
+
   --rui-violet: #830065;
+  --rui-violet-contrast: #f3e6f0;
+
   --rui-aqua: #6bbbab;
+  --rui-aqua-contrast: #203833;
+
   --rui-teal: #26686d;
+  --rui-teal-contrast: #e9f0f0;
+
   --rui-gold: #ffb600;
+  --rui-gold-contrast: #4c3700;
 
   /* Neutrals */
   --rui-black: #141517;

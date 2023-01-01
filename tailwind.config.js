@@ -71,14 +71,31 @@ module.exports = {
 
       // Accents
       'blue': 'var(--rui-blue)',
+      'blue-contrast': 'var(--rui-blue-contrast)',
+
       'orange': 'var(--rui-orange)',
+      'orange-contrast': 'var(--rui-orange-contrast)',
+
       'green': 'var(--rui-green)',
+      'green-contrast': 'var(--rui-green-contrast)',
+
       'brown': 'var(--rui-brown)',
+      'brown-contrast': 'var(--rui-brown-contrast)',
+
       'pink': 'var(--rui-pink)',
+      'pink-contrast': 'var(--rui-pink-contrast)',
+
       'violet': 'var(--rui-violet)',
+      'violet-contrast': 'var(--rui-violet-contrast)',
+
       'aqua': 'var(--rui-aqua)',
+      'aqua-contrast': 'var(--rui-aqua-contrast)',
+
       'teal': 'var(--rui-teal)',
+      'teal-contrast': 'var(--rui-teal-contrast)',
+
       'gold': 'var(--rui-gold)',
+      'gold-contrast': 'var(--rui-gold-contrast)',
 
       // Semantic color palettes
 
