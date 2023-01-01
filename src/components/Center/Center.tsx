@@ -7,10 +7,10 @@ export type CenterProps = {
 };
 
 /**
- * Vertically center content
+ * Centers content vertically and horizontally
  */
 export const Center = forwardRef<HTMLDivElement, CenterProps>(({ children }, ref) => (
-  <Box ref={ref} className="rui-inline-flex rui-items-center rui-justify-center">
+  <Box ref={ref} className="rui-grid rui-place-items-center rui-h-full">
     {children}
   </Box>
 ));

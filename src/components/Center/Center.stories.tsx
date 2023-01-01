@@ -2,7 +2,6 @@ import React from 'react';
 
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
-import { Icon } from '../Icon';
 import { Text } from '../Text';
 import { CenterProps, Center as Component } from './Center';
 
@@ -11,13 +10,9 @@ export default RUIComponentMeta<CenterProps>('Layout', Component)
   .withBadge('atom');
 
 export const Center = RUIComponentStory<CenterProps>((args) => (
-  <Component {...args}>
-    <Icon name="xmark" size={25} />
-    <Icon name="xmark" size={30} />
-    <Icon name="xmark" size={35} />
-    <Text>Text content</Text>
-    <Icon name="xmark" size={35} />
-    <Icon name="xmark" size={30} />
-    <Icon name="xmark" size={25} />
-  </Component>
+  <div style={{ width: '300px', height: '200px', background: 'var(--rui-light-shade)' }}>
+    <Component {...args}>
+      <Text bgc="dimmed">Content to be centered</Text>
+    </Component>
+  </div>
 ));
