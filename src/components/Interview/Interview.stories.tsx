@@ -6,7 +6,9 @@ import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 import { Item } from '../Item';
 import { Interview, InterviewProps } from './Interview';
 
-export default RUIComponentMeta<InterviewProps>('BUX Stuff', Interview);
+export default RUIComponentMeta<InterviewProps>('BUX Stuff', Interview)
+  .withStyleSystemProps()
+  .withBadge('stable');
 
 /**
  * Can I write a doc here?
@@ -50,7 +52,7 @@ const Template: Story<InterviewProps> = (args) => (
   </Interview>
 );
 
-export const Overview = RUIComponentStory(Template, {
+export const QAndA = RUIComponentStory(Template, {
   variant: 'qa'
 });
 
