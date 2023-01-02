@@ -2,10 +2,12 @@ import type { CSSProperties, ForwardRefExoticComponent } from 'react';
 
 import { Color } from '../theme';
 
+export * from './form';
+
 export const spacing = [0, 1, 'xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl', 'auto', 'full'] as const;
 export type PositiveSpacing = typeof spacing[number];
 
-export const negativeSpacing = ['-xxs', '-xs', '-sm', '-md', '-lg', '-xl', '-xxl'] as const;
+export const negativeSpacing = [-1, '-xxs', '-xs', '-sm', '-md', '-lg', '-xl', '-xxl'] as const;
 export type Spacing = typeof spacing[number] | typeof negativeSpacing[number];
 
 export const theme = ['light', 'dark'] as const;
