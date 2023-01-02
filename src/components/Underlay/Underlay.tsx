@@ -1,24 +1,22 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 
-import { StyleSystemProps } from '~/types';
 import { cx } from '~/utils';
 
-import { Box } from '../Box';
-
 export type UnderlayProps = React.ComponentProps<'div'> & {
-  blur?: boolean;
+  variant?: 'default' | 'tint' | 'blur' | 'paranoid';
 };
 
 /**
  * The UNDERLAYER
  */
-export function Underlay({ blur, ...props }: UnderlayProps) {
+export function Underlay({ variant = 'default', ...props }: UnderlayProps) {
   return (
     <div
       className={cx(
         'rui-fixed rui-inset-0 rui-z-40',
-        { 'rui-opacity-50 rui-bg-light-tint': !blur },
-        { 'rui-backdrop-blur-sm': blur }
+        { 'rui-opacity-50 rui-bg-light-tint': variant === 'tint' },
+        { 'rui-backdrop-blur-sm': variant === 'blur' },
+        { 'rui-backdrop-blur-xl': variant === 'paranoid' }
       )}
       {...props}
     />
