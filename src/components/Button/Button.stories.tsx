@@ -1,44 +1,39 @@
-import { Story } from '@storybook/react';
 import React from 'react';
 
-import { RUIComponentMeta } from '~/.storybook/utils';
+import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
 import { Button, ButtonProps } from '../Button';
 import { Icon } from '../Icon';
 
-export default RUIComponentMeta<ButtonProps>('Components', Button)
-  .withStyleSystemProps()
-  .withBadge('stable');
+export default RUIComponentMeta<ButtonProps>('Components', Button).withStyleSystemProps();
 
-const Template: Story<ButtonProps> = (args: ButtonProps) => <Button {...args}>Click me!</Button>;
+export const Overview = RUIComponentStory<ButtonProps>((args) => (
+  <Button {...args}>Standard button</Button>
+));
 
-export const Overview = Template.bind({});
-Overview.args = {};
+export const Disabled = RUIComponentStory(Overview, {
+  isDisabled: true
+});
 
-export const Disabled = Template.bind({});
-Disabled.args = {
-  disabled: true
-};
+export const Alternate = RUIComponentStory(Overview, {
+  variant: 'alt'
+});
 
-export const Small = Template.bind({});
-Small.args = {
-  small: true
-};
+export const WithLeftSlot = RUIComponentStory(Overview, {
+  variant: 'alt',
+  leftSlot: <Icon name="heart" size={20} mr="sm" c="pink" />
+});
 
-export const Alternate = Template.bind({});
-Alternate.args = {
-  variant: 'outline'
-};
-
-export const WithLeftIcon = Template.bind({});
-WithLeftIcon.args = {
-  variant: 'outline',
-  leftSlot: <Icon name="envelope" size={24} />
-};
-
-export const WithRightIcon = Template.bind({});
-WithRightIcon.args = {
+export const WithRightSlot = RUIComponentStory(Overview, {
   variant: 'default',
-  small: true,
-  rightSlot: <Icon name="caret" size={24} />
-};
+  rightSlot: <Icon name="caret" size={16} ml="xs" />
+});
+
+export const IconOnly = RUIComponentStory<ButtonProps>((args) => (
+  <Button aria-label="Add to favorites" w={44} variant="alt" {...args}>
+    <Icon name="heartFill" c="pink" />
+  </Button>
+)).withDescription(`
+This is for demo purposes only. Use the \`IconButton\` component if you
+want to use an icon-only button in an application.
+`);

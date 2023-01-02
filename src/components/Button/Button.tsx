@@ -1,23 +1,15 @@
 import React from 'react';
 
+import { StyleSystemProps } from '~/types';
 import { cx } from '~/utils';
 import { polymorphicForwardRef } from '~/utils';
 
 import { Group } from '../Group';
+import { UnstyledButton, UnstyledButtonProps } from '../UnstyledButton';
 
-export type ButtonProps = {
+export type ButtonProps = Omit<UnstyledButtonProps, 'leftSlot' | 'rightSlot'> & {
   /** Alternate rendering styles */
-  variant?: 'default' | 'outline';
-
-  /**
-   * Should the button listen to click events
-   */
-  disabled?: boolean;
-
-  /**
-   * Render a smaller variant of the button
-   */
-  small?: boolean;
+  variant?: 'default' | 'alt';
 
   /**
    * Button content
@@ -35,66 +27,37 @@ export type ButtonProps = {
  * The actions that buttons describe should be informative and concise.
  * With few exceptions, button text should not wrap onto multiple lines.
  *
- * ### When to use a Button
- *
- * - Opening or closing a modal or dialog
- * - Submitting data to the server
- *
- * ### When to consider something else
- *
- * - Navigating to a new page or view in your application
- * - Navigating to different web page, e.g. external documentation
- *
  * ## Polymorphic
  *  - You can use the `as` prop to change the root element for this component.
  *
  * ## Accessibility
- *
- * - Small buttons meet the minimum touch target of 44px for Success Criterion [2.5.5 Target Size (Level AAA)](https://www.w3.org/WAI/WCAG21/Understanding/target-size)
+ * - Keyboard users may activate buttons using the `Space` or `Enter` keys.
+ * - If a visual label is not provided (e.g. an icon only button) then an `aria-label` or `aria-labelledby`
+ * prop must be passed to identify the button to assistive technologies.
+ * - Buttons must have a minimum touch target of 44px to meet Success Criterion [2.5.5 Target Size (Level AAA)](https://www.w3.org/WAI/WCAG21/Understanding/target-size)
  */
 export const Button = polymorphicForwardRef<'button', ButtonProps>(
-  ({ as, disabled, small, variant = 'default', leftSlot, rightSlot, children }, ref) => (
-    <Group
+  ({ as, className, variant = 'default', leftSlot, rightSlot, children, ...props }, ref) => (
+    <UnstyledButton
       as={as || 'button'}
       ref={ref}
-      type="button"
-      disabled={disabled}
-      fw="semibold"
-      justify="center"
-      px={small ? 'sm' : 'md'}
-      py={small ? 'xs' : 'sm'}
-      fs={small ? 'sm' : 'base'}
-      className={cx({
-        'focus:rui-ring': true,
-        'rui-text-center': true,
-        'rui-border-2': true,
+      c={!props.isDisabled ? 'light-contrast' : 'dark'}
+      py="xxs"
+      px="sm"
+      className={cx(
+        'rui-focus-ring',
+        'rui-border-2 rui-border-clear',
+        { 'hover:rui-bg-light': !props.isDisabled },
 
-        // Primary theme
-        'rui-bg-primary': variant === 'default' && !disabled,
-        'rui-border-primary': !disabled,
-        'rui-text-primary-contrast': variant === 'default' && !disabled,
-        'rui-text-primary': variant === 'outline' && !disabled,
-
-        // outline variant against a dark theme
-        'dark:rui-text-dark': variant === 'outline' && !disabled,
-        'dark:rui-border-dark': variant === 'outline' && !disabled,
-
-        // Hover state
-        'hover:rui-bg-dark-shade': !disabled,
-        'hover:rui-border-dark-shade': !disabled,
-        'hover:rui-text-dark-contrast': !disabled,
-        'hover:rui-text-primary-contrast': variant === 'outline' && !disabled,
-
-        // Disabled state
-        'rui-bg-light-shade': disabled,
-        'rui-border-light-shade': disabled,
-        'rui-text-dark-tint': disabled,
-        'rui-cursor-not-allowed': disabled
-      })}
+        { 'rui-border-dimmed': variant === 'default' },
+        { 'rui-bg-light rui-border-light': props.isDisabled },
+        className
+      )}
+      {...props}
     >
       {leftSlot}
       {children}
       {rightSlot}
-    </Group>
+    </UnstyledButton>
   )
 );
