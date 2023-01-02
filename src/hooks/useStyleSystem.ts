@@ -10,7 +10,12 @@ import {
   sizeProps,
   styleSystemPropNames
 } from '../types';
-import { resolveColorProp, spacingPropsToClassNames, splitProps } from '../utils';
+import {
+  resolveColorProp,
+  resolveResponsiveProp,
+  spacingPropsToClassNames,
+  splitProps
+} from '../utils';
 import { useScreenSize } from './useScreenSize';
 import { useTheme } from './useTheme';
 
@@ -55,7 +60,7 @@ export function useStyleSystemV2<P>(props: P): [string[], CSSProperties, P] {
     [
       ...spacingPropsToClassNames(paddingProps, padding, screen),
       ...spacingPropsToClassNames(marginProps, margin, screen),
-      ...spacingPropsToClassNames(sizeProps, size, screen),
+      // ...spacingPropsToClassNames(sizeProps, size, screen),
 
       tc(resolveColorProp(color.c, theme)),
       bgc(resolveColorProp(color.bgc, theme)),
@@ -67,15 +72,14 @@ export function useStyleSystemV2<P>(props: P): [string[], CSSProperties, P] {
 
     // Styles that can't be resolved by spacing keys end up getting
     // resolved as inline styles.
-    // TODO: This doesn't support responsive objects.
     {
+      width: resolveResponsiveProp(size.w, screen),
+      height: resolveResponsiveProp(size.h, screen),
+      minWidth: resolveResponsiveProp(size.miw, screen),
+      minHeight: resolveResponsiveProp(size.mih, screen),
+      maxWidth: resolveResponsiveProp(size.maw, screen),
+      maxHeight: resolveResponsiveProp(size.mah, screen),
       ...(style ? style : {})
-      // width: !isSpacing(props.w) ? props.w : undefined,
-      // height: !isSpacing(props.h) ? props.h : undefined,
-      // minWidth: !isSpacing(props.miw) ? props.miw : undefined,
-      // minHeight: !isSpacing(props.mih) ? props.mih : undefined,
-      // maxWidth: !isSpacing(props.maw) ? props.maw : undefined,
-      // maxHeight: !isSpacing(props.mah) ? props.mah : undefined,
     },
 
     unused as P
