@@ -252,37 +252,32 @@
   padding: 2px;
 }
 
-.underlay {
-  position: fixed;
-  inset: 0;
-}
-
-.arrow {
+.rui-arrow {
   position: absolute;
-  fill: var(--page-background);
-  stroke: var(--spectrum-global-color-gray-400);
+  fill: var(--rui-white);
+  stroke: var(--rui-scarlet);
   stroke-width: 1px;
-  width: 12px;
-  height: 12px;
+  width: 30px;
+  height: 30px;
   border: 1px solid red;
 }
 
-.arrow[data-placement=top] {
+.rui-arrow[data-placement=top] {
   top: 100%;
   transform: translateX(-50%);
 }
 
-.arrow[data-placement=bottom] {
+.rui-arrow[data-placement=bottom] {
   bottom: 100%;
   transform: translateX(-50%) rotate(180deg);
 }
 
-.arrow[data-placement=left] {
+.rui-arrow[data-placement=left] {
   left: 100%;
   transform: translateY(-50%) rotate(-90deg);
 }
 
-.arrow[data-placement=right] {
+.rui-arrow[data-placement=right] {
   right: 100%;
   transform: translateY(-50%) rotate(90deg);
 }
