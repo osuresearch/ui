@@ -1,9 +1,13 @@
 import { Meta, Story } from '@storybook/react';
 import React from 'react';
 
-import { Button, Paper, PaperProps, Space, Text, Title } from '@osuresearch/ui';
-
 import { RUIComponentMeta } from '~/.storybook/utils';
+
+import { PrimaryButton } from '../PrimaryButton';
+import { Space } from '../Space';
+import { Text } from '../Text';
+import { Title } from '../Title';
+import { Paper, PaperProps } from './Paper';
 
 export default RUIComponentMeta<PaperProps>('Layout', Paper)
   .withStyleSystemProps()
@@ -39,6 +43,6 @@ export const PanelWithContent: Story<PaperProps> = (args) => (
       can change the planet and confront modern challenges.
     </Text>
     <Space h="lg" />
-    <Button>Apply Now</Button>
+    <PrimaryButton>Apply Now</PrimaryButton>
   </Paper>
 );

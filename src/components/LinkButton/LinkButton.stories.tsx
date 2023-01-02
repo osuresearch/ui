@@ -4,10 +4,7 @@ import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
 import { LinkButton, LinkButtonProps } from './LinkButton';
 
-export default RUIComponentMeta<LinkButtonProps>('Components', LinkButton)
-  .withStyleSystemProps()
-  .withBadge('molecule')
-  .withBadge('beta');
+export default RUIComponentMeta<LinkButtonProps>('BUX Stuff', LinkButton).withStyleSystemProps();
 
 export const Overview = RUIComponentStory<LinkButtonProps>((args) => (
   <LinkButton {...args}>Call to Action</LinkButton>

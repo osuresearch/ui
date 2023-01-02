@@ -1,10 +1,8 @@
 import React, { forwardRef } from 'react';
 
-import { StyleSystemProps } from '~/types';
-
 import { Icon } from '../Icon';
 
-export type NecessityIndicatorProps = StyleSystemProps;
+export type NecessityIndicatorProps = Record<string, never>;
 
 // NOTE: Naming convention comes from React Spectrum
 // due to their 'isRequired' prop already hinting that
@@ -23,6 +21,18 @@ export type NecessityIndicatorProps = StyleSystemProps;
  */
 export const NecessityIndicator = forwardRef<HTMLDivElement, NecessityIndicatorProps>(
   (props, ref) => (
-    <Icon ref={ref} c="error" size={10} ml="sm" name="asterisk" {...props} aria-hidden />
+    <Icon
+      aria-label="(required)"
+      ref={ref}
+      size={10}
+      ml="xs"
+      mb="xs"
+      name="asterisk"
+      c={{
+        light: 'error',
+        dark: 'dark'
+      }}
+      {...props}
+    />
   )
 );

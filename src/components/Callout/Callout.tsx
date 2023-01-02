@@ -3,7 +3,7 @@ import React, { useRef } from 'react';
 import { useOverlayTrigger } from 'react-aria';
 import { useOverlayTriggerState } from 'react-stately';
 
-import { SlotType } from '@osuresearch/ui';
+import { SlotType } from '~/types';
 
 import { MissingSlot } from '../MissingSlot';
 import { Popover } from '../Popover';

@@ -5,9 +5,7 @@ import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 import { Avatar } from '../Avatar';
 import { AvatarGroupProps, AvatarGroup as Component } from './AvatarGroup';
 
-export default RUIComponentMeta<AvatarGroupProps>('Layout', Component)
-  .withStyleSystemProps()
-  .withBadge('experimental');
+export default RUIComponentMeta<AvatarGroupProps>('Components', Component).withStyleSystemProps();
 
 export const Overview = RUIComponentStory<AvatarGroupProps>((args) => (
   <Component {...args}>

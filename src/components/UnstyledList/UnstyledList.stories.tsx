@@ -10,9 +10,7 @@ import { Item } from '../Item';
 import { Text } from '../Text';
 import { UnstyledList as Component, RowSlotProps, UnstyledListProps } from './UnstyledList';
 
-export default RUIComponentMeta<UnstyledListProps>('Utilities', Component).withBadge(
-  'experimental'
-);
+export default RUIComponentMeta<UnstyledListProps>('Unstyled', Component);
 
 const SimpleRowSlot = ({ item, checkboxProps, ...rowProps }: RowSlotProps) => {
   const ref = useRef<HTMLInputElement>(null);

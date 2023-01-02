@@ -193,3 +193,5 @@ export type ForwardRefWithStaticComponents<
   Props extends Record<string, any>,
   Static extends Record<string, any>
 > = ForwardRefExoticComponent<Props> & Static;
+
+export type SlotType<P = Record<string, never>> = React.ComponentType<P>;

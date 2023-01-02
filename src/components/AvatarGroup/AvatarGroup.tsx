@@ -39,7 +39,7 @@ export const AvatarGroup = forwardRef<HTMLDivElement, AvatarGroupProps>(
             size={size}
             alt={`and ${overflow} more`}
             label={`+${overflow}`}
-            colors={['dimmed-tint']}
+            colors={['dimmed']}
           />
         )}
       </Group>

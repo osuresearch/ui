@@ -1,22 +1,19 @@
-import { Story } from '@storybook/react';
 import React from 'react';
-
-import { Details as Component, DetailsProps, Text } from '@osuresearch/ui';
 
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
-export default RUIComponentMeta<DetailsProps>('Components', Component)
-  .withStyleSystemProps()
-  .withBadge('atom')
-  .withBadge('stable');
+import { Text } from '../Text';
+import { Details as Component, DetailsProps } from './Details';
 
-const Template: Story<DetailsProps> = (args: DetailsProps) => (
-  <Component {...args}>
-    <Text>Content to be revealed.</Text>
-  </Component>
+export default RUIComponentMeta<DetailsProps>('BUX Stuff', Component).withStyleSystemProps();
+
+export const Details = RUIComponentStory<DetailsProps>(
+  (args) => (
+    <Component {...args}>
+      <Text>Content to be revealed.</Text>
+    </Component>
+  ),
+  {
+    summary: 'This is a Details disclosure element'
+  }
 );
-
-export const Details = Template.bind({});
-Details.args = {
-  summary: 'This is a Details disclosure element'
-};

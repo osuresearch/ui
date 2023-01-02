@@ -141,10 +141,10 @@ export const Avatar = polymorphicForwardRef<'div', AvatarProps>(
         >
           <Text
             fw="bold"
-            c={colors[index]}
-            style={{
-              filter: 'brightness(30%)'
-            }}
+            c={(colors[index] + '-contrast') as Color}
+            // style={{
+            //   filter: 'brightness(30%)'
+            // }}
           >
             {label}
           </Text>

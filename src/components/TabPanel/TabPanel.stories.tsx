@@ -6,9 +6,7 @@ import { Item } from '../Item';
 import { Text } from '../Text';
 import { TabPanel, TabPanelProps } from './TabPanel';
 
-export default RUIComponentMeta<TabPanelProps>('Components', TabPanel)
-  .withStyleSystemProps()
-  .withBadge('experimental');
+export default RUIComponentMeta<TabPanelProps>('Bux Stuff', TabPanel).withStyleSystemProps();
 
 export const Overview = RUIComponentStory<TabPanelProps>((args) => (
   <TabPanel aria-label="Profiles of blah blah blah">

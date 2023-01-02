@@ -5,7 +5,7 @@ import { useToggleState } from 'react-stately';
 
 import { SlotProp, SlotPropWithRef, useSlots } from '~/hooks/useSlots';
 import { useStyleSystemProps } from '~/hooks/useStyleSystemProps';
-import { StyleSystemProps } from '~/types';
+import { SlotType, StyleSystemProps } from '~/types';
 import { cx, mergeRefs } from '~/utils';
 
 import { Box } from '../Box';
@@ -14,8 +14,6 @@ import { Group } from '../Group';
 import { Icon } from '../Icon';
 import { Stack } from '../Stack';
 import { Text } from '../Text';
-
-export type SlotType<P = Record<string, never>> = React.ComponentType<P>;
 
 export type InputFieldSlots = {
   // inputSlot?: SlotPropWithRef<HTMLInputElement, React.InputHTMLAttributes<HTMLInputElement>>

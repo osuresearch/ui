@@ -16,7 +16,12 @@ export type HashLinkProps = {
 export const HashLink = forwardRef<HTMLDivElement, HashLinkProps>(({ id, children }, ref) => (
   <span ref={ref} className="[&>a]:hover:rui-opacity-100">
     {children}
-    <Link id={id} ml="sm" className="rui-transition-opacity rui-opacity-0" href={`#${id}`}>
+    <Link
+      id={id}
+      ml="sm"
+      className="rui-transition-opacity rui-opacity-0 rui-scale-75 rui-inline-block"
+      href={`#${id}`}
+    >
       #
     </Link>
   </span>
