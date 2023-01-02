@@ -1,39 +1,85 @@
-import { Meta, Story } from '@storybook/react';
 import React from 'react';
 
+import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
+
 import { Icon } from '../Icon';
-import { Text } from '../Text/Text';
-import { Input, InputProps } from './index';
+import { Text } from '../Text';
+import { UnstyledButton } from '../UnstyledButton';
+import { Input, InputProps } from './Input';
 
-export default {
-  title: 'Utilities/Input',
-  component: Input,
-  argTypes: {}
-} as Meta<typeof Input>;
+// Specifying an explicit prop union so that Storybook
+// can understand child props for the default implementation
+type Props = InputProps & React.ComponentPropsWithoutRef<'input'>;
 
-const Template: Story<InputProps> = (args: InputProps) => <Input {...args} />;
+export default RUIComponentMeta<Props>('Utilities', Input)
+  .withStyleSystemProps()
+  .withBadge('stable');
 
-export const Default = Template.bind({});
-Default.args = {
-  id: 'default-story',
-  label: 'Form Input Label',
-  help: 'Helper Text',
-  error: 'Error helper text',
-  placeholder: 'Placeholder Text (Optional)'
-};
+export const Overview = RUIComponentStory<Props>((args) => <Input {...args} />, {
+  defaultValue: 'Hello world!'
+});
 
-export const WithLeftIcon = Template.bind({});
-WithLeftIcon.args = {
-  id: 'left-icon-story',
-  label: 'Enter your GitHub username',
-  leftContent: <Icon name="github" size={24} className="p-xs" />,
-  leftWidth: 32
-};
+export const Placeholder = RUIComponentStory(Overview, {
+  placeholder: 'Enter your email address'
+});
 
-export const WithRightContent = Template.bind({});
-WithRightContent.args = {
-  id: 'right-content-story',
-  label: 'Enter your OSU email address',
-  rightContent: <Text className="p-4">@osu.edu</Text>,
-  rightWidth: 80
-};
+export const Error = RUIComponentStory(Overview, {
+  'defaultValue': 'Hello world!',
+  'aria-invalid': true
+});
+
+export const ReadOnly = RUIComponentStory(Overview, {
+  defaultValue: 'Hello world!',
+  readOnly: true
+});
+
+export const Disabled = RUIComponentStory(Overview, {
+  defaultValue: 'Hello world!',
+  disabled: true
+});
+
+export const WithLeftSlot = RUIComponentStory(Overview, {
+  leftContent: <Icon c="light-contrast" name="github" size={22} p="xs" />,
+  leftWidth: 36,
+  placeholder: 'Your GitHub username'
+});
+
+export const WithRightSlot = RUIComponentStory(Overview, {
+  rightContent: (
+    <Text as="div" py="xxs" pr="xs">
+      @osu.edu
+    </Text>
+  ),
+  rightWidth: 80,
+  placeholder: 'buckeye.1'
+});
+
+export const WithButton = RUIComponentStory(Overview, {
+  leftContent: <Icon c="dark" name="search" size={15} p="sm" />,
+  leftWidth: 36,
+  rightContent: (
+    <UnstyledButton bgc="light-shade" h="full" px="sm">
+      Search
+    </UnstyledButton>
+  ),
+  rightWidth: 80,
+  placeholder: 'buckeye.1'
+});
+
+export const Polymorphic = RUIComponentStory<InputProps>((args) => (
+  <Input as="button" {...args} onClick={(e) => alert('Clicked button!')}>
+    Button
+  </Input>
+));
+
+export const DisabledPolymorphic = RUIComponentStory<InputProps>((args) => (
+  <Input as="button" disabled {...args} onClick={(e) => alert('Clicked button!')}>
+    Disabled button
+  </Input>
+));
+
+export const ErrorPolymorphic = RUIComponentStory<InputProps>((args) => (
+  <Input as="button" aria-invalid {...args} onClick={(e) => alert('Clicked button!')}>
+    Invalid button
+  </Input>
+));

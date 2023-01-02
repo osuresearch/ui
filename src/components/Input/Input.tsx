@@ -1,40 +1,23 @@
 import React, { CSSProperties, ReactNode, forwardRef } from 'react';
 
-import { cx } from '~/utils';
+import { Color } from '~/theme';
+import { cx, polymorphicForwardRef } from '~/utils';
 
-import { DefaultProps, ThemeSize } from '../../types';
-import { createPolymorphicComponent } from '../../utils/createPolymorphicComponent';
+import { StyleSystemProps } from '../../types';
 import { Box } from '../Box';
-import { Icon } from '../Icon';
-import { Stack } from '../Stack';
-import { Text } from '../Text/Text';
 
-export interface InputVisualProps {
-  /**
-   * Unique identifier for the input.
-   *
-   * **a11y**:
-   * - Will be automatically assigned to `htmlFor` of associated labels
-   */
-  id: string;
-
+// React.ComponentPropsWithoutRef<'input'> &
+export type InputProps = StyleSystemProps & {
   /**
    * Defines input appearance
-   *
-   * Default behaviour switches from 'default' to 'filled' for dark mode
    */
   variant?: 'unstyled' | 'default' | 'filled';
 
   /**
-   * Input size
+   * Render a pointer instead of a caret when
+   * the mouse cursor is over the input
    */
-  size?: ThemeSize;
-
-  /**
-   * Will only display the required asterisk without setting
-   * the required attribute of the input.
-   */
-  withAsterisk?: boolean;
+  pointer?: boolean;
 
   /**
    * Content to display on the left hand side of the input
@@ -59,76 +42,42 @@ export interface InputVisualProps {
   rightWidth?: number;
 
   /**
-   * Render a pointer instead of a caret when
-   * the mouse cursor is over the input
+   * Whether keyboard focus should be visible.
    */
-  pointer?: boolean;
-}
+  isFocusVisible?: boolean;
+};
 
-export interface InputFunctionalProps {
-  /**
-   * Label content
-   */
-  label: ReactNode;
-
-  /**
-   * Element to display with the associated `htmlFor`
-   * wrapping the label content.
-   */
-  labelElement?: 'div' | 'label';
-
-  /**
-   * Additional descriptive content
-   */
-  help?: ReactNode;
-
-  /**
-   * Error content associated with the input.
-   *
-   * **a11y**:
-   * * Will set `aria-invalid=true` when present
-   */
-  error?: ReactNode;
-
-  /**
-   * Input placeholder content
-   */
-  placeholder?: string;
-
-  /** Will display the required asterisk and add a `required` attribute to the input element */
-  required?: boolean;
-
-  disabled?: boolean;
-
-  /**
-   * Number of input lines.
-   *
-   * More than 1 will result in a textarea being rendered instead.
-   */
-  lines?: number;
-}
-
-export type InputProps = DefaultProps &
-  InputVisualProps &
-  InputFunctionalProps & {
-    // `component` prop is implied via polymorphism
-  };
-
-export const _Input = forwardRef<HTMLInputElement, InputProps>(
+/**
+ * Slot renderer for a text input.
+ *
+ * ## 🛑 Disclaimer
+ *
+ * In most cases, you should not use this component in your application.
+ * This is a component that is solely responsible for rendering states
+ * and does not meet accessibility requirements alone.
+ *
+ * ## Polymorphic
+ * - You can use the `as` prop to change the root element for this component.
+ *
+ * ## Accessibility
+ * - Requires `aria-invalid` to be set to visually represent an invalid state.
+ *
+ * ## Differences from BUX
+ * - Focus outline is outside the main border. In BUX it is difficult to
+ *  visually determine whether a field with an error has keyboard focus.
+ * - Contrast has been increased for placeholder text to meet minimum WCAG AA.
+ * - Disabled state does not perform the same grey-boxing.
+ */
+export const Input = polymorphicForwardRef<'input', InputProps>(
   (
     {
+      as,
       className,
       style,
-      id,
-      required = false,
-      disabled,
-      lines = 1,
 
-      label,
-      labelElement = 'label',
-
-      help,
-      error,
+      variant = 'default',
+      pointer,
+      isFocusVisible,
 
       leftContent,
       leftWidth,
@@ -136,87 +85,70 @@ export const _Input = forwardRef<HTMLInputElement, InputProps>(
       rightContent,
       rightWidth,
 
-      variant = 'default',
-      size,
-      withAsterisk,
-      pointer,
-
-      // The rest are to be spread into the input element
       ...inputProps
     },
     ref
   ) => {
-    const renderAsterisk = withAsterisk || required;
-    const describedBy = id + '__help';
-
-    const inputStyle: CSSProperties = {};
-    if (leftWidth) {
-      inputStyle.paddingLeft = leftWidth;
-    }
-
-    if (rightWidth) {
-      inputStyle.paddingRight = rightWidth;
-    }
+    const { disabled, readOnly, 'aria-invalid': invalid } = inputProps;
 
     return (
-      <Box as={Stack} style={style} className={cx(className)}>
-        <Box as={labelElement} htmlFor={id} className={cx('flex', 'flex-row')}>
-          {label}
-          {renderAsterisk && <Icon className="text-error pl-4" name="asterisk" size={8} />}
-        </Box>
-
-        {help && (
-          <Text id={describedBy} c="dimmed" fs="sm">
-            {help}
-          </Text>
+      <Box
+        className={cx(
+          'rui-relative'
+          // 'rui-outline rui-outline-2 rui-outline-black',
+        )}
+      >
+        {leftContent && (
+          <div className="rui-absolute rui-left-0 rui-top-0 rui-bottom-0">{leftContent}</div>
         )}
 
         <Box
-          className={cx({
-            'cursor-pointer': pointer,
-            'border-2': variant === 'default',
-            'border-error': error,
-            'relative': true
-          })}
-        >
-          {leftContent && <div className="absolute left-0 top-0">{leftContent}</div>}
+          as={as || 'input'}
+          ref={ref}
+          style={{
+            paddingLeft: leftWidth,
+            paddingRight: rightWidth
+          }}
+          px="xs"
+          py="xxs"
+          w="full"
+          bgc={{
+            dark: {
+              default: 'light-tint',
+              filled: 'light-shade',
+              unstyled: undefined
+            }[variant] as Color,
 
-          <Box
-            as="input"
-            {...inputProps}
-            ref={ref}
-            id={id}
-            required={required}
-            disabled={disabled}
-            aria-invalid={error !== undefined}
-            aria-describedby={describedBy}
-            className={cx({
-              'px-8': true,
-              'py-4': true,
-              'w-full': true,
-              'cursor-not-allowed': disabled
-            })}
-            style={inputStyle}
-          />
+            light: {
+              default: 'light-tint',
+              filled: 'light-shade',
+              unstyled: undefined
+            }[variant] as Color
+          }}
+          className={cx(
+            'rui-border-2 rui-text-light-contrast',
 
-          {rightContent && <div className="absolute right-0 top-0">{rightContent}</div>}
-        </Box>
+            // Replace default focus ring with our own
+            'focus-visible:rui-outline-none',
+            'focus:rui-ring-2 rui-ring-pink',
 
-        {error && (
-          <Text fs="sm" className={cx('flex', 'flex-row')}>
-            <Icon className="text-sm pr-xs text-error mt-1" name="xmarkCircle" />
-            {error}
-          </Text>
+            // Stateful styles
+            {
+              'rui-border-light-shade': variant !== 'unstyled',
+              'rui-border-clear': variant === 'unstyled',
+
+              'rui-border-error': invalid,
+              'rui-cursor-not-allowed': disabled,
+              'rui-cursor-pointer': pointer
+            }
+          )}
+          {...inputProps}
+        />
+
+        {rightContent && (
+          <div className="rui-absolute rui-right-0 rui-top-0 rui-bottom-0">{rightContent}</div>
         )}
       </Box>
     );
   }
 );
-
-/**
- * Polymorphic concept of an input.
- *
- * Do not use this directly, this is used as a bucket of behaviour
- * for other custom input components.
- */
-export const Input = createPolymorphicComponent<'input', InputProps>(_Input);

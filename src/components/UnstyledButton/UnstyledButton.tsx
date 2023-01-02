@@ -1,9 +1,12 @@
 import React, { MouseEventHandler } from 'react';
 
 import { StyleSystemProps } from '~/types';
-import { polymorphicForwardRef } from '~/utils';
+import { cx, polymorphicForwardRef } from '~/utils';
 
 import { Box } from '../Box';
+
+// TODO: How do we deal with applying hover styles,
+// disabled styles, etc to this button?
 
 export type UnstyledButtonProps = StyleSystemProps & {
   /**
@@ -27,10 +30,14 @@ export const UnstyledButton = polymorphicForwardRef<'button', UnstyledButtonProp
   ({ as, disabled, onClick, children, className, ...props }, ref) => (
     <Box
       as={as || 'button'}
-      // className={cx({
-      //   'focus:ring hover:ring': !disabled
-      // }, className)}
-      className={className}
+      className={cx(
+        {
+          // Replace default focus ring with our own
+          'focus-visible:rui-outline-none': !disabled,
+          'focus:rui-ring-2 rui-ring-pink': !disabled
+        },
+        className
+      )}
       ref={ref}
       type="button"
       onClick={onClick}
