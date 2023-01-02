@@ -37,7 +37,7 @@ export const CheckboxIcon = ({
       { 'rui-bg-light-tint rui-border-dark': !isSelected && !isIndeterminate },
       { 'rui-bg-primary rui-border-primary': isSelected || isIndeterminate },
       { 'rui-border-dimmed rui-bg-light-shade': isDisabled },
-      { 'rui-ring rui-ring-pink': isFocusVisible }
+      { 'rui-ring rui-focus-ring': isFocusVisible }
     )}
     {...props}
   >

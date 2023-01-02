@@ -9,16 +9,24 @@ import { Stack } from '../Stack';
 import { Text } from '../Text';
 import { UnstyledButton, UnstyledButtonProps } from './UnstyledButton';
 
-export default RUIComponentMeta<UnstyledButtonProps>('Utilities', UnstyledButton)
-  .withStyleSystemProps()
-  .withBadge('atom')
-  .withBadge('stable');
+export default RUIComponentMeta<UnstyledButtonProps>(
+  'Unstyled',
+  UnstyledButton
+).withStyleSystemProps();
 
-const Template: Story<UnstyledButtonProps> = (args) => (
+export const Overview = RUIComponentStory<UnstyledButtonProps>((args) => (
   <UnstyledButton {...args}>Button</UnstyledButton>
-);
+));
 
-export const Overview = Template.bind({});
+export const Disabled = RUIComponentStory(Overview, {
+  isDisabled: true
+});
+
+export const OnPress = RUIComponentStory(Overview, {
+  onPress: (e) => alert('Clicked!')
+}).withDescription(
+  'This is similar to the standard `onClick` event, but normalized to support all interaction methods (mouse, keyboard, and touch) equally.'
+);
 
 export const ContactCard = RUIComponentStory((args) => (
   <UnstyledButton>
@@ -39,13 +47,8 @@ export const ContactCard = RUIComponentStory((args) => (
   </UnstyledButton>
 ));
 
-export const PolymorphAsAnchor = RUIComponentStory((args) => (
+export const Polymorphic = RUIComponentStory((args) => (
   <UnstyledButton as="a" href="https://example.com">
     Polymorphic button
   </UnstyledButton>
-)).withDescription(`
-  >This example is for demonstrative purposes of polymorphism.
-
-  >**Do not** use this as-is in an application as it does not pass
-  accessibility guidelines
-`);
+));

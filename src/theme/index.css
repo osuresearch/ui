@@ -134,13 +134,13 @@
   --rui-error-shade: var(--rui-white);
   --rui-error-contrast: var(--rui-white);
 
-  --rui-focus: #41b6e6;
-
   --rui-link: var(--rui-scarlet);
   --rui-link-tint: var(--rui-white);
 
   --rui-visited: #660099;
   --rui-visited-tint: #e5c9f3;
+
+  --rui-focus: #41b6e6;
 
   /*
     Typography tokens
@@ -204,6 +204,13 @@
   Design token reconfigurations based on current theme
 */
 @layer base {
+  .rui-focus-ring {
+    @apply focus:rui-outline-none
+          focus:rui-ring-2
+          focus:rui-z-10
+          rui-ring-focus;
+  }
+
   [data-theme="light"] {
     /* :root defines defaults for the light theme */
   }
@@ -229,6 +236,8 @@
 
     --rui-visited: #e5c9f3;
     --rui-visited-tint: #e5c9f3;
+
+    --rui-focus: var(--rui-green);
   }
 }
 
@@ -241,4 +250,39 @@
   color: #ff00ff;
   background: #000;
   padding: 2px;
+}
+
+.underlay {
+  position: fixed;
+  inset: 0;
+}
+
+.arrow {
+  position: absolute;
+  fill: var(--page-background);
+  stroke: var(--spectrum-global-color-gray-400);
+  stroke-width: 1px;
+  width: 12px;
+  height: 12px;
+  border: 1px solid red;
+}
+
+.arrow[data-placement=top] {
+  top: 100%;
+  transform: translateX(-50%);
+}
+
+.arrow[data-placement=bottom] {
+  bottom: 100%;
+  transform: translateX(-50%) rotate(180deg);
+}
+
+.arrow[data-placement=left] {
+  left: 100%;
+  transform: translateY(-50%) rotate(-90deg);
+}
+
+.arrow[data-placement=right] {
+  right: 100%;
+  transform: translateY(-50%) rotate(90deg);
 }

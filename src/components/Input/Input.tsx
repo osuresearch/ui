@@ -126,12 +126,8 @@ export const Input = polymorphicForwardRef<'input', InputProps>(
             }[variant] as Color
           }}
           className={cx(
+            'rui-focus-ring',
             'rui-border-2 rui-text-light-contrast',
-
-            // Replace default focus ring with our own
-            'focus-visible:rui-outline-none',
-            'focus:rui-ring-2 rui-ring-pink',
-
             // Stateful styles
             {
               'rui-border-light-shade': variant !== 'unstyled',
