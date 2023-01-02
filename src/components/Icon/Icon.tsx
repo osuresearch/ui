@@ -15,8 +15,8 @@ export type IconProps = StyleSystemProps & {
   name: string; // TODO: keyof loaded icons somehow?
   rotate?: 0 | 90 | 180 | 270;
   flip?: 'horizontal' | 'vertical';
-  size?: number;
-  inline?: boolean;
+  size?: string | number;
+  block?: boolean;
 };
 
 /**
@@ -27,16 +27,11 @@ export type IconProps = StyleSystemProps & {
  * TODO: Notes about purpose / meaning / understandability / etc
  */
 export const Icon = polymorphicForwardRef<'i', IconProps>(
-  ({ as, className, name, inline, flip, rotate = 0, size = 16, ...props }, ref) => (
+  ({ as, className, name, block, flip, rotate = 0, size = 16, ...props }, ref) => (
     <Box
       as={as || 'i'}
       ref={ref}
-      className={cx(
-        {
-          'rui-inline-block': inline
-        },
-        className
-      )}
+      className={cx({ 'rui-inline-block': !block }, 'rui-align-middle', className)}
       {...props}
     >
       <Iconify
