@@ -99,10 +99,10 @@ function Item({ node, state, ...props }: ItemProps) {
  *
  * ## Slots
  *
- * **Checkbox**: A slot for the rendering of a checkbox on each item when
- * the list has a `selectionMode` of `multiple` or `single`. You **MUST**
- * define a checkbox slot renderer for an interactive list, as one will not
- * be provided by default.
+ * ### Checkbox Slot
+ * - A slot for the rendering of a checkbox on each item when the list has
+ *  a `selectionMode` of `multiple` or `single`.
+ * - Required for interactive lists, as a checkbox is not provided by default
  */
 export const UnstyledList = polymorphicForwardRef<'ul', UnstyledListProps>((props, ref) => {
   const state = useListState(props);

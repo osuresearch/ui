@@ -5,7 +5,7 @@ import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
 import { Box, BoxProps } from './Box';
 
-export default RUIComponentMeta<BoxProps>('Utilities', Box)
+export default RUIComponentMeta<BoxProps>('Layout', Box)
   .withStyleSystemProps()
   .withBadge('atom')
   .withBadge('stable');

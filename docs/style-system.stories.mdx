@@ -10,4 +10,4 @@ Key points to touch on:
 - Theme-dependent color. E.g. `c={{ dark: 'violet', light: 'blue' }}`
 - Screen-dependent space. E.g. `m={{ xs: 'sm', md: 'lg', xl: 'xl' }}`
 - Group and Stack composition (+ future container or grid things)
--
+- CSS independence - RUI does not control global CSS styles (except for Tailwind's reset). All styles are encapsulated into components. Meaning no implicit styling with `<strong>`, `<p>`, etc.

@@ -1,11 +1,11 @@
 import React, { forwardRef } from 'react';
 
-import { Box } from '@osuresearch/ui';
-
-import { DefaultProps } from '~/types';
+import { StyleSystemProps } from '~/types';
 import { cx } from '~/utils';
 
-export type __TEMPLATE__Props = DefaultProps & {
+import { Box } from '../Box';
+
+export type __TEMPLATE__Props = StyleSystemProps & {
   /* Your props */
 
   children?: React.ReactNode;
@@ -18,29 +18,16 @@ export type __TEMPLATE__Props = DefaultProps & {
  * - a11y info (used aria tags, keyboard behaviour, etc)
  */
 export const __TEMPLATE__ = forwardRef<HTMLDivElement, __TEMPLATE__Props>(
-  (
-    {
-      className,
-
-      /* Your props and defaults */
-
-      children, // If it supports children
-      ...props
-    },
-    ref
-  ) => (
+  ({ className, children, ...styleSystemProps }, ref) => (
     <Box
+      as="div"
       ref={ref}
       className={cx(
-        {
-          // Your custom styles
-          'text-scarlet': true
-        },
-        className // User-supplied styles
+        // Your custom styles
+        className
       )}
-      {...props} // Rest of the box model props
+      {...styleSystemProps}
     >
-      {/* Your DOM */}
       {children}
     </Box>
   )

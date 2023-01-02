@@ -45,6 +45,9 @@ export type ButtonProps = {
  * - Navigating to a new page or view in your application
  * - Navigating to different web page, e.g. external documentation
  *
+ * ## Polymorphic
+ *  - You can use the `as` prop to change the root element for this component.
+ *
  * ## Accessibility
  *
  * - Small buttons meet the minimum touch target of 44px for Success Criterion [2.5.5 Target Size (Level AAA)](https://www.w3.org/WAI/WCAG21/Understanding/target-size)

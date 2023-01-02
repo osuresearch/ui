@@ -1,7 +1,12 @@
+import React, { ForwardRefRenderFunction } from 'react';
+
 /**
  * Render prop slot on a component
  */
 export type SlotProp<Props> = React.ReactNode | ((props: Props) => React.ReactNode);
+
+export type SlotPropWithRef<Ref, Props> = ForwardRefRenderFunction<Ref, Props>;
+// (props: P, ref: ForwardedRef<T>): ReactElement | null;
 
 // Basically a variant on TypeScript's builtin Parameters<Type>
 // but we group everything into a single props param
