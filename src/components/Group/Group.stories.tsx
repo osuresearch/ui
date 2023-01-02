@@ -11,8 +11,14 @@ export default RUIComponentMeta<GroupProps>('Layout', GroupComponent)
 
 export const Group = RUIComponentStory((args: GroupProps) => (
   <GroupComponent {...args}>
-    <Button>1</Button>
-    <Button>2</Button>
-    <Button>3</Button>
+    <Button px="lg" py="lg">
+      1
+    </Button>
+    <Button px="lg" py="xxl">
+      2
+    </Button>
+    <Button px="lg" py="lg">
+      3
+    </Button>
   </GroupComponent>
 ));
