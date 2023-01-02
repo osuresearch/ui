@@ -222,6 +222,30 @@ module.exports = {
       },
       transitionTimingFunction: {
         'decelerate-max': 'transform 300ms cubic-bezier(0, 0, 0, 1)',
+      },
+      keyframes: {
+        'fade-in-down': {
+          '0%': {
+            opacity: '0',
+            transform: 'translateY(-10px)'
+          },
+          '100%': {
+            opacity: '1',
+            transform: 'translateY(0)'
+          },
+        },
+        'pop': {
+          '0%': {
+            transform: 'scale(0)'
+          },
+          '100%': {
+            transform: 'scale(1)'
+          }
+        }
+      },
+      animation: {
+        'fade-in-down': 'fade-in-down 0.5s ease-out',
+        'pop': 'pop 0.12s ease-in-out',
       }
     },
   },

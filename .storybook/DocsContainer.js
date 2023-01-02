@@ -20,7 +20,7 @@ export const DocsContainer = ({ children, context }) => {
 
   // TODO: Smarter check. Can I pull the source folder path?
   let isComponent = [
-    'layout', 'components', 'utilities', 'bux stuff'
+    'layout', 'components', 'utilities', 'bux stuff', 'forms'
   ].indexOf(parent) >= 0 && name !== 'Overview';
 
   return (
