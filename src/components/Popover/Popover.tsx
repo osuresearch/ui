@@ -1,7 +1,7 @@
 import { mergeProps } from '@react-aria/utils';
 import { FocusableElement } from '@react-types/shared';
 import React, { useRef } from 'react';
-import { Overlay, usePopover } from 'react-aria';
+import { FocusScope, Overlay, usePopover } from 'react-aria';
 import { OverlayTriggerState } from 'react-stately';
 
 import { Icon } from '../Icon';
@@ -37,6 +37,9 @@ export function Popover({ children, state, offset = 8, overlayProps, ...props }:
     style: {}
   };
 
+  // TODO: Figure out focus handling for this.
+  // Should we focus something specific? Should it be
+  // configurable by the developer? Etc.
   return (
     <Overlay {...overlayProps}>
       <Underlay {...underlayProps} />
@@ -44,23 +47,24 @@ export function Popover({ children, state, offset = 8, overlayProps, ...props }:
         <svg {...arrowProps} className="rui-arrow" data-placement={placement}>
           <path d="M0 0,L6 6,L12 0" />
         </svg>
+        <FocusScope contain restoreFocus autoFocus>
+          {/* <Icon
+            name="caret"
+            className="rui-arrow"
+            data-placement={placement}
+            {...mergeProps(arrowProps, iconProps)}
+          /> */}
 
-        {/* <Icon
-          name="caret"
-          className="rui-arrow"
-          data-placement={placement}
-          {...mergeProps(arrowProps, iconProps)}
-        /> */}
+          <VisuallyHidden>
+            <button aria-label="Close" onClick={state.close} />
+          </VisuallyHidden>
 
-        <VisuallyHidden>
-          <button aria-label="Close" onClick={state.close} />
-        </VisuallyHidden>
+          {children}
 
-        {children}
-
-        <VisuallyHidden>
-          <button aria-label="Close" onClick={state.close} />
-        </VisuallyHidden>
+          <VisuallyHidden>
+            <button aria-label="Close" onClick={state.close} />
+          </VisuallyHidden>
+        </FocusScope>
       </Paper>
     </Overlay>
   );
