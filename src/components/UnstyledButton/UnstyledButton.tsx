@@ -18,17 +18,21 @@ export type UnstyledButtonProps = StyleSystemProps &
 /**
  * Unstyled polymorphic button
  *
- * ## Accessibility
- * - Is wrapped by the `FocusRing` component
+ * ## 🛑 Disclaimer
  *
- * ## Polymorphic
- * - You can use the `as` prop to change the root element for this component.
+ * You should not use this component directly in your application.
+ * Use one of the styled toggle components.
+ *
+ * ## Accessibility
+ * - Wrapped by the `FocusRing` component for consistent focus
+ *
+ * <!-- @ruiPolymorphic -->
  */
 export const UnstyledButton = polymorphicForwardRef<'button', UnstyledButtonProps>(
   ({ as, ...props }, ref) => {
     const { children } = props;
     const buttonRef = useRef<HTMLButtonElement>(null);
-    const { buttonProps } = useButton(
+    const { buttonProps, isPressed } = useButton(
       {
         ...props,
         elementType: as
@@ -38,7 +42,7 @@ export const UnstyledButton = polymorphicForwardRef<'button', UnstyledButtonProp
 
     return (
       <FocusRing>
-        <Box as={as || 'button'} ref={ref} {...props} {...buttonProps}>
+        <Box as={as || 'button'} ref={ref} {...props} {...buttonProps} data-pressed={isPressed}>
           {children}
         </Box>
       </FocusRing>

@@ -30,7 +30,7 @@ export const OnPress = RUIComponentStory(Overview, {
 
 export const ContactCard = RUIComponentStory((args) => (
   <UnstyledButton>
-    <Group>
+    <Group p="xs">
       <Avatar
         alt="Chase McManning contact"
         size={40}
