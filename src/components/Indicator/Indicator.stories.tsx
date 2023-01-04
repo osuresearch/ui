@@ -1,14 +1,11 @@
 import { Story } from '@storybook/react';
 import React from 'react';
 
-import { Indicator, IndicatorProps } from '@osuresearch/ui';
-
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
-export default RUIComponentMeta<IndicatorProps>('Components', Indicator)
-  .withStyleSystemProps()
-  .withBadge('atom')
-  .withBadge('stable');
+import { Indicator, IndicatorProps } from './Indicator';
+
+export default RUIComponentMeta<IndicatorProps>('Components', Indicator).withStyleSystemProps();
 
 const Template: Story<IndicatorProps> = (args) => <Indicator {...args} />;
 

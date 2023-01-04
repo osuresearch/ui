@@ -6,7 +6,7 @@ import { cx } from '~/utils';
 import { Box } from '../Box';
 
 export type IndicatorProps = StyleSystemProps & {
-  size?: ThemeSize;
+  size?: number;
 
   c?: ColorProp;
 
@@ -17,7 +17,7 @@ export type IndicatorProps = StyleSystemProps & {
 /**
  * A dot that can be used as an indicator to grab the user's attention
  */
-export function Indicator({ size = 'sm', c = 'primary', ping, ...props }: IndicatorProps) {
+export function Indicator({ size = 14, c = 'primary', ping, ...props }: IndicatorProps) {
   return (
     <Box className="rui-relative rui-inline-flex rui-align-middle" {...props}>
       <Box className={cx('rui-flex rui-absolute rui-left-0 rui-top-0')} w={size} h={size}>
