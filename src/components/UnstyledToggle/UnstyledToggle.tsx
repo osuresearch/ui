@@ -6,6 +6,7 @@ import { StyleSystemProps } from '~/types';
 import { polymorphicForwardRef } from '~/utils';
 
 import { Box } from '../Box';
+import { FocusRing } from '../FocusRing';
 
 // TODO: Deal with onChange conflict.
 // See: https://github.com/adobe/react-spectrum/issues/1860#issuecomment-849833808
@@ -44,9 +45,11 @@ export const UnstyledToggle = polymorphicForwardRef<'button', UnstyledToggleProp
     );
 
     return (
-      <Box as={as || 'button'} ref={ref} {...props} {...buttonProps}>
-        {children}
-      </Box>
+      <FocusRing>
+        <Box as={as || 'button'} ref={ref} {...props} {...buttonProps}>
+          {children}
+        </Box>
+      </FocusRing>
     );
   }
 );
