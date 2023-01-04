@@ -184,15 +184,14 @@ export function styleSystemArgTypes() {
     }
   }
 
-  return {
-    m: margin,
-    mx: margin,
-    my: margin,
-    mt: margin,
-    mb: margin,
-    ml: margin,
-    mr: margin,
+  const layout = {
+    table: {
+      category: 'Style System',
+      subcategory: 'Layout',
+    }
+  }
 
+  return {
     p: padding,
     px: padding,
     py: padding,
@@ -200,6 +199,14 @@ export function styleSystemArgTypes() {
     pb: padding,
     pl: padding,
     pr: padding,
+
+    m: margin,
+    mx: margin,
+    my: margin,
+    mt: margin,
+    mb: margin,
+    ml: margin,
+    mr: margin,
 
     w: size,
     h: size,
@@ -214,5 +221,7 @@ export function styleSystemArgTypes() {
     ff: font(fontFamily),
     fw: font(fontWeight),
     fs: font(fontSize),
+
+    gridArea: layout,
   }
 }

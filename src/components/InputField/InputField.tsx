@@ -88,7 +88,7 @@ function MissingSlot() {
  */
 export const InputField = forwardRef<HTMLInputElement, InputFieldProps>((props, ref) => {
   const { className, label, description, errorMessage } = props;
-  const styleSystemProps = useStyleSystemProps(props);
+  const [styleSystemProps] = useStyleSystemProps(props);
 
   const inputRef = useRef<HTMLInputElement>(null);
 

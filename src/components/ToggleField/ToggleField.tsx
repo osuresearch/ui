@@ -94,7 +94,7 @@ export const ToggleField = forwardRef<HTMLInputElement, ToggleFieldProps>((props
   const { isSelected, isIndeterminate, isDisabled } = props;
 
   const { focusProps, isFocusVisible } = useFocusRing(props.inputProps);
-  const styleSystemProps = useStyleSystemProps(props);
+  const [styleSystemProps] = useStyleSystemProps(props);
 
   const DiffSlot = props.diffSlot || MissingSlot;
 

@@ -8,7 +8,7 @@ import { DocumentPagination as Component, DocumentPaginationProps } from './Docu
 export default RUIComponentMeta<DocumentPaginationProps>('BUX Stuff', Component);
 
 export const DocumentPagination = RUIComponentStory<DocumentPaginationProps>((args) => (
-  <Group gap="lg">
+  <Group gap="lg" align="stretch">
     <Component {...args} direction="previous">
       Title of previous page
     </Component>

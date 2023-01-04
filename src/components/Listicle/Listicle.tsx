@@ -26,7 +26,7 @@ function ListicleItem({ item, checkboxProps, variant, ...rowProps }: ListicleIte
       <Title as="div" level={3}>
         <Group gap={0}>
           {variant === 'ordered' && (
-            <Text bgc="dimmed-tint" py="xxs" mr="md" w="xl" ta="center">
+            <Text bgc="dimmed-tint" py="xxs" mr="md" miw={32} h={32} ta="center">
               {(item.index || 0) + 1}
             </Text>
           )}

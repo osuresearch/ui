@@ -9,7 +9,7 @@ import { MissingSlot } from '../MissingSlot';
 import { Popover } from '../Popover';
 
 export type CalloutSlots = {
-  contentSlot?: SlotType<React.ComponentPropsWithRef<'div'>>;
+  contentSlot: React.ReactNode;
 };
 
 export type CalloutProps = CalloutSlots & {
@@ -32,15 +32,12 @@ export type CalloutProps = CalloutSlots & {
  * A callout is an overlay element positioned relative to a trigger.
  */
 export const Callout = ({ children, contentSlot, ...props }: CalloutProps) => {
-  const triggerRef = useRef<HTMLButtonElement>(null);
+  const triggerRef = useRef<Element>(null);
   const state = useOverlayTriggerState(props);
 
   const { triggerProps, overlayProps } = useOverlayTrigger({ type: 'dialog' }, state, triggerRef);
 
   const trigger = React.Children.only(children);
-
-  const ContentSlot = contentSlot || MissingSlot;
-
   return (
     <>
       {React.cloneElement(trigger, {
@@ -49,7 +46,7 @@ export const Callout = ({ children, contentSlot, ...props }: CalloutProps) => {
       })}
       {state.isOpen && (
         <Popover overlayProps={overlayProps} triggerRef={triggerRef} state={state} {...props}>
-          <ContentSlot />
+          {contentSlot}
         </Popover>
       )}
     </>

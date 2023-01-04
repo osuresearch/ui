@@ -2,7 +2,7 @@ import React, { Children, forwardRef } from 'react';
 
 import { useScreenSize } from '~/hooks/useScreenSize';
 import { ResponsiveProp, StyleSystemProps } from '~/types';
-import { cx, resolveColorProp, resolveResponsiveProp } from '~/utils';
+import { cx } from '~/utils';
 
 import { Avatar } from '../Avatar';
 import { Group } from '../Group';
@@ -25,8 +25,8 @@ export type AvatarGroupProps = StyleSystemProps & {
  */
 export const AvatarGroup = forwardRef<HTMLDivElement, AvatarGroupProps>(
   ({ className, size = 38, limit = 100, children, ...props }, ref) => {
-    const [screen] = useScreenSize();
-    const overflow = Children.count(children) - resolveResponsiveProp(limit, screen);
+    const { resolve } = useScreenSize();
+    const overflow = Children.count(children) - resolve(limit);
 
     return (
       <Group ref={ref} gap={0} className={cx('[&>*]:-rui-m-xxs', className)} {...props}>

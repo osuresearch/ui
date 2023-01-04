@@ -56,9 +56,6 @@ export type InputProps = StyleSystemProps & {
  * This is a component that is solely responsible for rendering states
  * and does not meet accessibility requirements alone.
  *
- * ## Polymorphic
- * - You can use the `as` prop to change the root element for this component.
- *
  * ## Accessibility
  * - Requires `aria-invalid` to be set to visually represent an invalid state.
  *
@@ -67,6 +64,8 @@ export type InputProps = StyleSystemProps & {
  *  visually determine whether a field with an error has keyboard focus.
  * - Contrast has been increased for placeholder text to meet minimum WCAG AA.
  * - Disabled state does not perform the same grey-boxing.
+ *
+ * <!-- @ruiPolymorphic -->
  */
 export const Input = polymorphicForwardRef<'input', InputProps>(
   (
@@ -111,7 +110,7 @@ export const Input = polymorphicForwardRef<'input', InputProps>(
           }}
           px="xs"
           py="xxs"
-          w="full"
+          w="100%"
           bgc={{
             dark: {
               default: 'light-tint',

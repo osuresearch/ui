@@ -55,7 +55,7 @@ export const CheckboxField = forwardRef<HTMLInputElement, CheckboxFieldProps>(
             'rui-ring-2 rui-ring-scarlet': isFocusVisible
           })}
         >
-          <Box c="black" bgc="white" w="md" h="md">
+          <Box c="black" bgc="white" w={32} h={32}>
             {state.isSelected && <Icon name="check" />}
             {props.isIndeterminate && <Icon name="dash" />}
           </Box>

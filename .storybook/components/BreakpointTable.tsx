@@ -6,11 +6,11 @@ import { Icon } from '../../src/components/Icon';
 import { Box } from '../../src/components/Box';
 
 export function BreakpointTable({ size }: { size: ScreenSize }) {
-  const [, matrix] = useScreenSize();
+  const { breakpoints } = useScreenSize();
 
   return (
-    <Box c="white" bgc={matrix[size] ? 'success' : 'error'} px="sm" py="xs">
-      <Icon name={matrix[size] ? 'check' : 'xmark'} />
+    <Box c="white" bgc={breakpoints[size] ? 'success' : 'error'} px="sm" py="xs">
+      <Icon name={breakpoints[size] ? 'check' : 'xmark'} />
     </Box>
   );
 }

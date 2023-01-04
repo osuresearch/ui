@@ -1,16 +1,13 @@
 import React, { MouseEventHandler, forwardRef } from 'react';
 
 import { StyleSystemProps } from '~/types';
-import { cx } from '~/utils';
 
-import { IconButton } from '../IconButton';
+import { IconButton, IconButtonProps } from '../IconButton';
 
-export type CloseButtonProps = StyleSystemProps & {
+export type CloseButtonProps = Omit<IconButtonProps, 'name' | 'label'> & {
   /**
-   * Handler for when the button is clicked
+   * Defines a string value that labels the current element
    */
-  onClick: MouseEventHandler<HTMLButtonElement>;
-
   label?: string;
 };
 
@@ -24,7 +21,7 @@ export type CloseButtonProps = StyleSystemProps & {
  * - Touch target of 44px meets Success Criterion [2.5.5 Target Size (Level AAA)](https://www.w3.org/WAI/WCAG21/Understanding/target-size)
  */
 export const CloseButton = forwardRef<HTMLButtonElement, CloseButtonProps>(
-  ({ label = 'Close', className, ...props }, ref) => (
-    <IconButton ref={ref} variant="fade" label={label} name="xmark" size={44} {...props} />
+  ({ label = 'Close', size = 44, className, ...props }, ref) => (
+    <IconButton ref={ref} variant="fade" label={label} name="xmark" size={size} p="sm" {...props} />
   )
 );

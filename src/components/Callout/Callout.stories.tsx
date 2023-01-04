@@ -13,36 +13,41 @@ import { Callout, CalloutProps } from './Callout';
 export default RUIComponentMeta<CalloutProps>('Components', Callout);
 
 export const Overview = RUIComponentStory<CalloutProps>((args) => (
-  <Callout {...args}>
+  <Callout {...args} contentSlot="Text in the content slot">
     <Button>Help</Button>
   </Callout>
 ));
 
-export const WithPlacement = RUIComponentStory<CalloutProps>((args) => (
-  <Stack gap="lg" align="center">
-    <Group justify="center">
-      <Callout {...args} placement="left">
-        <Button>👈</Button>
-      </Callout>
+export const WithPlacement = RUIComponentStory<CalloutProps>(
+  (args) => (
+    <Stack gap="lg" align="center">
+      <Group justify="center">
+        <Callout {...args} placement="left">
+          <Button>👈</Button>
+        </Callout>
 
-      <Callout {...args} placement="top">
-        <Button>👆</Button>
-      </Callout>
+        <Callout {...args} placement="top">
+          <Button>👆</Button>
+        </Callout>
 
-      <Callout {...args} placement="bottom">
-        <Button>👇</Button>
-      </Callout>
+        <Callout {...args} placement="bottom">
+          <Button>👇</Button>
+        </Callout>
 
-      <Callout {...args} placement="right">
-        <Button>👉</Button>
-      </Callout>
-    </Group>
+        <Callout {...args} placement="right">
+          <Button>👉</Button>
+        </Callout>
+      </Group>
 
-    {/* <Callout {...args} placement="center">
+      {/* <Callout {...args} placement="center">
       <Button>👉👈</Button>
     </Callout> */}
-  </Stack>
-));
+    </Stack>
+  ),
+  {
+    contentSlot: '💥'
+  }
+);
 
 export const ButtonTests = RUIComponentStory<CalloutProps>((args) => {
   const [open, setOpen] = useState(false);
@@ -51,15 +56,15 @@ export const ButtonTests = RUIComponentStory<CalloutProps>((args) => {
     <Group>
       <Button onPress={() => setOpen(!open)}>Toggle ➡</Button>
 
-      <Callout isOpen={open} onOpenChange={setOpen}>
+      <Callout isOpen={open} onOpenChange={setOpen} contentSlot="Controlled callout content">
         <Button onPress={() => alert('on press')}>Controlled</Button>
       </Callout>
 
-      <Callout>
+      <Callout contentSlot="Uncontrolled callout content">
         <Button>Uncontrolled</Button>
       </Callout>
 
-      <Callout>
+      <Callout contentSlot="Uncontrolled callout content">
         <Button onClick={() => alert('on click')}>Uncontrolled w/ on click</Button>
       </Callout>
     </Group>
@@ -76,11 +81,11 @@ export const SpanTests = RUIComponentStory<CalloutProps>((args) => {
     <Group>
       <Button onPress={() => setOpen(!open)}>Toggle ➡</Button>
 
-      <Callout isOpen={open} onOpenChange={setOpen}>
+      <Callout isOpen={open} onOpenChange={setOpen} contentSlot="Controlled callout content">
         <span>Controlled</span>
       </Callout>
 
-      <Callout>
+      <Callout contentSlot="Uncontrolled callout content">
         <span>Uncontrolled</span>
       </Callout>
     </Group>
@@ -94,17 +99,20 @@ export const GuidedTour = RUIComponentStory<CalloutProps>((args) => {
     <Icon c="blue" style={{ position: 'absolute', top: y, left: x }} name="circle" />
   );
 
-  const NextButton = () => <Button onClick={() => setStep((s) => s + 1)}>Next</Button>;
+  const NextButton = () => <Button onPress={() => setStep((s) => s + 1)}>Next</Button>;
 
-  const PrevButton = () => <Button onClick={() => setStep((s) => s - 1)}>Previous</Button>;
+  const PrevButton = () => <Button onPress={() => setStep((s) => s - 1)}>Previous</Button>;
+
+  // TODO: Autofocus on the next button somehow
 
   const Content = () => (
     <Stack>
       <Group justify="apart">
         <Text>callout content</Text>
-        <CloseButton onClick={() => setStep(0)} />
+        <CloseButton onPress={() => setStep(0)} />
       </Group>
       <Group justify="apart">
+        <Text>{step} / 4</Text>
         <PrevButton />
         <NextButton />
       </Group>
@@ -113,21 +121,21 @@ export const GuidedTour = RUIComponentStory<CalloutProps>((args) => {
 
   return (
     <div style={{ width: 600, height: 400 }}>
-      <Button onClick={() => setStep(1)}>Start tour</Button>
+      <Button onPress={() => setStep(1)}>Start tour</Button>
 
-      <Callout isOpen={step === 1} contentSlot={Content}>
+      <Callout isOpen={step === 1} contentSlot={<Content />}>
         {coachmark(150, 20)}
       </Callout>
 
-      <Callout isOpen={step === 2} placement="left" contentSlot={Content}>
+      <Callout isOpen={step === 2} placement="left" contentSlot={<Content />}>
         {coachmark(300, 350)}
       </Callout>
 
-      <Callout isOpen={step === 3} contentSlot={Content}>
+      <Callout isOpen={step === 3} contentSlot={<Content />}>
         {coachmark(580, 200)}
       </Callout>
 
-      <Callout isOpen={step === 4} placement="right" contentSlot={Content}>
+      <Callout isOpen={step === 4} placement="right" contentSlot={<Content />}>
         {coachmark(100, 200)}
       </Callout>
     </div>
