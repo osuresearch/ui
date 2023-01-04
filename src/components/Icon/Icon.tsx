@@ -1,10 +1,10 @@
 import { Icon as Iconify } from '@iconify/react/dist/offline';
-import React from 'react';
+import React, { CSSProperties } from 'react';
 
 // Note that we use the offline version of iconify
 // for apps that can't call out to a public CDN
 import { loadAllIcons } from '~/icons';
-import { StyleSystemProps } from '~/types';
+import { ResponsiveProp, StyleSystemProps } from '~/types';
 import { cx, polymorphicForwardRef } from '~/utils';
 
 import { Box } from '../Box';
@@ -15,23 +15,45 @@ export type IconProps = StyleSystemProps & {
   name: string; // TODO: keyof loaded icons somehow?
   rotate?: 0 | 90 | 180 | 270;
   flip?: 'horizontal' | 'vertical';
-  size?: string | number;
+
+  /**
+   * Size of the icon in either pixels or CSS units.
+   */
+  size?: CSSProperties['fontSize'];
+
+  /**
+   * Use block display mode for the icon container.
+   *
+   * This will typically
+   */
   block?: boolean;
+
+  /**
+   * Props to pass down to the icon SVG
+   */
+  svgProps?: Omit<React.SVGAttributes<any>, 'onLoad'>;
 };
 
 /**
  * Icon documentation
  *
  * ## Accessibility
+ * - If the icon has semantic meaning add an `aria-label` to describe the icon
  *
- * TODO: Notes about purpose / meaning / understandability / etc
+ * <!-- @ruiPolymorphic -->
  */
 export const Icon = polymorphicForwardRef<'i', IconProps>(
-  ({ as, className, name, block, flip, rotate = 0, size = 16, ...props }, ref) => (
+  ({ as, className, name, block, flip, rotate = 0, size = 16, svgProps, ...props }, ref) => (
     <Box
       as={as || 'i'}
       ref={ref}
-      className={cx({ 'rui-inline-block': !block }, 'rui-align-middle', className)}
+      className={cx(
+        {
+          'rui-block rui-align-top': block,
+          'rui-inline-block rui-align-middle': !block
+        },
+        className
+      )}
       {...props}
     >
       <Iconify
@@ -41,9 +63,10 @@ export const Icon = polymorphicForwardRef<'i', IconProps>(
         // support a string for degrees.
         rotate={`${rotate}deg` as any}
         flip={flip}
-        className="rui-m-auto"
-        alignmentBaseline="middle"
-        fontSize={size}
+        width={size}
+        height={size}
+        {...svgProps}
+        mode="svg"
       />
     </Box>
   )
