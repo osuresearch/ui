@@ -1,8 +1,9 @@
 import { useLayoutEffect, useState } from 'react';
 
-import { Theme } from '~/types';
+import { Theme, ThemeProp } from '~/types';
+import { resolveThemeProp } from '~/utils';
 
-export function useTheme(): Theme {
+export function useTheme() {
   const [theme, setTheme] = useState<Theme>('light');
 
   useLayoutEffect(() => {
@@ -17,5 +18,8 @@ export function useTheme(): Theme {
     }
   }, []);
 
-  return theme;
+  return {
+    theme,
+    resolve: <T>(prop: ThemeProp<T>) => resolveThemeProp(prop, theme)
+  };
 }

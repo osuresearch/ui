@@ -10,7 +10,10 @@ import {
   Spacing,
   Theme,
   ThemeMap,
+  ThemeProp,
+  negativeSpacing,
   screenSize,
+  spacing,
   theme
 } from '../types';
 
@@ -39,7 +42,22 @@ export function isResponsiveObject<T>(value: any): value is Partial<Record<Scree
   );
 }
 
-export function resolveResponsiveProp<T>(prop: ResponsiveProp<T>, screen: ScreenSize): T {
+export function isPositiveSpacing(value: any): value is Spacing {
+  return spacing.indexOf(value) >= 0;
+}
+
+export function isNegativeSpacing(value: any): value is Spacing {
+  return negativeSpacing.indexOf(value) >= 0;
+}
+
+export function isSpacing(value: any): value is Spacing {
+  return isPositiveSpacing(value) || isNegativeSpacing(value);
+}
+
+export function resolveResponsiveProp<T>(
+  prop: ResponsiveProp<T> | undefined,
+  screen: ScreenSize
+): T | undefined {
   // The rough algorithm is:
   // use the closest break that is equal to or less than the input screen size.
   // If screen size is smaller than all of them, used the smallest possible.
@@ -49,6 +67,9 @@ export function resolveResponsiveProp<T>(prop: ResponsiveProp<T>, screen: Screen
   // { xs: T1, lg: T2 }
   //  screen sizes lg and lx will use T2
   //  all other sizes will use T1
+  if (!prop) {
+    return undefined;
+  }
 
   if (!isResponsiveObject(prop)) {
     return prop;
@@ -75,25 +96,21 @@ export function resolveResponsiveProp<T>(prop: ResponsiveProp<T>, screen: Screen
   throw new Error('No responsive prop could be resolved');
 }
 
-/**
- * Extract the current `Color` from the `ColorProp` based on
- * the current active theme.
- */
-export function resolveColorProp(color: ColorProp | undefined, theme: Theme): Color | undefined {
-  if (!color) {
+export function resolveThemeProp<T>(prop: ThemeProp<T> | undefined, theme: Theme): T | undefined {
+  if (!prop) {
     return;
   }
 
-  if (typeof color === 'string') {
-    return color;
+  if (!isThemeMap(prop)) {
+    return prop;
   }
 
-  if (color[theme]) {
-    return color[theme];
+  if (prop[theme]) {
+    return prop[theme];
   }
 
   // Fallback to the first key found. Could be a "base" or something else.
-  return color[Object.keys(color)[0] as Theme];
+  return prop[Object.keys(prop)[0] as Theme];
 }
 
 // TODO: Template version. Can be used for justify, font size, theme size, etc.

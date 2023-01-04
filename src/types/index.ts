@@ -45,53 +45,25 @@ export const colorProps = ['c', 'bgc'] as const;
 export const sizeProps = ['w', 'h', 'miw', 'mih', 'maw', 'mah'] as const;
 export const paddingProps = ['p', 'px', 'py', 'pl', 'pt', 'pr', 'pb'] as const;
 export const marginProps = ['m', 'mx', 'my', 'ml', 'mt', 'mr', 'mb'] as const;
+export const layoutProps = ['gridArea', 'gridSpan'] as const;
 
 export type FontPropName = typeof fontProps[number];
 export type ColorPropName = typeof colorProps[number];
 export type SizePropName = typeof sizeProps[number];
 export type PaddingPropName = typeof paddingProps[number];
 export type MarginPropName = typeof marginProps[number];
+export type LayoutPropName = typeof layoutProps[number];
 
 export const styleSystemPropNames = [
   ...fontProps,
   ...colorProps,
   ...sizeProps,
   ...paddingProps,
-  ...marginProps
+  ...marginProps,
+  ...layoutProps
 ] as const;
 
 export type StyleSystemPropName = typeof styleSystemPropNames[number];
-
-/**
- * A type of prop that can either be the given type OR
- * an object containing values per breakpoint.
- *
- * Examples:
- *
- * ```
- * <Box m="lg">
- * <Box m={{ xl: "lg", sm: "sm" xs: 0 }}>
- * ```
- */
-export type ResponsiveProp<Value> = Value | Partial<Record<ScreenSize, Value>>;
-
-/**
- * A type of prop that can either be the given color OR
- * an object defining the color per theme.
- *
- * Examples:
- *
- * ```
- * <Box bgc="scarlet">
- * <Box bgc={{ light: "scarlet", dark: "white" }}
- * ```
- */
-export type ColorProp = Color | Partial<Record<Theme, Color>>;
-
-// export type SpacingValue = NumberSize | (string & {});
-
-// TODO: I want support for all the tailwind palette colors
-// but without having to manually map them all...
 
 /**
  * Object that maps values to responsive breakpoints
@@ -102,6 +74,36 @@ export type ResponsiveMap<T> = Record<ScreenSize, T>;
  * Object that maps values to themes
  */
 export type ThemeMap<T> = Record<Theme, T>;
+
+/**
+ * A prop that can either be the given type or
+ * an object containing values per responsive breakpoint.
+ *
+ * Examples:
+ * ```
+ * <Box m="lg">
+ * <Box m={{ xl: "lg", sm: "sm" xs: 0 }}>
+ * ```
+ */
+export type ResponsiveProp<Value> = Value | Partial<Record<ScreenSize, Value>>;
+
+/**
+ * A prop that can either be the given type or
+ * an object containing values per theme.
+ *
+ * Examples:
+ *
+ * ```
+ * <Box bgc="scarlet">
+ * <Box bgc={{ light: "scarlet", dark: "white" }}
+ * ```
+ */
+export type ThemeProp<Value> = Value | ThemeMap<Value>;
+
+/**
+ * A prop that represents a component slot to be rendered
+ */
+export type SlotType<P = Record<string, never>> = React.ComponentType<P>;
 
 export interface StyleSystemProps {
   // Common overrides
@@ -135,63 +137,32 @@ export interface StyleSystemProps {
   mih?: ResponsiveProp<CSSProperties['minHeight']>;
   mah?: ResponsiveProp<CSSProperties['maxHeight']>;
 
-  c?: ColorProp;
-  bgc?: ColorProp;
+  c?: ThemeProp<Color>;
+  bgc?: ThemeProp<Color>;
 
   // Fonts
   ff?: FontFamily;
   fs?: FontSize;
   fw?: FontWeight;
 
-  // opacity?: SystemProp<CSSProperties['opacity']>;
+  // Layout
 
-  // ff?: SystemProp<CSSProperties['fontFamily']>;
-  // fz?: ResponsiveProp<ThemeSize>;
-  // fw?: SystemProp<CSSProperties['fontWeight']>;
-  // lts?: SystemProp<CSSProperties['letterSpacing']>;
-  // ta?: SystemProp<CSSProperties['textAlign']>;
-  // lh?: SystemProp<CSSProperties['lineHeight']>;
-  // fs?: SystemProp<CSSProperties['fontStyle']>;
-  // tt?: SystemProp<CSSProperties['textTransform']>;
-  // td?: SystemProp<CSSProperties['textDecoration']>;
+  /**
+   * Where to place this component within a CSS Grid.
+   * Must be one of the `grid-template-area` values
+   * in the parent grid.
+   */
+  gridArea?: ResponsiveProp<string>;
 
-  // bgsz?: SystemProp<CSSProperties['backgroundSize']>;
-  // bgp?: SystemProp<CSSProperties['backgroundPosition']>;
-  // bgr?: SystemProp<CSSProperties['backgroundRepeat']>;
-  // bga?: SystemProp<CSSProperties['backgroundAttachment']>;
-
-  // pos?: SystemProp<CSSProperties['position']>;
-  // top?: ResponsiveProp<CSSProperties['top']>;
-  // left?: ResponsiveProp<CSSProperties['left']>;
-  // bottom?: ResponsiveProp<CSSProperties['bottom']>;
-  // right?: ResponsiveProp<CSSProperties['right']>;
-  // inset?: ResponsiveProp<CSSProperties['inset']>;
-
-  // display?: SystemProp<CSSProperties['display']>;
+  /**
+   * Column span in a grid layout.
+   *
+   * Equivalent to CSS `grid-column: span N / span N;`
+   */
+  gridSpan?: ResponsiveProp<number | 'auto'>;
 }
-
-// export type ClassNames<StylesNames extends string> = Partial<Record<StylesNames, string>>;
-
-/**
- * Component props that define both an implementation of the Style System
- *
- * @deprecated - Replace with StyleSystemProps
- */
-export type DefaultProps = StyleSystemProps;
-
-/**
- * Wrap a component to support a polymorphic DOM element
- *
- * @author Mantine.dev <https://github.com/mantinedev/mantine>
- */
-export type xForwardRefWithStaticComponents<
-  Props extends Record<string, any>,
-  Static extends Record<string, any>
-> = ((props: Props) => React.ReactElement) & Static;
 
 export type ForwardRefWithStaticComponents<
   Props extends Record<string, any>,
   Static extends Record<string, any>
 > = ForwardRefExoticComponent<Props> & Static;
-
-export type SlotType<P = Record<string, never>> = React.ComponentType<P>;
