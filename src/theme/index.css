@@ -224,7 +224,7 @@
     --rui-dimmed-tint: var(--rui-gray-shade-40);
     --rui-dimmed: var(--rui-gray-shade-20);
     --rui-dimmed-shade: var(--rui-gray);
-    --rui-dimmed-contrast: var(--rui-white);
+    --rui-dimmed-contrast: var(--rui-black);
 
     --rui-dark-tint: var(--rui-gray-tint-20);
     --rui-dark: var(--rui-gray-tint-40);
