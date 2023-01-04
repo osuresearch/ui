@@ -15,7 +15,13 @@ export type IconButtonProps = Omit<UnstyledButtonProps, 'children'> & {
 
   variant?: 'default' | 'fade';
 
-  size?: ResponsiveProp<string | number>;
+  /**
+   * Size of the icon within the button, in pixels.
+   *
+   * The total size of the button will be this size * button padding.
+   * Default padding is `xxs (2px)`
+   */
+  size?: ResponsiveProp<number>;
 
   /** Name of the icon */
   name: string;
@@ -27,16 +33,17 @@ export type IconButtonProps = Omit<UnstyledButtonProps, 'children'> & {
 /**
  * An icon that can be clicked as a button
  *
- * ## Polymorphic
- *  - You can use the `as` prop to change the root element for this component.
- *
  * ## Accessibility
  * - Required `label` prop sets the `aria-label` on the button
+ * - Buttons must have a minimum touch target of 44px to meet Success Criterion [2.5.5 Target Size (Level AAA)](https://www.w3.org/WAI/WCAG21/Understanding/target-size).
+ *
+ *
+ * <!-- @ruiPolymorphic -->
  */
 export const IconButton = polymorphicForwardRef<'button', IconButtonProps>(
-  ({ as, className, variant = 'default', name, label, size = 32, iconProps, ...props }, ref) => {
-    const [screen] = useScreenSize();
-    const rsize = resolveResponsiveProp(size, screen);
+  ({ as, className, variant = 'default', name, label, size = 38, iconProps, ...props }, ref) => {
+    const { resolve } = useScreenSize();
+    const iconSize = resolve(size);
 
     // TODO: Icon needs to be based on font sizes, probably.
     // And the box needs to be based on the icon size. But
@@ -48,17 +55,20 @@ export const IconButton = polymorphicForwardRef<'button', IconButtonProps>(
         as={as || 'button'}
         aria-label={label}
         ref={ref}
-        w={size}
-        h={size}
+        p="xxs"
         c={!props.isDisabled ? 'light-contrast' : 'dark'}
         className={cx(
           'rui-inline-block',
-          // Hover styles
+          // Default variant
+          {
+            'data-[pressed=true]:rui-bg-light-shade': variant === 'default'
+          },
+          // Hover variant
           {
             'hover:rui-bg-light': !props.isDisabled && variant === 'default',
             'hover:rui-opacity-70': !props.isDisabled && variant === 'fade'
           },
-          // Disabled styles
+          // Disabled
           {
             'rui-bg-light': props.isDisabled && variant === 'default'
           },
@@ -66,7 +76,7 @@ export const IconButton = polymorphicForwardRef<'button', IconButtonProps>(
         )}
         {...props}
       >
-        <Icon name={name} {...iconProps} />
+        <Icon size={iconSize} name={name} {...iconProps} block />
       </UnstyledButton>
     );
   }

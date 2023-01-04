@@ -14,8 +14,8 @@ export const Overview = RUIComponentStory<IconButtonProps>((args) => <IconButton
   label: 'More information'
 });
 
-export const Large = RUIComponentStory(Overview, {
-  size: 64,
+export const WithSize = RUIComponentStory(Overview, {
+  size: 16,
   name: 'thumbs',
   label: 'Rate this up'
 });
