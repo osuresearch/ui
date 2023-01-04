@@ -45,8 +45,8 @@ export const Badge = polymorphicForwardRef<'div', BadgeProps>(
       })}
       {...props}
     >
-      <Group align="center" px="xs">
-        {variant === 'indicator' && <Indicator size="sm" mt="-sm" mr="xxs" c={c} />}
+      <Group align="center" justify="center" px="xs" gap="xxs">
+        {variant === 'indicator' && <Indicator size={12} mt="-sm" c={c} />}
         {children}
       </Group>
     </Box>
