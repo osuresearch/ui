@@ -23,7 +23,7 @@ export const Table = forwardRef<HTMLTableElement, TableProps>(
     <Box
       as="table"
       ref={ref}
-      w="full"
+      w="100%"
       c="light-contrast"
       fs={variant === 'compact' ? 'sm' : 'base'}
       className={cx(
