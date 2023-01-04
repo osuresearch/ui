@@ -17,15 +17,14 @@ const Template: Story<PaperProps> = (args: PaperProps) => (
   <Paper {...args}>
     Paper is the most basic UI component
     <br />
-    Use it to create cards, dropdowns, modals and other components that require background with
-    shadow
+    Use it to create cards, dropdowns, modals and other components that require borders and shadow.
   </Paper>
 );
 
 export const Overview = Template.bind({});
 
 export const PanelWithContent: Story<PaperProps> = (args) => (
-  <Paper variant="panel" p="xl" {...args}>
+  <Paper bgc="light-shade" p="xl" {...args}>
     <Title level={3}>Take your next step toward becoming a Buckeye</Title>
     <Space h="lg" />
     <Text>
