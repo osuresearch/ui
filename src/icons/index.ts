@@ -1,10 +1,11 @@
 // Iconify icon bundle configuration for all icons we support
 // Ref: https://docs.iconify.design/icon-components/bundles/
-import { addIcon } from '@iconify/react/dist/offline';
+import { addCollection, addIcon } from '@iconify/react/dist/offline';
 
 import * as data from './data';
 import * as misc from './misc';
 import * as navigation from './navigation';
+import ruiIllustration from './rui-illustration.json';
 import * as social from './social';
 import * as system from './system';
 
@@ -40,4 +41,6 @@ export function loadAllIcons() {
   Object.keys(all).forEach((name) => {
     addIcon(name, all[name].default);
   });
+
+  addCollection(ruiIllustration);
 }

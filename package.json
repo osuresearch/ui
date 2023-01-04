@@ -49,6 +49,7 @@
     "@iconify/icons-bi": "^1.2.13",
     "@iconify/icons-material-symbols": "^1.2.25",
     "@iconify/react": "^4.0.1",
+    "@iconify/tools": "^2.1.2",
     "@mantine/utils": "^5.9.3",
     "@semantic-release/changelog": "^6.0.2",
     "@semantic-release/git": "^10.0.1",
