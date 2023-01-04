@@ -22,8 +22,7 @@ export type StackProps = StyleSystemProps & {
 /**
  * Compose elements and components in a vertical flex container
  *
- * ## Polymorphic
- *  - You can use the `as` prop to change the root element for this component.
+ * <!-- @ruiPolymorphic -->
  */
 export const Stack = polymorphicForwardRef<'div', StackProps>(
   (
@@ -34,7 +33,7 @@ export const Stack = polymorphicForwardRef<'div', StackProps>(
       as={as || 'div'}
       ref={ref}
       className={cx(
-        'rui-flex rui-flex-col',
+        'rui-flex rui-flex-col rui-relative',
         styles.justify(justify),
         styles.gap(gap),
         styles.align(align),

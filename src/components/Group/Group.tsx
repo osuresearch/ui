@@ -46,6 +46,7 @@ export const Group = polymorphicForwardRef<'div', GroupProps>(
       ref={ref}
       className={cx(
         'rui-flex',
+        'rui-relative',
         styles.justify(justify),
         styles.gap(gap),
         styles.align(align),
