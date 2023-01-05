@@ -16,7 +16,11 @@ export type GroupProps = StyleSystemProps & {
   /** Define the `align-items` property */
   align?: Align;
 
+  /** Apply `flex-grow: 1` to all children evenly */
   grow?: boolean;
+
+  /** Enable wrapping of items into multiple rows */
+  wrap?: boolean;
 
   children: React.ReactNode;
 };
@@ -24,8 +28,7 @@ export type GroupProps = StyleSystemProps & {
 /**
  * Compose elements and components in a horizontal flex container
  *
- * ## Polymorphic
- *  - You can use the `as` prop to change the root element for this component.
+ * <!-- @ruiPolymorphic -->
  */
 export const Group = polymorphicForwardRef<'div', GroupProps>(
   (
@@ -36,6 +39,7 @@ export const Group = polymorphicForwardRef<'div', GroupProps>(
       gap = 'sm',
       align = 'start',
       grow = false,
+      wrap = false,
       children,
       ...props
     },
@@ -53,7 +57,9 @@ export const Group = polymorphicForwardRef<'div', GroupProps>(
         {
           // Grow - targets all direct children
           '[&>_*]:rui-flex-grow-0': !grow,
-          '[&>_*]:rui-flex-grow': grow
+          '[&>_*]:rui-flex-grow': grow,
+
+          'rui-flex-wrap': wrap
         },
         className
       )}

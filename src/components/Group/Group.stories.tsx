@@ -2,23 +2,31 @@ import React from 'react';
 
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
-import { Button } from '../Button';
-import { Group as GroupComponent, GroupProps } from './Group';
+import { Paper } from '../Paper';
+import { Group, GroupProps } from './Group';
 
-export default RUIComponentMeta<GroupProps>('Layout', GroupComponent)
-  .withStyleSystemProps()
-  .withBadge('stable');
+export default RUIComponentMeta<GroupProps>('Layout', Group).withStyleSystemProps();
 
-export const Group = RUIComponentStory((args: GroupProps) => (
-  <GroupComponent {...args}>
-    <Button px="lg" py="lg">
+export const Overview = RUIComponentStory<GroupProps>((args) => (
+  <Group {...args}>
+    <Paper px="lg" py="lg" bgc="teal" c="teal-contrast">
       1
-    </Button>
-    <Button px="lg" py="xxl">
+    </Paper>
+    <Paper px="lg" py="xxl" bgc="green" c="green-contrast">
       2
-    </Button>
-    <Button px="lg" py="lg">
+    </Paper>
+    <Paper px="lg" py="lg" bgc="gold" c="gold-contrast">
       3
-    </Button>
-  </GroupComponent>
+    </Paper>
+  </Group>
+));
+
+export const WrapContent = RUIComponentStory<GroupProps>((args) => (
+  <Group {...args} wrap>
+    {[...Array(9)].map((k, i) => (
+      <Paper key={i} w={200} h={200} bgc="green">
+        Item {i + 1}
+      </Paper>
+    ))}
+  </Group>
 ));
