@@ -38,8 +38,9 @@ export const Divider = forwardRef<HTMLHRElement, DividerProps>(
       my={orientation === 'horizontal' ? gap : 0}
       mx={orientation === 'vertical' ? gap : 0}
       className={cx({
-        'rui-border rui-border-light-shade': orientation === 'horizontal',
-        'rui-border rui-border-light-shade rui-self-stretch rui-h-auto': orientation === 'vertical'
+        'rui-border-2 rui-border-light-shade': orientation === 'horizontal',
+        'rui-border-2 rui-border-light-shade rui-self-stretch rui-h-auto':
+          orientation === 'vertical'
       })}
       role="separator"
     />
