@@ -35,7 +35,7 @@ export const ExternalLink = polymorphicForwardRef<'a', LinkProps>(
         }
         className="rui-transition-transform"
         mr="-sm"
-        size="80%"
+        size="1em"
         name="externalLink"
         aria-hidden
       />

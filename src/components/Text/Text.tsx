@@ -15,9 +15,7 @@ export type TextProps = StyleSystemProps & {
 /**
  * Use the Text component to display text content while maintaining theme styles
  *
- * ## Polymorphic
- *
- * You can use `component` prop to change the root element for this component.
+ * <!-- @ruiPolymorphic -->
  */
 export const Text = polymorphicForwardRef<'span', TextProps>(
   ({ as, className, ta = 'left', c = 'light-contrast', children, ...props }, ref) => (

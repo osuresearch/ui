@@ -4,10 +4,10 @@ import React from 'react';
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
 import { Group } from '../Group';
+import { Header } from '../Header';
 import { Paper } from '../Paper';
 import { Stack } from '../Stack';
 import { Text } from '../Text';
-import { Title } from '../Title';
 import { Icon as Component, IconProps } from './Icon';
 
 export default RUIComponentMeta<IconProps>('Components', Component).withStyleSystemProps();
@@ -101,7 +101,7 @@ export const Illustrations = RUIComponentStory<IconProps>(
   (args) => (
     <Stack align="center">
       <Component {...args} />
-      <Title level={3}>Error 500: Internal server error</Title>
+      <Header level={3}>Error 500: Internal server error</Header>
       <Text>Something went wrong. Please try again later.</Text>
     </Stack>
   ),

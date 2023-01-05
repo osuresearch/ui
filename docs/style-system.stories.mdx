@@ -11,3 +11,12 @@ Key points to touch on:
 - Screen-dependent space. E.g. `m={{ xs: 'sm', md: 'lg', xl: 'xl' }}`
 - Group and Stack composition (+ future container or grid things)
 - CSS independence - RUI does not control global CSS styles (except for Tailwind's reset). All styles are encapsulated into components. Meaning no implicit styling with `<strong>`, `<p>`, etc.
+
+
+
+## Responsive Properties
+
+Many components in Research UI support an object syntax for props that specify a different value depending on the responsive breakpoint.
+
+Research UI's breakpoints are mobile first: responsive props apply at that breakpoint and above. For example, the `xl` breakpoint is applied at screen sizes 1280px and wider.
+

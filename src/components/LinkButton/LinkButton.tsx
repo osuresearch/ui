@@ -15,9 +15,7 @@ export type LinkButtonProps = StyleSystemProps & {
  *
  * Wrap this within a `.group` parent to capture hover events on the parent.
  *
- * ### Polymorphic
- *
- * You can use the `as` prop to change the root element for this component.
+ * <!-- @ruiPolymorphic -->
  */
 export const LinkButton = polymorphicForwardRef<'button', LinkButtonProps>(
   ({ as, className, children, ...props }, ref) => (

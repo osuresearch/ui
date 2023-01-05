@@ -1,8 +1,9 @@
 import React from 'react';
 
-import { HashLink as Component, HashLinkProps, Title } from '@osuresearch/ui';
-
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
+
+import { Header } from '../Header';
+import { HashLink as Component, HashLinkProps } from './HashLink';
 
 export default RUIComponentMeta<HashLinkProps>('Components', Component)
   .withBadge('atom')
@@ -10,9 +11,9 @@ export default RUIComponentMeta<HashLinkProps>('Components', Component)
 
 export const HashLink = RUIComponentStory<HashLinkProps>(
   (args) => (
-    <Title level={1}>
-      <Component {...args}>Linked title content</Component>
-    </Title>
+    <Header level={1}>
+      <Component {...args}>Linked header content</Component>
+    </Header>
   ),
   {
     id: 'hash-link-example'

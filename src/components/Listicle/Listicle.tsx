@@ -3,8 +3,8 @@ import React, { forwardRef } from 'react';
 
 import { StyleSystemProps } from '../../types';
 import { Group } from '../Group';
+import { Header } from '../Header';
 import { Text } from '../Text';
-import { Title } from '../Title';
 import { RowSlotProps, UnstyledList } from '../UnstyledList';
 
 export type ListicleVariant = 'ordered' | 'unordered';
@@ -23,7 +23,7 @@ type ListicleItemProps = RowSlotProps & {
 function ListicleItem({ item, checkboxProps, variant, ...rowProps }: ListicleItemProps) {
   return (
     <div {...rowProps}>
-      <Title as="div" level={3}>
+      <Header as="div" level={3}>
         <Group gap={0}>
           {variant === 'ordered' && (
             <Text bgc="dimmed-tint" py="xxs" mr="md" miw={32} h={32} ta="center">
@@ -32,7 +32,7 @@ function ListicleItem({ item, checkboxProps, variant, ...rowProps }: ListicleIte
           )}
           {item.textValue}
         </Group>
-      </Title>
+      </Header>
       <Text as="div" mb="xxl" ml={variant === 'ordered' ? 'xxl' : 0}>
         {item.rendered}
       </Text>

@@ -2,11 +2,11 @@ import React from 'react';
 
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
+import { Header } from '../Header';
 import { Paper } from '../Paper';
 import { PrimaryButton } from '../PrimaryButton';
 import { Space } from '../Space';
 import { Text } from '../Text';
-import { Title } from '../Title';
 import { Underlay as Component, UnderlayProps } from './Underlay';
 
 export default RUIComponentMeta<UnderlayProps>('Utilities', Component);
@@ -14,7 +14,7 @@ export default RUIComponentMeta<UnderlayProps>('Utilities', Component);
 export const Underlay = RUIComponentStory<UnderlayProps>((args) => (
   <>
     <Paper variant="panel" p="xl">
-      <Title level={3}>Take your next step toward becoming a Buckeye</Title>
+      <Header level={3}>Take your next step toward becoming a Buckeye</Header>
       <Space h="lg" />
       <Text>
         Columbus our strengths are an authentic and distinctive combination of qualities reflective

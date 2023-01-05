@@ -90,8 +90,8 @@ function Item({ node, state, ...props }: ItemProps) {
  * This handles the heavy lifting of a11y compliance and interactions.
  *
  * ## Polymorphic
- *  - You can use the `as` prop to change the root element for this component.
- *  - Only polymorph to either an `ul` or `ol`, as each item will be a semantic `li`.
+ *
+ * Only polymorph to either an `ul` or `ol`, as each item will be a semantic `li`.
  *
  * ## Accessibility
  *
@@ -103,6 +103,8 @@ function Item({ node, state, ...props }: ItemProps) {
  * - A slot for the rendering of a checkbox on each item when the list has
  *  a `selectionMode` of `multiple` or `single`.
  * - Required for interactive lists, as a checkbox is not provided by default
+ *
+ * <!-- @ruiPolymorphic -->
  */
 export const UnstyledList = polymorphicForwardRef<'ul', UnstyledListProps>((props, ref) => {
   const state = useListState(props);

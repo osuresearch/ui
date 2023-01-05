@@ -3,10 +3,10 @@ import React from 'react';
 
 import { RUIComponentMeta } from '~/.storybook/utils';
 
+import { Header } from '../Header';
 import { PrimaryButton } from '../PrimaryButton';
 import { Space } from '../Space';
 import { Text } from '../Text';
-import { Title } from '../Title';
 import { Paper, PaperProps } from './Paper';
 
 export default RUIComponentMeta<PaperProps>('Layout', Paper)
@@ -25,7 +25,7 @@ export const Overview = Template.bind({});
 
 export const PanelWithContent: Story<PaperProps> = (args) => (
   <Paper bgc="light-shade" p="xl" {...args}>
-    <Title level={3}>Take your next step toward becoming a Buckeye</Title>
+    <Header level={3}>Take your next step toward becoming a Buckeye</Header>
     <Space h="lg" />
     <Text>
       Columbus our strengths are an authentic and distinctive combination of qualities reflective of

@@ -21,12 +21,25 @@ export type UnstyledToggleProps = StyleSystemProps &
   };
 
 /**
- * Unstyled polymorphic button
+ * Unstyled toggle button
  *
- * ## Polymorphic
- *  - You can use the `as` prop to change the root element for this component.
+ * ## 🛑 Disclaimer
+ *
+ * You should not use this component directly in your application.
+ * Use one of the styled toggle components.
+ *
+ * ## Press Events
+ *
+ * Use the `onPress` handler in place of `onClick` to support a wider range
+ * of input devices. For detailed information see [Adobe's blog post](https://react-spectrum.adobe.com/blog/building-a-button-part-1.html).
+ *
+ * A `data-pressed` attribute is available while the button is in a pressed state.
+ * Use this instead of the CSS `:active` psuedo class to properly handle when
+ * the user drags their pointer off the button, along with keyboard support
+ * and better touchscreen support.
  *
  * ## Accessibility
+ * -
  * - Toggles `aria-pressed` on the root element
  */
 export const UnstyledToggle = polymorphicForwardRef<'button', UnstyledToggleProps>(

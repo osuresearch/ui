@@ -70,11 +70,10 @@ const DEFAULT_COLORS: Color[] = [
 /**
  * Avatar / profile picture automatically integrated with https://opic.osu.edu.
  *
- * ## Polymorphic
- *  - You can use the `as` prop to change the root element for this component.
- *
  * ## Accessibility
- * - Image alt text is a required property
+ * - Image alt text is a required property. For purely cosmetic images, use `alt=""`.
+ *
+ * <!-- @ruiPolymorphic -->
  */
 export const Avatar = polymorphicForwardRef<'div', AvatarProps>(
   (
