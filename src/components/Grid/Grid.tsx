@@ -1,9 +1,8 @@
-import { mergeProps } from '@react-aria/utils';
-import React, { CSSProperties, forwardRef } from 'react';
+import React from 'react';
 
 import { useScreenSize } from '~/hooks/useScreenSize';
 import { ResponsiveProp, Spacing, StyleSystemProps } from '~/types';
-import { cx, resolveResponsiveProp } from '~/utils';
+import { cx } from '~/utils';
 
 import { Box } from '../Box';
 
@@ -15,24 +14,24 @@ export type GridProps = StyleSystemProps & {
    *
    * See `grid-template-areas` on [MDN](https://developer.mozilla.org/docs/Web/CSS/grid-template-areas)
    */
-  areas: ResponsiveProp<string[]>;
+  areas?: ResponsiveProp<string[]>;
 
   /** Size per row in CSS units */
-  rows: ResponsiveProp<(string | number)[]>;
+  rows?: ResponsiveProp<(string | number)[]>;
 
   /** Size per column in CSS units */
-  columns: ResponsiveProp<(string | number)[]>;
+  columns?: ResponsiveProp<(string | number)[]>;
 
   /** The space between columns */
-  columnGap: ResponsiveProp<Spacing>;
+  columnGap?: ResponsiveProp<Spacing>;
 
   /** The space between rows */
-  rowGap: ResponsiveProp<Spacing>;
+  rowGap?: ResponsiveProp<Spacing>;
 
   /**
    * The space between both rows and columns. Will override both `rowGap` and `columnGap`.
    */
-  gap: ResponsiveProp<Spacing>;
+  gap?: ResponsiveProp<Spacing>;
 
   /** Content */
   children?: React.ReactNode;
