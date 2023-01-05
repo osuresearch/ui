@@ -119,7 +119,10 @@ export function spacingValueToClass(
   size: ResponsiveProp<Spacing>,
   screen: ScreenSize = 'sm'
 ) {
-  const value = resolveResponsiveProp(size, screen) as string;
+  const value = resolveResponsiveProp(size, screen);
+  if (!value) {
+    return '';
+  }
 
   // HACK: maw/mah need to be converted to tailwind's naming scheme
   if (prefix === 'maw') prefix = 'max-w';
@@ -130,7 +133,7 @@ export function spacingValueToClass(
   else if (prefix === 'mih') prefix = 'min-h';
 
   // Handle negatives by transforming -sm to -p-sm
-  if (value[0] === '-') {
+  if ((value as string)[0] === '-') {
     return `-rui-${prefix}${value}`;
   }
 
