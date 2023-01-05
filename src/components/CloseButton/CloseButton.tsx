@@ -21,7 +21,15 @@ export type CloseButtonProps = Omit<IconButtonProps, 'name' | 'label'> & {
  * - Touch target of 44px meets Success Criterion [2.5.5 Target Size (Level AAA)](https://www.w3.org/WAI/WCAG21/Understanding/target-size)
  */
 export const CloseButton = forwardRef<HTMLButtonElement, CloseButtonProps>(
-  ({ label = 'Close', size = 44, className, ...props }, ref) => (
-    <IconButton ref={ref} variant="fade" label={label} name="xmark" size={size} p="sm" {...props} />
+  ({ label = 'Close', size = 16, className, ...props }, ref) => (
+    <IconButton
+      ref={ref}
+      variant="fade"
+      label={label}
+      name="xmark"
+      size={size}
+      iconProps={{ p: 'sm' }}
+      {...props}
+    />
   )
 );
