@@ -182,10 +182,10 @@ module.exports = {
 
       // Headings use different font steps
       // Ref: https://bux.osu.edu/typography/headings
-      h1: ['var(--rui-title-1)', { lineHeight: '1.2'}],
-      h2: ['var(--rui-title-2)', { lineHeight: '1.25'}],
-      h3: ['var(--rui-title-3)', { lineHeight: '1.25'}],
-      h4: ['var(--rui-title-4)', { lineHeight: '1.25'}],
+      h1: ['var(--rui-heading-1)', { lineHeight: '1.2'}],
+      h2: ['var(--rui-heading-2)', { lineHeight: '1.25'}],
+      h3: ['var(--rui-heading-3)', { lineHeight: '1.25'}],
+      h4: ['var(--rui-heading-4)', { lineHeight: '1.25'}],
     },
     // Ref: https://bux.osu.edu/typography/fonts
     fontFamily: {

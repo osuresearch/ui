@@ -1,6 +1,7 @@
 import React from 'react';
-import { fontSize } from '../../src/types';
-import { Text } from '@osuresearch/ui';
+import { fontSize } from '~/types';
+import { Text } from '~/components/Text';
+import { Code } from '~/components/Code';
 
 export function FontSizeTable() {
   return (
@@ -15,7 +16,7 @@ export function FontSizeTable() {
       <tbody>
         {fontSize.map(size =>
         <tr key={size}>
-          <td><code>--rui-text-{size}</code></td>
+          <td><Code>--rui-text-{size}</Code></td>
           <td>
             {window
               .getComputedStyle(document.documentElement)
