@@ -26,7 +26,7 @@ export type AvatarGroupProps = StyleSystemProps & {
 export const AvatarGroup = forwardRef<HTMLDivElement, AvatarGroupProps>(
   ({ className, size = 38, limit = 100, children, ...props }, ref) => {
     const { resolve } = useScreenSize();
-    const overflow = Children.count(children) - resolve(limit);
+    const overflow = Children.count(children) - (resolve(limit) ?? 100);
 
     return (
       <Group ref={ref} gap={0} className={cx('[&>*]:-rui-m-xxs', className)} {...props}>

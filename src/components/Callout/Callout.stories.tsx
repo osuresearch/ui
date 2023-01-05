@@ -65,7 +65,7 @@ export const ButtonTests = RUIComponentStory<CalloutProps>((args) => {
       </Callout>
 
       <Callout contentSlot="Uncontrolled callout content">
-        <Button onClick={() => alert('on click')}>Uncontrolled w/ on click</Button>
+        <Button onPress={() => alert('on press')}>Uncontrolled w/ on click</Button>
       </Callout>
     </Group>
   );

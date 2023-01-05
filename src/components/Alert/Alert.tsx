@@ -54,7 +54,7 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
           </Stack>
         </Group>
         {dismissible && (
-          <CloseButton c={contrast} label="Dismiss this alert" onClick={() => setOpen(false)} />
+          <CloseButton c={contrast} label="Dismiss this alert" onPress={() => setOpen(false)} />
         )}
       </Group>
     );

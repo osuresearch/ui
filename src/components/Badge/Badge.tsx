@@ -1,12 +1,11 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 
 import { Color, bc } from '~/theme';
-import { ColorProp, StyleSystemProps } from '~/types';
+import { StyleSystemProps } from '~/types';
 import { cx } from '~/utils';
 import { polymorphicForwardRef } from '~/utils';
 
 import { Box } from '../Box';
-import { CloseButton } from '../CloseButton';
 import { Group } from '../Group';
 import { Indicator } from '../Indicator';
 
@@ -35,7 +34,7 @@ export const Badge = polymorphicForwardRef<'div', BadgeProps>(
           solid: `${c}-contrast`,
           outline: c,
           indicator: 'light-contrast'
-        }[variant] as ColorProp
+        }[variant] as Color
       }
       fs="xs"
       fw="semibold"

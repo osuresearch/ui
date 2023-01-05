@@ -1,9 +1,7 @@
 /**
  * Theme-related utilities
  */
-import { Color } from '../theme';
 import {
-  ColorProp,
   ResponsiveMap,
   ResponsiveProp,
   ScreenSize,

@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { ColorProp, StyleSystemProps, ThemeSize } from '~/types';
+import { Color } from '~/theme';
+import { StyleSystemProps, ThemeProp } from '~/types';
 import { cx } from '~/utils';
 
 import { Box } from '../Box';
@@ -8,7 +9,7 @@ import { Box } from '../Box';
 export type IndicatorProps = StyleSystemProps & {
   size?: number;
 
-  c?: ColorProp;
+  c?: ThemeProp<Color>;
 
   /** Apply a ripple effect. Useful for notifications */
   ping?: boolean;

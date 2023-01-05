@@ -12,7 +12,7 @@ import { Stack } from '../Stack';
 import { Text } from '../Text';
 
 export type CardProps = StyleSystemProps & {
-  variant: 'default' | 'panel' | 'storytelling';
+  variant?: 'default' | 'panel' | 'storytelling';
 
   /** Taxonomy text above the title */
   taxonomy?: string;
@@ -101,7 +101,7 @@ export const Card = forwardRef<HTMLAnchorElement, CardProps>(
       rel="noopener noreferrer"
       {...props}
     >
-      <Paper variant={variant === 'panel' ? 'panel' : 'default'} withBorder={withBorder}>
+      <Paper bgc={variant === 'panel' ? 'light' : undefined} withBorder={withBorder}>
         <div className="rui-bg-primary rui-h-4" />
         <img className="rui-w-full" src={image} alt={alt} />
 
