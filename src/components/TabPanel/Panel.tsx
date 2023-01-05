@@ -2,22 +2,34 @@ import React, { useRef } from 'react';
 import { AriaTabPanelProps, useTabPanel } from 'react-aria';
 import { TabListState } from 'react-stately';
 
-import { Paper } from '~/components/Paper';
+import { cx } from '~/utils';
+
+import { FocusRing } from '../FocusRing';
+import { Paper } from '../Paper';
+import { TabPanelVariant } from './TabPanel';
 
 export type PanelProps = AriaTabPanelProps & {
+  variant: TabPanelVariant;
   state: TabListState<HTMLDivElement>;
 };
 
-export function Panel({ state, ...props }: PanelProps) {
+export function Panel({ variant, state, ...props }: PanelProps) {
   const ref = useRef<HTMLDivElement>(null);
   const { tabPanelProps } = useTabPanel(props, state, ref);
 
-  // TODO: BUX just darkens the border slightly when focused.
-  // But ... do we actually want to do that?
-  // https://bux.osu.edu/page-elements/tabpanel
   return (
-    <Paper ref={ref} p="xl" {...tabPanelProps}>
-      {state.selectedItem?.props.children}
-    </Paper>
+    <FocusRing>
+      <Paper
+        ref={ref}
+        p={variant === 'default' ? 'xl' : 0}
+        className={cx(
+          // The default tab panel has a border below the content
+          { 'rui-border-b-2 rui-border-light-shade': variant === 'default' }
+        )}
+        {...tabPanelProps}
+      >
+        {state.selectedItem?.props.children}
+      </Paper>
+    </FocusRing>
   );
 }

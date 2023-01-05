@@ -9,7 +9,7 @@ import { TabPanel, TabPanelProps } from './TabPanel';
 export default RUIComponentMeta<TabPanelProps>('Bux Stuff', TabPanel).withStyleSystemProps();
 
 export const Overview = RUIComponentStory<TabPanelProps>((args) => (
-  <TabPanel aria-label="Profiles of blah blah blah">
+  <TabPanel aria-label="Famous OSU people" {...args}>
     <Item key="Glenn" title="John Glenn">
       Tbdbitl land grant institution bringing together ideas and disciplines to create bold, new
       connections our strengths are an authentic and distinctive combination of qualities reflective
@@ -34,7 +34,7 @@ export const Overview = RUIComponentStory<TabPanelProps>((args) => (
 
 export const Disabled = RUIComponentStory<TabPanelProps>(
   (args) => (
-    <TabPanel aria-label="Profiles of blah blah blah">
+    <TabPanel aria-label="Profiles of blah blah blah" {...args}>
       <Item key="Glenn" title="John Glenn">
         Tbdbitl land grant institution bringing
       </Item>
@@ -61,6 +61,7 @@ export const Controlled = RUIComponentStory<TabPanelProps>((args) => {
         aria-label="Mesozoic time periods"
         selectedKey={timePeriod}
         onSelectionChange={setTimePeriod}
+        {...args}
       >
         <Item key="triassic" title="Triassic">
           The Triassic ranges roughly from 252 million to 201 million years ago, preceding the

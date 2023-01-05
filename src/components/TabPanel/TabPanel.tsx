@@ -12,19 +12,25 @@ import { Stack } from '../Stack';
 import { Panel } from './Panel';
 import { Tab } from './Tab';
 
+export type TabPanelVariant = 'default' | 'simple';
+
 export type TabPanelProps = StyleSystemProps & {
   // AriaTabListProps re-declared to load into Storybook
   // TODO: Don't do this.
   // See: https://storybook.js.org/docs/react/configure/typescript#mainjs-configuration
   // (except I only want *specific* props exposed to end users)
 
+  variant?: TabPanelVariant;
+
   /** The item keys that are disabled. These items cannot be selected, focused, or otherwise interacted with. */
   disabledKeys?: Iterable<Key>;
 
   /** The currently selected key in the collection (controlled). */
   selectedKey?: Key | null;
+
   /** The initial selected key in the collection (uncontrolled). */
   defaultSelectedKey?: Key;
+
   /** Handler that is called when the selection changes. */
   onSelectionChange?: (key: Key) => any;
 
@@ -51,8 +57,8 @@ export type TabPanelProps = StyleSystemProps & {
  * This implementation wrapper exists so that I can hide some
  * AriaTabListProps and standardize usage.
  */
-function TabPanelImpl(props: AriaTabListProps<HTMLDivElement>) {
-  const ariaTabListProps = props as AriaTabListProps<HTMLDivElement>;
+function TabPanelImpl(props: AriaTabListProps<HTMLDivElement> & { variant: TabPanelVariant }) {
+  const { variant, ...ariaTabListProps } = props;
 
   const ref = useRef<HTMLDivElement>(null);
   const state = useTabListState(ariaTabListProps);
@@ -74,7 +80,7 @@ function TabPanelImpl(props: AriaTabListProps<HTMLDivElement>) {
   }, [state.selectedKey]);
 
   return (
-    <Stack gap={0} className="rui-border-b-2 rui-border-light-shade">
+    <Stack gap={0}>
       <Group
         ref={ref}
         gap={0}
@@ -89,16 +95,22 @@ function TabPanelImpl(props: AriaTabListProps<HTMLDivElement>) {
             // Visual
             'rui-border-2 rui-border-clear rui-shadow-underline-primary',
 
-            // Animation. TODO: Collapse
+            // Animation
             'rui-transition-transform rui-duration-300 rui-ease-decelerate-max'
           )}
           style={{ ...activeTabStyle }}
         />
         {[...state.collection].map((tab) => (
-          <Tab key={tab.key} item={tab} state={state} orientation={props.orientation} />
+          <Tab
+            variant={variant}
+            key={tab.key}
+            item={tab}
+            state={state}
+            orientation={props.orientation}
+          />
         ))}
       </Group>
-      <Panel key={state.selectedItem?.key} state={state} />
+      <Panel variant={variant} key={state.selectedItem?.key} state={state} />
     </Stack>
   );
 }
@@ -115,12 +127,13 @@ function TabPanelImpl(props: AriaTabListProps<HTMLDivElement>) {
  *
  * ## Differences from BUX
  * - Tabs require explicit activation with `Space` or `Enter`
- * - Keyboard focus is more apparent when navigating through tabs with a keyboard
+ * - Keyboard focus ring is more apparent when navigating through tabs with a keyboard
  */
 export const TabPanel = forwardRef<HTMLDivElement, TabPanelProps>(
   (
     {
       orientation = 'horizontal',
+      variant = 'default',
       isDisabled = false,
       disabledKeys,
       selectedKey,
@@ -133,6 +146,7 @@ export const TabPanel = forwardRef<HTMLDivElement, TabPanelProps>(
   ) => (
     <Box ref={ref} {...styleSystemProps}>
       <TabPanelImpl
+        variant={variant}
         orientation={orientation}
         isDisabled={isDisabled}
         disabledKeys={disabledKeys}
