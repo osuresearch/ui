@@ -26,7 +26,7 @@ export type StackProps = StyleSystemProps & {
  */
 export const Stack = polymorphicForwardRef<'div', StackProps>(
   (
-    { as, className, gap = 'sm', align = 'stretch', justify = 'center', children, ...props },
+    { as, className, gap = 'sm', align = 'start', justify = 'start', children, ...props },
     ref
   ) => (
     <Box
