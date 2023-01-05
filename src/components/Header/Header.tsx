@@ -5,7 +5,7 @@ import { polymorphicForwardRef } from '~/utils';
 
 import { Box } from '../Box';
 
-export type TitleProps = {
+export type HeaderProps = {
   /**
    * Heading level. We support H1 through H4
    */
@@ -31,24 +31,9 @@ const ff: FontFamily[] = ['serif', 'sans', 'sans', 'sans'];
 /**
  * H1 through H4 heading levels.
  *
- * ## Accessibility
- *
- * - TODO
- *
- * ## Polymorphic
- *
- * You can use the `as` prop to change the root element for this component.
- * If omitted, the root element will use `h1` through `h4` depending on the
- * specified `level`.
- *
- * Use polymorphics when you need to display content as a header, but without
- * using the semantic header elements that may cause problems for screen readers.
- *
- * ## Responsive
- *
- * - Title font sizes will shrink for smaller screens
+ * <!-- @ruiPolymorphic -->
  */
-export const Title = polymorphicForwardRef<'h1', TitleProps>(
+export const Header = polymorphicForwardRef<'h1', HeaderProps>(
   ({ as, level, variant, children }, ref) => (
     <Box
       ref={ref}
