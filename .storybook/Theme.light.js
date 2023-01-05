@@ -5,12 +5,14 @@ export default create({
   base: 'light',
 
   colorPrimary: '#26686d',
-  colorSecondary: '#ba0c2f',
+
+  // Secondary drives link colors, input outlines, hover color for buttons,
+  // active underline colors,
+  colorSecondary: '#ba0c2f', // scarlet, or teal is good #26686d
 
   // UI
-  appBg: '#f6f7f8', // gray-tint-90
-  appContentBg: 'white',
-  // appBorderColor: '#3f4443', I like the default
+  appBg: '#ffffff', // f6f7f8 gray-tint-90
+  appContentBg: 'transparent',
   appBorderRadius: 0,
 
   // Typography
@@ -23,8 +25,8 @@ export default create({
 
   // Toolbar default and active colors
   barTextColor: '#212325',
-  barSelectedColor: '#ba0c2f',
-  barBg: '#f6f7f8', // gray-tint-90
+  barSelectedColor: '#ba0c2f', // scarlet
+  barBg: 'transparent',
 
   // Form colors
   inputBg: 'white',

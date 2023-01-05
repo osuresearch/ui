@@ -10,6 +10,7 @@ import { SpacingSample } from './components/SpacingSample';
 import { FontSizeTable } from './components/FontSizeTable';
 
 import '../src/theme/index.css';
+import { RUIProvider } from "../src/components/RUIProvider";
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -67,29 +68,9 @@ export const parameters = {
 export const decorators = [
   (Story) => (
     <div data-theme={useDarkMode() ? 'dark' : 'light'} data-decorator="true">
-      <Story />
+      <RUIProvider>
+        <Story />
+      </RUIProvider>
     </div>
   ),
 ];
-
-// Additional badges for https://storybook.js.org/addons/@geometricpanda/storybook-addon-badges
-addParameters({
-  badgesConfig: {
-    atom: {
-      title: 'Atom',
-      styles: {
-        backgroundColor: '#FFF',
-        borderColor: '#018786',
-        color: '#018786',
-      }
-    },
-    molecule: {
-      title: 'Molecule',
-      styles: {
-        backgroundColor: '#FFF',
-        borderColor: '#018786',
-        color: '#018786',
-      }
-    }
-  }
-});

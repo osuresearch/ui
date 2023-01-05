@@ -4,12 +4,12 @@ import { create } from '@storybook/theming';
 export default create({
   base: 'dark',
 
-  colorPrimary: '#ffffff',
+  colorPrimary: 'white',
   colorSecondary: '#26686d',
 
   // UI
-  appBg: '#212325', // gray-shade-80
-  appContentBg: '#141517', // black
+  appBg: '#141517', // '#212325', // gray-shade-80
+  appContentBg: 'transparent', // black
   appBorderRadius: 0,
 
   // Typography
@@ -23,7 +23,7 @@ export default create({
   // Toolbar default and active colors
   barTextColor: '#a7b1b7',
   barSelectedColor: '#ba0c2f',
-  barBg: '#212325',
+  barBg: 'transparent',
 
   // Form colors
   inputBg: '#212325', // gray-shade-80

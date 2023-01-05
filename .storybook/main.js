@@ -24,8 +24,7 @@ module.exports = {
         },
       },
     },
-    'storybook-dark-mode',
-    '@geometricpanda/storybook-addon-badges'
+    'storybook-dark-mode'
   ],
   framework: '@storybook/react',
   // features: {

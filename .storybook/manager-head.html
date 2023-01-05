@@ -2,207 +2,254 @@
 
 <style>
 
+/*
+  Note all the !important abuse is to override styles set by Emotion.
+  I'm sorry, but Storybook needs better low level customization.
+
+  Hopefully this'll be replaced with some sort of component-level
+  overrides in the future.
+*/
+
+:root {
+  /* TODO: Pull in tokens from the content so we can reuse them here. */
+  --rui-scarlet: #ba0c2f;
+  --rui-caret-svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='32' height='32' viewBox='0 0 24 24'%3E%3Cpath fill='rgb(100, 106, 110)' d='M9.4 18L8 16.6l4.6-4.6L8 7.4L9.4 6l6 6Z'%3E%3C/path%3E%3C/svg%3E");
+
+  --rui-light: #f6f7f8;
+  --rui-light-shade: #eff1f2;
+}
+
+.dark {
+  --rui-light: #212325;
+  --rui-light-shade: #3f4443;
+}
+
+/* Setup room for injected header / footer content */
 #root {
-  height: calc(100vh - 48px - 38px);
+  height: calc(100vh - 48px);
 }
 #root > div {
-  height: calc(100vh - 48px - 38px);
+  height: calc(100vh - 48px);
 }
 
-.rui-link--root {
-  text-transform: none;
-  letter-spacing: initial;
-  font-weight: 600;
-  color: #141517;
+/*
+  Draggable edge doesn't line up with the table
+  when in horizontal canvas mode
+*/
+.react-draggable {
+  margin: 0 !important;
 }
 
-.sidebar-header {
-  display: none;
-}
+/* ---- Sidebar styles ---- */
 
-.container.sidebar-container::after {
-  content: '';
-  position: absolute;
-  top: -200px;
-  left: -200px;
-  width: 400px;
-  height: 400px;
-  background: #a7b1b7;
-  opacity: 0.4;
-  filter: blur(150px);
-}
-
-.dark .container.sidebar-container::after {
-  content: '';
-  position: absolute;
-  top: -200px;
-  left: -200px;
-  width: 400px;
-  height: 400px;
-  background: #212325;
-  opacity: 0.4;
-  filter: blur(150px);
-}
-
-.sidebar-subheading > button > span:first-of-type,
-.sidebar-subheading > button:focus > span:first-of-type {
-  color: #a7b1b7;
-
-  border-top-width: 5px;
-  border-bottom-width: 5px;
-  border-left-width: 7px;
-  margin-right: 0;
-  margin-top: 8px;
-  margin-left: 8px;
-}
-
-.sidebar-item span:first-of-type {
-  color: #a7b1b7;
-
-  border-top-width: 5px;
-  border-bottom-width: 5px;
-  border-left-width: 7px;
-  margin-right: 0;
-  margin-top: 12px;
-  margin-left: 8px;
-}
-
-.search-field {
-  margin: 0;
-}
-
-.search-field input {
-  border-radius: 0;
-
-}
-
-.search-result-recentlyOpened {
-  text-transform: none;
-  letter-spacing: initial;
-  font-weight: 600;
-  color: #141517;
-}
-
-.search-result-item svg {
-  display: none;
-}
-
-.search-result-item mark {
-  background: #ffb60066;
-  color: initial;
-}
-
-.rui-link--root,
-.rui-link--story,
-.rui-link--component {
-  font-size: 14px;
-  padding: 4px;
-  padding-left: 10px;
-}
-
-.dark .rui-link--root {
-  color: #f6f7f8;
-}
-
-.dark .rui-link--story,
-.dark .rui-link--component {
-  color: #dfe3e5;
-}
-
-.dark .os-content button {
-  color: #f6f7f8;
-}
-
-.sidebar-item svg {
- display: none;
-}
-
-.rui-header {
-  background: #0e1115;
-  height: 38px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 20px;
-
-  box-shadow: 0 4px 0 0 #ba0c2f;
-}
-
-.rui-header__link {
-  color: #fff;
-  font-size: 14px;
-  margin-left: 16px;
-  text-decoration: none;
-}
-
-.rui-header__link svg {
-  vertical-align: bottom;
-  margin-right: 4px;
-  fill: #ffffff;
-}
-
-.rui-header__link:hover {
-  text-decoration: underline;
-}
-
-.rui-header__brand {
-  height: 16px;
-  width: 80px;
-  display: block;
-  text-indent: -9999px;
-  background: url(https://research.osu.edu/themes/fire/assets/vendor/osu_navbar/images/white/osu_name.png) 0 0 no-repeat;
-}
-
-.rui-header__skip-link {
-  display: block;
-  position: absolute;
-  width: 100%;
-  padding: 10px 15px;
-  font-size: 12px;
-  z-index: 1;
-  -webkit-transform: translate(0,-9999px);
-  -moz-transform: translate(0,-9999px);
-  -ms-transform: translate(0,-9999px);
-  transform: translate(0,-9999px);
-}
-
-.rui-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  background: #4a0513;
-  color: #afb2b5;
-  font-size: 14px;
-  padding: 8px 20px;
-  height: 48px;
-}
-
-.dark .rui-footer {
-  background: #0e1115;
-}
-
-.rui-footer a {
-  color: #fff;
-}
-
-.rui-footer__a11y {
-  max-width: 70%;
-}
-
-.rui-footer__contributors:before {
-  content: '💖';
-}
-
-.dark .rui-footer__contributors:before {
-  content: '✨';
-}
-
-@media screen and (max-width: 970px) {
-  .rui-footer {
-    font-size: 12px;
+  #storybook-explorer-tree {
+    margin: 24px;
   }
-}
+
+  /* Invisible skip link */
+  .sidebar-header > a:first-child {
+    top: 0;
+    scale: 0;
+  }
+
+  .container.sidebar-container::after {
+    content: '';
+    position: absolute;
+    top: -200px;
+    left: -200px;
+    width: 400px;
+    height: 400px;
+    background: #a7b1b7;
+    opacity: 0.4;
+    filter: blur(150px);
+  }
+
+  .dark .container.sidebar-container::after {
+    content: '';
+    position: absolute;
+    top: -200px;
+    left: -200px;
+    width: 400px;
+    height: 400px;
+    background: #212325;
+    opacity: 0.4;
+    filter: blur(150px);
+  }
+
+  /* Root toggle carets */
+  .sidebar-subheading > button > span:first-of-type,
+  .sidebar-subheading > button:focus > span:first-of-type {
+    border: none;
+    margin: 0;
+
+    margin-top: 4px;
+
+    width: 16px;
+    height: 16px;
+
+    background-size: contain;
+    background-image: var(--rui-caret-svg);
+  }
+
+  /* Subsection toggle carets */
+  .sidebar-item span:first-of-type {
+    border: none;
+    margin: 0;
+
+    margin-top: 4px;
+
+    width: 16px;
+    height: 16px;
+
+    background-size: contain;
+    background-image: var(--rui-caret-svg);
+  }
+
+  .sidebar-item svg {
+    /* Using our own SVG as a background image */
+    display: none;
+   }
+
+  /* Lighter selection style */
+  .sidebar-item[data-selected="true"],
+  .sidebar-item[data-selected="true"]:hover,
+  .sidebar-item[data-selected="true"]:active,
+  .sidebar-item[data-selected="true"]:focus {
+    background: var(--rui-light-shade) !important;
+    box-shadow: inset 4px 0 var(--rui-scarlet) !important;
+    color: var(--rui-scarlet) !important;
+    font-weight: normal !important;
+  }
+
+  .sidebar-item:hover {
+    background: var(--rui-light) !important;
+  }
+
+  /* Remove the expand all button */
+  .sidebar-subheading-action {
+    display: none;
+  }
+
+  .rui-link--root {
+    letter-spacing: initial;
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #141517;
+  }
+
+  .rui-link--root,
+  .rui-link--story,
+  .rui-link--component {
+    padding: 4px;
+    padding-left: 8px;
+  }
+
+  .dark .rui-link--root {
+    color: #f6f7f8;
+  }
+
+  .dark .rui-link--story,
+  .dark .rui-link--component {
+    color: #dfe3e5;
+  }
+
+/* ---- Search field / result styles ---- */
+
+  .search-field {
+    margin: 0;
+  }
+
+  .search-field input {
+    border-radius: 0;
+  }
+
+  .search-result-recentlyOpened {
+    text-transform: none;
+    letter-spacing: initial;
+    font-weight: 600;
+    color: #141517;
+  }
+
+  .search-result-item svg {
+    display: none;
+  }
+
+  .search-result-item mark {
+    background: #ffb60066;
+    color: initial;
+  }
+
+/* ----- Header styles ------ */
+
+  .rui-header {
+    background: #0e1115;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+
+    border-bottom: 4px solid #ba0c2f;
+  }
+
+  .rui-header__link {
+    color: #fff;
+    font-size: 14px;
+    margin-left: 16px;
+    text-decoration: none;
+  }
+
+  .rui-header__link svg {
+    vertical-align: bottom;
+    margin-right: 4px;
+    fill: #ffffff;
+  }
+
+  .rui-header__link:hover {
+    text-decoration: underline;
+  }
+
+  .rui-header__brand {
+    height: 16px;
+    width: 80px;
+    display: block;
+    text-indent: -9999px;
+    background: url(https://research.osu.edu/themes/fire/assets/vendor/osu_navbar/images/white/osu_name.png) 0 0 no-repeat;
+  }
+
+  .rui-header__skip-link {
+    display: block;
+    position: absolute;
+    width: 100%;
+    padding: 10px 15px;
+    font-size: 12px;
+    z-index: 1;
+    -webkit-transform: translate(0,-9999px);
+    -moz-transform: translate(0,-9999px);
+    -ms-transform: translate(0,-9999px);
+    transform: translate(0,-9999px);
+  }
+
+/* Content container styles */
+
+  /* Header for addon content iframes */
+  .os-host {
+    background: transparent !important;
+  }
+
+  .dark .os-content button {
+    color: #f6f7f8;
+  }
+
+  /* Remove excess borders around the content area */
+  [role="main"] > div {
+    border: none;
+    background: none;
+    box-shadow: none;
+    top: 8px;
+    left: 8px;
+  }
 
 </style>
 
@@ -211,23 +258,11 @@
   <a class="rui-header__brand" href="https://osu.edu" target="_blank">The Ohio State University</a>
   <div class="rui-header__links">
     <!-- <a class="rui-header__link" href="#">Something</a> -->
-    <a class="rui-header__link" href="https://github.com/osuresearch/ui" target="_blank">
+    <a class="rui-header__link" title="Link to our GitHub" href="https://github.com/osuresearch/ui" target="_blank">
       <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" fill="#fffff" width="18" height="18">
         <path fill-rule="evenodd" clip-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8C0 11.54 2.29 14.53 5.47 15.59C5.87 15.66 6.02 15.42 6.02 15.21C6.02 15.02 6.01 14.39 6.01 13.72C4 14.09 3.48 13.23 3.32 12.78C3.23 12.55 2.84 11.84 2.5 11.65C2.22 11.5 1.82 11.13 2.49 11.12C3.12 11.11 3.57 11.7 3.72 11.94C4.44 13.15 5.59 12.81 6.05 12.6C6.12 12.08 6.33 11.73 6.56 11.53C4.78 11.33 2.92 10.64 2.92 7.58C2.92 6.71 3.23 5.99 3.74 5.43C3.66 5.23 3.38 4.41 3.82 3.31C3.82 3.31 4.49 3.1 6.02 4.13C6.66 3.95 7.34 3.86 8.02 3.86C8.7 3.86 9.38 3.95 10.02 4.13C11.55 3.09 12.22 3.31 12.22 3.31C12.66 4.41 12.38 5.23 12.3 5.43C12.81 5.99 13.12 6.7 13.12 7.58C13.12 10.65 11.25 11.33 9.47 11.53C9.76 11.78 10.01 12.26 10.01 13.01C10.01 14.08 10 14.94 10 15.21C10 15.42 10.15 15.67 10.55 15.59C13.71 14.53 16 11.53 16 8C16 3.58 12.42 0 8 0Z" transform="scale(64)" fill="#fffff"></path>
-      </svg>Check us out on GitHub
+      </svg>
     </a>
-  </div>
-</script>
-
-<script id="rui-footer-template" type="text/html">
-  <div class="rui-footer__contributors">
-    <a href="https://github.com/McManning" target="_blank">Chase McManning</a>
-    and <a href="https://github.com/osuresearch/ui/graphs/contributors" target="_blank">contributors</a>.
-  </div>
-
-  <div class="rui-footer__a11y">
-    If you have a disability and experience difficulty accessing this content,
-    contact <a href="mailto:oraccessibility@osu.edu">oraccessibility@osu.edu</a>
   </div>
 </script>
 
@@ -237,10 +272,5 @@
     ele.className = 'rui-header';
     ele.innerHTML = document.getElementById('rui-header-template').innerText;
     document.body.prepend(ele);
-
-    ele = document.createElement('footer');
-    ele.className = 'rui-footer';
-    ele.innerHTML = document.getElementById('rui-footer-template').innerText;
-    document.body.append(ele);
   });
 </script>
