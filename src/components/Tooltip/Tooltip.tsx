@@ -39,11 +39,17 @@ function TooltipPopup({ state, ...props }: TooltipPopupProps) {
 
   return (
     <Paper
-      className="rui-absolute"
       shadow="xs"
-      p="xs"
+      fs="sm"
+      w="max-content"
+      p="xxs"
       withBorder
-      {...mergeProps(props, tooltipProps)}
+      {...mergeProps(props, tooltipProps, {
+        style: {
+          position: 'absolute',
+          maxWidth: '15rem'
+        }
+      })}
     >
       {props.children}
     </Paper>

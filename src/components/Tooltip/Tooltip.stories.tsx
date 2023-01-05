@@ -5,6 +5,7 @@ import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 import { Button } from '../Button';
 import { Group } from '../Group';
 import { Icon } from '../Icon';
+import { Space } from '../Space';
 import { Stack } from '../Stack';
 import { Text } from '../Text';
 import { Tooltip, TooltipProps } from './Tooltip';
@@ -76,11 +77,28 @@ export const Disabled = RUIComponentStory(Overview, {
 export const HelpIcon = RUIComponentStory<TooltipProps>(
   (args) => (
     <Tooltip {...args}>
-      <Icon c="dark" name="questionCircle" />
+      <Icon c="dark" name="questionCircle" aria-label="Help with this feature" />
     </Tooltip>
   ),
   {
-    contentSlot: 'Instant tooltip ☕',
+    contentSlot: 'Elements dedicated to help should have instant tooltips',
     delay: 0
   }
 );
+
+export const LongContent = RUIComponentStory(Overview, {
+  contentSlot: (
+    <>
+      long content that also includes <Text fw="bold">text formatting</Text>, icons{' '}
+      <Icon name="heartFill" c="pink" />, and a whole bunch of text on a single line to see if it
+      wraps.
+      <Space />
+      And maybe even a list for good measure:
+      <ul>
+        <li>item 1</li>
+        <li>item 2</li>
+        <li>item 3</li>
+      </ul>
+    </>
+  )
+});
