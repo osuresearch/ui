@@ -5,6 +5,8 @@ import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 import { Badge } from '../Badge';
 import { Button, ButtonProps } from '../Button';
 import { Icon } from '../Icon';
+import { Paper } from '../Paper';
+import { Group } from '../Group';
 
 export default RUIComponentMeta<ButtonProps>('Components', Button).withStyleSystemProps();
 
@@ -38,3 +40,60 @@ export const WithBadge = RUIComponentStory(Overview, {
   variant: 'default',
   rightSlot: <Badge c="dimmed">+99</Badge>
 }).withDescription('Use badges when you want to indicate a value');
+
+export const WithAccent = RUIComponentStory<ButtonProps>((args) => (
+  <Group wrap>
+    <Paper p="md" bgc="clear">
+      <Button {...args}>Click me</Button>
+    </Paper>
+    <Paper p="md" bgc="white" c="black">
+      <Button {...args}>Click me</Button>
+    </Paper>
+    <Paper p="md" bgc="black" c="white">
+      <Button {...args}>Click me</Button>
+    </Paper>
+    <Paper p="md" bgc="light" c="light-contrast">
+      <Button {...args}>Click me</Button>
+    </Paper>
+    <Paper p="md" bgc="dimmed" c="dimmed-contrast">
+      <Button {...args}>Click me</Button>
+    </Paper>
+    <Paper p="md" bgc="dark" c="dark-contrast">
+      <Button {...args}>Click me</Button>
+    </Paper>
+    <Paper p="md" bgc="blue" c="blue-contrast">
+      <Button {...args}>Click me</Button>
+    </Paper>
+    <Paper p="md" bgc="orange" c="orange-contrast">
+      <Button {...args}>Click me</Button>
+    </Paper>
+    <Paper p="md" bgc="green" c="green-contrast">
+      <Button {...args}>Click me</Button>
+    </Paper>
+    <Paper p="md" bgc="brown" c="brown-contrast">
+      <Button {...args}>Click me</Button>
+    </Paper>
+    <Paper p="md" bgc="pink" c="pink-contrast">
+      <Button {...args}>Click me</Button>
+    </Paper>
+    <Paper p="md" bgc="violet" c="violet-contrast">
+      <Button {...args}>Click me</Button>
+    </Paper>
+    <Paper p="md" bgc="aqua" c="aqua-contrast">
+      <Button {...args}>Click me</Button>
+    </Paper>
+    <Paper p="md" bgc="teal" c="teal-contrast">
+      <Button {...args}>Click me</Button>
+    </Paper>
+    <Paper p="md" bgc="gold" c="gold-contrast">
+      <Button {...args}>Click me</Button>
+    </Paper>
+  </Group>
+  
+), {
+  variant: 'accented',
+}).withDescription(`
+  The \`accented\` button variant can be used against accented backgrounds. 
+
+  You should not use an accented button against the primary color.
+`)

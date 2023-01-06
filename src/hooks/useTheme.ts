@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 
 import { Theme, ThemeProp } from '~/types';
 import { resolveThemeProp } from '~/utils';
@@ -11,6 +11,13 @@ export function useTheme() {
     // but I need something to work with atm.
     // Will probably use a context + global RUI provider
     // that also handles all the other stuff we need (toast portals, etc)
+
+    // TODO: This doesn't properly handle changes
+    // triggered in Storybook. We need an observer
+    // to watch for theme changes. 
+
+    // Also - this doesn't handle nested or adjacent themes.
+    // Really, it needs to just use RUI Provider.
 
     const el = document.querySelector('[data-theme]');
     if (el) {

@@ -9,8 +9,8 @@ import { ExternalLink } from './ExternalLink';
 
 export default RUIComponentMeta<LinkProps>('Components', ExternalLink)
   .withStyleSystemProps()
-  .withBadge('atom')
-  .withBadge('stable');
+  
+  ;
 
 export const Overview = RUIComponentStory<LinkProps>((args) => (
   <ExternalLink href="https://research.osu.edu" {...args}>

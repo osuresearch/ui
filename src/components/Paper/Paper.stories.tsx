@@ -1,7 +1,7 @@
 import { Meta, Story } from '@storybook/react';
 import React from 'react';
 
-import { RUIComponentMeta } from '~/.storybook/utils';
+import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
 import { Header } from '../Header';
 import { PrimaryButton } from '../PrimaryButton';
@@ -11,19 +11,17 @@ import { Paper, PaperProps } from './Paper';
 
 export default RUIComponentMeta<PaperProps>('Layout', Paper)
   .withStyleSystemProps()
-  .withBadge('stable');
+  ;
 
-const Template: Story<PaperProps> = (args: PaperProps) => (
+export const Overview = RUIComponentStory<PaperProps>((args) => 
   <Paper {...args}>
-    Paper is the most basic UI component
-    <br />
-    Use it to create cards, dropdowns, modals and other components that require borders and shadow.
+  Paper is the most basic UI component
+  <Space />
+  Use it to create cards, dropdowns, modals and other components that require borders and shadow.
   </Paper>
 );
 
-export const Overview = Template.bind({});
-
-export const PanelWithContent: Story<PaperProps> = (args) => (
+export const PanelWithContent = RUIComponentStory<PaperProps>((args) => (
   <Paper bgc="light-shade" p="xl" {...args}>
     <Header level={3}>Take your next step toward becoming a Buckeye</Header>
     <Space h="lg" />
@@ -44,4 +42,14 @@ export const PanelWithContent: Story<PaperProps> = (args) => (
     <Space h="lg" />
     <PrimaryButton>Apply Now</PrimaryButton>
   </Paper>
-);
+));
+
+export const Accented = RUIComponentStory(Overview, {
+  p: 'lg',
+  rounded: 'md',
+  bgc: 'violet',
+  c: 'violet-contrast'
+}).withDescription(`
+  When using accent colors as a background, use the accent's 
+  contrast color as your foreground to ensure readability. 
+`);

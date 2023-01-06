@@ -22,9 +22,7 @@ export default RUIComponentMeta<DemoProps>(
     'Components', // Path. Can be nested, e.g. "Scientific / Analysis"
     Demo, // Component
   )
-  .withStyleSystemProps() // Show the style system props (m, mx, my, c, ...)
-  .withBadge('atom') // Add one or more badges
-  .withBadge('beta');
+  .withStyleSystemProps(); // Show the style system props (m, mx, my, c, ...)
 
 // Make a template
 const Template: Story<DemoProps> = (args) => (

@@ -7,8 +7,8 @@ import { Table, TableProps } from './Table';
 
 export default RUIComponentMeta<TableProps>('Components', Table)
   .withStyleSystemProps()
-  .withBadge('atom')
-  .withBadge('beta');
+  
+  ;
 
 const Template: Story<TableProps> = (args: TableProps) => (
   <Table {...args}>

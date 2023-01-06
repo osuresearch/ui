@@ -7,7 +7,7 @@ import { CheckboxFieldProps, CheckboxField as Component } from './CheckboxField'
 
 export default RUIComponentMeta<CheckboxFieldProps>('Forms', Component)
   .withStyleSystemProps()
-  .withBadge('experimental');
+  ;
 
 export const Overview = RUIComponentStory<CheckboxFieldProps>((args) => <Component {...args} />, {
   label: 'Yes I want to receive hourly promotional emails',

@@ -9,7 +9,7 @@ import { Avatar, AvatarProps } from './Avatar';
 
 export default RUIComponentMeta<AvatarProps>('Components', Avatar)
   .withStyleSystemProps()
-  .withBadge('beta');
+  ;
 
 export const Overview = RUIComponentStory<AvatarProps>((args) => <Avatar {...args} />, {
   name: 'Chase McManning',

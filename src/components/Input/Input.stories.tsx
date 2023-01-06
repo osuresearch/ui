@@ -13,7 +13,7 @@ type Props = InputProps & React.ComponentPropsWithoutRef<'input'>;
 
 export default RUIComponentMeta<Props>('Utilities', Input)
   .withStyleSystemProps()
-  .withBadge('stable');
+  ;
 
 export const Overview = RUIComponentStory<Props>((args) => <Input {...args} />, {
   defaultValue: 'Hello world!'

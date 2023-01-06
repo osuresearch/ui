@@ -9,8 +9,7 @@ import {
 } from './CheckboxGroupField';
 
 export default RUIComponentMeta<CheckboxGroupFieldProps>('Forms', CheckboxGroupField)
-  .withStyleSystemProps()
-  .withBadge('experimental');
+  .withStyleSystemProps();
 
 export const Overview = RUIComponentStory<CheckboxGroupFieldProps>(
   (args) => (

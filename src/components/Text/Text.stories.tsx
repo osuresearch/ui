@@ -8,8 +8,8 @@ import { Text, TextProps } from './Text';
 
 export default RUIComponentMeta<TextProps>('Components', Text)
   .withStyleSystemProps()
-  .withBadge('atom')
-  .withBadge('stable');
+  
+  ;
 
 const Template: Story<TextProps> = (args) => (
   <Text {...args}>The quick brown fox jumped over the lazy dog.</Text>
@@ -26,7 +26,7 @@ export const HelpText = RUIComponentStory(Template, {
 `);
 
 export const BreakWords = RUIComponentStory((args) => (
-  <Paper maw="xs" variant="panel">
+  <Paper maw={250} bgc="light">
     <Text>
       The longest word in any of the major English language dictionaries is{' '}
       <Text fw="bold">pneumonoultramicroscopicsilicovolcanoconiosis</Text>, a word that refers to a

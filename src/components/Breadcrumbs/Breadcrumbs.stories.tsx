@@ -9,10 +9,10 @@ import { Text } from '../Text';
 export default RUIComponentMeta<BreadcrumbsProps>('BUX Stuff', Component).withStyleSystemProps();
 
 export const Breadcrumbs = RUIComponentStory<BreadcrumbsProps>((args) => (
-  <Component>
+  <Component {...args}>
     <Link href="#">Home</Link>
     <Link href="#">Level 1</Link>
     <Link href="#">Level 2</Link>
-    <Text>Level 3</Text>
+    <Text c="dark">Level 3</Text>
   </Component>
 ));

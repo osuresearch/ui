@@ -7,7 +7,7 @@ import { ToggleField as Component, ToggleFieldProps } from './ToggleField';
 
 export default RUIComponentMeta<ToggleFieldProps>('Forms', Component)
   .withStyleSystemProps()
-  .withBadge('experimental');
+  ;
 
 export const Overview = RUIComponentStory<ToggleFieldProps>((args) => <Component {...args} />, {
   label: 'I want to receive hourly promotional emails',

@@ -5,12 +5,10 @@ import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
 import { Header, HeaderProps } from './Header';
 
-export default RUIComponentMeta<HeaderProps>('Components', Header)
-  .withBadge('atom')
-  .withBadge('stable');
+export default RUIComponentMeta<HeaderProps>('Components', Header);
 
 const Template: Story<HeaderProps> = (args: HeaderProps) => (
-  <Header {...args}>This is a title example</Header>
+  <Header {...args}>This is a heading example</Header>
 );
 
 export const Overview = RUIComponentStory(Template, {

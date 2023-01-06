@@ -7,7 +7,7 @@ import { Listicle, ListicleProps } from './index';
 
 export default RUIComponentMeta<ListicleProps>('BUX Stuff', Listicle)
   .withStyleSystemProps()
-  .withBadge('stable');
+  ;
 
 export const Ordered = RUIComponentStory<ListicleProps>(
   (args) => (

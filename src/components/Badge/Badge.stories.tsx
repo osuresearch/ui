@@ -9,9 +9,7 @@ import { Text } from '../Text';
 import { Badge, BadgeProps } from './Badge';
 
 export default RUIComponentMeta<BadgeProps>('Components', Badge)
-  .withStyleSystemProps()
-  .withBadge('atom')
-  .withBadge('beta');
+  .withStyleSystemProps();
 
 const Template: Story<BadgeProps> = (args) => <Badge {...args}>Beta</Badge>;
 
@@ -20,7 +18,7 @@ export const Overview = RUIComponentStory(Template);
 const Colors: Story<BadgeProps> = (args) => (
   <Stack>
     <Text as="div">Accents</Text>
-    <Group gap="xxs">
+    <Group gap="xxs" wrap>
       <Badge {...args} c="blue">
         blue
       </Badge>
@@ -50,7 +48,7 @@ const Colors: Story<BadgeProps> = (args) => (
       </Badge>
     </Group>
     <Text as="div">Utilities</Text>
-    <Group gap="xxs">
+    <Group gap="xxs" wrap>
       <Badge {...args} c="primary">
         primary
       </Badge>

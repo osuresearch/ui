@@ -10,7 +10,7 @@ export type CodeProps = {
  * Line or block of code
  */
 export const Code = forwardRef<HTMLDivElement, CodeProps>(({ children }, ref) => (
-  <Box as="code" fs="sm" ref={ref}>
+  <Box as="code" fs="sm" c="dark" ref={ref}>
     {children}
   </Box>
 ));

@@ -97,18 +97,18 @@ export const DocsContainer = ({ children, context }) => {
       >
         <TableOfContents title="On this page" className="rui-toc" />
 
-        <Stack gap={0} style={{ paddingRight: 200, height: '100%' }} justify="apart">
+        <Stack gap={0} style={{ paddingRight: 200, height: '100%' }} align="stretch" justify="apart">
 
           {/* Markdown or MDX documentation page */}
           {!isComponent &&
-          <Stack gap={0}>
+          <Stack gap={0} align="stretch">
             {children}
           </Stack>
           }
 
           {/* Refactor of component docs layout */}
           {isComponent && (
-          <Stack gap={0}>
+          <Stack gap={0} align="stretch">
             <Group align="center" justify="apart">
               <Title />
               <Group mb="lg">
@@ -139,7 +139,7 @@ export const DocsContainer = ({ children, context }) => {
 
             <Primary />
 
-            <TabPanel variant="simple">
+            <TabPanel variant="simple" align="stretch">
               {hasAdditionalStories &&
               <Item key="examples" title="Examples">
                 <Space h="xl" />
@@ -161,7 +161,7 @@ export const DocsContainer = ({ children, context }) => {
           </Stack>
           )}
 
-          <Stack gap={0}>
+          <Stack gap={0} align="stretch">
             <Divider />
 
             <Group justify="apart">

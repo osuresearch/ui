@@ -1,14 +1,16 @@
 import React from 'react';
 
-import { Group, Stack, Text } from '@osuresearch/ui';
+import { Group } from '../Group';
+import { Stack } from '../Stack';
+import { Text } from '../Text';
 
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
 import { Divider, DividerProps } from './Divider';
 
 export default RUIComponentMeta<DividerProps>('Layout', Divider)
-  .withBadge('atom')
-  .withBadge('stable');
+  
+  ;
 
 export const Horizontal = RUIComponentStory<DividerProps>(
   (args) => (

@@ -8,7 +8,7 @@ import { Interview, InterviewProps } from './Interview';
 
 export default RUIComponentMeta<InterviewProps>('BUX Stuff', Interview)
   .withStyleSystemProps()
-  .withBadge('stable');
+  ;
 
 /**
  * Can I write a doc here?

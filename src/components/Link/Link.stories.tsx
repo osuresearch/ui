@@ -8,8 +8,8 @@ import { Link, LinkProps } from './Link';
 
 export default RUIComponentMeta<LinkProps>('Components', Link)
   .withStyleSystemProps()
-  .withBadge('atom')
-  .withBadge('stable');
+  
+  ;
 
 export const Overview = RUIComponentStory<LinkProps>((args) => (
   <Link href="https://research.osu.edu" {...args}>

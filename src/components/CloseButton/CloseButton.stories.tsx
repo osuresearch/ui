@@ -7,7 +7,6 @@ import { CloseButtonProps, CloseButton as Component } from './CloseButton';
 
 export default RUIComponentMeta<CloseButtonProps>('Components', Component)
   .withStyleSystemProps()
-  .withBadge('stable');
 
 const Template: Story<CloseButtonProps> = (args) => <Component {...args} />;
 

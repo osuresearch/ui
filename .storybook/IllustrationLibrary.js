@@ -46,7 +46,7 @@ export function IllustrationLibrary({ group }) {
   };
 
   return (
-    <Stack>
+    <Stack align="stretch">
       {illustrations[group].map(name =>
         <Group>
           <Icon

@@ -23,7 +23,7 @@ export const ExternalLink = polymorphicForwardRef<'a', LinkProps>(
       {...props}
       target="_blank"
       referrerPolicy="no-referrer"
-      mr="sm"
+      mr="md"
     >
       {children}
       <Icon
@@ -34,8 +34,9 @@ export const ExternalLink = polymorphicForwardRef<'a', LinkProps>(
           }[variant] as Color
         }
         className="rui-transition-transform"
-        mr="-sm"
-        size="1em"
+        mr="-md"
+        px="xxs"
+        size="0.8em"
         name="externalLink"
         aria-hidden
       />

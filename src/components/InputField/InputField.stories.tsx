@@ -7,7 +7,7 @@ import { InputField as Component, InputFieldProps } from './InputField';
 
 export default RUIComponentMeta<InputFieldProps>('Forms', Component)
   .withStyleSystemProps()
-  .withBadge('experimental');
+  ;
 
 export const Overview = RUIComponentStory<InputFieldProps>((args) => <Component {...args} />, {
   label: 'Email',

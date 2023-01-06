@@ -5,7 +5,7 @@ import { Alert, AlertProps } from '@osuresearch/ui';
 
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
-export default RUIComponentMeta<AlertProps>('Components', Alert).withBadge('stable');
+export default RUIComponentMeta<AlertProps>('Components', Alert);
 
 const Template: Story<AlertProps> = (args: AlertProps) => (
   <Alert {...args}>This is additional text about this message.</Alert>
