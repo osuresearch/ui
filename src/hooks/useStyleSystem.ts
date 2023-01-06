@@ -44,9 +44,9 @@ export function useStyleSystem<P>(props: P): [string[], CSSProperties, P] {
       tc(resolveTheme(color.c)),
       bgc(resolveTheme(color.bgc)),
 
-      fs(font.fs),
-      fw(font.fw),
-      ff(font.ff)
+      fs(resolve(font.fs)),
+      fw(resolve(font.fw)),
+      ff(resolve(font.ff))
     ],
 
     // Styles that can't be resolved by spacing keys end up getting
