@@ -9,7 +9,7 @@ import { Paper } from '../Paper';
 import { TabPanelVariant } from './TabPanel';
 
 export type PanelProps = AriaTabPanelProps & {
-  variant: TabPanelVariant;
+  variant?: TabPanelVariant;
   state: TabListState<HTMLDivElement>;
 };
 

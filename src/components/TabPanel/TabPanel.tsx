@@ -13,6 +13,7 @@ import { Panel } from './Panel';
 import { Tab } from './Tab';
 
 export type TabPanelVariant = 'default' | 'simple';
+export type TabPanelAlignment = 'start' | 'stretch';
 
 export type TabPanelProps = StyleSystemProps & {
   // AriaTabListProps re-declared to load into Storybook
@@ -47,18 +48,26 @@ export type TabPanelProps = StyleSystemProps & {
    */
   isDisabled?: boolean;
 
+  /** Stack alignment */
+  align?: TabPanelAlignment
+
   /**
    * An `<Item>` component per tab.
    */
   children: CollectionChildren<HTMLDivElement>;
 };
 
+type TabPanelImplProps = AriaTabListProps<HTMLDivElement> & {
+  variant: TabPanelVariant
+  align: TabPanelAlignment
+}
+
 /**
  * This implementation wrapper exists so that I can hide some
  * AriaTabListProps and standardize usage.
  */
-function TabPanelImpl(props: AriaTabListProps<HTMLDivElement> & { variant: TabPanelVariant }) {
-  const { variant, ...ariaTabListProps } = props;
+function TabPanelImpl(props: TabPanelImplProps) {
+  const { variant, align, ...ariaTabListProps } = props;
 
   const ref = useRef<HTMLDivElement>(null);
   const state = useTabListState(ariaTabListProps);
@@ -80,7 +89,7 @@ function TabPanelImpl(props: AriaTabListProps<HTMLDivElement> & { variant: TabPa
   }, [state.selectedKey]);
 
   return (
-    <Stack gap={0}>
+    <Stack gap={0} align={align}>
       <Group
         ref={ref}
         gap={0}
@@ -135,6 +144,7 @@ export const TabPanel = forwardRef<HTMLDivElement, TabPanelProps>(
       orientation = 'horizontal',
       variant = 'default',
       isDisabled = false,
+      align = 'stretch',
       disabledKeys,
       selectedKey,
       defaultSelectedKey,
@@ -147,6 +157,7 @@ export const TabPanel = forwardRef<HTMLDivElement, TabPanelProps>(
     <Box ref={ref} {...styleSystemProps}>
       <TabPanelImpl
         variant={variant}
+        align={align}
         orientation={orientation}
         isDisabled={isDisabled}
         disabledKeys={disabledKeys}

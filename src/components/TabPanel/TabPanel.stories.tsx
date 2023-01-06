@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
+import { Button } from '../Button';
 
 import { Item } from '../Item';
 import { Text } from '../Text';
@@ -58,10 +59,10 @@ export const Controlled = RUIComponentStory<TabPanelProps>((args) => {
     <>
       <Text>Selected time period: {timePeriod}</Text>
       <TabPanel
+        {...args}
         aria-label="Mesozoic time periods"
         selectedKey={timePeriod}
         onSelectionChange={setTimePeriod}
-        {...args}
       >
         <Item key="triassic" title="Triassic">
           The Triassic ranges roughly from 252 million to 201 million years ago, preceding the
@@ -75,6 +76,7 @@ export const Controlled = RUIComponentStory<TabPanelProps>((args) => {
           years ago.
         </Item>
       </TabPanel>
+      <Button mt="sm" onPress={() => setTimePeriod('jurassic')}>Go to Jurassic</Button>
     </>
   );
 }).withDescription(`
