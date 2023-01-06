@@ -8,7 +8,7 @@ import { UnstyledButton, UnstyledButtonProps } from '../UnstyledButton';
 
 export type ButtonProps = Omit<UnstyledButtonProps, 'leftSlot' | 'rightSlot'> & {
   /** Alternate rendering styles */
-  variant?: 'default' | 'primary' | 'subtle';
+  variant?: 'default' | 'primary' | 'subtle' | 'accented';
 
   /**
    * Button content
@@ -55,23 +55,25 @@ export const Button = polymorphicForwardRef<'button', ButtonProps>(
     <UnstyledButton
       as={as || 'button'}
       ref={ref}
-      c={variant === 'primary' ? 'primary-contrast' : 'dark-shade'}
       py="xxs"
       px="sm"
       isDisabled={isDisabled}
       className={cx(
+        'rui-relative',
+
         // Default variant
         {
-          'rui-bg-light-shade dark:rui-bg-light': variant === 'default',
-          'hover:rui-bg-dimmed-tint hover:dark:rui-bg-light-shade': variant === 'default',
+          'rui-text-dark-shade': variant === 'default',
+          'rui-bg-light-shade dark:rui-bg-light': variant === 'default' && !isDisabled,
+          'hover:rui-bg-dimmed-tint hover:dark:rui-bg-light-shade': variant === 'default' && !isDisabled,
           'data-[pressed=true]:rui-bg-dimmed data-[pressed=true]:dark:rui-bg-dimmed-tint':
-            variant === 'default'
+            variant === 'default' && !isDisabled,
         },
 
         // Subtle variant
         {
-          'hover:rui-bg-light': variant === 'subtle',
-          'data-[pressed=true]:rui-bg-light-shade': variant === 'subtle'
+          'hover:rui-bg-light hover:rui-text-dark': variant === 'subtle',
+          'data-[pressed=true]:rui-bg-light-shade': variant === 'subtle',
         },
 
         // Primary variant
@@ -79,6 +81,23 @@ export const Button = polymorphicForwardRef<'button', ButtonProps>(
           'rui-bg-primary rui-text-primary-contrast': variant === 'primary',
           'hover:rui-bg-primary-shade': variant === 'primary',
           'data-[pressed=true]:rui-bg-black': variant === 'primary'
+        },
+
+        // Accented variant, color inherits, :before drives background color
+        {
+          'before:rui-absolute before:rui-inset-0 before:rui-mix-blend-multiply': variant === 'accented',
+
+          'before:rui-bg-gray-tint-80': variant === 'accented',
+          'hover:before:rui-bg-gray-tint-60': variant === 'accented' && !isDisabled,
+          'data-[pressed=true]:before:rui-bg-gray-tint-40': variant === 'accented' && !isDisabled,
+
+          // 'rui-mix-blend-multiply': variant === 'subtle',
+
+          // 'rui-text-black': variant === 'accented',
+          // 'rui-mix-blend-hard-light': variant === 'accented',
+          // 'rui-bg-gray-tint-80': variant === 'accented',
+          // 'hover:rui-bg-gray-tint-60': variant === 'accented' && !isDisabled,
+          // 'data-[pressed=true]:rui-bg-gray-tint-40': variant === 'accented',
         },
 
         // Disabled
