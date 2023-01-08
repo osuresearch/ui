@@ -52,7 +52,7 @@
     scale: 0;
   }
 
-  .container.sidebar-container::after {
+  /* .container.sidebar-container::after {
     content: '';
     position: absolute;
     top: -200px;
@@ -74,7 +74,7 @@
     background: #212325;
     opacity: 0.4;
     filter: blur(150px);
-  }
+  } */
 
   /* Root toggle carets */
   .sidebar-subheading > button > span:first-of-type,
@@ -247,8 +247,107 @@
     border: none;
     background: none;
     box-shadow: none;
-    top: 8px;
     left: 8px;
+  }
+
+  .search-field {
+    height: 64px;
+
+    padding-left: 90px;
+    padding-right: 16px;
+
+    position: sticky !important;
+    top: 0;
+    z-index: 10;
+
+    margin-top: -20px !important;
+    margin-left: -20px;
+    margin-right: -12px;
+
+    backdrop-filter: saturate(180%) blur(10px);
+  }
+
+.search-field input {
+  padding-left: 10px;
+  margin-top: 16px;
+
+  width: 100%;
+  z-index: 9;
+}
+
+.search-field code {
+  margin-top: 16px;
+  margin-right: 16px;
+}
+
+.search-field button {
+  margin-top: 16px;
+  margin-right: 16px;
+}
+
+.search-field svg {
+  display: none;
+  margin-top: 16px;
+  margin-right: 16px;
+}
+
+.sidebar-header img {
+  display: none;
+}
+
+.sidebar-header {
+  border: 1px solid red;
+  display: none !important;
+}
+
+/* button title=Shortcuts */
+button[title="Shortcuts"] {
+  position: sticky;
+  top: 100px;
+
+  height: 20px;
+  padding: 0 10px;
+  border-radius: 3px;
+}
+
+button[title="Shortcuts"]:focus::before {
+  border-radius: 3px;
+}
+
+  /* RUI logo */
+  .search-field:after {
+    content: "";
+    position: absolute;
+    z-index: 1;
+
+    top: 4px;
+    left: 20px;
+    width: 50px;
+    height: 50px;
+
+    background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='utf-8'%3F%3E%3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 100 100' enable-background='new 0 0 100 100' xml:space='preserve'%3E%3Cg id='RUI-Outline'%3E%3Cpath fill='none' stroke='%23FFFFFF' stroke-width='18.7144' stroke-linecap='round' stroke-linejoin='round' d='M89.93 74.63c0.31 0.69 0.25 1.52-0.02 2.38c-0.91 2.95-3.71 4.92-6.8 4.88c-1.15-0.01-2.38-0.09-3.44-0.29c-2.95-0.56-4.27-1.41-4.27-4.84V54.79v21.29c0 6.08-10.81 6.42-10.81 6.42s-6.25 0-10.81-5.58V55.81v17.76c0 4.15-2.93 7.73-7.01 8.52c-1.38 0.26-3.02 0.42-4.99 0.42c-11.66 0-11.66-17.07-9.46-26.87c2.2-9.8-15.37-9.46-15.37-9.46s2.58 0.61 5.74 0.35c5.3-0.44 12.33-3.34 12.33-15.72c0-13.11-11.07-13.96-18.53-13.05c-3.79 0.47-6.65 3.68-6.65 7.5v55.63'/%3E%3Ccircle fill='none' stroke='%23FFFFFF' stroke-width='12.4763' stroke-miterlimit='10' cx='75.41' cy='41.05' r='4.5'/%3E%3Cline fill='none' stroke='%23FFFFFF' stroke-width='18.7144' stroke-linecap='round' stroke-linejoin='round' x1='21.04' y1='18.97' x2='21.04' y2='43.05'/%3E%3C/g%3E%3Cg id='RUI'%3E%3Ccircle fill='%23ba0c2f' cx='75.41' cy='41.05' r='4.5'/%3E%3Cpath fill='none' stroke='%23ba0c2f' stroke-width='7.7977' stroke-linecap='round' stroke-linejoin='round' d='M89.93 74.63c0.31 0.69 0.25 1.52-0.02 2.38c-0.91 2.95-3.71 4.92-6.8 4.88c-1.15-0.01-2.38-0.09-3.44-0.29c-2.95-0.56-4.27-1.41-4.27-4.84V54.79v21.29c0 6.08-10.81 6.42-10.81 6.42s-6.25 0-10.81-5.58V55.81v17.76c0 4.15-2.93 7.73-7.01 8.52c-1.38 0.26-3.02 0.42-4.99 0.42c-11.66 0-11.66-17.07-9.46-26.87c2.2-9.8-15.37-9.46-15.37-9.46s18.08 4.39 18.08-15.38c0-13.11-11.07-13.96-18.53-13.05c-3.79 0.47-6.65 3.68-6.65 7.5v55.63'/%3E%3C/g%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+  }
+
+  /* Color highlight in the corner - decoration only */
+  div[role="main"]:before {
+    content: '';
+    position: fixed;
+    pointer-events: none;
+
+    z-index: 0;
+    top: -100px;
+    left: -100px;
+    width: 400px;
+    height: 400px;
+    background: #a7b1b7;
+    opacity: 0.2;
+    filter: blur(100px);
+  }
+
+  .dark div[role="main"]:before {
+    background: #4a0513;
+    opacity: 0.2;
   }
 
 </style>
@@ -267,6 +366,14 @@
 </script>
 
 <script type="text/javascript">
+
+  // Hack to overwrite default sidebar size.
+  // Ref: https://github.com/storybookjs/storybook/issues/9682#issuecomment-1318648868
+  let prev = JSON.parse(localStorage["storybook-layout"] || '{}');
+  let current = { resizerNav: { x: 265, y: 0 }};
+  localStorage["storybook-layout"] = JSON.stringify({...prev, ...current});
+
+  // Hack to inject the OSU navbar
   document.addEventListener('DOMContentLoaded', function () {
     let ele = document.createElement('header');
     ele.className = 'rui-header';

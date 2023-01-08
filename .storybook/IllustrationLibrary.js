@@ -19,6 +19,9 @@ export function IllustrationLibrary({ group }) {
   // TODO: Intelligently generate this from the rui-illustration namespace
   const illustrations = {
     brand: [
+      'rui-logo',
+    ],
+    osu: [
       'office-of-research-wordmark',
       'osu-logo-blocko',
     ],
