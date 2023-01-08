@@ -20,6 +20,7 @@ export function Panel({ variant, state, ...props }: PanelProps) {
   return (
     <FocusRing>
       <Paper
+        bgc={variant === 'default' ? 'light-tint' : 'clear'}
         ref={ref}
         p={variant === 'default' ? 'xl' : 0}
         className={cx(

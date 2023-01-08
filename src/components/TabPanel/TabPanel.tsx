@@ -49,7 +49,7 @@ export type TabPanelProps = StyleSystemProps & {
   isDisabled?: boolean;
 
   /** Stack alignment */
-  align?: TabPanelAlignment
+  align?: TabPanelAlignment;
 
   /**
    * An `<Item>` component per tab.
@@ -58,9 +58,9 @@ export type TabPanelProps = StyleSystemProps & {
 };
 
 type TabPanelImplProps = AriaTabListProps<HTMLDivElement> & {
-  variant: TabPanelVariant
-  align: TabPanelAlignment
-}
+  variant: TabPanelVariant;
+  align: TabPanelAlignment;
+};
 
 /**
  * This implementation wrapper exists so that I can hide some

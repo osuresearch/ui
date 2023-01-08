@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
-import { Button } from '../Button';
 
+import { Button } from '../Button';
 import { Item } from '../Item';
 import { Text } from '../Text';
 import { TabPanel, TabPanelProps } from './TabPanel';
@@ -76,7 +76,9 @@ export const Controlled = RUIComponentStory<TabPanelProps>((args) => {
           years ago.
         </Item>
       </TabPanel>
-      <Button mt="sm" onPress={() => setTimePeriod('jurassic')}>Go to Jurassic</Button>
+      <Button mt="sm" onPress={() => setTimePeriod('jurassic')}>
+        Go to Jurassic
+      </Button>
     </>
   );
 }).withDescription(`

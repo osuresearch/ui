@@ -33,9 +33,9 @@ export function Tab({ variant, item, state, orientation }: TabProps) {
           // Default style - border around the selected item
           {
             'rui-border-2 rui-border-b-0 rui-border-clear': variant === 'default' && !isDisabled,
-            'aria-selected:rui-border-light-shade': variant === 'default' && !isDisabled,
+            'aria-selected:rui-border-light-shade': variant === 'default' && !isDisabled
           },
-          
+
           {
             // hover style (bg matches the Panel bars)
             'hover:rui-bg-light-shade': !isDisabled,
