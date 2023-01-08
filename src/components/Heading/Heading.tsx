@@ -5,7 +5,7 @@ import { polymorphicForwardRef } from '~/utils';
 
 import { Box } from '../Box';
 
-export type HeaderProps = {
+export type HeadingProps = {
   /**
    * Heading level. We support H1 through H4
    */
@@ -33,7 +33,7 @@ const ff: FontFamily[] = ['serif', 'sans', 'sans', 'sans'];
  *
  * <!-- @ruiPolymorphic -->
  */
-export const Header = polymorphicForwardRef<'h1', HeaderProps>(
+export const Heading = polymorphicForwardRef<'h1', HeadingProps>(
   ({ as, level, variant, children }, ref) => (
     <Box
       ref={ref}
