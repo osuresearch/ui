@@ -1,54 +1,88 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
-import { Color, bc } from '~/theme';
-import { StyleSystemProps } from '~/types';
+import { Color, ThemeProp } from '~/types';
 import { cx } from '~/utils';
-import { polymorphicForwardRef } from '~/utils';
 
 import { Box } from '../Box';
 import { Group } from '../Group';
-import { Indicator } from '../Indicator';
 
-export type BadgeProps = StyleSystemProps & {
-  variant?: 'solid' | 'outline' | 'indicator';
+export type BadgeProps = {
+  /**
+   * Total count to display.
+   *
+   * If the count exceeds `maxCount` then the badge
+   * will display the max count.
+   *
+   * If the count is `0`, the badge will not be displayed.
+   */
+  count?: number;
 
+  maxCount?: number;
+
+  c?: ThemeProp<Color>;
+
+  /** Apply an animation to get the user's attention */
+  ping?: boolean;
+
+  /**
+   * Children to display within the badge
+   */
   children?: React.ReactNode;
 };
 
 /**
- * Display badge, pill or tag
+ * A small indicator to the top right of its children.
  *
  * ## Accessibility
- * - Check contrast of your badge against light and dark themes.
- *  Some variants and colors may work with one but not the other.
- *
- * <!-- @ruiPolymorphic -->
+ * - `ping` animation is not displayed when reduced motion is enabled.
+ * - TODO: How should badges be read to SR?
  */
-export const Badge = polymorphicForwardRef<'div', BadgeProps>(
-  ({ as, c = 'light', variant = 'solid', children, ...props }, ref) => (
-    <Box
-      as={as || 'div'}
-      bgc={variant === 'solid' ? c : undefined}
-      c={
-        {
-          solid: `${c}-contrast`,
-          outline: c,
-          indicator: 'light-contrast'
-        }[variant] as Color
-      }
-      fs="xs"
-      fw="semibold"
-      className={cx('rui-border rui-rounded-full rui-inline-block', {
-        [bc(c as Color)]: variant !== 'indicator',
-        'rui-border-dimmed': variant === 'indicator' || c === 'dimmed'
-      })}
-      {...props}
-    >
-      <Group align="center" justify="center" px="xs" gap="xxs">
-        {variant === 'indicator' && <Indicator size={12} mt="-sm" pr="sm" c={c} />}
-        {children}
-        {/* <CloseButton size={14} p="xxs" /> */}
-      </Group>
-    </Box>
+export const Badge = forwardRef<HTMLDivElement, BadgeProps>(
+  ({ c = 'primary', count, ping = false, maxCount = 99, children }, ref) => (
+    <div className="rui-inline-block rui-relative">
+      {children}
+      {count !== 0 && ( // Hide badge on 0
+        <div
+          className={cx(
+            'rui-absolute rui-flex rui-justify-center rui-pointer-events-none',
+            { '-rui-right-8 -rui-top-8': count === undefined },
+            { '-rui-right-8 -rui-top-12': count !== undefined }
+          )}
+        >
+          {ping && (
+            <Box
+              bgc={c}
+              h="100%"
+              w="100%"
+              className={cx(
+                // Surrounding animation
+                'motion-safe:rui-animate-ping rui-absolute rui-inline-flex rui-rounded-full rui-opacity-75'
+              )}
+            />
+          )}
+          <Box
+            bgc={c}
+            w={16}
+            mih={16}
+            miw="fit-content"
+            c={`${c}-contrast` as Color}
+            fs="xs"
+            fw="semibold"
+            className={cx(
+              'rui-rounded-full rui-inline-block',
+              'rui-border-2 rui-border-light-tint',
+              'rui-z-0'
+            )}
+          >
+            {count !== undefined && (
+              <Group align="center" justify="center" px="xs" gap="xxs">
+                {count > maxCount && `${maxCount}+`}
+                {count <= maxCount && count}
+              </Group>
+            )}
+          </Box>
+        </div>
+      )}
+    </div>
   )
 );
