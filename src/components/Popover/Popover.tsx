@@ -4,25 +4,58 @@ import React, { useRef } from 'react';
 import { FocusScope, Overlay, usePopover } from 'react-aria';
 import { OverlayTriggerState } from 'react-stately';
 
-import { Icon } from '../Icon';
+import { Color, ThemeProp } from '~/types';
+
+import { Arrow } from '../Arrow';
 import { Paper } from '../Paper';
 import { Underlay } from '../Underlay';
-import { VisuallyHidden } from '../VisuallyHidden';
 
 export type PopoverProps = {
+  /**
+   * Background color for the popover and arrow.
+   *
+   * Use `<Text>` and similar containers to drive foreground color.
+   */
+  bgc: ThemeProp<Color>;
+
+  /**
+   * React Aria trigger state
+   */
   state: OverlayTriggerState;
-  offset?: number;
+
+  /**
+   * Pixel-based offset from the trigger element to display the popover.
+   */
+  offset: number;
+
   children: React.ReactNode;
+
+  /**
+   * Ref to the element that triggered the popover.
+   *
+   * Required for returning keyboard focus to the trigger
+   * once the popover is closed.
+   */
   triggerRef: React.RefObject<Element>;
+
+  /**
+   * Props to spread into React Aria `<Overlay>`
+   */
   overlayProps: React.DOMAttributes<FocusableElement>;
 };
 
 /**
  * 🛑 Internal component. Do not use directly.
  *
+ * ## Accessibility
+ * - Applies React Aria `Overlay` and RUI's `Underlay` to block touch input outside of the paper
+ * - Wraps content with React Aria's `FocusScope` to force keyboard focus to only cycle through
+ *  components contained within the paper.
+ * - Keyboard focus is returned to the popover trigger once closed.
+ *
  * @internal
  */
-export function Popover({ children, state, offset = 8, overlayProps, ...props }: PopoverProps) {
+export function Popover({ children, state, bgc, offset, overlayProps, ...props }: PopoverProps) {
   const popoverRef = useRef<HTMLDivElement>(null);
   const { popoverProps, underlayProps, arrowProps, placement } = usePopover(
     {
@@ -33,37 +66,13 @@ export function Popover({ children, state, offset = 8, overlayProps, ...props }:
     state
   );
 
-  const iconProps = {
-    style: {}
-  };
-
-  // TODO: Figure out focus handling for this.
-  // Should we focus something specific? Should it be
-  // configurable by the developer? Etc.
   return (
     <Overlay {...overlayProps}>
       <Underlay {...underlayProps} />
-      <Paper {...popoverProps} ref={popoverRef} shadow="md" p="md" withBorder>
-        <svg {...arrowProps} className="rui-arrow" data-placement={placement}>
-          <path d="M0 0,L6 6,L12 0" />
-        </svg>
+      <Paper bgc={bgc} {...popoverProps} ref={popoverRef} shadow="md" p="md" withBorder>
+        <Arrow c={bgc} {...arrowProps} placement={placement} />
         <FocusScope contain restoreFocus autoFocus>
-          {/* <Icon
-            name="caret"
-            className="rui-arrow"
-            data-placement={placement}
-            {...mergeProps(arrowProps, iconProps)}
-          /> */}
-
-          <VisuallyHidden>
-            <button aria-label="Close" onClick={state.close} />
-          </VisuallyHidden>
-
           {children}
-
-          <VisuallyHidden>
-            <button aria-label="Close" onClick={state.close} />
-          </VisuallyHidden>
         </FocusScope>
       </Paper>
     </Overlay>

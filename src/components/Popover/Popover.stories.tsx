@@ -5,8 +5,8 @@ import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 import { Text } from '../Text';
 import { Popover as Component, PopoverProps } from './Popover';
 
-export default RUIComponentMeta<PopoverProps>('Utilities', Component);
+export default RUIComponentMeta<PopoverProps>('Internal', Component);
 
 export const Popover = RUIComponentStory<PopoverProps>((args) => (
-  <Text>For examples, see Callout</Text>
+  <Text>Popover cannot be used directly. See Callout for a component that uses the popover</Text>
 ));
