@@ -96,20 +96,28 @@ export const GuidedTour = RUIComponentStory<CalloutProps>((args) => {
   const [step, setStep] = useState(0);
 
   const coachmark = (x: number, y: number) => (
-    <Icon c="blue" style={{ position: 'absolute', top: y, left: x }} name="circle" />
+    <Icon c="teal" style={{ position: 'absolute', top: y, left: x }} name="circle" />
   );
 
-  const NextButton = () => <Button onPress={() => setStep((s) => s + 1)}>Next</Button>;
+  const NextButton = () => (
+    <Button tabIndex={1} onPress={() => setStep((s) => s + 1)}>
+      Next
+    </Button>
+  );
 
-  const PrevButton = () => <Button onPress={() => setStep((s) => s - 1)}>Previous</Button>;
+  const PrevButton = () => (
+    <Button tabIndex={2} onPress={() => setStep((s) => s - 1)}>
+      Previous
+    </Button>
+  );
 
   // TODO: Autofocus on the next button somehow
 
   const Content = () => (
-    <Stack>
+    <Stack c="teal-contrast">
       <Group justify="apart">
         <Text>callout content</Text>
-        <CloseButton onPress={() => setStep(0)} />
+        <CloseButton tabIndex={3} onPress={() => setStep(0)} />
       </Group>
       <Group justify="apart">
         <Text>{step} / 4</Text>
@@ -123,19 +131,19 @@ export const GuidedTour = RUIComponentStory<CalloutProps>((args) => {
     <div style={{ width: 600, height: 400 }}>
       <Button onPress={() => setStep(1)}>Start tour</Button>
 
-      <Callout isOpen={step === 1} contentSlot={<Content />}>
+      <Callout isOpen={step === 1} bgc="teal" contentSlot={<Content />}>
         {coachmark(150, 20)}
       </Callout>
 
-      <Callout isOpen={step === 2} placement="left" contentSlot={<Content />}>
+      <Callout isOpen={step === 2} placement="left" bgc="teal" contentSlot={<Content />}>
         {coachmark(300, 350)}
       </Callout>
 
-      <Callout isOpen={step === 3} contentSlot={<Content />}>
+      <Callout isOpen={step === 3} bgc="teal" contentSlot={<Content />}>
         {coachmark(580, 200)}
       </Callout>
 
-      <Callout isOpen={step === 4} placement="right" contentSlot={<Content />}>
+      <Callout isOpen={step === 4} placement="right" bgc="teal" contentSlot={<Content />}>
         {coachmark(100, 200)}
       </Callout>
     </div>

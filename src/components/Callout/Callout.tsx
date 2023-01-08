@@ -3,7 +3,7 @@ import React, { useRef } from 'react';
 import { useOverlayTrigger } from 'react-aria';
 import { useOverlayTriggerState } from 'react-stately';
 
-import { SlotType } from '~/types';
+import { Color, SlotType, ThemeProp } from '~/types';
 
 import { MissingSlot } from '../MissingSlot';
 import { Popover } from '../Popover';
@@ -24,14 +24,35 @@ export type CalloutProps = CalloutSlots & {
   /** Handler that is called when the overlay's open state changes. */
   onOpenChange?: (isOpen: boolean) => void;
 
-  /** Placement of the callout with respect to the trigger. */
+  /**
+   * Placement of the callout with respect to the trigger.
+   * If omitted, the popover will make a best-effort placement.
+   */
   placement?: PlacementAxis;
+
+  /**
+   * Background color for the popover and arrow.
+   *
+   * Use `<Text>` and similar containers to drive foreground color.
+   */
+  bgc?: ThemeProp<Color>;
+
+  /**
+   * Pixel-based offset from the trigger element to display the popover.
+   */
+  offset?: number;
 };
 
 /**
  * A callout is an overlay element positioned relative to a trigger.
  */
-export const Callout = ({ children, contentSlot, ...props }: CalloutProps) => {
+export const Callout = ({
+  children,
+  bgc = 'light-tint',
+  offset = 8,
+  contentSlot,
+  ...props
+}: CalloutProps) => {
   const triggerRef = useRef<Element>(null);
   const state = useOverlayTriggerState(props);
 
@@ -45,7 +66,14 @@ export const Callout = ({ children, contentSlot, ...props }: CalloutProps) => {
         ref: triggerRef
       })}
       {state.isOpen && (
-        <Popover overlayProps={overlayProps} triggerRef={triggerRef} state={state} {...props}>
+        <Popover
+          bgc={bgc}
+          offset={offset}
+          overlayProps={overlayProps}
+          triggerRef={triggerRef}
+          state={state}
+          {...props}
+        >
           {contentSlot}
         </Popover>
       )}
