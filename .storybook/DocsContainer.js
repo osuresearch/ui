@@ -108,10 +108,10 @@ export const DocsContainer = ({ children, context }) => {
 
           {/* Refactor of component docs layout */}
           {isComponent && (
-          <Stack gap={0} align="stretch">
-            <Group align="center" justify="apart">
+          <Stack gap="lg" align="stretch">
+            <Group align="center">
               <Title />
-              <Group mb="lg">
+              <Group>
                 {atomics.map((atomic) =>
                   <Badge>Atomic: {atomic[1]}</Badge>
                 )}
@@ -121,14 +121,14 @@ export const DocsContainer = ({ children, context }) => {
                 )}
 
                 {isPolymorphic &&
-                  <Badge as="a" href="/?path=/docs/getting-started-polymorphic-components--page">Polymorphic</Badge>
+                  <Badge c="gold" as="a" href="/?path=/docs/getting-started-polymorphic-components--page">Polymorphic</Badge>
                 }
               </Group>
             </Group>
 
             <Subtitle />
 
-            <Stack mt="lg">
+            <Stack>
               <Code>
                 import &#123; {name} &#125; from '@osuresearch/ui'
               </Code>

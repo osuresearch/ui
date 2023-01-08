@@ -2,18 +2,16 @@ import React from 'react';
 
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
-import { Header } from '../Header';
+import { Heading } from '../Heading';
 import { HashLink as Component, HashLinkProps } from './HashLink';
 
-export default RUIComponentMeta<HashLinkProps>('Components', Component)
-  
-  ;
+export default RUIComponentMeta<HashLinkProps>('Components', Component);
 
 export const HashLink = RUIComponentStory<HashLinkProps>(
   (args) => (
-    <Header level={1}>
+    <Heading level={1}>
       <Component {...args}>Linked header content</Component>
-    </Header>
+    </Heading>
   ),
   {
     id: 'hash-link-example'

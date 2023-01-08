@@ -5,9 +5,7 @@ import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 import { Text } from '../Text';
 import { ToggleField as Component, ToggleFieldProps } from './ToggleField';
 
-export default RUIComponentMeta<ToggleFieldProps>('Forms', Component)
-  .withStyleSystemProps()
-  ;
+export default RUIComponentMeta<ToggleFieldProps>('Forms', Component).withStyleSystemProps();
 
 export const Overview = RUIComponentStory<ToggleFieldProps>((args) => <Component {...args} />, {
   label: 'I want to receive hourly promotional emails',

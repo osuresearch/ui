@@ -60,20 +60,22 @@ export const Button = polymorphicForwardRef<'button', ButtonProps>(
       isDisabled={isDisabled}
       className={cx(
         'rui-relative',
+        'rui-whitespace-nowrap',
 
         // Default variant
         {
           'rui-text-dark-shade': variant === 'default',
           'rui-bg-light-shade dark:rui-bg-light': variant === 'default' && !isDisabled,
-          'hover:rui-bg-dimmed-tint hover:dark:rui-bg-light-shade': variant === 'default' && !isDisabled,
-          'data-[pressed=true]:rui-bg-dimmed data-[pressed=true]:dark:rui-bg-dimmed-tint':
+          'hover:rui-bg-dimmed-tint hover:dark:rui-bg-light-shade':
             variant === 'default' && !isDisabled,
+          'data-[pressed=true]:rui-bg-dimmed data-[pressed=true]:dark:rui-bg-dimmed-tint':
+            variant === 'default' && !isDisabled
         },
 
         // Subtle variant
         {
           'hover:rui-bg-light hover:rui-text-dark': variant === 'subtle',
-          'data-[pressed=true]:rui-bg-light-shade': variant === 'subtle',
+          'data-[pressed=true]:rui-bg-light-shade': variant === 'subtle'
         },
 
         // Primary variant
@@ -85,11 +87,12 @@ export const Button = polymorphicForwardRef<'button', ButtonProps>(
 
         // Accented variant, color inherits, :before drives background color
         {
-          'before:rui-absolute before:rui-inset-0 before:rui-mix-blend-multiply': variant === 'accented',
+          'before:rui-absolute before:rui-inset-0 before:rui-mix-blend-multiply':
+            variant === 'accented',
 
           'before:rui-bg-gray-tint-80': variant === 'accented',
           'hover:before:rui-bg-gray-tint-60': variant === 'accented' && !isDisabled,
-          'data-[pressed=true]:before:rui-bg-gray-tint-40': variant === 'accented' && !isDisabled,
+          'data-[pressed=true]:before:rui-bg-gray-tint-40': variant === 'accented' && !isDisabled
 
           // 'rui-mix-blend-multiply': variant === 'subtle',
 

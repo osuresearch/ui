@@ -6,10 +6,7 @@ import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 import { Box } from '../Box';
 import { Link, LinkProps } from './Link';
 
-export default RUIComponentMeta<LinkProps>('Components', Link)
-  .withStyleSystemProps()
-  
-  ;
+export default RUIComponentMeta<LinkProps>('Components', Link).withStyleSystemProps();
 
 export const Overview = RUIComponentStory<LinkProps>((args) => (
   <Link href="https://research.osu.edu" {...args}>

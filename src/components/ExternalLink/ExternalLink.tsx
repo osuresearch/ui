@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Color } from '~/theme';
+import { Color } from '~/types';
 import { cx, polymorphicForwardRef } from '~/utils';
 
 import { Icon } from '../Icon';

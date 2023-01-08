@@ -14,7 +14,7 @@ import { CSSTransition } from 'react-transition-group';
 import { Box } from '../Box';
 import { Button } from '../Button';
 import { Group } from '../Group';
-import { Header } from '../Header';
+import { Heading } from '../Heading';
 import { Paper } from '../Paper';
 import { Stack } from '../Stack';
 import { Underlay } from '../Underlay';

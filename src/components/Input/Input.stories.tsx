@@ -11,9 +11,7 @@ import { Input, InputProps } from './Input';
 // can understand child props for the default implementation
 type Props = InputProps & React.ComponentPropsWithoutRef<'input'>;
 
-export default RUIComponentMeta<Props>('Utilities', Input)
-  .withStyleSystemProps()
-  ;
+export default RUIComponentMeta<Props>('Internal', Input).withStyleSystemProps();
 
 export const Overview = RUIComponentStory<Props>((args) => <Input {...args} />, {
   defaultValue: 'Hello world!'

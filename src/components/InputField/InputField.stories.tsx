@@ -5,9 +5,7 @@ import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 import { Text } from '../Text';
 import { InputField as Component, InputFieldProps } from './InputField';
 
-export default RUIComponentMeta<InputFieldProps>('Forms', Component)
-  .withStyleSystemProps()
-  ;
+export default RUIComponentMeta<InputFieldProps>('Forms', Component).withStyleSystemProps();
 
 export const Overview = RUIComponentStory<InputFieldProps>((args) => <Component {...args} />, {
   label: 'Email',

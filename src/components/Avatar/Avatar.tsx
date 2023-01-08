@@ -1,7 +1,6 @@
 import React from 'react';
 
-import { Color } from '~/theme';
-import { StyleSystemProps } from '~/types';
+import { Color, StyleSystemProps } from '~/types';
 import { cx, polymorphicForwardRef } from '~/utils';
 
 import { Box } from '../Box';

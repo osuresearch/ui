@@ -8,6 +8,12 @@ export type UnderlayProps = React.ComponentProps<'div'> & {
 
 /**
  * The UNDERLAYER
+ *
+ * ## 🛑 Internal use only
+ * The underlay is used by modal and callout components to
+ * block interactions outside of their content containers.
+ *
+ * @internal
  */
 export function Underlay({ variant = 'default', ...props }: UnderlayProps) {
   return (

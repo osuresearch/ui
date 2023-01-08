@@ -7,9 +7,7 @@ import { Stack } from '../Stack';
 import { Text } from '../Text';
 import { Avatar, AvatarProps } from './Avatar';
 
-export default RUIComponentMeta<AvatarProps>('Components', Avatar)
-  .withStyleSystemProps()
-  ;
+export default RUIComponentMeta<AvatarProps>('Components', Avatar).withStyleSystemProps();
 
 export const Overview = RUIComponentStory<AvatarProps>((args) => <Avatar {...args} />, {
   name: 'Chase McManning',

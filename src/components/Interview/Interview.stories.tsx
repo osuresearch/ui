@@ -6,9 +6,7 @@ import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 import { Item } from '../Item';
 import { Interview, InterviewProps } from './Interview';
 
-export default RUIComponentMeta<InterviewProps>('BUX Stuff', Interview)
-  .withStyleSystemProps()
-  ;
+export default RUIComponentMeta<InterviewProps>('BUX Stuff', Interview).withStyleSystemProps();
 
 /**
  * Can I write a doc here?

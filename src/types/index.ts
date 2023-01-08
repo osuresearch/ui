@@ -1,6 +1,8 @@
 import type { CSSProperties, ForwardRefExoticComponent } from 'react';
 
-import { Color } from '../theme';
+import { Color } from '../theme/colors';
+
+export * from '../theme/colors';
 
 export * from './form';
 

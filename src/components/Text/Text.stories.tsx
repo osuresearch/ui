@@ -6,10 +6,7 @@ import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 import { Paper } from '../Paper';
 import { Text, TextProps } from './Text';
 
-export default RUIComponentMeta<TextProps>('Components', Text)
-  .withStyleSystemProps()
-  
-  ;
+export default RUIComponentMeta<TextProps>('Components', Text).withStyleSystemProps();
 
 const Template: Story<TextProps> = (args) => (
   <Text {...args}>The quick brown fox jumped over the lazy dog.</Text>

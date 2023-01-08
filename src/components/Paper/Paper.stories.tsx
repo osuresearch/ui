@@ -3,27 +3,25 @@ import React from 'react';
 
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
-import { Header } from '../Header';
+import { Heading } from '../Heading';
 import { PrimaryButton } from '../PrimaryButton';
 import { Space } from '../Space';
 import { Text } from '../Text';
 import { Paper, PaperProps } from './Paper';
 
-export default RUIComponentMeta<PaperProps>('Layout', Paper)
-  .withStyleSystemProps()
-  ;
+export default RUIComponentMeta<PaperProps>('Layout', Paper).withStyleSystemProps();
 
-export const Overview = RUIComponentStory<PaperProps>((args) => 
+export const Overview = RUIComponentStory<PaperProps>((args) => (
   <Paper {...args}>
-  Paper is the most basic UI component
-  <Space />
-  Use it to create cards, dropdowns, modals and other components that require borders and shadow.
+    Paper is the most basic UI component
+    <Space />
+    Use it to create cards, dropdowns, modals and other components that require borders and shadow.
   </Paper>
-);
+));
 
 export const PanelWithContent = RUIComponentStory<PaperProps>((args) => (
   <Paper bgc="light-shade" p="xl" {...args}>
-    <Header level={3}>Take your next step toward becoming a Buckeye</Header>
+    <Heading level={3}>Take your next step toward becoming a Buckeye</Heading>
     <Space h="lg" />
     <Text>
       Columbus our strengths are an authentic and distinctive combination of qualities reflective of
@@ -50,6 +48,6 @@ export const Accented = RUIComponentStory(Overview, {
   bgc: 'violet',
   c: 'violet-contrast'
 }).withDescription(`
-  When using accent colors as a background, use the accent's 
-  contrast color as your foreground to ensure readability. 
+  When using accent colors as a background, use the accent's
+  contrast color as your foreground to ensure readability.
 `);

@@ -21,6 +21,8 @@ export type BackToTopButtonProps = Record<string, never>;
  * - integration with RUI Provider (or some page container)
  * - scrollpages calculation (default to 4 pages)
  * - hide text on sm breakpoint
+ *
+ * <!-- @ruiPolymorphic -->
  */
 export const BackToTopButton = polymorphicForwardRef<'button', BackToTopButtonProps>(
   ({ as, ...props }, ref) => (

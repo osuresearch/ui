@@ -253,31 +253,45 @@
 }
 
 .rui-arrow {
-  position: absolute;
-  fill: var(--rui-white);
-  stroke: var(--rui-scarlet);
-  stroke-width: 1px;
-  width: 30px;
-  height: 30px;
-  border: 1px solid red;
+  --rui-arrow-color: red;
+
+	border: solid transparent;
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+	border-color: transparent;
+	border-width: 8px;
 }
 
-.rui-arrow[data-placement=top] {
-  top: 100%;
-  transform: translateX(-50%);
+.rui-arrow[data-placement="bottom"] {
+	bottom: 100%;
+	left: 50%;
+
+	border-bottom-color: currentColor;
+	margin-left: -8px;
 }
 
-.rui-arrow[data-placement=bottom] {
-  bottom: 100%;
-  transform: translateX(-50%) rotate(180deg);
+.rui-arrow[data-placement="top"] {
+	top: 100%;
+	left: 50%;
+
+	border-top-color: currentColor;
+	margin-left: -8px;
 }
 
-.rui-arrow[data-placement=left] {
-  left: 100%;
-  transform: translateY(-50%) rotate(-90deg);
+.rui-arrow[data-placement="left"] {
+	left: 100%;
+	top: 50%;
+
+	border-left-color: currentColor;
+	margin-top: -8px;
 }
 
-.rui-arrow[data-placement=right] {
-  right: 100%;
-  transform: translateY(-50%) rotate(90deg);
+.rui-arrow[data-placement="right"] {
+	right: 100%;
+	top: 50%;
+
+	border-right-color: currentColor;
+	margin-top: -8px;
 }

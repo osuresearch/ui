@@ -4,8 +4,7 @@ import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
 import { IconButton, IconButtonProps } from './IconButton';
 
-export default RUIComponentMeta<IconButtonProps>('Components', IconButton)
-  .withStyleSystemProps();
+export default RUIComponentMeta<IconButtonProps>('Components', IconButton).withStyleSystemProps();
 
 export const Overview = RUIComponentStory<IconButtonProps>((args) => <IconButton {...args} />, {
   name: 'question',
@@ -24,13 +23,11 @@ export const Accented = RUIComponentStory(Overview, {
   c: 'pink'
 });
 
-export const WithPadding = RUIComponentStory<IconButtonProps>(
-  (args) => <IconButton {...args} />
-, {
+export const WithPadding = RUIComponentStory<IconButtonProps>((args) => <IconButton {...args} />, {
   name: 'question',
   label: 'More information',
   size: 16,
-  iconProps: { p: 'md' },
+  iconProps: { p: 'md' }
 }).withDescription(`
 Use \`iconProps\` to send properties to the inner \`<Icon>\` element. 
 

@@ -39,14 +39,7 @@ export const RadioIcon = ({
     {...props}
   >
     {isSelected && (
-      <Icon
-        className="[&>svg]:rui-animate-pop"
-        size={16}
-        c="white"
-        pt="xxs"
-        name="circleFill"
-        block
-      />
+      <Icon className="[&>svg]:rui-animate-pop" size={16} c="white" name="circleFill" block />
     )}
   </Box>
 );

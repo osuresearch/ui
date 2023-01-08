@@ -8,8 +8,10 @@ import {
   CBItem as CheckboxItem
 } from './CheckboxGroupField';
 
-export default RUIComponentMeta<CheckboxGroupFieldProps>('Forms', CheckboxGroupField)
-  .withStyleSystemProps();
+export default RUIComponentMeta<CheckboxGroupFieldProps>(
+  'Forms',
+  CheckboxGroupField
+).withStyleSystemProps();
 
 export const Overview = RUIComponentStory<CheckboxGroupFieldProps>(
   (args) => (

@@ -4,10 +4,7 @@ import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
 import { Image, ImageProps } from './Image';
 
-export default RUIComponentMeta<ImageProps>('Components', Image)
-  .withStyleSystemProps()
-  
-  ;
+export default RUIComponentMeta<ImageProps>('Components', Image).withStyleSystemProps();
 
 export const Overview = RUIComponentStory<ImageProps>((args) => <Image {...args} />, {
   src: 'https://picsum.photos/640/360',

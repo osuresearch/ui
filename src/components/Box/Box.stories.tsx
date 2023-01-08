@@ -5,8 +5,7 @@ import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
 import { Box, BoxProps } from './Box';
 
-export default RUIComponentMeta<BoxProps>('Layout', Box)
-  .withStyleSystemProps();
+export default RUIComponentMeta<BoxProps>('Layout', Box).withStyleSystemProps();
 
 export const Overview = RUIComponentStory<BoxProps>((args) => (
   <Box {...args}>Lorem ipsum blah blah blah</Box>

@@ -25,10 +25,7 @@ export type StackProps = StyleSystemProps & {
  * <!-- @ruiPolymorphic -->
  */
 export const Stack = polymorphicForwardRef<'div', StackProps>(
-  (
-    { as, className, gap = 'sm', align = 'start', justify = 'start', children, ...props },
-    ref
-  ) => (
+  ({ as, className, gap = 'sm', align = 'start', justify = 'start', children, ...props }, ref) => (
     <Box
       as={as || 'div'}
       ref={ref}

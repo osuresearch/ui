@@ -5,10 +5,7 @@ import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
 import { Table, TableProps } from './Table';
 
-export default RUIComponentMeta<TableProps>('Components', Table)
-  .withStyleSystemProps()
-  
-  ;
+export default RUIComponentMeta<TableProps>('Components', Table).withStyleSystemProps();
 
 const Template: Story<TableProps> = (args: TableProps) => (
   <Table {...args}>

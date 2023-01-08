@@ -14,7 +14,7 @@ export function useTheme() {
 
     // TODO: This doesn't properly handle changes
     // triggered in Storybook. We need an observer
-    // to watch for theme changes. 
+    // to watch for theme changes.
 
     // Also - this doesn't handle nested or adjacent themes.
     // Really, it needs to just use RUI Provider.

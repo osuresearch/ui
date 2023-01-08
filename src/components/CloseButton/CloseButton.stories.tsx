@@ -5,8 +5,7 @@ import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
 import { CloseButtonProps, CloseButton as Component } from './CloseButton';
 
-export default RUIComponentMeta<CloseButtonProps>('Components', Component)
-  .withStyleSystemProps()
+export default RUIComponentMeta<CloseButtonProps>('Components', Component).withStyleSystemProps();
 
 const Template: Story<CloseButtonProps> = (args) => <Component {...args} />;
 

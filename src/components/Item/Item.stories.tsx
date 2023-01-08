@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { Item as Component, ItemProps } from '@osuresearch/ui';
-
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
+
+import { Item as Component, ItemProps } from './Item';
 
 export default RUIComponentMeta<ItemProps<any>>('Utilities', Component);
 

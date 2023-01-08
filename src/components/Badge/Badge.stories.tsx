@@ -8,8 +8,7 @@ import { Stack } from '../Stack';
 import { Text } from '../Text';
 import { Badge, BadgeProps } from './Badge';
 
-export default RUIComponentMeta<BadgeProps>('Components', Badge)
-  .withStyleSystemProps();
+export default RUIComponentMeta<BadgeProps>('Components', Badge).withStyleSystemProps();
 
 const Template: Story<BadgeProps> = (args) => <Badge {...args}>Beta</Badge>;
 

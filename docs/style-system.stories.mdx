@@ -8,20 +8,14 @@ import { Card } from '~/components/Card';
 
 # Style System
 
-Notes here about RUI's style system. How it works, what props mean, a reference maybe, etc.
+Many components in Research UI are configured using style system properties that allow you to set the margins, padding, colors, and other standard CSS styles on each component.
 
-Key points to touch on:
+The style system is opinionated to make easier to stay within design guidelines for non-designers.
 
-- Theme-dependent color. E.g. `c={{ dark: 'violet', light: 'blue' }}`
-- Screen-dependent space. E.g. `m={{ xs: 'sm', md: 'lg', xl: 'xl' }}`
-- Group and Stack composition (+ future container or grid things)
-- CSS independence - RUI does not control global CSS styles (except for Tailwind's reset). All styles are encapsulated into components. Meaning no implicit styling with `<strong>`, `<p>`, etc.
-
-Many components in Research UI are built on top of a set of style system properties that allow you to set the margins, padding, colors, and other standard styles on each component. 
 
 ## Spacing
 
-Each component has properties to modify spacing:
+Each component using the style system has a set of poroperties to modify spacing:
 
 |Prop|CSS Equivalent||Prop|CSS Equivalent
 |---|---|---|---|---
@@ -35,9 +29,10 @@ Each component has properties to modify spacing:
 
 Property values in the style system are based on T-shirt sizes `xs`, `sm`, `md`, `lg`, `xl`, and `xxl` to enforce standard spacing values between components.
 
+
 ## Colors
 
-Each component has properties to modify colors:
+Each component using the style system has properties to modify colors:
 
 |Prop|CSS Equivalent
 |---|---
@@ -46,25 +41,20 @@ Each component has properties to modify colors:
 
 These properties only accept colors from our palette, such as `primary`, `secondary`, `success`, `teal` and so forth.
 
-Make sure that when you are picking a color that the contrasting color meetings WCAG AA contrast requirements in both light and dark mode. Most theme colors come with a ready to use contrast value, such as `primary-contrast` or `success-contrast`. 
+Make sure that when you are picking a color that the contrasting color meetings WCAG AA contrast requirements in both light and dark mode. Most theme colors come with a ready to use contrast value, such as `primary-contrast` or `success-contrast`.
+
 
 ## Responsive Properties
 
 Many components in Research UI support an object syntax for props that specify a different value depending on the responsive breakpoint. All spacing, sizing, and color props support responsive values.
 
-If you wanted to reduce the padding and font size of a component for smaller screens, you can do the following:
-
-```tsx
-<Text as="p" pb={{ md: 'xs', lg: 'md' }} fs={{ md: 'sm', lg: 'base' }}> 
-  Brimming with traditions as a community, we empower people and their potential
-</Text>
-```
+If you wanted to reduce the padding and font size of a component for smaller screens, you can supply the properties as mappings between breakpoints and values.
 
 Resize your window to see the responsive font and padding changes:
 
 <Canvas withSource="open" withToolbar>
   <Card withBorder>
-    <Text as="p" pb={{ md: 'xs', lg: 'md' }} fs={{ md: 'sm', lg: 'base' }}> 
+    <Text as="p" pb={{ md: 'xs', lg: 'md' }} fs={{ md: 'sm', lg: 'base' }}>
       Brimming with traditions as a community, we empower people and their potential
     </Text>
     <Text as="p" fs={{ md: 'sm', lg: 'base' }}>
@@ -73,25 +63,32 @@ Resize your window to see the responsive font and padding changes:
   </Card>
 </Canvas>
 
+```tsx
+<Text as="p" pb={{ md: 'xs', lg: 'md' }} fs={{ md: 'sm', lg: 'base' }}>
+  Brimming with traditions as a community, we empower people and their potential
+</Text>
+```
+
 Research UI's breakpoints are mobile first: responsive props apply at that breakpoint and above. For example, the `lg` breakpoint is applied at screen sizes 960px and wider.
 
 If the screen is smaller than all included breakpoints, then the value is `undefined` for that property.
 
-Color properties (`c`, `bgc`) also follow a similar responsive object pattern to respond to theme changes to make color decisions based on the user's current theme:
-
-```tsx
-<Text as="p" c={{ light: 'gold', dark: 'teal' }}> 
-  Brimming with traditions as a community, we empower people and their potential
-</Text>
-```
+Color properties (`c`, `bgc`) also follow a similar responsive object pattern to respond to theme changes to make color decisions based on the user's current theme.
 
 Toggle your theme to watch the text color change:
 
 <Canvas withSource="open" withToolbar>
   <Card withBorder>
-    <Text as="p" c={{ light: 'violet', dark: 'teal' }}> 
+    <Text as="p" c={{ light: 'violet', dark: 'teal' }}>
       Brimming with traditions as a community, we empower people and their potential
     </Text>
   </Card>
 </Canvas>
+
+```tsx
+<Text as="p" c={{ light: 'gold', dark: 'teal' }}>
+  Brimming with traditions as a community, we empower people and their potential
+</Text>
+```
+
 

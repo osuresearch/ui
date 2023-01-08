@@ -1,6 +1,6 @@
-import React, { CSSProperties, ReactNode, forwardRef } from 'react';
+import React, { ReactNode } from 'react';
 
-import { Color } from '~/theme';
+import { Color } from '~/types';
 import { cx, polymorphicForwardRef } from '~/utils';
 
 import { StyleSystemProps } from '../../types';

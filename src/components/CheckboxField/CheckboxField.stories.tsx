@@ -5,9 +5,7 @@ import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 import { Text } from '../Text';
 import { CheckboxFieldProps, CheckboxField as Component } from './CheckboxField';
 
-export default RUIComponentMeta<CheckboxFieldProps>('Forms', Component)
-  .withStyleSystemProps()
-  ;
+export default RUIComponentMeta<CheckboxFieldProps>('Forms', Component).withStyleSystemProps();
 
 export const Overview = RUIComponentStory<CheckboxFieldProps>((args) => <Component {...args} />, {
   label: 'Yes I want to receive hourly promotional emails',

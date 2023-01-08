@@ -3,7 +3,7 @@
 
 # Polymorphic Components
 
-Some of our components (Button, Text, etc) accept special `as` prop that lets you
+Some of our components, such as `Button` and `Text`, accept an `as` prop that allows you to
 change the root element. This guide will explain how to correctly use them
 with HTML elements, custom components, and TypeScript.
 
@@ -61,32 +61,20 @@ In some cases, polymorphic components cannot infer ref and events correctly. Whe
 
 ## Create your own polymorphic components
 
-TODO!
+We provide a utility to allow you to construct your own polymorphic components.
 
-The tl;dr is:
+Typically, this involves wrapping a `<Box>` component and passing down your polymorphic element value.
 
 ```tsx
 type ButtonProps = {
   children: React.ReactNode;
 }
 
-export const Button = polymorphicForwardRef<ButtonProps>(({ as, children, ...props }, ref) => {
-  const state = useListState({
-    ...props,
-    selectionMode: 'multiple'
-  });
-
-  const listRef = useRef<HTMLElement>(null);
-  const { gridProps } = useGridList(props, state, listRef);
-
-  const { styleSystemProps, otherProps } = useStyleSystem(props);
-
-  const Component = as || 'ul';
-
-  return (
-    <Component ref={ref} {...props}>
-      {children}
-    </Component>
-  );
-});
+export const Button = polymorphicForwardRef<'button', ButtonProps>(({ as, children, ...props }, ref) => (
+  <Box as={as || 'button'}>
+    {children}
+  </Box>
+));
 ```
+
+>For RUI maintainers: Tag all polymorphic components with `@ruiPolymorphic`
