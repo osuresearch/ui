@@ -1,9 +1,9 @@
 import { Story } from '@storybook/react';
 import React from 'react';
 
-import { Alert, AlertProps } from '@osuresearch/ui';
-
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
+
+import { Alert, AlertProps } from '../Alert';
 
 export default RUIComponentMeta<AlertProps>('Components', Alert);
 

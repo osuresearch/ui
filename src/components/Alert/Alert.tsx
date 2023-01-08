@@ -1,6 +1,6 @@
 import React, { forwardRef, useState } from 'react';
 
-import { Color } from '~/theme';
+import { Color } from '~/types';
 
 import { CloseButton } from '../CloseButton';
 import { Group } from '../Group';
@@ -43,9 +43,24 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
     const contrast: Color = `${variant}-contrast`;
 
     return (
-      <Group justify="apart" ref={ref} role="alert" bgc={tint}>
+      <Group
+        justify="apart"
+        ref={ref}
+        role="alert"
+        bgc={{
+          light: tint,
+          dark: variant
+        }}
+      >
         <Group align="stretch" p="md">
-          <Icon c={shade} name={iconName} size={24} />
+          <Icon
+            c={{
+              light: shade,
+              dark: contrast
+            }}
+            name={iconName}
+            size={24}
+          />
           <Stack c={contrast}>
             <Text fw="bold" c={contrast}>
               {title}
