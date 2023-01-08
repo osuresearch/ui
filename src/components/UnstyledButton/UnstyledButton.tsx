@@ -1,3 +1,4 @@
+import { mergeProps } from '@react-aria/utils';
 import React, { useRef } from 'react';
 import { AriaButtonProps, useButton } from 'react-aria';
 
@@ -8,6 +9,7 @@ import { Box } from '../Box';
 import { FocusRing } from '../FocusRing';
 
 export type UnstyledButtonProps = StyleSystemProps &
+  React.HTMLAttributes<HTMLElement> &
   AriaButtonProps & {
     /**
      * Button content
@@ -42,7 +44,12 @@ export const UnstyledButton = polymorphicForwardRef<'button', UnstyledButtonProp
 
     return (
       <FocusRing>
-        <Box as={as || 'button'} ref={ref} {...props} {...buttonProps} data-pressed={isPressed}>
+        <Box
+          as={as || 'button'}
+          ref={ref}
+          {...mergeProps(props as any, buttonProps)}
+          data-pressed={isPressed}
+        >
           {children}
         </Box>
       </FocusRing>
