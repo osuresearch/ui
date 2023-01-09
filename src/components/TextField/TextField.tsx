@@ -2,14 +2,24 @@ import { FocusableElement } from '@react-types/shared';
 import React, { DOMAttributes, forwardRef, useRef } from 'react';
 import { AriaTextFieldOptions, AriaTextFieldProps, mergeProps, useTextField } from 'react-aria';
 
-import { AriaNecessityIndicator, StyleSystemProps } from '~/types';
+import { AriaNecessityIndicator, SlotType, StyleSystemProps } from '~/types';
 import { cx, mergeRefs } from '~/utils';
 
 import { Box } from '../Box';
 import { FocusRing } from '../FocusRing';
-import { InputField, InputFieldProps } from '../InputField';
+import { InputField } from '../InputField';
 
-export type TextFieldProps = AriaTextFieldProps & AriaNecessityIndicator;
+export type TextFieldSlots = {
+  leftSlot?: React.ReactElement;
+  leftWidth?: number;
+  rightSlot?: React.ReactElement;
+  rightWidth?: number;
+};
+
+export type TextFieldProps = StyleSystemProps &
+  AriaTextFieldProps &
+  AriaNecessityIndicator &
+  TextFieldSlots;
 
 type InputSlotProps = React.InputHTMLAttributes<HTMLInputElement> & DOMAttributes<FocusableElement>;
 

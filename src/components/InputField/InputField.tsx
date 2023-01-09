@@ -21,6 +21,28 @@ export type InputFieldSlots<T> = {
   inputSlot?: SlotType<InputSlotProps<T>>;
 
   diffSlot?: SlotType<{ value?: string; previousValue?: string }>;
+
+  /** Slot content to absolutely position to the left of the input */
+  leftSlot?: React.ReactElement;
+
+  /**
+   * Additional padding in pixels to apply to the left side of the input.
+   *
+   * This should match up with content size + additional padding to make
+   * room for the `leftSlot` content.
+   */
+  leftWidth?: number;
+
+  /** Slot content to absolutely position to the right of the input */
+  rightSlot?: React.ReactElement;
+
+  /**
+   * Additional padding in pixels to apply to the right side of the input.
+   *
+   * This should match up with content size + additional padding to make
+   * room for the `rightSlot` content.
+   */
+  rightWidth?: number;
 };
 
 export type InputFieldDiffProps = {
@@ -66,7 +88,25 @@ function _InputField<T>(props: InputFieldProps<T>, ref: ForwardedRef<T>) {
         {props.necessityIndicator && <NecessityIndicator />}
       </Text>
 
-      <InputSlot ref={ref} {...mergeProps(inputProps, focusProps)} />
+      <div className="rui-relative rui-w-full">
+        {props.leftSlot && (
+          <div className="rui-absolute rui-inset-[2px] rui-right-auto">{props.leftSlot}</div>
+        )}
+
+        <InputSlot
+          ref={ref}
+          {...mergeProps(inputProps, focusProps, {
+            style: {
+              paddingLeft: props.leftWidth,
+              paddingRight: props.rightWidth
+            }
+          })}
+        />
+
+        {props.rightSlot && (
+          <div className="rui-absolute rui-inset-[2px] rui-left-auto">{props.rightSlot}</div>
+        )}
+      </div>
 
       {props.showDiff && <DiffSlot value={props.value} previousValue={props.previousValue} />}
 
@@ -112,6 +152,17 @@ function _InputField<T>(props: InputFieldProps<T>, ref: ForwardedRef<T>) {
  * ### Diff Slot
  * - Slot for rendering the diff between a previous and current value
  * - Receives previous and current value as `string`
+ *
+ * ### Left Slot
+ * - Absolutely positioned content over the left side of the input slot.
+ * - Set `leftWidth` to the content size + padding to prevent overlap
+ * between input content and the slot content.
+ *
+ * ### Right Slot
+ * - Absolutely positioned content over the right side of the input slot.
+ * - Set `rightWidth` to the content size + padding to prevent overlap
+ * between input content and the slot content.
+ *
  */
 export const InputField = forwardRef(_InputField) as <T>(
   props: InputFieldProps<T> & { ref?: ForwardedRef<T> }

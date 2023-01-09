@@ -2,6 +2,8 @@ import React, { forwardRef, useRef, useState } from 'react';
 
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
+import { Button } from '../Button';
+import { Icon } from '../Icon';
 import { Text } from '../Text';
 import { TextField, TextFieldProps } from './TextField';
 
@@ -73,3 +75,26 @@ export const WithRHF7 = RUIComponentStory<TextFieldProps>(
     label: 'Subscribe'
   }
 );
+
+export const WithIcon = RUIComponentStory(Overview, {
+  leftSlot: <Icon c="light-contrast" name="github" size={24} p="xs" />,
+  leftWidth: 42,
+  ['aria-label']: 'Enter your GitHub information',
+  placeholder: 'Your GitHub username',
+  maw: 300
+});
+
+// TODO: Don't like the style hack for the buttons. Maybe it can be
+// a variant / setting? Or the content container is guaranteed within border?
+export const WithButton = RUIComponentStory(Overview, {
+  leftSlot: <Icon c="dark" name="search" size={18} p="sm" />,
+  leftWidth: 42,
+  rightSlot: <Button h="100%">Search</Button>,
+  rightWidth: 80,
+  placeholder: 'buckeye.1'
+}).withDescription(`
+  Left and right slots are inset within the input border to prevent
+  content from overlapping focus and error state borders.
+
+  Buttons may use \`h="100%"\` to fill the height of slot.
+`);
