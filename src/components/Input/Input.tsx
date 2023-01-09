@@ -5,6 +5,7 @@ import { cx, polymorphicForwardRef } from '~/utils';
 
 import { StyleSystemProps } from '../../types';
 import { Box } from '../Box';
+import { FocusRing } from '../FocusRing';
 
 // React.ComponentPropsWithoutRef<'input'> &
 export type InputProps = StyleSystemProps & {
@@ -101,44 +102,49 @@ export const Input = polymorphicForwardRef<'input', InputProps>(
           <div className="rui-absolute rui-left-0 rui-top-0 rui-bottom-0">{leftContent}</div>
         )}
 
-        <Box
-          as={as || 'input'}
-          ref={ref}
-          style={{
-            paddingLeft: leftWidth,
-            paddingRight: rightWidth
-          }}
-          px="xs"
-          py="xxs"
-          w="100%"
-          bgc={{
-            dark: {
-              default: 'light-tint',
-              filled: 'light-shade',
-              unstyled: undefined
-            }[variant] as Color,
+        <FocusRing>
+          <Box
+            as={as || 'input'}
+            ref={ref}
+            style={{
+              paddingLeft: leftWidth,
+              paddingRight: rightWidth
+            }}
+            px="xs"
+            py="xxs"
+            w="100%"
+            bgc={{
+              dark: {
+                default: 'light-tint',
+                filled: 'light-shade',
+                unstyled: undefined
+              }[variant] as Color,
 
-            light: {
-              default: 'light-tint',
-              filled: 'light-shade',
-              unstyled: undefined
-            }[variant] as Color
-          }}
-          className={cx(
-            'rui-focus-ring',
-            'rui-border-2 rui-text-light-contrast',
-            // Stateful styles
-            {
-              'rui-border-light-shade': variant !== 'unstyled',
-              'rui-border-clear': variant === 'unstyled',
+              light: {
+                default: 'light-tint',
+                filled: 'light-shade',
+                unstyled: undefined
+              }[variant] as Color
+            }}
+            className={cx(
+              'rui-border-2 rui-text-light-contrast',
 
-              'rui-border-error': invalid,
-              'rui-cursor-not-allowed': disabled,
-              'rui-cursor-pointer': pointer
-            }
-          )}
-          {...inputProps}
-        />
+              // Variants
+              {
+                'rui-cursor-pointer': pointer,
+                'rui-border-light-shade': variant !== 'unstyled',
+                'rui-border-clear': variant === 'unstyled'
+              },
+
+              // Invalid
+              { 'rui-border-error': invalid },
+
+              // Disabled
+              { 'rui-border-dimmed rui-bg-light-shade rui-cursor-not-allowed': disabled }
+            )}
+            {...inputProps}
+          />
+        </FocusRing>
 
         {rightContent && (
           <div className="rui-absolute rui-right-0 rui-top-0 rui-bottom-0">{rightContent}</div>

@@ -2,9 +2,9 @@ import React from 'react';
 
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
+import { Button } from '../Button';
 import { Icon } from '../Icon';
 import { Text } from '../Text';
-import { UnstyledButton } from '../UnstyledButton';
 import { Input, InputProps } from './Input';
 
 // Specifying an explicit prop union so that Storybook
@@ -55,11 +55,7 @@ export const WithRightSlot = RUIComponentStory(Overview, {
 export const WithButton = RUIComponentStory(Overview, {
   leftContent: <Icon c="dark" name="search" size={15} p="sm" />,
   leftWidth: 36,
-  rightContent: (
-    <UnstyledButton bgc="light-shade" h="full" px="sm">
-      Search
-    </UnstyledButton>
-  ),
+  rightContent: <Button h="100%">Search</Button>,
   rightWidth: 80,
   placeholder: 'buckeye.1'
 });

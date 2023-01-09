@@ -1,40 +1,24 @@
 import { mergeProps } from '@react-aria/utils';
-import React, { ForwardedRef, forwardRef, useRef } from 'react';
-import { AriaTextFieldProps, useTextField } from 'react-aria';
-import { useToggleState } from 'react-stately';
+import { DOMAttributes, FocusableElement } from '@react-types/shared';
+import React, { ForwardedRef, forwardRef } from 'react';
+import { AriaTextFieldProps, useFocusRing } from 'react-aria';
 
-import { SlotProp, SlotPropWithRef, useSlots } from '~/hooks/useSlots';
 import { useStyleSystemProps } from '~/hooks/useStyleSystemProps';
-import { SlotType, StyleSystemProps } from '~/types';
-import { cx, mergeRefs } from '~/utils';
+import { AriaNecessityIndicator, SlotType, StyleSystemProps } from '~/types';
 
-import { Box } from '../Box';
-import { Center } from '../Center';
-import { Group } from '../Group';
 import { Icon } from '../Icon';
 import { makeMissingSlot } from '../MissingSlot';
 import { NecessityIndicator } from '../NecessityIndicator';
 import { Stack } from '../Stack';
 import { Text } from '../Text';
 
-export type InputFieldSlots = {
-  // inputSlot?: SlotPropWithRef<HTMLInputElement, React.InputHTMLAttributes<HTMLInputElement>>
-  // ^ need to rewrite useSlots to support this.
+export type InputSlotProps<T> = React.InputHTMLAttributes<T> &
+  DOMAttributes<FocusableElement> & {
+    ref: React.ForwardedRef<T>;
+  };
 
-  // Let's see if I can do it the unsafe way.
-  // inputSlot?: SlotProp<
-  //   React.InputHTMLAttributes<HTMLInputElement> &
-  //   { ref: ForwardedRef<HTMLInputElement> }
-  // >
-
-  // inputSlot?: SlotProp<
-  //   React.ComponentPropsWithoutRef<'input'> &
-  //   { inputRef: React.ForwardedRef<HTMLInputElement>}
-  // >;
-  // inputSlot?: SlotProp<{} & React.ComponentPropsWithRef<'input'>>
-
-  // Should SlotProp JUST BE a synonym for React.ComponentType?
-  inputSlot?: SlotType<React.ComponentPropsWithRef<'input'>>;
+export type InputFieldSlots<T> = {
+  inputSlot?: SlotType<InputSlotProps<T>>;
 
   diffSlot?: SlotType<{ value?: string; previousValue?: string }>;
 };
@@ -44,26 +28,65 @@ export type InputFieldDiffProps = {
   previousValue?: string;
 };
 
-export type InputFieldProps = StyleSystemProps &
+export type InputFieldProps<T = HTMLInputElement> = StyleSystemProps &
   AriaTextFieldProps &
+  AriaNecessityIndicator &
   InputFieldDiffProps &
-  InputFieldSlots;
+  InputFieldSlots<T> & {
+    // NOTE: This is essentially: Pick<TextFieldAria<'input'>, 'inputProps' | 'labelProps' | 'descriptionProps' | 'errorMessageProps'>
+    // But accepting either input type.
 
-function MissingSlot() {
+    /** Props for the input element. */
+    inputProps: React.HTMLAttributes<T>;
+
+    /** Props for the text field's visible label element */
+    labelProps: DOMAttributes<FocusableElement> | React.LabelHTMLAttributes<HTMLLabelElement>;
+
+    /** Props for the text field's description element */
+    descriptionProps: DOMAttributes;
+
+    /** Props for the text field's error message element */
+    errorMessageProps: DOMAttributes;
+  };
+
+function _InputField<T>(props: InputFieldProps<T>, ref: ForwardedRef<T>) {
+  const { className, label, description, errorMessage } = props;
+  const { labelProps, inputProps, descriptionProps, errorMessageProps } = props;
+
+  const [styleSystemProps] = useStyleSystemProps(props);
+  const { focusProps } = useFocusRing();
+
+  const InputSlot = props.inputSlot || makeMissingSlot('input');
+  const DiffSlot = props.diffSlot || makeMissingSlot('diff');
+
   return (
-    <Text c="warning">
-      <Icon name="exclamationCircle" /> No diff support.
-    </Text>
+    <Stack className={className} {...styleSystemProps}>
+      <Text as="label" {...labelProps}>
+        {label}
+        {props.necessityIndicator && <NecessityIndicator />}
+      </Text>
+
+      <InputSlot ref={ref} {...mergeProps(inputProps, focusProps)} />
+
+      {props.showDiff && <DiffSlot value={props.value} previousValue={props.previousValue} />}
+
+      {description && (
+        <Text c="dark" fs="sm" {...descriptionProps}>
+          {description}
+        </Text>
+      )}
+
+      {errorMessage && (
+        <Text c="error" fs="sm" {...errorMessageProps}>
+          <Icon name="xmarkCircle" /> {errorMessage}
+        </Text>
+      )}
+    </Stack>
   );
 }
 
 /**
- * Form field component that accepts `Text` atomics.
- *
- * <!-- @ruiAtomic foo -->
- * <!-- @ruiAtomic bar -->
- * <!-- @ruiStatus ready -->
- * <!-- @ruiPolymorphic -->
+ * Base for a form field component
  *
  * ## 🛑 Disclaimer
  *
@@ -80,52 +103,16 @@ function MissingSlot() {
  * ## Slots
  *
  * ### Input Slot
- * - Slot for the underlying `<input>` element
- * - Receives all necessary `<input>` attributes for data binding and a11y
- * - Must accept an `HTMLInputElement` forwarded ref for the input
+ * - Slot for the underlying input element
+ * - Receives all necessary attributes for data binding and a11y
+ * - The generic type of `InputField` determines which ref type is allowed
+ * to be passed through the slot. This does not require an `InputHTMLAttributes`
+ * concrete, but it is recommended.
  *
  * ### Diff Slot
  * - Slot for rendering the diff between a previous and current value
  * - Receives previous and current value as `string`
  */
-export const InputField = forwardRef<HTMLInputElement, InputFieldProps>((props, ref) => {
-  const { className, label, description, errorMessage } = props;
-  const [styleSystemProps] = useStyleSystemProps(props);
-
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  const { labelProps, inputProps, descriptionProps, errorMessageProps } = useTextField(
-    props,
-    inputRef
-  );
-
-  // const { focusProps, isFocusVisible } = useFocusRing();
-
-  const InputSlot = props.inputSlot || makeMissingSlot('input');
-  const DiffSlot = props.diffSlot || makeMissingSlot('diff');
-
-  return (
-    <Stack className={className} {...styleSystemProps}>
-      <Text as="label" {...labelProps}>
-        {label}
-        {props.isRequired && <NecessityIndicator />}
-      </Text>
-
-      <InputSlot {...inputProps} ref={mergeRefs(inputRef, ref)} />
-
-      {description && (
-        <Text c="dark" fs="sm" {...descriptionProps}>
-          {description}
-        </Text>
-      )}
-
-      {errorMessage && (
-        <Text c="error" fs="sm" {...errorMessageProps}>
-          <Icon name="xmarkCircle" /> {errorMessage}
-        </Text>
-      )}
-
-      {props.showDiff && <DiffSlot value={props.value} previousValue={props.previousValue} />}
-    </Stack>
-  );
-});
+export const InputField = forwardRef(_InputField) as <T>(
+  props: InputFieldProps<T> & { ref?: ForwardedRef<T> }
+) => ReturnType<typeof _InputField>;
