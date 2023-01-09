@@ -12,6 +12,8 @@ import { Box } from '../Box';
 import { Center } from '../Center';
 import { Group } from '../Group';
 import { Icon } from '../Icon';
+import { makeMissingSlot } from '../MissingSlot';
+import { NecessityIndicator } from '../NecessityIndicator';
 import { Stack } from '../Stack';
 import { Text } from '../Text';
 
@@ -63,7 +65,7 @@ function MissingSlot() {
  * <!-- @ruiStatus ready -->
  * <!-- @ruiPolymorphic -->
  *
- * ## Disclaimer
+ * ## 🛑 Disclaimer
  *
  * In most cases, you should not use this component in your application.
  * This is a base for other specialized fields to implement.
@@ -99,13 +101,14 @@ export const InputField = forwardRef<HTMLInputElement, InputFieldProps>((props, 
 
   // const { focusProps, isFocusVisible } = useFocusRing();
 
-  const InputSlot = props.inputSlot || 'input';
-  const DiffSlot = props.diffSlot || MissingSlot;
+  const InputSlot = props.inputSlot || makeMissingSlot('input');
+  const DiffSlot = props.diffSlot || makeMissingSlot('diff');
 
   return (
     <Stack className={className} {...styleSystemProps}>
       <Text as="label" {...labelProps}>
         {label}
+        {props.isRequired && <NecessityIndicator />}
       </Text>
 
       <InputSlot {...inputProps} ref={mergeRefs(inputRef, ref)} />
