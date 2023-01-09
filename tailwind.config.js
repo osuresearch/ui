@@ -241,6 +241,13 @@ module.exports = {
           '100%': {
             transform: 'scale(1)'
           }
+        },
+        'ping': {
+          '75%, 100%': {
+            // Reduce Tailwind's default ping transform
+            transform: 'scale(1.5)',
+            opacity: '0',
+          }
         }
       },
       animation: {
