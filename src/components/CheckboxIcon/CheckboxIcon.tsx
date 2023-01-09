@@ -18,7 +18,7 @@ export type CheckboxIconProps = DOMAttributes<FocusableElement> &
 /**
  * Controlled slot renderer for a checkbox.
  *
- * ## Disclaimer
+ * ## 🛑 Disclaimer
  *
  * In most cases, you should not use this component in your application.
  * This is a controlled component that is solely responsible for rendering states.
@@ -34,7 +34,7 @@ export const CheckboxIcon = ({
     className={cx(
       'rui-border-2',
       'rui-w-[20px] rui-h-[20px]',
-      { 'rui-bg-light-tint rui-border-dark': !isSelected && !isIndeterminate },
+      { 'rui-bg-light-tint rui-border-dark': !isSelected && !isIndeterminate && !isDisabled },
       { 'rui-bg-primary rui-border-primary': isSelected || isIndeterminate },
       { 'rui-border-dimmed rui-bg-light-shade': isDisabled },
       { 'rui-ring rui-focus-ring': isFocusVisible }
@@ -44,9 +44,8 @@ export const CheckboxIcon = ({
     {(isSelected || isIndeterminate) && (
       <Icon
         className="[&>svg]:rui-animate-pop"
-        size={14}
-        c="white"
-        pt="xxs"
+        size={16}
+        c={!isDisabled ? 'white' : 'dark'}
         name={isIndeterminate ? 'dash' : 'check'}
         block
       />
