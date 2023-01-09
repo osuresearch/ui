@@ -1,7 +1,9 @@
 import React, { forwardRef, useEffect, useState } from 'react';
+import { mergeProps } from 'react-aria';
 
+import { useTheme } from '~/hooks';
 import { SlotProp, useSlots } from '~/hooks/useSlots';
-import { StyleSystemProps } from '~/types';
+import { StyleSystemProps, ThemeProp } from '~/types';
 import { cx } from '~/utils';
 
 import { Box } from '../Box';
@@ -17,7 +19,7 @@ export type ImageSlots = {
 export type ImageProps = StyleSystemProps &
   ImageSlots & {
     /** Image source */
-    src?: string;
+    src?: ThemeProp<string>;
 
     /**
      * Image alt text, used as title for placeholder if image was not loaded.
@@ -62,16 +64,19 @@ export const Image = forwardRef<HTMLImageElement, ImageProps>(
       src,
       alt,
       caption,
-      imageProps,
+      imageProps = {},
       ...props
     },
     ref
   ) => {
-    const [error, setError] = useState(!src);
+    const { resolve } = useTheme();
+    const imgSrc = resolve(src);
+
+    const [error, setError] = useState(!imgSrc);
 
     useEffect(() => {
       setError(false);
-    }, [src]);
+    }, [imgSrc]);
 
     const { placeholderSlot: Placeholder } = useSlots<ImageSlots>(props);
 
@@ -84,15 +89,16 @@ export const Image = forwardRef<HTMLImageElement, ImageProps>(
       >
         <img
           ref={ref}
-          src={src}
+          src={imgSrc}
           alt={alt}
           className="rui-w-full rui-h-full rui-text-clear rui-text-[0px]"
-          {...imageProps}
-          style={{
-            objectFit: fit,
-            width,
-            height
-          }}
+          {...mergeProps(imageProps, {
+            style: {
+              objectFit: fit,
+              width,
+              height
+            }
+          })}
           onError={() => setError(true)}
         />
 
