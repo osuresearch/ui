@@ -18,7 +18,7 @@ import darkTheme from './Theme.dark';
 import lightTheme from './Theme.light';
 
 import { RUIProvider } from '../src/components/RUIProvider';
-import { Badge } from '../src/components/Badge';
+import { Chip } from '../src/components/Chip';
 import { Stack } from '../src/components/Stack';
 import { Group } from '../src/components/Group';
 import { Link } from '../src/components/Link';
@@ -28,6 +28,7 @@ import { Divider } from '../src/components/Divider';
 import { Space } from '../src/components/Space';
 import { TabPanel } from '../src/components/TabPanel';
 import { Item } from '../src/components/Item';
+import { Image } from '../src/components/Image';
 
 export const DocsContainer = ({ children, context }) => {
   const dark = useDarkMode();
@@ -42,7 +43,7 @@ export const DocsContainer = ({ children, context }) => {
 
   // TODO: Smarter check. Can I pull the source folder path?
   let isComponent = [
-    'layout', 'components', 'utilities', 'bux stuff', 'forms', 'unstyled',
+    'layout', 'components', 'utilities', 'bux stuff', 'forms', 'unstyled', 'dialogs', 'ohiostate',
   ].indexOf(parent) >= 0 && name !== 'Overview';
 
   console.debug(context);
@@ -59,12 +60,10 @@ export const DocsContainer = ({ children, context }) => {
   const atomics = [...(context.component?.__docgenInfo.description.matchAll(
     /@ruiAtomic\s+(\w+)/g
   )) ?? []];
-  console.debug(atomics);
 
   const status = [...(context.component?.__docgenInfo.description.matchAll(
     /@ruiStatus\s+(\w+)/g
   )) ?? []];
-  console.debug(status);
 
   const isPolymorphic = context.component?.__docgenInfo.description.indexOf('@ruiPolymorphic') >= 0;
   console.log(context.componentStories());
@@ -113,15 +112,15 @@ export const DocsContainer = ({ children, context }) => {
               <Title />
               <Group>
                 {atomics.map((atomic) =>
-                  <Badge>Atomic: {atomic[1]}</Badge>
+                  <Chip>Atomic: {atomic[1]}</Chip>
                 )}
 
                 {status.map((value) =>
-                  <Badge>Status: {value[1]}</Badge>
+                  <Chip>Status: {value[1]}</Chip>
                 )}
 
                 {isPolymorphic &&
-                  <Badge c="gold" as="a" href="/?path=/docs/getting-started-polymorphic-components--page">Polymorphic</Badge>
+                  <Chip c="green" as="a" href="/?path=/docs/getting-started-polymorphic-components--page">Polymorphic</Chip>
                 }
               </Group>
             </Group>
@@ -136,6 +135,12 @@ export const DocsContainer = ({ children, context }) => {
 
             {/* TODO: Somehow split description up */}
             <Description />
+
+            {/* SVG diagram, if one exists */}
+            <Image
+              src={`/${name}.svg`}
+              alt={`Component diagram for ${name}`}
+            />
 
             <Primary />
 
