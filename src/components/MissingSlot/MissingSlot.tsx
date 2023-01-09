@@ -19,3 +19,11 @@ export function MissingSlot() {
     </Text>
   );
 }
+
+export function makeMissingSlot(name: string) {
+  return () => (
+    <Text c="error">
+      <Icon name="code" /> Slot `{name}` is missing.
+    </Text>
+  );
+}
