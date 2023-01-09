@@ -5,7 +5,7 @@ import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 import { Text } from '../Text';
 import { ToggleField as Component, ToggleFieldProps } from './ToggleField';
 
-export default RUIComponentMeta<ToggleFieldProps>('Forms', Component).withStyleSystemProps();
+export default RUIComponentMeta<ToggleFieldProps>('Internal', Component).withStyleSystemProps();
 
 export const Overview = RUIComponentStory<ToggleFieldProps>((args) => <Component {...args} />, {
   label: 'I want to receive hourly promotional emails',
@@ -22,12 +22,11 @@ export const Required = RUIComponentStory<ToggleFieldProps>(Overview, {
   isRequired: true
 });
 
-// TODO: ReadOnly state
-// export const ReadOnly = RUIComponentStory<ToggleFieldProps>(Overview, {
-//   label: 'I want to receive hourly promotional emails',
-//   isSelected: true,
-//   isReadOnly: true
-// });
+export const ReadOnly = RUIComponentStory<ToggleFieldProps>(Overview, {
+  label: 'I want to receive hourly promotional emails',
+  isSelected: true,
+  isReadOnly: true
+});
 
 export const Disabled = RUIComponentStory<ToggleFieldProps>(Overview, {
   label: 'I want to receive hourly promotional emails',

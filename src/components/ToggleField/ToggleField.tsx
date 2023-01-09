@@ -27,7 +27,7 @@ import { Box } from '../Box';
 import { CheckboxIcon } from '../CheckboxIcon';
 import { Group } from '../Group';
 import { Icon } from '../Icon';
-import { MissingSlot } from '../MissingSlot';
+import { MissingSlot, makeMissingSlot } from '../MissingSlot';
 import { NecessityIndicator } from '../NecessityIndicator';
 import { Stack } from '../Stack';
 import { Text } from '../Text';
@@ -36,7 +36,17 @@ import { VisuallyHidden } from '../VisuallyHidden';
 type SlotType<P = Record<string, never>> = React.ComponentType<P>;
 
 export type ToggleFieldSlots = {
-  diffSlot?: SlotType<{ isSelected?: boolean; previousValue?: boolean }>;
+  inputSlot: SlotType<{
+    isSelected?: boolean;
+    isIndeterminate?: boolean;
+    isDisabled?: boolean;
+    isFocusVisible?: boolean;
+  }>;
+
+  diffSlot?: SlotType<{
+    isSelected?: boolean;
+    wasSelected?: boolean;
+  }>;
 };
 
 export type ToggleFieldDiffProps = {
@@ -53,9 +63,9 @@ export type ToggleFieldProps = StyleSystemProps &
   > &
   AriaCheckboxProps & // Checkbox covers both AriaToggleProps + isIndeterminate
   AriaNecessityIndicator & {
-    label: string;
-    description?: string;
-    errorMessage?: string;
+    label: React.ReactNode;
+    description?: React.ReactNode;
+    errorMessage?: React.ReactNode;
   };
 
 /**
@@ -64,10 +74,10 @@ export type ToggleFieldProps = StyleSystemProps &
  * <!-- @ruiAtomic Text -->
  * <!-- @ruiAtomic Boolean -->
  *
- * ## Disclaimer
+ * ## 🛑 Disclaimer
  *
  * In most cases, you should not use this component in your application.
- * This is a controlled component for other components to implement.
+ * This is a base for other specialized fields to implement.
  *
  * ## Accessibility
  *
@@ -78,7 +88,7 @@ export type ToggleFieldProps = StyleSystemProps &
  *
  * ## Slots
  *
- * ### Toggle Slot
+ * ### Input Slot
  * - Slot for rendering the current toggle state
  *
  * ### Diff Slot
@@ -96,7 +106,8 @@ export const ToggleField = forwardRef<HTMLInputElement, ToggleFieldProps>((props
   const { focusProps, isFocusVisible } = useFocusRing(props.inputProps);
   const [styleSystemProps] = useStyleSystemProps(props);
 
-  const DiffSlot = props.diffSlot || MissingSlot;
+  const InputSlot = props.inputSlot || makeMissingSlot('input');
+  const DiffSlot = props.diffSlot || makeMissingSlot('diff');
 
   return (
     <Group as="label" className={className} {...styleSystemProps}>
@@ -104,12 +115,16 @@ export const ToggleField = forwardRef<HTMLInputElement, ToggleFieldProps>((props
         <input {...mergeProps(props.inputProps, focusProps)} ref={ref} />
       </VisuallyHidden>
 
-      <CheckboxIcon
+      <InputSlot
         isSelected={isSelected}
         isIndeterminate={isIndeterminate}
         isDisabled={isDisabled}
         isFocusVisible={isFocusVisible}
       />
+
+      {props.showDiff && (
+        <DiffSlot isSelected={props.isSelected} wasSelected={props.previousValue} />
+      )}
 
       <Stack>
         <Text {...props.labelProps}>
@@ -127,10 +142,6 @@ export const ToggleField = forwardRef<HTMLInputElement, ToggleFieldProps>((props
           <Text c="error" fs="sm" {...props.errorMessageProps}>
             <Icon name="xmarkCircle" /> {errorMessage}
           </Text>
-        )}
-
-        {props.showDiff && (
-          <DiffSlot isSelected={props.isSelected} previousValue={props.previousValue} />
         )}
       </Stack>
     </Group>
