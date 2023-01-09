@@ -28,7 +28,7 @@ export type SwitchIconProps = DOMAttributes<FocusableElement> &
  */
 export const SwitchIcon = ({
   isSelected,
-  isFocusVisible, // TODO: Unused. Might not need anymore due to new <FocusRing>
+  isFocusVisible,
   isDisabled,
   ...props
 }: SwitchIconProps) => (
@@ -41,7 +41,8 @@ export const SwitchIcon = ({
       'rui-rounded-full rui-border-2 rui-relative',
       { 'rui-border-dark-shade': !isSelected },
       { 'rui-border-primary': isSelected },
-      { 'rui-border-dimmed rui-bg-dimmed': isDisabled }
+      { 'rui-border-dimmed rui-bg-dimmed': isDisabled },
+      { 'rui-ring rui-focus-ring': isFocusVisible }
     )}
     {...props}
   >

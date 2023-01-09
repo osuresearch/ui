@@ -17,10 +17,12 @@ export type RadioIconProps = DOMAttributes<FocusableElement> &
 /**
  * Controlled slot renderer for a radio.
  *
- * ## Disclaimer
+ * ## 🛑 Disclaimer
  *
  * In most cases, you should not use this component in your application.
  * This is a controlled component that is solely responsible for rendering states.
+ *
+ * @internal
  */
 export const RadioIcon = ({
   isSelected,
@@ -29,17 +31,24 @@ export const RadioIcon = ({
   ...props
 }: RadioIconProps) => (
   <Box
+    w={20}
+    h={20}
     className={cx(
       'rui-border-2 rui-rounded-full',
-      'rui-w-[20px] rui-h-[20px]',
       { 'rui-bg-light-tint rui-border-dark': !isSelected },
-      { 'rui-bg-primary rui-border-primary': isSelected },
+      { 'rui-bg-light-tint rui-border-primary': isSelected },
       { 'rui-border-dimmed rui-bg-light-shade': isDisabled }
     )}
     {...props}
   >
     {isSelected && (
-      <Icon className="[&>svg]:rui-animate-pop" size={16} c="white" name="circleFill" block />
+      <Icon
+        className="[&>svg]:rui-animate-pop"
+        size={16}
+        c={!isDisabled ? 'primary' : 'dark'}
+        name="circleFill"
+        block
+      />
     )}
   </Box>
 );
