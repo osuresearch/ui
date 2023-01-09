@@ -2,6 +2,9 @@ import React from 'react';
 
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
+import { CheckboxField } from '../CheckboxField';
+import { Stack } from '../Stack';
+import { TextAreaField } from '../TextAreaField';
 import { FormDialog as Component, FormDialogProps } from './FormDialog';
 
 export default RUIComponentMeta<FormDialogProps>('Dialogs', Component);
@@ -15,8 +18,15 @@ export const FormDialog = RUIComponentStory<FormDialogProps>(
         alert('form onSubmit');
       }}
     >
-      <input type="text" />
-      <input type="text" />
+      <Stack w={480} align="stretch">
+        <TextAreaField
+          label="Text area label"
+          description="Some description content"
+          isRequired
+          necessityIndicator
+        />
+        <CheckboxField label="I agree to the above" isRequired />
+      </Stack>
     </Component>
   ),
   {
