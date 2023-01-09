@@ -4,10 +4,6 @@ module.exports = {
   content: [
     './src/**/*.{tsx,ts}'
   ],
-  plugins: [
-    // Reset for form styles
-    require('@tailwindcss/forms'),
-  ],
   darkMode: [
     'class', '[data-theme="dark"]'
   ],
