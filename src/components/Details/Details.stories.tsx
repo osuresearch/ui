@@ -20,7 +20,7 @@ export const Overview = RUIComponentStory<DetailsProps>(
 );
 
 export const Accordion = RUIComponentStory<DetailsProps>((args) => (
-  <Stack gap={0}>
+  <Stack gap={0} align="stretch">
     <Details summary="Ohio Union">
       <Text>
         Cutting edge of research and innovation innovations in biomedicine Skull Session Knowlton
@@ -29,7 +29,7 @@ export const Accordion = RUIComponentStory<DetailsProps>((args) => (
         Wexner Medical Center passionate students innovative researchers.
       </Text>
     </Details>
-    <Details summary="Mirror Lake">
+    <Details summary="Mirror Lake" mt="-xxs">
       <Text>
         Future Buckeye diverse community of students and scholars RPAC Woody Hayes as Buckeyes, we
         build healthier, more vibrant communities with the belief that all things are possible big,
@@ -38,7 +38,7 @@ export const Accordion = RUIComponentStory<DetailsProps>((args) => (
         community members, critical thinkers and creative problem solvers.
       </Text>
     </Details>
-    <Details summary="The Oval">
+    <Details summary="The Oval" mt="-xxs">
       <Text>
         Archie Griffin research that team up north you can never pay back, so you should always try
         to pay forward teaching and learning innovate Buckeye leaf home to world-class faculty

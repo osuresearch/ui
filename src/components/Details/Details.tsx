@@ -4,6 +4,7 @@ import { StyleSystemProps } from '~/types';
 import { cx } from '~/utils';
 
 import { Box } from '../Box';
+import { FocusRing } from '../FocusRing';
 import { Group } from '../Group';
 import { Icon } from '../Icon';
 import { Text } from '../Text';
@@ -26,6 +27,7 @@ export const Details = forwardRef<HTMLDetailsElement, DetailsProps>(
     <Box
       as="details"
       ref={ref}
+      bgc="light-tint"
       className={cx(
         'rui-group',
         // 'open:ring',
@@ -34,28 +36,30 @@ export const Details = forwardRef<HTMLDetailsElement, DetailsProps>(
       )}
       {...props}
     >
-      <Group
-        as="summary"
-        fw="bold"
-        p="md"
-        gap="xs"
-        className={cx(
-          'rui-border-t-2',
-          'rui-border-light-shade',
-          'hover:rui-bg-light focus:rui-bg-light group-open:rui-bg-light'
-        )}
-      >
-        <Icon
-          name="chevron"
-          c={{
-            light: 'primary',
-            dark: 'white'
-          }}
-          className="group-open:rui-rotate-90 rui-transition-transform"
-          size={24}
-        />
-        <Text>{summary}</Text>
-      </Group>
+      <FocusRing>
+        <Group
+          as="summary"
+          fw="bold"
+          p="md"
+          gap="xs"
+          className={cx(
+            'rui-border-t-2',
+            'rui-border-light-shade',
+            'hover:rui-bg-light focus:rui-bg-light group-open:rui-bg-light'
+          )}
+        >
+          <Icon
+            name="chevron"
+            c={{
+              light: 'primary',
+              dark: 'white'
+            }}
+            className="group-open:rui-rotate-90 rui-transition-transform"
+            size={24}
+          />
+          <Text>{summary}</Text>
+        </Group>
+      </FocusRing>
       <Box p="sm" pl="xxl">
         {children}
       </Box>
