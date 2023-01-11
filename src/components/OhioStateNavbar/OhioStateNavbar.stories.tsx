@@ -6,14 +6,16 @@ import { OhioStateNavbar, OhioStateNavbarProps } from './OhioStateNavbar';
 
 export default RUIComponentMeta<OhioStateNavbarProps>('Ohio State', OhioStateNavbar);
 
-export const Light = RUIComponentStory<OhioStateNavbarProps>((args) => (
-  <OhioStateNavbar {...args} />
-), {
-  variant: 'light'
-});
+export const Light = RUIComponentStory<OhioStateNavbarProps>(
+  (args) => <OhioStateNavbar {...args} />,
+  {
+    variant: 'light'
+  }
+);
 
-export const Dark = RUIComponentStory<OhioStateNavbarProps>((args) => (
-  <OhioStateNavbar {...args} />
-), {
-  variant: 'dark'
-});
+export const Dark = RUIComponentStory<OhioStateNavbarProps>(
+  (args) => <OhioStateNavbar {...args} />,
+  {
+    variant: 'dark'
+  }
+);
