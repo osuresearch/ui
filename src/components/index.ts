@@ -40,6 +40,7 @@ export * from './Link';
 export * from './LinkButton';
 export * from './ListField';
 export * from './Listicle';
+export * from './Menu';
 export * from './MissingSlot';
 export * from './Modal';
 export * from './NecessityIndicator';
