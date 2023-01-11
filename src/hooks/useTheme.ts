@@ -4,6 +4,9 @@ import { RUIContext } from '~/components/RUIProvider';
 import { Theme, ThemeProp } from '~/types';
 import { resolveThemeProp } from '~/utils';
 
+/**
+ * Doc gen here which doesn't seem to work :^)
+ */
 export function useTheme() {
   const { theme, setTheme } = useContext(RUIContext);
 
@@ -13,3 +16,5 @@ export function useTheme() {
     resolve: <T>(prop: ThemeProp<T>) => resolveThemeProp(prop, theme)
   };
 }
+
+useTheme.displayName = 'useTheme';

@@ -48,14 +48,14 @@ function LogoLink({ variant }: { variant: OhioStateNavbarVariant }) {
   const color = variant === 'light' ? 'rui-text-[#666666]' : 'rui-text-white';
 
   return (
-    <Text
-      as="a"
+    <a
       href="https://www.osu.edu"
       target="_blank"
       className={`rui-text-[19px] ${color} rui-font-[700]`}
+      rel="noreferrer"
     >
-      OSU<Text className={`rui-text-[19px] ${color} rui-font-[400]`}>.EDU</Text>
-    </Text>
+      OSU<span className={`rui-text-[19px] ${color} rui-font-[400]`}>.EDU</span>
+    </a>
   );
 }
 
@@ -64,7 +64,8 @@ function LogoLink({ variant }: { variant: OhioStateNavbarVariant }) {
  *
  *
  * ## Differences from BUX
- * - Not using their convoluted CSS. Just matching dimension guidelines specified below.
+ * - Not using the new fat banner, doesn't work for web applications. It may be
+ * introduced as a variant at a later time.
  * - Improved vertical alignment on text links
  * - Usage of the older style collapsing of text links to icons because it doesn't
  * make sense to have websites display three dots and then a hamburger right under it.

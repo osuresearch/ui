@@ -49,19 +49,28 @@ export const parameters = {
   options: {
     storySort: {
       order: [
+        // Guidance
         'Getting Started',
         ['Overview', 'Installation', 'Usage', 'Contributing'],
+
         'Design Tokens',
         ['Typography', 'Iconography', 'Color', 'Spacing'],
-        'Layout',
-        'Unstyled',
+
+        // Common things
+        'Layout', ['Overview'],
         'Components',
+        'Hooks',
         'Utilities',
-        ['Overview'],
-        'BUX Stuff',
-        ['Overview'],
-        'Forms',
-        ['Overview'],
+
+        // Uncommon / specialized things
+        'Dialogs',
+        'Forms', ['Overview'],
+        'BUX Stuff', ['Overview'],
+        'Ohio State',
+        'Unstyled', ['Overview'],
+        'Internal',
+
+        // Misc
         'Contributing',
       ]
     }

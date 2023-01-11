@@ -62,7 +62,7 @@ export const DocsContainer = ({ children, context }) => {
   )) ?? []];
 
   const isPolymorphic = isComponent && context.component?.__docgenInfo.description.indexOf('@ruiPolymorphic') >= 0;
-  console.log(context.componentStories());
+  console.log(context, context.componentStories());
 
   const hasAdditionalStories = context.componentStories().length > 1;
 
