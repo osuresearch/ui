@@ -40,8 +40,9 @@ export const DocsContainer = ({ children, context }) => {
   if (path.length > 1) {
     parent = path[path.length - 2].toLowerCase().trim();
   }
-  
-  const isComponent = context.component !== undefined;
+
+  const isComponent = context.component !== undefined
+    && context.component.__docgenInfo !== undefined;
 
   // TODO: I want to use @decorators in the docs for components
   // to mark them as beta, alpha, whatever. As well as various
@@ -52,15 +53,15 @@ export const DocsContainer = ({ children, context }) => {
   // So, FOR NOW, I have a hacky syntax for RUI decorators
   // where I hide the decorators in HTML comments so they don't
   // get parsed out.
-  const atomics = [...(context.component?.__docgenInfo.description.matchAll(
+  const atomics = isComponent && [...(context.component?.__docgenInfo.description.matchAll(
     /@ruiAtomic\s+(\w+)/g
   )) ?? []];
 
-  const status = [...(context.component?.__docgenInfo.description.matchAll(
+  const status = isComponent && [...(context.component?.__docgenInfo.description.matchAll(
     /@ruiStatus\s+(\w+)/g
   )) ?? []];
 
-  const isPolymorphic = context.component?.__docgenInfo.description.indexOf('@ruiPolymorphic') >= 0;
+  const isPolymorphic = isComponent && context.component?.__docgenInfo.description.indexOf('@ruiPolymorphic') >= 0;
   console.log(context.componentStories());
 
   const hasAdditionalStories = context.componentStories().length > 1;
@@ -69,8 +70,7 @@ export const DocsContainer = ({ children, context }) => {
   // https://github.com/storybookjs/storybook/blob/d772d382f8a26ab1d31b876239e3a3613c106e3b/code/ui/blocks/src/blocks/DocsContainer.tsx
 
   return (
-    <div data-theme={useDarkMode() ? 'dark' : 'light'}>
-      <RUIProvider>
+    <RUIProvider theme={useDarkMode() ? 'dark' : 'light'}>
       <BaseContainer
         context={{
           ...context,
@@ -184,7 +184,6 @@ export const DocsContainer = ({ children, context }) => {
         <BackToTop className="rui-top" />
 
       </BaseContainer>
-      </RUIProvider>
-    </div>
+    </RUIProvider>
   );
 };
