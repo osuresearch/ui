@@ -138,7 +138,7 @@ export const DocsContainer = ({ children, context }) => {
 
             {/* SVG diagram, if one exists */}
             <Image
-              src={`/${name}.svg`}
+              src={`./${name}.svg`}
               alt={`Component diagram for ${name}`}
             />
 
