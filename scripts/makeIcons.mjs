@@ -7,10 +7,11 @@ import {
   isEmptyColor,
 } from '@iconify/tools';
 
-(async () => {
+
+async function convert(directory, prefix) {
   // Import icons
-  const iconSet = await importDirectory('svg', {
-    prefix: 'rui-illustration',
+  const iconSet = await importDirectory(directory, {
+    prefix
   });
 
   // Validate, clean up, fix palette and optimise
@@ -41,7 +42,7 @@ import {
       });
 
       // Optimize
-      await runSVGO(svg);
+      runSVGO(svg);
     } catch (err) {
       // Invalid icon
       console.error(`Error parsing ${name}:`, err);
@@ -58,4 +59,9 @@ import {
 
   // Save to file
   await fs.writeFile(`src/icons/${iconSet.prefix}.json`, exported, 'utf8');
+}
+
+(async () => {
+  await convert('svg/icons', 'rui');
+  await convert('svg/illustrations', 'rui-illustration');
 })();

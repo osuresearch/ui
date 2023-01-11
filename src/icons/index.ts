@@ -5,7 +5,8 @@ import { addCollection, addIcon } from '@iconify/react/dist/offline';
 import * as data from './data';
 import * as misc from './misc';
 import * as navigation from './navigation';
-import ruiIllustration from './rui-illustration.json';
+import ruiIllustrations from './rui-illustration.json';
+import ruiIcons from './rui.json';
 import * as social from './social';
 import * as system from './system';
 
@@ -42,5 +43,6 @@ export function loadAllIcons() {
     addIcon(name, all[name].default);
   });
 
-  addCollection(ruiIllustration);
+  addCollection(ruiIcons);
+  addCollection(ruiIllustrations);
 }
