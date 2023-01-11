@@ -50,13 +50,13 @@ export const Chip = polymorphicForwardRef<'div', ChipProps>(
       })}
       {...props}
     >
-      <Group align="center" justify="center" px="xxs" gap="xxs" mr="xs">
+      <Group align="center" justify="center" px="xxs" gap="xxs">
         {variant === 'indicator' && <Box className="rui-rounded-full" w={12} h={12} bgc={c} />}
 
         {children}
 
         {isRemovable && (
-          <CloseButton p={0} iconProps={{ p: 'xxs' }} mr="-xs" label="Remove" onPress={onRemove} />
+          <CloseButton p={0} iconProps={{ p: 'xxs' }} label="Remove" onPress={onRemove} />
         )}
       </Group>
     </Box>
