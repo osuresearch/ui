@@ -70,10 +70,8 @@ export const parameters = {
 
 export const decorators = [
   (Story) => (
-    <div data-theme={useDarkMode() ? 'dark' : 'light'} data-decorator="true">
-      <RUIProvider>
-        <Story />
-      </RUIProvider>
-    </div>
+    <RUIProvider theme={useDarkMode() ? 'dark' : 'light'}>
+      <Story />
+    </RUIProvider>
   ),
 ];
