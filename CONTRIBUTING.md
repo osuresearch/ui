@@ -162,6 +162,8 @@ We use [StorybookJS](https://storybook.js.org/) as a workshop for building compo
 
 CSS is all done via [Tailwind CSS](https://tailwindcss.com) using the `rui-` prefix on all classes. You can take a look at this [Tailwind Cheatsheet](https://nerdcave.com/tailwind-cheat-sheet) for mapping between CSS and Tailwind.
 
+Be sure to map those back to our prefixed classes, such as `rui-text-scarlet`, `-rui-left-md`, and `hover:rui-underline`.
+
 ## Coding guidelines and tips
 
 ### Do not interpolate Tailwind class names
@@ -178,6 +180,8 @@ className={cx({
   'rui-border-black': color === 'black',
 })}
 ```
+
+We recommend using a [Tailwind IntelliSense Plugin](https://tailwindcss.com/docs/editor-setup) to give you Tailwind class name validation within any `className` props.
 
 ### Start new components from `<Box>`
 
