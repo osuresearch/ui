@@ -35,20 +35,23 @@ module.exports = {
   // },
   typescript: {
     check: false,
-    checkOptions: {},
-    reactDocgen: 'react-docgen-typescript',
+    // checkOptions: {},
+    // reactDocgen: 'react-docgen-typescript',
     reactDocgenTypescriptOptions: {
       shouldExtractLiteralValuesFromEnum: true,
+      shouldRemoveUndefinedFromOptional: true,
       propFilter: (prop) => (
         // Whitelist libraries with props that we expose through
         // our own components. Mostly React Aria / React Stately things.
-        prop.parent
-          ? /@react-types\/shared/.test(prop.parent.fileName) ||
-            /react-aria/.test(prop.parent.fileName) ||
-            /react-stately/.test(prop.parent.fileName) ||
-            !/node_modules/.test(prop.parent.fileName)
-          : true
+        prop.parent ? (
+          /@react-types/.test(prop.parent.fileName) ||
+          /react-aria/.test(prop.parent.fileName) ||
+          /react-stately/.test(prop.parent.fileName) ||
+          !/node_modules/.test(prop.parent.fileName)
+        ) : true
       ),
+      // NOTE: this default cannot be changed
+      savePropValueAsString: true,
     },
   },
   webpackFinal: async (config, { configType }) => {

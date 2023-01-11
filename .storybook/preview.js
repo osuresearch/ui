@@ -13,7 +13,10 @@ import '../src/theme/index.css';
 import { RUIProvider } from "../src/components/RUIProvider";
 
 export const parameters = {
-  actions: { argTypesRegex: "^on[A-Z].*" },
+  // We only monitor a subset of actions. Otherwise the performance
+  // drops SIGNIFICANTLY when we pass through @react-types events
+  // actions: { argTypesRegex: "^on[A-Z].*" },
+  actions: { argTypesRegex: "^on(Focus|Blur|Press|Click)" },
   controls: {
     matchers: {
       // color: /(background|color)$/i,
