@@ -33,6 +33,24 @@ module.exports = {
   // features: {
   //   storyStoreV7: true
   // },
+  typescript: {
+    check: false,
+    checkOptions: {},
+    reactDocgen: 'react-docgen-typescript',
+    reactDocgenTypescriptOptions: {
+      shouldExtractLiteralValuesFromEnum: true,
+      propFilter: (prop) => (
+        // Whitelist libraries with props that we expose through
+        // our own components. Mostly React Aria / React Stately things.
+        prop.parent
+          ? /@react-types\/shared/.test(prop.parent.fileName) ||
+            /react-aria/.test(prop.parent.fileName) ||
+            /react-stately/.test(prop.parent.fileName) ||
+            !/node_modules/.test(prop.parent.fileName)
+          : true
+      ),
+    },
+  },
   webpackFinal: async (config, { configType }) => {
     config.resolve.plugins = [new TsconfigPathsPlugin()];
     return config;
