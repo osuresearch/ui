@@ -4,7 +4,7 @@ import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
 import { OhioStateFooter, OhioStateFooterProps } from './OhioStateFooter';
 
-export default RUIComponentMeta<OhioStateFooterProps>('OhioState', OhioStateFooter);
+export default RUIComponentMeta<OhioStateFooterProps>('Ohio State', OhioStateFooter);
 
 export const Overview = RUIComponentStory<OhioStateFooterProps>(
   (args) => <OhioStateFooter {...args} />,
