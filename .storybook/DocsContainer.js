@@ -40,13 +40,8 @@ export const DocsContainer = ({ children, context }) => {
   if (path.length > 1) {
     parent = path[path.length - 2].toLowerCase().trim();
   }
-
-  // TODO: Smarter check. Can I pull the source folder path?
-  let isComponent = [
-    'layout', 'components', 'utilities', 'bux stuff', 'forms', 'unstyled', 'dialogs', 'ohiostate', 'internal',
-  ].indexOf(parent) >= 0 && name !== 'Overview';
-
-  console.debug(context);
+  
+  const isComponent = context.component !== undefined;
 
   // TODO: I want to use @decorators in the docs for components
   // to mark them as beta, alpha, whatever. As well as various
