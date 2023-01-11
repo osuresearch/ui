@@ -1,4 +1,5 @@
 import { mergeProps } from '@react-aria/utils';
+import { Placement, PlacementAxis } from '@react-types/overlays';
 import { FocusableElement } from '@react-types/shared';
 import React, { useRef } from 'react';
 import { FocusScope, Overlay, usePopover } from 'react-aria';
@@ -16,7 +17,7 @@ export type PopoverProps = {
    *
    * Use `<Text>` and similar containers to drive foreground color.
    */
-  bgc: ThemeProp<Color>;
+  bgc?: ThemeProp<Color>;
 
   /**
    * React Aria trigger state
@@ -26,7 +27,7 @@ export type PopoverProps = {
   /**
    * Pixel-based offset from the trigger element to display the popover.
    */
-  offset: number;
+  offset?: number;
 
   children: React.ReactNode;
 
@@ -41,7 +42,14 @@ export type PopoverProps = {
   /**
    * Props to spread into React Aria `<Overlay>`
    */
-  overlayProps: React.DOMAttributes<FocusableElement>;
+  overlayProps?: React.DOMAttributes<FocusableElement>;
+
+  /**
+   * Placement of the element with respect to its anchor.
+   *
+   * Defaults to `bottom`.
+   */
+  placement?: Placement;
 };
 
 /**
@@ -55,7 +63,14 @@ export type PopoverProps = {
  *
  * @internal
  */
-export function Popover({ children, state, bgc, offset, overlayProps, ...props }: PopoverProps) {
+export function Popover({
+  children,
+  state,
+  bgc = 'light-tint',
+  offset = 0,
+  overlayProps = {},
+  ...props
+}: PopoverProps) {
   const popoverRef = useRef<HTMLDivElement>(null);
   const { popoverProps, underlayProps, arrowProps, placement } = usePopover(
     {
@@ -69,7 +84,7 @@ export function Popover({ children, state, bgc, offset, overlayProps, ...props }
   return (
     <Overlay {...overlayProps}>
       <Underlay {...underlayProps} />
-      <Paper bgc={bgc} {...popoverProps} ref={popoverRef} shadow="md" p="md" withBorder>
+      <Paper bgc={bgc} {...popoverProps} ref={popoverRef} shadow="md" withBorder>
         <Arrow c={bgc} {...arrowProps} placement={placement} />
         <FocusScope contain restoreFocus autoFocus>
           {children}
