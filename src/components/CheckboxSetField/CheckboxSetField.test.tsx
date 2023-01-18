@@ -2,11 +2,11 @@ import '@testing-library/jest-dom';
 import { render } from '@testing-library/react';
 import React from 'react';
 
-import { CheckboxGroupField } from './CheckboxGroupField';
+import { CheckboxSetField } from './CheckboxSetField';
 
 describe('Tests for CheckboxGroupField component', () => {
   it('renders content', () => {
-    const { container } = render(<CheckboxGroupField>Foo bar</CheckboxGroupField>);
+    const { container } = render(<CheckboxSetField>Foo bar</CheckboxSetField>);
     expect(container.firstChild).toMatchSnapshot();
   });
 });

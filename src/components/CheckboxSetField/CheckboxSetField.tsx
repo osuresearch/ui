@@ -23,43 +23,44 @@ import { Stack } from '../Stack';
 import { Text } from '../Text';
 import { ToggleField } from '../ToggleField';
 
-export type CheckboxGroupItem = {
+export type CheckboxItem = {
   name?: string;
   label?: string;
   description?: string;
 };
 
-export type CheckboxGroupDiffProps = {
+export type CheckboxSetDiffProps = {
   showDiff?: boolean;
   previousValues?: string[];
 };
 
-export type CheckboxGroupFieldProps = StyleSystemProps &
+export type CheckboxSetFieldProps = StyleSystemProps &
   AriaCheckboxGroupProps &
   AriaNecessityIndicator &
-  CheckboxGroupDiffProps &
-  ListProps<CheckboxGroupItem> & {
+  CheckboxSetDiffProps &
+  ListProps<CheckboxItem> & {
     label: React.ReactNode;
   };
 
-const CheckboxGroupContext = createContext<CheckboxGroupState & ListState<CheckboxGroupItem>>(
-  {} as CheckboxGroupState & ListState<CheckboxGroupItem>
+const CheckboxSetContext = createContext<CheckboxGroupState & ListState<CheckboxItem>>(
+  {} as CheckboxGroupState & ListState<CheckboxItem>
 );
 
 type GroupItemProps = AriaCheckboxGroupItemProps & {
-  node: Node<CheckboxGroupItem>;
+  node: Node<CheckboxItem>;
 };
 
-export function GroupItem({ node, ...props }: GroupItemProps) {
-  const state = useContext(CheckboxGroupContext);
+function GroupItem({ node, ...props }: GroupItemProps) {
+  const state = useContext(CheckboxSetContext);
   const ref = useRef<HTMLInputElement>(null);
 
-  const isDisabled = state.isDisabled || state.disabledKeys.has(node.textValue);
-  const isSelected = state.isSelected(node.textValue) || props.isIndeterminate;
+  const isDisabled = state.isDisabled || state.disabledKeys.has(node.key);
+  const isSelected = state.isSelected('' + node.key) || props.isIndeterminate;
 
   const { inputProps } = useCheckboxGroupItem(
     {
       ...props,
+      value: '' + node.key,
       isDisabled
     },
     state,
@@ -84,12 +85,12 @@ export function GroupItem({ node, ...props }: GroupItemProps) {
 }
 
 /**
- * Checkbox groups allow users to select multiple items from a list of options.
+ * Checkbox sets allow users to select multiple items from a list of options.
  * Can attach multiple `Key` atomics to a single field.
  *
  * <!-- @ruiAtomic Key -->
  */
-export const CheckboxGroupField = forwardRef<HTMLDivElement, CheckboxGroupFieldProps>(
+export const CheckboxSetField = forwardRef<HTMLDivElement, CheckboxSetFieldProps>(
   (props, ref) => {
     const { label, description, necessityIndicator, errorMessage } = props;
 
@@ -106,12 +107,12 @@ export const CheckboxGroupField = forwardRef<HTMLDivElement, CheckboxGroupFieldP
 
     return (
       <Stack {...groupProps} ref={ref}>
-        <Text as="label" {...labelProps}>
+        <Text {...labelProps}>
           {label}
           {necessityIndicator && <NecessityIndicator />}
         </Text>
 
-        <CheckboxGroupContext.Provider value={{ ...listState, ...groupState }}>
+        <CheckboxSetContext.Provider value={{ ...listState, ...groupState }}>
           {[...listState.collection].map((item) => {
             if (item.type === 'section') {
               return <div key={item.key}>TODO: section</div>;
@@ -119,7 +120,7 @@ export const CheckboxGroupField = forwardRef<HTMLDivElement, CheckboxGroupFieldP
 
             return <GroupItem key={item.key} node={item} value={item.textValue} />;
           })}
-        </CheckboxGroupContext.Provider>
+        </CheckboxSetContext.Provider>
 
         {description && (
           <Text c="dark" fs="sm" {...descriptionProps}>

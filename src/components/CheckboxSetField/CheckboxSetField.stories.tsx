@@ -3,39 +3,57 @@ import { useListData } from 'react-stately';
 
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
+import {
+  CheckboxSetField,
+  CheckboxSetFieldProps
+} from './CheckboxSetField';
+
 import { Item } from '../Item';
 import { Text } from '../Text';
-import {
-  CheckboxGroupField,
-  CheckboxGroupFieldProps,
-  CheckboxGroupItem
-} from './CheckboxGroupField';
 
-export default RUIComponentMeta<CheckboxGroupFieldProps>(
+export default RUIComponentMeta<CheckboxSetFieldProps>(
   'Forms',
-  CheckboxGroupField
+  CheckboxSetField
 ).withStyleSystemProps();
 
-export const Overview = RUIComponentStory<CheckboxGroupFieldProps>(
+export const Overview = RUIComponentStory<CheckboxSetFieldProps>(
   (args) => (
-    <CheckboxGroupField {...args} label="Supported APIs">
-      <Item textValue="dx11" description="Each checkbox item may have its own description">
+    <CheckboxSetField {...args}>
+      <Item key="dx11" description="Each item may have its own description">
         DirectX 11
       </Item>
-      <Item textValue="metal">Metal</Item>
-      <Item textValue="vulkan">Vulkan</Item>
-    </CheckboxGroupField>
+      <Item key="metal">Metal</Item>
+      <Item key="vulkan">Vulkan</Item>
+    </CheckboxSetField>
   ),
   {
+    label: 'Supported APIs',
     description: 'This is description content for the entire set'
   }
 );
 
-export const DefaultValue = RUIComponentStory<CheckboxGroupFieldProps>(Overview, {
+export const UncontrolledValue = RUIComponentStory(Overview, {
+  label: 'Supported APIs',
   defaultValue: ['dx11', 'metal']
 });
 
-export const Required = RUIComponentStory<CheckboxGroupFieldProps>(Overview, {
+export const ControlledValue = RUIComponentStory<CheckboxSetFieldProps>((args) => {
+  const [value, setValue] = useState(['dx11', 'metal']);
+
+  return (
+    <>
+      <CheckboxSetField {...args} value={value} onChange={setValue} label="Supported APIs">
+        <Item key="dx11">DirectX 11</Item>
+        <Item key="metal">Metal</Item>
+        <Item key="vulkan">Vulkan</Item>
+      </CheckboxSetField>
+      <Text>Selected: {value.join(', ')}</Text>
+    </>
+  );
+});
+
+export const Required = RUIComponentStory(Overview, {
+  label: 'Supported APIs',
   isRequired: true,
   necessityIndicator: true
 }).withDescription(`
@@ -46,41 +64,30 @@ export const Required = RUIComponentStory<CheckboxGroupFieldProps>(Overview, {
   but validation happens at a later time, just use \`necessityIndicator\`.
 `);
 
-export const ReadOnly = RUIComponentStory<CheckboxGroupFieldProps>(Overview, {
+export const ReadOnly = RUIComponentStory(Overview, {
+  label: 'Supported APIs',
   defaultValue: ['dx11', 'metal'],
   isReadOnly: true
 });
 
-export const Disabled = RUIComponentStory<CheckboxGroupFieldProps>(Overview, {
+export const Disabled = RUIComponentStory(Overview, {
+  label: 'Supported APIs',
   defaultValue: ['dx11', 'metal'],
   isDisabled: true
 });
 
-export const DisabledItem = RUIComponentStory<CheckboxGroupFieldProps>(Overview, {
+export const DisabledItem = RUIComponentStory(Overview, {
+  label: 'Supported APIs',
   disabledKeys: ['metal']
 });
 
-export const Error = RUIComponentStory<CheckboxGroupFieldProps>(Overview, {
+export const Error = RUIComponentStory(Overview, {
+  label: 'Supported APIs',
   validationState: 'invalid',
   errorMessage: 'Select at least one API.'
 });
 
-export const ControlledValue = RUIComponentStory<CheckboxGroupFieldProps>((args) => {
-  const [value, setValue] = useState(['dx11', 'metal']);
-
-  return (
-    <>
-      <CheckboxGroupField {...args} value={value} onChange={setValue} label="Supported APIs">
-        <Item textValue="dx11">DirectX 11</Item>
-        <Item textValue="metal">Metal</Item>
-        <Item textValue="vulkan">Vulkan</Item>
-      </CheckboxGroupField>
-      <Text>Selected: {value.join(', ')}</Text>
-    </>
-  );
-});
-
-export const WithReactStatelyLists = RUIComponentStory<CheckboxGroupFieldProps>((args) => {
+export const WithReactStatelyLists = RUIComponentStory<CheckboxSetFieldProps>((args) => {
   const list = useListData({
     initialItems: [
       { name: 'dx11', label: 'DirectX 11' },
@@ -95,7 +102,7 @@ export const WithReactStatelyLists = RUIComponentStory<CheckboxGroupFieldProps>(
 
   return (
     <>
-      <CheckboxGroupField
+      <CheckboxSetField
         {...args}
         label="Supported APIs"
         items={list.items}
@@ -103,7 +110,7 @@ export const WithReactStatelyLists = RUIComponentStory<CheckboxGroupFieldProps>(
         onSelectionChange={list.setSelectedKeys}
       >
         {(item) => <Item key={item.name}>{item.label}</Item>}
-      </CheckboxGroupField>
+      </CheckboxSetField>
       <code>
         <pre>{JSON.stringify(list.selectedKeys, undefined, 2)}</pre>
       </code>
@@ -111,6 +118,9 @@ export const WithReactStatelyLists = RUIComponentStory<CheckboxGroupFieldProps>(
     </>
   );
 }).withDescription(`
+  >TODO: Not implemented. Need to match \`selectedKeys\` and \`onSelectionChange\` 
+  props back to the checkbox state of \`string[]\`.
+
   This component supports React Stately's [useListData hook](https://react-spectrum.adobe.com/react-stately/useListData.html#example)
   to construct a list from a collection.
 
