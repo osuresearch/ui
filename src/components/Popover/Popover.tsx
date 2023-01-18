@@ -50,6 +50,13 @@ export type PopoverProps = {
    * Defaults to `bottom`.
    */
   placement?: Placement;
+
+  /**
+   * Toggle the arrow linking popover to trigger.
+   * 
+   * @default false
+   */
+  withArrow?: boolean;
 };
 
 /**
@@ -68,6 +75,7 @@ export function Popover({
   state,
   bgc = 'light-tint',
   offset = 0,
+  withArrow = false,
   overlayProps = {},
   ...props
 }: PopoverProps) {
@@ -85,7 +93,7 @@ export function Popover({
     <Overlay {...overlayProps}>
       <Underlay {...underlayProps} />
       <Paper bgc={bgc} {...popoverProps} ref={popoverRef} shadow="md" withBorder>
-        <Arrow c={bgc} {...arrowProps} placement={placement} />
+        {withArrow && <Arrow c={bgc} {...arrowProps} placement={placement} />}
         <FocusScope contain restoreFocus autoFocus>
           {children}
         </FocusScope>
