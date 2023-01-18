@@ -36,11 +36,6 @@ export const WithIcon = RUIComponentStory(Overview, {
   leftSlot: <Icon name="heart" size={20} c="pink" />
 }).withDescription('Use icons when you want to convey meaning quicker');
 
-export const WithBadge = RUIComponentStory(Overview, {
-  variant: 'default',
-  rightSlot: <Badge c="dimmed">+99</Badge>
-}).withDescription('Use badges when you want to indicate a value');
-
 export const WithAccent = RUIComponentStory<ButtonProps>(
   (args) => (
     <Group wrap>
