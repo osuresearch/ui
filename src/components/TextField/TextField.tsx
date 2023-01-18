@@ -58,13 +58,12 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
 
   return (
     <InputField
-      ref={mergeRefs(inputRef, ref)}
-      inputSlot={TextInputSlot}
       labelProps={labelProps}
-      inputProps={inputProps}
       descriptionProps={descriptionProps}
       errorMessageProps={errorMessageProps}
       {...props}
-    />
+    >
+      <TextInputSlot ref={mergeRefs(inputRef, ref)} {...inputProps} />
+    </InputField>
   );
 });

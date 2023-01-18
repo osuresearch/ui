@@ -12,12 +12,15 @@ import { NecessityIndicator } from '../NecessityIndicator';
 import { Stack } from '../Stack';
 import { Text } from '../Text';
 
-export type InputSlotProps<T> = React.InputHTMLAttributes<T> &
+export type InputSlotProps<T> = 
   DOMAttributes<FocusableElement> & {
     ref: React.ForwardedRef<T>;
   };
 
 export type InputFieldSlots<T> = {
+  /**
+   * @deprecated use children
+   */
   inputSlot?: SlotType<InputSlotProps<T>>;
 
   diffSlot?: SlotType<{ value?: string; previousValue?: string }>;
@@ -58,8 +61,10 @@ export type InputFieldProps<T = HTMLInputElement> = StyleSystemProps &
     // NOTE: This is essentially: Pick<TextFieldAria<'input'>, 'inputProps' | 'labelProps' | 'descriptionProps' | 'errorMessageProps'>
     // But accepting either input type.
 
-    /** Props for the input element. */
-    inputProps: React.HTMLAttributes<T>;
+    /** 
+     * Props to spread into the wrapping stack (excluding style syste props)
+     */
+    groupProps?: DOMAttributes<FocusableElement>;
 
     /** Props for the text field's visible label element */
     labelProps: DOMAttributes<FocusableElement> | React.LabelHTMLAttributes<HTMLLabelElement>;
@@ -69,20 +74,23 @@ export type InputFieldProps<T = HTMLInputElement> = StyleSystemProps &
 
     /** Props for the text field's error message element */
     errorMessageProps: DOMAttributes;
+
+    children: React.ReactElement
   };
 
 function _InputField<T>(props: InputFieldProps<T>, ref: ForwardedRef<T>) {
-  const { className, label, description, errorMessage } = props;
-  const { labelProps, inputProps, descriptionProps, errorMessageProps } = props;
+  const { className, label, description, errorMessage, children } = props;
+  const { labelProps, groupProps, descriptionProps, errorMessageProps } = props;
 
   const [styleSystemProps] = useStyleSystemProps(props);
   const { focusProps } = useFocusRing();
 
-  const InputSlot = props.inputSlot || makeMissingSlot('input');
+  const inputSlot = React.Children.only(children);
+
   const DiffSlot = props.diffSlot || makeMissingSlot('diff');
 
   return (
-    <Stack className={className} {...styleSystemProps}>
+    <Stack className={className} {...groupProps} {...styleSystemProps}>
       <Text as="label" {...labelProps}>
         {label}
         {props.necessityIndicator && <NecessityIndicator />}
@@ -93,16 +101,15 @@ function _InputField<T>(props: InputFieldProps<T>, ref: ForwardedRef<T>) {
           <div className="rui-absolute rui-inset-[2px] rui-right-auto">{props.leftSlot}</div>
         )}
 
-        <InputSlot
-          ref={ref}
-          {...mergeProps(inputProps, focusProps, {
+        {React.cloneElement(inputSlot, 
+          mergeProps(focusProps, {
             style: {
               paddingLeft: props.leftWidth,
               paddingRight: props.rightWidth
             }
-          })}
-        />
-
+          }
+        ))}
+        
         {props.rightSlot && (
           <div className="rui-absolute rui-inset-[2px] rui-left-auto">{props.rightSlot}</div>
         )}
@@ -128,6 +135,10 @@ function _InputField<T>(props: InputFieldProps<T>, ref: ForwardedRef<T>) {
 /**
  * Base for a form field component
  *
+ * TODO: Rename to `FormField`. More accurate now that this supports
+ * more than just inputs. It handles the wrapping of labeling, errors,
+ * focus, descriptions, etc. 
+ * 
  * ## 🛑 Disclaimer
  *
  * In most cases, you should not use this component in your application.

@@ -16,7 +16,9 @@ import { Stack } from '../Stack';
 import { Text } from '../Text';
 
 type InputSlotProps = React.InputHTMLAttributes<HTMLTextAreaElement> &
-  DOMAttributes<FocusableElement>;
+  DOMAttributes<FocusableElement> & {
+    rows?: number
+  }
 
 export type TextAreaFieldProps = StyleSystemProps &
   AriaTextFieldProps &
@@ -61,11 +63,12 @@ export const TextAreaField = forwardRef<HTMLTextAreaElement, TextAreaFieldProps>
         {...props}
         inputSlot={TextAreaSlot}
         labelProps={labelProps}
-        inputProps={mergeProps(inputProps, { rows })}
+        inputProps={{}}
         descriptionProps={descriptionProps}
         errorMessageProps={errorMessageProps}
-        ref={mergeRefs(inputRef, ref)}
-      />
+      >
+        <TextAreaSlot ref={mergeRefs(inputRef, ref)} {...inputProps} rows={rows} />
+      </InputField>
     );
   }
 );
