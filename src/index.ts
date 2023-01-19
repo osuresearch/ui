@@ -51,6 +51,7 @@ export { default as Select } from './form/Select';
 export { default as Text } from './form/Text';
 export { default as Time } from './form/Time';
 export { default as Lookup } from './form/Lookup';
+export { default as Upload } from './form/Upload';
 
 // Hooks
 export { default as useMockFileUploader } from './hooks/useMockFileUploader';
