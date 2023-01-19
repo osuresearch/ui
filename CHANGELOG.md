@@ -1,3 +1,14 @@
+## [4.8.1](https://github.com/osuresearch/ui/compare/v4.8.0...v4.8.1) (2023-01-19)
+
+
+### Bug Fixes
+
+* **ci:** add missing publishConfig key ([44d19ea](https://github.com/osuresearch/ui/commit/44d19ea60a26f508cac102a35a0b85e1262666c0))
+* **ci:** lock semantic-release dependency to 19 ([734c069](https://github.com/osuresearch/ui/commit/734c0699834f1ddf902d21cd3a6989883b7f6e67))
+* **dependencies:** downgrade PrimeReact back to 6.3 due to build compat issues ([da1066e](https://github.com/osuresearch/ui/commit/da1066e17fa9f74e33044d56e8f1ef92b428ab5b))
+* **dependencies:** make sass a true dependency instead of dev dependency ([9ba2c9f](https://github.com/osuresearch/ui/commit/9ba2c9f5f10baabc8a33ae15f13467e93e56230e)), closes [#17](https://github.com/osuresearch/ui/issues/17)
+* missing Upload component export ([1ddcda0](https://github.com/osuresearch/ui/commit/1ddcda0a760ae0e6db0094343ae2fce384296f2a)), closes [#16](https://github.com/osuresearch/ui/issues/16)
+
 ## [4.8.1](https://github.com/osuresearch/ui/compare/v4.8.0...v4.8.1) (2022-12-21)
 
 
