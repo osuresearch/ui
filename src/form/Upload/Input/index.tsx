@@ -1,7 +1,7 @@
 import React, { useState, useContext, useRef } from "react";
 import bytes from 'bytes';
 
-import { FileUpload as PRUpload, FileUploadFilesParam, ItemTemplateOptions } from "primereact/fileupload/fileupload";
+import { FileUpload as PRUpload } from "primereact/fileupload";
 
 import { Context } from "..";
 import { ExternalLink, Icon } from "../../..";
@@ -248,7 +248,7 @@ export default function Input(props: InputProps) {
     // PrimeReact FileUpload template for each file in progress
     const itemTemplate = (
         file: object,
-        options: ItemTemplateOptions
+        options: PRUpload.ItemTemplateType
     ) => {
         const match = uploading?.find((f) => f.file === file);
         if (!match) {
@@ -361,7 +361,7 @@ export default function Input(props: InputProps) {
 
     // Push new files to the external upload handler (onSelect prop)
     // asynchronously and handle all responses.
-    const uploadHandler = (e: FileUploadFilesParam) => {
+    const uploadHandler = (e: PRUpload.FilesParam) => {
         e.files.forEach((src) => {
             // Validate MIME type restrictions
             // TODO: MIME type wildcards aren't supported in .includes

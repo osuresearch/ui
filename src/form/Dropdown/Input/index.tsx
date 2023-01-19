@@ -1,8 +1,7 @@
 import React, { useContext } from 'react';
 import { Context } from '..';
-import { Dropdown } from 'primereact/dropdown/dropdown';
-import TooltipOptions from 'primereact/tooltip/tooltipoptions';
-
+import { Dropdown } from 'primereact/dropdown';
+import TooltipOptions from 'primereact/components/tooltip/TooltipOptions';
 
 type OptionGroupTemplateType = React.ReactNode | ((option: any, index: number) => React.ReactNode);
 

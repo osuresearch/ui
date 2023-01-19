@@ -4,10 +4,9 @@
 #### Existing Files
 ```jsx
 import React, { useState } from 'react';
-import { useMockFileUploader, useRESTFileUploader } from '@osuresearch/ui';
+import { useMockFileUploader } from '@osuresearch/ui';
 
-//const { register } = useMockFileUploader();
-const { register } = useRESTFileUploader('http://localhost:8000/upload-rest-mock.php');
+const { register } = useMockFileUploader();
 
 const [files, setFiles] = useState([
     {
