@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Context } from '..';
-import { Chips } from 'primereact/chips/chips';
-import TooltipOptions from 'primereact/tooltip/tooltipoptions';
+import { Chips } from 'primereact/chips';
+import TooltipOptions from 'primereact/components/tooltip/TooltipOptions';
 
 interface AddParams {
     originalEvent: React.SyntheticEvent;
