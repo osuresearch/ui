@@ -1,3 +1,10 @@
+## [4.8.2](https://github.com/osuresearch/ui/compare/v4.8.1...v4.8.2) (2023-01-19)
+
+
+### Bug Fixes
+
+* language ([4d56aaa](https://github.com/osuresearch/ui/commit/4d56aaac5257d01b9d91aa0ec421bc8936787d2c))
+
 ## [4.8.1](https://github.com/osuresearch/ui/compare/v4.8.0...v4.8.1) (2023-01-19)
 
 
