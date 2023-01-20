@@ -1,11 +1,12 @@
 import { mergeProps } from '@react-aria/utils';
 import { Placement, PlacementAxis } from '@react-types/overlays';
 import { FocusableElement } from '@react-types/shared';
-import React, { useRef } from 'react';
+import React, { ForwardedRef, forwardRef, useRef } from 'react';
 import { FocusScope, Overlay, usePopover } from 'react-aria';
 import { OverlayTriggerState } from 'react-stately';
 
 import { Color, ThemeProp } from '~/types';
+import { mergeRefs } from '~/utils';
 
 import { Arrow } from '../Arrow';
 import { Paper } from '../Paper';
@@ -53,7 +54,7 @@ export type PopoverProps = {
 
   /**
    * Toggle the arrow linking popover to trigger.
-   * 
+   *
    * @default false
    */
   withArrow?: boolean;
@@ -70,34 +71,39 @@ export type PopoverProps = {
  *
  * @internal
  */
-export function Popover({
-  children,
-  state,
-  bgc = 'light-tint',
-  offset = 0,
-  withArrow = false,
-  overlayProps = {},
-  ...props
-}: PopoverProps) {
-  const popoverRef = useRef<HTMLDivElement>(null);
-  const { popoverProps, underlayProps, arrowProps, placement } = usePopover(
+export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
+  (
     {
-      ...props,
-      offset,
-      popoverRef
+      children,
+      state,
+      bgc = 'light-tint',
+      offset = 0,
+      withArrow = false,
+      overlayProps = {},
+      ...props
     },
-    state
-  );
+    ref
+  ) => {
+    const popoverRef = useRef<HTMLDivElement>(null);
+    const { popoverProps, underlayProps, arrowProps, placement } = usePopover(
+      {
+        ...props,
+        offset,
+        popoverRef
+      },
+      state
+    );
 
-  return (
-    <Overlay {...overlayProps}>
-      <Underlay {...underlayProps} />
-      <Paper bgc={bgc} {...popoverProps} ref={popoverRef} shadow="md" withBorder>
-        {withArrow && <Arrow c={bgc} {...arrowProps} placement={placement} />}
-        <FocusScope contain restoreFocus autoFocus>
-          {children}
-        </FocusScope>
-      </Paper>
-    </Overlay>
-  );
-}
+    return (
+      <Overlay {...overlayProps}>
+        <Underlay {...underlayProps} />
+        <Paper bgc={bgc} {...popoverProps} ref={mergeRefs(ref, popoverRef)} shadow="md" withBorder>
+          {withArrow && <Arrow c={bgc} {...arrowProps} placement={placement} />}
+          <FocusScope contain restoreFocus autoFocus>
+            {children}
+          </FocusScope>
+        </Paper>
+      </Overlay>
+    );
+  }
+);

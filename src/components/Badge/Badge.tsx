@@ -25,7 +25,7 @@ export type BadgeProps = {
   ping?: boolean;
 
   /**
-   * Children to display within the badge
+   * Element to attach the badge to
    */
   children?: React.ReactNode;
 };

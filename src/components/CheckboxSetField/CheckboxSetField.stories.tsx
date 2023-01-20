@@ -3,13 +3,9 @@ import { useListData } from 'react-stately';
 
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
-import {
-  CheckboxSetField,
-  CheckboxSetFieldProps
-} from './CheckboxSetField';
-
 import { Item } from '../Item';
 import { Text } from '../Text';
+import { CheckboxSetField, CheckboxSetFieldProps } from './CheckboxSetField';
 
 export default RUIComponentMeta<CheckboxSetFieldProps>(
   'Forms',

@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
-import { RadioSetField, RadioSetFieldProps } from './RadioSetField';
-
 import { Item } from '../Item';
 import { Text } from '../Text';
+import { RadioSetField, RadioSetFieldProps } from './RadioSetField';
 
 export default RUIComponentMeta<RadioSetFieldProps>('Forms', RadioSetField).withStyleSystemProps();
 
-export const Overview = RUIComponentStory<RadioSetFieldProps>((args) => (
+export const Overview = RUIComponentStory<RadioSetFieldProps>(
+  (args) => (
     <RadioSetField {...args}>
       <Item key="dx12" description="Each item may have its own description">
         DirectX 12
@@ -17,14 +17,16 @@ export const Overview = RUIComponentStory<RadioSetFieldProps>((args) => (
       <Item key="metal">Metal</Item>
       <Item key="vulkan">Vulkan</Item>
     </RadioSetField>
-), {
-  label: 'Supported API',
-  description: 'This is description content for the entire set',
-});
+  ),
+  {
+    label: 'Supported API',
+    description: 'This is description content for the entire set'
+  }
+);
 
 export const UncontrolledValue = RUIComponentStory(Overview, {
   label: 'Supported API',
-  defaultValue: 'vulkan',
+  defaultValue: 'vulkan'
 });
 
 export const ControlledValue = RUIComponentStory<RadioSetFieldProps>((args) => {

@@ -17,8 +17,8 @@ import { Text } from '../Text';
 
 type InputSlotProps = React.InputHTMLAttributes<HTMLTextAreaElement> &
   DOMAttributes<FocusableElement> & {
-    rows?: number
-  }
+    rows?: number;
+  };
 
 export type TextAreaFieldProps = StyleSystemProps &
   AriaTextFieldProps &

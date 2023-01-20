@@ -21,7 +21,8 @@ export type SwitchFieldProps = StyleSystemProps &
   };
 
 /**
- * Form field component that accept a single `Boolean` atomic.
+ * A switch is similar to a checkbox, but represents on/off values
+ * as opposed to selection.
  *
  * <!-- @ruiAtomic Boolean -->
  *

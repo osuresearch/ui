@@ -21,6 +21,12 @@ export const Box = polymorphicForwardRef<'div', BoxProps>(
 
     const Component = as || 'div';
 
+    // TODO: Sometimes props get down to this level and aren't supported
+    // by the underlying component, typically because the type checking
+    // didn't catch it during polymorphism. (e.g. onPress, isDisabled, etc).
+    // Need a way to scrub those out and only whitelist props that are
+    // supported by the morphed component.
+
     return (
       <Component
         {...otherProps}

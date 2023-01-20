@@ -2,13 +2,12 @@ import React, { useState } from 'react';
 
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
-import { SelectField, SelectFieldProps } from './SelectField';
-
-import { Item } from '../Item';
-import { Text } from '../Text';
-import { Group } from '../Group';
-import { Stack } from '../Stack';
 import { Avatar } from '../Avatar';
+import { Group } from '../Group';
+import { Item } from '../Item';
+import { Stack } from '../Stack';
+import { Text } from '../Text';
+import { SelectField, SelectFieldProps } from './SelectField';
 
 export default RUIComponentMeta<SelectFieldProps>('Forms', SelectField).withStyleSystemProps();
 
@@ -39,7 +38,7 @@ export const UncontrolledValue = RUIComponentStory(Overview, {
 
 export const ControlledValue = RUIComponentStory<SelectFieldProps>(
   (args) => {
-    const [value, setValue] = useState<React.Key|undefined>(undefined);
+    const [value, setValue] = useState<React.Key | undefined>(undefined);
 
     return (
       <>
@@ -54,7 +53,7 @@ export const ControlledValue = RUIComponentStory<SelectFieldProps>(
     );
   },
   {
-    label: '3D graphics and computing API',
+    label: '3D graphics and computing API'
   }
 ).withDescription(`
   The \`selectedKey\` prop controls the \`React.Key\` of the current selection
@@ -91,45 +90,47 @@ export const Error = RUIComponentStory(Overview, {
   errorMessage: 'Please specify an API to use.'
 });
 
-export const WithCustomItems = RUIComponentStory<SelectFieldProps>((args) => {
-  const people = [
-    {
-      name: 'Chase McManning',
-      username: 'mcmanning.1',
-    },
-    {
-      name: 'Neil Coplin',
-      username: 'coplin.7',
-    },
-    {
-      name: 'John Ray',
-      username: 'ray.30',
-    }
-  ];
-  
-  return (
-    <SelectField {...args} items={people}>
-      {(person) => <Item key={person.name}>
-        <Group p="xs">
-          <Avatar
-            alt={person.name as string}
-            name={person.name}
-            opicUsername={person.username}
-            size={40}
-          />
-          <Stack gap={0}>
-            <Text>
-              {person.name}
-            </Text>
-            <Text c="dark" fs="sm">
-              {person.username}@osu.edu
-            </Text>
-          </Stack>
-        </Group>
-      </Item>}
-    </SelectField>
-  )
-},
-{
-  label: 'Reviewer',
-});
+export const WithCustomItems = RUIComponentStory<SelectFieldProps>(
+  (args) => {
+    const people = [
+      {
+        name: 'Chase McManning',
+        username: 'mcmanning.1'
+      },
+      {
+        name: 'Neil Coplin',
+        username: 'coplin.7'
+      },
+      {
+        name: 'John Ray',
+        username: 'ray.30'
+      }
+    ];
+
+    return (
+      <SelectField {...args} items={people}>
+        {(person) => (
+          <Item key={person.name}>
+            <Group p="xs">
+              <Avatar
+                alt={person.name as string}
+                name={person.name}
+                opicUsername={person.username}
+                size={40}
+              />
+              <Stack gap={0}>
+                <Text>{person.name}</Text>
+                <Text c="dark" fs="sm">
+                  {person.username}@osu.edu
+                </Text>
+              </Stack>
+            </Group>
+          </Item>
+        )}
+      </SelectField>
+    );
+  },
+  {
+    label: 'Reviewer'
+  }
+);

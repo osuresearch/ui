@@ -8,11 +8,10 @@ import { cx, mergeRefs, polymorphicForwardRef } from '~/utils';
 import { Box } from '../Box';
 import { FocusRing } from '../FocusRing';
 
-  // React.HTMLAttributes<HTMLElement> &
-export type UnstyledButtonProps<T extends React.ElementType<any> = 'button'> = 
-  StyleSystemProps &
+// React.HTMLAttributes<HTMLElement> &
+export type UnstyledButtonProps<T extends React.ElementType<any> = 'button'> = StyleSystemProps &
   // React.ButtonHTMLAttributes<T> &
-  React.ButtonHTMLAttributes<HTMLButtonElement> & 
+  React.ButtonHTMLAttributes<HTMLButtonElement> &
   AriaButtonProps<T> & {
     /**
      * Button content
@@ -44,7 +43,7 @@ export const UnstyledButton = polymorphicForwardRef<'button', UnstyledButtonProp
       },
       buttonRef
     );
-    
+
     return (
       <FocusRing>
         <Box

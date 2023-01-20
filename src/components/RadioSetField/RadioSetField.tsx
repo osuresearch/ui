@@ -2,32 +2,28 @@ import { Node } from '@react-types/shared';
 import React, { createContext, forwardRef, useContext, useRef } from 'react';
 import {
   AriaCheckboxGroupItemProps,
-  AriaCheckboxGroupProps,
   AriaRadioGroupProps,
-  useCheckboxGroup,
-  useCheckboxGroupItem,
   useRadio,
   useRadioGroup
 } from 'react-aria';
 import {
-  CheckboxGroupState,
   ListProps,
   ListState,
   RadioGroupState,
-  useCheckboxGroupState,
   useListState,
   useRadioGroupState
 } from 'react-stately';
 
 import { AriaNecessityIndicator, StyleSystemProps } from '~/types';
 
-import { CheckboxIcon } from '../CheckboxIcon';
+import { Button } from '../Button';
 import { Icon } from '../Icon';
 import { NecessityIndicator } from '../NecessityIndicator';
 import { RadioIcon } from '../RadioIcon';
 import { Stack } from '../Stack';
 import { Text } from '../Text';
 import { ToggleField } from '../ToggleField';
+import { VisuallyHidden } from '../VisuallyHidden';
 
 export type RadioItem = {
   name?: string;
@@ -72,6 +68,17 @@ export function GroupItem({ node, ...props }: GroupItemProps) {
     ref
   );
 
+  // TODO: The below is okay, but needs work
+  // for a yes/no/toggle button set variant.
+  // return (
+  //   <Button as="label" variant={isSelected ? 'primary' : 'default'} isDisabled={isDisabled}>
+  //     <VisuallyHidden>
+  //       <input {...inputProps} />
+  //     </VisuallyHidden>
+  //     {node.rendered} {isSelected ? 'Y' :'N'}
+  //   </Button>
+  // )
+
   return (
     <ToggleField
       label={node.rendered}
@@ -94,46 +101,44 @@ export function GroupItem({ node, ...props }: GroupItemProps) {
  *
  * <!-- @ruiAtomic Key -->
  */
-export const RadioSetField = forwardRef<HTMLDivElement, RadioSetFieldProps>(
-  (props, ref) => {
-    const { label, description, necessityIndicator, errorMessage } = props;
+export const RadioSetField = forwardRef<HTMLDivElement, RadioSetFieldProps>((props, ref) => {
+  const { label, description, necessityIndicator, errorMessage } = props;
 
-    const listState = useListState(props);
-    const groupState = useRadioGroupState(props);
+  const listState = useListState(props);
+  const groupState = useRadioGroupState(props);
 
-    // TODO: Figure out how to merge listState and groupState.
-    // I might just make everything a "list" behind the scenes.
+  // TODO: Figure out how to merge listState and groupState.
+  // I might just make everything a "list" behind the scenes.
 
-    const { radioGroupProps, labelProps, descriptionProps, errorMessageProps } = useRadioGroup(
-      props,
-      groupState
-    );
+  const { radioGroupProps, labelProps, descriptionProps, errorMessageProps } = useRadioGroup(
+    props,
+    groupState
+  );
 
-    return (
-      <Stack {...radioGroupProps} ref={ref}>
-        <Text as="label" {...labelProps}>
-          {label}
-          {necessityIndicator && <NecessityIndicator />}
+  return (
+    <Stack {...radioGroupProps} ref={ref}>
+      <Text {...labelProps}>
+        {label}
+        {necessityIndicator && <NecessityIndicator />}
+      </Text>
+
+      <RadioSetContext.Provider value={{ ...listState, ...groupState }}>
+        {[...listState.collection].map((item) => (
+          <GroupItem key={item.key} node={item} value={item.textValue} />
+        ))}
+      </RadioSetContext.Provider>
+
+      {description && (
+        <Text c="dark" fs="sm" {...descriptionProps}>
+          {description}
         </Text>
+      )}
 
-        <RadioSetContext.Provider value={{ ...listState, ...groupState }}>
-          {[...listState.collection].map((item) =>
-            <GroupItem key={item.key} node={item} value={item.textValue} />
-          )}
-        </RadioSetContext.Provider>
-
-        {description && (
-          <Text c="dark" fs="sm" {...descriptionProps}>
-            {description}
-          </Text>
-        )}
-
-        {errorMessage && (
-          <Text c="error" fs="sm" {...errorMessageProps}>
-            <Icon name="xmarkCircle" /> {errorMessage}
-          </Text>
-        )}
-      </Stack>
-    );
-  }
-);
+      {errorMessage && (
+        <Text c="error" fs="sm" {...errorMessageProps}>
+          <Icon name="xmarkCircle" /> {errorMessage}
+        </Text>
+      )}
+    </Stack>
+  );
+});

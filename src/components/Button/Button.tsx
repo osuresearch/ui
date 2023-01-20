@@ -11,7 +11,7 @@ export type ButtonProps = UnstyledButtonProps & {
   variant?: 'default' | 'primary' | 'subtle' | 'accented';
 
   // Slots
-  
+
   leftSlot?: React.ReactNode;
   rightSlot?: React.ReactNode;
 };
