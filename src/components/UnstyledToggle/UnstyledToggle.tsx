@@ -1,9 +1,9 @@
 import React, { useRef } from 'react';
-import { AriaToggleButtonProps, useToggleButton } from 'react-aria';
-import { useToggleState } from 'react-stately';
+import { AriaButtonProps, AriaToggleButtonProps, mergeProps, useToggleButton } from 'react-aria';
+import { ToggleProps, useToggleState } from 'react-stately';
 
 import { StyleSystemProps } from '~/types';
-import { polymorphicForwardRef } from '~/utils';
+import { mergeRefs, polymorphicForwardRef } from '~/utils';
 
 import { Box } from '../Box';
 import { FocusRing } from '../FocusRing';
@@ -13,15 +13,16 @@ import { FocusRing } from '../FocusRing';
 // (pertains specifically to RHF as well)
 
 export type UnstyledToggleProps = StyleSystemProps &
+  React.ButtonHTMLAttributes<HTMLButtonElement> &
   AriaToggleButtonProps & {
     /**
      * Button content
      */
-    children: React.ReactNode;
+    children?: React.ReactNode;
   };
 
 /**
- * Unstyled toggle button
+ * Unstyled polymorphic toggle button
  *
  * ## 🛑 Disclaimer
  *
@@ -33,22 +34,24 @@ export type UnstyledToggleProps = StyleSystemProps &
  * Use the `onPress` handler in place of `onClick` to support a wider range
  * of input devices. For detailed information see [Adobe's blog post](https://react-spectrum.adobe.com/blog/building-a-button-part-1.html).
  *
- * A `data-pressed` attribute is available while the button is in a pressed state.
+ * A `data-active` attribute is available while the button is in a pressed state.
  * Use this instead of the CSS `:active` psuedo class to properly handle when
  * the user drags their pointer off the button, along with keyboard support
  * and better touchscreen support.
  *
  * ## Accessibility
- * -
+ * - Wrapped by the `FocusRing` component for consistent focus
  * - Toggles `aria-pressed` on the root element
+ *
+ * <!-- @ruiPolymorphic -->
  */
 export const UnstyledToggle = polymorphicForwardRef<'button', UnstyledToggleProps>(
   ({ as, ...props }, ref) => {
     const { children } = props;
+    const buttonRef = useRef<HTMLButtonElement>(null);
 
     const state = useToggleState(props);
-    const buttonRef = useRef<HTMLButtonElement>(null);
-    const { buttonProps } = useToggleButton(
+    const { buttonProps, isPressed } = useToggleButton(
       {
         ...props,
         elementType: as
@@ -59,7 +62,13 @@ export const UnstyledToggle = polymorphicForwardRef<'button', UnstyledToggleProp
 
     return (
       <FocusRing>
-        <Box as={as || 'button'} ref={ref} {...props} {...buttonProps}>
+        <Box
+          as={as || 'button'}
+          ref={mergeRefs(ref, buttonRef)}
+          {...buttonProps}
+          {...mergeProps(props as UnstyledToggleProps, buttonProps)}
+          data-active={isPressed}
+        >
           {children}
         </Box>
       </FocusRing>
