@@ -1,3 +1,38 @@
+# [5.0.0-alpha.10](https://github.com/osuresearch/ui/compare/v5.0.0-alpha.9...v5.0.0-alpha.10) (2023-01-20)
+
+
+### Bug Fixes
+
+* **Button:** bad Omit prop type ([dd6e706](https://github.com/osuresearch/ui/commit/dd6e706646373554e6c2e5dc8173ac98b914d68d))
+* **Callout:** using the wrong type for `placement` prop ([0d51958](https://github.com/osuresearch/ui/commit/0d51958b1ba16b47dedf060923b8280cebc8feac))
+* **Chip:** mismatched padding ([8b75cdb](https://github.com/osuresearch/ui/commit/8b75cdbf72b00cfe5cd0ae01b775ef39cd9d5215))
+* improve CSS cascading issues with theme tokens, now RUI Providers may be nested safely ([1f6b141](https://github.com/osuresearch/ui/commit/1f6b141bd61b4a71ec82538c8a4402b0096ef17b))
+* **storybook:** automatic detection of component doc pages ([aab8ab8](https://github.com/osuresearch/ui/commit/aab8ab8f6d81ea70c1f1909566887dd5e7a3a452))
+* **storybook:** build does not reference correct SVG path ([844518e](https://github.com/osuresearch/ui/commit/844518ed1314f6ac2f8cb3a2160174bc019be040))
+* **storybook:** include props from React Aria and React Stately in docs ([1415402](https://github.com/osuresearch/ui/commit/14154023ba5fef1e46dfe4ef5146fef2e0eb9120))
+* **storybook:** Safari does not render `backdrop-filter` (closes [#4](https://github.com/osuresearch/ui/issues/4)) ([af415e1](https://github.com/osuresearch/ui/commit/af415e1eb990082d1c59f18b0df61db336942623))
+* **UnstyledButton:** force prop coercion to work around rollup issue ([3c1a5aa](https://github.com/osuresearch/ui/commit/3c1a5aa1a6ea4c4ff8a6937e5db396d5c7b4651c))
+* **UnstyledButton:** merge forwarded ref with button ref ([065d8b5](https://github.com/osuresearch/ui/commit/065d8b5bba94f5537ad1dd40249c2cdc3dd879ff))
+
+
+### Features
+
+* add LookupField, ComboBoxField, and NumberField components ([4b8607b](https://github.com/osuresearch/ui/commit/4b8607bafea53c63b69b4220338c0bf151ee8cb0))
+* add Menu component ([7c8b4e7](https://github.com/osuresearch/ui/commit/7c8b4e7971c2406e97e0a95c5215cbc881422638))
+* add Ohio State Navbar ([6caad37](https://github.com/osuresearch/ui/commit/6caad370203a3c80b103b730eb6661d25b75d601))
+* add RadioSetField ([b716d95](https://github.com/osuresearch/ui/commit/b716d95b6e6c0029717f01dbc8d843d0f65976e1))
+* add SelectField for single option selection ([7a345f7](https://github.com/osuresearch/ui/commit/7a345f74ba9a294ec1d4d93e2d15ad20077b13e4))
+* add YesNoField component ([a12fcc2](https://github.com/osuresearch/ui/commit/a12fcc2a682b0f2c0fc919c6a6f1d84f10671f9d))
+* **OhioStateNavbar:** add light and dark variants ([3d20cca](https://github.com/osuresearch/ui/commit/3d20ccaa6306b5b8e520603012a0310390597df7))
+* **Popover:** add option to disable the arrow ([4fe5717](https://github.com/osuresearch/ui/commit/4fe5717dbd0fea23b81fe927a3f3f192c23b5a36))
+* **Popover:** add support for manually defining placement ([bf3ff03](https://github.com/osuresearch/ui/commit/bf3ff03c7976f62c23f2cdb0fb3b3acb0a5efaa0))
+* **RUI Provider:** add theme control ([2bb8a8d](https://github.com/osuresearch/ui/commit/2bb8a8dfa5090538c2a3cf8c055fc399a420e4a5))
+
+
+### Performance Improvements
+
+* **storybook:** resolve lag issue when a component has too many event handler props, specifically inputs ([bec0e69](https://github.com/osuresearch/ui/commit/bec0e69c5829db3e0e1a0e5eb35a49659cd86554))
+
 # [5.0.0-alpha.9](https://github.com/osuresearch/ui/compare/v5.0.0-alpha.8...v5.0.0-alpha.9) (2023-01-10)
 
 
