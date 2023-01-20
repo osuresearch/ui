@@ -223,5 +223,6 @@ export function styleSystemArgTypes() {
     fs: font(fontSize),
 
     gridArea: layout,
+    gridSpan: layout,
   }
 }
