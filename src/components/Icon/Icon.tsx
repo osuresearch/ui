@@ -47,6 +47,7 @@ export const Icon = polymorphicForwardRef<'i', IconProps>(
     <Box
       as={as || 'i'}
       ref={ref}
+      role="img"
       className={cx(
         {
           'rui-block rui-align-top': block,
