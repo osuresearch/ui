@@ -1,5 +1,6 @@
 import { Story } from '@storybook/react';
 import React from 'react';
+import { Cell, Column, Row, TableBody, TableHeader } from 'react-stately';
 
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
@@ -8,71 +9,96 @@ import { Table, TableProps } from './Table';
 export default RUIComponentMeta<TableProps>('Components', Table).withStyleSystemProps();
 
 const Template: Story<TableProps> = (args: TableProps) => (
-  <Table {...args}>
-    <caption>Table Caption</caption>
-    <thead>
-      <tr>
-        <th>Column 1</th>
-        <th>Column 2</th>
-        <th>Column 3</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Cell data A1</td>
-        <td>Cell data B1</td>
-        <td>Cell data C1</td>
-      </tr>
-      <tr>
-        <td>Cell data B1</td>
-        <td>Cell data B2</td>
-        <td>Cell data B3</td>
-      </tr>
-      <tr>
-        <td>Cell data C1</td>
-        <td>Cell data C2</td>
-        <td>Cell data C3</td>
-      </tr>
-    </tbody>
+  <Table {...args} caption="Table caption">
+    <TableHeader>
+      <Column>Column 1</Column>
+      <Column>Column 2</Column>
+      <Column>Column 3</Column>
+    </TableHeader>
+    <TableBody>
+      <Row>
+        <Cell>Cell data A1</Cell>
+        <Cell>Cell data A2</Cell>
+        <Cell>Cell data A3</Cell>
+      </Row>
+      <Row>
+        <Cell>Cell data B1</Cell>
+        <Cell>Cell data B2</Cell>
+        <Cell>Cell data B3</Cell>
+      </Row>
+      <Row>
+        <Cell>Cell data C1</Cell>
+        <Cell>Cell data C2</Cell>
+        <Cell>Cell data C3</Cell>
+      </Row>
+    </TableBody>
   </Table>
 );
 
 export const Overview = RUIComponentStory(Template);
 
-export const WithRowHeaders = RUIComponentStory<TableProps>((args) => (
-  <Table {...args}>
-    <caption>Table with column and row headers</caption>
-    <thead>
-      <tr>
-        <th scope="col">Column 1</th>
-        <th scope="col">Column 2</th>
-        <th scope="col">Column 3</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">Row A</th>
-        <td>Cell data B1</td>
-        <td>Cell data C1</td>
-      </tr>
-      <tr>
-        <th scope="row">Row B</th>
-        <td>Cell data B2</td>
-        <td>Cell data B3</td>
-      </tr>
-      <tr>
-        <th scope="row">Row C</th>
-        <td>Cell data C2</td>
-        <td>Cell data C3</td>
-      </tr>
-    </tbody>
-  </Table>
-));
-
-export const Striped = RUIComponentStory<TableProps>(Template, {
+export const Striped = RUIComponentStory(Overview, {
   striped: true
 });
 
-export const Compact = RUIComponentStory<TableProps>(Template, {
+export const Compact = RUIComponentStory(Overview, {
   variant: 'compact'
 });
+
+export const SingleSelection = RUIComponentStory<TableProps>(
+  (args) => (
+    <Table {...args} caption="Table caption">
+      <TableHeader>
+        <Column>Select all</Column>
+
+        <Column>Column 1</Column>
+        <Column>Column 2</Column>
+        <Column>Column 3</Column>
+      </TableHeader>
+      <TableBody>
+        <Row>
+          <Cell>select row A</Cell>
+
+          <Cell>Cell data A1</Cell>
+          <Cell>Cell data A2</Cell>
+          <Cell>Cell data A3</Cell>
+        </Row>
+        <Row>
+          <Cell>select row B</Cell>
+
+          <Cell>Cell data B1</Cell>
+          <Cell>Cell data B2</Cell>
+          <Cell>Cell data B3</Cell>
+        </Row>
+        <Row>
+          <Cell>select row C</Cell>
+
+          <Cell>Cell data C1</Cell>
+          <Cell>Cell data C2</Cell>
+          <Cell>Cell data C3</Cell>
+        </Row>
+      </TableBody>
+    </Table>
+  ),
+  {
+    selectionMode: 'single',
+    selectionBehavior: 'replace'
+  }
+).withDescription(`
+  Add the \`selectionMode: single\` prop to allow the user to select a table row.
+
+  The first \`Cell\` of each row will contain a label for the
+  selection checkbox generated before each row.
+`);
+
+export const MultipleSelection = RUIComponentStory(SingleSelection, {
+  selectionMode: 'multiple'
+}).withDescription(`
+  Add the \`selectionMode: multiple\` to allow the user to select multiple table rows.
+
+  The first \`Cell\` in the table header will contain a label
+  for the selection checkbox that allows the user to select all or none of the rows.
+
+  The first \`Cell\` of each row will contain a label for the
+  selection checkbox generated before each row.
+`);
