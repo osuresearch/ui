@@ -3,14 +3,16 @@ import React, { useRef } from 'react';
 import { AriaButtonProps, useButton } from 'react-aria';
 
 import { StyleSystemProps } from '~/types';
-import { cx, polymorphicForwardRef } from '~/utils';
+import { cx, mergeRefs, polymorphicForwardRef } from '~/utils';
 
 import { Box } from '../Box';
 import { FocusRing } from '../FocusRing';
 
-export type UnstyledButtonProps = StyleSystemProps &
-  React.HTMLAttributes<HTMLElement> &
-  AriaButtonProps & {
+// React.HTMLAttributes<HTMLElement> &
+export type UnstyledButtonProps<T extends React.ElementType<any> = 'button'> = StyleSystemProps &
+  // React.ButtonHTMLAttributes<T> &
+  React.ButtonHTMLAttributes<HTMLButtonElement> &
+  AriaButtonProps<T> & {
     /**
      * Button content
      */
@@ -46,8 +48,8 @@ export const UnstyledButton = polymorphicForwardRef<'button', UnstyledButtonProp
       <FocusRing>
         <Box
           as={as || 'button'}
-          ref={ref}
-          {...mergeProps(props as any, buttonProps)}
+          ref={mergeRefs(ref, buttonRef)}
+          {...mergeProps(props, buttonProps)}
           data-pressed={isPressed}
         >
           {children}

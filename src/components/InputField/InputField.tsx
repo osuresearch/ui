@@ -12,37 +12,17 @@ import { NecessityIndicator } from '../NecessityIndicator';
 import { Stack } from '../Stack';
 import { Text } from '../Text';
 
-export type InputSlotProps<T> = React.InputHTMLAttributes<T> &
-  DOMAttributes<FocusableElement> & {
-    ref: React.ForwardedRef<T>;
-  };
+export type InputSlotProps<T> = DOMAttributes<FocusableElement> & {
+  ref: React.ForwardedRef<T>;
+};
 
 export type InputFieldSlots<T> = {
+  /**
+   * @deprecated use children
+   */
   inputSlot?: SlotType<InputSlotProps<T>>;
 
   diffSlot?: SlotType<{ value?: string; previousValue?: string }>;
-
-  /** Slot content to absolutely position to the left of the input */
-  leftSlot?: React.ReactElement;
-
-  /**
-   * Additional padding in pixels to apply to the left side of the input.
-   *
-   * This should match up with content size + additional padding to make
-   * room for the `leftSlot` content.
-   */
-  leftWidth?: number;
-
-  /** Slot content to absolutely position to the right of the input */
-  rightSlot?: React.ReactElement;
-
-  /**
-   * Additional padding in pixels to apply to the right side of the input.
-   *
-   * This should match up with content size + additional padding to make
-   * room for the `rightSlot` content.
-   */
-  rightWidth?: number;
 };
 
 export type InputFieldDiffProps = {
@@ -50,16 +30,18 @@ export type InputFieldDiffProps = {
   previousValue?: string;
 };
 
-export type InputFieldProps<T = HTMLInputElement> = StyleSystemProps &
-  AriaTextFieldProps &
+export type InputFieldProps<T = HTMLInputElement, P = AriaTextFieldProps> = StyleSystemProps &
+  P &
   AriaNecessityIndicator &
   InputFieldDiffProps &
   InputFieldSlots<T> & {
     // NOTE: This is essentially: Pick<TextFieldAria<'input'>, 'inputProps' | 'labelProps' | 'descriptionProps' | 'errorMessageProps'>
     // But accepting either input type.
 
-    /** Props for the input element. */
-    inputProps: React.HTMLAttributes<T>;
+    /**
+     * Props to spread into the wrapping stack (excluding style syste props)
+     */
+    groupProps?: DOMAttributes<FocusableElement>;
 
     /** Props for the text field's visible label element */
     labelProps: DOMAttributes<FocusableElement> | React.LabelHTMLAttributes<HTMLLabelElement>;
@@ -69,45 +51,29 @@ export type InputFieldProps<T = HTMLInputElement> = StyleSystemProps &
 
     /** Props for the text field's error message element */
     errorMessageProps: DOMAttributes;
+
+    children: React.ReactElement;
   };
 
 function _InputField<T>(props: InputFieldProps<T>, ref: ForwardedRef<T>) {
-  const { className, label, description, errorMessage } = props;
-  const { labelProps, inputProps, descriptionProps, errorMessageProps } = props;
+  const { className, label, description, errorMessage, children } = props;
+  const { labelProps, groupProps, descriptionProps, errorMessageProps } = props;
 
   const [styleSystemProps] = useStyleSystemProps(props);
   const { focusProps } = useFocusRing();
 
-  const InputSlot = props.inputSlot || makeMissingSlot('input');
+  const inputSlot = React.Children.only(children);
+
   const DiffSlot = props.diffSlot || makeMissingSlot('diff');
 
   return (
-    <Stack className={className} {...styleSystemProps}>
+    <Stack className={className} {...groupProps} {...styleSystemProps}>
       <Text as="label" {...labelProps}>
         {label}
         {props.necessityIndicator && <NecessityIndicator />}
       </Text>
 
-      <div className="rui-relative rui-w-full">
-        {props.leftSlot && (
-          <div className="rui-absolute rui-inset-[2px] rui-right-auto">{props.leftSlot}</div>
-        )}
-
-        <InputSlot
-          ref={ref}
-          {...mergeProps(inputProps, focusProps, {
-            style: {
-              paddingLeft: props.leftWidth,
-              paddingRight: props.rightWidth
-            }
-          })}
-        />
-
-        {props.rightSlot && (
-          <div className="rui-absolute rui-inset-[2px] rui-left-auto">{props.rightSlot}</div>
-        )}
-      </div>
-
+      {React.cloneElement(inputSlot, focusProps)}
       {props.showDiff && <DiffSlot value={props.value} previousValue={props.previousValue} />}
 
       {description && (
@@ -128,6 +94,12 @@ function _InputField<T>(props: InputFieldProps<T>, ref: ForwardedRef<T>) {
 /**
  * Base for a form field component
  *
+ * <img class="rui-diagram" src="./InputField.svg" alt="Component diagram" />
+ *
+ * TODO: Rename to `FormField`. More accurate now that this supports
+ * more than just inputs. It handles the wrapping of labeling, errors,
+ * focus, descriptions, etc.
+ *
  * ## 🛑 Disclaimer
  *
  * In most cases, you should not use this component in your application.
@@ -142,7 +114,7 @@ function _InputField<T>(props: InputFieldProps<T>, ref: ForwardedRef<T>) {
  *
  * ## Slots
  *
- * ### Input Slot
+ * ### Children
  * - Slot for the underlying input element
  * - Receives all necessary attributes for data binding and a11y
  * - The generic type of `InputField` determines which ref type is allowed
@@ -152,17 +124,6 @@ function _InputField<T>(props: InputFieldProps<T>, ref: ForwardedRef<T>) {
  * ### Diff Slot
  * - Slot for rendering the diff between a previous and current value
  * - Receives previous and current value as `string`
- *
- * ### Left Slot
- * - Absolutely positioned content over the left side of the input slot.
- * - Set `leftWidth` to the content size + padding to prevent overlap
- * between input content and the slot content.
- *
- * ### Right Slot
- * - Absolutely positioned content over the right side of the input slot.
- * - Set `rightWidth` to the content size + padding to prevent overlap
- * between input content and the slot content.
- *
  */
 export const InputField = forwardRef(_InputField) as <T>(
   props: InputFieldProps<T> & { ref?: ForwardedRef<T> }

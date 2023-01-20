@@ -14,7 +14,7 @@ export const Overview = RUIComponentStory<TextFieldProps>((args) => <TextField {
   description: 'Enter an email for us to spam you with daily offers.'
 });
 
-export const DefaultValue = RUIComponentStory<TextFieldProps>(Overview, {
+export const UncontrolledValue = RUIComponentStory<TextFieldProps>(Overview, {
   label: 'Email',
   defaultValue: 'chase@example.com'
 });

@@ -12,7 +12,7 @@ export const Overview = RUIComponentStory<SwitchFieldProps>((args) => <Component
   description: 'Additional help text'
 });
 
-export const DefaultValue = RUIComponentStory<SwitchFieldProps>(Overview, {
+export const UncontrolledValue = RUIComponentStory<SwitchFieldProps>(Overview, {
   label: 'Yes I want to receive hourly promotional emails',
   defaultSelected: true
 });
@@ -33,13 +33,13 @@ export const ControlledValue = RUIComponentStory<SwitchFieldProps>(
   }
 );
 
-export const ReadOnly = RUIComponentStory<SwitchFieldProps>(Overview, {
+export const ReadOnly = RUIComponentStory(Overview, {
   label: 'Yes I want to receive hourly promotional emails',
   defaultSelected: true,
   isReadOnly: true
 });
 
-export const Disabled = RUIComponentStory<SwitchFieldProps>(Overview, {
+export const Disabled = RUIComponentStory(Overview, {
   label: 'Yes I want to receive hourly promotional emails',
   defaultSelected: true,
   isDisabled: true
@@ -61,7 +61,7 @@ export const WithRHF7 = RUIComponentStory<SwitchFieldProps>(
   }
 );
 
-export const WithDiff = RUIComponentStory<SwitchFieldProps>(Overview, {
+export const WithDiff = RUIComponentStory(Overview, {
   label: 'Yes I want to receive hourly promotional emails',
   showDiff: true,
   wasSelected: true

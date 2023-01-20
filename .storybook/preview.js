@@ -13,7 +13,10 @@ import '../src/theme/index.css';
 import { RUIProvider } from "../src/components/RUIProvider";
 
 export const parameters = {
-  actions: { argTypesRegex: "^on[A-Z].*" },
+  // We only monitor a subset of actions. Otherwise the performance
+  // drops SIGNIFICANTLY when we pass through @react-types events
+  // actions: { argTypesRegex: "^on[A-Z].*" },
+  actions: { argTypesRegex: "^on(Focus|Blur|Press|Click)" },
   controls: {
     matchers: {
       // color: /(background|color)$/i,
@@ -46,19 +49,28 @@ export const parameters = {
   options: {
     storySort: {
       order: [
+        // Guidance
         'Getting Started',
         ['Overview', 'Installation', 'Usage', 'Contributing'],
+
         'Design Tokens',
         ['Typography', 'Iconography', 'Color', 'Spacing'],
-        'Layout',
-        'Unstyled',
+
+        // Common things
+        'Layout', ['Overview'],
         'Components',
+        'Hooks',
         'Utilities',
-        ['Overview'],
-        'BUX Stuff',
-        ['Overview'],
-        'Forms',
-        ['Overview'],
+
+        // Uncommon / specialized things
+        'Dialogs',
+        'Forms', ['Overview'],
+        'BUX Stuff', ['Overview'],
+        'Ohio State',
+        'Unstyled', ['Overview'],
+        'Internal',
+
+        // Misc
         'Contributing',
       ]
     }
@@ -67,10 +79,8 @@ export const parameters = {
 
 export const decorators = [
   (Story) => (
-    <div data-theme={useDarkMode() ? 'dark' : 'light'} data-decorator="true">
-      <RUIProvider>
-        <Story />
-      </RUIProvider>
-    </div>
+    <RUIProvider theme={useDarkMode() ? 'dark' : 'light'}>
+      <Story />
+    </RUIProvider>
   ),
 ];

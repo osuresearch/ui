@@ -15,8 +15,14 @@ addons.setConfig({
     // showRoots: false,
     collapsedRoots: [
       'components',
+      'hooks',
       'utilities',
+      'dialogs',
+      'forms',
       'bux-stuff',
+      'ohio-state',
+      'unstyled',
+      'internal',
       'contributing'
     ],
     renderLabel: (item) => {

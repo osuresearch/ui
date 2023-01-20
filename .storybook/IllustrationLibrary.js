@@ -23,7 +23,7 @@ export function IllustrationLibrary({ group }) {
     ],
     osu: [
       'office-of-research-wordmark',
-      'osu-logo-blocko',
+      'osu-blocko',
     ],
     system: [
       'error',

@@ -1,4 +1,4 @@
-import { PlacementAxis } from '@react-types/overlays';
+import { Placement } from '@react-types/overlays';
 import React, { useRef } from 'react';
 import { useOverlayTrigger } from 'react-aria';
 import { useOverlayTriggerState } from 'react-stately';
@@ -28,7 +28,7 @@ export type CalloutProps = CalloutSlots & {
    * Placement of the callout with respect to the trigger.
    * If omitted, the popover will make a best-effort placement.
    */
-  placement?: PlacementAxis;
+  placement?: Placement;
 
   /**
    * Background color for the popover and arrow.
@@ -72,6 +72,7 @@ export const Callout = ({
           overlayProps={overlayProps}
           triggerRef={triggerRef}
           state={state}
+          withArrow
           {...props}
         >
           {contentSlot}

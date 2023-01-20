@@ -1,0 +1,28 @@
+import { useRef } from 'react';
+
+<Meta title="Hooks / useReducedMotion" />
+
+# Some kind of docs here
+
+and whatever
+
+<Canvas>
+  {(() => {
+     const ref = useRef()
+     return (
+      <Text ref={ref}>
+         hello world!
+      </Text>
+     )
+     {/* const { fullscreen, isFullscreen, exitFullscreen } = useFullscreen(ref)
+     const style = { color: isFullscreen ? 'white' : 'inherit' }
+     return (
+        <div ref={ref} style={style}>
+           <h1>Test FullScreen</h1>
+          {!isFullscreen && <button onClick={fullscreen}>go fullScreen</button>}
+          {isFullscreen && <button onClick={exitFullscreen}>exit fullScreen</button>}
+        </div>
+     ); */}
+  })()}
+</Canvas>
+

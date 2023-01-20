@@ -6,17 +6,13 @@ import { polymorphicForwardRef } from '~/utils';
 import { Group } from '../Group';
 import { UnstyledButton, UnstyledButtonProps } from '../UnstyledButton';
 
-export type ButtonProps = Omit<UnstyledButtonProps, 'leftSlot' | 'rightSlot'> & {
+export type ButtonProps = UnstyledButtonProps & {
   /** Alternate rendering styles */
   variant?: 'default' | 'primary' | 'subtle' | 'accented';
 
-  /**
-   * Button content
-   */
-  children: React.ReactNode;
+  // Slots
 
   leftSlot?: React.ReactNode;
-
   rightSlot?: React.ReactNode;
 };
 

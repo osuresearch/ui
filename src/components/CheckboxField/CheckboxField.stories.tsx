@@ -12,7 +12,7 @@ export const Overview = RUIComponentStory<CheckboxFieldProps>((args) => <Compone
   description: 'Additional help text'
 });
 
-export const DefaultValue = RUIComponentStory<CheckboxFieldProps>(Overview, {
+export const UncontrolledValue = RUIComponentStory<CheckboxFieldProps>(Overview, {
   label: 'Yes I want to receive hourly promotional emails',
   defaultSelected: true
 });

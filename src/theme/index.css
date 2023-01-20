@@ -95,24 +95,6 @@
   --rui-tertiary-shade: var(--rui-teal);
   --rui-tertiary-tint: var(--rui-teal);
 
-  /* Neutrals */
-  --rui-light-tint: var(--rui-white);
-  --rui-light: var(--rui-gray-tint-90);
-  --rui-light-shade: var(--rui-gray-tint-80);
-  --rui-light-contrast: var(--rui-black);
-
-  --rui-dimmed-tint: var(--rui-gray-tint-60);
-  --rui-dimmed: var(--rui-gray-tint-40);
-  --rui-dimmed-shade: var(--rui-gray-tint-20);
-  --rui-dimmed-contrast: var(--rui-black);
-
-  /* Unused: gray-shade-80 */
-
-  --rui-dark-tint: var(--rui-gray-shade-20);
-  --rui-dark: var(--rui-gray-shade-40);
-  --rui-dark-shade: var(--rui-gray-shade-60);
-  --rui-dark-contrast: var(--rui-white);
-
   --rui-info-tint: #c6e9f8;
   --rui-info: #41b6e6;
   --rui-info-shade: #41b6e6;
@@ -132,14 +114,6 @@
   --rui-error: #ba0c2f;
   --rui-error-shade: var(--rui-white);
   --rui-error-contrast: var(--rui-white);
-
-  --rui-link: var(--rui-scarlet);
-  --rui-link-tint: var(--rui-white);
-
-  --rui-visited: #660099;
-  --rui-visited-tint: #e5c9f3;
-
-  --rui-focus: #41b6e6;
 
   /*
     Typography tokens
@@ -210,8 +184,31 @@
           rui-ring-focus;
   }
 
+  /* Theme-responsive tokens */
+
   [data-theme="light"] {
-    /* :root defines defaults for the light theme */
+    --rui-light-tint: var(--rui-white);
+    --rui-light: var(--rui-gray-tint-90);
+    --rui-light-shade: var(--rui-gray-tint-80);
+    --rui-light-contrast: var(--rui-black);
+
+    --rui-dimmed-tint: var(--rui-gray-tint-60);
+    --rui-dimmed: var(--rui-gray-tint-40);
+    --rui-dimmed-shade: var(--rui-gray-tint-20);
+    --rui-dimmed-contrast: var(--rui-black);
+
+    --rui-dark-tint: var(--rui-gray-shade-20);
+    --rui-dark: var(--rui-gray-shade-40);
+    --rui-dark-shade: var(--rui-gray-shade-60);
+    --rui-dark-contrast: var(--rui-white);
+
+    --rui-link: var(--rui-scarlet);
+    --rui-link-tint: var(--rui-white);
+
+    --rui-visited: #660099;
+    --rui-visited-tint: #e5c9f3;
+
+    --rui-focus: #41b6e6;
   }
 
   [data-theme="dark"] {

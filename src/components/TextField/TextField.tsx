@@ -21,9 +21,11 @@ export type TextFieldProps = StyleSystemProps &
   AriaNecessityIndicator &
   TextFieldSlots;
 
-type InputSlotProps = React.InputHTMLAttributes<HTMLInputElement> & DOMAttributes<FocusableElement>;
+type InputSlotProps = StyleSystemProps &
+  React.InputHTMLAttributes<HTMLInputElement> &
+  DOMAttributes<FocusableElement>;
 
-const TextInputSlot = forwardRef<HTMLInputElement, InputSlotProps>((props, ref) => (
+export const TextInputSlot = forwardRef<HTMLInputElement, InputSlotProps>((props, ref) => (
   <FocusRing isTextInput={true}>
     <Box
       as="input"
@@ -58,13 +60,12 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
 
   return (
     <InputField
-      ref={mergeRefs(inputRef, ref)}
-      inputSlot={TextInputSlot}
       labelProps={labelProps}
-      inputProps={inputProps}
       descriptionProps={descriptionProps}
       errorMessageProps={errorMessageProps}
       {...props}
-    />
+    >
+      <TextInputSlot ref={mergeRefs(inputRef, ref)} {...inputProps} />
+    </InputField>
   );
 });
