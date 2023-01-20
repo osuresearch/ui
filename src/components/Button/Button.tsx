@@ -27,7 +27,7 @@ export type ButtonProps = UnstyledButtonProps & {
  * Use the `onPress` handler in place of `onClick` to support a wider range
  * of input devices. For detailed information see [Adobe's blog post](https://react-spectrum.adobe.com/blog/building-a-button-part-1.html).
  *
- * A `data-pressed` attribute is available while the button is in a pressed state.
+ * A `data-active` attribute is available while the button is in a pressed state.
  * Use this instead of the CSS `:active` psuedo class to properly handle when
  * the user drags their pointer off the button, along with keyboard support
  * and better touchscreen support.
@@ -64,21 +64,21 @@ export const Button = polymorphicForwardRef<'button', ButtonProps>(
           'rui-bg-light-shade dark:rui-bg-light': variant === 'default' && !isDisabled,
           'hover:rui-bg-dimmed-tint hover:dark:rui-bg-light-shade':
             variant === 'default' && !isDisabled,
-          'data-[pressed=true]:rui-bg-dimmed data-[pressed=true]:dark:rui-bg-dimmed-tint':
+          'data-[active=true]:rui-bg-dimmed data-[active=true]:dark:rui-bg-dimmed-tint':
             variant === 'default' && !isDisabled
         },
 
         // Subtle variant
         {
           'hover:rui-bg-light hover:rui-text-dark': variant === 'subtle',
-          'data-[pressed=true]:rui-bg-light-shade': variant === 'subtle'
+          'data-[active=true]:rui-bg-light-shade': variant === 'subtle'
         },
 
         // Primary variant
         {
           'rui-bg-primary rui-text-primary-contrast': variant === 'primary',
           'hover:rui-bg-primary-shade': variant === 'primary',
-          'data-[pressed=true]:rui-bg-black': variant === 'primary'
+          'data-[active=true]:rui-bg-black': variant === 'primary'
         },
 
         // Accented variant, color inherits, :before drives background color
@@ -88,7 +88,7 @@ export const Button = polymorphicForwardRef<'button', ButtonProps>(
 
           'before:rui-bg-gray-tint-80': variant === 'accented',
           'hover:before:rui-bg-gray-tint-60': variant === 'accented' && !isDisabled,
-          'data-[pressed=true]:before:rui-bg-gray-tint-40': variant === 'accented' && !isDisabled
+          'data-[active=true]:before:rui-bg-gray-tint-40': variant === 'accented' && !isDisabled
 
           // 'rui-mix-blend-multiply': variant === 'subtle',
 
@@ -96,7 +96,7 @@ export const Button = polymorphicForwardRef<'button', ButtonProps>(
           // 'rui-mix-blend-hard-light': variant === 'accented',
           // 'rui-bg-gray-tint-80': variant === 'accented',
           // 'hover:rui-bg-gray-tint-60': variant === 'accented' && !isDisabled,
-          // 'data-[pressed=true]:rui-bg-gray-tint-40': variant === 'accented',
+          // 'data-[active=true]:rui-bg-gray-tint-40': variant === 'accented',
         },
 
         // Disabled

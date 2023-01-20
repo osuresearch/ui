@@ -61,7 +61,7 @@ export const IconButton = polymorphicForwardRef<'button', IconButtonProps>(
           'rui-inline-block',
           // Default variant
           {
-            'data-[pressed=true]:rui-bg-light-shade': variant === 'default'
+            'data-[active=true]:rui-bg-light-shade': variant === 'default'
           },
           // Hover variant
           {
