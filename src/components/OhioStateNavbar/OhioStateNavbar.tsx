@@ -60,8 +60,9 @@ function LogoLink({ variant }: { variant: OhioStateNavbarVariant }) {
 }
 
 /**
- * Brannnd
+ * Identity banner for Ohio State applications
  *
+ * <img class="rui-diagram" src="./OhioStateNavbar.svg" alt="Component diagram" />
  *
  * ## Differences from BUX
  * - Not using the new fat banner, doesn't work for web applications. It may be

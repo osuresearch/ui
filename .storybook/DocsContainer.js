@@ -131,12 +131,6 @@ export const DocsContainer = ({ children, context }) => {
             {/* TODO: Somehow split description up */}
             <Description />
 
-            {/* SVG diagram, if one exists */}
-            <Image
-              src={`./${name}.svg`}
-              alt={`Component diagram for ${name}`}
-            />
-
             <Primary />
 
             <TabPanel variant="simple" align="stretch">

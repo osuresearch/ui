@@ -72,6 +72,7 @@ export const Callout = ({
           overlayProps={overlayProps}
           triggerRef={triggerRef}
           state={state}
+          withArrow
           {...props}
         >
           {contentSlot}
