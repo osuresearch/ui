@@ -50,7 +50,7 @@ export const UnstyledButton = polymorphicForwardRef<'button', UnstyledButtonProp
           as={as || 'button'}
           ref={mergeRefs(ref, buttonRef)}
           {...mergeProps(props as any, buttonProps)}
-          data-pressed={isPressed}
+          data-active={isPressed}
         >
           {children}
         </Box>

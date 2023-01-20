@@ -17,11 +17,6 @@ export const Disabled = RUIComponentStory(Overview, {
   isDisabled: true
 });
 
-export const Controlled = RUIComponentStory(Overview, {
-  isSelected: true
-  // onChange
-});
-
 export const OnPress = RUIComponentStory(Overview, {
   onPress: (e) => alert('Clicked!'),
   onChange: (e) => alert(e)

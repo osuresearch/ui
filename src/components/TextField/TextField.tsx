@@ -82,14 +82,13 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
       errorMessageProps={errorMessageProps}
       {...props}
     >
-
       <div className="rui-relative rui-w-full">
         {props.leftSlot && (
           <div className="rui-absolute rui-inset-[2px] rui-right-auto">{props.leftSlot}</div>
         )}
 
-        <TextInputSlot 
-          ref={mergeRefs(inputRef, ref)} 
+        <TextInputSlot
+          ref={mergeRefs(inputRef, ref)}
           {...mergeProps(inputProps, {
             style: {
               paddingLeft: props.leftWidth,

@@ -60,25 +60,3 @@ export const Error = RUIComponentStory<CheckboxFieldProps>(Overview, {
   validationState: 'invalid',
   errorMessage: 'You must agree to receive hourly emails.'
 });
-
-export const WithRHF7 = RUIComponentStory<CheckboxFieldProps>(
-  (args) => {
-    const [value, setValue] = useState(false);
-
-    return (
-      <>
-        <Component isSelected={value} onChange={setValue} {...args} />
-        <Text>{`You are ${value ? 'subscribed' : 'unsubscribed'}`}</Text>
-      </>
-    );
-  },
-  {
-    label: 'Subscribe'
-  }
-);
-
-export const WithDiff = RUIComponentStory<CheckboxFieldProps>(Overview, {
-  label: 'Yes I want to receive hourly promotional emails',
-  showDiff: true,
-  wasSelected: true
-});

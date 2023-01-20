@@ -59,23 +59,6 @@ export const Error = RUIComponentStory<TextFieldProps>(Overview, {
   errorMessage: 'Please enter a valid email address.'
 });
 
-export const WithRHF7 = RUIComponentStory<TextFieldProps>(
-  (args) => {
-    const [value, setValue] = useState('Foo bar');
-
-    return (
-      <>
-        <TextField value={value} onChange={setValue} {...args} />
-        <Text>{`You entered: ${value}`}</Text>
-      </>
-    );
-  },
-  {
-    name: 'rhf7-input',
-    label: 'Subscribe'
-  }
-);
-
 export const WithIcon = RUIComponentStory(Overview, {
   leftSlot: <Icon c="light-contrast" name="github" size={24} p="xs" />,
   leftWidth: 42,

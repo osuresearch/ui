@@ -1,5 +1,8 @@
 import classNames from 'classnames';
 
+// Re-export mergeProps, we use it everywhere.
+export { mergeProps } from '@react-aria/utils';
+
 export * from './polymorphics';
 export * from './createPolymorphicComponent';
 export * from './theme';

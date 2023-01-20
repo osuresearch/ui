@@ -44,25 +44,3 @@ export const Disabled = RUIComponentStory(Overview, {
   defaultSelected: true,
   isDisabled: true
 });
-
-export const WithRHF7 = RUIComponentStory<SwitchFieldProps>(
-  (args) => {
-    const [value, setValue] = useState(false);
-
-    return (
-      <>
-        <Component isSelected={value} onChange={setValue} {...args} />
-        <Text>{`You are ${value ? 'subscribed' : 'unsubscribed'}`}</Text>
-      </>
-    );
-  },
-  {
-    label: 'Subscribe'
-  }
-);
-
-export const WithDiff = RUIComponentStory(Overview, {
-  label: 'Yes I want to receive hourly promotional emails',
-  showDiff: true,
-  wasSelected: true
-});

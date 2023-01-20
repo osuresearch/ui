@@ -60,23 +60,6 @@ export const Error = RUIComponentStory<TextAreaFieldProps>(Overview, {
   errorMessage: 'Please enter a valid email address.'
 });
 
-export const WithRHF7 = RUIComponentStory<TextAreaFieldProps>(
-  (args) => {
-    const [value, setValue] = useState('Foo bar');
-
-    return (
-      <>
-        <TextAreaField value={value} onChange={setValue} {...args} />
-        <Text>{`You entered: ${value}`}</Text>
-      </>
-    );
-  },
-  {
-    name: 'rhf7-input',
-    label: 'Subscribe'
-  }
-);
-
 export const WithAddedRows = RUIComponentStory<TextAreaFieldProps>(Overview, {
   label: 'Email',
   rows: 5
