@@ -61,9 +61,7 @@ export const TextAreaField = forwardRef<HTMLTextAreaElement, TextAreaFieldProps>
     return (
       <InputField
         {...props}
-        inputSlot={TextAreaSlot}
         labelProps={labelProps}
-        inputProps={{}}
         descriptionProps={descriptionProps}
         errorMessageProps={errorMessageProps}
       >
