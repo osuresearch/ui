@@ -14,13 +14,9 @@ import {
   useListState
 } from 'react-stately';
 
-import { AriaNecessityIndicator, StyleSystemProps } from '~/types';
-
 import { CheckboxIcon } from '../CheckboxIcon';
-import { Icon } from '../Icon';
-import { NecessityIndicator } from '../NecessityIndicator';
+import { FormField, FormFieldBase } from '../FormField';
 import { Stack } from '../Stack';
-import { Text } from '../Text';
 import { ToggleField } from '../ToggleField';
 
 export type CheckboxItem = {
@@ -29,15 +25,8 @@ export type CheckboxItem = {
   description?: string;
 };
 
-export type CheckboxSetDiffProps = {
-  showDiff?: boolean;
-  previousValues?: string[];
-};
-
-export type CheckboxSetFieldProps = StyleSystemProps &
+export type CheckboxSetFieldProps = FormFieldBase<string[]> &
   AriaCheckboxGroupProps &
-  AriaNecessityIndicator &
-  CheckboxSetDiffProps &
   ListProps<CheckboxItem> & {
     label: React.ReactNode;
   };
@@ -91,8 +80,6 @@ function GroupItem({ node, ...props }: GroupItemProps) {
  * <!-- @ruiAtomic Key -->
  */
 export const CheckboxSetField = forwardRef<HTMLDivElement, CheckboxSetFieldProps>((props, ref) => {
-  const { label, description, necessityIndicator, errorMessage } = props;
-
   const listState = useListState(props);
   const groupState = useCheckboxGroupState(props);
 
@@ -105,33 +92,25 @@ export const CheckboxSetField = forwardRef<HTMLDivElement, CheckboxSetFieldProps
   );
 
   return (
-    <Stack {...groupProps} ref={ref}>
-      <Text {...labelProps}>
-        {label}
-        {necessityIndicator && <NecessityIndicator />}
-      </Text>
+    <CheckboxSetContext.Provider value={{ ...listState, ...groupState }}>
+      <FormField<string[]>
+        wrapperProps={groupProps}
+        labelAs="span"
+        labelProps={labelProps}
+        descriptionProps={descriptionProps}
+        errorMessageProps={errorMessageProps}
+        {...props}
+      >
+        <Stack ref={ref}>
+          {[...listState.collection].map((item) => {
+            if (item.type === 'section') {
+              return <div key={item.key}>TODO: section</div>;
+            }
 
-      <CheckboxSetContext.Provider value={{ ...listState, ...groupState }}>
-        {[...listState.collection].map((item) => {
-          if (item.type === 'section') {
-            return <div key={item.key}>TODO: section</div>;
-          }
-
-          return <GroupItem key={item.key} node={item} value={item.textValue} />;
-        })}
-      </CheckboxSetContext.Provider>
-
-      {description && (
-        <Text c="dark" fs="sm" {...descriptionProps}>
-          {description}
-        </Text>
-      )}
-
-      {errorMessage && (
-        <Text c="error" fs="sm" {...errorMessageProps}>
-          <Icon name="xmarkCircle" /> {errorMessage}
-        </Text>
-      )}
-    </Stack>
+            return <GroupItem key={item.key} node={item} value={item.textValue} />;
+          })}
+        </Stack>
+      </FormField>
+    </CheckboxSetContext.Provider>
   );
 });

@@ -133,3 +133,15 @@ export const CustomUnits = RUIComponentStory<NumberFieldProps>(Overview, {
 
   For additional details, see [React Aria's useNumberField docs](https://react-spectrum.adobe.com/react-aria/useNumberField.html#units).
 `);
+
+export const WithMinMax = RUIComponentStory<NumberFieldProps>(Overview, {
+  label: 'Adjust exposure between 1 and 10',
+  defaultValue: 1.0,
+  minValue: 1.0,
+  maxValue: 10.0,
+  formatOptions: {
+    signDisplay: 'exceptZero',
+    minimumFractionDigits: 1,
+    maximumFractionDigits: 2
+  }
+})

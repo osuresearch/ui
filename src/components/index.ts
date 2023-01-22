@@ -25,6 +25,7 @@ export * from './DocumentPagination';
 export * from './ExternalLink';
 export * from './FocusRing';
 export * from './FormDialog';
+export * from './FormField';
 export * from './Grid';
 export * from './Group';
 export * from './HamburgerButton';

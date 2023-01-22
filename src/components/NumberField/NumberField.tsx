@@ -1,25 +1,17 @@
-import { FocusableElement } from '@react-types/shared';
-import React, { DOMAttributes, forwardRef, useRef } from 'react';
+import React, { forwardRef, useRef } from 'react';
 import {
-  AriaTextFieldOptions,
-  AriaTextFieldProps,
-  mergeProps,
   useLocale,
-  useNumberField,
-  useTextField
+  useNumberField
 } from 'react-aria';
 import { NumberFieldStateOptions, useNumberFieldState } from 'react-stately';
 
-import { AriaNecessityIndicator, SlotType, StyleSystemProps } from '~/types';
-import { cx, mergeRefs } from '~/utils';
+import { mergeRefs } from '~/utils';
+import { FormField, FormFieldBase } from '../FormField';
 
-import { Box } from '../Box';
-import { FocusRing } from '../FocusRing';
 import { IconButton } from '../IconButton';
-import { InputField } from '../InputField';
 import { TextInputSlot } from '../TextField';
 
-export type NumberFieldProps = StyleSystemProps & NumberFieldStateOptions & AriaNecessityIndicator;
+export type NumberFieldProps = FormFieldBase<number> & NumberFieldStateOptions;
 
 /**
  * Number fields allow users to enter a number, and increment
@@ -44,16 +36,12 @@ export const NumberField = forwardRef<HTMLInputElement, NumberFieldProps>((props
   } = useNumberField(props, state, inputRef);
 
   return (
-    <InputField
-      groupProps={groupProps}
-      label={props.label}
+    <FormField
+      wrapperProps={groupProps}
       labelProps={labelProps}
-      isRequired={props.isRequired}
-      necessityIndicator={props.necessityIndicator}
-      description={props.description}
       descriptionProps={descriptionProps}
-      errorMessage={props.errorMessage}
       errorMessageProps={errorMessageProps}
+      {...props}
     >
       <div className="rui-relative rui-w-full">
         <div className="rui-absolute rui-inset-[2px] rui-right-auto">
@@ -80,6 +68,6 @@ export const NumberField = forwardRef<HTMLInputElement, NumberFieldProps>((props
           />
         </div>
       </div>
-    </InputField>
+    </FormField>
   );
 });

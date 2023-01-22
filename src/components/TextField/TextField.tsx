@@ -7,6 +7,7 @@ import { cx, mergeRefs } from '~/utils';
 
 import { Box } from '../Box';
 import { FocusRing } from '../FocusRing';
+import { FormField, FormFieldBase, FormFieldProps } from '../FormField';
 import { InputField } from '../InputField';
 
 export type TextFieldSlots = {
@@ -33,9 +34,8 @@ export type TextFieldSlots = {
   rightWidth?: number;
 };
 
-export type TextFieldProps = StyleSystemProps &
+export type TextFieldProps = FormFieldBase &
   AriaTextFieldProps &
-  AriaNecessityIndicator &
   TextFieldSlots;
 
 type InputSlotProps = StyleSystemProps &
@@ -76,7 +76,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
   );
 
   return (
-    <InputField
+    <FormField
       labelProps={labelProps}
       descriptionProps={descriptionProps}
       errorMessageProps={errorMessageProps}
@@ -101,6 +101,6 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
           <div className="rui-absolute rui-inset-[2px] rui-left-auto">{props.rightSlot}</div>
         )}
       </div>
-    </InputField>
+    </FormField>
   );
 });

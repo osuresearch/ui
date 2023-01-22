@@ -16,14 +16,10 @@ import {
 
 import { AriaNecessityIndicator, StyleSystemProps } from '~/types';
 
-import { Button } from '../Button';
-import { Icon } from '../Icon';
-import { NecessityIndicator } from '../NecessityIndicator';
+import { FormField, FormFieldBase } from '../FormField';
 import { RadioIcon } from '../RadioIcon';
 import { Stack } from '../Stack';
-import { Text } from '../Text';
 import { ToggleField } from '../ToggleField';
-import { VisuallyHidden } from '../VisuallyHidden';
 
 export type RadioItem = {
   name?: string;
@@ -31,15 +27,8 @@ export type RadioItem = {
   description?: React.ReactNode;
 };
 
-export type RadioSetDiffProps = {
-  showDiff?: boolean;
-  previousValues?: string[];
-};
-
-export type RadioSetFieldProps = StyleSystemProps &
+export type RadioSetFieldProps = FormFieldBase &
   AriaRadioGroupProps &
-  AriaNecessityIndicator &
-  RadioSetDiffProps &
   ListProps<RadioItem> & {
     label: React.ReactNode;
   };
@@ -68,17 +57,6 @@ export function GroupItem({ node, ...props }: GroupItemProps) {
     ref
   );
 
-  // TODO: The below is okay, but needs work
-  // for a yes/no/toggle button set variant.
-  // return (
-  //   <Button as="label" variant={isSelected ? 'primary' : 'default'} isDisabled={isDisabled}>
-  //     <VisuallyHidden>
-  //       <input {...inputProps} />
-  //     </VisuallyHidden>
-  //     {node.rendered} {isSelected ? 'Y' :'N'}
-  //   </Button>
-  // )
-
   return (
     <ToggleField
       label={node.rendered}
@@ -102,8 +80,6 @@ export function GroupItem({ node, ...props }: GroupItemProps) {
  * <!-- @ruiAtomic Key -->
  */
 export const RadioSetField = forwardRef<HTMLDivElement, RadioSetFieldProps>((props, ref) => {
-  const { label, description, necessityIndicator, errorMessage } = props;
-
   const listState = useListState(props);
   const groupState = useRadioGroupState(props);
 
@@ -116,29 +92,21 @@ export const RadioSetField = forwardRef<HTMLDivElement, RadioSetFieldProps>((pro
   );
 
   return (
-    <Stack {...radioGroupProps} ref={ref}>
-      <Text {...labelProps}>
-        {label}
-        {necessityIndicator && <NecessityIndicator />}
-      </Text>
-
-      <RadioSetContext.Provider value={{ ...listState, ...groupState }}>
-        {[...listState.collection].map((item) => (
-          <GroupItem key={item.key} node={item} value={item.textValue} />
-        ))}
-      </RadioSetContext.Provider>
-
-      {description && (
-        <Text c="dark" fs="sm" {...descriptionProps}>
-          {description}
-        </Text>
-      )}
-
-      {errorMessage && (
-        <Text c="error" fs="sm" {...errorMessageProps}>
-          <Icon name="xmarkCircle" /> {errorMessage}
-        </Text>
-      )}
-    </Stack>
+    <RadioSetContext.Provider value={{ ...listState, ...groupState }}>
+      <FormField
+        wrapperProps={radioGroupProps}
+        labelAs="span"
+        labelProps={labelProps}
+        descriptionProps={descriptionProps}
+        errorMessageProps={errorMessageProps}
+        {...props}
+      >
+        <Stack ref={ref}>
+          {[...listState.collection].map((item) => (
+            <GroupItem key={item.key} node={item} value={item.textValue} />
+          ))}
+        </Stack>
+      </FormField>
+    </RadioSetContext.Provider>
   );
 });

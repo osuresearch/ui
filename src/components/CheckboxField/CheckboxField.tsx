@@ -1,20 +1,12 @@
-import { mergeProps } from '@react-aria/utils';
 import React, { forwardRef, useRef } from 'react';
-import { AriaCheckboxProps, useCheckbox, useFocusRing } from 'react-aria';
+import { AriaCheckboxProps, useCheckbox } from 'react-aria';
 import { useToggleState } from 'react-stately';
 
 import { StyleSystemProps } from '~/types';
-import { cx, mergeRefs } from '~/utils';
+import { mergeRefs } from '~/utils';
 
-import { Box } from '../Box';
 import { CheckboxIcon } from '../CheckboxIcon';
-import { Group } from '../Group';
-import { Icon } from '../Icon';
-import { NecessityIndicator } from '../NecessityIndicator';
-import { Stack } from '../Stack';
-import { Text } from '../Text';
 import { ToggleField } from '../ToggleField';
-import { VisuallyHidden } from '../VisuallyHidden';
 
 export type CheckboxFieldDiffProps = {
   wasSelected?: boolean;

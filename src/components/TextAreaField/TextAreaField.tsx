@@ -1,28 +1,20 @@
 import { FocusableElement } from '@react-types/shared';
 import React, { DOMAttributes, forwardRef, useRef } from 'react';
-import { AriaTextFieldProps, mergeProps, useFocusRing, useTextField } from 'react-aria';
+import { AriaTextFieldProps, useTextField } from 'react-aria';
 
-import { useStyleSystemProps } from '~/hooks/useStyleSystemProps';
-import { AriaNecessityIndicator, StyleSystemProps } from '~/types';
 import { cx, mergeRefs } from '~/utils';
 
 import { Box } from '../Box';
 import { FocusRing } from '../FocusRing';
-import { Icon } from '../Icon';
-import { InputField, InputFieldProps } from '../InputField';
-import { makeMissingSlot } from '../MissingSlot';
-import { NecessityIndicator } from '../NecessityIndicator';
-import { Stack } from '../Stack';
-import { Text } from '../Text';
+import { FormField, FormFieldBase } from '../FormField';
 
 type InputSlotProps = React.InputHTMLAttributes<HTMLTextAreaElement> &
   DOMAttributes<FocusableElement> & {
     rows?: number;
   };
 
-export type TextAreaFieldProps = StyleSystemProps &
-  AriaTextFieldProps &
-  AriaNecessityIndicator & {
+export type TextAreaFieldProps = FormFieldBase &
+  AriaTextFieldProps & {
     rows?: number;
   };
 
@@ -59,14 +51,14 @@ export const TextAreaField = forwardRef<HTMLTextAreaElement, TextAreaFieldProps>
       useTextField<'textarea'>(props, inputRef);
 
     return (
-      <InputField
-        {...props}
+      <FormField
         labelProps={labelProps}
         descriptionProps={descriptionProps}
         errorMessageProps={errorMessageProps}
+        {...props}
       >
         <TextAreaSlot ref={mergeRefs(inputRef, ref)} {...inputProps} rows={rows} />
-      </InputField>
+      </FormField>
     );
   }
 );

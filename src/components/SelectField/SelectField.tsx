@@ -4,21 +4,18 @@ import React, { forwardRef, useRef } from 'react';
 import { HiddenSelect, useSelect } from 'react-aria';
 import { useSelectState } from 'react-stately';
 
-import { AriaNecessityIndicator, StyleSystemProps } from '~/types';
 import { mergeRefs } from '~/utils';
 
-import { Box } from '../Box';
 import { Button } from '../Button';
+import { FormField, FormFieldBase } from '../FormField';
 import { Icon } from '../Icon';
-import { InputField } from '../InputField';
 import { ListBox } from '../ListBox';
 import { Popover } from '../Popover';
 
 export type SelectOption = Record<string, any>;
 
-export type SelectFieldProps = StyleSystemProps &
+export type SelectFieldProps = FormFieldBase &
   SelectProps<SelectOption> &
-  AriaNecessityIndicator &
   AriaSelectProps<SelectOption> & {
     /* Your props */
 
@@ -73,9 +70,9 @@ export const SelectField = forwardRef<HTMLButtonElement, SelectFieldProps>((prop
     );
 
   return (
-    <Box /* inline-flex, column, relative position, margin top 20px */>
+    <>
       <HiddenSelect name={props.name} label={props.label} state={state} triggerRef={triggerRef} />
-      <InputField
+      <FormField
         {...props}
         labelProps={labelProps}
         descriptionProps={descriptionProps}
@@ -90,13 +87,13 @@ export const SelectField = forwardRef<HTMLButtonElement, SelectFieldProps>((prop
             {state.selectedItem ? state.selectedItem.rendered : 'Select an option'}
           </span>
         </Button>
-      </InputField>
+      </FormField>
 
       {state.isOpen && (
         <Popover state={state} triggerRef={triggerRef} placement="bottom start">
           <ListBox {...menuProps} state={state} />
         </Popover>
       )}
-    </Box>
+    </>
   );
 });
