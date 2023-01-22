@@ -36,6 +36,7 @@ export type FormFieldLayout = 'default' | 'horizontal';
  * read only state, values, and so forth. 
  */
 export interface FormFieldBase<T = string> extends StyleSystemProps, AriaNecessityIndicator, InputBase, Validation, HelpTextProps, FocusableProps, ValueBase<T>, DiffBase<T>, LabelableProps {
+  name?: string
   layout?: FormFieldLayout
 }
 

@@ -19,6 +19,7 @@ export * from './Code';
 export * from './ComboBoxField';
 export * from './ConfirmButton';
 export * from './ConfirmDialog';
+export * from './DateField';
 export * from './Details';
 export * from './Divider';
 export * from './DocumentPagination';
