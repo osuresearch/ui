@@ -26,6 +26,14 @@ export const osuResearch = {
   }
 };
 
+export const blank = {
+  default: {
+    body: `
+      <g fill="none"></g>
+    `
+  }
+};
+
 // ----------------
 
 export * as heart from '@iconify/icons-bi/heart';
