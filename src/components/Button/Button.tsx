@@ -70,6 +70,7 @@ export const Button = polymorphicForwardRef<'button', ButtonProps>(
 
         // Subtle variant
         {
+          'rui-text-light-contrast': variant === 'subtle',
           'hover:rui-bg-light hover:rui-text-dark': variant === 'subtle',
           'data-[active=true]:rui-bg-light-shade': variant === 'subtle'
         },
