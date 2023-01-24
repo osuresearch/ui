@@ -114,7 +114,7 @@ export const WithReactStatelyLists = RUIComponentStory<CheckboxSetFieldProps>((a
     </>
   );
 }).withDescription(`
-  >TODO: Not implemented. Need to match \`selectedKeys\` and \`onSelectionChange\` 
+  >TODO: Not implemented. Need to match \`selectedKeys\` and \`onSelectionChange\`
   props back to the checkbox state of \`string[]\`.
 
   This component supports React Stately's [useListData hook](https://react-spectrum.adobe.com/react-stately/useListData.html#example)

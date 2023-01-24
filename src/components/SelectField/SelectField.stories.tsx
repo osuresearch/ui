@@ -30,9 +30,9 @@ export const Overview = RUIComponentStory<SelectFieldProps>(
 
 export const UncontrolledValue = RUIComponentStory(Overview, {
   label: '3D graphics and computing API',
-  defaultSelectedKey: 'vulkan'
+  defaultValue: 'vulkan'
 }).withDescription(`
-  Use \`defaultSelectedKey\` to specify the \`React.Key\` to
+  Use \`defaultValue\` to specify the \`React.Key\` to
   select when the component is first mounted.
 `);
 
@@ -42,7 +42,7 @@ export const ControlledValue = RUIComponentStory<SelectFieldProps>(
 
     return (
       <>
-        <SelectField selectedKey={value} onSelectionChange={setValue} {...args}>
+        <SelectField value={value} onChange={setValue} {...args}>
           <Item key="dx12">DirectX 12</Item>
           <Item key="ogl3">OpenGL 3.0</Item>
           <Item key="metal">Metal</Item>
@@ -56,8 +56,8 @@ export const ControlledValue = RUIComponentStory<SelectFieldProps>(
     label: '3D graphics and computing API'
   }
 ).withDescription(`
-  The \`selectedKey\` prop controls the \`React.Key\` of the current selection
-  while the \`onSelectionChange\` prop can be used to set the key to the user's choice.
+  The \`value\` prop controls the \`React.Key\` of the current selection
+  while the \`onChange\` prop can be used to set the key to the user's choice.
 `);
 
 export const Required = RUIComponentStory(Overview, {
@@ -68,17 +68,17 @@ export const Required = RUIComponentStory(Overview, {
 
 export const ReadOnly = RUIComponentStory(Overview, {
   label: '3D graphics and computing API',
-  selectedKey: 'vulkan',
+  value: 'vulkan',
   isReadOnly: true
 }).withDescription(`
-  Read only state is not supported natively by select, but our 
-  component supports an \`isReadOnly\` prop and custom render state 
+  Read only state is not supported natively by select, but our
+  component supports an \`isReadOnly\` prop and custom render state
   for consistency with other form fields.
 `);
 
 export const Disabled = RUIComponentStory(Overview, {
   label: '3D graphics and computing API',
-  selectedKey: 'vulkan',
+  value: 'vulkan',
   isDisabled: true
 });
 

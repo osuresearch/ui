@@ -14,9 +14,11 @@ import { Popover } from '../Popover';
 
 export type SelectOption = Record<string, any>;
 
-export type SelectFieldProps = FormFieldBase &
-  SelectProps<SelectOption> &
-  AriaSelectProps<SelectOption> & {
+export type SelectFieldProps = FormFieldBase<React.Key> &
+  Omit<
+    AriaSelectProps<SelectOption>,
+    'selectedKey' | 'defaultSelectedKey' | 'onSelectionChange'
+  > & {
     /* Your props */
 
     isReadOnly?: boolean;
@@ -53,21 +55,21 @@ export const SelectField = forwardRef<HTMLButtonElement, SelectFieldProps>((prop
   // Need to verify behaviour.
   const isDisabled = props.isReadOnly || props.isDisabled;
 
-  const triggerRef = useRef<HTMLButtonElement>(null);
-  const state = useSelectState({
+  const selectProps: SelectProps<SelectOption> = {
     ...props,
-    isDisabled
-  });
+    isDisabled,
+
+    // Transform ValueBase<React.Key> to SingleSelection
+    selectedKey: props.value,
+    defaultSelectedKey: props.defaultValue,
+    onSelectionChange: props.onChange
+  };
+
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const state = useSelectState(selectProps);
 
   const { labelProps, triggerProps, valueProps, menuProps, descriptionProps, errorMessageProps } =
-    useSelect(
-      {
-        ...props,
-        isDisabled
-      },
-      state,
-      triggerRef
-    );
+    useSelect(selectProps, state, triggerRef);
 
   return (
     <>

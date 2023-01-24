@@ -1,34 +1,25 @@
-import { AriaSelectProps, SelectProps } from '@react-types/select';
+import { AriaSelectProps } from '@react-types/select';
 import { CollectionChildren } from '@react-types/shared';
 import React, { forwardRef, useRef } from 'react';
 import { useComboBox, useFilter } from 'react-aria';
 import { ComboBoxStateOptions, useComboBoxState } from 'react-stately';
 
-import { AriaNecessityIndicator, StyleSystemProps } from '~/types';
 import { mergeRefs } from '~/utils';
 
-import { Box } from '../Box';
-import { Button } from '../Button';
+import { FormField, FormFieldBase } from '../FormField';
 import { Group } from '../Group';
-import { Icon } from '../Icon';
 import { IconButton } from '../IconButton';
-import { InputField } from '../InputField';
 import { ListBox } from '../ListBox';
 import { Popover } from '../Popover';
 import { TextInputSlot } from '../TextField';
 
 export type ComboBoxOption = Record<string, any>;
 
-export type ComboBoxFieldProps = StyleSystemProps &
-  SelectProps<ComboBoxOption> &
-  AriaNecessityIndicator &
-  AriaSelectProps<ComboBoxOption> &
-  // AriaComboBoxOptions
-  ComboBoxStateOptions<ComboBoxOption> & {
-    /* Your props */
-
-    isReadOnly?: boolean;
-
+export type ComboBoxFieldProps = FormFieldBase<React.Key> &
+  Omit<
+    ComboBoxStateOptions<ComboBoxOption>,
+    'selectedKey' | 'defaultSelectedKey' | 'onSelectionChange'
+  > & {
     /** `Item` components only */
     children: CollectionChildren<ComboBoxOption>;
   };
@@ -64,10 +55,18 @@ export const ComboBoxField = forwardRef<HTMLInputElement, ComboBoxFieldProps>((p
     sensitivity: 'base'
   });
 
-  const state = useComboBoxState({
+  const comboBoxProps: ComboBoxStateOptions<ComboBoxOption> = {
     ...props,
+
+    // Transform ValueBase<React.Key> to SingleSelection
+    selectedKey: props.value,
+    defaultSelectedKey: props.defaultValue,
+    onSelectionChange: props.onChange,
+
     defaultFilter: contains
-  });
+  };
+
+  const state = useComboBoxState(comboBoxProps);
 
   const {
     labelProps,
@@ -78,7 +77,7 @@ export const ComboBoxField = forwardRef<HTMLInputElement, ComboBoxFieldProps>((p
     errorMessageProps
   } = useComboBox(
     {
-      ...props,
+      ...comboBoxProps,
       inputRef,
       buttonRef: triggerRef,
       listBoxRef,
@@ -88,7 +87,7 @@ export const ComboBoxField = forwardRef<HTMLInputElement, ComboBoxFieldProps>((p
   );
 
   return (
-    <InputField
+    <FormField
       {...props}
       labelProps={labelProps}
       descriptionProps={descriptionProps}
@@ -115,6 +114,6 @@ export const ComboBoxField = forwardRef<HTMLInputElement, ComboBoxFieldProps>((p
           </Popover>
         )}
       </Group>
-    </InputField>
+    </FormField>
   );
 });

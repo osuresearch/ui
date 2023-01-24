@@ -1,31 +1,24 @@
-import { AriaSelectProps, SelectProps } from '@react-types/select';
 import { CollectionChildren } from '@react-types/shared';
 import React, { forwardRef, useRef } from 'react';
 import { useComboBox, useFilter, useSearchField } from 'react-aria';
 import { ComboBoxStateOptions, useComboBoxState, useSearchFieldState } from 'react-stately';
 
-import { AriaNecessityIndicator, StyleSystemProps } from '~/types';
 import { mergeRefs } from '~/utils';
 
 import { CloseButton } from '../CloseButton';
+import { FormField, FormFieldBase } from '../FormField';
 import { Group } from '../Group';
-import { InputField } from '../InputField';
 import { ListBox } from '../ListBox';
 import { Popover } from '../Popover';
 import { TextInputSlot } from '../TextField';
 
 export type LookupOption = Record<string, any>;
 
-export type LookupFieldProps = StyleSystemProps &
-  SelectProps<LookupOption> &
-  AriaNecessityIndicator &
-  AriaSelectProps<LookupOption> &
-  // AriaLookupOptions
-  ComboBoxStateOptions<LookupOption> & {
-    /* Your props */
-
-    isReadOnly?: boolean;
-
+export type LookupFieldProps = FormFieldBase<React.Key> &
+  Omit<
+    ComboBoxStateOptions<LookupOption>,
+    'selectedKey' | 'defaultSelectedKey' | 'onSelectionChange'
+  > & {
     /** `Item` components only */
     children: CollectionChildren<LookupOption>;
   };
@@ -46,14 +39,22 @@ export const LookupField = forwardRef<HTMLInputElement, LookupFieldProps>((props
     sensitivity: 'base'
   });
 
-  const state = useComboBoxState({
+  const comboBoxProps: ComboBoxStateOptions<LookupOption> = {
     ...props,
+
+    // Transform ValueBase<React.Key> to SingleSelection
+    selectedKey: props.value,
+    defaultSelectedKey: props.defaultValue,
+    onSelectionChange: props.onChange,
+
     defaultFilter: contains
-  });
+  };
+
+  const state = useComboBoxState(comboBoxProps);
 
   const { labelProps, inputProps, listBoxProps, descriptionProps, errorMessageProps } = useComboBox(
     {
-      ...props,
+      ...comboBoxProps,
       inputRef,
       listBoxRef,
       popoverRef,
@@ -74,7 +75,7 @@ export const LookupField = forwardRef<HTMLInputElement, LookupFieldProps>((props
   const showCloseButton = state.inputValue !== '' && !props.isReadOnly && !props.isDisabled;
 
   return (
-    <InputField
+    <FormField
       {...props}
       labelProps={labelProps}
       descriptionProps={descriptionProps}
@@ -98,6 +99,6 @@ export const LookupField = forwardRef<HTMLInputElement, LookupFieldProps>((props
           </Popover>
         )}
       </Group>
-    </InputField>
+    </FormField>
   );
 });
