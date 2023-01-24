@@ -35,7 +35,7 @@ export const RadioIcon = ({
     h={20}
     className={cx(
       'rui-border-2 rui-rounded-full',
-      { 'rui-bg-light-tint rui-border-dark': !isSelected },
+      { 'rui-bg-light-tint rui-border-dark': !isSelected && !isDisabled },
       { 'rui-bg-light-tint rui-border-primary': isSelected },
       { 'rui-border-dimmed rui-bg-light-shade': isDisabled }
     )}
