@@ -8,9 +8,11 @@ import {
 } from 'react-aria';
 import { TableState } from 'react-stately';
 
-import { CheckboxField } from '../CheckboxField';
+import { cx } from '~/utils';
+
 import { CheckboxIcon } from '../CheckboxIcon';
 import { FocusRing } from '../FocusRing';
+import { Icon } from '../Icon';
 import { VisuallyHidden } from '../VisuallyHidden';
 
 type ColumnProps = {
@@ -23,14 +25,28 @@ export function DataColumn({ node, state }: ColumnProps) {
   const { columnHeaderProps } = useTableColumnHeader({ node }, state, ref);
 
   const isSortedOn = state.sortDescriptor?.column === node.key;
-  const sortable = node.props.allowsSorting; // TODO: Is custom prop, untyped
-  const sortIcon = state.sortDescriptor?.direction === 'ascending' ? '▲' : '▼';
+  const sortable = !!node.props.allowsSorting;
 
   return (
     <FocusRing>
-      <th ref={ref} {...columnHeaderProps}>
+      <th
+        ref={ref}
+        {...columnHeaderProps}
+        className={cx({
+          'rui-cursor-pointer': sortable
+        })}
+      >
         {node.rendered}
-        {sortable && isSortedOn && { sortIcon }}
+        {isSortedOn && state.sortDescriptor?.direction === 'ascending' && (
+          <Icon ml="xs" name="sortUp" />
+        )}
+        {isSortedOn && state.sortDescriptor?.direction === 'descending' && (
+          <Icon ml="xs" name="sortDown" />
+        )}
+        {!isSortedOn && sortable && (
+          // Placeholder when there's no icon to prevent content shift
+          <Icon ml="xs" name="blank" />
+        )}
       </th>
     </FocusRing>
   );
