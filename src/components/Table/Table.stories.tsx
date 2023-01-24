@@ -1,14 +1,17 @@
+import { SortDescriptor } from '@react-types/shared';
 import { Story } from '@storybook/react';
-import React from 'react';
-import { Cell, Column, Row, TableBody, TableHeader } from 'react-stately';
+import React, { useState } from 'react';
+import { Cell, Column, Row, TableBody, TableHeader, useAsyncList } from 'react-stately';
 
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
+import { useTabularData } from '~/hooks/useTabularData';
 
+import { Item } from '../Item/Item.stories';
 import { Table, TableProps } from './Table';
 
 export default RUIComponentMeta<TableProps>('Components', Table).withStyleSystemProps();
 
-const Template: Story<TableProps> = (args: TableProps) => (
+const Template: Story<TableProps> = (args) => (
   <Table {...args} caption="Table caption">
     <TableHeader>
       <Column>Column 1</Column>
@@ -44,6 +47,143 @@ export const Striped = RUIComponentStory(Overview, {
 export const Compact = RUIComponentStory(Overview, {
   variant: 'compact'
 });
+
+export const DynamicContent = RUIComponentStory<TableProps>((args) => {
+  type Entry = {
+    id: number;
+    name: string;
+    date: string;
+    type: string;
+  };
+
+  const columns = [
+    { name: 'Name', key: 'name' },
+    { name: 'Type', key: 'type' },
+    { name: 'Date Modified', key: 'date' }
+  ];
+
+  const rows: Entry[] = [
+    { id: 1, name: 'Games', date: '6/7/2020', type: 'File folder' },
+    { id: 2, name: 'Program Files', date: '4/7/2021', type: 'File folder' },
+    { id: 3, name: 'bootmgr', date: '11/20/2010', type: 'System file' },
+    { id: 4, name: 'log.txt', date: '1/18/2016', type: 'Text Document' }
+  ];
+
+  return (
+    <Table {...args} mih="20rem">
+      <TableHeader columns={columns}>{(column) => <Column>{column.name}</Column>}</TableHeader>
+      <TableBody items={rows}>
+        {(item) => (
+          <Row key={item.id}>{(columnKey) => <Cell>{item[columnKey as keyof Entry]}</Cell>}</Row>
+        )}
+      </TableBody>
+    </Table>
+  );
+}).withDescription(`
+  Columns and rows can be provided to the table via render functions when working
+  with dynamic content that comes from an external API.
+`);
+
+export const Sortable = RUIComponentStory<TableProps>((args) => {
+  type Entry = {
+    id: number;
+    name: string;
+    date: string;
+    type: string;
+  };
+
+  const columns = [
+    { name: 'Name', key: 'name' },
+    { name: 'Type', key: 'type' },
+    { name: 'Date Modified', key: 'date' }
+  ];
+
+  const rows: Entry[] = [
+    { id: 1, name: 'Games', date: '6/7/2020', type: 'File folder' },
+    { id: 2, name: 'Program Files', date: '4/7/2021', type: 'File folder' },
+    { id: 3, name: 'bootmgr', date: '11/20/2010', type: 'System file' },
+    { id: 4, name: 'log.txt', date: '1/18/2016', type: 'Text Document' }
+  ];
+
+  const { tableProps, tableBodyProps, tableHeaderProps } = useTabularData(columns, rows);
+
+  return (
+    <Table mih="20rem" {...tableProps} {...args}>
+      <TableHeader {...tableHeaderProps} />
+      <TableBody {...tableBodyProps} />
+    </Table>
+  );
+}).withDescription(`
+  The \`useTabularData\` hook can be used to populate a table from a *simple*
+  dataset of rows and columns.
+
+  Each column is interpreted as a string and sortable based on simple string comparisons.
+`);
+
+export const CustomSorting = RUIComponentStory<TableProps>((args) => {
+  const list = useAsyncList<Record<string, any>>({
+    async load({ signal }) {
+      const res = await fetch('https://swapi.py4e.com/api/people/?search', {
+        signal
+      });
+
+      const json = await res.json();
+      return {
+        items: json.results
+      };
+    },
+    async sort({ items, sortDescriptor }) {
+      return {
+        items: items.sort((a, b) => {
+          if (!sortDescriptor.column) {
+            return 0;
+          }
+
+          const first = a[sortDescriptor.column];
+          const second = b[sortDescriptor.column];
+
+          let cmp = (parseInt(first) || first) < (parseInt(second) || second) ? -1 : 1;
+          if (sortDescriptor.direction === 'descending') {
+            cmp *= -1;
+          }
+          return cmp;
+        })
+      };
+    }
+  });
+
+  return (
+    <Table {...args} sortDescriptor={list.sortDescriptor} onSortChange={list.sort} mih="20rem">
+      <TableHeader>
+        <Column key="name" allowsSorting>
+          Name
+        </Column>
+        <Column key="height" allowsSorting>
+          Height
+        </Column>
+        <Column key="mass" allowsSorting>
+          Mass
+        </Column>
+        <Column key="birth_year" allowsSorting>
+          Birth Year
+        </Column>
+      </TableHeader>
+      <TableBody items={list.items}>
+        {(item) => <Row key={item.name}>{(columnKey) => <Cell>{item[columnKey]}</Cell>}</Row>}
+      </TableBody>
+    </Table>
+  );
+}).withDescription(`
+  Controlled sorting behaviour can be performed by combining the \`sortDescriptor\` prop
+  to set the active sort state and the \`onSortChange\` callback to execute a custom
+  sorting algorithm on the dataset.
+
+  This example demonstrates controlled sorting as well as pulling data from
+  a remote API via react-stately's \`useAsyncList\` hook. For server-side
+  sorting with \`useAsyncList\`, check out [the hook documentation](https://react-spectrum.adobe.com/react-stately/useAsyncList.html#server-side-sorting).
+
+  For more information, see [React Aria's useTable guide](https://react-spectrum.adobe.com/react-aria/useTable.html#sorting).
+`);
 
 export const SingleSelection = RUIComponentStory<TableProps>(
   (args) => (
