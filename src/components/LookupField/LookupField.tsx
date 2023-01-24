@@ -86,6 +86,7 @@ export const LookupField = forwardRef<HTMLInputElement, LookupFieldProps>((props
         <div className="rui-absolute rui-inset-[2px] rui-left-auto">
           <CloseButton
             ref={clearButtonRef}
+            iconProps={{ p: 'xs' }}
             style={{
               visibility: showCloseButton ? 'visible' : 'hidden'
             }}
