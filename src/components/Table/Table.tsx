@@ -2,6 +2,7 @@ import React, { forwardRef, useRef } from 'react';
 import { useTable, useTableRowGroup } from 'react-aria';
 import { TableStateProps, useTableState } from 'react-stately';
 
+import { useStyleSystemProps } from '~/hooks/useStyleSystemProps';
 import { StyleSystemProps } from '~/types';
 import { cx, mergeRefs } from '~/utils';
 
@@ -51,6 +52,8 @@ export const Table = forwardRef<HTMLTableElement, TableProps>(
     const { rowGroupProps: headProps } = useTableRowGroup();
     const { rowGroupProps: bodyProps } = useTableRowGroup();
 
+    const [styleSystemProps] = useStyleSystemProps(props);
+
     return (
       <Box
         as="table"
@@ -87,6 +90,7 @@ export const Table = forwardRef<HTMLTableElement, TableProps>(
           className
         )}
         {...gridProps}
+        {...styleSystemProps}
       >
         <thead {...headProps}>
           {collection.headerRows.map((header) => (
