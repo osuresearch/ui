@@ -57,7 +57,7 @@ export const TextAreaField = forwardRef<HTMLTextAreaElement, TextAreaFieldProps>
         errorMessageProps={errorMessageProps}
         {...props}
       >
-        <TextAreaSlot ref={mergeRefs(inputRef, ref)} {...inputProps} rows={rows} />
+        <TextAreaSlot ref={mergeRefs(inputRef, ref)} rows={rows} {...inputProps} />
       </FormField>
     );
   }

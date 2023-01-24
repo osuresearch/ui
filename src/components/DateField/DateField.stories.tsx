@@ -1,3 +1,4 @@
+import { DateValue, parseDate, parseDateTime } from '@internationalized/date';
 import React, { forwardRef, useRef, useState } from 'react';
 
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
@@ -6,8 +7,6 @@ import { Button } from '../Button';
 import { Icon } from '../Icon';
 import { Text } from '../Text';
 import { DateField, DateFieldProps } from './DateField';
-import { DateValue, parseDate, parseDateTime } from '@internationalized/date';
-
 
 export default RUIComponentMeta<DateFieldProps>('Forms', DateField).withStyleSystemProps();
 
@@ -16,11 +15,12 @@ export const Overview = RUIComponentStory<DateFieldProps>((args) => <DateField {
   description: 'Enter your date of birth'
 });
 
-export const UncontrolledValue = RUIComponentStory<DateFieldProps>((args) => 
-  <DateField {...args} defaultValue={parseDate('1989-08-14')} />
-, {
-  label: 'Date',
-});
+export const UncontrolledValue = RUIComponentStory<DateFieldProps>(
+  (args) => <DateField {...args} defaultValue={parseDate('1989-08-14')} />,
+  {
+    label: 'Date'
+  }
+);
 
 export const ControlledValue = RUIComponentStory<DateFieldProps>(
   (args) => {

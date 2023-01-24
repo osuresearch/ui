@@ -144,4 +144,4 @@ export const WithMinMax = RUIComponentStory<NumberFieldProps>(Overview, {
     minimumFractionDigits: 1,
     maximumFractionDigits: 2
   }
-})
+});

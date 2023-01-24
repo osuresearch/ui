@@ -1,14 +1,13 @@
 import { FocusableElement } from '@react-types/shared';
 import React, { DOMAttributes, forwardRef, useRef } from 'react';
-import { AriaTextFieldOptions, AriaTextFieldProps, mergeProps, useTextField } from 'react-aria';
+import { AriaTextFieldProps, mergeProps, useTextField } from 'react-aria';
 
-import { AriaNecessityIndicator, SlotType, StyleSystemProps } from '~/types';
+import { StyleSystemProps } from '~/types';
 import { cx, mergeRefs } from '~/utils';
 
 import { Box } from '../Box';
 import { FocusRing } from '../FocusRing';
-import { FormField, FormFieldBase, FormFieldProps } from '../FormField';
-import { InputField } from '../InputField';
+import { FormField, FormFieldBase } from '../FormField';
 
 export type TextFieldSlots = {
   /** Slot content to absolutely position to the left of the input */
@@ -34,9 +33,7 @@ export type TextFieldSlots = {
   rightWidth?: number;
 };
 
-export type TextFieldProps = FormFieldBase &
-  AriaTextFieldProps &
-  TextFieldSlots;
+export type TextFieldProps = FormFieldBase & AriaTextFieldProps & TextFieldSlots;
 
 type InputSlotProps = StyleSystemProps &
   React.InputHTMLAttributes<HTMLInputElement> &
