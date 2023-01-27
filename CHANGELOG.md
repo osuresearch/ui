@@ -1,3 +1,33 @@
+# [5.0.0-alpha.11](https://github.com/osuresearch/ui/compare/v5.0.0-alpha.10...v5.0.0-alpha.11) (2023-01-27)
+
+
+### Bug Fixes
+
+* **build:** resolve a number of issues around the build process for d.ts files ([57ef153](https://github.com/osuresearch/ui/commit/57ef153d9b8c7d2883ef94049707556f2b428cab))
+* **Button:** subtle variant missing text contrast for dark mode ([1d23a3f](https://github.com/osuresearch/ui/commit/1d23a3fd2b5d6f5c4e45eea71e23e642781bef80))
+* **ComboBoxField:** icon size to match the rest ([1013587](https://github.com/osuresearch/ui/commit/10135871fcfa31930a2e32aa88a3e6be82c9bc73))
+* **Divider:** invalid width when in a flex-grow container ([19606a5](https://github.com/osuresearch/ui/commit/19606a5c48381a4af70fc2c3f84fe2c9a8bc8969))
+* **Icon:** add role for aria labeling ([8287cb8](https://github.com/osuresearch/ui/commit/8287cb8a21ef48d39571639c29c5a51877d3a303))
+* **LookupField:** close icon alignment ([607713b](https://github.com/osuresearch/ui/commit/607713b851394f52d2e31c9e0d356be214a5a244))
+* missing TS declarations path ([f56317f](https://github.com/osuresearch/ui/commit/f56317f5b8239a02590a14adf6ca41b435c18cbb))
+* **RadioIcon:** incorrect border color when disabled ([328a841](https://github.com/osuresearch/ui/commit/328a8418726091086a90e4753747f0430476c10b))
+
+
+### Features
+
+* add DateField component ([8e8fd0c](https://github.com/osuresearch/ui/commit/8e8fd0cbaf2594239781134a37fc1c66bcf1ecc0))
+* add FormErrors component for standardizing a list of errors and a11y focus links ([b44c3f0](https://github.com/osuresearch/ui/commit/b44c3f035279712146085bbaecb38ea74398aa6e))
+* add Table component ([14e9116](https://github.com/osuresearch/ui/commit/14e9116c6d767eab87edec9c49cb166c30311eda))
+* add ToggleButton and HamburgerButton components ([e54060e](https://github.com/osuresearch/ui/commit/e54060e0c37fd7d6ab3d0fbf3efad877ea40b353))
+* add useRUIForm hook to support  react-hook-form integration across all field components ([5af4f7f](https://github.com/osuresearch/ui/commit/5af4f7ff541f3e1f1345106e88d24c9dc230db50))
+* add useTabularData hook to support typical use cases for data tables ([7075183](https://github.com/osuresearch/ui/commit/7075183068ae459f4b216bf91674e670e02ad93a))
+* **Code:** add block display mode ([c5935f3](https://github.com/osuresearch/ui/commit/c5935f37a7061c008c2d5ddcd5551d5d50a5b226))
+* **FormField:** add `data-field` and `data-label-for` for a11y focus control without a context ([ad71c50](https://github.com/osuresearch/ui/commit/ad71c50d1fff82720a101487f3f07d2314b7c867))
+* **Icon:** add `blank` for a placeholder that renders no content ([fc77be8](https://github.com/osuresearch/ui/commit/fc77be8f013c8fbd533e78da361455be3b52f3a9))
+* standardize on `value` and `onChange` props for collection fields CheckboxSet, ComboBox, Lookup, and Select ([ad5e833](https://github.com/osuresearch/ui/commit/ad5e833abe3a4b438afe9aed1d9cb58fb126fea1))
+* **Table:** add sort icons to columns ([886d15b](https://github.com/osuresearch/ui/commit/886d15bec8ffd5cb3d1159e6b988477973041e2e))
+* **Table:** add support for style system props ([7f128c3](https://github.com/osuresearch/ui/commit/7f128c34f7970446fdbe01abda7f41f8a6619b91))
+
 # [5.0.0-alpha.10](https://github.com/osuresearch/ui/compare/v5.0.0-alpha.9...v5.0.0-alpha.10) (2023-01-20)
 
 
