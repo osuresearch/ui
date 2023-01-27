@@ -2,7 +2,7 @@
 import { ArgTypes, Meta, Story } from '@storybook/react';
 import { fontFamily, fontSize, fontWeight, spacing } from '../src/types';
 import React from 'react';
-import { colors } from '../src/types';
+import { colors } from '../src/theme';
 
 export type RUIBadge = 'beta' | 'stable' | 'deprecated' | 'experimental' | 'atom' | 'molecule';
 

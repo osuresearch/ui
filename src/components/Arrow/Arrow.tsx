@@ -2,8 +2,8 @@ import { PlacementAxis } from '@react-types/overlays';
 import { FocusableElement } from '@react-types/shared';
 import React, { DOMAttributes } from 'react';
 
-import { Color, ThemeProp } from '~/types';
-
+import { Color } from '../../theme';
+import { ThemeProp } from '../../types';
 import { Box } from '../Box';
 
 export type ArrowProps = DOMAttributes<FocusableElement> & {

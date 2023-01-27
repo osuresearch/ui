@@ -4,19 +4,19 @@ import { StyleSystemProps } from '../../types';
 import { cx } from '../../utils';
 import { Box } from '../Box';
 
-export type __TEMPLATE__Props = StyleSystemProps & {
+export type MarkdownProps = StyleSystemProps & {
   /* Your props */
 
   children?: React.ReactNode;
 };
 
 /**
- * __TEMPLATE__ documentation
+ * Markdown documentation
  *
  * ## Accessibility
  * - a11y info (used aria tags, keyboard behaviour, etc)
  */
-export const __TEMPLATE__ = forwardRef<HTMLDivElement, __TEMPLATE__Props>(
+export const Markdown = forwardRef<HTMLDivElement, MarkdownProps>(
   ({ className, children, ...styleSystemProps }, ref) => (
     <Box
       as="div"

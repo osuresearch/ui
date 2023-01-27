@@ -2,7 +2,7 @@ import { mergeProps } from '@react-aria/utils';
 import React from 'react';
 import { useFocusRing } from 'react-aria';
 
-import { cx } from '~/utils';
+import { cx } from '../../utils';
 
 export type FocusRingProps = {
   /** Child element to apply CSS classes to. */

@@ -2,8 +2,7 @@ import React, { useRef } from 'react';
 import { AriaTabPanelProps, useTabPanel } from 'react-aria';
 import { TabListState } from 'react-stately';
 
-import { cx } from '~/utils';
-
+import { cx } from '../../utils';
 import { FocusRing } from '../FocusRing';
 import { Paper } from '../Paper';
 import { TabPanelVariant } from './TabPanel';

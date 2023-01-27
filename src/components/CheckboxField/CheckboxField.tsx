@@ -2,9 +2,8 @@ import React, { forwardRef, useRef } from 'react';
 import { AriaCheckboxProps, useCheckbox } from 'react-aria';
 import { useToggleState } from 'react-stately';
 
-import { StyleSystemProps } from '~/types';
-import { mergeRefs } from '~/utils';
-
+import { StyleSystemProps } from '../../types';
+import { mergeRefs } from '../../utils';
 import { CheckboxIcon } from '../CheckboxIcon';
 import { ToggleField } from '../ToggleField';
 

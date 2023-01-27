@@ -11,11 +11,8 @@ import {
 import React from 'react';
 import { useFocusRing } from 'react-aria';
 
-import { useStyleSystemProps } from '~/hooks/useStyleSystemProps';
-import { AriaNecessityIndicator, StyleSystemProps } from '~/types';
-
-import { Box } from '../Box';
-import { Group } from '../Group';
+import { useStyleSystemProps } from '../../hooks/useStyleSystemProps';
+import { AriaNecessityIndicator, StyleSystemProps } from '../../types';
 import { Icon } from '../Icon';
 import { NecessityIndicator } from '../NecessityIndicator';
 import { Stack } from '../Stack';

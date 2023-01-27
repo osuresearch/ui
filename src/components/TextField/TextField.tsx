@@ -2,9 +2,8 @@ import { FocusableElement } from '@react-types/shared';
 import React, { DOMAttributes, forwardRef, useRef } from 'react';
 import { AriaTextFieldProps, mergeProps, useTextField } from 'react-aria';
 
-import { StyleSystemProps } from '~/types';
-import { cx, mergeRefs } from '~/utils';
-
+import { StyleSystemProps } from '../../types';
+import { cx, mergeRefs } from '../../utils';
 import { Box } from '../Box';
 import { FocusRing } from '../FocusRing';
 import { FormField, FormFieldBase } from '../FormField';

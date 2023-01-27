@@ -15,24 +15,13 @@
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
 
+    "rootDir": "src",
     "baseUrl": ".",
-    "paths": {
-      "~/.storybook/*": [
-        "./.storybook/*",
-      ],
-      "~/*": [
-        "./src/*"
-      ]
-    },
   },
-  "include": [
-    "src",
-    "docs",
-  ],
   "exclude": [
     "dist",
     "node_modules",
     "src/**/*.test.{ts,tsx}",
-    // "src/**/*.stories.{mdx,tsx}"
+    "src/**/*.stories.{mdx,tsx}"
   ]
 }

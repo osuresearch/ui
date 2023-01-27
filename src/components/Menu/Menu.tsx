@@ -1,7 +1,7 @@
 import { AriaMenuProps } from '@react-types/menu';
 import { CollectionChildren, Node } from '@react-types/shared';
-import React, { forwardRef, useRef } from 'react';
-import { AriaMenuOptions, useFocusRing, useMenu, useMenuItem, useMenuTrigger } from 'react-aria';
+import React, { useRef } from 'react';
+import { AriaMenuOptions, useMenu, useMenuItem, useMenuTrigger } from 'react-aria';
 import {
   MenuTriggerProps,
   TreeProps,
@@ -10,9 +10,7 @@ import {
   useTreeState
 } from 'react-stately';
 
-import { StyleSystemProps } from '~/types';
-import { cx } from '~/utils';
-
+import { cx } from '../../utils';
 import { Box } from '../Box';
 import { Button } from '../Button';
 import { CheckboxIcon } from '../CheckboxIcon';

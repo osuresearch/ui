@@ -3,9 +3,8 @@ import React, { Key, forwardRef, useEffect, useRef, useState } from 'react';
 import { AriaTabListProps, useTabList } from 'react-aria';
 import { useTabListState } from 'react-stately';
 
-import { StyleSystemProps } from '~/types';
-import { cx } from '~/utils';
-
+import { StyleSystemProps } from '../../types';
+import { cx } from '../../utils';
 import { Box } from '../Box';
 import { Group } from '../Group';
 import { Stack } from '../Stack';

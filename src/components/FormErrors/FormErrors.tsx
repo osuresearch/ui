@@ -1,15 +1,9 @@
 import { FocusableElement } from '@react-types/shared';
 import React, { forwardRef } from 'react';
 
-import { StyleSystemProps } from '~/types';
-import { cx } from '~/utils';
-
+import { StyleSystemProps } from '../../types';
 import { Alert } from '../Alert';
-import { Box } from '../Box';
 import { Link } from '../Link';
-import { Paper } from '../Paper';
-import { Stack } from '../Stack';
-import { Text } from '../Text';
 
 export type FormErrorsProps = StyleSystemProps & {
   /* Your props */

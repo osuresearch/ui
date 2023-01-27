@@ -2,10 +2,9 @@ import React, { forwardRef, useRef } from 'react';
 import { useTable, useTableRowGroup } from 'react-aria';
 import { TableStateProps, useTableState } from 'react-stately';
 
-import { useStyleSystemProps } from '~/hooks/useStyleSystemProps';
-import { StyleSystemProps } from '~/types';
-import { cx, mergeRefs } from '~/utils';
-
+import { useStyleSystemProps } from '../../hooks/useStyleSystemProps';
+import { StyleSystemProps } from '../../types';
+import { cx, mergeRefs } from '../../utils';
 import { Box } from '../Box';
 import { BodyRow, HeaderRow } from './Rows';
 

@@ -1,11 +1,9 @@
-import { AriaSelectProps } from '@react-types/select';
 import { CollectionChildren } from '@react-types/shared';
 import React, { forwardRef, useRef } from 'react';
 import { useComboBox, useFilter } from 'react-aria';
 import { ComboBoxStateOptions, useComboBoxState } from 'react-stately';
 
-import { mergeRefs } from '~/utils';
-
+import { mergeRefs } from '../../utils';
 import { FormField, FormFieldBase } from '../FormField';
 import { Group } from '../Group';
 import { IconButton } from '../IconButton';

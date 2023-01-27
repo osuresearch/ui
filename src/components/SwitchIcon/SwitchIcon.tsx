@@ -1,9 +1,8 @@
 import { FocusableElement } from '@react-types/shared';
 import React, { DOMAttributes } from 'react';
 
-import { StyleSystemProps } from '~/types';
-import { cx } from '~/utils';
-
+import { StyleSystemProps } from '../../types';
+import { cx } from '../../utils';
 import { Box } from '../Box';
 
 export type SwitchIconProps = DOMAttributes<FocusableElement> &

@@ -1,10 +1,9 @@
 import React, { useRef } from 'react';
-import { AriaButtonProps, AriaToggleButtonProps, mergeProps, useToggleButton } from 'react-aria';
-import { ToggleProps, useToggleState } from 'react-stately';
+import { AriaToggleButtonProps, mergeProps, useToggleButton } from 'react-aria';
+import { useToggleState } from 'react-stately';
 
-import { StyleSystemProps } from '~/types';
-import { mergeRefs, polymorphicForwardRef } from '~/utils';
-
+import { StyleSystemProps } from '../../types';
+import { mergeRefs, polymorphicForwardRef } from '../../utils';
 import { Box } from '../Box';
 import { FocusRing } from '../FocusRing';
 

@@ -1,8 +1,6 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 
-import { StyleSystemProps } from '~/types';
-import { cx, polymorphicForwardRef } from '~/utils';
-
+import { polymorphicForwardRef } from '../../utils';
 import { Icon } from '../Icon';
 import { PrimaryButton } from '../PrimaryButton';
 
@@ -26,7 +24,7 @@ export type BackToTopButtonProps = Record<string, never>;
  */
 export const BackToTopButton = polymorphicForwardRef<'button', BackToTopButtonProps>(
   ({ as, ...props }, ref) => (
-    <PrimaryButton as={as || 'button'} variant="outline" ref={ref}>
+    <PrimaryButton as={as || 'button'} variant="outline" ref={ref} {...props}>
       <Icon name="jump" rotate={180} size={22} />
       Back to top
     </PrimaryButton>

@@ -9,9 +9,8 @@ import {
 } from 'react-aria';
 import { ListProps, ListState, useListState } from 'react-stately';
 
-import { SlotProp, useSlots } from '~/hooks/useSlots';
-import { mergeRefs, polymorphicForwardRef } from '~/utils';
-
+import { SlotProp, useSlots } from '../../hooks/useSlots';
+import { mergeRefs, polymorphicForwardRef } from '../../utils';
 import { Box } from '../Box';
 
 export type CheckboxSlotProps = {

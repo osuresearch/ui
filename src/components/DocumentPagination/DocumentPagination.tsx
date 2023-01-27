@@ -1,8 +1,6 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 
-import { cx, polymorphicForwardRef } from '~/utils';
-import { createPolymorphicComponent } from '~/utils';
-
+import { cx, polymorphicForwardRef } from '../../utils';
 import { Icon } from '../Icon';
 import { UnstyledButton } from '../UnstyledButton';
 

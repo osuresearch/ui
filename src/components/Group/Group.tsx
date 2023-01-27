@@ -1,9 +1,8 @@
 import React from 'react';
 
-import * as styles from '~/theme';
-import { Align, Justify, PositiveSpacing, StyleSystemProps } from '~/types';
-import { cx, polymorphicForwardRef } from '~/utils';
-
+import * as styles from '../../theme';
+import { Align, Justify, PositiveSpacing, StyleSystemProps } from '../../types';
+import { cx, polymorphicForwardRef } from '../../utils';
 import { Box } from '../Box';
 
 export type GroupProps = StyleSystemProps & {
@@ -51,9 +50,9 @@ export const Group = polymorphicForwardRef<'div', GroupProps>(
       className={cx(
         'rui-flex',
         'rui-relative',
-        styles.justify(justify),
+        styles.justifyContent(justify),
         styles.gap(gap),
-        styles.align(align),
+        styles.alignItems(align),
         {
           // Grow - targets all direct children
           '[&>_*]:rui-flex-grow-0': !grow,

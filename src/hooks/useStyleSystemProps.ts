@@ -1,4 +1,4 @@
-import { StyleSystemPropName, StyleSystemProps, styleSystemPropNames } from '~/types';
+import { StyleSystemProps, styleSystemPropNames } from '../types';
 
 /**
  * Extract style system props from the given prop set.

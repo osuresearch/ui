@@ -1,7 +1,6 @@
 import React, { forwardRef, useState } from 'react';
 
-import { Color } from '~/types';
-
+import { Color } from '../../theme';
 import { CloseButton } from '../CloseButton';
 import { Group } from '../Group';
 import { Icon } from '../Icon';

@@ -1,9 +1,8 @@
 import React from 'react';
 
-import { useScreenSize } from '~/hooks/useScreenSize';
-import { ResponsiveProp, Spacing, StyleSystemProps } from '~/types';
-import { cx } from '~/utils';
-
+import { useScreenSize } from '../../hooks/useScreenSize';
+import { ResponsiveProp, Spacing, StyleSystemProps } from '../../types';
+import { cx } from '../../utils';
 import { Box } from '../Box';
 
 export type GridProps = StyleSystemProps & {

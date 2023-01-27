@@ -22,21 +22,20 @@
   "main": "dist/index.umd.js",
   "module": "dist/index.module.js",
   "source": "src/index.ts",
-  "types": "dist/src/index.d.ts",
+  "types": "dist/index.d.ts",
   "files": [
     "dist"
   ],
   "scripts": {
     "pretest": "npm run lint",
     "test": "jest",
-    "build": "microbundle --jsx React.createElement --jsxFragment React.Fragment",
+    "build": "microbundle --jsx React.createElement --jsxFragment React.Fragment --visualize",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "prepare": "husky install",
     "lint": "eslint . --cache --ext ts,tsx --fix",
     "storybook": "start-storybook -p 6006",
     "build:storybook": "build-storybook -o docs-build",
-    "build:tailwind": "npx tailwindcss -o ./dist/tailwind.css",
     "generate:component": "node ./scripts/newComponent.mjs"
   },
   "peerDependencies": {
@@ -97,7 +96,6 @@
     "postcss": "^8.4.19",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-hook-form": "^7.42.1",
     "storybook-dark-mode": "^2.0.4",
     "storybook-docs-toc": "^1.7.0",
     "tailwindcss": "^3.2.4",

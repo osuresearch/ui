@@ -3,9 +3,8 @@ import React, { useRef } from 'react';
 import { useOverlayTrigger } from 'react-aria';
 import { useOverlayTriggerState } from 'react-stately';
 
-import { Color, SlotType, ThemeProp } from '~/types';
-
-import { MissingSlot } from '../MissingSlot';
+import { Color } from '../../theme';
+import { ThemeProp } from '../../types';
 import { Popover } from '../Popover';
 
 export type CalloutSlots = {

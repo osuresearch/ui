@@ -3,8 +3,7 @@ import React, { forwardRef, useRef } from 'react';
 import { useComboBox, useFilter, useSearchField } from 'react-aria';
 import { ComboBoxStateOptions, useComboBoxState, useSearchFieldState } from 'react-stately';
 
-import { mergeRefs } from '~/utils';
-
+import { mergeRefs } from '../../utils';
 import { CloseButton } from '../CloseButton';
 import { FormField, FormFieldBase } from '../FormField';
 import { Group } from '../Group';

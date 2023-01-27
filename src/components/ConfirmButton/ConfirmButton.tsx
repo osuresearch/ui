@@ -3,8 +3,7 @@ import React, { forwardRef, useRef } from 'react';
 import { useOverlayTrigger } from 'react-aria';
 import { OverlayTriggerProps, useOverlayTriggerState } from 'react-stately';
 
-import { mergeRefs } from '~/utils';
-
+import { mergeRefs } from '../../utils';
 import { Button, ButtonProps } from '../Button';
 import { ConfirmDialog, ConfirmDialogProps } from '../ConfirmDialog';
 import { Modal } from '../Modal/Modal';

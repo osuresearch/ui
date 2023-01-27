@@ -1,9 +1,8 @@
 import React, { Children, forwardRef } from 'react';
 
-import { useScreenSize } from '~/hooks/useScreenSize';
-import { ResponsiveProp, StyleSystemProps } from '~/types';
-import { cx } from '~/utils';
-
+import { useScreenSize } from '../../hooks/useScreenSize';
+import { ResponsiveProp, StyleSystemProps } from '../../types';
+import { cx } from '../../utils';
 import { Avatar } from '../Avatar';
 import { Group } from '../Group';
 

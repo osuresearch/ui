@@ -19,6 +19,31 @@ For Office of Research applications on UI 4, visit the 4.x maintenance branch.
 | < 4.8.0 | :x:                  |
 
 
+## Using RUI with Storybook
+
+If you are writing components in Storybook that depend on RUI, you should wrap your stories with our provider to access theme tokens, portals, and other necessary utilities.
+
+RUI integrates with Storybook's dark mode plugin to help you test components across multiple themes.
+
+In your Storybook `preview.js` import the distribution CSS and add a decorator that wraps your stories with `RUIProvider`:
+
+```js
+import { RUIProvider } from '@osuresearch/ui';
+import '@osuresearch/ui/dist/index.css';
+
+...
+
+export const decorators = [
+  (Story) => (
+    <RUIProvider theme={useDarkMode() ? 'dark' : 'light'}>
+      <Story />
+    </RUIProvider>
+  ),
+];
+```
+
+RUI's theme will update whenever you toggle dark mode in Storybook.
+
 ## Changelog
 
 The changelog can be found on the [Releases page](https://github.com/osuresearch/ui/releases).

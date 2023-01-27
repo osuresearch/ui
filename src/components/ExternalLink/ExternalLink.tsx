@@ -1,8 +1,7 @@
 import React from 'react';
 
-import { Color } from '~/types';
-import { cx, polymorphicForwardRef } from '~/utils';
-
+import { Color } from '../../theme';
+import { cx, polymorphicForwardRef } from '../../utils';
 import { Icon } from '../Icon';
 import { Link, LinkProps } from '../Link';
 

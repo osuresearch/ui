@@ -1,4 +1,3 @@
-import { PlacementAxis } from '@react-types/overlays';
 import { FocusableElement } from '@react-types/shared';
 import React, { ReactNode, useRef } from 'react';
 import { AriaTooltipProps, mergeProps, useTooltip, useTooltipTrigger } from 'react-aria';

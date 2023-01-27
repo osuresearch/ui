@@ -4,8 +4,7 @@ import React, { forwardRef, useRef } from 'react';
 import { HiddenSelect, useSelect } from 'react-aria';
 import { useSelectState } from 'react-stately';
 
-import { mergeRefs } from '~/utils';
-
+import { mergeRefs } from '../../utils';
 import { Button } from '../Button';
 import { FormField, FormFieldBase } from '../FormField';
 import { Icon } from '../Icon';

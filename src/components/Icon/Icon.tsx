@@ -3,10 +3,9 @@ import React, { CSSProperties } from 'react';
 
 // Note that we use the offline version of iconify
 // for apps that can't call out to a public CDN
-import { loadAllIcons } from '~/icons';
-import { ResponsiveProp, StyleSystemProps } from '~/types';
-import { cx, polymorphicForwardRef } from '~/utils';
-
+import { loadAllIcons } from '../../icons';
+import { ResponsiveProp, StyleSystemProps } from '../../types';
+import { cx, polymorphicForwardRef } from '../../utils';
 import { Box } from '../Box';
 
 loadAllIcons();

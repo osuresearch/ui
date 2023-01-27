@@ -1,9 +1,8 @@
 import React from 'react';
 
-import { useScreenSize } from '~/hooks/useScreenSize';
-import { FontSize, ResponsiveProp, Spacing, StyleSystemProps, ThemeSize } from '~/types';
-import { cx, polymorphicForwardRef, resolveResponsiveProp } from '~/utils';
-
+import { useScreenSize } from '../../hooks/useScreenSize';
+import { ResponsiveProp } from '../../types';
+import { cx, polymorphicForwardRef } from '../../utils';
 import { Icon, IconProps } from '../Icon';
 import { UnstyledButton, UnstyledButtonProps } from '../UnstyledButton';
 

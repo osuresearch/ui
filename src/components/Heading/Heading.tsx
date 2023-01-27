@@ -1,8 +1,7 @@
 import React from 'react';
 
-import { FontFamily, FontWeight } from '~/types';
-import { polymorphicForwardRef } from '~/utils';
-
+import { FontFamily, FontWeight } from '../../types';
+import { polymorphicForwardRef } from '../../utils';
 import { Box } from '../Box';
 
 export type HeadingProps = {

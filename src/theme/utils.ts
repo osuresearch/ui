@@ -85,7 +85,7 @@ export function hw(size: ThemeSize): string {
   return className[size] ?? '';
 }
 
-export function align(value: Align): string {
+export function alignItems(value: Align): string {
   const className = {
     stretch: 'rui-items-stretch',
     center: 'rui-items-center',
@@ -112,7 +112,7 @@ export function gap(spacing: PositiveSpacing): string {
   return className[spacing] ?? '';
 }
 
-export function justify(value: Justify): string {
+export function justifyContent(value: Justify): string {
   const className = {
     start: 'rui-justify-start',
     end: 'rui-justify-end',

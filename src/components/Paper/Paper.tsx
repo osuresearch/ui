@@ -1,8 +1,7 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 
-import { StyleSystemProps, ThemeSize } from '~/types';
-import { cx, polymorphicForwardRef } from '~/utils';
-
+import { StyleSystemProps, ThemeSize } from '../../types';
+import { cx, polymorphicForwardRef } from '../../utils';
 import { Box } from '../Box';
 
 export type PaperProps = StyleSystemProps & {

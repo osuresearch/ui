@@ -1,8 +1,7 @@
 import React from 'react';
 
-import { cx } from '~/utils';
-import { polymorphicForwardRef } from '~/utils';
-
+import { cx } from '../../utils';
+import { polymorphicForwardRef } from '../../utils';
 import { Group } from '../Group';
 
 export type PrimaryButtonProps = {

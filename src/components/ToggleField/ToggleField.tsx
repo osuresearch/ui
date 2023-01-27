@@ -1,33 +1,12 @@
 import { mergeProps } from '@react-aria/utils';
-import { CollectionChildren, FocusableElement, Node } from '@react-types/shared';
-import React, {
-  Children,
-  DOMAttributes,
-  createContext,
-  forwardRef,
-  useContext,
-  useRef
-} from 'react';
-import {
-  AriaCheckboxGroupItemProps,
-  AriaCheckboxGroupProps,
-  AriaCheckboxProps,
-  TextFieldAria,
-  useCheckboxGroup,
-  useCheckboxGroupItem,
-  useFocusRing
-} from 'react-aria';
-import { CheckboxGroupState, useCheckboxGroupState, useCollection } from 'react-stately';
+import React, { forwardRef } from 'react';
+import { AriaCheckboxProps, TextFieldAria, useFocusRing } from 'react-aria';
 
-import { useStyleSystemProps } from '~/hooks/useStyleSystemProps';
-import { AriaNecessityIndicator, StyleSystemProps } from '~/types';
-import { cx, mergeRefs } from '~/utils';
-
-import { Box } from '../Box';
-import { CheckboxIcon } from '../CheckboxIcon';
+import { useStyleSystemProps } from '../../hooks/useStyleSystemProps';
+import { AriaNecessityIndicator, StyleSystemProps } from '../../types';
 import { Group } from '../Group';
 import { Icon } from '../Icon';
-import { MissingSlot, makeMissingSlot } from '../MissingSlot';
+import { makeMissingSlot } from '../MissingSlot';
 import { NecessityIndicator } from '../NecessityIndicator';
 import { Stack } from '../Stack';
 import { Text } from '../Text';

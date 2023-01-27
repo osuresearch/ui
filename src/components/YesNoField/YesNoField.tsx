@@ -1,11 +1,8 @@
-import { AriaSelectProps, SelectProps } from '@react-types/select';
-import { CollectionChildren } from '@react-types/shared';
 import React, { forwardRef, useRef } from 'react';
 import { AriaRadioGroupProps, VisuallyHidden, useRadio, useRadioGroup } from 'react-aria';
 import { RadioGroupState, useRadioGroupState } from 'react-stately';
 
-import { AriaNecessityIndicator, StyleSystemProps } from '~/types';
-
+import { AriaNecessityIndicator, StyleSystemProps } from '../../types';
 import { Button } from '../Button';
 import { Divider } from '../Divider';
 import { Group } from '../Group';

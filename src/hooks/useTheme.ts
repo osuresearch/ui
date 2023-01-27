@@ -1,8 +1,8 @@
-import { useContext, useEffect, useLayoutEffect, useState } from 'react';
+import { useContext } from 'react';
 
-import { RUIContext } from '~/components/RUIProvider';
-import { Theme, ThemeProp } from '~/types';
-import { resolveThemeProp } from '~/utils';
+import { RUIContext } from '../components/RUIProvider';
+import { ThemeProp } from '../types';
+import { resolveThemeProp } from '../utils';
 
 /**
  * Doc gen here which doesn't seem to work :^)

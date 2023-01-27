@@ -1,13 +1,12 @@
-import { mergeProps } from '@react-aria/utils';
-import { Placement, PlacementAxis } from '@react-types/overlays';
+import { Placement } from '@react-types/overlays';
 import { FocusableElement } from '@react-types/shared';
-import React, { ForwardedRef, forwardRef, useRef } from 'react';
+import React, { forwardRef, useRef } from 'react';
 import { FocusScope, Overlay, usePopover } from 'react-aria';
 import { OverlayTriggerState } from 'react-stately';
 
-import { Color, ThemeProp } from '~/types';
-import { mergeRefs } from '~/utils';
-
+import { Color } from '../../theme';
+import { ThemeProp } from '../../types';
+import { mergeRefs } from '../../utils';
 import { Arrow } from '../Arrow';
 import { Paper } from '../Paper';
 import { Underlay } from '../Underlay';

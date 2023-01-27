@@ -1,7 +1,6 @@
 import React, { Children, forwardRef } from 'react';
 
-import { StyleSystemProps } from '~/types';
-
+import { StyleSystemProps } from '../../types';
 import { Group } from '../Group';
 import { Icon } from '../Icon';
 

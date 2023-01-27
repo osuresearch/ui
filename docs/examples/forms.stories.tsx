@@ -27,7 +27,8 @@ import {
   YesNoField
 } from '~/components';
 import { Text } from '~/components/Text';
-import { useRUIForm } from '~/hooks/useRUIForm';
+
+import { useRUIForm } from '../../hooks/useRUIForm';
 
 export default {
   title: 'Examples / Forms'

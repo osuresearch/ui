@@ -2,8 +2,7 @@ import React, { forwardRef, useRef } from 'react';
 import { AriaSwitchProps, useSwitch } from 'react-aria';
 import { useToggleState } from 'react-stately';
 
-import { StyleSystemProps } from '~/types';
-
+import { StyleSystemProps } from '../../types';
 import { SwitchIcon } from '../SwitchIcon';
 import { ToggleField } from '../ToggleField';
 
@@ -34,7 +33,7 @@ export type SwitchFieldProps = StyleSystemProps &
  *  be passed instead to identify the element for screen readers.
  */
 export const SwitchField = forwardRef<HTMLInputElement, SwitchFieldProps>(
-  ({ className, label, description, errorMessage, children, ...props }, ref) => {
+  ({ label, description, errorMessage, ...props }, ref) => {
     const inputRef = useRef<HTMLInputElement>(null);
     const state = useToggleState(props);
 
@@ -42,6 +41,7 @@ export const SwitchField = forwardRef<HTMLInputElement, SwitchFieldProps>(
 
     return (
       <ToggleField
+        ref={ref}
         label={label}
         labelProps={{}}
         description={description}

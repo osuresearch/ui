@@ -1,8 +1,7 @@
 import React from 'react';
 
-import { StyleSystemProps } from '~/types';
-import { cx, polymorphicForwardRef } from '~/utils';
-
+import { StyleSystemProps } from '../../types';
+import { cx, polymorphicForwardRef } from '../../utils';
 import { Box } from '../Box';
 
 export type TextProps = StyleSystemProps & {

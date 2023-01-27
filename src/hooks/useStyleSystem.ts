@@ -1,9 +1,8 @@
 import { CSSProperties } from 'react';
 
-import { bgc, ff, fs, fw, tc } from '~/theme';
-import { colorProps, fontProps, layoutProps, marginProps, paddingProps, sizeProps } from '~/types';
-import { spacingPropsToClassNames, splitProps } from '~/utils';
-
+import { bgc, ff, fs, fw, tc } from '../theme';
+import { colorProps, fontProps, layoutProps, marginProps, paddingProps, sizeProps } from '../types';
+import { spacingPropsToClassNames, splitProps } from '../utils';
 import { useScreenSize } from './useScreenSize';
 import { useTheme } from './useTheme';
 

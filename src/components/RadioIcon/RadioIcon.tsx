@@ -1,9 +1,8 @@
 import { FocusableElement } from '@react-types/shared';
 import React, { DOMAttributes } from 'react';
 
-import { StyleSystemProps } from '~/types';
-import { cx } from '~/utils';
-
+import { StyleSystemProps } from '../../types';
+import { cx } from '../../utils';
 import { Box } from '../Box';
 import { Icon } from '../Icon';
 
@@ -11,7 +10,6 @@ export type RadioIconProps = DOMAttributes<FocusableElement> &
   StyleSystemProps & {
     isSelected?: boolean;
     isDisabled?: boolean;
-    isFocusVisible?: boolean;
   };
 
 /**
@@ -24,12 +22,7 @@ export type RadioIconProps = DOMAttributes<FocusableElement> &
  *
  * @internal
  */
-export const RadioIcon = ({
-  isSelected,
-  isFocusVisible, // TODO: Unused. Might not need anymore due to new <FocusRing>
-  isDisabled,
-  ...props
-}: RadioIconProps) => (
+export const RadioIcon = ({ isSelected, isDisabled, ...props }: RadioIconProps) => (
   <Box
     w={20}
     h={20}

@@ -1,10 +1,6 @@
 import React from 'react';
-import { AriaButtonProps } from 'react-aria';
-import { ToggleProps } from 'react-stately';
 
-import { StyleSystemProps } from '~/types';
-import { cx, polymorphicForwardRef } from '~/utils';
-
+import { cx, polymorphicForwardRef } from '../../utils';
 import { Group } from '../Group';
 import { UnstyledToggle, UnstyledToggleProps } from '../UnstyledToggle';
 

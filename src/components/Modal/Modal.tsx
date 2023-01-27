@@ -1,22 +1,11 @@
 import { FocusableElement } from '@react-types/shared';
 import React, { useRef, useState } from 'react';
-import {
-  AriaDialogProps,
-  AriaModalOverlayProps,
-  useDialog,
-  useModalOverlay,
-  useOverlayTrigger
-} from 'react-aria';
-import { FocusScope, Overlay } from 'react-aria';
+import { AriaDialogProps, AriaModalOverlayProps, useModalOverlay } from 'react-aria';
+import { Overlay } from 'react-aria';
 import { OverlayTriggerState } from 'react-stately';
 import { CSSTransition } from 'react-transition-group';
 
 import { Box } from '../Box';
-import { Button } from '../Button';
-import { Group } from '../Group';
-import { Heading } from '../Heading';
-import { Paper } from '../Paper';
-import { Stack } from '../Stack';
 import { Underlay } from '../Underlay';
 
 export type ModalProps = AriaModalOverlayProps & {

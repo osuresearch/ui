@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { Color, StyleSystemProps } from '~/types';
-import { cx, polymorphicForwardRef } from '~/utils';
-
+import { Color } from '../../theme';
+import { StyleSystemProps } from '../../types';
+import { cx, polymorphicForwardRef } from '../../utils';
 import { Box } from '../Box';
 import { Image } from '../Image';
 import { Text } from '../Text';
@@ -86,7 +86,6 @@ export const Avatar = polymorphicForwardRef<'div', AvatarProps>(
       src,
       size = 38,
       alt,
-      children,
       ...props
     },
     ref
@@ -108,6 +107,7 @@ export const Avatar = polymorphicForwardRef<'div', AvatarProps>(
 
     return (
       <Box
+        ref={ref}
         as={as || 'div'}
         className={cx('rui-block', 'rui-relative', className)}
         style={{

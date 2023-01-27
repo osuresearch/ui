@@ -1,8 +1,8 @@
 import React, { forwardRef } from 'react';
 
-import { Color, ThemeProp } from '~/types';
-import { cx } from '~/utils';
-
+import { Color } from '../../theme';
+import { ThemeProp } from '../../types';
+import { cx } from '../../utils';
 import { Box } from '../Box';
 import { Group } from '../Group';
 
@@ -39,7 +39,7 @@ export type BadgeProps = {
  */
 export const Badge = forwardRef<HTMLDivElement, BadgeProps>(
   ({ c = 'primary', count, ping = false, maxCount = 99, children }, ref) => (
-    <div className="rui-inline-block rui-relative">
+    <div className="rui-inline-block rui-relative" ref={ref}>
       {children}
       {count !== 0 && ( // Hide badge on 0
         <div

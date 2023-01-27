@@ -1,9 +1,7 @@
 import React from 'react';
 
-import { useScreenSize } from '~/hooks';
-
+import { useScreenSize } from '../../hooks';
 import { Box } from '../Box';
-import { ExternalLink } from '../ExternalLink';
 import { Group } from '../Group';
 import { Icon } from '../Icon';
 import { Link } from '../Link';

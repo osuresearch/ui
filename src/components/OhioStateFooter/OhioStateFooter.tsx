@@ -1,7 +1,4 @@
-import React, { forwardRef } from 'react';
-
-import { StyleSystemProps } from '~/types';
-import { cx } from '~/utils';
+import React from 'react';
 
 import { Box } from '../Box';
 import { Divider } from '../Divider';

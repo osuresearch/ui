@@ -1,9 +1,8 @@
 import React from 'react';
 
-import * as styles from '~/theme';
-import { Align, Justify, PositiveSpacing, StyleSystemProps } from '~/types';
-import { cx, polymorphicForwardRef } from '~/utils';
-
+import * as styles from '../../theme';
+import { Align, Justify, PositiveSpacing, StyleSystemProps } from '../../types';
+import { cx, polymorphicForwardRef } from '../../utils';
 import { Box } from '../Box';
 
 export type StackProps = StyleSystemProps & {
@@ -31,9 +30,9 @@ export const Stack = polymorphicForwardRef<'div', StackProps>(
       ref={ref}
       className={cx(
         'rui-flex rui-flex-col rui-relative',
-        styles.justify(justify),
+        styles.justifyContent(justify),
         styles.gap(gap),
-        styles.align(align),
+        styles.alignItems(align),
         className
       )}
       {...props}

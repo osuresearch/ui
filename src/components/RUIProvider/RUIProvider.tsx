@@ -1,9 +1,7 @@
 import React, { createContext, useEffect, useMemo, useState } from 'react';
 import { OverlayProvider } from 'react-aria';
 
-import { Theme } from '~/types';
-
-import { Box } from '../Box';
+import { Theme } from '../../types';
 
 export type RUIProviderProps = {
   /**
@@ -29,13 +27,7 @@ export interface IRUIContext {
 
 const DEFAULT_THEME = 'light';
 
-export const RUIContext = createContext<IRUIContext>({
-  theme: DEFAULT_THEME,
-  setTheme: (v) => 0,
-
-  reducedMotion: false,
-  setReducedMotion: (v) => 0
-});
+export const RUIContext = createContext<IRUIContext>({} as IRUIContext);
 
 /**
  * The RUI Provider wraps an application to support global features of the framework.

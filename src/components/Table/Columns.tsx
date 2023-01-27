@@ -8,8 +8,7 @@ import {
 } from 'react-aria';
 import { TableState } from 'react-stately';
 
-import { cx } from '~/utils';
-
+import { cx } from '../../utils';
 import { CheckboxIcon } from '../CheckboxIcon';
 import { FocusRing } from '../FocusRing';
 import { Icon } from '../Icon';

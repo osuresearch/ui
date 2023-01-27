@@ -1,8 +1,6 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 
-import { StyleSystemProps } from '~/types';
-import { cx } from '~/utils';
-
+import { cx } from '../../utils';
 import { Text } from '../Text';
 
 export type KbdProps = {

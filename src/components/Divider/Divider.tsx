@@ -1,8 +1,7 @@
 import React, { forwardRef } from 'react';
 
-import { PositiveSpacing } from '~/types';
-import { cx } from '~/utils';
-
+import { PositiveSpacing } from '../../types';
+import { cx } from '../../utils';
 import { Box } from '../Box';
 
 export type DividerProps = {

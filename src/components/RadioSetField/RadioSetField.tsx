@@ -14,8 +14,6 @@ import {
   useRadioGroupState
 } from 'react-stately';
 
-import { AriaNecessityIndicator, StyleSystemProps } from '~/types';
-
 import { FormField, FormFieldBase } from '../FormField';
 import { RadioIcon } from '../RadioIcon';
 import { Stack } from '../Stack';

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { cx } from '~/utils';
+import { cx } from '../../utils';
 
 export type UnderlayProps = React.ComponentProps<'div'> & {
   variant?: 'default' | 'tint' | 'blur' | 'paranoid';

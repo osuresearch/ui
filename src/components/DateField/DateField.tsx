@@ -4,17 +4,13 @@ import React, { forwardRef, useRef } from 'react';
 import { AriaDatePickerProps, useDateField, useDateSegment, useLocale } from 'react-aria';
 import { DateFieldState, DateSegment, useDateFieldState } from 'react-stately';
 
-import { cx, mergeRefs } from '~/utils';
-
+import { cx, mergeRefs } from '../../utils';
 import { FormField, FormFieldBase } from '../FormField';
 import { Group } from '../Group';
 import { Text } from '../Text';
 import { VisuallyHidden } from '../VisuallyHidden';
 
-export type DateFieldProps = FormFieldBase<DateValue> &
-  AriaDatePickerProps<DateValue> & {
-    rows?: number;
-  };
+export type DateFieldProps = FormFieldBase<DateValue> & AriaDatePickerProps<DateValue>;
 
 // We only support the gregorian calendar to reduce bundle size.
 // For more info, see React Aria's docs:
@@ -91,7 +87,7 @@ function Segment({ segment, state }: SegmentProps) {
  *
  * <!-- @ruiAtomic Date -->
  */
-export const DateField = forwardRef<HTMLDivElement, DateFieldProps>(({ rows, ...props }, ref) => {
+export const DateField = forwardRef<HTMLDivElement, DateFieldProps>((props, ref) => {
   const inputRef = useRef<HTMLDivElement>(null);
 
   const { locale } = useLocale();

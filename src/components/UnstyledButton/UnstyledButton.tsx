@@ -2,9 +2,8 @@ import { mergeProps } from '@react-aria/utils';
 import React, { useRef } from 'react';
 import { AriaButtonProps, useButton } from 'react-aria';
 
-import { StyleSystemProps } from '~/types';
-import { cx, mergeRefs, polymorphicForwardRef } from '~/utils';
-
+import { StyleSystemProps } from '../../types';
+import { mergeRefs, polymorphicForwardRef } from '../../utils';
 import { Box } from '../Box';
 import { FocusRing } from '../FocusRing';
 

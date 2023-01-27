@@ -1,8 +1,7 @@
 import React, { forwardRef } from 'react';
 import { mergeProps } from 'react-aria';
 
-import { cx } from '~/utils';
-
+import { cx } from '../../utils';
 import { Icon } from '../Icon';
 import { UnstyledToggle, UnstyledToggleProps } from '../UnstyledToggle';
 

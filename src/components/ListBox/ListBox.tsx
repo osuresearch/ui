@@ -3,8 +3,7 @@ import React, { ForwardedRef, forwardRef, useRef } from 'react';
 import { AriaListBoxOptions, useListBox, useOption } from 'react-aria';
 import { ListState } from 'react-stately';
 
-import { cx, mergeRefs } from '~/utils';
-
+import { cx, mergeRefs } from '../../utils';
 import { Box } from '../Box';
 import { FocusRing } from '../FocusRing';
 

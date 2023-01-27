@@ -2,8 +2,7 @@ import React, { forwardRef, useRef } from 'react';
 import { useLocale, useNumberField } from 'react-aria';
 import { NumberFieldStateOptions, useNumberFieldState } from 'react-stately';
 
-import { mergeRefs } from '~/utils';
-
+import { mergeRefs } from '../../utils';
 import { FormField, FormFieldBase } from '../FormField';
 import { IconButton } from '../IconButton';
 import { TextInputSlot } from '../TextField';

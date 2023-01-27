@@ -1,7 +1,6 @@
-import classNames from 'classnames';
-
 // Re-export mergeProps, we use it everywhere.
-export { mergeProps } from '@react-aria/utils';
+import { mergeProps as ariaMergeProps } from '@react-aria/utils';
+import classNames from 'classnames';
 
 export * from './polymorphics';
 export * from './createPolymorphicComponent';
@@ -9,6 +8,24 @@ export * from './theme';
 
 export function cx(...args: classNames.ArgumentArray): string {
   return classNames(args);
+}
+
+interface Props {
+  [key: string]: any;
+}
+type TupleTypes<T> = {
+  [P in keyof T]: T[P];
+} extends {
+  [key: number]: infer V;
+}
+  ? V
+  : never;
+type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends (k: infer I) => void
+  ? I
+  : never;
+
+export function mergeProps<T extends Props[]>(...args: T): UnionToIntersection<TupleTypes<T>> {
+  return ariaMergeProps(...args);
 }
 
 /**

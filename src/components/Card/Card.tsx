@@ -1,8 +1,7 @@
 import React, { forwardRef } from 'react';
 
-import { StyleSystemProps } from '~/types';
-import { cx } from '~/utils';
-
+import { StyleSystemProps } from '../../types';
+import { cx } from '../../utils';
 import { Box } from '../Box';
 import { Group } from '../Group';
 import { Icon } from '../Icon';

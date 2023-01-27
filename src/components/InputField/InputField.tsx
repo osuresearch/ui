@@ -1,11 +1,9 @@
-import { mergeProps } from '@react-aria/utils';
 import { DOMAttributes, FocusableElement } from '@react-types/shared';
 import React, { ForwardedRef, forwardRef } from 'react';
 import { AriaTextFieldProps, useFocusRing } from 'react-aria';
 
-import { useStyleSystemProps } from '~/hooks/useStyleSystemProps';
-import { AriaNecessityIndicator, SlotType, StyleSystemProps } from '~/types';
-
+import { useStyleSystemProps } from '../../hooks/useStyleSystemProps';
+import { AriaNecessityIndicator, SlotType, StyleSystemProps } from '../../types';
 import { Icon } from '../Icon';
 import { makeMissingSlot } from '../MissingSlot';
 import { NecessityIndicator } from '../NecessityIndicator';

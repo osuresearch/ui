@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { useStyleSystem } from '~/hooks/useStyleSystem';
-import { StyleSystemProps } from '~/types';
-import { polymorphicForwardRef } from '~/utils';
-import { cx } from '~/utils';
+import { useStyleSystem } from '../../hooks/useStyleSystem';
+import { StyleSystemProps } from '../../types';
+import { polymorphicForwardRef } from '../../utils';
+import { cx } from '../../utils';
 
 export type BoxProps = StyleSystemProps & {
   children?: React.ReactNode;

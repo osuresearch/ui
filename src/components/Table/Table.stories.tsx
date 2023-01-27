@@ -4,8 +4,8 @@ import React, { useState } from 'react';
 import { Cell, Column, Row, TableBody, TableHeader, useAsyncList } from 'react-stately';
 
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
-import { useTabularData } from '~/hooks/useTabularData';
 
+import { useTabularData } from '../../hooks/useTabularData';
 import { Item } from '../Item/Item.stories';
 import { Table, TableProps } from './Table';
 

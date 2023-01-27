@@ -1,11 +1,10 @@
 import React, { forwardRef, useEffect, useState } from 'react';
 import { mergeProps } from 'react-aria';
 
-import { useTheme } from '~/hooks';
-import { SlotProp, useSlots } from '~/hooks/useSlots';
-import { StyleSystemProps, ThemeProp } from '~/types';
-import { cx } from '~/utils';
-
+import { useTheme } from '../../hooks';
+import { SlotProp, useSlots } from '../../hooks/useSlots';
+import { StyleSystemProps, ThemeProp } from '../../types';
+import { cx } from '../../utils';
 import { Box } from '../Box';
 import { Text } from '../Text';
 

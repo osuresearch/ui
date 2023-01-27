@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { PositiveSpacing } from '~/types';
-import { cx, spacingValueToClass } from '~/utils';
+import { PositiveSpacing } from '../../types';
+import { cx, spacingValueToClass } from '../../utils';
 
 export type SpaceProps = {
   h?: PositiveSpacing;

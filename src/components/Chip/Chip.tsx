@@ -1,12 +1,10 @@
 import { PressEvent } from '@react-types/shared';
 import React from 'react';
 
-import { bc } from '~/theme';
-import { Color, StyleSystemProps } from '~/types';
-import { cx, polymorphicForwardRef } from '~/utils';
-
+import { Color, bc } from '../../theme';
+import { StyleSystemProps } from '../../types';
+import { cx, polymorphicForwardRef } from '../../utils';
 import { Box } from '../Box';
-import { Button } from '../Button';
 import { CloseButton } from '../CloseButton';
 import { Group } from '../Group';
 
@@ -33,6 +31,7 @@ export type ChipProps = StyleSystemProps & {
 export const Chip = polymorphicForwardRef<'div', ChipProps>(
   ({ as, c = 'light', variant = 'solid', isRemovable, onRemove, children, ...props }, ref) => (
     <Box
+      ref={ref}
       as={as || 'div'}
       bgc={variant === 'solid' ? c : undefined}
       c={

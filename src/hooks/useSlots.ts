@@ -28,7 +28,7 @@ export function useSlots<Props extends Record<string, any>>(props: Props) {
         a[k] = slot;
       } else {
         // TODO: Can we pass it down as props?
-        a[k] = (_: any) => slot;
+        a[k] = () => slot;
       }
 
       return a;

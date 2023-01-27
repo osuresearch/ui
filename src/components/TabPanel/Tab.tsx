@@ -3,8 +3,7 @@ import React, { useRef } from 'react';
 import { useTab } from 'react-aria';
 import { TabListState } from 'react-stately';
 
-import { cx } from '~/utils';
-
+import { cx } from '../../utils';
 import { Box } from '../Box';
 import { FocusRing } from '../FocusRing';
 import { TabPanelVariant } from './TabPanel';

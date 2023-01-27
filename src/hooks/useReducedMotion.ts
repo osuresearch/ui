@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { RUIContext } from '~/components/RUIProvider';
+import { RUIContext } from '../components/RUIProvider';
 
 /**
  * Query and update the current user's reduced motion preferences

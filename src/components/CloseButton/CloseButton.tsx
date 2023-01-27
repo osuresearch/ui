@@ -1,6 +1,4 @@
-import React, { MouseEventHandler, forwardRef } from 'react';
-
-import { StyleSystemProps } from '~/types';
+import React, { forwardRef } from 'react';
 
 import { IconButton, IconButtonProps } from '../IconButton';
 
@@ -21,7 +19,7 @@ export type CloseButtonProps = Omit<IconButtonProps, 'name' | 'label'> & {
  * - Touch target of 44px meets Success Criterion [2.5.5 Target Size (Level AAA)](https://www.w3.org/WAI/WCAG21/Understanding/target-size)
  */
 export const CloseButton = forwardRef<HTMLButtonElement, CloseButtonProps>(
-  ({ label = 'Close', size = 16, className, ...props }, ref) => (
+  ({ label = 'Close', size = 16, ...props }, ref) => (
     <IconButton
       ref={ref}
       variant="fade"

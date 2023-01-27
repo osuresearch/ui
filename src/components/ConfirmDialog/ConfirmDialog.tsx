@@ -1,9 +1,8 @@
 import React, { forwardRef, useRef } from 'react';
 import { AriaDialogProps, useDialog } from 'react-aria';
 
-import { Color } from '~/types';
-import { mergeRefs } from '~/utils';
-
+import { Color } from '../../theme';
+import { mergeRefs } from '../../utils';
 import { Button } from '../Button';
 import { FocusRing } from '../FocusRing';
 import { Group } from '../Group';

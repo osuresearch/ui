@@ -2,7 +2,6 @@ import React from 'react';
 
 import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
-import { Badge } from '../Badge';
 import { Button, ButtonProps } from '../Button';
 import { Group } from '../Group';
 import { Icon } from '../Icon';
@@ -90,7 +89,7 @@ export const WithAccent = RUIComponentStory<ButtonProps>(
     variant: 'accented'
   }
 ).withDescription(`
-  The \`accented\` button variant can be used against accented backgrounds. 
+  The \`accented\` button variant can be used against accented backgrounds.
 
   You should not use an accented button against the primary color.
 `);
