@@ -1,7 +1,7 @@
 import React from 'react';
-import { fontSize } from '~/types';
-import { Text } from '~/components/Text';
-import { Code } from '~/components/Code';
+import { fontSize } from '../../src/types';
+import { Text } from '../../src/components/Text';
+import { Code } from '../../src/components/Code';
 
 export function FontSizeTable() {
   return (

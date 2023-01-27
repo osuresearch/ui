@@ -1,6 +1,5 @@
+import { RUIComponentMeta, RUIComponentStory } from '@sb/utils';
 import React from 'react';
-
-import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
 import { Avatar } from '../Avatar';
 import { AvatarGroupProps, AvatarGroup as Component } from './AvatarGroup';

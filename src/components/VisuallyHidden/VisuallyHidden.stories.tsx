@@ -1,6 +1,5 @@
+import { RUIComponentMeta } from '@sb/utils';
 import React from 'react';
-
-import { RUIComponentMeta } from '~/.storybook/utils';
 
 import { VisuallyHidden as Component } from './VisuallyHidden';
 

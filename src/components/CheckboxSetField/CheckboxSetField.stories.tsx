@@ -1,7 +1,6 @@
+import { RUIComponentMeta, RUIComponentStory } from '@sb/utils';
 import React, { useState } from 'react';
 import { useListData } from 'react-stately';
-
-import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
 import { Item } from '../Item';
 import { Text } from '../Text';

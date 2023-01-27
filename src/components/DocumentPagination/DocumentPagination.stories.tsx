@@ -1,6 +1,5 @@
+import { RUIComponentMeta, RUIComponentStory } from '@sb/utils';
 import React from 'react';
-
-import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
 import { Group } from '../Group';
 import { DocumentPagination as Component, DocumentPaginationProps } from './DocumentPagination';

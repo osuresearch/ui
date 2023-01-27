@@ -1,6 +1,5 @@
+import { RUIComponentMeta, RUIComponentStory } from '@sb/utils';
 import React, { forwardRef, useRef, useState } from 'react';
-
-import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
 import { Button } from '../Button';
 import { Icon } from '../Icon';
@@ -70,10 +69,10 @@ export const Decimal = RUIComponentStory<NumberFieldProps>(Overview, {
     maximumFractionDigits: 2
   }
 }).withDescription(`
-  The following example uses the \`signDisplay\` option to include 
-  the plus sign for positive numbers, for example to display an offset 
-  from some value. In addition, it always displays a minimum of 1 digit 
-  after the decimal point, and allows up to 2 fraction digits. 
+  The following example uses the \`signDisplay\` option to include
+  the plus sign for positive numbers, for example to display an offset
+  from some value. In addition, it always displays a minimum of 1 digit
+  after the decimal point, and allows up to 2 fraction digits.
   If the user enters more than 2 fraction digits, the result will be rounded.
 `);
 
@@ -85,15 +84,15 @@ export const Percentage = RUIComponentStory<NumberFieldProps>(Overview, {
     style: 'percent'
   }
 }).withDescription(`
-  The percent formatting option will treat the value as a percentage. 
-  In this mode, the value is multiplied by 100 before it is displayed, 
-  i.e. 0.45 is displayed as 45%. 
-  
-  The reverse is also true: when the user enters a value, the \`onChange\` 
-  event will be triggered with the entered value divided by 100. 
-  
-  When the percent option is enabled, the default step automatically 
-  changes to 0.01 such that incrementing and decrementing occurs by 1%. 
+  The percent formatting option will treat the value as a percentage.
+  In this mode, the value is multiplied by 100 before it is displayed,
+  i.e. 0.45 is displayed as 45%.
+
+  The reverse is also true: when the user enters a value, the \`onChange\`
+  event will be triggered with the entered value divided by 100.
+
+  When the percent option is enabled, the default step automatically
+  changes to 0.01 such that incrementing and decrementing occurs by 1%.
   This can be overridden with the \`step\` prop.
 `);
 
@@ -119,16 +118,16 @@ export const CustomUnits = RUIComponentStory<NumberFieldProps>(Overview, {
   }
 }).withDescription(`
   The style: 'unit' option can be passed to the \`formatOptions \`
-  prop to format the value with a unit of measurement. 
-  The unit option must also be passed to set which unit to 
-  use (e.g. inch). In addition, the unitDisplay option can 
+  prop to format the value with a unit of measurement.
+  The unit option must also be passed to set which unit to
+  use (e.g. inch). In addition, the unitDisplay option can
   be used to choose whether to display the unit in long, short, or narrow format.
 
-  If you need to allow the user to change the unit, you should 
+  If you need to allow the user to change the unit, you should
   include a separate dropdown next to the number field. The number
   field itself will not determine the unit from the user input.
 
-  Note: the unit style is not currently supported in Safari. 
+  Note: the unit style is not currently supported in Safari.
   A polyfill may be necessary.
 
   For additional details, see [React Aria's useNumberField docs](https://react-spectrum.adobe.com/react-aria/useNumberField.html#units).

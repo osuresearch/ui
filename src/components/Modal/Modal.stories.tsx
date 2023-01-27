@@ -1,8 +1,7 @@
+import { RUIComponentMeta, RUIComponentStory } from '@sb/utils';
 import React from 'react';
 
-import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
-import { Text } from '~/components/Text';
-
+import { Text } from '../Text';
 import { Modal as Component, ModalProps } from './Modal';
 
 export default RUIComponentMeta<ModalProps>('Internal', Component);

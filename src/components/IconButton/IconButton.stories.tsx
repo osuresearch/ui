@@ -1,6 +1,5 @@
+import { RUIComponentMeta, RUIComponentStory } from '@sb/utils';
 import React from 'react';
-
-import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
 import { IconButton, IconButtonProps } from './IconButton';
 
@@ -29,7 +28,7 @@ export const WithPadding = RUIComponentStory<IconButtonProps>((args) => <IconBut
   size: 16,
   iconProps: { p: 'md' }
 }).withDescription(`
-Use \`iconProps\` to send properties to the inner \`<Icon>\` element. 
+Use \`iconProps\` to send properties to the inner \`<Icon>\` element.
 
 Combining a smaller icon size with iconProp padding allows you to use smaller
 icons with larger touch surfaces.

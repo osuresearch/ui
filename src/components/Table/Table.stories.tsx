@@ -1,9 +1,8 @@
 import { SortDescriptor } from '@react-types/shared';
+import { RUIComponentMeta, RUIComponentStory } from '@sb/utils';
 import { Story } from '@storybook/react';
 import React, { useState } from 'react';
 import { Cell, Column, Row, TableBody, TableHeader, useAsyncList } from 'react-stately';
-
-import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
 import { useTabularData } from '../../hooks/useTabularData';
 import { Item } from '../Item/Item.stories';

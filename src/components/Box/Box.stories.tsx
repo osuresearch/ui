@@ -1,7 +1,6 @@
 import { FocusableElement } from '@react-types/shared';
+import { RUIComponentMeta, RUIComponentStory } from '@sb/utils';
 import React, { forwardRef, useRef } from 'react';
-
-import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
 import { Box, BoxProps } from './Box';
 

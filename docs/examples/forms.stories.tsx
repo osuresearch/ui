@@ -22,13 +22,12 @@ import {
   SelectField,
   Stack,
   SwitchField,
+  Text,
   TextAreaField,
   TextField,
   YesNoField
-} from '~/components';
-import { Text } from '~/components/Text';
-
-import { useRUIForm } from '../../hooks/useRUIForm';
+} from '../../src/components';
+import { useRUIForm } from '../../src/hooks/useRUIForm';
 
 export default {
   title: 'Examples / Forms'

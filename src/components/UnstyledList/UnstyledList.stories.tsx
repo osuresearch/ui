@@ -1,8 +1,7 @@
+import { RUIComponentMeta, RUIComponentStory } from '@sb/utils';
 import React, { Key, useRef, useState } from 'react';
 import { useCheckbox } from 'react-aria';
 import { useToggleState } from 'react-stately';
-
-import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
 import { Box } from '../Box';
 import { Group } from '../Group';

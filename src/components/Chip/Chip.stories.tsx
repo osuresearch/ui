@@ -1,7 +1,6 @@
+import { RUIComponentMeta, RUIComponentStory } from '@sb/utils';
 import { Story } from '@storybook/react';
 import React from 'react';
-
-import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
 import { Button, Icon, UnstyledButton } from '..';
 import { Avatar } from '../Avatar';

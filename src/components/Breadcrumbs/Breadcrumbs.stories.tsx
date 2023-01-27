@@ -1,6 +1,5 @@
+import { RUIComponentMeta, RUIComponentStory } from '@sb/utils';
 import React from 'react';
-
-import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
 import { BreadcrumbsProps, Breadcrumbs as Component } from '../Breadcrumbs';
 import { Link } from '../Link';

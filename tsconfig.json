@@ -15,8 +15,13 @@
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
 
-    "rootDir": "src",
     "baseUrl": ".",
+    "paths": {
+      // Note: Only use these paths for Storybook stories.
+      // Compilation of the main library will break otherwise.
+      // "@osuresearch/ui": [".src/index.ts"],
+      "@sb/*": ["./.storybook/*"],
+    },
   },
   "exclude": [
     "dist",

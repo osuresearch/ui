@@ -1,11 +1,11 @@
 
 import React from 'react';
-import { Icon } from '~/components/Icon';
-import { Text } from '~/components/Text';
-import { Stack } from '~/components/Stack';
-import { Group } from '~/components/Group';
+import { Icon } from '../src/components/Icon';
+import { Text } from '../src/components/Text';
+import { Stack } from '../src/components/Stack';
+import { Group } from '../src/components/Group';
 
-import { groups } from '~/icons';
+import { groups } from '../src/icons';
 
 /**
  * Custom icon gallery component for Storybook to

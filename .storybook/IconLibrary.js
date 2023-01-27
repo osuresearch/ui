@@ -1,9 +1,9 @@
 
 import React from 'react';
 import { IconGallery, IconItem } from '@storybook/addon-docs';
-import { Icon } from '~/components/Icon';
-import { Text } from '~/components/Text';
-import { groups } from '~/icons';
+import { Icon } from '../src/components/Icon';
+import { Text } from '../src/components/Text';
+import { groups } from '../src/icons';
 
 /**
  * Custom icon gallery component for Storybook to

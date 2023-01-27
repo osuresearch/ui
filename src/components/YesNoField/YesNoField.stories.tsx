@@ -1,6 +1,5 @@
+import { RUIComponentMeta, RUIComponentStory } from '@sb/utils';
 import React, { useState } from 'react';
-
-import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
 import { Text } from '../Text';
 import { YesNoField, YesNoFieldProps } from './YesNoField';
@@ -44,8 +43,8 @@ export const ReadOnly = RUIComponentStory(Overview, {
   defaultValue: '1',
   isReadOnly: true
 }).withDescription(`
-  Read only state is not supported natively by select, but our 
-  component supports an \`isReadOnly\` prop and custom render state 
+  Read only state is not supported natively by select, but our
+  component supports an \`isReadOnly\` prop and custom render state
   for consistency with other form fields.
 `);
 

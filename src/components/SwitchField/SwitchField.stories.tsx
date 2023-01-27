@@ -1,6 +1,5 @@
+import { RUIComponentMeta, RUIComponentStory } from '@sb/utils';
 import React, { useState } from 'react';
-
-import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
 import { Text } from '../Text';
 import { SwitchField as Component, SwitchFieldProps } from './SwitchField';

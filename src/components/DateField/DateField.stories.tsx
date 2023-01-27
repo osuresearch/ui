@@ -1,7 +1,6 @@
 import { DateValue, parseDate, parseDateTime } from '@internationalized/date';
+import { RUIComponentMeta, RUIComponentStory } from '@sb/utils';
 import React, { forwardRef, useRef, useState } from 'react';
-
-import { RUIComponentMeta, RUIComponentStory } from '~/.storybook/utils';
 
 import { Button } from '../Button';
 import { Icon } from '../Icon';
