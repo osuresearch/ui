@@ -53,7 +53,7 @@ function _ListBox<T>(props: ListBoxProps<T>, ref: ForwardedRef<HTMLUListElement>
   return (
     <FocusRing>
       <Box as="ul" ref={mergeRefs(ref, boxRef)} {...listBoxProps}>
-        {[...state.collection].map((item) => (
+        {Array.from(state.collection).map((item) => (
           <ListItem<T> key={item.key} node={item} state={state} />
         ))}
       </Box>

@@ -118,7 +118,7 @@ export const UnstyledList = polymorphicForwardRef<'ul', UnstyledListProps>((prop
       {...mergeProps(gridProps, props as object)}
       ref={mergeRefs(listRef, ref)}
     >
-      {[...state.collection].map((item) => (
+      {Array.from(state.collection).map((item) => (
         <Item key={item.key} node={item} state={state} {...props} />
       ))}
     </Box>

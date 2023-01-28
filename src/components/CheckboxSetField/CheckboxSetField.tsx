@@ -102,7 +102,7 @@ export const CheckboxSetField = forwardRef<HTMLDivElement, CheckboxSetFieldProps
         {...props}
       >
         <Stack ref={ref}>
-          {[...listState.collection].map((item) => {
+          {Array.from(listState.collection).map((item) => {
             if (item.type === 'section') {
               return <div key={item.key}>TODO: section</div>;
             }

@@ -81,7 +81,7 @@ function MenuImpl(props: MenuImplProps) {
   return (
     <FocusRing>
       <Box as="ul" ref={ref} {...menuProps}>
-        {[...state.collection].map((item) => {
+        {Array.from(state.collection).map((item) => {
           if (item.type === 'section') {
             return <div key={item.key}>TODO: Section support</div>;
           }

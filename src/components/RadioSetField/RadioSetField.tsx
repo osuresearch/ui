@@ -20,6 +20,8 @@ import { Stack } from '../Stack';
 import { ToggleField } from '../ToggleField';
 
 export type RadioItem = {
+  // TODO: This is wrong. What if I wanted to use key?
+  // This should be consistent with usage with Checkbox sets
   name?: string;
   label?: React.ReactNode;
   description?: React.ReactNode;
@@ -100,7 +102,7 @@ export const RadioSetField = forwardRef<HTMLDivElement, RadioSetFieldProps>((pro
         {...props}
       >
         <Stack ref={ref}>
-          {[...listState.collection].map((item) => (
+          {Array.from(listState.collection).map((item) => (
             <GroupItem key={item.key} node={item} value={item.textValue} />
           ))}
         </Stack>

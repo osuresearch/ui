@@ -108,7 +108,7 @@ function TabPanelImpl(props: TabPanelImplProps) {
           )}
           style={{ ...activeTabStyle }}
         />
-        {[...state.collection].map((tab) => (
+        {Array.from(state.collection).map((tab) => (
           <Tab
             variant={variant}
             key={tab.key}
