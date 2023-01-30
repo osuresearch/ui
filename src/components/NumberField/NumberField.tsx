@@ -1,3 +1,4 @@
+import { NumberFieldProps as BaseNumberFieldProps } from '@react-types/numberfield';
 import React, { forwardRef, useRef } from 'react';
 import { useLocale, useNumberField } from 'react-aria';
 import { NumberFieldStateOptions, useNumberFieldState } from 'react-stately';
@@ -7,7 +8,7 @@ import { FormField, FormFieldBase } from '../FormField';
 import { IconButton } from '../IconButton';
 import { TextInputSlot } from '../TextField';
 
-export type NumberFieldProps = FormFieldBase<number> & NumberFieldStateOptions;
+export type NumberFieldProps = FormFieldBase<number> & BaseNumberFieldProps;
 
 /**
  * Number fields allow users to enter a number, and increment
