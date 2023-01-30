@@ -48,6 +48,7 @@ export const ComboBoxField = forwardRef<HTMLInputElement, ComboBoxFieldProps>((p
   const inputRef = useRef<HTMLInputElement>(null);
   const listBoxRef = useRef<HTMLDivElement>(null);
   const popoverRef = useRef<HTMLDivElement>(null);
+  const anchorRef = useRef<HTMLDivElement>(null);
 
   const { contains } = useFilter({
     sensitivity: 'base'
@@ -91,7 +92,7 @@ export const ComboBoxField = forwardRef<HTMLInputElement, ComboBoxFieldProps>((p
       descriptionProps={descriptionProps}
       errorMessageProps={errorMessageProps}
     >
-      <Group w="100%">
+      <div className="rui-relative rui-w-full">
         <TextInputSlot ref={mergeRefs(ref, inputRef)} {...inputProps} />
         <div className="rui-absolute rui-inset-[2px] rui-left-auto">
           <IconButton
@@ -106,12 +107,15 @@ export const ComboBoxField = forwardRef<HTMLInputElement, ComboBoxFieldProps>((p
           />
         </div>
 
+        {/* Anchor right under the start of the input box to position the popover  */}
+        <div ref={anchorRef} className="rui-w-0 rui-h-0" />
+
         {state.isOpen && (
-          <Popover ref={popoverRef} state={state} triggerRef={inputRef} placement="bottom start">
+          <Popover ref={popoverRef} state={state} triggerRef={anchorRef} placement="bottom left">
             <ListBox ref={listBoxRef} {...listBoxProps} state={state} />
           </Popover>
         )}
-      </Group>
+      </div>
     </FormField>
   );
 });
