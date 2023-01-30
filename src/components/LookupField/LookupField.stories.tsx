@@ -126,12 +126,12 @@ export const WithCustomItems = RUIComponentStory<LookupFieldProps>(
     );
   },
   {
-    label: 'Reviewer'
+    label: 'Reviewer',
+    iconName: 'user'
   }
 ).withDescription(`
   Use Item's \`textValue\` prop to populate the input when selected.
 
-  If your field requires the user to select explicit values
-  from the suggestion rather than arbitrary data entry,
-  use a Lookup field instead.
+  The \`iconName\` prop can also be used to further clarify the type of
+  data that you are searching against.
 `);
