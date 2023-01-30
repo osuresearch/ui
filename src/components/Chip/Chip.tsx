@@ -13,7 +13,7 @@ export type ChipProps = StyleSystemProps & {
 
   children?: React.ReactNode;
 
-  isRemovable: boolean;
+  isRemovable?: boolean;
 
   /** Handler that is called when the press is released over the remove button. */
   onRemove?: (e: PressEvent) => void;
