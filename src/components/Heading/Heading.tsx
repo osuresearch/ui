@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 
 import { FontFamily, FontWeight } from '../../types';
-import { polymorphicForwardRef } from '../../utils';
+import { cx, polymorphicForwardRef } from '../../utils';
 import { Box } from '../Box';
 
 export type HeadingProps = {
+  id?: string;
+  className?: string;
+  style?: CSSProperties;
+
   /**
    * Heading level. We support H1 through H4
    */
@@ -19,7 +23,7 @@ export type HeadingProps = {
 };
 
 // Font classes per heading level
-const className = ['rui-text-h1', 'rui-text-h2', 'rui-text-h3', 'rui-text-h4'];
+const headerClassName = ['rui-text-h1', 'rui-text-h2', 'rui-text-h3', 'rui-text-h4'];
 
 // Font weight per heading level
 const fw: FontWeight[] = ['black', 'extrabold', 'semibold', 'semibold'];
@@ -33,7 +37,7 @@ const ff: FontFamily[] = ['serif', 'sans', 'sans', 'sans'];
  * <!-- @ruiPolymorphic -->
  */
 export const Heading = polymorphicForwardRef<'h1', HeadingProps>(
-  ({ as, level, variant, children }, ref) => (
+  ({ as, className, level, variant, children, ...props }, ref) => (
     <Box
       ref={ref}
       as={as ? as : `h${level}`}
@@ -43,7 +47,8 @@ export const Heading = polymorphicForwardRef<'h1', HeadingProps>(
       fw={fw[level - 1]}
       // H1 has additional padding at the bottom
       pb={level === 1 ? 'lg' : 'xs'}
-      className={className[level - 1]}
+      className={cx(className, headerClassName[level - 1])}
+      {...props}
     >
       {children}
     </Box>
