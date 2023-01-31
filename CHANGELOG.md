@@ -1,3 +1,24 @@
+# [5.0.0-alpha.12](https://github.com/osuresearch/ui/compare/v5.0.0-alpha.11...v5.0.0-alpha.12) (2023-01-31)
+
+
+### Bug Fixes
+
+* **build:** reconfigure tsc to target ES5 and DOM ([51d2fda](https://github.com/osuresearch/ui/commit/51d2fdae6c887815169b4108aa480839c0e2933b))
+* **build:** remove bundling of react-hook-form and internationalized/date ([317613b](https://github.com/osuresearch/ui/commit/317613bb7b95c8889a5bdcc79a671a82dff6bb9b))
+* **Chip:** isRemovable prop is optional ([cc17cb7](https://github.com/osuresearch/ui/commit/cc17cb79a9ac23826e414e042de6605999956f08))
+* **ComboBoxField:** misaligned dropdowns ([99fa9cf](https://github.com/osuresearch/ui/commit/99fa9cfabd81e1fc43878224c5718801f8123841))
+* missing hook export ([9d843c8](https://github.com/osuresearch/ui/commit/9d843c8d72ab37d904af91398813182a4a0877c5))
+* **NumberField:** incorrect base type for props ([ca58a26](https://github.com/osuresearch/ui/commit/ca58a26d756f0e8c620eac4814c66f7730f025a3)), closes [#21](https://github.com/osuresearch/ui/issues/21)
+* remove array spread from collection iterators ([d67da70](https://github.com/osuresearch/ui/commit/d67da704482deccac2227ec0715f93a578331b3f)), closes [#23](https://github.com/osuresearch/ui/issues/23)
+* **TextAreaField:** extraneous rows rendered ([d3ba156](https://github.com/osuresearch/ui/commit/d3ba156f6a8f2b43c19aea4911a5a9100a119906)), closes [#26](https://github.com/osuresearch/ui/issues/26)
+
+
+### Features
+
+* add edit icon ([5a93e43](https://github.com/osuresearch/ui/commit/5a93e43fbaba678d24add7f79c667e91903c71c7)), closes [#27](https://github.com/osuresearch/ui/issues/27)
+* **Heading:** add className, id, and style props ([c61e912](https://github.com/osuresearch/ui/commit/c61e9125f35edd3b4665fb43cc3def285261b65c)), closes [#28](https://github.com/osuresearch/ui/issues/28)
+* **LookupField:** add support for a custom icon and using the item renderer for the selection ([3efde0c](https://github.com/osuresearch/ui/commit/3efde0cda4d0e1e5b1cd2bcbd33a57b66f13e5eb))
+
 # [5.0.0-alpha.11](https://github.com/osuresearch/ui/compare/v5.0.0-alpha.10...v5.0.0-alpha.11) (2023-01-27)
 
 
