@@ -26,6 +26,7 @@ const TextAreaSlot = forwardRef<HTMLTextAreaElement, InputSlotProps>((props, ref
       c="light-contrast"
       w="100%"
       className={cx(
+        'rui-overflow-x-hidden', // Fix for Firefox rendering an extra row (#26)
         'rui-border-2 rui-border-light-shade',
         'focus:rui-border-dark-shade',
         { 'rui-border-dimmed rui-bg-light-shade': props.disabled },
