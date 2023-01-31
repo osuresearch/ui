@@ -10,3 +10,4 @@ export * as upload from '@iconify/icons-bi/upload';
 export * as cloudDownload from '@iconify/icons-bi/cloud-arrow-down';
 export * as cloudUpload from '@iconify/icons-bi/cloud-arrow-up';
 export * as rotate from '@iconify/icons-bi/arrow-clockwise';
+export * as edit from '@iconify/icons-bi/pencil';
