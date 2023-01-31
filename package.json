@@ -40,7 +40,8 @@
     "generate:component": "node ./scripts/newComponent.mjs"
   },
   "peerDependencies": {
-    "react": "^16.8.0 || ^17.0.0-rc.1 || ^18.0.0"
+    "react": "^16.8.0 || ^17.0.0-rc.1 || ^18.0.0",
+    "react-hook-form": "^7.42.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.5",
@@ -157,6 +158,7 @@
     "*.{ts,tsx}": "npm run lint"
   },
   "dependencies": {
+    "@internationalized/date": "^3.0.2",
     "react-aria": "^3.22.0",
     "react-responsive": "^9.0.2",
     "react-stately": "^3.20.0",
