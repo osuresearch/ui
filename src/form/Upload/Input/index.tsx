@@ -423,7 +423,7 @@ export default function Input(props: InputProps) {
 
     return (
         <div className="form-upload__wrapper">
-            <PRUpload
+            {!props.disabled && <PRUpload
                 ref={fileUploadRef}
                 id={bind.id || props.id}
                 name={bind.name || props.name}
@@ -442,8 +442,9 @@ export default function Input(props: InputProps) {
                 customUpload
                 uploadHandler={uploadHandler}
             />
+            }
 
-            <div className="form-upload__right-col">
+            <div className={"form-upload__right-col" + (props.disabled ? ' no-space' : '')}>
                 {files.length > 0 && (
                     <div className="form-upload__block--uploaded">
                         <span className="form-upload__block-title">UPLOADED FILES</span>
