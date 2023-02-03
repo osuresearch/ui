@@ -55,6 +55,10 @@
     &__right-col {
         width: 55%;
         padding-left: 2rem;
+
+        &.no-space {
+            padding-left: 0;
+        }
     }
 
     &__block-title {
