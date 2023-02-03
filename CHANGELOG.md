@@ -1,3 +1,10 @@
+## [4.8.3](https://github.com/osuresearch/ui/compare/v4.8.2...v4.8.3) (2023-02-03)
+
+
+### Bug Fixes
+
+* **Upload:** allowed the display of uploader to be controlled by 'disabled' attribute ([#32](https://github.com/osuresearch/ui/issues/32)) ([ce77242](https://github.com/osuresearch/ui/commit/ce77242656ab268ebcfa91b896caf1fc7823f189))
+
 ## [4.8.2](https://github.com/osuresearch/ui/compare/v4.8.1...v4.8.2) (2023-01-19)
 
 
