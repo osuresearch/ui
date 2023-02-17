@@ -38,7 +38,8 @@ export function Tab({ variant, item, state, orientation }: TabProps) {
           {
             // hover style (bg matches the Panel bars)
             'hover:rui-bg-light-shade': !isDisabled,
-            'hover:rui-shadow-underline-dark': !isDisabled
+            'hover:rui-shadow-underline-dark': !isDisabled,
+            'hover:rui-cursor-not-allowed': isDisabled
           }
         )}
         {...tabProps}
