@@ -1,3 +1,10 @@
+# [5.0.0-alpha.13](https://github.com/osuresearch/ui/compare/v5.0.0-alpha.12...v5.0.0-alpha.13) (2023-02-20)
+
+
+### Bug Fixes
+
+* added `cursor-not-allowed` attribute to stop the cursor rendering as a pointer when it's disabled ([b9a602d](https://github.com/osuresearch/ui/commit/b9a602d68b97ebbb51664f603d28a265a6261051)), closes [#6](https://github.com/osuresearch/ui/issues/6)
+
 # [5.0.0-alpha.12](https://github.com/osuresearch/ui/compare/v5.0.0-alpha.11...v5.0.0-alpha.12) (2023-01-31)
 
 
