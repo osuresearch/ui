@@ -6,9 +6,7 @@ import { ProgressBar, ProgressBarProps } from '.';
 
 export default RUIComponentMeta<ProgressBarProps>('Components', ProgressBar);
 
-const Template: Story<ProgressBarProps> = (args: ProgressBarProps) => (
-  <ProgressBar {...args}>This is additional text about this message.</ProgressBar>
-);
+const Template: Story<ProgressBarProps> = (args: ProgressBarProps) => <ProgressBar {...args} />;
 
 export const Overview = RUIComponentStory(Template, {
   label: 'Loading...',
@@ -17,4 +15,5 @@ export const Overview = RUIComponentStory(Template, {
 
 export const LoadingContinuously = RUIComponentStory(Template, {
   label: 'Loading continuously...'
+  // Didn't give a value on purpose to demo the animated ProgressBar
 });

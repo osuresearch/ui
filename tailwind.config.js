@@ -178,10 +178,10 @@ module.exports = {
 
       // Headings use different font steps
       // Ref: https://bux.osu.edu/typography/headings
-      h1: ['var(--rui-heading-1)', { lineHeight: '1.2'}],
-      h2: ['var(--rui-heading-2)', { lineHeight: '1.25'}],
-      h3: ['var(--rui-heading-3)', { lineHeight: '1.25'}],
-      h4: ['var(--rui-heading-4)', { lineHeight: '1.25'}],
+      h1: ['var(--rui-heading-1)', { lineHeight: '1.2' }],
+      h2: ['var(--rui-heading-2)', { lineHeight: '1.25' }],
+      h3: ['var(--rui-heading-3)', { lineHeight: '1.25' }],
+      h4: ['var(--rui-heading-4)', { lineHeight: '1.25' }],
     },
     // Ref: https://bux.osu.edu/typography/fonts
     fontFamily: {
@@ -249,6 +249,23 @@ module.exports = {
       animation: {
         'fade-in-down': 'fade-in-down 0.5s ease-out',
         'pop': 'pop 0.12s ease-in-out',
+        //       'animate-scroll': {
+        //         /* Color */
+        //         background- color: '#3b82f6',
+        //       /* Rounded border */
+        //       border- radius: '9999px';
+
+        //     /* Absolute position */
+        //     position: absolute;
+        //     bottom: 0;
+        //     top: 0;
+        //     width: 50 %;
+
+        //     /* Move the bar infinitely */
+        //     animation- duration: 2s;
+        //   animation- iteration - count: infinite;
+        // animation- name: indeterminate - progress - bar;
+        //       }
       }
     },
   },
