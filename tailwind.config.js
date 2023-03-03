@@ -228,7 +228,7 @@ module.exports = {
           '100%': {
             opacity: '1',
             transform: 'translateY(0)'
-          },
+          }
         },
         'pop': {
           '0%': {
@@ -242,30 +242,22 @@ module.exports = {
           '75%, 100%': {
             // Reduce Tailwind's default ping transform
             transform: 'scale(1.5)',
-            opacity: '0',
+            opacity: '0'
+          }
+        },
+        'scroll': {
+          'from': {
+            transform: 'translateX(0)'
+          },
+          'to': {
+            transform: 'translateX(525%)' // Need to figure out why translateX(100%) doesn't work
           }
         }
       },
       animation: {
         'fade-in-down': 'fade-in-down 0.5s ease-out',
         'pop': 'pop 0.12s ease-in-out',
-        //       'animate-scroll': {
-        //         /* Color */
-        //         background- color: '#3b82f6',
-        //       /* Rounded border */
-        //       border- radius: '9999px';
-
-        //     /* Absolute position */
-        //     position: absolute;
-        //     bottom: 0;
-        //     top: 0;
-        //     width: 50 %;
-
-        //     /* Move the bar infinitely */
-        //     animation- duration: 2s;
-        //   animation- iteration - count: infinite;
-        // animation- name: indeterminate - progress - bar;
-        //       }
+        'scroll': 'scroll 2s linear infinite'
       }
     },
   },

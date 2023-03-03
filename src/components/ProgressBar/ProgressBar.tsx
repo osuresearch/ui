@@ -1,5 +1,6 @@
 import React, { forwardRef, useEffect, useState } from 'react';
 import { useProgressBar } from 'react-aria';
+
 import { Box } from '../Box';
 import { Group } from '../Group';
 import { Stack } from '../Stack';
@@ -25,7 +26,9 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
         }
       }, [percentComplete]);
     } else if (!value) {
-      setPercentComplete(-1);
+      useEffect(() => {
+        setPercentComplete(-1);
+      }, []);
     }
 
     const props = {
@@ -38,25 +41,33 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
 
     const { progressBarProps, labelProps } = useProgressBar(props);
 
-    console.log(progressBarProps, labelProps);
 
     let barWidth;
     if (props.value > -1) {
       // Calculate the width of the progress bar as a percentage
       const percentage = (props.value - props.minValue) / (props.maxValue - props.minValue);
       barWidth = `${Math.round(percentage * 100)}%`;
+    } else {
+      progressBarProps['aria-valuetext'] = 'unknown';
+      console.log(props.label, progressBarProps);
     }
 
     return (
       <Box {...progressBarProps} w="full">
         <Group justify="apart" fs="sm">
           {label && <span {...labelProps}>{label}</span>}
-          {label && <span>{progressBarProps['aria-valuetext']}</span>}
+          {label && <span>{props.value === -1 ? '' : progressBarProps['aria-valuetext']}</span>}
         </Group>
 
-        <Box bgc="light-shade">
-          <Box w={barWidth} bgc="info" h={4} />
-        </Box>
+        {props.value === -1 ? (
+          <Box bgc="light-shade" w="full">
+            <Box w={100} bgc="info" h={4} className="rui-animate-scroll" />
+          </Box>
+        ) : (
+          <Box bgc="light-shade">
+            <Box w={barWidth} bgc="info" h={4} />
+          </Box>
+        )}
       </Box>
     );
   }

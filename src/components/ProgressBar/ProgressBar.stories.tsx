@@ -13,7 +13,12 @@ export const Overview = RUIComponentStory(Template, {
   value: 80
 });
 
-export const LoadingContinuously = RUIComponentStory(Template, {
+export const Continuously = RUIComponentStory(Template, {
   label: 'Loading continuously...'
+  // Didn't give a value on purpose to demo the animated ProgressBar
+});
+
+export const Indeterminate = RUIComponentStory(Template, {
+  label: 'Loading indeterminately...'
   // Didn't give a value on purpose to demo the animated ProgressBar
 });
