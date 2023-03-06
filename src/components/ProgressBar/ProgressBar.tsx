@@ -41,7 +41,6 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
 
     const { progressBarProps, labelProps } = useProgressBar(props);
 
-
     let barWidth;
     if (props.value > -1) {
       // Calculate the width of the progress bar as a percentage
