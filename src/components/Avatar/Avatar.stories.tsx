@@ -79,6 +79,14 @@ export const CustomPlaceholder = RUIComponentStory(Overview, {
   alt: 'and 12 more'
 });
 
+export const WithInvalidSrc = RUIComponentStory(Overview, {
+  name: 'Chase McManning',
+  alt: 'Avatar for Chase McManning',
+  src: 'http://example.com/invalid',
+  label: 'CM',
+  size: 42
+});
+
 export const Polymorphic = RUIComponentStory((args) => <Avatar as="a" {...args} />, {
   name: 'Chase McManning',
   href: 'https://github.com/McManning',

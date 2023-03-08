@@ -110,6 +110,7 @@ export const Avatar = polymorphicForwardRef<'div', AvatarProps>(
         ref={ref}
         as={as || 'div'}
         className={cx('rui-block', 'rui-relative', className)}
+        title={alt}
         style={{
           width: size,
           height: size
@@ -137,30 +138,26 @@ export const Avatar = polymorphicForwardRef<'div', AvatarProps>(
             height: size + 'px'
           }}
         >
-          <Text
-            fw="bold"
-            c={(colors[index] + '-contrast') as Color}
-            // style={{
-            //   filter: 'brightness(30%)'
-            // }}
-          >
+          <Text fw="bold" c={(colors[index] + '-contrast') as Color}>
             {label}
           </Text>
         </Box>
-        <Image
-          width={size}
-          height={size}
-          className={cx(
-            'rui-rounded-full rui-overflow-hidden',
+        {src && (
+          <Image
+            width={size}
+            height={size}
+            className={cx(
+              'rui-rounded-full rui-overflow-hidden',
 
-            'rui-outline',
-            'rui-outline-2',
-            '-rui-outline-offset-1',
-            'rui-outline-light-tint'
-          )}
-          src={src}
-          alt={alt}
-        />
+              'rui-outline',
+              'rui-outline-2',
+              '-rui-outline-offset-1',
+              'rui-outline-light-tint'
+            )}
+            src={src}
+            alt=""
+          />
+        )}
       </Box>
     );
   }
