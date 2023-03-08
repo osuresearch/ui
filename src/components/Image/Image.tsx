@@ -8,40 +8,37 @@ import { cx } from '../../utils';
 import { Box } from '../Box';
 import { Text } from '../Text';
 
-export type ImageSlots = {
+export type ImageProps = StyleSystemProps & {
+  /** Image source */
+  src?: ThemeProp<string>;
+
   /**
-   * Content to render when the image source is invalid
+   * Image alt text, used as title for placeholder if image was not loaded.
+   *
+   * If the image is only for decoration, use `alt=""`
    */
-  placeholderSlot?: SlotProp<Record<string, never>>;
+  alt: string;
+
+  /** Image width */
+  width?: number | string;
+
+  /** Image height */
+  height?: number | string;
+
+  /** Image object-fit property */
+  fit?: React.CSSProperties['objectFit'];
+
+  /** Image caption */
+  caption?: React.ReactNode;
+
+  /** [Image element props](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img) to spread into the `img` element */
+  imageProps?: React.ComponentPropsWithoutRef<'img'>;
+
+  /**
+   * Content to render while the image is loading or has failed to load.
+   */
+  placeholder?: React.ReactNode;
 };
-
-export type ImageProps = StyleSystemProps &
-  ImageSlots & {
-    /** Image source */
-    src?: ThemeProp<string>;
-
-    /**
-     * Image alt text, used as title for placeholder if image was not loaded.
-     *
-     * If the image is only for decoration, use `alt=""`
-     */
-    alt: string;
-
-    /** Image width */
-    width?: number | string;
-
-    /** Image height */
-    height?: number | string;
-
-    /** Image object-fit property */
-    fit?: React.CSSProperties['objectFit'];
-
-    /** Image caption */
-    caption?: React.ReactNode;
-
-    /** [Image element props](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img) to spread into the `img` element */
-    imageProps?: React.ComponentPropsWithoutRef<'img'>;
-  };
 
 /**
  * Image documentation
@@ -64,6 +61,7 @@ export const Image = forwardRef<HTMLImageElement, ImageProps>(
       alt,
       caption,
       imageProps = {},
+      placeholder,
       ...props
     },
     ref
@@ -77,31 +75,29 @@ export const Image = forwardRef<HTMLImageElement, ImageProps>(
       setError(false);
     }, [imgSrc]);
 
-    const { placeholderSlot: Placeholder } = useSlots<ImageSlots>(props);
-
     return (
       <Box
-        as="figure"
+        as={caption ? 'figure' : 'div'}
         {...props}
         className={cx('rui-relative', className)}
-        style={{ width, ...style }}
+        style={{ width, height, ...style }}
       >
         <img
           ref={ref}
           src={imgSrc}
           alt={alt}
-          className="rui-w-full rui-h-full rui-text-clear rui-text-[0px]"
           {...mergeProps(imageProps, {
             style: {
               objectFit: fit,
               width,
-              height
+              height,
+              display: error ? 'none' : undefined
             }
           })}
           onError={() => setError(true)}
         />
 
-        {error && Placeholder && <Placeholder />}
+        {error && <>{placeholder ?? <Text>{alt}</Text>}</>}
 
         {caption && (
           <Text ta="center" as="figcaption" fs="sm" c="dark">

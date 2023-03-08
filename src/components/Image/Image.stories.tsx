@@ -1,6 +1,13 @@
 import { RUIComponentMeta, RUIComponentStory } from '@sb/utils';
 import React from 'react';
 
+import { Box } from '../Box';
+import { Center } from '../Center';
+import { Heading } from '../Heading';
+import { Icon } from '../Icon';
+import { Paper } from '../Paper';
+import { Stack } from '../Stack';
+import { Text } from '../Text';
 import { Image, ImageProps } from './Image';
 
 export default RUIComponentMeta<ImageProps>('Components', Image).withStyleSystemProps();
@@ -12,7 +19,7 @@ export const Overview = RUIComponentStory<ImageProps>((args) => <Image {...args}
   alt: 'Example image'
 });
 
-export const WithCaption = RUIComponentStory<ImageProps>(Overview, {
+export const AsCaptionedFigure = RUIComponentStory<ImageProps>(Overview, {
   src: 'https://picsum.photos/360/360',
   width: 360,
   height: 360,
@@ -25,7 +32,26 @@ export const WithError = RUIComponentStory<ImageProps>(Overview, {
   width: 360,
   height: 360,
   alt: 'Example image that failed to load'
-});
+}).withDescription(`
+  The \`alt\` text will be displayed when the image fails to load.
+`);
+
+export const WithErrorPlaceholder = RUIComponentStory<ImageProps>(Overview, {
+  src: 'https://invalid.url',
+  width: 360,
+  height: 360,
+  alt: 'Example image that failed to load',
+  placeholder: (
+    <Box bgc="light" h={360}>
+      <Center>
+        <Icon block c="dimmed" name="image" size={200} />
+      </Center>
+    </Box>
+  )
+}).withDescription(`
+You can use the \`placeholder\` prop to define replacement content when
+an image fails to load. This will be rendered in place of the \`alt\` text.
+`);
 
 export const WithFitContain = RUIComponentStory<ImageProps>(Overview, {
   src: 'https://picsum.photos/1024/360',
