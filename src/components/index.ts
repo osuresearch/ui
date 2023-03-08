@@ -1,3 +1,4 @@
+export * from './Admonition';
 export * from './Alert';
 export * from './Arrow';
 export * from './Avatar';
@@ -62,6 +63,7 @@ export * from './PrimaryButton';
 export * from './RUIProvider';
 export * from './RadioIcon';
 export * from './RadioSetField';
+export * from './ScrollArea';
 export * from './SectionTitle';
 export * from './SelectField';
 export * from './Space';

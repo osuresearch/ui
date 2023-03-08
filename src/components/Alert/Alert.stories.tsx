@@ -10,9 +10,9 @@ const Template: Story<AlertProps> = (args: AlertProps) => (
   <Alert {...args}>This is additional text about this message.</Alert>
 );
 
-export const Overview = RUIComponentStory(Template, {
+export const Info = RUIComponentStory(Template, {
   variant: 'info',
-  title: 'This is an alert title'
+  title: 'This is an info message'
 });
 
 export const Success = RUIComponentStory(Template, {

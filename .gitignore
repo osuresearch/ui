@@ -8,3 +8,4 @@ coverage
 docs-build/
 dist/
 coverage/
+.eslintcache
