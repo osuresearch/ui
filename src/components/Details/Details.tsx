@@ -44,7 +44,8 @@ export const Details = forwardRef<HTMLDetailsElement, DetailsProps>(
           className={cx(
             'rui-border-t-2',
             'rui-border-light-shade',
-            'hover:rui-bg-light focus:rui-bg-light group-open:rui-bg-light'
+            'hover:rui-bg-light focus:rui-bg-light group-open:rui-bg-light',
+            'rui-details'
           )}
         >
           <Icon

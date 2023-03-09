@@ -291,3 +291,7 @@
 	border-right-color: currentColor;
 	margin-top: -8px;
 }
+
+.rui-details::-webkit-details-marker {
+  display: none;
+}
