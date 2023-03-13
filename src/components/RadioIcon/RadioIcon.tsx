@@ -24,6 +24,7 @@ export type RadioIconProps = DOMAttributes<FocusableElement> &
  */
 export const RadioIcon = ({ isSelected, isDisabled, ...props }: RadioIconProps) => (
   <Box
+    miw={20}
     w={20}
     h={20}
     className={cx(
