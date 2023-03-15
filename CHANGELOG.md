@@ -1,3 +1,11 @@
+# [5.0.0-alpha.14](https://github.com/osuresearch/ui/compare/v5.0.0-alpha.13...v5.0.0-alpha.14) (2023-03-15)
+
+
+### Bug Fixes
+
+* **CheckboxIcon and RadioIcon:**  prevent the icons from being compressed when their following text is very long  ([e5e3406](https://github.com/osuresearch/ui/commit/e5e34065a1994fa61a05c45ed8b28333cbd6e6fa)), closes [#25](https://github.com/osuresearch/ui/issues/25) [#45](https://github.com/osuresearch/ui/issues/45)
+* **Details:** hide the detail marker in Safari ([3a6352c](https://github.com/osuresearch/ui/commit/3a6352c6aaa04f22d12d0bebd7b1d37638cf0cfd)), closes [#1](https://github.com/osuresearch/ui/issues/1) [#43](https://github.com/osuresearch/ui/issues/43)
+
 # [5.0.0-alpha.13](https://github.com/osuresearch/ui/compare/v5.0.0-alpha.12...v5.0.0-alpha.13) (2023-02-20)
 
 
