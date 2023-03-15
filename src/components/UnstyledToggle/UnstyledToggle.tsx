@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { forwardRef, useRef } from 'react';
 import { AriaToggleButtonProps, mergeProps, useToggleButton } from 'react-aria';
 import { useToggleState } from 'react-stately';
 
@@ -7,12 +7,10 @@ import { mergeRefs, polymorphicForwardRef } from '../../utils';
 import { Box } from '../Box';
 import { FocusRing } from '../FocusRing';
 
-// TODO: Deal with onChange conflict.
+// onChange is omitted to handle a conflict with react-aria
 // See: https://github.com/adobe/react-spectrum/issues/1860#issuecomment-849833808
-// (pertains specifically to RHF as well)
 
 export type UnstyledToggleProps = StyleSystemProps &
-  React.ButtonHTMLAttributes<HTMLButtonElement> &
   AriaToggleButtonProps & {
     /**
      * Button content
@@ -21,7 +19,7 @@ export type UnstyledToggleProps = StyleSystemProps &
   };
 
 /**
- * Unstyled polymorphic toggle button
+ * Unstyled toggle button
  *
  * ## 🛑 Disclaimer
  *
@@ -41,36 +39,31 @@ export type UnstyledToggleProps = StyleSystemProps &
  * ## Accessibility
  * - Wrapped by the `FocusRing` component for consistent focus
  * - Toggles `aria-pressed` on the root element
- *
- * <!-- @ruiPolymorphic -->
  */
-export const UnstyledToggle = polymorphicForwardRef<'button', UnstyledToggleProps>(
-  ({ as, ...props }, ref) => {
-    const { children } = props;
-    const buttonRef = useRef<HTMLButtonElement>(null);
+export const UnstyledToggle = forwardRef<HTMLButtonElement, UnstyledToggleProps>((props, ref) => {
+  const { children } = props;
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
-    const state = useToggleState(props);
-    const { buttonProps, isPressed } = useToggleButton(
-      {
-        ...props,
-        elementType: as
-      },
-      state,
-      buttonRef
-    );
+  const state = useToggleState(props);
+  const { buttonProps, isPressed } = useToggleButton(
+    {
+      ...props
+    },
+    state,
+    buttonRef
+  );
 
-    return (
-      <FocusRing>
-        <Box
-          as={as || 'button'}
-          ref={mergeRefs(ref, buttonRef)}
-          {...buttonProps}
-          {...mergeProps(props as UnstyledToggleProps, buttonProps)}
-          data-active={isPressed}
-        >
-          {children}
-        </Box>
-      </FocusRing>
-    );
-  }
-);
+  return (
+    <FocusRing>
+      <Box
+        as="button"
+        ref={mergeRefs(ref, buttonRef)}
+        {...buttonProps}
+        {...mergeProps(props as UnstyledToggleProps, buttonProps)}
+        data-active={isPressed}
+      >
+        {children}
+      </Box>
+    </FocusRing>
+  );
+});

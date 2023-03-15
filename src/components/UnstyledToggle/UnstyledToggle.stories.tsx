@@ -16,13 +16,13 @@ export const Disabled = RUIComponentStory(Overview, {
   isDisabled: true
 });
 
+export const Selected = RUIComponentStory(Overview, {
+  isSelected: true
+});
+
 export const OnPress = RUIComponentStory(Overview, {
   onPress: (e) => alert('Clicked!'),
   onChange: (e) => alert(e)
 }).withDescription(
   'This is similar to the standard `onClick` event, but normalized to support all interaction methods (mouse, keyboard, and touch) equally.'
 );
-
-export const Polymorphic = RUIComponentStory((args) => (
-  <UnstyledToggle as="span">Polymorphic toggle</UnstyledToggle>
-));
