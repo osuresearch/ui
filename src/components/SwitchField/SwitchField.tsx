@@ -3,21 +3,11 @@ import { AriaSwitchProps, useSwitch } from 'react-aria';
 import { useToggleState } from 'react-stately';
 
 import { StyleSystemProps } from '../../types';
+import { FormFieldBase } from '../FormField';
 import { SwitchIcon } from '../SwitchIcon';
 import { ToggleField } from '../ToggleField';
 
-export type SwitchFieldDiffProps = {
-  wasSelected?: boolean;
-  showDiff?: boolean;
-};
-
-export type SwitchFieldProps = StyleSystemProps &
-  AriaSwitchProps &
-  SwitchFieldDiffProps & {
-    label: React.ReactNode;
-    description?: React.ReactNode;
-    errorMessage?: React.ReactNode;
-  };
+export type SwitchFieldProps = FormFieldBase<boolean>;
 
 /**
  * A switch is similar to a checkbox, but represents on/off values
@@ -35,9 +25,24 @@ export type SwitchFieldProps = StyleSystemProps &
 export const SwitchField = forwardRef<HTMLInputElement, SwitchFieldProps>(
   ({ label, description, errorMessage, ...props }, ref) => {
     const inputRef = useRef<HTMLInputElement>(null);
-    const state = useToggleState(props);
 
-    const { inputProps } = useSwitch(props, state, inputRef);
+    const { value, defaultValue, ...other } = props;
+
+    const state = useToggleState({
+      ...other,
+      isSelected: value,
+      defaultSelected: defaultValue
+    });
+
+    const { inputProps } = useSwitch(
+      {
+        ...other,
+        isSelected: value,
+        defaultSelected: defaultValue
+      },
+      state,
+      inputRef
+    );
 
     return (
       <ToggleField

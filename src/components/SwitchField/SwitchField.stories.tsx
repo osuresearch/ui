@@ -13,16 +13,16 @@ export const Overview = RUIComponentStory<SwitchFieldProps>((args) => <Component
 
 export const UncontrolledValue = RUIComponentStory<SwitchFieldProps>(Overview, {
   label: 'Yes I want to receive hourly promotional emails',
-  defaultSelected: true
+  defaultValue: true
 });
 
 export const ControlledValue = RUIComponentStory<SwitchFieldProps>(
   (args) => {
-    const [value, setValue] = useState(false);
+    const [value, setValue] = useState<boolean | undefined>(false);
 
     return (
       <>
-        <Component isSelected={value} onChange={setValue} {...args} />
+        <Component value={value} onChange={setValue} {...args} />
         <Text>{`You are ${value ? 'subscribed' : 'unsubscribed'}`}</Text>
       </>
     );
@@ -34,12 +34,12 @@ export const ControlledValue = RUIComponentStory<SwitchFieldProps>(
 
 export const ReadOnly = RUIComponentStory(Overview, {
   label: 'Yes I want to receive hourly promotional emails',
-  defaultSelected: true,
+  defaultValue: true,
   isReadOnly: true
 });
 
 export const Disabled = RUIComponentStory(Overview, {
   label: 'Yes I want to receive hourly promotional emails',
-  defaultSelected: true,
+  defaultValue: true,
   isDisabled: true
 });

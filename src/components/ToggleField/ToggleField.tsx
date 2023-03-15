@@ -48,9 +48,8 @@ export type ToggleFieldProps = StyleSystemProps &
   };
 
 /**
- * Form field component that accepts `Text` or `Boolean` atomics.
+ * Form field component that accepts `Boolean` atomics.
  *
- * <!-- @ruiAtomic Text -->
  * <!-- @ruiAtomic Boolean -->
  *
  * <img class="rui-diagram" src="./ToggleField.svg" alt="Component diagram" />
