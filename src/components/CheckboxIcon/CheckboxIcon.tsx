@@ -30,9 +30,11 @@ export const CheckboxIcon = ({
   ...props
 }: CheckboxIconProps) => (
   <Box
+    miw={20}
+    w={20}
+    h={20}
     className={cx(
       'rui-border-2',
-      'rui-w-[20px] rui-h-[20px]',
       { 'rui-bg-light-tint rui-border-dark': !isSelected && !isIndeterminate && !isDisabled },
       { 'rui-bg-primary rui-border-primary': isSelected || isIndeterminate },
       { 'rui-border-dimmed rui-bg-light-shade': isDisabled },
