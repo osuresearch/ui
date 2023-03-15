@@ -1,10 +1,9 @@
 import React, { forwardRef, useRef } from 'react';
-import { AriaCheckboxProps, useCheckbox } from 'react-aria';
+import { useCheckbox } from 'react-aria';
 import { useToggleState } from 'react-stately';
 
-import { StyleSystemProps } from '../../types';
-import { mergeRefs } from '../../utils';
 import { CheckboxIcon } from '../CheckboxIcon';
+import { FormFieldBase } from '../FormField';
 import { ToggleField } from '../ToggleField';
 
 export type CheckboxFieldDiffProps = {
@@ -12,24 +11,13 @@ export type CheckboxFieldDiffProps = {
   showDiff?: boolean;
 };
 
-export type CheckboxFieldProps = StyleSystemProps &
-  AriaCheckboxProps &
-  CheckboxFieldDiffProps & {
-    // Fields needed but omitted (unless in a group)
-    // descriptionProps, errorMessageProps
-
-    label: React.ReactNode;
-    description?: React.ReactNode;
-    errorMessage?: React.ReactNode;
-  };
-
-/**
- * CheckboxField documentation
- *
- * ## Accessibility
- * - TODO: Checkbox itself does not have error/description support via React Aria.
- * Figure out why: https://react-spectrum.adobe.com/react-aria/useCheckbox.html
- */
+export type CheckboxFieldProps = FormFieldBase<boolean> & {
+  /**
+   * Indeterminism is presentational only.
+   * The indeterminate visual representation remains regardless of user interaction.
+   */
+  isIndeterminate?: boolean;
+};
 
 /**
  * Checkboxes allow the user to toggle a single `Key` atomic.
@@ -44,15 +32,30 @@ export type CheckboxFieldProps = StyleSystemProps &
  *  be passed instead to identify the element for screen readers.
  */
 export const CheckboxField = forwardRef<HTMLInputElement, CheckboxFieldProps>(
-  ({ className, label, description, errorMessage, children, ...props }, ref) => {
+  ({ label, description, errorMessage, ...props }, ref) => {
     const inputRef = useRef<HTMLInputElement>(null);
-    const state = useToggleState(props);
 
-    const { inputProps } = useCheckbox(props, state, inputRef);
+    const { value, defaultValue, ...other } = props;
+
+    const state = useToggleState({
+      ...other,
+      isSelected: value,
+      defaultSelected: defaultValue
+    });
+
+    const { inputProps } = useCheckbox(
+      {
+        ...other,
+        isSelected: value,
+        defaultSelected: defaultValue
+      },
+      state,
+      inputRef
+    );
 
     return (
       <ToggleField
-        ref={mergeRefs(inputRef, ref)}
+        ref={ref}
         label={label}
         labelProps={{}}
         description={description}
@@ -62,8 +65,8 @@ export const CheckboxField = forwardRef<HTMLInputElement, CheckboxFieldProps>(
         inputSlot={CheckboxIcon}
         inputProps={inputProps}
         isSelected={state.isSelected}
-        isIndeterminate={props.isIndeterminate}
         isDisabled={props.isDisabled}
+        isIndeterminate={props.isIndeterminate}
       />
     );
   }

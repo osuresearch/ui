@@ -32,7 +32,7 @@ export type TextFieldSlots = {
   rightWidth?: number;
 };
 
-export type TextFieldProps = FormFieldBase & AriaTextFieldProps & TextFieldSlots;
+export type TextFieldProps = FormFieldBase<string> & AriaTextFieldProps & TextFieldSlots;
 
 type InputSlotProps = StyleSystemProps &
   React.InputHTMLAttributes<HTMLInputElement> &

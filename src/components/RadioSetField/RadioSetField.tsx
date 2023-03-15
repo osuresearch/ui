@@ -1,5 +1,5 @@
 import { Node } from '@react-types/shared';
-import React, { createContext, forwardRef, useContext, useRef } from 'react';
+import React, { Key, createContext, forwardRef, useContext, useRef } from 'react';
 import {
   AriaCheckboxGroupItemProps,
   AriaRadioGroupProps,
@@ -20,18 +20,12 @@ import { Stack } from '../Stack';
 import { ToggleField } from '../ToggleField';
 
 export type RadioItem = {
-  // TODO: This is wrong. What if I wanted to use key?
-  // This should be consistent with usage with Checkbox sets
   name?: string;
   label?: React.ReactNode;
   description?: React.ReactNode;
 };
 
-export type RadioSetFieldProps = FormFieldBase &
-  AriaRadioGroupProps &
-  ListProps<RadioItem> & {
-    label: React.ReactNode;
-  };
+export type RadioSetFieldProps = FormFieldBase<string> & AriaRadioGroupProps & ListProps<RadioItem>;
 
 const RadioSetContext = createContext<RadioGroupState & ListState<RadioItem>>(
   {} as RadioGroupState & ListState<RadioItem>
@@ -93,7 +87,7 @@ export const RadioSetField = forwardRef<HTMLDivElement, RadioSetFieldProps>((pro
 
   return (
     <RadioSetContext.Provider value={{ ...listState, ...groupState }}>
-      <FormField
+      <FormField<string>
         wrapperProps={radioGroupProps}
         labelAs="span"
         labelProps={labelProps}

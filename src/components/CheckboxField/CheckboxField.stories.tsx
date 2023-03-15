@@ -7,22 +7,23 @@ import { CheckboxFieldProps, CheckboxField as Component } from './CheckboxField'
 export default RUIComponentMeta<CheckboxFieldProps>('Forms', Component).withStyleSystemProps();
 
 export const Overview = RUIComponentStory<CheckboxFieldProps>((args) => <Component {...args} />, {
+  id: 'checkbox-overview',
   label: 'Yes I want to receive hourly promotional emails',
   description: 'Additional help text'
 });
 
 export const UncontrolledValue = RUIComponentStory<CheckboxFieldProps>(Overview, {
   label: 'Yes I want to receive hourly promotional emails',
-  defaultSelected: true
+  defaultValue: true
 });
 
 export const ControlledValue = RUIComponentStory<CheckboxFieldProps>(
   (args) => {
-    const [value, setValue] = useState(false);
+    const [value, setValue] = useState<boolean | undefined>(false);
 
     return (
       <>
-        <Component isSelected={value} onChange={setValue} {...args} />
+        <Component value={value} onChange={setValue} {...args} />
         <Text>{`You are ${value ? 'subscribed' : 'unsubscribed'}`}</Text>
       </>
     );
@@ -39,13 +40,13 @@ export const Required = RUIComponentStory<CheckboxFieldProps>(Overview, {
 
 export const ReadOnly = RUIComponentStory<CheckboxFieldProps>(Overview, {
   label: 'Yes I want to receive hourly promotional emails',
-  defaultSelected: true,
+  defaultValue: true,
   isReadOnly: true
 });
 
 export const Disabled = RUIComponentStory<CheckboxFieldProps>(Overview, {
   label: 'Yes I want to receive hourly promotional emails',
-  defaultSelected: true,
+  defaultValue: true,
   isDisabled: true
 });
 

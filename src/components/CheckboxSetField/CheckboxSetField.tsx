@@ -1,5 +1,5 @@
 import { Node } from '@react-types/shared';
-import React, { createContext, forwardRef, useContext, useRef } from 'react';
+import React, { Key, createContext, forwardRef, useContext, useRef } from 'react';
 import {
   AriaCheckboxGroupItemProps,
   AriaCheckboxGroupProps,
@@ -27,9 +27,7 @@ export type CheckboxItem = {
 
 export type CheckboxSetFieldProps = FormFieldBase<string[]> &
   AriaCheckboxGroupProps &
-  ListProps<CheckboxItem> & {
-    label: React.ReactNode;
-  };
+  ListProps<CheckboxItem>;
 
 const CheckboxSetContext = createContext<CheckboxGroupState & ListState<CheckboxItem>>(
   {} as CheckboxGroupState & ListState<CheckboxItem>

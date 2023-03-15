@@ -29,7 +29,7 @@ export const UncontrolledValue = RUIComponentStory(Overview, {
 });
 
 export const ControlledValue = RUIComponentStory<RadioSetFieldProps>((args) => {
-  const [value, setValue] = useState('metal');
+  const [value, setValue] = useState<string | undefined>('metal');
 
   return (
     <>

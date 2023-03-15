@@ -33,7 +33,7 @@ export const UncontrolledValue = RUIComponentStory(Overview, {
 });
 
 export const ControlledValue = RUIComponentStory<CheckboxSetFieldProps>((args) => {
-  const [value, setValue] = useState(['dx11', 'metal']);
+  const [value, setValue] = useState<string[] | undefined>(['dx11', 'metal']);
 
   return (
     <>
@@ -42,7 +42,7 @@ export const ControlledValue = RUIComponentStory<CheckboxSetFieldProps>((args) =
         <Item key="metal">Metal</Item>
         <Item key="vulkan">Vulkan</Item>
       </CheckboxSetField>
-      <Text>Selected: {value.join(', ')}</Text>
+      <Text>Selected: {value?.join(', ')}</Text>
     </>
   );
 });
@@ -109,7 +109,7 @@ export const WithReactStatelyLists = RUIComponentStory<CheckboxSetFieldProps>((a
       <code>
         <pre>{JSON.stringify(list.selectedKeys, undefined, 2)}</pre>
       </code>
-      <Text>Selected: {[...(list.selectedKeys as Set<any>).values()].join(', ')}</Text>
+      <Text>Selected: {Array.from(list.selectedKeys).join(', ')}</Text>
     </>
   );
 }).withDescription(`

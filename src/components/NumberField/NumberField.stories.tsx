@@ -20,7 +20,7 @@ export const UncontrolledValue = RUIComponentStory<NumberFieldProps>(Overview, {
 
 export const ControlledValue = RUIComponentStory<NumberFieldProps>(
   (args) => {
-    const [value, setValue] = useState(1234);
+    const [value, setValue] = useState<number | undefined>(1234);
 
     return (
       <>

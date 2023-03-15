@@ -12,7 +12,7 @@ type InputSlotProps = React.InputHTMLAttributes<HTMLTextAreaElement> &
     rows?: number;
   };
 
-export type TextAreaFieldProps = FormFieldBase &
+export type TextAreaFieldProps = FormFieldBase<string> &
   AriaTextFieldProps & {
     rows?: number;
   };

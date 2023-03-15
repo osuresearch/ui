@@ -18,7 +18,7 @@ import { NecessityIndicator } from '../NecessityIndicator';
 import { Stack } from '../Stack';
 import { Text } from '../Text';
 
-export interface DiffBase<T = string> {
+export interface DiffBase<T> {
   previousValue?: T;
 }
 
@@ -31,24 +31,29 @@ export type FormFieldLayout = 'default' | 'horizontal';
  * This covers labeling, help text, required state,
  * read only state, values, and so forth.
  */
-export interface FormFieldBase<T = string>
+export interface FormFieldBase<T>
   extends StyleSystemProps,
     AriaNecessityIndicator,
     InputBase,
     Validation,
     HelpTextProps,
     FocusableProps,
-    ValueBase<T>,
-    DiffBase<T>,
+    ValueBase<T, T | undefined>,
+    // DiffBase<T>,
     LabelableProps {
-  name?: string;
+  /**
+   * The name of the input, used when submitting an HTML form.
+   * See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input).
+   */
+  name: string;
+
   layout?: FormFieldLayout;
 
   /** All form elements support a full read-only state */
   isReadOnly?: boolean;
 }
 
-export type FormFieldProps<T = string> = FormFieldBase<T> & {
+export type FormFieldProps<T> = FormFieldBase<T> & {
   /**
    * Props to spread into the wrapping element (excluding style system props)
    */
@@ -133,12 +138,8 @@ function ContentLayout({ layout, children }: LayoutProps) {
  * - The generic type of `FormField` determines which ref type is allowed
  * to be passed through the slot. This does not require an `InputHTMLAttributes`
  * concrete, but it is recommended.
- *
- * ### Diff Slot
- * - Slot for rendering the diff between a previous and current value
- * - Receives previous and current value as `string`
  */
-export function FormField<T = string>(props: FormFieldProps<T>) {
+export function FormField<T>(props: FormFieldProps<T>) {
   const { className, label, description, errorMessage, layout, children } = props;
   const { labelAs, labelProps, wrapperProps, descriptionProps, errorMessageProps } = props;
 
