@@ -40,7 +40,9 @@
     "generate:component": "node ./scripts/newComponent.mjs"
   },
   "peerDependencies": {
-    "react": "^16.8.0 || ^17.0.0-rc.1 || ^18.0.0",
+    "react": "^16.8.0 || ^17.0.0-rc.1 || ^18.0.0"
+  },
+  "optionalDependencies": {
     "react-hook-form": "^7.42.1"
   },
   "devDependencies": {
