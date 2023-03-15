@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
-import { cx, polymorphicForwardRef } from '../../utils';
+import { cx } from '../../utils';
 import { Group } from '../Group';
 import { UnstyledToggle, UnstyledToggleProps } from '../UnstyledToggle';
 
 export type ToggleButtonProps = UnstyledToggleProps & {
-  variant: 'default';
+  variant?: 'default';
 
   leftSlot?: React.ReactNode;
   rightSlot?: React.ReactNode;
@@ -20,16 +20,13 @@ export type ToggleButtonProps = UnstyledToggleProps & {
  * - Mouse and touch event handling, and press state management
  * - Keyboard focus management and cross browser normalization
  * - Keyboard event support for `Space` and `Enter` keys
- *
- * <!-- @ruiPolymorphic -->
  */
-export const ToggleButton = polymorphicForwardRef<'button', ToggleButtonProps>(
+export const ToggleButton = forwardRef<HTMLButtonElement, ToggleButtonProps>(
   (
-    { as, className, variant = 'default', isDisabled, leftSlot, rightSlot, children, ...props },
+    { className, variant = 'default', isDisabled, leftSlot, rightSlot, children, ...props },
     ref
   ) => (
     <UnstyledToggle
-      as={as || 'button'}
       ref={ref}
       py="xxs"
       px="sm"
