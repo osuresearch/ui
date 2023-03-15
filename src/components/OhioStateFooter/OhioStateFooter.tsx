@@ -53,7 +53,7 @@ export function OhioStateFooter({
   ...props
 }: OhioStateFooterProps) {
   return (
-    <Box as="footer" bgc="light" p="lg">
+    <Box bgc="light" p="lg">
       <Group justify="apart" align="stretch" gap="md">
         <Stack justify="apart" gap="md">
           <a href="https://www.osu.edu">
