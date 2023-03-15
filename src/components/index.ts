@@ -39,7 +39,6 @@ export * from './Icon';
 export * from './IconButton';
 export * from './Image';
 export * from './InformationDialog';
-export * from './InputField';
 export * from './Interview';
 export * from './Item';
 export * from './Kbd';
