@@ -1,3 +1,29 @@
+# [5.0.0-alpha.15](https://github.com/osuresearch/ui/compare/v5.0.0-alpha.14...v5.0.0-alpha.15) (2023-03-16)
+
+
+### Bug Fixes
+
+* **Avatar:** renders broken image placeholders in Safari and Chrome ([4b626c9](https://github.com/osuresearch/ui/commit/4b626c9c94adda21462f7fb27b514fdd7dd5eeaf)), closes [#3](https://github.com/osuresearch/ui/issues/3)
+* **Button:** incorrect display mode when used as a polymorphed element ([b586474](https://github.com/osuresearch/ui/commit/b586474b2d1f8adbbe9b1e2d936199712d8549d1))
+* **Button:** omit hover styles while disabled ([299437a](https://github.com/osuresearch/ui/commit/299437a73525124cc84ae53abe873ba6d001210e))
+* **deps:** `react-hook-form` is an optional dependency ([e454ea6](https://github.com/osuresearch/ui/commit/e454ea666252e46955f54f42555c36066bb3e240))
+* **FormErrors:** incorrect type for errorMessage keys ([44603a9](https://github.com/osuresearch/ui/commit/44603a9d88325be565af75b3ce966113fcabdb99))
+* **Image:** standardize broken image placeholder across browsers ([2facb72](https://github.com/osuresearch/ui/commit/2facb729b0acf6adcacf8190a96f1c96fa7acd8e)), closes [#5](https://github.com/osuresearch/ui/issues/5)
+* inconsistent value and onChange types behaviour across form fields ([70a6d02](https://github.com/osuresearch/ui/commit/70a6d0282907ba29c5401504edb3a60309fd5e87))
+* **OhioStateFooter:** do not use semantic `footer` element ([dd5001c](https://github.com/osuresearch/ui/commit/dd5001ccfac4098a52874d0e42a81b2f1b0c8a58)), closes [#46](https://github.com/osuresearch/ui/issues/46)
+* **SwitchField:** incorrect value, defaultValue, and onChange types ([6e67ef6](https://github.com/osuresearch/ui/commit/6e67ef644b77a8719c9007b0eaa68658ee0bd075)), closes [#24](https://github.com/osuresearch/ui/issues/24)
+* **ToggleButton:** `variant` prop should be optional ([0f0f991](https://github.com/osuresearch/ui/commit/0f0f991d300c5ba139f909894dccddc19428cb28))
+* **UnstyledToggleButton:** remove polymorphism to avoid conflict with base button props ([cf45d30](https://github.com/osuresearch/ui/commit/cf45d30bb4fbfa73f3438c71cd70b3c5dc2b952d)), closes [#31](https://github.com/osuresearch/ui/issues/31)
+* **YesNoField:** fix exposed types in value/onChange ([18ee1ad](https://github.com/osuresearch/ui/commit/18ee1ad8eddf61b5c781f478dc617bb7c41e9218))
+
+
+### Features
+
+* add Admonition component for non-alert content ([a892060](https://github.com/osuresearch/ui/commit/a892060705a9153301f6d42cba8428b75842203d)), closes [#39](https://github.com/osuresearch/ui/issues/39)
+* add ScrollArea component ([a2a92a7](https://github.com/osuresearch/ui/commit/a2a92a7dcb266ccae1cb57a29756a50b607aa0db))
+* **RadioSetField:** support custom item renderers ([4ff9340](https://github.com/osuresearch/ui/commit/4ff93408d9eea18f315ded2c9dfec303508d92db))
+* **UnstyledButton:** add `data-disabled` when the disabled state is passed down ([7fc4859](https://github.com/osuresearch/ui/commit/7fc4859e0fd87a79544a81f64ae5e7d8a224ba87))
+
 # [5.0.0-alpha.14](https://github.com/osuresearch/ui/compare/v5.0.0-alpha.13...v5.0.0-alpha.14) (2023-03-15)
 
 
