@@ -13,12 +13,12 @@ export const Overview = RUIComponentStory<YesNoFieldProps>((args) => <YesNoField
 
 export const UncontrolledValue = RUIComponentStory(Overview, {
   label: 'Are there something or other?',
-  defaultValue: '1'
+  defaultValue: true
 });
 
 export const ControlledValue = RUIComponentStory<YesNoFieldProps>(
   (args) => {
-    const [value, setValue] = useState('');
+    const [value, setValue] = useState<boolean | undefined>(false);
 
     return (
       <>
@@ -40,17 +40,13 @@ export const Required = RUIComponentStory(Overview, {
 
 export const ReadOnly = RUIComponentStory(Overview, {
   label: '3D graphics and computing API',
-  defaultValue: '1',
+  defaultValue: true,
   isReadOnly: true
-}).withDescription(`
-  Read only state is not supported natively by select, but our
-  component supports an \`isReadOnly\` prop and custom render state
-  for consistency with other form fields.
-`);
+});
 
 export const Disabled = RUIComponentStory(Overview, {
   label: '3D graphics and computing API',
-  defaultValue: '1',
+  defaultValue: true,
   isDisabled: true
 });
 

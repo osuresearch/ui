@@ -1,39 +1,55 @@
-import React, { forwardRef, useRef } from 'react';
+import React, { Key, forwardRef, useContext, useRef } from 'react';
 import { AriaRadioGroupProps, VisuallyHidden, useRadio, useRadioGroup } from 'react-aria';
 import { RadioGroupState, useRadioGroupState } from 'react-stately';
 
-import { AriaNecessityIndicator, StyleSystemProps } from '../../types';
 import { Button } from '../Button';
+import { CheckboxIcon } from '../CheckboxIcon';
 import { Divider } from '../Divider';
+import { FormFieldBase } from '../FormField';
 import { Group } from '../Group';
-import { InputField } from '../InputField';
+import { Item } from '../Item';
+import { RadioButtonIcon } from '../RadioButtonIcon';
+import { GroupItemSlotProps, RadioSetContext, RadioSetField } from '../RadioSetField';
+import { ToggleField } from '../ToggleField';
 
-export type YesNoDiffProps = {
-  showDiff?: boolean;
-  previousValue?: string;
-};
+export type YesNoFieldProps = FormFieldBase<boolean>;
 
-export type YesNoFieldProps = StyleSystemProps &
-  AriaRadioGroupProps &
-  AriaNecessityIndicator &
-  YesNoDiffProps & {
-    label: React.ReactNode;
-  };
+/**
+ * A specialized radio set with Yes and No toggle buttons.
+ *
+ * This supports an `undefined` value for unanswered fields.
+ *
+ * <!-- @ruiAtomic Boolean -->
+ */
+export const YesNoField = forwardRef<HTMLDivElement, YesNoFieldProps>((props, ref) => {
+  const { defaultValue, value, onChange } = props;
 
-type OptionProps = {
-  label: string;
-  value: string;
-  state: RadioGroupState;
-};
+  return (
+    <RadioSetField
+      ref={ref}
+      {...props}
+      value={convertYesNoToString(value)}
+      defaultValue={convertYesNoToString(defaultValue)}
+      onChange={(value) => onChange && onChange(convertStringToYesNo(value))}
+      itemSlot={YesNoGroupItemSlot}
+      itemLayout="horizontal"
+    >
+      <Item key="yes">Yes</Item>
+      <Item key="no">No</Item>
+    </RadioSetField>
+  );
+});
 
-function Option({ label, value, state }: OptionProps) {
+function YesNoGroupItemSlot({ node, ...props }: GroupItemSlotProps) {
+  const state = useContext(RadioSetContext);
   const ref = useRef<HTMLInputElement>(null);
 
-  const isDisabled = state.isDisabled;
+  const isDisabled = state.isDisabled || state.disabledKeys.has(node.key);
 
   const { inputProps, isSelected } = useRadio(
     {
-      value: '' + value,
+      ...props,
+      value: '' + node.key,
       isDisabled
     },
     state,
@@ -45,36 +61,31 @@ function Option({ label, value, state }: OptionProps) {
       <VisuallyHidden>
         <input {...inputProps} />
       </VisuallyHidden>
-      {label}
+      {node.rendered}
     </Button>
   );
 }
 
-/**
- * A specialized radio set with Yes and No toggle buttons.
- *
- * <!-- @ruiAtomic Boolean -->
- */
-export const YesNoField = forwardRef<HTMLDivElement, YesNoFieldProps>((props, ref) => {
-  const state = useRadioGroupState(props);
+function convertYesNoToString(value?: boolean): string | undefined {
+  if (value) {
+    return 'yes';
+  }
 
-  const { radioGroupProps, labelProps, descriptionProps, errorMessageProps } = useRadioGroup(
-    props,
-    state
-  );
+  if (value === false) {
+    return 'no';
+  }
 
-  return (
-    <InputField
-      {...props}
-      labelProps={labelProps}
-      descriptionProps={descriptionProps}
-      errorMessageProps={errorMessageProps}
-    >
-      <Group {...radioGroupProps} ref={ref} gap={0}>
-        <Option label="Yes" state={state} value="1" />
-        <Divider orientation="vertical" />
-        <Option label="No" state={state} value="0" />
-      </Group>
-    </InputField>
-  );
-});
+  return undefined;
+}
+
+function convertStringToYesNo(value?: string): boolean | undefined {
+  if (value === 'yes') {
+    return true;
+  }
+
+  if (value === 'no') {
+    return false;
+  }
+
+  return undefined;
+}
