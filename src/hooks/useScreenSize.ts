@@ -27,7 +27,12 @@ export function useScreenSize() {
   const xxl = useMediaQuery({ minWidth: screens.xxl });
 
   const active = [sm, md, lg, xl, xxl];
-  const current = screenSize[active.indexOf(false) - 1];
+  const idx = active.indexOf(false) - 1;
+
+  let current: ScreenSize = 'xxl';
+  if (idx >= 0) {
+    current = screenSize[idx];
+  }
 
   // current, matrix and tools
   return useMemo(
