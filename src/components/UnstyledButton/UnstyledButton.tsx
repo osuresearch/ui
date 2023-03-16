@@ -43,13 +43,16 @@ export const UnstyledButton = polymorphicForwardRef<'button', UnstyledButtonProp
       buttonRef
     );
 
+    const { isDisabled, ...rest } = props;
+
     return (
       <FocusRing>
         <Box
           as={as || 'button'}
           ref={mergeRefs(ref, buttonRef)}
-          {...mergeProps(props as any, buttonProps)}
+          {...mergeProps(rest as any, buttonProps)}
           data-active={isPressed}
+          data-disabled={isDisabled}
         >
           {children}
         </Box>
