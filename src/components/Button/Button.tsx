@@ -70,14 +70,14 @@ export const Button = polymorphicForwardRef<'button', ButtonProps>(
         // Subtle variant
         {
           'rui-text-light-contrast': variant === 'subtle',
-          'hover:rui-bg-light hover:rui-text-dark': variant === 'subtle',
+          'hover:rui-bg-light hover:rui-text-dark': variant === 'subtle' && !isDisabled,
           'data-[active=true]:rui-bg-light-shade': variant === 'subtle'
         },
 
         // Primary variant
         {
           'rui-bg-primary rui-text-primary-contrast': variant === 'primary',
-          'hover:rui-bg-primary-shade': variant === 'primary',
+          'hover:rui-bg-primary-shade': variant === 'primary' && !isDisabled,
           'data-[active=true]:rui-bg-black': variant === 'primary'
         },
 
@@ -101,8 +101,7 @@ export const Button = polymorphicForwardRef<'button', ButtonProps>(
 
         // Disabled
         {
-          'rui-bg-light rui-border-light rui-cursor-not-allowed': isDisabled,
-          'hover:rui-bg-light': isDisabled
+          'rui-bg-light rui-border-light rui-cursor-not-allowed': isDisabled
         },
         className
       )}
