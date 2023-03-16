@@ -5,7 +5,7 @@ import { Text } from '../src/components/Text';
 import { Stack } from '../src/components/Stack';
 import { Group } from '../src/components/Group';
 
-import { groups } from '../src/icons';
+import { groups } from '@osuresearch/iconography';
 
 /**
  * Custom icon gallery component for Storybook to

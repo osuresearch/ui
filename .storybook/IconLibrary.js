@@ -3,7 +3,7 @@ import React from 'react';
 import { IconGallery, IconItem } from '@storybook/addon-docs';
 import { Icon } from '../src/components/Icon';
 import { Text } from '../src/components/Text';
-import { groups } from '../src/icons';
+import { groups } from '@osuresearch/iconography';
 
 /**
  * Custom icon gallery component for Storybook to
