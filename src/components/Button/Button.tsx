@@ -54,6 +54,7 @@ export const Button = polymorphicForwardRef<'button', ButtonProps>(
       px="sm"
       isDisabled={isDisabled}
       className={cx(
+        'rui-inline-block',
         'rui-relative',
         'rui-whitespace-nowrap',
 
