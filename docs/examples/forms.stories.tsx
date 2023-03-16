@@ -209,7 +209,7 @@ export const ReactHookForm7 = (args: any) => {
       numberField: 12345,
       currencyField: 1234567.89,
       checkboxField: true,
-      yesNoField: '1',
+      yesNoField: true,
       switchField: true,
       selectField: 'vulkan',
       comboBoxField: 'dx11',
