@@ -1,3 +1,15 @@
+# [5.0.0-alpha.16](https://github.com/osuresearch/ui/compare/v5.0.0-alpha.15...v5.0.0-alpha.16) (2023-03-16)
+
+
+### Bug Fixes
+
+* **useScreenSize:** screens larger than xxl do not get correct breakpoints applied ([41edc92](https://github.com/osuresearch/ui/commit/41edc92f2f33f9240b2682e74e90829877559778)), closes [#48](https://github.com/osuresearch/ui/issues/48)
+
+
+### Performance Improvements
+
+* refactoring dependencies to reduce bundle size ([85dea0a](https://github.com/osuresearch/ui/commit/85dea0a3fc4962d298943526f296b03ae75b4898))
+
 # [5.0.0-alpha.15](https://github.com/osuresearch/ui/compare/v5.0.0-alpha.14...v5.0.0-alpha.15) (2023-03-16)
 
 
