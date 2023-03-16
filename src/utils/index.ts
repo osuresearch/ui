@@ -1,12 +1,12 @@
 // Re-export mergeProps, we use it everywhere.
 import { mergeProps as ariaMergeProps } from '@react-aria/utils';
-import classNames from 'classnames';
+import classNames, { ClassArray } from 'clsx';
 
 export * from './polymorphics';
 export * from './createPolymorphicComponent';
 export * from './theme';
 
-export function cx(...args: classNames.ArgumentArray): string {
+export function cx(...args: ClassArray): string {
   return classNames(args);
 }
 
