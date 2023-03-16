@@ -1,5 +1,5 @@
 import { Node } from '@react-types/shared';
-import React, { Key, createContext, forwardRef, useContext, useRef } from 'react';
+import React, { createContext, forwardRef, useContext, useRef } from 'react';
 import {
   AriaCheckboxGroupItemProps,
   AriaRadioGroupProps,
@@ -14,7 +14,10 @@ import {
   useRadioGroupState
 } from 'react-stately';
 
+import { SlotProp, useSlots } from '../../hooks/useSlots';
+import { Box } from '../Box';
 import { FormField, FormFieldBase } from '../FormField';
+import { Group } from '../Group';
 import { RadioIcon } from '../RadioIcon';
 import { Stack } from '../Stack';
 import { ToggleField } from '../ToggleField';
@@ -25,17 +28,32 @@ export type RadioItem = {
   description?: React.ReactNode;
 };
 
-export type RadioSetFieldProps = FormFieldBase<string> & AriaRadioGroupProps & ListProps<RadioItem>;
-
-const RadioSetContext = createContext<RadioGroupState & ListState<RadioItem>>(
-  {} as RadioGroupState & ListState<RadioItem>
-);
-
-type GroupItemProps = AriaCheckboxGroupItemProps & {
+export type GroupItemSlotProps = AriaCheckboxGroupItemProps & {
   node: Node<RadioItem>;
 };
 
-export function GroupItem({ node, ...props }: GroupItemProps) {
+export type RadioSetFieldSlots = {
+  /**
+   * Slot for rendering each item in the radio set.
+   *
+   * Items must implement `useRadio` with the given props
+   * and manage their own disabled / value states.
+   */
+  itemSlot?: SlotProp<GroupItemSlotProps>;
+};
+
+export type RadioSetFieldProps = FormFieldBase<string> &
+  AriaRadioGroupProps &
+  ListProps<RadioItem> &
+  RadioSetFieldSlots & {
+    itemLayout?: 'horizontal' | 'vertical';
+  };
+
+export const RadioSetContext = createContext<RadioGroupState & ListState<RadioItem>>(
+  {} as RadioGroupState & ListState<RadioItem>
+);
+
+export function DefaultGroupItemSlot({ node, ...props }: GroupItemSlotProps) {
   const state = useContext(RadioSetContext);
   const ref = useRef<HTMLInputElement>(null);
 
@@ -77,13 +95,13 @@ export const RadioSetField = forwardRef<HTMLDivElement, RadioSetFieldProps>((pro
   const listState = useListState(props);
   const groupState = useRadioGroupState(props);
 
-  // TODO: Figure out how to merge listState and groupState.
-  // I might just make everything a "list" behind the scenes.
-
   const { radioGroupProps, labelProps, descriptionProps, errorMessageProps } = useRadioGroup(
     props,
     groupState
   );
+
+  const { itemSlot } = useSlots(props);
+  const ItemSlot = itemSlot ?? DefaultGroupItemSlot;
 
   return (
     <RadioSetContext.Provider value={{ ...listState, ...groupState }}>
@@ -95,11 +113,11 @@ export const RadioSetField = forwardRef<HTMLDivElement, RadioSetFieldProps>((pro
         errorMessageProps={errorMessageProps}
         {...props}
       >
-        <Stack ref={ref}>
+        <Box as={props.itemLayout === 'horizontal' ? Group : Stack} ref={ref}>
           {Array.from(listState.collection).map((item) => (
-            <GroupItem key={item.key} node={item} value={item.textValue} />
+            <ItemSlot key={item.key} node={item} value={item.textValue} />
           ))}
-        </Stack>
+        </Box>
       </FormField>
     </RadioSetContext.Provider>
   );
