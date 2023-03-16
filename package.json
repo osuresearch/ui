@@ -48,11 +48,6 @@
   "devDependencies": {
     "@babel/core": "^7.20.5",
     "@emotion/react": "^11.10.5",
-    "@iconify/icons-bi": "^1.2.13",
-    "@iconify/icons-material-symbols": "^1.2.25",
-    "@iconify/react": "^4.0.1",
-    "@iconify/tools": "^2.1.2",
-    "@mantine/utils": "^5.9.3",
     "@semantic-release/changelog": "^6.0.2",
     "@semantic-release/git": "^10.0.1",
     "@storybook/addon-a11y": "^6.5.15",
@@ -161,6 +156,7 @@
   },
   "dependencies": {
     "@internationalized/date": "^3.0.2",
+    "@osuresearch/iconography": "^1.0.1",
     "@radix-ui/react-scroll-area": "^1.0.3",
     "react-aria": "^3.22.0",
     "react-responsive": "^9.0.2",
