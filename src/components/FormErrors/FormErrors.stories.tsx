@@ -5,6 +5,16 @@ import { FormErrors as Component, FormErrorsProps } from './FormErrors';
 
 export default RUIComponentMeta<FormErrorsProps>('Forms', Component).withStyleSystemProps();
 
-export const FormErrors = RUIComponentStory<FormErrorsProps>((args) => (
-  <Component {...args}>Component template created through newComponent.mjs</Component>
-));
+export const FormErrors = RUIComponentStory<FormErrorsProps>((args) => <Component {...args} />, {
+  errorMessages: {
+    foo: {
+      message: 'You must fill out the foo field'
+    },
+    bar: {
+      message: 'You must fill out the bar field'
+    },
+    date: {
+      message: 'The date you selected must be between January and December'
+    }
+  }
+});
