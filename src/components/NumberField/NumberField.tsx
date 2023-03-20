@@ -1,7 +1,7 @@
 import { NumberFieldProps as BaseNumberFieldProps } from '@react-types/numberfield';
 import React, { forwardRef, useRef } from 'react';
 import { useLocale, useNumberField } from 'react-aria';
-import { NumberFieldStateOptions, useNumberFieldState } from 'react-stately';
+import { useNumberFieldState } from 'react-stately';
 
 import { mergeRefs } from '../../utils';
 import { FormField, FormFieldBase } from '../FormField';
@@ -32,6 +32,10 @@ export const NumberField = forwardRef<HTMLInputElement, NumberFieldProps>((props
     decrementButtonProps
   } = useNumberField(props, state, inputRef);
 
+  const { name, ...inputPropsWithoutName } = inputProps;
+
+  console.log(state);
+
   return (
     <FormField
       wrapperProps={groupProps}
@@ -52,7 +56,8 @@ export const NumberField = forwardRef<HTMLInputElement, NumberFieldProps>((props
             {...decrementButtonProps}
           />
         </div>
-        <TextInputSlot {...inputProps} px="xxl" ref={mergeRefs(inputRef, ref)} />
+        <input type="hidden" name={name} value={state.inputValue ? state.numberValue : ''} />
+        <TextInputSlot {...inputPropsWithoutName} px="xxl" ref={mergeRefs(inputRef, ref)} />
         <div className="rui-absolute rui-inset-[2px] rui-left-auto">
           <IconButton
             bgc="light"
