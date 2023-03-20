@@ -34,8 +34,6 @@ export const NumberField = forwardRef<HTMLInputElement, NumberFieldProps>((props
 
   const { name, ...inputPropsWithoutName } = inputProps;
 
-  console.log(state);
-
   return (
     <FormField
       wrapperProps={groupProps}
