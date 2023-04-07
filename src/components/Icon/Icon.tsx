@@ -1,7 +1,5 @@
 import { Icon as BaseIcon, IconProps as BaseIconProps } from '@osuresearch/iconography';
 import React from 'react';
-
-import { useStyleSystemProps } from '../../hooks/useStyleSystemProps';
 import { StyleSystemProps } from '../../types';
 import { cx, polymorphicForwardRef } from '../../utils';
 import { Box } from '../Box';
@@ -12,35 +10,37 @@ export type IconProps = StyleSystemProps &
      * Use `display: block` for the icon container.
      */
     block?: boolean;
+
+    /**
+     * ARIA label for the icon. If omitted, the icon will have `role="presentation"`
+     * and hidden from screen readers.
+     */
+    label?: string;
   };
 
 /**
  * Icon documentation
  *
  * ## Accessibility
- * - If the icon has semantic meaning add an `aria-label` to describe the icon
+ * - If the icon has semantic meaning add a `label` to describe the icon
  *
  * <!-- @ruiPolymorphic -->
  */
 export const Icon = polymorphicForwardRef<'i', IconProps>(
-  ({ as, name, block, className, ...props }, ref) => {
-    const [styleSystemProps, iconProps] = useStyleSystemProps(props);
-    return (
-      <Box
-        as={as || 'i'}
-        ref={ref}
-        role="img"
-        className={cx(
-          {
-            'rui-block rui-align-top': block,
-            'rui-inline-block rui-align-middle': !block
-          },
-          className
-        )}
-        {...styleSystemProps}
-      >
-        <BaseIcon name={name} {...iconProps} />
-      </Box>
-    );
-  }
+  ({ as, label, block, name, className, flip, rotate, style, size, svgProps, ...props }, ref) =>
+  <Box
+    as={as || 'i'}
+    ref={ref}
+    role={label ? 'img' : 'presentation'}
+    className={cx(
+      {
+        'rui-block rui-align-top': block,
+        'rui-inline-block rui-align-middle': !block
+      },
+      className
+    )}
+    {...props}
+  >
+    <BaseIcon name={name} flip={flip} rotate={rotate} style={style} size={size} svgProps={svgProps} />
+  </Box>
 );
