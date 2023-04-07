@@ -1,19 +1,31 @@
 import { PlacementAxis } from '@react-types/overlays';
 import { FocusableElement } from '@react-types/shared';
-import React, { DOMAttributes } from 'react';
+import React, { CSSProperties, DOMAttributes } from 'react';
 
 import { Color } from '../../theme';
 import { ThemeProp } from '../../types';
 import { Box } from '../Box';
 
 export type ArrowProps = DOMAttributes<FocusableElement> & {
+  style?: CSSProperties;
   c: ThemeProp<Color>;
   placement: PlacementAxis;
+  size?: number
 };
 
 /**
  * An arrow that can be applied to an edge of a relatively positioned container.
  */
-export function Arrow({ placement, c, ...props }: ArrowProps) {
-  return <Box c={c} className="rui-arrow" data-placement={placement} {...props} />;
+export function Arrow({ placement, c, size = 8, style, ...props }: ArrowProps) {
+  return (
+    <Box c={c}
+      className="rui-arrow"
+      data-placement={placement}
+      style={{
+        ...style,
+        '--rui-arrow-size': `${size}px`,
+      } as any}
+      {...props}
+    />
+  );
 }
