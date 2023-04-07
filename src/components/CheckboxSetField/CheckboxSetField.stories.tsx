@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { useListData } from 'react-stately';
 
 import { Item } from '../Item';
+import { Button } from '../Button';
+import { Stack } from '../Stack';
 import { Text } from '../Text';
 import { CheckboxSetField, CheckboxSetFieldProps } from './CheckboxSetField';
 
@@ -83,39 +85,38 @@ export const Error = RUIComponentStory(Overview, {
 });
 
 export const WithReactStatelyLists = RUIComponentStory<CheckboxSetFieldProps>((args) => {
+
+  const [value, setValue] = useState<string[] | undefined>(['item_0', 'item_3']);
   const list = useListData({
-    initialItems: [
-      { name: 'dx11', label: 'DirectX 11' },
-      { name: 'dx12', label: 'DirectX 12' },
-      { name: 'ogles', label: 'OpenGL ES' },
-      { name: 'ogl3', label: 'OpenGL 3.0' },
-      { name: 'metal', label: 'Metal' },
-      { name: 'vulkan', label: 'Vulkan' }
-    ],
-    initialSelectedKeys: ['dx12', 'metal', 'vulkan']
-  });
+    getKey: (item) => item.name,
+    initialItems: [...Array(5)].map((_, i) => ({ name: `item_${i}`, label: `Item ${i}` })),
+  })
 
   return (
-    <>
+    <Stack>
       <CheckboxSetField
         {...args}
         label="Supported APIs"
         items={list.items}
-        selectedKeys={list.selectedKeys}
-        onSelectionChange={list.setSelectedKeys}
+        value={value}
+        onChange={setValue}
+        placeholder="There are no items available"
       >
-        {(item) => <Item key={item.name}>{item.label}</Item>}
+        {(item) => <Item key={item.name}>
+          {item.label} <Button onPress={() => {
+            list.remove(item.name);
+            setValue((keys) => keys?.filter((key) => key !== item.name));
+          }}>Remove</Button>
+        </Item>}
       </CheckboxSetField>
-      <code>
-        <pre>{JSON.stringify(list.selectedKeys, undefined, 2)}</pre>
-      </code>
-      <Text>Selected: {Array.from(list.selectedKeys).join(', ')}</Text>
-    </>
+      <Button onPress={() => list.append({
+        name: 'item_' + Date.now(),
+        label: 'Item ' + Date.now(),
+      })}>Add item</Button>
+      <Text>Selected: {value?.join(', ')}</Text>
+    </Stack>
   );
 }).withDescription(`
-  >TODO: Not implemented. Need to match \`selectedKeys\` and \`onSelectionChange\`
-  props back to the checkbox state of \`string[]\`.
-
   This component supports React Stately's [useListData hook](https://react-spectrum.adobe.com/react-stately/useListData.html#example)
   to construct a list from a collection.
 
