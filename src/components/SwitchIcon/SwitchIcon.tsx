@@ -15,14 +15,6 @@ export type SwitchIconProps = DOMAttributes<FocusableElement> &
 /**
  * Controlled slot renderer for a switch.
  *
- * ## 🛑 Disclaimer
- *
- * In most cases, you should not use this component in your application.
- * This is a controlled component that is solely responsible for rendering states.
- *
- * ## Differences from BUX
- * - Omitted the vertical line in the "on" state.
- *
  * @internal
  */
 export const SwitchIcon = ({
@@ -33,6 +25,7 @@ export const SwitchIcon = ({
 }: SwitchIconProps) => (
   <Box
     w={44}
+    miw={44}
     h={24}
     bgc={isSelected ? 'primary' : 'dark-shade'}
     className={cx(
