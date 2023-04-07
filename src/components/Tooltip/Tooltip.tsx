@@ -1,9 +1,12 @@
 import { FocusableElement } from '@react-types/shared';
+import { Placement } from '@react-types/overlays';
 import React, { ReactNode, useRef } from 'react';
-import { AriaTooltipProps, mergeProps, useTooltip, useTooltipTrigger } from 'react-aria';
+import { AriaTooltipProps, useOverlayPosition, useTooltip, useTooltipTrigger } from 'react-aria';
 import { TooltipTriggerState, useTooltipTriggerState } from 'react-stately';
 
 import { Paper } from '../Paper';
+import { FocusRing } from '../FocusRing';
+import { Arrow } from '../Arrow';
 
 export type TooltipSlots = {
   contentSlot: React.ReactNode;
@@ -26,6 +29,17 @@ export type TooltipProps = TooltipSlots & {
 
   /** Whether the tooltip should be disabled, independent from the trigger. */
   isDisabled?: boolean;
+
+  /**
+   * Placement of the tooltip with respect to the trigger.
+   * If omitted, the tooltip will make a best-effort placement.
+   */
+  placement?: Placement;
+
+  /**
+   * Pixel-based offset from the trigger element to display the popover.
+   */
+  offset?: number;
 };
 
 type TooltipPopupProps = AriaTooltipProps & {
@@ -38,17 +52,15 @@ function TooltipPopup({ state, ...props }: TooltipPopupProps) {
 
   return (
     <Paper
+      bgc="black"
+      c="white"
       shadow="xs"
       fs="sm"
       w="max-content"
-      p="xxs"
-      withBorder
-      {...mergeProps(props, tooltipProps, {
-        style: {
-          position: 'absolute',
-          maxWidth: '15rem'
-        }
-      })}
+      maw="15rem"
+      py="xxs"
+      px="xs"
+      {...tooltipProps}
     >
       {props.children}
     </Paper>
@@ -57,28 +69,48 @@ function TooltipPopup({ state, ...props }: TooltipPopupProps) {
 
 /**
  * A tooltip is an overlay description positioned relative to a trigger.
+ *
+ * ## Accessibility
+ * -  `aria-describedby` is applied to the trigger element when a tooltip is visible.
+ * -  The element wrapped by a Tooltip will receive tab index of 0 to ensure that
+ *    non-focusable elements can receive keyboard focus (e.g. icons).
  */
 export const Tooltip = ({ children, contentSlot, delay = 800, ...props }: TooltipProps) => {
-  const triggerRef = useRef<FocusableElement>(null);
+  const targetRef = useRef<FocusableElement>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
 
   const config = { ...props, delay };
 
   const state = useTooltipTriggerState(config);
+  const { triggerProps, tooltipProps } = useTooltipTrigger(config, state, targetRef);
 
-  const { triggerProps, tooltipProps } = useTooltipTrigger(config, state, triggerRef);
+  const { overlayProps, arrowProps, placement } = useOverlayPosition({
+    ...props,
+    targetRef,
+    overlayRef,
+    isOpen: state.isOpen,
+    shouldFlip: true,
+    offset: 4,
+  });
 
   const trigger = React.Children.only(children);
   return (
-    <span className="rui-relative">
+    <>
+    <FocusRing>
       {React.cloneElement(trigger, {
         ...triggerProps,
-        ref: triggerRef
+        tabIndex: 0,
+        ref: targetRef
       })}
-      {state.isOpen && (
+    </FocusRing>
+    {state.isOpen && (
+      <div ref={overlayRef} {...overlayProps}>
+        <Arrow c="black" size={4} placement={placement} {...arrowProps} />
         <TooltipPopup state={state} {...tooltipProps}>
           {contentSlot}
         </TooltipPopup>
-      )}
-    </span>
+      </div>
+    )}
+    </>
   );
 };
