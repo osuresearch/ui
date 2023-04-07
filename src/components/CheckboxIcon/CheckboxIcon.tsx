@@ -44,6 +44,7 @@ export const CheckboxIcon = ({
   >
     {(isSelected || isIndeterminate) && (
       <Icon
+        role="presentation"
         className="[&>svg]:rui-animate-pop"
         size={16}
         c={!isDisabled ? 'white' : 'dark'}
