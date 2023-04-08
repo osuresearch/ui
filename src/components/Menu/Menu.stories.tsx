@@ -16,6 +16,10 @@ export const Overview = RUIComponentStory<MenuProps>((args) => (
   </Menu>
 ));
 
+export const Disabled = RUIComponentStory(Overview, {
+  isDisabled: true,
+});
+
 export const WithDisabledItems = RUIComponentStory(Overview, {
   disabledKeys: ['cut']
 });

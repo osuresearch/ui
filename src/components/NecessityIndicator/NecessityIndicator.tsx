@@ -18,11 +18,13 @@ export type NecessityIndicatorProps = Record<string, never>;
  * - This is a visual-only component that sets `aria-hidden`.
  * - This must be combined with the `required` prop on the relevant `<input>`
  *  to signal to screen readers that a field is required.
+ *
+ * @internal
  */
 export const NecessityIndicator = forwardRef<HTMLDivElement, NecessityIndicatorProps>(
   (props, ref) => (
     <Icon
-      aria-label="(required)"
+      label="(required)"
       ref={ref}
       size={10}
       ml="xs"

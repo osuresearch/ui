@@ -23,6 +23,8 @@ export type MenuProps = MenuTriggerProps &
   AriaMenuProps<any> & {
     label: React.ReactNode;
 
+    isDisabled?: boolean;
+
     /** `Item` components only */
     children: CollectionChildren<any>;
   };
@@ -108,11 +110,15 @@ export const Menu = ({ children, label, ...props }: MenuProps) => {
   const triggerRef = useRef<HTMLButtonElement>(null);
   const state = useMenuTriggerState(props);
 
-  const { menuTriggerProps, menuProps } = useMenuTrigger({}, state, triggerRef);
+  const { menuTriggerProps, menuProps } = useMenuTrigger(props, state, triggerRef);
 
   return (
     <>
-      <Button ref={triggerRef} {...menuTriggerProps} rightSlot={<Icon name="caret" />}>
+      <Button ref={triggerRef}
+        isDisabled={props.isDisabled}
+        rightSlot={<Icon name="chevron" rotate={90} />}
+        {...menuTriggerProps}
+      >
         {label}
       </Button>
       {state.isOpen && (
