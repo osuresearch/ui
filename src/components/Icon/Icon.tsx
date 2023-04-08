@@ -32,6 +32,7 @@ export const Icon = polymorphicForwardRef<'i', IconProps>(
     as={as || 'i'}
     ref={ref}
     role={label ? 'img' : 'presentation'}
+    aria-label={label}
     className={cx(
       {
         'rui-block rui-align-top': block,
