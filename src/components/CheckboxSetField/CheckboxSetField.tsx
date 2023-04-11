@@ -50,7 +50,8 @@ function GroupItem({ node, ...props }: GroupItemProps) {
     {
       ...props,
       value: '' + node.key,
-      isDisabled
+      isDisabled,
+      children: node.rendered,
     },
     state,
     ref

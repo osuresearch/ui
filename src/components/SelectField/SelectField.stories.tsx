@@ -109,7 +109,7 @@ export const WithCustomItems = RUIComponentStory<SelectFieldProps>(
     return (
       <SelectField {...args} items={people}>
         {(person) => (
-          <Item key={person.name}>
+          <Item key={person.name} textValue={person.name}>
             <Group p="xs">
               <Avatar
                 alt={person.name as string}

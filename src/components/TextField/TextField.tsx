@@ -67,7 +67,10 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
   const inputRef = useRef<HTMLInputElement>(null);
 
   const { labelProps, inputProps, descriptionProps, errorMessageProps } = useTextField<'input'>(
-    props,
+    {
+      'aria-label': '',
+      ...props,
+    },
     inputRef
   );
 

@@ -50,6 +50,7 @@ function YesNoGroupItemSlot({ node, ...props }: GroupItemSlotProps) {
     {
       ...props,
       value: '' + node.key,
+      'aria-label': '' + node.key,
       isDisabled
     },
     state,
