@@ -4,6 +4,7 @@ import React, { forwardRef, useRef, useState } from 'react';
 import { StyleSystemProps } from '../../types';
 import { cx } from '../../utils';
 import { Box } from '../Box';
+import { useScreenSize } from '../../hooks';
 
 export type ScrollAreaProps = StyleSystemProps & {
   /**
@@ -15,20 +16,20 @@ export type ScrollAreaProps = StyleSystemProps & {
    * - `hover`: when the user is scrolling along its corresponding orientation and when the user
    *  is hovering over the scroll area.
    */
-  type: 'auto' | 'always' | 'scroll' | 'hover';
+  type?: 'auto' | 'always' | 'scroll' | 'hover';
 
   /**
    * If type is set to either `scroll` or `hover`, this prop determines the length
    * of time, in milliseconds, before the scrollbars are hidden after the user
    * stops interacting with scrollbars.
    */
-  hideDelay: number;
+  hideDelay?: number;
 
   children: React.ReactNode;
 };
 
 /**
- * Augments native scroll functionality for custom, cross-browser styling
+ * Augments native scroll functionality for custom, cross-browser styling.
  *
  * ## Accessibility
  * - Scrolling via keyboard is supported by default because the component
@@ -38,6 +39,8 @@ export type ScrollAreaProps = StyleSystemProps & {
 export function ScrollArea({
   type = 'hover',
   hideDelay = 1000,
+  mah,
+  maw,
   children,
   ...styleSystemProps
 }: ScrollAreaProps) {
@@ -68,70 +71,47 @@ export function ScrollArea({
   };
 
   const viewportRef = useRef<HTMLDivElement>(null);
-  const [atBottom, setAtBottom] = useState(false);
-
-  const onScroll = () => {
-    if (viewportRef.current) {
-      const el = viewportRef.current;
-      const bottom = el.scrollTop === el.scrollHeight - el.offsetHeight;
-
-      if (atBottom !== bottom) {
-        setAtBottom(bottom);
-      }
-    }
-  };
+  const { resolve } = useScreenSize();
 
   return (
-    <RadixScrollArea.Root
-      type={type}
-      scrollHideDelay={hideDelay}
-      asChild
-      className="rui-overflow-hidden"
-    >
-      <Box {...styleSystemProps} pr="xs" pb="xs">
-        <RadixScrollArea.Viewport
-          ref={viewportRef}
-          className={className.viewport}
-          style={
-            {
-              // TODO: Don't do this lol. I'm just playing with the UX a bit.
-              // Having the overflow mask fade out the closer we get to the
-              // bottom would be nice - with complete transparency @ bottom.
-              '--mask': atBottom
-                ? `
-              rgba(0,0,0, 1)
-            `
-                : `linear-gradient(to bottom,
-                rgba(0,0,0, 1) 0,   rgba(0,0,0, 1) 80%,
-                rgba(0,0,0, 0) 100%, rgba(0,0,0, 0) 0
-            ) 100% 50% / 100% 100% repeat-x
-            `,
-              'mask': 'var(--mask)'
-            } as React.CSSProperties
-          }
-          onScroll={onScroll}
-        >
-          {children}
-        </RadixScrollArea.Viewport>
+    <Box {...styleSystemProps}>
+      <RadixScrollArea.Root
+        type={type}
+        scrollHideDelay={hideDelay}
+        asChild
+      >
+        <Box pr="xs" pb="xs" className="rui-overflow-hidden">
+          <RadixScrollArea.Viewport
+            ref={viewportRef}
+            className={className.viewport}
+            style={{
+              // For a scroll area, we use mah/maw for the viewport dimensions.
+              maxHeight: resolve(mah),
+              maxWidth: resolve(maw),
+            }}
+          >
+            {children}
+          </RadixScrollArea.Viewport>
 
-        <RadixScrollArea.Scrollbar
-          className={className.scrollbar}
-          orientation="vertical"
-          forceMount
-        >
-          <RadixScrollArea.Thumb className={className.thumb} />
-        </RadixScrollArea.Scrollbar>
+          <RadixScrollArea.Scrollbar
+            className={className.scrollbar}
+            orientation="vertical"
+            forceMount
+          >
+            <RadixScrollArea.Thumb className={className.thumb} />
+          </RadixScrollArea.Scrollbar>
 
-        <RadixScrollArea.Scrollbar
-          className={className.scrollbar}
-          orientation="horizontal"
-          forceMount
-        >
-          <RadixScrollArea.Thumb className={className.thumb} />
-        </RadixScrollArea.Scrollbar>
+          <RadixScrollArea.Scrollbar
+            className={className.scrollbar}
+            orientation="horizontal"
+            forceMount
+          >
+            <RadixScrollArea.Thumb className={className.thumb} />
+          </RadixScrollArea.Scrollbar>
 
-        <RadixScrollArea.Corner className={className.corner} />
-      </Box>
-    </RadixScrollArea.Root>
+          <RadixScrollArea.Corner className={className.corner} />
+        </Box>
+      </RadixScrollArea.Root>
+    </Box>
   );
 }
