@@ -23,7 +23,7 @@ export * from './ConfirmDialog';
 export * from './DateField';
 export * from './Details';
 export * from './Divider';
-export * from './DocumentPagination';
+export * from './PageButton';
 export * from './ExternalLink';
 export * from './FocusRing';
 export * from './FormDialog';
