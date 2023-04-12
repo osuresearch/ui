@@ -91,12 +91,8 @@ function _ListBox<T extends object>(props: ListBoxProps<T>, ref: ForwardedRef<HT
 /**
  * Low level component for managing interactive lists of items.
  *
- * ## 🛑 Internal use only
- *
  * - Requires state to be passed in from React Stately's `useListState`.
  * - Section and item rendering are the responsibility of the consumer.
- *
- * <!-- @ruiInternal -->
  *
  * @internal
  */

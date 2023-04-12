@@ -59,7 +59,6 @@ export * from './Paper';
 export * from './Popover';
 export * from './PrimaryButton';
 export * from './RUIProvider';
-export * from './RadioButtonIcon';
 export * from './RadioIcon';
 export * from './RadioSetField';
 export * from './ScrollArea';

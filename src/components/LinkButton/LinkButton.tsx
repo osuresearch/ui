@@ -10,7 +10,9 @@ export type LinkButtonProps = StyleSystemProps & {
 };
 
 /**
- * Link button / call to action button
+ * Link button / call to action button.
+ *
+ * This is an alternative button style from Buckeye UX.
  *
  * Wrap this within a `.group` parent to capture hover events on the parent.
  *

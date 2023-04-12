@@ -15,6 +15,7 @@ export type RadioIconProps = DOMAttributes<FocusableElement> &
 /**
  * Controlled slot renderer for a radio.
  *
+ * <!-- @ruiInternal -->
  * @internal
  */
 export const RadioIcon = ({ isSelected, isDisabled, ...props }: RadioIconProps) => (

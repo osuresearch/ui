@@ -112,14 +112,11 @@ function ContentLayout({ layout, children }: LayoutProps) {
 }
 
 /**
- * Base for a form field component
+ * Base for all specialized form field components. Handles labeling,
+ * description, focus rings and error rendering without layout variants.
  *
- * <img class="rui-diagram" src="./FormField.svg" alt="Component diagram" />
- *
- * ## 🛑 Disclaimer
- *
- * In most cases, you should not use this component in your application.
- * This is a base for other specialized fields to implement.
+ * IDs and Aria associations are the responsibility of each
+ * specialized form field component.
  *
  * ## Accessibility
  *
@@ -127,10 +124,8 @@ function ContentLayout({ layout, children }: LayoutProps) {
  *  [React Aria](https://react-spectrum.adobe.com/react-aria/useTextField.html).
  * - If `label` is omitted, an `aria-label` or `aria-labeledby` prop must
  *  be passed instead to identify the element for screen readers.
- * - `data-field` and `data-label-for` are set to the `name` prop to support
- *  targeting and focusing elements from an external component e.g. `FormErrors`.
- *
- * ## Slots
+ * - `data-field` and `data-label-for` are set to the component`name` prop to support
+ *  targeting and focusing elements from an external  e.g. `FormErrors`.
  *
  * ### Children
  * - Slot for the underlying input element

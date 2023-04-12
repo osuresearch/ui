@@ -36,8 +36,6 @@ export type ConfirmDialogProps = AriaDialogProps & {
 /**
  * A dialog that requires user confirmation before continuing the current action.
  *
- * ## 🛑 Internal use only
- *
  * Use the `ConfirmButton` component to toggle a confirmation dialog.
  *
  * ## Accessibility

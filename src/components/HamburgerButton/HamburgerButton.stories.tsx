@@ -4,7 +4,7 @@ import React from 'react';
 import { HamburgerButton as Component, HamburgerButtonProps } from './HamburgerButton';
 
 export default RUIComponentMeta<HamburgerButtonProps>(
-  'Components',
+  'Buttons',
   Component
 ).withStyleSystemProps();
 

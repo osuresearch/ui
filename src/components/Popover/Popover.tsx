@@ -60,7 +60,8 @@ export type PopoverProps = {
 };
 
 /**
- * 🛑 Internal component. Do not use directly.
+ * Extension of tooltips that can include interactive content. Positioning
+ * is relative to the trigger element, unlike Modals.
  *
  * ## Accessibility
  * - Applies React Aria `Overlay` and RUI's `Underlay` to block touch input outside of the paper

@@ -8,7 +8,6 @@ import { Divider } from '../Divider';
 import { FormFieldBase } from '../FormField';
 import { Group } from '../Group';
 import { Item } from '../Item';
-import { RadioButtonIcon } from '../RadioButtonIcon';
 import { GroupItemSlotProps, RadioSetContext, RadioSetField } from '../RadioSetField';
 import { ToggleField } from '../ToggleField';
 

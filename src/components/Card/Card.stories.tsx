@@ -4,7 +4,7 @@ import React from 'react';
 
 import { Card, CardProps } from './Card';
 
-export default RUIComponentMeta<CardProps>('BUX Stuff', Card).withStyleSystemProps();
+export default RUIComponentMeta<CardProps>('Ohio State', Card).withStyleSystemProps();
 
 const Template: Story<CardProps> = (args: CardProps) => (
   <Card {...args} href="https://example.com">

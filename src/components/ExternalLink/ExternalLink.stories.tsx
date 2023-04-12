@@ -6,7 +6,7 @@ import { Box } from '../Box';
 import { LinkProps } from '../Link';
 import { ExternalLink } from './ExternalLink';
 
-export default RUIComponentMeta<LinkProps>('Components', ExternalLink).withStyleSystemProps();
+export default RUIComponentMeta<LinkProps>('Buttons', ExternalLink).withStyleSystemProps();
 
 export const Overview = RUIComponentStory<LinkProps>((args) => (
   <ExternalLink href="https://research.osu.edu" {...args}>

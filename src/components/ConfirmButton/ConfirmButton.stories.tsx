@@ -6,7 +6,7 @@ import { Text } from '../Text';
 import { ConfirmButton, ConfirmButtonProps } from './ConfirmButton';
 
 export default RUIComponentMeta<ConfirmButtonProps>(
-  'Dialogs',
+  'Buttons',
   ConfirmButton
 ).withStyleSystemProps();
 

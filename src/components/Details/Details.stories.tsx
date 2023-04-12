@@ -5,7 +5,7 @@ import { Stack } from '../Stack';
 import { Text } from '../Text';
 import { Details, DetailsProps } from './Details';
 
-export default RUIComponentMeta<DetailsProps>('BUX Stuff', Details).withStyleSystemProps();
+export default RUIComponentMeta<DetailsProps>('Ohio State', Details).withStyleSystemProps();
 
 export const Overview = RUIComponentStory<DetailsProps>(
   (args) => (
