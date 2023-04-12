@@ -24,7 +24,7 @@ export type NecessityIndicatorProps = Record<string, never>;
 export const NecessityIndicator = forwardRef<HTMLDivElement, NecessityIndicatorProps>(
   (props, ref) => (
     <Icon
-      label="(required)"
+      aria-label="(required)"
       ref={ref}
       size={10}
       ml="xs"
