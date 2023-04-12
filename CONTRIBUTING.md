@@ -158,11 +158,14 @@ The default graphite width of 10mm is always used for performance reasons.
 
 ## General architecture
 
-We use [StorybookJS](https://storybook.js.org/) as a workshop for building components in isolation and running tests. Execute `npm run storybook` to start it up for development.
+UI 5l leverages the following frameworks. Understand these before tackling issues:
 
-CSS is all done via [Tailwind CSS](https://tailwindcss.com) using the `rui-` prefix on all classes. You can take a look at this [Tailwind Cheatsheet](https://nerdcave.com/tailwind-cheat-sheet) for mapping between CSS and Tailwind.
-
-Be sure to map those back to our prefixed classes, such as `rui-text-scarlet`, `-rui-left-md`, and `hover:rui-underline`.
+- [React Aria](https://react-spectrum.adobe.com/react-aria/) - almost all of our interactive components are built on top of React Aria hooks to leverage their efforts for ensuring a11y. 
+- [React Stately](https://react-spectrum.adobe.com/react-stately/) - Drives our components that handle lists of things (checkbox sets, select lists, lookups, etc). Future components that handle lists need to follow similar patterns. 
+- [Tailwind CSS](https://tailwindcss.com/) - All of our visual components are built on top of Tailwind utility classes. Make sure you understand how Tailwind works as well as our `tailwind.config.js` file.
+- [@osuresearch/iconography](https://github.com/osuresearch/iconography) - Our icons depend on our iconography package. If you need to introduce new icons, create an issue there.
+- [Microbundle](https://github.com/developit/microbundle) - We use Microbundle to package our code for CommonJS/UMD/ESM/etc. There are quirks, like `devDependencies` that are referenced from bundled code being packaged directly in the final build, so read up on how this bundler works. 
+- [Storybook](https://storybook.js.org/) - Used as a workshop for building components in isolation, running tests, and providing documentation for consumers. Execute `npm run storybook` to start it up for development. 
 
 ## Coding guidelines and tips
 
@@ -234,9 +237,9 @@ The linter will reformat your code to our standard and check for a number of com
 
 ### Use `Item` collections for iterable children
 
-I want to standardize on using React Stately's `Item` and `Collection` features for children. This gives us a lot more flexibility and consistency in the API.
+We standardize on using React Stately's `Item`, `Section` and `Collection` features for children of list-based components. This gives us a lot more flexibility and consistency in the API, e.g. by allowing consumers to customize the per-item renderer where appropriate while still maintaining higher performance rendering. 
 
-For some examples take a look at `CheckboxGroupField` and `UnstyledList` components.
+For some examples take a look at `CheckboxSetField` and `Menu` components.
 
 ## Documenting guidelines and tips
 
@@ -285,3 +288,12 @@ Generally, include stories that show off:
 If a component is intended to integrate with a third party library make sure there are stories that cover these integrations.
 
 For example, we use [React Hook Form](https://react-hook-form.com/) for form state management, so form components must all provide RHF samples. This helps us keep tests up to date for future compatibility issues.
+
+## Additional Resources
+
+The [Tailwind Cheatsheet](https://nerdcave.com/tailwind-cheat-sheet) is helpful for mapping your CSS knowledge to Tailwind utilities. Be sure also map those back to our prefixed classes, such as `rui-text-scarlet`, `-rui-left-md`, and `hover:rui-underline`.
+
+If you're using VSCode, we recommend the following extensions:
+
+- [Tailwind CSS IntelliSense](https://tailwindcss.com/docs/editor-setup)
+- [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) - Your code will be autoformatted on commit based on our Prettier rules, but the extension is also useful for identifying problems early on. 

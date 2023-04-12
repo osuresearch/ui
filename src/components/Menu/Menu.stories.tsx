@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import { Item } from '../Item';
 import { Text } from '../Text';
 import { Menu, MenuProps } from './Menu';
+import { Section } from '../Section';
 
 export default RUIComponentMeta<MenuProps>('Components', Menu);
 
@@ -15,6 +16,10 @@ export const Overview = RUIComponentStory<MenuProps>((args) => (
     <Item key="paste">Paste</Item>
   </Menu>
 ));
+
+export const Disabled = RUIComponentStory(Overview, {
+  isDisabled: true,
+});
 
 export const WithDisabledItems = RUIComponentStory(Overview, {
   disabledKeys: ['cut']
@@ -38,6 +43,24 @@ export const DynamicItems = RUIComponentStory<MenuProps>((args) => {
   );
 });
 
+export const WithSections = RUIComponentStory<MenuProps>((args) => (
+  <Menu {...args} label="Options" onAction={alert}>
+    <Section title="My Account">
+      <Item key="billing">Billing</Item>
+      <Item key="settings">Settings</Item>
+    </Section>
+    <Section title="My Team">
+      <Item key="invite">Invite users</Item>
+      <Item key="new">New team</Item>
+      <Item key="permissions">Permissions</Item>
+    </Section>
+    <Section>
+      <Item key="logout">Log out</Item>
+    </Section>
+  </Menu>
+));
+
+
 export const SelectingItems = RUIComponentStory<MenuProps>((args) => {
   const [selection, setSelection] = useState<Selection>(new Set(['dx12', 'metal']));
 
@@ -50,14 +73,17 @@ export const SelectingItems = RUIComponentStory<MenuProps>((args) => {
         selectedKeys={selection}
         onSelectionChange={setSelection}
       >
-        <Item key="dx11">DirectX 11</Item>
         <Item key="dx12">DirectX 12</Item>
         <Item key="metal">Metal</Item>
         <Item key="gles">OpenGL ES</Item>
         <Item key="gl3">OpenGL 3.0</Item>
         <Item key="vulkan">Vulkan</Item>
+        <Section title="Legacy APIs">
+          <Item key="dx11">DirectX 11</Item>
+          <Item key="gl2">OpenGL 2.0</Item>
+        </Section>
       </Menu>
-      <Text as="p">Selected: {[...(selection as Set<string>).values()].join(', ')}</Text>
+      <Text as="p">Selected: {Array.from(selection).join(', ')}</Text>
     </>
   );
 }).withDescription(`
@@ -65,3 +91,4 @@ export const SelectingItems = RUIComponentStory<MenuProps>((args) => {
 
   Keyboard users can use \`Space\` to toggle items.
 `);
+

@@ -5,7 +5,6 @@ import { ComboBoxStateOptions, useComboBoxState } from 'react-stately';
 
 import { mergeRefs } from '../../utils';
 import { FormField, FormFieldBase } from '../FormField';
-import { Group } from '../Group';
 import { IconButton } from '../IconButton';
 import { ListBox } from '../ListBox';
 import { Popover } from '../Popover';
@@ -85,6 +84,8 @@ export const ComboBoxField = forwardRef<HTMLInputElement, ComboBoxFieldProps>((p
     state
   );
 
+  const { name, ...inputPropsWithoutName } = inputProps;
+
   return (
     <FormField
       {...props}
@@ -93,7 +94,8 @@ export const ComboBoxField = forwardRef<HTMLInputElement, ComboBoxFieldProps>((p
       errorMessageProps={errorMessageProps}
     >
       <div className="rui-relative rui-w-full">
-        <TextInputSlot ref={mergeRefs(ref, inputRef)} {...inputProps} />
+        <input type="hidden" name={name} value={state.selectedKey} />
+        <TextInputSlot ref={mergeRefs(ref, inputRef)} {...inputPropsWithoutName} />
         <div className="rui-absolute rui-inset-[2px] rui-left-auto">
           <IconButton
             name="caret"

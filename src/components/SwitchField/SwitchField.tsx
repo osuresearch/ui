@@ -38,7 +38,8 @@ export const SwitchField = forwardRef<HTMLInputElement, SwitchFieldProps>(
       {
         ...other,
         isSelected: value,
-        defaultSelected: defaultValue
+        defaultSelected: defaultValue,
+        children: label,
       },
       state,
       inputRef

@@ -178,10 +178,10 @@ module.exports = {
 
       // Headings use different font steps
       // Ref: https://bux.osu.edu/typography/headings
-      h1: ['var(--rui-heading-1)', { lineHeight: '1.2'}],
-      h2: ['var(--rui-heading-2)', { lineHeight: '1.25'}],
-      h3: ['var(--rui-heading-3)', { lineHeight: '1.25'}],
-      h4: ['var(--rui-heading-4)', { lineHeight: '1.25'}],
+      h1: ['var(--rui-heading-1)', { lineHeight: '1.2' }],
+      h2: ['var(--rui-heading-2)', { lineHeight: '1.25' }],
+      h3: ['var(--rui-heading-3)', { lineHeight: '1.25' }],
+      h4: ['var(--rui-heading-4)', { lineHeight: '1.25' }],
     },
     // Ref: https://bux.osu.edu/typography/fonts
     fontFamily: {
@@ -228,7 +228,7 @@ module.exports = {
           '100%': {
             opacity: '1',
             transform: 'translateY(0)'
-          },
+          }
         },
         'pop': {
           '0%': {
@@ -242,13 +242,22 @@ module.exports = {
           '75%, 100%': {
             // Reduce Tailwind's default ping transform
             transform: 'scale(1.5)',
-            opacity: '0',
+            opacity: '0'
+          }
+        },
+        'scroll': {
+          'from': {
+            left: '-50%'
+          },
+          'to': {
+            left: '100%'
           }
         }
       },
       animation: {
         'fade-in-down': 'fade-in-down 0.5s ease-out',
         'pop': 'pop 0.12s ease-in-out',
+        'scroll': 'scroll 2s linear infinite'
       }
     },
   },

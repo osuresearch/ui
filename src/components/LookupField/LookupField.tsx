@@ -78,6 +78,8 @@ export const LookupField = forwardRef<HTMLInputElement, LookupFieldProps>(
         state
       );
 
+    const { name, ...inputPropsWithoutName } = inputProps;
+
     const searchProps = {
       label: props.label,
       value: state.inputValue,
@@ -110,9 +112,11 @@ export const LookupField = forwardRef<HTMLInputElement, LookupFieldProps>(
 
           {renderSelectedItem && <Box ml="xxl">{state.selectedItem.rendered}</Box>}
 
+          <input type="hidden" name={name} value={state.selectedKey} />
+
           <TextInputSlot
             ref={mergeRefs(ref, inputRef)}
-            {...mergeProps(inputProps, {
+            {...mergeProps(inputPropsWithoutName, {
               style: {
                 paddingLeft: 40,
                 paddingRight: 40,

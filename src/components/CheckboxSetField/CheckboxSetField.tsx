@@ -1,5 +1,5 @@
-import { Node } from '@react-types/shared';
-import React, { Key, createContext, forwardRef, useContext, useRef } from 'react';
+import { Node, CollectionBase } from '@react-types/shared';
+import React, { createContext, useContext, useRef } from 'react';
 import {
   AriaCheckboxGroupItemProps,
   AriaCheckboxGroupProps,
@@ -8,7 +8,6 @@ import {
 } from 'react-aria';
 import {
   CheckboxGroupState,
-  ListProps,
   ListState,
   useCheckboxGroupState,
   useListState
@@ -20,14 +19,17 @@ import { Stack } from '../Stack';
 import { ToggleField } from '../ToggleField';
 
 export type CheckboxItem = {
-  name?: string;
-  label?: string;
+  name: string;
+  label: string;
   description?: string;
 };
 
 export type CheckboxSetFieldProps = FormFieldBase<string[]> &
   AriaCheckboxGroupProps &
-  ListProps<CheckboxItem>;
+  CollectionBase<CheckboxItem> & {
+    /** Content to render when there are no options available */
+    placeholder?: React.ReactNode
+  }
 
 const CheckboxSetContext = createContext<CheckboxGroupState & ListState<CheckboxItem>>(
   {} as CheckboxGroupState & ListState<CheckboxItem>
@@ -48,7 +50,8 @@ function GroupItem({ node, ...props }: GroupItemProps) {
     {
       ...props,
       value: '' + node.key,
-      isDisabled
+      isDisabled,
+      children: node.rendered,
     },
     state,
     ref
@@ -77,12 +80,12 @@ function GroupItem({ node, ...props }: GroupItemProps) {
  *
  * <!-- @ruiAtomic Key -->
  */
-export const CheckboxSetField = forwardRef<HTMLDivElement, CheckboxSetFieldProps>((props, ref) => {
+export function CheckboxSetField({ placeholder, ...props }: CheckboxSetFieldProps) {
+  // List state handles dynamic (async) items.
   const listState = useListState(props);
-  const groupState = useCheckboxGroupState(props);
 
-  // TODO: Figure out how to merge listState and groupState.
-  // I might just make everything a "list" behind the scenes.
+  // Checkbox group state handles selection.
+  const groupState = useCheckboxGroupState(props);
 
   const { groupProps, labelProps, descriptionProps, errorMessageProps } = useCheckboxGroup(
     props,
@@ -91,7 +94,7 @@ export const CheckboxSetField = forwardRef<HTMLDivElement, CheckboxSetFieldProps
 
   return (
     <CheckboxSetContext.Provider value={{ ...listState, ...groupState }}>
-      <FormField<string[]>
+      <FormField
         wrapperProps={groupProps}
         labelAs="span"
         labelProps={labelProps}
@@ -99,7 +102,9 @@ export const CheckboxSetField = forwardRef<HTMLDivElement, CheckboxSetFieldProps
         errorMessageProps={errorMessageProps}
         {...props}
       >
-        <Stack ref={ref}>
+        <Stack>
+          {listState.collection.size < 1 && placeholder}
+
           {Array.from(listState.collection).map((item) => {
             if (item.type === 'section') {
               return <div key={item.key}>TODO: section</div>;
@@ -111,4 +116,4 @@ export const CheckboxSetField = forwardRef<HTMLDivElement, CheckboxSetFieldProps
       </FormField>
     </CheckboxSetContext.Provider>
   );
-});
+}

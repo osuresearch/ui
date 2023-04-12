@@ -9,19 +9,12 @@ export type SwitchIconProps = DOMAttributes<FocusableElement> &
   StyleSystemProps & {
     isSelected?: boolean;
     isDisabled?: boolean;
+    isIndeterminate?: boolean;
     isFocusVisible?: boolean;
   };
 
 /**
  * Controlled slot renderer for a switch.
- *
- * ## 🛑 Disclaimer
- *
- * In most cases, you should not use this component in your application.
- * This is a controlled component that is solely responsible for rendering states.
- *
- * ## Differences from BUX
- * - Omitted the vertical line in the "on" state.
  *
  * @internal
  */
@@ -29,10 +22,15 @@ export const SwitchIcon = ({
   isSelected,
   isFocusVisible,
   isDisabled,
+  // Needs to be extracted to avoid being given to the native DOM element
+  // Currently the generic <ToggleField> passes this down.
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  isIndeterminate,
   ...props
 }: SwitchIconProps) => (
   <Box
     w={44}
+    miw={44}
     h={24}
     bgc={isSelected ? 'primary' : 'dark-shade'}
     className={cx(

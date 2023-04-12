@@ -1,11 +1,12 @@
 import { Node } from '@react-types/shared';
 import React, { ForwardedRef, forwardRef, useRef } from 'react';
-import { AriaListBoxOptions, useListBox, useOption } from 'react-aria';
+import { AriaListBoxOptions, useListBox, useListBoxSection, useOption, useSeparator } from 'react-aria';
 import { ListState } from 'react-stately';
 
 import { cx, mergeRefs } from '../../utils';
 import { Box } from '../Box';
 import { FocusRing } from '../FocusRing';
+import { Text } from '../Text';
 
 type ListItemProps<T> = {
   state: ListState<T>;
@@ -18,25 +19,51 @@ function ListItem<T>({ node, state }: ListItemProps<T>) {
     useOption({ key: node.key }, state, ref);
 
   return (
-    <Box
-      as="li"
-      ref={ref}
-      {...optionProps}
-      className={cx(
-        // Disable default focus behaviour: focused elements get a bgc
-        'rui-outline-none',
+    <FocusRing>
+      <Box
+        as="li"
+        ref={ref}
+        {...optionProps}
+        className={cx(
+          { 'rui-cursor-pointer': !isDisabled },
+          { 'rui-cursor-not-allowed': isDisabled }
+        )}
+        c={isDisabled ? 'dark' : 'light-contrast'}
+        miw={200}
+        bgc={isFocused ? 'light-shade' : undefined}
+      >
+        {node.rendered}
+      </Box>
+    </FocusRing>
+  );
+}
 
-        { 'rui-cursor-pointer': !isDisabled },
-        { 'rui-cursor-not-allowed': isDisabled }
-      )}
-      c={isDisabled ? 'dark' : 'light-contrast'}
-      px="sm"
-      py="xxs"
-      miw={200}
-      bgc={isFocused ? 'light' : isSelected ? 'light-shade' : undefined}
-    >
-      {node.rendered}
-    </Box>
+function ListSection<T>({ node, state }: ListItemProps<T>) {
+  const { itemProps, headingProps, groupProps } = useListBoxSection({
+    heading: node.rendered,
+    'aria-label': node['aria-label']
+  });
+
+  const { separatorProps } = useSeparator({
+    elementType: 'li'
+  });
+
+  return (
+    <>
+      {node.key !== state.collection.getFirstKey() &&
+        <li {...separatorProps} />
+      }
+      <li {...itemProps}>
+        {node.rendered && <div {...headingProps}>{node.rendered}</div>}
+        <ul {...groupProps}>
+          {Array.from(node.childNodes).map((item) => (
+            item.type === 'section'
+              ? <ListSection<T> key={item.key} node={item} state={state} />
+              : <ListItem<T> key={item.key} node={item} state={state} />
+          ))}
+        </ul>
+      </li>
+    </>
   );
 }
 
@@ -44,20 +71,20 @@ export type ListBoxProps<T = object> = AriaListBoxOptions<T> & {
   state: ListState<T>;
 };
 
-function _ListBox<T>(props: ListBoxProps<T>, ref: ForwardedRef<HTMLUListElement>) {
-  const boxRef = useRef<HTMLUListElement>(null);
+function _ListBox<T extends object>(props: ListBoxProps<T>, ref: ForwardedRef<HTMLElement>) {
+  const boxRef = useRef<HTMLElement>(null);
   const { state } = props;
 
   const { listBoxProps } = useListBox(props, state, boxRef);
 
   return (
-    <FocusRing>
-      <Box as="ul" ref={mergeRefs(ref, boxRef)} {...listBoxProps}>
-        {Array.from(state.collection).map((item) => (
-          <ListItem<T> key={item.key} node={item} state={state} />
-        ))}
-      </Box>
-    </FocusRing>
+    <Box as="ul" ref={mergeRefs(ref, boxRef)} {...listBoxProps}>
+      {Array.from(state.collection).map((item) => (
+        item.type === 'section'
+          ? <ListSection<T> key={item.key} node={item} state={state} />
+          : <ListItem<T> key={item.key} node={item} state={state} />
+      ))}
+    </Box>
   );
 }
 
@@ -66,11 +93,13 @@ function _ListBox<T>(props: ListBoxProps<T>, ref: ForwardedRef<HTMLUListElement>
  *
  * ## 🛑 Internal use only
  *
+ * - Requires state to be passed in from React Stately's `useListState`.
+ * - Section and item rendering are the responsibility of the consumer.
  *
  * <!-- @ruiInternal -->
  *
  * @internal
  */
-export const ListBox = forwardRef(_ListBox) as <T>(
-  props: ListBoxProps<T> & { ref?: ForwardedRef<T> }
+export const ListBox = forwardRef(_ListBox) as <T extends object>(
+  props: ListBoxProps<T> & { ref?: ForwardedRef<HTMLElement> }
 ) => ReturnType<typeof _ListBox>;

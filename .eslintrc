@@ -76,7 +76,7 @@
     "no-unused-vars": "off", // Handled via @typescript-eslint/no-unused-vars
     "no-useless-catch": "off",
     "no-useless-escape": "off",
-    "prettier/prettier": "error",
+    "prettier/prettier": "off",
     "react/display-name": "off",
     "react/jsx-curly-brace-presence": "error",
     "react/no-string-refs": "off",

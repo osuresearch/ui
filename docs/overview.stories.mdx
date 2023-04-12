@@ -8,31 +8,15 @@ import { Card } from '../src/components';
 Research UI is The Ohio State University's Office of Research component library, based on
 Ohio State's design system - BUX.
 
-Version 5 is a complete ground-up rework of the framework with a focus on:
-
-<Card
-  headline="This is a card without an image"
-  href="https://example.com"
-  variant="panel"
->
-  Script Ohio tbdbitl non magna quis tortor volutpat flow of ideas The Lantern vestibulum ligula efficitur Woody Hayes highest-ranked public university in Ohio.
-</Card>
-
-- Brand alignment with BUX
-- Accessibility-first components
-- Full TypeScript compatibility
-- Larger suite of atomic components
-
-And other rants here. I'll think of good wordy bits later.
-
-
 UI designs and documentation can be found for most components at [https://osuresearch.github.io/ui/](https://osuresearch.github.io/ui/)
 
 ## Installation
 
-```
-npm i @osuresearch/ui
-```
+Install using your package manager of choice:
+
+- `yarn add @osuresearch/ui`
+- `npm i @osuresearch/ui`
+- `pnpm i @osuresearch/ui`
 
 ## Usage
 
@@ -42,7 +26,7 @@ import { Button } from '@osuresearch/ui';
 
 render() {
   return (
-    <Button>Hello world!</Button>
+    <Button variant="primary">Hello world!</Button>
   )
 }
 ```

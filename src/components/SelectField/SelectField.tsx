@@ -81,7 +81,7 @@ export const SelectField = forwardRef<HTMLButtonElement, SelectFieldProps>((prop
       >
         <Button
           ref={mergeRefs(ref, triggerRef)}
-          rightSlot={<Icon name="caret" />}
+          rightSlot={<Icon name="chevron" rotate={90} />}
           {...triggerProps}
         >
           <span {...valueProps}>
@@ -92,7 +92,7 @@ export const SelectField = forwardRef<HTMLButtonElement, SelectFieldProps>((prop
 
       {state.isOpen && (
         <Popover state={state} triggerRef={triggerRef} placement="bottom start">
-          <ListBox {...menuProps} state={state} />
+          <ListBox label="Options" {...menuProps} state={state} />
         </Popover>
       )}
     </>

@@ -47,7 +47,8 @@ export const CheckboxField = forwardRef<HTMLInputElement, CheckboxFieldProps>(
       {
         ...other,
         isSelected: value,
-        defaultSelected: defaultValue
+        defaultSelected: defaultValue,
+        children: label,
       },
       state,
       inputRef

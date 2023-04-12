@@ -1,9 +1,10 @@
 import { RUIComponentMeta, RUIComponentStory } from '@sb/utils';
-import React from 'react';
+import React, { useState } from 'react';
 
 import { Stack } from '../Stack';
 import { Text } from '../Text';
 import { ScrollArea as Component, ScrollAreaProps } from './ScrollArea';
+import { Button } from '../Button';
 
 export default RUIComponentMeta<ScrollAreaProps>('Layout', Component).withStyleSystemProps();
 
@@ -69,19 +70,18 @@ export const Vertical = RUIComponentStory<ScrollAreaProps>(
     </div>
   ),
   {
-    h: 500
+    mah: 500
   }
-);
+).withDescription(`
+  Use the \`mah\` prop to define a maximum height for the scroll viewport.
+`);
 
 export const Horizontal = RUIComponentStory<ScrollAreaProps>(
   (args) => (
     <Component {...args}>
-      <div style={{ minWidth: 800, whiteSpace: 'nowrap' }}>{Content}</div>
+      <div style={{ whiteSpace: 'nowrap' }}>{Content}</div>
     </Component>
-  ),
-  {
-    w: 500
-  }
+  )
 );
 
 export const HorizontalAndVertical = RUIComponentStory<ScrollAreaProps>(
@@ -91,7 +91,27 @@ export const HorizontalAndVertical = RUIComponentStory<ScrollAreaProps>(
     </Component>
   ),
   {
-    h: 500,
-    w: 500
+    mah: 500
   }
 );
+
+export const ContentAdaptive = RUIComponentStory<ScrollAreaProps>((args) => {
+  const lipsum = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed viverra, sem et iaculis tincidunt, erat dui rhoncus turpis, id pellentesque augue mi a nisi. Sed vitae risus vel nisl finibus varius sed at turpis. Maecenas vulputate eu nisi sit amet blandit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.';
+
+  const [content, setContent] = useState<string[]>([lipsum]);
+
+  return (
+    <Stack>
+    <Component {...args}>
+      <Stack>
+      {content.map((text, i) => <Text as="p" key={i}>{text}</Text>)}
+      </Stack>
+    </Component>
+    <Button onPress={() => setContent([...content, lipsum])}>
+      Add lines
+    </Button>
+    </Stack>
+  );
+}, {
+  mah: 300
+});
