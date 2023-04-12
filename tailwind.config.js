@@ -247,10 +247,10 @@ module.exports = {
         },
         'scroll': {
           'from': {
-            transform: 'translateX(0)'
+            left: '-50%'
           },
           'to': {
-            transform: 'translateX(525%)' // Need to figure out why translateX(100%) doesn't work
+            left: '100%'
           }
         }
       },

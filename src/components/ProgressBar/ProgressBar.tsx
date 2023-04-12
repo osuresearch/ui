@@ -3,71 +3,68 @@ import { useProgressBar } from 'react-aria';
 
 import { Box } from '../Box';
 import { Group } from '../Group';
-import { Stack } from '../Stack';
 
 export type ProgressBarProps = {
   label: string;
+
+  /**
+   * Controlled value between `minValue` and `maxValue`.
+   *
+   * If omitted, the component will behave as if it's indeterminate.
+   */
   value?: number;
+
+  /**
+   * Minimum value. Defaults to `0`
+   */
   minValue?: number;
+
+  /**
+   * Maximum value. Defaults to `100`.
+   */
   maxValue?: number;
 };
 
 /**
  *
  */
-export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
-  ({ label, value, minValue, maxValue }, ref) => {
-    const [percentComplete, setPercentComplete] = useState<number>(0);
+export function ProgressBar({
+  label,
+  value,
+  minValue = 0,
+  maxValue = 100
+}: ProgressBarProps) {
+  const { progressBarProps, labelProps } = useProgressBar({
+    label,
+    showValueLabel: true,
+    value,
+    minValue,
+    maxValue
+  });
 
-    if (!value && label === 'Loading continuously...') {
-      useEffect(() => {
-        if (percentComplete < 100) {
-          setTimeout(() => setPercentComplete(percentComplete + 5), 500);
-        }
-      }, [percentComplete]);
-    } else if (!value) {
-      useEffect(() => {
-        setPercentComplete(-1);
-      }, []);
-    }
+  const isIndeterminate = value === undefined;
 
-    const props = {
-      label,
-      showValueLabel: !!label,
-      value: value ?? percentComplete,
-      minValue: minValue ?? 0,
-      maxValue: maxValue ?? 100
-    };
-
-    const { progressBarProps, labelProps } = useProgressBar(props);
-
-    let barWidth;
-    if (props.value > -1) {
-      // Calculate the width of the progress bar as a percentage
-      const percentage = (props.value - props.minValue) / (props.maxValue - props.minValue);
-      barWidth = `${Math.round(percentage * 100)}%`;
-    } else {
-      progressBarProps['aria-valuetext'] = 'unknown';
-      console.log(props.label, progressBarProps);
-    }
-
-    return (
-      <Box {...progressBarProps} w="full">
-        <Group justify="apart" fs="sm">
-          {label && <span {...labelProps}>{label}</span>}
-          {label && <span>{props.value === -1 ? '' : progressBarProps['aria-valuetext']}</span>}
-        </Group>
-
-        {props.value === -1 ? (
-          <Box bgc="light-shade" w="full">
-            <Box w={100} bgc="info" h={4} className="rui-animate-scroll" />
-          </Box>
-        ) : (
-          <Box bgc="light-shade">
-            <Box w={barWidth} bgc="info" h={4} />
-          </Box>
-        )}
-      </Box>
-    );
+  let barWidth;
+  if (!isIndeterminate) {
+    // Calculate the width of the progress bar as a percentage
+    const percentage = (value - minValue) / (maxValue - minValue);
+    barWidth = `${Math.round(percentage * 100)}%`;
+  } else {
+    progressBarProps['aria-valuetext'] = 'unknown';
   }
-);
+
+  return (
+    <Box {...progressBarProps} w="100%">
+      <Group justify="apart" fs="sm">
+        {label && <span {...labelProps}>{label}</span>}
+        {label && <span>{isIndeterminate ? '' : progressBarProps['aria-valuetext']}</span>}
+      </Group>
+      <Box bgc="light-shade" h={4} className="rui-overflow-x-hidden rui-relative">
+      {isIndeterminate
+        ? <Box bgc="info" className="rui-animate-scroll rui-absolute rui-inset-0" w="50%" />
+        : <Box bgc="info" h="100%" w={barWidth} />
+      }
+      </Box>
+    </Box>
+  );
+}

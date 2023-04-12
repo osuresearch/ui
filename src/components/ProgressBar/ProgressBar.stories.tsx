@@ -3,6 +3,8 @@ import { Story } from '@storybook/react';
 import React, { useEffect, useState } from 'react';
 
 import { ProgressBar, ProgressBarProps } from '.';
+import { Stack } from '../Stack';
+import { Button } from '../Button';
 
 export default RUIComponentMeta<ProgressBarProps>('Components', ProgressBar);
 
@@ -13,12 +15,36 @@ export const Overview = RUIComponentStory(Template, {
   value: 80
 });
 
-export const Continuously = RUIComponentStory(Template, {
-  label: 'Loading continuously...'
-  // Didn't give a value on purpose to demo the animated ProgressBar
-});
+export const Controlled = RUIComponentStory<ProgressBarProps>((args) => {
+  const [percentComplete, setPercentComplete] = useState<number>(0);
+
+  useEffect(() => {
+    if (percentComplete >= 100) {
+      return;
+    }
+
+    const handle = setTimeout(
+      () => setPercentComplete(percentComplete + 5),
+      500
+    );
+
+    return () => clearInterval(handle);
+  }, [percentComplete]);
+
+  return (
+    <Stack>
+      <ProgressBar {...args} value={percentComplete} />
+      <Button onPress={() => setPercentComplete(0)}>Reset</Button>
+    </Stack>
+  )
+}, {
+  label: 'Loading...'
+}).withDescription(`
+  Set \`value\` between \`minValue\` and \`maxValue\` to update the displayed progress.
+`);
 
 export const Indeterminate = RUIComponentStory(Template, {
   label: 'Loading indeterminately...'
-  // Didn't give a value on purpose to demo the animated ProgressBar
-});
+}).withDescription(`
+  If no \`value\` prop is provided then the progress bar will behave as an indeterminate loader.
+`);
