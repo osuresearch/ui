@@ -1,3 +1,49 @@
+# [5.0.0-alpha.17](https://github.com/osuresearch/ui/compare/v5.0.0-alpha.16...v5.0.0-alpha.17) (2023-04-12)
+
+
+### Bug Fixes
+
+* add a hidden `input` element in `ComboBoxField` and `LookupField` to assign their selected key to their field name ([d2bf7ba](https://github.com/osuresearch/ui/commit/d2bf7bad533130b2797ef168bf8966ae46172373)), closes [#20](https://github.com/osuresearch/ui/issues/20) [#56](https://github.com/osuresearch/ui/issues/56)
+* **Button:** incorrect display mode when used as a polymorphed element ([a8af1f1](https://github.com/osuresearch/ui/commit/a8af1f1ac251724b4e4fc1e77748e706f7f73386))
+* **Button:** omit hover styles while disabled ([b9566e6](https://github.com/osuresearch/ui/commit/b9566e6298af15c9f423e79afb79203a2299e6e2))
+* **CheckboxIcon and RadioIcon:**  prevent the icons from being compressed when their following text is very long  ([a5d655c](https://github.com/osuresearch/ui/commit/a5d655cdcd135c600bf5b4c85e0a0e771e268bb5)), closes [#25](https://github.com/osuresearch/ui/issues/25) [#45](https://github.com/osuresearch/ui/issues/45)
+* **CheckboxIcon:** incorrect ARIA role ([74430e7](https://github.com/osuresearch/ui/commit/74430e7c50438ebc518de19300a874eb78318ee4))
+* **CheckboxIcon:** incorrect colors when disabled ([3e1d462](https://github.com/osuresearch/ui/commit/3e1d462fdc77525f73bdcc71bfd8d2dd3c3b1eac))
+* **Details:** hide the detail marker in Safari ([4326081](https://github.com/osuresearch/ui/commit/4326081977ad42f5f34ac0ac9f1c179168e4ce7f)), closes [#1](https://github.com/osuresearch/ui/issues/1) [#43](https://github.com/osuresearch/ui/issues/43)
+* disable prettier errors when using the VSCode plugin ([62c68ce](https://github.com/osuresearch/ui/commit/62c68cea557164c845d360a6a844232a4cc4c3f9))
+* **FormErrors:** incorrect type for errorMessage keys ([2819ad4](https://github.com/osuresearch/ui/commit/2819ad4c8f2f4403161fcfa3cd4fca9ca03b2b96))
+* **Icon:** missing aria-label when role is img ([56e28ac](https://github.com/osuresearch/ui/commit/56e28ac608f86b3866a6f17e308e3a44e5e1d144))
+* **NecessityIndicator:** set `aria-label` instead of label ([b558ddd](https://github.com/osuresearch/ui/commit/b558ddd856c04be32e3eeca4ed48dea78465e481))
+* **NumberField:** add a hidden `input` element to tie a `NumberField`'s numberValue to its name in `FormData` ([3c2dc46](https://github.com/osuresearch/ui/commit/3c2dc46167a29d65d5153bb13ab06bc3a2d93116)), closes [#55](https://github.com/osuresearch/ui/issues/55) [#60](https://github.com/osuresearch/ui/issues/60)
+* **RadioIcon:** incorrect colors when disabled ([39293f0](https://github.com/osuresearch/ui/commit/39293f0cfdad86195bfa9ef074b965cef67a4bc3))
+* **RadioSetField:** prevent react-aria warnings ([9f24b80](https://github.com/osuresearch/ui/commit/9f24b8067500046cc76c0bcae3572545c3bb11ae)), closes [#61](https://github.com/osuresearch/ui/issues/61)
+* react-aria warnings when children or aria-label were not provided to the hook ([c4a7acd](https://github.com/osuresearch/ui/commit/c4a7acd92456d8119022efd64d2b36f32e037847))
+* **ScrollArea:** adaptive height when the viewport is smaller than the area limits ([62c416f](https://github.com/osuresearch/ui/commit/62c416fb28aec42c8227d5d6fcbf5ff17776474d))
+* **SwitchIcon:** set a min width to prevent resizing ([70b499f](https://github.com/osuresearch/ui/commit/70b499f8db8e8137143340214adc77f0cf6b69c1))
+* **useScreenSize:** screens larger than xxl do not get correct breakpoints applied ([f7fe24c](https://github.com/osuresearch/ui/commit/f7fe24ca88be5cc8ba801aec75457824db997efc)), closes [#48](https://github.com/osuresearch/ui/issues/48)
+* **YesNoField:** fix exposed types in value/onChange ([9540655](https://github.com/osuresearch/ui/commit/95406552358212001352be2147d63fbf5941c538))
+
+
+### Features
+
+* Add `Section` component to avoid needing to expose react-stately to consumers ([c449b18](https://github.com/osuresearch/ui/commit/c449b18ef12233122aee1bab6cd03be0381a2d48))
+* add Figma token file for use with Tokens Studio ([a24c203](https://github.com/osuresearch/ui/commit/a24c203b98b222ccd517fbfb5f523ced10cfd25b))
+* add ProgressBar component ([0eef567](https://github.com/osuresearch/ui/commit/0eef56793a8d04320ed5d83fc584d5a54d2c37a1)), closes [#13](https://github.com/osuresearch/ui/issues/13)
+* **Arrow:** add `size` prop ([286cfd7](https://github.com/osuresearch/ui/commit/286cfd74d9e615cdd11fa2dbba733cb573a4e3e0))
+* **CheckboxSetField:** add `placeholder` prop and compatibility with React Stately lists ([9ba9ffc](https://github.com/osuresearch/ui/commit/9ba9ffc99209cfdc73a5ba9d179ad21cb2bbee87))
+* **Icon:** add optional `label` prop to set role to `img` when defined ([9269141](https://github.com/osuresearch/ui/commit/92691415b349515dc64b049a44a18f2fb85aba2c))
+* **ListBox:** add support for sections ([dc2770a](https://github.com/osuresearch/ui/commit/dc2770a4056b43848cac40ac4b07f388a2d24a61))
+* **Menu:** add `isDisabled` prop ([9dd8b2b](https://github.com/osuresearch/ui/commit/9dd8b2be0205efaed3e0686e9ddcedb60a9d6f2d)), closes [#54](https://github.com/osuresearch/ui/issues/54)
+* **Menu:** add support for sections ([e4c6d58](https://github.com/osuresearch/ui/commit/e4c6d589fab04ac72a6d0a4af64526a74afb99a0))
+* **RadioSetField:** support custom item renderers ([9f4be1d](https://github.com/osuresearch/ui/commit/9f4be1db7debd358a0b092e8e20d05baa4a6dda5))
+* **Tooltip:** add placement and offset props ([e5b6b06](https://github.com/osuresearch/ui/commit/e5b6b0662161094ffb7ed469238b185a5500e85c))
+* **UnstyledButton:** add `data-disabled` when the disabled state is passed down ([e8ed19b](https://github.com/osuresearch/ui/commit/e8ed19bfb024b5535606b4ef4810db3950c24843))
+
+
+### Performance Improvements
+
+* refactoring dependencies to reduce bundle size ([fe24bff](https://github.com/osuresearch/ui/commit/fe24bff14ad9335a22e57f1f2df835ef5d2491e4))
+
 # [5.0.0-alpha.16](https://github.com/osuresearch/ui/compare/v5.0.0-alpha.15...v5.0.0-alpha.16) (2023-03-16)
 
 
