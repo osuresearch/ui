@@ -15,39 +15,6 @@ If you are not familiar with the concept of polymorphic components, check out th
 
 [Intermediate TypeScript and React Handbook - How to Build Strongly Typed Polymorphic Components](https://www.freecodecamp.org/news/build-strongly-typed-polymorphic-components-with-react-and-typescript/)
 
-## As HTML elements
-
-You can use any HTML element in the `as` prop, for example the `a` tag will render an anchor:
-
-```tsx
-import { Button } from '@osuresearch/ui';
-
-function Demo() {
-  return (
-    <Button as="a" href="https://research.osu.edu">
-      Go to research.osu.edu
-    </Button>
-  );
-}
-```
-
-## As other components
-
-You can also polymorph into any other component. For example, with the `react-router-dom` Link:
-
-```tsx
-import { Link } from 'react-router-dom';
-import { Button } from '@osuresearch/ui';
-
-function Demo() {
-  return (
-    <Button component={Link} to="/react-router">
-      React router link
-    </Button>
-  );
-}
-```
-
 ## Why use polymorphics
 
 Often you will want to use specific components that visually or interactively match your design but the root component is not semantically allowed for accessibility.
@@ -66,6 +33,57 @@ Take for example a card with a button that links the user to another website:
 
 We want it to visually look like a button, but semantically it has to be an anchor to be WCAG compliant.
 
+Another example would be to want a component to visually look like a heading to a sighted user, but to semantically not be a heading for screen readers for one reason or another, such as noncompliant heading skips.
+
+```tsx
+<Heading level={1}>Article heading</Heading>
+<Text as={Heading} level={4}>
+  Subtitle that should not be a semantic heading
+</Text>
+
+<Heading level={2}>Level 2 content heading</Heading>
+<Text>And your article content</Text>
+```
+
+
+## As HTML elements
+
+You can use any HTML element in the `as` prop, for example a button polymorphed to the anchor element will still retain the visual appearance of a button but functionally perform as an anchor:
+
+<Canvas withSource="open" withToolbar>
+  <Button as="a" href="https://research.osu.edu">
+    Go to research.osu.edu
+  </Button>
+</Canvas>
+
+```tsx
+import { Button } from '@osuresearch/ui';
+
+function Demo() {
+  return (
+    <Button as="a" href="https://research.osu.edu">
+      Go to research.osu.edu
+    </Button>
+  );
+}
+```
+
+
+## Usage with React Router v6
+
+You can polymorph our buttons and links into React Router components to easily integrate with their router:
+
+```tsx
+import { NavLink } from 'react-router-dom';
+import { Button } from '@osuresearch/ui';
+
+export function HomeButton() {
+  return (
+    <Button as={NavLink} to="/">Home</Button>
+  )
+}
+```
+
 ## TypeScript edge cases
 
 In some cases, polymorphic components cannot infer ref and events correctly. When this happens, specify the component type in the generic form:
@@ -81,22 +99,23 @@ In some cases, polymorphic components cannot infer ref and events correctly. Whe
 </Box>
 ```
 
+
 ## Create your own polymorphic components
 
-We provide a utility to allow you to construct your own polymorphic components.
-
-Typically, this involves wrapping a `<Box>` component and passing down your polymorphic element value.
+We provide a `polymorphicForwardRef` utility to allow you to construct your own polymorphic components. Wrap your component with a `<Box>` and pass down your polymorphic `as` element:
 
 ```tsx
-type ButtonProps = {
+import { polymorphicForwardRef } from '@osuresearch/ui';
+
+export type MyCustomButtonProps = {
   children: React.ReactNode;
 }
 
-export const Button = polymorphicForwardRef<'button', ButtonProps>(({ as, children, ...props }, ref) => (
-  <Box as={as || 'button'}>
-    {children}
-  </Box>
-));
+export const MyCustomButton = polymorphicForwardRef<'button', MyCustomButtonProps>(
+  ({ as, children, ...props }, ref) => (
+    <Box as={as || 'button'}>
+      {children}
+    </Box>
+  )
+);
 ```
-
->For RUI maintainers: Tag all polymorphic components with `@ruiPolymorphic`
