@@ -23,13 +23,14 @@ export type IconProps = StyleSystemProps &
  * <!-- @ruiPolymorphic -->
  */
 export const Icon = polymorphicForwardRef<'i', IconProps>(
-  ({ as, name, block, className, ...props }, ref) => {
+  ({ as, name, block, className, style, ...props }, ref) => {
     const [styleSystemProps, iconProps] = useStyleSystemProps(props);
     return (
       <Box
         as={as || 'i'}
         ref={ref}
         role="img"
+        style={style}
         className={cx(
           {
             'rui-block rui-align-top': block,
