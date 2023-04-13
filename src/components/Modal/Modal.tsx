@@ -32,8 +32,6 @@ export type DialogImplProps = AriaDialogProps & {
  *
  * Once active, only content within the modal may be interacted with.
  *
- * ## 🛑 Internal use only
- *
  * @internal
  */
 export function Modal({ children, state, overlayProps, ...props }: ModalProps) {

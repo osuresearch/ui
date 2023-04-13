@@ -29,5 +29,5 @@ export const ListBox = RUIComponentStory<ListBoxProps>((args) => (
     </Section>
   </UsageExample>
 ), {
-
+  label: "Example"
 });

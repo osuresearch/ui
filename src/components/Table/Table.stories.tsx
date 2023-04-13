@@ -1,12 +1,11 @@
-import { SortDescriptor } from '@react-types/shared';
+
+import React from 'react';
 import { RUIComponentMeta, RUIComponentStory } from '@sb/utils';
 import { Story } from '@storybook/react';
-import React, { useState } from 'react';
-import { Cell, Column, Row, TableBody, TableHeader, useAsyncList } from 'react-stately';
+import { useAsyncList } from 'react-stately';
 
 import { useTabularData } from '../../hooks/useTabularData';
-import { Item } from '../Item/Item.stories';
-import { Table, TableProps } from './Table';
+import { Table, TableProps, Cell, Column, Row, TableBody, TableHeader } from './Table';
 
 export default RUIComponentMeta<TableProps>('Components', Table).withStyleSystemProps();
 
@@ -224,6 +223,8 @@ export const SingleSelection = RUIComponentStory<TableProps>(
     selectionBehavior: 'replace'
   }
 ).withDescription(`
+  #### 🛑 This feature has not passed WCAG AA testing. Do not use if you need to be compliant.
+
   Add the \`selectionMode: single\` prop to allow the user to select a table row.
 
   The first \`Cell\` of each row will contain a label for the
@@ -233,6 +234,8 @@ export const SingleSelection = RUIComponentStory<TableProps>(
 export const MultipleSelection = RUIComponentStory(SingleSelection, {
   selectionMode: 'multiple'
 }).withDescription(`
+  #### 🛑 This feature has not passed WCAG AA testing. Do not use if you need to be compliant.
+
   Add the \`selectionMode: multiple\` to allow the user to select multiple table rows.
 
   The first \`Cell\` in the table header will contain a label

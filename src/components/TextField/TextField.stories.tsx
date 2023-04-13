@@ -20,7 +20,7 @@ export const UncontrolledValue = RUIComponentStory<TextFieldProps>(Overview, {
 
 export const ControlledValue = RUIComponentStory<TextFieldProps>(
   (args) => {
-    const [value, setValue] = useState('');
+    const [value, setValue] = useState<string | undefined>('');
 
     return (
       <>

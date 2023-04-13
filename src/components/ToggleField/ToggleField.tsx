@@ -21,21 +21,10 @@ export type ToggleFieldSlots = {
     isDisabled?: boolean;
     isFocusVisible?: boolean;
   }>;
-
-  diffSlot?: SlotType<{
-    isSelected?: boolean;
-    wasSelected?: boolean;
-  }>;
-};
-
-export type ToggleFieldDiffProps = {
-  showDiff?: boolean;
-  previousValue?: boolean;
 };
 
 export type ToggleFieldProps = StyleSystemProps &
   ToggleFieldSlots &
-  ToggleFieldDiffProps &
   Pick<
     TextFieldAria<'input'>,
     'inputProps' | 'labelProps' | 'descriptionProps' | 'errorMessageProps'
@@ -74,6 +63,8 @@ export type ToggleFieldProps = StyleSystemProps &
  * ### Diff Slot
  * - Slot for rendering the diff between a previous and current value
  * - Receives previous and current value for comparison
+ *
+ * @internal
  */
 export const ToggleField = forwardRef<HTMLInputElement, ToggleFieldProps>((props, ref) => {
   const { className, label, description, errorMessage, necessityIndicator } = props;
@@ -87,7 +78,6 @@ export const ToggleField = forwardRef<HTMLInputElement, ToggleFieldProps>((props
   const [styleSystemProps] = useStyleSystemProps(props);
 
   const InputSlot = props.inputSlot || makeMissingSlot('input');
-  const DiffSlot = props.diffSlot || makeMissingSlot('diff');
 
   return (
     <Group as="label" className={className} {...styleSystemProps}>
@@ -101,10 +91,6 @@ export const ToggleField = forwardRef<HTMLInputElement, ToggleFieldProps>((props
         isDisabled={isDisabled}
         isFocusVisible={isFocusVisible}
       />
-
-      {props.showDiff && (
-        <DiffSlot isSelected={props.isSelected} wasSelected={props.previousValue} />
-      )}
 
       <Stack>
         <Text {...props.labelProps}>

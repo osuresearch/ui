@@ -30,6 +30,8 @@ export type FocusRingProps = {
  * Focus rings are only visible when interacting with a keyboard so as not to distract
  * mouse and touch screen users. When we are unable to detect if the user is using a mouse
  * or touch screen, such as switching in from a different tab, we show the focus ring.
+ *
+ * This component applies a ring that is responsive to both light and dark themes.
  */
 export function FocusRing(props: FocusRingProps) {
   const { children } = props;

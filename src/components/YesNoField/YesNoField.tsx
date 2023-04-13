@@ -49,7 +49,8 @@ function YesNoGroupItemSlot({ node, ...props }: GroupItemSlotProps) {
     {
       ...props,
       value: '' + node.key,
-      isDisabled
+      isDisabled,
+      children: node.rendered,
     },
     state,
     ref

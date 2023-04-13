@@ -1,6 +1,6 @@
 import { Node } from '@react-types/shared';
 import React, { ForwardedRef, forwardRef, useRef } from 'react';
-import { AriaListBoxOptions, useListBox, useListBoxSection, useOption, useSeparator } from 'react-aria';
+import { AriaListBoxOptions, FocusScope, useListBox, useListBoxSection, useOption, useSeparator } from 'react-aria';
 import { ListState } from 'react-stately';
 
 import { cx, mergeRefs } from '../../utils';
@@ -68,6 +68,7 @@ function ListSection<T>({ node, state }: ListItemProps<T>) {
 }
 
 export type ListBoxProps<T = object> = AriaListBoxOptions<T> & {
+  label: React.ReactNode;
   state: ListState<T>;
 };
 
@@ -78,13 +79,15 @@ function _ListBox<T extends object>(props: ListBoxProps<T>, ref: ForwardedRef<HT
   const { listBoxProps } = useListBox(props, state, boxRef);
 
   return (
-    <Box as="ul" ref={mergeRefs(ref, boxRef)} {...listBoxProps}>
-      {Array.from(state.collection).map((item) => (
-        item.type === 'section'
-          ? <ListSection<T> key={item.key} node={item} state={state} />
-          : <ListItem<T> key={item.key} node={item} state={state} />
-      ))}
-    </Box>
+    <FocusScope>
+      <Box as="ul" ref={mergeRefs(ref, boxRef)} {...listBoxProps}>
+        {Array.from(state.collection).map((item) => (
+          item.type === 'section'
+            ? <ListSection<T> key={item.key} node={item} state={state} />
+            : <ListItem<T> key={item.key} node={item} state={state} />
+        ))}
+      </Box>
+    </FocusScope>
   );
 }
 

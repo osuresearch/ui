@@ -105,13 +105,9 @@ export function CheckboxSetField({ placeholder, ...props }: CheckboxSetFieldProp
         <Stack>
           {listState.collection.size < 1 && placeholder}
 
-          {Array.from(listState.collection).map((item) => {
-            if (item.type === 'section') {
-              return <div key={item.key}>TODO: section</div>;
-            }
-
-            return <GroupItem key={item.key} node={item} value={item.textValue} />;
-          })}
+          {Array.from(listState.collection).map(
+            (item) => <GroupItem key={item.key} node={item} value={item.textValue} />
+          )}
         </Stack>
       </FormField>
     </CheckboxSetContext.Provider>
