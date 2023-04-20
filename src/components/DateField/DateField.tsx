@@ -35,6 +35,8 @@ function Segment({ segment, state }: SegmentProps) {
     const ref = useRef<HTMLDivElement>(null);
     const { segmentProps } = useDateSegment(segment, state, ref);
 
+    console.log(segment, state);
+
     return (
         <Text
             {...segmentProps}
@@ -91,12 +93,13 @@ function Segment({ segment, state }: SegmentProps) {
  */
 export const DateField = forwardRef<HTMLDivElement, DateFieldProps>((props, ref) => {
     const inputRef = useRef<HTMLDivElement>(null);
+
     const { defaultValue, value, onChange, ...restProps } = props;
 
     const convertedProps = {
         defaultValue: defaultValue ? parseDate(defaultValue) : undefined,
         value: value ? parseDate(value) : undefined,
-        onChange: (value: DateValue | undefined) => onChange && onChange(value?.toString())
+        onChange: (value: DateValue | undefined) => onChange && onChange(value ? value?.toString() : '')
     }
 
     const newProps: DateFieldPropsConverted = {
@@ -104,9 +107,8 @@ export const DateField = forwardRef<HTMLDivElement, DateFieldProps>((props, ref)
         ...convertedProps
     }
 
-    console.log(props, newProps);
-
     const { locale } = useLocale();
+
     const state = useDateFieldState({
         ...newProps,
         locale,
@@ -118,8 +120,6 @@ export const DateField = forwardRef<HTMLDivElement, DateFieldProps>((props, ref)
         state,
         inputRef
     );
-
-    console.log(props, state);
 
     return (
         <FormField<string>
@@ -145,7 +145,7 @@ export const DateField = forwardRef<HTMLDivElement, DateFieldProps>((props, ref)
             >
                 {/* Hidden input for form submission support */}
                 <VisuallyHidden>
-                    <input aria-hidden="true" name={props.name} type="text" value={state.value?.toString()} />
+                    <input aria-hidden="true" name={props.name} type="text" value={value} />
                 </VisuallyHidden>
 
                 {state.segments.map((segment, i) => (
