@@ -1,8 +1,6 @@
 import { RUIComponentMeta, RUIComponentStory } from '@sb/utils';
-import React, { forwardRef, useRef, useState } from 'react';
+import React, { useState } from 'react';
 
-import { Button } from '../Button';
-import { Icon } from '../Icon';
 import { Text } from '../Text';
 import { NumberField, NumberFieldProps } from './NumberField';
 

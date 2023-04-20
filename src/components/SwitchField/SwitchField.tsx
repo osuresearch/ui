@@ -1,8 +1,7 @@
 import React, { forwardRef, useRef } from 'react';
-import { AriaSwitchProps, useSwitch } from 'react-aria';
+import { useSwitch } from 'react-aria';
 import { useToggleState } from 'react-stately';
 
-import { StyleSystemProps } from '../../types';
 import { FormFieldBase } from '../FormField';
 import { SwitchIcon } from '../SwitchIcon';
 import { ToggleField } from '../ToggleField';
