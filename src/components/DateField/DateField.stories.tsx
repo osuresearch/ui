@@ -15,7 +15,10 @@ export const Overview = RUIComponentStory<DateFieldProps>((args) => <DateField {
 });
 
 export const UncontrolledValue = RUIComponentStory<DateFieldProps>(
-  (args) => <DateField {...args} defaultValue={parseDate('1989-08-14')} />,
+  (args) => <DateField {...args}
+    //defaultValue={parseDate('1989-08-14')}
+    defaultValue='1989-08-14'
+  />,
   {
     label: 'Date'
   }
@@ -23,7 +26,8 @@ export const UncontrolledValue = RUIComponentStory<DateFieldProps>(
 
 export const ControlledValue = RUIComponentStory<DateFieldProps>(
   (args) => {
-    const [value, setValue] = useState<DateValue>(parseDate('1989-08-14'));
+    //const [value, setValue] = useState<DateValue>(parseDate('1989-08-14'));
+    const [value, setValue] = useState<string>('1989-08-14');
 
     return (
       <>
