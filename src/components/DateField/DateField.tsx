@@ -143,7 +143,7 @@ export const DateField = forwardRef<HTMLDivElement, DateFieldProps>((props, ref)
             >
                 {/* Hidden input for form submission support */}
                 <VisuallyHidden>
-                    <input aria-hidden="true" name={props.name} type="text" value={state.value ? state.value.toString() : ''} />
+                    <input aria-hidden="true" name={props.name} type="text" value={state.value?.toString()} />
                 </VisuallyHidden>
 
                 {state.segments.map((segment, i) => (
