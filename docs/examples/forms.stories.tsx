@@ -248,7 +248,7 @@ export const ReactHookForm7 = (args: any) => {
             <TextAreaField label="TextArea field" {...register('textAreaField')} {...args} />
             <DateField
               label="Date field"
-              {...register('dateField', { valueAsDate: true })}
+              {...register('dateField')}
               {...args}
             />
             <NumberField

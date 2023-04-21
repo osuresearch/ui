@@ -35,8 +35,6 @@ function Segment({ segment, state }: SegmentProps) {
     const ref = useRef<HTMLDivElement>(null);
     const { segmentProps } = useDateSegment(segment, state, ref);
 
-    console.log(segment, state);
-
     return (
         <Text
             {...segmentProps}
@@ -99,7 +97,7 @@ export const DateField = forwardRef<HTMLDivElement, DateFieldProps>((props, ref)
     const convertedProps = {
         defaultValue: defaultValue ? parseDate(defaultValue) : undefined,
         value: value ? parseDate(value) : undefined,
-        onChange: (value: DateValue | undefined) => onChange && onChange(value ? value?.toString() : '')
+        onChange: (value: DateValue | undefined) => onChange && onChange(value?.toString())
     }
 
     const newProps: DateFieldPropsConverted = {
@@ -145,7 +143,7 @@ export const DateField = forwardRef<HTMLDivElement, DateFieldProps>((props, ref)
             >
                 {/* Hidden input for form submission support */}
                 <VisuallyHidden>
-                    <input aria-hidden="true" name={props.name} type="text" value={value} />
+                    <input aria-hidden="true" name={props.name} type="text" value={state.value ? state.value.toString() : ''} />
                 </VisuallyHidden>
 
                 {state.segments.map((segment, i) => (
