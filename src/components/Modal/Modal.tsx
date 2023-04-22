@@ -1,4 +1,4 @@
-import { FocusableElement } from '@react-types/shared';
+import { DOMAttributes, FocusableElement } from '@react-types/shared';
 import React, { useRef, useState } from 'react';
 import { AriaDialogProps, AriaModalOverlayProps, useModalOverlay } from 'react-aria';
 import { Overlay } from 'react-aria';
@@ -17,7 +17,7 @@ export type ModalProps = AriaModalOverlayProps & {
   /**
    * Props to spread into React Aria `<Overlay>`
    */
-  overlayProps: React.DOMAttributes<FocusableElement>;
+  overlayProps: DOMAttributes<FocusableElement>;
 
   children: React.ReactNode;
 };

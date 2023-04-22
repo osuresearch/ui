@@ -1,5 +1,5 @@
 import { Placement } from '@react-types/overlays';
-import { FocusableElement } from '@react-types/shared';
+import { DOMAttributes, FocusableElement } from '@react-types/shared';
 import React, { forwardRef, useRef } from 'react';
 import { FocusScope, Overlay, usePopover } from 'react-aria';
 import { OverlayTriggerState } from 'react-stately';
@@ -42,7 +42,7 @@ export type PopoverProps = {
   /**
    * Props to spread into React Aria `<Overlay>`
    */
-  overlayProps?: React.DOMAttributes<FocusableElement>;
+  overlayProps?: DOMAttributes<FocusableElement>;
 
   /**
    * Placement of the element with respect to its anchor.
