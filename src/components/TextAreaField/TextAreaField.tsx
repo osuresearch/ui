@@ -57,7 +57,13 @@ export const TextAreaField = forwardRef<HTMLTextAreaElement, TextAreaFieldProps>
         errorMessageProps={errorMessageProps}
         {...props}
       >
-        <TextAreaSlot ref={mergeRefs(inputRef, ref)} rows={rows} {...inputProps} />
+        <div className="rui-relative rui-w-full">
+          <TextAreaSlot
+            ref={mergeRefs(inputRef, ref)}
+            rows={rows}
+            {...inputProps}
+          />
+        </div>
       </FormField>
     );
   }
