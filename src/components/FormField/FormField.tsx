@@ -147,10 +147,12 @@ export function FormField<T>(props: FormFieldProps<T>) {
     <Stack className={className} {...wrapperProps} {...styleSystemProps} data-field={props.name}>
       <OuterLayout layout={layout}>
         <LabelLayout layout={layout}>
+          {label &&
           <Text as={labelAs ?? 'label'} {...labelProps} data-label-for={props.name}>
             {label}
             {props.necessityIndicator && <NecessityIndicator />}
           </Text>
+          }
         </LabelLayout>
         <ContentLayout layout={layout}>
           {React.cloneElement(inputSlot, focusProps)}

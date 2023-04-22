@@ -58,6 +58,11 @@ export const Error = RUIComponentStory<TextFieldProps>(Overview, {
   errorMessage: 'Please enter a valid email address.'
 });
 
+export const WithAriaLabel = RUIComponentStory<TextFieldProps>(Overview, {
+  'aria-label': 'Email',
+  value: 'chase@example.com',
+});
+
 export const WithIcon = RUIComponentStory(Overview, {
   leftSlot: <Icon c="light-contrast" name="github" size={24} p="xs" />,
   leftWidth: 42,
