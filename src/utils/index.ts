@@ -1,3 +1,5 @@
+import React from 'react';
+
 // Re-export mergeProps, we use it everywhere.
 import { mergeProps as ariaMergeProps } from '@react-aria/utils';
 import classNames, { ClassArray } from 'clsx';
@@ -24,7 +26,7 @@ type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends (
   ? I
   : never;
 
-export function mergeProps<T extends Props[]>(...args: T): UnionToIntersection<TupleTypes<T>> {
+export function mergeProps<T extends Props[]>(...args: T) {
   return ariaMergeProps(...args);
 }
 
@@ -34,7 +36,7 @@ export function mergeProps<T extends Props[]>(...args: T): UnionToIntersection<T
 export function mergeRefs<T = any>(
   ...refs: Array<React.MutableRefObject<T> | React.LegacyRef<T> | undefined>
 ): React.RefCallback<T> {
-  return (value) => {
+  return (value: any) => {
     refs.forEach((ref) => {
       if (typeof ref === 'function') {
         ref(value);
