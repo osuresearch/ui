@@ -10,6 +10,7 @@ import { FormField, FormFieldBase } from '../FormField';
 import { Icon } from '../Icon';
 import { ListBox } from '../ListBox';
 import { Popover } from '../Popover';
+import { Box } from '../Box';
 
 export type SelectOption = Record<string, any>;
 
@@ -92,7 +93,7 @@ export const SelectField = forwardRef<HTMLButtonElement, SelectFieldProps>((prop
 
       {state.isOpen && (
         <Popover state={state} triggerRef={triggerRef} placement="bottom start">
-          <ListBox label="Options" {...menuProps} state={state} />
+          <ListBox itemProps={{ px: 'sm', py: 'xxs' }} label="Options" {...menuProps} state={state} />
         </Popover>
       )}
     </>
