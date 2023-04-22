@@ -1,5 +1,5 @@
 import { Node, CollectionBase } from '@react-types/shared';
-import React, { createContext, useContext, useRef } from 'react';
+import React, { createContext, useContext, useEffect, useRef } from 'react';
 import {
   AriaCheckboxGroupItemProps,
   AriaCheckboxGroupProps,
@@ -91,6 +91,13 @@ export function CheckboxSetField({ placeholder, ...props }: CheckboxSetFieldProp
     props,
     groupState
   );
+
+  // useCheckboxGroupState does not support changing value TO undefined.
+  // So we utilize an effect hook to force a change if this component is being
+  // controlled via `value`.
+  useEffect(() => {
+    groupState.setValue(props.value ?? []);
+  }, [props.value])
 
   return (
     <CheckboxSetContext.Provider value={{ ...listState, ...groupState }}>
