@@ -4,25 +4,21 @@ import { cx, polymorphicForwardRef } from '../../utils';
 import { Icon } from '../Icon';
 import { UnstyledButton } from '../UnstyledButton';
 
-export type DocumentPaginationProps = {
+export type PageButtonProps = {
   direction: 'previous' | 'next';
 
   children?: React.ReactNode;
 };
 
 /**
- * The Document Pagination component is used for page-by-page navigation
+ * The page button component is used for page-by-page navigation
  * through content that is meant to be viewed in sequential order.
  *
  * It is often used for content such as books, manuals, or courses.
  *
- * ## Accessibility
- * - Each button receives either "Go to previous page" or "Go to next page"
- *  as an automatic `aria-label`
- *
  * <!-- @ruiPolymorphic -->
  */
-export const DocumentPagination = polymorphicForwardRef<'button', DocumentPaginationProps>(
+export const PageButton = polymorphicForwardRef<'button', PageButtonProps>(
   ({ as, direction, children }, ref) => (
     <UnstyledButton
       as={as || 'button'}
@@ -50,7 +46,6 @@ export const DocumentPagination = polymorphicForwardRef<'button', DocumentPagina
         // Reverse layout for next vs previous button
         { 'rui-flex-row-reverse': direction === 'next' }
       )}
-      aria-label={`Go to ${direction} page`}
     >
       <Icon rotate={direction === 'previous' ? 180 : 0} name="chevron" size={26} px="sm" />
       {children}

@@ -11,13 +11,15 @@ export type NecessityIndicatorProps = Record<string, never>;
 /**
  * Icon attached to form field labels to indicate that the field is required.
  *
+ * This may be used in form fields that are logically required but cannot
+ * be flagged as such using native form attributes e.g. those that are
+ * required but validated serverside.
+ *
  * The name comes from [React Aria](https://react-spectrum.adobe.com/react-spectrum/Form.html#required-and-necessity-indicator)
  * which universally uses the `necessityIndicator` prop on field components.
  *
  * ## Accessibility
- * - This is a visual-only component that sets `aria-hidden`.
- * - This must be combined with the `required` prop on the relevant `<input>`
- *  to signal to screen readers that a field is required.
+ * - The `aria-label` on the icon is automatically set to `(required)`
  *
  * @internal
  */

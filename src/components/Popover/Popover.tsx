@@ -1,5 +1,5 @@
 import { Placement } from '@react-types/overlays';
-import { FocusableElement } from '@react-types/shared';
+import { DOMAttributes, FocusableElement } from '@react-types/shared';
 import React, { forwardRef, useRef } from 'react';
 import { FocusScope, Overlay, usePopover } from 'react-aria';
 import { OverlayTriggerState } from 'react-stately';
@@ -42,7 +42,7 @@ export type PopoverProps = {
   /**
    * Props to spread into React Aria `<Overlay>`
    */
-  overlayProps?: React.DOMAttributes<FocusableElement>;
+  overlayProps?: DOMAttributes<FocusableElement>;
 
   /**
    * Placement of the element with respect to its anchor.
@@ -60,7 +60,8 @@ export type PopoverProps = {
 };
 
 /**
- * 🛑 Internal component. Do not use directly.
+ * Extension of tooltips that can include interactive content. Positioning
+ * is relative to the trigger element, unlike Modals.
  *
  * ## Accessibility
  * - Applies React Aria `Overlay` and RUI's `Underlay` to block touch input outside of the paper

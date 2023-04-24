@@ -59,7 +59,7 @@ function Segment({ segment, state }: SegmentProps) {
                 aria-hidden="true"
                 className={cx(
                     'rui-block rui-w-full rui-text-center rui-italic',
-                    'rui-text-light-shade group-focus:rui-text-light-contrast'
+                    'rui-text-dark group-focus:rui-text-light-contrast'
                 )}
                 style={{
                     visibility: segment.isPlaceholder ? 'visible' : 'hidden',

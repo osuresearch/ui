@@ -6,7 +6,7 @@ import { Item } from '../Item';
 import { Text } from '../Text';
 import { TabPanel, TabPanelProps } from './TabPanel';
 
-export default RUIComponentMeta<TabPanelProps>('Bux Stuff', TabPanel).withStyleSystemProps();
+export default RUIComponentMeta<TabPanelProps>('Ohio State', TabPanel).withStyleSystemProps();
 
 export const Overview = RUIComponentStory<TabPanelProps>((args) => (
   <TabPanel aria-label="Famous OSU people" {...args}>

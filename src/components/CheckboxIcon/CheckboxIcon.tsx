@@ -17,10 +17,8 @@ export type CheckboxIconProps = DOMAttributes<FocusableElement> &
 /**
  * Controlled slot renderer for a checkbox.
  *
- * ## 🛑 Disclaimer
- *
- * In most cases, you should not use this component in your application.
- * This is a controlled component that is solely responsible for rendering states.
+ * <!-- @ruiInternal -->
+ * @internal
  */
 export const CheckboxIcon = ({
   isSelected,

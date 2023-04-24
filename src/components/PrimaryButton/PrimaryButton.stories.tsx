@@ -5,7 +5,7 @@ import { Icon } from '../Icon';
 import { PrimaryButton, PrimaryButtonProps } from '../PrimaryButton';
 
 export default RUIComponentMeta<PrimaryButtonProps>(
-  'BUX Stuff',
+  'Ohio State',
   PrimaryButton
 ).withStyleSystemProps();
 

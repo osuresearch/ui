@@ -6,132 +6,117 @@ import { Group } from '../Group';
 import { Item } from '../Item';
 import { Stack } from '../Stack';
 import { Text } from '../Text';
-import { LookupField, LookupFieldProps } from './LookupField';
+import { LookupField, LookupFieldProps, LookupOption } from './LookupField';
+import { Code } from '../Code';
 
 export default RUIComponentMeta<LookupFieldProps>('Forms', LookupField).withStyleSystemProps();
 
-export const Overview = RUIComponentStory<LookupFieldProps>(
-  (args) => (
-    <LookupField {...args}>
-      <Item key="dx11">DirectX 11</Item>
-      <Item key="dx12">DirectX 12</Item>
-      <Item key="ogles">OpenGL ES</Item>
-      <Item key="ogl3">OpenGL 3.0</Item>
-      <Item key="metal">Metal</Item>
-      <Item key="vulkan">Vulkan</Item>
-    </LookupField>
-  ),
-  {
-    label: '3D graphics and computing API',
-    description: 'This is description content for the field'
-  }
-);
+// swapi.py4e.com example result
+const bobaFett = {
+  "name": "Boba Fett",
+  "height": "183",
+  "mass": "78.2",
+  "hair_color": "black",
+  "skin_color": "fair",
+  "eye_color": "brown",
+  "birth_year": "31.5BBY",
+  "gender": "male",
+  "homeworld": "https://swapi.py4e.com/api/planets/10/",
+  "films": [
+    "https://swapi.py4e.com/api/films/2/",
+    "https://swapi.py4e.com/api/films/3/",
+    "https://swapi.py4e.com/api/films/5/"
+  ],
+  "species": [
+    "https://swapi.py4e.com/api/species/1/"
+  ],
+  "vehicles": [],
+  "starships": [
+    "https://swapi.py4e.com/api/starships/21/"
+  ],
+  "created": "2014-12-15T12:49:32.457000Z",
+  "edited": "2014-12-20T21:17:50.349000Z",
+  "url": "https://swapi.py4e.com/api/people/22/"
+}
+
+export const Overview = RUIComponentStory<LookupFieldProps>((args) => (
+  <LookupField {...args} getKey={(item) => item.name}
+    load={async ({ signal, filterText }) => {
+      const res = await fetch(
+        `https://swapi.py4e.com/api/people/?search=${filterText}`,
+        { signal }
+      );
+      const json = await res.json();
+
+      return {
+        items: json.results
+      };
+    }}
+  >
+    {(item) => (
+      <Item key={item.name} textValue={item.name}>
+        {item.name}
+        <Text as="div" fs="sm" c="dark">
+          Hair color: {item.hair_color}, eye color: {item.eye_color}
+        </Text>
+      </Item>
+    )}
+  </LookupField>
+), {
+  label: 'Find a person',
+  placeholder: 'Search by name',
+  description: 'Something here'
+}).withDescription(`
+
+`);
 
 export const UncontrolledValue = RUIComponentStory(Overview, {
-  label: '3D graphics and computing API',
-  defaultValue: 'vulkan'
-}).withDescription(`
-  Use \`defaultValue\` to specify the \`React.Key\` to
-  select when the component is first mounted.
-`);
+  label: 'Find a person',
+  placeholder: 'Search by name',
+  defaultValue: bobaFett,
+});
 
 export const ControlledValue = RUIComponentStory<LookupFieldProps>(
   (args) => {
-    const [value, setValue] = useState<React.Key | undefined>(undefined);
+    const [value, setValue] = useState<LookupOption | undefined>(bobaFett);
 
     return (
       <>
-        <LookupField value={value} onChange={setValue} {...args}>
-          <Item key="dx12">DirectX 12</Item>
-          <Item key="ogl3">OpenGL 3.0</Item>
-          <Item key="metal">Metal</Item>
-          <Item key="vulkan">Vulkan</Item>
+        <LookupField {...args} getKey={(item) => item.name}
+          load={async ({ signal, filterText }) => {
+            const res = await fetch(
+              `https://swapi.py4e.com/api/people/?search=${filterText}`,
+              { signal }
+            );
+            const json = await res.json();
+
+            return {
+              items: json.results
+            };
+          }}
+          value={value}
+          onChange={setValue}
+        >
+          {(item) => (
+            <Item key={item.name} textValue={item.name}>
+              {item.name}
+              <Text as="div" fs="sm" c="dark">
+                Hair color: {item.hair_color}, eye color: {item.eye_color}
+              </Text>
+            </Item>
+          )}
         </LookupField>
-        <Text>{`Your selection is: ${value}`}</Text>
+        <Text>
+          Selected item
+          <Code block>
+            {JSON.stringify(value, undefined, 2)}
+          </Code>
+        </Text>
       </>
     );
   },
   {
-    label: '3D graphics and computing API'
+    label: 'Email'
   }
-).withDescription(`
-  The \`value\` prop controls the \`React.Key\` of the current selection
-  while the \`onChange\` prop can be used to set the key to the user's choice.
-`);
+);
 
-export const Required = RUIComponentStory(Overview, {
-  label: '3D graphics and computing API',
-  necessityIndicator: true,
-  isRequired: true
-});
-
-export const ReadOnly = RUIComponentStory(Overview, {
-  label: '3D graphics and computing API',
-  value: 'vulkan',
-  isReadOnly: true
-});
-
-export const Disabled = RUIComponentStory(Overview, {
-  label: '3D graphics and computing API',
-  value: 'vulkan',
-  isDisabled: true
-});
-
-export const Error = RUIComponentStory(Overview, {
-  label: '3D graphics and computing API',
-  necessityIndicator: true,
-  isRequired: true,
-  validationState: 'invalid',
-  errorMessage: 'Please specify an API to use.'
-});
-
-export const WithCustomItems = RUIComponentStory<LookupFieldProps>(
-  (args) => {
-    const people = [
-      {
-        name: 'Chase McManning',
-        username: 'mcmanning.1'
-      },
-      {
-        name: 'Neil Coplin',
-        username: 'coplin.7'
-      },
-      {
-        name: 'John Ray',
-        username: 'ray.30'
-      }
-    ];
-
-    return (
-      <LookupField {...args} items={people}>
-        {(person) => (
-          <Item key={person.name} textValue={person.name}>
-            <Group p="xs">
-              <Avatar
-                alt={person.name as string}
-                name={person.name}
-                opicUsername={person.username}
-                size={40}
-              />
-              <Stack gap={0}>
-                <Text>{person.name}</Text>
-                <Text c="dark" fs="sm">
-                  {person.username}@osu.edu
-                </Text>
-              </Stack>
-            </Group>
-          </Item>
-        )}
-      </LookupField>
-    );
-  },
-  {
-    label: 'Reviewer',
-    iconName: 'user'
-  }
-).withDescription(`
-  Use Item's \`textValue\` prop to populate the input when selected.
-
-  The \`iconName\` prop can also be used to further clarify the type of
-  data that you are searching against.
-`);

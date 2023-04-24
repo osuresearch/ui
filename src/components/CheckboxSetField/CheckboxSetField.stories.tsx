@@ -44,7 +44,8 @@ export const ControlledValue = RUIComponentStory<CheckboxSetFieldProps>((args) =
         <Item key="metal">Metal</Item>
         <Item key="vulkan">Vulkan</Item>
       </CheckboxSetField>
-      <Text>Selected: {value?.join(', ')}</Text>
+      <Text as="div">Selected: {value?.join(', ')}</Text>
+      <Button onPress={() => setValue(undefined)}>Reset</Button>
     </>
   );
 });

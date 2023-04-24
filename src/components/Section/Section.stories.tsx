@@ -5,4 +5,4 @@ import { Section as Component, SectionProps } from './Section';
 
 export default RUIComponentMeta<SectionProps<any>>('Utilities', Component);
 
-export const Item = RUIComponentStory<SectionProps<any>>((args) => <>No example available</>);
+export const Section = RUIComponentStory<SectionProps<any>>((args) => <>No example available</>);

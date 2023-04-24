@@ -1,4 +1,4 @@
-import { FocusableElement } from '@react-types/shared';
+import { DOMAttributes, FocusableElement } from '@react-types/shared';
 import React, { useRef, useState } from 'react';
 import { AriaDialogProps, AriaModalOverlayProps, useModalOverlay } from 'react-aria';
 import { Overlay } from 'react-aria';
@@ -7,6 +7,7 @@ import { CSSTransition } from 'react-transition-group';
 
 import { Box } from '../Box';
 import { Underlay } from '../Underlay';
+import { Paper } from '../Paper';
 
 export type ModalProps = AriaModalOverlayProps & {
   /**
@@ -17,7 +18,7 @@ export type ModalProps = AriaModalOverlayProps & {
   /**
    * Props to spread into React Aria `<Overlay>`
    */
-  overlayProps: React.DOMAttributes<FocusableElement>;
+  overlayProps: DOMAttributes<FocusableElement>;
 
   children: React.ReactNode;
 };
@@ -31,8 +32,6 @@ export type DialogImplProps = AriaDialogProps & {
  * Container for dialogs.
  *
  * Once active, only content within the modal may be interacted with.
- *
- * ## 🛑 Internal use only
  *
  * @internal
  */
@@ -49,29 +48,16 @@ export function Modal({ children, state, overlayProps, ...props }: ModalProps) {
 
   return (
     <Overlay {...overlayProps}>
-      <CSSTransition
-        in={state.isOpen}
-        appear
-        onEntered={() => setOpen(false)}
-        onExited={() => setOpen(true)}
-        timeout={{ enter: 0, exit: 250 }}
-        classNames={{
-          enter: 'rui-opacity-0',
-          enterDone: 'rui-opacity-100 rui-backdrop-blur-sm rui-transition rui-ease-in',
-          exit: 'rui-opacity-0 rui-backdrop-blur-none rui-transition rui-ease-out'
-        }}
-      >
-        <Underlay {...underlayProps} />
-      </CSSTransition>
+      <Underlay {...underlayProps} variant="tint" />
 
       <div className="rui-fixed rui-inset-0 rui-flex rui-justify-center rui-z-50">
-        <Box
+        <Paper
           className="rui-top-[10%] rui-h-fit rui-max-h-[80vh] rui-max-w-sm rui-flex rui-justify-center rui-relative rui-animate-fade-in-down"
           {...modalProps}
           ref={modalRef}
         >
           {children}
-        </Box>
+        </Paper>
       </div>
     </Overlay>
   );

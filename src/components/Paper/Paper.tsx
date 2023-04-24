@@ -28,7 +28,6 @@ export const Paper = polymorphicForwardRef<'div', PaperProps>(
         'rui-relative',
         {
           // Border style
-          'rui-border-2': withBorder,
           'rui-border-light': withBorder,
 
           // Shadow

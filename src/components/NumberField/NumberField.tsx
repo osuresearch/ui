@@ -43,28 +43,30 @@ export const NumberField = forwardRef<HTMLInputElement, NumberFieldProps>((props
       {...props}
     >
       <div className="rui-relative rui-w-full">
-        <div className="rui-absolute rui-inset-[2px] rui-right-auto">
-          <IconButton
-            bgc="light"
-            size={24}
-            px="xs"
-            h="100%"
-            label="decrement"
-            name="dash"
-            {...decrementButtonProps}
-          />
-        </div>
         <input type="hidden" name={name} value={state.inputValue ? state.numberValue : ''} />
-        <TextInputSlot {...inputPropsWithoutName} px="xxl" ref={mergeRefs(inputRef, ref)} />
-        <div className="rui-absolute rui-inset-[2px] rui-left-auto">
+
+        <TextInputSlot {...inputPropsWithoutName} pr="xxl" ref={mergeRefs(inputRef, ref)} />
+
+        <div className="rui-flex rui-flex-col rui-absolute rui-inset-[2px] rui-left-auto">
           <IconButton
             bgc="light"
-            size={24}
+            size={14}
             px="xs"
-            h="100%"
+            h="50%"
             label="increment"
-            name="plus"
+            iconProps={{ rotate: 270 }}
+            name="chevron"
             {...incrementButtonProps}
+          />
+          <IconButton
+            bgc="light"
+            size={14}
+            px="xs"
+            h="50%"
+            label="decrement"
+            iconProps={{ rotate: 90 }}
+            name="chevron"
+            {...decrementButtonProps}
           />
         </div>
       </div>

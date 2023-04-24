@@ -4,7 +4,7 @@ import React from 'react';
 import { ToggleButton, ToggleButtonProps } from './ToggleButton';
 
 export default RUIComponentMeta<ToggleButtonProps>(
-  'Components',
+  'Buttons',
   ToggleButton
 ).withStyleSystemProps();
 

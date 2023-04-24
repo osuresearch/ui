@@ -10,7 +10,7 @@ export type FormErrorsProps = StyleSystemProps & {
 
   errorMessages?: {
     [field: string]: {
-      message: string;
+      message?: string;
     };
   };
 

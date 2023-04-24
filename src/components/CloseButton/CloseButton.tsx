@@ -16,7 +16,7 @@ export type CloseButtonProps = Omit<IconButtonProps, 'name' | 'label'> & {
  *
  * * `aria-label` will always be set on the button by either the user supplied `label`
  *  prop or the default message of "Close"
- * - Touch target of 44px meets Success Criterion [2.5.5 Target Size (Level AAA)](https://www.w3.org/WAI/WCAG21/Understanding/target-size)
+ * - The default touch target of 44px meets [WCAG 2.5.5 Target Size (Level AAA)](https://www.w3.org/WAI/WCAG21/Understanding/target-size)
  */
 export const CloseButton = forwardRef<HTMLButtonElement, CloseButtonProps>(
   ({ label = 'Close', size = 16, ...props }, ref) => (

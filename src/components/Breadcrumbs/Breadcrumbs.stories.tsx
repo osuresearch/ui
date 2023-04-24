@@ -5,7 +5,7 @@ import { BreadcrumbsProps, Breadcrumbs as Component } from '../Breadcrumbs';
 import { Link } from '../Link';
 import { Text } from '../Text';
 
-export default RUIComponentMeta<BreadcrumbsProps>('BUX Stuff', Component).withStyleSystemProps();
+export default RUIComponentMeta<BreadcrumbsProps>('Buttons', Component).withStyleSystemProps();
 
 export const Breadcrumbs = RUIComponentStory<BreadcrumbsProps>((args) => (
   <Component {...args}>

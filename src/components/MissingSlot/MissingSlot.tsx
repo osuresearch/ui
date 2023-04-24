@@ -11,6 +11,8 @@ export type MissingSlotProps = Record<string, never>;
  * TODO: Might drop this and replace with just throwing exceptions.
  * Only use case currently is Diff where we don't need it for apps
  * that don't support diffing.
+ *
+ * @internal
  */
 export function MissingSlot() {
   return (
