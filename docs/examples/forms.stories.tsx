@@ -1,6 +1,7 @@
 import { ComponentMeta } from '@storybook/react';
 import React, { FormEventHandler, useState } from 'react';
 import { FieldValues, SubmitHandler } from 'react-hook-form';
+import { DateRangeField } from 'src/components/DateRangeField';
 
 import {
   Button,
@@ -58,6 +59,7 @@ export const Uncontrolled = (args: any) => {
             <TextField name="textField" label="Text field" {...args} />
             <TextAreaField name="textAreaField" label="TextArea field" {...args} />
             <DateField name="dateField" label="Date field" {...args} />
+            <DateRangeField name="dateRangeField" label="Date range field" {...args} />
             <NumberField locale="en-US" name="numberField" label="Number field" {...args} />
             <NumberField
               locale="en-US"

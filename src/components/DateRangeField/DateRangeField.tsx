@@ -145,7 +145,7 @@ export const DateRangeField = forwardRef<HTMLDivElement, DateRangeFieldProps>((p
         inputRefEnd
     );
 
-    console.log(stateStart, state);
+    //console.log(stateStart, state);
 
     return (
         <>
@@ -171,47 +171,42 @@ export const DateRangeField = forwardRef<HTMLDivElement, DateRangeFieldProps>((p
                     )}
                 >
                     {/* Hidden input for form submission support */}
-                    {/* <VisuallyHidden>
-                    <input aria-hidden="true" name={props.name} type="text" value={state.value?.toString()} />
-                </VisuallyHidden> */}
+                    <VisuallyHidden>
+                        <input aria-hidden="true" name={props.name} type="text" value={[stateStart.value?.toString(), state.value?.toString()]} />
+                    </VisuallyHidden>
 
                     {stateStart.segments.map((segment, i) => (
                         <Segment key={i} segment={segment} state={stateStart} />
                     ))}
                 </Group>
             </FormField>
-            <div>{'-->'}</div>
-            < FormField<string[]>
-                labelAs="span"
-                labelProps={labelProps}
-                descriptionProps={descriptionProps}
-                errorMessageProps={errorMessageProps}
-                {...props}
-            >
-                <Group
-                    {...fieldProps}
-                    ref={inputRefEnd}
-                    p="xs"
-                    gap="xxs"
-                    bgc="light-tint"
-                    className={cx(
-                        'rui-border-2 rui-border-light-shade',
 
-                        'focus-within:rui-border-dark-shade',
-                        { 'rui-border-dimmed rui-bg-light-shade': props.isDisabled },
-                        { 'rui-border-error': props.errorMessage }
-                    )}
-                >
-                    {/* Hidden input for form submission support */}
-                    {/* <VisuallyHidden>
+            <div>{'-->'}</div>
+
+
+            <Group
+                {...fieldProps}
+                ref={inputRefEnd}
+                p="xs"
+                gap="xxs"
+                bgc="light-tint"
+                className={cx(
+                    'rui-border-2 rui-border-light-shade',
+
+                    'focus-within:rui-border-dark-shade',
+                    { 'rui-border-dimmed rui-bg-light-shade': props.isDisabled },
+                    { 'rui-border-error': props.errorMessage }
+                )}
+            >
+                {/* Hidden input for form submission support */}
+                {/* <VisuallyHidden>
                     <input aria-hidden="true" name={props.name} type="text" value={state.value?.toString()} />
                 </VisuallyHidden> */}
 
-                    {state.segments.map((segment, i) => (
-                        <Segment key={i} segment={segment} state={state} />
-                    ))}
-                </Group>
-            </FormField>
+                {state.segments.map((segment, i) => (
+                    <Segment key={i} segment={segment} state={state} />
+                ))}
+            </Group>
         </>
 
     );
