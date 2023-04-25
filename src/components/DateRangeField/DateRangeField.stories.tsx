@@ -11,14 +11,14 @@ export const Overview = RUIComponentStory<DateRangeFieldProps>((args) => <DateRa
   description: 'Enter your date of birth'
 });
 
-// export const UncontrolledValue = RUIComponentStory<DateFieldProps>(
-//   (args) => <DateField {...args}
-//     defaultValue='1989-08-14'
-//   />,
-//   {
-//     label: 'Date'
-//   }
-// );
+export const UncontrolledValue = RUIComponentStory<DateRangeFieldProps>(
+  (args) => <DateRangeField {...args}
+    defaultValue={['2023-04-10', '2023-04-25']}
+  />,
+  {
+    label: 'Date'
+  }
+);
 
 // export const ControlledValue = RUIComponentStory<DateFieldProps>(
 //   (args) => {
