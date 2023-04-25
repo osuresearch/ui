@@ -95,9 +95,9 @@ export const DateRangeField = forwardRef<HTMLDivElement, DateRangeFieldProps>((p
     const { defaultValue, value, onChange, ...restProps } = props;
 
     const convertedPropsStart = {
-        defaultValue: defaultValue ? parseDate(defaultValue[0]) : undefined,
-        value: value ? parseDate(value[0]) : undefined,
-        onChange: (value: DateValue | undefined) => onChange && onChange([value ? value?.toString() : '', ''])
+        defaultValue: defaultValue && defaultValue[0]?.length > 0 ? parseDate(defaultValue[0]) : undefined,
+        value: value && value[0]?.length > 0 ? parseDate(value[0]) : undefined,
+        onChange: (valueParam: DateValue | undefined) => { onChange && onChange([valueParam ? valueParam.toString() : '', value && value[1] ? value[1] : '']) }
     }
 
     const newPropsStart: DateFieldPropsConverted = {

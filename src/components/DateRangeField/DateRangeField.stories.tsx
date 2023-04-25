@@ -20,21 +20,21 @@ export const UncontrolledValue = RUIComponentStory<DateRangeFieldProps>(
   }
 );
 
-// export const ControlledValue = RUIComponentStory<DateFieldProps>(
-//   (args) => {
-//     const [value, setValue] = useState<string | undefined>('1989-08-14');
+export const ControlledValue = RUIComponentStory<DateRangeFieldProps>(
+  (args) => {
+    const [value, setValue] = useState<string[] | undefined>(['2023-04-10', '2023-04-25']);
 
-//     return (
-//       <>
-//         <DateField value={value} onChange={setValue} {...args} />
-//         <Text>{`Your date is: ${value}`}</Text>
-//       </>
-//     );
-//   },
-//   {
-//     label: 'Date'
-//   }
-// );
+    return (
+      <>
+        <DateRangeField value={value} onChange={setValue} {...args} />
+        <Text>{`Your date is: ${value}`}</Text>
+      </>
+    );
+  },
+  {
+    label: 'Date'
+  }
+);
 
 // export const Required = RUIComponentStory(UncontrolledValue, {
 //   label: 'Date',
