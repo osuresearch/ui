@@ -1,5 +1,4 @@
 import React, { createContext } from 'react';
-import './index.scss';
 
 import Active, { Props as ActiveProps } from './Active';
 import Terms, { Props as TermsProps } from './Terms';

@@ -1,4 +1,6 @@
 
+$lookup-minimum-dropdown-width: 20rem;
+
 // Allow error message to wrap (could be long)
 .lookup-error {
     white-space: normal;
@@ -12,4 +14,93 @@
 // Show the clear button only when the lookup is readonly
 .lookup[readonly] ~ .input-group-suffix > .lookup-clear {
     display: inline;
+}
+
+.lookup-results {
+    position: relative;
+    flex: 0 0 100%;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+
+    .dropdown-menu {
+        margin: 0;
+
+        .lookup-result {
+            display: block;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+
+            background: none;
+            border: 0;
+            margin: 0;
+            padding: 0.25rem 1rem;
+
+            &:hover {
+                background: #f0f0f0;
+            }
+
+            &.active-result {
+                background: lighten($casal, 60%);
+            }
+        }
+
+        .dropdown-header {
+            padding: 0.5rem 1rem;
+        }
+
+        .lookup-error {
+            color: #b00;
+        }
+    }
+
+    // Container for an invisible copy of the input text
+    // used to calculate flexbox dimensions.
+    &__offset {
+        max-width: fit-content;
+        max-height: 0;
+        overflow-y: clip;
+
+        padding-left: 0.75rem;
+
+        width: calc(100% - $lookup-minimum-dropdown-width);
+    }
+
+    // Flexbox container for the dropdown to offset it
+    // based on the text. In this setup, we *must*
+    // have a minimum width on the dropdown to ensure
+    // it doesn't overflow out of the container.
+    &__dropdown {
+        flex: 1 auto;
+        position: relative;
+
+        .dropdown-menu {
+            min-width: $lookup-minimum-dropdown-width;
+
+            // Highlight emphasis style for result items.
+            // A bold style is used instead of italics to avoid
+            // characters overlapping when we have an emphasis
+            // end in the middle of a string. (e.g. "<em>Fo</em>o")
+            em {
+                font-style: normal;
+                font-weight: 500;
+            }
+        }
+    }
+}
+
+.lookup-value {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0.375rem 0;
+
+    &-clear {
+        background: none;
+        border: 0;
+        margin: 0;
+        padding-left: 1rem;
+    }
 }

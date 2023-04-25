@@ -3,8 +3,6 @@ import React, { useState } from "react";
 import { Button } from "../..";
 import useSearchProvider from "../hooks/useSearchProvider";
 
-import './SearchDebugger.scss';
-
 type Props = {
     /** SearchProvider `id` to attach the debugger to */
     provider: string

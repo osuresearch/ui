@@ -17,8 +17,6 @@ import {
 } from '../../internal/FormCommon/Components';
 import { SearchDriver, SearchProvider } from '../../search';
 
-import './index.scss';
-
 type Props = FormFieldProps<JsonObject> & {
     /**
      * Search provider to use for interacting with a search API.

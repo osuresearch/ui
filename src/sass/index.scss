@@ -92,7 +92,11 @@
 @import "components/upload";
 @import "components/uploader";
 
-@import "../controls/Button";
-@import "../controls/Search";
+@import "components/button";
+@import "components/search";
 
-@import "../experimental/Masthead";
+@import "components/masthead";
+@import "components/masthead-item";
+@import "components/search-debugger";
+@import "components/terms";
+@import "components/filters";

@@ -4,8 +4,6 @@ import React, { useState, useContext, useEffect, useCallback } from 'react';
 import { Context } from '..';
 import { Icon, Text } from '../../../..';
 
-import './index.scss';
-
 // HTML attributes allowed from `input` - excluding those we override internally.
 // This will allow the developer to add any ARIA related attributes safely.
 type SafeInputHTMLAttributes = Omit<

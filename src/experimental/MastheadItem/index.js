@@ -5,8 +5,6 @@ import PropTypes from 'prop-types';
 import ExternalLink from '../../controls/ExternalLink';
 import Icon from '../../generic/Icon';
 
-import './index.scss';
-
 /**
  * "At a glance" information presented within a Masthead
  */

@@ -3,8 +3,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import debounce from 'lodash/debounce';
 
-import './index.scss';
-
 /**
  * Masthead for a resource details page (project, award, protocol, etc)
  *
