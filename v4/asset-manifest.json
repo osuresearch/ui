@@ -1,11 +1,11 @@
 {
   "files": {
     "main.css": "/osuresearch/ui/static/css/main.341e23ea.css",
-    "main.js": "/osuresearch/ui/build/bundle.3c35e953.js",
+    "main.js": "/osuresearch/ui/build/bundle.191fd600.js",
     "index.html": "/osuresearch/ui/index.html"
   },
   "entrypoints": [
     "static/css/main.341e23ea.css",
-    "build/bundle.3c35e953.js"
+    "build/bundle.191fd600.js"
   ]
 }
