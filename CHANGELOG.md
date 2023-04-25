@@ -3,6 +3,19 @@
 
 ### Bug Fixes
 
+* **ci:** omit `clean-exclude` list from gh-pages deployment ([68ea49c](https://github.com/osuresearch/ui/commit/68ea49c7b911efafd3ee16237303dbbfc9ce46ff))
+* remove inline scss imports from components ([295876c](https://github.com/osuresearch/ui/commit/295876c3ea3867b122580074124f04faf3c5e061)), closes [#72](https://github.com/osuresearch/ui/issues/72)
+
+
+### Features
+
+* **ci:** deploy Styleguidist to GitHub Pages for v4 docs ([5366eac](https://github.com/osuresearch/ui/commit/5366eac82cbb69aed7a0248cec550ed2a6438f6b))
+
+# [4.9.0](https://github.com/osuresearch/ui/compare/v4.8.3...v4.9.0) (2023-04-25)
+
+
+### Bug Fixes
+
 * remove inline scss imports from components ([295876c](https://github.com/osuresearch/ui/commit/295876c3ea3867b122580074124f04faf3c5e061)), closes [#72](https://github.com/osuresearch/ui/issues/72)
 
 
