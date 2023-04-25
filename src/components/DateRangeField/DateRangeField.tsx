@@ -97,7 +97,7 @@ export const DateRangeField = forwardRef<HTMLDivElement, DateRangeFieldProps>((p
     const convertedPropsStart = {
         defaultValue: defaultValue && defaultValue[0]?.length > 0 ? parseDate(defaultValue[0]) : undefined,
         value: value && value[0]?.length > 0 ? parseDate(value[0]) : undefined,
-        onChange: (valueParam: DateValue | undefined) => { onChange && onChange([valueParam ? valueParam.toString() : '', value && value[1] ? value[1] : '']) }
+        onChange: (value: DateValue | undefined) => onChange && onChange([value ? value.toString() : '', state?.value ? state.value.toString() : ''])
     }
 
     const newPropsStart: DateFieldPropsConverted = {
@@ -119,13 +119,12 @@ export const DateRangeField = forwardRef<HTMLDivElement, DateRangeFieldProps>((p
         inputRef
     );
 
-
     const inputRefEnd = useRef<HTMLDivElement>(null);
 
     const convertedProps = {
         defaultValue: defaultValue && defaultValue[1]?.length > 0 ? parseDate(defaultValue[1]) : undefined,
         value: value && value[1]?.length > 0 ? parseDate(value[1]) : undefined,
-        onChange: (valueParam: DateValue | undefined) => onChange && onChange([value && value[0] ? value[0] : '', valueParam ? valueParam.toString() : ''])
+        onChange: (value: DateValue | undefined) => onChange && onChange([stateStart?.value ? stateStart.value.toString() : '', value ? value.toString() : ''])
     }
 
     const newProps: DateFieldPropsConverted = {
@@ -179,7 +178,7 @@ export const DateRangeField = forwardRef<HTMLDivElement, DateRangeFieldProps>((p
                         <Segment key={i} segment={segment} state={stateStart} />
                     ))}
 
-                    <div>{'-->'}</div>
+                    <div>{'->'}</div>
 
                     {state.segments.map((segment, i) => (
                         <Segment key={i} segment={segment} state={state} />
