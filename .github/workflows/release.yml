@@ -30,6 +30,21 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Build Styleguidist
+        run: npm run build:styleguide
+
+      - name: Deploy GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: gh-pages
+          folder: styleguide
+          target-folder: v4
+          clea: true
+          clean-exclude: |
+            index.html
+            v5/*
+
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
