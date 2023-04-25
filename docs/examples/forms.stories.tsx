@@ -208,6 +208,7 @@ export const ReactHookForm7 = (args: any) => {
       textField: 'text value',
       textAreaField: 'text area value',
       dateField: '1989-08-14',
+      dateRangeField: ['2023-04-10', '2023-04-25'],
       numberField: 12345,
       currencyField: 1234567.89,
       checkboxField: true,
@@ -251,6 +252,11 @@ export const ReactHookForm7 = (args: any) => {
             <DateField
               label="Date field"
               {...register('dateField')}
+              {...args}
+            />
+            <DateRangeField
+              label="Date range field"
+              {...register('dateRangeField')}
               {...args}
             />
             <NumberField
