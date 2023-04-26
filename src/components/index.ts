@@ -46,6 +46,7 @@ export * from './LinkButton';
 export * from './ListBox';
 export * from './ListField';
 export * from './Listicle';
+export * from './Lookup';
 export * from './LookupField';
 export * from './Markdown';
 export * from './Menu';
