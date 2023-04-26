@@ -89,14 +89,14 @@ function Segment({ segment, state }: SegmentProps) {
  * <!-- @ruiAtomic Date -->
  */
 export const DateRangeField = forwardRef<HTMLDivElement, DateRangeFieldProps>((props, ref) => {
-    const inputRef = useRef<HTMLDivElement>(null);
+    const inputRefStart = useRef<HTMLDivElement>(null);
 
     const { defaultValue, value, onChange, ...restProps } = props;
 
     const convertedPropsStart = {
-        defaultValue: defaultValue && defaultValue[0]?.length > 0 ? parseDate(defaultValue[0]) : undefined,
-        value: value && value[0]?.length > 0 ? parseDate(value[0]) : undefined,
-        onChange: (value: DateValue | undefined) => onChange && onChange([value ? value.toString() : '', state?.value ? state.value.toString() : ''])
+        defaultValue: defaultValue && defaultValue[0] ? parseDate(defaultValue[0]) : undefined,
+        value: value && value[0] ? parseDate(value[0]) : undefined,
+        onChange: (value: DateValue | undefined) => onChange && onChange((value || stateEnd?.value) ? [value?.toString(), stateEnd?.value?.toString()] : undefined)
     }
 
     const newPropsStart: DateFieldPropsConverted = {
@@ -115,82 +115,71 @@ export const DateRangeField = forwardRef<HTMLDivElement, DateRangeFieldProps>((p
     const { labelProps: labelPropsStart, fieldProps: fieldPropsStart, descriptionProps: descriptionPropsStart, errorMessageProps: errorMessagePropsStart } = useDateField(
         props,
         stateStart,
-        inputRef
+        inputRefStart
     );
-
 
     const inputRefEnd = useRef<HTMLDivElement>(null);
 
-    const convertedProps = {
-        defaultValue: defaultValue && defaultValue[1]?.length > 0 ? parseDate(defaultValue[1]) : undefined,
-        value: value && value[1]?.length > 0 ? parseDate(value[1]) : undefined,
-        onChange: (value: DateValue | undefined) => onChange && onChange([stateStart?.value ? stateStart.value.toString() : '', value ? value.toString() : ''])
+    const convertedPropsEnd = {
+        defaultValue: defaultValue && defaultValue[1] ? parseDate(defaultValue[1]) : undefined,
+        value: value && value[1] ? parseDate(value[1]) : undefined,
+        onChange: (value: DateValue | undefined) => onChange && onChange((stateStart?.value || value) ? [stateStart?.value?.toString(), value?.toString()] : undefined)
     }
 
     const newPropsEnd: DateFieldPropsConverted = {
         ...restProps,
-        ...convertedProps
+        ...convertedPropsEnd
     }
 
-    const state = useDateFieldState({
+    const stateEnd = useDateFieldState({
         ...newPropsEnd,
         locale,
         createCalendar
     });
 
-    const { labelProps, fieldProps, descriptionProps, errorMessageProps } = useDateField(
+    // TODO: add the props to the component for accessibility if needed
+    const { labelProps: labelPropsEnd, fieldProps: fieldPropsEnd, descriptionProps: descriptionPropsEnd, errorMessageProps: errorMessagePropsEnd } = useDateField(
         props,
-        state,
+        stateEnd,
         inputRefEnd
     );
 
-    //console.log(stateStart, state);
-
     return (
-        <>
-            < FormField<(string | undefined)[] | undefined>
-                labelAs="span"
-                labelProps={labelPropsStart}
-                descriptionProps={descriptionPropsStart}
-                errorMessageProps={errorMessagePropsStart}
-                {...props}
+        < FormField<(string | undefined)[] | undefined>
+            labelAs="span"
+            labelProps={labelPropsStart}
+            descriptionProps={descriptionPropsStart}
+            errorMessageProps={errorMessagePropsStart}
+            {...props}
+        >
+            <Group
+                {...fieldPropsStart}
+                ref={mergeRefs(ref, inputRefStart)}
+                p="xs"
+                gap="xxs"
+                bgc="light-tint"
+                className={cx(
+                    'rui-border-2 rui-border-light-shade',
+                    'focus-within:rui-border-dark-shade',
+                    { 'rui-border-dimmed rui-bg-light-shade': props.isDisabled },
+                    { 'rui-border-error': props.errorMessage }
+                )}
             >
-                <Group
-                    {...fieldPropsStart}
-                    ref={mergeRefs(ref, inputRef)}
-                    p="xs"
-                    gap="xxs"
-                    bgc="light-tint"
-                    className={cx(
-                        'rui-border-2 rui-border-light-shade',
+                {/* Hidden input for form submission support */}
+                <VisuallyHidden>
+                    <input aria-hidden="true" name={props.name} type="text" value={(stateStart?.value || stateEnd?.value) ? [stateStart?.value?.toString(), stateEnd?.value?.toString()] : ''} />
+                </VisuallyHidden>
 
-                        'focus-within:rui-border-dark-shade',
-                        { 'rui-border-dimmed rui-bg-light-shade': props.isDisabled },
-                        { 'rui-border-error': props.errorMessage }
-                    )}
-                >
-                    {/* Hidden input for form submission support */}
-                    <VisuallyHidden>
-                        <input aria-hidden="true" name={props.name} type="text" value={[stateStart.value?.toString(), state.value?.toString()]} />
-                    </VisuallyHidden>
+                {stateStart.segments.map((segment, i) => (
+                    <Segment key={i} segment={segment} state={stateStart} />
+                ))}
 
-                    {stateStart.segments.map((segment, i) => (
-                        <Segment key={i} segment={segment} state={stateStart} />
-                    ))}
+                <div>→</div>
 
-                    <div>→</div>
-
-                    {state.segments.map((segment, i) => (
-                        <Segment key={i} segment={segment} state={state} />
-                    ))}
-                </Group>
-            </FormField>
-
-
-
-
-
-        </>
-
+                {stateEnd.segments.map((segment, i) => (
+                    <Segment key={i} segment={segment} state={stateEnd} />
+                ))}
+            </Group>
+        </FormField>
     );
 });
