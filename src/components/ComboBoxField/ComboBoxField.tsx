@@ -117,7 +117,7 @@ export const ComboBoxField = forwardRef<HTMLInputElement, ComboBoxFieldProps>((p
 
         {state.isOpen && (
           <Popover ref={popoverRef} state={state} triggerRef={anchorRef} placement="bottom left">
-            <ListBox ref={listBoxRef} {...listBoxProps} label="Suggestions" state={state} />
+            <ListBox itemProps={{ px: 'sm', py: 'xxs' }} ref={listBoxRef} {...listBoxProps} label="Suggestions" state={state} />
           </Popover>
         )}
       </div>
