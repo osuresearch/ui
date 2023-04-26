@@ -9,10 +9,9 @@ import { FormField, FormFieldBase } from '../FormField';
 import { Group } from '../Group';
 import { Text } from '../Text';
 import { VisuallyHidden } from '../VisuallyHidden';
+import { DateFieldPropsConverted } from '../DateField'
 
-export type DateRangeFieldProps = FormFieldBase<string[]>;
-
-export type DateFieldPropsConverted = FormFieldBase<DateValue> & AriaDatePickerProps<DateValue>;
+export type DateRangeFieldProps = FormFieldBase<(string | undefined)[] | undefined>;
 
 // We only support the gregorian calendar to reduce bundle size.
 // For more info, see React Aria's docs:
@@ -119,6 +118,7 @@ export const DateRangeField = forwardRef<HTMLDivElement, DateRangeFieldProps>((p
         inputRef
     );
 
+
     const inputRefEnd = useRef<HTMLDivElement>(null);
 
     const convertedProps = {
@@ -127,13 +127,13 @@ export const DateRangeField = forwardRef<HTMLDivElement, DateRangeFieldProps>((p
         onChange: (value: DateValue | undefined) => onChange && onChange([stateStart?.value ? stateStart.value.toString() : '', value ? value.toString() : ''])
     }
 
-    const newProps: DateFieldPropsConverted = {
+    const newPropsEnd: DateFieldPropsConverted = {
         ...restProps,
         ...convertedProps
     }
 
     const state = useDateFieldState({
-        ...newProps,
+        ...newPropsEnd,
         locale,
         createCalendar
     });
@@ -148,7 +148,7 @@ export const DateRangeField = forwardRef<HTMLDivElement, DateRangeFieldProps>((p
 
     return (
         <>
-            < FormField<string[]>
+            < FormField<(string | undefined)[] | undefined>
                 labelAs="span"
                 labelProps={labelPropsStart}
                 descriptionProps={descriptionPropsStart}
@@ -178,7 +178,7 @@ export const DateRangeField = forwardRef<HTMLDivElement, DateRangeFieldProps>((p
                         <Segment key={i} segment={segment} state={stateStart} />
                     ))}
 
-                    <div>{'->'}</div>
+                    <div>→</div>
 
                     {state.segments.map((segment, i) => (
                         <Segment key={i} segment={segment} state={state} />

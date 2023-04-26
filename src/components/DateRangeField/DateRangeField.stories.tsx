@@ -22,7 +22,7 @@ export const UncontrolledValue = RUIComponentStory<DateRangeFieldProps>(
 
 export const ControlledValue = RUIComponentStory<DateRangeFieldProps>(
   (args) => {
-    const [value, setValue] = useState<string[] | undefined>(['2023-04-10', '2023-04-25']);
+    const [value, setValue] = useState<(string | undefined)[] | undefined>(['2023-04-10', '2023-04-25']);
 
     return (
       <>

@@ -1,7 +1,6 @@
 import { ComponentMeta } from '@storybook/react';
 import React, { FormEventHandler, useState } from 'react';
 import { FieldValues, SubmitHandler } from 'react-hook-form';
-import { DateRangeField } from 'src/components/DateRangeField';
 
 import {
   Button,
@@ -10,6 +9,7 @@ import {
   Code,
   ComboBoxField,
   DateField,
+  DateRangeField,
   Divider,
   FormErrors,
   FormFieldBase,
