@@ -1,3 +1,10 @@
+# [5.0.0-alpha.20](https://github.com/osuresearch/ui/compare/v5.0.0-alpha.19...v5.0.0-alpha.20) (2023-04-27)
+
+
+### Bug Fixes
+
+* **SelectField:** add check for the placeholder prop ([9a7b2cb](https://github.com/osuresearch/ui/commit/9a7b2cb0b84d94ee06b801536c987ae377d0130e))
+
 # [5.0.0-alpha.19](https://github.com/osuresearch/ui/compare/v5.0.0-alpha.18...v5.0.0-alpha.19) (2023-04-26)
 
 
