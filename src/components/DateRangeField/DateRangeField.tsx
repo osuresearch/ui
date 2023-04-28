@@ -1,6 +1,6 @@
 import { GregorianCalendar, parseDate } from '@internationalized/date';
 import { DateValue } from '@react-types/datepicker';
-import React, { forwardRef, useRef } from 'react';
+import React, { forwardRef, useEffect, useRef, useState } from 'react';
 import { AriaDatePickerProps, useDateField, useDateSegment, useLocale } from 'react-aria';
 import { DateFieldState, DateSegment, useDateFieldState } from 'react-stately';
 
@@ -10,6 +10,7 @@ import { Group } from '../Group';
 import { Text } from '../Text';
 import { VisuallyHidden } from '../VisuallyHidden';
 import { DateFieldPropsConverted } from '../DateField'
+import { Box } from '../Box';
 
 export type DateRangeFieldProps = FormFieldBase<(string | undefined)[] | undefined>;
 
@@ -144,6 +145,34 @@ export const DateRangeField = forwardRef<HTMLDivElement, DateRangeFieldProps>((p
         inputRefEnd
     );
 
+    // ----------Below is functions for displaying "Anytime" as a placeholder for undefined fields----------
+    const [showStartInput, setShowStartInput] = useState<boolean>(false);
+
+    const [showEndInput, setShowEndInput] = useState<boolean>(false);
+
+    // Exit editing the field when clicking the outside of the DateRangeField component
+    useEffect(() => {
+        const clickOutside = (event: { target: any; }) => {
+            if (!document.getElementsByClassName('date-range-input')[0].contains(event.target)) {
+                setShowStartInput(false);
+                setShowEndInput(false);
+            }
+        };
+        document.addEventListener('click', clickOutside);
+        return () => {
+            document.removeEventListener('click', clickOutside);
+        };
+    }, []);
+
+    function editDate(side: string) {
+        if (side === 'start') {
+            setShowStartInput(true);
+        }
+        else {
+            setShowEndInput(true);
+        }
+    }
+
     return (
         < FormField<(string | undefined)[] | undefined>
             labelAs="span"
@@ -161,8 +190,10 @@ export const DateRangeField = forwardRef<HTMLDivElement, DateRangeFieldProps>((p
                 className={cx(
                     'rui-border-2 rui-border-light-shade',
                     'focus-within:rui-border-dark-shade',
+                    'rui-w-3/4',
                     { 'rui-border-dimmed rui-bg-light-shade': props.isDisabled },
-                    { 'rui-border-error': props.errorMessage }
+                    { 'rui-border-error': props.errorMessage },
+                    'date-range-input'
                 )}
             >
                 {/* Hidden input for form submission support */}
@@ -170,16 +201,30 @@ export const DateRangeField = forwardRef<HTMLDivElement, DateRangeFieldProps>((p
                     <input aria-hidden="true" name={props.name} type="text" value={(stateStart?.value || stateEnd?.value) ? [stateStart?.value?.toString(), stateEnd?.value?.toString()] : ''} />
                 </VisuallyHidden>
 
-                {stateStart.segments.map((segment, i) => (
-                    <Segment key={i} segment={segment} state={stateStart} />
-                ))}
+                {(stateStart.value || showStartInput) ?
+                    stateStart.segments.map((segment, i) => (
+                        <Segment key={i} segment={segment} state={stateStart} />
+                    ))
+                    :
+                    <Box hidden={showStartInput} onClick={() => editDate('start')} className={cx(
+                        'rui-block rui-w-full rui-text-center',
+                        'rui-text-gray-shade-40 group-focus:rui-text-light-contrast'
+                    )}>Anytime</Box>
+                }
 
                 <div>→</div>
 
-                {stateEnd.segments.map((segment, i) => (
-                    <Segment key={i} segment={segment} state={stateEnd} />
-                ))}
+                {(stateEnd.value || showEndInput) ?
+                    stateEnd.segments.map((segment, i) => (
+                        <Segment key={i} segment={segment} state={stateEnd} />
+                    ))
+                    :
+                    <Box hidden={showEndInput} onClick={() => editDate('end')} className={cx(
+                        'rui-block rui-w-full rui-text-center',
+                        'rui-text-gray-shade-40 group-focus:rui-text-light-contrast'
+                    )}>Anytime</Box>
+                }
             </Group>
-        </FormField>
+        </FormField >
     );
 });
