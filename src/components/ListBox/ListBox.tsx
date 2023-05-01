@@ -30,7 +30,6 @@ function ListItem<T>({ node, state, ...props }: ListItemProps<T>) {
           { 'rui-cursor-not-allowed': isDisabled }
         )}
         c={isDisabled ? 'dark' : 'light-contrast'}
-        miw={200}
         bgc={isFocused ? 'light-shade' : undefined}
         {...props}
       >

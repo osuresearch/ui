@@ -8,9 +8,7 @@ import { FormField, FormFieldBase } from '../FormField';
 import { Icon } from '../Icon';
 import { Popover } from '../Popover';
 import { Button } from '../Button';
-import { Lookup } from '../Lookup/Lookup';
-
-export type LookupOption = Record<string, any>;
+import { Lookup, LookupOption } from '../Lookup';
 
 export type LookupFieldProps<T extends object = LookupOption> = FormFieldBase<T> &
   Omit<AsyncListOptions<T, any>, 'initialFilterText' | 'initialSelectedKeys'> & {
