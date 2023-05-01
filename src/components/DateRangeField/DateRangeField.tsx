@@ -35,13 +35,16 @@ function Segment({ segment, state }: SegmentProps) {
     const ref = useRef<HTMLDivElement>(null);
     const { segmentProps } = useDateSegment(segment, state, ref);
 
+    console.log(segment);
+
     return (
         <Text
             {...segmentProps}
             ref={ref}
             ta="right"
             style={{
-                ...segmentProps.style
+                ...segmentProps.style,
+                width: (!segment.isPlaceholder && segment.type === 'month') ? '2ch' : undefined
             }}
             className={cx(
                 'rui-box-content rui-tabular-nums',
@@ -58,8 +61,7 @@ function Segment({ segment, state }: SegmentProps) {
                 aria-hidden="true"
                 className={cx(
                     'rui-block rui-w-full rui-text-center rui-italic',
-                    'rui-text-light-shade group-focus:rui-text-light-contrast',
-                    'rui-min-w-full'
+                    'rui-text-light-shade group-focus:rui-text-light-contrast'
                 )}
                 style={{
                     visibility: segment.isPlaceholder ? 'visible' : 'hidden',
@@ -153,7 +155,8 @@ export const DateRangeField = forwardRef<HTMLDivElement, DateRangeFieldProps>((p
     // Exit editing the field when clicking the outside of the DateRangeField component
     useEffect(() => {
         const clickOutside = (event: { target: any; }) => {
-            if (!document.getElementsByClassName('date-range-input')[0].contains(event.target)) {
+            console.log(!document.getElementsByClassName('date-range-field-input')[0].contains(event.target));
+            if (!document.getElementsByClassName('date-range-field-input')[0].contains(event.target)) {
                 setShowStartInput(false);
                 setShowEndInput(false);
             }
@@ -191,7 +194,8 @@ export const DateRangeField = forwardRef<HTMLDivElement, DateRangeFieldProps>((p
                     'rui-border-2 rui-border-light-shade',
                     'focus-within:rui-border-dark-shade',
                     { 'rui-border-dimmed rui-bg-light-shade': props.isDisabled },
-                    { 'rui-border-error': props.errorMessage }
+                    { 'rui-border-error': props.errorMessage },
+                    'date-range-field-input'
                 )}
             >
                 {/* Hidden input for form submission support */}
@@ -204,10 +208,8 @@ export const DateRangeField = forwardRef<HTMLDivElement, DateRangeFieldProps>((p
                         <Segment key={i} segment={segment} state={stateStart} />
                     ))
                     :
-                    <Box hidden={showStartInput} onClick={() => editDate('start')} className={cx(
-                        'rui-block rui-w-full rui-text-center',
-                        'rui-text-gray-shade-40 group-focus:rui-text-light-contrast'
-                    )}>Anytime</Box>
+                    <Box hidden={showStartInput} onClick={() => editDate('start')} className='rui-text-gray-shade-40'
+                    >Anytime</Box>
                 }
 
                 <div>→</div>
@@ -217,10 +219,7 @@ export const DateRangeField = forwardRef<HTMLDivElement, DateRangeFieldProps>((p
                         <Segment key={i} segment={segment} state={stateEnd} />
                     ))
                     :
-                    <Box hidden={showEndInput} onClick={() => editDate('end')} className={cx(
-                        'rui-block rui-w-full rui-text-center',
-                        'rui-text-gray-shade-40 group-focus:rui-text-light-contrast'
-                    )}>Anytime</Box>
+                    <Box hidden={showEndInput} onClick={() => editDate('end')} className='rui-text-gray-shade-40'>Anytime</Box>
                 }
             </Group>
         </FormField>
