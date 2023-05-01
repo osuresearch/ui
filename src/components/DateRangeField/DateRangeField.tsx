@@ -1,7 +1,7 @@
 import { GregorianCalendar, parseDate } from '@internationalized/date';
 import { DateValue } from '@react-types/datepicker';
 import React, { forwardRef, useEffect, useRef, useState } from 'react';
-import { AriaDatePickerProps, useDateField, useDateSegment, useLocale } from 'react-aria';
+import { useDateField, useDateSegment, useLocale } from 'react-aria';
 import { DateFieldState, DateSegment, useDateFieldState } from 'react-stately';
 
 import { cx, mergeRefs } from '../../utils';
@@ -41,8 +41,7 @@ function Segment({ segment, state }: SegmentProps) {
             ref={ref}
             ta="right"
             style={{
-                ...segmentProps.style,
-                minWidth: segment.maxValue != null ? String(segment.maxValue).length + 'ch' : undefined
+                ...segmentProps.style
             }}
             className={cx(
                 'rui-box-content rui-tabular-nums',
@@ -59,7 +58,8 @@ function Segment({ segment, state }: SegmentProps) {
                 aria-hidden="true"
                 className={cx(
                     'rui-block rui-w-full rui-text-center rui-italic',
-                    'rui-text-light-shade group-focus:rui-text-light-contrast'
+                    'rui-text-light-shade group-focus:rui-text-light-contrast',
+                    'rui-min-w-full'
                 )}
                 style={{
                     visibility: segment.isPlaceholder ? 'visible' : 'hidden',
@@ -190,10 +190,8 @@ export const DateRangeField = forwardRef<HTMLDivElement, DateRangeFieldProps>((p
                 className={cx(
                     'rui-border-2 rui-border-light-shade',
                     'focus-within:rui-border-dark-shade',
-                    'rui-w-3/4',
                     { 'rui-border-dimmed rui-bg-light-shade': props.isDisabled },
-                    { 'rui-border-error': props.errorMessage },
-                    'date-range-input'
+                    { 'rui-border-error': props.errorMessage }
                 )}
             >
                 {/* Hidden input for form submission support */}
@@ -225,6 +223,6 @@ export const DateRangeField = forwardRef<HTMLDivElement, DateRangeFieldProps>((p
                     )}>Anytime</Box>
                 }
             </Group>
-        </FormField >
+        </FormField>
     );
 });
