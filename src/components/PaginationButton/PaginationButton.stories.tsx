@@ -21,7 +21,7 @@ export const Overview = RUIComponentStory<PaginationButtonProps>((args) => (
 
 export const ControlledValue = RUIComponentStory<PaginationButtonProps>(
   (args) => {
-    const [value, setValue] = useState<number>(8);
+    const [value, setValue] = useState<number | undefined>(8);
 
     return (
       <>
