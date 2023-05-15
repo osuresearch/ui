@@ -13,7 +13,7 @@ export type VisuallyHiddenProps = {
  */
 export const VisuallyHidden = forwardRef<HTMLDivElement, VisuallyHiddenProps>(
   ({ children }, ref) => (
-    <div ref={ref} className="rui-sr-only">
+    <div ref={ref} className="sr-only">
       {children}
     </div>
   )

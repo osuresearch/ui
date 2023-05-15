@@ -32,7 +32,7 @@ export function DataColumn({ node, state }: ColumnProps) {
         ref={ref}
         {...columnHeaderProps}
         className={cx({
-          'rui-cursor-pointer': sortable
+          'cursor-pointer': sortable
         })}
       >
         {node.rendered}

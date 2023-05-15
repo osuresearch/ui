@@ -24,16 +24,16 @@ export const RadioIcon = ({ isSelected, isDisabled, ...props }: RadioIconProps) 
     w={20}
     h={20}
     className={cx(
-      'rui-border-2 rui-rounded-full',
-      { 'rui-bg-light-tint rui-border-dark': !isSelected && !isDisabled },
-      { 'rui-bg-light-tint rui-border-primary': isSelected && !isDisabled },
-      { 'rui-border-dimmed rui-bg-light-shade': isDisabled }
+      'border-2 rounded-full',
+      { 'bg-light-tint border-dark': !isSelected && !isDisabled },
+      { 'bg-light-tint border-primary': isSelected && !isDisabled },
+      { 'border-dimmed bg-light-shade': isDisabled }
     )}
     {...props}
   >
     {isSelected && (
       <Icon
-        className="[&>svg]:rui-animate-pop"
+        className="[&>svg]:animate-pop"
         size={16}
         c={!isDisabled ? 'primary' : 'dark'}
         name="circleFill"

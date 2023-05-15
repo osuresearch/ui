@@ -90,27 +90,27 @@ export const Table = forwardRef<HTMLTableElement, TableProps>(
         fs={variant === 'compact' ? 'sm' : 'base'}
         className={cx(
           // <th> styles
-          '[&_th]:rui-text-left',
-          '[&_th]:rui-border-b-2 [&_th]:rui-border-b-dark',
+          '[&_th]:text-left',
+          '[&_th]:border-b-2 [&_th]:border-b-dark',
 
           // <th scope="row">
-          '[&_th[scope="row"]]:rui-border-b-0',
-          '[&_th[scope="row"]]:rui-border-r-2 [&_th[scope="row"]]:rui-border-r-dark',
+          '[&_th[scope="row"]]:border-b-0',
+          '[&_th[scope="row"]]:border-r-2 [&_th[scope="row"]]:border-r-dark',
 
           // <tr> styles
-          '[&_tr]:rui-border-b-2 [&_tr]:rui-border-b-light-shade',
+          '[&_tr]:border-b-2 [&_tr]:border-b-light-shade',
 
           {
             // <tr> for striped rows
-            '[&_tr:nth-child(2n)]:rui-bg-light': striped,
+            '[&_tr:nth-child(2n)]:bg-light': striped,
 
             // `default` variant
-            '[&_th]:rui-py-xs [&_th]:rui-px-md': variant === 'default',
-            '[&_td]:rui-p-md': variant === 'default',
+            '[&_th]:py-xs [&_th]:px-md': variant === 'default',
+            '[&_td]:p-md': variant === 'default',
 
             // `compact` variant
-            '[&_th]:rui-p-xs': variant == 'compact',
-            '[&_td]:rui-p-xs': variant == 'compact'
+            '[&_th]:p-xs': variant == 'compact',
+            '[&_td]:p-xs': variant == 'compact'
           },
 
           // User-supplied styles

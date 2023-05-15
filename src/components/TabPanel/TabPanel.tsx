@@ -92,19 +92,19 @@ function TabPanelImpl(props: TabPanelImplProps) {
       <Group
         ref={ref}
         gap={0}
-        className="rui-relative rui-border-b-4 rui-border-light-shade"
+        className="relative border-b-4 border-light-shade"
         {...tabListProps}
       >
         <div
           className={cx(
             // Positioning
-            'rui-absolute rui-bottom-0 rui-left-0 ',
+            'absolute bottom-0 left-0 ',
 
             // Visual
-            'rui-border-2 rui-border-clear rui-shadow-underline-primary',
+            'border-2 border-clear shadow-underline-primary',
 
             // Animation
-            'rui-transition-transform rui-duration-300 rui-ease-decelerate-max'
+            'transition-transform duration-300 ease-decelerate-max'
           )}
           style={{ ...activeTabStyle }}
         />

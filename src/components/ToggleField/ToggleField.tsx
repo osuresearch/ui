@@ -41,7 +41,7 @@ export type ToggleFieldProps = StyleSystemProps &
  *
  * <!-- @ruiAtomic Boolean -->
  *
- * <img class="rui-diagram" src="./ToggleField.svg" alt="Component diagram" />
+ * <img class="diagram" src="./ToggleField.svg" alt="Component diagram" />
  *
  * ## 🛑 Disclaimer
  *

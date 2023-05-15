@@ -39,14 +39,14 @@ export type BadgeProps = {
  */
 export const Badge = forwardRef<HTMLDivElement, BadgeProps>(
   ({ c = 'primary', count, ping = false, maxCount = 99, children }, ref) => (
-    <div className="rui-inline-block rui-relative" ref={ref}>
+    <div className="inline-block relative" ref={ref}>
       {children}
       {count !== 0 && ( // Hide badge on 0
         <div
           className={cx(
-            'rui-absolute rui-flex rui-justify-center rui-pointer-events-none',
-            { '-rui-right-8 -rui-top-8': count === undefined },
-            { '-rui-right-8 -rui-top-12': count !== undefined }
+            'absolute flex justify-center pointer-events-none',
+            { '-right-8 -top-8': count === undefined },
+            { '-right-8 -top-12': count !== undefined }
           )}
         >
           {ping && (
@@ -56,7 +56,7 @@ export const Badge = forwardRef<HTMLDivElement, BadgeProps>(
               w="100%"
               className={cx(
                 // Surrounding animation
-                'motion-safe:rui-animate-ping rui-absolute rui-inline-flex rui-rounded-full rui-opacity-75'
+                'motion-safe:animate-ping absolute inline-flex rounded-full opacity-75'
               )}
             />
           )}
@@ -69,9 +69,9 @@ export const Badge = forwardRef<HTMLDivElement, BadgeProps>(
             fs="xs"
             fw="semibold"
             className={cx(
-              'rui-rounded-full rui-inline-block',
-              'rui-border-2 rui-border-light-tint',
-              'rui-z-0'
+              'rounded-full inline-block',
+              'border-2 border-light-tint',
+              'z-0'
             )}
           >
             {count !== undefined && (

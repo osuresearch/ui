@@ -60,7 +60,7 @@ export function Grid({ children, ...props }: GridProps) {
   return (
     <Box
       as="div"
-      className={cx('rui-grid', className)}
+      className={cx('grid', className)}
       // Grid system props get baked right into style
       style={{
         gridTemplateAreas: `"${(resolve(areas) ?? []).join('" "')}"`,

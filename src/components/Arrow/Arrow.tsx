@@ -19,7 +19,7 @@ export type ArrowProps = DOMAttributes<FocusableElement> & {
 export function Arrow({ placement, c, size = 8, style, ...props }: ArrowProps) {
   return (
     <Box c={c}
-      className="rui-arrow"
+      className="arrow"
       data-placement={placement}
       style={{
         ...style,

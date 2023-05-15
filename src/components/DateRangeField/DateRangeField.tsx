@@ -48,12 +48,12 @@ function Segment({ segment, state }: SegmentProps) {
         width: (!segment.isPlaceholder && segment.type === 'month') ? '2ch' : undefined
       }}
       className={cx(
-        'rui-box-content rui-tabular-nums',
-        'rui-outline-none focus:rui-border-dark-shade',
-        'rui-group',
-        'focus:rui-bg-light-shade',
+        'box-content tabular-nums',
+        'outline-none focus:border-dark-shade',
+        'group',
+        'focus:bg-light-shade',
         {
-          'rui-text-dimmed': !segment.isEditable
+          'text-dimmed': !segment.isEditable
         }
       )}
     >
@@ -61,8 +61,8 @@ function Segment({ segment, state }: SegmentProps) {
       <span
         aria-hidden="true"
         className={cx(
-          'rui-block rui-w-full rui-text-center rui-italic',
-          'rui-text-light-shade group-focus:rui-text-light-contrast'
+          'block w-full text-center italic',
+          'text-light-shade group-focus:text-light-contrast'
         )}
         style={{
           visibility: segment.isPlaceholder ? 'visible' : 'hidden',
@@ -182,10 +182,10 @@ export const DateRangeField = forwardRef<HTMLDivElement, DateRangeFieldProps>((p
         gap="xxs"
         bgc="light-tint"
         className={cx(
-          'rui-border-2 rui-border-light-shade',
-          'focus-within:rui-border-dark-shade',
-          { 'rui-border-dimmed rui-bg-light-shade': props.isDisabled },
-          { 'rui-border-error': props.errorMessage },
+          'border-2 border-light-shade',
+          'focus-within:border-dark-shade',
+          { 'border-dimmed bg-light-shade': props.isDisabled },
+          { 'border-error': props.errorMessage },
           'date-range-field-input'
         )}
       >
@@ -199,7 +199,7 @@ export const DateRangeField = forwardRef<HTMLDivElement, DateRangeFieldProps>((p
             <Segment key={i} segment={segment} state={stateStart} />
           ))
           :
-          <Box hidden={showStartInput} onClick={() => editDate('start')} className='rui-text-gray-shade-40'
+          <Box hidden={showStartInput} onClick={() => editDate('start')} className='text-gray-shade-40'
           >Anytime</Box>
         }
 
@@ -210,7 +210,7 @@ export const DateRangeField = forwardRef<HTMLDivElement, DateRangeFieldProps>((p
             <Segment key={i} segment={segment} state={stateEnd} />
           ))
           :
-          <Box hidden={showEndInput} onClick={() => editDate('end')} className='rui-text-gray-shade-40'>Anytime</Box>
+          <Box hidden={showEndInput} onClick={() => editDate('end')} className='text-gray-shade-40'>Anytime</Box>
         }
       </Group>
     </FormField>

@@ -33,19 +33,19 @@ export const Link = polymorphicForwardRef<'a', LinkProps>(
         as={as || 'a'}
         className={cx(
           {
-            'rui-cursor-pointer': true,
-            'rui-border-b': true,
+            'cursor-pointer': true,
+            'border-b': true,
 
             // Default theme
-            'rui-text-link rui-border-link': variant === 'default',
-            'hover:rui-text-light-contrast': variant === 'default',
-            'hover:rui-bg-light-shade hover:rui-border-light-contrast':
+            'text-link border-link': variant === 'default',
+            'hover:text-light-contrast': variant === 'default',
+            'hover:bg-light-shade hover:border-light-contrast':
               variant === 'default' || variant === 'white',
-            'visited:rui-text-visited visited:rui-border-visited': variant === 'default',
+            'visited:text-visited visited:border-visited': variant === 'default',
 
             // White theme
-            'rui-text-white rui-border-white': variant === 'white',
-            'hover:rui-text-black hover:rui-border-white hover:rui-bg-white': variant === 'white'
+            'text-white border-white': variant === 'white',
+            'hover:text-black hover:border-white hover:bg-white': variant === 'white'
           },
           className
         )}

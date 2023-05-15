@@ -99,7 +99,7 @@ function _Lookup<T extends object>(
   return (
     <>
     <Stack w="100%" gap="xs" p="sm">
-      <div className="rui-relative rui-w-full">
+      <div className="relative w-full">
         <VisuallyHidden>
           <span {...labelProps}>{props.label}</span>
         </VisuallyHidden>
@@ -115,9 +115,9 @@ function _Lookup<T extends object>(
           })}
         />
 
-        <div className="rui-absolute rui-inset-[2px] rui-left-auto">
+        <div className="absolute inset-[2px] left-auto">
           {list.isLoading && // TODO: better icon
-            <Icon name="rotate" c="dark" className="rui-animate-spin" size={16} p="xs" h="100%" />
+            <Icon name="rotate" c="dark" className="animate-spin" size={16} p="xs" h="100%" />
           }
           {!list.isLoading && inputProps.value !== '' &&
             <IconButton {...clearButtonProps}
@@ -184,9 +184,9 @@ function ResultItem<T>({ node, state }: ResultItemProps<T>) {
       ref={ref}
       {...menuItemProps}
       className={cx(
-        'rui-outline-none',
-        { 'rui-cursor-pointer': !isDisabled },
-        { 'rui-cursor-not-allowed': isDisabled }
+        'outline-none',
+        { 'cursor-pointer': !isDisabled },
+        { 'cursor-not-allowed': isDisabled }
       )}
       c={isDisabled ? 'dark' : 'light-contrast'}
       px="sm"

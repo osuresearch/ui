@@ -33,8 +33,8 @@ export const Icon = polymorphicForwardRef<'i', IconProps>(
         style={style}
         className={cx(
           {
-            'rui-block rui-align-top': block,
-            'rui-inline-block rui-align-middle': !block
+            'block align-top': block,
+            'inline-block align-middle': !block
           },
           className
         )}

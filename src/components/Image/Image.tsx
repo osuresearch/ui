@@ -79,7 +79,7 @@ export const Image = forwardRef<HTMLImageElement, ImageProps>(
       <Box
         as={caption ? 'figure' : 'div'}
         {...props}
-        className={cx('rui-relative', className)}
+        className={cx('relative', className)}
         style={{ width, height, ...style }}
       >
         <img

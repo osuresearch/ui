@@ -50,9 +50,9 @@ export function Modal({ children, state, overlayProps, ...props }: ModalProps) {
     <Overlay {...overlayProps}>
       <Underlay {...underlayProps} variant="tint" />
 
-      <div className="rui-fixed rui-inset-0 rui-flex rui-justify-center rui-z-50">
+      <div className="fixed inset-0 flex justify-center z-50">
         <Paper
-          className="rui-top-[10%] rui-h-fit rui-max-h-[80vh] rui-max-w-sm rui-flex rui-justify-center rui-relative rui-animate-fade-in-down"
+          className="top-[10%] h-fit max-h-[80vh] max-w-sm flex justify-center relative animate-fade-in-down"
           {...modalProps}
           ref={modalRef}
         >

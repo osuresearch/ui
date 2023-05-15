@@ -26,8 +26,8 @@ function ListItem<T>({ node, state, ...props }: ListItemProps<T>) {
         ref={ref}
         {...optionProps}
         className={cx(
-          { 'rui-cursor-pointer': !isDisabled },
-          { 'rui-cursor-not-allowed': isDisabled }
+          { 'cursor-pointer': !isDisabled },
+          { 'cursor-not-allowed': isDisabled }
         )}
         c={isDisabled ? 'dark' : 'light-contrast'}
         bgc={isFocused ? 'light-shade' : undefined}

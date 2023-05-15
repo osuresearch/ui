@@ -43,14 +43,14 @@ export const Chip = polymorphicForwardRef<'div', ChipProps>(
       }
       fs="xs"
       fw="semibold"
-      className={cx('rui-border rui-rounded-full rui-inline-block', {
+      className={cx('border rounded-full inline-block', {
         [bc(c as Color)]: variant !== 'indicator',
-        'rui-border-dimmed': variant === 'indicator' || c === 'dimmed'
+        'border-dimmed': variant === 'indicator' || c === 'dimmed'
       })}
       {...props}
     >
       <Group align="center" justify="center" px="xxs" gap="xxs">
-        {variant === 'indicator' && <Box className="rui-rounded-full" w={12} h={12} bgc={c} />}
+        {variant === 'indicator' && <Box className="rounded-full" w={12} h={12} bgc={c} />}
 
         {children}
 

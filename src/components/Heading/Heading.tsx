@@ -23,7 +23,7 @@ export type HeadingProps = {
 };
 
 // Font classes per heading level
-const headerClassName = ['rui-text-h1', 'rui-text-h2', 'rui-text-h3', 'rui-text-h4'];
+const headerClassName = ['text-h1', 'text-h2', 'text-h3', 'text-h4'];
 
 // Font weight per heading level
 const fw: FontWeight[] = ['black', 'extrabold', 'semibold', 'semibold'];

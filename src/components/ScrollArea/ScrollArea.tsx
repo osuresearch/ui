@@ -45,29 +45,29 @@ export function ScrollArea({
   ...styleSystemProps
 }: ScrollAreaProps) {
   const className = {
-    viewport: 'rui-w-full rui-h-full',
+    viewport: 'w-full h-full',
     scrollbar: cx(
-      'rui-flex rui-select-none rui-touch-none',
-      'rui-bg-light rui-opacity-100',
+      'flex select-none touch-none',
+      'bg-light opacity-100',
 
       // Scrollbar width/height
-      'data-[orientation=vertical]:rui-w-xs',
-      'data-[orientation=horizontal]:rui-flex-col data-[orientation=horizontal]:rui-h-xs',
+      'data-[orientation=vertical]:w-xs',
+      'data-[orientation=horizontal]:flex-col data-[orientation=horizontal]:h-xs',
 
       // Hover transitions
-      'rui-transition rui-duration-[150ms] rui-ease-out',
-      'hover:rui-bg-light-shade',
-      'data-[state=hidden]:rui-opacity-0'
+      'transition duration-[150ms] ease-out',
+      'hover:bg-light-shade',
+      'data-[state=hidden]:opacity-0'
     ),
     thumb: cx(
-      'rui-flex-1 rui-bg-dimmed rui-relative',
-      "before:content-[''] before:rui-absolute before:rui-top-1/2 before:rui-left-1/2",
-      'before:-rui-translate-x-1/2 before:-rui-translate-y-1/2',
-      'before:rui-w-full before:rui-h-full before:rui-min-w-[44px] before:rui-min-h-[44px]'
+      'flex-1 bg-dimmed relative',
+      "before:content-[''] before:absolute before:top-1/2 before:left-1/2",
+      'before:-translate-x-1/2 before:-translate-y-1/2',
+      'before:w-full before:h-full before:min-w-[44px] before:min-h-[44px]'
     ),
     // Corner is only visible when we have both scrollbars active.
     // I don't really need to show the corner, scrollbars are small enough.
-    corner: 'rui-opacity-0'
+    corner: 'opacity-0'
   };
 
   const viewportRef = useRef<HTMLDivElement>(null);
@@ -80,7 +80,7 @@ export function ScrollArea({
         scrollHideDelay={hideDelay}
         asChild
       >
-        <Box pr="xs" pb="xs" className="rui-overflow-hidden">
+        <Box pr="xs" pb="xs" className="overflow-hidden">
           <RadixScrollArea.Viewport
             ref={viewportRef}
             className={className.viewport}

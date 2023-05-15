@@ -18,7 +18,7 @@ export const ExternalLink = polymorphicForwardRef<'a', LinkProps>(
       ref={ref}
       variant={variant}
       aria-label="Link leads to an external site"
-      className={cx(className, '[&>i]:hover:-rui-translate-y-4', '[&>i]:hover:rui-translate-x-4')}
+      className={cx(className, '[&>i]:hover:-translate-y-4', '[&>i]:hover:translate-x-4')}
       {...props}
       target="_blank"
       referrerPolicy="no-referrer"
@@ -32,7 +32,7 @@ export const ExternalLink = polymorphicForwardRef<'a', LinkProps>(
             white: 'white'
           }[variant] as Color
         }
-        className="rui-transition-transform"
+        className="transition-transform"
         mr="-md"
         px="xxs"
         size="0.8em"

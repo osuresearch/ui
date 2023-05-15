@@ -65,7 +65,7 @@ export const Admonition = forwardRef<HTMLDivElement, AdmonitionProps>(
             name={iconName}
             size={20}
           />
-          <Text as="div" fw="bold" fs="sm" c={contrast} className="rui-uppercase">
+          <Text as="div" fw="bold" fs="sm" c={contrast} className="uppercase">
             {title ?? variant}
           </Text>
         </Group>

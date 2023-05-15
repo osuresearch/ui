@@ -60,31 +60,31 @@ export const PrimaryButton = polymorphicForwardRef<'button', PrimaryButtonProps>
       py={small ? 'xxs' : 'sm'}
       fs={small ? 'sm' : 'base'}
       className={cx({
-        'rui-focus-ring': true,
-        'rui-text-center': true,
-        'rui-border-2': true,
+        'focus-ring': true,
+        'text-center': true,
+        'border-2': true,
 
         // Primary theme
-        'rui-bg-primary': variant === 'default' && !disabled,
-        'rui-border-primary': !disabled,
-        'rui-text-primary-contrast': variant === 'default' && !disabled,
-        'rui-text-primary': variant === 'outline' && !disabled,
+        'bg-primary': variant === 'default' && !disabled,
+        'border-primary': !disabled,
+        'text-primary-contrast': variant === 'default' && !disabled,
+        'text-primary': variant === 'outline' && !disabled,
 
         // outline variant against a dark theme
-        'dark:rui-text-dark': variant === 'outline' && !disabled,
-        'dark:rui-border-dark': variant === 'outline' && !disabled,
+        'dark:text-dark': variant === 'outline' && !disabled,
+        'dark:border-dark': variant === 'outline' && !disabled,
 
         // Hover state
-        'hover:rui-bg-dark-shade': !disabled,
-        'hover:rui-border-dark-shade': !disabled,
-        'hover:rui-text-dark-contrast': !disabled,
-        'hover:rui-text-primary-contrast': variant === 'outline' && !disabled,
+        'hover:bg-dark-shade': !disabled,
+        'hover:border-dark-shade': !disabled,
+        'hover:text-dark-contrast': !disabled,
+        'hover:text-primary-contrast': variant === 'outline' && !disabled,
 
         // Disabled state
-        'rui-bg-light-shade': disabled,
-        'rui-border-light-shade': disabled,
-        'rui-text-dark-tint': disabled,
-        'rui-cursor-not-allowed': disabled
+        'bg-light-shade': disabled,
+        'border-light-shade': disabled,
+        'text-dark-tint': disabled,
+        'cursor-not-allowed': disabled
       })}
     >
       {leftSlot}

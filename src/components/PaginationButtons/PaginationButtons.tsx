@@ -97,23 +97,23 @@ export function PaginationButtons({ value, totalPages, onChange }: PaginationBut
 
   return (
     <nav role="navigation" aria-label="Pagination">
-      <ul className="rui-flex rui-justify-center">
+      <ul className="flex justify-center">
         {/* Previous button */}
         <li>
           <UnstyledButton w={40} h={40} p="xs"
             c={value === 1 ? 'gray-tint-20' : 'primary'}
             className={cx(
-              'rui-flex',
+              'flex',
               {
-                'hover:rui-bg-gray-tint-80 hover:rui-text-gray-shade-80': value !== 1,
-                'hover:rui-cursor-not-allowed': value === 1
+                'hover:bg-gray-tint-80 hover:text-gray-shade-80': value !== 1,
+                'hover:cursor-not-allowed': value === 1
               }
             )}
             onPress={() => onChange(value - 1)}
             disabled={value === 1}
           >
             <Icon name="chevron" rotate={180} size={24} />
-            <span className="rui-sr-only">Previous</span>
+            <span className="sr-only">Previous</span>
           </UnstyledButton>
         </li>
 
@@ -126,12 +126,12 @@ export function PaginationButtons({ value, totalPages, onChange }: PaginationBut
               <UnstyledButton w={40} h={40} p="xs"
                 c={value === page ? 'gray-shade-80' : 'primary'}
                 bgc={value === page ? 'gray-tint-80' : 'clear'}
-                className='hover:rui-bg-gray-tint-80 hover:rui-text-gray-shade-80'
+                className='hover:bg-gray-tint-80 hover:text-gray-shade-80'
                 onPress={() => onChange(page)}
                 disabled={value === page}
               >
                 {page}
-                {value === page && <span className="rui-sr-only">current</span>}
+                {value === page && <span className="sr-only">current</span>}
               </UnstyledButton>
             }
           </li>
@@ -142,16 +142,16 @@ export function PaginationButtons({ value, totalPages, onChange }: PaginationBut
           <UnstyledButton w={40} h={40} p="xs"
             c={value === totalPages ? 'gray-tint-20' : 'primary'}
             className={cx(
-              'rui-flex',
+              'flex',
               {
-                'hover:rui-bg-gray-tint-80 hover:rui-text-gray-shade-80': value !== totalPages,
-                'hover:rui-cursor-not-allowed': value === totalPages
+                'hover:bg-gray-tint-80 hover:text-gray-shade-80': value !== totalPages,
+                'hover:cursor-not-allowed': value === totalPages
               })}
             onPress={() => onChange(value + 1)}
             disabled={value === totalPages}
           >
             <Icon name="chevron" size={24} />
-            <span className="rui-sr-only">Next</span>
+            <span className="sr-only">Next</span>
           </UnstyledButton>
         </li>
       </ul>

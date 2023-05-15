@@ -25,16 +25,16 @@ export const LinkButton = polymorphicForwardRef<'button', LinkButtonProps>(
       ref={ref}
       c="light-contrast"
       className={cx(
-        'rui-flex',
-        'hover:rui-text-primary dark:hover:rui-text-primary-contrast',
-        'group-hover:rui-text-primary dark:group-hover:rui-text-primary-contrast', // Support for .group parenting
-        '[&>i]:hover:rui-translate-x-sm [&>i]:group-hover:rui-translate-x-sm',
+        'flex',
+        'hover:text-primary dark:hover:text-primary-contrast',
+        'group-hover:text-primary dark:group-hover:text-primary-contrast', // Support for .group parenting
+        '[&>i]:hover:translate-x-sm [&>i]:group-hover:translate-x-sm',
         className
       )}
       {...props}
     >
       {children}
-      <Icon className="rui-transition-transform" name="chevron" c="primary" ml="sm" size={24} />
+      <Icon className="transition-transform" name="chevron" c="primary" ml="sm" size={24} />
     </UnstyledButton>
   )
 );

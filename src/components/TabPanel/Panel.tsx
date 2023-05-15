@@ -24,7 +24,7 @@ export function Panel({ variant, state, ...props }: PanelProps) {
         p={variant === 'default' ? 'xl' : 0}
         className={cx(
           // The default tab panel has a border below the content
-          { 'rui-border-b-2 rui-border-light-shade': variant === 'default' }
+          { 'border-b-2 border-light-shade': variant === 'default' }
         )}
         {...tabPanelProps}
       >

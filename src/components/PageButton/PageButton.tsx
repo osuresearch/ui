@@ -32,19 +32,19 @@ export const PageButton = polymorphicForwardRef<'button', PageButtonProps>(
       px="md"
       w="100%"
       className={cx(
-        'focus:rui-ring',
-        'rui-flex',
+        'focus:ring',
+        'flex',
 
-        'rui-border-2',
-        'rui-border-light',
+        'border-2',
+        'border-light',
 
         // Hover styles
-        'hover:rui-bg-dark-shade',
-        'hover:rui-border-dark-shade',
-        'hover:rui-text-dark-contrast',
+        'hover:bg-dark-shade',
+        'hover:border-dark-shade',
+        'hover:text-dark-contrast',
 
         // Reverse layout for next vs previous button
-        { 'rui-flex-row-reverse': direction === 'next' }
+        { 'flex-row-reverse': direction === 'next' }
       )}
     >
       <Icon rotate={direction === 'previous' ? 180 : 0} name="chevron" size={26} px="sm" />

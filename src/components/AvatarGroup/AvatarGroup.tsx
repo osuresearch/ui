@@ -28,7 +28,7 @@ export const AvatarGroup = forwardRef<HTMLDivElement, AvatarGroupProps>(
     const overflow = Children.count(children) - (resolve(limit) ?? 100);
 
     return (
-      <Group ref={ref} gap={0} className={cx('[&>*]:-rui-m-xxs', className)} {...props}>
+      <Group ref={ref} gap={0} className={cx('[&>*]:-m-xxs', className)} {...props}>
         {Children.map(children, (child, idx) => (
           <React.Fragment key={idx}>{idx < limit && child}</React.Fragment>
         ))}

@@ -34,7 +34,7 @@ export interface OhioStateFooterProps {
  * Our footer validates a site as officially from Ohio State and identifies the specific unit
  * managing the site so the user can connect with them appropriately.
  *
- * <img class="rui-diagram" src="./OhioStateFooter.svg" alt="Component diagram" />
+ * <img class="diagram" src="./OhioStateFooter.svg" alt="Component diagram" />
  *
  * ## Changes from BUX
  * - Modified the accessibility language to be more generic to support

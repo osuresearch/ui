@@ -93,10 +93,10 @@ export const ComboBoxField = forwardRef<HTMLInputElement, ComboBoxFieldProps>((p
       descriptionProps={descriptionProps}
       errorMessageProps={errorMessageProps}
     >
-      <div className="rui-relative rui-w-full">
+      <div className="relative w-full">
         <input type="hidden" name={name} value={state.selectedKey} />
         <TextInputSlot ref={mergeRefs(ref, inputRef)} {...inputPropsWithoutName} />
-        <div className="rui-absolute rui-inset-[2px] rui-left-auto">
+        <div className="absolute inset-[2px] left-auto">
           <IconButton
             ref={triggerRef}
             name="chevron"
@@ -113,7 +113,7 @@ export const ComboBoxField = forwardRef<HTMLInputElement, ComboBoxFieldProps>((p
         </div>
 
         {/* Anchor right under the start of the input box to position the popover  */}
-        <div ref={anchorRef} className="rui-w-0 rui-h-0" />
+        <div ref={anchorRef} className="w-0 h-0" />
 
         {state.isOpen && (
           <Popover ref={popoverRef} state={state} triggerRef={anchorRef} placement="bottom left">

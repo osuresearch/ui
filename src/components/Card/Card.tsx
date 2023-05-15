@@ -94,19 +94,19 @@ export const Card = forwardRef<HTMLAnchorElement, CardProps>(
       as="a"
       ref={ref}
       style={{ maxWidth: 420, ...style }}
-      className={cx('rui-block rui-group', className)}
+      className={cx('block group', className)}
       href={href}
       target="_blank"
       rel="noopener noreferrer"
       {...props}
     >
       <Paper bgc={variant === 'panel' ? 'light' : undefined} withBorder={withBorder}>
-        <div className="rui-bg-primary rui-h-4" />
-        <img className="rui-w-full" src={image} alt={alt} />
+        <div className="bg-primary h-4" />
+        <img className="w-full" src={image} alt={alt} />
 
         <Stack p="lg" gap="xs">
           {taxonomy && (
-            <Text className="rui-uppercase" c="primary" fs="sm">
+            <Text className="uppercase" c="primary" fs="sm">
               {taxonomy}
             </Text>
           )}
@@ -118,7 +118,7 @@ export const Card = forwardRef<HTMLAnchorElement, CardProps>(
               mt="sm"
               fw="bold"
               ff={variant === 'storytelling' ? 'serif' : 'sans'}
-              className="rui-text-h3"
+              className="text-h3"
             >
               {headline}
             </LinkButton>
@@ -128,15 +128,15 @@ export const Card = forwardRef<HTMLAnchorElement, CardProps>(
               fw="bold"
               ff={variant === 'storytelling' ? 'serif' : 'sans'}
               className={cx({
-                'rui-text-h3': true,
-                'group-hover:rui-underline': variant === 'storytelling'
+                'text-h3': true,
+                'group-hover:underline': variant === 'storytelling'
               })}
             >
               {headline}
             </Text>
           )}
 
-          <Text className="rui-text-h4">{children}</Text>
+          <Text className="text-h4">{children}</Text>
 
           {!linkedHeadline && callToAction && (
             <LinkButton as="a" href={href} mt="sm">

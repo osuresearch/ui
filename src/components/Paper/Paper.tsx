@@ -25,23 +25,23 @@ export const Paper = polymorphicForwardRef<'div', PaperProps>(
       bgc="light-tint"
       c="light-contrast"
       className={cx(
-        'rui-relative',
+        'relative',
         {
           // Border style
-          'rui-border-light': withBorder,
+          'border-light': withBorder,
 
           // Shadow
-          'rui-shadow-sm': shadow === 'sm',
-          'rui-shadow-md': shadow === 'md',
-          'rui-shadow-lg': shadow === 'lg',
-          'rui-shadow-xl': shadow === 'xl',
+          'shadow-sm': shadow === 'sm',
+          'shadow-md': shadow === 'md',
+          'shadow-lg': shadow === 'lg',
+          'shadow-xl': shadow === 'xl',
 
           // Radius
-          'rui-rounded-xs': rounded === 'xs',
-          'rui-rounded-sm': rounded === 'sm',
-          'rui-rounded-md': rounded === 'md',
-          'rui-rounded-lg': rounded === 'lg',
-          'rui-rounded-xl': rounded === 'xl'
+          'rounded-xs': rounded === 'xs',
+          'rounded-sm': rounded === 'sm',
+          'rounded-md': rounded === 'md',
+          'rounded-lg': rounded === 'lg',
+          'rounded-xl': rounded === 'xl'
         },
         className
       )}

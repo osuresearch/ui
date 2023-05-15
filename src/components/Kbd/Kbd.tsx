@@ -20,10 +20,10 @@ export const Kbd = ({ children }: KbdProps) => (
     px="xs"
     py="xxs"
     className={cx(
-      'rui-border-[1px]',
-      'rui-border-b-[3px]',
-      'rui-rounded-[3px]',
-      'rui-border-dimmed dark:rui-border-light-shade'
+      'border-[1px]',
+      'border-b-[3px]',
+      'rounded-[3px]',
+      'border-dimmed dark:border-light-shade'
     )}
   >
     {children}

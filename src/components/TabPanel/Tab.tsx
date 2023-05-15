@@ -31,15 +31,15 @@ export function Tab({ variant, item, state, orientation }: TabProps) {
         className={cx(
           // Default style - border around the selected item
           {
-            'rui-border-2 rui-border-b-0 rui-border-clear': variant === 'default' && !isDisabled,
-            'aria-selected:rui-border-light-shade': variant === 'default' && !isDisabled
+            'border-2 border-b-0 border-clear': variant === 'default' && !isDisabled,
+            'aria-selected:border-light-shade': variant === 'default' && !isDisabled
           },
 
           {
             // hover style (bg matches the Panel bars)
-            'hover:rui-bg-light-shade': !isDisabled,
-            'hover:rui-shadow-underline-dark': !isDisabled,
-            'hover:rui-cursor-not-allowed': isDisabled
+            'hover:bg-light-shade': !isDisabled,
+            'hover:shadow-underline-dark': !isDisabled,
+            'hover:cursor-not-allowed': isDisabled
           }
         )}
         {...tabProps}

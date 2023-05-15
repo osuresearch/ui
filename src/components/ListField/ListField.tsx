@@ -12,7 +12,7 @@ export type ListFieldProps = StyleSystemProps & {
 
 /**
  *
- * <img class="rui-diagram" src="./ListField.svg" alt="Component diagram" />
+ * <img class="diagram" src="./ListField.svg" alt="Component diagram" />
  *
  */
 export const ListField = forwardRef<HTMLDivElement, ListFieldProps>(

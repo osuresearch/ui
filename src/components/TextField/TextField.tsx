@@ -47,10 +47,10 @@ export const TextInputSlot = forwardRef<HTMLInputElement, InputSlotProps>((props
       c="light-contrast"
       w="100%"
       className={cx(
-        'rui-border-2 rui-border-light-shade',
-        'focus:rui-border-dark-shade',
-        { 'rui-border-dimmed rui-bg-light-shade': props.disabled },
-        { 'rui-border-error': props['aria-invalid'] }
+        'border-2 border-light-shade',
+        'focus:border-dark-shade',
+        { 'border-dimmed bg-light-shade': props.disabled },
+        { 'border-error': props['aria-invalid'] }
       )}
       {...props}
       ref={ref}
@@ -81,9 +81,9 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
       errorMessageProps={errorMessageProps}
       {...props}
     >
-      <div className="rui-relative rui-w-full">
+      <div className="relative w-full">
         {props.leftSlot && (
-          <div className="rui-absolute rui-inset-[2px] rui-right-auto">{props.leftSlot}</div>
+          <div className="absolute inset-[2px] right-auto">{props.leftSlot}</div>
         )}
 
         <TextInputSlot
@@ -97,7 +97,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
         />
 
         {props.rightSlot && (
-          <div className="rui-absolute rui-inset-[2px] rui-left-auto">{props.rightSlot}</div>
+          <div className="absolute inset-[2px] left-auto">{props.rightSlot}</div>
         )}
       </div>
     </FormField>
