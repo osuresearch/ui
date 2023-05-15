@@ -6,7 +6,7 @@ import { Group } from '../Group';
 import { Icon } from '../Icon';
 import { Paper } from '../Paper';
 
-export default RUIComponentMeta<ButtonProps>('Components', Button).withStyleSystemProps();
+export default RUIComponentMeta<ButtonProps>('Buttons', Button).withStyleSystemProps();
 
 export const Overview = RUIComponentStory<ButtonProps>((args) => <Button {...args}>Button</Button>);
 

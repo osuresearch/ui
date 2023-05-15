@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Item } from '../Item';
 import { Text } from '../Text';
 import { RadioSetField, RadioSetFieldProps } from './RadioSetField';
+import { Button } from '../Button';
 
 export default RUIComponentMeta<RadioSetFieldProps>('Forms', RadioSetField).withStyleSystemProps();
 
@@ -38,7 +39,9 @@ export const ControlledValue = RUIComponentStory<RadioSetFieldProps>((args) => {
         <Item key="metal">Metal</Item>
         <Item key="vulkan">Vulkan</Item>
       </RadioSetField>
-      <Text>Selected: {value}</Text>
+
+      <Text as="div">Selected: {value}</Text>
+      <Button onPress={() => setValue(undefined)}>Reset</Button>
     </>
   );
 });

@@ -14,10 +14,6 @@ export type ListFieldProps = StyleSystemProps & {
  *
  * <img class="rui-diagram" src="./ListField.svg" alt="Component diagram" />
  *
- * ## 🛑 Disclaimer
- * In most cases, you should not use this component in your application.
- * This is a base for other specialized fields to implement.
- *
  */
 export const ListField = forwardRef<HTMLDivElement, ListFieldProps>(
   ({ className, children, ...styleSystemProps }, ref) => (

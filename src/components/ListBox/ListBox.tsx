@@ -6,14 +6,15 @@ import { ListState } from 'react-stately';
 import { cx, mergeRefs } from '../../utils';
 import { Box } from '../Box';
 import { FocusRing } from '../FocusRing';
-import { Text } from '../Text';
+import { StyleSystemProps } from '../../types';
+import { useStyleSystemProps } from '../../hooks';
 
-type ListItemProps<T> = {
+type ListItemProps<T> = StyleSystemProps & {
   state: ListState<T>;
   node: Node<T>;
 };
 
-function ListItem<T>({ node, state }: ListItemProps<T>) {
+function ListItem<T>({ node, state, ...props }: ListItemProps<T>) {
   const ref = useRef<HTMLLIElement>(null);
   const { optionProps, labelProps, descriptionProps, isSelected, isFocused, isDisabled } =
     useOption({ key: node.key }, state, ref);
@@ -31,6 +32,7 @@ function ListItem<T>({ node, state }: ListItemProps<T>) {
         c={isDisabled ? 'dark' : 'light-contrast'}
         miw={200}
         bgc={isFocused ? 'light-shade' : undefined}
+        {...props}
       >
         {node.rendered}
       </Box>
@@ -38,7 +40,7 @@ function ListItem<T>({ node, state }: ListItemProps<T>) {
   );
 }
 
-function ListSection<T>({ node, state }: ListItemProps<T>) {
+function ListSection<T>({ node, state, ...props }: ListItemProps<T>) {
   const { itemProps, headingProps, groupProps } = useListBoxSection({
     heading: node.rendered,
     'aria-label': node['aria-label']
@@ -58,8 +60,8 @@ function ListSection<T>({ node, state }: ListItemProps<T>) {
         <ul {...groupProps}>
           {Array.from(node.childNodes).map((item) => (
             item.type === 'section'
-              ? <ListSection<T> key={item.key} node={item} state={state} />
-              : <ListItem<T> key={item.key} node={item} state={state} />
+              ? <ListSection<T> key={item.key} node={item} state={state} {...props} />
+              : <ListItem<T> key={item.key} node={item} state={state} {...props} />
           ))}
         </ul>
       </li>
@@ -67,36 +69,44 @@ function ListSection<T>({ node, state }: ListItemProps<T>) {
   );
 }
 
-export type ListBoxProps<T = object> = AriaListBoxOptions<T> & {
+export type ListBoxProps<T = object> = AriaListBoxOptions<T> & StyleSystemProps & {
+  label: React.ReactNode;
   state: ListState<T>;
+
+  /** Additional style system props to apply to each list item */
+  itemProps?: StyleSystemProps;
 };
 
 function _ListBox<T extends object>(props: ListBoxProps<T>, ref: ForwardedRef<HTMLElement>) {
   const boxRef = useRef<HTMLElement>(null);
   const { state } = props;
 
+  const [styleSystemProps, ] = useStyleSystemProps(props);
   const { listBoxProps } = useListBox(props, state, boxRef);
 
   return (
-    <Box as="ul" ref={mergeRefs(ref, boxRef)} {...listBoxProps}>
-      {Array.from(state.collection).map((item) => (
-        item.type === 'section'
-          ? <ListSection<T> key={item.key} node={item} state={state} />
-          : <ListItem<T> key={item.key} node={item} state={state} />
-      ))}
-    </Box>
+    <FocusRing>
+      <Box
+        as="ul"
+        ref={mergeRefs(ref, boxRef)}
+        {...styleSystemProps}
+        {...listBoxProps}
+      >
+        {Array.from(state.collection).map((item) => (
+          item.type === 'section'
+            ? <ListSection<T> key={item.key} node={item} state={state} {...props.itemProps} />
+            : <ListItem<T> key={item.key} node={item} state={state} {...props.itemProps} />
+        ))}
+      </Box>
+    </FocusRing>
   );
 }
 
 /**
  * Low level component for managing interactive lists of items.
  *
- * ## 🛑 Internal use only
- *
  * - Requires state to be passed in from React Stately's `useListState`.
  * - Section and item rendering are the responsibility of the consumer.
- *
- * <!-- @ruiInternal -->
  *
  * @internal
  */

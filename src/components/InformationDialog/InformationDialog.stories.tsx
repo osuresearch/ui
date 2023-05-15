@@ -3,7 +3,7 @@ import React from 'react';
 
 import { InformationDialog as Component, InformationDialogProps } from './InformationDialog';
 
-export default RUIComponentMeta<InformationDialogProps>('Dialogs', Component);
+export default RUIComponentMeta<InformationDialogProps>('Internal', Component);
 
 export const InformationDialog = RUIComponentStory<InformationDialogProps>(
   (args) => (

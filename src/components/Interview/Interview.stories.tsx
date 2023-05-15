@@ -5,7 +5,7 @@ import React from 'react';
 import { Item } from '../Item';
 import { Interview, InterviewProps } from './Interview';
 
-export default RUIComponentMeta<InterviewProps>('BUX Stuff', Interview).withStyleSystemProps();
+export default RUIComponentMeta<InterviewProps>('Ohio State', Interview).withStyleSystemProps();
 
 /**
  * Can I write a doc here?

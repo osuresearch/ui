@@ -2,11 +2,11 @@ import { RUIComponentMeta, RUIComponentStory } from '@sb/utils';
 import React from 'react';
 
 import { Group } from '../Group';
-import { DocumentPagination as Component, DocumentPaginationProps } from './DocumentPagination';
+import { PageButton as Component, PageButtonProps } from './PageButton';
 
-export default RUIComponentMeta<DocumentPaginationProps>('BUX Stuff', Component);
+export default RUIComponentMeta<PageButtonProps>('Buttons', Component);
 
-export const DocumentPagination = RUIComponentStory<DocumentPaginationProps>((args) => (
+export const PageButton = RUIComponentStory<PageButtonProps>((args) => (
   <Group gap="lg" align="stretch">
     <Component {...args} direction="previous">
       Title of previous page

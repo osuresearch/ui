@@ -98,10 +98,13 @@ export const ComboBoxField = forwardRef<HTMLInputElement, ComboBoxFieldProps>((p
         <TextInputSlot ref={mergeRefs(ref, inputRef)} {...inputPropsWithoutName} />
         <div className="rui-absolute rui-inset-[2px] rui-left-auto">
           <IconButton
-            name="caret"
             ref={triggerRef}
-            bgc="light"
+            name="chevron"
             size={16}
+            variant="fade"
+            iconProps={{
+              rotate: 90,
+            }}
             h="100%"
             px="xs"
             label={triggerProps['aria-label'] ?? 'Show suggestions'}
@@ -114,7 +117,7 @@ export const ComboBoxField = forwardRef<HTMLInputElement, ComboBoxFieldProps>((p
 
         {state.isOpen && (
           <Popover ref={popoverRef} state={state} triggerRef={anchorRef} placement="bottom left">
-            <ListBox ref={listBoxRef} {...listBoxProps} state={state} />
+            <ListBox ref={listBoxRef} {...listBoxProps} label="Suggestions" state={state} />
           </Popover>
         )}
       </div>

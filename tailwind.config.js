@@ -255,7 +255,7 @@ module.exports = {
         }
       },
       animation: {
-        'fade-in-down': 'fade-in-down 0.5s ease-out',
+        'fade-in-down': 'fade-in-down 0.2s ease-out', // Used by modals. TODO: Replace. I hate it.
         'pop': 'pop 0.12s ease-in-out',
         'scroll': 'scroll 2s linear infinite'
       }

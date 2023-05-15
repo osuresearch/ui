@@ -20,7 +20,7 @@ export function HeaderRow({ node, state }: RowProps) {
 
   return (
     <tr ref={ref} {...rowProps}>
-      {[...node.childNodes].map((column) => {
+      {Array.from(node.childNodes).map((column) => {
         // First column represents a checkbox for all selectable rows
         if (hasSelectableRows && column.index === 0) {
           return <CheckboxColumn key={column.key} node={column} state={state} />;
@@ -44,7 +44,7 @@ export function BodyRow({ node, state }: RowProps) {
   return (
     <FocusRing>
       <tr ref={ref} {...rowProps}>
-        {[...node.childNodes].map((cell) => {
+        {Array.from(node.childNodes).map((cell) => {
           // First cell represents a checkbox for selecting this row
           if (hasSelectableRows && cell.index === 0) {
             return <CheckboxCell key={cell.key} node={cell} state={state} />;

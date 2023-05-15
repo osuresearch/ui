@@ -109,7 +109,7 @@ export const Uncontrolled = (args: any) => {
               <Item key="vulkan">Vulkan</Item>
             </ComboBoxField>
 
-            <LookupField name="lookupField" label="Lookup field" disabledKeys={['dx12']} {...args}>
+            {/* <LookupField name="lookupField" label="Lookup field" disabledKeys={['dx12']} {...args}>
               <Item key="ogl">OpenGL</Item>
               <Item key="dx11">DirectX 11</Item>
               <Item
@@ -120,7 +120,7 @@ export const Uncontrolled = (args: any) => {
               </Item>
               <Item key="metal">Metal</Item>
               <Item key="vulkan">Vulkan</Item>
-            </LookupField>
+            </LookupField> */}
 
             <CheckboxSetField
               name="checkboxSetField"
@@ -312,7 +312,7 @@ export const ReactHookForm7 = (args: any) => {
               <Item key="vulkan">Vulkan</Item>
             </ComboBoxField>
 
-            <LookupField
+            {/* <LookupField
               {...register('lookupField')}
               label="Lookup field"
               disabledKeys={['dx12']}
@@ -328,7 +328,7 @@ export const ReactHookForm7 = (args: any) => {
               </Item>
               <Item key="metal">Metal</Item>
               <Item key="vulkan">Vulkan</Item>
-            </LookupField>
+            </LookupField> */}
 
             <CheckboxSetField
               {...register('checkboxSetField')}

@@ -4,6 +4,14 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Reset for X button on search inputs */
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input::-webkit-search-results-decoration {
+  display: none;
+}
+
 /* .root,
 #root,
 #docs-root {

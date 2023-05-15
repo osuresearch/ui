@@ -36,7 +36,7 @@ export const BreakWords = RUIComponentStory((args) => (
 
 export const Polymorphic = RUIComponentStory((args) => (
   <>
-    <Text component="p">
+    <Text as="p" mb="sm">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eget elit ac arcu luctus
       varius. Vivamus egestas neque ut sem auctor vehicula. Sed suscipit lobortis porta. Etiam
       vulputate iaculis diam, a suscipit sem accumsan et. Fusce consectetur, ligula eget vehicula
@@ -48,7 +48,7 @@ export const Polymorphic = RUIComponentStory((args) => (
       aliquet. Aliquam consequat sollicitudin nunc in semper. Donec pellentesque a sapien eu
       dapibus.
     </Text>
-    <Text component="p">
+    <Text as="p">
       Vestibulum cursus dolor neque, eget porttitor purus fermentum condimentum. Praesent sagittis
       lorem et bibendum faucibus. Sed quis erat placerat, tempor magna at, dictum ante. Quisque
       fringilla, orci at tristique imperdiet, nunc lacus faucibus mi, ultricies dapibus nunc enim
@@ -59,5 +59,7 @@ export const Polymorphic = RUIComponentStory((args) => (
     </Text>
   </>
 )).withDescription(`
-  Text can be a semantic paragraph element by using the \`component\` prop
+  Text can be a semantic paragraph element by using the \`as\` prop.
+  Paragraphs are not styled with additional margins out of the box so
+  use \`mb\` or similar prop on the Text component.
 `);

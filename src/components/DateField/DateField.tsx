@@ -32,46 +32,46 @@ type SegmentProps = {
 };
 
 function Segment({ segment, state }: SegmentProps) {
-    const ref = useRef<HTMLDivElement>(null);
-    const { segmentProps } = useDateSegment(segment, state, ref);
+  const ref = useRef<HTMLDivElement>(null);
+  const { segmentProps } = useDateSegment(segment, state, ref);
 
-    return (
-        <Text
-            {...segmentProps}
-            ref={ref}
-            ta="right"
-            style={{
-                ...segmentProps.style,
-                minWidth: segment.maxValue != null ? String(segment.maxValue).length + 'ch' : undefined
-            }}
-            className={cx(
-                'rui-box-content rui-tabular-nums',
-                'rui-outline-none focus:rui-border-dark-shade',
-                'rui-group',
-                'focus:rui-bg-light-shade',
-                {
-                    'rui-text-dimmed': !segment.isEditable
-                }
-            )}
-        >
-            {/* Always reserve space for the placeholder, to prevent layout shift when editing. */}
-            <span
-                aria-hidden="true"
-                className={cx(
-                    'rui-block rui-w-full rui-text-center rui-italic',
-                    'rui-text-light-shade group-focus:rui-text-light-contrast'
-                )}
-                style={{
-                    visibility: segment.isPlaceholder ? 'visible' : 'hidden',
-                    height: segment.isPlaceholder ? undefined : 0,
-                    pointerEvents: 'none'
-                }}
-            >
-                {segment.placeholder}
-            </span>
-            {segment.isPlaceholder ? '' : segment.text}
-        </Text>
-    );
+  return (
+    <Text
+      {...segmentProps}
+      ref={ref}
+      ta="right"
+      style={{
+        ...segmentProps.style,
+        minWidth: segment.maxValue != null ? String(segment.maxValue).length + 'ch' : undefined
+      }}
+      className={cx(
+        'rui-box-content rui-tabular-nums',
+        'rui-outline-none focus:rui-border-dark-shade',
+        'rui-group',
+        'focus:rui-bg-light-shade',
+        {
+          'rui-text-dimmed': !segment.isEditable
+        }
+      )}
+    >
+      {/* Always reserve space for the placeholder, to prevent layout shift when editing. */}
+      <span
+        aria-hidden="true"
+        className={cx(
+          'rui-block rui-w-full rui-text-center rui-italic',
+          'rui-text-dark group-focus:rui-text-light-contrast'
+        )}
+        style={{
+          visibility: segment.isPlaceholder ? 'visible' : 'hidden',
+          height: segment.isPlaceholder ? undefined : 0,
+          pointerEvents: 'none'
+        }}
+      >
+        {segment.placeholder}
+      </span>
+      {segment.isPlaceholder ? '' : segment.text}
+    </Text>
+  );
 }
 
 /**

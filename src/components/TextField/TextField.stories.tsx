@@ -20,7 +20,7 @@ export const UncontrolledValue = RUIComponentStory<TextFieldProps>(Overview, {
 
 export const ControlledValue = RUIComponentStory<TextFieldProps>(
   (args) => {
-    const [value, setValue] = useState('');
+    const [value, setValue] = useState<string | undefined>('');
 
     return (
       <>
@@ -56,6 +56,11 @@ export const Error = RUIComponentStory<TextFieldProps>(Overview, {
   label: 'Email',
   validationState: 'invalid',
   errorMessage: 'Please enter a valid email address.'
+});
+
+export const WithAriaLabel = RUIComponentStory<TextFieldProps>(Overview, {
+  'aria-label': 'Email',
+  value: 'chase@example.com',
 });
 
 export const WithIcon = RUIComponentStory(Overview, {

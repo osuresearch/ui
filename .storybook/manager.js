@@ -15,6 +15,7 @@ addons.setConfig({
     // showRoots: false,
     collapsedRoots: [
       'components',
+      'buttons',
       'hooks',
       'utilities',
       'dialogs',

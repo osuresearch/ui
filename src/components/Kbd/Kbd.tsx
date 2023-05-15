@@ -14,7 +14,7 @@ export const Kbd = ({ children }: KbdProps) => (
   <Text
     as="kbd"
     ff="mono"
-    fs="sm"
+    fs="xs"
     bgc="light"
     c="light-contrast"
     px="xs"

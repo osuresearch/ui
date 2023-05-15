@@ -2,11 +2,11 @@ import '@testing-library/jest-dom';
 import { render } from '@testing-library/react';
 import React from 'react';
 
-import { RadioButtonIcon } from './RadioButtonIcon';
+import { Lookup } from './Lookup';
 
-describe('Tests for RadioButtonIcon component', () => {
+describe('Tests for Lookup component', () => {
   it('renders content', () => {
-    const { container } = render(<RadioButtonIcon>Foo bar</RadioButtonIcon>);
+    const { container } = render(<Lookup>Foo bar</Lookup>);
     expect(container.firstChild).toMatchSnapshot();
   });
 });

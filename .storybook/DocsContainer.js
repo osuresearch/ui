@@ -28,7 +28,7 @@ import { Divider } from '../src/components/Divider';
 import { Space } from '../src/components/Space';
 import { TabPanel } from '../src/components/TabPanel';
 import { Item } from '../src/components/Item';
-import { Image } from '../src/components/Image';
+import { Admonition } from '../src/components/Admonition';
 
 export const DocsContainer = ({ children, context }) => {
   const dark = useDarkMode();
@@ -63,6 +63,8 @@ export const DocsContainer = ({ children, context }) => {
 
   const isPolymorphic = isComponent && context.component?.__docgenInfo.description.indexOf('@ruiPolymorphic') >= 0;
   console.log(context, context.componentStories());
+
+  const isInternal = isComponent && context.title.indexOf('Internal') === 0;
 
   const hasAdditionalStories = context.componentStories().length > 1;
 
@@ -100,6 +102,13 @@ export const DocsContainer = ({ children, context }) => {
           </Stack>
           }
 
+          {isInternal && (
+            <Admonition variant="caution">
+              This is an internal component to Research UI and the API is not guaranteed to
+              be stable between minor releases. Usage by consumers is strongly discouraged.
+            </Admonition>
+          )}
+
           {/* Refactor of component docs layout */}
           {isComponent && (
           <Stack gap="lg" align="stretch">
@@ -107,11 +116,11 @@ export const DocsContainer = ({ children, context }) => {
               <Title />
               <Group>
                 {atomics.map((atomic) =>
-                  <Chip>Atomic: {atomic[1]}</Chip>
+                  <Chip c="violet">Atomic: {atomic[1]}</Chip>
                 )}
 
                 {status.map((value) =>
-                  <Chip>Status: {value[1]}</Chip>
+                  <Chip c="teal">Status: {value[1]}</Chip>
                 )}
 
                 {isPolymorphic &&

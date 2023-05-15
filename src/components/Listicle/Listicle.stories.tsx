@@ -4,7 +4,7 @@ import React from 'react';
 import { Item } from '../Item';
 import { Listicle, ListicleProps } from './index';
 
-export default RUIComponentMeta<ListicleProps>('BUX Stuff', Listicle).withStyleSystemProps();
+export default RUIComponentMeta<ListicleProps>('Ohio State', Listicle).withStyleSystemProps();
 
 export const Ordered = RUIComponentStory<ListicleProps>(
   (args) => (

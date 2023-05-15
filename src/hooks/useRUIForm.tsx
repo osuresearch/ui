@@ -1,5 +1,5 @@
 import { parseDate } from '@internationalized/date';
-import React from 'react';
+import React, { FocusEvent } from 'react';
 import {
   FieldPath,
   FieldValues,
@@ -20,9 +20,7 @@ export type UseRUIFormRegisterReturn<TFieldName extends string = string, TFieldV
   validationState?: 'invalid' | 'valid';
   errorMessage?: React.ReactNode;
 
-  // ((e: FocusEvent<Element, Element>) => void)
-  // TODO: Don't know where type is sourced from on this one.
-  onBlur?: (e: FocusEvent) => void;
+  onBlur?: (e: FocusEvent<Element>) => void;
 
   defaultValue?: TFieldValue; // DateValue
   value?: TFieldValue; // DateValue

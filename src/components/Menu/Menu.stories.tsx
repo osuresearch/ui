@@ -7,7 +7,7 @@ import { Text } from '../Text';
 import { Menu, MenuProps } from './Menu';
 import { Section } from '../Section';
 
-export default RUIComponentMeta<MenuProps>('Components', Menu);
+export default RUIComponentMeta<MenuProps>('Buttons', Menu);
 
 export const Overview = RUIComponentStory<MenuProps>((args) => (
   <Menu {...args} label="Options" onAction={alert}>

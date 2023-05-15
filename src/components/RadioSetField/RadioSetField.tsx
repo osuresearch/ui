@@ -1,5 +1,5 @@
 import { Node } from '@react-types/shared';
-import React, { createContext, forwardRef, useContext, useRef } from 'react';
+import React, { createContext, forwardRef, useContext, useEffect, useRef } from 'react';
 import {
   AriaCheckboxGroupItemProps,
   AriaRadioGroupProps,
@@ -100,6 +100,13 @@ export const RadioSetField = forwardRef<HTMLDivElement, RadioSetFieldProps>((pro
     props,
     groupState
   );
+
+  // useRadioGroupState does not support changing value from a value to undefined.
+  // So we utilize an effect hook to force a change if this component is being
+  // controlled via `value`.
+  useEffect(() => {
+    groupState.setSelectedValue(props.value ?? '');
+  }, [props.value])
 
   const { itemSlot } = useSlots(props);
   const ItemSlot = itemSlot ?? DefaultGroupItemSlot;
