@@ -86,7 +86,7 @@ type LayoutProps = {
 
 function OuterLayout({ layout, children }: LayoutProps) {
   if (layout === 'horizontal') {
-    return <div className="rui-flex rui-w-full">{children}</div>;
+    return <div className="flex w-full">{children}</div>;
   }
 
   // Default fallback
@@ -95,7 +95,7 @@ function OuterLayout({ layout, children }: LayoutProps) {
 
 function LabelLayout({ layout, children }: LayoutProps) {
   if (layout === 'horizontal') {
-    return <div className="rui-flex-1">{children}</div>;
+    return <div className="flex-1">{children}</div>;
   }
 
   // Default fallback
@@ -104,7 +104,7 @@ function LabelLayout({ layout, children }: LayoutProps) {
 
 function ContentLayout({ layout, children }: LayoutProps) {
   if (layout === 'horizontal') {
-    return <Stack className="rui-flex-1">{children}</Stack>;
+    return <Stack className="flex-1">{children}</Stack>;
   }
 
   // Default fallback

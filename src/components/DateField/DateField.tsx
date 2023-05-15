@@ -45,12 +45,12 @@ function Segment({ segment, state }: SegmentProps) {
         minWidth: segment.maxValue != null ? String(segment.maxValue).length + 'ch' : undefined
       }}
       className={cx(
-        'rui-box-content rui-tabular-nums',
-        'rui-outline-none focus:rui-border-dark-shade',
-        'rui-group',
-        'focus:rui-bg-light-shade',
+        'box-content tabular-nums',
+        'outline-none focus:border-dark-shade',
+        'group',
+        'focus:bg-light-shade',
         {
-          'rui-text-dimmed': !segment.isEditable
+          'text-dimmed': !segment.isEditable
         }
       )}
     >
@@ -58,8 +58,8 @@ function Segment({ segment, state }: SegmentProps) {
       <span
         aria-hidden="true"
         className={cx(
-          'rui-block rui-w-full rui-text-center rui-italic',
-          'rui-text-dark group-focus:rui-text-light-contrast'
+          'block w-full text-center italic',
+          'text-dark group-focus:text-light-contrast'
         )}
         style={{
           visibility: segment.isPlaceholder ? 'visible' : 'hidden',
@@ -134,11 +134,11 @@ export const DateField = forwardRef<HTMLDivElement, DateFieldProps>((props, ref)
         gap="xxs"
         bgc="light-tint"
         className={cx(
-          'rui-border-2 rui-border-light-shade',
+          'border-2 border-light-shade',
 
-          'focus-within:rui-border-dark-shade',
-          { 'rui-border-dimmed rui-bg-light-shade': props.isDisabled },
-          { 'rui-border-error': props.errorMessage }
+          'focus-within:border-dark-shade',
+          { 'border-dimmed bg-light-shade': props.isDisabled },
+          { 'border-error': props.errorMessage }
         )}
       >
         {/* Hidden input for form submission support */}

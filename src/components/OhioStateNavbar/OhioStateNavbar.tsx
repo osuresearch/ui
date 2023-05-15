@@ -34,7 +34,7 @@ function NavbarLink({ title, variant, href, children }: LinkProps) {
       target="_blank"
       fs="sm"
       c={variant === 'light' ? 'black' : 'white'}
-      className="hover:rui-underline"
+      className="hover:underline"
     >
       {!isMobile && title}
       {isMobile && children}
@@ -43,16 +43,16 @@ function NavbarLink({ title, variant, href, children }: LinkProps) {
 }
 
 function LogoLink({ variant }: { variant: OhioStateNavbarVariant }) {
-  const color = variant === 'light' ? 'rui-text-[#666666]' : 'rui-text-white';
+  const color = variant === 'light' ? 'text-[#666666]' : 'text-white';
 
   return (
     <a
       href="https://www.osu.edu"
       target="_blank"
-      className={`rui-text-[19px] ${color} rui-font-[700]`}
+      className={`text-[19px] ${color} font-[700]`}
       rel="noreferrer"
     >
-      OSU<span className={`rui-text-[19px] ${color} rui-font-[400]`}>.EDU</span>
+      OSU<span className={`text-[19px] ${color} font-[400]`}>.EDU</span>
     </a>
   );
 }
@@ -60,7 +60,7 @@ function LogoLink({ variant }: { variant: OhioStateNavbarVariant }) {
 /**
  * Identity banner for Ohio State applications
  *
- * <img class="rui-diagram" src="./OhioStateNavbar.svg" alt="Component diagram" />
+ * <img class="diagram" src="./OhioStateNavbar.svg" alt="Component diagram" />
  *
  * ## Differences from BUX
  * - Not using the new fat banner, doesn't work for web applications. It may be
@@ -77,7 +77,7 @@ export function OhioStateNavbar({ variant = 'light' }: OhioStateNavbarProps) {
       bgc={variant === 'light' ? 'white' : 'black'}
       h={44}
       // TODO: Container max width?
-      className="rui-border-scarlet rui-border-b-4"
+      className="border-scarlet border-b-4"
     >
       <VisuallyHidden>
         <Link href="#content">Skip to main content</Link>

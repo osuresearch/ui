@@ -29,7 +29,7 @@ export const Stack = polymorphicForwardRef<'div', StackProps>(
       as={as || 'div'}
       ref={ref}
       className={cx(
-        'rui-flex rui-flex-col rui-relative',
+        'flex flex-col relative',
         styles.justifyContent(justify),
         styles.gap(gap),
         styles.alignItems(align),

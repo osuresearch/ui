@@ -54,55 +54,55 @@ export const Button = polymorphicForwardRef<'button', ButtonProps>(
       px="sm"
       isDisabled={isDisabled}
       className={cx(
-        'rui-inline-block',
-        'rui-relative',
-        'rui-whitespace-nowrap',
+        'inline-block',
+        'relative',
+        'whitespace-nowrap',
 
         // Default variant
         {
-          'rui-text-dark-shade': variant === 'default',
-          'rui-bg-light-shade dark:rui-bg-light': variant === 'default' && !isDisabled,
-          'hover:rui-bg-dimmed-tint hover:dark:rui-bg-light-shade':
+          'text-dark-shade': variant === 'default',
+          'bg-light-shade dark:bg-light': variant === 'default' && !isDisabled,
+          'hover:bg-dimmed-tint hover:dark:bg-light-shade':
             variant === 'default' && !isDisabled,
-          'data-[active=true]:rui-bg-dimmed data-[active=true]:dark:rui-bg-dimmed-tint':
+          'data-[active=true]:bg-dimmed data-[active=true]:dark:bg-dimmed-tint':
             variant === 'default' && !isDisabled
         },
 
         // Subtle variant
         {
-          'rui-text-light-contrast': variant === 'subtle',
-          'hover:rui-bg-light hover:rui-text-dark': variant === 'subtle' && !isDisabled,
-          'data-[active=true]:rui-bg-light-shade': variant === 'subtle'
+          'text-light-contrast': variant === 'subtle',
+          'hover:bg-light hover:text-dark': variant === 'subtle' && !isDisabled,
+          'data-[active=true]:bg-light-shade': variant === 'subtle'
         },
 
         // Primary variant
         {
-          'rui-bg-primary rui-text-primary-contrast': variant === 'primary',
-          'hover:rui-bg-primary-shade': variant === 'primary' && !isDisabled,
-          'data-[active=true]:rui-bg-black': variant === 'primary'
+          'bg-primary text-primary-contrast': variant === 'primary',
+          'hover:bg-primary-shade': variant === 'primary' && !isDisabled,
+          'data-[active=true]:bg-black': variant === 'primary'
         },
 
         // Accented variant, color inherits, :before drives background color
         {
-          'before:rui-absolute before:rui-inset-0 before:rui-mix-blend-multiply':
+          'before:absolute before:inset-0 before:mix-blend-multiply':
             variant === 'accented',
 
-          'before:rui-bg-gray-tint-80': variant === 'accented',
-          'hover:before:rui-bg-gray-tint-60': variant === 'accented' && !isDisabled,
-          'data-[active=true]:before:rui-bg-gray-tint-40': variant === 'accented' && !isDisabled
+          'before:bg-gray-tint-80': variant === 'accented',
+          'hover:before:bg-gray-tint-60': variant === 'accented' && !isDisabled,
+          'data-[active=true]:before:bg-gray-tint-40': variant === 'accented' && !isDisabled
 
-          // 'rui-mix-blend-multiply': variant === 'subtle',
+          // 'mix-blend-multiply': variant === 'subtle',
 
-          // 'rui-text-black': variant === 'accented',
-          // 'rui-mix-blend-hard-light': variant === 'accented',
-          // 'rui-bg-gray-tint-80': variant === 'accented',
-          // 'hover:rui-bg-gray-tint-60': variant === 'accented' && !isDisabled,
-          // 'data-[active=true]:rui-bg-gray-tint-40': variant === 'accented',
+          // 'text-black': variant === 'accented',
+          // 'mix-blend-hard-light': variant === 'accented',
+          // 'bg-gray-tint-80': variant === 'accented',
+          // 'hover:bg-gray-tint-60': variant === 'accented' && !isDisabled,
+          // 'data-[active=true]:bg-gray-tint-40': variant === 'accented',
         },
 
         // Disabled
         {
-          'rui-bg-light rui-border-light rui-cursor-not-allowed': isDisabled
+          'bg-light border-light cursor-not-allowed': isDisabled
         },
         className
       )}

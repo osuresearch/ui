@@ -109,7 +109,7 @@ export const Avatar = polymorphicForwardRef<'div', AvatarProps>(
       <Box
         ref={ref}
         as={as || 'div'}
-        className={cx('rui-block', 'rui-relative', className)}
+        className={cx('block', 'relative', className)}
         title={alt}
         style={{
           width: size,
@@ -120,16 +120,16 @@ export const Avatar = polymorphicForwardRef<'div', AvatarProps>(
         <Box
           bgc={colors[index]}
           className={cx(
-            'rui-absolute',
-            'rui-top-0',
-            'rui-rounded-full',
-            'rui-overflow-hidden',
-            'rui-text-center',
+            'absolute',
+            'top-0',
+            'rounded-full',
+            'overflow-hidden',
+            'text-center',
 
-            'rui-outline',
-            'rui-outline-2',
-            '-rui-outline-offset-1',
-            'rui-outline-light-tint'
+            'outline',
+            'outline-2',
+            '-outline-offset-1',
+            'outline-light-tint'
           )}
           style={{
             fontSize: size / 2.75 + 'px',
@@ -147,12 +147,12 @@ export const Avatar = polymorphicForwardRef<'div', AvatarProps>(
             width={size}
             height={size}
             className={cx(
-              'rui-rounded-full rui-overflow-hidden',
+              'rounded-full overflow-hidden',
 
-              'rui-outline',
-              'rui-outline-2',
-              '-rui-outline-offset-1',
-              'rui-outline-light-tint'
+              'outline',
+              'outline-2',
+              '-outline-offset-1',
+              'outline-light-tint'
             )}
             src={src}
             alt=""

@@ -57,19 +57,19 @@ export const IconButton = polymorphicForwardRef<'button', IconButtonProps>(
         p="xxs"
         c={!props.isDisabled ? 'light-contrast' : 'dark'}
         className={cx(
-          'rui-inline-block',
+          'inline-block',
           // Default variant
           {
-            'data-[active=true]:rui-bg-light-shade': variant === 'default'
+            'data-[active=true]:bg-light-shade': variant === 'default'
           },
           // Hover variant
           {
-            'hover:rui-bg-light': !props.isDisabled && variant === 'default',
-            'hover:rui-opacity-70': !props.isDisabled && variant === 'fade'
+            'hover:bg-light': !props.isDisabled && variant === 'default',
+            'hover:opacity-70': !props.isDisabled && variant === 'fade'
           },
           // Disabled
           {
-            'rui-bg-light': props.isDisabled && variant === 'default'
+            'bg-light': props.isDisabled && variant === 'default'
           },
           className
         )}

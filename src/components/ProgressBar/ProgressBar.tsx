@@ -59,9 +59,9 @@ export function ProgressBar({
         {label && <span {...labelProps}>{label}</span>}
         {label && <span>{isIndeterminate ? '' : progressBarProps['aria-valuetext']}</span>}
       </Group>
-      <Box bgc="light-shade" h={4} className="rui-overflow-x-hidden rui-relative">
+      <Box bgc="light-shade" h={4} className="overflow-x-hidden relative">
       {isIndeterminate
-        ? <Box bgc="info" className="rui-animate-scroll rui-absolute rui-inset-0" w="50%" />
+        ? <Box bgc="info" className="animate-scroll absolute inset-0" w="50%" />
         : <Box bgc="info" h="100%" w={barWidth} />
       }
       </Box>

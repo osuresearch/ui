@@ -32,8 +32,8 @@ export const ToggleButton = forwardRef<HTMLButtonElement, ToggleButtonProps>(
       px="sm"
       isDisabled={isDisabled}
       className={cx(
-        'rui-relative',
-        'rui-whitespace-nowrap',
+        'relative',
+        'whitespace-nowrap',
 
         // TODO: Refactor all of this. It's replicated from Button
         // and I want a more standardized system for defining variant
@@ -41,20 +41,20 @@ export const ToggleButton = forwardRef<HTMLButtonElement, ToggleButtonProps>(
 
         // Default variant
         {
-          'rui-text-dark-shade': variant === 'default',
+          'text-dark-shade': variant === 'default',
 
-          'rui-bg-light-shade': variant === 'default' && !isDisabled,
-          'hover:rui-bg-dimmed-tint': variant === 'default' && !isDisabled,
-          'data-[active=true]:rui-bg-dimmed': variant === 'default' && !isDisabled,
+          'bg-light-shade': variant === 'default' && !isDisabled,
+          'hover:bg-dimmed-tint': variant === 'default' && !isDisabled,
+          'data-[active=true]:bg-dimmed': variant === 'default' && !isDisabled,
 
-          'aria-pressed:rui-bg-primary': variant === 'default' && !isDisabled,
-          'aria-pressed:rui-text-primary-contrast': variant === 'default' && !isDisabled
+          'aria-pressed:bg-primary': variant === 'default' && !isDisabled,
+          'aria-pressed:text-primary-contrast': variant === 'default' && !isDisabled
         },
 
         // Disabled
         {
-          'rui-bg-light rui-border-light rui-cursor-not-allowed': isDisabled,
-          'hover:rui-bg-light': isDisabled
+          'bg-light border-light cursor-not-allowed': isDisabled,
+          'hover:bg-light': isDisabled
         },
         className
       )}

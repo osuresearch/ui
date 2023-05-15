@@ -53,10 +53,10 @@ function MenuItem<T>({ node, state }: MenuItemProps<T>) {
       {...menuItemProps}
       className={cx(
         // Disable default focus behaviour: focused elements get a bgc
-        'rui-outline-none',
+        'outline-none',
 
-        { 'rui-cursor-pointer': !isDisabled },
-        { 'rui-cursor-not-allowed': isDisabled }
+        { 'cursor-pointer': !isDisabled },
+        { 'cursor-not-allowed': isDisabled }
       )}
       c={isDisabled ? 'dark' : 'light-contrast'}
       px="sm"

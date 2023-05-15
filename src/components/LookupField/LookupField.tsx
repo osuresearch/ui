@@ -77,7 +77,7 @@ function _LookupField<T extends object>(
         <Button
           ref={triggerRef}
           variant="subtle"
-          className="rui-text-left"
+          className="text-left"
           rightSlot={<Icon name="chevron" rotate={90} />}
           {...triggerProps}
         >

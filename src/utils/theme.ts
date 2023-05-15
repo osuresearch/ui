@@ -132,10 +132,10 @@ export function spacingValueToClass(
 
   // Handle negatives by transforming -sm to -p-sm
   if ((value as string)[0] === '-') {
-    return `-rui-${prefix}${value}`;
+    return `-${prefix}${value}`;
   }
 
-  return `rui-${prefix}-${value}`;
+  return `${prefix}-${value}`;
 }
 
 export function spacingPropsToClassNames<P extends { [K: string]: ResponsiveProp<Spacing> }>(

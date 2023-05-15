@@ -44,8 +44,8 @@ export function FocusRing(props: FocusRingProps) {
     mergeProps(child.props, {
       ...focusProps,
       className: cx({
-        'rui-outline-none': isFocused,
-        'rui-outline-none rui-ring-2 rui-ring-focus': isFocusVisible
+        'outline-none': isFocused,
+        'outline-none ring-2 ring-focus': isFocusVisible
       })
     })
   );

@@ -28,10 +28,10 @@ export const Details = forwardRef<HTMLDetailsElement, DetailsProps>(
       ref={ref}
       bgc="light-tint"
       className={cx(
-        'rui-group',
+        'group',
         // 'open:ring',
-        'rui-border-b-2',
-        'rui-border-light-shade'
+        'border-b-2',
+        'border-light-shade'
       )}
       {...props}
     >
@@ -42,10 +42,10 @@ export const Details = forwardRef<HTMLDetailsElement, DetailsProps>(
           p="md"
           gap="xs"
           className={cx(
-            'rui-border-t-2',
-            'rui-border-light-shade',
-            'hover:rui-bg-light focus:rui-bg-light group-open:rui-bg-light',
-            'rui-details'
+            'border-t-2',
+            'border-light-shade',
+            'hover:bg-light focus:bg-light group-open:bg-light',
+            'details'
           )}
         >
           <Icon
@@ -54,7 +54,7 @@ export const Details = forwardRef<HTMLDetailsElement, DetailsProps>(
               light: 'primary',
               dark: 'white'
             }}
-            className="group-open:rui-rotate-90 rui-transition-transform"
+            className="group-open:rotate-90 transition-transform"
             size={24}
           />
           <Text>{summary}</Text>

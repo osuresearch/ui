@@ -32,18 +32,18 @@ export const CheckboxIcon = ({
     w={20}
     h={20}
     className={cx(
-      'rui-border-2',
-      { 'rui-bg-light-tint rui-border-dark': !isSelected && !isIndeterminate && !isDisabled },
-      { 'rui-bg-primary rui-border-primary': (isSelected || isIndeterminate) && !isDisabled },
-      { 'rui-border-dimmed rui-bg-light-shade': isDisabled },
-      { 'rui-ring rui-focus-ring': isFocusVisible }
+      'border-2',
+      { 'bg-light-tint border-dark': !isSelected && !isIndeterminate && !isDisabled },
+      { 'bg-primary border-primary': (isSelected || isIndeterminate) && !isDisabled },
+      { 'border-dimmed bg-light-shade': isDisabled },
+      { 'ring focus-ring': isFocusVisible }
     )}
     {...props}
   >
     {(isSelected || isIndeterminate) && (
       <Icon
         role="presentation"
-        className="[&>svg]:rui-animate-pop"
+        className="[&>svg]:animate-pop"
         size={16}
         c={!isDisabled ? 'white' : 'dark'}
         name={isIndeterminate ? 'dash' : 'check'}

@@ -35,11 +35,11 @@ export const SwitchIcon = ({
     bgc={isSelected ? 'primary' : 'dark-shade'}
     className={cx(
       // Background container
-      'rui-rounded-full rui-border-2 rui-relative',
-      { 'rui-border-dark-shade': !isSelected },
-      { 'rui-border-primary': isSelected },
-      { 'rui-border-dimmed rui-bg-dimmed': isDisabled },
-      { 'rui-ring rui-focus-ring': isFocusVisible }
+      'rounded-full border-2 relative',
+      { 'border-dark-shade': !isSelected },
+      { 'border-primary': isSelected },
+      { 'border-dimmed bg-dimmed': isDisabled },
+      { 'ring focus-ring': isFocusVisible }
     )}
     {...props}
   >
@@ -49,8 +49,8 @@ export const SwitchIcon = ({
       bgc="light-tint"
       className={cx(
         // Switch button
-        'rui-absolute rui-top-1 rui-left-[2px] rui-rounded-full rui-transition-all',
-        { 'rui-translate-x-full': isSelected }
+        'absolute top-1 left-[2px] rounded-full transition-all',
+        { 'translate-x-full': isSelected }
       )}
     />
   </Box>

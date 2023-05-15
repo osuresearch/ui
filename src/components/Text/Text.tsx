@@ -23,12 +23,12 @@ export const Text = polymorphicForwardRef<'span', TextProps>(
       ref={ref}
       c={c}
       className={cx(
-        'rui-break-words',
+        'break-words',
         {
           // Alignment
-          'rui-text-left': ta === 'left',
-          'rui-text-right': ta === 'right',
-          'rui-text-center': ta === 'center'
+          'text-left': ta === 'left',
+          'text-right': ta === 'right',
+          'text-center': ta === 'center'
         },
         className
       )}

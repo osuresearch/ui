@@ -42,12 +42,12 @@ export const NumberField = forwardRef<HTMLInputElement, NumberFieldProps>((props
       errorMessageProps={errorMessageProps}
       {...props}
     >
-      <div className="rui-relative rui-w-full">
+      <div className="relative w-full">
         <input type="hidden" name={name} value={state.inputValue ? state.numberValue : ''} />
 
         <TextInputSlot {...inputPropsWithoutName} pr="xxl" ref={mergeRefs(inputRef, ref)} />
 
-        <div className="rui-flex rui-flex-col rui-absolute rui-inset-[2px] rui-left-auto">
+        <div className="flex flex-col absolute inset-[2px] left-auto">
           <IconButton
             bgc="light"
             size={14}

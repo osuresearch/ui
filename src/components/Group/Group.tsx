@@ -48,17 +48,17 @@ export const Group = polymorphicForwardRef<'div', GroupProps>(
       as={as || 'div'}
       ref={ref}
       className={cx(
-        'rui-flex',
-        'rui-relative',
+        'flex',
+        'relative',
         styles.justifyContent(justify),
         styles.gap(gap),
         styles.alignItems(align),
         {
           // Grow - targets all direct children
-          '[&>_*]:rui-flex-grow-0': !grow,
-          '[&>_*]:rui-flex-grow': grow,
+          '[&>_*]:flex-grow-0': !grow,
+          '[&>_*]:flex-grow': grow,
 
-          'rui-flex-wrap': wrap
+          'flex-wrap': wrap
         },
         className
       )}
