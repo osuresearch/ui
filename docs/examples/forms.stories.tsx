@@ -9,6 +9,7 @@ import {
   Code,
   ComboBoxField,
   DateField,
+  DateRangeField,
   Divider,
   FormErrors,
   FormFieldBase,
@@ -58,6 +59,7 @@ export const Uncontrolled = (args: any) => {
             <TextField name="textField" label="Text field" {...args} />
             <TextAreaField name="textAreaField" label="TextArea field" {...args} />
             <DateField name="dateField" label="Date field" {...args} />
+            <DateRangeField name="dateRangeField" label="Date range field" {...args} />
             <NumberField locale="en-US" name="numberField" label="Number field" {...args} />
             <NumberField
               locale="en-US"
@@ -206,6 +208,7 @@ export const ReactHookForm7 = (args: any) => {
       textField: 'text value',
       textAreaField: 'text area value',
       dateField: '1989-08-14',
+      dateRangeField: ['2023-04-10', '2023-04-25'],
       numberField: 12345,
       currencyField: 1234567.89,
       checkboxField: true,
@@ -251,10 +254,15 @@ export const ReactHookForm7 = (args: any) => {
               {...register('dateField')}
               {...args}
             />
+            <DateRangeField
+              label="Date range field"
+              {...register('dateRangeField')}
+              {...args}
+            />
             <NumberField
               locale="en-US"
-              {...register('numberField')}
               label="Number field"
+              {...register('numberField')}
               {...args}
             />
             <NumberField
