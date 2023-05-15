@@ -21,6 +21,7 @@ export * from './ComboBoxField';
 export * from './ConfirmButton';
 export * from './ConfirmDialog';
 export * from './DateField';
+export * from './DateRangeField';
 export * from './Details';
 export * from './Divider';
 export * from './PageButton';
