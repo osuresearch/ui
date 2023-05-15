@@ -1,9 +1,6 @@
-import { DateValue, parseDate, parseDateTime } from '@internationalized/date';
 import { RUIComponentMeta, RUIComponentStory } from '@sb/utils';
-import React, { forwardRef, useRef, useState } from 'react';
+import React, { useState } from 'react';
 
-import { Button } from '../Button';
-import { Icon } from '../Icon';
 import { Text } from '../Text';
 import { DateField, DateFieldProps } from './DateField';
 
@@ -15,7 +12,9 @@ export const Overview = RUIComponentStory<DateFieldProps>((args) => <DateField {
 });
 
 export const UncontrolledValue = RUIComponentStory<DateFieldProps>(
-  (args) => <DateField {...args} defaultValue={parseDate('1989-08-14')} />,
+  (args) => <DateField {...args}
+    defaultValue='1989-08-14'
+  />,
   {
     label: 'Date'
   }
@@ -23,7 +22,7 @@ export const UncontrolledValue = RUIComponentStory<DateFieldProps>(
 
 export const ControlledValue = RUIComponentStory<DateFieldProps>(
   (args) => {
-    const [value, setValue] = useState<DateValue>(parseDate('1989-08-14'));
+    const [value, setValue] = useState<string | undefined>('1989-08-14');
 
     return (
       <>

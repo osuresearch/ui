@@ -1,5 +1,5 @@
 import { RUIComponentMeta, RUIComponentStory } from '@sb/utils';
-import React, { forwardRef, useRef, useState } from 'react';
+import React, { useState } from 'react';
 
 import { Text } from '../Text';
 import { TextAreaField, TextAreaFieldProps } from './TextAreaField';
