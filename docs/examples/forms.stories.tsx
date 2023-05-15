@@ -369,17 +369,6 @@ export const ReactHookForm7 = (args: any) => {
         </Group>
 
         <Group w="100%" justify="end">
-          <Button type="reset" variant="subtle">
-            Native reset
-          </Button>
-          {/* TODO: Reset probably doesn't work because we're setting defaultValue on everything
-            to make elements uncontrolled. Maybe it makes more sense to force control over
-            the entire form?
-           */}
-          <Button variant="subtle" onPress={() => reset()}>
-            RHF7 reset()
-          </Button>
-
           <Button variant="subtle" onPress={applyMockErrors}>
             Mock errors
           </Button>

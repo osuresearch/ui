@@ -21,7 +21,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           cache: yarn
-          node-version: 18
+          node-version: 16
           cache-dependency-path: yarn.lock
 
       - name: Install dependencies
@@ -34,12 +34,13 @@ jobs:
         run: yarn build:storybook
 
       - name: Deploy GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@3.6.2
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages
-          FOLDER: docs-build
-          CLEAN: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: gh-pages
+          folder: docs-build
+          target-folder: v5
+          clean: true
 
       - name: Release
         env:
