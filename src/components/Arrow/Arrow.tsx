@@ -16,16 +16,15 @@ export type ArrowProps = DOMAttributes<FocusableElement> & {
 /**
  * An arrow that can be applied to an edge of a relatively positioned container.
  */
-export function Arrow({ placement, c, size = 8, style, ...props }: ArrowProps) {
+export function Arrow({ placement, c, size = 8, ...props }: ArrowProps) {
   return (
     <Box c={c}
       className="arrow"
       data-placement={placement}
+      {...props}
       style={{
-        ...style,
         '--rui-arrow-size': `${size}px`,
       } as any}
-      {...props}
     />
   );
 }
