@@ -15,13 +15,15 @@
   --rui-scarlet: #ba0c2f;
   --rui-caret-svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='32' height='32' viewBox='0 0 24 24'%3E%3Cpath fill='rgb(100, 106, 110)' d='M9.4 18L8 16.6l4.6-4.6L8 7.4L9.4 6l6 6Z'%3E%3C/path%3E%3C/svg%3E");
 
-  --rui-light: #f6f7f8;
-  --rui-light-shade: #eff1f2;
+  --rui-surface-subtle: #f6f7f8;
+
+  --rui-interactive-hover: #eff1f2;
 }
 
 .dark {
-  --rui-light: #212325;
-  --rui-light-shade: #3f4443;
+  --rui-surface-subtle: #212325;
+
+  --rui-interactive-hover: #3f4443;
 }
 
 /* Setup room for injected header / footer content */
@@ -115,14 +117,14 @@
   .sidebar-item[data-selected="true"]:hover,
   .sidebar-item[data-selected="true"]:active,
   .sidebar-item[data-selected="true"]:focus {
-    background: var(--rui-light-shade) !important;
+    background: var(--rui-interactive-hover) !important;
     box-shadow: inset 4px 0 var(--rui-scarlet) !important;
     color: var(--rui-scarlet) !important;
     font-weight: normal !important;
   }
 
   .sidebar-item:hover {
-    background: var(--rui-light) !important;
+    background: var(--rui-interactive-hover) !important;
   }
 
   /* Remove the expand all button */

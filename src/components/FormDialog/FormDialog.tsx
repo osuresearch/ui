@@ -1,7 +1,6 @@
 import React, { forwardRef, useRef } from 'react';
 import { AriaDialogProps, useDialog } from 'react-aria';
 
-import { Color } from '../../theme';
 import { mergeRefs } from '../../utils';
 import { Button } from '../Button';
 import { FocusRing } from '../FocusRing';
@@ -56,7 +55,7 @@ export const FormDialog = forwardRef<HTMLDivElement, FormDialogProps>(
       <FocusRing>
         <Paper
           ref={mergeRefs(dialogRef, ref)}
-          bgc="light-tint"
+          bgc="surface"
           p="md"
           shadow="md"
           w="fit-content"
@@ -76,7 +75,7 @@ export const FormDialog = forwardRef<HTMLDivElement, FormDialogProps>(
                   {props.cancelSlot ?? 'Cancel'}
                 </Button>
 
-                <Button variant="accented" type="submit" bgc="primary" c="primary-contrast">
+                <Button variant="primary" type="submit">
                   {props.submitSlot ?? 'Submit'}
                 </Button>
               </Group>

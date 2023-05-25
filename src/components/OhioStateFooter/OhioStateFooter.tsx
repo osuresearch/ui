@@ -35,11 +35,6 @@ export interface OhioStateFooterProps {
  * managing the site so the user can connect with them appropriately.
  *
  * <img class="diagram" src="./OhioStateFooter.svg" alt="Component diagram" />
- *
- * ## Changes from BUX
- * - Modified the accessibility language to be more generic to support
- * units that refer users to a local accessibility coordinator rather
- * than the Digital Accessibility Center.
  */
 export function OhioStateFooter({
   contactPhone = '614-292-OHIO',
@@ -53,7 +48,7 @@ export function OhioStateFooter({
   ...props
 }: OhioStateFooterProps) {
   return (
-    <Box bgc="light" p="lg">
+    <Box bgc="surface-subtle" p="lg">
       <Group justify="apart" align="stretch" gap="md">
         <Stack justify="apart" gap="md">
           <a href="https://www.osu.edu">

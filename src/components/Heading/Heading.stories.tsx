@@ -14,7 +14,7 @@ export const Overview = RUIComponentStory(Template, {
   level: 1
 });
 
-export const Levels = RUIComponentStory((args) => (
+export const Levels = RUIComponentStory(() => (
   <>
     <Heading level={1}>This is a Heading 1 example</Heading>
     <Heading level={2}>This is a Heading 2 example</Heading>
@@ -23,13 +23,13 @@ export const Levels = RUIComponentStory((args) => (
   </>
 )).withDescription('Header font sizes responsively adjust for smaller screens');
 
-export const SansVariant = RUIComponentStory((args) => (
+export const SansVariant = RUIComponentStory(() => (
   <Heading level={1} variant="sans">
     This is a Heading 1 sans example
   </Heading>
 ));
 
-export const Polymorphic = RUIComponentStory((args) => (
+export const Polymorphic = RUIComponentStory(() => (
   <Heading as="div" level={1}>
     This is a div styled as Heading 1
   </Heading>

@@ -54,17 +54,18 @@ export const DocsContainer = ({ children, context }) => {
   // where I hide the decorators in HTML comments so they don't
   // get parsed out.
   const atomics = isComponent && [...(context.component?.__docgenInfo.description.matchAll(
-    /@ruiAtomic\s+(\w+)/g
+    /@ruiAtomic\s+(.*)-->/g
   )) ?? []];
 
   const status = isComponent && [...(context.component?.__docgenInfo.description.matchAll(
-    /@ruiStatus\s+(\w+)/g
+    /@ruiStatus\s+(.*)-->/g
   )) ?? []];
 
   const isPolymorphic = isComponent && context.component?.__docgenInfo.description.indexOf('@ruiPolymorphic') >= 0;
   console.log(context, context.componentStories());
 
   const isInternal = isComponent && context.title.indexOf('Internal') === 0;
+  const isDev = status.length > 0 && status[0][1].trim() === 'In Development';
 
   const hasAdditionalStories = context.componentStories().length > 1;
 
@@ -109,6 +110,13 @@ export const DocsContainer = ({ children, context }) => {
             </Admonition>
           )}
 
+          {isDev && (
+            <Admonition variant="caution" title="In development">
+              This is an in development component in the Research UI
+              and the API is not guaranteed to be stable between minor releases.
+            </Admonition>
+          )}
+
           {/* Refactor of component docs layout */}
           {isComponent && (
           <Stack gap="lg" align="stretch">
@@ -116,15 +124,15 @@ export const DocsContainer = ({ children, context }) => {
               <Title />
               <Group>
                 {atomics.map((atomic) =>
-                  <Chip c="violet">Atomic: {atomic[1]}</Chip>
+                  <Chip c="accent06">Atomic: {atomic[1]}</Chip>
                 )}
 
                 {status.map((value) =>
-                  <Chip c="teal">Status: {value[1]}</Chip>
+                  <Chip c="accent01">Status: {value[1]}</Chip>
                 )}
 
                 {isPolymorphic &&
-                  <Chip c="green" as="a" href="/?path=/docs/getting-started-polymorphic-components--page">Polymorphic</Chip>
+                  <Chip c="accent03" as="a" href="/?path=/docs/getting-started-polymorphic-components--page">Polymorphic</Chip>
                 }
               </Group>
             </Group>
@@ -168,7 +176,7 @@ export const DocsContainer = ({ children, context }) => {
             <Divider />
 
             <Group justify="apart">
-              <Text fs="xs" c="dark" style={{ whiteSpace: 'nowrap' }}>
+              <Text fs="xs" c="neutral-subtle" style={{ whiteSpace: 'nowrap' }}>
                 {useDarkMode() ? '✨ ' : '💖 '}
                 <Link href="https://github.com/McManning" target="_blank">
                   Chase McManning
@@ -176,7 +184,7 @@ export const DocsContainer = ({ children, context }) => {
                   contributors
                 </Link>
               </Text>
-              <Text fs="xs" c="dark">
+              <Text fs="xs" c="neutral-subtle">
                 If you have a disability and experience difficulty accessing this content,
                 contact <Link href="mailto:oraccessibility@osu.edu">oraccessibility@osu.edu</Link>
               </Text>

@@ -201,7 +201,6 @@ export const ReactHookForm7 = (args: any) => {
     register,
     handleSubmit,
     setError,
-    reset,
     formState: { errors, dirtyFields, touchedFields, defaultValues }
   } = useRUIForm({
     defaultValues: {

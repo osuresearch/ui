@@ -21,14 +21,14 @@ export const Success = RUIComponentStory(Template, {
   dismissible: true
 });
 
-export const Warning = RUIComponentStory(Template, {
-  variant: 'warning',
-  title: 'This is a warning message',
+export const Caution = RUIComponentStory(Template, {
+  variant: 'caution',
+  title: 'This is a caution message',
   dismissible: true
 });
 
-export const Error = RUIComponentStory(Template, {
-  variant: 'error',
-  title: 'This is an error message',
+export const Critical = RUIComponentStory(Template, {
+  variant: 'critical',
+  title: 'This is a critical message',
   dismissible: true
 });

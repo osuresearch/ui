@@ -32,13 +32,14 @@ export const SwitchIcon = ({
     w={44}
     miw={44}
     h={24}
-    bgc={isSelected ? 'primary' : 'dark-shade'}
     className={cx(
       // Background container
-      'rounded-full border-2 relative',
-      { 'border-dark-shade': !isSelected },
-      { 'border-primary': isSelected },
-      { 'border-dimmed bg-dimmed': isDisabled },
+      'rounded-full border-2 relative cursor-pointer',
+
+      // TODO: I don't like this usage of class selectors for the inactive background.
+      { 'border-outline-active bg-outline-active': !isSelected },
+      { 'border-primary bg-primary': isSelected },
+      { 'border-outline-disabled bg-outline-disabled': isDisabled },
       { 'ring focus-ring': isFocusVisible }
     )}
     {...props}
@@ -46,7 +47,7 @@ export const SwitchIcon = ({
     <Box
       w={18}
       h={18}
-      bgc="light-tint"
+      bgc="input"
       className={cx(
         // Switch button
         'absolute top-1 left-[2px] rounded-full transition-all',

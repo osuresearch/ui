@@ -24,7 +24,8 @@ export const HamburgerButton = forwardRef<HTMLButtonElement, HamburgerButtonProp
       {...mergeProps(props, {
         className: cx({
           'aria-pressed:bg-primary': true,
-          'aria-pressed:text-primary-contrast': true
+          'aria-pressed:text-primary-inverse': true,
+          className
         })
       })}
     >

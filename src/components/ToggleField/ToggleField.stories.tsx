@@ -1,7 +1,6 @@
 import { RUIComponentMeta, RUIComponentStory } from '@sb/utils';
-import React, { useState } from 'react';
+import React from 'react';
 
-import { Text } from '../Text';
 import { ToggleField as Component, ToggleFieldProps } from './ToggleField';
 
 export default RUIComponentMeta<ToggleFieldProps>('Internal', Component).withStyleSystemProps();

@@ -11,15 +11,22 @@ export const Overview = RUIComponentStory<IconButtonProps>((args) => <IconButton
 });
 
 export const WithSize = RUIComponentStory(Overview, {
-  size: 16,
+  size: 24,
   name: 'thumbs',
   label: 'Rate this up'
+});
+
+export const FadeVariant = RUIComponentStory(Overview, {
+  size: 24,
+  name: 'thumbs',
+  label: 'Rate this up',
+  variant: 'fade',
 });
 
 export const Accented = RUIComponentStory(Overview, {
   name: 'heartFill',
   label: 'Add to favorites',
-  c: 'pink'
+  c: 'accent05'
 });
 
 export const WithPadding = RUIComponentStory<IconButtonProps>((args) => <IconButton {...args} />, {

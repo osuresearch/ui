@@ -14,15 +14,15 @@ const Template: Story<TextProps> = (args) => (
 export const Overview = RUIComponentStory(Template);
 
 export const HelpText = RUIComponentStory(Template, {
-  c: 'dark',
+  c: 'neutral-subtle',
   fs: 'sm'
 }).withDescription(`
   Additional help text is typically shown smaller and slightly
   lighter than the base color to de-emphasize the content
 `);
 
-export const BreakWords = RUIComponentStory((args) => (
-  <Paper maw={250} bgc="light">
+export const BreakWords = RUIComponentStory(() => (
+  <Paper maw={250} bgc="surface-subtle">
     <Text>
       The longest word in any of the major English language dictionaries is{' '}
       <Text fw="bold">pneumonoultramicroscopicsilicovolcanoconiosis</Text>, a word that refers to a
@@ -34,7 +34,7 @@ export const BreakWords = RUIComponentStory((args) => (
   Text will automatically add line breaks mid-word if needed
 `);
 
-export const Polymorphic = RUIComponentStory((args) => (
+export const Polymorphic = RUIComponentStory(() => (
   <>
     <Text as="p" mb="sm">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eget elit ac arcu luctus

@@ -28,7 +28,7 @@ export const Overview = RUIComponentStory<LookupProps>((args) => {
       {(item) => (
         <Item key={item.name} textValue={item.name}>
           {item.name}
-          <Text as="div" fs="sm" c="dark">
+          <Text as="div" fs="sm" c="neutral-subtle">
             Hair color: {item.hair_color}, eye color: {item.eye_color}
           </Text>
         </Item>

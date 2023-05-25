@@ -1,7 +1,6 @@
 import React, { forwardRef, useRef } from 'react';
 import { AriaDialogProps, useDialog } from 'react-aria';
 
-import { Color } from '../../theme';
 import { mergeRefs } from '../../utils';
 import { Button } from '../Button';
 import { FocusRing } from '../FocusRing';
@@ -19,11 +18,6 @@ export type ConfirmDialogProps = AriaDialogProps & {
   onCancel?: () => void;
 
   primaryActionSlot: React.ReactNode;
-
-  /**
-   * Accent color of the primary button.
-   */
-  primaryActionAccent?: Color;
 
   secondaryActionSlot?: React.ReactNode;
 
@@ -46,7 +40,7 @@ export type ConfirmDialogProps = AriaDialogProps & {
  * @internal
  */
 export const ConfirmDialog = forwardRef<HTMLDivElement, ConfirmDialogProps>(
-  ({ children, primaryActionAccent = 'primary', ...props }, ref) => {
+  ({ children, ...props }, ref) => {
     const dialogRef = useRef<HTMLDivElement>(null);
     const { dialogProps, titleProps } = useDialog(
       {
@@ -60,7 +54,7 @@ export const ConfirmDialog = forwardRef<HTMLDivElement, ConfirmDialogProps>(
       <FocusRing>
         <Paper
           ref={mergeRefs(dialogRef, ref)}
-          bgc="light-tint"
+          bgc="surface"
           p="md"
           shadow="md"
           w="fit-content"
@@ -84,9 +78,7 @@ export const ConfirmDialog = forwardRef<HTMLDivElement, ConfirmDialogProps>(
               )}
 
               <Button
-                variant="accented"
-                bgc={primaryActionAccent}
-                c={`${primaryActionAccent}-contrast` as Color}
+                variant="primary"
                 onPress={props.onPrimaryAction}
               >
                 {props.primaryActionSlot}

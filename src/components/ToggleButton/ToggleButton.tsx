@@ -41,19 +41,19 @@ export const ToggleButton = forwardRef<HTMLButtonElement, ToggleButtonProps>(
 
         // Default variant
         {
-          'text-dark-shade': variant === 'default',
+          'text-neutral': variant === 'default',
 
-          'bg-light-shade': variant === 'default' && !isDisabled,
-          'hover:bg-dimmed-tint': variant === 'default' && !isDisabled,
-          'data-[active=true]:bg-dimmed': variant === 'default' && !isDisabled,
+          'bg-interactive': variant === 'default' && !isDisabled,
+          'hover:bg-interactive-hover': variant === 'default' && !isDisabled,
+          'data-[active=true]:bg-interactive-active': variant === 'default' && !isDisabled,
 
-          'aria-pressed:bg-primary': variant === 'default' && !isDisabled,
-          'aria-pressed:text-primary-contrast': variant === 'default' && !isDisabled
+          'aria-pressed:bg-interactive-active': variant === 'default' && !isDisabled,
+          'aria-pressed:text-neutral': variant === 'default' && !isDisabled
         },
 
         // Disabled
         {
-          'bg-light border-light cursor-not-allowed': isDisabled,
+          'bg-interactive-disabled cursor-not-allowed': isDisabled,
           'hover:bg-light': isDisabled
         },
         className

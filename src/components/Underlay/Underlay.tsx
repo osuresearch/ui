@@ -17,7 +17,7 @@ export function Underlay({ variant = 'default', ...props }: UnderlayProps) {
     <div
       className={cx(
         'fixed inset-0 z-40',
-        { 'opacity-50 bg-light-tint': variant === 'tint' },
+        { 'opacity-50 bg-surface': variant === 'tint' },
         { 'backdrop-blur-sm': variant === 'blur' },
         { 'backdrop-blur-xl': variant === 'paranoid' }
       )}

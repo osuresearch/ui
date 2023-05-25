@@ -61,13 +61,6 @@ function LogoLink({ variant }: { variant: OhioStateNavbarVariant }) {
  * Identity banner for Ohio State applications
  *
  * <img class="diagram" src="./OhioStateNavbar.svg" alt="Component diagram" />
- *
- * ## Differences from BUX
- * - Not using the new fat banner, doesn't work for web applications. It may be
- * introduced as a variant at a later time.
- * - Improved vertical alignment on text links
- * - Usage of the older style collapsing of text links to icons because it doesn't
- * make sense to have websites display three dots and then a hamburger right under it.
  */
 export function OhioStateNavbar({ variant = 'light' }: OhioStateNavbarProps) {
   return (
@@ -77,7 +70,7 @@ export function OhioStateNavbar({ variant = 'light' }: OhioStateNavbarProps) {
       bgc={variant === 'light' ? 'white' : 'black'}
       h={44}
       // TODO: Container max width?
-      className="border-scarlet border-b-4"
+      className="border-[var(--osu-scarlet)] border-b-4"
     >
       <VisuallyHidden>
         <Link href="#content">Skip to main content</Link>

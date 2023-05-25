@@ -19,7 +19,7 @@ export type SectionTitleProps = {
  */
 export const SectionTitle = forwardRef<HTMLDivElement, SectionTitleProps>(
   ({ children, level = 2 }, ref) => (
-    <Box as={`h${level}`} ref={ref} className="text-h2 uppercase" c="dark">
+    <Box as={`h${level}`} ref={ref} className="text-h2 uppercase" c="neutral-subtle">
       {children}
     </Box>
   )

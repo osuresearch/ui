@@ -33,9 +33,11 @@ export const CheckboxIcon = ({
     h={20}
     className={cx(
       'border-2',
-      { 'bg-light-tint border-dark': !isSelected && !isIndeterminate && !isDisabled },
+
+      // TODO: I don't like this usage of class selectors abusing active.
+      { 'bg-surface border-outline-active': !isSelected && !isIndeterminate && !isDisabled },
       { 'bg-primary border-primary': (isSelected || isIndeterminate) && !isDisabled },
-      { 'border-dimmed bg-light-shade': isDisabled },
+      { 'border-outline-disabled bg-input-disabled': isDisabled },
       { 'ring focus-ring': isFocusVisible }
     )}
     {...props}
@@ -45,7 +47,7 @@ export const CheckboxIcon = ({
         role="presentation"
         className="[&>svg]:animate-pop"
         size={16}
-        c={!isDisabled ? 'white' : 'dark'}
+        c={!isDisabled ? 'input' : 'input-disabled'}
         name={isIndeterminate ? 'dash' : 'check'}
         block
       />

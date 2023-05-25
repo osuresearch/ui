@@ -3,7 +3,7 @@ import { AriaToggleButtonProps, mergeProps, useToggleButton } from 'react-aria';
 import { useToggleState } from 'react-stately';
 
 import { StyleSystemProps } from '../../types';
-import { mergeRefs, polymorphicForwardRef } from '../../utils';
+import { mergeRefs } from '../../utils';
 import { Box } from '../Box';
 import { FocusRing } from '../FocusRing';
 

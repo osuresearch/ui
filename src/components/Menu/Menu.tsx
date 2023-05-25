@@ -58,11 +58,11 @@ function MenuItem<T>({ node, state }: MenuItemProps<T>) {
         { 'cursor-pointer': !isDisabled },
         { 'cursor-not-allowed': isDisabled }
       )}
-      c={isDisabled ? 'dark' : 'light-contrast'}
+      c={isDisabled ? 'neutral-subtle' : 'neutral'}
       px="sm"
       py="xxs"
       miw={200}
-      bgc={isFocused ? 'light' : undefined}
+      bgc={isFocused ? 'interactive-subtle-hover' : undefined}
     >
       <Group>
         {isSelectable && <CheckboxIcon isSelected={isSelected} />}
@@ -92,7 +92,7 @@ function MenuSection<T>(props: MenuItemProps<T>) {
       }
       <li {...itemProps}>
         {node.rendered &&
-          <Text fs="sm" px="sm" c="dark" {...headingProps}>
+          <Text fs="sm" px="sm" c="neutral-subtle" {...headingProps}>
             {node.rendered}
           </Text>
         }

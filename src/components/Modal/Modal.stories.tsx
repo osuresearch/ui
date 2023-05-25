@@ -7,7 +7,7 @@ import { Modal as Component, ModalProps } from './Modal';
 export default RUIComponentMeta<ModalProps>('Internal', Component);
 
 export const Modal = RUIComponentStory<ModalProps>(
-  (args) => <Text>No example available</Text>
+  () => <Text>No example available</Text>
   // <Component {...args} state={{
   //   isOpen: false,
   //   setOpen: () => 0,

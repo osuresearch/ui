@@ -1,0 +1,276 @@
+
+/*
+  Ohio State brand tokens. Used to inform semantic
+  tokens but are not available through Tailwind
+*/
+:root {
+  --osu-scarlet: #ba0c2f;
+  --osu-scarlet-dark-40: #70071c;
+  --osu-scarlet-dark-60: #4a0513;
+
+  --osu-gray: #a7b1b7;
+
+  --osu-gray-tint-20: #bfc6cb;
+  --osu-gray-tint-40: #cfd4d8;
+  --osu-gray-tint-60: #dfe3e5;
+  --osu-gray-tint-80: #eff1f2;
+  --osu-gray-tint-90: #f6f7f8;
+
+  --osu-gray-shade-20: #868e92;
+  --osu-gray-shade-40: #646a6e;
+  --osu-gray-shade-60: #3f4443;
+  --osu-gray-shade-80: #212325;
+
+  --osu-blue: #41b6e6;
+  --osu-orange: #ff6a39;
+  --osu-green: #8edd65;
+  --osu-brown: #946037;
+  --osu-pink: #fb637e;
+  --osu-violet: #830065;
+  --osu-aqua: #6bbbab;
+  --osu-teal: #26686d;
+  --osu-gold: #ffb600;
+
+  --osu-info: #41b6e6;
+  --osu-success: #80c75b;
+  --osu-warning: #ffb600;
+  --osu-error: #ba0c2f;
+  --osu-visited: #660099;
+}
+
+/*
+  Design tokens exposed as CSS variables.
+
+  This is the light theme, by default.
+*/
+:root {
+  /*
+    Typography tokens
+  */
+  --rui-font-sans: BuckeyeSans, HelveticaNeue, Helvetica, Arial, serif;
+  --rui-font-serif: BuckeyeSerif, Georgia, sans-serif;
+  --rui-font-mono: Menlo, Monaco, 'Courier New', monospace;
+
+  --rui-text-xs: 0.75rem;
+  --rui-text-sm: 0.875rem;
+  --rui-text-base: 1rem;
+  --rui-text-md: 1.5rem;
+  --rui-text-lg: 2rem;
+  --rui-text-xl: 2.5rem;
+  --rui-text-xxl: 3rem;
+
+  --rui-heading-1: 1.625rem;
+  --rui-heading-2: 1.375rem;
+  --rui-heading-3: 1.25rem;
+  --rui-heading-4: 1.125rem;
+
+  --rui-font-normal: 400;
+  --rui-font-semibold: 600;
+  --rui-font-bold: 700;
+  --rui-font-extrabold: 800;
+  --rui-font-black: 900;
+
+  /*
+    Spacing tokens
+  */
+  --rui-spacing-xxs: 4px;
+  --rui-spacing-xs: 8px;
+  --rui-spacing-sm: 12px;
+  --rui-spacing-md: 16px;
+  --rui-spacing-lg: 24px;
+  --rui-spacing-xl: 32px;
+  --rui-spacing-xxl: 48px;
+  --rui-spacing-xxxl: 64px;
+
+  /*
+    Breakpoint tokens
+  */
+  --rui-screen-sm: 0;
+  --rui-screen-md: 640px;
+  --rui-screen-lg: 960px;
+  --rui-screen-xl: 1280px;
+  --rui-screen-xxl: 1440px;
+
+  /* Base [role]-[emphasis]-[state] for Tailwind */
+  --rui-black: #141517;
+  --rui-white: #ffffff;
+  --rui-clear: rgba(0, 0, 0, 0);
+  --rui-focus: #41b6e6;
+
+  --rui-neutral-subtle: var(--osu-gray-shade-40);
+  --rui-neutral: #141517;
+  --rui-neutral-bold: #000000;
+
+  --rui-surface-subtle: var(--osu-gray-tint-90);
+  --rui-surface: #ffffff;
+  --rui-surface-bold: var(--osu-gray-tint-80);
+
+  --rui-surface-subtle-inverse: #141517;
+  --rui-surface-inverse: #141517;
+  --rui-surface-bold-inverse: #141517;
+
+  --rui-primary: var(--osu-scarlet);
+  --rui-primary-hover: var(--osu-gray-shade-80);
+  --rui-primary-active: var(--osu-gray-shade-60);
+  --rui-primary-disabled: var(--osu-gray-shade-20);
+  --rui-primary-inverse: #ffffff;
+
+  --rui-secondary: var(--osu-gray);
+  --rui-secondary-inverse: #141517;
+
+  --rui-tertiary: var(--osu-teal);
+  --rui-tertiary-inverse: #ffffff;
+
+  --rui-link: var(--osu-scarlet);
+  --rui-link-hover: #141517;
+  --rui-surface-link-hover: var(--osu-gray-tint-80);
+
+  --rui-info: #c6e9f8;
+  --rui-info-bold: #41b6e6;
+  --rui-info-inverse: #141517;
+
+  --rui-caution: #fff0cc;
+  --rui-caution-bold: #ffb600;
+  --rui-caution-inverse: #141517;
+
+  --rui-critical: #ba0c2f;
+  --rui-critical-bold: #ba0c2f;
+  --rui-critical-inverse: #ffffff;
+
+  --rui-success: #dcf5d0;
+  --rui-success-bold: #80c75b;
+  --rui-success-inverse: #141517;
+
+  /* Buttons, menu options */
+  --rui-interactive: var(--osu-gray-tint-90);
+  --rui-interactive-hover: var(--osu-gray-tint-80);
+  --rui-interactive-active: var(--osu-gray-tint-40);
+  --rui-interactive-selected: var(--osu-gray-tint-80);
+  --rui-interactive-disabled: var(--osu-tint-40);
+  /* --rui-interactive-bold-disabled: var(--osu-tint-60); */
+
+  --rui-interactive-subtle-hover: var(--osu-gray-tint-90);
+
+  /* Text input, numeric input, choice input */
+  --rui-input: #ffffff;
+  --rui-input-active: #ffffff;
+  --rui-input-focused: #ffffff;
+  --rui-input-error: #ffffff;
+  --rui-input-disabled: #eff1f2;
+
+  /* Borders on interactives */
+  --rui-outline: #eff1f2;
+  --rui-outline-active: #212325;
+  --rui-outline-focused: blue;
+  --rui-outline-error: #ba0c2f;
+  --rui-outline-disabled: #cfd4d8;
+
+  /*
+    Accents
+  */
+  --rui-accent01: var(--osu-blue);
+  --rui-accent01-inverse: #141517;
+
+  --rui-accent02: var(--osu-orange);
+  --rui-accent02-inverse: #141517;
+
+  --rui-accent03: var(--osu-green);
+  --rui-accent03-inverse: #141517;
+
+  --rui-accent04: var(--osu-brown);
+  --rui-accent04-inverse: #ffffff;
+
+  --rui-accent05: var(--osu-pink);
+  --rui-accent05-inverse: #141517;
+
+  --rui-accent06: var(--osu-violet);
+  --rui-accent06-inverse: #ffffff;
+
+  --rui-accent07: var(--osu-aqua);
+  --rui-accent07-inverse: #141517;
+
+  --rui-accent08: var(--osu-teal);
+  --rui-accent08-inverse: #ffffff;
+
+  --rui-accent09: var(--osu-gold);
+  --rui-accent09-inverse: #141517;
+}
+
+@media screen(md) {
+  :root {
+    /* Responsive title sizes that match BUX's rules */
+    --rui-heading-1: 2.625rem;
+    --rui-heading-2: 1.75rem;
+    --rui-heading-3: 1.375rem;
+    --rui-heading-4: 1.125rem;
+  }
+}
+
+/* Theme-responsive tokens */
+
+[data-theme="light"] {
+  --rui-light-tint: var(--rui-white);
+  --rui-light: var(--rui-gray-tint-90);
+  --rui-light-shade: var(--rui-gray-tint-80);
+  --rui-light-contrast: var(--rui-black);
+
+  --rui-dimmed-tint: var(--rui-gray-tint-60);
+  --rui-dimmed: var(--rui-gray-tint-40);
+  --rui-dimmed-shade: var(--rui-gray-tint-20);
+  --rui-dimmed-contrast: var(--rui-black);
+
+  --rui-dark-tint: var(--rui-gray-shade-20);
+  --rui-dark: var(--rui-gray-shade-40);
+  --rui-dark-shade: var(--rui-gray-shade-60);
+  --rui-dark-contrast: var(--rui-white);
+
+  --rui-link-tint: var(--rui-white);
+
+  --rui-visited: #660099;
+  --rui-visited-tint: #e5c9f3;
+
+
+
+
+  --rui-light-tint: red;
+  --rui-light: red;
+  --rui-light-shade: red;
+  --rui-light-contrast: red;
+
+  --rui-dimmed-tint: green;
+  --rui-dimmed: green;
+  --rui-dimmed-shade: green;
+  --rui-dimmed-contrast: green;
+
+  --rui-dark-tint: blue;
+  --rui-dark: blue;
+  --rui-dark-shade: blue;
+  --rui-dark-contrast: blue;
+
+  --rui-link-tint: pink;
+}
+
+[data-theme="dark"] {
+  --rui-light-tint: var(--rui-black);
+  --rui-light: var(--rui-gray-shade-80);
+  --rui-light-shade: var(--rui-gray-shade-60);
+  --rui-light-contrast: var(--rui-white);
+
+  --rui-dimmed-tint: var(--rui-gray-shade-40);
+  --rui-dimmed: var(--rui-gray-shade-20);
+  --rui-dimmed-shade: var(--rui-gray);
+  --rui-dimmed-contrast: var(--rui-black);
+
+  --rui-dark-tint: var(--rui-gray-tint-20);
+  --rui-dark: var(--rui-gray-tint-40);
+  --rui-dark-shade: var(--rui-gray-tint-60);
+  --rui-dark-contrast: var(--rui-black);
+
+  --rui-link: var(--rui-white);
+  --rui-link-tint: var(--rui-link-tint);
+
+  --rui-visited: #e5c9f3;
+  --rui-visited-tint: #e5c9f3;
+
+  --rui-focus: var(--rui-green);
+}

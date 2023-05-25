@@ -1,4 +1,4 @@
-import React, { forwardRef, useEffect, useState } from 'react';
+import React from 'react';
 import { useProgressBar } from 'react-aria';
 
 import { Box } from '../Box';
@@ -59,7 +59,7 @@ export function ProgressBar({
         {label && <span {...labelProps}>{label}</span>}
         {label && <span>{isIndeterminate ? '' : progressBarProps['aria-valuetext']}</span>}
       </Group>
-      <Box bgc="light-shade" h={4} className="overflow-x-hidden relative">
+      <Box h={4} className="overflow-x-hidden relative">
       {isIndeterminate
         ? <Box bgc="info" className="animate-scroll absolute inset-0" w="50%" />
         : <Box bgc="info" h="100%" w={barWidth} />

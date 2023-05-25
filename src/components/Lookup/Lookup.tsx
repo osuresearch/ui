@@ -1,12 +1,11 @@
 import { Node, CollectionChildren } from '@react-types/shared';
 import React, { ForwardedRef, forwardRef, useEffect, useRef } from 'react';
 import { mergeProps, useMenu, useMenuItem, useSearchField, AriaMenuOptions } from 'react-aria';
-import { AsyncListOptions, useSearchFieldState, useTreeState, TreeProps, TreeState, useAsyncList, AsyncListData } from 'react-stately';
+import { useSearchFieldState, useTreeState, TreeProps, TreeState, AsyncListData } from 'react-stately';
 
 import { cx, mergeRefs } from '../../utils';
 import { Box } from '../Box';
 import { Icon } from '../Icon';
-import { TextInputSlot } from '../TextField';
 import { Stack } from '../Stack';
 import { useDebouncedState } from '../../hooks/useDebouncedState';
 import { FocusRing } from '../FocusRing';
@@ -14,6 +13,7 @@ import { Text } from '../Text';
 import { IconButton } from '../IconButton';
 import { VisuallyHidden } from '../VisuallyHidden';
 import { ScrollArea } from '../ScrollArea';
+import { Interactive } from '../Interactive';
 
 type ResultListProps<T> = TreeProps<T> & AriaMenuOptions<T>;
 
@@ -104,7 +104,7 @@ function _Lookup<T extends object>(
           <span {...labelProps}>{props.label}</span>
         </VisuallyHidden>
 
-        <TextInputSlot
+        <Interactive as="input" isTextInput
           fs="sm"
           p="xxs"
           ref={mergeRefs(inputRef, ref)}
@@ -117,7 +117,7 @@ function _Lookup<T extends object>(
 
         <div className="absolute inset-[2px] left-auto">
           {list.isLoading && // TODO: better icon
-            <Icon name="rotate" c="dark" className="animate-spin" size={16} p="xs" h="100%" />
+            <Icon name="rotate" c="neutral-subtle" className="animate-spin" size={16} p="xs" h="100%" />
           }
           {!list.isLoading && inputProps.value !== '' &&
             <IconButton {...clearButtonProps}
@@ -133,7 +133,7 @@ function _Lookup<T extends object>(
       </div>
 
       {errorMessage && (
-        <Text c="error" fs="sm" {...errorMessageProps}>
+        <Text c="critical" fs="sm" {...errorMessageProps}>
           <Icon name="xmarkCircle" /> {errorMessage}
         </Text>
       )}
@@ -188,11 +188,11 @@ function ResultItem<T>({ node, state }: ResultItemProps<T>) {
         { 'cursor-pointer': !isDisabled },
         { 'cursor-not-allowed': isDisabled }
       )}
-      c={isDisabled ? 'dark' : 'light-contrast'}
+      c={isDisabled ? 'neutral-subtle' : 'neutral'}
       px="sm"
       py="xxs"
       miw={200}
-      bgc={isFocused ? 'light' : undefined}
+      bgc={isFocused ? 'surface' : undefined}
     >
       {node.rendered}
     </Box>

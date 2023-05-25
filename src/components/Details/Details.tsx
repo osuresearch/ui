@@ -26,12 +26,11 @@ export const Details = forwardRef<HTMLDetailsElement, DetailsProps>(
     <Box
       as="details"
       ref={ref}
-      bgc="light-tint"
+      bgc="surface"
       className={cx(
         'group',
-        // 'open:ring',
         'border-b-2',
-        'border-light-shade'
+        'border-surface-bold'
       )}
       {...props}
     >
@@ -43,8 +42,8 @@ export const Details = forwardRef<HTMLDetailsElement, DetailsProps>(
           gap="xs"
           className={cx(
             'border-t-2',
-            'border-light-shade',
-            'hover:bg-light focus:bg-light group-open:bg-light',
+            'border-surface-bold',
+            'hover:bg-interactive-subtle-hover focus:bg-interactive-subtle-hover group-open:bg-interactive-subtle-hover',
             'details'
           )}
         >

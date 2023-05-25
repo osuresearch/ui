@@ -48,7 +48,7 @@ export const WithPlacement = RUIComponentStory<CalloutProps>(
   }
 );
 
-export const ButtonTests = RUIComponentStory<CalloutProps>((args) => {
+export const ButtonTests = RUIComponentStory<CalloutProps>(() => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -73,7 +73,7 @@ export const ButtonTests = RUIComponentStory<CalloutProps>((args) => {
 - Trigger slot needs an \`onPress\` prop to be supported. Otherwise, it's controlled-only
 `);
 
-export const SpanTests = RUIComponentStory<CalloutProps>((args) => {
+export const SpanTests = RUIComponentStory<CalloutProps>(() => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -91,7 +91,7 @@ export const SpanTests = RUIComponentStory<CalloutProps>((args) => {
   );
 });
 
-export const GuidedTour = RUIComponentStory<CalloutProps>((args) => {
+export const GuidedTour = RUIComponentStory<CalloutProps>(() => {
   const [step, setStep] = useState(0);
 
   const coachmark = (x: number, y: number) => (

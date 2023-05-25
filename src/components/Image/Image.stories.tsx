@@ -3,11 +3,7 @@ import React from 'react';
 
 import { Box } from '../Box';
 import { Center } from '../Center';
-import { Heading } from '../Heading';
 import { Icon } from '../Icon';
-import { Paper } from '../Paper';
-import { Stack } from '../Stack';
-import { Text } from '../Text';
 import { Image, ImageProps } from './Image';
 
 export default RUIComponentMeta<ImageProps>('Components', Image).withStyleSystemProps();
@@ -42,9 +38,9 @@ export const WithErrorPlaceholder = RUIComponentStory<ImageProps>(Overview, {
   height: 360,
   alt: 'Example image that failed to load',
   placeholder: (
-    <Box bgc="light" h={360}>
+    <Box bgc="surface-subtle" h={360}>
       <Center>
-        <Icon block c="dimmed" name="image" size={200} />
+        <Icon block c="neutral-subtle" name="image" size={200} />
       </Center>
     </Box>
   )

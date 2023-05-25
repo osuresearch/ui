@@ -1,5 +1,5 @@
 import * as RadixScrollArea from '@radix-ui/react-scroll-area';
-import React, { forwardRef, useRef, useState } from 'react';
+import React, { useRef } from 'react';
 
 import { StyleSystemProps } from '../../types';
 import { cx } from '../../utils';
@@ -48,7 +48,7 @@ export function ScrollArea({
     viewport: 'w-full h-full',
     scrollbar: cx(
       'flex select-none touch-none',
-      'bg-light opacity-100',
+      'bg-surface-subtle opacity-100',
 
       // Scrollbar width/height
       'data-[orientation=vertical]:w-xs',
@@ -56,11 +56,11 @@ export function ScrollArea({
 
       // Hover transitions
       'transition duration-[150ms] ease-out',
-      'hover:bg-light-shade',
+      'hover:bg-surface-bold',
       'data-[state=hidden]:opacity-0'
     ),
     thumb: cx(
-      'flex-1 bg-dimmed relative',
+      'flex-1 bg-interactive-active relative',
       "before:content-[''] before:absolute before:top-1/2 before:left-1/2",
       'before:-translate-x-1/2 before:-translate-y-1/2',
       'before:w-full before:h-full before:min-w-[44px] before:min-h-[44px]'

@@ -5,200 +5,146 @@ import { ColorSet } from '@sb/ColorSet';
 
 # Colors
 
-## Brand
-
-Scarlet and Gray have been Ohio State's official colors since
-the university's earliest days.
-
-### Primary
+## Semantic Colors
 
 <ColorPalette>
   <ColorItem
-    title="Scarlet"
-    subtitle="PMS 200"
-    colors={{
-      '--rui-scarlet': '#ba0c2f',
-    }}
-  />
-  <ColorItem
-    title="Gray"
-    subtitle="PMS 429"
-    colors={{
-      '--rui-gray': '#a7b1b7'
-    }}
-  />
-  <ColorItem
     title="White"
-    colors={{ '--rui-white': '#ffffff' }}
+    colors={{ '': 'var(--rui-white)' }}
   />
   <ColorItem
     title="Black"
-    colors={{ '--rui-black': '#141517' }}
-  />
-</ColorPalette>
-
-### Scarlet Shades
-
-<ColorPalette>
-  <ColorItem
-    title="Scarlet Shades"
-    colors={{
-      '--rui-scarlet-dark-60': '#4a0513',
-      '--rui-scarlet-dark-40': '#70071c',
-    }}
-  />
-</ColorPalette>
-
-### Gray Tints
-
-<ColorPalette>
-  <ColorItem
-    title="Gray Tints"
-    colors={{
-      '--rui-gray-tint-20': '#bfc6cb',
-      '--rui-gray-tint-40': '#cfd4d8',
-      '--rui-gray-tint-60': '#dfe3e5',
-      '--rui-gray-tint-80': '#eff1f2',
-      '--rui-gray-tint-90': '#f6f7f8',
-    }}
-  />
-</ColorPalette>
-
-### Gray Shades
-
-<ColorPalette>
-  <ColorItem
-    title="Gray Shades"
-    colors={{
-      '--rui-gray-shade-20': '#868e92',
-      '--rui-gray-shade-40': '#646a6e',
-      '--rui-gray-shade-60': '#3f4443',
-      '--rui-gray-shade-80': '#212325',
-    }}
-  />
-</ColorPalette>
-
-
-### Accents
-
-Accent colors are used to complement the primary colors and should be used in small amounts, typically no more than 10% of the page.
-
-<ColorPalette>
-  <ColorItem
-    title="Blue"
-    subtitle="PMS 298"
-    colors={{
-      'Base': 'var(--rui-blue)',
-      'Contrast': 'var(--rui-blue-contrast)',
-    }}
+    colors={{ '': 'var(--rui-black)' }}
   />
   <ColorItem
-    title="Orange"
-    subtitle="PMS 1645"
-    colors={{
-      'Base': 'var(--rui-orange)',
-      'Contrast': 'var(--rui-orange-contrast)',
-    }}
+    title="Clear"
+    colors={{ '': 'var(--rui-clear)' }}
   />
-  <ColorItem
-    title="Green"
-    subtitle="PMS 7487"
-    colors={{
-      'Base': 'var(--rui-green)',
-      'Contrast': 'var(--rui-green-contrast)',
-    }}
-  />
-  <ColorItem
-    title="Brown"
-    subtitle="PMS 4635"
-    colors={{
-      'Base': 'var(--rui-brown)',
-      'Contrast': 'var(--rui-brown-contrast)',
-    }}
-  />
-  <ColorItem
-    title="Pink"
-    subtitle="PMS 1777"
-    colors={{
-      'Base': 'var(--rui-pink)',
-      'Contrast': 'var(--rui-pink-contrast)',
-    }}
-  />
-  <ColorItem
-    title="Violet"
-    subtitle="PMS 2425"
-    colors={{
-      'Base': 'var(--rui-violet)',
-      'Contrast': 'var(--rui-violet-contrast)',
-    }}
-  />
-  <ColorItem
-    title="Aqua"
-    subtitle="PMS 563"
-    colors={{
-      'Base': 'var(--rui-aqua)',
-      'Contrast': 'var(--rui-aqua-contrast)',
-    }}
-  />
-  <ColorItem
-    title="Teal"
-    subtitle="PMS 5473"
-    colors={{
-      'Base': 'var(--rui-teal)',
-      'Contrast': 'var(--rui-teal-contrast)',
-    }}
-  />
-  <ColorItem
-    title="Gold"
-    subtitle="PMS 7549"
-    colors={{
-      'Base': 'var(--rui-gold)',
-      'Contrast': 'var(--rui-gold-contrast)',
-    }}
-  />
-</ColorPalette>
 
-## Utilities
+  <ColorItem
+    title="Neutral"
+    colors={{
+      'Subtle': 'var(--rui-neutral-subtle)',
+      'Base': 'var(--rui-neutral)',
+      'Bold': 'var(--rui-neutral-bold)',
+    }}
+  />
 
-Utility colors change to better adapt to light, dark, and high contrast themes.
+  <ColorItem
+    title="Surface"
+    colors={{
+      'Subtle': 'var(--rui-surface-subtle)',
+      'Base': 'var(--rui-surface)',
+      'Bold': 'var(--rui-surface-bold)',
+    }}
+  />
 
-Each color consists of a `base`, `contrast`, `shade`, and `tint`.
-
-<ColorPalette>
-  <ColorSet name="Primary" />
-  <ColorSet name="Secondary" />
-  <ColorSet name="Tertiary" />
-  <ColorSet name="Light" />
-  <ColorSet name="Dimmed" />
-  <ColorSet name="Dark" />
-  <ColorSet name="Info" />
-  <ColorSet name="Success" />
-  <ColorSet name="Warning" />
-  <ColorSet name="Error" />
+  <ColorItem
+    title="Surface Inverse"
+    colors={{
+      'Subtle': 'var(--rui-surface-subtle-inverse)',
+      'Base': 'var(--rui-surface-inverse)',
+      'Bold': 'var(--rui-surface-bold-inverse)',
+    }}
+  />
 
   <ColorItem
     title="Link"
     colors={{
       'Base': 'var(--rui-link)',
-      'Tint': 'var(--rui-link-tint)',
+      'Hover': 'var(--rui-link-hover)',
     }}
   />
 
   <ColorItem
-    title="Visited"
+    title="Info"
     colors={{
-      'Base': 'var(--rui-visited)',
-      'Tint': 'var(--rui-visited-tint)',
+      'Base': 'var(--rui-info)',
+      'Bold': 'var(--rui-info-bold)',
+      'Inverse': 'var(--rui-info-inverse)',
     }}
   />
 
   <ColorItem
-    title="Focus"
+    title="Caution"
     colors={{
-      'Base': 'var(--rui-focus)',
+      'Base': 'var(--rui-caution)',
+      'Bold': 'var(--rui-caution-bold)',
+      'Inverse': 'var(--rui-caution-inverse)',
     }}
   />
 
+  <ColorItem
+    title="Critical"
+    colors={{
+      'Base': 'var(--rui-critical)',
+      'Bold': 'var(--rui-critical-bold)',
+      'Inverse': 'var(--rui-critical-inverse)',
+    }}
+  />
+
+  <ColorItem
+    title="Success"
+    colors={{
+      'Base': 'var(--rui-success)',
+      'Bold': 'var(--rui-success-bold)',
+      'Inverse': 'var(--rui-success-inverse)',
+    }}
+  />
+
+  <ColorItem
+    title="Interactive"
+    colors={{
+      'Base': 'var(--rui-interactive)',
+      'Hover': 'var(--rui-interactive-hover)',
+      'Subtle Hover': 'var(--rui-interactive-subtle-hover)',
+      'Active': 'var(--rui-interactive-active)',
+      'Selected': 'var(--rui-interactive-selected)',
+      'Disabled': 'var(--rui-interactive-disabled)',
+    }}
+  />
+
+  <ColorItem
+    title="Input"
+    colors={{
+      'Base': 'var(--rui-input)',
+      'Active': 'var(--rui-input-active)',
+      'Focused': 'var(--rui-input-focused)',
+      'Error': 'var(--rui-input-error)',
+      'Disabled': 'var(--rui-input-disabled)',
+    }}
+  />
+
+  <ColorItem
+    title="Outline"
+    colors={{
+      'Base': 'var(--rui-outline)',
+      'Active': 'var(--rui-outline-active)',
+      'Focused': 'var(--rui-outline-focused)',
+      'Error': 'var(--rui-outline-error)',
+      'Disabled': 'var(--rui-outline-disabled)',
+    }}
+  />
+</ColorPalette>
+
+## Accents
+
+Accent colors are used to complement the primary colors and should be used
+in small amounts, typically no more than 10% of the page.
+
+Components that come with RUI do not use the accent colors by default.
+
+<ColorPalette>
+  {[...Array(9)].map((a, i) =>
+    <ColorItem
+      key={i+1}
+      title={`accent0${i+1}`}
+      colors={{
+        'Base': `var(--rui-accent0${i+1})`,
+        'Inverse': `var(--rui-accent0${i+1}-inverse)`,
+      }}
+    />
+  )}
 </ColorPalette>
 
 ## Tips and Tricks

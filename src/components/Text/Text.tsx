@@ -17,7 +17,7 @@ export type TextProps = StyleSystemProps & {
  * <!-- @ruiPolymorphic -->
  */
 export const Text = polymorphicForwardRef<'span', TextProps>(
-  ({ as, className, ta = 'left', c = 'light-contrast', children, ...props }, ref) => (
+  ({ as, className, ta = 'left', c = 'neutral', children, ...props }, ref) => (
     <Box
       as={as || 'span'}
       ref={ref}

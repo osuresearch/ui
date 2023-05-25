@@ -6,7 +6,7 @@ import { Kbd as Component, KbdProps } from './Kbd';
 
 export default RUIComponentMeta<KbdProps>('Components', Component);
 
-export const Kbd = RUIComponentStory<KbdProps>((args) => (
+export const Kbd = RUIComponentStory<KbdProps>(() => (
   <Text>
     Use the keyboard combination <Component>⌘</Component> + <Component>shift</Component> +
     <Component>M</Component> to do something amazing

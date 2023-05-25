@@ -2,9 +2,8 @@ import { RUIComponentMeta, RUIComponentStory } from '@sb/utils';
 import { Story } from '@storybook/react';
 import React from 'react';
 
-import { Button, Icon, UnstyledButton } from '..';
+import { UnstyledButton } from '../UnstyledButton';
 import { Avatar } from '../Avatar';
-import { CloseButton } from '../CloseButton';
 import { Group } from '../Group';
 import { Stack } from '../Stack';
 import { Text } from '../Text';
@@ -20,32 +19,32 @@ const Colors: Story<ChipProps> = (args) => (
   <Stack>
     <Text as="div">Accents</Text>
     <Group gap="xxs" wrap>
-      <Chip {...args} c="blue">
-        blue
+      <Chip {...args} c="accent01">
+      accent01
       </Chip>
-      <Chip {...args} c="orange">
-        orange
+      <Chip {...args} c="accent02">
+      accent02
       </Chip>
-      <Chip {...args} c="green">
-        green
+      <Chip {...args} c="accent03">
+        accent03
       </Chip>
-      <Chip {...args} c="brown">
-        brown
+      <Chip {...args} c="accent04">
+        accent04
       </Chip>
-      <Chip {...args} c="pink">
-        pink
+      <Chip {...args} c="accent05">
+        accent05
       </Chip>
-      <Chip {...args} c="violet">
-        violet
+      <Chip {...args} c="accent06">
+        accent06
       </Chip>
-      <Chip {...args} c="aqua">
-        aqua
+      <Chip {...args} c="accent07">
+        accent07
       </Chip>
-      <Chip {...args} c="teal">
-        teal
+      <Chip {...args} c="accent08">
+        accent08
       </Chip>
-      <Chip {...args} c="gold">
-        gold
+      <Chip {...args} c="accent09">
+        accent09
       </Chip>
     </Group>
     <Text as="div">Utilities</Text>
@@ -60,27 +59,17 @@ const Colors: Story<ChipProps> = (args) => (
         tertiary
       </Chip>
 
-      <Chip {...args} c="light">
-        light
-      </Chip>
-      <Chip {...args} c="dimmed">
-        dimmed
-      </Chip>
-      <Chip {...args} c="dark">
-        dark
-      </Chip>
-
       <Chip {...args} c="info">
         info
       </Chip>
       <Chip {...args} c="success">
         success
       </Chip>
-      <Chip {...args} c="warning">
-        warning
+      <Chip {...args} c="caution">
+        caution
       </Chip>
-      <Chip {...args} c="error">
-        error
+      <Chip {...args} c="critical">
+        critical
       </Chip>
     </Group>
   </Stack>
@@ -99,7 +88,7 @@ export const WithIndicator = RUIComponentStory(Colors, {
 });
 
 export const WithAvatar = RUIComponentStory<ChipProps>((args) => (
-  <Chip as="a" c="dimmed" href="https://github.com/McManning" target="_blank" {...args}>
+  <Chip as="a" href="https://github.com/McManning" target="_blank" {...args}>
     <Avatar
       alt="Avatar for Chase McManning"
       name="Chase McManning"
@@ -112,7 +101,7 @@ export const WithAvatar = RUIComponentStory<ChipProps>((args) => (
 ));
 
 export const Clickable = RUIComponentStory<ChipProps>((args) => (
-  <Chip as={Button} {...args} variant="solid" onPress={() => alert('pressed')}>
+  <Chip as={UnstyledButton} {...args} variant="solid" onPress={() => alert('pressed')}>
     Clickable chip
   </Chip>
 ));
@@ -130,7 +119,7 @@ export const Removable = RUIComponentStory<ChipProps>(
 
 export const ClickableAndRemovable = RUIComponentStory<ChipProps>(
   (args) => (
-    <Chip as={Button} onPress={() => alert('pressed')} variant="solid" {...args}>
+    <Chip as={UnstyledButton} onPress={() => alert('pressed')} variant="solid" {...args}>
       Click me or remove me
     </Chip>
   ),

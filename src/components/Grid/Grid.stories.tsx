@@ -10,16 +10,16 @@ export default RUIComponentMeta<GridProps>('Layout', Grid).withStyleSystemProps(
 export const Overview = RUIComponentStory<GridProps>(
   (args) => (
     <Grid {...args}>
-      <Paper as="header" bgc="aqua" c="aqua-contrast" gridArea="header">
+      <Paper as="header" bgc="accent01" c="accent01-inverse" gridArea="header">
         Header
       </Paper>
-      <Paper as="aside" bgc="green" c="green-contrast" gridArea="aside">
+      <Paper as="aside" bgc="accent02" c="accent02-inverse" gridArea="aside">
         Aside
       </Paper>
-      <Paper as="main" bgc="gold" c="gold-contrast" gridArea="content">
+      <Paper as="main" bgc="accent03" c="accent03-inverse" gridArea="content">
         Content
       </Paper>
-      <Paper as="footer" bgc="teal" c="teal-contrast" gridArea="footer">
+      <Paper as="footer" bgc="accent04" c="accent04-inverse" gridArea="footer">
         Footer
       </Paper>
     </Grid>
@@ -59,29 +59,29 @@ export const TwelveColumns = RUIComponentStory<GridProps>(
   (args) => (
     <Stack gap="sm">
       <Grid {...args}>
-        <Paper bgc="aqua" c="aqua-contrast" gridSpan={{ sm: 12, md: 8 }}>
+        <Paper bgc="accent01" c="accent01-inverse" gridSpan={{ sm: 12, md: 8 }}>
           sm 12, md 8
         </Paper>
-        <Paper bgc="aqua" c="aqua-contrast" gridSpan={{ sm: 6, md: 4 }}>
+        <Paper bgc="accent01" c="accent01-inverse" gridSpan={{ sm: 6, md: 4 }}>
           sm 6, md 4
         </Paper>
       </Grid>
       <Grid {...args}>
-        <Paper bgc="gold" c="gold-contrast" gridSpan={{ sm: 6, md: 4 }}>
+        <Paper bgc="accent02" c="accent02-inverse" gridSpan={{ sm: 6, md: 4 }}>
           sm 6, md 4
         </Paper>
-        <Paper bgc="gold" c="gold-contrast" gridSpan={{ sm: 6, md: 4 }}>
+        <Paper bgc="accent02" c="accent02-inverse" gridSpan={{ sm: 6, md: 4 }}>
           sm 6, md 4
         </Paper>
-        <Paper bgc="gold" c="gold-contrast" gridSpan={{ sm: 6, md: 4 }}>
+        <Paper bgc="accent02" c="accent02-inverse" gridSpan={{ sm: 6, md: 4 }}>
           sm 6, md 4
         </Paper>
       </Grid>
       <Grid {...args}>
-        <Paper bgc="orange" c="orange-contrast" gridSpan={6}>
+        <Paper bgc="accent03" c="accent03-inverse" gridSpan={6}>
           sm 6
         </Paper>
-        <Paper bgc="orange" c="orange-contrast" gridSpan={6}>
+        <Paper bgc="accent03" c="accent03-inverse" gridSpan={6}>
           sm 6
         </Paper>
       </Grid>

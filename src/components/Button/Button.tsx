@@ -7,7 +7,7 @@ import { UnstyledButton, UnstyledButtonProps } from '../UnstyledButton';
 
 export type ButtonProps = UnstyledButtonProps & {
   /** Alternate rendering styles */
-  variant?: 'default' | 'primary' | 'subtle' | 'accented';
+  variant?: 'default' | 'primary' | 'subtle';
 
   // Slots
 
@@ -60,49 +60,29 @@ export const Button = polymorphicForwardRef<'button', ButtonProps>(
 
         // Default variant
         {
-          'text-dark-shade': variant === 'default',
-          'bg-light-shade dark:bg-light': variant === 'default' && !isDisabled,
-          'hover:bg-dimmed-tint hover:dark:bg-light-shade':
-            variant === 'default' && !isDisabled,
-          'data-[active=true]:bg-dimmed data-[active=true]:dark:bg-dimmed-tint':
-            variant === 'default' && !isDisabled
+          'text-neutral': variant === 'default' && !isDisabled,
+          'bg-interactive': variant === 'default' && !isDisabled,
+          'hover:bg-interactive-hover': variant === 'default' && !isDisabled,
+          'data-[active=true]:bg-interactive-active': variant === 'default' && !isDisabled
         },
 
         // Subtle variant
         {
-          'text-light-contrast': variant === 'subtle',
-          'hover:bg-light hover:text-dark': variant === 'subtle' && !isDisabled,
-          'data-[active=true]:bg-light-shade': variant === 'subtle'
+          'text-neutral': variant === 'subtle' && !isDisabled,
+          'hover:bg-interactive-subtle-hover': variant === 'subtle' && !isDisabled,
+          'data-[active=true]:bg-interactive-active': variant === 'subtle' && !isDisabled
         },
 
         // Primary variant
         {
-          'bg-primary text-primary-contrast': variant === 'primary',
-          'hover:bg-primary-shade': variant === 'primary' && !isDisabled,
-          'data-[active=true]:bg-black': variant === 'primary'
-        },
-
-        // Accented variant, color inherits, :before drives background color
-        {
-          'before:absolute before:inset-0 before:mix-blend-multiply':
-            variant === 'accented',
-
-          'before:bg-gray-tint-80': variant === 'accented',
-          'hover:before:bg-gray-tint-60': variant === 'accented' && !isDisabled,
-          'data-[active=true]:before:bg-gray-tint-40': variant === 'accented' && !isDisabled
-
-          // 'mix-blend-multiply': variant === 'subtle',
-
-          // 'text-black': variant === 'accented',
-          // 'mix-blend-hard-light': variant === 'accented',
-          // 'bg-gray-tint-80': variant === 'accented',
-          // 'hover:bg-gray-tint-60': variant === 'accented' && !isDisabled,
-          // 'data-[active=true]:bg-gray-tint-40': variant === 'accented',
+          'bg-primary text-primary-inverse': variant === 'primary' && !isDisabled,
+          'hover:bg-primary-hover': variant === 'primary' && !isDisabled,
+          'data-[active=true]:bg-primary-active': variant === 'primary' && !isDisabled
         },
 
         // Disabled
         {
-          'bg-light border-light cursor-not-allowed': isDisabled
+          'text-neutral-subtle cursor-not-allowed': isDisabled
         },
         className
       )}

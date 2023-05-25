@@ -76,7 +76,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     {
       children,
       state,
-      bgc = 'light-tint',
+      bgc = 'surface',
       offset = 0,
       withArrow = false,
       overlayProps = {},

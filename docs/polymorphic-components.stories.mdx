@@ -21,7 +21,7 @@ Often you will want to use specific components that visually or interactively ma
 
 Take for example a card with a button that links the user to another website:
 
-<Paper withBorder bgc="light" p="md" w={220}>
+<Paper withBorder bgc="surface-subtle" p="md" w={220}>
   <Text as="p" pb="md">
     Some blurb here!
   </Text>
@@ -83,24 +83,6 @@ export function HomeButton() {
   )
 }
 ```
-
-## Why use polymorphics
-
-Often you will want to use specific components that visually or interactively match your design but the root component is not semantically allowed for accessibility.
-
-Take for example a card with a button that links the user to another website:
-
-<Paper withBorder bgc="light" p="md" w={220}>
-  <Text as="p" pb="md">
-    Some blurb here!
-  </Text>
-
-  <Button as="a" variant="primary" href="https://research.osu.edu" target="_blank">
-    Visit research.osu.edu
-  </Button>
-</Paper>
-
-We want it to visually look like a button, but semantically it has to be an anchor to be WCAG compliant.
 
 ## TypeScript edge cases
 

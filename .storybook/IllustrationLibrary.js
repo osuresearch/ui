@@ -42,7 +42,7 @@ export function IllustrationLibrary({ group }) {
     system: {
       c: 'clear',
       svgProps: {
-        stroke: 'var(--rui-dark)',
+        stroke: 'var(--rui-neutral)',
         strokeWidth: 1.5,
       }
     }

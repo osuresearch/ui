@@ -6,7 +6,7 @@ import { Box } from '../Box';
 import { FocusRing } from '../FocusRing';
 
 export type LinkProps = StyleSystemProps & {
-  variant?: 'default' | 'white';
+  variant?: 'default' | 'subtle';
 
   children?: React.ReactNode;
 };
@@ -32,21 +32,15 @@ export const Link = polymorphicForwardRef<'a', LinkProps>(
         ref={ref}
         as={as || 'a'}
         className={cx(
+          'cursor-pointer',
+          'border-b',
+
+          // Default theme
           {
-            'cursor-pointer': true,
-            'border-b': true,
-
-            // Default theme
             'text-link border-link': variant === 'default',
-            'hover:text-light-contrast': variant === 'default',
-            'hover:bg-light-shade hover:border-light-contrast':
-              variant === 'default' || variant === 'white',
-            'visited:text-visited visited:border-visited': variant === 'default',
-
-            // White theme
-            'text-white border-white': variant === 'white',
-            'hover:text-black hover:border-white hover:bg-white': variant === 'white'
           },
+          // Hover state
+          'hover:text-link-hover hover:border-link-hover hover:bg-surface-link-hover',
           className
         )}
         {...props}

@@ -21,7 +21,7 @@ export const Selected = RUIComponentStory(Overview, {
 });
 
 export const OnPress = RUIComponentStory(Overview, {
-  onPress: (e) => alert('Clicked!'),
+  onPress: () => alert('Clicked!'),
   onChange: (e) => alert(e)
 }).withDescription(
   'This is similar to the standard `onClick` event, but normalized to support all interaction methods (mouse, keyboard, and touch) equally.'

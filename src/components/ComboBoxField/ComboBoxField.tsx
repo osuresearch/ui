@@ -8,7 +8,7 @@ import { FormField, FormFieldBase } from '../FormField';
 import { IconButton } from '../IconButton';
 import { ListBox } from '../ListBox';
 import { Popover } from '../Popover';
-import { TextInputSlot } from '../TextField';
+import { Interactive } from '../Interactive';
 
 export type ComboBoxOption = Record<string, any>;
 
@@ -95,7 +95,10 @@ export const ComboBoxField = forwardRef<HTMLInputElement, ComboBoxFieldProps>((p
     >
       <div className="relative w-full">
         <input type="hidden" name={name} value={state.selectedKey} />
-        <TextInputSlot ref={mergeRefs(ref, inputRef)} {...inputPropsWithoutName} />
+        <Interactive as="input"
+          ref={mergeRefs(ref, inputRef)}
+          {...inputPropsWithoutName}
+        />
         <div className="absolute inset-[2px] left-auto">
           <IconButton
             ref={triggerRef}

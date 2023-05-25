@@ -20,10 +20,10 @@ export type BreadcrumbsProps = StyleSystemProps & {
  */
 export const Breadcrumbs = forwardRef<HTMLDivElement, BreadcrumbsProps>(
   ({ children, ...props }, ref) => (
-    <Group ref={ref} fs="sm" align="center" gap="xxs" c="dark" aria-label="Breadcrumbs" {...props}>
+    <Group ref={ref} fs="sm" align="center" gap="xxs" c="neutral-subtle" aria-label="Breadcrumbs" {...props}>
       {Children.map(children, (child, idx) => (
         <React.Fragment key={idx}>
-          {idx > 0 && <Icon c="dark" name="chevron" />}
+          {idx > 0 && <Icon c="neutral-subtle" name="chevron" />}
           {child}
         </React.Fragment>
       ))}

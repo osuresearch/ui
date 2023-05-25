@@ -25,20 +25,20 @@ export function Tab({ variant, item, state, orientation }: TabProps) {
       <Box
         as="button"
         ref={ref}
-        c="light-contrast"
+        c="neutral"
         px="md"
         py="sm"
         className={cx(
           // Default style - border around the selected item
           {
             'border-2 border-b-0 border-clear': variant === 'default' && !isDisabled,
-            'aria-selected:border-light-shade': variant === 'default' && !isDisabled
+            'aria-selected:border-interactive-selected': variant === 'default' && !isDisabled
           },
 
           {
             // hover style (bg matches the Panel bars)
-            'hover:bg-light-shade': !isDisabled,
-            'hover:shadow-underline-dark': !isDisabled,
+            'hover:bg-interactive-subtle-hover': !isDisabled,
+            'hover:shadow-underline-interactive': !isDisabled,
             'hover:cursor-not-allowed': isDisabled
           }
         )}

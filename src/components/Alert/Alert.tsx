@@ -8,7 +8,7 @@ import { Stack } from '../Stack';
 import { Text } from '../Text';
 
 export type AlertProps = {
-  variant: 'success' | 'info' | 'warning' | 'error';
+  variant: 'success' | 'info' | 'caution' | 'critical';
 
   title?: string;
   dismissible?: boolean;
@@ -49,46 +49,39 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
     const iconName = {
       success: 'checkCircle',
       info: 'infoCircle',
-      warning: 'infoCircle',
-      error: 'xmarkCircle'
+      caution: 'infoCircle',
+      critical: 'xmarkCircle'
     }[variant];
 
     if (!open) {
       return null;
     }
 
-    const tint: Color = `${variant}-tint`;
-    const shade: Color = `${variant}-shade`;
-    const contrast: Color = `${variant}-contrast`;
+    const bold: Color = `${variant}-bold`;
+    const inverse: Color = `${variant}-inverse`;
 
     return (
       <Group
         justify="apart"
         ref={ref}
         role="alert"
-        bgc={{
-          light: tint,
-          dark: variant
-        }}
+        bgc={bold}
       >
         <Group align="stretch" p="md">
           <Icon
-            c={{
-              light: shade,
-              dark: contrast
-            }}
+            c={inverse}
             name={iconName}
             size={24}
           />
-          <Stack c={contrast}>
-            <Text fw="bold" c={contrast}>
+          <Stack c={inverse}>
+            <Text fw="bold" c={inverse}>
               {title}
             </Text>
             {children}
           </Stack>
         </Group>
         {dismissible && (
-          <CloseButton c={contrast} label="Dismiss this alert" onPress={() => setOpen(false)} />
+          <CloseButton c={inverse} label="Dismiss this alert" onPress={() => setOpen(false)} />
         )}
       </Group>
     );

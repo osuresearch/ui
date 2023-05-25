@@ -28,7 +28,7 @@ export type ColorClassMap = Record<Color, string>;
 export const textColorClasses: ColorClassMap = {
 ${
   colors
-    .map(c => `  '${c}': 'rui-text-${c}',`)
+    .map(c => `  '${c}': 'text-${c}',`)
     .join('\n')
 }
 };
@@ -36,7 +36,7 @@ ${
 export const backgroundColorClasses: ColorClassMap = {
 ${
   colors
-    .map(c => `  '${c}': 'rui-bg-${c}',`)
+    .map(c => `  '${c}': 'bg-${c}',`)
     .join('\n')
 }
 };
@@ -44,7 +44,7 @@ ${
 export const borderColorClasses: ColorClassMap = {
 ${
   colors
-    .map(c => `  '${c}': 'rui-border-${c}',`)
+    .map(c => `  '${c}': 'border-${c}',`)
     .join('\n')
 }
 };

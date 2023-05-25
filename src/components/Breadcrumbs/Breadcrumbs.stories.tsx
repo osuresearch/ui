@@ -12,6 +12,6 @@ export const Breadcrumbs = RUIComponentStory<BreadcrumbsProps>((args) => (
     <Link href="#">Home</Link>
     <Link href="#">Level 1</Link>
     <Link href="#">Level 2</Link>
-    <Text c="dark">Level 3</Text>
+    <Text c="neutral-subtle">Level 3</Text>
   </Component>
 ));
