@@ -5,7 +5,6 @@ import { Button } from '../Button';
 import { Group } from '../Group';
 import { IconButton } from '../IconButton';
 import { Stack } from '../Stack';
-import { Text } from '../Text';
 import { Badge, BadgeProps } from './Badge';
 
 export default RUIComponentMeta<BadgeProps>('Components', Badge);
@@ -24,7 +23,6 @@ export const Overview = RUIComponentStory<BadgeProps>(
 export const Colors = RUIComponentStory<BadgeProps>(
   (args) => (
     <Stack>
-      <Text as="div">Utilities</Text>
       <Group gap="sm" wrap>
         <Badge {...args} c="primary">
           <Button>primary</Button>
@@ -36,57 +34,46 @@ export const Colors = RUIComponentStory<BadgeProps>(
           <Button>tertiary</Button>
         </Badge>
 
-        <Badge {...args} c="light">
-          <Button>light</Button>
-        </Badge>
-        <Badge {...args} c="dimmed">
-          <Button>dimmed</Button>
-        </Badge>
-        <Badge {...args} c="dark">
-          <Button>dark</Button>
-        </Badge>
-
         <Badge {...args} c="info">
           <Button>info</Button>
         </Badge>
         <Badge {...args} c="success">
           <Button>success</Button>
         </Badge>
-        <Badge {...args} c="warning">
-          <Button>warning</Button>
+        <Badge {...args} c="caution">
+          <Button>caution</Button>
         </Badge>
-        <Badge {...args} c="error">
-          <Button>error</Button>
+        <Badge {...args} c="critical">
+          <Button>critical</Button>
         </Badge>
       </Group>
-      <Text as="div">Accents</Text>
       <Group gap="sm" wrap>
-        <Badge {...args} c="blue">
-          <Button>blue</Button>
+        <Badge {...args} c="accent01">
+          <Button>accent01</Button>
         </Badge>
-        <Badge {...args} c="orange">
-          <Button>orange</Button>
+        <Badge {...args} c="accent02">
+          <Button>accent02</Button>
         </Badge>
-        <Badge {...args} c="green">
-          <Button>green</Button>
+        <Badge {...args} c="accent03">
+          <Button>accent03</Button>
         </Badge>
-        <Badge {...args} c="brown">
-          <Button>brown</Button>
+        <Badge {...args} c="accent04">
+          <Button>accent04</Button>
         </Badge>
-        <Badge {...args} c="pink">
-          <Button>pink</Button>
+        <Badge {...args} c="accent05">
+          <Button>accent05</Button>
         </Badge>
-        <Badge {...args} c="violet">
-          <Button>violet</Button>
+        <Badge {...args} c="accent06">
+          <Button>accent06</Button>
         </Badge>
-        <Badge {...args} c="aqua">
-          <Button>aqua</Button>
+        <Badge {...args} c="accent07">
+          <Button>accent07</Button>
         </Badge>
-        <Badge {...args} c="teal">
-          <Button>teal</Button>
+        <Badge {...args} c="accent08">
+          <Button>accent08</Button>
         </Badge>
-        <Badge {...args} c="gold">
-          <Button>gold</Button>
+        <Badge {...args} c="accent09">
+          <Button>accent09</Button>
         </Badge>
       </Group>
     </Stack>

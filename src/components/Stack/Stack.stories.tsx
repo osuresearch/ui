@@ -8,13 +8,13 @@ export default RUIComponentMeta<StackProps>('Layout', StackComponent).withStyleS
 
 export const Stack = RUIComponentStory((args: StackProps) => (
   <StackComponent {...args}>
-    <Paper px="lg" py="lg" bgc="teal" c="teal-contrast">
+    <Paper px="lg" py="lg" bgc="accent01" c="accent01-inverse">
       1
     </Paper>
-    <Paper px="xxl" py="xxl" bgc="green" c="green-contrast">
+    <Paper px="xxl" py="xxl" bgc="accent02" c="accent02-inverse">
       2
     </Paper>
-    <Paper px="lg" py="lg" bgc="gold" c="gold-contrast">
+    <Paper px="lg" py="lg" bgc="accent03" c="accent03-inverse">
       3
     </Paper>
   </StackComponent>

@@ -19,12 +19,11 @@ export function Panel({ variant, state, ...props }: PanelProps) {
   return (
     <FocusRing>
       <Paper
-        bgc={variant === 'default' ? 'light-tint' : 'clear'}
         ref={ref}
         p={variant === 'default' ? 'xl' : 0}
         className={cx(
           // The default tab panel has a border below the content
-          { 'border-b-2 border-light-shade': variant === 'default' }
+          { 'border-b-2 border-surface-subtle': variant === 'default' }
         )}
         {...tabPanelProps}
       >

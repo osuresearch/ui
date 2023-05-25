@@ -30,7 +30,7 @@ function InterviewItem({ item, checkboxProps, variant, ...rowProps }: InterviewI
     <div {...rowProps}>
       <Group gap={0} mb="md">
         {variant === 'qa' && (
-          <Text as="div" fs="md" bgc="dimmed-tint" mr="md" miw={32} h={32} ta="center" aria-hidden>
+          <Text as="div" fs="md" bgc="surface-bold" mr="md" miw={32} h={32} ta="center" aria-hidden>
             Q
           </Text>
         )}
@@ -42,7 +42,7 @@ function InterviewItem({ item, checkboxProps, variant, ...rowProps }: InterviewI
       </Group>
       <Group gap={0}>
         {variant === 'qa' && (
-          <Text as="div" fs="md" bgc="dimmed-tint" mr="md" miw={32} h={32} ta="center" aria-hidden>
+          <Text as="div" fs="md" bgc="surface-bold" mr="md" miw={32} h={32} ta="center" aria-hidden>
             A
           </Text>
         )}

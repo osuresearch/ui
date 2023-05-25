@@ -114,7 +114,7 @@ export const WithCustomItems = RUIComponentStory<ComboBoxFieldProps>(
               />
               <Stack gap={0}>
                 <Text>{person.name}</Text>
-                <Text c="dark" fs="sm">
+                <Text c="neutral-subtle" fs="sm">
                   {person.username}@osu.edu
                 </Text>
               </Stack>

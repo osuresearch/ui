@@ -47,7 +47,7 @@ export type CalloutProps = CalloutSlots & {
  */
 export const Callout = ({
   children,
-  bgc = 'light-tint',
+  bgc = 'surface',
   offset = 8,
   contentSlot,
   ...props

@@ -29,8 +29,8 @@ function ListItem<T>({ node, state, ...props }: ListItemProps<T>) {
           { 'cursor-pointer': !isDisabled },
           { 'cursor-not-allowed': isDisabled }
         )}
-        c={isDisabled ? 'dark' : 'light-contrast'}
-        bgc={isFocused ? 'light-shade' : undefined}
+        c={isDisabled ? 'neutral-subtle' : 'neutral'}
+        bgc={isFocused ? 'interactive-hover' : 'surface'}
         {...props}
       >
         {node.rendered}
@@ -69,7 +69,7 @@ function ListSection<T>({ node, state, ...props }: ListItemProps<T>) {
 }
 
 export type ListBoxProps<T = object> = AriaListBoxOptions<T> & StyleSystemProps & {
-  label: React.ReactNode;
+  label?: React.ReactNode;
   state: ListState<T>;
 
   /** Additional style system props to apply to each list item */

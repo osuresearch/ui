@@ -8,13 +8,13 @@ export default RUIComponentMeta<GroupProps>('Layout', Group).withStyleSystemProp
 
 export const Overview = RUIComponentStory<GroupProps>((args) => (
   <Group {...args}>
-    <Paper px="lg" py="lg" bgc="teal" c="teal-contrast">
+    <Paper px="lg" py="lg" bgc="accent01" c="accent01-inverse">
       1
     </Paper>
-    <Paper px="lg" py="xxl" bgc="green" c="green-contrast">
+    <Paper px="lg" py="xxl" bgc="accent02" c="accent02-inverse">
       2
     </Paper>
-    <Paper px="lg" py="lg" bgc="gold" c="gold-contrast">
+    <Paper px="lg" py="lg" bgc="accent03" c="accent03-inverse">
       3
     </Paper>
   </Group>
@@ -23,7 +23,7 @@ export const Overview = RUIComponentStory<GroupProps>((args) => (
 export const WrapContent = RUIComponentStory<GroupProps>((args) => (
   <Group {...args} wrap>
     {[...Array(9)].map((k, i) => (
-      <Paper key={i} w={200} h={200} bgc="green">
+      <Paper key={i} w={200} h={200} bgc="accent01">
         Item {i + 1}
       </Paper>
     ))}

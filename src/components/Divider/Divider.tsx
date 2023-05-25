@@ -41,8 +41,8 @@ export const Divider = forwardRef<HTMLHRElement, DividerProps>(
       maw={orientation === 'vertical' ? '0px' : undefined}
       mah={orientation === 'horizontal' ? '0px' : undefined}
       className={cx({
-        'border border-light-shade': orientation === 'horizontal',
-        'border border-light-shade self-stretch h-auto': orientation === 'vertical'
+        'border border-surface-bold': orientation === 'horizontal',
+        'border border-surface-bold self-stretch h-auto': orientation === 'vertical'
       })}
       role="separator"
     />

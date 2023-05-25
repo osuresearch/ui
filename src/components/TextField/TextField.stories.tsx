@@ -1,5 +1,5 @@
 import { RUIComponentMeta, RUIComponentStory } from '@sb/utils';
-import React, { forwardRef, useRef, useState } from 'react';
+import React, { useState } from 'react';
 
 import { Button } from '../Button';
 import { Icon } from '../Icon';
@@ -64,7 +64,7 @@ export const WithAriaLabel = RUIComponentStory<TextFieldProps>(Overview, {
 });
 
 export const WithIcon = RUIComponentStory(Overview, {
-  leftSlot: <Icon c="light-contrast" name="github" size={24} p="xs" />,
+  leftSlot: <Icon c="neutral" name="github" size={24} p="xs" />,
   leftWidth: 42,
   ['aria-label']: 'Enter your GitHub information',
   placeholder: 'Your GitHub username',

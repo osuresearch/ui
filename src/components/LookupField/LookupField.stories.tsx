@@ -1,13 +1,11 @@
 import { RUIComponentMeta, RUIComponentStory } from '@sb/utils';
 import React, { useState } from 'react';
 
-import { Avatar } from '../Avatar';
-import { Group } from '../Group';
 import { Item } from '../Item';
-import { Stack } from '../Stack';
 import { Text } from '../Text';
-import { LookupField, LookupFieldProps, LookupOption } from './LookupField';
+import { LookupField, LookupFieldProps } from './LookupField';
 import { Code } from '../Code';
+import { LookupOption } from '../Lookup';
 
 export default RUIComponentMeta<LookupFieldProps>('Forms', LookupField).withStyleSystemProps();
 
@@ -56,7 +54,7 @@ export const Overview = RUIComponentStory<LookupFieldProps>((args) => (
     {(item) => (
       <Item key={item.name} textValue={item.name}>
         {item.name}
-        <Text as="div" fs="sm" c="dark">
+        <Text as="div" fs="sm" c="neutral-subtle">
           Hair color: {item.hair_color}, eye color: {item.eye_color}
         </Text>
       </Item>
@@ -100,7 +98,7 @@ export const ControlledValue = RUIComponentStory<LookupFieldProps>(
           {(item) => (
             <Item key={item.name} textValue={item.name}>
               {item.name}
-              <Text as="div" fs="sm" c="dark">
+              <Text as="div" fs="sm" c="neutral-subtle">
                 Hair color: {item.hair_color}, eye color: {item.eye_color}
               </Text>
             </Item>

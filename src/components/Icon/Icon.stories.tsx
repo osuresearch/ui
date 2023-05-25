@@ -1,5 +1,4 @@
 import { RUIComponentMeta, RUIComponentStory } from '@sb/utils';
-import { Story } from '@storybook/react';
 import React from 'react';
 
 import { Group } from '../Group';
@@ -50,9 +49,9 @@ export const Block = RUIComponentStory<IconProps>(
 export const Colors = RUIComponentStory<IconProps>(
   (args) => (
     <Group align="center">
-      <Component {...args} name="sun" c={{ light: 'orange', dark: 'gold' }} aria-label="sun icon" />
-      <Component {...args} name="exclamationCircle" c="error" aria-label="error icon" />
-      <Component {...args} name="code" c="dark" aria-label="code icon" />
+      <Component {...args} name="sun" c={{ light: 'accent01', dark: 'accent02' }} aria-label="sun icon" />
+      <Component {...args} name="exclamationCircle" c="critical" aria-label="critical icon" />
+      <Component {...args} name="code" c="neutral-subtle" aria-label="code icon" />
       <Component
         {...args}
         name="facebook"
@@ -89,7 +88,7 @@ export const SVGManipulation = RUIComponentStory<IconProps>(
     c: 'white',
     block: true,
     svgProps: {
-      stroke: 'var(--rui-dark)',
+      stroke: 'var(--rui-black)',
       strokeWidth: 0.3,
       overflow: 'visible'
     }

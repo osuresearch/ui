@@ -104,7 +104,7 @@ export const Tooltip = ({ children, contentSlot, delay = 800, ...props }: Toolti
       })}
     </FocusRing>
     {state.isOpen && (
-      <div ref={overlayRef} {...overlayProps}>
+      <div ref={overlayRef} {...overlayProps} className="relative">
         <Arrow c="black" size={4} placement={placement} {...arrowProps} />
         <TooltipPopup state={state} {...tooltipProps}>
           {contentSlot}

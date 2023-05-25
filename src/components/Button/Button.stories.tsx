@@ -2,9 +2,7 @@ import { RUIComponentMeta, RUIComponentStory } from '@sb/utils';
 import React from 'react';
 
 import { Button, ButtonProps } from '../Button';
-import { Group } from '../Group';
 import { Icon } from '../Icon';
-import { Paper } from '../Paper';
 
 export default RUIComponentMeta<ButtonProps>('Buttons', Button).withStyleSystemProps();
 
@@ -31,64 +29,24 @@ export const Disabled = RUIComponentStory(Overview, {
 
 export const WithIcon = RUIComponentStory(Overview, {
   variant: 'subtle',
-  leftSlot: <Icon name="heart" size={20} c="pink" />
+  leftSlot: <Icon name="heart" size={20} c="accent05" />
 }).withDescription('Use icons when you want to convey meaning quicker');
 
-export const WithAccent = RUIComponentStory<ButtonProps>(
-  (args) => (
-    <Group wrap>
-      <Paper p="md" bgc="clear">
-        <Button {...args}>Click me</Button>
-      </Paper>
-      <Paper p="md" bgc="white" c="black">
-        <Button {...args}>Click me</Button>
-      </Paper>
-      <Paper p="md" bgc="black" c="white">
-        <Button {...args}>Click me</Button>
-      </Paper>
-      <Paper p="md" bgc="light" c="light-contrast">
-        <Button {...args}>Click me</Button>
-      </Paper>
-      <Paper p="md" bgc="dimmed" c="dimmed-contrast">
-        <Button {...args}>Click me</Button>
-      </Paper>
-      <Paper p="md" bgc="dark" c="dark-contrast">
-        <Button {...args}>Click me</Button>
-      </Paper>
-      <Paper p="md" bgc="blue" c="blue-contrast">
-        <Button {...args}>Click me</Button>
-      </Paper>
-      <Paper p="md" bgc="orange" c="orange-contrast">
-        <Button {...args}>Click me</Button>
-      </Paper>
-      <Paper p="md" bgc="green" c="green-contrast">
-        <Button {...args}>Click me</Button>
-      </Paper>
-      <Paper p="md" bgc="brown" c="brown-contrast">
-        <Button {...args}>Click me</Button>
-      </Paper>
-      <Paper p="md" bgc="pink" c="pink-contrast">
-        <Button {...args}>Click me</Button>
-      </Paper>
-      <Paper p="md" bgc="violet" c="violet-contrast">
-        <Button {...args}>Click me</Button>
-      </Paper>
-      <Paper p="md" bgc="aqua" c="aqua-contrast">
-        <Button {...args}>Click me</Button>
-      </Paper>
-      <Paper p="md" bgc="teal" c="teal-contrast">
-        <Button {...args}>Click me</Button>
-      </Paper>
-      <Paper p="md" bgc="gold" c="gold-contrast">
-        <Button {...args}>Click me</Button>
-      </Paper>
-    </Group>
-  ),
-  {
-    variant: 'accented'
-  }
-).withDescription(`
-  The \`accented\` button variant can be used against accented backgrounds.
+// export const WithAccent = RUIComponentStory<ButtonProps>(
+//   (args) => (
+//     <Group wrap>
+//       {[...Array(9)].map(
+//         (_, i) => <Paper p="md" key={i} bgc={`accent0${i+1}` as Color} c={`accent0${i+1}-inverse` as Color}>
+//           <Button {...args}>Accent {i + 1}</Button>
+//         </Paper>
+//       )}
+//     </Group>
+//   ),
+//   {
+//     variant: 'subtle'
+//   }
+// ).withDescription(`
+//   The \`accented\` button variant can be used against accented backgrounds.
 
-  You should not use an accented button against the primary color.
-`);
+//   You should not use an accented button against the primary color.
+// `);

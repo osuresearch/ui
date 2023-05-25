@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { Color } from '../../theme';
 import { StyleSystemProps } from '../../types';
 import { cx, polymorphicForwardRef } from '../../utils';
 import { Box } from '../Box';
@@ -41,30 +40,12 @@ export type AvatarProps = StyleSystemProps & {
    * as determined by combining the `name` and `opicUsername` props.
    */
   label?: string;
-
-  /**
-   * Pool of available background colors to pick from.
-   *
-   * The chosen color will be based on the `name` prop.
-   */
-  colors?: Color[];
 };
 
 /**
  * Fallback (pixel.gif) for when someone does not have an OPIC.
  */
 const FALLBACK_URL = 'https://orapps.osu.edu/assets/img/pixel.gif';
-
-const DEFAULT_COLORS: Color[] = [
-  'blue',
-  'orange',
-  'green',
-  'pink',
-  'violet',
-  'aqua',
-  'teal',
-  'gold'
-];
 
 /**
  * Avatar / profile picture automatically integrated with https://opic.osu.edu.
@@ -81,7 +62,6 @@ export const Avatar = polymorphicForwardRef<'div', AvatarProps>(
       className,
       label,
       name,
-      colors = DEFAULT_COLORS,
       opicUsername,
       src,
       size = 38,
@@ -90,8 +70,6 @@ export const Avatar = polymorphicForwardRef<'div', AvatarProps>(
     },
     ref
   ) => {
-    const index = ((name || 'a').charCodeAt(0) - 65) % colors.length;
-
     if (!src && opicUsername) {
       src = `https://opic.osu.edu/${opicUsername}?width=${size}&default=${FALLBACK_URL}`;
     }
@@ -118,18 +96,13 @@ export const Avatar = polymorphicForwardRef<'div', AvatarProps>(
         {...props}
       >
         <Box
-          bgc={colors[index]}
+          bgc="surface-subtle"
           className={cx(
             'absolute',
             'top-0',
             'rounded-full',
             'overflow-hidden',
             'text-center',
-
-            'outline',
-            'outline-2',
-            '-outline-offset-1',
-            'outline-light-tint'
           )}
           style={{
             fontSize: size / 2.75 + 'px',
@@ -138,7 +111,7 @@ export const Avatar = polymorphicForwardRef<'div', AvatarProps>(
             height: size + 'px'
           }}
         >
-          <Text fw="bold" c={(colors[index] + '-contrast') as Color}>
+          <Text fw="bold" c="neutral">
             {label}
           </Text>
         </Box>
@@ -148,11 +121,6 @@ export const Avatar = polymorphicForwardRef<'div', AvatarProps>(
             height={size}
             className={cx(
               'rounded-full overflow-hidden',
-
-              'outline',
-              'outline-2',
-              '-outline-offset-1',
-              'outline-light-tint'
             )}
             src={src}
             alt=""

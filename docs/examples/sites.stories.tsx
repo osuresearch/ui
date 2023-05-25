@@ -82,7 +82,7 @@ export const OhioStateResearch = () => (
       <Heading level={1} style={{ fontSize: '3.75rem' }}>
         Driving research and discovery
       </Heading>
-      <Text fs="md" ta="center" c="dark">
+      <Text fs="md" ta="center" c="neutral-subtle">
         With top minds in their fields, world-class research facilities and partners across the
         country, we are working together to find solutions and redefine discovery.
       </Text>
@@ -91,7 +91,7 @@ export const OhioStateResearch = () => (
       {/* TODO: Small with caret  */}
       <Stack w={220} gap={0}>
         <Divider orientation="horizontal" gap={0} />
-        <Arrow placement="top" c="light-shade" />
+        <Arrow placement="top" c="neutral" />
       </Stack>
     </Stack>
 
@@ -125,7 +125,7 @@ export const OhioStateResearch = () => (
         <Card
           headline="Advancing discovery — together"
           href="https://example.com"
-          bgc="light-tint"
+          bgc="surface"
           style={{ zIndex: 1 }}
         >
           From vast corporate partnerships to developing technology, supporting startups and more,
@@ -144,8 +144,8 @@ export const OhioStateResearch = () => (
     </Stack>
 
     {/* Another mid-page CTA, classic. Boring. */}
-    <Stack align="center" bgc="light" gap="xl" py="xxl" my="xl">
-      <Icon name="code" c="scarlet" size={60} />
+    <Stack align="center" bgc="surface-subtle" gap="xl" py="xxl" my="xl">
+      <Icon name="code" c="primary" size={60} />
 
       <Stack align="center" gap="xs">
         <Heading level={2}>Making connections</Heading>

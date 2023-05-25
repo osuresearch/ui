@@ -1,5 +1,4 @@
 import { RUIComponentMeta, RUIComponentStory } from '@sb/utils';
-import { Story } from '@storybook/react';
 import React from 'react';
 
 import { Box } from '../Box';
@@ -13,23 +12,23 @@ export const Overview = RUIComponentStory<LinkProps>((args) => (
   </Link>
 ));
 
-export const White = RUIComponentStory<LinkProps>(
+export const Subtle = RUIComponentStory<LinkProps>(
   (args) => (
-    <Box bgc="primary" c="primary-contrast" p="lg">
+    <Box bgc="primary" c="primary-inverse" p="lg">
       Here is an example of an{' '}
       <Link href="https://research.osu.edu" {...args}>
-        inline link
+        subtle link
       </Link>{' '}
-      within a paragraph on a scarlet background.
+      within a paragraph on a primary background.
     </Box>
   ),
   {
-    variant: 'white'
+    variant: 'subtle'
   }
-).withDescription('Use the white variant for links that will always be against a dark background');
+).withDescription('Use the subtle variant for links that will be against an accented background');
 
 export const Polymorphic = RUIComponentStory<LinkProps>((args) => (
-  <Link as="button" onClick={(e) => alert('Clicked link button!')} {...args}>
+  <Link as="button" onClick={() => alert('Clicked link button!')} {...args}>
     button rendered as a link
   </Link>
 ));

@@ -99,13 +99,13 @@ export const ToggleField = forwardRef<HTMLInputElement, ToggleFieldProps>((props
         </Text>
 
         {description && (
-          <Text c="dark" fs="sm" {...props.descriptionProps}>
+          <Text c="neutral-subtle" fs="sm" {...props.descriptionProps}>
             {description}
           </Text>
         )}
 
         {errorMessage && (
-          <Text c="error" fs="sm" {...props.errorMessageProps}>
+          <Text c="critical" fs="sm" {...props.errorMessageProps}>
             <Icon name="xmarkCircle" /> {errorMessage}
           </Text>
         )}

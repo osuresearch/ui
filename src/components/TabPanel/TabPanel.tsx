@@ -92,7 +92,7 @@ function TabPanelImpl(props: TabPanelImplProps) {
       <Group
         ref={ref}
         gap={0}
-        className="relative border-b-4 border-light-shade"
+        className="relative border-b-4 border-surface-subtle"
         {...tabListProps}
       >
         <div

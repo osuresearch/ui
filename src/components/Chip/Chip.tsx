@@ -29,23 +29,23 @@ export type ChipProps = StyleSystemProps & {
  * <!-- @ruiPolymorphic -->
  */
 export const Chip = polymorphicForwardRef<'div', ChipProps>(
-  ({ as, c = 'light', variant = 'solid', isRemovable, onRemove, children, ...props }, ref) => (
+  ({ as, c = 'surface-subtle', variant = 'solid', isRemovable, onRemove, children, ...props }, ref) => (
     <Box
       ref={ref}
       as={as || 'div'}
       bgc={variant === 'solid' ? c : undefined}
       c={
         {
-          solid: `${c}-contrast`,
+          solid: `${c}-inverse`,
           outline: c,
-          indicator: 'light-contrast'
+          indicator: 'neutral-subtle'
         }[variant] as Color
       }
       fs="xs"
       fw="semibold"
-      className={cx('border rounded-full inline-block', {
+      className={cx('border border-clear rounded-full inline-block', {
         [bc(c as Color)]: variant !== 'indicator',
-        'border-dimmed': variant === 'indicator' || c === 'dimmed'
+        'border-neutral-subtle': variant === 'indicator' || c === 'neutral-subtle'
       })}
       {...props}
     >
@@ -55,7 +55,7 @@ export const Chip = polymorphicForwardRef<'div', ChipProps>(
         {children}
 
         {isRemovable && (
-          <CloseButton p={0} iconProps={{ p: 'xxs' }} label="Remove" onPress={onRemove} />
+          <CloseButton p={0} size={12} iconProps={{ p: 'xxs' }} label="Remove" onPress={onRemove} />
         )}
       </Group>
     </Box>

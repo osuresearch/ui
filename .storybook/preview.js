@@ -10,6 +10,7 @@ import { SpacingSample } from './components/SpacingSample';
 import { FontSizeTable } from './components/FontSizeTable';
 
 import '../src/theme/index.css';
+import '../src/theme/tokens.css';
 import { RUIProvider } from "../src/components/RUIProvider";
 
 export const parameters = {

@@ -23,7 +23,7 @@ export const LinkButton = polymorphicForwardRef<'button', LinkButtonProps>(
     <UnstyledButton
       as={as || 'button'}
       ref={ref}
-      c="light-contrast"
+      c="neutral"
       className={cx(
         'flex',
         'hover:text-primary dark:hover:text-primary-contrast',

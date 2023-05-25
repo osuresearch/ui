@@ -22,6 +22,8 @@ export type FormErrorsProps = StyleSystemProps & {
  *
  * ## Accessibility
  * - a11y info (used aria tags, keyboard behaviour, etc)
+ *
+ * <!-- @ruiStatus In Development -->
  */
 export const FormErrors = forwardRef<HTMLDivElement, FormErrorsProps>(
   ({ className, errorMessages, children, ...styleSystemProps }, ref) => {
@@ -46,14 +48,14 @@ export const FormErrors = forwardRef<HTMLDivElement, FormErrorsProps>(
     // is a link to that error.
 
     return (
-      <Alert variant="error" title={`There are ${keys.length} problems to fix in this form`}>
+      <Alert variant="critical" title={`There are ${keys.length} problems to fix in this form`}>
         <ul>
           {keys.map((name) => (
             <li key={name}>{errorMessages[name as any].message}</li>
           ))}
         </ul>
 
-        <Link variant="white" onClick={() => focusField(keys[0])}>
+        <Link variant="subtle" onClick={() => focusField(keys[0])}>
           Go to the first field with an error to fix it
         </Link>
       </Alert>

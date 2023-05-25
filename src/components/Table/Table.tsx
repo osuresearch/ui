@@ -86,19 +86,19 @@ export const Table = forwardRef<HTMLTableElement, TableProps>(
         as="table"
         ref={mergeRefs(ref, tableRef)}
         w="100%"
-        c="light-contrast"
+        c="neutral"
         fs={variant === 'compact' ? 'sm' : 'base'}
         className={cx(
           // <th> styles
           '[&_th]:text-left',
-          '[&_th]:border-b-2 [&_th]:border-b-dark',
+          '[&_th]:border-b-2 [&_th]:border-b-surface-bold',
 
           // <th scope="row">
           '[&_th[scope="row"]]:border-b-0',
           '[&_th[scope="row"]]:border-r-2 [&_th[scope="row"]]:border-r-dark',
 
           // <tr> styles
-          '[&_tr]:border-b-2 [&_tr]:border-b-light-shade',
+          '[&_tr]:border-b-2 [&_tr]:border-b-surface-subtle',
 
           {
             // <tr> for striped rows

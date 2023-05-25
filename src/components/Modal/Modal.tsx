@@ -3,9 +3,7 @@ import React, { useRef, useState } from 'react';
 import { AriaDialogProps, AriaModalOverlayProps, useModalOverlay } from 'react-aria';
 import { Overlay } from 'react-aria';
 import { OverlayTriggerState } from 'react-stately';
-import { CSSTransition } from 'react-transition-group';
 
-import { Box } from '../Box';
 import { Underlay } from '../Underlay';
 import { Paper } from '../Paper';
 

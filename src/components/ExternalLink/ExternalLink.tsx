@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { Color } from '../../theme';
 import { cx, polymorphicForwardRef } from '../../utils';
 import { Icon } from '../Icon';
 import { Link, LinkProps } from '../Link';
@@ -26,12 +25,7 @@ export const ExternalLink = polymorphicForwardRef<'a', LinkProps>(
     >
       {children}
       <Icon
-        c={
-          {
-            default: 'dark',
-            white: 'white'
-          }[variant] as Color
-        }
+        c="neutral-subtle"
         className="transition-transform"
         mr="-md"
         px="xxs"

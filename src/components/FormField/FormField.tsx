@@ -158,13 +158,13 @@ export function FormField<T>(props: FormFieldProps<T>) {
           {React.cloneElement(inputSlot, focusProps)}
 
           {description && (
-            <Text c="dark" fs="sm" {...descriptionProps}>
+            <Text c="neutral-subtle" fs="sm" {...descriptionProps}>
               {description}
             </Text>
           )}
 
           {errorMessage && (
-            <Text c="error" fs="sm" {...errorMessageProps}>
+            <Text c="critical" fs="sm" {...errorMessageProps}>
               <Icon name="xmarkCircle" /> {errorMessage}
             </Text>
           )}

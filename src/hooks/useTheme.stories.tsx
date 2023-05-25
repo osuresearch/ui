@@ -1,9 +1,8 @@
-import { RUIComponentMeta, RUIComponentStory } from '@sb/utils';
-import { Meta, Story } from '@storybook/react';
 import React, { PropsWithChildren, useState } from 'react';
 
 import { Button, Code, Divider, Group, Stack } from '../components';
 import { useTheme } from './useTheme';
+import { Story } from '@storybook/react';
 
 const RenderingControls = ({ children }: PropsWithChildren<Record<string, unknown>>) => {
   const [key, setKey] = useState(1);
@@ -24,20 +23,11 @@ const RenderingControls = ({ children }: PropsWithChildren<Record<string, unknow
   );
 };
 
-type DemoProps = {
-  totalPages: number;
-  initialPage: number;
-  pageNumbersCount: number;
-};
-
-/**
- * Notes here?
- */
-const Demo = ({ totalPages, initialPage, pageNumbersCount }: DemoProps) => {
+const Demo = () => {
   const data = useTheme();
 
   return (
-    <Stack bgc="light-tint" p="md">
+    <Stack bgc="surface" p="md">
       <Code>{JSON.stringify(data, null, 2)}</Code>
 
       <Group>
@@ -48,35 +38,16 @@ const Demo = ({ totalPages, initialPage, pageNumbersCount }: DemoProps) => {
   );
 };
 
-export const Example: Story<DemoProps> = (args) => (
+export const Example: Story = () => (
   <RenderingControls>
-    <Demo {...args} />
+    <Demo />
   </RenderingControls>
 );
 
 export default {
   title: 'Hooks/useTheme',
   component: useTheme,
-  argTypes: {
-    totalPages: {
-      control: {
-        type: 'number'
-      },
-      defaultValue: 10
-    },
-    initialPage: {
-      control: {
-        type: 'number'
-      },
-      defaultValue: 1
-    },
-    pageNumbersCount: {
-      control: {
-        type: 'number'
-      },
-      defaultValue: 5
-    }
-  },
+  argTypes: {},
   parameters: {
     controls: { expanded: true }
   }

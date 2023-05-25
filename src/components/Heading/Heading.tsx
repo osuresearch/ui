@@ -41,7 +41,7 @@ export const Heading = polymorphicForwardRef<'h1', HeadingProps>(
     <Box
       ref={ref}
       as={as ? as : `h${level}`}
-      c="light-contrast"
+      c="neutral"
       // Sans variant forces sans for all levels.
       ff={variant === 'sans' ? 'sans' : ff[level - 1]}
       fw={fw[level - 1]}

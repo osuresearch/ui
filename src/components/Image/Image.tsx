@@ -2,7 +2,6 @@ import React, { forwardRef, useEffect, useState } from 'react';
 import { mergeProps } from 'react-aria';
 
 import { useTheme } from '../../hooks';
-import { SlotProp, useSlots } from '../../hooks/useSlots';
 import { StyleSystemProps, ThemeProp } from '../../types';
 import { cx } from '../../utils';
 import { Box } from '../Box';
@@ -100,7 +99,7 @@ export const Image = forwardRef<HTMLImageElement, ImageProps>(
         {error && <>{placeholder ?? <Text>{alt}</Text>}</>}
 
         {caption && (
-          <Text ta="center" as="figcaption" fs="sm" c="dark">
+          <Text ta="center" as="figcaption" fs="sm" c="neutral-subtle">
             {caption}
           </Text>
         )}

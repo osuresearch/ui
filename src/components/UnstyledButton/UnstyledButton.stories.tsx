@@ -21,12 +21,12 @@ export const Disabled = RUIComponentStory(Overview, {
 });
 
 export const OnPress = RUIComponentStory(Overview, {
-  onPress: (e) => alert('Clicked!')
+  onPress: () => alert('Clicked!')
 }).withDescription(
   'This is similar to the standard `onClick` event, but normalized to support all interaction methods (mouse, keyboard, and touch) equally.'
 );
 
-export const ContactCard = RUIComponentStory((args) => (
+export const ContactCard = RUIComponentStory(() => (
   <UnstyledButton>
     <Group p="xs">
       <Avatar
@@ -37,7 +37,7 @@ export const ContactCard = RUIComponentStory((args) => (
       />
       <Stack gap={0}>
         <Text>Chase McManning</Text>
-        <Text c="dark" fs="sm">
+        <Text c="neutral-subtle" fs="sm">
           mcmanning.1@osu.edu
         </Text>
       </Stack>
@@ -45,7 +45,7 @@ export const ContactCard = RUIComponentStory((args) => (
   </UnstyledButton>
 ));
 
-export const Polymorphic = RUIComponentStory((args) => (
+export const Polymorphic = RUIComponentStory(() => (
   <UnstyledButton as="a" href="https://example.com">
     Polymorphic button
   </UnstyledButton>

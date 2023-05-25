@@ -100,7 +100,7 @@ export const Card = forwardRef<HTMLAnchorElement, CardProps>(
       rel="noopener noreferrer"
       {...props}
     >
-      <Paper bgc={variant === 'panel' ? 'light' : undefined} withBorder={withBorder}>
+      <Paper bgc={variant === 'panel' ? 'surface-subtle' : undefined} withBorder={withBorder}>
         <div className="bg-primary h-4" />
         <img className="w-full" src={image} alt={alt} />
 
@@ -145,7 +145,7 @@ export const Card = forwardRef<HTMLAnchorElement, CardProps>(
           )}
 
           {minutes && (
-            <Group c="dark" align="center" gap="xxs">
+            <Group c="neutral-subtle" align="center" gap="xxs">
               <Icon name="clock" />
               {minutes}-minute read
             </Group>

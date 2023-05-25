@@ -25,7 +25,7 @@ export const PageButton = polymorphicForwardRef<'button', PageButtonProps>(
       ref={ref}
       c={{
         light: 'primary',
-        dark: 'light-contrast'
+        dark: 'neutral'
       }}
       fw="semibold"
       py="lg"
@@ -36,12 +36,12 @@ export const PageButton = polymorphicForwardRef<'button', PageButtonProps>(
         'flex',
 
         'border-2',
-        'border-light',
+        'border-primary',
 
-        // Hover styles
-        'hover:bg-dark-shade',
-        'hover:border-dark-shade',
-        'hover:text-dark-contrast',
+        // Hover style uses the primary color palette
+        'hover:bg-primary-hover',
+        'hover:border-primary-hover',
+        'hover:text-primary-inverse',
 
         // Reverse layout for next vs previous button
         { 'flex-row-reverse': direction === 'next' }

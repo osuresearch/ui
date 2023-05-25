@@ -5,4 +5,4 @@ import { Item as Component, ItemProps } from './Item';
 
 export default RUIComponentMeta<ItemProps<any>>('Utilities', Component);
 
-export const Item = RUIComponentStory<ItemProps<any>>((args) => <>No example available</>);
+export const Item = RUIComponentStory<ItemProps<any>>(() => <>No example available</>);

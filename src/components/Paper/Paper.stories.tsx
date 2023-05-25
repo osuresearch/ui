@@ -1,5 +1,4 @@
 import { RUIComponentMeta, RUIComponentStory } from '@sb/utils';
-import { Meta, Story } from '@storybook/react';
 import React from 'react';
 
 import { Heading } from '../Heading';
@@ -19,7 +18,7 @@ export const Overview = RUIComponentStory<PaperProps>((args) => (
 ));
 
 export const PanelWithContent = RUIComponentStory<PaperProps>((args) => (
-  <Paper bgc="light-shade" p="xl" {...args}>
+  <Paper bgc="surface-subtle" p="xl" {...args}>
     <Heading level={3}>Take your next step toward becoming a Buckeye</Heading>
     <Space h="lg" />
     <Text>
@@ -44,9 +43,9 @@ export const PanelWithContent = RUIComponentStory<PaperProps>((args) => (
 export const Accented = RUIComponentStory(Overview, {
   p: 'lg',
   rounded: 'md',
-  bgc: 'violet',
-  c: 'violet-contrast'
+  bgc: 'accent02',
+  c: 'accent02-inverse'
 }).withDescription(`
   When using accent colors as a background, use the accent's
-  contrast color as your foreground to ensure readability.
+  inverse color as your foreground to ensure readability.
 `);

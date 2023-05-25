@@ -22,8 +22,8 @@ export const Paper = polymorphicForwardRef<'div', PaperProps>(
     <Box
       as={as || 'div'}
       ref={ref}
-      bgc="light-tint"
-      c="light-contrast"
+      bgc="surface"
+      c="neutral"
       className={cx(
         'relative',
         {

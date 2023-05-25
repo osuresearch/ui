@@ -23,23 +23,33 @@ export type AvatarGroupProps = StyleSystemProps & {
  * Grouping of avatars with logic to handle overflow
  */
 export const AvatarGroup = forwardRef<HTMLDivElement, AvatarGroupProps>(
-  ({ className, size = 38, limit = 100, children, ...props }, ref) => {
+  ({ className, size = 38, children, ...props }, ref) => {
     const { resolve } = useScreenSize();
-    const overflow = Children.count(children) - (resolve(limit) ?? 100);
+    const limit = resolve(props.limit) ?? 100;
+
+    const overflow = Children.count(children) - limit;
 
     return (
-      <Group ref={ref} gap={0} className={cx('[&>*]:-m-xxs', className)} {...props}>
+      <Group ref={ref} gap={0} className={cx(
+        '[&>*]:-m-xxs',
+        className
+      )} {...props}>
         {Children.map(children, (child, idx) => (
-          <React.Fragment key={idx}>{idx < limit && child}</React.Fragment>
+          <div className="relative" key={idx}>
+            <div className="absolute -inset-[2px] bg-surface rounded-full" />
+            {idx < limit && child}
+          </div>
         ))}
 
         {overflow > 0 && (
-          <Avatar
-            size={size}
-            alt={`and ${overflow} more`}
-            label={`+${overflow}`}
-            colors={['dimmed']}
-          />
+          <div className="relative">
+            <div className="absolute -inset-[2px] bg-surface rounded-full" />
+            <Avatar
+              size={size}
+              alt={`and ${overflow} more`}
+              label={`+${overflow}`}
+            />
+          </div>
         )}
       </Group>
     );

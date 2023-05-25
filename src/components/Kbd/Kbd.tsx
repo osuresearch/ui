@@ -15,15 +15,15 @@ export const Kbd = ({ children }: KbdProps) => (
     as="kbd"
     ff="mono"
     fs="xs"
-    bgc="light"
-    c="light-contrast"
+    bgc="surface"
+    c="neutral"
     px="xs"
     py="xxs"
     className={cx(
       'border-[1px]',
       'border-b-[3px]',
       'rounded-[3px]',
-      'border-dimmed dark:border-light-shade'
+      'border-surface-bold'
     )}
   >
     {children}

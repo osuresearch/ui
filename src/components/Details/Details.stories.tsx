@@ -18,7 +18,7 @@ export const Overview = RUIComponentStory<DetailsProps>(
   }
 );
 
-export const Accordion = RUIComponentStory<DetailsProps>((args) => (
+export const Accordion = RUIComponentStory<DetailsProps>(() => (
   <Stack gap={0} align="stretch">
     <Details summary="Ohio Union">
       <Text>

@@ -7,7 +7,7 @@ import { Stack } from '../Stack';
 import { Text } from '../Text';
 
 export type AdmonitionProps = {
-  variant?: 'note' | 'tip' | 'info' | 'caution' | 'danger';
+  variant?: 'note' | 'tip' | 'info' | 'caution' | 'critical';
 
   /**
    * Optional title to display. If omitted, the variant name will be used instead.
@@ -31,18 +31,18 @@ export const Admonition = forwardRef<HTMLDivElement, AdmonitionProps>(
       tip: 'infoCircle',
       info: 'exclamationCircle',
       caution: 'exclamationCircle',
-      danger: 'exclamationFill'
+      critical: 'exclamationFill'
     }[variant];
 
     const bg = {
-      note: 'light',
-      tip: 'green',
-      info: 'blue',
-      caution: 'gold',
-      danger: 'violet'
+      note: 'surface-subtle',
+      tip: 'surface-subtle',
+      info: 'info',
+      caution: 'caution',
+      critical: 'critical'
     }[variant] as Color;
 
-    const contrast = `${bg}-contrast` as Color;
+    const inverse = `${bg}-inverse` as Color;
 
     return (
       <Stack
@@ -54,18 +54,18 @@ export const Admonition = forwardRef<HTMLDivElement, AdmonitionProps>(
           light: bg,
           dark: bg
         }}
-        c={contrast}
+        c={inverse}
       >
         <Group gap="xs">
           <Icon
             c={{
-              light: contrast,
-              dark: contrast
+              light: inverse,
+              dark: inverse
             }}
             name={iconName}
             size={20}
           />
-          <Text as="div" fw="bold" fs="sm" c={contrast} className="uppercase">
+          <Text as="div" fw="bold" fs="sm" c={inverse} className="uppercase">
             {title ?? variant}
           </Text>
         </Group>

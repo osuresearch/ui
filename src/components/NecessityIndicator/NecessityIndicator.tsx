@@ -33,8 +33,8 @@ export const NecessityIndicator = forwardRef<HTMLDivElement, NecessityIndicatorP
       mb="xs"
       name="asterisk"
       c={{
-        light: 'error',
-        dark: 'dark'
+        light: 'critical',
+        dark: 'white'
       }}
       {...props}
     />

@@ -55,21 +55,21 @@ export const IconButton = polymorphicForwardRef<'button', IconButtonProps>(
         aria-label={label}
         ref={ref}
         p="xxs"
-        c={!props.isDisabled ? 'light-contrast' : 'dark'}
+        c={!props.isDisabled ? 'neutral' : 'neutral-subtle'}
         className={cx(
           'inline-block',
           // Default variant
           {
-            'data-[active=true]:bg-light-shade': variant === 'default'
+            'data-[active=true]:bg-interactive-active': variant === 'default',
+            'hover:bg-interactive-subtle-hover': variant === 'default' && !props.isDisabled,
           },
           // Hover variant
           {
-            'hover:bg-light': !props.isDisabled && variant === 'default',
             'hover:opacity-70': !props.isDisabled && variant === 'fade'
           },
           // Disabled
           {
-            'bg-light': props.isDisabled && variant === 'default'
+            'bg-interactive-disabled': props.isDisabled && variant === 'default'
           },
           className
         )}

@@ -26,11 +26,11 @@ export const Caution = RUIComponentStory(Template, {
   variant: 'caution'
 });
 
-export const Danger = RUIComponentStory(Template, {
-  variant: 'danger'
+export const Critical = RUIComponentStory(Template, {
+  variant: 'critical'
 });
 
 export const WithCustomTitle = RUIComponentStory(Template, {
-  variant: 'note',
-  title: 'Your Title'
+  variant: 'critical',
+  title: 'This is really bad'
 });

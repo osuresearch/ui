@@ -47,7 +47,7 @@ export const InformationDialog = forwardRef<HTMLDivElement, InformationDialogPro
       <FocusRing>
         <Paper
           ref={mergeRefs(dialogRef, ref)}
-          bgc="light-tint"
+          bgc="surface"
           p="md"
           shadow="md"
           w="fit-content"

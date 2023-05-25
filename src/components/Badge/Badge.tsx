@@ -65,12 +65,12 @@ export const Badge = forwardRef<HTMLDivElement, BadgeProps>(
             w={16}
             mih={16}
             miw="fit-content"
-            c={`${c}-contrast` as Color}
+            c={`${c}-inverse` as Color}
             fs="xs"
             fw="semibold"
             className={cx(
               'rounded-full inline-block',
-              'border-2 border-light-tint',
+              'border-2 border-surface',
               'z-0'
             )}
           >

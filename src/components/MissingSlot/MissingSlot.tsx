@@ -16,7 +16,7 @@ export type MissingSlotProps = Record<string, never>;
  */
 export function MissingSlot() {
   return (
-    <Text c="error">
+    <Text c="critical">
       <Icon name="code" /> Slot NAME is missing.
     </Text>
   );
@@ -24,7 +24,7 @@ export function MissingSlot() {
 
 export function makeMissingSlot(name: string) {
   return () => (
-    <Text c="error">
+    <Text c="critical">
       <Icon name="code" /> Slot `{name}` is missing.
     </Text>
   );
