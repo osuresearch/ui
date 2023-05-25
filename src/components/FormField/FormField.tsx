@@ -141,7 +141,7 @@ export function FormField<T>(props: FormFieldProps<T>) {
   const [styleSystemProps] = useStyleSystemProps(props);
   const { focusProps } = useFocusRing();
 
-  const inputSlot = React.Children.only(children);
+  const inputContent = React.Children.only(children);
 
   return (
     <Stack className={className} {...wrapperProps} {...styleSystemProps} data-field={props.name}>
@@ -155,7 +155,7 @@ export function FormField<T>(props: FormFieldProps<T>) {
           }
         </LabelLayout>
         <ContentLayout layout={layout}>
-          {React.cloneElement(inputSlot, focusProps)}
+          {React.cloneElement(inputContent, focusProps)}
 
           {description && (
             <Text c="neutral-subtle" fs="sm" {...descriptionProps}>

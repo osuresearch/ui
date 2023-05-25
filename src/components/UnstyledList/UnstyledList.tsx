@@ -37,7 +37,7 @@ export type UnstyledListSlots = {
    * If not defined, only the content of each `<Item>` will
    * be rendered for each list item.
    */
-  rowSlot?: SlotProp<RowSlotProps>;
+  renderRow?: SlotProp<RowSlotProps>;
 };
 
 export type UnstyledListProps = ListProps<any> &
@@ -63,14 +63,14 @@ function Item({ node, state, ...props }: ItemProps) {
   const { rowProps, gridCellProps } = useGridListItem({ node }, state, ref);
   const { checkboxProps } = useGridListSelectionCheckbox({ key: node.key }, state);
 
-  const { rowSlot: RowSlot } = useSlots(props);
+  const { renderRow: RowSlot } = useSlots(props);
 
   const isInteractive = state.selectionManager.selectionMode !== 'none';
   // Quick check: if it's interactive and they didn't provide a slot renderer,
   // then throw an error. Our fallback implementation doesn't support interactive mode.
   if (isInteractive && !RowSlot) {
     throw new Error(
-      'You must specify a `rowSlot` when using an UnstyledList in interactive selection mode'
+      'You must specify a `renderRow` when using an UnstyledList in interactive selection mode'
     );
   }
 

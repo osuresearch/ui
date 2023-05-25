@@ -5,7 +5,7 @@ import { cx } from '../../utils';
 import { Box } from '../Box';
 import { Group } from '../Group';
 import { Icon } from '../Icon';
-import { LinkButton } from '../LinkButton';
+import { TextLink } from '../TextLink';
 import { Paper } from '../Paper';
 import { Stack } from '../Stack';
 import { Text } from '../Text';
@@ -112,8 +112,7 @@ export const Card = forwardRef<HTMLAnchorElement, CardProps>(
           )}
 
           {linkedHeadline && (
-            <LinkButton
-              as="a"
+            <TextLink
               href={href}
               mt="sm"
               fw="bold"
@@ -121,7 +120,7 @@ export const Card = forwardRef<HTMLAnchorElement, CardProps>(
               className="text-h3"
             >
               {headline}
-            </LinkButton>
+            </TextLink>
           )}
           {!linkedHeadline && (
             <Text
@@ -139,9 +138,9 @@ export const Card = forwardRef<HTMLAnchorElement, CardProps>(
           <Text className="text-h4">{children}</Text>
 
           {!linkedHeadline && callToAction && (
-            <LinkButton as="a" href={href} mt="sm">
+            <TextLink href={href} mt="sm">
               {callToAction}
-            </LinkButton>
+            </TextLink>
           )}
 
           {minutes && (

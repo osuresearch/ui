@@ -65,7 +65,7 @@ function GroupItem({ node, ...props }: GroupItemProps) {
       descriptionProps={{}}
       errorMessage={undefined}
       errorMessageProps={{}}
-      inputSlot={CheckboxIcon}
+      renderIcon={CheckboxIcon}
       inputProps={inputProps}
       isSelected={isSelected}
       isIndeterminate={props.isIndeterminate}

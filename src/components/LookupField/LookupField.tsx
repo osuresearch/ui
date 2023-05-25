@@ -78,7 +78,7 @@ function _LookupField<T extends object>(
           ref={triggerRef}
           variant="subtle"
           className="text-left"
-          rightSlot={<Icon name="chevron" rotate={90} />}
+          renderRight={<Icon name="chevron" rotate={90} />}
           {...triggerProps}
         >
           <span {...valueProps}>

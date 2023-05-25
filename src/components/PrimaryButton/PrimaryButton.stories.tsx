@@ -25,13 +25,13 @@ export const Outline = RUIComponentStory(Overview, {
   variant: 'outline'
 });
 
-export const WithLeftSlot = RUIComponentStory(Overview, {
+export const WithLeftIcon = RUIComponentStory(Overview, {
   variant: 'outline',
-  leftSlot: <Icon name="envelope" size={24} />
+  renderLeft: <Icon name="envelope" size={24} />
 });
 
-export const WithRightSlot = RUIComponentStory(Overview, {
+export const WithRightIcon = RUIComponentStory(Overview, {
   variant: 'default',
   small: true,
-  rightSlot: <Icon name="caret" />
+  renderRight: <Icon name="caret" />
 });

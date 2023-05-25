@@ -6,7 +6,6 @@ import { useStyleSystemProps } from '../../hooks/useStyleSystemProps';
 import { AriaNecessityIndicator, StyleSystemProps } from '../../types';
 import { Group } from '../Group';
 import { Icon } from '../Icon';
-import { makeMissingSlot } from '../MissingSlot';
 import { NecessityIndicator } from '../NecessityIndicator';
 import { Stack } from '../Stack';
 import { Text } from '../Text';
@@ -15,7 +14,7 @@ import { VisuallyHidden } from '../VisuallyHidden';
 type SlotType<P = Record<string, never>> = React.ComponentType<P>;
 
 export type ToggleFieldSlots = {
-  inputSlot: SlotType<{
+  renderIcon: SlotType<{
     isSelected?: boolean;
     isIndeterminate?: boolean;
     isDisabled?: boolean;
@@ -55,15 +54,6 @@ export type ToggleFieldProps = StyleSystemProps &
  * - If `label` is omitted, an `aria-label` or `aria-labeledby` prop must
  *  be passed instead to identify the element for screen readers.
  *
- * ## Slots
- *
- * ### Input Slot
- * - Slot for rendering the current toggle state
- *
- * ### Diff Slot
- * - Slot for rendering the diff between a previous and current value
- * - Receives previous and current value for comparison
- *
  * @internal
  */
 export const ToggleField = forwardRef<HTMLInputElement, ToggleFieldProps>((props, ref) => {
@@ -77,7 +67,7 @@ export const ToggleField = forwardRef<HTMLInputElement, ToggleFieldProps>((props
   const { focusProps, isFocusVisible } = useFocusRing(props.inputProps);
   const [styleSystemProps] = useStyleSystemProps(props);
 
-  const InputSlot = props.inputSlot || makeMissingSlot('input');
+  const IconRenderer = props.renderIcon;
 
   return (
     <Group as="label" className={className} {...styleSystemProps}>
@@ -85,7 +75,7 @@ export const ToggleField = forwardRef<HTMLInputElement, ToggleFieldProps>((props
         <input {...mergeProps(props.inputProps, focusProps)} ref={ref} />
       </VisuallyHidden>
 
-      <InputSlot
+      <IconRenderer
         isSelected={isSelected}
         isIndeterminate={isIndeterminate}
         isDisabled={isDisabled}

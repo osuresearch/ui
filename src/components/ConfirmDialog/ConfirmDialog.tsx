@@ -17,11 +17,11 @@ export type ConfirmDialogProps = AriaDialogProps & {
   onSecondaryAction?: () => void;
   onCancel?: () => void;
 
-  primaryActionSlot: React.ReactNode;
+  renderPrimaryAction: React.ReactNode;
 
-  secondaryActionSlot?: React.ReactNode;
+  renderSecondaryAction?: React.ReactNode;
 
-  cancelSlot?: React.ReactNode;
+  renderCancelAction?: React.ReactNode;
 
   /** Message to display within the dialog */
   children: React.ReactNode;
@@ -70,18 +70,18 @@ export const ConfirmDialog = forwardRef<HTMLDivElement, ConfirmDialogProps>(
 
             <Group justify="end">
               <Button variant="subtle" onPress={props.onCancel}>
-                {props.cancelSlot ?? 'Cancel'}
+                {props.renderCancelAction ?? 'Cancel'}
               </Button>
 
-              {props.secondaryActionSlot && props.onSecondaryAction && (
-                <Button onPress={props.onSecondaryAction}>{props.secondaryActionSlot}</Button>
+              {props.renderSecondaryAction && props.onSecondaryAction && (
+                <Button onPress={props.onSecondaryAction}>{props.renderSecondaryAction}</Button>
               )}
 
               <Button
                 variant="primary"
                 onPress={props.onPrimaryAction}
               >
-                {props.primaryActionSlot}
+                {props.renderPrimaryAction}
               </Button>
             </Group>
           </Stack>

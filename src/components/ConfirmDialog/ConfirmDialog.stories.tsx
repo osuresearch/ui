@@ -8,14 +8,14 @@ export default RUIComponentMeta<ConfirmDialogProps>('Internal', Component);
 
 export const ConfirmDialog = RUIComponentStory<ConfirmDialogProps>((args) => (
   <Stack>
-    <Component {...args} title="Delete folder" primaryActionSlot="Delete">
+    <Component {...args} title="Delete folder" renderPrimaryAction="Delete">
       Are you sure you want to delete &quot;My Documents&quot;? All contents will be permanently
       destroyed.
     </Component>
     <Component
       {...args}
       title="Submit document"
-      primaryActionSlot="Submit"
+      renderPrimaryAction="Submit"
       primaryActionAccent="success"
     >
       Are you sure you want to submit this document?
@@ -23,9 +23,9 @@ export const ConfirmDialog = RUIComponentStory<ConfirmDialogProps>((args) => (
     <Component
       {...args}
       title="Share file"
-      primaryActionSlot="Yes, share publicly"
+      renderPrimaryAction="Yes, share publicly"
       primaryActionAccent="teal"
-      secondaryActionSlot="No, share privately"
+      renderSecondaryAction="No, share privately"
     >
       Do you want to create a shared link that is publicly accessible?
     </Component>

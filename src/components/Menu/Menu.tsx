@@ -147,7 +147,7 @@ export function Menu<T extends object = any>({ children, label, ...props }: Menu
     <>
       <Button ref={triggerRef}
         isDisabled={props.isDisabled}
-        rightSlot={<Icon name="chevron" rotate={90} />}
+        renderRight={<Icon name="chevron" rotate={90} />}
         {...menuTriggerProps}
       >
         {label}
