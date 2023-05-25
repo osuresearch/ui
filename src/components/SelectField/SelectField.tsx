@@ -5,11 +5,12 @@ import { HiddenSelect, useSelect } from 'react-aria';
 import { useSelectState } from 'react-stately';
 
 import { mergeRefs } from '../../utils';
-import { Button } from '../Button';
 import { FormField, FormFieldBase } from '../FormField';
 import { Icon } from '../Icon';
 import { ListBox } from '../ListBox';
 import { Popover } from '../Popover';
+import { Interactive } from '../Interactive';
+import { UnstyledButton } from '../UnstyledButton';
 
 export type SelectOption = Record<string, any>;
 
@@ -79,15 +80,23 @@ export const SelectField = forwardRef<HTMLButtonElement, SelectFieldProps>((prop
         descriptionProps={descriptionProps}
         errorMessageProps={errorMessageProps}
       >
-        <Button
-          ref={mergeRefs(ref, triggerRef)}
-          rightSlot={<Icon name="chevron" rotate={90} />}
-          {...triggerProps}
-        >
-          <span {...valueProps}>
-            {state.selectedItem ? state.selectedItem.rendered : props.placeholder ?? 'Select an option'}
-          </span>
-        </Button>
+        <div className="relative w-full">
+          <Interactive as={UnstyledButton}
+            ref={mergeRefs(ref, triggerRef)}
+            {...triggerProps}
+            className="text-left"
+          >
+            <span {...valueProps}>
+              {state.selectedItem
+                ? state.selectedItem.rendered
+                : props.placeholder ?? 'Select an option'}
+            </span>
+
+            <div className="absolute inset-0 left-auto">
+              <Icon name="chevron" rotate={90} px="xs" py="sm" />
+            </div>
+          </Interactive>
+        </div>
       </FormField>
 
       {state.isOpen && (
