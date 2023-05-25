@@ -6,7 +6,7 @@ import { useNumberFieldState } from 'react-stately';
 import { mergeRefs } from '../../utils';
 import { FormField, FormFieldBase } from '../FormField';
 import { IconButton } from '../IconButton';
-import { TextInputSlot } from '../TextField';
+import { Interactive } from '../Interactive';
 
 export type NumberFieldProps = FormFieldBase<number> & BaseNumberFieldProps;
 
@@ -45,11 +45,14 @@ export const NumberField = forwardRef<HTMLInputElement, NumberFieldProps>((props
       <div className="relative w-full">
         <input type="hidden" name={name} value={state.inputValue ? state.numberValue : ''} />
 
-        <TextInputSlot {...inputPropsWithoutName} pr="xxl" ref={mergeRefs(inputRef, ref)} />
+        <Interactive as="input"
+          {...inputPropsWithoutName}
+          pr="xxl"
+          ref={mergeRefs(inputRef, ref)}
+        />
 
         <div className="flex flex-col absolute inset-[2px] left-auto">
           <IconButton
-            bgc="light"
             size={14}
             px="xs"
             h="50%"
@@ -59,7 +62,6 @@ export const NumberField = forwardRef<HTMLInputElement, NumberFieldProps>((props
             {...incrementButtonProps}
           />
           <IconButton
-            bgc="light"
             size={14}
             px="xs"
             h="50%"
