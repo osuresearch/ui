@@ -1,16 +1,17 @@
 import { GregorianCalendar, parseDate } from '@internationalized/date';
 import { DateValue } from '@react-types/datepicker';
 import React, { forwardRef, useEffect, useRef, useState } from 'react';
-import { useDateField, useDateSegment, useLocale } from 'react-aria';
-import { DateFieldState, DateSegment, useDateFieldState } from 'react-stately';
+import { useDateField, useLocale } from 'react-aria';
+import { useDateFieldState } from 'react-stately';
 
-import { cx, mergeRefs } from '../../utils';
+import { mergeRefs } from '../../utils';
 import { FormField, FormFieldBase } from '../FormField';
 import { Group } from '../Group';
-import { Text } from '../Text';
 import { VisuallyHidden } from '../VisuallyHidden';
 import { DateFieldPropsConverted } from '../DateField'
 import { Box } from '../Box';
+import { DateSegment } from '../DateSegment';
+import { Interactive } from '../Interactive';
 
 
 export type DateRange = (string | undefined)[];
@@ -27,54 +28,6 @@ function createCalendar(name: string) {
     default:
       throw new Error(`Unsupported calendar ${name}`);
   }
-}
-
-type SegmentProps = {
-  segment: DateSegment;
-  state: DateFieldState;
-};
-
-function Segment({ segment, state }: SegmentProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  const { segmentProps } = useDateSegment(segment, state, ref);
-
-  return (
-    <Text
-      {...segmentProps}
-      ref={ref}
-      ta="right"
-      style={{
-        ...segmentProps.style,
-        width: (!segment.isPlaceholder && segment.type === 'month') ? '2ch' : undefined
-      }}
-      className={cx(
-        'box-content tabular-nums',
-        'outline-none focus:border-dark-shade',
-        'group',
-        'focus:bg-light-shade',
-        {
-          'text-dimmed': !segment.isEditable
-        }
-      )}
-    >
-      {/* Always reserve space for the placeholder, to prevent layout shift when editing. */}
-      <span
-        aria-hidden="true"
-        className={cx(
-          'block w-full text-center italic',
-          'text-light-shade group-focus:text-light-contrast'
-        )}
-        style={{
-          visibility: segment.isPlaceholder ? 'visible' : 'hidden',
-          height: segment.isPlaceholder ? undefined : 0,
-          pointerEvents: 'none'
-        }}
-      >
-        {segment.placeholder}
-      </span>
-      {segment.isPlaceholder ? '' : segment.text}
-    </Text>
-  );
 }
 
 /**
@@ -145,7 +98,8 @@ export const DateRangeField = forwardRef<HTMLDivElement, DateRangeFieldProps>((p
 
   // Exit editing the field when clicking the outside of the DateRangeField component
   useEffect(() => {
-    // TODO: Fix this logic.
+    // TODO: Fix this logic. This assumes a single date range field exists on the page.
+    // (and should really be more React-y anyway)
     const clickOutside = (event: { target: any; }) => {
       if (!document.getElementsByClassName('date-range-field-input')[0].contains(event.target)) {
         setShowStartInput(false);
@@ -175,44 +129,48 @@ export const DateRangeField = forwardRef<HTMLDivElement, DateRangeFieldProps>((p
       errorMessageProps={errorMessagePropsStart}
       {...props}
     >
-      <Group
-        {...fieldPropsStart}
+      <Interactive as={Group}
         ref={mergeRefs(ref, inputRefStart)}
+        {...fieldPropsStart}
         p="xs"
         gap="xxs"
-        bgc="light-tint"
-        className={cx(
-          'border-2 border-light-shade',
-          'focus-within:border-dark-shade',
-          { 'border-dimmed bg-light-shade': props.isDisabled },
-          { 'border-error': props.errorMessage },
-          'date-range-field-input'
-        )}
       >
         {/* Hidden input for form submission support */}
         <VisuallyHidden>
-          <input aria-hidden="true" name={props.name} type="text" value={(stateStart?.value || stateEnd?.value) ? [stateStart?.value?.toString(), stateEnd?.value?.toString()] : ''} />
+          <input
+            name={props.name}
+            type="text"
+            value={(stateStart?.value || stateEnd?.value)
+              ? [stateStart?.value?.toString(), stateEnd?.value?.toString()]
+              : ''
+            }
+          />
         </VisuallyHidden>
 
-        {(stateStart.value || showStartInput) ?
-          stateStart.segments.map((segment, i) => (
-            <Segment key={i} segment={segment} state={stateStart} />
+        {(stateStart.value || showStartInput)
+          ? stateStart.segments.map((segment, i) => (
+            <DateSegment key={i} segment={segment} state={stateStart} />
           ))
-          :
-          <Box hidden={showStartInput} onClick={() => editDate('start')} className='text-gray-shade-40'
-          >Anytime</Box>
+          : <Box
+              hidden={showStartInput}
+              onClick={() => editDate('start')}
+              className='text-gray-neutral-subtle'
+            >Anytime</Box>
         }
 
         <div>→</div>
 
-        {(stateEnd.value || showEndInput) ?
-          stateEnd.segments.map((segment, i) => (
-            <Segment key={i} segment={segment} state={stateEnd} />
+        {(stateEnd.value || showEndInput)
+          ? stateEnd.segments.map((segment, i) => (
+            <DateSegment key={i} segment={segment} state={stateEnd} />
           ))
-          :
-          <Box hidden={showEndInput} onClick={() => editDate('end')} className='text-gray-shade-40'>Anytime</Box>
+          : <Box
+              hidden={showEndInput}
+              onClick={() => editDate('end')}
+              className='text-gray-neutral-subtle'
+            >Anytime</Box>
         }
-      </Group>
+      </Interactive>
     </FormField>
   );
 });
