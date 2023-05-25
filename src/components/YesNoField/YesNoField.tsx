@@ -25,7 +25,7 @@ export const YesNoField = forwardRef<HTMLDivElement, YesNoFieldProps>((props, re
       value={convertYesNoToString(value)}
       defaultValue={convertYesNoToString(defaultValue)}
       onChange={(value) => onChange && onChange(convertStringToYesNo(value))}
-      itemSlot={YesNoGroupItemSlot}
+      renderItem={YesNoGroupItemSlot}
       itemLayout="horizontal"
     >
       <Item key="yes">Yes</Item>

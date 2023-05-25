@@ -42,15 +42,6 @@ function ListicleItem({ item, checkboxProps, variant, ...rowProps }: ListicleIte
 
 /**
  * An article written in list format.
- *
- * ## Differences from BUX
- *
- * - Bux uses a semantic H2 element but with a style that is not
- * documented in their headings guide. It uses `var(--ifm-h2-font-size)`
- * with a 1.5rem versus their `.bux-h2` class that uses a 1.75rem. I've
- * decided to go with the visual representation of the H3 while not
- * using any header element semantically, as there's no guarantee where
- * a Listicle would live within the DOM.
  */
 export const Listicle = forwardRef<HTMLOListElement, ListicleProps>(
   ({ variant = 'ordered', children, ...props }, ref) => (
@@ -60,7 +51,7 @@ export const Listicle = forwardRef<HTMLOListElement, ListicleProps>(
       {...props}
       selectionMode="none" // Listicles are not interactive
       disabledBehavior="all"
-      rowSlot={(props) => <ListicleItem variant={variant} {...props} />}
+      renderRow={(props) => <ListicleItem variant={variant} {...props} />}
     >
       {children as any}
     </UnstyledList>

@@ -64,20 +64,6 @@ function InterviewItem({ item, checkboxProps, variant, ...rowProps }: InterviewI
  * ## Accessibility
  *
  * - "Q" and "A" labels are expanded to "Question" and "Answer" for screen readers
- *
- * ## Differences from BUX
- *
- * - Bux uses a semantic H2 element but with a style that is not
- * documented in their headings guide. It uses `var(--ifm-h2-font-size)`
- * with a 1.5rem versus their `.bux-h2` class that uses a 1.75rem. I've
- * decided to go with the visual representation of the H3 while not
- * using any header element semantically, as there's no guarantee where
- * a Interview would live within the DOM.
- * - Bux also uses 1.25rem for the Q & A label font, but that is not
- * in their list of font size tokens. So we changed it to the nearest match.
- * - We went with `ul` semantics instead of `dl` to use the unstyled list component.
- * This may change if we are required to use `dl`, but it seems in their use case
- * and sample code, there is no semantic difference.
  */
 export const Interview = forwardRef<HTMLUListElement, InterviewProps>(
   ({ variant = 'qa', children, ...props }, ref) => (
@@ -85,7 +71,7 @@ export const Interview = forwardRef<HTMLUListElement, InterviewProps>(
       ref={ref}
       selectionMode="none" // Interviews are not interactive
       disabledBehavior="all"
-      rowSlot={(props) => <InterviewItem variant={variant} {...props} />}
+      renderRow={(props) => <InterviewItem variant={variant} {...props} />}
       {...props}
     >
       {children as any /* TODO: Make this work without a cast */}

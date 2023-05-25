@@ -23,9 +23,9 @@ export type PrimaryButtonProps = {
    */
   children: React.ReactNode;
 
-  leftSlot?: React.ReactNode;
+  renderLeft?: React.ReactNode;
 
-  rightSlot?: React.ReactNode;
+  renderRight?: React.ReactNode;
 };
 
 /**
@@ -47,7 +47,7 @@ export type PrimaryButtonProps = {
  * <!-- @ruiPolymorphic -->
  */
 export const PrimaryButton = polymorphicForwardRef<'button', PrimaryButtonProps>(
-  ({ as, disabled, small, variant = 'default', leftSlot, rightSlot, children }, ref) => (
+  ({ as, disabled, small, variant = 'default', renderLeft, renderRight, children }, ref) => (
     <Group
       as={as || 'button'}
       ref={ref}
@@ -87,9 +87,9 @@ export const PrimaryButton = polymorphicForwardRef<'button', PrimaryButtonProps>
         'cursor-not-allowed': disabled
       })}
     >
-      {leftSlot}
+      {renderLeft}
       {children}
-      {rightSlot}
+      {renderRight}
     </Group>
   )
 );

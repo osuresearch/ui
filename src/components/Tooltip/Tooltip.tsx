@@ -9,7 +9,7 @@ import { FocusRing } from '../FocusRing';
 import { Arrow } from '../Arrow';
 
 export type TooltipSlots = {
-  contentSlot: React.ReactNode;
+  renderContent: React.ReactNode;
 };
 
 export type TooltipProps = TooltipSlots & {
@@ -75,7 +75,7 @@ function TooltipPopup({ state, ...props }: TooltipPopupProps) {
  * -  The element wrapped by a Tooltip will receive tab index of 0 to ensure that
  *    non-focusable elements can receive keyboard focus (e.g. icons).
  */
-export const Tooltip = ({ children, contentSlot, delay = 800, ...props }: TooltipProps) => {
+export const Tooltip = ({ children, renderContent, delay = 800, ...props }: TooltipProps) => {
   const targetRef = useRef<FocusableElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
 
@@ -107,7 +107,7 @@ export const Tooltip = ({ children, contentSlot, delay = 800, ...props }: Toolti
       <div ref={overlayRef} {...overlayProps} className="relative">
         <Arrow c="black" size={4} placement={placement} {...arrowProps} />
         <TooltipPopup state={state} {...tooltipProps}>
-          {contentSlot}
+          {renderContent}
         </TooltipPopup>
       </div>
     )}

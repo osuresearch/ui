@@ -20,7 +20,7 @@ export type FormDialogProps = AriaDialogProps & {
   submitSlot?: React.ReactNode;
 
   /** Content for the cancel button. Defaults to `Cancel` */
-  cancelSlot?: React.ReactNode;
+  renderCancelAction?: React.ReactNode;
 
   /** Form content */
   children: React.ReactNode;
@@ -72,7 +72,7 @@ export const FormDialog = forwardRef<HTMLDivElement, FormDialogProps>(
 
               <Group justify="end" mt="sm">
                 <Button variant="subtle" onPress={props.onCancel}>
-                  {props.cancelSlot ?? 'Cancel'}
+                  {props.renderCancelAction ?? 'Cancel'}
                 </Button>
 
                 <Button variant="primary" type="submit">

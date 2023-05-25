@@ -11,7 +11,7 @@ import { Modal } from '../Modal/Modal';
 export type ConfirmButtonProps = ButtonProps &
   OverlayTriggerProps &
   Omit<ConfirmDialogProps, 'children'> & {
-    dialogContentSlot: React.ReactNode;
+    renderContent: React.ReactNode;
   };
 
 /**
@@ -30,7 +30,7 @@ export const ConfirmButton = forwardRef<HTMLButtonElement, ConfirmButtonProps>(
 
     const { triggerProps, overlayProps } = useOverlayTrigger({ type: 'dialog' }, state, triggerRef);
 
-    const { dialogContentSlot, onCancel, onPrimaryAction, onSecondaryAction, ...dialogProps } =
+    const { renderContent, onCancel, onPrimaryAction, onSecondaryAction, ...dialogProps } =
       props;
 
     return (
@@ -56,7 +56,7 @@ export const ConfirmButton = forwardRef<HTMLButtonElement, ConfirmButtonProps>(
               }}
               {...dialogProps}
             >
-              {dialogContentSlot}
+              {renderContent}
             </ConfirmDialog>
           </Modal>
         )}

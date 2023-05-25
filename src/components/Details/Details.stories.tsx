@@ -5,7 +5,7 @@ import { Stack } from '../Stack';
 import { Text } from '../Text';
 import { Details, DetailsProps } from './Details';
 
-export default RUIComponentMeta<DetailsProps>('Ohio State', Details).withStyleSystemProps();
+export default RUIComponentMeta<DetailsProps>('Layout', Details).withStyleSystemProps();
 
 export const Overview = RUIComponentStory<DetailsProps>(
   (args) => (
@@ -14,7 +14,7 @@ export const Overview = RUIComponentStory<DetailsProps>(
     </Details>
   ),
   {
-    summary: 'This is a Details disclosure element'
+    summary: 'This is a details disclosure element'
   }
 );
 

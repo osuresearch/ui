@@ -7,8 +7,8 @@ import { UnstyledToggle, UnstyledToggleProps } from '../UnstyledToggle';
 export type ToggleButtonProps = UnstyledToggleProps & {
   variant?: 'default';
 
-  leftSlot?: React.ReactNode;
-  rightSlot?: React.ReactNode;
+  renderLeft?: React.ReactNode;
+  renderRight?: React.ReactNode;
 };
 
 /**
@@ -23,7 +23,7 @@ export type ToggleButtonProps = UnstyledToggleProps & {
  */
 export const ToggleButton = forwardRef<HTMLButtonElement, ToggleButtonProps>(
   (
-    { className, variant = 'default', isDisabled, leftSlot, rightSlot, children, ...props },
+    { className, variant = 'default', isDisabled, renderLeft, renderRight, children, ...props },
     ref
   ) => (
     <UnstyledToggle
@@ -61,9 +61,9 @@ export const ToggleButton = forwardRef<HTMLButtonElement, ToggleButtonProps>(
       {...props}
     >
       <Group justify="center" align="center">
-        {leftSlot}
+        {renderLeft}
         {children}
-        {rightSlot}
+        {renderRight}
       </Group>
     </UnstyledToggle>
   )

@@ -75,27 +75,27 @@ export const SingleSelection = RUIComponentStory(Template, {
   selectionMode: 'single',
   selectionBehavior: 'replace',
   defaultSelectedKeys: ['vk'],
-  rowSlot: SimpleRowSlot
+  renderRow: SimpleRowSlot
 });
 
 export const MultipleSelection = RUIComponentStory(Template, {
   selectionMode: 'multiple',
   defaultSelectedKeys: ['dx11', 'dx12'],
-  rowSlot: SimpleRowSlot
+  renderRow: SimpleRowSlot
 });
 
 export const DisallowEmptySelection = RUIComponentStory(Template, {
   selectionMode: 'multiple',
   defaultSelectedKeys: ['vk'],
   disallowEmptySelection: true,
-  rowSlot: SimpleRowSlot
+  renderRow: SimpleRowSlot
 });
 
 export const DisabledRows = RUIComponentStory(Template, {
   selectionMode: 'single',
   selectionBehavior: 'replace',
   disabledKeys: ['ogl', 'dx11'],
-  rowSlot: SimpleRowSlot
+  renderRow: SimpleRowSlot
 });
 
 export const Controlled = RUIComponentStory<UnstyledListProps>((args) => {
@@ -126,7 +126,7 @@ export const Controlled = RUIComponentStory<UnstyledListProps>((args) => {
         items={rows}
         selectedKeys={selectedKeys}
         onSelectionChange={setSelectedKeys}
-        rowSlot={SimpleRowSlot}
+        renderRow={SimpleRowSlot}
         {...args}
       >
         {(item: Row) => <Item>{item.name}</Item>}
@@ -150,7 +150,7 @@ const [selectedKeys, setSelectedKeys] = useState<'all' | Set<Key>>(
 
 export const RowSlot = RUIComponentStory<UnstyledListProps>(
   (args) => (
-    <Component aria-label="Graphics API" {...args} rowSlot={SimpleRowSlot}>
+    <Component aria-label="Graphics API" {...args} renderRow={SimpleRowSlot}>
       <Item key="dx11">DirectX 11</Item>
       <Item key="dx12">DirectX 12</Item>
       <Item key="ogl">OpenGL</Item>

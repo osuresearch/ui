@@ -39,7 +39,7 @@ export type RadioSetFieldSlots = {
    * Items must implement `useRadio` with the given props
    * and manage their own disabled / value states.
    */
-  itemSlot?: SlotProp<GroupItemSlotProps>;
+  renderItem?: React.ElementType<GroupItemSlotProps>;
 };
 
 export type RadioSetFieldProps = FormFieldBase<string> &
@@ -78,7 +78,7 @@ export function DefaultGroupItemSlot({ node, ...props }: GroupItemSlotProps) {
       descriptionProps={{}}
       errorMessage={undefined}
       errorMessageProps={{}}
-      inputSlot={RadioIcon}
+      renderIcon={RadioIcon}
       inputProps={inputProps}
       isSelected={isSelected}
       isIndeterminate={props.isIndeterminate}
@@ -108,8 +108,7 @@ export const RadioSetField = forwardRef<HTMLDivElement, RadioSetFieldProps>((pro
     groupState.setSelectedValue(props.value ?? '');
   }, [props.value])
 
-  const { itemSlot } = useSlots(props);
-  const ItemSlot = itemSlot ?? DefaultGroupItemSlot;
+  const RenderItem = props.renderItem ?? DefaultGroupItemSlot;
 
   return (
     <RadioSetContext.Provider value={{ ...listState, ...groupState }}>
@@ -123,7 +122,7 @@ export const RadioSetField = forwardRef<HTMLDivElement, RadioSetFieldProps>((pro
       >
         <Box as={props.itemLayout === 'horizontal' ? Group : Stack} ref={ref}>
           {Array.from(listState.collection).map((item) => (
-            <ItemSlot key={item.key} node={item} value={item.textValue} />
+            <RenderItem key={item.key} node={item} value={item.textValue} />
           ))}
         </Box>
       </FormField>

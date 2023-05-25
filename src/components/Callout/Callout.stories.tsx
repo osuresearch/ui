@@ -12,7 +12,7 @@ import { Callout, CalloutProps } from './Callout';
 export default RUIComponentMeta<CalloutProps>('Components', Callout);
 
 export const Overview = RUIComponentStory<CalloutProps>((args) => (
-  <Callout {...args} contentSlot="Text in the content slot">
+  <Callout {...args} renderContent="Text in the content slot">
     <Button>Help</Button>
   </Callout>
 ));
@@ -44,7 +44,7 @@ export const WithPlacement = RUIComponentStory<CalloutProps>(
     </Stack>
   ),
   {
-    contentSlot: '💥'
+    renderContent: '💥'
   }
 );
 
@@ -55,15 +55,15 @@ export const ButtonTests = RUIComponentStory<CalloutProps>(() => {
     <Group>
       <Button onPress={() => setOpen(!open)}>Toggle ➡</Button>
 
-      <Callout isOpen={open} onOpenChange={setOpen} contentSlot="Controlled callout content">
+      <Callout isOpen={open} onOpenChange={setOpen} renderContent="Controlled callout content">
         <Button onPress={() => alert('on press')}>Controlled</Button>
       </Callout>
 
-      <Callout contentSlot="Uncontrolled callout content">
+      <Callout renderContent="Uncontrolled callout content">
         <Button>Uncontrolled</Button>
       </Callout>
 
-      <Callout contentSlot="Uncontrolled callout content">
+      <Callout renderContent="Uncontrolled callout content">
         <Button onPress={() => alert('on press')}>Uncontrolled w/ on click</Button>
       </Callout>
     </Group>
@@ -80,11 +80,11 @@ export const SpanTests = RUIComponentStory<CalloutProps>(() => {
     <Group>
       <Button onPress={() => setOpen(!open)}>Toggle ➡</Button>
 
-      <Callout isOpen={open} onOpenChange={setOpen} contentSlot="Controlled callout content">
+      <Callout isOpen={open} onOpenChange={setOpen} renderContent="Controlled callout content">
         <span>Controlled</span>
       </Callout>
 
-      <Callout contentSlot="Uncontrolled callout content">
+      <Callout renderContent="Uncontrolled callout content">
         <span>Uncontrolled</span>
       </Callout>
     </Group>
@@ -95,7 +95,7 @@ export const GuidedTour = RUIComponentStory<CalloutProps>(() => {
   const [step, setStep] = useState(0);
 
   const coachmark = (x: number, y: number) => (
-    <Icon c="teal" style={{ position: 'absolute', top: y, left: x }} name="circle" />
+    <Icon c="accent01" style={{ position: 'absolute', top: y, left: x }} name="circle" />
   );
 
   const NextButton = () => (
@@ -113,10 +113,10 @@ export const GuidedTour = RUIComponentStory<CalloutProps>(() => {
   // TODO: Autofocus on the next button somehow
 
   const Content = () => (
-    <Stack c="teal-contrast">
+    <Stack c="accent01-inverse">
       <Group justify="apart">
         <Text>callout content</Text>
-        <CloseButton tabIndex={3} onPress={() => setStep(0)} />
+        <CloseButton onPress={() => setStep(0)} />
       </Group>
       <Group justify="apart">
         <Text>{step} / 4</Text>
@@ -130,19 +130,19 @@ export const GuidedTour = RUIComponentStory<CalloutProps>(() => {
     <div style={{ width: 600, height: 400 }}>
       <Button onPress={() => setStep(1)}>Start tour</Button>
 
-      <Callout isOpen={step === 1} bgc="teal" contentSlot={<Content />}>
+      <Callout isOpen={step === 1} bgc="accent01" renderContent={<Content />}>
         {coachmark(150, 20)}
       </Callout>
 
-      <Callout isOpen={step === 2} placement="left" bgc="teal" contentSlot={<Content />}>
+      <Callout isOpen={step === 2} placement="left" bgc="accent01" renderContent={<Content />}>
         {coachmark(300, 350)}
       </Callout>
 
-      <Callout isOpen={step === 3} bgc="teal" contentSlot={<Content />}>
+      <Callout isOpen={step === 3} bgc="accent01" renderContent={<Content />}>
         {coachmark(580, 200)}
       </Callout>
 
-      <Callout isOpen={step === 4} placement="right" bgc="teal" contentSlot={<Content />}>
+      <Callout isOpen={step === 4} placement="right" bgc="accent01" renderContent={<Content />}>
         {coachmark(100, 200)}
       </Callout>
     </div>

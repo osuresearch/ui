@@ -8,7 +8,7 @@ import { ThemeProp } from '../../types';
 import { Popover } from '../Popover';
 
 export type CalloutSlots = {
-  contentSlot: React.ReactNode;
+  renderContent: React.ReactNode;
 };
 
 export type CalloutProps = CalloutSlots & {
@@ -49,7 +49,7 @@ export const Callout = ({
   children,
   bgc = 'surface',
   offset = 8,
-  contentSlot,
+  renderContent,
   ...props
 }: CalloutProps) => {
   const triggerRef = useRef<Element>(null);
@@ -74,7 +74,7 @@ export const Callout = ({
           withArrow
           {...props}
         >
-          {contentSlot}
+          {renderContent}
         </Popover>
       )}
     </>

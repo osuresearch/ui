@@ -15,9 +15,9 @@ export const Overview = RUIComponentStory<ConfirmButtonProps>(
   (args) => <ConfirmButton {...args}>Delete folder</ConfirmButton>,
   {
     title: 'Delete folder',
-    dialogContentSlot:
+    renderContent:
       'Are you sure you want to delete "My Documents"? All contents will be permanently destroyed.',
-    primaryActionSlot: 'Delete'
+    renderPrimaryAction: 'Delete'
   }
 );
 
@@ -25,10 +25,9 @@ export const SecondaryAction = RUIComponentStory<ConfirmButtonProps>(
   (args) => <ConfirmButton {...args}>Share</ConfirmButton>,
   {
     title: 'Share project',
-    dialogContentSlot: 'Do you want to create a shared link that is publicly accessible?',
-    primaryActionSlot: 'Yes, share publicly',
-    secondaryActionSlot: 'No, share privately',
-    primaryActionAccent: 'teal'
+    renderContent: 'Do you want to create a shared link that is publicly accessible?',
+    renderPrimaryAction: 'Yes, share publicly',
+    renderSecondaryAction: 'No, share privately',
   }
 ).withDescription(`
   A secondary action can be added to confirmation dialogs to provide
@@ -168,7 +167,7 @@ export const LargeContent = RUIComponentStory<ConfirmButtonProps>((args) => (
   >Review the Terms and Conditions</ConfirmButton>
 ), {
   title: 'Terms and Conditions',
-  dialogContentSlot: <TOS />,
-  primaryActionSlot: 'Agree',
-  cancelSlot: 'Disagree'
+  renderContent: <TOS />,
+  renderPrimaryAction: 'Agree',
+  renderCancelAction: 'Disagree'
 });

@@ -29,7 +29,7 @@ export const Disabled = RUIComponentStory(Overview, {
 
 export const WithIcon = RUIComponentStory(Overview, {
   variant: 'subtle',
-  leftSlot: <Icon name="heart" size={20} c="accent05" />
+  renderLeft: <Icon name="heart" size={20} c="accent05" />
 }).withDescription('Use icons when you want to convey meaning quicker');
 
 // export const WithAccent = RUIComponentStory<ButtonProps>(

@@ -7,24 +7,24 @@ import { Interactive } from '../Interactive';
 
 export type TextFieldSlots = {
   /** Slot content to absolutely position to the left of the input */
-  leftSlot?: React.ReactElement;
+  renderLeft?: React.ReactElement;
 
   /**
    * Additional padding in pixels to apply to the left side of the input.
    *
    * This should match up with content size + additional padding to make
-   * room for the `leftSlot` content.
+   * room for the `renderLeft` content.
    */
   leftWidth?: number;
 
   /** Slot content to absolutely position to the right of the input */
-  rightSlot?: React.ReactElement;
+  renderRight?: React.ReactElement;
 
   /**
    * Additional padding in pixels to apply to the right side of the input.
    *
    * This should match up with content size + additional padding to make
-   * room for the `rightSlot` content.
+   * room for the `renderRight` content.
    */
   rightWidth?: number;
 };
@@ -55,8 +55,8 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
       {...props}
     >
       <div className="relative w-full">
-        {props.leftSlot && (
-          <div className="absolute inset-[2px] right-auto">{props.leftSlot}</div>
+        {props.renderLeft && (
+          <div className="absolute inset-[2px] right-auto">{props.renderLeft}</div>
         )}
 
         <Interactive as="input"
@@ -70,8 +70,8 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
           })}
         />
 
-        {props.rightSlot && (
-          <div className="absolute inset-[2px] left-auto">{props.rightSlot}</div>
+        {props.renderRight && (
+          <div className="absolute inset-[2px] left-auto">{props.renderRight}</div>
         )}
       </div>
     </FormField>

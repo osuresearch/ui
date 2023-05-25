@@ -21,19 +21,19 @@ export const Overview = RUIComponentStory<TooltipProps>(
     </Box>
   ),
   {
-    contentSlot: 'Tooltip content'
+    renderContent: 'Tooltip content'
   }
 );
 
 export const AdjacentTips = RUIComponentStory<TooltipProps>((args) => (
   <Group p="xxl">
-    <Tooltip {...args} contentSlot="Tooltip for button 1">
+    <Tooltip {...args} renderContent="Tooltip for button 1">
       <Button>Button 1</Button>
     </Tooltip>
-    <Tooltip {...args} contentSlot="Tooltip for button 2">
+    <Tooltip {...args} renderContent="Tooltip for button 2">
       <Button>Button 2</Button>
     </Tooltip>
-    <Tooltip {...args} contentSlot="Tooltip for button 3">
+    <Tooltip {...args} renderContent="Tooltip for button 3">
       <Button>Button 3</Button>
     </Tooltip>
   </Group>
@@ -55,7 +55,7 @@ export const Controlled = RUIComponentStory<TooltipProps>(
     );
   },
   {
-    contentSlot: 'Controlled tooltip'
+    renderContent: 'Controlled tooltip'
   }
 );
 
@@ -68,7 +68,7 @@ export const NoDelay = RUIComponentStory<TooltipProps>(
     </Box>
   ),
   {
-    contentSlot: 'Instant tooltip ☕',
+    renderContent: 'Instant tooltip ☕',
     delay: 0
   }
 );
@@ -87,14 +87,14 @@ export const HelpIcon = RUIComponentStory<TooltipProps>(
     </Box>
   ),
   {
-    contentSlot: 'Elements dedicated to help should have instant tooltips',
+    renderContent: 'Elements dedicated to help should have instant tooltips',
     delay: 0,
     placement: 'bottom left'
   }
 );
 
 export const LongContent = RUIComponentStory(Overview, {
-  contentSlot: (
+  renderContent: (
     <>
       long content that also includes <Text c="green" fw="bold">text formatting</Text>, icons{' '}
       <Icon name="heartFill" c="pink" />, and a whole bunch of text on a single line to see if it
@@ -131,7 +131,7 @@ export const WithPlacement = RUIComponentStory<TooltipProps>(
     </Group>
   ),
   {
-    contentSlot: '💥'
+    renderContent: '💥'
   }
 ).withDescription(`
   Note that left/right placement does not work as expected within a Storybook Docs iframe.

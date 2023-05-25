@@ -9,10 +9,8 @@ export type ButtonProps = UnstyledButtonProps & {
   /** Alternate rendering styles */
   variant?: 'default' | 'primary' | 'subtle';
 
-  // Slots
-
-  leftSlot?: React.ReactNode;
-  rightSlot?: React.ReactNode;
+  renderLeft?: React.ReactNode;
+  renderRight?: React.ReactNode;
 };
 
 /**
@@ -44,7 +42,7 @@ export type ButtonProps = UnstyledButtonProps & {
  */
 export const Button = polymorphicForwardRef<'button', ButtonProps>(
   (
-    { as, className, variant = 'default', isDisabled, leftSlot, rightSlot, children, ...props },
+    { as, className, variant = 'default', isDisabled, renderLeft, renderRight, children, ...props },
     ref
   ) => (
     <UnstyledButton
@@ -89,9 +87,9 @@ export const Button = polymorphicForwardRef<'button', ButtonProps>(
       {...props}
     >
       <Group justify="center" align="center">
-        {leftSlot}
+        {renderLeft}
         {children}
-        {rightSlot}
+        {renderRight}
       </Group>
     </UnstyledButton>
   )

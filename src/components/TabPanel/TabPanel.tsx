@@ -132,10 +132,6 @@ function TabPanelImpl(props: TabPanelImplProps) {
  * - Pressing `Space` or `Enter` will activate the selected tab
  * - `Home` will move focus to the first tab
  * - `End` will move focus to the last tab
- *
- * ## Differences from BUX
- * - Tabs require explicit activation with `Space` or `Enter`
- * - Keyboard focus ring is more apparent when navigating through tabs with a keyboard
  */
 export const TabPanel = forwardRef<HTMLDivElement, TabPanelProps>(
   (
