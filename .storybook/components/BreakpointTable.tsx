@@ -9,7 +9,7 @@ export function BreakpointTable({ size }: { size: ScreenSize }) {
   const { breakpoints } = useScreenSize();
 
   return (
-    <Box c="white" bgc={breakpoints[size] ? 'success' : 'error'} px="sm" py="xs">
+    <Box c="white" bgc={breakpoints[size] ? 'success' : 'critical'} px="sm" py="xs">
       <Icon name={breakpoints[size] ? 'check' : 'xmark'} />
     </Box>
   );

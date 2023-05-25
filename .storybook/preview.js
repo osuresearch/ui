@@ -59,6 +59,7 @@ export const parameters = {
 
         // Common things
         'Layout', ['Overview'],
+        'Navigation',
         'Buttons', ['Button'],
         'Components',
         'Hooks',
@@ -66,8 +67,7 @@ export const parameters = {
 
         // Uncommon / specialized things
         'Forms', ['Overview'],
-        'BUX Stuff', ['Overview'],
-        'Ohio State',
+        'Ohio State', ['Overview', 'Design Tokens'],
         'Unstyled', ['Overview'],
         'Internal',
       ]

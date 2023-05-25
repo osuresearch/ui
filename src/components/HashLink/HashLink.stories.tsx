@@ -4,7 +4,7 @@ import React from 'react';
 import { Heading } from '../Heading';
 import { HashLink as Component, HashLinkProps } from './HashLink';
 
-export default RUIComponentMeta<HashLinkProps>('Buttons', Component);
+export default RUIComponentMeta<HashLinkProps>('Navigation', Component);
 
 export const HashLink = RUIComponentStory<HashLinkProps>(
   (args) => (
