@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { RUIComponentMeta, RUIComponentStory } from '@sb/utils';
 
-import { Text } from '../Text';
 import { DateRangeField, DateRangeFieldProps } from './DateRangeField';
 
 export default RUIComponentMeta<DateRangeFieldProps>('Forms', DateRangeField).withStyleSystemProps();

@@ -1,14 +1,14 @@
 import { GregorianCalendar, parseDate } from '@internationalized/date';
 import { DateValue } from '@react-types/datepicker';
 import React, { forwardRef, useRef } from 'react';
-import { AriaDatePickerProps, useDateField, useDateSegment, useLocale } from 'react-aria';
-import { DateFieldState, DateSegment, useDateFieldState } from 'react-stately';
+import { AriaDatePickerProps, useDateField, useLocale } from 'react-aria';
+import { useDateFieldState } from 'react-stately';
 
-import { cx, mergeRefs } from '../../utils';
+import { mergeRefs } from '../../utils';
 import { FormField, FormFieldBase } from '../FormField';
 import { Group } from '../Group';
-import { Text } from '../Text';
-import { VisuallyHidden } from '../VisuallyHidden';
+import { Interactive } from '../Interactive';
+import { DateSegment } from '../DateSegment';
 
 export type DateFieldProps = FormFieldBase<string>;
 
@@ -24,54 +24,6 @@ function createCalendar(name: string) {
     default:
       throw new Error(`Unsupported calendar ${name}`);
   }
-}
-
-type SegmentProps = {
-  segment: DateSegment;
-  state: DateFieldState;
-};
-
-function Segment({ segment, state }: SegmentProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  const { segmentProps } = useDateSegment(segment, state, ref);
-
-  return (
-    <Text
-      {...segmentProps}
-      ref={ref}
-      ta="right"
-      style={{
-        ...segmentProps.style,
-        minWidth: segment.maxValue != null ? String(segment.maxValue).length + 'ch' : undefined
-      }}
-      className={cx(
-        'box-content tabular-nums',
-        'outline-none focus:border-dark-shade',
-        'group',
-        'focus:bg-light-shade',
-        {
-          'text-dimmed': !segment.isEditable
-        }
-      )}
-    >
-      {/* Always reserve space for the placeholder, to prevent layout shift when editing. */}
-      <span
-        aria-hidden="true"
-        className={cx(
-          'block w-full text-center italic',
-          'text-dark group-focus:text-light-contrast'
-        )}
-        style={{
-          visibility: segment.isPlaceholder ? 'visible' : 'hidden',
-          height: segment.isPlaceholder ? undefined : 0,
-          pointerEvents: 'none'
-        }}
-      >
-        {segment.placeholder}
-      </span>
-      {segment.isPlaceholder ? '' : segment.text}
-    </Text>
-  );
 }
 
 /**
@@ -94,23 +46,19 @@ export const DateField = forwardRef<HTMLDivElement, DateFieldProps>((props, ref)
 
   const { defaultValue, value, onChange, ...restProps } = props;
 
-  const convertedProps = {
-    defaultValue: defaultValue ? parseDate(defaultValue) : undefined,
-    value: value ? parseDate(value) : undefined,
-    onChange: (value: DateValue | undefined) => onChange && onChange(value?.toString())
-  }
-
-  const newProps: DateFieldPropsConverted = {
-    ...restProps,
-    ...convertedProps
-  }
-
   const { locale } = useLocale();
 
   const state = useDateFieldState({
-    ...newProps,
     locale,
-    createCalendar
+    createCalendar,
+
+    // TODO: Outstanding issue regarding controlled inputs and nullifying
+    // the current value. See: https://github.com/adobe/react-spectrum/issues/3187
+    defaultValue: defaultValue ? parseDate(defaultValue) : undefined,
+    value: value ? parseDate(value) : undefined,
+    onChange: (value?: DateValue) => onChange && onChange(value?.toString()),
+
+    ...restProps,
   });
 
   const { labelProps, fieldProps, descriptionProps, errorMessageProps } = useDateField(
@@ -127,29 +75,20 @@ export const DateField = forwardRef<HTMLDivElement, DateFieldProps>((props, ref)
       errorMessageProps={errorMessageProps}
       {...props}
     >
-      <Group
-        {...fieldProps}
-        ref={mergeRefs(ref, inputRef)}
-        p="xs"
-        gap="xxs"
-        bgc="light-tint"
-        className={cx(
-          'border-2 border-light-shade',
-
-          'focus-within:border-dark-shade',
-          { 'border-dimmed bg-light-shade': props.isDisabled },
-          { 'border-error': props.errorMessage }
-        )}
-      >
-        {/* Hidden input for form submission support */}
-        <VisuallyHidden>
-          <input aria-hidden="true" name={props.name} type="text" value={state.value?.toString()} />
-        </VisuallyHidden>
-
-        {state.segments.map((segment, i) => (
-          <Segment key={i} segment={segment} state={state} />
-        ))}
-      </Group>
+      <>
+        <input name={props.name} type="hidden" value={state.value?.toString() ?? ''} />
+        <Interactive as={Group}
+          gap="xxs"
+          ref={mergeRefs(ref, inputRef)}
+          {...fieldProps}
+          aria-invalid={state.validationState === "invalid"}
+          disabled={state.isDisabled}
+        >
+          {state.segments.map((segment, i) => (
+            <DateSegment key={i} segment={segment} state={state} />
+          ))}
+        </Interactive>
+      </>
     </FormField>
   );
 });
