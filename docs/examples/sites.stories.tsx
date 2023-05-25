@@ -10,7 +10,7 @@ import {
   Heading,
   Icon,
   Image,
-  LinkButton,
+  TextLink,
   OhioStateFooter,
   OhioStateNavbar,
   PrimaryButton,
@@ -63,7 +63,7 @@ function WideCard({
       <Stack gap={0}>
         <Heading level={2}>{title}</Heading>
         <Text>{children}</Text>
-        <LinkButton mt="lg">{cta}</LinkButton>
+        <TextLink mt="lg">{cta}</TextLink>
       </Stack>
     </Group>
   );
@@ -169,7 +169,7 @@ export const OhioStateResearch = () => (
         </Text>
       </div>
 
-      <LinkButton>Explore our stories</LinkButton>
+      <TextLink>Explore our stories</TextLink>
 
       <Group gap="xl" grow>
         <Card
