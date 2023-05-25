@@ -373,8 +373,8 @@
 
 /* Right hand table of contents */
 .sbdocs.rui-toc {
-  --toc-color: var(--rui-light-contrast);
-  --toc-indicator-color: var(--rui-light);
+  --toc-color: var(--rui-neutral);
+  --toc-indicator-color: rgba(0, 0, 0, 0);
   --toc-indicator-color--active: var(--rui-primary);
 
   left: initial;
@@ -385,13 +385,13 @@
 }
 
 .sbdocs.sbdocs-toc__header {
-  color: var(--rui-dark-shade);
+  color: var(--rui-neutral-subtle);
   text-transform: uppercase;
   font-size: 12px;
 }
 
 .sbdocs.rui-toc a {
-  color: var(--rui-dark) !important;
+  color: var(--rui-neutral) !important;
 }
 
 /* Spacing handled by RUI components in DocsContainer */
@@ -405,7 +405,7 @@
   --toc-button-color: var(--rui-primary);
   --toc-button-color--hover: #ffffff;
   --toc-button-color--active: #ffffff;
-  --toc-button-background: var(--rui-light-tint);
+  --toc-button-background: var(--rui-surface);
   --toc-button-background--hover: var(--rui-black);
   --toc-button-background--active: var(--rui-black);
 
@@ -422,7 +422,7 @@
 }
 
 .sbdocs.rui-top:hover {
-  border-color: var(--rui-dark-shade);
+  border-color: var(--rui-primary-hover);
 }
 
 .sbdocs.sbdocs-a {
@@ -430,7 +430,7 @@
 }
 
 .sbdocs.sbdocs-a:hover {
-  background-color: var(--rui-light-shade);
+  background-color: var(--rui-surface-link-hover);
 }
 
 [data-theme="dark"]
@@ -439,13 +439,13 @@
 }
 
 .sbdocs.sbdocs-table tr:nth-of-type(2n) {
-  background-color: var(--rui-light);
+  background-color: var(--rui-surface-subtle);
 }
 
 /* Import line at the top of doc pages */
 .rui-import {
   display: inline-block;
-  color: var(--rui-dark);
+  color: var(--rui-neutral-subtle);
 
   font-size: var(--rui-text-sm);
   margin-bottom: var(--rui-spacing-md);
@@ -468,27 +468,23 @@
 }
 
 .docblock-argstable-body tr {
-  border-top: 2px solid var(--rui-light-shade) !important;
+  border-top: 2px solid var(--rui-neutral-subtle) !important;
 }
 
 .sbdocs .docs-story {
   /* Change background to a grid so it's easier to identify translucent components */
   background:
-    repeating-conic-gradient(var(--rui-light) 0% 25%, transparent 0% 50%)
+    repeating-conic-gradient(var(--rui-surface-subtle) 0% 25%, transparent 0% 50%)
       50% / 20px 20px;
 
-  border: 1px solid var(--rui-light-shade);
+  border: 1px solid var(--rui-surface-bold);
 }
 
 kbd {
-  border: 1px solid var(--rui-dimmed);
+  border: 1px solid var(--rui-surface-bold);
   border-radius: 3px;
   border-bottom-width: 3px;
   padding: 2px 4px;
-}
-
-[data-theme="dark"] kbd {
-  border-color: var(--rui-light-shade);
 }</style><style>#root[hidden],
       #docs-root[hidden] {
         display: none !important;
@@ -512,4 +508,4 @@ kbd {
           
       
           
-            window['STORIES'] = [{"titlePrefix":"","directory":".","files":"@(src|docs)/**/*.stories.mdx","importPathMatcher":"^\\.[\\\\/](?:(src|docs)(?:\\/(?!\\.)(?:(?:(?!(?:^|\\/)\\.).)*?)\\/|\\/|$)(?!\\.)(?=.)[^/]*?\\.stories\\.mdx)$"},{"titlePrefix":"","directory":".","files":"@(src|docs)/**/*.stories.@(js|jsx|ts|tsx)","importPathMatcher":"^\\.[\\\\/](?:(src|docs)(?:\\/(?!\\.)(?:(?:(?!(?:^|\\/)\\.).)*?)\\/|\\/|$)(?!\\.)(?=.)[^/]*?\\.stories\\.(js|jsx|ts|tsx))$"}];</script><script src="runtime~main.acbc9e29.iframe.bundle.js"></script><script src="vendors~main.9e921c9f.iframe.bundle.js"></script><script src="main.8d659da5.iframe.bundle.js"></script></body></html>
+            window['STORIES'] = [{"titlePrefix":"","directory":".","files":"@(src|docs)/**/*.stories.mdx","importPathMatcher":"^\\.[\\\\/](?:(src|docs)(?:\\/(?!\\.)(?:(?:(?!(?:^|\\/)\\.).)*?)\\/|\\/|$)(?!\\.)(?=.)[^/]*?\\.stories\\.mdx)$"},{"titlePrefix":"","directory":".","files":"@(src|docs)/**/*.stories.@(js|jsx|ts|tsx)","importPathMatcher":"^\\.[\\\\/](?:(src|docs)(?:\\/(?!\\.)(?:(?:(?!(?:^|\\/)\\.).)*?)\\/|\\/|$)(?!\\.)(?=.)[^/]*?\\.stories\\.(js|jsx|ts|tsx))$"}];</script><script src="runtime~main.e6ebfcaf.iframe.bundle.js"></script><script src="vendors~main.7e9bbca3.iframe.bundle.js"></script><script src="main.9157cb1c.iframe.bundle.js"></script></body></html>
