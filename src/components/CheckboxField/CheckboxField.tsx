@@ -6,11 +6,6 @@ import { CheckboxIcon } from '../CheckboxIcon';
 import { FormFieldBase } from '../FormField';
 import { ToggleField } from '../ToggleField';
 
-export type CheckboxFieldDiffProps = {
-  wasSelected?: boolean;
-  showDiff?: boolean;
-};
-
 export type CheckboxFieldProps = FormFieldBase<boolean> & {
   /**
    * Indeterminism is presentational only.
