@@ -7,6 +7,7 @@ import { Item } from '../Item';
 import { Stack } from '../Stack';
 import { Text } from '../Text';
 import { ComboBoxField, ComboBoxFieldProps } from './ComboBoxField';
+import { useAsyncList } from 'react-stately';
 
 export default RUIComponentMeta<ComboBoxFieldProps>('Forms', ComboBoxField).withStyleSystemProps();
 
@@ -37,7 +38,7 @@ export const UncontrolledValue = RUIComponentStory(Overview, {
 
 export const ControlledValue = RUIComponentStory<ComboBoxFieldProps>(
   (args) => {
-    const [value, setValue] = useState<React.Key | undefined>(undefined);
+    const [value, setValue] = useState<string | undefined>(undefined);
 
     return (
       <>
@@ -134,3 +135,40 @@ export const WithCustomItems = RUIComponentStory<ComboBoxFieldProps>(
   from the suggestion rather than arbitrary data entry,
   use a Lookup field instead.
 `);
+
+
+export const WithAsyncList = RUIComponentStory<ComboBoxFieldProps>(
+  (args) => {
+    type ItemType = { name: string }
+
+    const list = useAsyncList<ItemType>({
+      async load({ signal, filterText }) {
+        const res = await fetch(
+          `https://swapi.py4e.com/api/people/?search=${filterText}`,
+          { signal }
+        );
+        const json = await res.json();
+
+        return {
+          items: json.results
+        };
+      }
+    });
+
+    return (
+      <ComboBoxField {...args} items={list.items} inputValue={list.filterText} onInputChange={list.setFilterText}>
+        {(item) => (
+          <Item key={item.name} textValue={item.name}>{item.name}</Item>
+        )}
+      </ComboBoxField>
+    );
+  },
+  {
+    label: 'Character'
+  }
+).withDescription(`
+
+  When using async lists, use \`inputValue\` and \`onInputChange\` to control the state of the search
+  input rather than the resulting key that's omitted in \`onChange\`.
+`);
+

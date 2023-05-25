@@ -12,7 +12,7 @@ import { Interactive } from '../Interactive';
 
 export type ComboBoxOption = Record<string, any>;
 
-export type ComboBoxFieldProps = FormFieldBase<React.Key> &
+export type ComboBoxFieldProps = FormFieldBase<string> &
   Omit<
     ComboBoxStateOptions<ComboBoxOption>,
     'selectedKey' | 'defaultSelectedKey' | 'onSelectionChange'
@@ -59,7 +59,7 @@ export const ComboBoxField = forwardRef<HTMLInputElement, ComboBoxFieldProps>((p
     // Transform ValueBase<React.Key> to SingleSelection
     selectedKey: props.value,
     defaultSelectedKey: props.defaultValue,
-    onSelectionChange: props.onChange,
+    onSelectionChange: (key) => props.onChange && props.onChange('' + key),
 
     defaultFilter: contains
   };
