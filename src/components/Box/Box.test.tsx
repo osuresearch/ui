@@ -11,7 +11,7 @@ console.error = (warning = '') => {
   // }
 };
 
-describe('Tests for AltBox component', () => {
+describe('Tests for Box component', () => {
   it('renders content', () => {
     const { container } = render(<Box>Foo bar</Box>);
     expect(container.firstChild).toMatchSnapshot();
@@ -25,20 +25,28 @@ describe('Tests for AltBox component', () => {
 
   it('passes down polymorph props', () => {
     const { container } = render(
-      <Box as="a" href="https://sybolt.com">
+      <Box as="a" href="https://example.com">
         Foo bar
       </Box>
     );
 
     expect((container.firstChild as HTMLElement).tagName).toBe('A');
-    expect((container.firstChild as HTMLAnchorElement).href).toBe('https://sybolt.com/');
+    expect((container.firstChild as HTMLAnchorElement).href).toBe('https://example.com/');
   });
 
-  // it('rejects invalid polymorph props', () => {
-  //   expect(() => {
-  //     render(<AltBox as='a' garbage="foo">Foo bar</AltBox>);
-  //   }).toThrow();
-  // });
+  // Issue #83 - cannot polymorph to components that also have an 'as' prop
+  it('ignores target as prop', () => {
+
+    const TestComponent = forwardRef<HTMLSpanElement, { as: URL }>((props, ref) => <mark />);
+
+    const { container } = render(
+      <Box as={TestComponent}>
+        Foo bar
+      </Box>
+    );
+
+    expect((container.firstChild as HTMLElement).tagName).toBe('MARK');
+  });
 
   itIsPolymorphic(Box, {});
 });
@@ -47,10 +55,10 @@ export function itIsPolymorphic<P>(Component: React.ComponentType<P>, requiredPr
   it('is polymorphic', () => {
     const get = (container: HTMLElement): HTMLElement => container.firstChild as HTMLElement;
 
-    const TestComponent = forwardRef((props: any, ref) => <mark ref={ref} {...props} />);
+    const TestComponent = forwardRef<HTMLElement>((props: any, ref) => <mark ref={ref} {...props} />);
 
     const { container: withTag } = render(
-      <Component as="a" href="https://mantine.dev" {...requiredProps} />
+      <Component as="a" href="https://example.com/" {...requiredProps} />
     );
 
     const { container: withComponent } = render(
@@ -58,11 +66,11 @@ export function itIsPolymorphic<P>(Component: React.ComponentType<P>, requiredPr
     );
 
     const { container: withProps } = render(
-      <Component as="a" href="https://sybolt.com/" {...requiredProps} />
+      <Component as="a" href="https://example.com/" {...requiredProps} />
     );
 
     expect(get(withTag).tagName).toBe('A');
     expect(get(withComponent).tagName).toBe('MARK');
-    expect(get(withProps).getAttribute('href')).toBe('https://sybolt.com/');
+    expect(get(withProps).getAttribute('href')).toBe('https://example.com/');
   });
 }
