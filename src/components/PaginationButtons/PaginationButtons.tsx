@@ -1,8 +1,10 @@
 import React from 'react';
+import { PressEvent } from '@react-types/shared';
 
 import { cx } from '../../utils';
 import { Icon } from '../Icon';
 import { UnstyledButton } from '../UnstyledButton';
+import { VisuallyHidden } from '../VisuallyHidden';
 
 export type PaginationButtonsProps = {
   /**
@@ -89,70 +91,84 @@ function getPagesArray(total: number | undefined, eachSide: number, current: num
   return results
 }
 
-/**
- *
- */
+type PaginationButtonProps = {
+  isDisabled?: boolean
+  isCurrent?: boolean
+  children: React.ReactNode
+  onPress: (e: PressEvent) => void
+}
+
+function PaginationButton({ isDisabled, isCurrent, onPress, children }: PaginationButtonProps) {
+  return (
+    <UnstyledButton w={40} h={40} p="xs"
+      c={(isCurrent || isDisabled) ? 'neutral' : 'primary'}
+      bgc={isCurrent ? 'interactive-selected' : undefined}
+      className={cx(
+        {
+          'hover:bg-interactive-hover hover:text-neutral': !isDisabled,
+        }
+      )}
+      onPress={onPress}
+      isDisabled={isDisabled}
+    >
+      {children}
+    </UnstyledButton>
+  )
+}
+
 export function PaginationButtons({ value, totalPages, onChange }: PaginationButtonsProps) {
   const range: number[] = getPagesArray(totalPages, 2, value);
 
   return (
-    <nav role="navigation" aria-label="Pagination">
+    <nav role="navigation" aria-label="Page">
       <ul className="flex justify-center">
         {/* Previous button */}
         <li>
-          <UnstyledButton w={40} h={40} p="xs"
-            c={value === 1 ? 'gray-tint-20' : 'primary'}
+          <PaginationButton isDisabled={value <= 1} onPress={() => onChange(value - 1)}>
+            <Icon name="chevron" rotate={180} size={24} aria-label="previous" />
+          </PaginationButton>
+
+          {/* <UnstyledButton w={40} h={40} p="xs"
+            c={value === 1 ? 'neutral' : 'primary'}
             className={cx(
               'flex',
               {
-                'hover:bg-gray-tint-80 hover:text-gray-shade-80': value !== 1,
+                'hover:bg-interactive-hover': value !== 1,
                 'hover:cursor-not-allowed': value === 1
               }
             )}
             onPress={() => onChange(value - 1)}
             disabled={value === 1}
           >
-            <Icon name="chevron" rotate={180} size={24} />
-            <span className="sr-only">Previous</span>
-          </UnstyledButton>
+
+          </UnstyledButton> */}
         </li>
 
         {/* Pages */}
         {range.map((page, idx) =>
           <li key={idx}>
-            {page === -1 ?
-              <Icon name="dots" w={40} h={40} p="sm" />
-              :
-              <UnstyledButton w={40} h={40} p="xs"
-                c={value === page ? 'gray-shade-80' : 'primary'}
-                bgc={value === page ? 'gray-tint-80' : 'clear'}
-                className='hover:bg-gray-tint-80 hover:text-gray-shade-80'
-                onPress={() => onChange(page)}
-                disabled={value === page}
-              >
-                {page}
-                {value === page && <span className="sr-only">current</span>}
-              </UnstyledButton>
+            {page === -1
+              ? <Icon name="dots" w={40} h={40} p="sm" />
+              : <PaginationButton
+                  isDisabled={value === page}
+                  isCurrent={value === page}
+                  onPress={() => onChange(page)}
+                >
+                  {page}
+                  {value === page && <VisuallyHidden>current</VisuallyHidden>}
+                </PaginationButton>
             }
           </li>
         )}
 
         {/* Next button */}
         <li>
-          <UnstyledButton w={40} h={40} p="xs"
-            c={value === totalPages ? 'gray-tint-20' : 'primary'}
-            className={cx(
-              'flex',
-              {
-                'hover:bg-gray-tint-80 hover:text-gray-shade-80': value !== totalPages,
-                'hover:cursor-not-allowed': value === totalPages
-              })}
+          <PaginationButton
+            isDisabled={totalPages ? value >= totalPages : false}
             onPress={() => onChange(value + 1)}
-            disabled={value === totalPages}
           >
-            <Icon name="chevron" size={24} />
-            <span className="sr-only">Next</span>
-          </UnstyledButton>
+            <Icon name="chevron" size={24} aria-label="next" />
+          </PaginationButton>
         </li>
       </ul>
     </nav >
