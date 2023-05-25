@@ -1,3 +1,30 @@
+# [5.0.0-alpha.21](https://github.com/osuresearch/ui/compare/v5.0.0-alpha.20...v5.0.0-alpha.21) (2023-05-25)
+
+
+### Bug Fixes
+
+* **Arrow:** alignment issue in tooltips ([7f5de3e](https://github.com/osuresearch/ui/commit/7f5de3ec11d6f4bd3f96478ccd721b0de82d31e8))
+* **DateField:** change exposed form field type from `DateValue` to `string` ([2f628c5](https://github.com/osuresearch/ui/commit/2f628c599d687e6a717fe4419d81cc1bb4abef42)), closes [#66](https://github.com/osuresearch/ui/issues/66)
+* **NumberField:** reference to missing component ([2a799bf](https://github.com/osuresearch/ui/commit/2a799bf8291008676d562af1ad962f4e6c8d4ff9))
+* **PaginationButtons:** prev/next buttons do not disable when on the first/last page ([c839bdf](https://github.com/osuresearch/ui/commit/c839bdfab542799028c0bedd22ad3ef7fb945e2e))
+* remove BackToTop and Markdown components. Neither were fully implemented ([d21fa93](https://github.com/osuresearch/ui/commit/d21fa93fe266e247108d88483237e6ce0d0f05e3))
+* remove unneeded dependency on react-transition-group ([68e6f61](https://github.com/osuresearch/ui/commit/68e6f6106b8849cb3c62750d033e84c3244565e3))
+* rename all slot props to have a `render` prefix to improve compatibility with the eslint rule `react/no-unstable-nested-components` ([924de55](https://github.com/osuresearch/ui/commit/924de55efe3bf222b23e4e13e88cb7ab72aa96b0))
+* rename LinkButton to TextLink to conform to BUX's conventions ([b09aff9](https://github.com/osuresearch/ui/commit/b09aff9ea6c859f087f35ecdf59740129b647ca0))
+* **SelectField:** missing chevron icon ([3d2b96a](https://github.com/osuresearch/ui/commit/3d2b96ade78bebb2a3844211ee5fd11bd6821ed2))
+* **UnstyledButton:** block usage of native `onClick` to force developers to use `onPress` for better a11y ([974222b](https://github.com/osuresearch/ui/commit/974222bffb098a10030e321909fb14aa9e8f2c80))
+
+
+### Features
+
+* add `SliderField` component ([7f83742](https://github.com/osuresearch/ui/commit/7f837429959c7a641527c9a4e3581f07713d5616))
+* add DateRangeField ([1a5c7e9](https://github.com/osuresearch/ui/commit/1a5c7e9e6b2b4f2d4b46d75f38eec0448a653b79)), closes [#70](https://github.com/osuresearch/ui/issues/70)
+* add new `Interactive` base component for handling all stateful styling of interactive fields (inputs, selects, etc) ([146b060](https://github.com/osuresearch/ui/commit/146b060389832fc73ed4c8de77e58716c99f35c7))
+* add PaginationButtons components ([c0dfa4a](https://github.com/osuresearch/ui/commit/c0dfa4a70f66c45acf2ec05c0bc37a46698572cb)), closes [#78](https://github.com/osuresearch/ui/issues/78)
+* add source files to distribution bundle ([8a271ac](https://github.com/osuresearch/ui/commit/8a271acc54c6bcdade8f601087715dcbbaf2cc3c))
+* add Tailwind preset for apps that use their own Tailwind runtimes may include and extend RUI's config ([b395c49](https://github.com/osuresearch/ui/commit/b395c497e836192efc9699c365b076f5ef26a755))
+* switch to newer, more consistent, semantics for color tokens ([8f4df30](https://github.com/osuresearch/ui/commit/8f4df30904ce89edce3fb3f9ae83dc962d948bca))
+
 # [5.0.0-alpha.20](https://github.com/osuresearch/ui/compare/v5.0.0-alpha.19...v5.0.0-alpha.20) (2023-04-27)
 
 
