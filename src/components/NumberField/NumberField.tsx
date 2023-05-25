@@ -51,24 +51,20 @@ export const NumberField = forwardRef<HTMLInputElement, NumberFieldProps>((props
           ref={mergeRefs(inputRef, ref)}
         />
 
-        <div className="flex flex-col absolute inset-[2px] left-auto">
+        <div className="flex flex-row absolute inset-[2px] left-auto">
           <IconButton
-            size={14}
-            px="xs"
-            h="50%"
-            label="increment"
-            iconProps={{ rotate: 270 }}
-            name="chevron"
-            {...incrementButtonProps}
+            size={20}
+            px="sm"
+            label="decrement"
+            name="dash"
+            {...decrementButtonProps}
           />
           <IconButton
-            size={14}
-            px="xs"
-            h="50%"
-            label="decrement"
-            iconProps={{ rotate: 90 }}
-            name="chevron"
-            {...decrementButtonProps}
+            size={20}
+            px="sm"
+            label="increment"
+            name="plus"
+            {...incrementButtonProps}
           />
         </div>
       </div>
