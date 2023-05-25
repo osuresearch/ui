@@ -25,7 +25,8 @@
   "source": "src/index.ts",
   "types": "dist/index.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "src"
   ],
   "scripts": {
     "pretest": "npm run lint",
