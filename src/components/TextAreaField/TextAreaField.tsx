@@ -1,42 +1,14 @@
-import { FocusableElement } from '@react-types/shared';
-import React, { DOMAttributes, forwardRef, useRef } from 'react';
+import React, { forwardRef, useRef } from 'react';
 import { AriaTextFieldProps, useTextField } from 'react-aria';
 
-import { cx, mergeRefs } from '../../utils';
-import { Box } from '../Box';
-import { FocusRing } from '../FocusRing';
+import { mergeRefs } from '../../utils';
 import { FormField, FormFieldBase } from '../FormField';
-
-type InputSlotProps = React.InputHTMLAttributes<HTMLTextAreaElement> &
-  DOMAttributes<FocusableElement> & {
-    rows?: number;
-  };
+import { Interactive } from '../Interactive';
 
 export type TextAreaFieldProps = FormFieldBase<string> &
   AriaTextFieldProps & {
     rows?: number;
   };
-
-const TextAreaSlot = forwardRef<HTMLTextAreaElement, InputSlotProps>((props, ref) => (
-  <FocusRing isTextInput={true}>
-    <Box
-      as="textarea"
-      p="xs"
-      bgc="light-tint"
-      c="light-contrast"
-      w="100%"
-      className={cx(
-        'overflow-x-hidden', // Fix for Firefox rendering an extra row (#26)
-        'border-2 border-light-shade',
-        'focus:border-dark-shade',
-        { 'border-dimmed bg-light-shade': props.disabled },
-        { 'border-error': props['aria-invalid'] }
-      )}
-      {...props}
-      ref={ref}
-    />
-  </FocusRing>
-));
 
 /**
  * Multiple lines of text input
@@ -57,13 +29,12 @@ export const TextAreaField = forwardRef<HTMLTextAreaElement, TextAreaFieldProps>
         errorMessageProps={errorMessageProps}
         {...props}
       >
-        <div className="relative w-full">
-          <TextAreaSlot
-            ref={mergeRefs(inputRef, ref)}
-            rows={rows}
-            {...inputProps}
-          />
-        </div>
+        <Interactive as="textarea"
+          isTextInput
+          ref={mergeRefs(inputRef, ref)}
+          rows={rows}
+          {...inputProps}
+        />
       </FormField>
     );
   }

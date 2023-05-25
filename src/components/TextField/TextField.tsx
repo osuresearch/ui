@@ -1,12 +1,9 @@
-import { FocusableElement } from '@react-types/shared';
-import React, { DOMAttributes, forwardRef, useRef } from 'react';
+import React, { forwardRef, useRef } from 'react';
 import { AriaTextFieldProps, mergeProps, useTextField } from 'react-aria';
 
-import { StyleSystemProps } from '../../types';
-import { cx, mergeRefs } from '../../utils';
-import { Box } from '../Box';
-import { FocusRing } from '../FocusRing';
+import { mergeRefs } from '../../utils';
 import { FormField, FormFieldBase } from '../FormField';
+import { Interactive } from '../Interactive';
 
 export type TextFieldSlots = {
   /** Slot content to absolutely position to the left of the input */
@@ -33,30 +30,6 @@ export type TextFieldSlots = {
 };
 
 export type TextFieldProps = FormFieldBase<string> & AriaTextFieldProps & TextFieldSlots;
-
-type InputSlotProps = StyleSystemProps &
-  React.InputHTMLAttributes<HTMLInputElement> &
-  DOMAttributes<FocusableElement>;
-
-export const TextInputSlot = forwardRef<HTMLInputElement, InputSlotProps>((props, ref) => (
-  <FocusRing isTextInput={true}>
-    <Box
-      as="input"
-      p="xs"
-      bgc="light-tint"
-      c="light-contrast"
-      w="100%"
-      className={cx(
-        'border-2 border-light-shade',
-        'focus:border-dark-shade',
-        { 'border-dimmed bg-light-shade': props.disabled },
-        { 'border-error': props['aria-invalid'] }
-      )}
-      {...props}
-      ref={ref}
-    />
-  </FocusRing>
-));
 
 /**
  * Single line of text input
@@ -86,7 +59,8 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
           <div className="absolute inset-[2px] right-auto">{props.leftSlot}</div>
         )}
 
-        <TextInputSlot
+        <Interactive as="input"
+          isTextInput
           ref={mergeRefs(inputRef, ref)}
           {...mergeProps(inputProps, {
             style: {
