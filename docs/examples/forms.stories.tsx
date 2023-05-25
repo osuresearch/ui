@@ -36,15 +36,21 @@ export default {
 
 export const Uncontrolled = (args: any) => {
   const [formData, setFormData] = useState<FormData>();
+  const [key, setKey] = useState(1);
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     setFormData(new FormData(e.currentTarget));
     e.preventDefault();
   };
 
+  // Since inputs are all uncontrolled, force a rerender after reset.
+  const handleReset: FormEventHandler<HTMLFormElement> = () => {
+    setKey((k) => k + 1);
+  }
+
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form key={key} onSubmit={handleSubmit} onReset={handleReset}>
         <Heading level={1}>Kitchen Sink Form</Heading>
         <Paper p="md" withBorder>
           This is an example of an uncontrolled form. Use the browser&apos;s <Code>FormData</Code>{' '}
