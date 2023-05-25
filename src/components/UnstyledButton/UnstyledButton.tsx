@@ -9,8 +9,6 @@ import { FocusRing } from '../FocusRing';
 
 // React.HTMLAttributes<HTMLElement> &
 export type UnstyledButtonProps<T extends React.ElementType<any> = 'button'> = StyleSystemProps &
-  // React.ButtonHTMLAttributes<T> &
-  React.ButtonHTMLAttributes<HTMLButtonElement> &
   AriaButtonProps<T> & {
     /**
      * Button content
