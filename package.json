@@ -70,7 +70,6 @@
     "@types/jest": "^29.2.4",
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.9",
-    "@types/react-transition-group": "^4.4.5",
     "@typescript-eslint/eslint-plugin": "^5.46.0",
     "@typescript-eslint/parser": "^5.46.0",
     "autoprefixer": "^10.4.13",
@@ -164,7 +163,6 @@
     "clsx": "^1.2.1",
     "react-aria": "^3.24.0",
     "react-responsive": "^9.0.2",
-    "react-stately": "^3.22.0",
-    "react-transition-group": "^4.4.5"
+    "react-stately": "^3.22.0"
   }
 }
