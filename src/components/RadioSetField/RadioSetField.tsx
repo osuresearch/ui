@@ -8,13 +8,11 @@ import {
 } from 'react-aria';
 import {
   ListProps,
-  ListState,
   RadioGroupState,
   useListState,
   useRadioGroupState
 } from 'react-stately';
 
-import { SlotProp, useSlots } from '../../hooks/useSlots';
 import { Box } from '../Box';
 import { FormField, FormFieldBase } from '../FormField';
 import { Group } from '../Group';
@@ -49,15 +47,15 @@ export type RadioSetFieldProps = FormFieldBase<string> &
     itemLayout?: 'horizontal' | 'vertical';
   };
 
-export const RadioSetContext = createContext<RadioGroupState & ListState<RadioItem>>(
-  {} as RadioGroupState & ListState<RadioItem>
+export const RadioSetContext = createContext<RadioGroupState>(
+  {} as RadioGroupState
 );
 
 export function DefaultGroupItemSlot({ node, ...props }: GroupItemSlotProps) {
   const state = useContext(RadioSetContext);
   const ref = useRef<HTMLInputElement>(null);
 
-  const isDisabled = state.isDisabled || state.disabledKeys.has(node.key);
+  const isDisabled = state.isDisabled;
 
   const { inputProps, isSelected } = useRadio(
     {
@@ -70,6 +68,7 @@ export function DefaultGroupItemSlot({ node, ...props }: GroupItemSlotProps) {
     ref
   );
 
+  console.log(props, inputProps);
   return (
     <ToggleField
       label={node.rendered}
@@ -111,7 +110,7 @@ export const RadioSetField = forwardRef<HTMLDivElement, RadioSetFieldProps>((pro
   const RenderItem = props.renderItem ?? DefaultGroupItemSlot;
 
   return (
-    <RadioSetContext.Provider value={{ ...listState, ...groupState }}>
+    <RadioSetContext.Provider value={groupState}>
       <FormField<string>
         wrapperProps={radioGroupProps}
         labelAs="span"

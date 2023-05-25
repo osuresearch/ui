@@ -31,8 +31,8 @@ export type CheckboxSetFieldProps = FormFieldBase<string[]> &
     placeholder?: React.ReactNode
   }
 
-const CheckboxSetContext = createContext<CheckboxGroupState & ListState<CheckboxItem>>(
-  {} as CheckboxGroupState & ListState<CheckboxItem>
+const CheckboxSetContext = createContext<CheckboxGroupState>(
+  {} as CheckboxGroupState
 );
 
 type GroupItemProps = AriaCheckboxGroupItemProps & {
@@ -43,7 +43,7 @@ function GroupItem({ node, ...props }: GroupItemProps) {
   const state = useContext(CheckboxSetContext);
   const ref = useRef<HTMLInputElement>(null);
 
-  const isDisabled = state.isDisabled || state.disabledKeys.has(node.key);
+  const isDisabled = state.isDisabled;
   const isSelected = state.isSelected('' + node.key) || props.isIndeterminate;
 
   const { inputProps } = useCheckboxGroupItem(
@@ -97,10 +97,10 @@ export function CheckboxSetField({ placeholder, ...props }: CheckboxSetFieldProp
   // controlled via `value`.
   useEffect(() => {
     groupState.setValue(props.value ?? []);
-  }, [props.value])
+  }, [props.value]);
 
   return (
-    <CheckboxSetContext.Provider value={{ ...listState, ...groupState }}>
+    <CheckboxSetContext.Provider value={groupState}>
       <FormField
         wrapperProps={groupProps}
         labelAs="span"

@@ -24,12 +24,14 @@ export const Overview = RUIComponentStory<CheckboxSetFieldProps>(
     </CheckboxSetField>
   ),
   {
+    name: 'apis',
     label: 'Supported APIs',
     description: 'This is description content for the entire set'
   }
 );
 
 export const UncontrolledValue = RUIComponentStory(Overview, {
+  name: 'apis',
   label: 'Supported APIs',
   defaultValue: ['dx11', 'metal']
 });
@@ -51,6 +53,7 @@ export const ControlledValue = RUIComponentStory<CheckboxSetFieldProps>((args) =
 });
 
 export const Required = RUIComponentStory(Overview, {
+  name: 'apis',
   label: 'Supported APIs',
   isRequired: true,
   necessityIndicator: true
@@ -63,23 +66,27 @@ export const Required = RUIComponentStory(Overview, {
 `);
 
 export const ReadOnly = RUIComponentStory(Overview, {
+  name: 'apis',
   label: 'Supported APIs',
   defaultValue: ['dx11', 'metal'],
   isReadOnly: true
 });
 
 export const Disabled = RUIComponentStory(Overview, {
+  name: 'apis',
   label: 'Supported APIs',
   defaultValue: ['dx11', 'metal'],
   isDisabled: true
 });
 
 export const DisabledItem = RUIComponentStory(Overview, {
+  name: 'apis',
   label: 'Supported APIs',
   disabledKeys: ['metal']
 });
 
 export const Error = RUIComponentStory(Overview, {
+  name: 'apis',
   label: 'Supported APIs',
   validationState: 'invalid',
   errorMessage: 'Select at least one API.'

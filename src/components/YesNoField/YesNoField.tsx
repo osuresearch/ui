@@ -38,7 +38,7 @@ function YesNoGroupItemSlot({ node, ...props }: GroupItemSlotProps) {
   const state = useContext(RadioSetContext);
   const ref = useRef<HTMLInputElement>(null);
 
-  const isDisabled = state.isDisabled || state.disabledKeys.has(node.key);
+  const isDisabled = state.isDisabled;
 
   const { inputProps, isSelected } = useRadio(
     {

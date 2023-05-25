@@ -19,12 +19,14 @@ export const Overview = RUIComponentStory<RadioSetFieldProps>(
     </RadioSetField>
   ),
   {
+    name: 'api',
     label: 'Supported API',
     description: 'This is description content for the entire set'
   }
 );
 
 export const UncontrolledValue = RUIComponentStory(Overview, {
+  name: 'api',
   label: 'Supported API',
   defaultValue: 'vulkan'
 });
@@ -34,7 +36,7 @@ export const ControlledValue = RUIComponentStory<RadioSetFieldProps>((args) => {
 
   return (
     <>
-      <RadioSetField {...args} value={value} onChange={setValue} label="Supported API">
+      <RadioSetField {...args} value={value} onChange={setValue}>
         <Item key="dx11">DirectX 11</Item>
         <Item key="metal">Metal</Item>
         <Item key="vulkan">Vulkan</Item>
@@ -44,9 +46,13 @@ export const ControlledValue = RUIComponentStory<RadioSetFieldProps>((args) => {
       <Button onPress={() => setValue(undefined)}>Reset</Button>
     </>
   );
+}, {
+  name: 'api',
+  label: 'Supported API',
 });
 
 export const Required = RUIComponentStory(Overview, {
+  name: 'api',
   label: 'Supported API',
   isRequired: true,
   necessityIndicator: true
@@ -59,23 +65,27 @@ export const Required = RUIComponentStory(Overview, {
 `);
 
 export const ReadOnly = RUIComponentStory(Overview, {
+  name: 'api',
   label: 'Supported API',
   defaultValue: 'metal',
   isReadOnly: true
 });
 
 export const Disabled = RUIComponentStory(Overview, {
+  name: 'api',
   label: 'Supported API',
   defaultValue: 'metal',
   isDisabled: true
 });
 
 export const DisabledItem = RUIComponentStory(Overview, {
+  name: 'api',
   label: 'Supported API',
   disabledKeys: ['metal']
 });
 
 export const Error = RUIComponentStory(Overview, {
+  name: 'api',
   label: 'Supported API',
   validationState: 'invalid',
   errorMessage: 'Select at least one API.'
