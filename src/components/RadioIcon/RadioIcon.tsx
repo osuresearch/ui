@@ -19,7 +19,7 @@ export type RadioIconProps = DOMAttributes<FocusableElement> &
  * <!-- @ruiInternal -->
  * @internal
  */
-export const RadioIcon = ({ isSelected, isDisabled, isFocusVisible, ...props }: RadioIconProps) => (
+export const RadioIcon = ({ isSelected, isDisabled, isFocusVisible, className, ...props }: RadioIconProps) => (
   <Box
     miw={20}
     w={20}
@@ -27,11 +27,11 @@ export const RadioIcon = ({ isSelected, isDisabled, isFocusVisible, ...props }: 
     className={cx(
       'border-2 rounded-full',
 
-      // TODO: I don't like this usage of class selectors abusing active.
       { 'bg-surface border-outline-active': !isSelected && !isDisabled },
       { 'bg-surface border-primary': isSelected && !isDisabled },
       { 'border-outline-disabled bg-input-disabled': isDisabled },
-      { 'ring focus-ring': isFocusVisible }
+      { 'ring focus-ring': isFocusVisible },
+      className,
     )}
     {...props}
   >
