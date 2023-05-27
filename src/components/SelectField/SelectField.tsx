@@ -84,6 +84,7 @@ export const SelectField = forwardRef<HTMLButtonElement, SelectFieldProps>((prop
           <Interactive as={UnstyledButton}
             ref={mergeRefs(ref, triggerRef)}
             {...triggerProps}
+            disabled={isDisabled}
             className="text-left"
           >
             <span {...valueProps}>
