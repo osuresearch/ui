@@ -26,6 +26,7 @@ export const SwitchIcon = ({
   // Currently the generic <ToggleField> passes this down.
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   isIndeterminate,
+  className,
   ...props
 }: SwitchIconProps) => (
   <Box
@@ -40,7 +41,8 @@ export const SwitchIcon = ({
       { 'border-outline-active bg-outline-active': !isSelected },
       { 'border-primary bg-primary': isSelected },
       { 'border-outline-disabled bg-outline-disabled': isDisabled },
-      { 'ring focus-ring': isFocusVisible }
+      { 'ring focus-ring': isFocusVisible },
+      className,
     )}
     {...props}
   >
