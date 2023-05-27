@@ -1,42 +1,28 @@
-import { AriaMenuProps } from '@react-types/menu';
-import { CollectionChildren, Node } from '@react-types/shared';
 import React, { useRef } from 'react';
-import { AriaMenuOptions, useMenu, useMenuItem, useMenuSection, useMenuTrigger, useSeparator } from 'react-aria';
+import { Node } from '@react-types/shared';
+import { AriaMenuOptions, useMenu, useMenuItem, useMenuSection, useSeparator } from 'react-aria';
 import {
-  MenuTriggerProps,
   TreeProps,
   TreeState,
-  useMenuTriggerState,
   useTreeState
 } from 'react-stately';
 
 import { cx } from '../../utils';
 import { Box } from '../Box';
-import { Button } from '../Button';
 import { CheckboxIcon } from '../CheckboxIcon';
 import { FocusRing } from '../FocusRing';
 import { Group } from '../Group';
-import { Icon } from '../Icon';
-import { Popover } from '../Popover';
 import { Divider } from '../Divider';
 import { Text } from '../Text';
 
-export type MenuProps<T extends object = any> = MenuTriggerProps &
-  AriaMenuProps<T> & {
-    label: React.ReactNode;
+export type MenuProps<T> = TreeProps<T> & AriaMenuOptions<T>;
 
-    isDisabled?: boolean;
-
-    /** `Item` components only */
-    children: CollectionChildren<T>;
-  };
-
-type MenuItemProps<T> = {
+export type MenuItemProps<T> = {
   state: TreeState<T>;
   node: Node<T>;
 };
 
-function MenuItem<T>({ node, state }: MenuItemProps<T>) {
+export function MenuItem<T>({ node, state }: MenuItemProps<T>) {
   const ref = useRef<HTMLLIElement>(null);
   const { menuItemProps, isFocused, isSelected, isDisabled } = useMenuItem(
     { key: node.key },
@@ -72,9 +58,7 @@ function MenuItem<T>({ node, state }: MenuItemProps<T>) {
   );
 }
 
-type MenuImplProps<T> = TreeProps<T> & AriaMenuOptions<T>;
-
-function MenuSection<T>(props: MenuItemProps<T>) {
+export function MenuSection<T>(props: MenuItemProps<T>) {
   const { node, state } = props;
   const { itemProps, headingProps, groupProps } = useMenuSection({
     heading: node.rendered,
@@ -108,7 +92,10 @@ function MenuSection<T>(props: MenuItemProps<T>) {
   );
 }
 
-function MenuImpl<T extends object>(props: MenuImplProps<T>) {
+/**
+ * @internal
+ */
+export function Menu<T extends object>(props: MenuProps<T>) {
   const state = useTreeState<T>(props);
   const ref = useRef<HTMLUListElement>(null);
   const { menuProps } = useMenu<T>(props, state, ref);
@@ -131,34 +118,5 @@ function MenuImpl<T extends object>(props: MenuImplProps<T>) {
         })}
       </Box>
     </FocusRing>
-  );
-}
-
-/**
- * A menu displays a list of actions or options that a user can choose.
- */
-export function Menu<T extends object = any>({ children, label, ...props }: MenuProps<T>) {
-  const triggerRef = useRef<HTMLButtonElement>(null);
-  const state = useMenuTriggerState(props);
-
-  const { menuTriggerProps, menuProps } = useMenuTrigger<T>(props, state, triggerRef);
-
-  return (
-    <>
-      <Button ref={triggerRef}
-        isDisabled={props.isDisabled}
-        renderRight={<Icon name="chevron" rotate={90} />}
-        {...menuTriggerProps}
-      >
-        {label}
-      </Button>
-      {state.isOpen && (
-        <Popover state={state} triggerRef={triggerRef} placement="bottom left">
-          <MenuImpl<T> {...menuProps} {...props}>
-            {children}
-          </MenuImpl>
-        </Popover>
-      )}
-    </>
   );
 }

@@ -4,17 +4,18 @@ import React, { useState } from 'react';
 
 import { Item } from '../Item';
 import { Text } from '../Text';
-import { Menu, MenuProps } from './Menu';
+import { MenuButton, MenuButtonProps } from './MenuButton';
 import { Section } from '../Section';
+import { IconButton } from '../IconButton';
 
-export default RUIComponentMeta<MenuProps>('Buttons', Menu);
+export default RUIComponentMeta<MenuButtonProps>('Buttons', MenuButton);
 
-export const Overview = RUIComponentStory<MenuProps>((args) => (
-  <Menu {...args} label="Options" onAction={alert}>
+export const Overview = RUIComponentStory<MenuButtonProps>((args) => (
+  <MenuButton {...args} label="Options" onAction={alert}>
     <Item key="copy">Copy</Item>
     <Item key="cut">Cut</Item>
     <Item key="paste">Paste</Item>
-  </Menu>
+  </MenuButton>
 ));
 
 export const Disabled = RUIComponentStory(Overview, {
@@ -25,7 +26,7 @@ export const WithDisabledItems = RUIComponentStory(Overview, {
   disabledKeys: ['cut']
 });
 
-export const DynamicItems = RUIComponentStory<MenuProps>((args) => {
+export const DynamicItems = RUIComponentStory<MenuButtonProps>((args) => {
   const items = [
     { id: 'new', name: 'New' },
     { id: 'open', name: 'Open' },
@@ -37,14 +38,14 @@ export const DynamicItems = RUIComponentStory<MenuProps>((args) => {
   ];
 
   return (
-    <Menu {...args} label="Options" items={items} onAction={alert}>
+    <MenuButton {...args} label="Options" items={items} onAction={alert}>
       {(item) => <Item key={item.id}>{item.name}</Item>}
-    </Menu>
+    </MenuButton>
   );
 });
 
-export const WithSections = RUIComponentStory<MenuProps>((args) => (
-  <Menu {...args} label="Options" onAction={alert}>
+export const WithSections = RUIComponentStory<MenuButtonProps>((args) => (
+  <MenuButton {...args} label="Options" onAction={alert}>
     <Section title="My Account">
       <Item key="billing">Billing</Item>
       <Item key="settings">Settings</Item>
@@ -57,16 +58,34 @@ export const WithSections = RUIComponentStory<MenuProps>((args) => (
     <Section>
       <Item key="logout">Log out</Item>
     </Section>
-  </Menu>
+  </MenuButton>
+));
+
+export const WithCustomTrigger = RUIComponentStory<MenuButtonProps>((args) => (
+  <MenuButton {...args} onAction={alert} renderTrigger={<IconButton label="More options" name="dots" iconProps={{ rotate: 90 }} />}>
+    <Section title="My Account">
+      <Item key="billing">Billing</Item>
+      <Item key="settings">Settings</Item>
+    </Section>
+    <Section title="My Team">
+      <Item key="invite">Invite users</Item>
+      <Item key="new">New team</Item>
+      <Item key="permissions">Permissions</Item>
+    </Section>
+    <Section>
+      <Item key="logout">Log out</Item>
+    </Section>
+  </MenuButton>
 ));
 
 
-export const SelectingItems = RUIComponentStory<MenuProps>((args) => {
+
+export const SelectingItems = RUIComponentStory<MenuButtonProps>((args) => {
   const [selection, setSelection] = useState<Selection>(new Set(['dx12', 'metal']));
 
   return (
     <>
-      <Menu
+      <MenuButton
         {...args}
         label="Transpile target(s)"
         selectionMode="multiple"
@@ -82,7 +101,7 @@ export const SelectingItems = RUIComponentStory<MenuProps>((args) => {
           <Item key="dx11">DirectX 11</Item>
           <Item key="gl2">OpenGL 2.0</Item>
         </Section>
-      </Menu>
+      </MenuButton>
       <Text as="p">Selected: {Array.from(selection).join(', ')}</Text>
     </>
   );
