@@ -19,7 +19,7 @@ export type ThemeSize = typeof size[number];
 export const fontSize = ['xs', 'sm', 'base', 'md', 'lg', 'xl', 'xxl'] as const;
 export type FontSize = typeof fontSize[number];
 
-export const fontWeight = ['normal', 'semibold', 'bold', 'extrabold', 'black'] as const;
+export const fontWeight = ['regular', 'semibold', 'bold', 'extrabold', 'black'] as const;
 export type FontWeight = typeof fontWeight[number];
 
 export const fontFamily = ['sans', 'serif', 'mono'] as const;

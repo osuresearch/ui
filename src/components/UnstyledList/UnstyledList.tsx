@@ -9,7 +9,6 @@ import {
 } from 'react-aria';
 import { ListProps, ListState, useListState } from 'react-stately';
 
-import { SlotProp, useSlots } from '../../hooks/useSlots';
 import { mergeRefs, polymorphicForwardRef } from '../../utils';
 import { Box } from '../Box';
 
@@ -37,7 +36,7 @@ export type UnstyledListSlots = {
    * If not defined, only the content of each `<Item>` will
    * be rendered for each list item.
    */
-  renderRow?: SlotProp<RowSlotProps>;
+  renderRow?: React.ComponentType<RowSlotProps>;
 };
 
 export type UnstyledListProps = ListProps<any> &
@@ -63,7 +62,7 @@ function Item({ node, state, ...props }: ItemProps) {
   const { rowProps, gridCellProps } = useGridListItem({ node }, state, ref);
   const { checkboxProps } = useGridListSelectionCheckbox({ key: node.key }, state);
 
-  const { renderRow: RowSlot } = useSlots(props);
+  const RowSlot = props.renderRow;
 
   const isInteractive = state.selectionManager.selectionMode !== 'none';
   // Quick check: if it's interactive and they didn't provide a slot renderer,

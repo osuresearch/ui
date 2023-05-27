@@ -3,14 +3,14 @@ import React from 'react';
 import { useScreenSize } from '../../src/hooks';
 import { ScreenSize } from '../../src/types';
 import { Icon } from '../../src/components/Icon';
-import { Box } from '../../src/components/Box';
+import { Group } from '../../src/components/Group';
 
 export function BreakpointTable({ size }: { size: ScreenSize }) {
   const { breakpoints } = useScreenSize();
 
   return (
-    <Box c="white" bgc={breakpoints[size] ? 'success' : 'critical'} px="sm" py="xs">
+    <Group justify="center" c="white" bgc={breakpoints[size] ? 'success-bold' : 'critical-bold'} px="sm" py="xs">
       <Icon name={breakpoints[size] ? 'check' : 'xmark'} />
-    </Box>
+    </Group>
   );
 }

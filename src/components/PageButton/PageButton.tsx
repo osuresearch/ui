@@ -27,7 +27,7 @@ export const PageButton = polymorphicForwardRef<'button', PageButtonProps>(
         light: 'primary',
         dark: 'neutral'
       }}
-      fw="semibold"
+      fw="bold"
       py="lg"
       px="md"
       w="100%"
@@ -36,7 +36,7 @@ export const PageButton = polymorphicForwardRef<'button', PageButtonProps>(
         'flex',
 
         'border-2',
-        'border-primary',
+        'border-surface-subtle',
 
         // Hover style uses the primary color palette
         'hover:bg-primary-hover',

@@ -28,7 +28,7 @@ export const Paper = polymorphicForwardRef<'div', PaperProps>(
         'relative',
         {
           // Border style
-          'border-light': withBorder,
+          'border border-surface-subtle': withBorder,
 
           // Shadow
           'shadow-sm': shadow === 'sm',

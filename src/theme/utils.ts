@@ -31,7 +31,7 @@ const fontFamilyClasses = {
 } as Record<FontFamily, string>;
 
 const fontWeightClasses = {
-  normal: 'font-normal',
+  regular: 'font-regular',
   semibold: 'font-semibold',
   bold: 'font-bold',
   extrabold: 'font-extrabold',

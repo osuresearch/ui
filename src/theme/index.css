@@ -1,4 +1,6 @@
-/* Note that this file is in PostCSS syntax. Use an appropriate plugin. */
+@import url(
+  'https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800;900&family=Source+Serif+Pro:wght@400;600;700;900&display=swap'
+);
 
 @tailwind base;
 @tailwind components;

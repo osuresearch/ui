@@ -39,7 +39,7 @@ export const RadioIcon = ({ isSelected, isDisabled, isFocusVisible, ...props }: 
       <Icon
         className="[&>svg]:animate-pop"
         size={16}
-        c={!isDisabled ? 'primary' : 'input-disabled'}
+        c={!isDisabled ? 'primary' : 'outline-disabled'}
         name="circleFill"
         block
       />

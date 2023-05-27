@@ -8,7 +8,7 @@
   --osu-scarlet-dark-40: #70071c;
   --osu-scarlet-dark-60: #4a0513;
 
-  --osu-gray: #a7b1b7;
+  --osu-gray: #a7b1b7; /* hsl(202.5,10%,68.6%) */
 
   --osu-gray-tint-20: #bfc6cb;
   --osu-gray-tint-40: #cfd4d8;
@@ -20,6 +20,7 @@
   --osu-gray-shade-40: #646a6e;
   --osu-gray-shade-60: #3f4443;
   --osu-gray-shade-80: #212325;
+  --osu-gray-shade-90: #111212;
 
   --osu-blue: #41b6e6;
   --osu-orange: #ff6a39;
@@ -47,8 +48,8 @@
   /*
     Typography tokens
   */
-  --rui-font-sans: BuckeyeSans, HelveticaNeue, Helvetica, Arial, serif;
-  --rui-font-serif: BuckeyeSerif, Georgia, sans-serif;
+  --rui-font-serif: 'Source Serif Pro', Georgia, serif;
+  --rui-font-sans: 'Nunito Sans', HelveticaNeue, Helvetica, Arial, sans-serif;
   --rui-font-mono: Menlo, Monaco, 'Courier New', monospace;
 
   --rui-text-xs: 0.75rem;
@@ -64,7 +65,7 @@
   --rui-heading-3: 1.25rem;
   --rui-heading-4: 1.125rem;
 
-  --rui-font-normal: 400;
+  --rui-font-regular: 400;
   --rui-font-semibold: 600;
   --rui-font-bold: 700;
   --rui-font-extrabold: 800;
@@ -99,7 +100,7 @@
 
   --rui-neutral-subtle: var(--osu-gray-shade-40);
   --rui-neutral: #141517;
-  --rui-neutral-bold: #000000;
+  --rui-neutral-bold: var(--osu-gray-shade-80);
 
   --rui-surface-subtle: var(--osu-gray-tint-90);
   --rui-surface: #ffffff;
@@ -207,70 +208,75 @@
 }
 
 /* Theme-responsive tokens */
-
-[data-theme="light"] {
-  --rui-light-tint: var(--rui-white);
-  --rui-light: var(--rui-gray-tint-90);
-  --rui-light-shade: var(--rui-gray-tint-80);
-  --rui-light-contrast: var(--rui-black);
-
-  --rui-dimmed-tint: var(--rui-gray-tint-60);
-  --rui-dimmed: var(--rui-gray-tint-40);
-  --rui-dimmed-shade: var(--rui-gray-tint-20);
-  --rui-dimmed-contrast: var(--rui-black);
-
-  --rui-dark-tint: var(--rui-gray-shade-20);
-  --rui-dark: var(--rui-gray-shade-40);
-  --rui-dark-shade: var(--rui-gray-shade-60);
-  --rui-dark-contrast: var(--rui-white);
-
-  --rui-link-tint: var(--rui-white);
-
-  --rui-visited: #660099;
-  --rui-visited-tint: #e5c9f3;
-
-
-
-
-  --rui-light-tint: red;
-  --rui-light: red;
-  --rui-light-shade: red;
-  --rui-light-contrast: red;
-
-  --rui-dimmed-tint: green;
-  --rui-dimmed: green;
-  --rui-dimmed-shade: green;
-  --rui-dimmed-contrast: green;
-
-  --rui-dark-tint: blue;
-  --rui-dark: blue;
-  --rui-dark-shade: blue;
-  --rui-dark-contrast: blue;
-
-  --rui-link-tint: pink;
-}
-
 [data-theme="dark"] {
-  --rui-light-tint: var(--rui-black);
-  --rui-light: var(--rui-gray-shade-80);
-  --rui-light-shade: var(--rui-gray-shade-60);
-  --rui-light-contrast: var(--rui-white);
 
-  --rui-dimmed-tint: var(--rui-gray-shade-40);
-  --rui-dimmed: var(--rui-gray-shade-20);
-  --rui-dimmed-shade: var(--rui-gray);
-  --rui-dimmed-contrast: var(--rui-black);
+  --rui-focus: var(--rui-white);
 
-  --rui-dark-tint: var(--rui-gray-tint-20);
-  --rui-dark: var(--rui-gray-tint-40);
-  --rui-dark-shade: var(--rui-gray-tint-60);
-  --rui-dark-contrast: var(--rui-black);
+  --rui-neutral-subtle: var(--osu-gray-tint-20);
+  --rui-neutral:        var(--osu-gray-tint-90);
+  --rui-neutral-bold:   var(--rui-white);
 
-  --rui-link: var(--rui-white);
-  --rui-link-tint: var(--rui-link-tint);
+  --rui-surface-subtle:   var(--osu-gray-shade-80);
+  --rui-surface:          var(--rui-black);
+  --rui-surface-bold:     var(--osu-gray-shade-90);
 
-  --rui-visited: #e5c9f3;
-  --rui-visited-tint: #e5c9f3;
+  --rui-surface-subtle-inverse: var(--rui-white);
+  --rui-surface-inverse:        var(--rui-white);
+  --rui-surface-bold-inverse:   var(--rui-white);
 
-  --rui-focus: var(--rui-green);
+  --rui-primary:            var(--osu-scarlet);
+  --rui-primary-hover:      var(--osu-gray-shade-80);
+  --rui-primary-active:     var(--osu-gray-shade-60);
+  --rui-primary-disabled:   var(--osu-gray-shade-20);
+  --rui-primary-inverse:    var(--rui-white);
+
+  --rui-secondary:          var(--osu-gray);
+  --rui-secondary-inverse:  var(--rui-black);
+
+  --rui-tertiary:           var(--osu-teal);
+  --rui-tertiary-inverse:   var(--rui-white);
+
+  --rui-link:               var(--rui-white);
+  --rui-link-hover:         var(--rui-white);
+  --rui-surface-link-hover: var(--osu-gray-shade-60);
+
+  --rui-info:         var(--osu-info);
+  --rui-info-bold:    var(--osu-info);
+  --rui-info-inverse: var(--rui-black);
+
+  --rui-caution:          var(--osu-warning);
+  --rui-caution-bold:     var(--osu-warning);
+  --rui-caution-inverse:  var(--rui-black);
+
+  --rui-critical:         var(--osu-error);
+  --rui-critical-bold:    var(--osu-error);
+  --rui-critical-inverse: var(--rui-white);
+
+  --rui-success:          var(--osu-success);
+  --rui-success-bold:     var(--osu-success);
+  --rui-success-inverse:  var(--rui-black);
+
+  /* Buttons, menu options */
+  --rui-interactive:          var(--osu-gray-shade-80);
+  --rui-interactive-hover:    var(--osu-gray-shade-60);
+  --rui-interactive-active:   var(--osu-gray-shade-40);
+  --rui-interactive-selected: var(--osu-gray-shade-80);
+  --rui-interactive-disabled: var(--osu-shade-40);
+  /* --rui-interactive-bold-disabled: var(--osu-tint-60); */
+
+  --rui-interactive-subtle-hover: var(--osu-gray-shade-60);
+
+  /* Text input, numeric input, choice input */
+  --rui-input:          var(--rui-surface);
+  --rui-input-active:   var(--rui-surface);
+  --rui-input-focused:  var(--rui-surface);
+  --rui-input-error:    var(--rui-surface);
+  --rui-input-disabled: var(--osu-gray-shade-80);
+
+  /* Borders on interactives */
+  --rui-outline:          var(--osu-gray-shade-60);
+  --rui-outline-active:   var(--osu-gray-shade-20);
+  --rui-outline-focused:  blue;
+  --rui-outline-error:    var(--osu-error);
+  --rui-outline-disabled: var(--osu-gray-shade-60);
 }

@@ -13,7 +13,7 @@ export default create({
   appBorderRadius: 0,
 
   // Typography
-  fontBase: 'BuckeyeSans, HelveticaNeue, Helvetica, Arial, serif',
+  fontBase: 'Nunito Sans, HelveticaNeue, Helvetica, Arial, serif',
   fontCode: 'monospace',
 
   // Text colors

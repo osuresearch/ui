@@ -65,7 +65,7 @@ export const Uncontrolled = (args: any) => {
             <TextField name="textField" label="Text field" {...args} />
             <TextAreaField name="textAreaField" label="TextArea field" {...args} />
             <DateField name="dateField" label="Date field" {...args} />
-            <DateRangeField name="dateRangeField" label="Date range field" {...args} />
+            {/* <DateRangeField name="dateRangeField" label="Date range field" {...args} /> */}
             <NumberField locale="en-US" name="numberField" label="Number field" {...args} />
             <NumberField
               locale="en-US"
@@ -192,7 +192,7 @@ Uncontrolled.argTypes = {
 };
 
 Uncontrolled.args = {
-  description: '',
+  description: 'This is additional help text',
   isRequired: false,
   necessityIndicator: false,
   isReadOnly: false,
@@ -259,11 +259,11 @@ export const ReactHookForm7 = (args: any) => {
               {...register('dateField')}
               {...args}
             />
-            <DateRangeField
+            {/* <DateRangeField
               label="Date range field"
               {...register('dateRangeField')}
               {...args}
-            />
+            /> */}
             <NumberField
               locale="en-US"
               label="Number field"
@@ -425,7 +425,7 @@ ReactHookForm7.argTypes = {
 };
 
 ReactHookForm7.args = {
-  description: '',
+  description: 'This is additional help text',
   // isRequired: false,
   // necessityIndicator: false,
   // isReadOnly: false,

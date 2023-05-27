@@ -10,8 +10,15 @@
   overrides in the future.
 */
 
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800;900&family=Source+Serif+Pro:wght@400;600;700;900&display=swap');
+
 :root {
   /* TODO: Pull in tokens from the content so we can reuse them here. */
+
+  --rui-font-serif: 'Source Serif Pro', Georgia, serif;
+  --rui-font-sans: 'Nunito Sans', HelveticaNeue, Helvetica, Arial, sans-serif;
+  --rui-font-mono: Menlo, Monaco, 'Courier New', monospace;
+
   --rui-scarlet: #ba0c2f;
   --rui-caret-svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='32' height='32' viewBox='0 0 24 24'%3E%3Cpath fill='rgb(100, 106, 110)' d='M9.4 18L8 16.6l4.6-4.6L8 7.4L9.4 6l6 6Z'%3E%3C/path%3E%3C/svg%3E");
 
@@ -29,6 +36,7 @@
 /* Setup room for injected header / footer content */
 #root {
   height: calc(100vh - 48px);
+  font-family: var(---rui-font-sans);
 }
 #root > div {
   height: calc(100vh - 48px);
@@ -54,29 +62,14 @@
     scale: 0;
   }
 
-  /* .container.sidebar-container::after {
-    content: '';
-    position: absolute;
-    top: -200px;
-    left: -200px;
-    width: 400px;
-    height: 400px;
-    background: #a7b1b7;
-    opacity: 0.4;
-    filter: blur(150px);
+  .rui-link--root {
+    font-weight: 700;
+    font-size: 14px !important;
   }
 
-  .dark .container.sidebar-container::after {
-    content: '';
-    position: absolute;
-    top: -200px;
-    left: -200px;
-    width: 400px;
-    height: 400px;
-    background: #212325;
-    opacity: 0.4;
-    filter: blur(150px);
-  } */
+  .sidebar-item {
+    font-size: 14px !important;
+  }
 
   /* Root toggle carets */
   .sidebar-subheading > button > span:first-of-type,
@@ -333,7 +326,7 @@ button[title="Shortcuts"]:focus::before {
   }
 
   /* Color highlight in the corner - decoration only */
-  div[role="main"]:before {
+  /* div[role="main"]:before {
     content: '';
     position: fixed;
     pointer-events: none;
@@ -343,15 +336,9 @@ button[title="Shortcuts"]:focus::before {
     left: -100px;
     width: 400px;
     height: 400px;
-    background: #a7b1b7;
-    opacity: 0.2;
+    background: #bd0b2f08;
     filter: blur(100px);
-  }
-
-  .dark div[role="main"]:before {
-    background: #4a0513;
-    opacity: 0.2;
-  }
+  } */
 
 </style>
 

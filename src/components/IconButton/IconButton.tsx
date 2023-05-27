@@ -40,7 +40,7 @@ export type IconButtonProps = Omit<UnstyledButtonProps, 'children'> & {
  * <!-- @ruiPolymorphic -->
  */
 export const IconButton = polymorphicForwardRef<'button', IconButtonProps>(
-  ({ as, className, variant = 'default', name, label, size = 38, iconProps, ...props }, ref) => {
+  ({ as, className, variant = 'default', name, label, size = 24, iconProps, ...props }, ref) => {
     const { resolve } = useScreenSize();
     const iconSize = resolve(size);
 

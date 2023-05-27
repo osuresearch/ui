@@ -109,7 +109,7 @@ export const Illustrations = RUIComponentStory<IconProps>(
     block: true,
     c: 'clear',
     svgProps: {
-      stroke: 'var(--rui-error)'
+      stroke: 'var(--rui-critical)'
     }
   }
 ).withDescription('SVG illustrations can be combined with text for large placeholders');

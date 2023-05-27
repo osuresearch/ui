@@ -82,7 +82,7 @@ export const HelpIcon = RUIComponentStory<TooltipProps>(
   (args) => (
     <Box p="xxl">
       <Tooltip {...args}>
-        <Icon c="dark" name="questionCircle" aria-label="Help with this feature" />
+        <Icon c="neutral-subtle" name="questionCircle" aria-label="Help with this feature" />
       </Tooltip>
     </Box>
   ),
@@ -96,8 +96,8 @@ export const HelpIcon = RUIComponentStory<TooltipProps>(
 export const LongContent = RUIComponentStory(Overview, {
   renderContent: (
     <>
-      long content that also includes <Text c="green" fw="bold">text formatting</Text>, icons{' '}
-      <Icon name="heartFill" c="pink" />, and a whole bunch of text on a single line to see if it
+      long content that also includes <Text c="accent01" fw="bold">text formatting</Text>, icons{' '}
+      <Icon name="heartFill" c="accent05" />, and a whole bunch of text on a single line to see if it
       wraps.
       <Space />
       And maybe even a list for good measure:

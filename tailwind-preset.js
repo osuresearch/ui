@@ -153,12 +153,12 @@ module.exports = {
     },
     // Ref: https://bux.osu.edu/typography/fonts
     fontFamily: {
-      sans: ['BuckeyeSans', 'HelveticaNeue', 'Helvetica', 'Arial', 'serif'],
-      serif: ['BuckeyeSerif', 'Georgia', 'sans-serif'],
+      sans: ['Nunito Sans', 'HelveticaNeue', 'Helvetica', 'Arial', 'serif'],
+      serif: ['Source Serif Pro', 'Georgia', 'sans-serif'],
       mono: ['Menlo', 'Monaco', 'Courier New', 'monospace'],
     },
     fontWeight: {
-      normal: 'var(--rui-font-normal)',
+      regular: 'var(--rui-font-regular)',
       semibold: 'var(--rui-font-semibold)',
       bold: 'var(--rui-font-bold)',
       extrabold: 'var(--rui-font-extrabold)',

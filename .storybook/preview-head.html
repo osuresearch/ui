@@ -1,7 +1,32 @@
 
 <style>
 
-/* Match BUX sans serif */
+body {
+  background-color: var(--rui-surface);
+}
+
+/*
+  Storybook has no font size adjustment so... hacks! And more hacks!
+  Hopefully Storybook 7 means less hacks.
+*/
+.sbdocs-p {
+  font-size: 16px !important;
+}
+
+.sbdocs-li {
+    font-size: 16px !important;
+}
+
+.docblock-argstable-body {
+  font-size: 14px !important;
+}
+
+.docblock-argstable-body tr {
+  border-top: 2px solid var(--rui-surface-subtle) !important;
+}
+
+
+/* Match BUX serif */
 .sbdocs-title,
 .sbdocs-h1 {
   margin-top: var(--rui-spacing-xl) !important;
@@ -131,7 +156,7 @@
 }
 
 .docblock-argstable-body tr {
-  border-top: 2px solid var(--rui-neutral-subtle) !important;
+  border-top: 2px solid var(--rui-surface-subtle) !important;
 }
 
 .sbdocs .docs-story {

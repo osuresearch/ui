@@ -30,7 +30,7 @@ export const Details = forwardRef<HTMLDetailsElement, DetailsProps>(
       className={cx(
         'group',
         'border-b-2',
-        'border-surface-bold'
+        'border-outline'
       )}
       {...props}
     >
@@ -42,7 +42,7 @@ export const Details = forwardRef<HTMLDetailsElement, DetailsProps>(
           gap="xs"
           className={cx(
             'border-t-2',
-            'border-surface-bold',
+            'border-outline',
             'hover:bg-interactive-subtle-hover focus:bg-interactive-subtle-hover group-open:bg-interactive-subtle-hover',
             'details'
           )}

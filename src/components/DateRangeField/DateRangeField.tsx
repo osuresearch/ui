@@ -154,7 +154,7 @@ export const DateRangeField = forwardRef<HTMLDivElement, DateRangeFieldProps>((p
           : <Box
               hidden={showStartInput}
               onClick={() => editDate('start')}
-              className='text-gray-neutral-subtle'
+              className='text-neutral-subtle'
             >Anytime</Box>
         }
 
@@ -167,7 +167,7 @@ export const DateRangeField = forwardRef<HTMLDivElement, DateRangeFieldProps>((p
           : <Box
               hidden={showEndInput}
               onClick={() => editDate('end')}
-              className='text-gray-neutral-subtle'
+              className='text-neutral-subtle'
             >Anytime</Box>
         }
       </Interactive>

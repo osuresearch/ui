@@ -25,6 +25,7 @@ export const CheckboxIcon = ({
   isIndeterminate,
   isFocusVisible,
   isDisabled,
+  className,
   ...props
 }: CheckboxIconProps) => (
   <Box
@@ -38,16 +39,16 @@ export const CheckboxIcon = ({
       { 'bg-surface border-outline-active': !isSelected && !isIndeterminate && !isDisabled },
       { 'bg-primary border-primary': (isSelected || isIndeterminate) && !isDisabled },
       { 'border-outline-disabled bg-input-disabled': isDisabled },
-      { 'ring focus-ring': isFocusVisible }
+      { 'ring focus-ring': isFocusVisible },
+      className,
     )}
     {...props}
   >
     {(isSelected || isIndeterminate) && (
       <Icon
-        role="presentation"
         className="[&>svg]:animate-pop"
         size={16}
-        c={!isDisabled ? 'input' : 'input-disabled'}
+        c="white"
         name={isIndeterminate ? 'dash' : 'check'}
         block
       />

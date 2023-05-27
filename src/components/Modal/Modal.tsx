@@ -50,6 +50,7 @@ export function Modal({ children, state, overlayProps, ...props }: ModalProps) {
 
       <div className="fixed inset-0 flex justify-center z-50">
         <Paper
+          withBorder
           className="top-[10%] h-fit max-h-[80vh] max-w-sm flex justify-center relative animate-fade-in-down"
           {...modalProps}
           ref={modalRef}

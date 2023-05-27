@@ -74,7 +74,7 @@ export const WithIcon = RUIComponentStory(Overview, {
 // TODO: Don't like the style hack for the buttons. Maybe it can be
 // a variant / setting? Or the content container is guaranteed within border?
 export const WithButton = RUIComponentStory(Overview, {
-  renderLeft: <Icon c="dark" name="search" size={18} p="sm" />,
+  renderLeft: <Icon c="neutral-subtle" name="search" size={18} p="sm" />,
   leftWidth: 42,
   renderRight: <Button h="100%">Search</Button>,
   rightWidth: 80,

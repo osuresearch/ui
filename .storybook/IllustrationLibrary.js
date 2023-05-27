@@ -37,7 +37,7 @@ export function IllustrationLibrary({ group }) {
 
   const config = {
     brand: {
-      c: 'light-contrast',
+      c: 'var(--rui-neutral)',
     },
     system: {
       c: 'clear',
