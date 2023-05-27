@@ -36,7 +36,6 @@ export function ProgressBar({
 }: ProgressBarProps) {
   const { progressBarProps, labelProps } = useProgressBar({
     label,
-    showValueLabel: true,
     value,
     minValue,
     maxValue
@@ -61,8 +60,8 @@ export function ProgressBar({
       </Group>
       <Box h={4} className="overflow-x-hidden relative">
       {isIndeterminate
-        ? <Box bgc="info" className="animate-scroll absolute inset-0" w="50%" />
-        : <Box bgc="info" h="100%" w={barWidth} />
+        ? <Box bgc="info-bold" className="animate-scroll absolute inset-0" w="50%" />
+        : <Box bgc="info-bold" h="100%" w={barWidth} />
       }
       </Box>
     </Box>
