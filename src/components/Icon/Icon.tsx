@@ -29,7 +29,7 @@ export const Icon = polymorphicForwardRef<'i', IconProps>(
       <Box
         as={as || 'i'}
         ref={ref}
-        role="img"
+        role={props['aria-label'] ? 'img' : 'presentation'}
         style={style}
         className={cx(
           {
@@ -38,6 +38,7 @@ export const Icon = polymorphicForwardRef<'i', IconProps>(
           },
           className
         )}
+        aria-label={props['aria-label']}
         {...styleSystemProps}
       >
         <BaseIcon name={name} {...iconProps} />
