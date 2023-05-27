@@ -8,10 +8,16 @@ export type AsProp<C extends React.ElementType> = {
   as?: C;
 };
 
-export type PolymorphicComponentProp<C extends React.ElementType, Props = Record<string, never>> =
-  Props & AsProp<C> & { children?: any } & Omit<React.ComponentPropsWithoutRef<C>, keyof AsProp<C>>;
+type ComponentPropsWithoutAs<P = Record<string, never>> =
+  P extends any
+    ? ('as' extends keyof P
+        ? Omit<P, 'as'>
+        : P
+      )
+    : P;
 
-// omit is necessary to specify the lower level component..
+export type PolymorphicComponentProp<C extends React.ElementType, Props = Record<string, never>> =
+  Props & ComponentPropsWithoutAs<React.ComponentPropsWithoutRef<C>> & AsProp<C>;
 
 // TODO: Extract children proptype from Props instead of using 'any' above.
 // Some components, such as Unstyled List, use a narrower type for children.
