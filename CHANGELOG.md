@@ -1,3 +1,26 @@
+# [5.0.0-alpha.22](https://github.com/osuresearch/ui/compare/v5.0.0-alpha.21...v5.0.0-alpha.22) (2023-05-28)
+
+
+### Bug Fixes
+
+* **ComboBoxField:** use string over key for value types ([be0c34a](https://github.com/osuresearch/ui/commit/be0c34a920caaddb30f9c2eddc2ea47e03da1082))
+* **docs:** add forced rerender of uncontrolled form components for a form's `onReset` ([753b53f](https://github.com/osuresearch/ui/commit/753b53f8b1b4766fdd2ca8b13d086a780faa4659)), closes [#59](https://github.com/osuresearch/ui/issues/59)
+* **Icon:** `aria-label` not propagating down to the DOM attributes ([14aacfa](https://github.com/osuresearch/ui/commit/14aacfaa775a5465b9da9ac4d3709fd32a35a865))
+* **NumberField:** use larger click areas for increment/decrement buttons ([0f42e9b](https://github.com/osuresearch/ui/commit/0f42e9b9dfea2bfb17c5bcb6eae402fcd16f303d))
+* polymorphics incompatible with components with `as` props ([4536326](https://github.com/osuresearch/ui/commit/45363260d9e051ffab3bbbb948fe0df5f92d1ff6)), closes [#83](https://github.com/osuresearch/ui/issues/83)
+* **ProgressBar:** incompatibility with React Aria upgrade ([9502118](https://github.com/osuresearch/ui/commit/9502118979be2c3b89e060da15dd237deffa0c61))
+* **RadioIcon:** `className` causes built-in styles to be dropped ([80bde26](https://github.com/osuresearch/ui/commit/80bde26241517dd3f2d26e4c7245bc105dbc1b23))
+* **SelectField:** disabled state not propagated down to the `Interactive` ([37665be](https://github.com/osuresearch/ui/commit/37665be5f5a9aeaf83b972e205c3c27ab16f4012))
+* state not correctly passed down for checkbox and radio sets ([7d30870](https://github.com/osuresearch/ui/commit/7d30870461829d83073674ae2d2353f83be607d1)), closes [#50](https://github.com/osuresearch/ui/issues/50)
+* **SwitchIcon:** `className` causes built-in styles to be dropped ([02ffb50](https://github.com/osuresearch/ui/commit/02ffb50b7b09c0166e94325d160b0e17fd26c89c))
+
+
+### Features
+
+* add `LazyLoaded` component from UI 4 ([061c69e](https://github.com/osuresearch/ui/commit/061c69e169198d60e83cca0069476ed63a6e0928))
+* add `SplitButton` component ([26379ff](https://github.com/osuresearch/ui/commit/26379ff84b1782f65c3124f579d588d87b3d3bfb))
+* add more flexible `MenuButton` component to replace old `Menu` ([67dd24d](https://github.com/osuresearch/ui/commit/67dd24d37fbf23b9915827e3baa75cf3c20fff09))
+
 # [5.0.0-alpha.21](https://github.com/osuresearch/ui/compare/v5.0.0-alpha.20...v5.0.0-alpha.21) (2023-05-25)
 
 
