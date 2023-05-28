@@ -6,10 +6,10 @@ import { Text } from '../Text';
 import { ConfirmButton, ConfirmButtonProps } from './ConfirmButton';
 import { ScrollArea } from '../ScrollArea';
 
-export default RUIComponentMeta<ConfirmButtonProps>(
-  'Buttons',
-  ConfirmButton
-).withStyleSystemProps();
+export default {
+  title: 'Buttons / ConfirmButton',
+  ...RUIComponentMeta(ConfirmButton).withStyleSystemProps()
+};
 
 export const Overview = RUIComponentStory<ConfirmButtonProps>(
   (args) => <ConfirmButton {...args}>Delete folder</ConfirmButton>,

@@ -4,7 +4,10 @@ import React, { useState } from 'react';
 import { Text } from '../Text';
 import { CheckboxFieldProps, CheckboxField as Component } from './CheckboxField';
 
-export default RUIComponentMeta<CheckboxFieldProps>('Forms', Component).withStyleSystemProps();
+export default {
+  title: 'Forms / CheckboxField',
+  ...RUIComponentMeta(Component).withStyleSystemProps()
+};
 
 export const Overview = RUIComponentStory<CheckboxFieldProps>((args) => <Component {...args} />, {
   name: 'checkbox-overview',

@@ -7,7 +7,10 @@ import { Space } from '../Space';
 import { Text } from '../Text';
 import { Paper, PaperProps } from './Paper';
 
-export default RUIComponentMeta<PaperProps>('Layout', Paper).withStyleSystemProps();
+export default {
+  title: 'Layout / Paper',
+  ...RUIComponentMeta(Paper).withStyleSystemProps()
+};
 
 export const Overview = RUIComponentStory<PaperProps>((args) => (
   <Paper {...args}>

@@ -4,10 +4,10 @@ import React from 'react';
 import { Text } from '../Text';
 import { FormField as Component, FormFieldProps } from './FormField';
 
-export default RUIComponentMeta<FormFieldProps<string>>(
-  'Internal',
-  Component
-).withStyleSystemProps();
+export default {
+  title: 'Internal / FormField',
+  ...RUIComponentMeta(Component).withStyleSystemProps()
+};
 
 export const FormField = RUIComponentStory<FormFieldProps<string>>((args) => (
   <Component {...args}>

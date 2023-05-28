@@ -4,7 +4,10 @@ import React from 'react';
 import { Text } from '../Text';
 import { Modal as Component, ModalProps } from './Modal';
 
-export default RUIComponentMeta<ModalProps>('Internal', Component);
+export default {
+  title: 'Internal / Modal',
+  ...RUIComponentMeta(Component)
+};
 
 export const Modal = RUIComponentStory<ModalProps>(
   () => <Text>No example available</Text>

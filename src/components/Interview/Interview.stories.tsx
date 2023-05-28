@@ -1,16 +1,15 @@
 import { RUIComponentMeta, RUIComponentStory } from '@sb/utils';
-import { Story } from '@storybook/react';
 import React from 'react';
 
 import { Item } from '../Item';
 import { Interview, InterviewProps } from './Interview';
 
-export default RUIComponentMeta<InterviewProps>('Ohio State', Interview).withStyleSystemProps();
+export default {
+  title: 'Ohio State / Interview',
+  ...RUIComponentMeta(Interview).withStyleSystemProps()
+};
 
-/**
- * Can I write a doc here?
- */
-const Template: Story<InterviewProps> = (args) => (
+const Template = RUIComponentStory<InterviewProps>((args) => (
   <Interview {...args}>
     <Item textValue="What makes you the happiest?">
       Brimming with traditions as a community, we empower people and their potential to envision the
@@ -47,7 +46,7 @@ const Template: Story<InterviewProps> = (args) => (
       critical thinkers and creative problem solvers.
     </Item>
   </Interview>
-);
+));
 
 export const QAndA = RUIComponentStory(Template, {
   variant: 'qa'

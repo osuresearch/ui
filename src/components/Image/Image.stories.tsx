@@ -6,7 +6,10 @@ import { Center } from '../Center';
 import { Icon } from '../Icon';
 import { Image, ImageProps } from './Image';
 
-export default RUIComponentMeta<ImageProps>('Components', Image).withStyleSystemProps();
+export default {
+  title: 'Components / Image',
+  ...RUIComponentMeta(Image).withStyleSystemProps()
+};
 
 export const Overview = RUIComponentStory<ImageProps>((args) => <Image {...args} />, {
   src: 'https://picsum.photos/640/360',

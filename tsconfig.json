@@ -22,7 +22,7 @@
       // Note: Only use these paths for Storybook stories.
       // Compilation of the main library will break otherwise.
       // "@osuresearch/ui": [".src/index.ts"],
-      "@sb/*": ["./.storybook/*"],
+      "@sb/*": ["./src/storybook/*"],
     },
   },
   "exclude": [

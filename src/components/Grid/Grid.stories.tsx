@@ -5,7 +5,10 @@ import { Paper } from '../Paper';
 import { Stack } from '../Stack';
 import { Grid, GridProps } from './Grid';
 
-export default RUIComponentMeta<GridProps>('Layout', Grid).withStyleSystemProps();
+export default {
+  title: 'Layout / Grid',
+  ...RUIComponentMeta(Grid).withStyleSystemProps()
+};
 
 export const Overview = RUIComponentStory<GridProps>(
   (args) => (

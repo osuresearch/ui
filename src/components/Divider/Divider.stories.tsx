@@ -6,7 +6,10 @@ import { Stack } from '../Stack';
 import { Text } from '../Text';
 import { Divider, DividerProps } from './Divider';
 
-export default RUIComponentMeta<DividerProps>('Layout', Divider);
+export default {
+  title: 'Layout / Divider',
+  ...RUIComponentMeta(Divider)
+};
 
 export const Horizontal = RUIComponentStory<DividerProps>(
   (args) => (

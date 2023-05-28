@@ -1,9 +1,9 @@
 
 import React from 'react';
-import { useScreenSize } from '../../src/hooks';
-import { ScreenSize } from '../../src/types';
-import { Icon } from '../../src/components/Icon';
-import { Group } from '../../src/components/Group';
+import { useScreenSize } from '../hooks';
+import { ScreenSize } from '../types';
+import { Icon } from '../components/Icon';
+import { Group } from '../components/Group';
 
 export function BreakpointTable({ size }: { size: ScreenSize }) {
   const { breakpoints } = useScreenSize();

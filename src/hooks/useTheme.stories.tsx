@@ -2,7 +2,16 @@ import React, { PropsWithChildren, useState } from 'react';
 
 import { Button, Code, Divider, Group, Stack } from '../components';
 import { useTheme } from './useTheme';
-import { Story } from '@storybook/react';
+import { StoryFn } from '@storybook/react';
+
+export default {
+  title: 'Hooks / useTheme',
+  component: useTheme,
+  argTypes: {},
+  parameters: {
+    controls: { expanded: true }
+  }
+};
 
 const RenderingControls = ({ children }: PropsWithChildren<Record<string, unknown>>) => {
   const [key, setKey] = useState(1);
@@ -38,17 +47,8 @@ const Demo = () => {
   );
 };
 
-export const Example: Story = () => (
+export const Example: StoryFn = () => (
   <RenderingControls>
     <Demo />
   </RenderingControls>
 );
-
-export default {
-  title: 'Hooks/useTheme',
-  component: useTheme,
-  argTypes: {},
-  parameters: {
-    controls: { expanded: true }
-  }
-};

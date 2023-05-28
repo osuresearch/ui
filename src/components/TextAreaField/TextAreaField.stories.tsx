@@ -4,7 +4,10 @@ import React, { useState } from 'react';
 import { Text } from '../Text';
 import { TextAreaField, TextAreaFieldProps } from './TextAreaField';
 
-export default RUIComponentMeta<TextAreaFieldProps>('Forms', TextAreaField).withStyleSystemProps();
+export default {
+  title: 'Forms / TextAreaField',
+  ...RUIComponentMeta(TextAreaField).withStyleSystemProps()
+};
 
 export const Overview = RUIComponentStory<TextAreaFieldProps>(
   (args) => <TextAreaField {...args} />,

@@ -1,12 +1,15 @@
 import { RUIComponentMeta, RUIComponentStory } from '@sb/utils';
-import { Story } from '@storybook/react';
+import { StoryFn } from '@storybook/react';
 import React from 'react';
 
 import { Admonition, AdmonitionProps } from '../Admonition';
 
-export default RUIComponentMeta<AdmonitionProps>('Components', Admonition);
+export default {
+  title: 'Components / Admonition',
+  ...RUIComponentMeta(Admonition)
+};
 
-const Template: Story<AdmonitionProps> = (args: AdmonitionProps) => (
+const Template: StoryFn<AdmonitionProps> = (args: AdmonitionProps) => (
   <Admonition {...args}>This is text content that you want to call out for the user</Admonition>
 );
 

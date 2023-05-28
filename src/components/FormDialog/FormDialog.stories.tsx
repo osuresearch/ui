@@ -6,7 +6,10 @@ import { Stack } from '../Stack';
 import { TextAreaField } from '../TextAreaField';
 import { FormDialog as Component, FormDialogProps } from './FormDialog';
 
-export default RUIComponentMeta<FormDialogProps>('Internal', Component);
+export default {
+  title: 'Internal / FormDialog',
+  ...RUIComponentMeta(Component)
+};
 
 export const FormDialog = RUIComponentStory<FormDialogProps>(
   (args) => (

@@ -6,7 +6,10 @@ import { Stack } from '../Stack';
 import { Text } from '../Text';
 import { Space, SpaceProps } from './Space';
 
-export default RUIComponentMeta<SpaceProps>('Layout', Space);
+export default {
+  title: 'Layout / Space',
+  ...RUIComponentMeta(Space)
+};
 
 export const Vertical = RUIComponentStory(
   (args: SpaceProps) => (

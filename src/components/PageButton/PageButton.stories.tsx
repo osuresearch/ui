@@ -4,7 +4,10 @@ import React from 'react';
 import { Group } from '../Group';
 import { PageButton as Component, PageButtonProps } from './PageButton';
 
-export default RUIComponentMeta<PageButtonProps>('Navigation', Component);
+export default {
+  title: 'Navigation / PageButton',
+  ...RUIComponentMeta(Component)
+};
 
 export const PageButton = RUIComponentStory<PageButtonProps>((args) => (
   <Group gap="lg" align="stretch">

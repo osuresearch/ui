@@ -1,24 +1,26 @@
 
-import { ArgTypes, Meta, Story } from '@storybook/react';
-import { fontFamily, fontSize, fontWeight, spacing } from '../src/types';
-import React from 'react';
-import { colors } from '../src/theme';
+import { ArgTypes, Meta, ReactRenderer, Story, StoryObj } from '@storybook/react';
+import { fontFamily, fontSize, fontWeight, spacing } from '../types';
+import React, { ComponentProps, ComponentType, JSXElementConstructor } from 'react';
+import { colors } from '../theme';
+import { Button } from '..';
+import { ComponentAnnotations, StoryAnnotations } from '@storybook/types';
 
 export type RUIBadge = 'beta' | 'stable' | 'deprecated' | 'experimental' | 'atom' | 'molecule';
 
-export type RUIMeta<T> = Meta<T> & {
+export type RUIMeta<T> = ComponentAnnotations<ReactRenderer, ComponentProps<ComponentType<T>>> & {
   withStyleSystemProps(): RUIMeta<T>;
+
+  withArgTypes(argTypes: Partial<ArgTypes<T>>): RUIMeta<T>;
 
   /**
    * Add a new badge to the component
    *
    * Depends on https://storybook.js.org/addons/@geometricpanda/storybook-addon-badges
    */
-  withBadge(badge: RUIBadge): RUIMeta<T>;
+  // withBadge(badge: RUIBadge): RUIMeta<T>;
 
-  withSubcomponent(name: string): RUIMeta<T>;
-
-  withArgTypes(argTypes: Partial<ArgTypes<T>>): RUIMeta<T>;
+  // withSubcomponent(name: string): RUIMeta<T>;
 }
 
 /**
@@ -32,57 +34,25 @@ export type RUIMeta<T> = Meta<T> & {
  * @returns
  */
 export function RUIComponentMeta<T>(
-  category: string,
-  component: React.ComponentType<T>
-): RUIMeta<T> {
+  component: ComponentType<T>
+): RUIMeta<T> { // ComponentAnnotations<ReactRenderer, ComponentProps<typeof component>> {
 
-  return {
-    title: category + '/' + component.displayName,
-    id: category + '/' + component.displayName,
+  const meta: Meta<typeof component> = {
     component,
-    subcomponents: {},
     argTypes: {},
+    excludeStories: /(_.*)/,
     parameters: {
       badges: []
-    },
-    excludeStories: /(_.*)/,
+    }
+  };
 
+  return {
+    ...meta,
     withStyleSystemProps: function () {
       this.argTypes = {
         ...styleSystemArgTypes() as Partial<ArgTypes<T>>,
         ...this.argTypes
       };
-      return this;
-    },
-    withBadge: function (badge: RUIBadge) {
-      if (!this.parameters)
-        this.parameters = {};
-
-      this.parameters.badges = [
-        ...this.parameters.badges,
-        badge
-      ]
-
-      // Encode the badge onto the `title` prop for the Sidebar
-      // if (badge === 'beta')
-      //   this.title += ' 🔨';
-      // else if (badge === 'experimental')
-      //   this.title += ' 🧪';
-      // else if (badge === 'atom')
-      //   this.title += ' 🤏';
-
-      // TODO: The above breaks components where
-      // the export name is the same as the component
-      // to collapse it down to a single page.
-
-      return this;
-    },
-    withSubcomponent: function (name: string) {
-      this.subcomponents = {
-        ...this.subcomponents,
-        [`${component.displayName}.${name}`]: (component as Record<string, any>)[name]
-      };
-
       return this;
     },
     withArgTypes(argTypes: Partial<ArgTypes<T>>): RUIMeta<T> {
@@ -95,9 +65,17 @@ export function RUIComponentMeta<T>(
   };
 }
 
+
+// type Story = StoryObj<typeof Conditional>;
+
+// Retval needs to be: StoryAnnotations<ReactRenderer, ButtonProps>
+
+// Where T is ComponentProps of something.
 export type RUIStory<T> = Story<T> & {
   withDescription(markdown: string): RUIStory<T>
 }
+
+// type RUIStory<T> = StoryAnnotations<ReactRenderer, ComponentProps<ComponentType<T>>>
 
 export function RUIComponentStory<T>(
   template: Story<T>,
@@ -174,15 +152,13 @@ export function styleSystemArgTypes() {
     }
   }
 
-  const font = (options: readonly string[]) => {
-    return {
+  const font = (options: readonly string[]) => ({
       options,
       table: {
         category: 'Style System',
         subcategory: 'Font',
       }
-    }
-  }
+    })
 
   const layout = {
     table: {

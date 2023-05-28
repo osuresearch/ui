@@ -9,7 +9,10 @@ import { Text } from '../Text';
 import { ComboBoxField, ComboBoxFieldProps } from './ComboBoxField';
 import { useAsyncList } from 'react-stately';
 
-export default RUIComponentMeta<ComboBoxFieldProps>('Forms', ComboBoxField).withStyleSystemProps();
+export default {
+  title: 'Forms / ComboBoxField',
+  ...RUIComponentMeta(ComboBoxField).withStyleSystemProps()
+};
 
 export const Overview = RUIComponentStory<ComboBoxFieldProps>(
   (args) => (

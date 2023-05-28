@@ -6,7 +6,10 @@ import { Icon } from '../Icon';
 import { Text } from '../Text';
 import { TextField, TextFieldProps } from './TextField';
 
-export default RUIComponentMeta<TextFieldProps>('Forms', TextField).withStyleSystemProps();
+export default {
+  title: 'Forms / TextField',
+  ...RUIComponentMeta(TextField).withStyleSystemProps()
+};
 
 export const Overview = RUIComponentStory<TextFieldProps>((args) => <TextField {...args} />, {
   label: 'Email',

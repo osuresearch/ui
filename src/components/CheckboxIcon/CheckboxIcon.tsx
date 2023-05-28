@@ -48,7 +48,7 @@ export const CheckboxIcon = ({
       <Icon
         className="[&>svg]:animate-pop"
         size={16}
-        c="white"
+        c={!isDisabled ? 'white' : 'outline-disabled'}
         name={isIndeterminate ? 'dash' : 'check'}
         block
       />

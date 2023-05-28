@@ -1,8 +1,8 @@
 
 import React from 'react';
 import { IconGallery, IconItem } from '@storybook/addon-docs';
-import { Icon } from '../src/components/Icon';
-import { Text } from '../src/components/Text';
+import { Icon } from '../components/Icon';
+import { Text } from '../components/Text';
 import { groups } from '@osuresearch/iconography';
 
 /**
@@ -12,7 +12,7 @@ import { groups } from '@osuresearch/iconography';
  * Note that this *must* be in JavaScript because
  * Storybook's components don't fully support React 18.
  */
-export function IconLibrary({ name }) {
+export function IconLibrary({ name }: { name: string }) {
   let names = [];
 
   // TODO: Edge case is the OSU namespace icons currently. Fix this.
@@ -30,7 +30,7 @@ export function IconLibrary({ name }) {
   return (
     <IconGallery>
       {names.map(
-        name =>
+        (name) =>
         <IconItem key={name} name={name}>
           <Text><Icon size={32} name={name} /></Text>
         </IconItem>

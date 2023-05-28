@@ -8,10 +8,10 @@ import { Stack } from '../Stack';
 import { Text } from '../Text';
 import { CheckboxSetField, CheckboxSetFieldProps } from './CheckboxSetField';
 
-export default RUIComponentMeta<CheckboxSetFieldProps>(
-  'Forms',
-  CheckboxSetField
-).withStyleSystemProps();
+export default {
+  title: 'Forms / CheckboxSetField',
+  ...RUIComponentMeta(CheckboxSetField).withStyleSystemProps()
+};
 
 export const Overview = RUIComponentStory<CheckboxSetFieldProps>(
   (args) => (

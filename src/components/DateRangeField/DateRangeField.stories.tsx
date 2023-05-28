@@ -3,7 +3,10 @@ import { RUIComponentMeta, RUIComponentStory } from '@sb/utils';
 
 import { DateRangeField, DateRangeFieldProps } from './DateRangeField';
 
-export default RUIComponentMeta<DateRangeFieldProps>('Forms', DateRangeField).withStyleSystemProps();
+export default {
+  title: 'Forms / DateRangeField',
+  ...RUIComponentMeta(DateRangeField).withStyleSystemProps()
+};
 
 // export const Overview = RUIComponentStory<DateRangeFieldProps>((args) => <DateRangeField {...args} />, {
 //   label: 'Date',

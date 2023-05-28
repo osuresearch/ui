@@ -3,10 +3,10 @@ import React from 'react';
 
 import { HamburgerButton as Component, HamburgerButtonProps } from './HamburgerButton';
 
-export default RUIComponentMeta<HamburgerButtonProps>(
-  'Buttons',
-  Component
-).withStyleSystemProps();
+export default {
+  title: 'Buttons / HamburgerButton',
+  ...RUIComponentMeta(Component).withStyleSystemProps()
+};
 
 export const HamburgerButton = RUIComponentStory<HamburgerButtonProps>((args) => (
   <Component {...args}>Component template created through newComponent.mjs</Component>

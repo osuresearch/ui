@@ -4,7 +4,10 @@ import React from 'react';
 import { Box } from '../Box';
 import { Link, LinkProps } from './Link';
 
-export default RUIComponentMeta<LinkProps>('Navigation', Link).withStyleSystemProps();
+export default {
+  title: 'Navigation / Link',
+  ...RUIComponentMeta(Link).withStyleSystemProps()
+};
 
 export const Overview = RUIComponentStory<LinkProps>((args) => (
   <Link href="https://research.osu.edu" {...args}>

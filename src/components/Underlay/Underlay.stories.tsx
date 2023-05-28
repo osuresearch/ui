@@ -8,7 +8,10 @@ import { Space } from '../Space';
 import { Text } from '../Text';
 import { Underlay as Component, UnderlayProps } from './Underlay';
 
-export default RUIComponentMeta<UnderlayProps>('Internal', Component);
+export default {
+  title: 'Internal / Underlay',
+  ...RUIComponentMeta(Component)
+};
 
 export const Underlay = RUIComponentStory<UnderlayProps>((args) => (
   <>

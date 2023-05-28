@@ -7,10 +7,10 @@ import { Stack } from '../Stack';
 import { Text } from '../Text';
 import { UnstyledButton, UnstyledButtonProps } from './UnstyledButton';
 
-export default RUIComponentMeta<UnstyledButtonProps>(
-  'Unstyled',
-  UnstyledButton
-).withStyleSystemProps();
+export default {
+  title: 'Buttons / UnstyledButton',
+  ...RUIComponentMeta(UnstyledButton).withStyleSystemProps()
+};
 
 export const Overview = RUIComponentStory<UnstyledButtonProps>((args) => (
   <UnstyledButton {...args}>Button</UnstyledButton>

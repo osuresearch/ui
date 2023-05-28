@@ -5,7 +5,10 @@ import { SplitButton, SplitButtonProps } from '../SplitButton';
 import { Icon } from '../Icon';
 import { Item } from 'react-stately';
 
-export default RUIComponentMeta<SplitButtonProps>('Buttons', SplitButton).withStyleSystemProps();
+export default {
+  title: 'Buttons / SplitButton',
+  ...RUIComponentMeta(SplitButton).withStyleSystemProps()
+};
 
 export const Overview = RUIComponentStory<SplitButtonProps>((args) => (
   <SplitButton {...args} label="Paste">

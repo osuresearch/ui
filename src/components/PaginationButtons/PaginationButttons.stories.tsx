@@ -4,7 +4,10 @@ import React, { useState } from 'react';
 import { Text } from '../Text';
 import { PaginationButtons, PaginationButtonsProps } from './PaginationButtons';
 
-export default RUIComponentMeta<PaginationButtonsProps>('Buttons', PaginationButtons).withStyleSystemProps();
+export default {
+  title: 'Buttons / PaginationButtons',
+  ...RUIComponentMeta(PaginationButtons).withStyleSystemProps()
+};
 
 export const Overview = RUIComponentStory<PaginationButtonsProps>((args) => {
   const [value, setValue] = useState<number>(1);

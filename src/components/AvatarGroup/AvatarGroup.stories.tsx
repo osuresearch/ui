@@ -4,7 +4,10 @@ import React from 'react';
 import { Avatar } from '../Avatar';
 import { AvatarGroupProps, AvatarGroup as Component } from './AvatarGroup';
 
-export default RUIComponentMeta<AvatarGroupProps>('Components', Component).withStyleSystemProps();
+export default {
+  title: 'Components / AvatarGroup',
+  ...RUIComponentMeta(Component).withStyleSystemProps()
+};
 
 export const Overview = RUIComponentStory<AvatarGroupProps>((args) => (
   <Component {...args}>

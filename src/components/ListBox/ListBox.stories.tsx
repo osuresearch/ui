@@ -8,7 +8,10 @@ import { Text } from '../Text';
 import { Section } from '../Section';
 import { Item } from '../Item';
 
-export default RUIComponentMeta<ListBoxProps>('Internal', Component);
+export default {
+  title: 'Internal / ListBox',
+  ...RUIComponentMeta(Component)
+};
 
 function UsageExample(props: CollectionBase<any> & ListBoxProps) {
   const listState = useListState(props);

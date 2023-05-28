@@ -4,7 +4,10 @@ import React, { forwardRef, useRef } from 'react';
 
 import { Box, BoxProps } from './Box';
 
-export default RUIComponentMeta<BoxProps>('Layout', Box).withStyleSystemProps();
+export default {
+  title: 'Layout / Box',
+  ...RUIComponentMeta(Box).withStyleSystemProps()
+};
 
 export const Overview = RUIComponentStory<BoxProps>((args) => (
   <Box {...args}>Lorem ipsum blah blah blah</Box>

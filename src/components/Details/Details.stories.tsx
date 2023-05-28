@@ -5,7 +5,10 @@ import { Stack } from '../Stack';
 import { Text } from '../Text';
 import { Details, DetailsProps } from './Details';
 
-export default RUIComponentMeta<DetailsProps>('Layout', Details).withStyleSystemProps();
+export default {
+  title: 'Layout / Details',
+  ...RUIComponentMeta(Details).withStyleSystemProps()
+};
 
 export const Overview = RUIComponentStory<DetailsProps>(
   (args) => (

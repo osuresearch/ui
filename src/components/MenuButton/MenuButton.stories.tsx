@@ -8,7 +8,10 @@ import { MenuButton, MenuButtonProps } from './MenuButton';
 import { Section } from '../Section';
 import { IconButton } from '../IconButton';
 
-export default RUIComponentMeta<MenuButtonProps>('Buttons', MenuButton);
+export default {
+  title: 'Buttons / MenuButton',
+  ...RUIComponentMeta(MenuButton)
+};
 
 export const Overview = RUIComponentStory<MenuButtonProps>((args) => (
   <MenuButton {...args} label="Options" onAction={alert}>

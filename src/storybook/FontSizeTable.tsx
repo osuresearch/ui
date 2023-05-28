@@ -14,7 +14,7 @@ export function FontSizeTable() {
         </tr>
       </thead>
       <tbody>
-        {fontSize.map(size =>
+        {fontSize.map((size) =>
         <tr key={size}>
           <td><Code>--rui-text-{size}</Code></td>
           <td>

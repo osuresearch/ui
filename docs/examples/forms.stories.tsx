@@ -1,4 +1,4 @@
-import { ComponentMeta } from '@storybook/react';
+import { Meta } from '@storybook/react';
 import React, { FormEventHandler, useState } from 'react';
 import { FieldValues, SubmitHandler } from 'react-hook-form';
 
@@ -32,7 +32,7 @@ import { useRUIForm } from '../../src/hooks/useRUIForm';
 
 export default {
   title: 'Examples / Forms'
-} as ComponentMeta<any>;
+} as Meta<any>;
 
 export const Uncontrolled = (args: any) => {
   const [formData, setFormData] = useState<FormData>();

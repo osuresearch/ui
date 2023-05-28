@@ -5,7 +5,10 @@ import { Lookup, LookupProps } from './Lookup';
 import { Item } from '../Item';
 import { useAsyncList } from 'react-stately';
 
-export default RUIComponentMeta<LookupProps>('Internal', Lookup);
+export default {
+  title: 'Internal / Lookup',
+  ...RUIComponentMeta(Lookup)
+};
 
 export const Overview = RUIComponentStory<LookupProps>((args) => {
   const list = useAsyncList<any>({

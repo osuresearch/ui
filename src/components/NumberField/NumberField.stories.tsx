@@ -4,7 +4,10 @@ import React, { useState } from 'react';
 import { Text } from '../Text';
 import { NumberField, NumberFieldProps } from './NumberField';
 
-export default RUIComponentMeta<NumberFieldProps>('Forms', NumberField).withStyleSystemProps();
+export default {
+  title: 'Forms / NumberField',
+  ...RUIComponentMeta(NumberField).withStyleSystemProps()
+};
 
 export const Overview = RUIComponentStory<NumberFieldProps>((args) => <NumberField {...args} />, {
   label: 'Population',

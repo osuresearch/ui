@@ -1,16 +1,17 @@
 import { RUIComponentMeta, RUIComponentStory } from '@sb/utils';
-import { Story } from '@storybook/react';
+import { StoryFn } from '@storybook/react';
 import React from 'react';
 
 import { Heading, HeadingProps } from './Heading';
 
-export default RUIComponentMeta<HeadingProps>('Components', Heading);
+export default {
+  title: 'Components / Heading',
+  ...RUIComponentMeta(Heading)
+};
 
-const Template: Story<HeadingProps> = (args: HeadingProps) => (
+export const Overview = RUIComponentStory<HeadingProps>((args) => (
   <Heading {...args}>This is a heading example</Heading>
-);
-
-export const Overview = RUIComponentStory(Template, {
+), {
   level: 1
 });
 

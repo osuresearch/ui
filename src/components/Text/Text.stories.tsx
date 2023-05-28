@@ -1,13 +1,16 @@
 import { RUIComponentMeta, RUIComponentStory } from '@sb/utils';
-import { Story } from '@storybook/react';
+import { StoryFn } from '@storybook/react';
 import React from 'react';
 
 import { Paper } from '../Paper';
 import { Text, TextProps } from './Text';
 
-export default RUIComponentMeta<TextProps>('Components', Text).withStyleSystemProps();
+export default {
+  title: 'Components / Text',
+  ...RUIComponentMeta(Text).withStyleSystemProps()
+};
 
-const Template: Story<TextProps> = (args) => (
+const Template: StoryFn<TextProps> = (args) => (
   <Text {...args}>The quick brown fox jumped over the lazy dog.</Text>
 );
 

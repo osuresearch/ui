@@ -3,10 +3,10 @@ import React from 'react';
 
 import { ToggleButton, ToggleButtonProps } from './ToggleButton';
 
-export default RUIComponentMeta<ToggleButtonProps>(
-  'Buttons',
-  ToggleButton
-).withStyleSystemProps();
+export default {
+  title: 'Buttons / ToggleButton',
+  ...RUIComponentMeta(ToggleButton).withStyleSystemProps()
+};
 
 export const Overview = RUIComponentStory<ToggleButtonProps>((args) => (
   <ToggleButton {...args}>Toggle</ToggleButton>

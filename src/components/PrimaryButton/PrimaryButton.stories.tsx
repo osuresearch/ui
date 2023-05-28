@@ -4,10 +4,10 @@ import React from 'react';
 import { Icon } from '../Icon';
 import { PrimaryButton, PrimaryButtonProps } from '../PrimaryButton';
 
-export default RUIComponentMeta<PrimaryButtonProps>(
-  'Ohio State',
-  PrimaryButton
-).withStyleSystemProps();
+export default {
+  title: 'Ohio State / PrimaryButton',
+  ...RUIComponentMeta(PrimaryButton).withStyleSystemProps()
+};
 
 export const Overview = RUIComponentStory<PrimaryButtonProps>((args) => (
   <PrimaryButton {...args}>Primary button</PrimaryButton>

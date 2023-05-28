@@ -4,7 +4,10 @@ import React, { useState } from 'react';
 import { SliderField, SliderFieldProps } from './SliderField';
 import { Text } from '../Text';
 
-export default RUIComponentMeta<SliderFieldProps>('Forms', SliderField).withStyleSystemProps();
+export default {
+  title: 'Forms / SliderField',
+  ...RUIComponentMeta(SliderField).withStyleSystemProps()
+};
 
 export const Overview = RUIComponentStory<SliderFieldProps>((args) => <SliderField {...args} />, {
   label: 'Population',

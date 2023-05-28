@@ -7,7 +7,10 @@ import { LookupField, LookupFieldProps } from './LookupField';
 import { Code } from '../Code';
 import { LookupOption } from '../Lookup';
 
-export default RUIComponentMeta<LookupFieldProps>('Forms', LookupField).withStyleSystemProps();
+export default {
+  title: 'Forms / LookupField',
+  ...RUIComponentMeta(LookupField).withStyleSystemProps()
+};
 
 // swapi.py4e.com example result
 const bobaFett = {

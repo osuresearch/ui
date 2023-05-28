@@ -1,5 +1,5 @@
 import { RUIComponentMeta, RUIComponentStory } from '@sb/utils';
-import { Story } from '@storybook/react';
+import { StoryFn } from '@storybook/react';
 import React from 'react';
 
 import { UnstyledButton } from '../UnstyledButton';
@@ -9,13 +9,16 @@ import { Stack } from '../Stack';
 import { Text } from '../Text';
 import { Chip, ChipProps } from './Chip';
 
-export default RUIComponentMeta<ChipProps>('Components', Chip).withStyleSystemProps();
+export default {
+  title: 'Components / Chip',
+  ...RUIComponentMeta(Chip).withStyleSystemProps()
+};
 
-const Template: Story<ChipProps> = (args) => <Chip {...args}>Beta</Chip>;
+const Template: StoryFn<ChipProps> = (args) => <Chip {...args}>Beta</Chip>;
 
 export const Overview = RUIComponentStory(Template);
 
-const Colors: Story<ChipProps> = (args) => (
+const Colors: StoryFn<ChipProps> = (args) => (
   <Stack>
     <Text as="div">Accents</Text>
     <Group gap="xxs" wrap>

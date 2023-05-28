@@ -3,7 +3,10 @@ import React from 'react';
 
 import { OhioStateNavbar, OhioStateNavbarProps } from './OhioStateNavbar';
 
-export default RUIComponentMeta<OhioStateNavbarProps>('Ohio State', OhioStateNavbar);
+export default {
+  title: 'Ohio State / OhioStateNavbar',
+  ...RUIComponentMeta(OhioStateNavbar)
+};
 
 export const Light = RUIComponentStory<OhioStateNavbarProps>(
   (args) => <OhioStateNavbar {...args} />,

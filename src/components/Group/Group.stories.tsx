@@ -4,7 +4,10 @@ import React from 'react';
 import { Paper } from '../Paper';
 import { Group, GroupProps } from './Group';
 
-export default RUIComponentMeta<GroupProps>('Layout', Group).withStyleSystemProps();
+export default {
+  title: 'Layout / Group',
+  ...RUIComponentMeta(Group).withStyleSystemProps()
+};
 
 export const Overview = RUIComponentStory<GroupProps>((args) => (
   <Group {...args}>

@@ -4,7 +4,10 @@ import React from 'react';
 import { Button, ButtonProps } from '../Button';
 import { Icon } from '../Icon';
 
-export default RUIComponentMeta<ButtonProps>('Buttons', Button).withStyleSystemProps();
+export default {
+  title: 'Buttons / Button',
+  ...RUIComponentMeta(Button).withStyleSystemProps()
+};
 
 export const Overview = RUIComponentStory<ButtonProps>((args) => <Button {...args}>Button</Button>);
 

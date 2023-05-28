@@ -4,7 +4,10 @@ import React, { useState } from 'react';
 import { Text } from '../Text';
 import { YesNoField, YesNoFieldProps } from './YesNoField';
 
-export default RUIComponentMeta<YesNoFieldProps>('Forms', YesNoField).withStyleSystemProps();
+export default {
+  title: 'Forms / YesNoField',
+  ...RUIComponentMeta(YesNoField).withStyleSystemProps()
+};
 
 export const Overview = RUIComponentStory<YesNoFieldProps>((args) => <YesNoField {...args} />, {
   label: 'Are there something or other?',

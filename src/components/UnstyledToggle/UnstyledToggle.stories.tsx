@@ -3,10 +3,10 @@ import React from 'react';
 
 import { UnstyledToggle, UnstyledToggleProps } from './UnstyledToggle';
 
-export default RUIComponentMeta<UnstyledToggleProps>(
-  'Unstyled',
-  UnstyledToggle
-).withStyleSystemProps();
+export default {
+  title: 'Unstyled / UnstyledToggle',
+  ...RUIComponentMeta(UnstyledToggle).withStyleSystemProps()
+};
 
 export const Overview = RUIComponentStory<UnstyledToggleProps>((args) => (
   <UnstyledToggle {...args}>Toggle</UnstyledToggle>

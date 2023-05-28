@@ -3,7 +3,10 @@ import React from 'react';
 
 import { IconButton, IconButtonProps } from './IconButton';
 
-export default RUIComponentMeta<IconButtonProps>('Buttons', IconButton).withStyleSystemProps();
+export default {
+  title: 'Buttons / IconButton',
+  ...RUIComponentMeta(IconButton).withStyleSystemProps()
+};
 
 export const Overview = RUIComponentStory<IconButtonProps>((args) => <IconButton {...args} />, {
   name: 'question',

@@ -6,7 +6,10 @@ import { Text } from '../Text';
 import { RadioSetField, RadioSetFieldProps } from './RadioSetField';
 import { Button } from '../Button';
 
-export default RUIComponentMeta<RadioSetFieldProps>('Forms', RadioSetField).withStyleSystemProps();
+export default {
+  title: 'Forms / RadioSetField',
+  ...RUIComponentMeta(RadioSetField).withStyleSystemProps()
+};
 
 export const Overview = RUIComponentStory<RadioSetFieldProps>(
   (args) => (

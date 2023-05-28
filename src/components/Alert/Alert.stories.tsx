@@ -1,12 +1,15 @@
 import { RUIComponentMeta, RUIComponentStory } from '@sb/utils';
-import { Story } from '@storybook/react';
+import { StoryFn } from '@storybook/react';
 import React from 'react';
 
 import { Alert, AlertProps } from '../Alert';
 
-export default RUIComponentMeta<AlertProps>('Components', Alert);
+export default {
+  title: 'Components / Alert',
+  ...RUIComponentMeta(Alert)
+};
 
-const Template: Story<AlertProps> = (args: AlertProps) => (
+const Template: StoryFn<AlertProps> = (args: AlertProps) => (
   <Alert {...args}>This is additional text about this message.</Alert>
 );
 

@@ -4,7 +4,10 @@ import React from 'react';
 import { Text } from '../Text';
 import { NecessityIndicator as Component, NecessityIndicatorProps } from './NecessityIndicator';
 
-export default RUIComponentMeta<NecessityIndicatorProps>('Utilities', Component);
+export default {
+  title: 'Utilities / NecessityIndicator',
+  ...RUIComponentMeta(Component)
+};
 
 export const NecessityIndicator = RUIComponentStory<NecessityIndicatorProps>((args) => (
   <Text>

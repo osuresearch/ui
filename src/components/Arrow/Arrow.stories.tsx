@@ -4,7 +4,10 @@ import React from 'react';
 import { Paper } from '../Paper';
 import { ArrowProps, Arrow as Component } from './Arrow';
 
-export default RUIComponentMeta<ArrowProps>('Utilities', Component);
+export default {
+  title: 'Utilities / Arrow',
+  ...RUIComponentMeta(Component)
+};
 
 export const Arrow = RUIComponentStory<ArrowProps>(
   (args) => (

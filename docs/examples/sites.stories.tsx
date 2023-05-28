@@ -1,4 +1,4 @@
-import { ComponentMeta } from '@storybook/react';
+import { Meta } from '@storybook/react';
 import React from 'react';
 
 import {
@@ -21,7 +21,7 @@ import {
 
 export default {
   title: 'Examples / Sites'
-} as ComponentMeta<any>;
+} as Meta<any>;
 
 // Like boring static content sites? Say no more!
 // https://www.osu.edu/research

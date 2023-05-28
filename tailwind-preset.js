@@ -3,6 +3,9 @@ module.exports = {
   content: [
     './src/**/*.{tsx,ts}'
   ],
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
   darkMode: [
     'class', '[data-theme="dark"]'
   ],

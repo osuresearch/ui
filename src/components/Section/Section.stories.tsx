@@ -3,6 +3,9 @@ import React from 'react';
 
 import { Section as Component, SectionProps } from './Section';
 
-export default RUIComponentMeta<SectionProps<any>>('Utilities', Component);
+export default {
+  title: 'Utilities / Section',
+  ...RUIComponentMeta(Component)
+};
 
 export const Section = RUIComponentStory<SectionProps<any>>(() => <>No example available</>);

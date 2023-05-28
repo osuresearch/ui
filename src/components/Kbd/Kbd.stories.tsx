@@ -4,7 +4,10 @@ import React from 'react';
 import { Text } from '../Text';
 import { Kbd as Component, KbdProps } from './Kbd';
 
-export default RUIComponentMeta<KbdProps>('Components', Component);
+export default {
+  title: 'Components / Kbd',
+  ...RUIComponentMeta(Component)
+};
 
 export const Kbd = RUIComponentStory<KbdProps>(() => (
   <Text>

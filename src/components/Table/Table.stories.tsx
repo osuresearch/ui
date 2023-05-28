@@ -1,15 +1,18 @@
 
 import React from 'react';
 import { RUIComponentMeta, RUIComponentStory } from '@sb/utils';
-import { Story } from '@storybook/react';
+import { StoryFn } from '@storybook/react';
 import { useAsyncList } from 'react-stately';
 
 import { useTabularData } from '../../hooks/useTabularData';
 import { Table, TableProps, Cell, Column, Row, TableBody, TableHeader } from './Table';
 
-export default RUIComponentMeta<TableProps>('Components', Table).withStyleSystemProps();
+export default {
+  title: 'Components / Table',
+  ...RUIComponentMeta(Table).withStyleSystemProps()
+};
 
-const Template: Story<TableProps> = (args) => (
+const Template: StoryFn<TableProps> = (args) => (
   <Table {...args} caption="Table caption">
     <TableHeader>
       <Column>Column 1</Column>

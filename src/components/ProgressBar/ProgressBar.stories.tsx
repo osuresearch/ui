@@ -1,14 +1,17 @@
 import { RUIComponentMeta, RUIComponentStory } from '@sb/utils';
-import { Story } from '@storybook/react';
+import { StoryFn } from '@storybook/react';
 import React, { useEffect, useState } from 'react';
 
 import { ProgressBar, ProgressBarProps } from '.';
 import { Stack } from '../Stack';
 import { Button } from '../Button';
 
-export default RUIComponentMeta<ProgressBarProps>('Components', ProgressBar);
+export default {
+  title: 'Components / ProgressBar',
+  ...RUIComponentMeta(ProgressBar)
+};
 
-const Template: Story<ProgressBarProps> = (args: ProgressBarProps) => <ProgressBar {...args} />;
+const Template: StoryFn<ProgressBarProps> = (args: ProgressBarProps) => <ProgressBar {...args} />;
 
 export const Overview = RUIComponentStory(Template, {
   label: 'Loading...',

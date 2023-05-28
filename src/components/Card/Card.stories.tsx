@@ -1,12 +1,15 @@
 import { RUIComponentMeta } from '@sb/utils';
-import { Story } from '@storybook/react';
+import { StoryFn } from '@storybook/react';
 import React from 'react';
 
 import { Card, CardProps } from './Card';
 
-export default RUIComponentMeta<CardProps>('Ohio State', Card).withStyleSystemProps();
+export default {
+  title: 'Ohio State / Card',
+  ...RUIComponentMeta(Card).withStyleSystemProps()
+};
 
-const Template: Story<CardProps> = (args: CardProps) => (
+const Template: StoryFn<CardProps> = (args: CardProps) => (
   <Card {...args} href="https://example.com">
     Script Ohio tbdbitl non magna quis tortor volutpat flow of ideas The Lantern vestibulum ligula
     efficitur Woody Hayes highest-ranked public university in Ohio.
@@ -53,7 +56,7 @@ ImageOmitted.args = {
   callToAction: 'Call to Action'
 };
 
-const BodyTextOmittedTemplate: Story<CardProps> = (args: CardProps) => (
+const BodyTextOmittedTemplate: StoryFn<CardProps> = (args: CardProps) => (
   <Card {...args} href="https://example.com" />
 );
 

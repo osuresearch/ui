@@ -3,7 +3,10 @@ import React from 'react';
 
 import { OhioStateFooter, OhioStateFooterProps } from './OhioStateFooter';
 
-export default RUIComponentMeta<OhioStateFooterProps>('Ohio State', OhioStateFooter);
+export default {
+  title: 'Ohio State / OhioStateFooter',
+  ...RUIComponentMeta(OhioStateFooter)
+};
 
 export const Overview = RUIComponentStory<OhioStateFooterProps>(
   (args) => <OhioStateFooter {...args} />,

@@ -8,7 +8,10 @@ import { Stack } from '../Stack';
 import { Text } from '../Text';
 import { SelectField, SelectFieldProps } from './SelectField';
 
-export default RUIComponentMeta<SelectFieldProps>('Forms', SelectField).withStyleSystemProps();
+export default {
+  title: 'Forms / SelectField',
+  ...RUIComponentMeta(SelectField).withStyleSystemProps()
+};
 
 export const Overview = RUIComponentStory<SelectFieldProps>(
   (args) => (

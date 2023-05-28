@@ -3,7 +3,10 @@ import React from 'react';
 
 import { FocusRing as Component, FocusRingProps } from './FocusRing';
 
-export default RUIComponentMeta<FocusRingProps>('Utilities', Component);
+export default {
+  title: 'Utilities / FocusRing',
+  ...RUIComponentMeta(Component)
+};
 
 export const FocusRing = RUIComponentStory<FocusRingProps>((args) => (
   <Component {...args}>

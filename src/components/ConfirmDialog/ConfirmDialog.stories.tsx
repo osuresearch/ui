@@ -4,7 +4,10 @@ import React from 'react';
 import { Stack } from '../Stack';
 import { ConfirmDialog as Component, ConfirmDialogProps } from './ConfirmDialog';
 
-export default RUIComponentMeta<ConfirmDialogProps>('Internal', Component);
+export default {
+  title: 'Internal / ConfirmDialog',
+  ...RUIComponentMeta(Component)
+};
 
 export const ConfirmDialog = RUIComponentStory<ConfirmDialogProps>((args) => (
   <Stack>

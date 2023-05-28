@@ -1,17 +1,18 @@
 
 import React from "react";
-import { addParameters } from '@storybook/react';
 import { useDarkMode } from 'storybook-dark-mode';
-import { DocsContainer } from './DocsContainer';
 import light from './Theme.light';
 import dark from './Theme.dark';
 
-import { SpacingSample } from './components/SpacingSample';
-import { FontSizeTable } from './components/FontSizeTable';
+import { RUIProvider } from "../src/components/RUIProvider";
+import { DocsContainer } from '@sb/DocsContainer';
+import { SpacingSample } from '@sb/SpacingSample';
+import { FontSizeTable } from '@sb/FontSizeTable';
+import { DocsPage } from '@sb/DocsPage';
 
 import '../src/theme/index.css';
 import '../src/theme/tokens.css';
-import { RUIProvider } from "../src/components/RUIProvider";
+
 
 export const parameters = {
   // We only monitor a subset of actions. Otherwise the performance
@@ -27,6 +28,7 @@ export const parameters = {
   viewMode: "docs",
   docs: {
     // theme: themes.dark,
+    // page: DocsPage,
     container: DocsContainer,
     components: {
       SpacingSample,

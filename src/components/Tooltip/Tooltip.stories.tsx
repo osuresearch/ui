@@ -10,7 +10,10 @@ import { Text } from '../Text';
 import { Box } from '../Box';
 import { Tooltip, TooltipProps } from './Tooltip';
 
-export default RUIComponentMeta<TooltipProps>('Components', Tooltip);
+export default {
+  title: 'Components / Tooltip',
+  ...RUIComponentMeta(Tooltip)
+};
 
 export const Overview = RUIComponentStory<TooltipProps>(
   (args) => (

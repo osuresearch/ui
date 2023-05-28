@@ -1,11 +1,9 @@
 
 import React from 'react';
-import { Icon } from '../src/components/Icon';
-import { Text } from '../src/components/Text';
-import { Stack } from '../src/components/Stack';
-import { Group } from '../src/components/Group';
-
-import { groups } from '@osuresearch/iconography';
+import { Icon } from '../components/Icon';
+import { Text } from '../components/Text';
+import { Stack } from '../components/Stack';
+import { Group } from '../components/Group';
 
 /**
  * Custom icon gallery component for Storybook to
@@ -14,7 +12,7 @@ import { groups } from '@osuresearch/iconography';
  * Note that this *must* be in JavaScript because
  * Storybook's components don't fully support React 18.
  */
-export function IllustrationLibrary({ group }) {
+export function IllustrationLibrary({ group }: { group: 'brand' | 'osu' | 'system' }) {
 
   // TODO: Intelligently generate this from the rui-illustration namespace
   const illustrations = {
@@ -37,8 +35,9 @@ export function IllustrationLibrary({ group }) {
 
   const config = {
     brand: {
-      c: 'var(--rui-neutral)',
+      c: 'neutral',
     },
+    osu: {},
     system: {
       c: 'clear',
       svgProps: {
@@ -50,8 +49,8 @@ export function IllustrationLibrary({ group }) {
 
   return (
     <Stack align="stretch">
-      {illustrations[group].map(name =>
-        <Group>
+      {illustrations[group].map((name) =>
+        <Group key={name}>
           <Icon
             name={'rui-illustration:' + name}
             size={200}

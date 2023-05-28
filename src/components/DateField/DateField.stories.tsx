@@ -4,7 +4,10 @@ import React, { useState } from 'react';
 import { Text } from '../Text';
 import { DateField, DateFieldProps } from './DateField';
 
-export default RUIComponentMeta<DateFieldProps>('Forms', DateField).withStyleSystemProps();
+export default {
+  title: 'Forms / DateField',
+  ...RUIComponentMeta(DateField).withStyleSystemProps()
+};
 
 export const Overview = RUIComponentStory<DateFieldProps>((args) => <DateField {...args} />, {
   label: 'Date',

@@ -8,7 +8,10 @@ import { Stack } from '../Stack';
 import { Text } from '../Text';
 import { Icon as Component, IconProps } from './Icon';
 
-export default RUIComponentMeta<IconProps>('Components', Component).withStyleSystemProps();
+export default {
+  title: 'Components / Icon',
+  ...RUIComponentMeta(Component).withStyleSystemProps()
+};
 
 export const Overview = RUIComponentStory<IconProps>(
   (args) => <Component {...args} aria-label="example icon" />,

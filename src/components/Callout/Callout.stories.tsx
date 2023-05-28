@@ -9,7 +9,10 @@ import { Stack } from '../Stack';
 import { Text } from '../Text';
 import { Callout, CalloutProps } from './Callout';
 
-export default RUIComponentMeta<CalloutProps>('Components', Callout);
+export default {
+  title: 'Components / Callout',
+  ...RUIComponentMeta(Callout)
+};
 
 export const Overview = RUIComponentStory<CalloutProps>((args) => (
   <Callout {...args} renderContent="Text in the content slot">

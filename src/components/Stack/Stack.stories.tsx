@@ -2,12 +2,15 @@ import { RUIComponentMeta, RUIComponentStory } from '@sb/utils';
 import React from 'react';
 
 import { Paper } from '../Paper';
-import { Stack as StackComponent, StackProps } from './Stack';
+import { Stack as Component, StackProps } from './Stack';
 
-export default RUIComponentMeta<StackProps>('Layout', StackComponent).withStyleSystemProps();
+export default {
+  title: 'Layout / Stack',
+  ...RUIComponentMeta(Component).withStyleSystemProps()
+};
 
 export const Stack = RUIComponentStory((args: StackProps) => (
-  <StackComponent {...args}>
+  <Component {...args}>
     <Paper px="lg" py="lg" bgc="accent01" c="accent01-inverse">
       1
     </Paper>
@@ -17,5 +20,5 @@ export const Stack = RUIComponentStory((args: StackProps) => (
     <Paper px="lg" py="lg" bgc="accent03" c="accent03-inverse">
       3
     </Paper>
-  </StackComponent>
+  </Component>
 ));

@@ -1,8 +1,13 @@
-import { RUIComponentMeta } from '@sb/utils';
+import { RUIComponentMeta, RUIComponentStory } from '@sb/utils';
 import React from 'react';
 
-import { VisuallyHidden as Component } from './VisuallyHidden';
+import { VisuallyHidden as Component, VisuallyHiddenProps } from './VisuallyHidden';
 
-export default RUIComponentMeta('Utilities', Component);
+export default {
+  title: 'Utilities / VisuallyHidden',
+  ...RUIComponentMeta(Component).withStyleSystemProps()
+};
 
-export const VisuallyHidden = () => <Component>Hello screen readers!</Component>;
+export const VisuallyHidden = RUIComponentStory<VisuallyHiddenProps>(
+  () => <Component>Hello screen readers!</Component>
+);

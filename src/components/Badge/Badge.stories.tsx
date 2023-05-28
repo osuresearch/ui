@@ -7,7 +7,10 @@ import { IconButton } from '../IconButton';
 import { Stack } from '../Stack';
 import { Badge, BadgeProps } from './Badge';
 
-export default RUIComponentMeta<BadgeProps>('Components', Badge);
+export default {
+  title: 'Components / Badge',
+  ...RUIComponentMeta(Badge)
+};
 
 export const Overview = RUIComponentStory<BadgeProps>(
   (args) => (

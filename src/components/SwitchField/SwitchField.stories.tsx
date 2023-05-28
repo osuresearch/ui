@@ -4,7 +4,10 @@ import React, { useState } from 'react';
 import { Text } from '../Text';
 import { SwitchField as Component, SwitchFieldProps } from './SwitchField';
 
-export default RUIComponentMeta<SwitchFieldProps>('Forms', Component).withStyleSystemProps();
+export default {
+  title: 'Forms / SwitchField',
+  ...RUIComponentMeta(Component).withStyleSystemProps()
+};
 
 export const Overview = RUIComponentStory<SwitchFieldProps>((args) => <Component {...args} />, {
   label: 'Yes I want to receive hourly promotional emails',

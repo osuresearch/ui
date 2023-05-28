@@ -6,7 +6,10 @@ import { Stack } from '../Stack';
 import { Text } from '../Text';
 import { Button } from '../Button';
 
-export default RUIComponentMeta<LazyLoadedProps>('Layout', LazyLoaded);
+export default {
+  title: 'Layout / LazyLoaded',
+  ...RUIComponentMeta(LazyLoaded)
+};
 
 export const Overview = RUIComponentStory<LazyLoadedProps>((args) => {
   const [loading, setLoading] = useState(true);

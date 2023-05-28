@@ -6,7 +6,10 @@ import { Text } from '../Text';
 import { ScrollArea as Component, ScrollAreaProps } from './ScrollArea';
 import { Button } from '../Button';
 
-export default RUIComponentMeta<ScrollAreaProps>('Layout', Component).withStyleSystemProps();
+export default {
+  title: 'Layout / ScrollArea',
+  ...RUIComponentMeta(Component).withStyleSystemProps()
+};
 
 const Content = (
   <Stack>
