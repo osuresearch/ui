@@ -1,43 +1,63 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"/><title>Webpack App</title><meta name="viewport" content="width=device-width,initial-scale=1"/><style>html, body {
-    overflow: hidden;
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-  }
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
 
-  * {
-    box-sizing: border-box;
-  }</style><script>/* globals window */
-  /* eslint-disable no-underscore-dangle */
-  try {
-    if (window.top !== window) {
-      window.__REACT_DEVTOOLS_GLOBAL_HOOK__ = window.top.__REACT_DEVTOOLS_GLOBAL_HOOK__;
-    }
-  } catch (e) {
-    // eslint-disable-next-line no-console
-    console.warn('unable to connect to top frame for connecting dev tools');
-  }
+    <title>@storybook/cli - Storybook</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  window.onerror = function onerror(message, source, line, column, err) {
-    if (window.CONFIG_TYPE !== 'DEVELOPMENT') return;
-    // eslint-disable-next-line no-var, vars-on-top
-    var xhr = new window.XMLHttpRequest();
-    xhr.open('POST', '/runtime-error');
-    xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-    xhr.send(
-      JSON.stringify({
-        /* eslint-disable object-shorthand */
-        message: message,
-        source: source,
-        line: line,
-        column: column,
-        error: err && { message: err.message, name: err.name, stack: err.stack },
-        origin: 'manager',
-        /* eslint-enable object-shorthand */
-      })
-    );
-  };</script><style>/*
+    
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    
+    <link
+      rel="prefetch"
+      href="./sb-common-assets/nunito-sans-regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="prefetch"
+      href="./sb-common-assets/nunito-sans-bold.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="./sb-common-assets/fonts.css" />
+
+    <link href="./sb-manager/runtime.js" rel="modulepreload" />
+
+    
+    <link href="./sb-addons/links-0/manager-bundle.js" rel="modulepreload" />
+    
+    <link href="./sb-addons/essentials-controls-1/manager-bundle.js" rel="modulepreload" />
+    
+    <link href="./sb-addons/essentials-actions-2/manager-bundle.js" rel="modulepreload" />
+    
+    <link href="./sb-addons/essentials-backgrounds-3/manager-bundle.js" rel="modulepreload" />
+    
+    <link href="./sb-addons/essentials-viewport-4/manager-bundle.js" rel="modulepreload" />
+    
+    <link href="./sb-addons/essentials-toolbars-5/manager-bundle.js" rel="modulepreload" />
+    
+    <link href="./sb-addons/essentials-measure-6/manager-bundle.js" rel="modulepreload" />
+    
+    <link href="./sb-addons/essentials-outline-7/manager-bundle.js" rel="modulepreload" />
+    
+    <link href="./sb-addons/interactions-8/manager-bundle.js" rel="modulepreload" />
+    
+    <link href="./sb-addons/a11y-9/manager-bundle.js" rel="modulepreload" />
+    
+    <link href="./sb-addons/styling-10/manager-bundle.js" rel="modulepreload" />
+    
+    <link href="./sb-addons/storybook-dark-mode-esm-preset-11/manager-bundle.js" rel="modulepreload" />
+    
+    <link href="./sb-addons/storybook-12/manager-bundle.js" rel="modulepreload" />
+      
+
+<style>
+
+/*
   Note all the !important abuse is to override styles set by Emotion.
   I'm sorry, but Storybook needs better low level customization.
 
@@ -45,8 +65,15 @@
   overrides in the future.
 */
 
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800;900&family=Source+Serif+Pro:wght@400;600;700;900&display=swap');
+
 :root {
   /* TODO: Pull in tokens from the content so we can reuse them here. */
+
+  --rui-font-serif: 'Source Serif Pro', Georgia, serif;
+  --rui-font-sans: 'Nunito Sans', HelveticaNeue, Helvetica, Arial, sans-serif;
+  --rui-font-mono: Menlo, Monaco, 'Courier New', monospace;
+
   --rui-scarlet: #ba0c2f;
   --rui-caret-svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='32' height='32' viewBox='0 0 24 24'%3E%3Cpath fill='rgb(100, 106, 110)' d='M9.4 18L8 16.6l4.6-4.6L8 7.4L9.4 6l6 6Z'%3E%3C/path%3E%3C/svg%3E");
 
@@ -64,6 +91,7 @@
 /* Setup room for injected header / footer content */
 #root {
   height: calc(100vh - 48px);
+  font-family: var(---rui-font-sans);
 }
 #root > div {
   height: calc(100vh - 48px);
@@ -89,29 +117,14 @@
     scale: 0;
   }
 
-  /* .container.sidebar-container::after {
-    content: '';
-    position: absolute;
-    top: -200px;
-    left: -200px;
-    width: 400px;
-    height: 400px;
-    background: #a7b1b7;
-    opacity: 0.4;
-    filter: blur(150px);
+  .rui-link--root {
+    font-weight: 700;
+    font-size: 14px !important;
   }
 
-  .dark .container.sidebar-container::after {
-    content: '';
-    position: absolute;
-    top: -200px;
-    left: -200px;
-    width: 400px;
-    height: 400px;
-    background: #212325;
-    opacity: 0.4;
-    filter: blur(150px);
-  } */
+  .sidebar-item {
+    font-size: 14px !important;
+  }
 
   /* Root toggle carets */
   .sidebar-subheading > button > span:first-of-type,
@@ -368,7 +381,7 @@ button[title="Shortcuts"]:focus::before {
   }
 
   /* Color highlight in the corner - decoration only */
-  div[role="main"]:before {
+  /* div[role="main"]:before {
     content: '';
     position: fixed;
     pointer-events: none;
@@ -378,15 +391,14 @@ button[title="Shortcuts"]:focus::before {
     left: -100px;
     width: 400px;
     height: 400px;
-    background: #a7b1b7;
-    opacity: 0.2;
+    background: #bd0b2f08;
     filter: blur(100px);
-  }
+  } */
 
-  .dark div[role="main"]:before {
-    background: #4a0513;
-    opacity: 0.2;
-  }</style><script id="rui-header-template" type="text/html"><a class="rui-header__skip-link" tabindex="0" href="#storybook-preview-wrapper">Skip to canvas</a>
+</style>
+
+<script id="rui-header-template" type="text/html">
+  <a class="rui-header__skip-link" tabindex="0" href="#storybook-preview-wrapper">Skip to canvas</a>
   <a class="rui-header__brand" href="https://osu.edu" target="_blank">The Ohio State University</a>
   <div class="rui-header__links">
     <!-- <a class="rui-header__link" href="#">Something</a> -->
@@ -395,7 +407,12 @@ button[title="Shortcuts"]:focus::before {
         <path fill-rule="evenodd" clip-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8C0 11.54 2.29 14.53 5.47 15.59C5.87 15.66 6.02 15.42 6.02 15.21C6.02 15.02 6.01 14.39 6.01 13.72C4 14.09 3.48 13.23 3.32 12.78C3.23 12.55 2.84 11.84 2.5 11.65C2.22 11.5 1.82 11.13 2.49 11.12C3.12 11.11 3.57 11.7 3.72 11.94C4.44 13.15 5.59 12.81 6.05 12.6C6.12 12.08 6.33 11.73 6.56 11.53C4.78 11.33 2.92 10.64 2.92 7.58C2.92 6.71 3.23 5.99 3.74 5.43C3.66 5.23 3.38 4.41 3.82 3.31C3.82 3.31 4.49 3.1 6.02 4.13C6.66 3.95 7.34 3.86 8.02 3.86C8.7 3.86 9.38 3.95 10.02 4.13C11.55 3.09 12.22 3.31 12.22 3.31C12.66 4.41 12.38 5.23 12.3 5.43C12.81 5.99 13.12 6.7 13.12 7.58C13.12 10.65 11.25 11.33 9.47 11.53C9.76 11.78 10.01 12.26 10.01 13.01C10.01 14.08 10 14.94 10 15.21C10 15.42 10.15 15.67 10.55 15.59C13.71 14.53 16 11.53 16 8C16 3.58 12.42 0 8 0Z" transform="scale(64)" fill="#fffff"></path>
       </svg>
     </a>
-  </div></script><script>// Hack to overwrite default sidebar size.
+  </div>
+</script>
+
+<script type="text/javascript">
+
+  // Hack to overwrite default sidebar size.
   // Ref: https://github.com/storybookjs/storybook/issues/9682#issuecomment-1318648868
   let prev = JSON.parse(localStorage["storybook-layout"] || '{}');
   let current = { resizerNav: { x: 265, y: 0 }};
@@ -407,23 +424,94 @@ button[title="Shortcuts"]:focus::before {
     ele.className = 'rui-header';
     ele.innerHTML = document.getElementById('rui-header-template').innerText;
     document.body.prepend(ele);
-  });</script><style>#root[hidden],
-      #docs-root[hidden] {
+  });
+</script>
+ 
+
+    <style>
+      #storybook-root[hidden] {
         display: none !important;
-      }</style></head><body><div id="root"></div><div id="docs-root"></div><script>window['CONFIG_TYPE'] = "PRODUCTION";
-          
+      }
+    </style>
+
+    
+  </head>
+  <body>
+    <div id="root"></div>
+
+    
+    <script>
       
-          
-            window['LOGLEVEL'] = "info";
-          
+        
+          window['FEATURES'] = {
+  "warnOnLegacyHierarchySeparator": true,
+  "buildStoriesJson": false,
+  "storyStoreV7": true,
+  "argTypeTargetsV7": true,
+  "legacyDecoratorFileOrder": false
+};
+        
       
-          
-            window['FEATURES'] = {"postcss":true,"emotionAlias":false,"warnOnLegacyHierarchySeparator":true,"buildStoriesJson":false,"storyStoreV7":false,"modernInlineRender":false,"breakingChangesV7":false,"interactionsDebugger":false,"babelModeV7":false,"argTypeTargetsV7":false,"previewMdx2":false};
-          
+        
+          window['REFS'] = {};
+        
       
-          
+        
+          window['LOGLEVEL'] = "info";
+        
       
-          
+        
+          window['DOCS_OPTIONS'] = {
+  "defaultName": "Docs",
+  "autodocs": true
+};
+        
       
-          
-            window['DOCS_MODE'] = false;</script><script src="runtime~main.a01761c39d2c7a9cf2ba.manager.bundle.js"></script><script src="vendors~main.db6755c2b75dd00451e6.manager.bundle.js"></script><script src="main.376798d0286f66292531.manager.bundle.js"></script></body></html>
+        
+          window['CONFIG_TYPE'] = "PRODUCTION";
+        
+      
+        
+      
+        
+      
+        
+      
+    </script>
+    
+
+    <script type="module">
+      import './sb-manager/runtime.js';
+
+      
+      import './sb-addons/links-0/manager-bundle.js';
+      
+      import './sb-addons/essentials-controls-1/manager-bundle.js';
+      
+      import './sb-addons/essentials-actions-2/manager-bundle.js';
+      
+      import './sb-addons/essentials-backgrounds-3/manager-bundle.js';
+      
+      import './sb-addons/essentials-viewport-4/manager-bundle.js';
+      
+      import './sb-addons/essentials-toolbars-5/manager-bundle.js';
+      
+      import './sb-addons/essentials-measure-6/manager-bundle.js';
+      
+      import './sb-addons/essentials-outline-7/manager-bundle.js';
+      
+      import './sb-addons/interactions-8/manager-bundle.js';
+      
+      import './sb-addons/a11y-9/manager-bundle.js';
+      
+      import './sb-addons/styling-10/manager-bundle.js';
+      
+      import './sb-addons/storybook-dark-mode-esm-preset-11/manager-bundle.js';
+      
+      import './sb-addons/storybook-12/manager-bundle.js';
+      
+    </script>
+
+    <link href="./sb-preview/runtime.js" rel="prefetch" as="script" />
+  </body>
+</html>
