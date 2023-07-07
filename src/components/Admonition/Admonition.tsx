@@ -5,8 +5,10 @@ import { Group } from '../Group';
 import { Icon } from '../Icon';
 import { Stack } from '../Stack';
 import { Text } from '../Text';
+import { StyleSystemProps } from '../../types';
+import { mergeProps } from 'src/utils';
 
-export type AdmonitionProps = {
+export type AdmonitionProps = StyleSystemProps & {
   variant?: 'note' | 'tip' | 'info' | 'caution' | 'critical';
 
   /**
@@ -25,7 +27,7 @@ export type AdmonitionProps = {
  * overriding screen reader behaviour.
  */
 export const Admonition = forwardRef<HTMLDivElement, AdmonitionProps>(
-  ({ variant = 'note', title, children }, ref) => {
+  ({ variant = 'note', title, children, ...styleSystemProps }, ref) => {
     const iconName = {
       note: 'infoCircle',
       tip: 'infoCircle',
@@ -55,6 +57,7 @@ export const Admonition = forwardRef<HTMLDivElement, AdmonitionProps>(
           dark: bg
         }}
         c={inverse}
+        {...styleSystemProps}
       >
         <Group gap="xs">
           <Icon
