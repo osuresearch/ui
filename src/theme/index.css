@@ -6,6 +6,9 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "./tokens";
+@import "./typography";
+
 /* Reset for X button on search inputs */
 input[type="search"]::-webkit-search-decoration,
 input[type="search"]::-webkit-search-cancel-button,
@@ -14,12 +17,11 @@ input::-webkit-search-results-decoration {
   display: none;
 }
 
-/* .root,
-#root,
-#docs-root {
-  --primary-color: #fff;
-  --secondary-color: #000;
-} */
+/* Body level theming */
+body {
+  background: var(--rui-surface);
+  color: var(--rui-neutral);
+}
 
 /*
   Design token reconfigurations based on current theme
@@ -94,4 +96,10 @@ input::-webkit-search-results-decoration {
 
 .details::-webkit-details-marker {
   display: none;
+}
+
+/* Adjustments to @tailwind/typography */
+.prose :where(a):not(:where([class~="not-prose"] *)) {
+  text-decoration: inherit;
+  border: none;
 }
