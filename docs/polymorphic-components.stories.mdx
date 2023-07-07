@@ -21,15 +21,17 @@ Often you will want to use specific components that visually or interactively ma
 
 Take for example a card with a button that links the user to another website:
 
-<Paper withBorder bgc="surface-subtle" p="md" w={220}>
-  <Text as="p" pb="md">
-    Some blurb here!
-  </Text>
+<Canvas withToolbar>
+  <Paper withBorder bgc="surface-subtle" p="md" w={220}>
+    <Text as="p" pb="md">
+      Some blurb here!
+    </Text>
 
-  <Button as="a" variant="primary" href="https://research.osu.edu" target="_blank">
-    Visit research.osu.edu
-  </Button>
-</Paper>
+    <Button as="a" variant="primary" href="https://research.osu.edu" target="_blank">
+      Visit research.osu.edu
+    </Button>
+  </Paper>
+</Canvas>
 
 We want it to visually look like a button, but semantically it has to be an anchor to be WCAG compliant.
 
@@ -50,24 +52,11 @@ Another example would be to want a component to visually look like a heading to 
 
 You can use any HTML element in the `as` prop, for example a button polymorphed to the anchor element will still retain the visual appearance of a button but functionally perform as an anchor:
 
-<Canvas withSource="open" withToolbar>
+<Canvas withToolbar>
   <Button as="a" href="https://research.osu.edu">
     Go to research.osu.edu
   </Button>
 </Canvas>
-
-```tsx
-import { Button } from '@osuresearch/ui';
-
-function Demo() {
-  return (
-    <Button as="a" href="https://research.osu.edu">
-      Go to research.osu.edu
-    </Button>
-  );
-}
-```
-
 
 ## Usage with React Router v6
 

@@ -49,7 +49,7 @@ export const SwitchIcon = ({
     <Box
       w={18}
       h={18}
-      bgc="input"
+      bgc="white"
       className={cx(
         // Switch button
         'absolute top-1 left-[2px] rounded-full transition-all',

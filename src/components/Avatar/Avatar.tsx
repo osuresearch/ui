@@ -87,7 +87,7 @@ export const Avatar = polymorphicForwardRef<'div', AvatarProps>(
       <Box
         ref={ref}
         as={as || 'div'}
-        className={cx('block', 'relative', className)}
+        className={cx('not-prose block', 'relative', className)}
         title={alt}
         style={{
           width: size,

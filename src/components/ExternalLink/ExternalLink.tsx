@@ -5,7 +5,7 @@ import { Icon } from '../Icon';
 import { Link, LinkProps } from '../Link';
 
 /**
- * ExternalLink documentation
+ * External links should be used for anything that links outside of the current application.
  *
  * ## Accessibility
  * - `aria-label` indicates that the link leads to an external website.

@@ -13,8 +13,8 @@ export default create({
   appBorderRadius: 0,
 
   // Typography
-  fontBase: 'Nunito Sans, HelveticaNeue, Helvetica, Arial, serif',
-  fontCode: 'monospace',
+  fontBase: '\'Nunito Sans\', HelveticaNeue, Helvetica, Arial, sans-serif',
+  fontCode: 'Menlo, Monaco, \'Courier New\', monospace',
 
   // Text colors
   textColor: 'white',
@@ -33,5 +33,5 @@ export default create({
 
   brandTitle: 'Research UI',
   brandUrl: 'https://github.com/osuresearch/ui',
-  brandImage: 'https://place-hold.it/350x150',
+  // brandImage: 'https://place-hold.it/350x150',
 });

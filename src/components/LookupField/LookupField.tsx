@@ -111,6 +111,8 @@ function _LookupField<T extends object>(
  * input will become read only once an item has been selected.
  *
  * A hidden `input` receives the selected item's key returned by the `getKey` prop
+ *
+ * <!-- @ruiStatus In Development -->
  */
 export const LookupField = forwardRef(_LookupField) as <T extends object = LookupOption>(
   props: LookupFieldProps<T> & { ref?: ForwardedRef<HTMLInputElement> }

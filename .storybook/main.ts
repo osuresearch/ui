@@ -1,4 +1,5 @@
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
+import remarkGfm from 'remark-gfm';
 
 import type { StorybookConfig } from '@storybook/react-webpack5';
 
@@ -8,16 +9,22 @@ const config: StorybookConfig = {
   addons: ['@storybook/addon-links', '@storybook/addon-essentials', '@storybook/addon-interactions', '@storybook/addon-a11y', {
     name: '@storybook/addon-docs',
     options: {
-      transcludeMarkdown: true
+      transcludeMarkdown: true,
+      mdxPluginOptions: {
+        mdxCompileOptions: {
+          remarkPlugins: [remarkGfm],
+        }
+      }
     }
   },
-  {
-    name: '@storybook/addon-styling',
-    options: {
-      postCss: true,
-    }
-  },
-  'storybook-dark-mode'],
+    {
+      name: '@storybook/addon-styling',
+      options: {
+        postCss: true,
+      }
+    },
+    'storybook-dark-mode'
+  ],
   framework: {
     name: '@storybook/react-webpack5',
     options: {}
@@ -30,9 +37,9 @@ const config: StorybookConfig = {
       shouldExtractLiteralValuesFromEnum: true,
       shouldRemoveUndefinedFromOptional: true,
       propFilter: prop =>
-      // Whitelist libraries with props that we expose through
-      // our own components. Mostly React Aria / React Stately things.
-      prop.parent ? /@react-types/.test(prop.parent.fileName) || /react-aria/.test(prop.parent.fileName) || /react-stately/.test(prop.parent.fileName) || !/node_modules/.test(prop.parent.fileName) : true,
+        // Whitelist libraries with props that we expose through
+        // our own components. Mostly React Aria / React Stately things.
+        prop.parent ? /@react-types/.test(prop.parent.fileName) || /react-aria/.test(prop.parent.fileName) || /react-stately/.test(prop.parent.fileName) || !/node_modules/.test(prop.parent.fileName) : true,
       // NOTE: this default cannot be changed
       savePropValueAsString: true
     }

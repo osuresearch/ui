@@ -229,7 +229,42 @@ module.exports = {
         'fade-in-down': 'fade-in-down 0.2s ease-out', // Used by modals. TODO: Replace. I hate it.
         'pop': 'pop 0.12s ease-in-out',
         'scroll': 'scroll 2s linear infinite'
-      }
+      },
+      // @tailwindcss/typography plugin theme
+      typography: () => ({
+        rui: {
+          css: {
+            h1: {
+              fontFamily: 'var(--rui-font-serif)',
+            },
+            a: {
+              textDecoration: 'inherit',
+              borderBottom: '1px solid var(--rui-link)',
+              '&:hover': {
+                color: 'var(--rui-link-hover)',
+                borderColor: 'var(--rui-link-hover)',
+                background: 'var(--rui-surface-link-hover)',
+              }
+            },
+            '--tw-prose-body': 'var(--rui-neutral)',
+            '--tw-prose-headings': 'var(--rui-neutral)',
+            '--tw-prose-lead': 'var(--rui-neutral-subtle)',
+            '--tw-prose-links': 'var(--rui-link)',
+            '--tw-prose-bold': 'var(--rui-neutral)',
+            '--tw-prose-counters': 'var(--rui-primary)',
+            '--tw-prose-bullets': 'var(--rui-primary)',
+            '--tw-prose-hr': 'var(--rui-surface-subtle)',
+            '--tw-prose-quotes': 'var(--rui-neutral-subtle)',
+            '--tw-prose-quote-borders': 'var(--rui-primary)',
+            '--tw-prose-captions': 'var(--rui-neutral-subtle)',
+            '--tw-prose-code': 'var(--rui-neutral)',
+            '--tw-prose-pre-code': 'var(--rui-neutral)',
+            '--tw-prose-pre-bg': 'var(--rui-surface-subtle)',
+            '--tw-prose-th-borders': 'var(--rui-surface-bold)',
+            '--tw-prose-td-borders': 'var(--rui-surface-subtle)',
+          }
+        }
+      })
     },
   },
 }

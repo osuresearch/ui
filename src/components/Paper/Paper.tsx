@@ -25,7 +25,7 @@ export const Paper = polymorphicForwardRef<'div', PaperProps>(
       bgc="surface"
       c="neutral"
       className={cx(
-        'relative',
+        'not-prose relative',
         {
           // Border style
           'border border-surface-subtle': withBorder,

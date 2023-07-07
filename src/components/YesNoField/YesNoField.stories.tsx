@@ -10,12 +10,12 @@ export default {
 };
 
 export const Overview = RUIComponentStory<YesNoFieldProps>((args) => <YesNoField {...args} />, {
-  label: 'Are there something or other?',
+  label: 'Do you agree to the terms and conditions?',
   description: 'Blah blah blah'
 });
 
 export const UncontrolledValue = RUIComponentStory(Overview, {
-  label: 'Are there something or other?',
+  label: 'Do you agree to the terms and conditions?',
   defaultValue: true
 });
 
@@ -31,32 +31,32 @@ export const ControlledValue = RUIComponentStory<YesNoFieldProps>(
     );
   },
   {
-    label: 'Are there something or other?'
+    label: 'Do you agree to the terms and conditions?'
   }
 );
 
 export const Required = RUIComponentStory(Overview, {
-  label: '3D graphics and computing API',
+  label: 'Do you agree to the terms and conditions?',
   necessityIndicator: true,
   isRequired: true
 });
 
 export const ReadOnly = RUIComponentStory(Overview, {
-  label: '3D graphics and computing API',
+  label: 'Do you agree to the terms and conditions?',
   defaultValue: true,
   isReadOnly: true
 });
 
 export const Disabled = RUIComponentStory(Overview, {
-  label: '3D graphics and computing API',
+  label: 'Do you agree to the terms and conditions?',
   defaultValue: true,
   isDisabled: true
 });
 
 export const Error = RUIComponentStory(Overview, {
-  label: '3D graphics and computing API',
+  label: 'Do you agree to the terms and conditions?',
   necessityIndicator: true,
   isRequired: true,
   validationState: 'invalid',
-  errorMessage: 'Please specify an API to use.'
+  errorMessage: 'Please state whether you agree.'
 });

@@ -1,0 +1,24 @@
+/* CSS hacks to override some storybook conflicts */
+
+h2 {
+  @apply
+    text-h2
+    font-sans
+    font-extrabold
+    pb-xs
+}
+
+h3 {
+  @apply
+    text-h3
+    font-sans
+    font-semibold
+    pb-xs
+}
+
+/* Reset arrows in code samples so RUI's class doesn't interfere */
+.prismjs .arrow {
+  position: initial;
+  pointer-events: initial;
+  border: none;
+}

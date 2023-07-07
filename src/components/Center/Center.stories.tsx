@@ -10,7 +10,7 @@ export default {
 };
 
 export const Center = RUIComponentStory<CenterProps>((args) => (
-  <div style={{ width: '300px', height: '200px', background: 'var(--rui-surface)' }}>
+  <div style={{ width: '400px', height: '300px', background: 'var(--rui-surface-subtle)' }}>
     <Component {...args}>
       <Text>Content to be centered</Text>
     </Component>

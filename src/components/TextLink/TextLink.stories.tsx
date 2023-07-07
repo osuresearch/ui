@@ -5,7 +5,7 @@ import { TextLink, TextLinkProps } from './TextLink';
 import { UnstyledButton } from '../UnstyledButton';
 
 export default {
-  title: 'Buttons / TextLink',
+  title: 'Navigation / TextLink',
   ...RUIComponentMeta(TextLink).withStyleSystemProps()
 };
 

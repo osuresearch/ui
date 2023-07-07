@@ -44,6 +44,7 @@ export type PrimaryButtonProps = {
  * - Navigating to a new page or view in your application
  * - Navigating to different web page, e.g. external documentation
  *
+ * <!-- @ruiStatus In Development -->
  * <!-- @ruiPolymorphic -->
  */
 export const PrimaryButton = polymorphicForwardRef<'button', PrimaryButtonProps>(

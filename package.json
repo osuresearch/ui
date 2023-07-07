@@ -100,6 +100,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.42.1",
+    "remark-gfm": "^3.0.1",
     "storybook": "7.0.18",
     "storybook-dark-mode": "^3.0.0",
     "storybook-docs-toc": "^1.7.0",

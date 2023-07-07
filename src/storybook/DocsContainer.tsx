@@ -1,7 +1,6 @@
 import React from "react";
 import { useDarkMode } from "storybook-dark-mode";
 import { BackToTop, TableOfContents } from "storybook-docs-toc";
-import { themes } from "@storybook/theming";
 
 import {
   DocsContainer as BaseContainer,
@@ -15,9 +14,6 @@ import {
   Controls
 } from '@storybook/blocks';
 
-import darkTheme from '../../.storybook/Theme.dark';
-import lightTheme from '../../.storybook/Theme.light';
-
 import { RUIProvider } from '../components/RUIProvider';
 import { Chip } from '../components/Chip';
 import { Stack } from '../components/Stack';
@@ -30,7 +26,15 @@ import { Space } from '../components/Space';
 import { TabPanel } from '../components/TabPanel';
 import { Item } from '../components/Item';
 import { Admonition } from '../components/Admonition';
+import { Prose } from '../components/Prose';
+import { Heading } from '../components/Heading';
 import { RUIMeta } from "./utils";
+
+import light from './Theme.light';
+import dark from './Theme.dark';
+
+import '../theme/index.css';
+import './hacks.css';
 
 function getDocgenInfo(meta: RUIMeta<any>) {
   if ((meta.component as any).__docgenInfo !== undefined) {
@@ -118,22 +122,22 @@ export function ComponentContainer({ meta }: { meta: RUIMeta<any> }) {
   return (
     <>
       {isInternal && (
-        <Admonition variant="caution">
+        <Admonition variant="caution" mb="lg">
           This is an internal component to Research UI and the API is not guaranteed to
           be stable between minor releases. Usage by consumers is strongly discouraged.
         </Admonition>
       )}
 
       {isDev && (
-        <Admonition variant="caution" title="In development">
+        <Admonition variant="caution" title="In development" mb="lg">
           This is an in development component in the Research UI
           and the API is not guaranteed to be stable between minor releases.
         </Admonition>
       )}
 
       <Stack gap="lg" align="stretch">
-        <Group align="center">
-          <Title />
+        <Group>
+          <Heading level={1}>{name}</Heading>
           <Group>
             {atomics.map((atomic, i) =>
               <Chip key={i} c="accent06">Atomic: {atomic[1]}</Chip>
@@ -153,13 +157,12 @@ export function ComponentContainer({ meta }: { meta: RUIMeta<any> }) {
           <Code>
             import &#123; {name} &#125; from &quot;@osuresearch/ui&quot;
           </Code>
-          <div className="prose">
+          <Prose>
             <Description />
-          </div>
+          </Prose>
         </Stack>
 
-
-        <Primary />
+        {/* <Primary /> */}
 
         <TabPanel variant="simple" align="stretch">
           {hasAdditionalStories &&
@@ -184,28 +187,32 @@ export function ComponentContainer({ meta }: { meta: RUIMeta<any> }) {
   );
 }
 
+function MDXContainer({ meta, children }: any) {
+  return (
+    <Prose>
+      {children}
+    </Prose>
+  )
+}
+
 export function DocsContainer({ children, ...props }: any) {
   const meta = props.context.attachedCSFFile.meta as RUIMeta<any>;
+  const darkMode = useDarkMode();
 
   const isComponent = meta.component !== undefined;
 
   console.log(props.context);
 
   return (
-    <RUIProvider theme={useDarkMode() ? 'dark' : 'light'}>
-      <BaseContainer {...props}>
-        <Stack className="sb-unstyled" gap={0} style={{ paddingRight: 200, height: '100%' }} align="stretch" justify="apart">
-
+    <RUIProvider theme={darkMode ? 'dark' : 'light'}>
+      <BaseContainer {...props} theme={darkMode ? dark : light}>
+        {/* <Stack gap={0} style={{ paddingRight: 200, height: '100%' }} align="stretch" justify="apart"> */}
+        {/* <div className="sb-unstyled typography"> */}
+        <div className="sb-unstyled">
           {isComponent && <ComponentContainer meta={meta} />}
-
-          {!isComponent &&
-          <Stack gap={0} align="stretch">
-            {children}
-          </Stack>
-          }
-
+          {!isComponent && <MDXContainer meta={meta}>{children}</MDXContainer>}
           <DocsFooter />
-        </Stack>
+        </div>
 
         {/* @ts-ignore className *does* work, it's just not typed right */}
         <BackToTop className="rui-top" />

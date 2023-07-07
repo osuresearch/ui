@@ -12,6 +12,8 @@ module.exports = {
     extend: {}
   },
   safelist: [
+    { pattern: /^(.*?)/ },
+
     // I expose a number of props for controlling the box model via specific spacing units.
     // But to support this, we have to interpolate class names. To ensure each variant is
     // compiled into the final .css build we create a whitelist of all patterns we support.

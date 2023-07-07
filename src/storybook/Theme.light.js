@@ -36,5 +36,4 @@ export default create({
 
   brandTitle: 'Research UI',
   brandUrl: 'https://github.com/osuresearch/ui',
-  brandImage: 'https://place-hold.it/350x150',
 });

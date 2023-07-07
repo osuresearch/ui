@@ -18,10 +18,6 @@ export type FormErrorsProps = StyleSystemProps & {
 };
 
 /**
- * FormErrors documentation
- *
- * ## Accessibility
- * - a11y info (used aria tags, keyboard behaviour, etc)
  *
  * <!-- @ruiStatus In Development -->
  */
