@@ -6,9 +6,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import "./tokens";
-@import "./typography";
-
 /* Reset for X button on search inputs */
 input[type="search"]::-webkit-search-decoration,
 input[type="search"]::-webkit-search-cancel-button,
