@@ -11,6 +11,7 @@
 }
 
 .filters {
+
     // CSS fix since buttons seem to have margins by default
     // TODO: Should be a general fix, not just in .filters
     .input-group-append .btn {
@@ -62,7 +63,7 @@
 
         &:hover {
             background-color: #efefef;
-            opacity: 0.5;
+            color: #333333;
         }
     }
 
