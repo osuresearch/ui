@@ -31,14 +31,15 @@ $theme-colors: (
     // danger: #e52c5a, // Old UCR alert red
     light: $gray-100,
     dark: $gray-800,
-) !default;
+    ) !default;
 
 $enable-rounded: false;
 $enable-shadows: false;
 
 // Link color meets minimum contrast requirements with white background (4.5:1)
-$link-color: rgb(47, 122, 186);
-$link-hover-color: darken($link-color, 15%);
+$link-color: #2D75B3;
+$link-hover-color: darken($link-color, 15%
+);
 
 // Remove underline from link hover. We'll be using a border
 // for a better looking underline
