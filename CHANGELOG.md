@@ -1,3 +1,11 @@
+# [5.0.0-alpha.23](https://github.com/osuresearch/ui/compare/v5.0.0-alpha.22...v5.0.0-alpha.23) (2023-07-07)
+
+
+### Features
+
+* add `Prose` component that applies Tailwind Typography to content ([14e6cbf](https://github.com/osuresearch/ui/commit/14e6cbfc21ab759b11889a6deca2754c7ae4f637))
+* **Admonition:** add style system prop support ([ed8318f](https://github.com/osuresearch/ui/commit/ed8318ffd2b6ec18436cb5be5518998d27d5fcb9))
+
 # [5.0.0-alpha.22](https://github.com/osuresearch/ui/compare/v5.0.0-alpha.21...v5.0.0-alpha.22) (2023-05-28)
 
 
