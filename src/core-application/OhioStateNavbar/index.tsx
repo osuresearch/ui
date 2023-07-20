@@ -6,7 +6,7 @@ import React from "react";
 const OhioStateNavbar = () => (
   <nav className="osu-navbar" aria-label="Ohio State nav bar">
     <div className="osu-navbar-info">
-      <a href="https://osu.edu" title="OSU.EDU, home" />
+      <a href="https://osu.edu">OSU.EDU, home</a>
     </div>
     <div className="osu-navbar-links">
       <ul>
