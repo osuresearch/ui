@@ -52,3 +52,8 @@ table.dataTable td.dataTables_empty {
 .p-sortable-column-icon {
     color: #949494 !important;
 }
+
+.p-sortable-column:focus {
+    border: 1px solid #50bac2 !important;
+    outline: 3px solid #cedcdd !important;
+}
