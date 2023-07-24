@@ -1,3 +1,10 @@
+## [4.9.1](https://github.com/osuresearch/ui/compare/v4.9.0...v4.9.1) (2023-07-24)
+
+
+### Bug Fixes
+
+* accessibility updates for multiple components ([d5b5362](https://github.com/osuresearch/ui/commit/d5b5362be925abe81124ab2571200cf2daa8933c)), closes [#94](https://github.com/osuresearch/ui/issues/94) [#91](https://github.com/osuresearch/ui/issues/91) [#90](https://github.com/osuresearch/ui/issues/90) [#87](https://github.com/osuresearch/ui/issues/87)
+
 # [4.9.0](https://github.com/osuresearch/ui/compare/v4.8.3...v4.9.0) (2023-04-25)
 
 
