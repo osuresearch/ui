@@ -1,6 +1,7 @@
-
 table.dataTable {
-    tbody td, tbody th {
+
+    tbody td,
+    tbody th {
         vertical-align: bottom;
 
         &.money {
@@ -8,7 +9,8 @@ table.dataTable {
         }
     }
 
-    thead th, thead td {
+    thead th,
+    thead td {
         // Style correction for headers to match BS4 table headers
         font-weight: 400;
         font-size: 0.85em;
@@ -31,7 +33,9 @@ table.dataTable {
 
 // Scrollable datatables also introduces a more specific wrapper
 .dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody {
-    th, td {
+
+    th,
+    td {
         vertical-align: top;
     }
 }
@@ -39,4 +43,23 @@ table.dataTable {
 // Fix _empty container inheriting the .odd/.even styles.
 table.dataTable td.dataTables_empty {
     background: $white;
+}
+
+.p-column-title {
+    color: #757575;
+}
+
+.p-sortable-column-icon {
+    color: #949494 !important;
+}
+
+.p-sortable-column.p-highlight {
+    .p-sortable-column-icon {
+        color: #292929 !important;
+    }
+}
+
+.p-sortable-column:focus {
+    border: 1px solid #50bac2 !important;
+    outline: 3px solid #cedcdd !important;
 }
