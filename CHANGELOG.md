@@ -1,3 +1,10 @@
+# [4.10.0](https://github.com/osuresearch/ui/compare/v4.9.1...v4.10.0) (2023-07-24)
+
+
+### Features
+
+* **Button:** add `ref` support ([f856c96](https://github.com/osuresearch/ui/commit/f856c969d00bd667ed4e56b88d092f4168dc7b02)), closes [#99](https://github.com/osuresearch/ui/issues/99)
+
 ## [4.9.1](https://github.com/osuresearch/ui/compare/v4.9.0...v4.9.1) (2023-07-24)
 
 
