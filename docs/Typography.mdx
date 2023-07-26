@@ -1,0 +1,22 @@
+import { Meta, Canvas } from '@storybook/blocks';
+import * as TypographyStories from './mui/Typography.stories';
+
+<Meta of={TypographyStories} title="Getting Started / Typography" />
+
+# Typography
+
+- Sans serif stack is `'Nunito Sans Variable', HelveticaNeue, Helvetica, Arial, sans-serif`
+- Serif stack is `'Source Serif Pro', Georgia, serif`
+
+If you are using BuckeyeSans/BuckeyeSerif v1 or v2, it's the same as Nunito Sans and Source Serif Pro.
+
+Fonts are automatically included via fontsource:
+
+```tsx
+import '@fontsource-variable/nunito-sans';
+import '@fontsource/source-serif-pro';
+```
+
+## Examples
+
+<Canvas of={TypographyStories.Examples} />

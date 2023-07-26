@@ -1,48 +1,43 @@
-import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
-import remarkGfm from 'remark-gfm';
-
 import type { StorybookConfig } from '@storybook/react-webpack5';
+import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 
 const config: StorybookConfig = {
-  stories: ['../@(src|docs)/**/*.stories.mdx', '../@(src|docs)/**/*.stories.@(js|jsx|ts|tsx)'],
-  staticDirs: ['../docs/diagrams'],
-  addons: ['@storybook/addon-links', '@storybook/addon-essentials', '@storybook/addon-interactions', '@storybook/addon-a11y', {
-    name: '@storybook/addon-docs',
-    options: {
-      transcludeMarkdown: true,
-      mdxPluginOptions: {
-        mdxCompileOptions: {
-          remarkPlugins: [remarkGfm],
-        }
-      }
-    }
-  },
-    {
-      name: '@storybook/addon-styling',
-      options: {
-        postCss: true,
-      }
-    },
-    'storybook-dark-mode'
-  ],
   framework: {
     name: '@storybook/react-webpack5',
-    options: {}
+    options: {
+      strictMode: true,
+    },
   },
+  stories: ['../@(src|docs)/**/*.mdx', '../@(src|docs)/**/*.stories.@(ts|tsx)'],
+  addons: [
+    '@storybook/addon-links',
+    '@storybook/addon-essentials',
+    '@storybook/addon-interactions',
+    '@storybook/addon-a11y',
+    // 'storybook-dark-mode',
+  ],
+  docs: {
+    autodocs: true,
+  },
+  // staticDirs: ['../public'],
+
+  // Typescript config to support MUI props
+  // See: https://storybook.js.org/recipes/@mui/material
   typescript: {
     check: false,
-    // checkOptions: {},
-    // reactDocgen: 'react-docgen-typescript',
+    checkOptions: {},
+    reactDocgen: 'react-docgen-typescript',
     reactDocgenTypescriptOptions: {
+      // makes union prop types like variant and size appear as select controls
       shouldExtractLiteralValuesFromEnum: true,
+
+      // makes string and boolean types that can be undefined appear as inputs and switches
       shouldRemoveUndefinedFromOptional: true,
-      propFilter: prop =>
-        // Whitelist libraries with props that we expose through
-        // our own components. Mostly React Aria / React Stately things.
-        prop.parent ? /@react-types/.test(prop.parent.fileName) || /react-aria/.test(prop.parent.fileName) || /react-stately/.test(prop.parent.fileName) || !/node_modules/.test(prop.parent.fileName) : true,
-      // NOTE: this default cannot be changed
-      savePropValueAsString: true
-    }
+
+      // Filter out third-party props from node_modules except @mui packages
+      propFilter: (prop) =>
+        prop.parent ? !/node_modules\/(?!@mui)/.test(prop.parent.fileName) : true,
+    },
   },
   // Fix for Typescript aliases not resolving.
   // See: https://storybook.js.org/docs/react/builders/webpack#typescript-modules-are-not-resolved-within-storybook
@@ -58,9 +53,6 @@ const config: StorybookConfig = {
 
     return config;
   },
-  docs: {
-    autodocs: true
-  }
 };
 
 export default config;

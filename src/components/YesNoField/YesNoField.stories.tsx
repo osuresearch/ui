@@ -1,62 +1,60 @@
-import { RUIComponentMeta, RUIComponentStory } from '@sb/utils';
-import React, { useState } from 'react';
+import React from 'react';
+import { Meta, StoryObj } from '@storybook/react';
+import { YesNoField } from './YesNoField';
 
-import { Text } from '../Text';
-import { YesNoField, YesNoFieldProps } from './YesNoField';
-
-export default {
-  title: 'Forms / YesNoField',
-  ...RUIComponentMeta(YesNoField).withStyleSystemProps()
+const meta: Meta<typeof YesNoField> = {
+  title: 'Forms/YesNoField',
+  component: YesNoField,
+  argTypes: {}
 };
 
-export const Overview = RUIComponentStory<YesNoFieldProps>((args) => <YesNoField {...args} />, {
-  label: 'Do you agree to the terms and conditions?',
-  description: 'Blah blah blah'
-});
+export default meta;
 
-export const UncontrolledValue = RUIComponentStory(Overview, {
-  label: 'Do you agree to the terms and conditions?',
-  defaultValue: true
-});
+type Story = StoryObj<typeof YesNoField>;
 
-export const ControlledValue = RUIComponentStory<YesNoFieldProps>(
-  (args) => {
-    const [value, setValue] = useState<boolean | undefined>(false);
-
-    return (
-      <>
-        <YesNoField value={value} onChange={setValue} {...args} />
-        <Text>{`Your answer is: ${value}`}</Text>
-      </>
-    );
-  },
-  {
-    label: 'Do you agree to the terms and conditions?'
+export const Example: Story = {
+  render: (args) => <YesNoField {...args} />,
+  args: {
+    name: 'misconduct',
+    label: 'Have you conducted research misconduct in the last year?',
+    description: 'Description content'
   }
-);
+};
 
-export const Required = RUIComponentStory(Overview, {
-  label: 'Do you agree to the terms and conditions?',
-  necessityIndicator: true,
-  isRequired: true
-});
+export const DefaultValue: Story = {
+  args: {
+    ...Example.args,
+    defaultValue: true
+  }
+};
 
-export const ReadOnly = RUIComponentStory(Overview, {
-  label: 'Do you agree to the terms and conditions?',
-  defaultValue: true,
-  isReadOnly: true
-});
+export const Required: Story = {
+  args: {
+    ...Example.args,
+    required: true,
+    necessityIndicator: true
+  }
+};
 
-export const Disabled = RUIComponentStory(Overview, {
-  label: 'Do you agree to the terms and conditions?',
-  defaultValue: true,
-  isDisabled: true
-});
+export const Disabled: Story = {
+  args: {
+    ...Example.args,
+    disabled: true,
+    defaultValue: true
+  }
+};
 
-export const Error = RUIComponentStory(Overview, {
-  label: 'Do you agree to the terms and conditions?',
-  necessityIndicator: true,
-  isRequired: true,
-  validationState: 'invalid',
-  errorMessage: 'Please state whether you agree.'
-});
+export const ReadOnly: Story = {
+  args: {
+    ...Example.args,
+    readOnly: true,
+    defaultValue: true
+  }
+};
+
+export const Error: Story = {
+  args: {
+    ...Example.args,
+    error: 'You must select yes or no'
+  }
+};

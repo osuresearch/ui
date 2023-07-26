@@ -1,41 +1,36 @@
-import React, { forwardRef, useRef } from 'react';
-import { AriaTextFieldProps, useTextField } from 'react-aria';
-
-import { mergeRefs } from '../../utils';
+import React, { useId } from 'react';
 import { FormField, FormFieldBase } from '../FormField';
-import { Interactive } from '../Interactive';
+import { OutlinedInput } from '@mui/material';
 
-export type TextAreaFieldProps = FormFieldBase<string> &
-  AriaTextFieldProps & {
-    rows?: number;
-  };
+export type TextAreaFieldProps = FormFieldBase<string>
 
-/**
- * Multiple lines of text input
- *
- * <!-- @ruiAtomic Text -->
- */
-export const TextAreaField = forwardRef<HTMLTextAreaElement, TextAreaFieldProps>(
-  ({ rows, ...props }, ref) => {
-    const inputRef = useRef<HTMLTextAreaElement>(null);
+export function TextAreaField(props: TextAreaFieldProps) {
+  const { name, onChange, onBlur, value, defaultValue } = props;
+  const id = useId();
 
-    const { labelProps, inputProps, descriptionProps, errorMessageProps } =
-      useTextField<'textarea'>(props, inputRef);
-
-    return (
-      <FormField
-        labelProps={labelProps}
-        descriptionProps={descriptionProps}
-        errorMessageProps={errorMessageProps}
-        {...props}
-      >
-        <Interactive as="textarea"
-          isTextInput
-          ref={mergeRefs(inputRef, ref)}
-          rows={rows}
-          {...inputProps}
+  return (
+    <FormField
+      {...props}
+      id={id}
+      renderInput={(inputProps) => (
+        <OutlinedInput
+          id={id}
+          name={name}
+          defaultValue={defaultValue}
+          value={value}
+          onChange={(e) => onChange && onChange(e.currentTarget.value)}
+          onBlur={onBlur}
+          multiline
+          rows={4}
+          fullWidth
+          inputProps={{
+            ...inputProps,
+            sx: {
+              resize: 'vertical'
+            }
+          }}
         />
-      </FormField>
-    );
-  }
-);
+      )}
+    />
+  );
+}

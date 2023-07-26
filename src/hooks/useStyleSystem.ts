@@ -4,7 +4,7 @@ import { bgc, ff, fs, fw, tc } from '../theme';
 import { colorProps, fontProps, layoutProps, marginProps, paddingProps, sizeProps } from '../types';
 import { spacingPropsToClassNames, splitProps } from '../utils';
 import { useScreenSize } from './useScreenSize';
-import { useTheme } from './useTheme';
+import { useTheme } from '../../.idea/useTheme';
 
 /**
  * Convert style system props into classNames and styles
@@ -36,6 +36,9 @@ export function useStyleSystem<P>(props: P): [string[], CSSProperties, P] {
     // Construct an array of Tailwind class names
     // resolved from the style system props
     [
+      // Disable @tailwindcss/typography plugin for all content
+      // 'not-prose',
+
       ...spacingPropsToClassNames(paddingProps, padding, current),
       ...spacingPropsToClassNames(marginProps, margin, current),
       // ...spacingPropsToClassNames(sizeProps, size, screen),

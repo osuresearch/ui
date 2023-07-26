@@ -1,68 +1,78 @@
-import { RUIComponentMeta, RUIComponentStory } from '@sb/utils';
+import { Meta, StoryObj } from '@storybook/react';
+
 import React, { useState } from 'react';
 
-import { Text } from '../Text';
-import { TextAreaField, TextAreaFieldProps } from './TextAreaField';
+import { Stack, Typography } from '@mui/material';
 
-export default {
-  title: 'Forms / TextAreaField',
-  ...RUIComponentMeta(TextAreaField).withStyleSystemProps()
+import { TextAreaField } from './TextAreaField';
+
+const meta: Meta<typeof TextAreaField> = {
+  title: 'Forms/TextAreaField',
+  component: TextAreaField,
+  argTypes: {},
 };
 
-export const Overview = RUIComponentStory<TextAreaFieldProps>(
-  (args) => <TextAreaField {...args} />,
-  {
-    label: 'Email',
-    description: 'Enter an email for us to contact you about your order.'
-  }
-);
+export default meta;
 
-export const DefaultValue = RUIComponentStory<TextAreaFieldProps>(Overview, {
-  label: 'Email',
-  defaultValue: 'chase@example.com'
-});
+type Story = StoryObj<typeof TextAreaField>;
 
-export const ControlledValue = RUIComponentStory<TextAreaFieldProps>(
-  (args) => {
-    const [value, setValue] = useState('');
+export const Example: Story = {
+  args: {
+    label: 'Textarea field',
+    description: 'Description content',
+  },
+};
+
+export const DefaultValue: Story = {
+  args: {
+    ...Example.args,
+    defaultValue: 'string value',
+  },
+};
+
+export const ControlledValue: Story = {
+  render: (args) => {
+    const [value, setValue] = useState<string | undefined>('String value');
 
     return (
-      <>
-        <TextAreaField value={value} onChange={setValue} {...args} />
-        <Text>{`Your email is: ${value}`}</Text>
-      </>
+      <Stack>
+        <TextAreaField {...args} value={value} onChange={setValue} />
+        <Typography>You entered: {value ?? <em>undefined</em>}</Typography>
+      </Stack>
     );
   },
-  {
-    label: 'Email'
-  }
-);
+  args: {
+    ...Example.args,
+  },
+};
 
-export const Required = RUIComponentStory<TextAreaFieldProps>(Overview, {
-  label: 'Email',
-  necessityIndicator: true,
-  isRequired: true
-});
+export const Required: Story = {
+  args: {
+    ...Example.args,
+    required: true,
+    necessityIndicator: true,
+  },
+};
 
-export const ReadOnly = RUIComponentStory<TextAreaFieldProps>(Overview, {
-  label: 'Email',
-  value: 'chase@example.com',
-  isReadOnly: true
-});
+export const Disabled: Story = {
+  args: {
+    ...Example.args,
+    disabled: true,
+    defaultValue: 'string value',
+  },
+};
 
-export const Disabled = RUIComponentStory<TextAreaFieldProps>(Overview, {
-  label: 'Email',
-  value: 'chase@example.com',
-  isDisabled: true
-});
+export const ReadOnly: Story = {
+  args: {
+    ...Example.args,
+    readOnly: true,
+    defaultValue: 'string value',
+  },
+};
 
-export const Error = RUIComponentStory<TextAreaFieldProps>(Overview, {
-  label: 'Email',
-  validationState: 'invalid',
-  errorMessage: 'Please enter a valid email address.'
-});
-
-export const WithAddedRows = RUIComponentStory<TextAreaFieldProps>(Overview, {
-  label: 'Email',
-  rows: 5
-});
+export const Error: Story = {
+  args: {
+    ...Example.args,
+    error: 'You need to fill out this field',
+  },
+};

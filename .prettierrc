@@ -1,0 +1,22 @@
+{
+  "trailingComma": "es5",
+  "tabWidth": 2,
+  "semi": true,
+  "singleQuote": true,
+  "arrayParens": "always",
+  "arrowParens": "always",
+  "bracketSpacing": true,
+  "parser": "typescript",
+  "printWidth": 100,
+  "quoteProps": "consistent",
+  "useTabs": false,
+  "importOrder": [
+    "^react$",
+    "^react(.*)$",
+    "^@mui/(.*)$",
+    "^[~/]",
+    "^[./]"
+  ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true
+}

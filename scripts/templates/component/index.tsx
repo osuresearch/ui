@@ -1,33 +1,12 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
+import { Box, BoxProps } from '@mui/material';
 
-import { StyleSystemProps } from '../../types';
-import { cx } from '../../utils';
-import { Box } from '../Box';
+export type __TEMPLATE__Props = BoxProps<'div'>
 
-export type __TEMPLATE__Props = StyleSystemProps & {
-  /* Your props */
-
-  children?: React.ReactNode;
-};
-
-/**
- * __TEMPLATE__ documentation
- *
- * ## Accessibility
- * - a11y info (used aria tags, keyboard behaviour, etc)
- */
-export const __TEMPLATE__ = forwardRef<HTMLDivElement, __TEMPLATE__Props>(
-  ({ className, children, ...styleSystemProps }, ref) => (
-    <Box
-      as="div"
-      ref={ref}
-      className={cx(
-        // Your custom styles
-        className
-      )}
-      {...styleSystemProps}
-    >
+export function __TEMPLATE__({ children, ...props }: __TEMPLATE__Props) {
+  return (
+    <Box component="div" {...props}>
       {children}
     </Box>
-  )
-);
+  );
+}

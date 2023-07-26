@@ -1,62 +1,60 @@
-import { RUIComponentMeta, RUIComponentStory } from '@sb/utils';
-import React, { useState } from 'react';
+import React from 'react';
+import { Meta, StoryObj } from '@storybook/react';
+import { DateField } from './DateField';
+import dayjs from 'dayjs';
 
-import { Text } from '../Text';
-import { DateField, DateFieldProps } from './DateField';
-
-export default {
-  title: 'Forms / DateField',
-  ...RUIComponentMeta(DateField).withStyleSystemProps()
+const meta: Meta<typeof DateField> = {
+  title: 'Forms/DateField',
+  component: DateField,
+  argTypes: {}
 };
 
-export const Overview = RUIComponentStory<DateFieldProps>((args) => <DateField {...args} />, {
-  label: 'Date',
-  description: 'Enter your date of birth'
-});
+export default meta;
 
-export const UncontrolledValue = RUIComponentStory<DateFieldProps>(
-  (args) => <DateField {...args}
-    defaultValue='1989-08-14'
-  />,
-  {
-    label: 'Date'
+type Story = StoryObj<typeof DateField>;
+
+export const Example: Story = {
+  render: (args) => <DateField {...args} />,
+  args: {
+    label: 'Date field',
+    description: 'Description content'
   }
-);
+};
 
-export const ControlledValue = RUIComponentStory<DateFieldProps>(
-  (args) => {
-    const [value, setValue] = useState<string | undefined>('1989-08-14');
-
-    return (
-      <>
-        <DateField value={value} onChange={setValue} {...args} />
-        <Text>{`Your date is: ${value}`}</Text>
-      </>
-    );
-  },
-  {
-    label: 'Date'
+export const DefaultValue: Story = {
+  args: {
+    ...Example.args,
+    defaultValue: dayjs().toISOString()
   }
-);
+};
 
-export const Required = RUIComponentStory(UncontrolledValue, {
-  label: 'Date',
-  necessityIndicator: true,
-  isRequired: true
-});
+export const Required: Story = {
+  args: {
+    ...Example.args,
+    required: true,
+    necessityIndicator: true
+  }
+};
 
-export const ReadOnly = RUIComponentStory(UncontrolledValue, {
-  label: 'Date',
-  isReadOnly: true
-});
+export const Disabled: Story = {
+  args: {
+    ...Example.args,
+    disabled: true,
+    defaultValue: dayjs().toISOString()
+  }
+};
 
-export const Disabled = RUIComponentStory(UncontrolledValue, {
-  label: 'Date',
-  isDisabled: true
-});
+export const ReadOnly: Story = {
+  args: {
+    ...Example.args,
+    readOnly: true,
+    defaultValue: dayjs().toISOString()
+  }
+};
 
-export const Error = RUIComponentStory(Overview, {
-  label: 'Date',
-  validationState: 'invalid',
-  errorMessage: 'Please enter a valid date.'
-});
+export const Error: Story = {
+  args: {
+    ...Example.args,
+    error: 'You need to fill out this field'
+  }
+};

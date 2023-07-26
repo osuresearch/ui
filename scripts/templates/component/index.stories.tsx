@@ -1,13 +1,16 @@
-import { RUIComponentMeta, RUIComponentStory } from '@sb/utils';
 import React from 'react';
+import { Meta, StoryObj } from '@storybook/react';
+import { __TEMPLATE__ } from './__TEMPLATE__';
 
-import { __TEMPLATE__ as Component, __TEMPLATE__Props } from './__TEMPLATE__';
+const meta = {
+  title: '__GROUP__/__TEMPLATE__',
+  component: __TEMPLATE__,
+  argTypes: {}
+} satisfies Meta<typeof __TEMPLATE__>;
 
-export default {
-  title: '__GROUP__ / __TEMPLATE__',
-  ...RUIComponentMeta(Component).withStyleSystemProps()
-};
+export default meta;
+type Story = StoryObj<typeof __TEMPLATE__>;
 
-export const __TEMPLATE__ = RUIComponentStory<__TEMPLATE__Props>((args) => (
-  <Component {...args}>Component template created through newComponent.mjs</Component>
-));
+export const Example = {
+  args: {}
+} satisfies Story;

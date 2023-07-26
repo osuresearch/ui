@@ -1,13 +1,19 @@
-import { RUIComponentMeta, RUIComponentStory } from '@sb/utils';
+import { Meta, StoryObj } from '@storybook/react';
+
 import React from 'react';
 
-import { VisuallyHidden as Component, VisuallyHiddenProps } from './VisuallyHidden';
+import { VisuallyHidden } from './VisuallyHidden';
 
-export default {
-  title: 'Utilities / VisuallyHidden',
-  ...RUIComponentMeta(Component).withStyleSystemProps()
-};
+const meta = {
+  title: 'Utility/VisuallyHidden',
+  component: VisuallyHidden,
+  argTypes: {},
+} satisfies Meta<typeof VisuallyHidden>;
 
-export const VisuallyHidden = RUIComponentStory<VisuallyHiddenProps>(
-  () => <Component>Hello screen readers!</Component>
-);
+export default meta;
+type Story = StoryObj<typeof VisuallyHidden>;
+
+export const Example = {
+  render: (args) => <VisuallyHidden {...args}>Hello screen readers!</VisuallyHidden>,
+  args: {},
+} satisfies Story;

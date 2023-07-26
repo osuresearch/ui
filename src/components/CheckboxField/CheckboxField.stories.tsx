@@ -1,72 +1,61 @@
-import { RUIComponentMeta, RUIComponentStory } from '@sb/utils';
-import React, { useState } from 'react';
+import React from 'react';
+import { Meta, StoryObj } from '@storybook/react';
+import { CheckboxField } from './CheckboxField';
+import { Item } from '../Item';
 
-import { Text } from '../Text';
-import { CheckboxFieldProps, CheckboxField as Component } from './CheckboxField';
-
-export default {
-  title: 'Forms / CheckboxField',
-  ...RUIComponentMeta(Component).withStyleSystemProps()
+const meta: Meta<typeof CheckboxField> = {
+  title: 'Forms/CheckboxField',
+  component: CheckboxField,
+  argTypes: {}
 };
 
-export const Overview = RUIComponentStory<CheckboxFieldProps>((args) => <Component {...args} />, {
-  name: 'checkbox-overview',
-  label: 'Yes I want to receive hourly promotional emails',
-  description: 'Additional help text'
-});
+export default meta;
 
-export const UncontrolledValue = RUIComponentStory<CheckboxFieldProps>(Overview, {
-  name: 'promos',
-  label: 'Yes I want to receive hourly promotional emails',
-  defaultValue: true
-});
+type Story = StoryObj<typeof CheckboxField>;
 
-export const ControlledValue = RUIComponentStory<CheckboxFieldProps>(
-  (args) => {
-    const [value, setValue] = useState<boolean | undefined>(false);
-
-    return (
-      <>
-        <Component value={value} onChange={setValue} {...args} />
-        <Text>{`You are ${value ? 'subscribed' : 'unsubscribed'}`}</Text>
-      </>
-    );
-  },
-  {
-    name: 'promos',
-    label: 'Yes I want to receive hourly promotional emails'
+export const Example: Story = {
+  render: (args) => <CheckboxField {...args} />,
+  args: {
+    name: 'opt-in',
+    label: 'Yes I want to receive hourly promotional email',
+    description: 'Description content'
   }
-);
+};
 
-export const Required = RUIComponentStory<CheckboxFieldProps>(Overview, {
-  name: 'promos',
-  label: 'Yes I want to receive hourly promotional emails',
-  isRequired: true
-});
+export const DefaultValue: Story = {
+  args: {
+    ...Example.args,
+    defaultValue: true
+  }
+};
 
-export const ReadOnly = RUIComponentStory<CheckboxFieldProps>(Overview, {
-  name: 'promos',
-  label: 'Yes I want to receive hourly promotional emails',
-  defaultValue: true,
-  isReadOnly: true
-});
+export const Required: Story = {
+  args: {
+    ...Example.args,
+    required: true,
+    necessityIndicator: true
+  }
+};
 
-export const Disabled = RUIComponentStory<CheckboxFieldProps>(Overview, {
-  name: 'promos',
-  label: 'Yes I want to receive hourly promotional emails',
-  defaultValue: true,
-  isDisabled: true
-});
+export const Disabled: Story = {
+  args: {
+    ...Example.args,
+    disabled: true,
+    defaultValue: true
+  }
+};
 
-export const Indeterminate = RUIComponentStory<CheckboxFieldProps>(Overview, {
-  name: 'promos',
-  label: 'Yes I want to receive hourly promotional emails',
-  isIndeterminate: true
-});
+export const ReadOnly: Story = {
+  args: {
+    ...Example.args,
+    readOnly: true,
+    defaultValue: true
+  }
+};
 
-export const Error = RUIComponentStory<CheckboxFieldProps>(Overview, {
-  name: 'promos',
-  label: 'Yes I want to receive hourly promotional emails',
-  validationState: 'invalid',
-  errorMessage: 'You must agree to receive hourly emails.'
-});
+export const Error: Story = {
+  args: {
+    ...Example.args,
+    error: 'You must opt in for us to spam you'
+  }
+};

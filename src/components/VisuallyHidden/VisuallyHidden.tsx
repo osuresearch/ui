@@ -1,8 +1,10 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
+import { Box, BoxProps } from '@mui/material';
+import { visuallyHidden } from '@mui/utils';
 
-export type VisuallyHiddenProps = {
-  children?: React.ReactNode;
-};
+export interface VisuallyHiddenProps {
+  children: React.ReactNode;
+}
 
 /**
  * Screen reader only content container
@@ -11,10 +13,10 @@ export type VisuallyHiddenProps = {
  * - Content within this component are only visible to screen readers
  * - To make content **NOT** visible to screen readers, use the `aria-hidden` attribute
  */
-export const VisuallyHidden = forwardRef<HTMLDivElement, VisuallyHiddenProps>(
-  ({ children }, ref) => (
-    <div ref={ref} className="sr-only">
+export function VisuallyHidden({ children }: VisuallyHiddenProps) {
+  return (
+    <Box component="div" sx={visuallyHidden}>
       {children}
-    </div>
-  )
-);
+    </Box>
+  );
+}

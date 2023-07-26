@@ -1,17 +1,18 @@
-import { RUIComponentMeta, RUIComponentStory } from '@sb/utils';
 import React from 'react';
+import { Meta, StoryObj } from '@storybook/react';
+import { NecessityIndicator } from './NecessityIndicator';
 
-import { Text } from '../Text';
-import { NecessityIndicator as Component, NecessityIndicatorProps } from './NecessityIndicator';
-
-export default {
-  title: 'Utilities / NecessityIndicator',
-  ...RUIComponentMeta(Component)
+const meta: Meta<typeof NecessityIndicator> = {
+  title: 'Internal/NecessityIndicator',
+  component: NecessityIndicator,
+  argTypes: {}
 };
 
-export const NecessityIndicator = RUIComponentStory<NecessityIndicatorProps>((args) => (
-  <Text>
-    This data is necessary
-    <Component {...args} />
-  </Text>
-));
+export default meta;
+
+type Story = StoryObj<typeof NecessityIndicator>;
+
+export const Example: Story = {
+  render: (args) => <NecessityIndicator />,
+  args: {}
+};

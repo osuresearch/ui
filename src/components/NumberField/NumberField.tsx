@@ -1,73 +1,44 @@
-import { NumberFieldProps as BaseNumberFieldProps } from '@react-types/numberfield';
-import React, { forwardRef, useRef } from 'react';
-import { useLocale, useNumberField } from 'react-aria';
-import { useNumberFieldState } from 'react-stately';
-
-import { mergeRefs } from '../../utils';
+import React, { useId } from 'react';
 import { FormField, FormFieldBase } from '../FormField';
-import { IconButton } from '../IconButton';
-import { Interactive } from '../Interactive';
+import { OutlinedInput } from '@mui/material';
 
-export type NumberFieldProps = FormFieldBase<number> & BaseNumberFieldProps;
+export interface NumberFieldProps extends FormFieldBase<number> {
+  min?: number;
+  max?: number;
+  step?: number;
+}
 
-/**
- * Number fields allow users to enter a number, and increment
- * or decrement the value using stepper buttons.
- *
- * <!-- @ruiAtomic Number -->
- */
-export const NumberField = forwardRef<HTMLInputElement, NumberFieldProps>((props, ref) => {
-  const inputRef = useRef<HTMLInputElement>(null);
+export function NumberField(props: NumberFieldProps) {
+  const { name, onChange, onBlur, value, defaultValue, min, max, step } = props;
+  const id = useId();
 
-  const { locale } = useLocale();
-  const state = useNumberFieldState({ ...props, locale });
+  // TODO: Min/max support. Native uncontrolled doesn't support it.
 
-  const {
-    groupProps,
-    labelProps,
-    errorMessageProps,
-    descriptionProps,
-    inputProps,
-    incrementButtonProps,
-    decrementButtonProps
-  } = useNumberField(props, state, inputRef);
-
-  const { name, ...inputPropsWithoutName } = inputProps;
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    onChange && onChange(Number.parseFloat(e.currentTarget.value));
+  };
 
   return (
     <FormField
-      wrapperProps={groupProps}
-      labelProps={labelProps}
-      descriptionProps={descriptionProps}
-      errorMessageProps={errorMessageProps}
       {...props}
-    >
-      <div className="relative w-full">
-        <input type="hidden" name={name} value={state.inputValue ? state.numberValue : ''} />
-
-        <Interactive as="input"
-          {...inputPropsWithoutName}
-          pr="xxl"
-          ref={mergeRefs(inputRef, ref)}
+      id={id}
+      renderInput={(inputProps) => (
+        <OutlinedInput
+          id={id}
+          name={name}
+          defaultValue={defaultValue}
+          value={value}
+          onChange={handleChange}
+          onBlur={onBlur}
+          type="number"
+          inputProps={{
+            min,
+            max,
+            step,
+            ...inputProps
+          }}
         />
-
-        <div className="flex flex-row absolute inset-[2px] left-auto">
-          <IconButton
-            size={20}
-            px="sm"
-            label="decrement"
-            name="dash"
-            {...decrementButtonProps}
-          />
-          <IconButton
-            size={20}
-            px="sm"
-            label="increment"
-            name="plus"
-            {...incrementButtonProps}
-          />
-        </div>
-      </div>
-    </FormField>
+      )}
+    />
   );
-});
+}

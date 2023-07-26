@@ -5,8 +5,8 @@ import React from 'react';
 import { VisuallyHidden } from './VisuallyHidden';
 
 describe('Tests for VisuallyHidden component', () => {
-  it('renders content', () => {
-    const { container } = render(<VisuallyHidden>Foo bar</VisuallyHidden>);
+  it('renders', () => {
+    const { container } = render(<VisuallyHidden />);
     expect(container.firstChild).toMatchSnapshot();
   });
 });

@@ -1,16 +1,7 @@
 import React from 'react';
 
-// Re-export mergeProps, we use it everywhere.
-import { mergeProps as ariaMergeProps } from '@react-aria/utils';
-import classNames, { ClassArray } from 'clsx';
-
 export * from './polymorphics';
 export * from './createPolymorphicComponent';
-export * from './theme';
-
-export function cx(...args: ClassArray): string {
-  return classNames(args);
-}
 
 interface Props {
   [key: string]: any;
@@ -25,10 +16,6 @@ type TupleTypes<T> = {
 type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends (k: infer I) => void
   ? I
   : never;
-
-export function mergeProps<T extends Props[]>(...args: T) {
-  return ariaMergeProps(...args);
-}
 
 /**
  * Your typical ref merge. This version supports our polymorphic refs.

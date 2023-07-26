@@ -1,69 +1,46 @@
-import React, { forwardRef, useRef } from 'react';
-import { useCheckbox } from 'react-aria';
-import { useToggleState } from 'react-stately';
+import React, { useId } from 'react';
+import { FormField, FormFieldBase } from '../FormField';
+import { Checkbox, FormControlLabel, OutlinedInput } from '@mui/material';
 
-import { CheckboxIcon } from '../CheckboxIcon';
-import { FormFieldBase } from '../FormField';
-import { ToggleField } from '../ToggleField';
-
-export type CheckboxFieldProps = FormFieldBase<boolean> & {
+export interface CheckboxFieldProps extends FormFieldBase<boolean> {
   /**
-   * Indeterminism is presentational only.
-   * The indeterminate visual representation remains regardless of user interaction.
+   * If true, the component appears indeterminate. This does not set the native
+   * input element to indeterminate due to inconsistent behavior across browsers.
+   * However, we set a `data-indeterminate` attribute on the input.
    */
-  isIndeterminate?: boolean;
-};
+  indeterminate?: boolean;
+}
 
-/**
- * Checkboxes allow the user to toggle a single `Key` atomic.
- *
- * <!-- @ruiAtomic Key -->
- *
- * ## Accessibility
- *
- * - ARIA labeling and state are handled by
- *  [React Aria](https://react-spectrum.adobe.com/react-aria/useTextField.html).
- * - If `label` is omitted, an `aria-label` or `aria-labeledby` prop must
- *  be passed instead to identify the element for screen readers.
- */
-export const CheckboxField = forwardRef<HTMLInputElement, CheckboxFieldProps>(
-  ({ label, description, errorMessage, ...props }, ref) => {
-    const inputRef = useRef<HTMLInputElement>(null);
+export function CheckboxField(props: CheckboxFieldProps) {
+  const { name, onChange, onBlur, value, defaultValue, label, indeterminate } = props;
+  const id = useId();
 
-    const { value, defaultValue, ...other } = props;
+  // TODO: Need to handle necessity indicator and whatnot here as well.
+  // I'd rather provide a variant for FormControlLabel to wrap an element.
 
-    const state = useToggleState({
-      ...other,
-      isSelected: value,
-      defaultSelected: defaultValue
-    });
-
-    const { inputProps } = useCheckbox(
-      {
-        ...other,
-        isSelected: value,
-        defaultSelected: defaultValue,
-        children: label,
-      },
-      state,
-      inputRef
-    );
-
-    return (
-      <ToggleField
-        ref={ref}
-        label={label}
-        labelProps={{}}
-        description={description}
-        descriptionProps={{}}
-        errorMessage={errorMessage}
-        errorMessageProps={{}}
-        renderIcon={CheckboxIcon}
-        inputProps={inputProps}
-        isSelected={state.isSelected}
-        isDisabled={props.isDisabled}
-        isIndeterminate={props.isIndeterminate}
-      />
-    );
-  }
-);
+  return (
+    <FormField
+      {...props}
+      id={id}
+      noLabel
+      renderInput={(inputProps) => (
+        <FormControlLabel
+          label={label}
+          htmlFor={id}
+          control={
+            <Checkbox
+              id={id}
+              name={name}
+              defaultChecked={defaultValue}
+              checked={value}
+              indeterminate={indeterminate}
+              onChange={(e, checked) => onChange && onChange(checked)}
+              onBlur={onBlur}
+              inputProps={inputProps}
+            />
+          }
+        />
+      )}
+    />
+  );
+}

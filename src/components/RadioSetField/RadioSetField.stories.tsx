@@ -1,95 +1,91 @@
-import { RUIComponentMeta, RUIComponentStory } from '@sb/utils';
-import React, { useState } from 'react';
-
+import React from 'react';
+import { Meta, StoryObj } from '@storybook/react';
+import { RadioSetField } from './RadioSetField';
 import { Item } from '../Item';
-import { Text } from '../Text';
-import { RadioSetField, RadioSetFieldProps } from './RadioSetField';
-import { Button } from '../Button';
 
-export default {
-  title: 'Forms / RadioSetField',
-  ...RUIComponentMeta(RadioSetField).withStyleSystemProps()
+const meta: Meta<typeof RadioSetField> = {
+  title: 'Forms/RadioSetField',
+  component: RadioSetField,
+  argTypes: {}
 };
 
-export const Overview = RUIComponentStory<RadioSetFieldProps>(
-  (args) => (
+export default meta;
+
+type Story = StoryObj<typeof RadioSetField>;
+
+export const Example: Story = {
+  render: (args) => (
     <RadioSetField {...args}>
-      <Item key="dx12" description="Each item may have its own description">
-        DirectX 12
-      </Item>
+      <Item key="dx11">DirectX 11</Item>
       <Item key="metal">Metal</Item>
       <Item key="vulkan">Vulkan</Item>
     </RadioSetField>
   ),
-  {
-    name: 'api',
-    label: 'Supported API',
-    description: 'This is description content for the entire set'
+  args: {
+    name: 'supported-api',
+    label: 'Default APIs',
+    description: 'Description content'
   }
-);
+};
 
-export const UncontrolledValue = RUIComponentStory(Overview, {
-  name: 'api',
-  label: 'Supported API',
-  defaultValue: 'vulkan'
-});
+export const ItemDescriptions: Story = {
+  render: (args) => (
+    <RadioSetField {...args}>
+      <Item key="dx11" description="Developed by Microsoft and released in 2009">
+        DirectX 11
+      </Item>
+      <Item key="metal" description="Developed by Apple and released in 2022">
+        Metal
+      </Item>
+      <Item key="vulkan" description="Developed by the Kronos Group and released in 2016">
+        Vulkan
+      </Item>
+    </RadioSetField>
+  ),
+  args: {
+    ...Example.args
+  }
+};
 
-export const ControlledValue = RUIComponentStory<RadioSetFieldProps>((args) => {
-  const [value, setValue] = useState<string | undefined>('metal');
+export const DefaultValue: Story = {
+  ...Example,
+  args: {
+    ...Example.args,
+    defaultValue: 'vulkan'
+  }
+};
 
-  return (
-    <>
-      <RadioSetField {...args} value={value} onChange={setValue}>
-        <Item key="dx11">DirectX 11</Item>
-        <Item key="metal">Metal</Item>
-        <Item key="vulkan">Vulkan</Item>
-      </RadioSetField>
+export const Required: Story = {
+  ...Example,
+  args: {
+    ...Example.args,
+    required: true,
+    necessityIndicator: true
+  }
+};
 
-      <Text as="div">Selected: {value}</Text>
-      <Button onPress={() => setValue(undefined)}>Reset</Button>
-    </>
-  );
-}, {
-  name: 'api',
-  label: 'Supported API',
-});
+export const Disabled: Story = {
+  ...Example,
+  args: {
+    ...Example.args,
+    disabled: true,
+    defaultValue: 'vulkan'
+  }
+};
 
-export const Required = RUIComponentStory(Overview, {
-  name: 'api',
-  label: 'Supported API',
-  isRequired: true,
-  necessityIndicator: true
-}).withDescription(`
-  If form submission must be blocked until the field is filled out, combine both
-  \`isRequired\` and \`necessityIndicator\`.
+export const ReadOnly: Story = {
+  ...Example,
+  args: {
+    ...Example.args,
+    readOnly: true,
+    defaultValue: 'vulkan'
+  }
+};
 
-  If the field is only validated on the server or should be indicated as required
-  but validation happens at a later time, just use \`necessityIndicator\`.
-`);
-
-export const ReadOnly = RUIComponentStory(Overview, {
-  name: 'api',
-  label: 'Supported API',
-  defaultValue: 'metal',
-  isReadOnly: true
-});
-
-export const Disabled = RUIComponentStory(Overview, {
-  name: 'api',
-  label: 'Supported API',
-  defaultValue: 'metal',
-  isDisabled: true
-});
-
-export const DisabledItem = RUIComponentStory(Overview, {
-  name: 'api',
-  label: 'Supported API',
-  disabledKeys: ['metal']
-});
-
-export const Error = RUIComponentStory(Overview, {
-  name: 'api',
-  label: 'Supported API',
-  validationState: 'invalid',
-  errorMessage: 'Select at least one API.'
-});
+export const Error: Story = {
+  ...Example,
+  args: {
+    ...Example.args,
+    error: 'You need to specify a default API'
+  }
+};

@@ -1,16 +1,18 @@
-import { RUIComponentMeta, RUIComponentStory } from '@sb/utils';
 import React from 'react';
+import { Meta, StoryObj } from '@storybook/react';
+import { FormField } from '../FormField';
 
-import { Text } from '../Text';
-import { FormField as Component, FormFieldProps } from './FormField';
-
-export default {
-  title: 'Internal / FormField',
-  ...RUIComponentMeta(Component).withStyleSystemProps()
+const meta: Meta<typeof FormField> = {
+  title: 'Internal/FormField',
+  component: FormField,
+  argTypes: {}
 };
 
-export const FormField = RUIComponentStory<FormFieldProps<string>>((args) => (
-  <Component {...args}>
-    <Text>No example available</Text>
-  </Component>
-));
+export default meta;
+
+type Story = StoryObj<typeof FormField>;
+
+export const Example: Story = {
+  render: (args) => <FormField {...args} />,
+  args: {}
+};

@@ -1,11 +1,18 @@
-import { RUIComponentMeta, RUIComponentStory } from '@sb/utils';
 import React from 'react';
+import { Meta, StoryObj } from '@storybook/react';
+import { Item } from './Item';
 
-import { Item as Component, ItemProps } from './Item';
-
-export default {
-  title: 'Utilities / Item',
-  ...RUIComponentMeta(Component).withStyleSystemProps()
+const meta: Meta<typeof Item> = {
+  title: 'Utility/Item',
+  component: Item,
+  argTypes: {}
 };
 
-export const Item = RUIComponentStory<ItemProps<any>>(() => <>No example available</>);
+export default meta;
+
+type Story = StoryObj<typeof Item>;
+
+export const Example: Story = {
+  render: (args) => <Item {...args} />,
+  args: {}
+};
