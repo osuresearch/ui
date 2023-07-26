@@ -3,7 +3,7 @@ import parse from 'autosuggest-highlight/parse';
 
 import React, { useId } from 'react';
 
-import { AsyncListData, Item, useAsyncList } from 'react-stately';
+import { useAsyncList } from 'react-stately';
 
 import {
   Autocomplete,
@@ -15,7 +15,7 @@ import {
 
 import { FormField, FormFieldBase } from '../FormField';
 
-export type AutocompleteFieldProps = FormFieldBase<string>
+export type AutocompleteFieldProps = FormFieldBase<string>;
 
 // Top 100 films as rated by IMDb users. http://www.imdb.com/chart/top
 const top100Films = [

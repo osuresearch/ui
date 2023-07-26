@@ -1,9 +1,10 @@
-import React from 'react';
 import { Meta, StoryObj } from '@storybook/react';
-import FaceIcon from '@mui/icons-material/Face';
+
+import React from 'react';
+
 import DoneIcon from '@mui/icons-material/Done';
-import { Stack, Chip as MuiChip, ChipProps as MuiChipProps, Avatar } from '@mui/material';
-import { Icon } from '../../src/components';
+import FaceIcon from '@mui/icons-material/Face';
+import { Avatar, Chip as MuiChip, ChipProps as MuiChipProps, Stack } from '@mui/material';
 
 export type ChipProps = Pick<
   MuiChipProps,
@@ -25,7 +26,7 @@ export const Chip = (args: ChipProps) => <MuiChip label="Basic" {...args} />;
 
 const meta = {
   title: 'MUI Components/Chip',
-  component: Chip
+  component: Chip,
 } satisfies Meta<typeof Chip>;
 
 export default meta;
@@ -92,15 +93,15 @@ export const Default = {
       />
     </Stack>
   ),
-  args: {}
+  args: {},
 } satisfies Story;
 
 export const Outlined = {
   ...Default,
   args: {
     ...Default.args,
-    variant: 'outlined'
-  }
+    variant: 'outlined',
+  },
 } satisfies Story;
 
 export const Small = {
@@ -108,6 +109,6 @@ export const Small = {
   args: {
     ...Default.args,
     variant: 'outlined',
-    size: 'small'
-  }
+    size: 'small',
+  },
 } satisfies Story;

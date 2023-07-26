@@ -1,11 +1,13 @@
-import React from 'react';
 import { Meta, StoryObj } from '@storybook/react';
-import { Button, ButtonGroup, ButtonGroupProps, Stack } from '@mui/material';
+
+import React from 'react';
+
+import { Button, ButtonGroup } from '@mui/material';
 
 const meta = {
   title: 'MUI Components/ButtonGroup',
   component: ButtonGroup,
-  argTypes: {}
+  argTypes: {},
 } satisfies Meta<typeof ButtonGroup>;
 
 export default meta;
@@ -20,31 +22,31 @@ export const Default = {
       <Button>Three</Button>
     </ButtonGroup>
   ),
-  args: {}
+  args: {},
 } satisfies Story;
 
 export const Contained = {
   ...Default,
   args: {
     ...Default.args,
-    variant: 'contained'
-  }
+    variant: 'contained',
+  },
 } satisfies Story;
 
 export const Outlined = {
   ...Default,
   args: {
     ...Default.args,
-    variant: 'outlined'
-  }
+    variant: 'outlined',
+  },
 } satisfies Story;
 
 export const Text = {
   ...Default,
   args: {
     ...Default.args,
-    variant: 'text'
-  }
+    variant: 'text',
+  },
 } satisfies Story;
 
 export const Secondary = {
@@ -52,6 +54,6 @@ export const Secondary = {
   args: {
     ...Default.args,
     variant: 'contained',
-    color: 'secondary'
-  }
+    color: 'secondary',
+  },
 } satisfies Story;

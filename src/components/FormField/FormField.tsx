@@ -5,11 +5,9 @@ import {
   FormHelperText,
   FormLabel,
   InputBaseComponentProps,
-  OutlinedInput,
   Stack,
   Typography,
 } from '@mui/material';
-import useId from '@mui/material/utils/useId';
 
 import { Icon } from '../Icon';
 import { NecessityIndicator } from '../NecessityIndicator';

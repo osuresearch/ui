@@ -1,6 +1,8 @@
 import React, { useId } from 'react';
+
+import { Checkbox, FormControlLabel } from '@mui/material';
+
 import { FormField, FormFieldBase } from '../FormField';
-import { Checkbox, FormControlLabel, OutlinedInput } from '@mui/material';
 
 export interface CheckboxFieldProps extends FormFieldBase<boolean> {
   /**

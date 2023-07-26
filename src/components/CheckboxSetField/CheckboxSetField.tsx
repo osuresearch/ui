@@ -4,9 +4,9 @@ import React, { useId } from 'react';
 
 import { useListState } from 'react-stately';
 
-import { Checkbox, FormControlLabel, FormGroup, FormHelperText, Radio } from '@mui/material';
+import { Checkbox, FormControlLabel, FormGroup, FormHelperText } from '@mui/material';
 
-import { FormField, FormFieldBase, FormFieldProps } from '../FormField';
+import { FormField, FormFieldBase } from '../FormField';
 
 export interface CheckboxSetFieldProps
   extends FormFieldBase<string[]>,

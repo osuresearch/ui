@@ -1,5 +1,6 @@
 import React from 'react';
-import { Box, BoxProps } from '@mui/material';
+
+import { Box } from '@mui/material';
 import { visuallyHidden } from '@mui/utils';
 
 export interface VisuallyHiddenProps {

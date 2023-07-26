@@ -1,6 +1,7 @@
 import { CollectionBase } from '@react-types/shared';
 
-import React, { FormEvent, FormEventHandler, useId, useState } from 'react';
+import React, { useId } from 'react';
+
 import { useListState } from 'react-stately';
 
 import { Box, BoxProps, Tab as MuiTab, Tabs as MuiTabs } from '@mui/material';
@@ -9,13 +10,6 @@ import { Item } from '../Item';
 import { TabPanel } from './TabPanel';
 
 export interface TabsProps extends Omit<BoxProps<'div'>, 'children'>, CollectionBase<typeof Item> {}
-
-function a11yProps(index: number) {
-  return {
-    'id': `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
-  };
-}
 
 /**
  * Wrapper around MUI tabs to introduce additional accessible labeling and statefulness
@@ -53,7 +47,6 @@ export function Tabs({ children, ...props }: TabsProps) {
         <TabPanel
           key={idx}
           id={`${id}-tabpanel-${idx}`}
-          index={idx}
           isSelected={state.selectionManager.isSelected(idx)}
           aria-labelledby={`${id}-tab-${idx}`}
         >

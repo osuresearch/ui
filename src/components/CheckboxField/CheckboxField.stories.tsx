@@ -1,12 +1,13 @@
-import React from 'react';
 import { Meta, StoryObj } from '@storybook/react';
+
+import React from 'react';
+
 import { CheckboxField } from './CheckboxField';
-import { Item } from '../Item';
 
 const meta: Meta<typeof CheckboxField> = {
   title: 'Forms/CheckboxField',
   component: CheckboxField,
-  argTypes: {}
+  argTypes: {},
 };
 
 export default meta;
@@ -18,44 +19,44 @@ export const Example: Story = {
   args: {
     name: 'opt-in',
     label: 'Yes I want to receive hourly promotional email',
-    description: 'Description content'
-  }
+    description: 'Description content',
+  },
 };
 
 export const DefaultValue: Story = {
   args: {
     ...Example.args,
-    defaultValue: true
-  }
+    defaultValue: true,
+  },
 };
 
 export const Required: Story = {
   args: {
     ...Example.args,
     required: true,
-    necessityIndicator: true
-  }
+    necessityIndicator: true,
+  },
 };
 
 export const Disabled: Story = {
   args: {
     ...Example.args,
     disabled: true,
-    defaultValue: true
-  }
+    defaultValue: true,
+  },
 };
 
 export const ReadOnly: Story = {
   args: {
     ...Example.args,
     readOnly: true,
-    defaultValue: true
-  }
+    defaultValue: true,
+  },
 };
 
 export const Error: Story = {
   args: {
     ...Example.args,
-    error: 'You must opt in for us to spam you'
-  }
+    error: 'You must opt in for us to spam you',
+  },
 };

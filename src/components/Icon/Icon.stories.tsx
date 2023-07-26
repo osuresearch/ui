@@ -1,11 +1,11 @@
-import React from 'react';
 import { Meta, StoryObj } from '@storybook/react';
+
 import { Icon } from './Icon';
 
 const meta: Meta<typeof Icon> = {
   title: 'Components/Icon',
   component: Icon,
-  argTypes: {}
+  argTypes: {},
 };
 
 export default meta;
@@ -17,7 +17,7 @@ export const Example: Story = {
     name: 'heart',
     size: 64,
     sx: {
-      color: 'pink'
-    }
-  }
+      color: 'pink',
+    },
+  },
 };

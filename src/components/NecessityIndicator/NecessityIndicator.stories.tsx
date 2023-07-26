@@ -1,11 +1,13 @@
-import React from 'react';
 import { Meta, StoryObj } from '@storybook/react';
+
+import React from 'react';
+
 import { NecessityIndicator } from './NecessityIndicator';
 
 const meta: Meta<typeof NecessityIndicator> = {
   title: 'Internal/NecessityIndicator',
   component: NecessityIndicator,
-  argTypes: {}
+  argTypes: {},
 };
 
 export default meta;
@@ -13,6 +15,5 @@ export default meta;
 type Story = StoryObj<typeof NecessityIndicator>;
 
 export const Example: Story = {
-  render: (args) => <NecessityIndicator />,
-  args: {}
+  render: () => <NecessityIndicator />,
 };

@@ -1,16 +1,18 @@
 import React, { useId, useState } from 'react';
-import { FormField, FormFieldBase } from '../FormField';
+
 import { Stack, ToggleButton, ToggleButtonGroup, styled } from '@mui/material';
 
-export type YesNoFieldProps = FormFieldBase<boolean>
+import { FormField, FormFieldBase } from '../FormField';
+
+export type YesNoFieldProps = FormFieldBase<boolean>;
 
 const YesNoButton = styled(ToggleButton)(({ theme }) => ({
   'width': 64,
   'fontSize': '1rem',
   '&.Mui-selected': {
     background: theme.palette.primary.main,
-    color: '#fff'
-  }
+    color: '#fff',
+  },
 }));
 
 function boolToYesNo(value?: boolean) {
@@ -22,7 +24,7 @@ function yesNoToBool(value?: string) {
 }
 
 export function YesNoField(props: YesNoFieldProps) {
-  const { name, onChange, onBlur, defaultValue } = props;
+  const { onChange, onBlur, defaultValue } = props;
   const id = useId();
   const [value, setValue] = useState(boolToYesNo(defaultValue));
 
