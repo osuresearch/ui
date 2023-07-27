@@ -7,6 +7,7 @@ import { Shadows, createTheme, formLabelClasses, outlinedInputClasses } from '@m
 
 // Colors
 import * as colors from './colors';
+import { accents } from './colors/accents';
 
 // Base theme rules - breakpoints, palette, typography, etc.
 let theme = createTheme({
@@ -45,6 +46,31 @@ let theme = createTheme({
       secondary: '#666',
       disabled: '#a7b1b7',
     },
+    error: {
+      light: '#ba0c2f',
+      main: '#ba0c2f',
+      dark: '#ba0c2f',
+      contrastText: '#ffffff',
+    },
+    warning: {
+      light: '#fff0cc',
+      main: '#fff0cc',
+      dark: '#ffb600',
+      contrastText: '#141517',
+    },
+    info: {
+      light: '#c6e9f8',
+      main: '#c6e9f8',
+      dark: '#41b6e6',
+      contrastText: '#141517',
+    },
+    success: {
+      light: '#dcf5d0',
+      main: '#dcf5d0',
+      dark: '#80c75b',
+      contrastText: '#141517',
+    },
+    ...accents,
   },
   typography: {
     fontFamily: "'Nunito Sans Variable', HelveticaNeue, Helvetica, Arial, sans-serif",
@@ -121,6 +147,37 @@ theme = createTheme(theme, {
         },
       },
     },
+    MuiAlert: {
+      defaultProps: {
+        variant: 'filled',
+      },
+      styleOverrides: {
+        icon: ({ ownerState, theme }: any) => ({
+          // Note that !important is only because of the relationship between paper + root
+          // being more specific than what we can do here with an icon style override
+          color:
+            ownerState.severity === 'error'
+              ? '#fff'
+              : theme.palette[ownerState.severity].dark + ' !important',
+          fontSize: 26,
+        }),
+        root: ({ ownerState, theme }: any) => ({
+          // Darken the border when applied to outlined variants
+          borderColor: theme.palette[ownerState.severity].dark,
+        }),
+        message: {
+          // Adjustment due to the larger icon size
+          paddingTop: '10px',
+        },
+      },
+    },
+    MuiAlertTitle: {
+      styleOverrides: {
+        root: {
+          fontWeight: 700,
+        },
+      },
+    },
     MuiBadge: {
       defaultProps: {
         color: 'primary',
@@ -169,7 +226,6 @@ theme = createTheme(theme, {
         },
       },
     },
-    MuiTable: {},
     MuiTableRow: {
       styleOverrides: {
         head: {
@@ -215,6 +271,24 @@ theme = createTheme(theme, {
             marginLeft: -2,
           },
         },
+      },
+    },
+    MuiToggleButtonGroup: {
+      defaultProps: {
+        color: 'gray',
+      },
+    },
+    MuiToggleButton: {
+      defaultProps: {
+        color: 'gray',
+      },
+      styleOverrides: {
+        root: ({ ownerState, theme }: any) => ({
+          '&.Mui-selected, &.Mui-selected:hover': {
+            color: theme.palette[ownerState.color].contrastText,
+            backgroundColor: theme.palette[ownerState.color].main,
+          },
+        }),
       },
     },
     MuiFormLabel: {
