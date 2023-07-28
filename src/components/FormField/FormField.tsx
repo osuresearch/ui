@@ -129,6 +129,7 @@ export function FormField<T>(props: FormFieldProps<T>) {
       fullWidth={fullWidth}
       component={isFieldset ? 'fieldset' : 'div'}
       variant="standard"
+      error={!!error}
     >
       <Stack data-field={name} gap={1}>
         {!noLabel && (

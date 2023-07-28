@@ -14,9 +14,9 @@ import { useDarkMode } from 'storybook-dark-mode';
 
 import React from 'react';
 
-import { Box, Stack, Typography } from '@mui/material';
+import { Box, Divider, Link, Stack, Typography } from '@mui/material';
 
-import { Code, Item, Tabs } from '../components';
+import { Item, Tabs } from '../components';
 import { RUIProvider } from '../components/RUIProvider';
 import dark from './Theme.dark';
 import light from './Theme.light';
@@ -77,7 +77,28 @@ function getComponentSpecs(meta: RUIMeta<any>) {
 }
 
 function DocsFooter() {
-  return <div></div>;
+  return (
+    <Stack gap={0} alignItems="stretch" px={1}>
+      <Divider />
+
+      <Stack direction="row" justifyContent="space-between" p={1} gap={2}>
+        <Typography fontSize={14} whiteSpace="nowrap">
+          {useDarkMode() ? '✨ ' : '💖 '}
+          <Link href="https://github.com/McManning" target="_blank">
+            Chase McManning
+          </Link>{' '}
+          and{' '}
+          <Link href="https://github.com/osuresearch/ui/graphs/contributors" target="_blank">
+            contributors
+          </Link>
+        </Typography>
+        <Typography fontSize={14}>
+          If you have a disability and experience difficulty accessing this content, contact{' '}
+          <Link href="mailto:oraccessibility@osu.edu">oraccessibility@osu.edu</Link>
+        </Typography>
+      </Stack>
+    </Stack>
+  );
 }
 
 export function ComponentContainer({ meta }: { meta: RUIMeta<any> }) {
