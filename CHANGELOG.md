@@ -1,3 +1,20 @@
+# [5.0.0-beta.2](https://github.com/osuresearch/ui/compare/v5.0.0-beta.1...v5.0.0-beta.2) (2023-07-28)
+
+
+### Bug Fixes
+
+* clipping issues for focus indicators on multiple components ([9a1ab32](https://github.com/osuresearch/ui/commit/9a1ab3231f4c483ad0a6a94b8da3b46814fd9812))
+* **FormField:** propagate error state down to MUI ([e937cec](https://github.com/osuresearch/ui/commit/e937cec42bbe823b1f85ed3934eb97207fd0ef1b))
+* **OhioStateNavbar:** links are not typed ([d3956f5](https://github.com/osuresearch/ui/commit/d3956f5b7bd69549d7840acb2ec6f58528427501))
+
+
+### Features
+
+* add new `Admonition` ([d12e953](https://github.com/osuresearch/ui/commit/d12e95388ed47692c0249e4042a614f86c26ca95))
+* add the full brand color palette ([1f96f93](https://github.com/osuresearch/ui/commit/1f96f938c51f08fb7970dd0908e4aa654859e055))
+* refactor Ohio State brand components into MUI ([4016acc](https://github.com/osuresearch/ui/commit/4016accdd2bed7f851c717351cee0f4970298fc9))
+* **TextField:** add `autoFocus` and `type` props ([ba8d953](https://github.com/osuresearch/ui/commit/ba8d953b23884d934e2bd9d643c26ed3c6ac4291))
+
 # [5.0.0-beta.1](https://github.com/osuresearch/ui/compare/v4.8.0...v5.0.0-beta.1) (2023-07-26)
 
 ### BREAKING CHANGES
