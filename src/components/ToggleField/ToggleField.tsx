@@ -1,8 +1,10 @@
 import React, { useId } from 'react';
-import { FormField, FormFieldBase } from '../FormField';
-import { Switch, FormControlLabel, styled, SwitchProps } from '@mui/material';
 
-export type ToggleFieldProps = FormFieldBase<boolean>
+import { FormControlLabel, Switch, SwitchProps, styled } from '@mui/material';
+
+import { FormField, FormFieldBase } from '../FormField';
+
+export type ToggleFieldProps = FormFieldBase<boolean>;
 
 const BUXSwitch = styled((props: SwitchProps) => (
   <Switch focusVisibleClassName=".Mui-focusVisible" {...props} />
@@ -20,36 +22,36 @@ const BUXSwitch = styled((props: SwitchProps) => (
       '& + .MuiSwitch-track': {
         backgroundColor: theme.palette.mode === 'dark' ? '#ba0c2f' : '#ba0c2f',
         opacity: 1,
-        border: 0
+        border: 0,
       },
       '&.Mui-disabled + .MuiSwitch-track': {
-        opacity: 0.5
-      }
+        opacity: 0.5,
+      },
     },
     '&.Mui-focusVisible .MuiSwitch-thumb': {
       color: '#33cf4d',
-      border: '6px solid #fff'
+      border: '6px solid #fff',
     },
     '&.Mui-disabled .MuiSwitch-thumb': {
-      color: theme.palette.mode === 'light' ? '#fff' : '#fff'
+      color: theme.palette.mode === 'light' ? '#fff' : '#fff',
     },
     '&.Mui-disabled + .MuiSwitch-track': {
-      color: '#cfd4d8'
-    }
+      color: '#cfd4d8',
+    },
   },
   '& .MuiSwitch-thumb': {
     boxSizing: 'border-box',
     width: 20,
-    height: 20
+    height: 20,
   },
   '& .MuiSwitch-track': {
     borderRadius: 24 / 2,
     backgroundColor: theme.palette.mode === 'light' ? '#212325' : '#39393D',
-    opacity: 1
+    opacity: 1,
     // transition: theme.transitions.create(['background-color'], {
     //   duration: 500,
     // }),
-  }
+  },
 }));
 
 export function ToggleField(props: ToggleFieldProps) {
@@ -71,6 +73,8 @@ export function ToggleField(props: ToggleFieldProps) {
               id={id}
               name={name}
               defaultChecked={defaultValue}
+              disabled={disabled}
+              readOnly={readOnly}
               checked={value}
               onChange={(e, checked) => onChange && onChange(checked)}
               onBlur={onBlur}

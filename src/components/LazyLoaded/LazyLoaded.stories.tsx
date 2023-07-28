@@ -36,7 +36,7 @@ export const Example = {
             <Avatar alt="Chase McManning" src="https://opic.osu.edu/mcmanning.1" />
             <Stack>
               <Typography>Chase McManning</Typography>
-              <Typography fontSize="small">Sr. Enterprise Applications Engineer</Typography>
+              <Typography fontSize={14}>Sr. Enterprise Applications Engineer</Typography>
             </Stack>
           </Stack>
         </LazyLoaded>

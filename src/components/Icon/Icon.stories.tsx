@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 
+import { pink } from '../../theme/colors/pink';
 import { Icon } from './Icon';
 
 const meta: Meta<typeof Icon> = {
@@ -17,7 +18,7 @@ export const Example: Story = {
     name: 'heart',
     size: 64,
     sx: {
-      color: 'pink',
+      color: pink[500],
     },
   },
 };

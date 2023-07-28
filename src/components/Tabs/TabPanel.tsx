@@ -12,7 +12,7 @@ export function TabPanel(props: TabPanelProps) {
 
   return (
     <Box role="tabpanel" hidden={!isSelected} {...other}>
-      {isSelected && <Box sx={{ p: 3 }}>{children}</Box>}
+      {isSelected && <Box sx={{ p: 2 }}>{children}</Box>}
     </Box>
   );
 }
