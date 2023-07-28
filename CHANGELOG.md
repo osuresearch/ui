@@ -1,3 +1,10 @@
+# [5.0.0-beta.1](https://github.com/osuresearch/ui/compare/v4.8.0...v5.0.0-beta.1) (2023-07-26)
+
+### BREAKING CHANGES
+
+* Dropped use of TailwindCSS in favor of Material UI 5. This removes redundant components (Box, Stack, Text, etc) and introduces a TSS styling system to replace the previous CSS bundling. Form components have been refactored to take advantage of new MUI base fields and several components have been introduced to wrap MUI components to be always-accessible. Components that are not an immediate need for the Office of Research applications (e.g. Interview, Listicle) have been dropped from the beta. ([54efe9f](https://github.com/osuresearch/ui/commit/54efe9f15eb6bd3c29b0805ce127e76d96d8b579))
+
+
 # [5.0.0-alpha.23](https://github.com/osuresearch/ui/compare/v5.0.0-alpha.22...v5.0.0-alpha.23) (2023-07-07)
 
 
