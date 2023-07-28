@@ -46,6 +46,10 @@ let theme = createTheme({
       secondary: '#666',
       disabled: '#a7b1b7',
     },
+    common: {
+      black: '#141517',
+      white: '#fff',
+    },
     error: {
       light: '#ba0c2f',
       main: '#ba0c2f',
@@ -79,6 +83,7 @@ let theme = createTheme({
     },
     button: {
       textTransform: 'initial',
+      fontSize: '1rem',
     },
     subtitle1: {
       fontSize: '87.5%',
@@ -147,6 +152,35 @@ theme = createTheme(theme, {
         },
       },
     },
+    MuiDivider: {
+      // Thicker border lines on dividers
+      styleOverrides: {
+        root: {
+          'borderBottomWidth': 2,
+          '&:before, &:after': {
+            borderTopWidth: 2,
+          },
+        },
+      },
+    },
+    MuiPagination: {
+      defaultProps: {
+        shape: 'rounded',
+      },
+    },
+    MuiBreadcrumbs: {
+      defaultProps: {
+        separator: '❯',
+      },
+      styleOverrides: {
+        root: {
+          fontSize: 14,
+        },
+        separator: {
+          fontSize: 10,
+        },
+      },
+    },
     MuiAlert: {
       defaultProps: {
         variant: 'filled',
@@ -190,7 +224,7 @@ theme = createTheme(theme, {
       styleOverrides: {
         root: {
           '&.Mui-focusVisible': {
-            outline: `1px solid #000`,
+            outline: `2px solid ${colors.blue[700]}`,
             outlineOffset: '1px',
           },
           // Double the border width of buttons
@@ -353,6 +387,12 @@ theme = createTheme(theme, {
         textColorPrimary: {
           color: colors.gray[900],
         },
+        root: {
+          // Additional margin is added so that the overflow
+          // of a scroll container doesn't hide the focusVisible
+          // outline of the tab button
+          margin: 3,
+        },
       },
     },
     MuiLink: {
@@ -364,6 +404,10 @@ theme = createTheme(theme, {
           '&:hover': {
             background: colors.gray[100],
             color: colors.gray[900],
+          },
+          '&.Mui-focusVisible': {
+            outline: `2px solid ${colors.blue[700]}`,
+            outlineOffset: '1px',
           },
         },
       },
@@ -422,6 +466,16 @@ theme = createTheme(theme, {
     MuiInputBase: {
       defaultProps: {
         size: 'small',
+      },
+    },
+    MuiFormControlLabel: {
+      styleOverrides: {
+        label: {
+          // Don't grey out input labels when disabled.
+          '&.Mui-disabled': {
+            color: theme.palette.text.primary,
+          },
+        },
       },
     },
     MuiLinearProgress: {
