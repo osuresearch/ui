@@ -1,6 +1,16 @@
 import React from 'react';
 
-import { Box, BoxProps, Link, LinkBaseProps, Stack, Typography, styled } from '@mui/material';
+import {
+  Box,
+  BoxProps,
+  Link,
+  LinkBaseProps,
+  LinkTypeMap,
+  Stack,
+  Typography,
+  styled,
+} from '@mui/material';
+import { OverridableComponent } from '@mui/material/OverridableComponent';
 
 import { Icon } from '../Icon';
 import { VisuallyHidden } from '../VisuallyHidden';
@@ -20,10 +30,6 @@ interface NavbarLinkProps {
   children: React.ReactNode;
 }
 
-type LinkProps = LinkBaseProps & {
-  variant: OhioStateNavbarVariant;
-};
-
 interface RootProps extends BoxProps {
   variant?: OhioStateNavbarVariant;
 }
@@ -34,36 +40,36 @@ const Root = styled(Box)<RootProps>(({ variant, theme }) => ({
   borderBottom: `4px solid ${theme.palette.primary.main}`,
 }));
 
-const LogoLink = styled(Link)<LinkProps>(({ variant, theme }) => ({
-  'color': variant === 'light' ? '#666' : '#fff',
+const LogoLink = styled(Link)<{ v: OhioStateNavbarVariant }>(({ v }) => ({
+  'color': v === 'light' ? '#666' : '#fff',
   'fontWeight': 700,
   'fontSize': 19,
   'textDecoration': 'none',
   'whiteSpace': 'nowrap',
   '&:hover': {
     background: 'none',
-    color: variant === 'light' ? '#666' : '#fff',
+    color: v === 'light' ? '#666' : '#fff',
   },
-}));
+})) as OverridableComponent<LinkTypeMap<{ v: OhioStateNavbarVariant }>>;
 
-const NavLink = styled(Link)<LinkProps>(({ variant, theme }) => ({
-  'color': variant === 'light' ? '#141517' : '#fff',
+const NavLink = styled(Link)<{ v: OhioStateNavbarVariant }>(({ v }) => ({
+  'color': v === 'light' ? '#141517' : '#fff',
   'fontWeight': 300,
   'fontSize': 14,
   'textDecoration': 'none',
   '&:hover': {
-    color: variant === 'light' ? '#141517' : '#fff',
+    color: v === 'light' ? '#141517' : '#fff',
     background: 'none',
     textDecoration: 'underline',
   },
-}));
+})) as OverridableComponent<LinkTypeMap<{ v: OhioStateNavbarVariant }>>;
 
 function NavbarLink({ title, variant, href, children }: NavbarLinkProps) {
   // const { breakpoints } = useScreenSize();
   const isMobile = false; //  !breakpoints.lg;
 
   return (
-    <NavLink href={href} target="_blank" variant={variant}>
+    <NavLink href={href} target="_blank" v={variant}>
       {!isMobile && title}
       {isMobile && children}
     </NavLink>
@@ -88,7 +94,7 @@ export function OhioStateNavbar({ variant = 'light' }: OhioStateNavbarProps) {
         alignItems="center"
         justifyContent="space-between"
       >
-        <LogoLink href="https://www.osu.edu" target="_blank" rel="noreferrer" variant={variant}>
+        <LogoLink href="https://www.osu.edu" target="_blank" rel="noreferrer" v={variant}>
           OSU
           <Typography component="span" fontSize={19} fontWeight={400}>
             .EDU
