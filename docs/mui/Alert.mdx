@@ -1,0 +1,15 @@
+
+import { Meta, Canvas, Stories } from '@storybook/blocks';
+import * as AlertStories from './Alert.stories';
+
+<Meta of={AlertStories} />
+
+# Alert
+
+When the component is dynamically displayed, the content is automatically
+announced by most screen readers with the default `role="alert"`. At this time,
+screen readers do not inform users of alerts that are present when the page loads.
+
+For content that should be called out to the user but is not an alert, use `<Admonition>`.
+
+<Stories title="" />

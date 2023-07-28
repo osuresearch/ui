@@ -5,7 +5,7 @@ import React from 'react';
 import { Typography } from '@mui/material';
 
 const meta = {
-  title: 'Typography',
+  title: 'Getting Started / Typography',
   component: Typography,
   argTypes: {},
 } satisfies Meta<typeof Typography>;

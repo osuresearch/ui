@@ -1,3 +1,4 @@
+import argTypes from '@sb/argTypes';
 import { Meta, StoryObj } from '@storybook/react';
 
 import React from 'react';
@@ -7,9 +8,32 @@ import FormatBoldIcon from '@mui/icons-material/FormatBold';
 import FormatColorFillIcon from '@mui/icons-material/FormatColorFill';
 import FormatItalicIcon from '@mui/icons-material/FormatItalic';
 import FormatUnderlinedIcon from '@mui/icons-material/FormatUnderlined';
-import { ToggleButton, ToggleButtonGroup } from '@mui/material';
+import {
+  ToggleButton as MuiToggleButton,
+  ToggleButtonProps as MuiToggleButtonProps,
+  ToggleButtonGroup,
+} from '@mui/material';
 
 import { Icon } from '../../src/components';
+
+type HiddenMuiProps =
+  | 'disableFocusRipple'
+  | 'classes'
+  | 'centerRipple'
+  | 'disableRipple'
+  | 'focusRipple'
+  | 'disableTouchRipple'
+  | 'focusVisibleClassName'
+  | 'TouchRippleProps'
+  | 'touchRippleRef'
+  | 'className'
+  | 'style';
+
+export type ToggleButtonProps = Omit<MuiToggleButtonProps, HiddenMuiProps>
+
+export const ToggleButton = ({ children = 'Toggle button', ...rest }: ToggleButtonProps) => (
+  <MuiToggleButton {...rest}>{children}</MuiToggleButton>
+);
 
 const meta = {
   title: 'MUI Components/ToggleButton',
@@ -38,6 +62,7 @@ export const Default = {
       </ToggleButton>
     );
   },
+  argTypes: argTypes,
 } satisfies Story;
 
 export const Primary = {
@@ -96,6 +121,7 @@ export const VerticalGroup = {
         value={formats}
         onChange={handleFormat}
         aria-label="text formatting"
+        color="gray"
       >
         <ToggleButton value="bold" aria-label="bold">
           <FormatBoldIcon />
