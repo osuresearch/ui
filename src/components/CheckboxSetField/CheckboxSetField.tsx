@@ -22,7 +22,7 @@ export interface CheckboxItem {
 }
 
 export function CheckboxSetField(props: CheckboxSetFieldProps) {
-  const { name, onChange, onBlur, value, defaultValue } = props;
+  const { name, onChange, onBlur, value, defaultValue, disabled, readOnly } = props;
   const id = useId();
   const state = useListState({
     ...props,
@@ -50,6 +50,7 @@ export function CheckboxSetField(props: CheckboxSetFieldProps) {
       {...props}
       id={id}
       isFieldset
+      disabled={disabled || readOnly}
       renderInput={(inputProps) => (
         <FormGroup
           sx={{ marginLeft: '6px' }}

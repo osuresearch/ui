@@ -63,6 +63,8 @@ export function ToggleField(props: ToggleFieldProps) {
       {...props}
       id={id}
       noLabel
+      // Checkboxes don't support readonly
+      disabled={disabled || readOnly}
       renderInput={(inputProps) => (
         <FormControlLabel
           label={label}

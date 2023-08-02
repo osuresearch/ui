@@ -1,8 +1,10 @@
 import React, { useId } from 'react';
-import { FormField, FormFieldBase } from '../FormField';
+
 import { OutlinedInput } from '@mui/material';
 
-export type TextAreaFieldProps = FormFieldBase<string>
+import { FormField, FormFieldBase } from '../FormField';
+
+export type TextAreaFieldProps = FormFieldBase<string>;
 
 export function TextAreaField(props: TextAreaFieldProps) {
   const { name, onChange, onBlur, value, defaultValue } = props;
@@ -22,12 +24,13 @@ export function TextAreaField(props: TextAreaFieldProps) {
           onBlur={onBlur}
           multiline
           rows={4}
+          sx={{ padding: 0 }}
           fullWidth
           inputProps={{
             ...inputProps,
             sx: {
-              resize: 'vertical'
-            }
+              resize: 'vertical',
+            },
           }}
         />
       )}

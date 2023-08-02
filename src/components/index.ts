@@ -7,6 +7,7 @@ export * from './DateField';
 export * from './EmailLink';
 export * from './ExternalLink';
 export * from './FormField';
+export * from './FormFieldError';
 export * from './Icon';
 export * from './Item';
 export * from './LazyLoaded';

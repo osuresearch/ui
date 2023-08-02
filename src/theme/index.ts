@@ -3,7 +3,13 @@ import '@fontsource-variable/nunito-sans';
 import '@fontsource/source-serif-pro';
 import '@fontsource/source-serif-pro/900.css';
 
-import { Shadows, createTheme, formLabelClasses, outlinedInputClasses } from '@mui/material';
+import {
+  Shadows,
+  createTheme,
+  formHelperTextClasses,
+  formLabelClasses,
+  outlinedInputClasses,
+} from '@mui/material';
 
 // Colors
 import * as colors from './colors';
@@ -28,33 +34,33 @@ let theme = createTheme({
   palette: {
     mode: 'light',
     divider: colors.gray[100],
+    common: {
+      black: colors.black,
+      white: colors.white,
+    },
     primary: {
-      light: colors.scarlet[100], // Can't go lighter than base scarlet
+      light: colors.scarlet[100],
       main: colors.scarlet[100],
       dark: colors.scarlet[400],
-      contrastText: '#fff',
+      contrastText: colors.white,
     },
     secondary: {
       main: '#26686d',
     },
     background: {
-      default: '#ffffff',
-      paper: '#f6f7f8',
+      default: colors.white,
+      paper: colors.gray[100],
     },
     text: {
-      primary: '#212325',
-      secondary: '#666',
-      disabled: '#a7b1b7',
-    },
-    common: {
-      black: '#141517',
-      white: '#fff',
+      primary: colors.gray[900],
+      secondary: colors.gray[700],
+      disabled: colors.gray[700],
     },
     error: {
-      light: '#ba0c2f',
-      main: '#ba0c2f',
-      dark: '#ba0c2f',
-      contrastText: '#ffffff',
+      light: colors.scarlet[100],
+      main: colors.scarlet[100],
+      dark: colors.scarlet[100],
+      contrastText: colors.white,
     },
     warning: {
       light: '#fff0cc',
@@ -281,6 +287,12 @@ theme = createTheme(theme, {
       styleOverrides: {
         root: {
           fontSize: '87.5%', // 14px
+
+          // Don't change label color when in error or disabled.
+          // We display a secondary error message directly under the helper.
+          [`&.${formHelperTextClasses.error}, &.${formHelperTextClasses.disabled}`]: {
+            color: 'inherit',
+          },
         },
       },
     },
@@ -329,10 +341,11 @@ theme = createTheme(theme, {
       styleOverrides: {
         root: {
           color: colors.gray[900],
-          // Don't change label color when focused
-          [`&.${formLabelClasses.focused}`]: {
-            color: 'inherit',
-          },
+          // Don't change label color when focused, in error, or disabled.
+          [`&.${formLabelClasses.focused}, &.${formLabelClasses.error}, &.${formLabelClasses.disabled}`]:
+            {
+              color: 'inherit',
+            },
         },
       },
     },
@@ -429,10 +442,6 @@ theme = createTheme(theme, {
           padding: 8,
         },
         root: {
-          // No border change on hover
-          [`&:hover .${outlinedInputClasses.notchedOutline}`]: {
-            borderColor: colors.gray[100],
-          },
           // Thick and light input borders
           [`.${outlinedInputClasses.notchedOutline}`]: {
             borderColor: colors.gray[100],
@@ -471,7 +480,7 @@ theme = createTheme(theme, {
     MuiFormControlLabel: {
       styleOverrides: {
         label: {
-          // Don't grey out input labels when disabled.
+          // Don't grey out input labels when disabled or readonly
           '&.Mui-disabled': {
             color: theme.palette.text.primary,
           },

@@ -24,7 +24,7 @@ function yesNoToBool(value?: string) {
 }
 
 export function YesNoField(props: YesNoFieldProps) {
-  const { onChange, onBlur, defaultValue } = props;
+  const { onChange, onBlur, defaultValue, disabled, readOnly } = props;
   const id = useId();
   const [value, setValue] = useState(boolToYesNo(defaultValue));
 
@@ -38,6 +38,7 @@ export function YesNoField(props: YesNoFieldProps) {
     <FormField
       {...props}
       id={id}
+      disabled={disabled || readOnly}
       renderInput={(inputProps) => (
         <Stack spacing={2}>
           <ToggleButtonGroup
@@ -47,6 +48,7 @@ export function YesNoField(props: YesNoFieldProps) {
             onBlur={onBlur}
             value={value}
             exclusive
+            disabled={disabled || readOnly}
           >
             <YesNoButton value="yes">Yes</YesNoButton>
             <YesNoButton value="no">No</YesNoButton>

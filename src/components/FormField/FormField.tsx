@@ -6,10 +6,9 @@ import {
   FormLabel,
   InputBaseComponentProps,
   Stack,
-  Typography,
 } from '@mui/material';
 
-import { Icon } from '../Icon';
+import { FormFieldError } from '../FormFieldError';
 import { NecessityIndicator } from '../NecessityIndicator';
 
 /** Any focusable element, including both HTML and SVG elements. */
@@ -82,14 +81,14 @@ export interface FormFieldProps<T> extends FormFieldBase<T> {
    */
   labelAs?: 'label' | 'span';
 
-  /** Props for the text field's visible label element */
-  labelProps?: DOMAttributes<FocusableElement> | React.LabelHTMLAttributes<HTMLLabelElement>;
+  // /** Props for the text field's visible label element */
+  // labelProps?: DOMAttributes<FocusableElement> | React.LabelHTMLAttributes<HTMLLabelElement>;
 
-  /** Props for the text field's description element */
-  descriptionProps?: DOMAttributes<FocusableElement>;
+  // /** Props for the text field's description element */
+  // descriptionProps?: DOMAttributes<FocusableElement>;
 
-  /** Props for the text field's error message element */
-  errorMessageProps?: DOMAttributes<FocusableElement>;
+  // /** Props for the text field's error message element */
+  // errorMessageProps?: DOMAttributes<FocusableElement>;
 
   noLabel?: boolean;
 
@@ -105,18 +104,19 @@ type LayoutProps = {
   children: React.ReactNode;
 };
 
+/**
+ * Base component for rendering an interactive form field.
+ *
+ * This ensures an accessible mapping between label, input, description, and error messages.
+ *
+ * This component is typically used by RUI maintainers. You should instead use one of the
+ * concrete form components that wrap this component for a specific data type.
+ *
+ * <!-- @ruiInternal -->
+ */
 export function FormField<T>(props: FormFieldProps<T>) {
   const { id, name, label, description, error, layout, noLabel } = props;
-  const {
-    labelAs,
-    labelProps,
-    descriptionProps,
-    errorMessageProps,
-    isFieldset,
-    necessityIndicator,
-    renderInput,
-    fullWidth,
-  } = props;
+  const { isFieldset, necessityIndicator, renderInput, fullWidth } = props;
 
   // TODO: Aria associations again.
   // I need to inject aria-describedby={`${id}-error`}
@@ -130,6 +130,7 @@ export function FormField<T>(props: FormFieldProps<T>) {
       component={isFieldset ? 'fieldset' : 'div'}
       variant="standard"
       error={!!error}
+      disabled={props.disabled || props.readOnly}
     >
       <Stack data-field={name} gap={1}>
         {!noLabel && (
@@ -140,17 +141,14 @@ export function FormField<T>(props: FormFieldProps<T>) {
         )}
         {renderInput({
           // Pass down aria to the underlying input element
-          'aria-describedby': error ? `${id}-error` : undefined,
+          'id': id,
+          'aria-describedby': (error ? `${id}-error` : '') + (description ? ` ${id}-help` : ''),
+          'data-testid': id,
           'disabled': props.disabled,
           'readOnly': props.readOnly,
         })}
-        {description && <FormHelperText>{description}</FormHelperText>}
-        {error && (
-          <Typography id={`${id}-error`} fontSize="0.88em" color="error">
-            <Icon role="presentation" name="xmarkCircle" sx={{ verticalAlign: 'text-top' }} />{' '}
-            {error}
-          </Typography>
-        )}
+        {description && <FormHelperText id={`${id}-help`}>{description}</FormHelperText>}
+        {error && <FormFieldError id={`${id}-error`}>{error}</FormFieldError>}
       </Stack>
     </FormControl>
   );

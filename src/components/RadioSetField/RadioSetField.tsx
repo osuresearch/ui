@@ -4,7 +4,7 @@ import React, { Fragment, useId } from 'react';
 
 import { useListState } from 'react-stately';
 
-import { FormControlLabel, FormGroup, FormHelperText, Radio } from '@mui/material';
+import { FormControlLabel, FormGroup, FormHelperText, Radio, RadioGroup } from '@mui/material';
 
 import { FormField, FormFieldBase } from '../FormField';
 
@@ -31,6 +31,10 @@ export function RadioSetField(props: RadioSetFieldProps) {
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (disabled || readOnly || state.selectionManager.isDisabled(event.target.name)) {
+      return;
+    }
+
     state.selectionManager.select(event.target.name);
     onChange && onChange(event.target.name);
   };
@@ -41,7 +45,7 @@ export function RadioSetField(props: RadioSetFieldProps) {
       id={id}
       isFieldset
       renderInput={(inputProps) => (
-        <FormGroup aria-labelledby={`${id}-label`} defaultValue={defaultValue} onBlur={onBlur}>
+        <RadioGroup aria-labelledby={`${id}-label`} defaultValue={defaultValue} onBlur={onBlur}>
           {Array.from(state.collection).map((item) => (
             <Fragment key={item.key}>
               <FormControlLabel
@@ -52,7 +56,7 @@ export function RadioSetField(props: RadioSetFieldProps) {
                     name={item.key as string}
                     checked={state.selectionManager.isSelected(item.key)}
                     onChange={handleChange}
-                    disabled={disabled || state.selectionManager.isDisabled(item.key)}
+                    disabled={disabled || readOnly || state.selectionManager.isDisabled(item.key)}
                     inputProps={inputProps}
                   />
                 }
@@ -61,7 +65,7 @@ export function RadioSetField(props: RadioSetFieldProps) {
               {item.props.description && <FormHelperText>{item.props.description}</FormHelperText>}
             </Fragment>
           ))}
-        </FormGroup>
+        </RadioGroup>
       )}
     />
   );

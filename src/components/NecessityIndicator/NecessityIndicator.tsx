@@ -5,6 +5,8 @@ import { Icon } from '../Icon';
 
 /**
  * Icon attached to form field labels to indicate that the field is required.
+ *
+ * <!-- @ruiInternal -->
  */
 export function NecessityIndicator() {
   return (
