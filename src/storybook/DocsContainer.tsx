@@ -18,63 +18,10 @@ import { Box, Divider, Link, Stack, Typography } from '@mui/material';
 
 import { Item, Tabs } from '../components';
 import { RUIProvider } from '../components/RUIProvider';
+import { MUIDocsContainer } from './MUIDocsContainer';
 import dark from './Theme.dark';
 import light from './Theme.light';
-import { RUIMeta } from './utils';
-
-function getDocgenInfo(meta: RUIMeta<any>) {
-  if (meta && (meta.component as any).__docgenInfo !== undefined) {
-    return (meta.component as any).__docgenInfo;
-  }
-
-  return {
-    description: '',
-    displayName: '',
-    props: {},
-  };
-}
-
-function getComponentSpecs(meta: RUIMeta<any>) {
-  const docgen = getDocgenInfo(meta);
-
-  // TODO: I want to use @decorators in the docs for components
-  // to mark them as beta, alpha, whatever. As well as various
-  // other flags (atomics) so we don't do that in stories.
-  // But that gets stripped via Storybook
-  // (see: https://github.com/storybookjs/storybook/issues/18162)
-
-  // So, FOR NOW, I have a hacky syntax for RUI decorators
-  // where I hide the decorators in HTML comments so they don't
-  // get parsed out.
-  const atomics = [...docgen.description.matchAll(/@ruiAtomic\s+(.*)-->/g)];
-
-  const status = [...docgen.description.matchAll(/@ruiStatus\s+(.*)-->/g)];
-
-  const isPolymorphic = docgen.description.indexOf('@ruiPolymorphic') >= 0;
-  const isInternal = (meta.title ?? '').indexOf('Internal') === 0;
-  const isDev = status.length > 0 && status[0][1].trim() === 'In Development';
-
-  const path = (meta.title ?? '').split('/');
-  const name = path[path.length - 1].trim();
-
-  let parent = 'root';
-  if (path.length > 1) {
-    parent = path[path.length - 2].toLowerCase().trim();
-  }
-
-  const isMUI = parent.startsWith('mui');
-
-  return {
-    name,
-    parent,
-    atomics,
-    status,
-    isPolymorphic,
-    isInternal,
-    isDev,
-    isMUI,
-  };
-}
+import { RUIMeta, getComponentSpecs } from './utils';
 
 function DocsFooter() {
   return (
@@ -107,15 +54,8 @@ export function ComponentContainer({ meta }: { meta: RUIMeta<any> }) {
 
   const hasAdditionalStories = true; // meta.componentStoriesValue.length > 1;
 
-  // TODO: Link to MUI docs
   if (isMUI) {
-    return (
-      <Stack p={4}>
-        <Typography variant="h1">{name}</Typography>
-        <Source code={`import { ${name} } from "@mui/material"`} />
-        <Stories title="" />
-      </Stack>
-    );
+    return <MUIDocsContainer meta={meta} />;
   }
 
   return (
