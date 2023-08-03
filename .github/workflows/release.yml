@@ -17,6 +17,11 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Setup variables
+        id: vars
+        shell: bash
+        run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
@@ -39,7 +44,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: gh-pages
           folder: docs-build
-          target-folder: ${GITHUB_REF##*/}
+          target-folder: ${{ steps.vars.outputs.branch }}
           clean: true
 
       - name: Release
