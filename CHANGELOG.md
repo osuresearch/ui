@@ -1,3 +1,10 @@
+# [5.1.0](https://github.com/osuresearch/ui/compare/v5.0.0...v5.1.0) (2023-08-03)
+
+
+### Features
+
+* **AutocompleteField:** add `load` prop for an async callback to load suggestions ([ac1d9ba](https://github.com/osuresearch/ui/commit/ac1d9ba6733ccd6210cf49529c6255b3e1b22f6c))
+
 # [5.0.0](https://github.com/osuresearch/ui/compare/v4.8.0...v5.0.0) (2023-08-03)
 
 Main branch release of beta.4
