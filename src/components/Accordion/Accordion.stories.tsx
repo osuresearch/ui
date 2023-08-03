@@ -1,7 +1,9 @@
-import React from 'react';
 import { Meta, StoryObj } from '@storybook/react';
-import { Accordion, AccordionProps as BaseAccordionProps } from './Accordion';
+
+import React from 'react';
+
 import { Item } from '../Item';
+import { Accordion, AccordionProps as BaseAccordionProps } from './Accordion';
 
 // Filter down all the Box props to just the ones we want for the styleguide
 export type AccordionProps = Pick<BaseAccordionProps, 'sx' | 'children'>;
@@ -9,7 +11,7 @@ export type AccordionProps = Pick<BaseAccordionProps, 'sx' | 'children'>;
 const meta = {
   title: 'Navigation/Accordion',
   component: Accordion,
-  argTypes: {}
+  argTypes: {},
 } satisfies Meta<AccordionProps>;
 
 export default meta;
@@ -39,5 +41,5 @@ export const Example = {
       </Item>
     </Accordion>
   ),
-  args: {}
+  args: {},
 } satisfies Story;

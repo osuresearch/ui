@@ -4,7 +4,7 @@ import React from 'react';
 
 import { Alert, AlertTitle, Box, Button, Collapse, IconButton, Stack } from '@mui/material';
 
-import { Icon } from '../../src/components';
+import { CloseButton, Icon } from '../../src/components';
 
 const meta = {
   title: 'MUI Components/Alert',
@@ -72,21 +72,7 @@ export const Dismissable = {
     return (
       <Box sx={{ width: '100%' }}>
         <Collapse in={open}>
-          <Alert
-            action={
-              <IconButton
-                aria-label="close"
-                color="inherit"
-                size="small"
-                onClick={() => {
-                  setOpen(false);
-                }}
-              >
-                <Icon name="xmark" />
-              </IconButton>
-            }
-            sx={{ mb: 2 }}
-          >
+          <Alert action={<CloseButton onClick={() => setOpen(false)} />} sx={{ mb: 2 }}>
             Close me!
           </Alert>
         </Collapse>
