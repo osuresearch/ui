@@ -1,14 +1,19 @@
-import { ThemeProvider, CssBaseline } from '@mui/material';
 import React from 'react';
-import { theme } from '../../theme';
+
+import { CssBaseline, ThemeProvider } from '@mui/material';
+
+import { theme as dark } from '../../theme/dark';
+import { theme as light } from '../../theme/light';
 
 export interface RUIProviderProps {
   children: React.ReactNode;
+  theme?: 'light' | 'dark' | 'system';
 }
 
-export function RUIProvider({ children }: RUIProviderProps) {
+export function RUIProvider({ children, theme }: RUIProviderProps) {
+  // TODO: System.
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme === 'dark' ? dark : light}>
       <CssBaseline enableColorScheme />
       {children}
     </ThemeProvider>

@@ -1,4 +1,3 @@
-
 import { create } from '@storybook/theming';
 
 export default create({
@@ -9,12 +8,12 @@ export default create({
 
   // UI
   appBg: '#141517', // '#212325', // gray-shade-80
-  appContentBg: 'transparent', // black
+  appContentBg: '#000', // 'transparent', // black
   appBorderRadius: 0,
 
   // Typography
-  fontBase: '\'Nunito Sans\', HelveticaNeue, Helvetica, Arial, sans-serif',
-  fontCode: 'Menlo, Monaco, \'Courier New\', monospace',
+  fontBase: "'Nunito Sans', HelveticaNeue, Helvetica, Arial, sans-serif",
+  fontCode: "Menlo, Monaco, 'Courier New', monospace",
 
   // Text colors
   textColor: 'white',

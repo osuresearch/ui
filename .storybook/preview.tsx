@@ -1,4 +1,5 @@
 import { Preview } from '@storybook/react';
+import { useDarkMode } from 'storybook-dark-mode';
 
 import React from 'react';
 
@@ -25,6 +26,12 @@ const preview: Preview = {
         h4: (props) => <Typography variant="h4" {...props} />,
       },
     },
+    // darkMode: {
+    //   current: 'light',
+    //   stylePreview: true,
+    //   dark,
+    //   light,
+    // },
     controls: {
       expanded: true,
       hideNoControlsWarning: true,
@@ -35,11 +42,6 @@ const preview: Preview = {
     },
     backgrounds: {
       disable: true,
-    },
-    // Override dark and light modes with a custom theme
-    darkMode: {
-      // dark,
-      light,
     },
     options: {
       storySort: {
@@ -81,7 +83,7 @@ const preview: Preview = {
   },
   decorators: [
     (Story) => (
-      <RUIProvider>
+      <RUIProvider theme={useDarkMode() ? 'dark' : 'light'}>
         <Story />
       </RUIProvider>
     ),

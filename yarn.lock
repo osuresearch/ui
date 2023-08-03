@@ -2656,6 +2656,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@mui/x-data-grid@npm:^6.10.2":
+  version: 6.10.2
+  resolution: "@mui/x-data-grid@npm:6.10.2"
+  dependencies:
+    "@babel/runtime": ^7.22.6
+    "@mui/utils": ^5.13.7
+    clsx: ^1.2.1
+    prop-types: ^15.8.1
+    reselect: ^4.1.8
+  peerDependencies:
+    "@mui/material": ^5.4.1
+    "@mui/system": ^5.4.1
+    react: ^17.0.0 || ^18.0.0
+    react-dom: ^17.0.0 || ^18.0.0
+  checksum: 7699cdf7dbe66e1356ee4a09872185e4572b7d4fc86b1490ea3a27573f827e08a24adbaeab64707501c1160368fb2a7ef26d5a1c5b2ef7c22ed22baee43c1747
+  languageName: node
+  linkType: hard
+
 "@mui/x-date-pickers@npm:^6.10.1":
   version: 6.10.1
   resolution: "@mui/x-date-pickers@npm:6.10.1"
@@ -2819,6 +2837,7 @@ __metadata:
     "@mdx-js/react": ^2.3.0
     "@mui/icons-material": ^5.14.1
     "@mui/material": ^5.14.1
+    "@mui/x-data-grid": ^6.10.2
     "@mui/x-date-pickers": ^6.10.1
     "@osuresearch/iconography": ^1.1.0
     "@osuresearch/types": ^1.0.3
@@ -2871,7 +2890,7 @@ __metadata:
     react-stately: ^3.24.0
     react-use: ^17.4.0
     storybook: ^7.1.0
-    storybook-dark-mode: ^3.0.0
+    storybook-dark-mode: ^3.0.1
     ts-jest: ^29.0.5
     tsconfig-paths-webpack-plugin: ^4.0.0
     typescript: ^4.9.4
@@ -15384,6 +15403,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"reselect@npm:^4.1.8":
+  version: 4.1.8
+  resolution: "reselect@npm:4.1.8"
+  checksum: a4ac87cedab198769a29be92bc221c32da76cfdad6911eda67b4d3e7136dca86208c3b210e31632eae31ebd2cded18596f0dd230d3ccc9e978df22f233b5583e
+  languageName: node
+  linkType: hard
+
 "resize-observer-polyfill@npm:^1.5.1":
   version: 1.5.1
   resolution: "resize-observer-polyfill@npm:1.5.1"
@@ -16276,9 +16302,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"storybook-dark-mode@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "storybook-dark-mode@npm:3.0.0"
+"storybook-dark-mode@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "storybook-dark-mode@npm:3.0.1"
   dependencies:
     "@storybook/addons": ^7.0.0
     "@storybook/api": ^7.0.0
@@ -16296,7 +16322,7 @@ __metadata:
       optional: true
     react-dom:
       optional: true
-  checksum: a66b7d52e303cc71ab603e7fb02bab39c56fdffc6428c7977136b53e8da9b47279bee06957f642ac2812a548076ab6a76657cbb3e31a5cee1c782c56810a2e93
+  checksum: d04213c92e8a4af0035e80eb02b75b8da725ba7b1ecbfe050eb04cb4018d91394f08c8fe7c1b106c971b2047ef5a1ba776e78050ae1f6d7563cdfdba5e701a29
   languageName: node
   linkType: hard
 
