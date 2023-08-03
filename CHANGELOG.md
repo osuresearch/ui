@@ -1,3 +1,10 @@
+# [5.0.0-beta.4](https://github.com/osuresearch/ui/compare/v5.0.0-beta.3...v5.0.0-beta.4) (2023-08-03)
+
+
+### Features
+
+* add LinkList, TextLink, ConfirmButton, and CloseButton from 5.0-alpha ([62f574d](https://github.com/osuresearch/ui/commit/62f574d70a1409e6645a7614e6297ad6b172be4c))
+
 # [5.0.0-beta.3](https://github.com/osuresearch/ui/compare/v5.0.0-beta.2...v5.0.0-beta.3) (2023-08-03)
 
 
