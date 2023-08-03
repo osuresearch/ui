@@ -17,7 +17,7 @@ export type LinkListItemProps = {
 
 export const LinkListItem: (props: LinkListItemProps) => JSX.Element = StatelyItem;
 
-export type LinkListProps = BoxProps<'div'> & CollectionBase<LinkListItemProps>;
+export type LinkListProps = BoxProps<'ul'> & CollectionBase<LinkListItemProps>;
 
 /**
  * A Link List is often used on a Landing layout page, such as a section index page,
