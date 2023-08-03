@@ -1,3 +1,10 @@
+# [5.0.0-beta.3](https://github.com/osuresearch/ui/compare/v5.0.0-beta.2...v5.0.0-beta.3) (2023-08-03)
+
+
+### Bug Fixes
+
+* read only state not supported by multiple components ([e2c99cf](https://github.com/osuresearch/ui/commit/e2c99cf2f9e40ab59ee5948a11f634870ac1084b))
+
 # [5.0.0-beta.2](https://github.com/osuresearch/ui/compare/v5.0.0-beta.1...v5.0.0-beta.2) (2023-07-28)
 
 
