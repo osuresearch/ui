@@ -65,7 +65,7 @@ export const WithTitle = {
   ),
 } satisfies Story;
 
-export const Dismissable = {
+export const Dismissible = {
   render: (args) => {
     const [open, setOpen] = React.useState(true);
 

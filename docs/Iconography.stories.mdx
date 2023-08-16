@@ -1,0 +1,59 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Getting Started / Iconography" />
+
+# Iconography
+
+Default icons and illustrations are provided by [@osuresearch/iconography](https://github.com/osuresearch/iconography).
+This provides basic system icons, navigation icons, and illustrations for typical applications.
+
+For a full list, check out the Storybook for the iconography project.
+
+
+## Extending the icon set
+
+To add new icons for your application, you can extend the iconography library with additional icons from [Iconify](https://iconify.design/).
+
+Start by installing the icon pack you want from iconify:
+
+```sh
+yarn add -D @iconify/icons-mdi
+```
+
+Then add an `icons.ts` file to your application that registers your new icons with the iconography library:
+
+```ts
+import { addIcon } from '@osuresearch/iconography';
+
+// Import icons you want to use for this app.
+// Use semantic names for your icons. For example, instead of "bell-outline"
+// or "cog-filled", use "alerts" and "settings".
+import tableOfContents from '@iconify/icons-mdi/book-open-outline';
+import comment from '@iconify/icons-mdi/comment-outline';
+import addComment from '@iconify/icons-mdi/comment-plus-outline'
+import settings from '@iconify/icons-mdi/cog-filled';
+
+const icons: Record<string, any> = {
+  tableOfContents,
+  comment,
+  addComment,
+  settings,
+}
+
+// Add an export that loads all your icons into the registry
+export function loadAllIcons() {
+  Object.keys(icons).forEach((name) => {
+    addIcon(name, icons[name]);
+  });
+}
+```
+
+Import your icons file and execute `loadAllIcons()` wherever your root component for your app is. For a NextJS app, this may be your `_app.tsx`.
+
+Icons can then be used exactly as they were named in the dictionary:
+
+```tsx
+<Icon name="tableOfContents" />
+```
+
+Remember to follow best practices when picking new icons to ensure that they fit existing icons in your application.

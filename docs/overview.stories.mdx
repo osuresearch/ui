@@ -1,5 +1,4 @@
 import { Meta } from '@storybook/blocks';
-import { Card } from '../src/components';
 
 <Meta title="Getting Started / Overview" />
 
@@ -8,14 +7,35 @@ import { Card } from '../src/components';
 Research UI is The Ohio State University's Office of Research component library, based on
 Ohio State's design system - BUX.
 
-UI designs and documentation can be found for most components at [https://osuresearch.github.io/ui/v5](https://osuresearch.github.io/ui/v5)
-
 ## Installation
 
-Install using your package manager of choice:
+Install using your package manager of choice. `@mui/material` and `@emotion/styled` are required peer dependencies.
 
-- `yarn add @osuresearch/search-ui @mui/material @emotion/styled`
-- `npm i @osuresearch/search-ui @mui/material @emotion/styled`
-- `pnpm i @osuresearch/search-ui @mui/material @emotion/styled`
+```sh
+yarn add @osuresearch/ui @mui/material @emotion/styled
+```
 
-Note that `@mui/material` and `@emotion/styled` are required peer dependencies.
+## Usage
+
+Wrap your application in a `<RUIProvider>` to activate themes for child content.
+
+```tsx
+import { Typography, Stack } from '@mui/material';
+import { RUIProvider } from '@osuresearch/ui';
+
+export function App() {
+  return (
+    <RUIProvider>
+      <main>
+        <Typography variant="h1">Hello world!</Typography>
+      </main>
+    </RUIProvider>
+  );
+}
+```
+
+## Customizing
+
+We support CSS-in-JS through Emotion. See Material UI's guide on styled components:
+
+[https://mui.com/system/styled/](https://mui.com/system/styled/)
