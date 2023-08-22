@@ -1,12 +1,16 @@
-import React from 'react';
 import { Meta, StoryObj } from '@storybook/react';
-import { CheckboxSetField } from './CheckboxSetField';
+
+import React from 'react';
+
+import { Link, Typography } from '@mui/material';
+
 import { Item } from '../Item';
+import { CheckboxSetField } from './CheckboxSetField';
 
 const meta: Meta<typeof CheckboxSetField> = {
   title: 'Forms/CheckboxSetField',
   component: CheckboxSetField,
-  argTypes: {}
+  argTypes: {},
 };
 
 export default meta;
@@ -24,8 +28,8 @@ export const Example: Story = {
   args: {
     name: 'supported-api',
     label: 'Supported APIs',
-    description: 'Description content'
-  }
+    description: 'Description content',
+  },
 };
 
 export const ItemDescriptions: Story = {
@@ -43,16 +47,16 @@ export const ItemDescriptions: Story = {
     </CheckboxSetField>
   ),
   args: {
-    ...Example.args
-  }
+    ...Example.args,
+  },
 };
 
 export const DefaultValue: Story = {
   ...Example,
   args: {
     ...Example.args,
-    defaultValue: ['vulkan']
-  }
+    defaultValue: ['vulkan'],
+  },
 };
 
 export const Required: Story = {
@@ -60,8 +64,8 @@ export const Required: Story = {
   args: {
     ...Example.args,
     required: true,
-    necessityIndicator: true
-  }
+    necessityIndicator: true,
+  },
 };
 
 export const Disabled: Story = {
@@ -69,8 +73,8 @@ export const Disabled: Story = {
   args: {
     ...Example.args,
     disabled: true,
-    defaultValue: ['vulkan']
-  }
+    defaultValue: ['vulkan'],
+  },
 };
 
 export const ReadOnly: Story = {
@@ -78,14 +82,42 @@ export const ReadOnly: Story = {
   args: {
     ...Example.args,
     readOnly: true,
-    defaultValue: ['vulkan']
-  }
+    defaultValue: ['vulkan'],
+  },
 };
 
 export const Error: Story = {
   ...Example,
   args: {
     ...Example.args,
-    error: 'You need to specify at least one API'
-  }
+    error: 'You need to specify at least one API',
+  },
+};
+
+export const ComplexContent: Story = {
+  render: (args) => (
+    <CheckboxSetField {...args}>
+      <Item key="1">First choice</Item>
+      <Item key="2">
+        Second choice{' '}
+        <Typography fontWeight="bold">
+          with <del>formatting</del>
+        </Typography>
+      </Item>
+      <Item key="3">
+        Third choice with <strong>formatting</strong> and a list:
+        <ul>
+          <li>first item</li>
+          <li>second item</li>
+          <li>third item</li>
+        </ul>
+        Followed by a <Link href="#">link</Link>.
+      </Item>
+      <Item key="4">Fourth choice</Item>
+    </CheckboxSetField>
+  ),
+  args: {
+    name: 'complex',
+    label: 'Complex options',
+  },
 };

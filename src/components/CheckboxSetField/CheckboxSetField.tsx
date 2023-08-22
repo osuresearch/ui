@@ -68,12 +68,13 @@ export function CheckboxSetField(props: CheckboxSetFieldProps) {
                     checked={state.selectionManager.isSelected(item.key)}
                     onChange={handleChange}
                     inputProps={inputProps}
+                    aria-describedby={item.props.description ? `${id}-${item.key}-help` : undefined}
                   />
                 }
                 label={item.rendered}
               />
               {item.props.description && (
-                <FormHelperText sx={{ marginLeft: '24px' }}>
+                <FormHelperText sx={{ marginLeft: '24px' }} id={`${id}-${item.key}-help`}>
                   {item.props.description}
                 </FormHelperText>
               )}
