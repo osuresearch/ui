@@ -58,11 +58,16 @@ export function RadioSetField(props: RadioSetFieldProps) {
                     onChange={handleChange}
                     disabled={disabled || readOnly || state.selectionManager.isDisabled(item.key)}
                     inputProps={inputProps}
+                    aria-describedby={item.props.description ? `${id}-${item.key}-help` : undefined}
                   />
                 }
                 label={item.rendered}
               />
-              {item.props.description && <FormHelperText>{item.props.description}</FormHelperText>}
+              {item.props.description && (
+                <FormHelperText sx={{ marginLeft: '30px' }} id={`${id}-${item.key}-help`}>
+                  {item.props.description}
+                </FormHelperText>
+              )}
             </Fragment>
           ))}
         </RadioGroup>

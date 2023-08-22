@@ -1,12 +1,16 @@
-import React from 'react';
 import { Meta, StoryObj } from '@storybook/react';
-import { RadioSetField } from './RadioSetField';
+
+import React from 'react';
+
+import { Link, Typography } from '@mui/material';
+
 import { Item } from '../Item';
+import { RadioSetField } from './RadioSetField';
 
 const meta: Meta<typeof RadioSetField> = {
   title: 'Forms/RadioSetField',
   component: RadioSetField,
-  argTypes: {}
+  argTypes: {},
 };
 
 export default meta;
@@ -24,8 +28,8 @@ export const Example: Story = {
   args: {
     name: 'supported-api',
     label: 'Default APIs',
-    description: 'Description content'
-  }
+    description: 'Description content',
+  },
 };
 
 export const ItemDescriptions: Story = {
@@ -43,16 +47,16 @@ export const ItemDescriptions: Story = {
     </RadioSetField>
   ),
   args: {
-    ...Example.args
-  }
+    ...Example.args,
+  },
 };
 
 export const DefaultValue: Story = {
   ...Example,
   args: {
     ...Example.args,
-    defaultValue: 'vulkan'
-  }
+    defaultValue: 'vulkan',
+  },
 };
 
 export const Required: Story = {
@@ -60,8 +64,8 @@ export const Required: Story = {
   args: {
     ...Example.args,
     required: true,
-    necessityIndicator: true
-  }
+    necessityIndicator: true,
+  },
 };
 
 export const Disabled: Story = {
@@ -69,8 +73,8 @@ export const Disabled: Story = {
   args: {
     ...Example.args,
     disabled: true,
-    defaultValue: 'vulkan'
-  }
+    defaultValue: 'vulkan',
+  },
 };
 
 export const ReadOnly: Story = {
@@ -78,14 +82,42 @@ export const ReadOnly: Story = {
   args: {
     ...Example.args,
     readOnly: true,
-    defaultValue: 'vulkan'
-  }
+    defaultValue: 'vulkan',
+  },
 };
 
 export const Error: Story = {
   ...Example,
   args: {
     ...Example.args,
-    error: 'You need to specify a default API'
-  }
+    error: 'You need to specify a default API',
+  },
+};
+
+export const ComplexContent: Story = {
+  render: (args) => (
+    <RadioSetField {...args}>
+      <Item key="1">First choice</Item>
+      <Item key="2">
+        Second choice{' '}
+        <strong>
+          with <del>formatting</del>
+        </strong>
+      </Item>
+      <Item key="3">
+        Third choice with <strong>formatting</strong> and a list:
+        <ul>
+          <li>first item</li>
+          <li>second item</li>
+          <li>third item</li>
+        </ul>
+        Followed by a <Link href="#">link</Link>.
+      </Item>
+      <Item key="4">Fourth choice</Item>
+    </RadioSetField>
+  ),
+  args: {
+    name: 'complex',
+    label: 'Complex options',
+  },
 };
