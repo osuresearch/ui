@@ -19,16 +19,18 @@ import { FormField, FormFieldBase } from '../FormField';
  * Generic `T` is item type returned by the async list loader.
  * Generic `C` is the pagination cursor returned from the last page load.
  */
-export type AutocompleteFieldProps<T, C> = FormFieldBase<string> & {
+export type AutocompleteFieldProps<T, C = string> = FormFieldBase<T> & {
   load: AsyncListOptions<T, C>['load'];
 };
 
-interface AutocompleteItem {
-  id: string;
-  label: string;
+export type AutocompleteItem =
+  | string
+  | {
+      id: string;
+      label: string;
 
-  [other: string]: any;
-}
+      [other: string]: any;
+    };
 
 interface MatchTextProps {
   fragment: string;
@@ -57,12 +59,16 @@ function MatchText(props: MatchTextProps) {
   );
 }
 
+function getLabel(item: AutocompleteItem) {
+  return typeof item === 'string' ? item : item.label;
+}
+
 /**
  * Field that performs an asynchronous search as the user types.
  *
  * User must select an entry from the results.
  */
-export function AutocompleteField<T extends AutocompleteItem, C>(
+export function AutocompleteField<T extends AutocompleteItem, C = string>(
   props: AutocompleteFieldProps<T, C>
 ) {
   const { name, load, onChange, onBlur, value, defaultValue, readOnly, disabled } = props;
@@ -73,15 +79,15 @@ export function AutocompleteField<T extends AutocompleteItem, C>(
   });
 
   const handleChange = (e: React.SyntheticEvent, value: T | null) => {
-    onChange && onChange(value?.label ?? undefined);
+    onChange && onChange(value ?? undefined);
   };
 
   const handleInputChange = (e: React.SyntheticEvent, filterText: string) => {
     list.setFilterText(filterText);
   };
 
-  const defaultValueT = defaultValue ? ({ id: defaultValue, label: defaultValue } as T) : undefined;
-  const valueT = value ? ({ id: value, label: value } as T) : undefined;
+  // const defaultValueT = defaultValue ? ({ id: defaultValue, label: defaultValue } as T) : undefined;
+  // const valueT = value ? ({ id: value, label: value } as T) : undefined;
 
   const AutocompleteInput = (ariaInputProps: InputBaseComponentProps) => (
     <Autocomplete<T>
@@ -93,9 +99,9 @@ export function AutocompleteField<T extends AutocompleteItem, C>(
       loading={list.isLoading}
       noOptionsText={list.filterText.length > 0 ? 'No results' : 'Start typing to see suggestions'}
       options={list.items}
-      defaultValue={defaultValueT}
-      value={valueT}
-      getOptionLabel={(item) => item.label}
+      defaultValue={defaultValue}
+      value={value}
+      getOptionLabel={getLabel}
       onInputChange={handleInputChange}
       onChange={handleChange}
       onBlur={onBlur}
@@ -116,7 +122,7 @@ export function AutocompleteField<T extends AutocompleteItem, C>(
       )}
       renderOption={(props, option, { inputValue }) => (
         <li {...props}>
-          <MatchText text={option.label} fragment={inputValue} />
+          <MatchText text={getLabel(option)} fragment={inputValue} />
         </li>
       )}
     />

@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 
 import { Stack, Typography } from '@mui/material';
 
-import { AutocompleteField } from './AutocompleteField';
+import { AutocompleteField, AutocompleteItem } from './AutocompleteField';
 
 const meta: Meta<typeof AutocompleteField> = {
   title: 'Forms/AutocompleteField',
@@ -144,6 +144,20 @@ const TOP_100_FILMS = [
   { label: 'Monty Python and the Holy Grail', year: 1975 },
 ];
 
+const TOP_100_FILM_NAMES = TOP_100_FILMS.map((x) => x.label);
+
+async function searchTop100Films({ filterText }: { filterText?: string }) {
+  if (!filterText) {
+    return {
+      items: [],
+    };
+  }
+
+  return {
+    items: TOP_100_FILM_NAMES.filter((x) => x.toLowerCase().includes(filterText.toLowerCase())),
+  };
+}
+
 async function searchPeople({ filterText, signal }: { filterText?: string; signal: AbortSignal }) {
   if (!filterText) {
     return {
@@ -180,13 +194,47 @@ export const DefaultValue: Story = {
   },
 };
 
-export const ControlledValue: Story = {
+export const ControlledObjectValue: Story = {
   render: (args) => {
-    const [value, setValue] = useState<string | undefined>('McManning, Chase');
+    const [value, setValue] = useState<{ id: string; label: string } | undefined>({
+      id: '200275154',
+      label: 'Chase McManning',
+    });
 
     return (
       <Stack>
-        <AutocompleteField {...args} value={value} onChange={setValue} />
+        <AutocompleteField
+          name={args.name}
+          label={args.label}
+          description={args.description}
+          load={searchPeople}
+          value={value}
+          onChange={setValue}
+        />
+        <Typography>You selected: {JSON.stringify(value)}</Typography>
+      </Stack>
+    );
+  },
+  args: {
+    label: 'Autocomplete field',
+    description: 'Description content',
+  },
+};
+
+export const ControlledStringValue: Story = {
+  render: (args) => {
+    const [value, setValue] = useState<string | undefined>('The Shawshank Redemption');
+
+    return (
+      <Stack>
+        <AutocompleteField
+          name={args.name}
+          label={args.label}
+          description={args.description}
+          load={searchTop100Films}
+          value={value}
+          onChange={setValue}
+        />
         <Typography>You selected: {value ?? <em>undefined</em>}</Typography>
       </Stack>
     );
