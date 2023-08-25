@@ -20,6 +20,7 @@ export * from './NumberField';
 export * from './OhioStateFooter';
 export * from './OhioStateNavbar';
 export * from './Page';
+export * from './PageButton';
 export * from './RUIProvider';
 export * from './RadioSetField';
 export * from './SelectField';

@@ -7,7 +7,7 @@ export default create({
   colorSecondary: '#26686d',
 
   // UI
-  appBg: 'transparent', // '#212325', // gray-shade-80
+  appBg: '#141517', // '#212325', // gray-shade-80
   appContentBg: 'transparent', // 'transparent', // black
   appBorderRadius: 0,
 
