@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { theme } from '../../theme';
+import * as colors from '../../theme/colors';
 import { Icon } from '../Icon';
 
 /**
@@ -15,7 +15,7 @@ export function NecessityIndicator() {
       ml={1}
       aria-label="This field is required"
       name="asterisk"
-      svgProps={{ color: theme.palette.primary.main }}
+      svgProps={{ color: colors.scarlet[100] }}
     />
   );
 }
