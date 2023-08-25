@@ -1,5 +1,6 @@
+import addons from '@storybook/addons';
 import { Preview } from '@storybook/react';
-import { useDarkMode } from 'storybook-dark-mode';
+import { DARK_MODE_EVENT_NAME, useDarkMode } from 'storybook-dark-mode';
 
 import React from 'react';
 
@@ -26,12 +27,12 @@ const preview: Preview = {
         h4: (props) => <Typography variant="h4" {...props} />,
       },
     },
-    // darkMode: {
-    //   current: 'light',
-    //   stylePreview: true,
-    //   dark,
-    //   light,
-    // },
+    darkMode: {
+      current: 'light',
+      stylePreview: false,
+      dark,
+      light,
+    },
     controls: {
       expanded: true,
       hideNoControlsWarning: true,
@@ -83,11 +84,17 @@ const preview: Preview = {
   },
   decorators: [
     (Story) => (
-      <RUIProvider theme={useDarkMode() ? 'dark' : 'light'}>
+      <ThemeWrapper>
         <Story />
-      </RUIProvider>
+      </ThemeWrapper>
     ),
   ],
 };
+
+// create a component that listens for the DARK_MODE event
+function ThemeWrapper(props) {
+  const dark = useDarkMode();
+  return <RUIProvider theme={dark ? 'dark' : 'light'}>{props.children}</RUIProvider>;
+}
 
 export default preview;

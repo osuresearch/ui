@@ -1,19 +1,22 @@
+import { CollectionBase } from '@react-types/shared';
+
 import React from 'react';
+
+import { useListState } from 'react-stately';
+
 import {
+  AccordionSummaryProps,
   Box,
   BoxProps,
-  Accordion as MuiAccordion,
   AccordionProps as MuiACcordionProps,
-  AccordionSummary as MuiAccordionSummary,
-  AccordionSummaryProps,
+  Accordion as MuiAccordion,
   AccordionDetails as MuiAccordionDetails,
+  AccordionSummary as MuiAccordionSummary,
   Typography,
-  styled
+  styled,
 } from '@mui/material';
-import { CollectionBase } from '@react-types/shared';
-import { useListState } from 'react-stately';
+
 import { Icon } from '../Icon';
-import { theme } from '../../theme';
 
 export interface AccordionProps
   extends Omit<BoxProps<'div'>, 'children'>,
@@ -29,36 +32,37 @@ const StyledAccordion = styled((props: MuiACcordionProps) => (
   'background': 'none',
   'borderBottom': `2px solid ${theme.palette.divider}`,
   '&:not(:last-child)': {
-    borderBottom: 0
+    borderBottom: 0,
   },
   '&:before': {
-    display: 'none'
-  }
+    display: 'none',
+  },
+}));
+
+const StyledIcon = styled(Icon)(({ theme }) => ({
+  color: theme.palette.primary.main,
 }));
 
 const AccordionSummary = styled((props: AccordionSummaryProps) => (
-  <MuiAccordionSummary
-    expandIcon={<Icon size={24} name="chevron" sx={{ color: theme.palette.primary.main }} />}
-    {...props}
-  />
+  <MuiAccordionSummary expandIcon={<StyledIcon size={24} name="chevron" />} {...props} />
 ))(({ theme }) => ({
   'borderTop': `2px solid ${theme.palette.divider}`,
   'flexDirection': 'row-reverse',
   '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
-    transform: 'rotate(90deg)'
+    transform: 'rotate(90deg)',
   },
   '& .MuiAccordionSummary-content': {
     padding: theme.spacing(0.5),
-    marginLeft: theme.spacing(1)
+    marginLeft: theme.spacing(1),
   },
   '&:hover, &:focus': {
-    background: '#f6f7f8'
-  }
+    background: '#f6f7f8',
+  },
 }));
 
 const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
   padding: theme.spacing(2),
-  marginLeft: theme.spacing(4)
+  marginLeft: theme.spacing(4),
 }));
 
 /**
@@ -69,7 +73,7 @@ export function Accordion({ children, ...props }: AccordionProps) {
     ...props,
     selectionBehavior: 'toggle',
     selectionMode: 'multiple',
-    children
+    children,
   });
 
   return (
