@@ -18,9 +18,8 @@ import { Box, Divider, Link, Stack, Typography } from '@mui/material';
 
 import { Item, Tabs } from '../components';
 import { RUIProvider } from '../components/RUIProvider';
+import { dark, light } from '../storybook/theme';
 import { MUIDocsContainer } from './MUIDocsContainer';
-import dark from './Theme.dark';
-import light from './Theme.light';
 import { RUIMeta, getComponentSpecs } from './utils';
 
 function DocsFooter() {
@@ -91,7 +90,7 @@ export function DocsContainer({ children, ...props }: any) {
   const isComponent = meta?.component !== undefined;
 
   return (
-    <RUIProvider>
+    <RUIProvider theme={darkMode ? 'dark' : 'light'}>
       <BaseContainer {...props} theme={darkMode ? dark : light}>
         {/* <Stack gap={0} style={{ paddingRight: 200, height: '100%' }} align="stretch" justify="apart"> */}
         {/* <div className="sb-unstyled typography"> */}

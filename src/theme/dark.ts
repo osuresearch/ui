@@ -24,9 +24,9 @@ export const dark: PaletteOptions = {
     white: colors.white,
   },
   primary: {
-    light: colors.blue[400],
-    main: colors.blue[500],
-    dark: colors.blue[600],
+    light: colors.blue[600],
+    main: colors.blue[700],
+    dark: colors.blue[800],
     contrastText: colors.white,
   },
   secondary: {

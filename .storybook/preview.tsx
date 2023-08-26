@@ -8,8 +8,7 @@ import { Typography } from '@mui/material';
 
 import { RUIProvider } from '../src/components/RUIProvider';
 import { DocsContainer } from '../src/storybook/DocsContainer';
-import dark from '../src/storybook/Theme.dark';
-import light from '../src/storybook/Theme.light';
+import { dark, light } from '../src/storybook/theme';
 
 const preview: Preview = {
   parameters: {

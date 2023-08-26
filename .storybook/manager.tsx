@@ -2,16 +2,12 @@ import { addons } from '@storybook/addons';
 
 import React from 'react';
 
-import dark from '../src/storybook/Theme.dark';
-import light from '../src/storybook/Theme.light';
-
 addons.setConfig({
   // isFullscreen: false,
   // showNav: true,
   // showPanel: true,
   // panelPosition: 'bottom',
   enableShortcuts: false,
-  theme: light,
   // showToolbar: false,
   // theme: undefined,
   // selectedPanel: undefined,

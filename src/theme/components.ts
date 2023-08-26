@@ -144,7 +144,10 @@ export const components: ThemeOptions['components'] = {
     styleOverrides: {
       root: ({ theme }) => ({
         '.MuiPaper-root': {
-          background: theme.palette.background.default,
+          background:
+            theme.palette.mode === 'light'
+              ? theme.palette.background.default
+              : theme.palette.background.paper,
           boxShadow:
             'rgb(255, 255, 255) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px',
         },
@@ -317,25 +320,20 @@ export const components: ThemeOptions['components'] = {
     defaultProps: {
       underline: 'always',
     },
-    // styleOverrides: (theme: Theme) => ({
-    //   root: {
-    //     color: 'blue',
-    //   },
-    //   // root: (theme: Theme) => ({
-    //   //   'color':
-    //   //     theme.palette.mode === 'light'
-    //   //       ? theme.palette.secondary.main
-    //   //       : theme.palette.text.primary,
-    //   //   '&:hover': {
-    //   //     background: colors.gray[100],
-    //   //     color: colors.gray[900],
-    //   //   },
-    //   //   '&.Mui-focusVisible': {
-    //   //     outline: `2px solid ${colors.blue[700]}`,
-    //   //     outlineOffset: '1px',
-    //   //   },
-    //   // }),
-    // }),
+    styleOverrides: {
+      root: ({ theme }) => ({
+        'color':
+          theme.palette.mode === 'dark' ? theme.palette.text.primary : theme.palette.primary.main,
+        '&:hover': {
+          background: colors.gray[100],
+          color: colors.gray[900],
+        },
+        '&.Mui-focusVisible': {
+          outline: `2px solid ${colors.blue[700]}`,
+          outlineOffset: '1px',
+        },
+      }),
+    },
   },
   MuiTabs: {
     defaultProps: {
