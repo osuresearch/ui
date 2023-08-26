@@ -148,7 +148,7 @@
     "@iconify/react": "^4.1.0",
     "@mui/icons-material": "^5.14.1",
     "@mui/material": "^5.14.1",
-    "@mui/x-date-pickers": "^6.10.1",
+    "@mui/x-date-pickers": "^6.12.0",
     "@osuresearch/iconography": "^1.1.0",
     "@osuresearch/types": "^1.0.3",
     "@react-types/shared": "^3.18.1",
