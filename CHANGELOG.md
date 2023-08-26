@@ -1,3 +1,20 @@
+# [5.2.0](https://github.com/osuresearch/ui/compare/v5.1.0...v5.2.0) (2023-08-26)
+
+
+### Bug Fixes
+
+* **AutocompleteField:** incorrect typing for object results ([7a31bf3](https://github.com/osuresearch/ui/commit/7a31bf3850afae289f9e8c58cca42f08c5bf26a6))
+* **CheckboxSetField:** missing `aria-describedby` for helper text ([9aa0361](https://github.com/osuresearch/ui/commit/9aa036128400c7388498ea38846d25057f7af588))
+* **NecessityIndicator:** wrong theme variable reference ([3f5ebf7](https://github.com/osuresearch/ui/commit/3f5ebf7f08393646732a4f4e0a214f96794752e5))
+* **RadioSetField:** missing `aria-describedby` for helper text ([396cddb](https://github.com/osuresearch/ui/commit/396cddb4512195f579eed1a7c980bae4c5ee5792))
+* remove `DateField` temporarily due to build issues with @mui/x-date-pickers ([a68547a](https://github.com/osuresearch/ui/commit/a68547a37d415b65546252b340cb79d5bc3227e7))
+
+
+### Features
+
+* add support for system theme detection ([cfee60b](https://github.com/osuresearch/ui/commit/cfee60ba7c90d682b11764f8c82366b780102b5b))
+* improvements to theme configuration and integration with Storybook dark mode toggle ([df23f07](https://github.com/osuresearch/ui/commit/df23f072d4f2083f5362aabd208f63f59b009119))
+
 # [5.1.0](https://github.com/osuresearch/ui/compare/v5.0.0...v5.1.0) (2023-08-03)
 
 
