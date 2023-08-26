@@ -5,7 +5,6 @@ export * from './CheckboxField';
 export * from './CheckboxSetField';
 export * from './CloseButton';
 export * from './ConfirmButton';
-export * from './DateField';
 export * from './EmailLink';
 export * from './ExternalLink';
 export * from './FormField';
