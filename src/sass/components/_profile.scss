@@ -41,4 +41,10 @@
             color: $gray;
         }
     }
+
+    > button {
+        color: $gray;
+        border-width: 0;
+        background: transparent;
+    }
 }
